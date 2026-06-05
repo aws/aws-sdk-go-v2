@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type ListOriginEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOriginEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOriginEndpointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOriginEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.ListOriginEndpointsRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.ListOriginEndpointsRequest_ChannelName, *v.ChannelName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOriginEndpointsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOriginEndpointsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListOriginEndpointsOutput struct {
 
 	// The objects being returned.
@@ -91,26 +68,16 @@ type ListOriginEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOriginEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOriginEndpointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOriginEndpointsResponse_Items:
-			return deserializeOriginEndpointsList(d, schemas.ListOriginEndpointsResponse_Items, &v.Items)
-		case schemas.ListOriginEndpointsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOriginEndpointsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOriginEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOriginEndpoints, schemas.ListOriginEndpointsRequest, schemas.ListOriginEndpointsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOriginEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOriginEndpoints, schemas.ListOriginEndpointsRequest, schemas.ListOriginEndpointsResponse), output: &ListOriginEndpointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOriginEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOriginEndpoints"); err != nil {

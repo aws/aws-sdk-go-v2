@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,24 +45,6 @@ type GetLibraryItemInput struct {
 	AppId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLibraryItemInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.GetLibraryItemInput_appId, *v.AppId)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.GetLibraryItemInput_instanceId, *v.InstanceId)
-	}
-	if v.LibraryItemId != nil {
-		s.WriteString(schemas.GetLibraryItemInput_libraryItemId, *v.LibraryItemId)
-	}
 }
 
 type GetLibraryItemOutput struct {
@@ -130,59 +110,16 @@ type GetLibraryItemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLibraryItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLibraryItemOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLibraryItemOutput_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.GetLibraryItemOutput_appId, v.AppId)
-		case schemas.GetLibraryItemOutput_appVersion:
-			v.AppVersion = new(int32)
-			return d.ReadInt32(schemas.GetLibraryItemOutput_appVersion, v.AppVersion)
-		case schemas.GetLibraryItemOutput_categories:
-			return deserializeCategoryList(d, schemas.GetLibraryItemOutput_categories, &v.Categories)
-		case schemas.GetLibraryItemOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetLibraryItemOutput_createdAt, v.CreatedAt)
-		case schemas.GetLibraryItemOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetLibraryItemOutput_createdBy, v.CreatedBy)
-		case schemas.GetLibraryItemOutput_isRatedByUser:
-			v.IsRatedByUser = new(bool)
-			return d.ReadBool(schemas.GetLibraryItemOutput_isRatedByUser, v.IsRatedByUser)
-		case schemas.GetLibraryItemOutput_isVerified:
-			v.IsVerified = new(bool)
-			return d.ReadBool(schemas.GetLibraryItemOutput_isVerified, v.IsVerified)
-		case schemas.GetLibraryItemOutput_libraryItemId:
-			v.LibraryItemId = new(string)
-			return d.ReadString(schemas.GetLibraryItemOutput_libraryItemId, v.LibraryItemId)
-		case schemas.GetLibraryItemOutput_ratingCount:
-			v.RatingCount = new(int32)
-			return d.ReadInt32(schemas.GetLibraryItemOutput_ratingCount, v.RatingCount)
-		case schemas.GetLibraryItemOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.GetLibraryItemOutput_status, v.Status)
-		case schemas.GetLibraryItemOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetLibraryItemOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetLibraryItemOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.GetLibraryItemOutput_updatedBy, v.UpdatedBy)
-		case schemas.GetLibraryItemOutput_userCount:
-			v.UserCount = new(int32)
-			return d.ReadInt32(schemas.GetLibraryItemOutput_userCount, v.UserCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLibraryItem, schemas.GetLibraryItemInput, schemas.GetLibraryItemOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLibraryItem, schemas.GetLibraryItemInput, schemas.GetLibraryItemOutput), output: &GetLibraryItemOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLibraryItem"); err != nil {

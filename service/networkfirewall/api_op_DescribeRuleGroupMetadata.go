@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,24 +53,6 @@ type DescribeRuleGroupMetadataInput struct {
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeRuleGroupMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRuleGroupMetadataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRuleGroupMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleGroupArn != nil {
-		s.WriteString(schemas.DescribeRuleGroupMetadataRequest_RuleGroupArn, *v.RuleGroupArn)
-	}
-	if v.RuleGroupName != nil {
-		s.WriteString(schemas.DescribeRuleGroupMetadataRequest_RuleGroupName, *v.RuleGroupName)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DescribeRuleGroupMetadataRequest_Type, string(v.Type))
-	}
 }
 
 type DescribeRuleGroupMetadataOutput struct {
@@ -135,55 +115,16 @@ type DescribeRuleGroupMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRuleGroupMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRuleGroupMetadataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRuleGroupMetadataResponse_Capacity:
-			v.Capacity = new(int32)
-			return d.ReadInt32(schemas.DescribeRuleGroupMetadataResponse_Capacity, v.Capacity)
-		case schemas.DescribeRuleGroupMetadataResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_Description, v.Description)
-		case schemas.DescribeRuleGroupMetadataResponse_LastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeRuleGroupMetadataResponse_LastModifiedTime, v.LastModifiedTime)
-		case schemas.DescribeRuleGroupMetadataResponse_ListingName:
-			v.ListingName = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_ListingName, v.ListingName)
-		case schemas.DescribeRuleGroupMetadataResponse_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_ProductId, v.ProductId)
-		case schemas.DescribeRuleGroupMetadataResponse_RuleGroupArn:
-			v.RuleGroupArn = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_RuleGroupArn, v.RuleGroupArn)
-		case schemas.DescribeRuleGroupMetadataResponse_RuleGroupName:
-			v.RuleGroupName = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_RuleGroupName, v.RuleGroupName)
-		case schemas.DescribeRuleGroupMetadataResponse_StatefulRuleOptions:
-			v.StatefulRuleOptions = &types.StatefulRuleOptions{}
-			return v.StatefulRuleOptions.Deserialize(d)
-		case schemas.DescribeRuleGroupMetadataResponse_Type:
-			var ev string
-			if err := d.ReadString(schemas.DescribeRuleGroupMetadataResponse_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.RuleGroupType(ev)
-			return nil
-		case schemas.DescribeRuleGroupMetadataResponse_VendorName:
-			v.VendorName = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupMetadataResponse_VendorName, v.VendorName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRuleGroupMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupMetadata, schemas.DescribeRuleGroupMetadataRequest, schemas.DescribeRuleGroupMetadataResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRuleGroupMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupMetadata, schemas.DescribeRuleGroupMetadataRequest, schemas.DescribeRuleGroupMetadataResponse), output: &DescribeRuleGroupMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRuleGroupMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRuleGroupMetadata"); err != nil {

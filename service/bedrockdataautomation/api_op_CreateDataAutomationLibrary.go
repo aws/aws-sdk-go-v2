@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,30 +50,6 @@ type CreateDataAutomationLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAutomationLibraryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataAutomationLibraryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_clientToken, *v.ClientToken)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataAutomationLibraryRequest_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LibraryDescription != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_libraryDescription, *v.LibraryDescription)
-	}
-	if v.LibraryName != nil {
-		s.WriteString(schemas.CreateDataAutomationLibraryRequest_libraryName, *v.LibraryName)
-	}
-	serializeTagList(s, schemas.CreateDataAutomationLibraryRequest_tags, v.Tags)
-}
-
 // Create DataAutomationLibrary Response
 type CreateDataAutomationLibraryOutput struct {
 
@@ -91,31 +65,16 @@ type CreateDataAutomationLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataAutomationLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataAutomationLibraryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataAutomationLibraryResponse_libraryArn:
-			v.LibraryArn = new(string)
-			return d.ReadString(schemas.CreateDataAutomationLibraryResponse_libraryArn, v.LibraryArn)
-		case schemas.CreateDataAutomationLibraryResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDataAutomationLibraryResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataAutomationLibraryStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataAutomationLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAutomationLibrary, schemas.CreateDataAutomationLibraryRequest, schemas.CreateDataAutomationLibraryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAutomationLibrary, schemas.CreateDataAutomationLibraryRequest, schemas.CreateDataAutomationLibraryResponse), output: &CreateDataAutomationLibraryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataAutomationLibrary"); err != nil {

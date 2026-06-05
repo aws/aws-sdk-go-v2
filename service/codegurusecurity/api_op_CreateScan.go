@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,29 +73,6 @@ type CreateScanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalysisType != "" {
-		s.WriteString(schemas.CreateScanRequest_analysisType, string(v.AnalysisType))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateScanRequest_clientToken, *v.ClientToken)
-	}
-	serializeResourceId(s, schemas.CreateScanRequest_resourceId, v.ResourceId)
-	if v.ScanName != nil {
-		s.WriteString(schemas.CreateScanRequest_scanName, *v.ScanName)
-	}
-	if v.ScanType != "" {
-		s.WriteString(schemas.CreateScanRequest_scanType, string(v.ScanType))
-	}
-	serializeTagMap(s, schemas.CreateScanRequest_tags, v.Tags)
-}
-
 type CreateScanOutput struct {
 
 	// The identifier for the resource object that contains resources that were
@@ -131,39 +106,16 @@ type CreateScanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScanResponse_resourceId:
-			return deserializeResourceId(d, schemas.CreateScanResponse_resourceId, &v.ResourceId)
-		case schemas.CreateScanResponse_runId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.CreateScanResponse_runId, v.RunId)
-		case schemas.CreateScanResponse_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.CreateScanResponse_scanName, v.ScanName)
-		case schemas.CreateScanResponse_scanNameArn:
-			v.ScanNameArn = new(string)
-			return d.ReadString(schemas.CreateScanResponse_scanNameArn, v.ScanNameArn)
-		case schemas.CreateScanResponse_scanState:
-			var ev string
-			if err := d.ReadString(schemas.CreateScanResponse_scanState, &ev); err != nil {
-				return err
-			}
-			v.ScanState = types.ScanState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScan, schemas.CreateScanRequest, schemas.CreateScanResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScan, schemas.CreateScanRequest, schemas.CreateScanResponse), output: &CreateScanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScan"); err != nil {

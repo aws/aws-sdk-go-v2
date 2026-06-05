@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetUserInput struct {
 	UserId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.UserId != nil {
-		s.WriteString(schemas.GetUserRequest_userId, *v.UserId)
-	}
 }
 
 type GetUserOutput struct {
@@ -125,67 +111,16 @@ type GetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUserResponse_apiAccess:
-			var ev string
-			if err := d.ReadString(schemas.GetUserResponse_apiAccess, &ev); err != nil {
-				return err
-			}
-			v.ApiAccess = types.ApiAccess(ev)
-			return nil
-		case schemas.GetUserResponse_apiAccessPrincipalArn:
-			v.ApiAccessPrincipalArn = new(string)
-			return d.ReadString(schemas.GetUserResponse_apiAccessPrincipalArn, v.ApiAccessPrincipalArn)
-		case schemas.GetUserResponse_createTime:
-			return d.ReadInt64(schemas.GetUserResponse_createTime, &v.CreateTime)
-		case schemas.GetUserResponse_emailAddress:
-			v.EmailAddress = new(string)
-			return d.ReadString(schemas.GetUserResponse_emailAddress, v.EmailAddress)
-		case schemas.GetUserResponse_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.GetUserResponse_firstName, v.FirstName)
-		case schemas.GetUserResponse_lastDisabledTime:
-			return d.ReadInt64(schemas.GetUserResponse_lastDisabledTime, &v.LastDisabledTime)
-		case schemas.GetUserResponse_lastEnabledTime:
-			return d.ReadInt64(schemas.GetUserResponse_lastEnabledTime, &v.LastEnabledTime)
-		case schemas.GetUserResponse_lastLoginTime:
-			return d.ReadInt64(schemas.GetUserResponse_lastLoginTime, &v.LastLoginTime)
-		case schemas.GetUserResponse_lastModifiedTime:
-			return d.ReadInt64(schemas.GetUserResponse_lastModifiedTime, &v.LastModifiedTime)
-		case schemas.GetUserResponse_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.GetUserResponse_lastName, v.LastName)
-		case schemas.GetUserResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetUserResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.UserStatus(ev)
-			return nil
-		case schemas.GetUserResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetUserResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.UserType(ev)
-			return nil
-		case schemas.GetUserResponse_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.GetUserResponse_userId, v.UserId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse), output: &GetUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUser"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,28 +48,6 @@ type DetachPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DetachPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DetachPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DetachPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.DetachPolicyRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.DetachPolicyRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PolicyReference != nil {
-		s.WriteStruct(schemas.DetachPolicyRequest_PolicyReference)
-		v.PolicyReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type DetachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +55,16 @@ type DetachPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DetachPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DetachPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDetachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachPolicy, schemas.DetachPolicyRequest, schemas.DetachPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachPolicy, schemas.DetachPolicyRequest, schemas.DetachPolicyResponse), output: &DetachPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DetachPolicy"); err != nil {

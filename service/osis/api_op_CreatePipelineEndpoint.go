@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,23 +44,6 @@ type CreatePipelineEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePipelineEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePipelineEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePipelineEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PipelineArn != nil {
-		s.WriteString(schemas.CreatePipelineEndpointRequest_PipelineArn, *v.PipelineArn)
-	}
-	if v.VpcOptions != nil {
-		s.WriteStruct(schemas.CreatePipelineEndpointRequest_VpcOptions)
-		v.VpcOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreatePipelineEndpointOutput struct {
 
 	// The unique identifier of the pipeline endpoint.
@@ -83,37 +64,16 @@ type CreatePipelineEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePipelineEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePipelineEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePipelineEndpointResponse_EndpointId:
-			v.EndpointId = new(string)
-			return d.ReadString(schemas.CreatePipelineEndpointResponse_EndpointId, v.EndpointId)
-		case schemas.CreatePipelineEndpointResponse_PipelineArn:
-			v.PipelineArn = new(string)
-			return d.ReadString(schemas.CreatePipelineEndpointResponse_PipelineArn, v.PipelineArn)
-		case schemas.CreatePipelineEndpointResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.CreatePipelineEndpointResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PipelineEndpointStatus(ev)
-			return nil
-		case schemas.CreatePipelineEndpointResponse_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.CreatePipelineEndpointResponse_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePipelineEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipelineEndpoint, schemas.CreatePipelineEndpointRequest, schemas.CreatePipelineEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePipelineEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipelineEndpoint, schemas.CreatePipelineEndpointRequest, schemas.CreatePipelineEndpointResponse), output: &CreatePipelineEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePipelineEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePipelineEndpoint"); err != nil {

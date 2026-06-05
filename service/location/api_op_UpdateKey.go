@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,60 +64,6 @@ type UpdateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateKeyRequest_Description, *v.Description)
-	}
-	if v.ExpireTime != nil {
-		s.WriteTime(schemas.UpdateKeyRequest_ExpireTime, *v.ExpireTime)
-	}
-	if v.ForceUpdate != nil {
-		s.WriteBool(schemas.UpdateKeyRequest_ForceUpdate, *v.ForceUpdate)
-	}
-	if v.KeyName != nil {
-		s.WriteString(schemas.UpdateKeyRequest_KeyName, *v.KeyName)
-	}
-	if v.NoExpiry != nil {
-		s.WriteBool(schemas.UpdateKeyRequest_NoExpiry, *v.NoExpiry)
-	}
-	if v.Restrictions != nil {
-		s.WriteStruct(schemas.UpdateKeyRequest_Restrictions)
-		v.Restrictions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKeyRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKeyRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateKeyRequest_Description, v.Description)
-		case schemas.UpdateKeyRequest_ExpireTime:
-			v.ExpireTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateKeyRequest_ExpireTime, v.ExpireTime)
-		case schemas.UpdateKeyRequest_ForceUpdate:
-			v.ForceUpdate = new(bool)
-			return d.ReadBool(schemas.UpdateKeyRequest_ForceUpdate, v.ForceUpdate)
-		case schemas.UpdateKeyRequest_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.UpdateKeyRequest_KeyName, v.KeyName)
-		case schemas.UpdateKeyRequest_NoExpiry:
-			v.NoExpiry = new(bool)
-			return d.ReadBool(schemas.UpdateKeyRequest_NoExpiry, v.NoExpiry)
-		case schemas.UpdateKeyRequest_Restrictions:
-			v.Restrictions = &types.ApiKeyRestrictions{}
-			return v.Restrictions.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
@@ -149,47 +93,16 @@ type UpdateKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKeyOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKeyResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyArn != nil {
-		s.WriteString(schemas.UpdateKeyResponse_KeyArn, *v.KeyArn)
-	}
-	if v.KeyName != nil {
-		s.WriteString(schemas.UpdateKeyResponse_KeyName, *v.KeyName)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.UpdateKeyResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *UpdateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKeyResponse_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.UpdateKeyResponse_KeyArn, v.KeyArn)
-		case schemas.UpdateKeyResponse_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.UpdateKeyResponse_KeyName, v.KeyName)
-		case schemas.UpdateKeyResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateKeyResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKey, schemas.UpdateKeyRequest, schemas.UpdateKeyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKey, schemas.UpdateKeyRequest, schemas.UpdateKeyResponse), output: &UpdateKeyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKey"); err != nil {

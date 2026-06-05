@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,27 +54,6 @@ type ListContentAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListContentAssociationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListContentAssociationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListContentAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContentId != nil {
-		s.WriteString(schemas.ListContentAssociationsRequest_contentId, *v.ContentId)
-	}
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.ListContentAssociationsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListContentAssociationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListContentAssociationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListContentAssociationsOutput struct {
 
 	// Summary information about content associations.
@@ -93,26 +70,16 @@ type ListContentAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListContentAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListContentAssociationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListContentAssociationsResponse_contentAssociationSummaries:
-			return deserializeContentAssociationSummaryList(d, schemas.ListContentAssociationsResponse_contentAssociationSummaries, &v.ContentAssociationSummaries)
-		case schemas.ListContentAssociationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListContentAssociationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListContentAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContentAssociations, schemas.ListContentAssociationsRequest, schemas.ListContentAssociationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContentAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContentAssociations, schemas.ListContentAssociationsRequest, schemas.ListContentAssociationsResponse), output: &ListContentAssociationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContentAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContentAssociations"); err != nil {

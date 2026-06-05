@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivschat/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,57 +57,6 @@ type UpdateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRoomInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRoomRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateRoomRequest_identifier, *v.Identifier)
-	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomRequest_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
-	if v.MaximumMessageLength != nil {
-		s.WriteInt32(schemas.UpdateRoomRequest_maximumMessageLength, *v.MaximumMessageLength)
-	}
-	if v.MaximumMessageRatePerSecond != nil {
-		s.WriteInt32(schemas.UpdateRoomRequest_maximumMessageRatePerSecond, *v.MaximumMessageRatePerSecond)
-	}
-	if v.MessageReviewHandler != nil {
-		s.WriteStruct(schemas.UpdateRoomRequest_messageReviewHandler)
-		v.MessageReviewHandler.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateRoomRequest_name, *v.Name)
-	}
-}
-func (v *UpdateRoomInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRoomRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRoomRequest_identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.UpdateRoomRequest_identifier, v.Identifier)
-		case schemas.UpdateRoomRequest_loggingConfigurationIdentifiers:
-			return deserializeLoggingConfigurationIdentifierList(d, schemas.UpdateRoomRequest_loggingConfigurationIdentifiers, &v.LoggingConfigurationIdentifiers)
-		case schemas.UpdateRoomRequest_maximumMessageLength:
-			v.MaximumMessageLength = new(int32)
-			return d.ReadInt32(schemas.UpdateRoomRequest_maximumMessageLength, v.MaximumMessageLength)
-		case schemas.UpdateRoomRequest_maximumMessageRatePerSecond:
-			v.MaximumMessageRatePerSecond = new(int32)
-			return d.ReadInt32(schemas.UpdateRoomRequest_maximumMessageRatePerSecond, v.MaximumMessageRatePerSecond)
-		case schemas.UpdateRoomRequest_messageReviewHandler:
-			v.MessageReviewHandler = &types.MessageReviewHandler{}
-			return v.MessageReviewHandler.Deserialize(d)
-		case schemas.UpdateRoomRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateRoomRequest_name, v.Name)
-		}
-		return nil
-	})
-}
-
 type UpdateRoomOutput struct {
 
 	// Room ARN, from the request (if identifier was an ARN).
@@ -155,85 +102,16 @@ type UpdateRoomOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRoomOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRoomResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateRoomResponse_arn, *v.Arn)
-	}
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.UpdateRoomResponse_createTime, *v.CreateTime)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateRoomResponse_id, *v.Id)
-	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomResponse_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
-	if v.MaximumMessageLength != nil {
-		s.WriteInt32(schemas.UpdateRoomResponse_maximumMessageLength, *v.MaximumMessageLength)
-	}
-	if v.MaximumMessageRatePerSecond != nil {
-		s.WriteInt32(schemas.UpdateRoomResponse_maximumMessageRatePerSecond, *v.MaximumMessageRatePerSecond)
-	}
-	if v.MessageReviewHandler != nil {
-		s.WriteStruct(schemas.UpdateRoomResponse_messageReviewHandler)
-		v.MessageReviewHandler.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateRoomResponse_name, *v.Name)
-	}
-	serializeTags(s, schemas.UpdateRoomResponse_tags, v.Tags)
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.UpdateRoomResponse_updateTime, *v.UpdateTime)
-	}
-}
-func (v *UpdateRoomOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRoomResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRoomResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateRoomResponse_arn, v.Arn)
-		case schemas.UpdateRoomResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateRoomResponse_createTime, v.CreateTime)
-		case schemas.UpdateRoomResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateRoomResponse_id, v.Id)
-		case schemas.UpdateRoomResponse_loggingConfigurationIdentifiers:
-			return deserializeLoggingConfigurationIdentifierList(d, schemas.UpdateRoomResponse_loggingConfigurationIdentifiers, &v.LoggingConfigurationIdentifiers)
-		case schemas.UpdateRoomResponse_maximumMessageLength:
-			v.MaximumMessageLength = new(int32)
-			return d.ReadInt32(schemas.UpdateRoomResponse_maximumMessageLength, v.MaximumMessageLength)
-		case schemas.UpdateRoomResponse_maximumMessageRatePerSecond:
-			v.MaximumMessageRatePerSecond = new(int32)
-			return d.ReadInt32(schemas.UpdateRoomResponse_maximumMessageRatePerSecond, v.MaximumMessageRatePerSecond)
-		case schemas.UpdateRoomResponse_messageReviewHandler:
-			v.MessageReviewHandler = &types.MessageReviewHandler{}
-			return v.MessageReviewHandler.Deserialize(d)
-		case schemas.UpdateRoomResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateRoomResponse_name, v.Name)
-		case schemas.UpdateRoomResponse_tags:
-			return deserializeTags(d, schemas.UpdateRoomResponse_tags, &v.Tags)
-		case schemas.UpdateRoomResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateRoomResponse_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoom, schemas.UpdateRoomRequest, schemas.UpdateRoomResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoom{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoom, schemas.UpdateRoomRequest, schemas.UpdateRoomResponse), output: &UpdateRoomOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoom{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRoom"); err != nil {

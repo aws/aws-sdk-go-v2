@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,18 +54,6 @@ type ListPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPipelinesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPipelinesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Marker != nil {
-		s.WriteString(schemas.ListPipelinesInput_marker, *v.Marker)
-	}
-}
-
 // Contains the output of ListPipelines.
 type ListPipelinesOutput struct {
 
@@ -92,28 +78,16 @@ type ListPipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPipelinesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPipelinesOutput_hasMoreResults:
-			return d.ReadBool(schemas.ListPipelinesOutput_hasMoreResults, &v.HasMoreResults)
-		case schemas.ListPipelinesOutput_marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.ListPipelinesOutput_marker, v.Marker)
-		case schemas.ListPipelinesOutput_pipelineIdList:
-			return deserializepipelineList(d, schemas.ListPipelinesOutput_pipelineIdList, &v.PipelineIdList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelines, schemas.ListPipelinesInput, schemas.ListPipelinesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelines{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelines, schemas.ListPipelinesInput, schemas.ListPipelinesOutput), output: &ListPipelinesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPipelines{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPipelines"); err != nil {

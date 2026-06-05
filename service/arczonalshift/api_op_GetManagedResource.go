@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,18 +57,6 @@ type GetManagedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedResourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedResourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.GetManagedResourceRequest_resourceIdentifier, *v.ResourceIdentifier)
-	}
-}
-
 type GetManagedResourceOutput struct {
 
 	// A collection of key-value pairs that indicate whether resources are active in
@@ -111,43 +97,16 @@ type GetManagedResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedResourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedResourceResponse_appliedWeights:
-			return deserializeAppliedWeights(d, schemas.GetManagedResourceResponse_appliedWeights, &v.AppliedWeights)
-		case schemas.GetManagedResourceResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetManagedResourceResponse_arn, v.Arn)
-		case schemas.GetManagedResourceResponse_autoshifts:
-			return deserializeAutoshiftsInResource(d, schemas.GetManagedResourceResponse_autoshifts, &v.Autoshifts)
-		case schemas.GetManagedResourceResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetManagedResourceResponse_name, v.Name)
-		case schemas.GetManagedResourceResponse_practiceRunConfiguration:
-			v.PracticeRunConfiguration = &types.PracticeRunConfiguration{}
-			return v.PracticeRunConfiguration.Deserialize(d)
-		case schemas.GetManagedResourceResponse_zonalAutoshiftStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetManagedResourceResponse_zonalAutoshiftStatus, &ev); err != nil {
-				return err
-			}
-			v.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(ev)
-			return nil
-		case schemas.GetManagedResourceResponse_zonalShifts:
-			return deserializeZonalShiftsInResource(d, schemas.GetManagedResourceResponse_zonalShifts, &v.ZonalShifts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedResource, schemas.GetManagedResourceRequest, schemas.GetManagedResourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedResource, schemas.GetManagedResourceRequest, schemas.GetManagedResourceResponse), output: &GetManagedResourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedResource"); err != nil {

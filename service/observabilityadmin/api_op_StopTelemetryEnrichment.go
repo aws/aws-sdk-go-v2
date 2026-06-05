@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,22 +33,6 @@ type StopTelemetryEnrichmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopTelemetryEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopTelemetryEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *StopTelemetryEnrichmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type StopTelemetryEnrichmentOutput struct {
 
 	//  The status of the resource tags for telemetry feature after the stop operation
@@ -63,28 +45,16 @@ type StopTelemetryEnrichmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopTelemetryEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopTelemetryEnrichmentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopTelemetryEnrichmentOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.StopTelemetryEnrichmentOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TelemetryEnrichmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopTelemetryEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTelemetryEnrichment, nil, schemas.StopTelemetryEnrichmentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopTelemetryEnrichment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTelemetryEnrichment, nil, schemas.StopTelemetryEnrichmentOutput), output: &StopTelemetryEnrichmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopTelemetryEnrichment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopTelemetryEnrichment"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,18 +48,6 @@ type GetRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRateBasedRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRateBasedRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRateBasedRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleId != nil {
-		s.WriteString(schemas.GetRateBasedRuleRequest_RuleId, *v.RuleId)
-	}
-}
-
 type GetRateBasedRuleOutput struct {
 
 	// Information about the RateBasedRule that you specified in the GetRateBasedRule request.
@@ -73,24 +59,16 @@ type GetRateBasedRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRateBasedRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRateBasedRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRateBasedRuleResponse_Rule:
-			v.Rule = &types.RateBasedRule{}
-			return v.Rule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedRule, schemas.GetRateBasedRuleRequest, schemas.GetRateBasedRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRateBasedRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedRule, schemas.GetRateBasedRuleRequest, schemas.GetRateBasedRuleResponse), output: &GetRateBasedRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRateBasedRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRateBasedRule"); err != nil {

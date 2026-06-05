@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListAddressListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAddressListsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAddressListsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAddressListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAddressListsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListAddressListsRequest_PageSize, *v.PageSize)
-	}
-}
-
 type ListAddressListsOutput struct {
 
 	// The list of address lists.
@@ -75,26 +58,16 @@ type ListAddressListsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAddressListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAddressListsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAddressListsResponse_AddressLists:
-			return deserializeAddressLists(d, schemas.ListAddressListsResponse_AddressLists, &v.AddressLists)
-		case schemas.ListAddressListsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAddressListsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAddressListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddressLists, schemas.ListAddressListsRequest, schemas.ListAddressListsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAddressLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddressLists, schemas.ListAddressListsRequest, schemas.ListAddressListsResponse), output: &ListAddressListsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAddressLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAddressLists"); err != nil {

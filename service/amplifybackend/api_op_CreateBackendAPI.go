@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,29 +53,6 @@ type CreateBackendAPIInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAPIInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAPIRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAPIInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreateBackendAPIRequest_AppId, *v.AppId)
-	}
-	if v.BackendEnvironmentName != nil {
-		s.WriteString(schemas.CreateBackendAPIRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
-	}
-	if v.ResourceConfig != nil {
-		s.WriteStruct(schemas.CreateBackendAPIRequest_ResourceConfig)
-		v.ResourceConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceName != nil {
-		s.WriteString(schemas.CreateBackendAPIRequest_ResourceName, *v.ResourceName)
-	}
-}
-
 type CreateBackendAPIOutput struct {
 
 	// The app ID.
@@ -104,39 +79,16 @@ type CreateBackendAPIOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAPIOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAPIResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAPIResponse_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_AppId, v.AppId)
-		case schemas.CreateBackendAPIResponse_BackendEnvironmentName:
-			v.BackendEnvironmentName = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_BackendEnvironmentName, v.BackendEnvironmentName)
-		case schemas.CreateBackendAPIResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_Error, v.Error)
-		case schemas.CreateBackendAPIResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_JobId, v.JobId)
-		case schemas.CreateBackendAPIResponse_Operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_Operation, v.Operation)
-		case schemas.CreateBackendAPIResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CreateBackendAPIResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendAPI, schemas.CreateBackendAPIRequest, schemas.CreateBackendAPIResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackendAPI{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendAPI, schemas.CreateBackendAPIRequest, schemas.CreateBackendAPIResponse), output: &CreateBackendAPIOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBackendAPI{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBackendAPI"); err != nil {

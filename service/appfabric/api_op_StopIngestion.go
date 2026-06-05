@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type StopIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopIngestionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopIngestionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.StopIngestionRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	if v.IngestionIdentifier != nil {
-		s.WriteString(schemas.StopIngestionRequest_ingestionIdentifier, *v.IngestionIdentifier)
-	}
-}
-
 type StopIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type StopIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopIngestionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopIngestion, schemas.StopIngestionRequest, schemas.StopIngestionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopIngestion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopIngestion, schemas.StopIngestionRequest, schemas.StopIngestionResponse), output: &StopIngestionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopIngestion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopIngestion"); err != nil {

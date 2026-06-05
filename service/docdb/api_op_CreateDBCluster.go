@@ -7,10 +7,8 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -251,90 +249,6 @@ type CreateDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.CreateDBClusterMessage_AvailabilityZones, v.AvailabilityZones)
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.CreateDBClusterMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DBSubnetGroupName != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.destinationRegion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_DestinationRegion, *v.destinationRegion)
-	}
-	serializeLogTypeList(s, schemas.CreateDBClusterMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
-	if v.Engine != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_Engine, *v.Engine)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.ManageMasterUserPassword != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_ManageMasterUserPassword, *v.ManageMasterUserPassword)
-	}
-	if v.MasterUserPassword != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUserPassword, *v.MasterUserPassword)
-	}
-	if v.MasterUserSecretKmsKeyId != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUserSecretKmsKeyId, *v.MasterUserSecretKmsKeyId)
-	}
-	if v.MasterUsername != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_MasterUsername, *v.MasterUsername)
-	}
-	if v.NetworkType != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_NetworkType, *v.NetworkType)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateDBClusterMessage_Port, *v.Port)
-	}
-	if v.PreSignedUrl != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreSignedUrl, *v.PreSignedUrl)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.ServerlessV2ScalingConfiguration != nil {
-		s.WriteStruct(schemas.CreateDBClusterMessage_ServerlessV2ScalingConfiguration)
-		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceRegion != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_SourceRegion, *v.SourceRegion)
-	}
-	if v.StorageEncrypted != nil {
-		s.WriteBool(schemas.CreateDBClusterMessage_StorageEncrypted, *v.StorageEncrypted)
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.CreateDBClusterMessage_StorageType, *v.StorageType)
-	}
-	serializeTagList(s, schemas.CreateDBClusterMessage_Tags, v.Tags)
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDBClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type CreateDBClusterOutput struct {
 
 	// Detailed information about a cluster.
@@ -346,24 +260,16 @@ type CreateDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBCluster, schemas.CreateDBClusterMessage, schemas.CreateDBClusterResult), output: &CreateDBClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBCluster"); err != nil {

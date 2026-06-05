@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,21 +42,6 @@ type GetMLInputChannelInput struct {
 	MlInputChannelArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMLInputChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMLInputChannelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMLInputChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.GetMLInputChannelRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.MlInputChannelArn != nil {
-		s.WriteString(schemas.GetMLInputChannelRequest_mlInputChannelArn, *v.MlInputChannelArn)
-	}
 }
 
 type GetMLInputChannelOutput struct {
@@ -185,85 +168,16 @@ type GetMLInputChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMLInputChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMLInputChannelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMLInputChannelResponse_collaborationIdentifier:
-			v.CollaborationIdentifier = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_collaborationIdentifier, v.CollaborationIdentifier)
-		case schemas.GetMLInputChannelResponse_configuredModelAlgorithmAssociations:
-			return deserializeConfiguredModelAlgorithmAssociationArnList(d, schemas.GetMLInputChannelResponse_configuredModelAlgorithmAssociations, &v.ConfiguredModelAlgorithmAssociations)
-		case schemas.GetMLInputChannelResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.GetMLInputChannelResponse_createTime, v.CreateTime)
-		case schemas.GetMLInputChannelResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_description, v.Description)
-		case schemas.GetMLInputChannelResponse_inputChannel:
-			v.InputChannel = &types.InputChannel{}
-			return v.InputChannel.Deserialize(d)
-		case schemas.GetMLInputChannelResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.GetMLInputChannelResponse_membershipIdentifier:
-			v.MembershipIdentifier = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_membershipIdentifier, v.MembershipIdentifier)
-		case schemas.GetMLInputChannelResponse_mlInputChannelArn:
-			v.MlInputChannelArn = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_mlInputChannelArn, v.MlInputChannelArn)
-		case schemas.GetMLInputChannelResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_name, v.Name)
-		case schemas.GetMLInputChannelResponse_numberOfFiles:
-			v.NumberOfFiles = new(float64)
-			return d.ReadFloat64(schemas.GetMLInputChannelResponse_numberOfFiles, v.NumberOfFiles)
-		case schemas.GetMLInputChannelResponse_numberOfRecords:
-			v.NumberOfRecords = new(int64)
-			return d.ReadInt64(schemas.GetMLInputChannelResponse_numberOfRecords, v.NumberOfRecords)
-		case schemas.GetMLInputChannelResponse_payerConfiguration:
-			v.PayerConfiguration = &types.PayerConfiguration{}
-			return v.PayerConfiguration.Deserialize(d)
-		case schemas.GetMLInputChannelResponse_privacyBudgets:
-			return deserializePrivacyBudgets(d, schemas.GetMLInputChannelResponse_privacyBudgets, &v.PrivacyBudgets)
-		case schemas.GetMLInputChannelResponse_protectedQueryIdentifier:
-			v.ProtectedQueryIdentifier = new(string)
-			return d.ReadString(schemas.GetMLInputChannelResponse_protectedQueryIdentifier, v.ProtectedQueryIdentifier)
-		case schemas.GetMLInputChannelResponse_retentionInDays:
-			v.RetentionInDays = new(int32)
-			return d.ReadInt32(schemas.GetMLInputChannelResponse_retentionInDays, v.RetentionInDays)
-		case schemas.GetMLInputChannelResponse_sizeInGb:
-			v.SizeInGb = new(float64)
-			return d.ReadFloat64(schemas.GetMLInputChannelResponse_sizeInGb, v.SizeInGb)
-		case schemas.GetMLInputChannelResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetMLInputChannelResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.MLInputChannelStatus(ev)
-			return nil
-		case schemas.GetMLInputChannelResponse_statusDetails:
-			v.StatusDetails = &types.StatusDetails{}
-			return v.StatusDetails.Deserialize(d)
-		case schemas.GetMLInputChannelResponse_syntheticDataConfiguration:
-			v.SyntheticDataConfiguration = &types.SyntheticDataConfiguration{}
-			return v.SyntheticDataConfiguration.Deserialize(d)
-		case schemas.GetMLInputChannelResponse_tags:
-			return deserializeTagMap(d, schemas.GetMLInputChannelResponse_tags, &v.Tags)
-		case schemas.GetMLInputChannelResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.GetMLInputChannelResponse_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMLInputChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLInputChannel, schemas.GetMLInputChannelRequest, schemas.GetMLInputChannelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLInputChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLInputChannel, schemas.GetMLInputChannelRequest, schemas.GetMLInputChannelResponse), output: &GetMLInputChannelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLInputChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMLInputChannel"); err != nil {

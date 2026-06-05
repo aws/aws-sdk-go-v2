@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,27 +65,6 @@ type ListDataProductRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataProductRevisionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataProductRevisionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataProductRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListDataProductRevisionsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.ListDataProductRevisionsInput_identifier, *v.Identifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataProductRevisionsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataProductRevisionsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDataProductRevisionsOutput struct {
 
 	// The results of the ListDataProductRevisions action.
@@ -109,26 +86,16 @@ type ListDataProductRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataProductRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataProductRevisionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataProductRevisionsOutput_items:
-			return deserializeDataProductRevisions(d, schemas.ListDataProductRevisionsOutput_items, &v.Items)
-		case schemas.ListDataProductRevisionsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataProductRevisionsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataProductRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataProductRevisions, schemas.ListDataProductRevisionsInput, schemas.ListDataProductRevisionsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataProductRevisions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataProductRevisions, schemas.ListDataProductRevisionsInput, schemas.ListDataProductRevisionsOutput), output: &ListDataProductRevisionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataProductRevisions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataProductRevisions"); err != nil {

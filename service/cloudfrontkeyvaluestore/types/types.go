@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -17,28 +15,6 @@ type DeleteKeyRequestListItem struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteKeyRequestListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteKeyRequestListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteKeyRequestListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.DeleteKeyRequestListItem_Key, *v.Key)
-	}
-}
-func (v *DeleteKeyRequestListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteKeyRequestListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteKeyRequestListItem_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.DeleteKeyRequestListItem_Key, v.Key)
-		}
-		return nil
-	})
 }
 
 // A key value pair.
@@ -57,34 +33,6 @@ type ListKeysResponseListItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKeysResponseListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListKeysResponseListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListKeysResponseListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.ListKeysResponseListItem_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.ListKeysResponseListItem_Value, *v.Value)
-	}
-}
-func (v *ListKeysResponseListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListKeysResponseListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListKeysResponseListItem_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.ListKeysResponseListItem_Key, v.Key)
-		case schemas.ListKeysResponseListItem_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.ListKeysResponseListItem_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // List item for key value pair to put.
 type PutKeyRequestListItem struct {
 
@@ -99,34 +47,6 @@ type PutKeyRequestListItem struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PutKeyRequestListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutKeyRequestListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutKeyRequestListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.PutKeyRequestListItem_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.PutKeyRequestListItem_Value, *v.Value)
-	}
-}
-func (v *PutKeyRequestListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutKeyRequestListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutKeyRequestListItem_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.PutKeyRequestListItem_Key, v.Key)
-		case schemas.PutKeyRequestListItem_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.PutKeyRequestListItem_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

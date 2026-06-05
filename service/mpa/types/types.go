@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -26,14 +24,6 @@ type ApprovalStrategyMemberMofN struct {
 }
 
 func (*ApprovalStrategyMemberMofN) isApprovalStrategy() {}
-func (v *ApprovalStrategyMemberMofN) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApprovalStrategy_MofN)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ApprovalStrategyMemberMofN) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains details for how an approval team grants approval.
 //
@@ -52,14 +42,6 @@ type ApprovalStrategyResponseMemberMofN struct {
 }
 
 func (*ApprovalStrategyResponseMemberMofN) isApprovalStrategyResponse() {}
-func (v *ApprovalStrategyResponseMemberMofN) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApprovalStrategyResponse_MofN)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ApprovalStrategyResponseMemberMofN) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains details for an approver.
 type ApprovalTeamRequestApprover struct {
@@ -76,34 +58,6 @@ type ApprovalTeamRequestApprover struct {
 	PrimaryIdentitySourceArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApprovalTeamRequestApprover) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApprovalTeamRequestApprover)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApprovalTeamRequestApprover) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PrimaryIdentityId != nil {
-		s.WriteString(schemas.ApprovalTeamRequestApprover_PrimaryIdentityId, *v.PrimaryIdentityId)
-	}
-	if v.PrimaryIdentitySourceArn != nil {
-		s.WriteString(schemas.ApprovalTeamRequestApprover_PrimaryIdentitySourceArn, *v.PrimaryIdentitySourceArn)
-	}
-}
-func (v *ApprovalTeamRequestApprover) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApprovalTeamRequestApprover, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApprovalTeamRequestApprover_PrimaryIdentityId:
-			v.PrimaryIdentityId = new(string)
-			return d.ReadString(schemas.ApprovalTeamRequestApprover_PrimaryIdentityId, v.PrimaryIdentityId)
-		case schemas.ApprovalTeamRequestApprover_PrimaryIdentitySourceArn:
-			v.PrimaryIdentitySourceArn = new(string)
-			return d.ReadString(schemas.ApprovalTeamRequestApprover_PrimaryIdentitySourceArn, v.PrimaryIdentitySourceArn)
-		}
-		return nil
-	})
 }
 
 // Contains the filter to apply to requests. You can specify up to 10 filters for
@@ -153,48 +107,6 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Filter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Filter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FieldName != "" {
-		s.WriteString(schemas.Filter_FieldName, string(v.FieldName))
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.Filter_Operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Filter_Value, *v.Value)
-	}
-}
-func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Filter_FieldName:
-			var ev string
-			if err := d.ReadString(schemas.Filter_FieldName, &ev); err != nil {
-				return err
-			}
-			v.FieldName = FilterField(ev)
-			return nil
-		case schemas.Filter_Operator:
-			var ev string
-			if err := d.ReadString(schemas.Filter_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = Operator(ev)
-			return nil
-		case schemas.Filter_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Filter_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Contains details for an approver.
 type GetApprovalTeamResponseApprover struct {
 
@@ -231,81 +143,6 @@ type GetApprovalTeamResponseApprover struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApprovalTeamResponseApprover) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApprovalTeamResponseApprover)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApprovalTeamResponseApprover) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApproverId != nil {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_ApproverId, *v.ApproverId)
-	}
-	if v.LastActivity != "" {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_LastActivity, string(v.LastActivity))
-	}
-	if v.LastActivityTime != nil {
-		s.WriteTime(schemas.GetApprovalTeamResponseApprover_LastActivityTime, *v.LastActivityTime)
-	}
-	serializeMfaMethods(s, schemas.GetApprovalTeamResponseApprover_MfaMethods, v.MfaMethods)
-	if v.PendingBaselineSessionArn != nil {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_PendingBaselineSessionArn, *v.PendingBaselineSessionArn)
-	}
-	if v.PrimaryIdentityId != nil {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentityId, *v.PrimaryIdentityId)
-	}
-	if v.PrimaryIdentitySourceArn != nil {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn, *v.PrimaryIdentitySourceArn)
-	}
-	if v.PrimaryIdentityStatus != "" {
-		s.WriteString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentityStatus, string(v.PrimaryIdentityStatus))
-	}
-	if v.ResponseTime != nil {
-		s.WriteTime(schemas.GetApprovalTeamResponseApprover_ResponseTime, *v.ResponseTime)
-	}
-}
-func (v *GetApprovalTeamResponseApprover) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApprovalTeamResponseApprover, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApprovalTeamResponseApprover_ApproverId:
-			v.ApproverId = new(string)
-			return d.ReadString(schemas.GetApprovalTeamResponseApprover_ApproverId, v.ApproverId)
-		case schemas.GetApprovalTeamResponseApprover_LastActivity:
-			var ev string
-			if err := d.ReadString(schemas.GetApprovalTeamResponseApprover_LastActivity, &ev); err != nil {
-				return err
-			}
-			v.LastActivity = ApproverLastActivity(ev)
-			return nil
-		case schemas.GetApprovalTeamResponseApprover_LastActivityTime:
-			v.LastActivityTime = new(time.Time)
-			return d.ReadTime(schemas.GetApprovalTeamResponseApprover_LastActivityTime, v.LastActivityTime)
-		case schemas.GetApprovalTeamResponseApprover_MfaMethods:
-			return deserializeMfaMethods(d, schemas.GetApprovalTeamResponseApprover_MfaMethods, &v.MfaMethods)
-		case schemas.GetApprovalTeamResponseApprover_PendingBaselineSessionArn:
-			v.PendingBaselineSessionArn = new(string)
-			return d.ReadString(schemas.GetApprovalTeamResponseApprover_PendingBaselineSessionArn, v.PendingBaselineSessionArn)
-		case schemas.GetApprovalTeamResponseApprover_PrimaryIdentityId:
-			v.PrimaryIdentityId = new(string)
-			return d.ReadString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentityId, v.PrimaryIdentityId)
-		case schemas.GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn:
-			v.PrimaryIdentitySourceArn = new(string)
-			return d.ReadString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn, v.PrimaryIdentitySourceArn)
-		case schemas.GetApprovalTeamResponseApprover_PrimaryIdentityStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetApprovalTeamResponseApprover_PrimaryIdentityStatus, &ev); err != nil {
-				return err
-			}
-			v.PrimaryIdentityStatus = IdentityStatus(ev)
-			return nil
-		case schemas.GetApprovalTeamResponseApprover_ResponseTime:
-			v.ResponseTime = new(time.Time)
-			return d.ReadTime(schemas.GetApprovalTeamResponseApprover_ResponseTime, v.ResponseTime)
-		}
-		return nil
-	})
-}
-
 // Contains details for an approver response in an approval session.
 type GetSessionResponseApproverResponse struct {
 
@@ -329,56 +166,6 @@ type GetSessionResponseApproverResponse struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSessionResponseApproverResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSessionResponseApproverResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSessionResponseApproverResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApproverId != nil {
-		s.WriteString(schemas.GetSessionResponseApproverResponse_ApproverId, *v.ApproverId)
-	}
-	if v.IdentityId != nil {
-		s.WriteString(schemas.GetSessionResponseApproverResponse_IdentityId, *v.IdentityId)
-	}
-	if v.IdentitySourceArn != nil {
-		s.WriteString(schemas.GetSessionResponseApproverResponse_IdentitySourceArn, *v.IdentitySourceArn)
-	}
-	if v.Response != "" {
-		s.WriteString(schemas.GetSessionResponseApproverResponse_Response, string(v.Response))
-	}
-	if v.ResponseTime != nil {
-		s.WriteTime(schemas.GetSessionResponseApproverResponse_ResponseTime, *v.ResponseTime)
-	}
-}
-func (v *GetSessionResponseApproverResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSessionResponseApproverResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSessionResponseApproverResponse_ApproverId:
-			v.ApproverId = new(string)
-			return d.ReadString(schemas.GetSessionResponseApproverResponse_ApproverId, v.ApproverId)
-		case schemas.GetSessionResponseApproverResponse_IdentityId:
-			v.IdentityId = new(string)
-			return d.ReadString(schemas.GetSessionResponseApproverResponse_IdentityId, v.IdentityId)
-		case schemas.GetSessionResponseApproverResponse_IdentitySourceArn:
-			v.IdentitySourceArn = new(string)
-			return d.ReadString(schemas.GetSessionResponseApproverResponse_IdentitySourceArn, v.IdentitySourceArn)
-		case schemas.GetSessionResponseApproverResponse_Response:
-			var ev string
-			if err := d.ReadString(schemas.GetSessionResponseApproverResponse_Response, &ev); err != nil {
-				return err
-			}
-			v.Response = SessionResponse(ev)
-			return nil
-		case schemas.GetSessionResponseApproverResponse_ResponseTime:
-			v.ResponseTime = new(time.Time)
-			return d.ReadTime(schemas.GetSessionResponseApproverResponse_ResponseTime, v.ResponseTime)
-		}
-		return nil
-	})
-}
-
 // IAM Identity Center credentials. For more information see, [IAM Identity Center] .
 //
 // [IAM Identity Center]: http://aws.amazon.com/identity-center/
@@ -395,34 +182,6 @@ type IamIdentityCenter struct {
 	Region *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IamIdentityCenter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamIdentityCenter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamIdentityCenter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.IamIdentityCenter_InstanceArn, *v.InstanceArn)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.IamIdentityCenter_Region, *v.Region)
-	}
-}
-func (v *IamIdentityCenter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamIdentityCenter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamIdentityCenter_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.IamIdentityCenter_InstanceArn, v.InstanceArn)
-		case schemas.IamIdentityCenter_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.IamIdentityCenter_Region, v.Region)
-		}
-		return nil
-	})
 }
 
 // IAM Identity Center credentials. For more information see, [IAM Identity Center] .
@@ -442,40 +201,6 @@ type IamIdentityCenterForGet struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IamIdentityCenterForGet) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamIdentityCenterForGet)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamIdentityCenterForGet) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApprovalPortalUrl != nil {
-		s.WriteString(schemas.IamIdentityCenterForGet_ApprovalPortalUrl, *v.ApprovalPortalUrl)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.IamIdentityCenterForGet_InstanceArn, *v.InstanceArn)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.IamIdentityCenterForGet_Region, *v.Region)
-	}
-}
-func (v *IamIdentityCenterForGet) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamIdentityCenterForGet, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamIdentityCenterForGet_ApprovalPortalUrl:
-			v.ApprovalPortalUrl = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForGet_ApprovalPortalUrl, v.ApprovalPortalUrl)
-		case schemas.IamIdentityCenterForGet_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForGet_InstanceArn, v.InstanceArn)
-		case schemas.IamIdentityCenterForGet_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForGet_Region, v.Region)
-		}
-		return nil
-	})
-}
-
 // IAM Identity Center credentials. For more information see, [IAM Identity Center] .
 //
 // [IAM Identity Center]: http://aws.amazon.com/identity-center/
@@ -491,40 +216,6 @@ type IamIdentityCenterForList struct {
 	Region *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IamIdentityCenterForList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamIdentityCenterForList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamIdentityCenterForList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApprovalPortalUrl != nil {
-		s.WriteString(schemas.IamIdentityCenterForList_ApprovalPortalUrl, *v.ApprovalPortalUrl)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.IamIdentityCenterForList_InstanceArn, *v.InstanceArn)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.IamIdentityCenterForList_Region, *v.Region)
-	}
-}
-func (v *IamIdentityCenterForList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamIdentityCenterForList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamIdentityCenterForList_ApprovalPortalUrl:
-			v.ApprovalPortalUrl = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForList_ApprovalPortalUrl, v.ApprovalPortalUrl)
-		case schemas.IamIdentityCenterForList_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForList_InstanceArn, v.InstanceArn)
-		case schemas.IamIdentityCenterForList_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.IamIdentityCenterForList_Region, v.Region)
-		}
-		return nil
-	})
 }
 
 // Contains details for an identity source. For more information, see [Identity source] in the
@@ -560,73 +251,6 @@ type IdentitySourceForList struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IdentitySourceForList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentitySourceForList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IdentitySourceForList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.IdentitySourceForList_CreationTime, *v.CreationTime)
-	}
-	if v.IdentitySourceArn != nil {
-		s.WriteString(schemas.IdentitySourceForList_IdentitySourceArn, *v.IdentitySourceArn)
-	}
-	serializeIdentitySourceParametersForList(s, schemas.IdentitySourceForList_IdentitySourceParameters, v.IdentitySourceParameters)
-	if v.IdentitySourceType != "" {
-		s.WriteString(schemas.IdentitySourceForList_IdentitySourceType, string(v.IdentitySourceType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.IdentitySourceForList_Status, string(v.Status))
-	}
-	if v.StatusCode != "" {
-		s.WriteString(schemas.IdentitySourceForList_StatusCode, string(v.StatusCode))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.IdentitySourceForList_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *IdentitySourceForList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdentitySourceForList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdentitySourceForList_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.IdentitySourceForList_CreationTime, v.CreationTime)
-		case schemas.IdentitySourceForList_IdentitySourceArn:
-			v.IdentitySourceArn = new(string)
-			return d.ReadString(schemas.IdentitySourceForList_IdentitySourceArn, v.IdentitySourceArn)
-		case schemas.IdentitySourceForList_IdentitySourceParameters:
-			return deserializeIdentitySourceParametersForList(d, schemas.IdentitySourceForList_IdentitySourceParameters, &v.IdentitySourceParameters)
-		case schemas.IdentitySourceForList_IdentitySourceType:
-			var ev string
-			if err := d.ReadString(schemas.IdentitySourceForList_IdentitySourceType, &ev); err != nil {
-				return err
-			}
-			v.IdentitySourceType = IdentitySourceType(ev)
-			return nil
-		case schemas.IdentitySourceForList_Status:
-			var ev string
-			if err := d.ReadString(schemas.IdentitySourceForList_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = IdentitySourceStatus(ev)
-			return nil
-		case schemas.IdentitySourceForList_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.IdentitySourceForList_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = IdentitySourceStatusCode(ev)
-			return nil
-		case schemas.IdentitySourceForList_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.IdentitySourceForList_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
-
 // Contains details for the resource that provides identities to the identity
 // source. For example, an IAM Identity Center instance.
 type IdentitySourceParameters struct {
@@ -635,30 +259,6 @@ type IdentitySourceParameters struct {
 	IamIdentityCenter *IamIdentityCenter
 
 	noSmithyDocumentSerde
-}
-
-func (v *IdentitySourceParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentitySourceParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IdentitySourceParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IamIdentityCenter != nil {
-		s.WriteStruct(schemas.IdentitySourceParameters_IamIdentityCenter)
-		v.IamIdentityCenter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IdentitySourceParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdentitySourceParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdentitySourceParameters_IamIdentityCenter:
-			v.IamIdentityCenter = &IamIdentityCenter{}
-			return v.IamIdentityCenter.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains details for the resource that provides identities to the identity
@@ -682,14 +282,6 @@ type IdentitySourceParametersForGetMemberIamIdentityCenter struct {
 }
 
 func (*IdentitySourceParametersForGetMemberIamIdentityCenter) isIdentitySourceParametersForGet() {}
-func (v *IdentitySourceParametersForGetMemberIamIdentityCenter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentitySourceParametersForGet_IamIdentityCenter)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IdentitySourceParametersForGetMemberIamIdentityCenter) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains details for the resource that provides identities to the identity
 // source. For example, an IAM Identity Center instance. For more information, see [Identity source]
@@ -712,14 +304,6 @@ type IdentitySourceParametersForListMemberIamIdentityCenter struct {
 }
 
 func (*IdentitySourceParametersForListMemberIamIdentityCenter) isIdentitySourceParametersForList() {}
-func (v *IdentitySourceParametersForListMemberIamIdentityCenter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentitySourceParametersForList_IamIdentityCenter)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IdentitySourceParametersForListMemberIamIdentityCenter) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains details for an approval team
 type ListApprovalTeamsResponseApprovalTeam struct {
@@ -761,81 +345,6 @@ type ListApprovalTeamsResponseApprovalTeam struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApprovalTeamsResponseApprovalTeam) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApprovalTeamsResponseApprovalTeam)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApprovalTeamsResponseApprovalTeam) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategyResponse(s, schemas.ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy, v.ApprovalStrategy)
-	if v.Arn != nil {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ListApprovalTeamsResponseApprovalTeam_CreationTime, *v.CreationTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_Name, *v.Name)
-	}
-	if v.NumberOfApprovers != nil {
-		s.WriteInt32(schemas.ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers, *v.NumberOfApprovers)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_Status, string(v.Status))
-	}
-	if v.StatusCode != "" {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_StatusCode, string(v.StatusCode))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *ListApprovalTeamsResponseApprovalTeam) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApprovalTeamsResponseApprovalTeam, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy:
-			return deserializeApprovalStrategyResponse(d, schemas.ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy, &v.ApprovalStrategy)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_Arn, v.Arn)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ListApprovalTeamsResponseApprovalTeam_CreationTime, v.CreationTime)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_Description, v.Description)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_Name, v.Name)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers:
-			v.NumberOfApprovers = new(int32)
-			return d.ReadInt32(schemas.ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers, v.NumberOfApprovers)
-		case schemas.ListApprovalTeamsResponseApprovalTeam_Status:
-			var ev string
-			if err := d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ApprovalTeamStatus(ev)
-			return nil
-		case schemas.ListApprovalTeamsResponseApprovalTeam_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = ApprovalTeamStatusCode(ev)
-			return nil
-		case schemas.ListApprovalTeamsResponseApprovalTeam_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.ListApprovalTeamsResponseApprovalTeam_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
-
 // Contains details about a policy for a resource.
 type ListResourcePoliciesResponseResourcePolicy struct {
 
@@ -849,44 +358,6 @@ type ListResourcePoliciesResponseResourcePolicy struct {
 	PolicyType PolicyType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListResourcePoliciesResponseResourcePolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResourcePoliciesResponseResourcePolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResourcePoliciesResponseResourcePolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyArn, *v.PolicyArn)
-	}
-	if v.PolicyName != nil {
-		s.WriteString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyName, *v.PolicyName)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyType, string(v.PolicyType))
-	}
-}
-func (v *ListResourcePoliciesResponseResourcePolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResourcePoliciesResponseResourcePolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResourcePoliciesResponseResourcePolicy_PolicyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyArn, v.PolicyArn)
-		case schemas.ListResourcePoliciesResponseResourcePolicy_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyName, v.PolicyName)
-		case schemas.ListResourcePoliciesResponseResourcePolicy_PolicyType:
-			var ev string
-			if err := d.ReadString(schemas.ListResourcePoliciesResponseResourcePolicy_PolicyType, &ev); err != nil {
-				return err
-			}
-			v.PolicyType = PolicyType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains details for an approval session. For more information, see [Session] in the
@@ -958,139 +429,6 @@ type ListSessionsResponseSession struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSessionsResponseSession) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSessionsResponseSession)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSessionsResponseSession) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionCompletionStrategy != "" {
-		s.WriteString(schemas.ListSessionsResponseSession_ActionCompletionStrategy, string(v.ActionCompletionStrategy))
-	}
-	if v.ActionName != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_ActionName, *v.ActionName)
-	}
-	serializeAdditionalSecurityRequirements(s, schemas.ListSessionsResponseSession_AdditionalSecurityRequirements, v.AdditionalSecurityRequirements)
-	if v.ApprovalTeamArn != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_ApprovalTeamArn, *v.ApprovalTeamArn)
-	}
-	if v.ApprovalTeamName != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_ApprovalTeamName, *v.ApprovalTeamName)
-	}
-	if v.CompletionTime != nil {
-		s.WriteTime(schemas.ListSessionsResponseSession_CompletionTime, *v.CompletionTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_Description, *v.Description)
-	}
-	if v.ExpirationTime != nil {
-		s.WriteTime(schemas.ListSessionsResponseSession_ExpirationTime, *v.ExpirationTime)
-	}
-	if v.InitiationTime != nil {
-		s.WriteTime(schemas.ListSessionsResponseSession_InitiationTime, *v.InitiationTime)
-	}
-	if v.ProtectedResourceArn != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_ProtectedResourceArn, *v.ProtectedResourceArn)
-	}
-	if v.RequesterAccountId != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_RequesterAccountId, *v.RequesterAccountId)
-	}
-	if v.RequesterPrincipalArn != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_RequesterPrincipalArn, *v.RequesterPrincipalArn)
-	}
-	if v.RequesterRegion != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_RequesterRegion, *v.RequesterRegion)
-	}
-	if v.RequesterServicePrincipal != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_RequesterServicePrincipal, *v.RequesterServicePrincipal)
-	}
-	if v.SessionArn != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_SessionArn, *v.SessionArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListSessionsResponseSession_Status, string(v.Status))
-	}
-	if v.StatusCode != "" {
-		s.WriteString(schemas.ListSessionsResponseSession_StatusCode, string(v.StatusCode))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.ListSessionsResponseSession_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *ListSessionsResponseSession) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSessionsResponseSession, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSessionsResponseSession_ActionCompletionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.ListSessionsResponseSession_ActionCompletionStrategy, &ev); err != nil {
-				return err
-			}
-			v.ActionCompletionStrategy = ActionCompletionStrategy(ev)
-			return nil
-		case schemas.ListSessionsResponseSession_ActionName:
-			v.ActionName = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_ActionName, v.ActionName)
-		case schemas.ListSessionsResponseSession_AdditionalSecurityRequirements:
-			return deserializeAdditionalSecurityRequirements(d, schemas.ListSessionsResponseSession_AdditionalSecurityRequirements, &v.AdditionalSecurityRequirements)
-		case schemas.ListSessionsResponseSession_ApprovalTeamArn:
-			v.ApprovalTeamArn = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_ApprovalTeamArn, v.ApprovalTeamArn)
-		case schemas.ListSessionsResponseSession_ApprovalTeamName:
-			v.ApprovalTeamName = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_ApprovalTeamName, v.ApprovalTeamName)
-		case schemas.ListSessionsResponseSession_CompletionTime:
-			v.CompletionTime = new(time.Time)
-			return d.ReadTime(schemas.ListSessionsResponseSession_CompletionTime, v.CompletionTime)
-		case schemas.ListSessionsResponseSession_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_Description, v.Description)
-		case schemas.ListSessionsResponseSession_ExpirationTime:
-			v.ExpirationTime = new(time.Time)
-			return d.ReadTime(schemas.ListSessionsResponseSession_ExpirationTime, v.ExpirationTime)
-		case schemas.ListSessionsResponseSession_InitiationTime:
-			v.InitiationTime = new(time.Time)
-			return d.ReadTime(schemas.ListSessionsResponseSession_InitiationTime, v.InitiationTime)
-		case schemas.ListSessionsResponseSession_ProtectedResourceArn:
-			v.ProtectedResourceArn = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_ProtectedResourceArn, v.ProtectedResourceArn)
-		case schemas.ListSessionsResponseSession_RequesterAccountId:
-			v.RequesterAccountId = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_RequesterAccountId, v.RequesterAccountId)
-		case schemas.ListSessionsResponseSession_RequesterPrincipalArn:
-			v.RequesterPrincipalArn = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_RequesterPrincipalArn, v.RequesterPrincipalArn)
-		case schemas.ListSessionsResponseSession_RequesterRegion:
-			v.RequesterRegion = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_RequesterRegion, v.RequesterRegion)
-		case schemas.ListSessionsResponseSession_RequesterServicePrincipal:
-			v.RequesterServicePrincipal = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_RequesterServicePrincipal, v.RequesterServicePrincipal)
-		case schemas.ListSessionsResponseSession_SessionArn:
-			v.SessionArn = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_SessionArn, v.SessionArn)
-		case schemas.ListSessionsResponseSession_Status:
-			var ev string
-			if err := d.ReadString(schemas.ListSessionsResponseSession_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = SessionStatus(ev)
-			return nil
-		case schemas.ListSessionsResponseSession_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.ListSessionsResponseSession_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = SessionStatusCode(ev)
-			return nil
-		case schemas.ListSessionsResponseSession_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.ListSessionsResponseSession_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
-
 // MFA configuration and sycnronization status for an approver
 type MfaMethod struct {
 
@@ -1107,42 +445,6 @@ type MfaMethod struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MfaMethod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MfaMethod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MfaMethod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SyncStatus != "" {
-		s.WriteString(schemas.MfaMethod_SyncStatus, string(v.SyncStatus))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.MfaMethod_Type, string(v.Type))
-	}
-}
-func (v *MfaMethod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MfaMethod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MfaMethod_SyncStatus:
-			var ev string
-			if err := d.ReadString(schemas.MfaMethod_SyncStatus, &ev); err != nil {
-				return err
-			}
-			v.SyncStatus = MfaSyncStatus(ev)
-			return nil
-		case schemas.MfaMethod_Type:
-			var ev string
-			if err := d.ReadString(schemas.MfaMethod_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = MfaType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Strategy for how an approval team grants approval.
 type MofNApprovalStrategy struct {
 
@@ -1152,28 +454,6 @@ type MofNApprovalStrategy struct {
 	MinApprovalsRequired *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *MofNApprovalStrategy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MofNApprovalStrategy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MofNApprovalStrategy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MinApprovalsRequired != nil {
-		s.WriteInt32(schemas.MofNApprovalStrategy_MinApprovalsRequired, *v.MinApprovalsRequired)
-	}
-}
-func (v *MofNApprovalStrategy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MofNApprovalStrategy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MofNApprovalStrategy_MinApprovalsRequired:
-			v.MinApprovalsRequired = new(int32)
-			return d.ReadInt32(schemas.MofNApprovalStrategy_MinApprovalsRequired, v.MinApprovalsRequired)
-		}
-		return nil
-	})
 }
 
 // Contains details for the pending updates for an approval team, if applicable.
@@ -1217,78 +497,6 @@ type PendingUpdate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PendingUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PendingUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PendingUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategyResponse(s, schemas.PendingUpdate_ApprovalStrategy, v.ApprovalStrategy)
-	serializeGetApprovalTeamResponseApprovers(s, schemas.PendingUpdate_Approvers, v.Approvers)
-	if v.Description != nil {
-		s.WriteString(schemas.PendingUpdate_Description, *v.Description)
-	}
-	if v.NumberOfApprovers != nil {
-		s.WriteInt32(schemas.PendingUpdate_NumberOfApprovers, *v.NumberOfApprovers)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PendingUpdate_Status, string(v.Status))
-	}
-	if v.StatusCode != "" {
-		s.WriteString(schemas.PendingUpdate_StatusCode, string(v.StatusCode))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.PendingUpdate_StatusMessage, *v.StatusMessage)
-	}
-	if v.UpdateInitiationTime != nil {
-		s.WriteTime(schemas.PendingUpdate_UpdateInitiationTime, *v.UpdateInitiationTime)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.PendingUpdate_VersionId, *v.VersionId)
-	}
-}
-func (v *PendingUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PendingUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PendingUpdate_ApprovalStrategy:
-			return deserializeApprovalStrategyResponse(d, schemas.PendingUpdate_ApprovalStrategy, &v.ApprovalStrategy)
-		case schemas.PendingUpdate_Approvers:
-			return deserializeGetApprovalTeamResponseApprovers(d, schemas.PendingUpdate_Approvers, &v.Approvers)
-		case schemas.PendingUpdate_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PendingUpdate_Description, v.Description)
-		case schemas.PendingUpdate_NumberOfApprovers:
-			v.NumberOfApprovers = new(int32)
-			return d.ReadInt32(schemas.PendingUpdate_NumberOfApprovers, v.NumberOfApprovers)
-		case schemas.PendingUpdate_Status:
-			var ev string
-			if err := d.ReadString(schemas.PendingUpdate_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ApprovalTeamStatus(ev)
-			return nil
-		case schemas.PendingUpdate_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.PendingUpdate_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = ApprovalTeamStatusCode(ev)
-			return nil
-		case schemas.PendingUpdate_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.PendingUpdate_StatusMessage, v.StatusMessage)
-		case schemas.PendingUpdate_UpdateInitiationTime:
-			v.UpdateInitiationTime = new(time.Time)
-			return d.ReadTime(schemas.PendingUpdate_UpdateInitiationTime, v.UpdateInitiationTime)
-		case schemas.PendingUpdate_VersionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.PendingUpdate_VersionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // Contains details for a policy. Policies define what operations a team that
 // define the permissions for team resources.
 type Policy struct {
@@ -1316,50 +524,6 @@ type Policy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Policy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Policy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Policy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Policy_Arn, *v.Arn)
-	}
-	if v.DefaultVersion != nil {
-		s.WriteInt32(schemas.Policy_DefaultVersion, *v.DefaultVersion)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Policy_Name, *v.Name)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.Policy_PolicyType, string(v.PolicyType))
-	}
-}
-func (v *Policy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Policy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Policy_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Policy_Arn, v.Arn)
-		case schemas.Policy_DefaultVersion:
-			v.DefaultVersion = new(int32)
-			return d.ReadInt32(schemas.Policy_DefaultVersion, v.DefaultVersion)
-		case schemas.Policy_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Policy_Name, v.Name)
-		case schemas.Policy_PolicyType:
-			var ev string
-			if err := d.ReadString(schemas.Policy_PolicyType, &ev); err != nil {
-				return err
-			}
-			v.PolicyType = PolicyType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains the Amazon Resource Name (ARN) for a policy. Policies define what
 // operations a team that define the permissions for team resources.
 type PolicyReference struct {
@@ -1370,28 +534,6 @@ type PolicyReference struct {
 	PolicyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyReference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyReference)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyReference) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.PolicyReference_PolicyArn, *v.PolicyArn)
-	}
-}
-func (v *PolicyReference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyReference, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyReference_PolicyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.PolicyReference_PolicyArn, v.PolicyArn)
-		}
-		return nil
-	})
 }
 
 // Contains details for the version of a policy. Policies define what operations a
@@ -1454,90 +596,6 @@ type PolicyVersion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PolicyVersion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyVersion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.PolicyVersion_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.PolicyVersion_CreationTime, *v.CreationTime)
-	}
-	if v.Document != nil {
-		s.WriteString(schemas.PolicyVersion_Document, *v.Document)
-	}
-	if v.IsDefault != nil {
-		s.WriteBool(schemas.PolicyVersion_IsDefault, *v.IsDefault)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.PolicyVersion_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PolicyVersion_Name, *v.Name)
-	}
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.PolicyVersion_PolicyArn, *v.PolicyArn)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.PolicyVersion_PolicyType, string(v.PolicyType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PolicyVersion_Status, string(v.Status))
-	}
-	if v.VersionId != nil {
-		s.WriteInt32(schemas.PolicyVersion_VersionId, *v.VersionId)
-	}
-}
-func (v *PolicyVersion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyVersion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyVersion_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.PolicyVersion_Arn, v.Arn)
-		case schemas.PolicyVersion_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.PolicyVersion_CreationTime, v.CreationTime)
-		case schemas.PolicyVersion_Document:
-			v.Document = new(string)
-			return d.ReadString(schemas.PolicyVersion_Document, v.Document)
-		case schemas.PolicyVersion_IsDefault:
-			v.IsDefault = new(bool)
-			return d.ReadBool(schemas.PolicyVersion_IsDefault, v.IsDefault)
-		case schemas.PolicyVersion_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.PolicyVersion_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.PolicyVersion_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PolicyVersion_Name, v.Name)
-		case schemas.PolicyVersion_PolicyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.PolicyVersion_PolicyArn, v.PolicyArn)
-		case schemas.PolicyVersion_PolicyType:
-			var ev string
-			if err := d.ReadString(schemas.PolicyVersion_PolicyType, &ev); err != nil {
-				return err
-			}
-			v.PolicyType = PolicyType(ev)
-			return nil
-		case schemas.PolicyVersion_Status:
-			var ev string
-			if err := d.ReadString(schemas.PolicyVersion_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PolicyStatus(ev)
-			return nil
-		case schemas.PolicyVersion_VersionId:
-			v.VersionId = new(int32)
-			return d.ReadInt32(schemas.PolicyVersion_VersionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // Contains details for the version of a policy. Policies define what operations a
 // team that define the permissions for team resources.
 type PolicyVersionSummary struct {
@@ -1591,84 +649,6 @@ type PolicyVersionSummary struct {
 	VersionId *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyVersionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyVersionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.PolicyVersionSummary_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.PolicyVersionSummary_CreationTime, *v.CreationTime)
-	}
-	if v.IsDefault != nil {
-		s.WriteBool(schemas.PolicyVersionSummary_IsDefault, *v.IsDefault)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.PolicyVersionSummary_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PolicyVersionSummary_Name, *v.Name)
-	}
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.PolicyVersionSummary_PolicyArn, *v.PolicyArn)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.PolicyVersionSummary_PolicyType, string(v.PolicyType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PolicyVersionSummary_Status, string(v.Status))
-	}
-	if v.VersionId != nil {
-		s.WriteInt32(schemas.PolicyVersionSummary_VersionId, *v.VersionId)
-	}
-}
-func (v *PolicyVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyVersionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyVersionSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.PolicyVersionSummary_Arn, v.Arn)
-		case schemas.PolicyVersionSummary_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.PolicyVersionSummary_CreationTime, v.CreationTime)
-		case schemas.PolicyVersionSummary_IsDefault:
-			v.IsDefault = new(bool)
-			return d.ReadBool(schemas.PolicyVersionSummary_IsDefault, v.IsDefault)
-		case schemas.PolicyVersionSummary_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.PolicyVersionSummary_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.PolicyVersionSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PolicyVersionSummary_Name, v.Name)
-		case schemas.PolicyVersionSummary_PolicyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.PolicyVersionSummary_PolicyArn, v.PolicyArn)
-		case schemas.PolicyVersionSummary_PolicyType:
-			var ev string
-			if err := d.ReadString(schemas.PolicyVersionSummary_PolicyType, &ev); err != nil {
-				return err
-			}
-			v.PolicyType = PolicyType(ev)
-			return nil
-		case schemas.PolicyVersionSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.PolicyVersionSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PolicyStatus(ev)
-			return nil
-		case schemas.PolicyVersionSummary_VersionId:
-			v.VersionId = new(int32)
-			return d.ReadInt32(schemas.PolicyVersionSummary_VersionId, v.VersionId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

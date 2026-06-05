@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,18 +34,6 @@ type DescribeFirewallMetadataInput struct {
 	FirewallArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeFirewallMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeFirewallMetadataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeFirewallMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FirewallArn != nil {
-		s.WriteString(schemas.DescribeFirewallMetadataRequest_FirewallArn, *v.FirewallArn)
-	}
 }
 
 type DescribeFirewallMetadataOutput struct {
@@ -81,42 +67,16 @@ type DescribeFirewallMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFirewallMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeFirewallMetadataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeFirewallMetadataResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeFirewallMetadataResponse_Description, v.Description)
-		case schemas.DescribeFirewallMetadataResponse_FirewallArn:
-			v.FirewallArn = new(string)
-			return d.ReadString(schemas.DescribeFirewallMetadataResponse_FirewallArn, v.FirewallArn)
-		case schemas.DescribeFirewallMetadataResponse_FirewallPolicyArn:
-			v.FirewallPolicyArn = new(string)
-			return d.ReadString(schemas.DescribeFirewallMetadataResponse_FirewallPolicyArn, v.FirewallPolicyArn)
-		case schemas.DescribeFirewallMetadataResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeFirewallMetadataResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FirewallStatusValue(ev)
-			return nil
-		case schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones:
-			return deserializeSupportedAvailabilityZones(d, schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones, &v.SupportedAvailabilityZones)
-		case schemas.DescribeFirewallMetadataResponse_TransitGatewayAttachmentId:
-			v.TransitGatewayAttachmentId = new(string)
-			return d.ReadString(schemas.DescribeFirewallMetadataResponse_TransitGatewayAttachmentId, v.TransitGatewayAttachmentId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeFirewallMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewallMetadata, schemas.DescribeFirewallMetadataRequest, schemas.DescribeFirewallMetadataResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFirewallMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewallMetadata, schemas.DescribeFirewallMetadataRequest, schemas.DescribeFirewallMetadataResponse), output: &DescribeFirewallMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFirewallMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFirewallMetadata"); err != nil {

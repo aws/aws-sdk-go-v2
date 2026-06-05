@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -100,54 +98,6 @@ type UpdateTransformerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTransformerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTransformerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTransformerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdiType(s, schemas.UpdateTransformerRequest_ediType, v.EdiType)
-	if v.FileFormat != "" {
-		s.WriteString(schemas.UpdateTransformerRequest_fileFormat, string(v.FileFormat))
-	}
-	if v.InputConversion != nil {
-		s.WriteStruct(schemas.UpdateTransformerRequest_inputConversion)
-		v.InputConversion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Mapping != nil {
-		s.WriteStruct(schemas.UpdateTransformerRequest_mapping)
-		v.Mapping.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MappingTemplate != nil {
-		s.WriteString(schemas.UpdateTransformerRequest_mappingTemplate, *v.MappingTemplate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateTransformerRequest_name, *v.Name)
-	}
-	if v.OutputConversion != nil {
-		s.WriteStruct(schemas.UpdateTransformerRequest_outputConversion)
-		v.OutputConversion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SampleDocument != nil {
-		s.WriteString(schemas.UpdateTransformerRequest_sampleDocument, *v.SampleDocument)
-	}
-	if v.SampleDocuments != nil {
-		s.WriteStruct(schemas.UpdateTransformerRequest_sampleDocuments)
-		v.SampleDocuments.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateTransformerRequest_status, string(v.Status))
-	}
-	if v.TransformerId != nil {
-		s.WriteString(schemas.UpdateTransformerRequest_transformerId, *v.TransformerId)
-	}
-}
-
 type UpdateTransformerOutput struct {
 
 	// Returns a timestamp for creation date and time of the transformer.
@@ -234,70 +184,16 @@ type UpdateTransformerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTransformerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTransformerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTransformerResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateTransformerResponse_createdAt, v.CreatedAt)
-		case schemas.UpdateTransformerResponse_ediType:
-			return deserializeEdiType(d, schemas.UpdateTransformerResponse_ediType, &v.EdiType)
-		case schemas.UpdateTransformerResponse_fileFormat:
-			var ev string
-			if err := d.ReadString(schemas.UpdateTransformerResponse_fileFormat, &ev); err != nil {
-				return err
-			}
-			v.FileFormat = types.FileFormat(ev)
-			return nil
-		case schemas.UpdateTransformerResponse_inputConversion:
-			v.InputConversion = &types.InputConversion{}
-			return v.InputConversion.Deserialize(d)
-		case schemas.UpdateTransformerResponse_mapping:
-			v.Mapping = &types.Mapping{}
-			return v.Mapping.Deserialize(d)
-		case schemas.UpdateTransformerResponse_mappingTemplate:
-			v.MappingTemplate = new(string)
-			return d.ReadString(schemas.UpdateTransformerResponse_mappingTemplate, v.MappingTemplate)
-		case schemas.UpdateTransformerResponse_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateTransformerResponse_modifiedAt, v.ModifiedAt)
-		case schemas.UpdateTransformerResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateTransformerResponse_name, v.Name)
-		case schemas.UpdateTransformerResponse_outputConversion:
-			v.OutputConversion = &types.OutputConversion{}
-			return v.OutputConversion.Deserialize(d)
-		case schemas.UpdateTransformerResponse_sampleDocument:
-			v.SampleDocument = new(string)
-			return d.ReadString(schemas.UpdateTransformerResponse_sampleDocument, v.SampleDocument)
-		case schemas.UpdateTransformerResponse_sampleDocuments:
-			v.SampleDocuments = &types.SampleDocuments{}
-			return v.SampleDocuments.Deserialize(d)
-		case schemas.UpdateTransformerResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateTransformerResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TransformerStatus(ev)
-			return nil
-		case schemas.UpdateTransformerResponse_transformerArn:
-			v.TransformerArn = new(string)
-			return d.ReadString(schemas.UpdateTransformerResponse_transformerArn, v.TransformerArn)
-		case schemas.UpdateTransformerResponse_transformerId:
-			v.TransformerId = new(string)
-			return d.ReadString(schemas.UpdateTransformerResponse_transformerId, v.TransformerId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateTransformerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTransformer, schemas.UpdateTransformerRequest, schemas.UpdateTransformerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTransformer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTransformer, schemas.UpdateTransformerRequest, schemas.UpdateTransformerResponse), output: &UpdateTransformerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTransformer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTransformer"); err != nil {

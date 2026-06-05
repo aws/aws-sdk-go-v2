@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -169,62 +167,6 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeFilter != nil {
-		s.WriteStruct(schemas.QueryRequest_AttributeFilter)
-		v.AttributeFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CollapseConfiguration != nil {
-		s.WriteStruct(schemas.QueryRequest_CollapseConfiguration)
-		v.CollapseConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeDocumentRelevanceOverrideConfigurationList(s, schemas.QueryRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
-	serializeFacetList(s, schemas.QueryRequest_Facets, v.Facets)
-	if v.IndexId != nil {
-		s.WriteString(schemas.QueryRequest_IndexId, *v.IndexId)
-	}
-	if v.PageNumber != nil {
-		s.WriteInt32(schemas.QueryRequest_PageNumber, *v.PageNumber)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.QueryRequest_PageSize, *v.PageSize)
-	}
-	if v.QueryResultTypeFilter != "" {
-		s.WriteString(schemas.QueryRequest_QueryResultTypeFilter, string(v.QueryResultTypeFilter))
-	}
-	if v.QueryText != nil {
-		s.WriteString(schemas.QueryRequest_QueryText, *v.QueryText)
-	}
-	serializeDocumentAttributeKeyList(s, schemas.QueryRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
-	if v.SortingConfiguration != nil {
-		s.WriteStruct(schemas.QueryRequest_SortingConfiguration)
-		v.SortingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSortingConfigurationList(s, schemas.QueryRequest_SortingConfigurations, v.SortingConfigurations)
-	if v.SpellCorrectionConfiguration != nil {
-		s.WriteStruct(schemas.QueryRequest_SpellCorrectionConfiguration)
-		v.SpellCorrectionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UserContext != nil {
-		s.WriteStruct(schemas.QueryRequest_UserContext)
-		v.UserContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VisitorId != nil {
-		s.WriteString(schemas.QueryRequest_VisitorId, *v.VisitorId)
-	}
-}
-
 type QueryOutput struct {
 
 	// Contains the facet results. A FacetResult contains the counts for each
@@ -268,37 +210,16 @@ type QueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryResult_FacetResults:
-			return deserializeFacetResultList(d, schemas.QueryResult_FacetResults, &v.FacetResults)
-		case schemas.QueryResult_FeaturedResultsItems:
-			return deserializeFeaturedResultsItemList(d, schemas.QueryResult_FeaturedResultsItems, &v.FeaturedResultsItems)
-		case schemas.QueryResult_QueryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.QueryResult_QueryId, v.QueryId)
-		case schemas.QueryResult_ResultItems:
-			return deserializeQueryResultItemList(d, schemas.QueryResult_ResultItems, &v.ResultItems)
-		case schemas.QueryResult_SpellCorrectedQueries:
-			return deserializeSpellCorrectedQueryList(d, schemas.QueryResult_SpellCorrectedQueries, &v.SpellCorrectedQueries)
-		case schemas.QueryResult_TotalNumberOfResults:
-			v.TotalNumberOfResults = new(int32)
-			return d.ReadInt32(schemas.QueryResult_TotalNumberOfResults, v.TotalNumberOfResults)
-		case schemas.QueryResult_Warnings:
-			return deserializeWarningList(d, schemas.QueryResult_Warnings, &v.Warnings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Query, schemas.QueryRequest, schemas.QueryResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Query, schemas.QueryRequest, schemas.QueryResult), output: &QueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Query"); err != nil {

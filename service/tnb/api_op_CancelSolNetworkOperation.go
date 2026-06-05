@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type CancelSolNetworkOperationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelSolNetworkOperationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelSolNetworkOperationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelSolNetworkOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NsLcmOpOccId != nil {
-		s.WriteString(schemas.CancelSolNetworkOperationInput_nsLcmOpOccId, *v.NsLcmOpOccId)
-	}
-}
-
 type CancelSolNetworkOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,29 +46,16 @@ type CancelSolNetworkOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelSolNetworkOperationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelSolNetworkOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *CancelSolNetworkOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelSolNetworkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSolNetworkOperation, schemas.CancelSolNetworkOperationInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSolNetworkOperation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSolNetworkOperation, schemas.CancelSolNetworkOperationInput, nil), output: &CancelSolNetworkOperationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSolNetworkOperation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelSolNetworkOperation"); err != nil {

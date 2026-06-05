@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,28 +38,6 @@ type GetAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssistantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssistantRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssistantId != nil {
-		s.WriteString(schemas.GetAssistantRequest_assistantId, *v.AssistantId)
-	}
-}
-func (v *GetAssistantInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssistantRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssistantRequest_assistantId:
-			v.AssistantId = new(string)
-			return d.ReadString(schemas.GetAssistantRequest_assistantId, v.AssistantId)
-		}
-		return nil
-	})
-}
-
 type GetAssistantOutput struct {
 
 	// Information about the assistant.
@@ -73,37 +49,16 @@ type GetAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssistantOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssistantResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Assistant != nil {
-		s.WriteStruct(schemas.GetAssistantResponse_assistant)
-		v.Assistant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssistantResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssistantResponse_assistant:
-			v.Assistant = &types.AssistantData{}
-			return v.Assistant.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssistant, schemas.GetAssistantRequest, schemas.GetAssistantResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssistant, schemas.GetAssistantRequest, schemas.GetAssistantResponse), output: &GetAssistantOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssistant"); err != nil {

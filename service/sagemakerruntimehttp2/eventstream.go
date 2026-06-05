@@ -3,14 +3,22 @@
 package sagemakerruntimehttp2
 
 import (
+	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/schemas"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/types"
 	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
+	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
+	"sync"
+	"time"
 )
 
 // RequestStreamEventWriter provides the interface for writing events to a stream.
@@ -31,166 +39,547 @@ type ResponseStreamEventReader interface {
 	Close() error
 	Err() error
 }
-type requestStreamEventWriter struct {
-	writer *smithyhttp.EventStreamWriter
+
+type eventStreamSigner interface {
+	GetSignature(ctx context.Context, headers, payload []byte, signingTime time.Time, optFns ...func(*v4.StreamSignerOptions)) ([]byte, error)
 }
 
-var _ RequestStreamEventWriter = (*requestStreamEventWriter)(nil)
+type asyncRequestStreamEvent struct {
+	Event  types.RequestStreamEvent
+	Result chan<- error
+}
+
+func (e asyncRequestStreamEvent) ReportResult(cancel <-chan struct{}, err error) bool {
+	select {
+	case e.Result <- err:
+		return true
+
+	case <-cancel:
+		return false
+
+	}
+}
+
+type requestStreamEventWriter struct {
+	encoder             *eventstream.Encoder
+	signer              eventStreamSigner
+	stream              chan asyncRequestStreamEvent
+	serializationBuffer *bytes.Buffer
+	signingBuffer       *bytes.Buffer
+	eventStream         io.WriteCloser
+	done                chan struct{}
+	closeOnce           sync.Once
+	err                 *smithysync.OnceErr
+}
+
+func newRequestStreamEventWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *requestStreamEventWriter {
+	w := &requestStreamEventWriter{
+		encoder:             encoder,
+		signer:              signer,
+		stream:              make(chan asyncRequestStreamEvent),
+		eventStream:         stream,
+		done:                make(chan struct{}),
+		err:                 smithysync.NewOnceErr(),
+		serializationBuffer: bytes.NewBuffer(nil),
+		signingBuffer:       bytes.NewBuffer(nil),
+	}
+
+	go w.writeStream()
+
+	return w
+
+}
 
 func (w *requestStreamEventWriter) Send(ctx context.Context, event types.RequestStreamEvent) error {
-	var variant *smithy.Schema
-	switch event.(type) {
-	case *types.RequestStreamEventMemberPayloadPart:
-		variant = schemas.RequestStreamEvent_PayloadPart
-	default:
-		return fmt.Errorf("unknown event type: %T", event)
+	return w.send(ctx, event)
+}
+
+func (w *requestStreamEventWriter) send(ctx context.Context, event types.RequestStreamEvent) error {
+	if err := w.err.Err(); err != nil {
+		return err
 	}
-	sv, ok := event.(smithy.Serializable)
-	if !ok {
-		return fmt.Errorf("event %T is not serializable", event)
+
+	resultCh := make(chan error)
+
+	wrapped := asyncRequestStreamEvent{
+		Event:  event,
+		Result: resultCh,
 	}
-	return w.writer.Send(ctx, variant, sv)
+
+	select {
+	case w.stream <- wrapped:
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+	select {
+	case err := <-resultCh:
+		return err
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-w.done:
+		return fmt.Errorf("stream closed, unable to send event")
+
+	}
+
+}
+
+func (w *requestStreamEventWriter) writeStream() {
+	defer w.Close()
+
+	for {
+		select {
+		case wrapper := <-w.stream:
+			err := w.writeEvent(wrapper.Event)
+			wrapper.ReportResult(w.done, err)
+			if err != nil {
+				w.err.SetError(err)
+				return
+			}
+
+		case <-w.done:
+			if err := w.closeStream(); err != nil {
+				w.err.SetError(err)
+			}
+			return
+
+		}
+	}
+}
+
+func (w *requestStreamEventWriter) writeEvent(event types.RequestStreamEvent) error {
+	// serializedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	serializedEvent, err := w.serializeEvent(event)
+	if err != nil {
+		return err
+	}
+
+	// signedEvent returned bytes refers to an underlying byte buffer and must not
+	// escape this writeEvent scope without first copying. Any previous bytes stored in
+	// the buffer are cleared by this call.
+	signedEvent, err := w.signEvent(serializedEvent)
+	if err != nil {
+		return err
+	}
+
+	// bytes are now copied to the underlying stream writer
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *requestStreamEventWriter) serializeEvent(event types.RequestStreamEvent) ([]byte, error) {
+	w.serializationBuffer.Reset()
+
+	eventMessage := eventstream.Message{}
+
+	if err := awsRestjson1_serializeEventStreamRequestStreamEvent(event, &eventMessage); err != nil {
+		return nil, err
+	}
+
+	if err := w.encoder.Encode(w.serializationBuffer, eventMessage); err != nil {
+		return nil, err
+	}
+
+	return w.serializationBuffer.Bytes(), nil
+}
+
+func (w *requestStreamEventWriter) signEvent(payload []byte) ([]byte, error) {
+	w.signingBuffer.Reset()
+
+	date := time.Now().UTC()
+
+	var msg eventstream.Message
+	msg.Headers.Set(eventstreamapi.DateHeader, eventstream.TimestampValue(date))
+	msg.Payload = payload
+
+	var headers bytes.Buffer
+	if err := eventstream.EncodeHeaders(&headers, msg.Headers); err != nil {
+		return nil, err
+	}
+
+	sig, err := w.signer.GetSignature(context.Background(), headers.Bytes(), msg.Payload, date)
+	if err != nil {
+		return nil, err
+	}
+
+	msg.Headers.Set(eventstreamapi.ChunkSignatureHeader, eventstream.BytesValue(sig))
+
+	if err := w.encoder.Encode(w.signingBuffer, msg); err != nil {
+		return nil, err
+	}
+
+	return w.signingBuffer.Bytes(), nil
+}
+
+func (w *requestStreamEventWriter) closeStream() (err error) {
+	defer func() {
+		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
+			err = cErr
+		}
+	}()
+
+	// Per the protocol, a signed empty message is used to indicate the end of the stream,
+	// and that no subsequent events will be sent.
+	signedEvent, err := w.signEvent([]byte{})
+	if err != nil {
+		return err
+	}
+
+	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
+	return err
+}
+
+func (w *requestStreamEventWriter) ErrorSet() <-chan struct{} {
+	return w.err.ErrorSet()
 }
 
 func (w *requestStreamEventWriter) Close() error {
-	return w.writer.Close()
+	w.closeOnce.Do(w.safeClose)
+	return w.Err()
+}
+
+func (w *requestStreamEventWriter) safeClose() {
+	close(w.done)
 }
 
 func (w *requestStreamEventWriter) Err() error {
-	return w.writer.Err()
+	return w.err.Err()
 }
 
 type responseStreamEventReader struct {
-	reader *smithyhttp.EventStreamReader
-	ch     chan types.ResponseStreamEvent
-	done   chan struct{}
+	stream      chan types.ResponseStreamEvent
+	decoder     *eventstream.Decoder
+	eventStream io.ReadCloser
+	err         *smithysync.OnceErr
+	payloadBuf  []byte
+	done        chan struct{}
+	closeOnce   sync.Once
 }
 
-var _ ResponseStreamEventReader = (*responseStreamEventReader)(nil)
-
-func newResponseStreamEventReader(reader *smithyhttp.EventStreamReader) *responseStreamEventReader {
-	r := &responseStreamEventReader{
-		reader: reader,
-		ch:     make(chan types.ResponseStreamEvent),
-		done:   make(chan struct{}),
+func newResponseStreamEventReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *responseStreamEventReader {
+	w := &responseStreamEventReader{
+		stream:      make(chan types.ResponseStreamEvent),
+		decoder:     decoder,
+		eventStream: readCloser,
+		err:         smithysync.NewOnceErr(),
+		done:        make(chan struct{}),
+		payloadBuf:  make([]byte, 10*1024),
 	}
-	go r.pipe()
-	return r
-}
 
-func (r *responseStreamEventReader) pipe() {
-	defer close(r.ch)
-	for event := range r.reader.Events() {
-		var ev types.ResponseStreamEvent
-		switch v := event.(type) {
-		case *types.ResponsePayloadPart:
-			ev = &types.ResponseStreamEventMemberPayloadPart{Value: *v}
-		case *eventstream.UnknownUnionMember:
-			ev = &types.UnknownUnionMember{Tag: v.Tag, Value: v.Value}
-		default:
-			continue
-		}
-		select {
-		case r.ch <- ev:
-		case <-r.done:
-			return
-		}
-	}
+	go w.readEventStream()
+
+	return w
 }
 
 func (r *responseStreamEventReader) Events() <-chan types.ResponseStreamEvent {
-	return r.ch
+	return r.stream
+}
+
+func (r *responseStreamEventReader) readEventStream() {
+	defer r.Close()
+	defer close(r.stream)
+
+	for {
+		r.payloadBuf = r.payloadBuf[0:0]
+		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
+		if err != nil {
+			if err == io.EOF {
+				return
+			}
+			select {
+			case <-r.done:
+				return
+			default:
+				r.err.SetError(err)
+				return
+			}
+		}
+
+		event, err := r.deserializeEventMessage(&decodedMessage)
+		if err != nil {
+			r.err.SetError(err)
+			return
+		}
+
+		select {
+		case r.stream <- event:
+		case <-r.done:
+			return
+		}
+
+	}
+}
+
+func (r *responseStreamEventReader) deserializeEventMessage(msg *eventstream.Message) (types.ResponseStreamEvent, error) {
+	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
+	if messageType == nil {
+		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
+	}
+
+	switch messageType.String() {
+	case eventstreamapi.EventMessageType:
+		var v types.ResponseStreamEvent
+		if err := awsRestjson1_deserializeEventStreamResponseStreamEvent(&v, msg); err != nil {
+			return nil, err
+		}
+		return v, nil
+
+	case eventstreamapi.ExceptionMessageType:
+		return nil, awsRestjson1_deserializeEventStreamExceptionResponseStreamEvent(msg)
+
+	case eventstreamapi.ErrorMessageType:
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
+			errorCode = header.String()
+		}
+		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
+			errorMessage = header.String()
+		}
+		return nil, &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	default:
+		mc := msg.Clone()
+		return nil, &UnknownEventMessageError{
+			Type:    messageType.String(),
+			Message: &mc,
+		}
+
+	}
+}
+
+func (r *responseStreamEventReader) ErrorSet() <-chan struct{} {
+	return r.err.ErrorSet()
 }
 
 func (r *responseStreamEventReader) Close() error {
+	r.closeOnce.Do(r.safeClose)
+	return r.Err()
+}
+
+func (r *responseStreamEventReader) safeClose() {
 	close(r.done)
-	return r.reader.Close()
+	r.eventStream.Close()
+
 }
 
 func (r *responseStreamEventReader) Err() error {
-	return r.reader.Err()
+	return r.err.Err()
 }
 
-type deserializeOpEventStreamInvokeEndpointWithBidirectionalStream struct {
-	options *Options
+func (r *responseStreamEventReader) Closed() <-chan struct{} {
+	return r.done
 }
 
-func (*deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) ID() string {
+type awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream struct {
+	LogEventStreamWrites bool
+	LogEventStreamReads  bool
+
+	existingResult *InvokeEndpointWithBidirectionalStreamOutput
+	asyncResult    chan deserializeResult
+}
+
+func (*awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) ID() string {
 	return "OperationEventStreamDeserializer"
 }
 
-func (m *deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) HandleDeserialize(
-	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
-) (
-	middleware.DeserializeOutput, middleware.Metadata, error,
+func (m *awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
-	var out middleware.DeserializeOutput
-	var md middleware.Metadata
-	var err error
-
-	output := &InvokeEndpointWithBidirectionalStreamOutput{}
-	output.initialReply = make(chan InvokeEndpointWithBidirectionalStreamInitialReply, 1)
-
-	inputStreamWriter := smithyhttp.GetInputStreamWriter(ctx)
-	if inputStreamWriter == nil {
-		return out, md, fmt.Errorf("input stream writer not found in context")
-	}
-	if rscheme := getResolvedAuthScheme(ctx); rscheme != nil {
-		if es, ok := rscheme.Scheme.Signer().(smithyhttp.EventStreamSigner); ok {
-			req, _ := in.Request.(*smithyhttp.Request)
-			msgSigner, serr := es.NewMessageSigner(ctx, req, getIdentity(ctx), rscheme.SignerProperties)
-			if serr != nil {
-				return out, md, fmt.Errorf("event stream signer: %w", serr)
-			}
-			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
-		}
-	}
-	eventWriter := &requestStreamEventWriter{
-		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.RequestStreamEvent, inputStreamWriter),
-	}
 	defer func() {
-		if err != nil {
-			_ = eventWriter.Close()
+		if err == nil {
+			return
 		}
+		m.closeResponseBody(out)
 	}()
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newResponseStreamEventReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.ResponseStreamEvent, TypeRegistry, asyncReader.pipeReader),
-	)
 
-	output.eventStream = NewInvokeEndpointWithBidirectionalStreamEventStream(func(stream *InvokeEndpointWithBidirectionalStreamEventStream) {
-		stream.Writer = eventWriter
-		stream.Reader = eventReader
-	})
+	logger := middleware.GetLogger(ctx)
 
-	go output.eventStream.waitStreamClose()
-
-	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
-	if prc != nil {
-		select {
-		case <-prc:
-		default:
-		}
-		prc <- PartialResult{
-			Output:   output,
-			Metadata: middleware.Metadata{},
-		}
-	}
-
-	out, md, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		asyncResult <- deserializeResult{err: err}
-		middleware.AddEventStreamOutputToMetadata(&md, output)
-		return out, md, err
-	}
-
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
-		return out, md, fmt.Errorf("unknown transport type: %T", out.RawResponse)
+		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
+	}
+	_ = request
+
+	if err := eventstreamapi.ApplyHTTPTransportFixes(request); err != nil {
+		return out, metadata, err
 	}
 
-	asyncResult <- deserializeResult{reader: resp.Body}
-	middleware.AddEventStreamOutputToMetadata(&md, output)
-	return out, md, nil
+	requestSignature, err := v4.GetSignedRequestSignature(request.Request)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to get event stream seed signature: %v", err)
+	}
+
+	identity := getIdentity(ctx)
+	if identity == nil {
+		return out, metadata, fmt.Errorf("no identity")
+	}
+
+	creds, ok := identity.(*internalauthsmithy.CredentialsAdapter)
+	if !ok {
+		return out, metadata, fmt.Errorf("identity is not sigv4 credentials")
+	}
+
+	rscheme := getResolvedAuthScheme(ctx)
+	if rscheme == nil {
+		return out, metadata, fmt.Errorf("no resolved auth scheme")
+	}
+
+	name, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing name")
+	}
+
+	region, ok := smithyhttp.GetSigV4SigningRegion(&rscheme.SignerProperties)
+	if !ok {
+		return out, metadata, fmt.Errorf("no sigv4 signing region")
+	}
+
+	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
+
+	eventWriter := newRequestStreamEventWriter(
+		eventstreamapi.GetInputStreamWriter(ctx),
+		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
+			options.Logger = logger
+			options.LogMessages = m.LogEventStreamWrites
+
+		}),
+		signer,
+	)
+	defer func() {
+		if err == nil {
+			return
+		}
+		_ = eventWriter.Close()
+	}()
+
+	//  storing existing output instead of creating a new one
+	var output *InvokeEndpointWithBidirectionalStreamOutput
+	var asyncResult chan deserializeResult
+
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newResponseStreamEventReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
+		output = &InvokeEndpointWithBidirectionalStreamOutput{}
+		output.eventStream = NewInvokeEndpointWithBidirectionalStreamEventStream(func(stream *InvokeEndpointWithBidirectionalStreamEventStream) {
+			stream.Writer = eventWriter
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan InvokeEndpointWithBidirectionalStreamInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
+
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
+
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
+}
+
+func (*awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) closeResponseBody(out middleware.DeserializeOutput) {
+	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
+		_, _ = io.Copy(io.Discard, resp.Body)
+		_ = resp.Body.Close()
+	}
+}
+
+func addEventStreamInvokeEndpointWithBidirectionalStreamMiddleware(stack *middleware.Stack, options Options) error {
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream{
+		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
+		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
+}
+
+// UnknownEventMessageError provides an error when a message is received from the stream,
+// but the reader is unable to determine what kind of message it is.
+type UnknownEventMessageError struct {
+	Type    string
+	Message *eventstream.Message
+}
+
+// Error retruns the error message string.
+func (e *UnknownEventMessageError) Error() string {
+	return "unknown event stream message type, " + e.Type
+}
+
+func setSafeEventStreamClientLogMode(o *Options, operation string) {
+	switch operation {
+	case "InvokeEndpointWithBidirectionalStream":
+		toggleEventStreamClientLogMode(o, true, true)
+		return
+
+	default:
+		return
+
+	}
+}
+func toggleEventStreamClientLogMode(o *Options, request, response bool) {
+	mode := o.ClientLogMode
+
+	if request && mode.IsRequestWithBody() {
+		mode.ClearRequestWithBody()
+		mode |= aws.LogRequest
+	}
+
+	if response && mode.IsResponseWithBody() {
+		mode.ClearResponseWithBody()
+		mode |= aws.LogResponse
+	}
+
+	o.ClientLogMode = mode
+
 }

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -97,50 +95,6 @@ type InvokeAgentRuntimeCommandInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeAgentRuntimeCommandInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeAgentRuntimeCommandRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeAgentRuntimeCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accept != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_accept, *v.Accept)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_accountId, *v.AccountId)
-	}
-	if v.AgentRuntimeArn != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_agentRuntimeArn, *v.AgentRuntimeArn)
-	}
-	if v.Baggage != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_baggage, *v.Baggage)
-	}
-	if v.Body != nil {
-		s.WriteStruct(schemas.InvokeAgentRuntimeCommandRequest_body)
-		v.Body.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_contentType, *v.ContentType)
-	}
-	if v.Qualifier != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_qualifier, *v.Qualifier)
-	}
-	if v.RuntimeSessionId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_runtimeSessionId, *v.RuntimeSessionId)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceId, *v.TraceId)
-	}
-	if v.TraceParent != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceParent, *v.TraceParent)
-	}
-	if v.TraceState != nil {
-		s.WriteString(schemas.InvokeAgentRuntimeCommandRequest_traceState, *v.TraceState)
-	}
-}
-
 // Response for InvokeAgentRuntimeCommand operation.
 type InvokeAgentRuntimeCommandOutput struct {
 	eventStream *InvokeAgentRuntimeCommandEventStream
@@ -150,14 +104,6 @@ type InvokeAgentRuntimeCommandOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokeAgentRuntimeCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeAgentRuntimeCommandResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -206,13 +152,12 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntimeCommand, schemas.InvokeAgentRuntimeCommandRequest, schemas.InvokeAgentRuntimeCommandResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgentRuntimeCommand{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgentRuntimeCommand, schemas.InvokeAgentRuntimeCommandRequest, schemas.InvokeAgentRuntimeCommandResponse), output: &InvokeAgentRuntimeCommandOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAgentRuntimeCommand{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgentRuntimeCommand{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAgentRuntimeCommand"); err != nil {
@@ -220,6 +165,9 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamInvokeAgentRuntimeCommandMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {

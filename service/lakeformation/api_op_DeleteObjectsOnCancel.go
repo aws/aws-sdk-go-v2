@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,28 +66,6 @@ type DeleteObjectsOnCancelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteObjectsOnCancelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteObjectsOnCancelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteObjectsOnCancelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.DeleteObjectsOnCancelRequest_CatalogId, *v.CatalogId)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.DeleteObjectsOnCancelRequest_DatabaseName, *v.DatabaseName)
-	}
-	serializeVirtualObjectList(s, schemas.DeleteObjectsOnCancelRequest_Objects, v.Objects)
-	if v.TableName != nil {
-		s.WriteString(schemas.DeleteObjectsOnCancelRequest_TableName, *v.TableName)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.DeleteObjectsOnCancelRequest_TransactionId, *v.TransactionId)
-	}
-}
-
 type DeleteObjectsOnCancelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -97,21 +73,16 @@ type DeleteObjectsOnCancelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteObjectsOnCancelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteObjectsOnCancelResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteObjectsOnCancelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteObjectsOnCancel, schemas.DeleteObjectsOnCancelRequest, schemas.DeleteObjectsOnCancelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteObjectsOnCancel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteObjectsOnCancel, schemas.DeleteObjectsOnCancelRequest, schemas.DeleteObjectsOnCancelResponse), output: &DeleteObjectsOnCancelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteObjectsOnCancel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteObjectsOnCancel"); err != nil {

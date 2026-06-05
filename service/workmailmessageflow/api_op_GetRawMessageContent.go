@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -39,18 +37,6 @@ type GetRawMessageContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRawMessageContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRawMessageContentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRawMessageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageId != nil {
-		s.WriteString(schemas.GetRawMessageContentRequest_messageId, *v.MessageId)
-	}
-}
-
 type GetRawMessageContentOutput struct {
 
 	// The raw content of the email message, in MIME format.
@@ -64,29 +50,16 @@ type GetRawMessageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRawMessageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRawMessageContentResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-func (v *GetRawMessageContentOutput) GetPayloadStream() io.Reader { return v.MessageContent }
-
-var _ smithy.StreamingInput = (*GetRawMessageContentOutput)(nil)
-
-func (v *GetRawMessageContentOutput) SetPayloadStream(r io.ReadCloser) { v.MessageContent = r }
-
-var _ smithy.StreamingOutput = (*GetRawMessageContentOutput)(nil)
-
 func (c *Client) addOperationGetRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRawMessageContent, schemas.GetRawMessageContentRequest, schemas.GetRawMessageContentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRawMessageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRawMessageContent, schemas.GetRawMessageContentRequest, schemas.GetRawMessageContentResponse), output: &GetRawMessageContentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRawMessageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRawMessageContent"); err != nil {

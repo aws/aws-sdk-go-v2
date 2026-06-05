@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,24 +41,6 @@ type ListCodeInterpretersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeInterpretersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCodeInterpretersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCodeInterpretersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCodeInterpretersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCodeInterpretersRequest_nextToken, *v.NextToken)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListCodeInterpretersRequest_type, string(v.Type))
-	}
-}
-
 type ListCodeInterpretersOutput struct {
 
 	// The list of code interpreter summaries.
@@ -77,26 +57,16 @@ type ListCodeInterpretersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeInterpretersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCodeInterpretersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCodeInterpretersResponse_codeInterpreterSummaries:
-			return deserializeCodeInterpreterSummaries(d, schemas.ListCodeInterpretersResponse_codeInterpreterSummaries, &v.CodeInterpreterSummaries)
-		case schemas.ListCodeInterpretersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCodeInterpretersResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCodeInterpretersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeInterpreters, schemas.ListCodeInterpretersRequest, schemas.ListCodeInterpretersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeInterpreters{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeInterpreters, schemas.ListCodeInterpretersRequest, schemas.ListCodeInterpretersResponse), output: &ListCodeInterpretersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeInterpreters{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodeInterpreters"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,29 +56,6 @@ type GetStreamInput struct {
 	ShardFilter *types.ShardFilter
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetStreamInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStreamInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetStreamInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetStreamInput_nextToken, *v.NextToken)
-	}
-	if v.ShardFilter != nil {
-		s.WriteStruct(schemas.GetStreamInput_shardFilter)
-		v.ShardFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StreamArn != nil {
-		s.WriteString(schemas.GetStreamInput_streamArn, *v.StreamArn)
-	}
 }
 
 type GetStreamOutput struct {
@@ -155,55 +130,16 @@ type GetStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStreamOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStreamOutput_creationRequestDateTime:
-			v.CreationRequestDateTime = new(time.Time)
-			return d.ReadTime(schemas.GetStreamOutput_creationRequestDateTime, v.CreationRequestDateTime)
-		case schemas.GetStreamOutput_keyspaceName:
-			v.KeyspaceName = new(string)
-			return d.ReadString(schemas.GetStreamOutput_keyspaceName, v.KeyspaceName)
-		case schemas.GetStreamOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetStreamOutput_nextToken, v.NextToken)
-		case schemas.GetStreamOutput_shards:
-			return deserializeShardDescriptionList(d, schemas.GetStreamOutput_shards, &v.Shards)
-		case schemas.GetStreamOutput_streamArn:
-			v.StreamArn = new(string)
-			return d.ReadString(schemas.GetStreamOutput_streamArn, v.StreamArn)
-		case schemas.GetStreamOutput_streamLabel:
-			v.StreamLabel = new(string)
-			return d.ReadString(schemas.GetStreamOutput_streamLabel, v.StreamLabel)
-		case schemas.GetStreamOutput_streamStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamOutput_streamStatus, &ev); err != nil {
-				return err
-			}
-			v.StreamStatus = types.StreamStatus(ev)
-			return nil
-		case schemas.GetStreamOutput_streamViewType:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamOutput_streamViewType, &ev); err != nil {
-				return err
-			}
-			v.StreamViewType = types.StreamViewType(ev)
-			return nil
-		case schemas.GetStreamOutput_tableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.GetStreamOutput_tableName, v.TableName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetStream{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput), output: &GetStreamOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetStream{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStream"); err != nil {

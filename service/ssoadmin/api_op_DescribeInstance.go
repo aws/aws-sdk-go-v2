@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,18 +48,6 @@ type DescribeInstanceInput struct {
 	InstanceArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.DescribeInstanceRequest_InstanceArn, *v.InstanceArn)
-	}
 }
 
 type DescribeInstanceOutput struct {
@@ -106,49 +92,16 @@ type DescribeInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeInstanceResponse_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeInstanceResponse_CreatedDate, v.CreatedDate)
-		case schemas.DescribeInstanceResponse_EncryptionConfigurationDetails:
-			v.EncryptionConfigurationDetails = &types.EncryptionConfigurationDetails{}
-			return v.EncryptionConfigurationDetails.Deserialize(d)
-		case schemas.DescribeInstanceResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeInstanceResponse_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_InstanceArn, v.InstanceArn)
-		case schemas.DescribeInstanceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_Name, v.Name)
-		case schemas.DescribeInstanceResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.DescribeInstanceResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeInstanceResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.InstanceStatus(ev)
-			return nil
-		case schemas.DescribeInstanceResponse_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.DescribeInstanceResponse_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse), output: &DescribeInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInstance"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,31 +56,6 @@ type CreateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSubscriberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.CreateSubscriberRequest_AccountId, *v.AccountId)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.CreateSubscriberRequest_BudgetName, *v.BudgetName)
-	}
-	if v.Notification != nil {
-		s.WriteStruct(schemas.CreateSubscriberRequest_Notification)
-		v.Notification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Subscriber != nil {
-		s.WriteStruct(schemas.CreateSubscriberRequest_Subscriber)
-		v.Subscriber.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 // Response of CreateSubscriber
 type CreateSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -91,21 +64,16 @@ type CreateSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSubscriberResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubscriber{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse), output: &CreateSubscriberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSubscriber{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubscriber"); err != nil {

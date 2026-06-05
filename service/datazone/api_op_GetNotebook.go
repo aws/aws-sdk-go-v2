@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,21 +44,6 @@ type GetNotebookInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetNotebookInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetNotebookInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetNotebookInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetNotebookInput_identifier, *v.Identifier)
-	}
 }
 
 type GetNotebookOutput struct {
@@ -140,79 +123,16 @@ type GetNotebookOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNotebookOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetNotebookOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetNotebookOutput_cellOrder:
-			return deserializeCellOrder(d, schemas.GetNotebookOutput_cellOrder, &v.CellOrder)
-		case schemas.GetNotebookOutput_computeId:
-			v.ComputeId = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_computeId, v.ComputeId)
-		case schemas.GetNotebookOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookOutput_createdAt, v.CreatedAt)
-		case schemas.GetNotebookOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_createdBy, v.CreatedBy)
-		case schemas.GetNotebookOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_description, v.Description)
-		case schemas.GetNotebookOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_domainId, v.DomainId)
-		case schemas.GetNotebookOutput_environmentConfiguration:
-			v.EnvironmentConfiguration = &types.EnvironmentConfig{}
-			return v.EnvironmentConfiguration.Deserialize(d)
-		case schemas.GetNotebookOutput_error:
-			v.Error = &types.NotebookError{}
-			return v.Error.Deserialize(d)
-		case schemas.GetNotebookOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_id, v.Id)
-		case schemas.GetNotebookOutput_lockExpiresAt:
-			v.LockExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookOutput_lockExpiresAt, v.LockExpiresAt)
-		case schemas.GetNotebookOutput_lockedAt:
-			v.LockedAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookOutput_lockedAt, v.LockedAt)
-		case schemas.GetNotebookOutput_lockedBy:
-			v.LockedBy = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_lockedBy, v.LockedBy)
-		case schemas.GetNotebookOutput_metadata:
-			return deserializeMetadata(d, schemas.GetNotebookOutput_metadata, &v.Metadata)
-		case schemas.GetNotebookOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_name, v.Name)
-		case schemas.GetNotebookOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetNotebookOutput_parameters:
-			return deserializeParameters(d, schemas.GetNotebookOutput_parameters, &v.Parameters)
-		case schemas.GetNotebookOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetNotebookOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotebookStatus(ev)
-			return nil
-		case schemas.GetNotebookOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetNotebookOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetNotebookOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.GetNotebookOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetNotebookMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebook, schemas.GetNotebookInput, schemas.GetNotebookOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotebook{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebook, schemas.GetNotebookInput, schemas.GetNotebookOutput), output: &GetNotebookOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotebook{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNotebook"); err != nil {

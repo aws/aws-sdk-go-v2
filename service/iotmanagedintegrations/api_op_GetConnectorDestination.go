@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,18 +35,6 @@ type GetConnectorDestinationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetConnectorDestinationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetConnectorDestinationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetConnectorDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetConnectorDestinationRequest_Identifier, *v.Identifier)
-	}
 }
 
 type GetConnectorDestinationOutput struct {
@@ -87,49 +73,16 @@ type GetConnectorDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConnectorDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetConnectorDestinationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetConnectorDestinationResponse_AuthConfig:
-			v.AuthConfig = &types.AuthConfig{}
-			return v.AuthConfig.Deserialize(d)
-		case schemas.GetConnectorDestinationResponse_AuthType:
-			var ev string
-			if err := d.ReadString(schemas.GetConnectorDestinationResponse_AuthType, &ev); err != nil {
-				return err
-			}
-			v.AuthType = types.AuthType(ev)
-			return nil
-		case schemas.GetConnectorDestinationResponse_CloudConnectorId:
-			v.CloudConnectorId = new(string)
-			return d.ReadString(schemas.GetConnectorDestinationResponse_CloudConnectorId, v.CloudConnectorId)
-		case schemas.GetConnectorDestinationResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetConnectorDestinationResponse_Description, v.Description)
-		case schemas.GetConnectorDestinationResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetConnectorDestinationResponse_Id, v.Id)
-		case schemas.GetConnectorDestinationResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetConnectorDestinationResponse_Name, v.Name)
-		case schemas.GetConnectorDestinationResponse_OAuthCompleteRedirectUrl:
-			v.OAuthCompleteRedirectUrl = new(string)
-			return d.ReadString(schemas.GetConnectorDestinationResponse_OAuthCompleteRedirectUrl, v.OAuthCompleteRedirectUrl)
-		case schemas.GetConnectorDestinationResponse_SecretsManager:
-			v.SecretsManager = &types.SecretsManager{}
-			return v.SecretsManager.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetConnectorDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorDestination, schemas.GetConnectorDestinationRequest, schemas.GetConnectorDestinationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectorDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorDestination, schemas.GetConnectorDestinationRequest, schemas.GetConnectorDestinationResponse), output: &GetConnectorDestinationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectorDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConnectorDestination"); err != nil {

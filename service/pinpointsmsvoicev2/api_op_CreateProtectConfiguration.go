@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,22 +49,6 @@ type CreateProtectConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProtectConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateProtectConfigurationRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DeletionProtectionEnabled != nil {
-		s.WriteBool(schemas.CreateProtectConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
-	}
-	serializeTagList(s, schemas.CreateProtectConfigurationRequest_Tags, v.Tags)
-}
-
 type CreateProtectConfigurationOutput struct {
 
 	// This is true if the protect configuration is set as your account default
@@ -107,36 +89,16 @@ type CreateProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProtectConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProtectConfigurationResult_AccountDefault:
-			return d.ReadBool(schemas.CreateProtectConfigurationResult_AccountDefault, &v.AccountDefault)
-		case schemas.CreateProtectConfigurationResult_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CreateProtectConfigurationResult_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.CreateProtectConfigurationResult_DeletionProtectionEnabled:
-			return d.ReadBool(schemas.CreateProtectConfigurationResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
-		case schemas.CreateProtectConfigurationResult_ProtectConfigurationArn:
-			v.ProtectConfigurationArn = new(string)
-			return d.ReadString(schemas.CreateProtectConfigurationResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
-		case schemas.CreateProtectConfigurationResult_ProtectConfigurationId:
-			v.ProtectConfigurationId = new(string)
-			return d.ReadString(schemas.CreateProtectConfigurationResult_ProtectConfigurationId, v.ProtectConfigurationId)
-		case schemas.CreateProtectConfigurationResult_Tags:
-			return deserializeTagList(d, schemas.CreateProtectConfigurationResult_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProtectConfiguration, schemas.CreateProtectConfigurationRequest, schemas.CreateProtectConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProtectConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProtectConfiguration, schemas.CreateProtectConfigurationRequest, schemas.CreateProtectConfigurationResult), output: &CreateProtectConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProtectConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProtectConfiguration"); err != nil {

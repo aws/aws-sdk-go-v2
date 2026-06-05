@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -90,23 +88,6 @@ type UpdateTelemetryPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTelemetryPipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTelemetryPipelineInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTelemetryPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.UpdateTelemetryPipelineInput_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PipelineIdentifier != nil {
-		s.WriteString(schemas.UpdateTelemetryPipelineInput_PipelineIdentifier, *v.PipelineIdentifier)
-	}
-}
-
 type UpdateTelemetryPipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -114,21 +95,16 @@ type UpdateTelemetryPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTelemetryPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTelemetryPipelineOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateTelemetryPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryPipeline, schemas.UpdateTelemetryPipelineInput, schemas.UpdateTelemetryPipelineOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTelemetryPipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryPipeline, schemas.UpdateTelemetryPipelineInput, schemas.UpdateTelemetryPipelineOutput), output: &UpdateTelemetryPipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTelemetryPipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTelemetryPipeline"); err != nil {

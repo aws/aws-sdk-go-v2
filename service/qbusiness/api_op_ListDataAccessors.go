@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type ListDataAccessorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataAccessorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataAccessorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataAccessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ListDataAccessorsRequest_applicationId, *v.ApplicationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataAccessorsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataAccessorsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListDataAccessorsOutput struct {
 
 	// The list of data accessors.
@@ -81,26 +61,16 @@ type ListDataAccessorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataAccessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataAccessorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataAccessorsResponse_dataAccessors:
-			return deserializeDataAccessors(d, schemas.ListDataAccessorsResponse_dataAccessors, &v.DataAccessors)
-		case schemas.ListDataAccessorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataAccessorsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataAccessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAccessors, schemas.ListDataAccessorsRequest, schemas.ListDataAccessorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataAccessors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataAccessors, schemas.ListDataAccessorsRequest, schemas.ListDataAccessorsResponse), output: &ListDataAccessorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataAccessors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataAccessors"); err != nil {

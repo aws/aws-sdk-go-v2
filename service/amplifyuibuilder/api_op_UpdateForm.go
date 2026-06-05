@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,54 +55,6 @@ type UpdateFormInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFormInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFormRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFormInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.UpdateFormRequest_appId, *v.AppId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateFormRequest_clientToken, *v.ClientToken)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.UpdateFormRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateFormRequest_id, *v.Id)
-	}
-	if v.UpdatedForm != nil {
-		s.WriteStruct(schemas.UpdateFormRequest_updatedForm)
-		v.UpdatedForm.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateFormInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFormRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateFormRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.UpdateFormRequest_appId, v.AppId)
-		case schemas.UpdateFormRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateFormRequest_clientToken, v.ClientToken)
-		case schemas.UpdateFormRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.UpdateFormRequest_environmentName, v.EnvironmentName)
-		case schemas.UpdateFormRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateFormRequest_id, v.Id)
-		case schemas.UpdateFormRequest_updatedForm:
-			v.UpdatedForm = &types.UpdateFormData{}
-			return v.UpdatedForm.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateFormOutput struct {
 
 	// Describes the configuration of the updated form.
@@ -116,37 +66,16 @@ type UpdateFormOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateFormOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateFormResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Entity != nil {
-		s.WriteStruct(schemas.UpdateFormResponse_entity)
-		v.Entity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateFormResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateFormResponse_entity:
-			v.Entity = &types.Form{}
-			return v.Entity.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateForm, schemas.UpdateFormRequest, schemas.UpdateFormResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateForm{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateForm, schemas.UpdateFormRequest, schemas.UpdateFormResponse), output: &UpdateFormOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateForm{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateForm"); err != nil {

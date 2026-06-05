@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,16 +34,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request processing has an invalid argument.
 type IllegalArgumentException struct {
@@ -71,16 +60,6 @@ func (e *IllegalArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *IllegalArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IllegalArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IllegalArgumentException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IllegalArgumentException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The operation failed because the current state of the resource doesn't allow
 // the operation to proceed.
@@ -110,16 +89,6 @@ func (e *IllegalStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *IllegalStateException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IllegalStateException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IllegalStateException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IllegalStateException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
@@ -149,16 +118,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified resource was not found.
 //
@@ -187,13 +146,3 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}

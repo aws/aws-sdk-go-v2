@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,68 +36,6 @@ type ApiGatewayProxyConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApiGatewayProxyConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApiGatewayProxyConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApiGatewayProxyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiGatewayId != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_ApiGatewayId, *v.ApiGatewayId)
-	}
-	if v.EndpointType != "" {
-		s.WriteString(schemas.ApiGatewayProxyConfig_EndpointType, string(v.EndpointType))
-	}
-	if v.NlbArn != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_NlbArn, *v.NlbArn)
-	}
-	if v.NlbName != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_NlbName, *v.NlbName)
-	}
-	if v.ProxyUrl != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_ProxyUrl, *v.ProxyUrl)
-	}
-	if v.StageName != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_StageName, *v.StageName)
-	}
-	if v.VpcLinkId != nil {
-		s.WriteString(schemas.ApiGatewayProxyConfig_VpcLinkId, *v.VpcLinkId)
-	}
-}
-func (v *ApiGatewayProxyConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApiGatewayProxyConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApiGatewayProxyConfig_ApiGatewayId:
-			v.ApiGatewayId = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_ApiGatewayId, v.ApiGatewayId)
-		case schemas.ApiGatewayProxyConfig_EndpointType:
-			var ev string
-			if err := d.ReadString(schemas.ApiGatewayProxyConfig_EndpointType, &ev); err != nil {
-				return err
-			}
-			v.EndpointType = ApiGatewayEndpointType(ev)
-			return nil
-		case schemas.ApiGatewayProxyConfig_NlbArn:
-			v.NlbArn = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_NlbArn, v.NlbArn)
-		case schemas.ApiGatewayProxyConfig_NlbName:
-			v.NlbName = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_NlbName, v.NlbName)
-		case schemas.ApiGatewayProxyConfig_ProxyUrl:
-			v.ProxyUrl = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_ProxyUrl, v.ProxyUrl)
-		case schemas.ApiGatewayProxyConfig_StageName:
-			v.StageName = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_StageName, v.StageName)
-		case schemas.ApiGatewayProxyConfig_VpcLinkId:
-			v.VpcLinkId = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyConfig_VpcLinkId, v.VpcLinkId)
-		}
-		return nil
-	})
-}
-
 // A wrapper object holding the Amazon API Gateway endpoint input.
 type ApiGatewayProxyInput struct {
 
@@ -120,38 +56,6 @@ type ApiGatewayProxyInput struct {
 	StageName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApiGatewayProxyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApiGatewayProxyInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApiGatewayProxyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndpointType != "" {
-		s.WriteString(schemas.ApiGatewayProxyInput_EndpointType, string(v.EndpointType))
-	}
-	if v.StageName != nil {
-		s.WriteString(schemas.ApiGatewayProxyInput_StageName, *v.StageName)
-	}
-}
-func (v *ApiGatewayProxyInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApiGatewayProxyInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApiGatewayProxyInput_EndpointType:
-			var ev string
-			if err := d.ReadString(schemas.ApiGatewayProxyInput_EndpointType, &ev); err != nil {
-				return err
-			}
-			v.EndpointType = ApiGatewayEndpointType(ev)
-			return nil
-		case schemas.ApiGatewayProxyInput_StageName:
-			v.StageName = new(string)
-			return d.ReadString(schemas.ApiGatewayProxyInput_StageName, v.StageName)
-		}
-		return nil
-	})
 }
 
 // A wrapper object holding the Amazon API Gateway proxy summary.
@@ -181,68 +85,6 @@ type ApiGatewayProxySummary struct {
 	VpcLinkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApiGatewayProxySummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApiGatewayProxySummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApiGatewayProxySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiGatewayId != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_ApiGatewayId, *v.ApiGatewayId)
-	}
-	if v.EndpointType != "" {
-		s.WriteString(schemas.ApiGatewayProxySummary_EndpointType, string(v.EndpointType))
-	}
-	if v.NlbArn != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_NlbArn, *v.NlbArn)
-	}
-	if v.NlbName != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_NlbName, *v.NlbName)
-	}
-	if v.ProxyUrl != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_ProxyUrl, *v.ProxyUrl)
-	}
-	if v.StageName != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_StageName, *v.StageName)
-	}
-	if v.VpcLinkId != nil {
-		s.WriteString(schemas.ApiGatewayProxySummary_VpcLinkId, *v.VpcLinkId)
-	}
-}
-func (v *ApiGatewayProxySummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApiGatewayProxySummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApiGatewayProxySummary_ApiGatewayId:
-			v.ApiGatewayId = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_ApiGatewayId, v.ApiGatewayId)
-		case schemas.ApiGatewayProxySummary_EndpointType:
-			var ev string
-			if err := d.ReadString(schemas.ApiGatewayProxySummary_EndpointType, &ev); err != nil {
-				return err
-			}
-			v.EndpointType = ApiGatewayEndpointType(ev)
-			return nil
-		case schemas.ApiGatewayProxySummary_NlbArn:
-			v.NlbArn = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_NlbArn, v.NlbArn)
-		case schemas.ApiGatewayProxySummary_NlbName:
-			v.NlbName = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_NlbName, v.NlbName)
-		case schemas.ApiGatewayProxySummary_ProxyUrl:
-			v.ProxyUrl = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_ProxyUrl, v.ProxyUrl)
-		case schemas.ApiGatewayProxySummary_StageName:
-			v.StageName = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_StageName, v.StageName)
-		case schemas.ApiGatewayProxySummary_VpcLinkId:
-			v.VpcLinkId = new(string)
-			return d.ReadString(schemas.ApiGatewayProxySummary_VpcLinkId, v.VpcLinkId)
-		}
-		return nil
-	})
 }
 
 // The list of ApplicationSummary objects.
@@ -294,115 +136,6 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiGatewayProxy != nil {
-		s.WriteStruct(schemas.ApplicationSummary_ApiGatewayProxy)
-		v.ApiGatewayProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ApplicationSummary_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.ApplicationSummary_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.ApplicationSummary_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.ApplicationSummary_CreatedTime, *v.CreatedTime)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ApplicationSummary_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.ApplicationSummary_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.ApplicationSummary_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ApplicationSummary_Name, *v.Name)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.ApplicationSummary_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.ProxyType != "" {
-		s.WriteString(schemas.ApplicationSummary_ProxyType, string(v.ProxyType))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ApplicationSummary_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.ApplicationSummary_Tags, v.Tags)
-	if v.VpcId != nil {
-		s.WriteString(schemas.ApplicationSummary_VpcId, *v.VpcId)
-	}
-}
-func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationSummary_ApiGatewayProxy:
-			v.ApiGatewayProxy = &ApiGatewayProxySummary{}
-			return v.ApiGatewayProxy.Deserialize(d)
-		case schemas.ApplicationSummary_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_ApplicationId, v.ApplicationId)
-		case schemas.ApplicationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ApplicationSummary_Arn, v.Arn)
-		case schemas.ApplicationSummary_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.ApplicationSummary_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.ApplicationSummary_CreatedTime, v.CreatedTime)
-		case schemas.ApplicationSummary_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_EnvironmentId, v.EnvironmentId)
-		case schemas.ApplicationSummary_Error:
-			v.Error = &ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.ApplicationSummary_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.ApplicationSummary_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.ApplicationSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ApplicationSummary_Name, v.Name)
-		case schemas.ApplicationSummary_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_OwnerAccountId, v.OwnerAccountId)
-		case schemas.ApplicationSummary_ProxyType:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationSummary_ProxyType, &ev); err != nil {
-				return err
-			}
-			v.ProxyType = ProxyType(ev)
-			return nil
-		case schemas.ApplicationSummary_State:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationSummary_State, &ev); err != nil {
-				return err
-			}
-			v.State = ApplicationState(ev)
-			return nil
-		case schemas.ApplicationSummary_Tags:
-			return deserializeTagMap(d, schemas.ApplicationSummary_Tags, &v.Tags)
-		case schemas.ApplicationSummary_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.ApplicationSummary_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
-
 // The configuration for the default route type.
 type DefaultRouteInput struct {
 
@@ -411,32 +144,6 @@ type DefaultRouteInput struct {
 	ActivationState RouteActivationState
 
 	noSmithyDocumentSerde
-}
-
-func (v *DefaultRouteInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DefaultRouteInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DefaultRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationState != "" {
-		s.WriteString(schemas.DefaultRouteInput_ActivationState, string(v.ActivationState))
-	}
-}
-func (v *DefaultRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DefaultRouteInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DefaultRouteInput_ActivationState:
-			var ev string
-			if err := d.ReadString(schemas.DefaultRouteInput_ActivationState, &ev); err != nil {
-				return err
-			}
-			v.ActivationState = RouteActivationState(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The summary information for environments as a response to ListEnvironments .
@@ -481,101 +188,6 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnvironmentSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnvironmentSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.EnvironmentSummary_Arn, *v.Arn)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.EnvironmentSummary_CreatedTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.EnvironmentSummary_Description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.EnvironmentSummary_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.EnvironmentSummary_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.EnvironmentSummary_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.EnvironmentSummary_Name, *v.Name)
-	}
-	if v.NetworkFabricType != "" {
-		s.WriteString(schemas.EnvironmentSummary_NetworkFabricType, string(v.NetworkFabricType))
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.EnvironmentSummary_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.EnvironmentSummary_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.EnvironmentSummary_Tags, v.Tags)
-	if v.TransitGatewayId != nil {
-		s.WriteString(schemas.EnvironmentSummary_TransitGatewayId, *v.TransitGatewayId)
-	}
-}
-func (v *EnvironmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnvironmentSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EnvironmentSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_Arn, v.Arn)
-		case schemas.EnvironmentSummary_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.EnvironmentSummary_CreatedTime, v.CreatedTime)
-		case schemas.EnvironmentSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_Description, v.Description)
-		case schemas.EnvironmentSummary_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_EnvironmentId, v.EnvironmentId)
-		case schemas.EnvironmentSummary_Error:
-			v.Error = &ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.EnvironmentSummary_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.EnvironmentSummary_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.EnvironmentSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_Name, v.Name)
-		case schemas.EnvironmentSummary_NetworkFabricType:
-			var ev string
-			if err := d.ReadString(schemas.EnvironmentSummary_NetworkFabricType, &ev); err != nil {
-				return err
-			}
-			v.NetworkFabricType = NetworkFabricType(ev)
-			return nil
-		case schemas.EnvironmentSummary_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_OwnerAccountId, v.OwnerAccountId)
-		case schemas.EnvironmentSummary_State:
-			var ev string
-			if err := d.ReadString(schemas.EnvironmentSummary_State, &ev); err != nil {
-				return err
-			}
-			v.State = EnvironmentState(ev)
-			return nil
-		case schemas.EnvironmentSummary_Tags:
-			return deserializeTagMap(d, schemas.EnvironmentSummary_Tags, &v.Tags)
-		case schemas.EnvironmentSummary_TransitGatewayId:
-			v.TransitGatewayId = new(string)
-			return d.ReadString(schemas.EnvironmentSummary_TransitGatewayId, v.TransitGatewayId)
-		}
-		return nil
-	})
-}
-
 // Provides summary information for the EnvironmentVpc resource as a response to
 // ListEnvironmentVpc .
 type EnvironmentVpc struct {
@@ -604,61 +216,6 @@ type EnvironmentVpc struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnvironmentVpc) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnvironmentVpc)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnvironmentVpc) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.EnvironmentVpc_AccountId, *v.AccountId)
-	}
-	serializeCidrBlocks(s, schemas.EnvironmentVpc_CidrBlocks, v.CidrBlocks)
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.EnvironmentVpc_CreatedTime, *v.CreatedTime)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.EnvironmentVpc_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.EnvironmentVpc_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.EnvironmentVpc_VpcId, *v.VpcId)
-	}
-	if v.VpcName != nil {
-		s.WriteString(schemas.EnvironmentVpc_VpcName, *v.VpcName)
-	}
-}
-func (v *EnvironmentVpc) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnvironmentVpc, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EnvironmentVpc_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.EnvironmentVpc_AccountId, v.AccountId)
-		case schemas.EnvironmentVpc_CidrBlocks:
-			return deserializeCidrBlocks(d, schemas.EnvironmentVpc_CidrBlocks, &v.CidrBlocks)
-		case schemas.EnvironmentVpc_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.EnvironmentVpc_CreatedTime, v.CreatedTime)
-		case schemas.EnvironmentVpc_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.EnvironmentVpc_EnvironmentId, v.EnvironmentId)
-		case schemas.EnvironmentVpc_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.EnvironmentVpc_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.EnvironmentVpc_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.EnvironmentVpc_VpcId, v.VpcId)
-		case schemas.EnvironmentVpc_VpcName:
-			v.VpcName = new(string)
-			return d.ReadString(schemas.EnvironmentVpc_VpcName, v.VpcName)
-		}
-		return nil
-	})
-}
-
 // Error associated with a resource returned for a Get or List resource response.
 type ErrorResponse struct {
 
@@ -683,63 +240,6 @@ type ErrorResponse struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ErrorResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ErrorResponse_AccountId, *v.AccountId)
-	}
-	serializeAdditionalDetails(s, schemas.ErrorResponse_AdditionalDetails, v.AdditionalDetails)
-	if v.Code != "" {
-		s.WriteString(schemas.ErrorResponse_Code, string(v.Code))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ErrorResponse_Message, *v.Message)
-	}
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.ErrorResponse_ResourceIdentifier, *v.ResourceIdentifier)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.ErrorResponse_ResourceType, string(v.ResourceType))
-	}
-}
-func (v *ErrorResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorResponse_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ErrorResponse_AccountId, v.AccountId)
-		case schemas.ErrorResponse_AdditionalDetails:
-			return deserializeAdditionalDetails(d, schemas.ErrorResponse_AdditionalDetails, &v.AdditionalDetails)
-		case schemas.ErrorResponse_Code:
-			var ev string
-			if err := d.ReadString(schemas.ErrorResponse_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = ErrorCode(ev)
-			return nil
-		case schemas.ErrorResponse_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ErrorResponse_Message, v.Message)
-		case schemas.ErrorResponse_ResourceIdentifier:
-			v.ResourceIdentifier = new(string)
-			return d.ReadString(schemas.ErrorResponse_ResourceIdentifier, v.ResourceIdentifier)
-		case schemas.ErrorResponse_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.ErrorResponse_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ErrorResourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The configuration for the Lambda endpoint type.
 type LambdaEndpointConfig struct {
 
@@ -747,28 +247,6 @@ type LambdaEndpointConfig struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaEndpointConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEndpointConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEndpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.LambdaEndpointConfig_Arn, *v.Arn)
-	}
-}
-func (v *LambdaEndpointConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEndpointConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEndpointConfig_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.LambdaEndpointConfig_Arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 // The input for the Lambda endpoint type.
@@ -782,28 +260,6 @@ type LambdaEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEndpointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.LambdaEndpointInput_Arn, *v.Arn)
-	}
-}
-func (v *LambdaEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEndpointInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEndpointInput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.LambdaEndpointInput_Arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 // The summary for the Lambda endpoint type.
 type LambdaEndpointSummary struct {
 
@@ -811,28 +267,6 @@ type LambdaEndpointSummary struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaEndpointSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEndpointSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.LambdaEndpointSummary_Arn, *v.Arn)
-	}
-}
-func (v *LambdaEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEndpointSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEndpointSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.LambdaEndpointSummary_Arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 // The summary information for the routes as a response to ListRoutes .
@@ -902,131 +336,6 @@ type RouteSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RouteSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RouteSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppendSourcePath != nil {
-		s.WriteBool(schemas.RouteSummary_AppendSourcePath, *v.AppendSourcePath)
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.RouteSummary_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.RouteSummary_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.RouteSummary_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.RouteSummary_CreatedTime, *v.CreatedTime)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.RouteSummary_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.RouteSummary_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncludeChildPaths != nil {
-		s.WriteBool(schemas.RouteSummary_IncludeChildPaths, *v.IncludeChildPaths)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.RouteSummary_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	serializeHttpMethods(s, schemas.RouteSummary_Methods, v.Methods)
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.RouteSummary_OwnerAccountId, *v.OwnerAccountId)
-	}
-	serializePathResourceToId(s, schemas.RouteSummary_PathResourceToId, v.PathResourceToId)
-	if v.RouteId != nil {
-		s.WriteString(schemas.RouteSummary_RouteId, *v.RouteId)
-	}
-	if v.RouteType != "" {
-		s.WriteString(schemas.RouteSummary_RouteType, string(v.RouteType))
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.RouteSummary_ServiceId, *v.ServiceId)
-	}
-	if v.SourcePath != nil {
-		s.WriteString(schemas.RouteSummary_SourcePath, *v.SourcePath)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.RouteSummary_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.RouteSummary_Tags, v.Tags)
-}
-func (v *RouteSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RouteSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RouteSummary_AppendSourcePath:
-			v.AppendSourcePath = new(bool)
-			return d.ReadBool(schemas.RouteSummary_AppendSourcePath, v.AppendSourcePath)
-		case schemas.RouteSummary_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.RouteSummary_ApplicationId, v.ApplicationId)
-		case schemas.RouteSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RouteSummary_Arn, v.Arn)
-		case schemas.RouteSummary_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.RouteSummary_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.RouteSummary_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.RouteSummary_CreatedTime, v.CreatedTime)
-		case schemas.RouteSummary_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.RouteSummary_EnvironmentId, v.EnvironmentId)
-		case schemas.RouteSummary_Error:
-			v.Error = &ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.RouteSummary_IncludeChildPaths:
-			v.IncludeChildPaths = new(bool)
-			return d.ReadBool(schemas.RouteSummary_IncludeChildPaths, v.IncludeChildPaths)
-		case schemas.RouteSummary_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.RouteSummary_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.RouteSummary_Methods:
-			return deserializeHttpMethods(d, schemas.RouteSummary_Methods, &v.Methods)
-		case schemas.RouteSummary_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.RouteSummary_OwnerAccountId, v.OwnerAccountId)
-		case schemas.RouteSummary_PathResourceToId:
-			return deserializePathResourceToId(d, schemas.RouteSummary_PathResourceToId, &v.PathResourceToId)
-		case schemas.RouteSummary_RouteId:
-			v.RouteId = new(string)
-			return d.ReadString(schemas.RouteSummary_RouteId, v.RouteId)
-		case schemas.RouteSummary_RouteType:
-			var ev string
-			if err := d.ReadString(schemas.RouteSummary_RouteType, &ev); err != nil {
-				return err
-			}
-			v.RouteType = RouteType(ev)
-			return nil
-		case schemas.RouteSummary_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.RouteSummary_ServiceId, v.ServiceId)
-		case schemas.RouteSummary_SourcePath:
-			v.SourcePath = new(string)
-			return d.ReadString(schemas.RouteSummary_SourcePath, v.SourcePath)
-		case schemas.RouteSummary_State:
-			var ev string
-			if err := d.ReadString(schemas.RouteSummary_State, &ev); err != nil {
-				return err
-			}
-			v.State = RouteState(ev)
-			return nil
-		case schemas.RouteSummary_Tags:
-			return deserializeTagMap(d, schemas.RouteSummary_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // A summary for the service as a response to ListServices .
 type ServiceSummary struct {
 
@@ -1084,135 +393,6 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ServiceSummary_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.ServiceSummary_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.ServiceSummary_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.ServiceSummary_CreatedTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ServiceSummary_Description, *v.Description)
-	}
-	if v.EndpointType != "" {
-		s.WriteString(schemas.ServiceSummary_EndpointType, string(v.EndpointType))
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ServiceSummary_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.ServiceSummary_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LambdaEndpoint != nil {
-		s.WriteStruct(schemas.ServiceSummary_LambdaEndpoint)
-		v.LambdaEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.ServiceSummary_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ServiceSummary_Name, *v.Name)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.ServiceSummary_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.ServiceSummary_ServiceId, *v.ServiceId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ServiceSummary_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.ServiceSummary_Tags, v.Tags)
-	if v.UrlEndpoint != nil {
-		s.WriteStruct(schemas.ServiceSummary_UrlEndpoint)
-		v.UrlEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.ServiceSummary_VpcId, *v.VpcId)
-	}
-}
-func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceSummary_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.ServiceSummary_ApplicationId, v.ApplicationId)
-		case schemas.ServiceSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ServiceSummary_Arn, v.Arn)
-		case schemas.ServiceSummary_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.ServiceSummary_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.ServiceSummary_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.ServiceSummary_CreatedTime, v.CreatedTime)
-		case schemas.ServiceSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ServiceSummary_Description, v.Description)
-		case schemas.ServiceSummary_EndpointType:
-			var ev string
-			if err := d.ReadString(schemas.ServiceSummary_EndpointType, &ev); err != nil {
-				return err
-			}
-			v.EndpointType = ServiceEndpointType(ev)
-			return nil
-		case schemas.ServiceSummary_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.ServiceSummary_EnvironmentId, v.EnvironmentId)
-		case schemas.ServiceSummary_Error:
-			v.Error = &ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.ServiceSummary_LambdaEndpoint:
-			v.LambdaEndpoint = &LambdaEndpointSummary{}
-			return v.LambdaEndpoint.Deserialize(d)
-		case schemas.ServiceSummary_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.ServiceSummary_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.ServiceSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ServiceSummary_Name, v.Name)
-		case schemas.ServiceSummary_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.ServiceSummary_OwnerAccountId, v.OwnerAccountId)
-		case schemas.ServiceSummary_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.ServiceSummary_ServiceId, v.ServiceId)
-		case schemas.ServiceSummary_State:
-			var ev string
-			if err := d.ReadString(schemas.ServiceSummary_State, &ev); err != nil {
-				return err
-			}
-			v.State = ServiceState(ev)
-			return nil
-		case schemas.ServiceSummary_Tags:
-			return deserializeTagMap(d, schemas.ServiceSummary_Tags, &v.Tags)
-		case schemas.ServiceSummary_UrlEndpoint:
-			v.UrlEndpoint = &UrlEndpointSummary{}
-			return v.UrlEndpoint.Deserialize(d)
-		case schemas.ServiceSummary_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.ServiceSummary_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
-
 // The configuration for the URI path route type.
 type UriPathRouteInput struct {
 
@@ -1246,53 +426,6 @@ type UriPathRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UriPathRouteInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UriPathRouteInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UriPathRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationState != "" {
-		s.WriteString(schemas.UriPathRouteInput_ActivationState, string(v.ActivationState))
-	}
-	if v.AppendSourcePath != nil {
-		s.WriteBool(schemas.UriPathRouteInput_AppendSourcePath, *v.AppendSourcePath)
-	}
-	if v.IncludeChildPaths != nil {
-		s.WriteBool(schemas.UriPathRouteInput_IncludeChildPaths, *v.IncludeChildPaths)
-	}
-	serializeHttpMethods(s, schemas.UriPathRouteInput_Methods, v.Methods)
-	if v.SourcePath != nil {
-		s.WriteString(schemas.UriPathRouteInput_SourcePath, *v.SourcePath)
-	}
-}
-func (v *UriPathRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UriPathRouteInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UriPathRouteInput_ActivationState:
-			var ev string
-			if err := d.ReadString(schemas.UriPathRouteInput_ActivationState, &ev); err != nil {
-				return err
-			}
-			v.ActivationState = RouteActivationState(ev)
-			return nil
-		case schemas.UriPathRouteInput_AppendSourcePath:
-			v.AppendSourcePath = new(bool)
-			return d.ReadBool(schemas.UriPathRouteInput_AppendSourcePath, v.AppendSourcePath)
-		case schemas.UriPathRouteInput_IncludeChildPaths:
-			v.IncludeChildPaths = new(bool)
-			return d.ReadBool(schemas.UriPathRouteInput_IncludeChildPaths, v.IncludeChildPaths)
-		case schemas.UriPathRouteInput_Methods:
-			return deserializeHttpMethods(d, schemas.UriPathRouteInput_Methods, &v.Methods)
-		case schemas.UriPathRouteInput_SourcePath:
-			v.SourcePath = new(string)
-			return d.ReadString(schemas.UriPathRouteInput_SourcePath, v.SourcePath)
-		}
-		return nil
-	})
-}
-
 // The configuration for the URL endpoint type.
 type UrlEndpointConfig struct {
 
@@ -1303,34 +436,6 @@ type UrlEndpointConfig struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UrlEndpointConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UrlEndpointConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UrlEndpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthUrl != nil {
-		s.WriteString(schemas.UrlEndpointConfig_HealthUrl, *v.HealthUrl)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.UrlEndpointConfig_Url, *v.Url)
-	}
-}
-func (v *UrlEndpointConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UrlEndpointConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UrlEndpointConfig_HealthUrl:
-			v.HealthUrl = new(string)
-			return d.ReadString(schemas.UrlEndpointConfig_HealthUrl, v.HealthUrl)
-		case schemas.UrlEndpointConfig_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.UrlEndpointConfig_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The configuration for the URL endpoint type.
@@ -1355,34 +460,6 @@ type UrlEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UrlEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UrlEndpointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UrlEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthUrl != nil {
-		s.WriteString(schemas.UrlEndpointInput_HealthUrl, *v.HealthUrl)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.UrlEndpointInput_Url, *v.Url)
-	}
-}
-func (v *UrlEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UrlEndpointInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UrlEndpointInput_HealthUrl:
-			v.HealthUrl = new(string)
-			return d.ReadString(schemas.UrlEndpointInput_HealthUrl, v.HealthUrl)
-		case schemas.UrlEndpointInput_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.UrlEndpointInput_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // The summary of the configuration for the URL endpoint type.
 type UrlEndpointSummary struct {
 
@@ -1401,34 +478,6 @@ type UrlEndpointSummary struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UrlEndpointSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UrlEndpointSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UrlEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthUrl != nil {
-		s.WriteString(schemas.UrlEndpointSummary_HealthUrl, *v.HealthUrl)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.UrlEndpointSummary_Url, *v.Url)
-	}
-}
-func (v *UrlEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UrlEndpointSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UrlEndpointSummary_HealthUrl:
-			v.HealthUrl = new(string)
-			return d.ReadString(schemas.UrlEndpointSummary_HealthUrl, v.HealthUrl)
-		case schemas.UrlEndpointSummary_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.UrlEndpointSummary_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,21 +54,6 @@ type DescribeHsmInput struct {
 	HsmSerialNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeHsmInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeHsmRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeHsmInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HsmArn != nil {
-		s.WriteString(schemas.DescribeHsmRequest_HsmArn, *v.HsmArn)
-	}
-	if v.HsmSerialNumber != nil {
-		s.WriteString(schemas.DescribeHsmRequest_HsmSerialNumber, *v.HsmSerialNumber)
-	}
 }
 
 // Contains the output of the DescribeHsm operation.
@@ -149,91 +132,16 @@ type DescribeHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeHsmResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeHsmResponse_AvailabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_AvailabilityZone, v.AvailabilityZone)
-		case schemas.DescribeHsmResponse_EniId:
-			v.EniId = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_EniId, v.EniId)
-		case schemas.DescribeHsmResponse_EniIp:
-			v.EniIp = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_EniIp, v.EniIp)
-		case schemas.DescribeHsmResponse_HsmArn:
-			v.HsmArn = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_HsmArn, v.HsmArn)
-		case schemas.DescribeHsmResponse_HsmType:
-			v.HsmType = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_HsmType, v.HsmType)
-		case schemas.DescribeHsmResponse_IamRoleArn:
-			v.IamRoleArn = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_IamRoleArn, v.IamRoleArn)
-		case schemas.DescribeHsmResponse_Partitions:
-			return deserializePartitionList(d, schemas.DescribeHsmResponse_Partitions, &v.Partitions)
-		case schemas.DescribeHsmResponse_SerialNumber:
-			v.SerialNumber = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SerialNumber, v.SerialNumber)
-		case schemas.DescribeHsmResponse_ServerCertLastUpdated:
-			v.ServerCertLastUpdated = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_ServerCertLastUpdated, v.ServerCertLastUpdated)
-		case schemas.DescribeHsmResponse_ServerCertUri:
-			v.ServerCertUri = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_ServerCertUri, v.ServerCertUri)
-		case schemas.DescribeHsmResponse_SoftwareVersion:
-			v.SoftwareVersion = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SoftwareVersion, v.SoftwareVersion)
-		case schemas.DescribeHsmResponse_SshKeyLastUpdated:
-			v.SshKeyLastUpdated = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SshKeyLastUpdated, v.SshKeyLastUpdated)
-		case schemas.DescribeHsmResponse_SshPublicKey:
-			v.SshPublicKey = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SshPublicKey, v.SshPublicKey)
-		case schemas.DescribeHsmResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeHsmResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.HsmStatus(ev)
-			return nil
-		case schemas.DescribeHsmResponse_StatusDetails:
-			v.StatusDetails = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_StatusDetails, v.StatusDetails)
-		case schemas.DescribeHsmResponse_SubnetId:
-			v.SubnetId = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SubnetId, v.SubnetId)
-		case schemas.DescribeHsmResponse_SubscriptionEndDate:
-			v.SubscriptionEndDate = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SubscriptionEndDate, v.SubscriptionEndDate)
-		case schemas.DescribeHsmResponse_SubscriptionStartDate:
-			v.SubscriptionStartDate = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_SubscriptionStartDate, v.SubscriptionStartDate)
-		case schemas.DescribeHsmResponse_SubscriptionType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeHsmResponse_SubscriptionType, &ev); err != nil {
-				return err
-			}
-			v.SubscriptionType = types.SubscriptionType(ev)
-			return nil
-		case schemas.DescribeHsmResponse_VendorName:
-			v.VendorName = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_VendorName, v.VendorName)
-		case schemas.DescribeHsmResponse_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.DescribeHsmResponse_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsm, schemas.DescribeHsmRequest, schemas.DescribeHsmResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHsm{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHsm, schemas.DescribeHsmRequest, schemas.DescribeHsmResponse), output: &DescribeHsmOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHsm{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHsm"); err != nil {

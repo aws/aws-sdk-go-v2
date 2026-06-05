@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,13 +32,6 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 
 // The connection with the provided id no longer exists.
 type GoneException struct {
@@ -66,13 +58,6 @@ func (e *GoneException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *GoneException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GoneException, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 
 // The client is sending more than the allowed number of requests per unit of time
 // or the WebSocket client side buffer is full.
@@ -100,13 +85,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 
 // The data has exceeded the maximum size allowed.
 type PayloadTooLargeException struct {
@@ -133,13 +111,3 @@ func (e *PayloadTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *PayloadTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PayloadTooLargeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PayloadTooLargeException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.PayloadTooLargeException_Message, v.Message)
-		}
-		return nil
-	})
-}

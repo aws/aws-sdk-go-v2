@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,27 +46,6 @@ type UpdateSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSessionLoggerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateSessionLoggerRequest_displayName, *v.DisplayName)
-	}
-	serializeEventFilter(s, schemas.UpdateSessionLoggerRequest_eventFilter, v.EventFilter)
-	if v.LogConfiguration != nil {
-		s.WriteStruct(schemas.UpdateSessionLoggerRequest_logConfiguration)
-		v.LogConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SessionLoggerArn != nil {
-		s.WriteString(schemas.UpdateSessionLoggerRequest_sessionLoggerArn, *v.SessionLoggerArn)
-	}
-}
-
 type UpdateSessionLoggerOutput struct {
 
 	// The updated details of the session logger.
@@ -82,24 +59,16 @@ type UpdateSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSessionLoggerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSessionLoggerResponse_sessionLogger:
-			v.SessionLogger = &types.SessionLogger{}
-			return v.SessionLogger.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionLogger, schemas.UpdateSessionLoggerRequest, schemas.UpdateSessionLoggerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionLogger, schemas.UpdateSessionLoggerRequest, schemas.UpdateSessionLoggerResponse), output: &UpdateSessionLoggerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSessionLogger"); err != nil {

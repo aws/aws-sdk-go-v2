@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,24 +62,6 @@ type DescribeSupportedLanguagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSupportedLanguagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeSupportedLanguagesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeSupportedLanguagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CategoryCode != nil {
-		s.WriteString(schemas.DescribeSupportedLanguagesRequest_categoryCode, *v.CategoryCode)
-	}
-	if v.IssueType != nil {
-		s.WriteString(schemas.DescribeSupportedLanguagesRequest_issueType, *v.IssueType)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.DescribeSupportedLanguagesRequest_serviceCode, *v.ServiceCode)
-	}
-}
-
 type DescribeSupportedLanguagesOutput struct {
 
 	//  A JSON-formatted array that contains the available ISO 639-1 language codes.
@@ -93,23 +73,16 @@ type DescribeSupportedLanguagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSupportedLanguagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeSupportedLanguagesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeSupportedLanguagesResponse_supportedLanguages:
-			return deserializeSupportedLanguagesList(d, schemas.DescribeSupportedLanguagesResponse_supportedLanguages, &v.SupportedLanguages)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeSupportedLanguagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSupportedLanguages, schemas.DescribeSupportedLanguagesRequest, schemas.DescribeSupportedLanguagesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSupportedLanguages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSupportedLanguages, schemas.DescribeSupportedLanguagesRequest, schemas.DescribeSupportedLanguagesResponse), output: &DescribeSupportedLanguagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSupportedLanguages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSupportedLanguages"); err != nil {

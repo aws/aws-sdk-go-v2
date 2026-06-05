@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +38,6 @@ type BatchGetAgentSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAgentSpacesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetAgentSpacesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetAgentSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentSpaceIdList(s, schemas.BatchGetAgentSpacesInput_agentSpaceIds, v.AgentSpaceIds)
-}
-
 // Output for the BatchGetAgentSpaces operation.
 type BatchGetAgentSpacesOutput struct {
 
@@ -65,25 +53,16 @@ type BatchGetAgentSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAgentSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetAgentSpacesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetAgentSpacesOutput_agentSpaces:
-			return deserializeAgentSpaceList(d, schemas.BatchGetAgentSpacesOutput_agentSpaces, &v.AgentSpaces)
-		case schemas.BatchGetAgentSpacesOutput_notFound:
-			return deserializeAgentSpaceIdList(d, schemas.BatchGetAgentSpacesOutput_notFound, &v.NotFound)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetAgentSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAgentSpaces, schemas.BatchGetAgentSpacesInput, schemas.BatchGetAgentSpacesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAgentSpaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAgentSpaces, schemas.BatchGetAgentSpacesInput, schemas.BatchGetAgentSpacesOutput), output: &BatchGetAgentSpacesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAgentSpaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetAgentSpaces"); err != nil {

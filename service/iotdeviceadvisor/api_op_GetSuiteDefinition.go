@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,21 +45,6 @@ type GetSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSuiteDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSuiteDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSuiteDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SuiteDefinitionId != nil {
-		s.WriteString(schemas.GetSuiteDefinitionRequest_suiteDefinitionId, *v.SuiteDefinitionId)
-	}
-	if v.SuiteDefinitionVersion != nil {
-		s.WriteString(schemas.GetSuiteDefinitionRequest_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
-	}
-}
-
 type GetSuiteDefinitionOutput struct {
 
 	// Date (in Unix epoch time) when the suite definition was created.
@@ -94,44 +77,16 @@ type GetSuiteDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSuiteDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSuiteDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSuiteDefinitionResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetSuiteDefinitionResponse_createdAt, v.CreatedAt)
-		case schemas.GetSuiteDefinitionResponse_lastModifiedAt:
-			v.LastModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetSuiteDefinitionResponse_lastModifiedAt, v.LastModifiedAt)
-		case schemas.GetSuiteDefinitionResponse_latestVersion:
-			v.LatestVersion = new(string)
-			return d.ReadString(schemas.GetSuiteDefinitionResponse_latestVersion, v.LatestVersion)
-		case schemas.GetSuiteDefinitionResponse_suiteDefinitionArn:
-			v.SuiteDefinitionArn = new(string)
-			return d.ReadString(schemas.GetSuiteDefinitionResponse_suiteDefinitionArn, v.SuiteDefinitionArn)
-		case schemas.GetSuiteDefinitionResponse_suiteDefinitionConfiguration:
-			v.SuiteDefinitionConfiguration = &types.SuiteDefinitionConfiguration{}
-			return v.SuiteDefinitionConfiguration.Deserialize(d)
-		case schemas.GetSuiteDefinitionResponse_suiteDefinitionId:
-			v.SuiteDefinitionId = new(string)
-			return d.ReadString(schemas.GetSuiteDefinitionResponse_suiteDefinitionId, v.SuiteDefinitionId)
-		case schemas.GetSuiteDefinitionResponse_suiteDefinitionVersion:
-			v.SuiteDefinitionVersion = new(string)
-			return d.ReadString(schemas.GetSuiteDefinitionResponse_suiteDefinitionVersion, v.SuiteDefinitionVersion)
-		case schemas.GetSuiteDefinitionResponse_tags:
-			return deserializeTagMap(d, schemas.GetSuiteDefinitionResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteDefinition, schemas.GetSuiteDefinitionRequest, schemas.GetSuiteDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteDefinition, schemas.GetSuiteDefinitionRequest, schemas.GetSuiteDefinitionResponse), output: &GetSuiteDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuiteDefinition"); err != nil {

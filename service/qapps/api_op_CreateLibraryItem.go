@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,25 +53,6 @@ type CreateLibraryItemInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLibraryItemInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreateLibraryItemInput_appId, *v.AppId)
-	}
-	if v.AppVersion != nil {
-		s.WriteInt32(schemas.CreateLibraryItemInput_appVersion, *v.AppVersion)
-	}
-	serializeCategoryIdList(s, schemas.CreateLibraryItemInput_categories, v.Categories)
-	if v.InstanceId != nil {
-		s.WriteString(schemas.CreateLibraryItemInput_instanceId, *v.InstanceId)
-	}
-}
-
 type CreateLibraryItemOutput struct {
 
 	// The date and time the library item was created.
@@ -116,45 +95,16 @@ type CreateLibraryItemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLibraryItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLibraryItemOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLibraryItemOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateLibraryItemOutput_createdAt, v.CreatedAt)
-		case schemas.CreateLibraryItemOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_createdBy, v.CreatedBy)
-		case schemas.CreateLibraryItemOutput_isVerified:
-			v.IsVerified = new(bool)
-			return d.ReadBool(schemas.CreateLibraryItemOutput_isVerified, v.IsVerified)
-		case schemas.CreateLibraryItemOutput_libraryItemId:
-			v.LibraryItemId = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_libraryItemId, v.LibraryItemId)
-		case schemas.CreateLibraryItemOutput_ratingCount:
-			v.RatingCount = new(int32)
-			return d.ReadInt32(schemas.CreateLibraryItemOutput_ratingCount, v.RatingCount)
-		case schemas.CreateLibraryItemOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_status, v.Status)
-		case schemas.CreateLibraryItemOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateLibraryItemOutput_updatedAt, v.UpdatedAt)
-		case schemas.CreateLibraryItemOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.CreateLibraryItemOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLibraryItem, schemas.CreateLibraryItemInput, schemas.CreateLibraryItemOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLibraryItem, schemas.CreateLibraryItemInput, schemas.CreateLibraryItemOutput), output: &CreateLibraryItemOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLibraryItem"); err != nil {

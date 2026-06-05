@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,25 +79,6 @@ type GenerateMacInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateMacInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GenerateMacInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GenerateMacInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMacAttributes(s, schemas.GenerateMacInput_GenerationAttributes, v.GenerationAttributes)
-	if v.KeyIdentifier != nil {
-		s.WriteString(schemas.GenerateMacInput_KeyIdentifier, *v.KeyIdentifier)
-	}
-	if v.MacLength != nil {
-		s.WriteInt32(schemas.GenerateMacInput_MacLength, *v.MacLength)
-	}
-	if v.MessageData != nil {
-		s.WriteString(schemas.GenerateMacInput_MessageData, *v.MessageData)
-	}
-}
-
 type GenerateMacOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
@@ -129,30 +108,16 @@ type GenerateMacOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateMacOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GenerateMacOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GenerateMacOutput_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.GenerateMacOutput_KeyArn, v.KeyArn)
-		case schemas.GenerateMacOutput_KeyCheckValue:
-			v.KeyCheckValue = new(string)
-			return d.ReadString(schemas.GenerateMacOutput_KeyCheckValue, v.KeyCheckValue)
-		case schemas.GenerateMacOutput_Mac:
-			v.Mac = new(string)
-			return d.ReadString(schemas.GenerateMacOutput_Mac, v.Mac)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGenerateMacMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMac, schemas.GenerateMacInput, schemas.GenerateMacOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateMac{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMac, schemas.GenerateMacInput, schemas.GenerateMacOutput), output: &GenerateMacOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateMac{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMac"); err != nil {

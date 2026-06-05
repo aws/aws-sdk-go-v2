@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,18 +43,6 @@ type CancelServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelServiceSoftwareUpdateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelServiceSoftwareUpdateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelServiceSoftwareUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.CancelServiceSoftwareUpdateRequest_DomainName, *v.DomainName)
-	}
-}
-
 // Container for the response to a CancelServiceSoftwareUpdate operation. Contains
 // the status of the update.
 type CancelServiceSoftwareUpdateOutput struct {
@@ -70,24 +56,16 @@ type CancelServiceSoftwareUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelServiceSoftwareUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelServiceSoftwareUpdateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelServiceSoftwareUpdateResponse_ServiceSoftwareOptions:
-			v.ServiceSoftwareOptions = &types.ServiceSoftwareOptions{}
-			return v.ServiceSoftwareOptions.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServiceSoftwareUpdate, schemas.CancelServiceSoftwareUpdateRequest, schemas.CancelServiceSoftwareUpdateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelServiceSoftwareUpdate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServiceSoftwareUpdate, schemas.CancelServiceSoftwareUpdateRequest, schemas.CancelServiceSoftwareUpdateResponse), output: &CancelServiceSoftwareUpdateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelServiceSoftwareUpdate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelServiceSoftwareUpdate"); err != nil {

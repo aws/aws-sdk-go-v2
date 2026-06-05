@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type ListEvaluatorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEvaluatorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEvaluatorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEvaluatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEvaluatorsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEvaluatorsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListEvaluatorsOutput struct {
 
 	//  The list of evaluator summaries containing basic information about each
@@ -76,26 +59,16 @@ type ListEvaluatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEvaluatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEvaluatorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEvaluatorsResponse_evaluators:
-			return deserializeEvaluatorSummaryList(d, schemas.ListEvaluatorsResponse_evaluators, &v.Evaluators)
-		case schemas.ListEvaluatorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEvaluatorsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEvaluatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluators, schemas.ListEvaluatorsRequest, schemas.ListEvaluatorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEvaluators{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluators, schemas.ListEvaluatorsRequest, schemas.ListEvaluatorsResponse), output: &ListEvaluatorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEvaluators{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEvaluators"); err != nil {

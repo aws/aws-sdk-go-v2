@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception raised to indicate that authorization of an action was successful,
 // when the DryRun flag is set to true.
@@ -70,16 +59,6 @@ func (e *DryRunOperation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DryRunOperation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DryRunOperation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DryRunOperation_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DryRunOperation_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception raised when an internal, configuration, or dependency error is
 // encountered.
@@ -107,16 +86,6 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerError_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception raised when the provided input violates a policy constraint or is
 // entered in the wrong format or data type.
@@ -144,16 +113,6 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidInputException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidInputException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception raised when a request fails due to temporary unavailability of the
 // service.
@@ -181,16 +140,6 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -219,15 +168,3 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
-		case schemas.ThrottlingException_RetryAfterSeconds:
-			return d.ReadInt32(schemas.ThrottlingException_RetryAfterSeconds, &v.RetryAfterSeconds)
-		}
-		return nil
-	})
-}

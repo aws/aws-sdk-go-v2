@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type CreateEncoderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEncoderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEncoderConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEncoderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CreateEncoderConfigurationRequest_name, *v.Name)
-	}
-	serializeTags(s, schemas.CreateEncoderConfigurationRequest_tags, v.Tags)
-	if v.Video != nil {
-		s.WriteStruct(schemas.CreateEncoderConfigurationRequest_video)
-		v.Video.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateEncoderConfigurationOutput struct {
 
 	// The EncoderConfiguration that was created.
@@ -79,24 +59,16 @@ type CreateEncoderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEncoderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEncoderConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEncoderConfigurationResponse_encoderConfiguration:
-			v.EncoderConfiguration = &types.EncoderConfiguration{}
-			return v.EncoderConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEncoderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEncoderConfiguration, schemas.CreateEncoderConfigurationRequest, schemas.CreateEncoderConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEncoderConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEncoderConfiguration, schemas.CreateEncoderConfigurationRequest, schemas.CreateEncoderConfigurationResponse), output: &CreateEncoderConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEncoderConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEncoderConfiguration"); err != nil {

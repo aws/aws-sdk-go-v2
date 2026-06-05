@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,27 +50,6 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateChannelInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelDescription != nil {
-		s.WriteString(schemas.UpdateChannelInput_channelDescription, *v.ChannelDescription)
-	}
-	if v.ChannelId != nil {
-		s.WriteString(schemas.UpdateChannelInput_channelId, *v.ChannelId)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.UpdateChannelInput_channelName, *v.ChannelName)
-	}
-	if v.SpaceId != nil {
-		s.WriteString(schemas.UpdateChannelInput_spaceId, *v.SpaceId)
-	}
-}
-
 type UpdateChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,21 +57,16 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateChannelOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelInput, schemas.UpdateChannelOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelInput, schemas.UpdateChannelOutput), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannel"); err != nil {

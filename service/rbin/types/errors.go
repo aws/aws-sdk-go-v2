@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/rbin/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,23 +34,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_Message, v.Message)
-		case schemas.ConflictException_Reason:
-			var ev string
-			if err := d.ReadString(schemas.ConflictException_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ConflictExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
 
 // The service could not respond to the request due to an internal problem.
 type InternalServerException struct {
@@ -78,16 +60,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -116,23 +88,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		case schemas.ResourceNotFoundException_Reason:
-			var ev string
-			if err := d.ReadString(schemas.ResourceNotFoundException_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ResourceNotFoundExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
 
 // The request would cause a service quota for the number of tags per resource to
 // be exceeded.
@@ -162,23 +117,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
-		case schemas.ServiceQuotaExceededException_Reason:
-			var ev string
-			if err := d.ReadString(schemas.ServiceQuotaExceededException_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ServiceQuotaExceededExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
 
 // One or more of the parameters in the request is not valid.
 type ValidationException struct {
@@ -207,20 +145,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		case schemas.ValidationException_Reason:
-			var ev string
-			if err := d.ReadString(schemas.ValidationException_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ValidationExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}

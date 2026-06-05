@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,28 +36,6 @@ type StartClockInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartClockInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartClockInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartClockInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Simulation != nil {
-		s.WriteString(schemas.StartClockInput_Simulation, *v.Simulation)
-	}
-}
-func (v *StartClockInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartClockInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartClockInput_Simulation:
-			v.Simulation = new(string)
-			return d.ReadString(schemas.StartClockInput_Simulation, v.Simulation)
-		}
-		return nil
-	})
-}
-
 type StartClockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,29 +43,16 @@ type StartClockOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartClockOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartClockOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartClockOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *StartClockOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartClockOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartClockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartClock, schemas.StartClockInput, schemas.StartClockOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartClock{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartClock, schemas.StartClockInput, schemas.StartClockOutput), output: &StartClockOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartClock{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartClock"); err != nil {

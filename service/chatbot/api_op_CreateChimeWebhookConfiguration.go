@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,32 +75,6 @@ type CreateChimeWebhookConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChimeWebhookConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateChimeWebhookConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateChimeWebhookConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_ConfigurationName, *v.ConfigurationName)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_LoggingLevel, *v.LoggingLevel)
-	}
-	serializeSnsTopicArnList(s, schemas.CreateChimeWebhookConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	serializeTags(s, schemas.CreateChimeWebhookConfigurationRequest_Tags, v.Tags)
-	if v.WebhookDescription != nil {
-		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_WebhookDescription, *v.WebhookDescription)
-	}
-	if v.WebhookUrl != nil {
-		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_WebhookUrl, *v.WebhookUrl)
-	}
-}
-
 type CreateChimeWebhookConfigurationOutput struct {
 
 	// An Amazon Chime webhook configuration.
@@ -114,24 +86,16 @@ type CreateChimeWebhookConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChimeWebhookConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateChimeWebhookConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateChimeWebhookConfigurationResult_WebhookConfiguration:
-			v.WebhookConfiguration = &types.ChimeWebhookConfiguration{}
-			return v.WebhookConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateChimeWebhookConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChimeWebhookConfiguration, schemas.CreateChimeWebhookConfigurationRequest, schemas.CreateChimeWebhookConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChimeWebhookConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChimeWebhookConfiguration, schemas.CreateChimeWebhookConfigurationRequest, schemas.CreateChimeWebhookConfigurationResult), output: &CreateChimeWebhookConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChimeWebhookConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChimeWebhookConfiguration"); err != nil {

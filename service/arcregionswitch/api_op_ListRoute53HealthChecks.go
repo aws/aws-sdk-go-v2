@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,29 +53,6 @@ type ListRoute53HealthChecksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoute53HealthChecksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRoute53HealthChecksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRoute53HealthChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListRoute53HealthChecksRequest_arn, *v.Arn)
-	}
-	if v.HostedZoneId != nil {
-		s.WriteString(schemas.ListRoute53HealthChecksRequest_hostedZoneId, *v.HostedZoneId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRoute53HealthChecksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRoute53HealthChecksRequest_nextToken, *v.NextToken)
-	}
-	if v.RecordName != nil {
-		s.WriteString(schemas.ListRoute53HealthChecksRequest_recordName, *v.RecordName)
-	}
-}
 func (in *ListRoute53HealthChecksInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -98,26 +73,16 @@ type ListRoute53HealthChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoute53HealthChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRoute53HealthChecksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRoute53HealthChecksResponse_healthChecks:
-			return deserializeRoute53HealthCheckList(d, schemas.ListRoute53HealthChecksResponse_healthChecks, &v.HealthChecks)
-		case schemas.ListRoute53HealthChecksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRoute53HealthChecksResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRoute53HealthChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse), output: &ListRoute53HealthChecksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRoute53HealthChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoute53HealthChecks"); err != nil {

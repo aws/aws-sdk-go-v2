@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,22 +49,6 @@ type UpdatePackageScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePackageScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePackageScopeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePackageScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operation != "" {
-		s.WriteString(schemas.UpdatePackageScopeRequest_Operation, string(v.Operation))
-	}
-	if v.PackageID != nil {
-		s.WriteString(schemas.UpdatePackageScopeRequest_PackageID, *v.PackageID)
-	}
-	serializePackageUserList(s, schemas.UpdatePackageScopeRequest_PackageUserList, v.PackageUserList)
-}
-
 type UpdatePackageScopeOutput struct {
 
 	// The operation that was performed on the package scope.
@@ -84,33 +66,16 @@ type UpdatePackageScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePackageScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePackageScopeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePackageScopeResponse_Operation:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePackageScopeResponse_Operation, &ev); err != nil {
-				return err
-			}
-			v.Operation = types.PackageScopeOperationEnum(ev)
-			return nil
-		case schemas.UpdatePackageScopeResponse_PackageID:
-			v.PackageID = new(string)
-			return d.ReadString(schemas.UpdatePackageScopeResponse_PackageID, v.PackageID)
-		case schemas.UpdatePackageScopeResponse_PackageUserList:
-			return deserializePackageUserList(d, schemas.UpdatePackageScopeResponse_PackageUserList, &v.PackageUserList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePackageScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageScope, schemas.UpdatePackageScopeRequest, schemas.UpdatePackageScopeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageScope, schemas.UpdatePackageScopeRequest, schemas.UpdatePackageScopeResponse), output: &UpdatePackageScopeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackageScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePackageScope"); err != nil {

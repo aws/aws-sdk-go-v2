@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type StartMatchingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMatchingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartMatchingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartMatchingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.StartMatchingJobInput_workflowName, *v.WorkflowName)
-	}
-}
-
 type StartMatchingJobOutput struct {
 
 	// The ID of the job.
@@ -64,24 +50,16 @@ type StartMatchingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMatchingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartMatchingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartMatchingJobOutput_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.StartMatchingJobOutput_jobId, v.JobId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartMatchingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchingJob, schemas.StartMatchingJobInput, schemas.StartMatchingJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMatchingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchingJob, schemas.StartMatchingJobInput, schemas.StartMatchingJobOutput), output: &StartMatchingJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMatchingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMatchingJob"); err != nil {

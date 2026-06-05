@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -132,55 +130,6 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CustomDocumentEnrichmentConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_CustomDocumentEnrichmentConfiguration)
-		v.CustomDocumentEnrichmentConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_Description, *v.Description)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_IndexId, *v.IndexId)
-	}
-	if v.LanguageCode != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_LanguageCode, *v.LanguageCode)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_Name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_RoleArn, *v.RoleArn)
-	}
-	if v.Schedule != nil {
-		s.WriteString(schemas.CreateDataSourceRequest_Schedule, *v.Schedule)
-	}
-	serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.CreateDataSourceRequest_Type, string(v.Type))
-	}
-	if v.VpcConfiguration != nil {
-		s.WriteStruct(schemas.CreateDataSourceRequest_VpcConfiguration)
-		v.VpcConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateDataSourceOutput struct {
 
 	// The identifier of the data source connector.
@@ -194,24 +143,16 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataSourceResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateDataSourceResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataSource"); err != nil {

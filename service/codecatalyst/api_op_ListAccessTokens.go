@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type ListAccessTokensInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessTokensInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccessTokensRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccessTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccessTokensRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccessTokensRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAccessTokensOutput struct {
 
 	// A list of personal access tokens (PATs) associated with the calling user
@@ -77,26 +60,16 @@ type ListAccessTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccessTokensResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccessTokensResponse_items:
-			return deserializeAccessTokenSummaries(d, schemas.ListAccessTokensResponse_items, &v.Items)
-		case schemas.ListAccessTokensResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccessTokensResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensRequest, schemas.ListAccessTokensResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessTokens{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensRequest, schemas.ListAccessTokensResponse), output: &ListAccessTokensOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessTokens{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccessTokens"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,57 +55,6 @@ type CreatePackageImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageImportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePackageImportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePackageImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePackageImportJobRequest_ClientToken, *v.ClientToken)
-	}
-	if v.InputConfig != nil {
-		s.WriteStruct(schemas.CreatePackageImportJobRequest_InputConfig)
-		v.InputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeJobTagsList(s, schemas.CreatePackageImportJobRequest_JobTags, v.JobTags)
-	if v.JobType != "" {
-		s.WriteString(schemas.CreatePackageImportJobRequest_JobType, string(v.JobType))
-	}
-	if v.OutputConfig != nil {
-		s.WriteStruct(schemas.CreatePackageImportJobRequest_OutputConfig)
-		v.OutputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreatePackageImportJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePackageImportJobRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePackageImportJobRequest_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreatePackageImportJobRequest_ClientToken, v.ClientToken)
-		case schemas.CreatePackageImportJobRequest_InputConfig:
-			v.InputConfig = &types.PackageImportJobInputConfig{}
-			return v.InputConfig.Deserialize(d)
-		case schemas.CreatePackageImportJobRequest_JobTags:
-			return deserializeJobTagsList(d, schemas.CreatePackageImportJobRequest_JobTags, &v.JobTags)
-		case schemas.CreatePackageImportJobRequest_JobType:
-			var ev string
-			if err := d.ReadString(schemas.CreatePackageImportJobRequest_JobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = types.PackageImportJobType(ev)
-			return nil
-		case schemas.CreatePackageImportJobRequest_OutputConfig:
-			v.OutputConfig = &types.PackageImportJobOutputConfig{}
-			return v.OutputConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type CreatePackageImportJobOutput struct {
 
 	// The job's ID.
@@ -121,35 +68,16 @@ type CreatePackageImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageImportJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePackageImportJobResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePackageImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.CreatePackageImportJobResponse_JobId, *v.JobId)
-	}
-}
-func (v *CreatePackageImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePackageImportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePackageImportJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreatePackageImportJobResponse_JobId, v.JobId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePackageImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackageImportJob, schemas.CreatePackageImportJobRequest, schemas.CreatePackageImportJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackageImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackageImportJob, schemas.CreatePackageImportJobRequest, schemas.CreatePackageImportJobResponse), output: &CreatePackageImportJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackageImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackageImportJob"); err != nil {

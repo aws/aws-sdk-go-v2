@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,18 +43,6 @@ type GetJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.GetJobRequest_JobId, *v.JobId)
-	}
 }
 
 type GetJobOutput struct {
@@ -134,70 +120,16 @@ type GetJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetJobResponse_Action:
-			var ev string
-			if err := d.ReadString(schemas.GetJobResponse_Action, &ev); err != nil {
-				return err
-			}
-			v.Action = types.JobAction(ev)
-			return nil
-		case schemas.GetJobResponse_ActionOptions:
-			v.ActionOptions = &types.JobActionOptions{}
-			return v.ActionOptions.Deserialize(d)
-		case schemas.GetJobResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetJobResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetJobResponse_EndedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.GetJobResponse_EndedAt, v.EndedAt)
-		case schemas.GetJobResponse_Error:
-			v.Error = &types.JobError{}
-			return v.Error.Deserialize(d)
-		case schemas.GetJobResponse_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.GetJobResponse_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.GetJobResponse_InputOptions:
-			v.InputOptions = &types.JobInputOptions{}
-			return v.InputOptions.Deserialize(d)
-		case schemas.GetJobResponse_JobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.GetJobResponse_JobArn, v.JobArn)
-		case schemas.GetJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.GetJobResponse_JobId, v.JobId)
-		case schemas.GetJobResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetJobResponse_Name, v.Name)
-		case schemas.GetJobResponse_OutputOptions:
-			v.OutputOptions = &types.JobOutputOptions{}
-			return v.OutputOptions.Deserialize(d)
-		case schemas.GetJobResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetJobResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.JobStatus(ev)
-			return nil
-		case schemas.GetJobResponse_Tags:
-			return deserializeTagMap(d, schemas.GetJobResponse_Tags, &v.Tags)
-		case schemas.GetJobResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetJobResponse_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse), output: &GetJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJob"); err != nil {

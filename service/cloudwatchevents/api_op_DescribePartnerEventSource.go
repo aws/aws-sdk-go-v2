@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type DescribePartnerEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePartnerEventSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePartnerEventSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePartnerEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribePartnerEventSourceRequest_Name, *v.Name)
-	}
-}
-
 type DescribePartnerEventSourceOutput struct {
 
 	// The ARN of the event source.
@@ -69,27 +55,16 @@ type DescribePartnerEventSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePartnerEventSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePartnerEventSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePartnerEventSourceResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DescribePartnerEventSourceResponse_Arn, v.Arn)
-		case schemas.DescribePartnerEventSourceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribePartnerEventSourceResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerEventSource, schemas.DescribePartnerEventSourceRequest, schemas.DescribePartnerEventSourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePartnerEventSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerEventSource, schemas.DescribePartnerEventSourceRequest, schemas.DescribePartnerEventSourceResponse), output: &DescribePartnerEventSourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePartnerEventSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePartnerEventSource"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,26 +56,6 @@ type ListPolicyStoreAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPolicyStoreAliasesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPolicyStoreAliasesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPolicyStoreAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListPolicyStoreAliasesInput_filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPolicyStoreAliasesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPolicyStoreAliasesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListPolicyStoreAliasesOutput struct {
 
 	// The list of policy store aliases in the account.
@@ -98,26 +76,16 @@ type ListPolicyStoreAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPolicyStoreAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPolicyStoreAliasesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPolicyStoreAliasesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPolicyStoreAliasesOutput_nextToken, v.NextToken)
-		case schemas.ListPolicyStoreAliasesOutput_policyStoreAliases:
-			return deserializePolicyStoreAliasList(d, schemas.ListPolicyStoreAliasesOutput_policyStoreAliases, &v.PolicyStoreAliases)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPolicyStoreAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyStoreAliases, schemas.ListPolicyStoreAliasesInput, schemas.ListPolicyStoreAliasesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPolicyStoreAliases{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyStoreAliases, schemas.ListPolicyStoreAliasesInput, schemas.ListPolicyStoreAliasesOutput), output: &ListPolicyStoreAliasesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPolicyStoreAliases{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyStoreAliases"); err != nil {

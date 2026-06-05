@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,27 +74,6 @@ type FailoverGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailoverGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailoverGlobalClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailoverGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowDataLoss != nil {
-		s.WriteBool(schemas.FailoverGlobalClusterMessage_AllowDataLoss, *v.AllowDataLoss)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.FailoverGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.Switchover != nil {
-		s.WriteBool(schemas.FailoverGlobalClusterMessage_Switchover, *v.Switchover)
-	}
-	if v.TargetDbClusterIdentifier != nil {
-		s.WriteString(schemas.FailoverGlobalClusterMessage_TargetDbClusterIdentifier, *v.TargetDbClusterIdentifier)
-	}
-}
-
 type FailoverGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database.
@@ -110,24 +87,16 @@ type FailoverGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailoverGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailoverGlobalClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailoverGlobalClusterResult_GlobalCluster:
-			v.GlobalCluster = &types.GlobalCluster{}
-			return v.GlobalCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverGlobalCluster, schemas.FailoverGlobalClusterMessage, schemas.FailoverGlobalClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverGlobalCluster, schemas.FailoverGlobalClusterMessage, schemas.FailoverGlobalClusterResult), output: &FailoverGlobalClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpFailoverGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "FailoverGlobalCluster"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,28 +22,6 @@ type BufferOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BufferOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BufferOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BufferOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PersistentBufferEnabled != nil {
-		s.WriteBool(schemas.BufferOptions_PersistentBufferEnabled, *v.PersistentBufferEnabled)
-	}
-}
-func (v *BufferOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BufferOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BufferOptions_PersistentBufferEnabled:
-			v.PersistentBufferEnabled = new(bool)
-			return d.ReadBool(schemas.BufferOptions_PersistentBufferEnabled, v.PersistentBufferEnabled)
-		}
-		return nil
-	})
-}
-
 // Progress details for a specific stage of a pipeline configuration change.
 type ChangeProgressStage struct {
 
@@ -62,50 +38,6 @@ type ChangeProgressStage struct {
 	Status ChangeProgressStageStatuses
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChangeProgressStage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChangeProgressStage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChangeProgressStage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.ChangeProgressStage_Description, *v.Description)
-	}
-	if v.LastUpdatedAt != nil {
-		s.WriteTime(schemas.ChangeProgressStage_LastUpdatedAt, *v.LastUpdatedAt)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ChangeProgressStage_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ChangeProgressStage_Status, string(v.Status))
-	}
-}
-func (v *ChangeProgressStage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChangeProgressStage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChangeProgressStage_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ChangeProgressStage_Description, v.Description)
-		case schemas.ChangeProgressStage_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChangeProgressStage_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.ChangeProgressStage_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ChangeProgressStage_Name, v.Name)
-		case schemas.ChangeProgressStage_Status:
-			var ev string
-			if err := d.ReadString(schemas.ChangeProgressStage_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ChangeProgressStageStatuses(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The progress details of a pipeline configuration change.
@@ -127,46 +59,6 @@ type ChangeProgressStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChangeProgressStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChangeProgressStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChangeProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeProgressStageList(s, schemas.ChangeProgressStatus_ChangeProgressStages, v.ChangeProgressStages)
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ChangeProgressStatus_StartTime, *v.StartTime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ChangeProgressStatus_Status, string(v.Status))
-	}
-	if v.TotalNumberOfStages != 0 {
-		s.WriteInt32(schemas.ChangeProgressStatus_TotalNumberOfStages, v.TotalNumberOfStages)
-	}
-}
-func (v *ChangeProgressStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChangeProgressStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChangeProgressStatus_ChangeProgressStages:
-			return deserializeChangeProgressStageList(d, schemas.ChangeProgressStatus_ChangeProgressStages, &v.ChangeProgressStages)
-		case schemas.ChangeProgressStatus_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.ChangeProgressStatus_StartTime, v.StartTime)
-		case schemas.ChangeProgressStatus_Status:
-			var ev string
-			if err := d.ReadString(schemas.ChangeProgressStatus_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ChangeProgressStatuses(ev)
-			return nil
-		case schemas.ChangeProgressStatus_TotalNumberOfStages:
-			return d.ReadInt32(schemas.ChangeProgressStatus_TotalNumberOfStages, &v.TotalNumberOfStages)
-		}
-		return nil
-	})
-}
-
 // The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch.
 type CloudWatchLogDestination struct {
 
@@ -180,28 +72,6 @@ type CloudWatchLogDestination struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudWatchLogDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchLogDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchLogDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroup != nil {
-		s.WriteString(schemas.CloudWatchLogDestination_LogGroup, *v.LogGroup)
-	}
-}
-func (v *CloudWatchLogDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchLogDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchLogDestination_LogGroup:
-			v.LogGroup = new(string)
-			return d.ReadString(schemas.CloudWatchLogDestination_LogGroup, v.LogGroup)
-		}
-		return nil
-	})
-}
-
 // Options to control how OpenSearch encrypts buffer data.
 type EncryptionAtRestOptions struct {
 
@@ -212,28 +82,6 @@ type EncryptionAtRestOptions struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EncryptionAtRestOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionAtRestOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionAtRestOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.EncryptionAtRestOptions_KmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *EncryptionAtRestOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionAtRestOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionAtRestOptions_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.EncryptionAtRestOptions_KmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
 }
 
 // Container for the values required to configure logging for the pipeline. If you
@@ -249,36 +97,6 @@ type LogPublishingOptions struct {
 	IsLoggingEnabled *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *LogPublishingOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogPublishingOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogPublishingOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudWatchLogDestination != nil {
-		s.WriteStruct(schemas.LogPublishingOptions_CloudWatchLogDestination)
-		v.CloudWatchLogDestination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IsLoggingEnabled != nil {
-		s.WriteBool(schemas.LogPublishingOptions_IsLoggingEnabled, *v.IsLoggingEnabled)
-	}
-}
-func (v *LogPublishingOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogPublishingOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogPublishingOptions_CloudWatchLogDestination:
-			v.CloudWatchLogDestination = &CloudWatchLogDestination{}
-			return v.CloudWatchLogDestination.Deserialize(d)
-		case schemas.LogPublishingOptions_IsLoggingEnabled:
-			v.IsLoggingEnabled = new(bool)
-			return d.ReadBool(schemas.LogPublishingOptions_IsLoggingEnabled, v.IsLoggingEnabled)
-		}
-		return nil
-	})
 }
 
 // Information about an existing OpenSearch Ingestion pipeline.
@@ -350,131 +168,6 @@ type Pipeline struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Pipeline) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Pipeline)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Pipeline) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BufferOptions != nil {
-		s.WriteStruct(schemas.Pipeline_BufferOptions)
-		v.BufferOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Pipeline_CreatedAt, *v.CreatedAt)
-	}
-	serializePipelineDestinationList(s, schemas.Pipeline_Destinations, v.Destinations)
-	if v.EncryptionAtRestOptions != nil {
-		s.WriteStruct(schemas.Pipeline_EncryptionAtRestOptions)
-		v.EncryptionAtRestOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIngestEndpointUrlsList(s, schemas.Pipeline_IngestEndpointUrls, v.IngestEndpointUrls)
-	if v.LastUpdatedAt != nil {
-		s.WriteTime(schemas.Pipeline_LastUpdatedAt, *v.LastUpdatedAt)
-	}
-	if v.LogPublishingOptions != nil {
-		s.WriteStruct(schemas.Pipeline_LogPublishingOptions)
-		v.LogPublishingOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxUnits != 0 {
-		s.WriteInt32(schemas.Pipeline_MaxUnits, v.MaxUnits)
-	}
-	if v.MinUnits != 0 {
-		s.WriteInt32(schemas.Pipeline_MinUnits, v.MinUnits)
-	}
-	if v.PipelineArn != nil {
-		s.WriteString(schemas.Pipeline_PipelineArn, *v.PipelineArn)
-	}
-	if v.PipelineConfigurationBody != nil {
-		s.WriteString(schemas.Pipeline_PipelineConfigurationBody, *v.PipelineConfigurationBody)
-	}
-	if v.PipelineName != nil {
-		s.WriteString(schemas.Pipeline_PipelineName, *v.PipelineName)
-	}
-	if v.PipelineRoleArn != nil {
-		s.WriteString(schemas.Pipeline_PipelineRoleArn, *v.PipelineRoleArn)
-	}
-	serializeServiceVpcEndpointsList(s, schemas.Pipeline_ServiceVpcEndpoints, v.ServiceVpcEndpoints)
-	if v.Status != "" {
-		s.WriteString(schemas.Pipeline_Status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteStruct(schemas.Pipeline_StatusReason)
-		v.StatusReason.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.Pipeline_Tags, v.Tags)
-	if v.VpcEndpointService != nil {
-		s.WriteString(schemas.Pipeline_VpcEndpointService, *v.VpcEndpointService)
-	}
-	serializeVpcEndpointsList(s, schemas.Pipeline_VpcEndpoints, v.VpcEndpoints)
-}
-func (v *Pipeline) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Pipeline, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Pipeline_BufferOptions:
-			v.BufferOptions = &BufferOptions{}
-			return v.BufferOptions.Deserialize(d)
-		case schemas.Pipeline_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Pipeline_CreatedAt, v.CreatedAt)
-		case schemas.Pipeline_Destinations:
-			return deserializePipelineDestinationList(d, schemas.Pipeline_Destinations, &v.Destinations)
-		case schemas.Pipeline_EncryptionAtRestOptions:
-			v.EncryptionAtRestOptions = &EncryptionAtRestOptions{}
-			return v.EncryptionAtRestOptions.Deserialize(d)
-		case schemas.Pipeline_IngestEndpointUrls:
-			return deserializeIngestEndpointUrlsList(d, schemas.Pipeline_IngestEndpointUrls, &v.IngestEndpointUrls)
-		case schemas.Pipeline_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Pipeline_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.Pipeline_LogPublishingOptions:
-			v.LogPublishingOptions = &LogPublishingOptions{}
-			return v.LogPublishingOptions.Deserialize(d)
-		case schemas.Pipeline_MaxUnits:
-			return d.ReadInt32(schemas.Pipeline_MaxUnits, &v.MaxUnits)
-		case schemas.Pipeline_MinUnits:
-			return d.ReadInt32(schemas.Pipeline_MinUnits, &v.MinUnits)
-		case schemas.Pipeline_PipelineArn:
-			v.PipelineArn = new(string)
-			return d.ReadString(schemas.Pipeline_PipelineArn, v.PipelineArn)
-		case schemas.Pipeline_PipelineConfigurationBody:
-			v.PipelineConfigurationBody = new(string)
-			return d.ReadString(schemas.Pipeline_PipelineConfigurationBody, v.PipelineConfigurationBody)
-		case schemas.Pipeline_PipelineName:
-			v.PipelineName = new(string)
-			return d.ReadString(schemas.Pipeline_PipelineName, v.PipelineName)
-		case schemas.Pipeline_PipelineRoleArn:
-			v.PipelineRoleArn = new(string)
-			return d.ReadString(schemas.Pipeline_PipelineRoleArn, v.PipelineRoleArn)
-		case schemas.Pipeline_ServiceVpcEndpoints:
-			return deserializeServiceVpcEndpointsList(d, schemas.Pipeline_ServiceVpcEndpoints, &v.ServiceVpcEndpoints)
-		case schemas.Pipeline_Status:
-			var ev string
-			if err := d.ReadString(schemas.Pipeline_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PipelineStatus(ev)
-			return nil
-		case schemas.Pipeline_StatusReason:
-			v.StatusReason = &PipelineStatusReason{}
-			return v.StatusReason.Deserialize(d)
-		case schemas.Pipeline_Tags:
-			return deserializeTagList(d, schemas.Pipeline_Tags, &v.Tags)
-		case schemas.Pipeline_VpcEndpointService:
-			v.VpcEndpointService = new(string)
-			return d.ReadString(schemas.Pipeline_VpcEndpointService, v.VpcEndpointService)
-		case schemas.Pipeline_VpcEndpoints:
-			return deserializeVpcEndpointsList(d, schemas.Pipeline_VpcEndpoints, &v.VpcEndpoints)
-		}
-		return nil
-	})
-}
-
 // Container for information about an OpenSearch Ingestion blueprint.
 type PipelineBlueprint struct {
 
@@ -499,58 +192,6 @@ type PipelineBlueprint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineBlueprint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineBlueprint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineBlueprint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlueprintName != nil {
-		s.WriteString(schemas.PipelineBlueprint_BlueprintName, *v.BlueprintName)
-	}
-	if v.DisplayDescription != nil {
-		s.WriteString(schemas.PipelineBlueprint_DisplayDescription, *v.DisplayDescription)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.PipelineBlueprint_DisplayName, *v.DisplayName)
-	}
-	if v.PipelineConfigurationBody != nil {
-		s.WriteString(schemas.PipelineBlueprint_PipelineConfigurationBody, *v.PipelineConfigurationBody)
-	}
-	if v.Service != nil {
-		s.WriteString(schemas.PipelineBlueprint_Service, *v.Service)
-	}
-	if v.UseCase != nil {
-		s.WriteString(schemas.PipelineBlueprint_UseCase, *v.UseCase)
-	}
-}
-func (v *PipelineBlueprint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineBlueprint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineBlueprint_BlueprintName:
-			v.BlueprintName = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_BlueprintName, v.BlueprintName)
-		case schemas.PipelineBlueprint_DisplayDescription:
-			v.DisplayDescription = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_DisplayDescription, v.DisplayDescription)
-		case schemas.PipelineBlueprint_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_DisplayName, v.DisplayName)
-		case schemas.PipelineBlueprint_PipelineConfigurationBody:
-			v.PipelineConfigurationBody = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_PipelineConfigurationBody, v.PipelineConfigurationBody)
-		case schemas.PipelineBlueprint_Service:
-			v.Service = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_Service, v.Service)
-		case schemas.PipelineBlueprint_UseCase:
-			v.UseCase = new(string)
-			return d.ReadString(schemas.PipelineBlueprint_UseCase, v.UseCase)
-		}
-		return nil
-	})
-}
-
 // A summary of an OpenSearch Ingestion blueprint.
 type PipelineBlueprintSummary struct {
 
@@ -572,52 +213,6 @@ type PipelineBlueprintSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineBlueprintSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineBlueprintSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineBlueprintSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlueprintName != nil {
-		s.WriteString(schemas.PipelineBlueprintSummary_BlueprintName, *v.BlueprintName)
-	}
-	if v.DisplayDescription != nil {
-		s.WriteString(schemas.PipelineBlueprintSummary_DisplayDescription, *v.DisplayDescription)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.PipelineBlueprintSummary_DisplayName, *v.DisplayName)
-	}
-	if v.Service != nil {
-		s.WriteString(schemas.PipelineBlueprintSummary_Service, *v.Service)
-	}
-	if v.UseCase != nil {
-		s.WriteString(schemas.PipelineBlueprintSummary_UseCase, *v.UseCase)
-	}
-}
-func (v *PipelineBlueprintSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineBlueprintSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineBlueprintSummary_BlueprintName:
-			v.BlueprintName = new(string)
-			return d.ReadString(schemas.PipelineBlueprintSummary_BlueprintName, v.BlueprintName)
-		case schemas.PipelineBlueprintSummary_DisplayDescription:
-			v.DisplayDescription = new(string)
-			return d.ReadString(schemas.PipelineBlueprintSummary_DisplayDescription, v.DisplayDescription)
-		case schemas.PipelineBlueprintSummary_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.PipelineBlueprintSummary_DisplayName, v.DisplayName)
-		case schemas.PipelineBlueprintSummary_Service:
-			v.Service = new(string)
-			return d.ReadString(schemas.PipelineBlueprintSummary_Service, v.Service)
-		case schemas.PipelineBlueprintSummary_UseCase:
-			v.UseCase = new(string)
-			return d.ReadString(schemas.PipelineBlueprintSummary_UseCase, v.UseCase)
-		}
-		return nil
-	})
-}
-
 // An object representing the destination of a pipeline.
 type PipelineDestination struct {
 
@@ -628,34 +223,6 @@ type PipelineDestination struct {
 	ServiceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PipelineDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Endpoint != nil {
-		s.WriteString(schemas.PipelineDestination_Endpoint, *v.Endpoint)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.PipelineDestination_ServiceName, *v.ServiceName)
-	}
-}
-func (v *PipelineDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineDestination_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.PipelineDestination_Endpoint, v.Endpoint)
-		case schemas.PipelineDestination_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.PipelineDestination_ServiceName, v.ServiceName)
-		}
-		return nil
-	})
 }
 
 // Represents a VPC endpoint for an OpenSearch Ingestion pipeline, enabling
@@ -684,64 +251,6 @@ type PipelineEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndpointId != nil {
-		s.WriteString(schemas.PipelineEndpoint_EndpointId, *v.EndpointId)
-	}
-	if v.IngestEndpointUrl != nil {
-		s.WriteString(schemas.PipelineEndpoint_IngestEndpointUrl, *v.IngestEndpointUrl)
-	}
-	if v.PipelineArn != nil {
-		s.WriteString(schemas.PipelineEndpoint_PipelineArn, *v.PipelineArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PipelineEndpoint_Status, string(v.Status))
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.PipelineEndpoint_VpcId, *v.VpcId)
-	}
-	if v.VpcOptions != nil {
-		s.WriteStruct(schemas.PipelineEndpoint_VpcOptions)
-		v.VpcOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PipelineEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineEndpoint_EndpointId:
-			v.EndpointId = new(string)
-			return d.ReadString(schemas.PipelineEndpoint_EndpointId, v.EndpointId)
-		case schemas.PipelineEndpoint_IngestEndpointUrl:
-			v.IngestEndpointUrl = new(string)
-			return d.ReadString(schemas.PipelineEndpoint_IngestEndpointUrl, v.IngestEndpointUrl)
-		case schemas.PipelineEndpoint_PipelineArn:
-			v.PipelineArn = new(string)
-			return d.ReadString(schemas.PipelineEndpoint_PipelineArn, v.PipelineArn)
-		case schemas.PipelineEndpoint_Status:
-			var ev string
-			if err := d.ReadString(schemas.PipelineEndpoint_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PipelineEndpointStatus(ev)
-			return nil
-		case schemas.PipelineEndpoint_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.PipelineEndpoint_VpcId, v.VpcId)
-		case schemas.PipelineEndpoint_VpcOptions:
-			v.VpcOptions = &PipelineEndpointVpcOptions{}
-			return v.VpcOptions.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Represents a connection to a pipeline endpoint, containing details about the
 // endpoint association.
 type PipelineEndpointConnection struct {
@@ -762,50 +271,6 @@ type PipelineEndpointConnection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineEndpointConnection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineEndpointConnection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineEndpointConnection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndpointId != nil {
-		s.WriteString(schemas.PipelineEndpointConnection_EndpointId, *v.EndpointId)
-	}
-	if v.PipelineArn != nil {
-		s.WriteString(schemas.PipelineEndpointConnection_PipelineArn, *v.PipelineArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PipelineEndpointConnection_Status, string(v.Status))
-	}
-	if v.VpcEndpointOwner != nil {
-		s.WriteString(schemas.PipelineEndpointConnection_VpcEndpointOwner, *v.VpcEndpointOwner)
-	}
-}
-func (v *PipelineEndpointConnection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineEndpointConnection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineEndpointConnection_EndpointId:
-			v.EndpointId = new(string)
-			return d.ReadString(schemas.PipelineEndpointConnection_EndpointId, v.EndpointId)
-		case schemas.PipelineEndpointConnection_PipelineArn:
-			v.PipelineArn = new(string)
-			return d.ReadString(schemas.PipelineEndpointConnection_PipelineArn, v.PipelineArn)
-		case schemas.PipelineEndpointConnection_Status:
-			var ev string
-			if err := d.ReadString(schemas.PipelineEndpointConnection_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PipelineEndpointStatus(ev)
-			return nil
-		case schemas.PipelineEndpointConnection_VpcEndpointOwner:
-			v.VpcEndpointOwner = new(string)
-			return d.ReadString(schemas.PipelineEndpointConnection_VpcEndpointOwner, v.VpcEndpointOwner)
-		}
-		return nil
-	})
-}
-
 // Configuration settings for the VPC endpoint, specifying network access controls.
 type PipelineEndpointVpcOptions struct {
 
@@ -819,28 +284,6 @@ type PipelineEndpointVpcOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineEndpointVpcOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineEndpointVpcOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineEndpointVpcOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.PipelineEndpointVpcOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.PipelineEndpointVpcOptions_SubnetIds, v.SubnetIds)
-}
-func (v *PipelineEndpointVpcOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineEndpointVpcOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineEndpointVpcOptions_SecurityGroupIds:
-			return deserializeSecurityGroupIds(d, schemas.PipelineEndpointVpcOptions_SecurityGroupIds, &v.SecurityGroupIds)
-		case schemas.PipelineEndpointVpcOptions_SubnetIds:
-			return deserializeSubnetIds(d, schemas.PipelineEndpointVpcOptions_SubnetIds, &v.SubnetIds)
-		}
-		return nil
-	})
-}
-
 // Information about a pipeline's current status.
 type PipelineStatusReason struct {
 
@@ -848,28 +291,6 @@ type PipelineStatusReason struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PipelineStatusReason) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineStatusReason)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineStatusReason) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.PipelineStatusReason_Description, *v.Description)
-	}
-}
-func (v *PipelineStatusReason) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineStatusReason, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineStatusReason_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PipelineStatusReason_Description, v.Description)
-		}
-		return nil
-	})
 }
 
 // Summary information for an OpenSearch Ingestion pipeline.
@@ -908,82 +329,6 @@ type PipelineSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PipelineSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PipelineSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.PipelineSummary_CreatedAt, *v.CreatedAt)
-	}
-	serializePipelineDestinationList(s, schemas.PipelineSummary_Destinations, v.Destinations)
-	if v.LastUpdatedAt != nil {
-		s.WriteTime(schemas.PipelineSummary_LastUpdatedAt, *v.LastUpdatedAt)
-	}
-	if v.MaxUnits != nil {
-		s.WriteInt32(schemas.PipelineSummary_MaxUnits, *v.MaxUnits)
-	}
-	if v.MinUnits != nil {
-		s.WriteInt32(schemas.PipelineSummary_MinUnits, *v.MinUnits)
-	}
-	if v.PipelineArn != nil {
-		s.WriteString(schemas.PipelineSummary_PipelineArn, *v.PipelineArn)
-	}
-	if v.PipelineName != nil {
-		s.WriteString(schemas.PipelineSummary_PipelineName, *v.PipelineName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PipelineSummary_Status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteStruct(schemas.PipelineSummary_StatusReason)
-		v.StatusReason.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.PipelineSummary_Tags, v.Tags)
-}
-func (v *PipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PipelineSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PipelineSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.PipelineSummary_CreatedAt, v.CreatedAt)
-		case schemas.PipelineSummary_Destinations:
-			return deserializePipelineDestinationList(d, schemas.PipelineSummary_Destinations, &v.Destinations)
-		case schemas.PipelineSummary_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.PipelineSummary_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.PipelineSummary_MaxUnits:
-			v.MaxUnits = new(int32)
-			return d.ReadInt32(schemas.PipelineSummary_MaxUnits, v.MaxUnits)
-		case schemas.PipelineSummary_MinUnits:
-			v.MinUnits = new(int32)
-			return d.ReadInt32(schemas.PipelineSummary_MinUnits, v.MinUnits)
-		case schemas.PipelineSummary_PipelineArn:
-			v.PipelineArn = new(string)
-			return d.ReadString(schemas.PipelineSummary_PipelineArn, v.PipelineArn)
-		case schemas.PipelineSummary_PipelineName:
-			v.PipelineName = new(string)
-			return d.ReadString(schemas.PipelineSummary_PipelineName, v.PipelineName)
-		case schemas.PipelineSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.PipelineSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = PipelineStatus(ev)
-			return nil
-		case schemas.PipelineSummary_StatusReason:
-			v.StatusReason = &PipelineStatusReason{}
-			return v.StatusReason.Deserialize(d)
-		case schemas.PipelineSummary_Tags:
-			return deserializeTagList(d, schemas.PipelineSummary_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // A container for information about VPC endpoints that were created to other
 // services
 type ServiceVpcEndpoint struct {
@@ -995,38 +340,6 @@ type ServiceVpcEndpoint struct {
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ServiceVpcEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceVpcEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceVpcEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServiceName != "" {
-		s.WriteString(schemas.ServiceVpcEndpoint_ServiceName, string(v.ServiceName))
-	}
-	if v.VpcEndpointId != nil {
-		s.WriteString(schemas.ServiceVpcEndpoint_VpcEndpointId, *v.VpcEndpointId)
-	}
-}
-func (v *ServiceVpcEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceVpcEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceVpcEndpoint_ServiceName:
-			var ev string
-			if err := d.ReadString(schemas.ServiceVpcEndpoint_ServiceName, &ev); err != nil {
-				return err
-			}
-			v.ServiceName = VpcEndpointServiceName(ev)
-			return nil
-		case schemas.ServiceVpcEndpoint_VpcEndpointId:
-			v.VpcEndpointId = new(string)
-			return d.ReadString(schemas.ServiceVpcEndpoint_VpcEndpointId, v.VpcEndpointId)
-		}
-		return nil
-	})
 }
 
 // A tag (key-value pair) for an OpenSearch Ingestion pipeline.
@@ -1048,34 +361,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A validation message associated with a ValidatePipeline request in OpenSearch
 // Ingestion.
 type ValidationMessage struct {
@@ -1084,28 +369,6 @@ type ValidationMessage struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationMessage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationMessage_Message, *v.Message)
-	}
-}
-func (v *ValidationMessage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationMessage_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationMessage_Message, v.Message)
-		}
-		return nil
-	})
 }
 
 // Options for attaching a VPC to pipeline.
@@ -1123,34 +386,6 @@ type VpcAttachmentOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VpcAttachmentOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcAttachmentOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcAttachmentOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttachToVpc != nil {
-		s.WriteBool(schemas.VpcAttachmentOptions_AttachToVpc, *v.AttachToVpc)
-	}
-	if v.CidrBlock != nil {
-		s.WriteString(schemas.VpcAttachmentOptions_CidrBlock, *v.CidrBlock)
-	}
-}
-func (v *VpcAttachmentOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcAttachmentOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcAttachmentOptions_AttachToVpc:
-			v.AttachToVpc = new(bool)
-			return d.ReadBool(schemas.VpcAttachmentOptions_AttachToVpc, v.AttachToVpc)
-		case schemas.VpcAttachmentOptions_CidrBlock:
-			v.CidrBlock = new(string)
-			return d.ReadString(schemas.VpcAttachmentOptions_CidrBlock, v.CidrBlock)
-		}
-		return nil
-	})
-}
-
 // An OpenSearch Ingestion-managed VPC endpoint that will access one or more
 // pipelines.
 type VpcEndpoint struct {
@@ -1166,42 +401,6 @@ type VpcEndpoint struct {
 	VpcOptions *VpcOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *VpcEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VpcEndpointId != nil {
-		s.WriteString(schemas.VpcEndpoint_VpcEndpointId, *v.VpcEndpointId)
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.VpcEndpoint_VpcId, *v.VpcId)
-	}
-	if v.VpcOptions != nil {
-		s.WriteStruct(schemas.VpcEndpoint_VpcOptions)
-		v.VpcOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *VpcEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcEndpoint_VpcEndpointId:
-			v.VpcEndpointId = new(string)
-			return d.ReadString(schemas.VpcEndpoint_VpcEndpointId, v.VpcEndpointId)
-		case schemas.VpcEndpoint_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.VpcEndpoint_VpcId, v.VpcId)
-		case schemas.VpcEndpoint_VpcOptions:
-			v.VpcOptions = &VpcOptions{}
-			return v.VpcOptions.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Options that specify the subnets and security groups for an OpenSearch
@@ -1224,46 +423,6 @@ type VpcOptions struct {
 	VpcEndpointManagement VpcEndpointManagement
 
 	noSmithyDocumentSerde
-}
-
-func (v *VpcOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcOptions_SubnetIds, v.SubnetIds)
-	if v.VpcAttachmentOptions != nil {
-		s.WriteStruct(schemas.VpcOptions_VpcAttachmentOptions)
-		v.VpcAttachmentOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VpcEndpointManagement != "" {
-		s.WriteString(schemas.VpcOptions_VpcEndpointManagement, string(v.VpcEndpointManagement))
-	}
-}
-func (v *VpcOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcOptions_SecurityGroupIds:
-			return deserializeSecurityGroupIds(d, schemas.VpcOptions_SecurityGroupIds, &v.SecurityGroupIds)
-		case schemas.VpcOptions_SubnetIds:
-			return deserializeSubnetIds(d, schemas.VpcOptions_SubnetIds, &v.SubnetIds)
-		case schemas.VpcOptions_VpcAttachmentOptions:
-			v.VpcAttachmentOptions = &VpcAttachmentOptions{}
-			return v.VpcAttachmentOptions.Deserialize(d)
-		case schemas.VpcOptions_VpcEndpointManagement:
-			var ev string
-			if err := d.ReadString(schemas.VpcOptions_VpcEndpointManagement, &ev); err != nil {
-				return err
-			}
-			v.VpcEndpointManagement = VpcEndpointManagement(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

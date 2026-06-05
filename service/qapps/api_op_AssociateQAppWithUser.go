@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type AssociateQAppWithUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateQAppWithUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateQAppWithUserInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateQAppWithUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.AssociateQAppWithUserInput_appId, *v.AppId)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.AssociateQAppWithUserInput_instanceId, *v.InstanceId)
-	}
-}
-
 type AssociateQAppWithUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,29 +51,16 @@ type AssociateQAppWithUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateQAppWithUserOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateQAppWithUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *AssociateQAppWithUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateQAppWithUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQAppWithUser, schemas.AssociateQAppWithUserInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateQAppWithUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQAppWithUser, schemas.AssociateQAppWithUserInput, nil), output: &AssociateQAppWithUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateQAppWithUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateQAppWithUser"); err != nil {

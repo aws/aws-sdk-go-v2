@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,24 +53,6 @@ type GetFlowTemplateRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFlowTemplateRevisionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFlowTemplateRevisionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFlowTemplateRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetFlowTemplateRevisionsRequest_id, *v.Id)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetFlowTemplateRevisionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetFlowTemplateRevisionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type GetFlowTemplateRevisionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.
@@ -87,26 +67,16 @@ type GetFlowTemplateRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFlowTemplateRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFlowTemplateRevisionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFlowTemplateRevisionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetFlowTemplateRevisionsResponse_nextToken, v.NextToken)
-		case schemas.GetFlowTemplateRevisionsResponse_summaries:
-			return deserializeFlowTemplateSummaries(d, schemas.GetFlowTemplateRevisionsResponse_summaries, &v.Summaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFlowTemplateRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowTemplateRevisions, schemas.GetFlowTemplateRevisionsRequest, schemas.GetFlowTemplateRevisionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFlowTemplateRevisions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowTemplateRevisions, schemas.GetFlowTemplateRevisionsRequest, schemas.GetFlowTemplateRevisionsResponse), output: &GetFlowTemplateRevisionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFlowTemplateRevisions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlowTemplateRevisions"); err != nil {

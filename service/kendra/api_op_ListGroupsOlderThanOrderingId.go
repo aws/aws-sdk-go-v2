@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,30 +62,6 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupsOlderThanOrderingIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGroupsOlderThanOrderingIdRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGroupsOlderThanOrderingIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataSourceId != nil {
-		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_DataSourceId, *v.DataSourceId)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_IndexId, *v.IndexId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListGroupsOlderThanOrderingIdRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_NextToken, *v.NextToken)
-	}
-	if v.OrderingId != nil {
-		s.WriteInt64(schemas.ListGroupsOlderThanOrderingIdRequest_OrderingId, *v.OrderingId)
-	}
-}
-
 type ListGroupsOlderThanOrderingIdOutput struct {
 
 	//  Summary information for list of groups that are mapped to users before a given
@@ -105,26 +79,16 @@ type ListGroupsOlderThanOrderingIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupsOlderThanOrderingIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGroupsOlderThanOrderingIdResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries:
-			return deserializeListOfGroupSummaries(d, schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries, &v.GroupsSummaries)
-		case schemas.ListGroupsOlderThanOrderingIdResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGroupsOlderThanOrderingIdResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsOlderThanOrderingId, schemas.ListGroupsOlderThanOrderingIdRequest, schemas.ListGroupsOlderThanOrderingIdResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroupsOlderThanOrderingId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsOlderThanOrderingId, schemas.ListGroupsOlderThanOrderingIdRequest, schemas.ListGroupsOlderThanOrderingIdResponse), output: &ListGroupsOlderThanOrderingIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGroupsOlderThanOrderingId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroupsOlderThanOrderingId"); err != nil {

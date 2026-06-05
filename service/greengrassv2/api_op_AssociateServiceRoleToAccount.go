@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,18 +47,6 @@ type AssociateServiceRoleToAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateServiceRoleToAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateServiceRoleToAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateServiceRoleToAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RoleArn != nil {
-		s.WriteString(schemas.AssociateServiceRoleToAccountRequest_roleArn, *v.RoleArn)
-	}
-}
-
 type AssociateServiceRoleToAccountOutput struct {
 
 	// The time when the service role was associated with IoT Greengrass for your
@@ -73,24 +59,16 @@ type AssociateServiceRoleToAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateServiceRoleToAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateServiceRoleToAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateServiceRoleToAccountResponse_associatedAt:
-			v.AssociatedAt = new(string)
-			return d.ReadString(schemas.AssociateServiceRoleToAccountResponse_associatedAt, v.AssociatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceRoleToAccount, schemas.AssociateServiceRoleToAccountRequest, schemas.AssociateServiceRoleToAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateServiceRoleToAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateServiceRoleToAccount, schemas.AssociateServiceRoleToAccountRequest, schemas.AssociateServiceRoleToAccountResponse), output: &AssociateServiceRoleToAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateServiceRoleToAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateServiceRoleToAccount"); err != nil {

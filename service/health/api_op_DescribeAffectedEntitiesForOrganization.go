@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,26 +77,6 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAffectedEntitiesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAffectedEntitiesForOrganizationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAffectedEntitiesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Locale != nil {
-		s.WriteString(schemas.DescribeAffectedEntitiesForOrganizationRequest_locale, *v.Locale)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeAffectedEntitiesForOrganizationRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeAffectedEntitiesForOrganizationRequest_nextToken, *v.NextToken)
-	}
-	serializeOrganizationEntityAccountFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters, v.OrganizationEntityAccountFilters)
-	serializeOrganizationEntityFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters, v.OrganizationEntityFilters)
-}
-
 type DescribeAffectedEntitiesForOrganizationOutput struct {
 
 	// A JSON set of elements including the awsAccountId and its entityArn ,
@@ -122,28 +100,16 @@ type DescribeAffectedEntitiesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAffectedEntitiesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAffectedEntitiesForOrganizationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAffectedEntitiesForOrganizationResponse_entities:
-			return deserializeEntityList(d, schemas.DescribeAffectedEntitiesForOrganizationResponse_entities, &v.Entities)
-		case schemas.DescribeAffectedEntitiesForOrganizationResponse_failedSet:
-			return deserializeDescribeAffectedEntitiesForOrganizationFailedSet(d, schemas.DescribeAffectedEntitiesForOrganizationResponse_failedSet, &v.FailedSet)
-		case schemas.DescribeAffectedEntitiesForOrganizationResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeAffectedEntitiesForOrganizationResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntitiesForOrganization, schemas.DescribeAffectedEntitiesForOrganizationRequest, schemas.DescribeAffectedEntitiesForOrganizationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAffectedEntitiesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntitiesForOrganization, schemas.DescribeAffectedEntitiesForOrganizationRequest, schemas.DescribeAffectedEntitiesForOrganizationResponse), output: &DescribeAffectedEntitiesForOrganizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAffectedEntitiesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAffectedEntitiesForOrganization"); err != nil {

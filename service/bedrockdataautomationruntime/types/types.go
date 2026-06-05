@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -15,30 +13,6 @@ type AssetProcessingConfiguration struct {
 	Video *VideoAssetProcessingConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssetProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssetProcessingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssetProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Video != nil {
-		s.WriteStruct(schemas.AssetProcessingConfiguration_video)
-		v.Video.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AssetProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssetProcessingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssetProcessingConfiguration_video:
-			v.Video = &VideoAssetProcessingConfiguration{}
-			return v.Video.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Structure for single blueprint entity.
@@ -58,44 +32,6 @@ type Blueprint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Blueprint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Blueprint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Blueprint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlueprintArn != nil {
-		s.WriteString(schemas.Blueprint_blueprintArn, *v.BlueprintArn)
-	}
-	if v.Stage != "" {
-		s.WriteString(schemas.Blueprint_stage, string(v.Stage))
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.Blueprint_version, *v.Version)
-	}
-}
-func (v *Blueprint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Blueprint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Blueprint_blueprintArn:
-			v.BlueprintArn = new(string)
-			return d.ReadString(schemas.Blueprint_blueprintArn, v.BlueprintArn)
-		case schemas.Blueprint_stage:
-			var ev string
-			if err := d.ReadString(schemas.Blueprint_stage, &ev); err != nil {
-				return err
-			}
-			v.Stage = BlueprintStage(ev)
-			return nil
-		case schemas.Blueprint_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.Blueprint_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Data automation configuration.
 type DataAutomationConfiguration struct {
 
@@ -108,38 +44,6 @@ type DataAutomationConfiguration struct {
 	Stage DataAutomationStage
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataAutomationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataAutomationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataAutomationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataAutomationProjectArn != nil {
-		s.WriteString(schemas.DataAutomationConfiguration_dataAutomationProjectArn, *v.DataAutomationProjectArn)
-	}
-	if v.Stage != "" {
-		s.WriteString(schemas.DataAutomationConfiguration_stage, string(v.Stage))
-	}
-}
-func (v *DataAutomationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataAutomationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataAutomationConfiguration_dataAutomationProjectArn:
-			v.DataAutomationProjectArn = new(string)
-			return d.ReadString(schemas.DataAutomationConfiguration_dataAutomationProjectArn, v.DataAutomationProjectArn)
-		case schemas.DataAutomationConfiguration_stage:
-			var ev string
-			if err := d.ReadString(schemas.DataAutomationConfiguration_stage, &ev); err != nil {
-				return err
-			}
-			v.Stage = DataAutomationStage(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Encryption configuration.
@@ -156,31 +60,6 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.EncryptionConfiguration_kmsEncryptionContext, v.KmsEncryptionContext)
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.EncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
-	}
-}
-func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfiguration_kmsEncryptionContext:
-			return deserializeEncryptionContextMap(d, schemas.EncryptionConfiguration_kmsEncryptionContext, &v.KmsEncryptionContext)
-		case schemas.EncryptionConfiguration_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyId, v.KmsKeyId)
-		}
-		return nil
-	})
-}
-
 // Event bridge configuration.
 type EventBridgeConfiguration struct {
 
@@ -190,28 +69,6 @@ type EventBridgeConfiguration struct {
 	EventBridgeEnabled *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *EventBridgeConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventBridgeConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventBridgeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventBridgeEnabled != nil {
-		s.WriteBool(schemas.EventBridgeConfiguration_eventBridgeEnabled, *v.EventBridgeEnabled)
-	}
-}
-func (v *EventBridgeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventBridgeConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventBridgeConfiguration_eventBridgeEnabled:
-			v.EventBridgeEnabled = new(bool)
-			return d.ReadBool(schemas.EventBridgeConfiguration_eventBridgeEnabled, v.EventBridgeEnabled)
-		}
-		return nil
-	})
 }
 
 // Input configuration.
@@ -228,36 +85,6 @@ type InputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InputConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InputConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetProcessingConfiguration != nil {
-		s.WriteStruct(schemas.InputConfiguration_assetProcessingConfiguration)
-		v.AssetProcessingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3Uri != nil {
-		s.WriteString(schemas.InputConfiguration_s3Uri, *v.S3Uri)
-	}
-}
-func (v *InputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputConfiguration_assetProcessingConfiguration:
-			v.AssetProcessingConfiguration = &AssetProcessingConfiguration{}
-			return v.AssetProcessingConfiguration.Deserialize(d)
-		case schemas.InputConfiguration_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.InputConfiguration_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
-}
-
 // Notification configuration.
 type NotificationConfiguration struct {
 
@@ -269,30 +96,6 @@ type NotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventBridgeConfiguration != nil {
-		s.WriteStruct(schemas.NotificationConfiguration_eventBridgeConfiguration)
-		v.EventBridgeConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationConfiguration_eventBridgeConfiguration:
-			v.EventBridgeConfiguration = &EventBridgeConfiguration{}
-			return v.EventBridgeConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Output configuration.
 type OutputConfiguration struct {
 
@@ -302,28 +105,6 @@ type OutputConfiguration struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OutputConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Uri != nil {
-		s.WriteString(schemas.OutputConfiguration_s3Uri, *v.S3Uri)
-	}
-}
-func (v *OutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutputConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutputConfiguration_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.OutputConfiguration_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
 }
 
 // Results for an output segment
@@ -341,44 +122,6 @@ type OutputSegment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OutputSegment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputSegment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutputSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomOutput != nil {
-		s.WriteString(schemas.OutputSegment_customOutput, *v.CustomOutput)
-	}
-	if v.CustomOutputStatus != "" {
-		s.WriteString(schemas.OutputSegment_customOutputStatus, string(v.CustomOutputStatus))
-	}
-	if v.StandardOutput != nil {
-		s.WriteString(schemas.OutputSegment_standardOutput, *v.StandardOutput)
-	}
-}
-func (v *OutputSegment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutputSegment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutputSegment_customOutput:
-			v.CustomOutput = new(string)
-			return d.ReadString(schemas.OutputSegment_customOutput, v.CustomOutput)
-		case schemas.OutputSegment_customOutputStatus:
-			var ev string
-			if err := d.ReadString(schemas.OutputSegment_customOutputStatus, &ev); err != nil {
-				return err
-			}
-			v.CustomOutputStatus = CustomOutputStatus(ev)
-			return nil
-		case schemas.OutputSegment_standardOutput:
-			v.StandardOutput = new(string)
-			return d.ReadString(schemas.OutputSegment_standardOutput, v.StandardOutput)
-		}
-		return nil
-	})
-}
-
 // Input configuration for synchronous API
 type SyncInputConfiguration struct {
 
@@ -389,33 +132,6 @@ type SyncInputConfiguration struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SyncInputConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SyncInputConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SyncInputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bytes != nil {
-		s.WriteBlob(schemas.SyncInputConfiguration_bytes, v.Bytes)
-	}
-	if v.S3Uri != nil {
-		s.WriteString(schemas.SyncInputConfiguration_s3Uri, *v.S3Uri)
-	}
-}
-func (v *SyncInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SyncInputConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SyncInputConfiguration_bytes:
-			return d.ReadBlob(schemas.SyncInputConfiguration_bytes, &v.Bytes)
-		case schemas.SyncInputConfiguration_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.SyncInputConfiguration_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
 }
 
 // Key value pair of a tag
@@ -434,34 +150,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_key, v.Key)
-		case schemas.Tag_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Timestamp segment
 type TimestampSegment struct {
 
@@ -478,34 +166,6 @@ type TimestampSegment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TimestampSegment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimestampSegment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimestampSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimeMillis != nil {
-		s.WriteInt64(schemas.TimestampSegment_endTimeMillis, *v.EndTimeMillis)
-	}
-	if v.StartTimeMillis != nil {
-		s.WriteInt64(schemas.TimestampSegment_startTimeMillis, *v.StartTimeMillis)
-	}
-}
-func (v *TimestampSegment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimestampSegment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimestampSegment_endTimeMillis:
-			v.EndTimeMillis = new(int64)
-			return d.ReadInt64(schemas.TimestampSegment_endTimeMillis, v.EndTimeMillis)
-		case schemas.TimestampSegment_startTimeMillis:
-			v.StartTimeMillis = new(int64)
-			return d.ReadInt64(schemas.TimestampSegment_startTimeMillis, v.StartTimeMillis)
-		}
-		return nil
-	})
-}
-
 // Video asset processing configuration
 type VideoAssetProcessingConfiguration struct {
 
@@ -513,25 +173,6 @@ type VideoAssetProcessingConfiguration struct {
 	SegmentConfiguration VideoSegmentConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *VideoAssetProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VideoAssetProcessingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VideoAssetProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVideoSegmentConfiguration(s, schemas.VideoAssetProcessingConfiguration_segmentConfiguration, v.SegmentConfiguration)
-}
-func (v *VideoAssetProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VideoAssetProcessingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VideoAssetProcessingConfiguration_segmentConfiguration:
-			return deserializeVideoSegmentConfiguration(d, schemas.VideoAssetProcessingConfiguration_segmentConfiguration, &v.SegmentConfiguration)
-		}
-		return nil
-	})
 }
 
 // Delimits the segment of the input that will be processed
@@ -551,14 +192,6 @@ type VideoSegmentConfigurationMemberTimestampSegment struct {
 }
 
 func (*VideoSegmentConfigurationMemberTimestampSegment) isVideoSegmentConfiguration() {}
-func (v *VideoSegmentConfigurationMemberTimestampSegment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VideoSegmentConfiguration_timestampSegment)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *VideoSegmentConfigurationMemberTimestampSegment) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

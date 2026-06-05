@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type UpdateResolverTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateResolverTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateResolverTypeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateResolverTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.UpdateResolverTypeRequest_caseId, *v.CaseId)
-	}
-	if v.ResolverType != "" {
-		s.WriteString(schemas.UpdateResolverTypeRequest_resolverType, string(v.ResolverType))
-	}
-}
-
 type UpdateResolverTypeOutput struct {
 
 	// Response element for UpdateResolver identifying the case ID being updated.
@@ -81,38 +64,16 @@ type UpdateResolverTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateResolverTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateResolverTypeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateResolverTypeResponse_caseId:
-			v.CaseId = new(string)
-			return d.ReadString(schemas.UpdateResolverTypeResponse_caseId, v.CaseId)
-		case schemas.UpdateResolverTypeResponse_caseStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateResolverTypeResponse_caseStatus, &ev); err != nil {
-				return err
-			}
-			v.CaseStatus = types.CaseStatus(ev)
-			return nil
-		case schemas.UpdateResolverTypeResponse_resolverType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateResolverTypeResponse_resolverType, &ev); err != nil {
-				return err
-			}
-			v.ResolverType = types.ResolverType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateResolverTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverType, schemas.UpdateResolverTypeRequest, schemas.UpdateResolverTypeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResolverType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverType, schemas.UpdateResolverTypeRequest, schemas.UpdateResolverTypeResponse), output: &UpdateResolverTypeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResolverType{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResolverType"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,29 +51,6 @@ type SendDataToWirelessDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataToWirelessDeviceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendDataToWirelessDeviceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendDataToWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.SendDataToWirelessDeviceRequest_Id, *v.Id)
-	}
-	if v.PayloadData != nil {
-		s.WriteString(schemas.SendDataToWirelessDeviceRequest_PayloadData, *v.PayloadData)
-	}
-	if v.TransmitMode != nil {
-		s.WriteInt32(schemas.SendDataToWirelessDeviceRequest_TransmitMode, *v.TransmitMode)
-	}
-	if v.WirelessMetadata != nil {
-		s.WriteStruct(schemas.SendDataToWirelessDeviceRequest_WirelessMetadata)
-		v.WirelessMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SendDataToWirelessDeviceOutput struct {
 
 	// The ID of the message sent to the wireless device.
@@ -87,24 +62,16 @@ type SendDataToWirelessDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataToWirelessDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendDataToWirelessDeviceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendDataToWirelessDeviceResponse_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.SendDataToWirelessDeviceResponse_MessageId, v.MessageId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendDataToWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataToWirelessDevice, schemas.SendDataToWirelessDeviceRequest, schemas.SendDataToWirelessDeviceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDataToWirelessDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataToWirelessDevice, schemas.SendDataToWirelessDeviceRequest, schemas.SendDataToWirelessDeviceResponse), output: &SendDataToWirelessDeviceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDataToWirelessDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendDataToWirelessDevice"); err != nil {

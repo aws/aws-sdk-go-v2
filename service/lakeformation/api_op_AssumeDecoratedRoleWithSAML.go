@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -81,27 +79,6 @@ type AssumeDecoratedRoleWithSAMLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssumeDecoratedRoleWithSAMLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssumeDecoratedRoleWithSAMLRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssumeDecoratedRoleWithSAMLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.AssumeDecoratedRoleWithSAMLRequest_DurationSeconds, *v.DurationSeconds)
-	}
-	if v.PrincipalArn != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_PrincipalArn, *v.PrincipalArn)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_RoleArn, *v.RoleArn)
-	}
-	if v.SAMLAssertion != nil {
-		s.WriteString(schemas.AssumeDecoratedRoleWithSAMLRequest_SAMLAssertion, *v.SAMLAssertion)
-	}
-}
-
 type AssumeDecoratedRoleWithSAMLOutput struct {
 
 	// The access key ID for the temporary credentials. (The access key consists of an
@@ -124,33 +101,16 @@ type AssumeDecoratedRoleWithSAMLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssumeDecoratedRoleWithSAMLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssumeDecoratedRoleWithSAMLResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_AccessKeyId:
-			v.AccessKeyId = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_AccessKeyId, v.AccessKeyId)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_Expiration:
-			v.Expiration = new(time.Time)
-			return d.ReadTime(schemas.AssumeDecoratedRoleWithSAMLResponse_Expiration, v.Expiration)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_SecretAccessKey:
-			v.SecretAccessKey = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_SecretAccessKey, v.SecretAccessKey)
-		case schemas.AssumeDecoratedRoleWithSAMLResponse_SessionToken:
-			v.SessionToken = new(string)
-			return d.ReadString(schemas.AssumeDecoratedRoleWithSAMLResponse_SessionToken, v.SessionToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeDecoratedRoleWithSAML, schemas.AssumeDecoratedRoleWithSAMLRequest, schemas.AssumeDecoratedRoleWithSAMLResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeDecoratedRoleWithSAML{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeDecoratedRoleWithSAML, schemas.AssumeDecoratedRoleWithSAMLRequest, schemas.AssumeDecoratedRoleWithSAMLResponse), output: &AssumeDecoratedRoleWithSAMLOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeDecoratedRoleWithSAML{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssumeDecoratedRoleWithSAML"); err != nil {

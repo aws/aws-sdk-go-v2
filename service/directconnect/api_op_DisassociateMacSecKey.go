@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type DisassociateMacSecKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateMacSecKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateMacSecKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateMacSecKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionId != nil {
-		s.WriteString(schemas.DisassociateMacSecKeyRequest_connectionId, *v.ConnectionId)
-	}
-	if v.SecretARN != nil {
-		s.WriteString(schemas.DisassociateMacSecKeyRequest_secretARN, *v.SecretARN)
-	}
-}
-
 type DisassociateMacSecKeyOutput struct {
 
 	// The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or
@@ -81,26 +64,16 @@ type DisassociateMacSecKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateMacSecKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateMacSecKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateMacSecKeyResponse_connectionId:
-			v.ConnectionId = new(string)
-			return d.ReadString(schemas.DisassociateMacSecKeyResponse_connectionId, v.ConnectionId)
-		case schemas.DisassociateMacSecKeyResponse_macSecKeys:
-			return deserializeMacSecKeyList(d, schemas.DisassociateMacSecKeyResponse_macSecKeys, &v.MacSecKeys)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMacSecKey, schemas.DisassociateMacSecKeyRequest, schemas.DisassociateMacSecKeyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateMacSecKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMacSecKey, schemas.DisassociateMacSecKeyRequest, schemas.DisassociateMacSecKeyResponse), output: &DisassociateMacSecKeyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateMacSecKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateMacSecKey"); err != nil {

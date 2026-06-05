@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,26 +55,6 @@ type CreateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConfigurationSetEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateConfigurationSetEventDestinationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateConfigurationSetEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationSetName != nil {
-		s.WriteString(schemas.CreateConfigurationSetEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
-	}
-	if v.EventDestination != nil {
-		s.WriteStruct(schemas.CreateConfigurationSetEventDestinationRequest_EventDestination)
-		v.EventDestination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EventDestinationName != nil {
-		s.WriteString(schemas.CreateConfigurationSetEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
-	}
-}
-
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type CreateConfigurationSetEventDestinationOutput struct {
@@ -86,21 +64,16 @@ type CreateConfigurationSetEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConfigurationSetEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateConfigurationSetEventDestinationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSetEventDestination, schemas.CreateConfigurationSetEventDestinationRequest, schemas.CreateConfigurationSetEventDestinationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationSetEventDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSetEventDestination, schemas.CreateConfigurationSetEventDestinationRequest, schemas.CreateConfigurationSetEventDestinationResponse), output: &CreateConfigurationSetEventDestinationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfigurationSetEventDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfigurationSetEventDestination"); err != nil {

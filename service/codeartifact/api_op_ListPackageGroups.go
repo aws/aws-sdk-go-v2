@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,30 +52,6 @@ type ListPackageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackageGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackageGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.ListPackageGroupsRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.ListPackageGroupsRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPackageGroupsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackageGroupsRequest_nextToken, *v.NextToken)
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.ListPackageGroupsRequest_prefix, *v.Prefix)
-	}
-}
-
 type ListPackageGroupsOutput struct {
 
 	//  The token for the next set of results. Use the value returned in the previous
@@ -93,26 +67,16 @@ type ListPackageGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackageGroupsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackageGroupsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackageGroupsResult_nextToken, v.NextToken)
-		case schemas.ListPackageGroupsResult_packageGroups:
-			return deserializePackageGroupSummaryList(d, schemas.ListPackageGroupsResult_packageGroups, &v.PackageGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageGroups, schemas.ListPackageGroupsRequest, schemas.ListPackageGroupsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageGroups, schemas.ListPackageGroupsRequest, schemas.ListPackageGroupsResult), output: &ListPackageGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPackageGroups"); err != nil {

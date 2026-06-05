@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDomainInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDomainInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteDomainInput_clientToken, *v.ClientToken)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteDomainInput_identifier, *v.Identifier)
-	}
-	if v.SkipDeletionCheck != nil {
-		s.WriteBool(schemas.DeleteDomainInput_skipDeletionCheck, *v.SkipDeletionCheck)
-	}
-}
-
 type DeleteDomainOutput struct {
 
 	// The status of the domain.
@@ -77,28 +57,16 @@ type DeleteDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDomainOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDomainOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDomainOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DomainStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomain, schemas.DeleteDomainInput, schemas.DeleteDomainOutput), output: &DeleteDomainOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDomain"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,30 +54,6 @@ type RegisterOidcConfigTestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOidcConfigTestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterOidcConfigTestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterOidcConfigTestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Certificate != nil {
-		s.WriteString(schemas.RegisterOidcConfigTestRequest_certificate, *v.Certificate)
-	}
-	if v.ExtraAuthParams != nil {
-		s.WriteString(schemas.RegisterOidcConfigTestRequest_extraAuthParams, *v.ExtraAuthParams)
-	}
-	if v.Issuer != nil {
-		s.WriteString(schemas.RegisterOidcConfigTestRequest_issuer, *v.Issuer)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.RegisterOidcConfigTestRequest_networkId, *v.NetworkId)
-	}
-	if v.Scopes != nil {
-		s.WriteString(schemas.RegisterOidcConfigTestRequest_scopes, *v.Scopes)
-	}
-}
-
 type RegisterOidcConfigTestOutput struct {
 
 	// The authorization endpoint URL discovered from the OIDC provider.
@@ -124,53 +98,16 @@ type RegisterOidcConfigTestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOidcConfigTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterOidcConfigTestResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterOidcConfigTestResponse_authorizationEndpoint:
-			v.AuthorizationEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_authorizationEndpoint, v.AuthorizationEndpoint)
-		case schemas.RegisterOidcConfigTestResponse_endSessionEndpoint:
-			v.EndSessionEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_endSessionEndpoint, v.EndSessionEndpoint)
-		case schemas.RegisterOidcConfigTestResponse_grantTypesSupported:
-			return deserializeStringList(d, schemas.RegisterOidcConfigTestResponse_grantTypesSupported, &v.GrantTypesSupported)
-		case schemas.RegisterOidcConfigTestResponse_issuer:
-			v.Issuer = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_issuer, v.Issuer)
-		case schemas.RegisterOidcConfigTestResponse_logoutEndpoint:
-			v.LogoutEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_logoutEndpoint, v.LogoutEndpoint)
-		case schemas.RegisterOidcConfigTestResponse_microsoftMultiRefreshToken:
-			v.MicrosoftMultiRefreshToken = new(bool)
-			return d.ReadBool(schemas.RegisterOidcConfigTestResponse_microsoftMultiRefreshToken, v.MicrosoftMultiRefreshToken)
-		case schemas.RegisterOidcConfigTestResponse_responseTypesSupported:
-			return deserializeStringList(d, schemas.RegisterOidcConfigTestResponse_responseTypesSupported, &v.ResponseTypesSupported)
-		case schemas.RegisterOidcConfigTestResponse_revocationEndpoint:
-			v.RevocationEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_revocationEndpoint, v.RevocationEndpoint)
-		case schemas.RegisterOidcConfigTestResponse_scopesSupported:
-			return deserializeStringList(d, schemas.RegisterOidcConfigTestResponse_scopesSupported, &v.ScopesSupported)
-		case schemas.RegisterOidcConfigTestResponse_tokenEndpoint:
-			v.TokenEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_tokenEndpoint, v.TokenEndpoint)
-		case schemas.RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported:
-			return deserializeStringList(d, schemas.RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported, &v.TokenEndpointAuthMethodsSupported)
-		case schemas.RegisterOidcConfigTestResponse_userinfoEndpoint:
-			v.UserinfoEndpoint = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigTestResponse_userinfoEndpoint, v.UserinfoEndpoint)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterOidcConfigTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOidcConfigTest, schemas.RegisterOidcConfigTestRequest, schemas.RegisterOidcConfigTestResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterOidcConfigTest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOidcConfigTest, schemas.RegisterOidcConfigTestRequest, schemas.RegisterOidcConfigTestResponse), output: &RegisterOidcConfigTestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterOidcConfigTest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterOidcConfigTest"); err != nil {

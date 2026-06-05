@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DeleteRetrieverInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRetrieverInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRetrieverRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.DeleteRetrieverRequest_applicationId, *v.ApplicationId)
-	}
-	if v.RetrieverId != nil {
-		s.WriteString(schemas.DeleteRetrieverRequest_retrieverId, *v.RetrieverId)
-	}
-}
-
 type DeleteRetrieverOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,21 +48,16 @@ type DeleteRetrieverOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRetrieverOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRetrieverResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteRetrieverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetriever, schemas.DeleteRetrieverRequest, schemas.DeleteRetrieverResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRetriever{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetriever, schemas.DeleteRetrieverRequest, schemas.DeleteRetrieverResponse), output: &DeleteRetrieverOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRetriever{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRetriever"); err != nil {

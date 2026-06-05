@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,27 +66,6 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGatewayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayName != nil {
-		s.WriteString(schemas.CreateGatewayRequest_gatewayName, *v.GatewayName)
-	}
-	if v.GatewayPlatform != nil {
-		s.WriteStruct(schemas.CreateGatewayRequest_gatewayPlatform)
-		v.GatewayPlatform.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GatewayVersion != nil {
-		s.WriteString(schemas.CreateGatewayRequest_gatewayVersion, *v.GatewayVersion)
-	}
-	serializeTagMap(s, schemas.CreateGatewayRequest_tags, v.Tags)
-}
-
 type CreateGatewayOutput struct {
 
 	// The [ARN] of the gateway, which has the following format.
@@ -112,27 +89,16 @@ type CreateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGatewayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGatewayResponse_gatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.CreateGatewayResponse_gatewayArn, v.GatewayArn)
-		case schemas.CreateGatewayResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.CreateGatewayResponse_gatewayId, v.GatewayId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse), output: &CreateGatewayOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGateway"); err != nil {

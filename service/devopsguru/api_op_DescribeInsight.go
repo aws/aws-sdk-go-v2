@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type DescribeInsightInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInsightInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInsightRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.DescribeInsightRequest_AccountId, *v.AccountId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeInsightRequest_Id, *v.Id)
-	}
-}
-
 type DescribeInsightOutput struct {
 
 	//  A ProactiveInsight object that represents the requested insight.
@@ -71,27 +54,16 @@ type DescribeInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeInsightResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeInsightResponse_ProactiveInsight:
-			v.ProactiveInsight = &types.ProactiveInsight{}
-			return v.ProactiveInsight.Deserialize(d)
-		case schemas.DescribeInsightResponse_ReactiveInsight:
-			v.ReactiveInsight = &types.ReactiveInsight{}
-			return v.ReactiveInsight.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsight, schemas.DescribeInsightRequest, schemas.DescribeInsightResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInsight{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsight, schemas.DescribeInsightRequest, schemas.DescribeInsightResponse), output: &DescribeInsightOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInsight{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInsight"); err != nil {

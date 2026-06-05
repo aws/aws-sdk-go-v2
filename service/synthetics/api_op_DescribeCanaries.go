@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,22 +69,6 @@ type DescribeCanariesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCanariesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeCanariesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeCanariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeCanariesRequest_MaxResults, *v.MaxResults)
-	}
-	serializeDescribeCanariesNameFilter(s, schemas.DescribeCanariesRequest_Names, v.Names)
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeCanariesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeCanariesOutput struct {
 
 	// Returns an array. Each item in the array contains the full information about
@@ -104,26 +86,16 @@ type DescribeCanariesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCanariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeCanariesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeCanariesResponse_Canaries:
-			return deserializeCanaries(d, schemas.DescribeCanariesResponse_Canaries, &v.Canaries)
-		case schemas.DescribeCanariesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeCanariesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCanaries, schemas.DescribeCanariesRequest, schemas.DescribeCanariesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCanaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCanaries, schemas.DescribeCanariesRequest, schemas.DescribeCanariesResponse), output: &DescribeCanariesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCanaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCanaries"); err != nil {

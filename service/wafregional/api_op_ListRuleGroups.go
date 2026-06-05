@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,21 +55,6 @@ type ListRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRuleGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRuleGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRuleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Limit != 0 {
-		s.WriteInt32(schemas.ListRuleGroupsRequest_Limit, v.Limit)
-	}
-	if v.NextMarker != nil {
-		s.WriteString(schemas.ListRuleGroupsRequest_NextMarker, *v.NextMarker)
-	}
-}
-
 type ListRuleGroupsOutput struct {
 
 	// If you have more RuleGroups than the number that you specified for Limit in the
@@ -89,26 +72,16 @@ type ListRuleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRuleGroupsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRuleGroupsResponse_NextMarker:
-			v.NextMarker = new(string)
-			return d.ReadString(schemas.ListRuleGroupsResponse_NextMarker, v.NextMarker)
-		case schemas.ListRuleGroupsResponse_RuleGroups:
-			return deserializeRuleGroupSummaries(d, schemas.ListRuleGroupsResponse_RuleGroups, &v.RuleGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleGroups, schemas.ListRuleGroupsRequest, schemas.ListRuleGroupsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRuleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleGroups, schemas.ListRuleGroupsRequest, schemas.ListRuleGroupsResponse), output: &ListRuleGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRuleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRuleGroups"); err != nil {

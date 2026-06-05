@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,15 +35,6 @@ type DeleteNotifyMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteNotifyMessageSpendLimitOverrideInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteNotifyMessageSpendLimitOverrideRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteNotifyMessageSpendLimitOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DeleteNotifyMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit, in US dollars.
@@ -57,24 +46,16 @@ type DeleteNotifyMessageSpendLimitOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteNotifyMessageSpendLimitOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteNotifyMessageSpendLimitOverrideResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteNotifyMessageSpendLimitOverrideResult_MonthlyLimit:
-			v.MonthlyLimit = new(int64)
-			return d.ReadInt64(schemas.DeleteNotifyMessageSpendLimitOverrideResult_MonthlyLimit, v.MonthlyLimit)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteNotifyMessageSpendLimitOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotifyMessageSpendLimitOverride, schemas.DeleteNotifyMessageSpendLimitOverrideRequest, schemas.DeleteNotifyMessageSpendLimitOverrideResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteNotifyMessageSpendLimitOverride{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotifyMessageSpendLimitOverride, schemas.DeleteNotifyMessageSpendLimitOverrideRequest, schemas.DeleteNotifyMessageSpendLimitOverrideResult), output: &DeleteNotifyMessageSpendLimitOverrideOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteNotifyMessageSpendLimitOverride{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteNotifyMessageSpendLimitOverride"); err != nil {

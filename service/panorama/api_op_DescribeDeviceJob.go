@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,28 +36,6 @@ type DescribeDeviceJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeDeviceJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDeviceJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDeviceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.DescribeDeviceJobRequest_JobId, *v.JobId)
-	}
-}
-func (v *DescribeDeviceJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDeviceJobRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDeviceJobRequest_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobRequest_JobId, v.JobId)
-		}
-		return nil
-	})
 }
 
 type DescribeDeviceJobOutput struct {
@@ -97,95 +73,16 @@ type DescribeDeviceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDeviceJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDeviceJobResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDeviceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DescribeDeviceJobResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.DescribeDeviceJobResponse_DeviceArn, *v.DeviceArn)
-	}
-	if v.DeviceId != nil {
-		s.WriteString(schemas.DescribeDeviceJobResponse_DeviceId, *v.DeviceId)
-	}
-	if v.DeviceName != nil {
-		s.WriteString(schemas.DescribeDeviceJobResponse_DeviceName, *v.DeviceName)
-	}
-	if v.DeviceType != "" {
-		s.WriteString(schemas.DescribeDeviceJobResponse_DeviceType, string(v.DeviceType))
-	}
-	if v.ImageVersion != nil {
-		s.WriteString(schemas.DescribeDeviceJobResponse_ImageVersion, *v.ImageVersion)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.DescribeDeviceJobResponse_JobId, *v.JobId)
-	}
-	if v.JobType != "" {
-		s.WriteString(schemas.DescribeDeviceJobResponse_JobType, string(v.JobType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DescribeDeviceJobResponse_Status, string(v.Status))
-	}
-}
-func (v *DescribeDeviceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDeviceJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDeviceJobResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeDeviceJobResponse_CreatedTime, v.CreatedTime)
-		case schemas.DescribeDeviceJobResponse_DeviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobResponse_DeviceArn, v.DeviceArn)
-		case schemas.DescribeDeviceJobResponse_DeviceId:
-			v.DeviceId = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobResponse_DeviceId, v.DeviceId)
-		case schemas.DescribeDeviceJobResponse_DeviceName:
-			v.DeviceName = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobResponse_DeviceName, v.DeviceName)
-		case schemas.DescribeDeviceJobResponse_DeviceType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeDeviceJobResponse_DeviceType, &ev); err != nil {
-				return err
-			}
-			v.DeviceType = types.DeviceType(ev)
-			return nil
-		case schemas.DescribeDeviceJobResponse_ImageVersion:
-			v.ImageVersion = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobResponse_ImageVersion, v.ImageVersion)
-		case schemas.DescribeDeviceJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DescribeDeviceJobResponse_JobId, v.JobId)
-		case schemas.DescribeDeviceJobResponse_JobType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeDeviceJobResponse_JobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = types.JobType(ev)
-			return nil
-		case schemas.DescribeDeviceJobResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeDeviceJobResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.UpdateProgress(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDeviceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeviceJob, schemas.DescribeDeviceJobRequest, schemas.DescribeDeviceJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDeviceJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeviceJob, schemas.DescribeDeviceJobRequest, schemas.DescribeDeviceJobResponse), output: &DescribeDeviceJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDeviceJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDeviceJob"); err != nil {

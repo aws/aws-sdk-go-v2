@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,29 +53,6 @@ type ExportVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportVectorEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportVectorEnrichmentJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ExportVectorEnrichmentJobInput_Arn, *v.Arn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ExportVectorEnrichmentJobInput_ClientToken, *v.ClientToken)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.ExportVectorEnrichmentJobInput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.OutputConfig != nil {
-		s.WriteStruct(schemas.ExportVectorEnrichmentJobInput_OutputConfig)
-		v.OutputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ExportVectorEnrichmentJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Vector Enrichment job being exported.
@@ -112,40 +87,16 @@ type ExportVectorEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportVectorEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportVectorEnrichmentJobOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ExportVectorEnrichmentJobOutput_Arn, v.Arn)
-		case schemas.ExportVectorEnrichmentJobOutput_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ExportVectorEnrichmentJobOutput_CreationTime, v.CreationTime)
-		case schemas.ExportVectorEnrichmentJobOutput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.ExportVectorEnrichmentJobOutput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.ExportVectorEnrichmentJobOutput_ExportStatus:
-			var ev string
-			if err := d.ReadString(schemas.ExportVectorEnrichmentJobOutput_ExportStatus, &ev); err != nil {
-				return err
-			}
-			v.ExportStatus = types.VectorEnrichmentJobExportStatus(ev)
-			return nil
-		case schemas.ExportVectorEnrichmentJobOutput_OutputConfig:
-			v.OutputConfig = &types.ExportVectorEnrichmentJobOutputConfig{}
-			return v.OutputConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExportVectorEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportVectorEnrichmentJob, schemas.ExportVectorEnrichmentJobInput, schemas.ExportVectorEnrichmentJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportVectorEnrichmentJob, schemas.ExportVectorEnrichmentJobInput, schemas.ExportVectorEnrichmentJobOutput), output: &ExportVectorEnrichmentJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportVectorEnrichmentJob"); err != nil {

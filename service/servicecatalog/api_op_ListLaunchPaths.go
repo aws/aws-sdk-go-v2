@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,27 +61,6 @@ type ListLaunchPathsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLaunchPathsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLaunchPathsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLaunchPathsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ListLaunchPathsInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListLaunchPathsInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListLaunchPathsInput_PageToken, *v.PageToken)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.ListLaunchPathsInput_ProductId, *v.ProductId)
-	}
-}
-
 type ListLaunchPathsOutput struct {
 
 	// Information about the launch path.
@@ -99,26 +76,16 @@ type ListLaunchPathsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLaunchPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLaunchPathsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLaunchPathsOutput_LaunchPathSummaries:
-			return deserializeLaunchPathSummaries(d, schemas.ListLaunchPathsOutput_LaunchPathSummaries, &v.LaunchPathSummaries)
-		case schemas.ListLaunchPathsOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.ListLaunchPathsOutput_NextPageToken, v.NextPageToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLaunchPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLaunchPaths, schemas.ListLaunchPathsInput, schemas.ListLaunchPathsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLaunchPaths{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLaunchPaths, schemas.ListLaunchPathsInput, schemas.ListLaunchPathsOutput), output: &ListLaunchPathsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLaunchPaths{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLaunchPaths"); err != nil {

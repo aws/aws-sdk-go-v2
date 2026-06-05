@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,21 +54,6 @@ type DescribeResourceCollectionHealthInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeResourceCollectionHealthInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeResourceCollectionHealthRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeResourceCollectionHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeResourceCollectionHealthRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceCollectionType != "" {
-		s.WriteString(schemas.DescribeResourceCollectionHealthRequest_ResourceCollectionType, string(v.ResourceCollectionType))
-	}
 }
 
 type DescribeResourceCollectionHealthOutput struct {
@@ -127,30 +110,16 @@ type DescribeResourceCollectionHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeResourceCollectionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeResourceCollectionHealthResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeResourceCollectionHealthResponse_CloudFormation:
-			return deserializeCloudFormationHealths(d, schemas.DescribeResourceCollectionHealthResponse_CloudFormation, &v.CloudFormation)
-		case schemas.DescribeResourceCollectionHealthResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeResourceCollectionHealthResponse_NextToken, v.NextToken)
-		case schemas.DescribeResourceCollectionHealthResponse_Service:
-			return deserializeServiceHealths(d, schemas.DescribeResourceCollectionHealthResponse_Service, &v.Service)
-		case schemas.DescribeResourceCollectionHealthResponse_Tags:
-			return deserializeTagHealths(d, schemas.DescribeResourceCollectionHealthResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeResourceCollectionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceCollectionHealth, schemas.DescribeResourceCollectionHealthRequest, schemas.DescribeResourceCollectionHealthResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourceCollectionHealth{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceCollectionHealth, schemas.DescribeResourceCollectionHealthRequest, schemas.DescribeResourceCollectionHealthResponse), output: &DescribeResourceCollectionHealthOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResourceCollectionHealth{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeResourceCollectionHealth"); err != nil {

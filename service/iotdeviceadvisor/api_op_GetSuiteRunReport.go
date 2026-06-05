@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type GetSuiteRunReportInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSuiteRunReportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSuiteRunReportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSuiteRunReportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SuiteDefinitionId != nil {
-		s.WriteString(schemas.GetSuiteRunReportRequest_suiteDefinitionId, *v.SuiteDefinitionId)
-	}
-	if v.SuiteRunId != nil {
-		s.WriteString(schemas.GetSuiteRunReportRequest_suiteRunId, *v.SuiteRunId)
-	}
-}
-
 type GetSuiteRunReportOutput struct {
 
 	// Download URL of the qualification report.
@@ -74,24 +57,16 @@ type GetSuiteRunReportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSuiteRunReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSuiteRunReportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSuiteRunReportResponse_qualificationReportDownloadUrl:
-			v.QualificationReportDownloadUrl = new(string)
-			return d.ReadString(schemas.GetSuiteRunReportResponse_qualificationReportDownloadUrl, v.QualificationReportDownloadUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSuiteRunReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRunReport, schemas.GetSuiteRunReportRequest, schemas.GetSuiteRunReportResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteRunReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRunReport, schemas.GetSuiteRunReportRequest, schemas.GetSuiteRunReportResponse), output: &GetSuiteRunReportOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSuiteRunReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuiteRunReport"); err != nil {

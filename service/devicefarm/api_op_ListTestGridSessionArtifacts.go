@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,27 +46,6 @@ type ListTestGridSessionArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTestGridSessionArtifactsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTestGridSessionArtifactsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTestGridSessionArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResult != nil {
-		s.WriteInt32(schemas.ListTestGridSessionArtifactsRequest_maxResult, *v.MaxResult)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTestGridSessionArtifactsRequest_nextToken, *v.NextToken)
-	}
-	if v.SessionArn != nil {
-		s.WriteString(schemas.ListTestGridSessionArtifactsRequest_sessionArn, *v.SessionArn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListTestGridSessionArtifactsRequest_type, string(v.Type))
-	}
-}
-
 type ListTestGridSessionArtifactsOutput struct {
 
 	// A list of test grid session artifacts for a TestGridSession.
@@ -83,26 +60,16 @@ type ListTestGridSessionArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTestGridSessionArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTestGridSessionArtifactsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTestGridSessionArtifactsResult_artifacts:
-			return deserializeTestGridSessionArtifacts(d, schemas.ListTestGridSessionArtifactsResult_artifacts, &v.Artifacts)
-		case schemas.ListTestGridSessionArtifactsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTestGridSessionArtifactsResult_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTestGridSessionArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionArtifacts, schemas.ListTestGridSessionArtifactsRequest, schemas.ListTestGridSessionArtifactsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessionArtifacts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionArtifacts, schemas.ListTestGridSessionArtifactsRequest, schemas.ListTestGridSessionArtifactsResult), output: &ListTestGridSessionArtifactsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridSessionArtifacts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTestGridSessionArtifacts"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,15 +32,6 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 // Amazon Pinpoint account.
 type GetAccountInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *GetAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 // A list of details about the email-sending capabilities of your Amazon Pinpoint
@@ -98,33 +87,16 @@ type GetAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAccountResponse_DedicatedIpAutoWarmupEnabled:
-			return d.ReadBool(schemas.GetAccountResponse_DedicatedIpAutoWarmupEnabled, &v.DedicatedIpAutoWarmupEnabled)
-		case schemas.GetAccountResponse_EnforcementStatus:
-			v.EnforcementStatus = new(string)
-			return d.ReadString(schemas.GetAccountResponse_EnforcementStatus, v.EnforcementStatus)
-		case schemas.GetAccountResponse_ProductionAccessEnabled:
-			return d.ReadBool(schemas.GetAccountResponse_ProductionAccessEnabled, &v.ProductionAccessEnabled)
-		case schemas.GetAccountResponse_SendQuota:
-			v.SendQuota = &types.SendQuota{}
-			return v.SendQuota.Deserialize(d)
-		case schemas.GetAccountResponse_SendingEnabled:
-			return d.ReadBool(schemas.GetAccountResponse_SendingEnabled, &v.SendingEnabled)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccount, schemas.GetAccountRequest, schemas.GetAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccount, schemas.GetAccountRequest, schemas.GetAccountResponse), output: &GetAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccount"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,26 +47,6 @@ type UpdatePartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePartnerAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePartnerAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePartnerAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PartnerAccountId != nil {
-		s.WriteString(schemas.UpdatePartnerAccountRequest_PartnerAccountId, *v.PartnerAccountId)
-	}
-	if v.PartnerType != "" {
-		s.WriteString(schemas.UpdatePartnerAccountRequest_PartnerType, string(v.PartnerType))
-	}
-	if v.Sidewalk != nil {
-		s.WriteStruct(schemas.UpdatePartnerAccountRequest_Sidewalk)
-		v.Sidewalk.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdatePartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -76,21 +54,16 @@ type UpdatePartnerAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePartnerAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePartnerAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerAccount, schemas.UpdatePartnerAccountRequest, schemas.UpdatePartnerAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerAccount, schemas.UpdatePartnerAccountRequest, schemas.UpdatePartnerAccountResponse), output: &UpdatePartnerAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePartnerAccount"); err != nil {

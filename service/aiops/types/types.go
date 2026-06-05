@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -17,28 +15,6 @@ type CrossAccountConfiguration struct {
 	SourceRoleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CrossAccountConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CrossAccountConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CrossAccountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceRoleArn != nil {
-		s.WriteString(schemas.CrossAccountConfiguration_sourceRoleArn, *v.SourceRoleArn)
-	}
-}
-func (v *CrossAccountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CrossAccountConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CrossAccountConfiguration_sourceRoleArn:
-			v.SourceRoleArn = new(string)
-			return d.ReadString(schemas.CrossAccountConfiguration_sourceRoleArn, v.SourceRoleArn)
-		}
-		return nil
-	})
 }
 
 // Use this structure to specify a customer managed KMS key to use to encrypt
@@ -56,38 +32,6 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.EncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.EncryptionConfiguration_type, string(v.Type))
-	}
-}
-func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfiguration_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyId, v.KmsKeyId)
-		case schemas.EncryptionConfiguration_type:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionConfiguration_type, &ev); err != nil {
-				return err
-			}
-			v.Type = EncryptionConfigurationType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // This structure contains information about one investigation group in the
 // account.
 type ListInvestigationGroupsModel struct {
@@ -99,34 +43,6 @@ type ListInvestigationGroupsModel struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListInvestigationGroupsModel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInvestigationGroupsModel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInvestigationGroupsModel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListInvestigationGroupsModel_arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListInvestigationGroupsModel_name, *v.Name)
-	}
-}
-func (v *ListInvestigationGroupsModel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInvestigationGroupsModel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInvestigationGroupsModel_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ListInvestigationGroupsModel_arn, v.Arn)
-		case schemas.ListInvestigationGroupsModel_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ListInvestigationGroupsModel_name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,30 +52,6 @@ type ListEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEndpointAccessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEndpointAccessRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEndpointAccessRequest_nextToken, *v.NextToken)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.ListEndpointAccessRequest_ownerAccount, *v.OwnerAccount)
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.ListEndpointAccessRequest_vpcId, *v.VpcId)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.ListEndpointAccessRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type ListEndpointAccessOutput struct {
 
 	// The returned VPC endpoints.
@@ -96,26 +70,16 @@ type ListEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEndpointAccessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEndpointAccessResponse_endpoints:
-			return deserializeEndpointAccessList(d, schemas.ListEndpointAccessResponse_endpoints, &v.Endpoints)
-		case schemas.ListEndpointAccessResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEndpointAccessResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointAccess, schemas.ListEndpointAccessRequest, schemas.ListEndpointAccessResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEndpointAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointAccess, schemas.ListEndpointAccessRequest, schemas.ListEndpointAccessResponse), output: &ListEndpointAccessOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEndpointAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEndpointAccess"); err != nil {

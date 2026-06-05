@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/forecastquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecastquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,28 +63,6 @@ type QueryWhatIfForecastInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryWhatIfForecastInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryWhatIfForecastRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryWhatIfForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteString(schemas.QueryWhatIfForecastRequest_EndDate, *v.EndDate)
-	}
-	serializeFilters(s, schemas.QueryWhatIfForecastRequest_Filters, v.Filters)
-	if v.NextToken != nil {
-		s.WriteString(schemas.QueryWhatIfForecastRequest_NextToken, *v.NextToken)
-	}
-	if v.StartDate != nil {
-		s.WriteString(schemas.QueryWhatIfForecastRequest_StartDate, *v.StartDate)
-	}
-	if v.WhatIfForecastArn != nil {
-		s.WriteString(schemas.QueryWhatIfForecastRequest_WhatIfForecastArn, *v.WhatIfForecastArn)
-	}
-}
-
 type QueryWhatIfForecastOutput struct {
 
 	// Provides information about a forecast. Returned as part of the QueryForecast response.
@@ -98,24 +74,16 @@ type QueryWhatIfForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryWhatIfForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryWhatIfForecastResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryWhatIfForecastResponse_Forecast:
-			v.Forecast = &types.Forecast{}
-			return v.Forecast.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationQueryWhatIfForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryWhatIfForecast, schemas.QueryWhatIfForecastRequest, schemas.QueryWhatIfForecastResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryWhatIfForecast{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryWhatIfForecast, schemas.QueryWhatIfForecastRequest, schemas.QueryWhatIfForecastResponse), output: &QueryWhatIfForecastOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQueryWhatIfForecast{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryWhatIfForecast"); err != nil {

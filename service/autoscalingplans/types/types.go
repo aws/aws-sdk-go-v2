@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,31 +17,6 @@ type ApplicationSource struct {
 	TagFilters []TagFilter
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApplicationSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudFormationStackARN != nil {
-		s.WriteString(schemas.ApplicationSource_CloudFormationStackARN, *v.CloudFormationStackARN)
-	}
-	serializeTagFilters(s, schemas.ApplicationSource_TagFilters, v.TagFilters)
-}
-func (v *ApplicationSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationSource_CloudFormationStackARN:
-			v.CloudFormationStackARN = new(string)
-			return d.ReadString(schemas.ApplicationSource_CloudFormationStackARN, v.CloudFormationStackARN)
-		case schemas.ApplicationSource_TagFilters:
-			return deserializeTagFilters(d, schemas.ApplicationSource_TagFilters, &v.TagFilters)
-		}
-		return nil
-	})
 }
 
 // Represents a CloudWatch metric of your choosing that can be used for predictive
@@ -107,53 +80,6 @@ type CustomizedLoadMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomizedLoadMetricSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomizedLoadMetricSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomizedLoadMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensions(s, schemas.CustomizedLoadMetricSpecification_Dimensions, v.Dimensions)
-	if v.MetricName != nil {
-		s.WriteString(schemas.CustomizedLoadMetricSpecification_MetricName, *v.MetricName)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.CustomizedLoadMetricSpecification_Namespace, *v.Namespace)
-	}
-	if v.Statistic != "" {
-		s.WriteString(schemas.CustomizedLoadMetricSpecification_Statistic, string(v.Statistic))
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.CustomizedLoadMetricSpecification_Unit, *v.Unit)
-	}
-}
-func (v *CustomizedLoadMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomizedLoadMetricSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomizedLoadMetricSpecification_Dimensions:
-			return deserializeMetricDimensions(d, schemas.CustomizedLoadMetricSpecification_Dimensions, &v.Dimensions)
-		case schemas.CustomizedLoadMetricSpecification_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.CustomizedLoadMetricSpecification_MetricName, v.MetricName)
-		case schemas.CustomizedLoadMetricSpecification_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.CustomizedLoadMetricSpecification_Namespace, v.Namespace)
-		case schemas.CustomizedLoadMetricSpecification_Statistic:
-			var ev string
-			if err := d.ReadString(schemas.CustomizedLoadMetricSpecification_Statistic, &ev); err != nil {
-				return err
-			}
-			v.Statistic = MetricStatistic(ev)
-			return nil
-		case schemas.CustomizedLoadMetricSpecification_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.CustomizedLoadMetricSpecification_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // Represents a CloudWatch metric of your choosing that can be used for dynamic
 // scaling as part of a target tracking scaling policy.
 //
@@ -203,53 +129,6 @@ type CustomizedScalingMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomizedScalingMetricSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomizedScalingMetricSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomizedScalingMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensions(s, schemas.CustomizedScalingMetricSpecification_Dimensions, v.Dimensions)
-	if v.MetricName != nil {
-		s.WriteString(schemas.CustomizedScalingMetricSpecification_MetricName, *v.MetricName)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.CustomizedScalingMetricSpecification_Namespace, *v.Namespace)
-	}
-	if v.Statistic != "" {
-		s.WriteString(schemas.CustomizedScalingMetricSpecification_Statistic, string(v.Statistic))
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.CustomizedScalingMetricSpecification_Unit, *v.Unit)
-	}
-}
-func (v *CustomizedScalingMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomizedScalingMetricSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomizedScalingMetricSpecification_Dimensions:
-			return deserializeMetricDimensions(d, schemas.CustomizedScalingMetricSpecification_Dimensions, &v.Dimensions)
-		case schemas.CustomizedScalingMetricSpecification_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.CustomizedScalingMetricSpecification_MetricName, v.MetricName)
-		case schemas.CustomizedScalingMetricSpecification_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.CustomizedScalingMetricSpecification_Namespace, v.Namespace)
-		case schemas.CustomizedScalingMetricSpecification_Statistic:
-			var ev string
-			if err := d.ReadString(schemas.CustomizedScalingMetricSpecification_Statistic, &ev); err != nil {
-				return err
-			}
-			v.Statistic = MetricStatistic(ev)
-			return nil
-		case schemas.CustomizedScalingMetricSpecification_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.CustomizedScalingMetricSpecification_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // Represents a single value in the forecast data used for predictive scaling.
 type Datapoint struct {
 
@@ -260,34 +139,6 @@ type Datapoint struct {
 	Value *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Datapoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Datapoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Datapoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.Datapoint_Timestamp, *v.Timestamp)
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.Datapoint_Value, *v.Value)
-	}
-}
-func (v *Datapoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Datapoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Datapoint_Timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.Datapoint_Timestamp, v.Timestamp)
-		case schemas.Datapoint_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.Datapoint_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents a dimension for a customized metric.
@@ -304,34 +155,6 @@ type MetricDimension struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricDimension) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricDimension)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricDimension) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.MetricDimension_Name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.MetricDimension_Value, *v.Value)
-	}
-}
-func (v *MetricDimension) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricDimension, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricDimension_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MetricDimension_Name, v.Name)
-		case schemas.MetricDimension_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.MetricDimension_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents a predefined metric that can be used for predictive scaling.
@@ -374,38 +197,6 @@ type PredefinedLoadMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PredefinedLoadMetricSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredefinedLoadMetricSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredefinedLoadMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PredefinedLoadMetricType != "" {
-		s.WriteString(schemas.PredefinedLoadMetricSpecification_PredefinedLoadMetricType, string(v.PredefinedLoadMetricType))
-	}
-	if v.ResourceLabel != nil {
-		s.WriteString(schemas.PredefinedLoadMetricSpecification_ResourceLabel, *v.ResourceLabel)
-	}
-}
-func (v *PredefinedLoadMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredefinedLoadMetricSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredefinedLoadMetricSpecification_PredefinedLoadMetricType:
-			var ev string
-			if err := d.ReadString(schemas.PredefinedLoadMetricSpecification_PredefinedLoadMetricType, &ev); err != nil {
-				return err
-			}
-			v.PredefinedLoadMetricType = LoadMetricType(ev)
-			return nil
-		case schemas.PredefinedLoadMetricSpecification_ResourceLabel:
-			v.ResourceLabel = new(string)
-			return d.ReadString(schemas.PredefinedLoadMetricSpecification_ResourceLabel, v.ResourceLabel)
-		}
-		return nil
-	})
-}
-
 // Represents a predefined metric that can be used for dynamic scaling as part of
 // a target tracking scaling policy.
 type PredefinedScalingMetricSpecification struct {
@@ -440,38 +231,6 @@ type PredefinedScalingMetricSpecification struct {
 	ResourceLabel *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PredefinedScalingMetricSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredefinedScalingMetricSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredefinedScalingMetricSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PredefinedScalingMetricType != "" {
-		s.WriteString(schemas.PredefinedScalingMetricSpecification_PredefinedScalingMetricType, string(v.PredefinedScalingMetricType))
-	}
-	if v.ResourceLabel != nil {
-		s.WriteString(schemas.PredefinedScalingMetricSpecification_ResourceLabel, *v.ResourceLabel)
-	}
-}
-func (v *PredefinedScalingMetricSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredefinedScalingMetricSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredefinedScalingMetricSpecification_PredefinedScalingMetricType:
-			var ev string
-			if err := d.ReadString(schemas.PredefinedScalingMetricSpecification_PredefinedScalingMetricType, &ev); err != nil {
-				return err
-			}
-			v.PredefinedScalingMetricType = ScalingMetricType(ev)
-			return nil
-		case schemas.PredefinedScalingMetricSpecification_ResourceLabel:
-			v.ResourceLabel = new(string)
-			return d.ReadString(schemas.PredefinedScalingMetricSpecification_ResourceLabel, v.ResourceLabel)
-		}
-		return nil
-	})
 }
 
 // Describes a scaling instruction for a scalable resource in a scaling plan. Each
@@ -665,127 +424,6 @@ type ScalingInstruction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScalingInstruction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalingInstruction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScalingInstruction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomizedLoadMetricSpecification != nil {
-		s.WriteStruct(schemas.ScalingInstruction_CustomizedLoadMetricSpecification)
-		v.CustomizedLoadMetricSpecification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DisableDynamicScaling != nil {
-		s.WriteBool(schemas.ScalingInstruction_DisableDynamicScaling, *v.DisableDynamicScaling)
-	}
-	if v.MaxCapacity != nil {
-		s.WriteInt32(schemas.ScalingInstruction_MaxCapacity, *v.MaxCapacity)
-	}
-	if v.MinCapacity != nil {
-		s.WriteInt32(schemas.ScalingInstruction_MinCapacity, *v.MinCapacity)
-	}
-	if v.PredefinedLoadMetricSpecification != nil {
-		s.WriteStruct(schemas.ScalingInstruction_PredefinedLoadMetricSpecification)
-		v.PredefinedLoadMetricSpecification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PredictiveScalingMaxCapacityBehavior != "" {
-		s.WriteString(schemas.ScalingInstruction_PredictiveScalingMaxCapacityBehavior, string(v.PredictiveScalingMaxCapacityBehavior))
-	}
-	if v.PredictiveScalingMaxCapacityBuffer != nil {
-		s.WriteInt32(schemas.ScalingInstruction_PredictiveScalingMaxCapacityBuffer, *v.PredictiveScalingMaxCapacityBuffer)
-	}
-	if v.PredictiveScalingMode != "" {
-		s.WriteString(schemas.ScalingInstruction_PredictiveScalingMode, string(v.PredictiveScalingMode))
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.ScalingInstruction_ResourceId, *v.ResourceId)
-	}
-	if v.ScalableDimension != "" {
-		s.WriteString(schemas.ScalingInstruction_ScalableDimension, string(v.ScalableDimension))
-	}
-	if v.ScalingPolicyUpdateBehavior != "" {
-		s.WriteString(schemas.ScalingInstruction_ScalingPolicyUpdateBehavior, string(v.ScalingPolicyUpdateBehavior))
-	}
-	if v.ScheduledActionBufferTime != nil {
-		s.WriteInt32(schemas.ScalingInstruction_ScheduledActionBufferTime, *v.ScheduledActionBufferTime)
-	}
-	if v.ServiceNamespace != "" {
-		s.WriteString(schemas.ScalingInstruction_ServiceNamespace, string(v.ServiceNamespace))
-	}
-	serializeTargetTrackingConfigurations(s, schemas.ScalingInstruction_TargetTrackingConfigurations, v.TargetTrackingConfigurations)
-}
-func (v *ScalingInstruction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalingInstruction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalingInstruction_CustomizedLoadMetricSpecification:
-			v.CustomizedLoadMetricSpecification = &CustomizedLoadMetricSpecification{}
-			return v.CustomizedLoadMetricSpecification.Deserialize(d)
-		case schemas.ScalingInstruction_DisableDynamicScaling:
-			v.DisableDynamicScaling = new(bool)
-			return d.ReadBool(schemas.ScalingInstruction_DisableDynamicScaling, v.DisableDynamicScaling)
-		case schemas.ScalingInstruction_MaxCapacity:
-			v.MaxCapacity = new(int32)
-			return d.ReadInt32(schemas.ScalingInstruction_MaxCapacity, v.MaxCapacity)
-		case schemas.ScalingInstruction_MinCapacity:
-			v.MinCapacity = new(int32)
-			return d.ReadInt32(schemas.ScalingInstruction_MinCapacity, v.MinCapacity)
-		case schemas.ScalingInstruction_PredefinedLoadMetricSpecification:
-			v.PredefinedLoadMetricSpecification = &PredefinedLoadMetricSpecification{}
-			return v.PredefinedLoadMetricSpecification.Deserialize(d)
-		case schemas.ScalingInstruction_PredictiveScalingMaxCapacityBehavior:
-			var ev string
-			if err := d.ReadString(schemas.ScalingInstruction_PredictiveScalingMaxCapacityBehavior, &ev); err != nil {
-				return err
-			}
-			v.PredictiveScalingMaxCapacityBehavior = PredictiveScalingMaxCapacityBehavior(ev)
-			return nil
-		case schemas.ScalingInstruction_PredictiveScalingMaxCapacityBuffer:
-			v.PredictiveScalingMaxCapacityBuffer = new(int32)
-			return d.ReadInt32(schemas.ScalingInstruction_PredictiveScalingMaxCapacityBuffer, v.PredictiveScalingMaxCapacityBuffer)
-		case schemas.ScalingInstruction_PredictiveScalingMode:
-			var ev string
-			if err := d.ReadString(schemas.ScalingInstruction_PredictiveScalingMode, &ev); err != nil {
-				return err
-			}
-			v.PredictiveScalingMode = PredictiveScalingMode(ev)
-			return nil
-		case schemas.ScalingInstruction_ResourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ScalingInstruction_ResourceId, v.ResourceId)
-		case schemas.ScalingInstruction_ScalableDimension:
-			var ev string
-			if err := d.ReadString(schemas.ScalingInstruction_ScalableDimension, &ev); err != nil {
-				return err
-			}
-			v.ScalableDimension = ScalableDimension(ev)
-			return nil
-		case schemas.ScalingInstruction_ScalingPolicyUpdateBehavior:
-			var ev string
-			if err := d.ReadString(schemas.ScalingInstruction_ScalingPolicyUpdateBehavior, &ev); err != nil {
-				return err
-			}
-			v.ScalingPolicyUpdateBehavior = ScalingPolicyUpdateBehavior(ev)
-			return nil
-		case schemas.ScalingInstruction_ScheduledActionBufferTime:
-			v.ScheduledActionBufferTime = new(int32)
-			return d.ReadInt32(schemas.ScalingInstruction_ScheduledActionBufferTime, v.ScheduledActionBufferTime)
-		case schemas.ScalingInstruction_ServiceNamespace:
-			var ev string
-			if err := d.ReadString(schemas.ScalingInstruction_ServiceNamespace, &ev); err != nil {
-				return err
-			}
-			v.ServiceNamespace = ServiceNamespace(ev)
-			return nil
-		case schemas.ScalingInstruction_TargetTrackingConfigurations:
-			return deserializeTargetTrackingConfigurations(d, schemas.ScalingInstruction_TargetTrackingConfigurations, &v.TargetTrackingConfigurations)
-		}
-		return nil
-	})
-}
-
 // Represents a scaling plan.
 type ScalingPlan struct {
 
@@ -842,73 +480,6 @@ type ScalingPlan struct {
 	StatusStartTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScalingPlan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalingPlan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScalingPlan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationSource != nil {
-		s.WriteStruct(schemas.ScalingPlan_ApplicationSource)
-		v.ApplicationSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ScalingPlan_CreationTime, *v.CreationTime)
-	}
-	serializeScalingInstructions(s, schemas.ScalingPlan_ScalingInstructions, v.ScalingInstructions)
-	if v.ScalingPlanName != nil {
-		s.WriteString(schemas.ScalingPlan_ScalingPlanName, *v.ScalingPlanName)
-	}
-	if v.ScalingPlanVersion != nil {
-		s.WriteInt64(schemas.ScalingPlan_ScalingPlanVersion, *v.ScalingPlanVersion)
-	}
-	if v.StatusCode != "" {
-		s.WriteString(schemas.ScalingPlan_StatusCode, string(v.StatusCode))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.ScalingPlan_StatusMessage, *v.StatusMessage)
-	}
-	if v.StatusStartTime != nil {
-		s.WriteTime(schemas.ScalingPlan_StatusStartTime, *v.StatusStartTime)
-	}
-}
-func (v *ScalingPlan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalingPlan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalingPlan_ApplicationSource:
-			v.ApplicationSource = &ApplicationSource{}
-			return v.ApplicationSource.Deserialize(d)
-		case schemas.ScalingPlan_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ScalingPlan_CreationTime, v.CreationTime)
-		case schemas.ScalingPlan_ScalingInstructions:
-			return deserializeScalingInstructions(d, schemas.ScalingPlan_ScalingInstructions, &v.ScalingInstructions)
-		case schemas.ScalingPlan_ScalingPlanName:
-			v.ScalingPlanName = new(string)
-			return d.ReadString(schemas.ScalingPlan_ScalingPlanName, v.ScalingPlanName)
-		case schemas.ScalingPlan_ScalingPlanVersion:
-			v.ScalingPlanVersion = new(int64)
-			return d.ReadInt64(schemas.ScalingPlan_ScalingPlanVersion, v.ScalingPlanVersion)
-		case schemas.ScalingPlan_StatusCode:
-			var ev string
-			if err := d.ReadString(schemas.ScalingPlan_StatusCode, &ev); err != nil {
-				return err
-			}
-			v.StatusCode = ScalingPlanStatusCode(ev)
-			return nil
-		case schemas.ScalingPlan_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.ScalingPlan_StatusMessage, v.StatusMessage)
-		case schemas.ScalingPlan_StatusStartTime:
-			v.StatusStartTime = new(time.Time)
-			return d.ReadTime(schemas.ScalingPlan_StatusStartTime, v.StatusStartTime)
-		}
-		return nil
-	})
 }
 
 // Represents a scalable resource.
@@ -1008,79 +579,6 @@ type ScalingPlanResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScalingPlanResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalingPlanResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScalingPlanResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceId != nil {
-		s.WriteString(schemas.ScalingPlanResource_ResourceId, *v.ResourceId)
-	}
-	if v.ScalableDimension != "" {
-		s.WriteString(schemas.ScalingPlanResource_ScalableDimension, string(v.ScalableDimension))
-	}
-	if v.ScalingPlanName != nil {
-		s.WriteString(schemas.ScalingPlanResource_ScalingPlanName, *v.ScalingPlanName)
-	}
-	if v.ScalingPlanVersion != nil {
-		s.WriteInt64(schemas.ScalingPlanResource_ScalingPlanVersion, *v.ScalingPlanVersion)
-	}
-	serializeScalingPolicies(s, schemas.ScalingPlanResource_ScalingPolicies, v.ScalingPolicies)
-	if v.ScalingStatusCode != "" {
-		s.WriteString(schemas.ScalingPlanResource_ScalingStatusCode, string(v.ScalingStatusCode))
-	}
-	if v.ScalingStatusMessage != nil {
-		s.WriteString(schemas.ScalingPlanResource_ScalingStatusMessage, *v.ScalingStatusMessage)
-	}
-	if v.ServiceNamespace != "" {
-		s.WriteString(schemas.ScalingPlanResource_ServiceNamespace, string(v.ServiceNamespace))
-	}
-}
-func (v *ScalingPlanResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalingPlanResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalingPlanResource_ResourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ScalingPlanResource_ResourceId, v.ResourceId)
-		case schemas.ScalingPlanResource_ScalableDimension:
-			var ev string
-			if err := d.ReadString(schemas.ScalingPlanResource_ScalableDimension, &ev); err != nil {
-				return err
-			}
-			v.ScalableDimension = ScalableDimension(ev)
-			return nil
-		case schemas.ScalingPlanResource_ScalingPlanName:
-			v.ScalingPlanName = new(string)
-			return d.ReadString(schemas.ScalingPlanResource_ScalingPlanName, v.ScalingPlanName)
-		case schemas.ScalingPlanResource_ScalingPlanVersion:
-			v.ScalingPlanVersion = new(int64)
-			return d.ReadInt64(schemas.ScalingPlanResource_ScalingPlanVersion, v.ScalingPlanVersion)
-		case schemas.ScalingPlanResource_ScalingPolicies:
-			return deserializeScalingPolicies(d, schemas.ScalingPlanResource_ScalingPolicies, &v.ScalingPolicies)
-		case schemas.ScalingPlanResource_ScalingStatusCode:
-			var ev string
-			if err := d.ReadString(schemas.ScalingPlanResource_ScalingStatusCode, &ev); err != nil {
-				return err
-			}
-			v.ScalingStatusCode = ScalingStatusCode(ev)
-			return nil
-		case schemas.ScalingPlanResource_ScalingStatusMessage:
-			v.ScalingStatusMessage = new(string)
-			return d.ReadString(schemas.ScalingPlanResource_ScalingStatusMessage, v.ScalingStatusMessage)
-		case schemas.ScalingPlanResource_ServiceNamespace:
-			var ev string
-			if err := d.ReadString(schemas.ScalingPlanResource_ServiceNamespace, &ev); err != nil {
-				return err
-			}
-			v.ServiceNamespace = ServiceNamespace(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a scaling policy.
 type ScalingPolicy struct {
 
@@ -1101,46 +599,6 @@ type ScalingPolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScalingPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalingPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyName != nil {
-		s.WriteString(schemas.ScalingPolicy_PolicyName, *v.PolicyName)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.ScalingPolicy_PolicyType, string(v.PolicyType))
-	}
-	if v.TargetTrackingConfiguration != nil {
-		s.WriteStruct(schemas.ScalingPolicy_TargetTrackingConfiguration)
-		v.TargetTrackingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalingPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalingPolicy_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.ScalingPolicy_PolicyName, v.PolicyName)
-		case schemas.ScalingPolicy_PolicyType:
-			var ev string
-			if err := d.ReadString(schemas.ScalingPolicy_PolicyType, &ev); err != nil {
-				return err
-			}
-			v.PolicyType = PolicyType(ev)
-			return nil
-		case schemas.ScalingPolicy_TargetTrackingConfiguration:
-			v.TargetTrackingConfiguration = &TargetTrackingConfiguration{}
-			return v.TargetTrackingConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Represents a tag.
 type TagFilter struct {
 
@@ -1151,31 +609,6 @@ type TagFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.TagFilter_Key, *v.Key)
-	}
-	serializeTagValues(s, schemas.TagFilter_Values, v.Values)
-}
-func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagFilter_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagFilter_Key, v.Key)
-		case schemas.TagFilter_Values:
-			return deserializeTagValues(d, schemas.TagFilter_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Describes a target tracking configuration to use with AWS Auto Scaling. Used
@@ -1235,68 +668,6 @@ type TargetTrackingConfiguration struct {
 	ScaleOutCooldown *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *TargetTrackingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TargetTrackingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TargetTrackingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomizedScalingMetricSpecification != nil {
-		s.WriteStruct(schemas.TargetTrackingConfiguration_CustomizedScalingMetricSpecification)
-		v.CustomizedScalingMetricSpecification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DisableScaleIn != nil {
-		s.WriteBool(schemas.TargetTrackingConfiguration_DisableScaleIn, *v.DisableScaleIn)
-	}
-	if v.EstimatedInstanceWarmup != nil {
-		s.WriteInt32(schemas.TargetTrackingConfiguration_EstimatedInstanceWarmup, *v.EstimatedInstanceWarmup)
-	}
-	if v.PredefinedScalingMetricSpecification != nil {
-		s.WriteStruct(schemas.TargetTrackingConfiguration_PredefinedScalingMetricSpecification)
-		v.PredefinedScalingMetricSpecification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScaleInCooldown != nil {
-		s.WriteInt32(schemas.TargetTrackingConfiguration_ScaleInCooldown, *v.ScaleInCooldown)
-	}
-	if v.ScaleOutCooldown != nil {
-		s.WriteInt32(schemas.TargetTrackingConfiguration_ScaleOutCooldown, *v.ScaleOutCooldown)
-	}
-	if v.TargetValue != nil {
-		s.WriteFloat64(schemas.TargetTrackingConfiguration_TargetValue, *v.TargetValue)
-	}
-}
-func (v *TargetTrackingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TargetTrackingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TargetTrackingConfiguration_CustomizedScalingMetricSpecification:
-			v.CustomizedScalingMetricSpecification = &CustomizedScalingMetricSpecification{}
-			return v.CustomizedScalingMetricSpecification.Deserialize(d)
-		case schemas.TargetTrackingConfiguration_DisableScaleIn:
-			v.DisableScaleIn = new(bool)
-			return d.ReadBool(schemas.TargetTrackingConfiguration_DisableScaleIn, v.DisableScaleIn)
-		case schemas.TargetTrackingConfiguration_EstimatedInstanceWarmup:
-			v.EstimatedInstanceWarmup = new(int32)
-			return d.ReadInt32(schemas.TargetTrackingConfiguration_EstimatedInstanceWarmup, v.EstimatedInstanceWarmup)
-		case schemas.TargetTrackingConfiguration_PredefinedScalingMetricSpecification:
-			v.PredefinedScalingMetricSpecification = &PredefinedScalingMetricSpecification{}
-			return v.PredefinedScalingMetricSpecification.Deserialize(d)
-		case schemas.TargetTrackingConfiguration_ScaleInCooldown:
-			v.ScaleInCooldown = new(int32)
-			return d.ReadInt32(schemas.TargetTrackingConfiguration_ScaleInCooldown, v.ScaleInCooldown)
-		case schemas.TargetTrackingConfiguration_ScaleOutCooldown:
-			v.ScaleOutCooldown = new(int32)
-			return d.ReadInt32(schemas.TargetTrackingConfiguration_ScaleOutCooldown, v.ScaleOutCooldown)
-		case schemas.TargetTrackingConfiguration_TargetValue:
-			v.TargetValue = new(float64)
-			return d.ReadFloat64(schemas.TargetTrackingConfiguration_TargetValue, v.TargetValue)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,23 +49,6 @@ type PutSipMediaApplicationAlexaSkillConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSipMediaApplicationAlexaSkillConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutSipMediaApplicationAlexaSkillConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutSipMediaApplicationAlexaSkillConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SipMediaApplicationAlexaSkillConfiguration != nil {
-		s.WriteStruct(schemas.PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration)
-		v.SipMediaApplicationAlexaSkillConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SipMediaApplicationId != nil {
-		s.WriteString(schemas.PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
-	}
-}
-
 type PutSipMediaApplicationAlexaSkillConfigurationOutput struct {
 
 	// Returns the Alexa Skill configuration.
@@ -79,24 +60,16 @@ type PutSipMediaApplicationAlexaSkillConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSipMediaApplicationAlexaSkillConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutSipMediaApplicationAlexaSkillConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration:
-			v.SipMediaApplicationAlexaSkillConfiguration = &types.SipMediaApplicationAlexaSkillConfiguration{}
-			return v.SipMediaApplicationAlexaSkillConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutSipMediaApplicationAlexaSkillConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSipMediaApplicationAlexaSkillConfiguration, schemas.PutSipMediaApplicationAlexaSkillConfigurationRequest, schemas.PutSipMediaApplicationAlexaSkillConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSipMediaApplicationAlexaSkillConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSipMediaApplicationAlexaSkillConfiguration, schemas.PutSipMediaApplicationAlexaSkillConfigurationRequest, schemas.PutSipMediaApplicationAlexaSkillConfigurationResponse), output: &PutSipMediaApplicationAlexaSkillConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSipMediaApplicationAlexaSkillConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSipMediaApplicationAlexaSkillConfiguration"); err != nil {

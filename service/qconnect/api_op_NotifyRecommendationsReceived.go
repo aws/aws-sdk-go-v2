@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,37 +54,6 @@ type NotifyRecommendationsReceivedInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotifyRecommendationsReceivedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotifyRecommendationsReceivedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotifyRecommendationsReceivedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssistantId != nil {
-		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_assistantId, *v.AssistantId)
-	}
-	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, v.RecommendationIds)
-	if v.SessionId != nil {
-		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_sessionId, *v.SessionId)
-	}
-}
-func (v *NotifyRecommendationsReceivedInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotifyRecommendationsReceivedRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotifyRecommendationsReceivedRequest_assistantId:
-			v.AssistantId = new(string)
-			return d.ReadString(schemas.NotifyRecommendationsReceivedRequest_assistantId, v.AssistantId)
-		case schemas.NotifyRecommendationsReceivedRequest_recommendationIds:
-			return deserializeRecommendationIdList(d, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, &v.RecommendationIds)
-		case schemas.NotifyRecommendationsReceivedRequest_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.NotifyRecommendationsReceivedRequest_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
-
 type NotifyRecommendationsReceivedOutput struct {
 
 	// The identifiers of recommendations that are causing errors.
@@ -101,35 +68,16 @@ type NotifyRecommendationsReceivedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotifyRecommendationsReceivedOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotifyRecommendationsReceivedResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotifyRecommendationsReceivedOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyRecommendationsReceivedErrorList(s, schemas.NotifyRecommendationsReceivedResponse_errors, v.Errors)
-	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, v.RecommendationIds)
-}
-func (v *NotifyRecommendationsReceivedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotifyRecommendationsReceivedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotifyRecommendationsReceivedResponse_errors:
-			return deserializeNotifyRecommendationsReceivedErrorList(d, schemas.NotifyRecommendationsReceivedResponse_errors, &v.Errors)
-		case schemas.NotifyRecommendationsReceivedResponse_recommendationIds:
-			return deserializeRecommendationIdList(d, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, &v.RecommendationIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationNotifyRecommendationsReceivedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyRecommendationsReceived, schemas.NotifyRecommendationsReceivedRequest, schemas.NotifyRecommendationsReceivedResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpNotifyRecommendationsReceived{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyRecommendationsReceived, schemas.NotifyRecommendationsReceivedRequest, schemas.NotifyRecommendationsReceivedResponse), output: &NotifyRecommendationsReceivedOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpNotifyRecommendationsReceived{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NotifyRecommendationsReceived"); err != nil {

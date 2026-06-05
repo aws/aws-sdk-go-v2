@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -101,38 +99,6 @@ type PutPackageOriginConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPackageOriginConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPackageOriginConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPackageOriginConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_package, *v.Package)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.PutPackageOriginConfigurationRequest_repository, *v.Repository)
-	}
-	if v.Restrictions != nil {
-		s.WriteStruct(schemas.PutPackageOriginConfigurationRequest_restrictions)
-		v.Restrictions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type PutPackageOriginConfigurationOutput struct {
 
 	// A [PackageOriginConfiguration] object that describes the origin configuration set for the package. It
@@ -149,24 +115,16 @@ type PutPackageOriginConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPackageOriginConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPackageOriginConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutPackageOriginConfigurationResult_originConfiguration:
-			v.OriginConfiguration = &types.PackageOriginConfiguration{}
-			return v.OriginConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutPackageOriginConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPackageOriginConfiguration, schemas.PutPackageOriginConfigurationRequest, schemas.PutPackageOriginConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPackageOriginConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPackageOriginConfiguration, schemas.PutPackageOriginConfigurationRequest, schemas.PutPackageOriginConfigurationResult), output: &PutPackageOriginConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPackageOriginConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPackageOriginConfiguration"); err != nil {

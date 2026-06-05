@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type AssociateMulticastGroupWithFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateMulticastGroupWithFuotaTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateMulticastGroupWithFuotaTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateMulticastGroupWithFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.AssociateMulticastGroupWithFuotaTaskRequest_Id, *v.Id)
-	}
-	if v.MulticastGroupId != nil {
-		s.WriteString(schemas.AssociateMulticastGroupWithFuotaTaskRequest_MulticastGroupId, *v.MulticastGroupId)
-	}
-}
-
 type AssociateMulticastGroupWithFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,21 +48,16 @@ type AssociateMulticastGroupWithFuotaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateMulticastGroupWithFuotaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateMulticastGroupWithFuotaTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateMulticastGroupWithFuotaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMulticastGroupWithFuotaTask, schemas.AssociateMulticastGroupWithFuotaTaskRequest, schemas.AssociateMulticastGroupWithFuotaTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMulticastGroupWithFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMulticastGroupWithFuotaTask, schemas.AssociateMulticastGroupWithFuotaTaskRequest, schemas.AssociateMulticastGroupWithFuotaTaskResponse), output: &AssociateMulticastGroupWithFuotaTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMulticastGroupWithFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateMulticastGroupWithFuotaTask"); err != nil {

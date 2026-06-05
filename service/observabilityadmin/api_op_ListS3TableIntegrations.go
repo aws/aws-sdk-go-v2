@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListS3TableIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListS3TableIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListS3TableIntegrationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListS3TableIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListS3TableIntegrationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListS3TableIntegrationsInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListS3TableIntegrationsOutput struct {
 
 	// A list of S3 Table integration summaries containing key information about each
@@ -71,26 +54,16 @@ type ListS3TableIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListS3TableIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListS3TableIntegrationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListS3TableIntegrationsOutput_IntegrationSummaries:
-			return deserializeIntegrationSummaries(d, schemas.ListS3TableIntegrationsOutput_IntegrationSummaries, &v.IntegrationSummaries)
-		case schemas.ListS3TableIntegrationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListS3TableIntegrationsOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListS3TableIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3TableIntegrations, schemas.ListS3TableIntegrationsInput, schemas.ListS3TableIntegrationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListS3TableIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3TableIntegrations, schemas.ListS3TableIntegrationsInput, schemas.ListS3TableIntegrationsOutput), output: &ListS3TableIntegrationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListS3TableIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListS3TableIntegrations"); err != nil {

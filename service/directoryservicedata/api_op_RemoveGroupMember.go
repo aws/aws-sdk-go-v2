@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,30 +68,6 @@ type RemoveGroupMemberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveGroupMemberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveGroupMemberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveGroupMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.RemoveGroupMemberRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.RemoveGroupMemberRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.GroupName != nil {
-		s.WriteString(schemas.RemoveGroupMemberRequest_GroupName, *v.GroupName)
-	}
-	if v.MemberName != nil {
-		s.WriteString(schemas.RemoveGroupMemberRequest_MemberName, *v.MemberName)
-	}
-	if v.MemberRealm != nil {
-		s.WriteString(schemas.RemoveGroupMemberRequest_MemberRealm, *v.MemberRealm)
-	}
-}
-
 type RemoveGroupMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,21 +75,16 @@ type RemoveGroupMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveGroupMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveGroupMemberResult, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveGroupMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveGroupMember, schemas.RemoveGroupMemberRequest, schemas.RemoveGroupMemberResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveGroupMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveGroupMember, schemas.RemoveGroupMemberRequest, schemas.RemoveGroupMemberResult), output: &RemoveGroupMemberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveGroupMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveGroupMember"); err != nil {

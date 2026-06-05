@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,19 +42,6 @@ type AcceptAgreementRequestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptAgreementRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptAgreementRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementRequestId != nil {
-		s.WriteString(schemas.AcceptAgreementRequestInput_agreementRequestId, *v.AgreementRequestId)
-	}
-	serializePurchaseOrders(s, schemas.AcceptAgreementRequestInput_purchaseOrders, v.PurchaseOrders)
-}
-
 type AcceptAgreementRequestOutput struct {
 
 	// The unique identifier of the agreement created or modified by accepting the
@@ -69,24 +54,16 @@ type AcceptAgreementRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptAgreementRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptAgreementRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptAgreementRequestOutput_agreementId:
-			v.AgreementId = new(string)
-			return d.ReadString(schemas.AcceptAgreementRequestOutput_agreementId, v.AgreementId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptAgreementRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementRequest, schemas.AcceptAgreementRequestInput, schemas.AcceptAgreementRequestOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptAgreementRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementRequest, schemas.AcceptAgreementRequestInput, schemas.AcceptAgreementRequestOutput), output: &AcceptAgreementRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptAgreementRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptAgreementRequest"); err != nil {

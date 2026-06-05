@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,49 +60,6 @@ type UpdateResourceEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateResourceEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateResourceEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionStatus != nil {
-		s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest_ConnectionStatus)
-		v.ConnectionStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceRegistrationState != nil {
-		s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest_DeviceRegistrationState)
-		v.DeviceRegistrationState.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateResourceEventConfigurationRequest_Identifier, *v.Identifier)
-	}
-	if v.IdentifierType != "" {
-		s.WriteString(schemas.UpdateResourceEventConfigurationRequest_IdentifierType, string(v.IdentifierType))
-	}
-	if v.Join != nil {
-		s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest_Join)
-		v.Join.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MessageDeliveryStatus != nil {
-		s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest_MessageDeliveryStatus)
-		v.MessageDeliveryStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PartnerType != "" {
-		s.WriteString(schemas.UpdateResourceEventConfigurationRequest_PartnerType, string(v.PartnerType))
-	}
-	if v.Proximity != nil {
-		s.WriteStruct(schemas.UpdateResourceEventConfigurationRequest_Proximity)
-		v.Proximity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateResourceEventConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -112,21 +67,16 @@ type UpdateResourceEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateResourceEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateResourceEventConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateResourceEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceEventConfiguration, schemas.UpdateResourceEventConfigurationRequest, schemas.UpdateResourceEventConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceEventConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceEventConfiguration, schemas.UpdateResourceEventConfigurationRequest, schemas.UpdateResourceEventConfigurationResponse), output: &UpdateResourceEventConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceEventConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResourceEventConfiguration"); err != nil {

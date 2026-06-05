@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type GetDomainPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDomainPermissionsPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDomainPermissionsPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDomainPermissionsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.GetDomainPermissionsPolicyRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.GetDomainPermissionsPolicyRequest_domainOwner, *v.DomainOwner)
-	}
-}
-
 type GetDomainPermissionsPolicyOutput struct {
 
 	//  The returned resource policy.
@@ -74,24 +57,16 @@ type GetDomainPermissionsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDomainPermissionsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDomainPermissionsPolicyResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDomainPermissionsPolicyResult_policy:
-			v.Policy = &types.ResourcePolicy{}
-			return v.Policy.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainPermissionsPolicy, schemas.GetDomainPermissionsPolicyRequest, schemas.GetDomainPermissionsPolicyResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainPermissionsPolicy, schemas.GetDomainPermissionsPolicyRequest, schemas.GetDomainPermissionsPolicyResult), output: &GetDomainPermissionsPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainPermissionsPolicy"); err != nil {

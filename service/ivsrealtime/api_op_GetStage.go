@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +37,6 @@ type GetStageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetStageRequest_arn, *v.Arn)
-	}
-}
-func (v *GetStageInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStageRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStageRequest_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetStageRequest_arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 type GetStageOutput struct {
 
 	// The stage that is returned.
@@ -72,37 +48,16 @@ type GetStageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStageOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStageResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Stage != nil {
-		s.WriteStruct(schemas.GetStageResponse_stage)
-		v.Stage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStageResponse_stage:
-			v.Stage = &types.Stage{}
-			return v.Stage.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStage, schemas.GetStageRequest, schemas.GetStageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStage, schemas.GetStageRequest, schemas.GetStageResponse), output: &GetStageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStage"); err != nil {

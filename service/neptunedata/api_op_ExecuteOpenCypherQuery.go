@@ -7,10 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,21 +73,6 @@ type ExecuteOpenCypherQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteOpenCypherQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteOpenCypherQueryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteOpenCypherQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OpenCypherQuery != nil {
-		s.WriteString(schemas.ExecuteOpenCypherQueryInput_openCypherQuery, *v.OpenCypherQuery)
-	}
-	if v.Parameters != nil {
-		s.WriteString(schemas.ExecuteOpenCypherQueryInput_parameters, *v.Parameters)
-	}
-}
-
 type ExecuteOpenCypherQueryOutput struct {
 
 	// The openCypherquery results.
@@ -105,30 +86,16 @@ type ExecuteOpenCypherQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteOpenCypherQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteOpenCypherQueryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteOpenCypherQueryOutput_results:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.ExecuteOpenCypherQueryOutput_results, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Results = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteOpenCypherQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherQuery, schemas.ExecuteOpenCypherQueryInput, schemas.ExecuteOpenCypherQueryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteOpenCypherQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteOpenCypherQuery, schemas.ExecuteOpenCypherQueryInput, schemas.ExecuteOpenCypherQueryOutput), output: &ExecuteOpenCypherQueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteOpenCypherQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteOpenCypherQuery"); err != nil {

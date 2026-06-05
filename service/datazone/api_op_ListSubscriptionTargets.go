@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,33 +64,6 @@ type ListSubscriptionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionTargetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSubscriptionTargetsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSubscriptionTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListSubscriptionTargetsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListSubscriptionTargetsInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSubscriptionTargetsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSubscriptionTargetsInput_nextToken, *v.NextToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListSubscriptionTargetsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListSubscriptionTargetsInput_sortOrder, string(v.SortOrder))
-	}
-}
-
 type ListSubscriptionTargetsOutput struct {
 
 	// The results of the ListSubscriptionTargets action.
@@ -114,26 +85,16 @@ type ListSubscriptionTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSubscriptionTargetsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSubscriptionTargetsOutput_items:
-			return deserializeSubscriptionTargets(d, schemas.ListSubscriptionTargetsOutput_items, &v.Items)
-		case schemas.ListSubscriptionTargetsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSubscriptionTargetsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSubscriptionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionTargets, schemas.ListSubscriptionTargetsInput, schemas.ListSubscriptionTargetsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptionTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionTargets, schemas.ListSubscriptionTargetsInput, schemas.ListSubscriptionTargetsOutput), output: &ListSubscriptionTargetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptionTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubscriptionTargets"); err != nil {

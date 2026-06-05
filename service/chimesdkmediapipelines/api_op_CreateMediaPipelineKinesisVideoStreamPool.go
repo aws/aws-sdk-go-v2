@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,27 +67,6 @@ type CreateMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMediaPipelineKinesisVideoStreamPoolInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMediaPipelineKinesisVideoStreamPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.PoolName != nil {
-		s.WriteString(schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName, *v.PoolName)
-	}
-	if v.StreamConfiguration != nil {
-		s.WriteStruct(schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration)
-		v.StreamConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags, v.Tags)
-}
-
 type CreateMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The configuration for applying the streams to the pool.
@@ -101,24 +78,16 @@ type CreateMediaPipelineKinesisVideoStreamPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMediaPipelineKinesisVideoStreamPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMediaPipelineKinesisVideoStreamPoolResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration:
-			v.KinesisVideoStreamPoolConfiguration = &types.KinesisVideoStreamPoolConfiguration{}
-			return v.KinesisVideoStreamPoolConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMediaPipelineKinesisVideoStreamPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaPipelineKinesisVideoStreamPool, schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest, schemas.CreateMediaPipelineKinesisVideoStreamPoolResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaPipelineKinesisVideoStreamPool{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaPipelineKinesisVideoStreamPool, schemas.CreateMediaPipelineKinesisVideoStreamPoolRequest, schemas.CreateMediaPipelineKinesisVideoStreamPoolResponse), output: &CreateMediaPipelineKinesisVideoStreamPoolOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaPipelineKinesisVideoStreamPool{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMediaPipelineKinesisVideoStreamPool"); err != nil {

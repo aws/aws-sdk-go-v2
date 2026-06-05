@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,18 +44,6 @@ type GetWorkingLocationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkingLocationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWorkingLocationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWorkingLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LocationType != "" {
-		s.WriteString(schemas.GetWorkingLocationRequest_locationType, string(v.LocationType))
-	}
-}
-
 type GetWorkingLocationOutput struct {
 
 	// Returns the Amazon S3 bucket name for the working location.
@@ -75,30 +61,16 @@ type GetWorkingLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkingLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWorkingLocationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWorkingLocationResponse_s3Bucket:
-			v.S3Bucket = new(string)
-			return d.ReadString(schemas.GetWorkingLocationResponse_s3Bucket, v.S3Bucket)
-		case schemas.GetWorkingLocationResponse_s3Path:
-			v.S3Path = new(string)
-			return d.ReadString(schemas.GetWorkingLocationResponse_s3Path, v.S3Path)
-		case schemas.GetWorkingLocationResponse_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.GetWorkingLocationResponse_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWorkingLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkingLocation, schemas.GetWorkingLocationRequest, schemas.GetWorkingLocationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkingLocation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkingLocation, schemas.GetWorkingLocationRequest, schemas.GetWorkingLocationResponse), output: &GetWorkingLocationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkingLocation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkingLocation"); err != nil {

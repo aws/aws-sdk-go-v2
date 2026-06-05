@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,25 +83,6 @@ type GenerateCardValidationDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateCardValidationDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GenerateCardValidationDataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GenerateCardValidationDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCardGenerationAttributes(s, schemas.GenerateCardValidationDataInput_GenerationAttributes, v.GenerationAttributes)
-	if v.KeyIdentifier != nil {
-		s.WriteString(schemas.GenerateCardValidationDataInput_KeyIdentifier, *v.KeyIdentifier)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.GenerateCardValidationDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-	if v.ValidationDataLength != nil {
-		s.WriteInt32(schemas.GenerateCardValidationDataInput_ValidationDataLength, *v.ValidationDataLength)
-	}
-}
-
 type GenerateCardValidationDataOutput struct {
 
 	// The keyARN of the CVK encryption key that Amazon Web Services Payment
@@ -134,30 +113,16 @@ type GenerateCardValidationDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateCardValidationDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GenerateCardValidationDataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GenerateCardValidationDataOutput_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.GenerateCardValidationDataOutput_KeyArn, v.KeyArn)
-		case schemas.GenerateCardValidationDataOutput_KeyCheckValue:
-			v.KeyCheckValue = new(string)
-			return d.ReadString(schemas.GenerateCardValidationDataOutput_KeyCheckValue, v.KeyCheckValue)
-		case schemas.GenerateCardValidationDataOutput_ValidationData:
-			v.ValidationData = new(string)
-			return d.ReadString(schemas.GenerateCardValidationDataOutput_ValidationData, v.ValidationData)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGenerateCardValidationDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateCardValidationData, schemas.GenerateCardValidationDataInput, schemas.GenerateCardValidationDataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateCardValidationData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateCardValidationData, schemas.GenerateCardValidationDataInput, schemas.GenerateCardValidationDataOutput), output: &GenerateCardValidationDataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateCardValidationData{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateCardValidationData"); err != nil {

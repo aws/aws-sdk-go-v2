@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,40 +47,6 @@ type ListTrackerConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrackerConsumersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrackerConsumersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrackerConsumersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTrackerConsumersRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrackerConsumersRequest_NextToken, *v.NextToken)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.ListTrackerConsumersRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *ListTrackerConsumersInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrackerConsumersRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrackerConsumersRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListTrackerConsumersRequest_MaxResults, v.MaxResults)
-		case schemas.ListTrackerConsumersRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrackerConsumersRequest_NextToken, v.NextToken)
-		case schemas.ListTrackerConsumersRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.ListTrackerConsumersRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type ListTrackerConsumersOutput struct {
 
 	// Contains the list of geofence collection ARNs associated to the tracker
@@ -101,38 +65,16 @@ type ListTrackerConsumersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrackerConsumersOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrackerConsumersResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrackerConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.ListTrackerConsumersResponse_ConsumerArns, v.ConsumerArns)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrackerConsumersResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListTrackerConsumersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrackerConsumersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrackerConsumersResponse_ConsumerArns:
-			return deserializeArnList(d, schemas.ListTrackerConsumersResponse_ConsumerArns, &v.ConsumerArns)
-		case schemas.ListTrackerConsumersResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrackerConsumersResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrackerConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrackerConsumers, schemas.ListTrackerConsumersRequest, schemas.ListTrackerConsumersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrackerConsumers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrackerConsumers, schemas.ListTrackerConsumersRequest, schemas.ListTrackerConsumersResponse), output: &ListTrackerConsumersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrackerConsumers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrackerConsumers"); err != nil {

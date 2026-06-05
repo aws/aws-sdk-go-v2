@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,18 +46,6 @@ type DescribeEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventBusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEventBusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeEventBusRequest_Name, *v.Name)
-	}
-}
-
 type DescribeEventBusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account permitted to write events to the
@@ -78,30 +64,16 @@ type DescribeEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEventBusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEventBusResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DescribeEventBusResponse_Arn, v.Arn)
-		case schemas.DescribeEventBusResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeEventBusResponse_Name, v.Name)
-		case schemas.DescribeEventBusResponse_Policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.DescribeEventBusResponse_Policy, v.Policy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventBus, schemas.DescribeEventBusRequest, schemas.DescribeEventBusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventBus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventBus, schemas.DescribeEventBusRequest, schemas.DescribeEventBusResponse), output: &DescribeEventBusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventBus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEventBus"); err != nil {

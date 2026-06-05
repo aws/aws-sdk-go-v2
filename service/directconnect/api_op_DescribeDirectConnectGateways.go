@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type DescribeDirectConnectGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDirectConnectGatewaysInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDirectConnectGatewaysRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDirectConnectGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectConnectGatewayId != nil {
-		s.WriteString(schemas.DescribeDirectConnectGatewaysRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeDirectConnectGatewaysRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeDirectConnectGatewaysRequest_nextToken, *v.NextToken)
-	}
-}
-
 type DescribeDirectConnectGatewaysOutput struct {
 
 	// The Direct Connect gateways.
@@ -79,26 +59,16 @@ type DescribeDirectConnectGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDirectConnectGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDirectConnectGatewaysResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDirectConnectGatewaysResult_directConnectGateways:
-			return deserializeDirectConnectGatewayList(d, schemas.DescribeDirectConnectGatewaysResult_directConnectGateways, &v.DirectConnectGateways)
-		case schemas.DescribeDirectConnectGatewaysResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeDirectConnectGatewaysResult_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDirectConnectGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGateways, schemas.DescribeDirectConnectGatewaysRequest, schemas.DescribeDirectConnectGatewaysResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectConnectGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGateways, schemas.DescribeDirectConnectGatewaysRequest, schemas.DescribeDirectConnectGatewaysResult), output: &DescribeDirectConnectGatewaysOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectConnectGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDirectConnectGateways"); err != nil {

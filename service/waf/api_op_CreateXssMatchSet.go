@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,21 +72,6 @@ type CreateXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateXssMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateXssMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateXssMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.CreateXssMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateXssMatchSetRequest_Name, *v.Name)
-	}
-}
-
 // The response to a CreateXssMatchSet request.
 type CreateXssMatchSetOutput struct {
 
@@ -106,27 +89,16 @@ type CreateXssMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateXssMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateXssMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateXssMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.CreateXssMatchSetResponse_ChangeToken, v.ChangeToken)
-		case schemas.CreateXssMatchSetResponse_XssMatchSet:
-			v.XssMatchSet = &types.XssMatchSet{}
-			return v.XssMatchSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateXssMatchSet, schemas.CreateXssMatchSetRequest, schemas.CreateXssMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateXssMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateXssMatchSet, schemas.CreateXssMatchSetRequest, schemas.CreateXssMatchSetResponse), output: &CreateXssMatchSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateXssMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateXssMatchSet"); err != nil {

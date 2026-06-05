@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type DeleteBrowserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBrowserProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBrowserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteBrowserProfileRequest_clientToken, *v.ClientToken)
-	}
-	if v.ProfileId != nil {
-		s.WriteString(schemas.DeleteBrowserProfileRequest_profileId, *v.ProfileId)
-	}
-}
-
 type DeleteBrowserProfileOutput struct {
 
 	// The timestamp when the browser profile was last updated.
@@ -90,40 +73,16 @@ type DeleteBrowserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteBrowserProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteBrowserProfileResponse_lastSavedAt:
-			v.LastSavedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteBrowserProfileResponse_lastSavedAt, v.LastSavedAt)
-		case schemas.DeleteBrowserProfileResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteBrowserProfileResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.DeleteBrowserProfileResponse_profileArn:
-			v.ProfileArn = new(string)
-			return d.ReadString(schemas.DeleteBrowserProfileResponse_profileArn, v.ProfileArn)
-		case schemas.DeleteBrowserProfileResponse_profileId:
-			v.ProfileId = new(string)
-			return d.ReadString(schemas.DeleteBrowserProfileResponse_profileId, v.ProfileId)
-		case schemas.DeleteBrowserProfileResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteBrowserProfileResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.BrowserProfileStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBrowserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowserProfile, schemas.DeleteBrowserProfileRequest, schemas.DeleteBrowserProfileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBrowserProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowserProfile, schemas.DeleteBrowserProfileRequest, schemas.DeleteBrowserProfileResponse), output: &DeleteBrowserProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBrowserProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBrowserProfile"); err != nil {

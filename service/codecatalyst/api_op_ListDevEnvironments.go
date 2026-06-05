@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,28 +52,6 @@ type ListDevEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDevEnvironmentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDevEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListDevEnvironmentsRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDevEnvironmentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_nextToken, *v.NextToken)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.ListDevEnvironmentsRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type ListDevEnvironmentsOutput struct {
 
 	// Information about the Dev Environments in a project.
@@ -93,26 +69,16 @@ type ListDevEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDevEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDevEnvironmentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDevEnvironmentsResponse_items:
-			return deserializeDevEnvironmentSummaryList(d, schemas.ListDevEnvironmentsResponse_items, &v.Items)
-		case schemas.ListDevEnvironmentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDevEnvironmentsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDevEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironments, schemas.ListDevEnvironmentsRequest, schemas.ListDevEnvironmentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevEnvironments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEnvironments, schemas.ListDevEnvironmentsRequest, schemas.ListDevEnvironmentsResponse), output: &ListDevEnvironmentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevEnvironments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevEnvironments"); err != nil {

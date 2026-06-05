@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,22 +57,6 @@ type ResetDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResetDBClusterParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResetDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.ResetDBClusterParameterGroupMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	serializeParametersList(s, schemas.ResetDBClusterParameterGroupMessage_Parameters, v.Parameters)
-	if v.ResetAllParameters != nil {
-		s.WriteBool(schemas.ResetDBClusterParameterGroupMessage_ResetAllParameters, *v.ResetAllParameters)
-	}
-}
-
 // Contains the name of a cluster parameter group.
 type ResetDBClusterParameterGroupOutput struct {
 
@@ -97,35 +79,16 @@ type ResetDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResetDBClusterParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DBClusterParameterGroupNameMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResetDBClusterParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-}
-func (v *ResetDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DBClusterParameterGroupNameMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName:
-			v.DBClusterParameterGroupName = new(string)
-			return d.ReadString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, v.DBClusterParameterGroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBClusterParameterGroup, schemas.ResetDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpResetDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDBClusterParameterGroup, schemas.ResetDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage), output: &ResetDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResetDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ResetDBClusterParameterGroup"); err != nil {

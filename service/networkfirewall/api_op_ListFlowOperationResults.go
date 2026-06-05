@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -79,36 +77,6 @@ type ListFlowOperationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFlowOperationResultsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFlowOperationResultsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFlowOperationResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_AvailabilityZone, *v.AvailabilityZone)
-	}
-	if v.FirewallArn != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_FirewallArn, *v.FirewallArn)
-	}
-	if v.FlowOperationId != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_FlowOperationId, *v.FlowOperationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListFlowOperationResultsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_NextToken, *v.NextToken)
-	}
-	if v.VpcEndpointAssociationArn != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
-	}
-	if v.VpcEndpointId != nil {
-		s.WriteString(schemas.ListFlowOperationResultsRequest_VpcEndpointId, *v.VpcEndpointId)
-	}
-}
-
 type ListFlowOperationResultsOutput struct {
 
 	// The ID of the Availability Zone where the firewall is located. For example,
@@ -166,54 +134,16 @@ type ListFlowOperationResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFlowOperationResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFlowOperationResultsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFlowOperationResultsResponse_AvailabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_AvailabilityZone, v.AvailabilityZone)
-		case schemas.ListFlowOperationResultsResponse_FirewallArn:
-			v.FirewallArn = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_FirewallArn, v.FirewallArn)
-		case schemas.ListFlowOperationResultsResponse_FlowOperationId:
-			v.FlowOperationId = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_FlowOperationId, v.FlowOperationId)
-		case schemas.ListFlowOperationResultsResponse_FlowOperationStatus:
-			var ev string
-			if err := d.ReadString(schemas.ListFlowOperationResultsResponse_FlowOperationStatus, &ev); err != nil {
-				return err
-			}
-			v.FlowOperationStatus = types.FlowOperationStatus(ev)
-			return nil
-		case schemas.ListFlowOperationResultsResponse_FlowRequestTimestamp:
-			v.FlowRequestTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ListFlowOperationResultsResponse_FlowRequestTimestamp, v.FlowRequestTimestamp)
-		case schemas.ListFlowOperationResultsResponse_Flows:
-			return deserializeFlows(d, schemas.ListFlowOperationResultsResponse_Flows, &v.Flows)
-		case schemas.ListFlowOperationResultsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_NextToken, v.NextToken)
-		case schemas.ListFlowOperationResultsResponse_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_StatusMessage, v.StatusMessage)
-		case schemas.ListFlowOperationResultsResponse_VpcEndpointAssociationArn:
-			v.VpcEndpointAssociationArn = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_VpcEndpointAssociationArn, v.VpcEndpointAssociationArn)
-		case schemas.ListFlowOperationResultsResponse_VpcEndpointId:
-			v.VpcEndpointId = new(string)
-			return d.ReadString(schemas.ListFlowOperationResultsResponse_VpcEndpointId, v.VpcEndpointId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListFlowOperationResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperationResults, schemas.ListFlowOperationResultsRequest, schemas.ListFlowOperationResultsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFlowOperationResults{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperationResults, schemas.ListFlowOperationResultsRequest, schemas.ListFlowOperationResultsResponse), output: &ListFlowOperationResultsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFlowOperationResults{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFlowOperationResults"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,31 +40,6 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePackageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PackageName != nil {
-		s.WriteString(schemas.CreatePackageRequest_PackageName, *v.PackageName)
-	}
-	serializeTagMap(s, schemas.CreatePackageRequest_Tags, v.Tags)
-}
-func (v *CreatePackageInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePackageRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePackageRequest_PackageName:
-			v.PackageName = new(string)
-			return d.ReadString(schemas.CreatePackageRequest_PackageName, v.PackageName)
-		case schemas.CreatePackageRequest_Tags:
-			return deserializeTagMap(d, schemas.CreatePackageRequest_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreatePackageOutput struct {
 
 	// The package's storage location.
@@ -86,49 +59,16 @@ type CreatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePackageResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreatePackageResponse_Arn, *v.Arn)
-	}
-	if v.PackageId != nil {
-		s.WriteString(schemas.CreatePackageResponse_PackageId, *v.PackageId)
-	}
-	if v.StorageLocation != nil {
-		s.WriteStruct(schemas.CreatePackageResponse_StorageLocation)
-		v.StorageLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePackageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePackageResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreatePackageResponse_Arn, v.Arn)
-		case schemas.CreatePackageResponse_PackageId:
-			v.PackageId = new(string)
-			return d.ReadString(schemas.CreatePackageResponse_PackageId, v.PackageId)
-		case schemas.CreatePackageResponse_StorageLocation:
-			v.StorageLocation = &types.StorageLocation{}
-			return v.StorageLocation.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse), output: &CreatePackageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackage"); err != nil {

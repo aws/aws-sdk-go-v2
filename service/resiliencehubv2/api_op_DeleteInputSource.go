@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DeleteInputSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteInputSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteInputSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteInputSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InputSourceId != nil {
-		s.WriteString(schemas.DeleteInputSourceRequest_inputSourceId, *v.InputSourceId)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.DeleteInputSourceRequest_serviceArn, *v.ServiceArn)
-	}
-}
-
 type DeleteInputSourceOutput struct {
 
 	// The identifier of the deleted input source.
@@ -76,27 +59,16 @@ type DeleteInputSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteInputSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteInputSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteInputSourceResponse_inputSourceId:
-			v.InputSourceId = new(string)
-			return d.ReadString(schemas.DeleteInputSourceResponse_inputSourceId, v.InputSourceId)
-		case schemas.DeleteInputSourceResponse_serviceArn:
-			v.ServiceArn = new(string)
-			return d.ReadString(schemas.DeleteInputSourceResponse_serviceArn, v.ServiceArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteInputSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInputSource, schemas.DeleteInputSourceRequest, schemas.DeleteInputSourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInputSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInputSource, schemas.DeleteInputSourceRequest, schemas.DeleteInputSourceResponse), output: &DeleteInputSourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInputSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteInputSource"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +38,6 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTagsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLoadBalancerNamesMax20(s, schemas.DescribeTagsInput_LoadBalancerNames, v.LoadBalancerNames)
-}
-
 // Contains the output for DescribeTags.
 type DescribeTagsOutput struct {
 
@@ -62,23 +50,16 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTagsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTagsOutput_TagDescriptions:
-			return deserializeTagDescriptions(d, schemas.DescribeTagsOutput_TagDescriptions, &v.TagDescriptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTags"); err != nil {

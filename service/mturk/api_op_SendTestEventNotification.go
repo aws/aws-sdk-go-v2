@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,23 +53,6 @@ type SendTestEventNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendTestEventNotificationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendTestEventNotificationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendTestEventNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Notification != nil {
-		s.WriteStruct(schemas.SendTestEventNotificationRequest_Notification)
-		v.Notification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TestEventType != "" {
-		s.WriteString(schemas.SendTestEventNotificationRequest_TestEventType, string(v.TestEventType))
-	}
-}
-
 type SendTestEventNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +60,16 @@ type SendTestEventNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendTestEventNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendTestEventNotificationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendTestEventNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTestEventNotification, schemas.SendTestEventNotificationRequest, schemas.SendTestEventNotificationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendTestEventNotification{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTestEventNotification, schemas.SendTestEventNotificationRequest, schemas.SendTestEventNotificationResponse), output: &SendTestEventNotificationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendTestEventNotification{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendTestEventNotification"); err != nil {

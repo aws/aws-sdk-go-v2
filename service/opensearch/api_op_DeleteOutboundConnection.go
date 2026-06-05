@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type DeleteOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOutboundConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteOutboundConnectionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteOutboundConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionId != nil {
-		s.WriteString(schemas.DeleteOutboundConnectionRequest_ConnectionId, *v.ConnectionId)
-	}
-}
-
 // Details about the deleted outbound connection.
 type DeleteOutboundConnectionOutput struct {
 
@@ -67,24 +53,16 @@ type DeleteOutboundConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOutboundConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteOutboundConnectionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteOutboundConnectionResponse_Connection:
-			v.Connection = &types.OutboundConnection{}
-			return v.Connection.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteOutboundConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutboundConnection, schemas.DeleteOutboundConnectionRequest, schemas.DeleteOutboundConnectionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOutboundConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutboundConnection, schemas.DeleteOutboundConnectionRequest, schemas.DeleteOutboundConnectionResponse), output: &DeleteOutboundConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOutboundConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOutboundConnection"); err != nil {

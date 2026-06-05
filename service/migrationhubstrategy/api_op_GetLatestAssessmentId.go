@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,22 +30,6 @@ type GetLatestAssessmentIdInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLatestAssessmentIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLatestAssessmentIdRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLatestAssessmentIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetLatestAssessmentIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLatestAssessmentIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type GetLatestAssessmentIdOutput struct {
 
 	// The latest ID for the specific assessment task.
@@ -59,35 +41,16 @@ type GetLatestAssessmentIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLatestAssessmentIdOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLatestAssessmentIdResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLatestAssessmentIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetLatestAssessmentIdResponse_id, *v.Id)
-	}
-}
-func (v *GetLatestAssessmentIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLatestAssessmentIdResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLatestAssessmentIdResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetLatestAssessmentIdResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLatestAssessmentIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestAssessmentId, schemas.GetLatestAssessmentIdRequest, schemas.GetLatestAssessmentIdResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLatestAssessmentId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestAssessmentId, schemas.GetLatestAssessmentIdRequest, schemas.GetLatestAssessmentIdResponse), output: &GetLatestAssessmentIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLatestAssessmentId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLatestAssessmentId"); err != nil {

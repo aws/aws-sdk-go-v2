@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type DescribeProvisionedProductPlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisionedProductPlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProvisionedProductPlanInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProvisionedProductPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeProvisionedProductPlanInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.DescribeProvisionedProductPlanInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.DescribeProvisionedProductPlanInput_PageToken, *v.PageToken)
-	}
-	if v.PlanId != nil {
-		s.WriteString(schemas.DescribeProvisionedProductPlanInput_PlanId, *v.PlanId)
-	}
-}
-
 type DescribeProvisionedProductPlanOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -93,29 +70,16 @@ type DescribeProvisionedProductPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProvisionedProductPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProvisionedProductPlanOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProvisionedProductPlanOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.DescribeProvisionedProductPlanOutput_NextPageToken, v.NextPageToken)
-		case schemas.DescribeProvisionedProductPlanOutput_ProvisionedProductPlanDetails:
-			v.ProvisionedProductPlanDetails = &types.ProvisionedProductPlanDetails{}
-			return v.ProvisionedProductPlanDetails.Deserialize(d)
-		case schemas.DescribeProvisionedProductPlanOutput_ResourceChanges:
-			return deserializeResourceChanges(d, schemas.DescribeProvisionedProductPlanOutput_ResourceChanges, &v.ResourceChanges)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisionedProductPlan, schemas.DescribeProvisionedProductPlanInput, schemas.DescribeProvisionedProductPlanOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisionedProductPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisionedProductPlan, schemas.DescribeProvisionedProductPlanInput, schemas.DescribeProvisionedProductPlanOutput), output: &DescribeProvisionedProductPlanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProvisionedProductPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisionedProductPlan"); err != nil {

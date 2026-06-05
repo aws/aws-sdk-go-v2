@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -22,34 +20,6 @@ type PredictedAction struct {
 	Score *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *PredictedAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredictedAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredictedAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionId != nil {
-		s.WriteString(schemas.PredictedAction_actionId, *v.ActionId)
-	}
-	if v.Score != nil {
-		s.WriteFloat64(schemas.PredictedAction_score, *v.Score)
-	}
-}
-func (v *PredictedAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredictedAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredictedAction_actionId:
-			v.ActionId = new(string)
-			return d.ReadString(schemas.PredictedAction_actionId, v.ActionId)
-		case schemas.PredictedAction_score:
-			v.Score = new(float64)
-			return d.ReadFloat64(schemas.PredictedAction_score, v.Score)
-		}
-		return nil
-	})
 }
 
 // An object that identifies an item.
@@ -93,46 +63,6 @@ type PredictedItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PredictedItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredictedItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredictedItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ItemId != nil {
-		s.WriteString(schemas.PredictedItem_itemId, *v.ItemId)
-	}
-	serializeMetadata(s, schemas.PredictedItem_metadata, v.Metadata)
-	if v.PromotionName != nil {
-		s.WriteString(schemas.PredictedItem_promotionName, *v.PromotionName)
-	}
-	serializeReasonList(s, schemas.PredictedItem_reason, v.Reason)
-	if v.Score != nil {
-		s.WriteFloat64(schemas.PredictedItem_score, *v.Score)
-	}
-}
-func (v *PredictedItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredictedItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredictedItem_itemId:
-			v.ItemId = new(string)
-			return d.ReadString(schemas.PredictedItem_itemId, v.ItemId)
-		case schemas.PredictedItem_metadata:
-			return deserializeMetadata(d, schemas.PredictedItem_metadata, &v.Metadata)
-		case schemas.PredictedItem_promotionName:
-			v.PromotionName = new(string)
-			return d.ReadString(schemas.PredictedItem_promotionName, v.PromotionName)
-		case schemas.PredictedItem_reason:
-			return deserializeReasonList(d, schemas.PredictedItem_reason, &v.Reason)
-		case schemas.PredictedItem_score:
-			v.Score = new(float64)
-			return d.ReadFloat64(schemas.PredictedItem_score, v.Score)
-		}
-		return nil
-	})
-}
-
 // Contains information on a promotion. A promotion defines additional business
 // rules that apply to a configurable subset of recommended items.
 type Promotion struct {
@@ -166,43 +96,6 @@ type Promotion struct {
 	PercentPromotedItems *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Promotion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Promotion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Promotion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilterArn != nil {
-		s.WriteString(schemas.Promotion_filterArn, *v.FilterArn)
-	}
-	serializeFilterValues(s, schemas.Promotion_filterValues, v.FilterValues)
-	if v.Name != nil {
-		s.WriteString(schemas.Promotion_name, *v.Name)
-	}
-	if v.PercentPromotedItems != nil {
-		s.WriteInt32(schemas.Promotion_percentPromotedItems, *v.PercentPromotedItems)
-	}
-}
-func (v *Promotion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Promotion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Promotion_filterArn:
-			v.FilterArn = new(string)
-			return d.ReadString(schemas.Promotion_filterArn, v.FilterArn)
-		case schemas.Promotion_filterValues:
-			return deserializeFilterValues(d, schemas.Promotion_filterValues, &v.FilterValues)
-		case schemas.Promotion_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Promotion_name, v.Name)
-		case schemas.Promotion_percentPromotedItems:
-			v.PercentPromotedItems = new(int32)
-			return d.ReadInt32(schemas.Promotion_percentPromotedItems, v.PercentPromotedItems)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +37,6 @@ type GetGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGatewayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGatewayInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.GetGatewayInput_GatewayArn, *v.GatewayArn)
-	}
-}
-func (v *GetGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGatewayInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGatewayInput_GatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.GetGatewayInput_GatewayArn, v.GatewayArn)
-		}
-		return nil
-	})
-}
-
 type GetGatewayOutput struct {
 
 	// By providing the ARN (Amazon Resource Name), this API returns the gateway.
@@ -72,37 +48,16 @@ type GetGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGatewayOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGatewayOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Gateway != nil {
-		s.WriteStruct(schemas.GetGatewayOutput_Gateway)
-		v.Gateway.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGatewayOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGatewayOutput_Gateway:
-			v.Gateway = &types.GatewayDetails{}
-			return v.Gateway.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGateway, schemas.GetGatewayInput, schemas.GetGatewayOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGateway, schemas.GetGatewayInput, schemas.GetGatewayOutput), output: &GetGatewayOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetGateway{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGateway"); err != nil {

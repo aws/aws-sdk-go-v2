@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,36 +59,6 @@ type UpdateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSubscriberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.UpdateSubscriberRequest_AccountId, *v.AccountId)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.UpdateSubscriberRequest_BudgetName, *v.BudgetName)
-	}
-	if v.NewSubscriber != nil {
-		s.WriteStruct(schemas.UpdateSubscriberRequest_NewSubscriber)
-		v.NewSubscriber.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Notification != nil {
-		s.WriteStruct(schemas.UpdateSubscriberRequest_Notification)
-		v.Notification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OldSubscriber != nil {
-		s.WriteStruct(schemas.UpdateSubscriberRequest_OldSubscriber)
-		v.OldSubscriber.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 // Response of UpdateSubscriber
 type UpdateSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -99,21 +67,16 @@ type UpdateSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSubscriberResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriber, schemas.UpdateSubscriberRequest, schemas.UpdateSubscriberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSubscriber{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriber, schemas.UpdateSubscriberRequest, schemas.UpdateSubscriberResponse), output: &UpdateSubscriberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSubscriber{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSubscriber"); err != nil {

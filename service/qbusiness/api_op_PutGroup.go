@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -88,38 +86,6 @@ type PutGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.PutGroupRequest_applicationId, *v.ApplicationId)
-	}
-	if v.DataSourceId != nil {
-		s.WriteString(schemas.PutGroupRequest_dataSourceId, *v.DataSourceId)
-	}
-	if v.GroupMembers != nil {
-		s.WriteStruct(schemas.PutGroupRequest_groupMembers)
-		v.GroupMembers.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GroupName != nil {
-		s.WriteString(schemas.PutGroupRequest_groupName, *v.GroupName)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.PutGroupRequest_indexId, *v.IndexId)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.PutGroupRequest_roleArn, *v.RoleArn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.PutGroupRequest_type, string(v.Type))
-	}
-}
-
 type PutGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -127,21 +93,16 @@ type PutGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroup, schemas.PutGroupRequest, schemas.PutGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroup, schemas.PutGroupRequest, schemas.PutGroupResponse), output: &PutGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGroup"); err != nil {

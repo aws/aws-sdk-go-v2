@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type GetSolNetworkOperationInput struct {
 	NsLcmOpOccId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSolNetworkOperationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSolNetworkOperationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSolNetworkOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NsLcmOpOccId != nil {
-		s.WriteString(schemas.GetSolNetworkOperationInput_nsLcmOpOccId, *v.NsLcmOpOccId)
-	}
 }
 
 type GetSolNetworkOperationOutput struct {
@@ -98,61 +84,16 @@ type GetSolNetworkOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSolNetworkOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSolNetworkOperationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSolNetworkOperationOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetSolNetworkOperationOutput_arn, v.Arn)
-		case schemas.GetSolNetworkOperationOutput_error:
-			v.Error = &types.ProblemDetails{}
-			return v.Error.Deserialize(d)
-		case schemas.GetSolNetworkOperationOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetSolNetworkOperationOutput_id, v.Id)
-		case schemas.GetSolNetworkOperationOutput_lcmOperationType:
-			var ev string
-			if err := d.ReadString(schemas.GetSolNetworkOperationOutput_lcmOperationType, &ev); err != nil {
-				return err
-			}
-			v.LcmOperationType = types.LcmOperationType(ev)
-			return nil
-		case schemas.GetSolNetworkOperationOutput_metadata:
-			v.Metadata = &types.GetSolNetworkOperationMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.GetSolNetworkOperationOutput_nsInstanceId:
-			v.NsInstanceId = new(string)
-			return d.ReadString(schemas.GetSolNetworkOperationOutput_nsInstanceId, v.NsInstanceId)
-		case schemas.GetSolNetworkOperationOutput_operationState:
-			var ev string
-			if err := d.ReadString(schemas.GetSolNetworkOperationOutput_operationState, &ev); err != nil {
-				return err
-			}
-			v.OperationState = types.NsLcmOperationState(ev)
-			return nil
-		case schemas.GetSolNetworkOperationOutput_tags:
-			return deserializeTagMap(d, schemas.GetSolNetworkOperationOutput_tags, &v.Tags)
-		case schemas.GetSolNetworkOperationOutput_tasks:
-			return deserializeGetSolNetworkOperationTasksList(d, schemas.GetSolNetworkOperationOutput_tasks, &v.Tasks)
-		case schemas.GetSolNetworkOperationOutput_updateType:
-			var ev string
-			if err := d.ReadString(schemas.GetSolNetworkOperationOutput_updateType, &ev); err != nil {
-				return err
-			}
-			v.UpdateType = types.UpdateSolNetworkType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSolNetworkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolNetworkOperation, schemas.GetSolNetworkOperationInput, schemas.GetSolNetworkOperationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSolNetworkOperation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolNetworkOperation, schemas.GetSolNetworkOperationInput, schemas.GetSolNetworkOperationOutput), output: &GetSolNetworkOperationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSolNetworkOperation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSolNetworkOperation"); err != nil {

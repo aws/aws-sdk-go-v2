@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type ListImageSetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListImageSetVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListImageSetVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListImageSetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.ListImageSetVersionsRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.ListImageSetVersionsRequest_imageSetId, *v.ImageSetId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListImageSetVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListImageSetVersionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListImageSetVersionsOutput struct {
 
 	// Lists all properties associated with an image set.
@@ -89,26 +66,16 @@ type ListImageSetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListImageSetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListImageSetVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListImageSetVersionsResponse_imageSetPropertiesList:
-			return deserializeImageSetPropertiesList(d, schemas.ListImageSetVersionsResponse_imageSetPropertiesList, &v.ImageSetPropertiesList)
-		case schemas.ListImageSetVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListImageSetVersionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListImageSetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageSetVersions, schemas.ListImageSetVersionsRequest, schemas.ListImageSetVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageSetVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageSetVersions, schemas.ListImageSetVersionsRequest, schemas.ListImageSetVersionsResponse), output: &ListImageSetVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageSetVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImageSetVersions"); err != nil {

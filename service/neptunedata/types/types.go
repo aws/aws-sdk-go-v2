@@ -4,9 +4,6 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/neptunedata/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,40 +35,6 @@ type CustomModelTrainingParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomModelTrainingParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomModelTrainingParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomModelTrainingParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceS3DirectoryPath != nil {
-		s.WriteString(schemas.CustomModelTrainingParameters_sourceS3DirectoryPath, *v.SourceS3DirectoryPath)
-	}
-	if v.TrainingEntryPointScript != nil {
-		s.WriteString(schemas.CustomModelTrainingParameters_trainingEntryPointScript, *v.TrainingEntryPointScript)
-	}
-	if v.TransformEntryPointScript != nil {
-		s.WriteString(schemas.CustomModelTrainingParameters_transformEntryPointScript, *v.TransformEntryPointScript)
-	}
-}
-func (v *CustomModelTrainingParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomModelTrainingParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomModelTrainingParameters_sourceS3DirectoryPath:
-			v.SourceS3DirectoryPath = new(string)
-			return d.ReadString(schemas.CustomModelTrainingParameters_sourceS3DirectoryPath, v.SourceS3DirectoryPath)
-		case schemas.CustomModelTrainingParameters_trainingEntryPointScript:
-			v.TrainingEntryPointScript = new(string)
-			return d.ReadString(schemas.CustomModelTrainingParameters_trainingEntryPointScript, v.TrainingEntryPointScript)
-		case schemas.CustomModelTrainingParameters_transformEntryPointScript:
-			v.TransformEntryPointScript = new(string)
-			return d.ReadString(schemas.CustomModelTrainingParameters_transformEntryPointScript, v.TransformEntryPointScript)
-		}
-		return nil
-	})
-}
-
 // Contains custom model transform parameters. See [Use a trained model to generate new model artifacts].
 //
 // [Use a trained model to generate new model artifacts]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html
@@ -94,34 +57,6 @@ type CustomModelTransformParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomModelTransformParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomModelTransformParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomModelTransformParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceS3DirectoryPath != nil {
-		s.WriteString(schemas.CustomModelTransformParameters_sourceS3DirectoryPath, *v.SourceS3DirectoryPath)
-	}
-	if v.TransformEntryPointScript != nil {
-		s.WriteString(schemas.CustomModelTransformParameters_transformEntryPointScript, *v.TransformEntryPointScript)
-	}
-}
-func (v *CustomModelTransformParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomModelTransformParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomModelTransformParameters_sourceS3DirectoryPath:
-			v.SourceS3DirectoryPath = new(string)
-			return d.ReadString(schemas.CustomModelTransformParameters_sourceS3DirectoryPath, v.SourceS3DirectoryPath)
-		case schemas.CustomModelTransformParameters_transformEntryPointScript:
-			v.TransformEntryPointScript = new(string)
-			return d.ReadString(schemas.CustomModelTransformParameters_transformEntryPointScript, v.TransformEntryPointScript)
-		}
-		return nil
-	})
-}
-
 // The payload for DeleteStatistics.
 type DeleteStatisticsValueMap struct {
 
@@ -132,34 +67,6 @@ type DeleteStatisticsValueMap struct {
 	StatisticsId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteStatisticsValueMap) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteStatisticsValueMap)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteStatisticsValueMap) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Active != nil {
-		s.WriteBool(schemas.DeleteStatisticsValueMap_active, *v.Active)
-	}
-	if v.StatisticsId != nil {
-		s.WriteString(schemas.DeleteStatisticsValueMap_statisticsId, *v.StatisticsId)
-	}
-}
-func (v *DeleteStatisticsValueMap) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteStatisticsValueMap, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteStatisticsValueMap_active:
-			v.Active = new(bool)
-			return d.ReadBool(schemas.DeleteStatisticsValueMap_active, v.Active)
-		case schemas.DeleteStatisticsValueMap_statisticsId:
-			v.StatisticsId = new(string)
-			return d.ReadString(schemas.DeleteStatisticsValueMap_statisticsId, v.StatisticsId)
-		}
-		return nil
-	})
 }
 
 // An edge structure.
@@ -174,31 +81,6 @@ type EdgeStructure struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EdgeStructure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EdgeStructure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EdgeStructure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt64(schemas.EdgeStructure_count, *v.Count)
-	}
-	serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
-}
-func (v *EdgeStructure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EdgeStructure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EdgeStructure_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.EdgeStructure_count, v.Count)
-		case schemas.EdgeStructure_edgeProperties:
-			return deserializeEdgeProperties(d, schemas.EdgeStructure_edgeProperties, &v.EdgeProperties)
-		}
-		return nil
-	})
-}
-
 // A structure containing the fast reset token used to initiate a fast reset.
 type FastResetToken struct {
 
@@ -207,28 +89,6 @@ type FastResetToken struct {
 	Token *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FastResetToken) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FastResetToken)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FastResetToken) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Token != nil {
-		s.WriteString(schemas.FastResetToken_token, *v.Token)
-	}
-}
-func (v *FastResetToken) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FastResetToken, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FastResetToken_token:
-			v.Token = new(string)
-			return d.ReadString(schemas.FastResetToken_token, v.Token)
-		}
-		return nil
-	})
 }
 
 // Captures the status of a Gremlin query (see the [Gremlin query status API] page).
@@ -248,42 +108,6 @@ type GremlinQueryStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GremlinQueryStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GremlinQueryStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GremlinQueryStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryEvalStats != nil {
-		s.WriteStruct(schemas.GremlinQueryStatus_queryEvalStats)
-		v.QueryEvalStats.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryId != nil {
-		s.WriteString(schemas.GremlinQueryStatus_queryId, *v.QueryId)
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.GremlinQueryStatus_queryString, *v.QueryString)
-	}
-}
-func (v *GremlinQueryStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GremlinQueryStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GremlinQueryStatus_queryEvalStats:
-			v.QueryEvalStats = &QueryEvalStats{}
-			return v.QueryEvalStats.Deserialize(d)
-		case schemas.GremlinQueryStatus_queryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.GremlinQueryStatus_queryId, v.QueryId)
-		case schemas.GremlinQueryStatus_queryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.GremlinQueryStatus_queryString, v.QueryString)
-		}
-		return nil
-	})
-}
-
 // Contains status components of a Gremlin query.
 type GremlinQueryStatusAttributes struct {
 
@@ -299,44 +123,6 @@ type GremlinQueryStatusAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GremlinQueryStatusAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GremlinQueryStatusAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GremlinQueryStatusAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.GremlinQueryStatusAttributes_attributes, &smithydocument.Opaque{Value: v.Attributes})
-	if v.Code != nil {
-		s.WriteInt32(schemas.GremlinQueryStatusAttributes_code, *v.Code)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.GremlinQueryStatusAttributes_message, *v.Message)
-	}
-}
-func (v *GremlinQueryStatusAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GremlinQueryStatusAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GremlinQueryStatusAttributes_attributes:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GremlinQueryStatusAttributes_attributes, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Attributes = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GremlinQueryStatusAttributes_code:
-			v.Code = new(int32)
-			return d.ReadInt32(schemas.GremlinQueryStatusAttributes_code, v.Code)
-		case schemas.GremlinQueryStatusAttributes_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.GremlinQueryStatusAttributes_message, v.Message)
-		}
-		return nil
-	})
-}
-
 // Contains a list of load IDs.
 type LoaderIdResult struct {
 
@@ -344,25 +130,6 @@ type LoaderIdResult struct {
 	LoadIds []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LoaderIdResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoaderIdResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoaderIdResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.LoaderIdResult_loadIds, v.LoadIds)
-}
-func (v *LoaderIdResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoaderIdResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoaderIdResult_loadIds:
-			return deserializeStringList(d, schemas.LoaderIdResult_loadIds, &v.LoadIds)
-		}
-		return nil
-	})
 }
 
 // Contains a Neptune ML configuration.
@@ -375,34 +142,6 @@ type MlConfigDefinition struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MlConfigDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MlConfigDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MlConfigDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.MlConfigDefinition_arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.MlConfigDefinition_name, *v.Name)
-	}
-}
-func (v *MlConfigDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MlConfigDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MlConfigDefinition_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.MlConfigDefinition_arn, v.Arn)
-		case schemas.MlConfigDefinition_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MlConfigDefinition_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Defines a Neptune ML resource.
@@ -429,58 +168,6 @@ type MlResourceDefinition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MlResourceDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MlResourceDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MlResourceDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.MlResourceDefinition_arn, *v.Arn)
-	}
-	if v.CloudwatchLogUrl != nil {
-		s.WriteString(schemas.MlResourceDefinition_cloudwatchLogUrl, *v.CloudwatchLogUrl)
-	}
-	if v.FailureReason != nil {
-		s.WriteString(schemas.MlResourceDefinition_failureReason, *v.FailureReason)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.MlResourceDefinition_name, *v.Name)
-	}
-	if v.OutputLocation != nil {
-		s.WriteString(schemas.MlResourceDefinition_outputLocation, *v.OutputLocation)
-	}
-	if v.Status != nil {
-		s.WriteString(schemas.MlResourceDefinition_status, *v.Status)
-	}
-}
-func (v *MlResourceDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MlResourceDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MlResourceDefinition_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_arn, v.Arn)
-		case schemas.MlResourceDefinition_cloudwatchLogUrl:
-			v.CloudwatchLogUrl = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_cloudwatchLogUrl, v.CloudwatchLogUrl)
-		case schemas.MlResourceDefinition_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_failureReason, v.FailureReason)
-		case schemas.MlResourceDefinition_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_name, v.Name)
-		case schemas.MlResourceDefinition_outputLocation:
-			v.OutputLocation = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_outputLocation, v.OutputLocation)
-		case schemas.MlResourceDefinition_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.MlResourceDefinition_status, v.Status)
-		}
-		return nil
-	})
-}
-
 // A node structure.
 type NodeStructure struct {
 
@@ -494,34 +181,6 @@ type NodeStructure struct {
 	NodeProperties []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NodeStructure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NodeStructure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NodeStructure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt64(schemas.NodeStructure_count, *v.Count)
-	}
-	serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
-	serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
-}
-func (v *NodeStructure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NodeStructure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NodeStructure_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.NodeStructure_count, v.Count)
-		case schemas.NodeStructure_distinctOutgoingEdgeLabels:
-			return deserializeOutgoingEdgeLabels(d, schemas.NodeStructure_distinctOutgoingEdgeLabels, &v.DistinctOutgoingEdgeLabels)
-		case schemas.NodeStructure_nodeProperties:
-			return deserializeNodeProperties(d, schemas.NodeStructure_nodeProperties, &v.NodeProperties)
-		}
-		return nil
-	})
 }
 
 // A Gremlin or openCypher change record.
@@ -568,62 +227,6 @@ type PropertygraphData struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PropertygraphData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PropertygraphData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PropertygraphData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.From != nil {
-		s.WriteString(schemas.PropertygraphData_from, *v.From)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.PropertygraphData_id, *v.Id)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.PropertygraphData_key, *v.Key)
-	}
-	if v.To != nil {
-		s.WriteString(schemas.PropertygraphData_to, *v.To)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.PropertygraphData_type, *v.Type)
-	}
-	s.WriteDocument(schemas.PropertygraphData_value, &smithydocument.Opaque{Value: v.Value})
-}
-func (v *PropertygraphData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PropertygraphData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PropertygraphData_from:
-			v.From = new(string)
-			return d.ReadString(schemas.PropertygraphData_from, v.From)
-		case schemas.PropertygraphData_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PropertygraphData_id, v.Id)
-		case schemas.PropertygraphData_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.PropertygraphData_key, v.Key)
-		case schemas.PropertygraphData_to:
-			v.To = new(string)
-			return d.ReadString(schemas.PropertygraphData_to, v.To)
-		case schemas.PropertygraphData_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.PropertygraphData_type, v.Type)
-		case schemas.PropertygraphData_value:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.PropertygraphData_value, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		}
-		return nil
-	})
-}
-
 // Structure of a property graph record.
 type PropertygraphRecord struct {
 
@@ -654,51 +257,6 @@ type PropertygraphRecord struct {
 	IsLastOp *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *PropertygraphRecord) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PropertygraphRecord)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PropertygraphRecord) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CommitTimestampInMillis != nil {
-		s.WriteInt64(schemas.PropertygraphRecord_commitTimestampInMillis, *v.CommitTimestampInMillis)
-	}
-	if v.Data != nil {
-		s.WriteStruct(schemas.PropertygraphRecord_data)
-		v.Data.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeStringValuedMap(s, schemas.PropertygraphRecord_eventId, v.EventId)
-	if v.IsLastOp != nil {
-		s.WriteBool(schemas.PropertygraphRecord_isLastOp, *v.IsLastOp)
-	}
-	if v.Op != nil {
-		s.WriteString(schemas.PropertygraphRecord_op, *v.Op)
-	}
-}
-func (v *PropertygraphRecord) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PropertygraphRecord, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PropertygraphRecord_commitTimestampInMillis:
-			v.CommitTimestampInMillis = new(int64)
-			return d.ReadInt64(schemas.PropertygraphRecord_commitTimestampInMillis, v.CommitTimestampInMillis)
-		case schemas.PropertygraphRecord_data:
-			v.Data = &PropertygraphData{}
-			return v.Data.Deserialize(d)
-		case schemas.PropertygraphRecord_eventId:
-			return deserializeStringValuedMap(d, schemas.PropertygraphRecord_eventId, &v.EventId)
-		case schemas.PropertygraphRecord_isLastOp:
-			v.IsLastOp = new(bool)
-			return d.ReadBool(schemas.PropertygraphRecord_isLastOp, v.IsLastOp)
-		case schemas.PropertygraphRecord_op:
-			v.Op = new(string)
-			return d.ReadString(schemas.PropertygraphRecord_op, v.Op)
-		}
-		return nil
-	})
 }
 
 // The graph summary API returns a read-only list of node and edge labels and
@@ -756,88 +314,6 @@ type PropertygraphSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PropertygraphSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PropertygraphSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PropertygraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeLabels(s, schemas.PropertygraphSummary_edgeLabels, v.EdgeLabels)
-	serializeLongValuedMapList(s, schemas.PropertygraphSummary_edgeProperties, v.EdgeProperties)
-	serializeEdgeStructures(s, schemas.PropertygraphSummary_edgeStructures, v.EdgeStructures)
-	serializeNodeLabels(s, schemas.PropertygraphSummary_nodeLabels, v.NodeLabels)
-	serializeLongValuedMapList(s, schemas.PropertygraphSummary_nodeProperties, v.NodeProperties)
-	serializeNodeStructures(s, schemas.PropertygraphSummary_nodeStructures, v.NodeStructures)
-	if v.NumEdgeLabels != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numEdgeLabels, *v.NumEdgeLabels)
-	}
-	if v.NumEdgeProperties != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numEdgeProperties, *v.NumEdgeProperties)
-	}
-	if v.NumEdges != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numEdges, *v.NumEdges)
-	}
-	if v.NumNodeLabels != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numNodeLabels, *v.NumNodeLabels)
-	}
-	if v.NumNodeProperties != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numNodeProperties, *v.NumNodeProperties)
-	}
-	if v.NumNodes != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_numNodes, *v.NumNodes)
-	}
-	if v.TotalEdgePropertyValues != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_totalEdgePropertyValues, *v.TotalEdgePropertyValues)
-	}
-	if v.TotalNodePropertyValues != nil {
-		s.WriteInt64(schemas.PropertygraphSummary_totalNodePropertyValues, *v.TotalNodePropertyValues)
-	}
-}
-func (v *PropertygraphSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PropertygraphSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PropertygraphSummary_edgeLabels:
-			return deserializeEdgeLabels(d, schemas.PropertygraphSummary_edgeLabels, &v.EdgeLabels)
-		case schemas.PropertygraphSummary_edgeProperties:
-			return deserializeLongValuedMapList(d, schemas.PropertygraphSummary_edgeProperties, &v.EdgeProperties)
-		case schemas.PropertygraphSummary_edgeStructures:
-			return deserializeEdgeStructures(d, schemas.PropertygraphSummary_edgeStructures, &v.EdgeStructures)
-		case schemas.PropertygraphSummary_nodeLabels:
-			return deserializeNodeLabels(d, schemas.PropertygraphSummary_nodeLabels, &v.NodeLabels)
-		case schemas.PropertygraphSummary_nodeProperties:
-			return deserializeLongValuedMapList(d, schemas.PropertygraphSummary_nodeProperties, &v.NodeProperties)
-		case schemas.PropertygraphSummary_nodeStructures:
-			return deserializeNodeStructures(d, schemas.PropertygraphSummary_nodeStructures, &v.NodeStructures)
-		case schemas.PropertygraphSummary_numEdgeLabels:
-			v.NumEdgeLabels = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numEdgeLabels, v.NumEdgeLabels)
-		case schemas.PropertygraphSummary_numEdgeProperties:
-			v.NumEdgeProperties = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numEdgeProperties, v.NumEdgeProperties)
-		case schemas.PropertygraphSummary_numEdges:
-			v.NumEdges = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numEdges, v.NumEdges)
-		case schemas.PropertygraphSummary_numNodeLabels:
-			v.NumNodeLabels = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numNodeLabels, v.NumNodeLabels)
-		case schemas.PropertygraphSummary_numNodeProperties:
-			v.NumNodeProperties = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numNodeProperties, v.NumNodeProperties)
-		case schemas.PropertygraphSummary_numNodes:
-			v.NumNodes = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_numNodes, v.NumNodes)
-		case schemas.PropertygraphSummary_totalEdgePropertyValues:
-			v.TotalEdgePropertyValues = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_totalEdgePropertyValues, v.TotalEdgePropertyValues)
-		case schemas.PropertygraphSummary_totalNodePropertyValues:
-			v.TotalNodePropertyValues = new(int64)
-			return d.ReadInt64(schemas.PropertygraphSummary_totalNodePropertyValues, v.TotalNodePropertyValues)
-		}
-		return nil
-	})
-}
-
 // Payload for the property graph summary response.
 type PropertygraphSummaryValueMap struct {
 
@@ -852,42 +328,6 @@ type PropertygraphSummaryValueMap struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PropertygraphSummaryValueMap) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PropertygraphSummaryValueMap)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PropertygraphSummaryValueMap) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GraphSummary != nil {
-		s.WriteStruct(schemas.PropertygraphSummaryValueMap_graphSummary)
-		v.GraphSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastStatisticsComputationTime != nil {
-		s.WriteTime(schemas.PropertygraphSummaryValueMap_lastStatisticsComputationTime, *v.LastStatisticsComputationTime)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.PropertygraphSummaryValueMap_version, *v.Version)
-	}
-}
-func (v *PropertygraphSummaryValueMap) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PropertygraphSummaryValueMap, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PropertygraphSummaryValueMap_graphSummary:
-			v.GraphSummary = &PropertygraphSummary{}
-			return v.GraphSummary.Deserialize(d)
-		case schemas.PropertygraphSummaryValueMap_lastStatisticsComputationTime:
-			v.LastStatisticsComputationTime = new(time.Time)
-			return d.ReadTime(schemas.PropertygraphSummaryValueMap_lastStatisticsComputationTime, v.LastStatisticsComputationTime)
-		case schemas.PropertygraphSummaryValueMap_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.PropertygraphSummaryValueMap_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // Structure to capture query statistics such as how many queries are running,
@@ -909,50 +349,6 @@ type QueryEvalStats struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryEvalStats) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryEvalStats)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryEvalStats) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cancelled != nil {
-		s.WriteBool(schemas.QueryEvalStats_cancelled, *v.Cancelled)
-	}
-	if v.Elapsed != nil {
-		s.WriteInt32(schemas.QueryEvalStats_elapsed, *v.Elapsed)
-	}
-	s.WriteDocument(schemas.QueryEvalStats_subqueries, &smithydocument.Opaque{Value: v.Subqueries})
-	if v.Waited != nil {
-		s.WriteInt32(schemas.QueryEvalStats_waited, *v.Waited)
-	}
-}
-func (v *QueryEvalStats) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryEvalStats, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryEvalStats_cancelled:
-			v.Cancelled = new(bool)
-			return d.ReadBool(schemas.QueryEvalStats_cancelled, v.Cancelled)
-		case schemas.QueryEvalStats_elapsed:
-			v.Elapsed = new(int32)
-			return d.ReadInt32(schemas.QueryEvalStats_elapsed, v.Elapsed)
-		case schemas.QueryEvalStats_subqueries:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.QueryEvalStats_subqueries, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Subqueries = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.QueryEvalStats_waited:
-			v.Waited = new(int32)
-			return d.ReadInt32(schemas.QueryEvalStats_waited, v.Waited)
-		}
-		return nil
-	})
-}
-
 // Structure for expressing the query language version.
 type QueryLanguageVersion struct {
 
@@ -962,28 +358,6 @@ type QueryLanguageVersion struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *QueryLanguageVersion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryLanguageVersion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryLanguageVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Version != nil {
-		s.WriteString(schemas.QueryLanguageVersion_version, *v.Version)
-	}
-}
-func (v *QueryLanguageVersion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryLanguageVersion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryLanguageVersion_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.QueryLanguageVersion_version, v.Version)
-		}
-		return nil
-	})
 }
 
 // The RDF graph summary API returns a read-only list of classes and predicate
@@ -1015,55 +389,6 @@ type RDFGraphSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RDFGraphSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RDFGraphSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RDFGraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClasses(s, schemas.RDFGraphSummary_classes, v.Classes)
-	if v.NumClasses != nil {
-		s.WriteInt64(schemas.RDFGraphSummary_numClasses, *v.NumClasses)
-	}
-	if v.NumDistinctPredicates != nil {
-		s.WriteInt64(schemas.RDFGraphSummary_numDistinctPredicates, *v.NumDistinctPredicates)
-	}
-	if v.NumDistinctSubjects != nil {
-		s.WriteInt64(schemas.RDFGraphSummary_numDistinctSubjects, *v.NumDistinctSubjects)
-	}
-	if v.NumQuads != nil {
-		s.WriteInt64(schemas.RDFGraphSummary_numQuads, *v.NumQuads)
-	}
-	serializeLongValuedMapList(s, schemas.RDFGraphSummary_predicates, v.Predicates)
-	serializeSubjectStructures(s, schemas.RDFGraphSummary_subjectStructures, v.SubjectStructures)
-}
-func (v *RDFGraphSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RDFGraphSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RDFGraphSummary_classes:
-			return deserializeClasses(d, schemas.RDFGraphSummary_classes, &v.Classes)
-		case schemas.RDFGraphSummary_numClasses:
-			v.NumClasses = new(int64)
-			return d.ReadInt64(schemas.RDFGraphSummary_numClasses, v.NumClasses)
-		case schemas.RDFGraphSummary_numDistinctPredicates:
-			v.NumDistinctPredicates = new(int64)
-			return d.ReadInt64(schemas.RDFGraphSummary_numDistinctPredicates, v.NumDistinctPredicates)
-		case schemas.RDFGraphSummary_numDistinctSubjects:
-			v.NumDistinctSubjects = new(int64)
-			return d.ReadInt64(schemas.RDFGraphSummary_numDistinctSubjects, v.NumDistinctSubjects)
-		case schemas.RDFGraphSummary_numQuads:
-			v.NumQuads = new(int64)
-			return d.ReadInt64(schemas.RDFGraphSummary_numQuads, v.NumQuads)
-		case schemas.RDFGraphSummary_predicates:
-			return deserializeLongValuedMapList(d, schemas.RDFGraphSummary_predicates, &v.Predicates)
-		case schemas.RDFGraphSummary_subjectStructures:
-			return deserializeSubjectStructures(d, schemas.RDFGraphSummary_subjectStructures, &v.SubjectStructures)
-		}
-		return nil
-	})
-}
-
 // Payload for an RDF graph summary response.
 type RDFGraphSummaryValueMap struct {
 
@@ -1082,42 +407,6 @@ type RDFGraphSummaryValueMap struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RDFGraphSummaryValueMap) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RDFGraphSummaryValueMap)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RDFGraphSummaryValueMap) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GraphSummary != nil {
-		s.WriteStruct(schemas.RDFGraphSummaryValueMap_graphSummary)
-		v.GraphSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastStatisticsComputationTime != nil {
-		s.WriteTime(schemas.RDFGraphSummaryValueMap_lastStatisticsComputationTime, *v.LastStatisticsComputationTime)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.RDFGraphSummaryValueMap_version, *v.Version)
-	}
-}
-func (v *RDFGraphSummaryValueMap) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RDFGraphSummaryValueMap, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RDFGraphSummaryValueMap_graphSummary:
-			v.GraphSummary = &RDFGraphSummary{}
-			return v.GraphSummary.Deserialize(d)
-		case schemas.RDFGraphSummaryValueMap_lastStatisticsComputationTime:
-			v.LastStatisticsComputationTime = new(time.Time)
-			return d.ReadTime(schemas.RDFGraphSummaryValueMap_lastStatisticsComputationTime, v.LastStatisticsComputationTime)
-		case schemas.RDFGraphSummaryValueMap_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.RDFGraphSummaryValueMap_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Statistics for REFRESH mode.
 type RefreshStatisticsIdMap struct {
 
@@ -1125,28 +414,6 @@ type RefreshStatisticsIdMap struct {
 	StatisticsId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RefreshStatisticsIdMap) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RefreshStatisticsIdMap)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RefreshStatisticsIdMap) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StatisticsId != nil {
-		s.WriteString(schemas.RefreshStatisticsIdMap_statisticsId, *v.StatisticsId)
-	}
-}
-func (v *RefreshStatisticsIdMap) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RefreshStatisticsIdMap, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RefreshStatisticsIdMap_statisticsId:
-			v.StatisticsId = new(string)
-			return d.ReadString(schemas.RefreshStatisticsIdMap_statisticsId, v.StatisticsId)
-		}
-		return nil
-	})
 }
 
 // Neptune logs are converted to SPARQL quads in the graph using the Resource
@@ -1164,28 +431,6 @@ type SparqlData struct {
 	Stmt *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SparqlData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SparqlData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SparqlData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Stmt != nil {
-		s.WriteString(schemas.SparqlData_stmt, *v.Stmt)
-	}
-}
-func (v *SparqlData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SparqlData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SparqlData_stmt:
-			v.Stmt = new(string)
-			return d.ReadString(schemas.SparqlData_stmt, v.Stmt)
-		}
-		return nil
-	})
 }
 
 // A serialized SPARQL stream record capturing a change-log entry for the RDF
@@ -1222,51 +467,6 @@ type SparqlRecord struct {
 	IsLastOp *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *SparqlRecord) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SparqlRecord)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SparqlRecord) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CommitTimestampInMillis != nil {
-		s.WriteInt64(schemas.SparqlRecord_commitTimestampInMillis, *v.CommitTimestampInMillis)
-	}
-	if v.Data != nil {
-		s.WriteStruct(schemas.SparqlRecord_data)
-		v.Data.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeStringValuedMap(s, schemas.SparqlRecord_eventId, v.EventId)
-	if v.IsLastOp != nil {
-		s.WriteBool(schemas.SparqlRecord_isLastOp, *v.IsLastOp)
-	}
-	if v.Op != nil {
-		s.WriteString(schemas.SparqlRecord_op, *v.Op)
-	}
-}
-func (v *SparqlRecord) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SparqlRecord, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SparqlRecord_commitTimestampInMillis:
-			v.CommitTimestampInMillis = new(int64)
-			return d.ReadInt64(schemas.SparqlRecord_commitTimestampInMillis, v.CommitTimestampInMillis)
-		case schemas.SparqlRecord_data:
-			v.Data = &SparqlData{}
-			return v.Data.Deserialize(d)
-		case schemas.SparqlRecord_eventId:
-			return deserializeStringValuedMap(d, schemas.SparqlRecord_eventId, &v.EventId)
-		case schemas.SparqlRecord_isLastOp:
-			v.IsLastOp = new(bool)
-			return d.ReadBool(schemas.SparqlRecord_isLastOp, v.IsLastOp)
-		case schemas.SparqlRecord_op:
-			v.Op = new(string)
-			return d.ReadString(schemas.SparqlRecord_op, v.Op)
-		}
-		return nil
-	})
 }
 
 // Contains statistics information. The DFE engine uses information about the data
@@ -1307,60 +507,6 @@ type Statistics struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Statistics) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Statistics)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Statistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Active != nil {
-		s.WriteBool(schemas.Statistics_active, *v.Active)
-	}
-	if v.AutoCompute != nil {
-		s.WriteBool(schemas.Statistics_autoCompute, *v.AutoCompute)
-	}
-	if v.Date != nil {
-		s.WriteTime(schemas.Statistics_date, *v.Date)
-	}
-	if v.Note != nil {
-		s.WriteString(schemas.Statistics_note, *v.Note)
-	}
-	if v.SignatureInfo != nil {
-		s.WriteStruct(schemas.Statistics_signatureInfo)
-		v.SignatureInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StatisticsId != nil {
-		s.WriteString(schemas.Statistics_statisticsId, *v.StatisticsId)
-	}
-}
-func (v *Statistics) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Statistics, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Statistics_active:
-			v.Active = new(bool)
-			return d.ReadBool(schemas.Statistics_active, v.Active)
-		case schemas.Statistics_autoCompute:
-			v.AutoCompute = new(bool)
-			return d.ReadBool(schemas.Statistics_autoCompute, v.AutoCompute)
-		case schemas.Statistics_date:
-			v.Date = new(time.Time)
-			return d.ReadTime(schemas.Statistics_date, v.Date)
-		case schemas.Statistics_note:
-			v.Note = new(string)
-			return d.ReadString(schemas.Statistics_note, v.Note)
-		case schemas.Statistics_signatureInfo:
-			v.SignatureInfo = &StatisticsSummary{}
-			return v.SignatureInfo.Deserialize(d)
-		case schemas.Statistics_statisticsId:
-			v.StatisticsId = new(string)
-			return d.ReadString(schemas.Statistics_statisticsId, v.StatisticsId)
-		}
-		return nil
-	})
-}
-
 // Information about the characteristic sets generated in the statistics.
 type StatisticsSummary struct {
 
@@ -1376,40 +522,6 @@ type StatisticsSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StatisticsSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StatisticsSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StatisticsSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceCount != nil {
-		s.WriteInt32(schemas.StatisticsSummary_instanceCount, *v.InstanceCount)
-	}
-	if v.PredicateCount != nil {
-		s.WriteInt32(schemas.StatisticsSummary_predicateCount, *v.PredicateCount)
-	}
-	if v.SignatureCount != nil {
-		s.WriteInt32(schemas.StatisticsSummary_signatureCount, *v.SignatureCount)
-	}
-}
-func (v *StatisticsSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StatisticsSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StatisticsSummary_instanceCount:
-			v.InstanceCount = new(int32)
-			return d.ReadInt32(schemas.StatisticsSummary_instanceCount, v.InstanceCount)
-		case schemas.StatisticsSummary_predicateCount:
-			v.PredicateCount = new(int32)
-			return d.ReadInt32(schemas.StatisticsSummary_predicateCount, v.PredicateCount)
-		case schemas.StatisticsSummary_signatureCount:
-			v.SignatureCount = new(int32)
-			return d.ReadInt32(schemas.StatisticsSummary_signatureCount, v.SignatureCount)
-		}
-		return nil
-	})
-}
-
 // A subject structure.
 type SubjectStructure struct {
 
@@ -1420,31 +532,6 @@ type SubjectStructure struct {
 	Predicates []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SubjectStructure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubjectStructure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubjectStructure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt64(schemas.SubjectStructure_count, *v.Count)
-	}
-	serializePredicates(s, schemas.SubjectStructure_predicates, v.Predicates)
-}
-func (v *SubjectStructure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubjectStructure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubjectStructure_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.SubjectStructure_count, v.Count)
-		case schemas.SubjectStructure_predicates:
-			return deserializePredicates(d, schemas.SubjectStructure_predicates, &v.Predicates)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,15 +32,6 @@ type DisassociateFromMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateFromMasterAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateFromMasterAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateFromMasterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DisassociateFromMasterAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,21 +39,16 @@ type DisassociateFromMasterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateFromMasterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateFromMasterAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromMasterAccount, schemas.DisassociateFromMasterAccountRequest, schemas.DisassociateFromMasterAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFromMasterAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFromMasterAccount, schemas.DisassociateFromMasterAccountRequest, schemas.DisassociateFromMasterAccountResponse), output: &DisassociateFromMasterAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFromMasterAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateFromMasterAccount"); err != nil {

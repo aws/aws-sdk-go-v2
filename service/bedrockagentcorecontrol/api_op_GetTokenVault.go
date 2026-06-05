@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetTokenVaultInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTokenVaultInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTokenVaultRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTokenVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TokenVaultId != nil {
-		s.WriteString(schemas.GetTokenVaultRequest_tokenVaultId, *v.TokenVaultId)
-	}
-}
-
 type GetTokenVaultOutput struct {
 
 	// The KMS configuration for the token vault.
@@ -73,30 +59,16 @@ type GetTokenVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTokenVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTokenVaultResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTokenVaultResponse_kmsConfiguration:
-			v.KmsConfiguration = &types.KmsConfiguration{}
-			return v.KmsConfiguration.Deserialize(d)
-		case schemas.GetTokenVaultResponse_lastModifiedDate:
-			v.LastModifiedDate = new(time.Time)
-			return d.ReadTime(schemas.GetTokenVaultResponse_lastModifiedDate, v.LastModifiedDate)
-		case schemas.GetTokenVaultResponse_tokenVaultId:
-			v.TokenVaultId = new(string)
-			return d.ReadString(schemas.GetTokenVaultResponse_tokenVaultId, v.TokenVaultId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTokenVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokenVault, schemas.GetTokenVaultRequest, schemas.GetTokenVaultResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTokenVault{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokenVault, schemas.GetTokenVaultRequest, schemas.GetTokenVaultResponse), output: &GetTokenVaultOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTokenVault{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTokenVault"); err != nil {

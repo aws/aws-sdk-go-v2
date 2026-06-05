@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -21,34 +19,6 @@ type Identity struct {
 	UserAgent *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Identity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Identity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Identity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceIp != nil {
-		s.WriteString(schemas.Identity_SourceIp, *v.SourceIp)
-	}
-	if v.UserAgent != nil {
-		s.WriteString(schemas.Identity_UserAgent, *v.UserAgent)
-	}
-}
-func (v *Identity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Identity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Identity_SourceIp:
-			v.SourceIp = new(string)
-			return d.ReadString(schemas.Identity_SourceIp, v.SourceIp)
-		case schemas.Identity_UserAgent:
-			v.UserAgent = new(string)
-			return d.ReadString(schemas.Identity_UserAgent, v.UserAgent)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -347,44 +345,6 @@ type GetHLSStreamingSessionURLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetHLSStreamingSessionURLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetHLSStreamingSessionURLInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetHLSStreamingSessionURLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContainerFormat != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_ContainerFormat, string(v.ContainerFormat))
-	}
-	if v.DiscontinuityMode != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_DiscontinuityMode, string(v.DiscontinuityMode))
-	}
-	if v.DisplayFragmentTimestamp != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp, string(v.DisplayFragmentTimestamp))
-	}
-	if v.Expires != nil {
-		s.WriteInt32(schemas.GetHLSStreamingSessionURLInput_Expires, *v.Expires)
-	}
-	if v.HLSFragmentSelector != nil {
-		s.WriteStruct(schemas.GetHLSStreamingSessionURLInput_HLSFragmentSelector)
-		v.HLSFragmentSelector.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxMediaPlaylistFragmentResults != nil {
-		s.WriteInt64(schemas.GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults, *v.MaxMediaPlaylistFragmentResults)
-	}
-	if v.PlaybackMode != "" {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_PlaybackMode, string(v.PlaybackMode))
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.GetHLSStreamingSessionURLInput_StreamName, *v.StreamName)
-	}
-}
-
 type GetHLSStreamingSessionURLOutput struct {
 
 	// The URL (containing the session token) that a media player can use to retrieve
@@ -397,24 +357,16 @@ type GetHLSStreamingSessionURLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetHLSStreamingSessionURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetHLSStreamingSessionURLOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL:
-			v.HLSStreamingSessionURL = new(string)
-			return d.ReadString(schemas.GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL, v.HLSStreamingSessionURL)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetHLSStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHLSStreamingSessionURL, schemas.GetHLSStreamingSessionURLInput, schemas.GetHLSStreamingSessionURLOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHLSStreamingSessionURL{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHLSStreamingSessionURL, schemas.GetHLSStreamingSessionURLInput, schemas.GetHLSStreamingSessionURLOutput), output: &GetHLSStreamingSessionURLOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHLSStreamingSessionURL{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHLSStreamingSessionURL"); err != nil {

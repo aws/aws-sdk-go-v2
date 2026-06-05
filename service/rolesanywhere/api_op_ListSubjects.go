@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,34 +42,6 @@ type ListSubjectsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubjectsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSubjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRequest_nextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListRequest_pageSize, *v.PageSize)
-	}
-}
-func (v *ListSubjectsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRequest_nextToken, v.NextToken)
-		case schemas.ListRequest_pageSize:
-			v.PageSize = new(int32)
-			return d.ReadInt32(schemas.ListRequest_pageSize, v.PageSize)
-		}
-		return nil
-	})
-}
-
 type ListSubjectsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous
@@ -88,38 +58,16 @@ type ListSubjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubjectsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSubjectsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSubjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSubjectsResponse_nextToken, *v.NextToken)
-	}
-	serializeSubjectSummaries(s, schemas.ListSubjectsResponse_subjects, v.Subjects)
-}
-func (v *ListSubjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSubjectsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSubjectsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSubjectsResponse_nextToken, v.NextToken)
-		case schemas.ListSubjectsResponse_subjects:
-			return deserializeSubjectSummaries(d, schemas.ListSubjectsResponse_subjects, &v.Subjects)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSubjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubjects, schemas.ListRequest, schemas.ListSubjectsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubjects{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubjects, schemas.ListRequest, schemas.ListSubjectsResponse), output: &ListSubjectsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubjects{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubjects"); err != nil {

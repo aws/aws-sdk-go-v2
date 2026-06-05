@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -132,29 +130,6 @@ type CreateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateIdentityProviderRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_clientToken, *v.ClientToken)
-	}
-	serializeIdentityProviderDetails(s, schemas.CreateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
-	if v.IdentityProviderName != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_identityProviderName, *v.IdentityProviderName)
-	}
-	if v.IdentityProviderType != "" {
-		s.WriteString(schemas.CreateIdentityProviderRequest_identityProviderType, string(v.IdentityProviderType))
-	}
-	if v.PortalArn != nil {
-		s.WriteString(schemas.CreateIdentityProviderRequest_portalArn, *v.PortalArn)
-	}
-	serializeTagList(s, schemas.CreateIdentityProviderRequest_tags, v.Tags)
-}
-
 type CreateIdentityProviderOutput struct {
 
 	// The ARN of the identity provider.
@@ -168,24 +143,16 @@ type CreateIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateIdentityProviderResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateIdentityProviderResponse_identityProviderArn:
-			v.IdentityProviderArn = new(string)
-			return d.ReadString(schemas.CreateIdentityProviderResponse_identityProviderArn, v.IdentityProviderArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIdentityProvider{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse), output: &CreateIdentityProviderOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIdentityProvider{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIdentityProvider"); err != nil {

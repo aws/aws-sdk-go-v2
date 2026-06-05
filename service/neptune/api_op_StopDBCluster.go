@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type StopDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.StopDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-}
-
 type StopDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -69,24 +55,16 @@ type StopDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBCluster, schemas.StopDBClusterMessage, schemas.StopDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpStopDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDBCluster, schemas.StopDBClusterMessage, schemas.StopDBClusterResult), output: &StopDBClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStopDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopDBCluster"); err != nil {

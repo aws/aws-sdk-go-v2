@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListAudienceModelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAudienceModelsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAudienceModelsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAudienceModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAudienceModelsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAudienceModelsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAudienceModelsOutput struct {
 
 	// The audience models that match the request.
@@ -72,26 +55,16 @@ type ListAudienceModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAudienceModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAudienceModelsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAudienceModelsResponse_audienceModels:
-			return deserializeAudienceModelList(d, schemas.ListAudienceModelsResponse_audienceModels, &v.AudienceModels)
-		case schemas.ListAudienceModelsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAudienceModelsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAudienceModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceModels, schemas.ListAudienceModelsRequest, schemas.ListAudienceModelsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAudienceModels{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceModels, schemas.ListAudienceModelsRequest, schemas.ListAudienceModelsResponse), output: &ListAudienceModelsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAudienceModels{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAudienceModels"); err != nil {

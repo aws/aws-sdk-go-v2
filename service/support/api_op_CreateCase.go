@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -121,40 +119,6 @@ type CreateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttachmentSetId != nil {
-		s.WriteString(schemas.CreateCaseRequest_attachmentSetId, *v.AttachmentSetId)
-	}
-	if v.CategoryCode != nil {
-		s.WriteString(schemas.CreateCaseRequest_categoryCode, *v.CategoryCode)
-	}
-	serializeCcEmailAddressList(s, schemas.CreateCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
-	if v.CommunicationBody != nil {
-		s.WriteString(schemas.CreateCaseRequest_communicationBody, *v.CommunicationBody)
-	}
-	if v.IssueType != nil {
-		s.WriteString(schemas.CreateCaseRequest_issueType, *v.IssueType)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.CreateCaseRequest_language, *v.Language)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.CreateCaseRequest_serviceCode, *v.ServiceCode)
-	}
-	if v.SeverityCode != nil {
-		s.WriteString(schemas.CreateCaseRequest_severityCode, *v.SeverityCode)
-	}
-	if v.Subject != nil {
-		s.WriteString(schemas.CreateCaseRequest_subject, *v.Subject)
-	}
-}
-
 // The support case ID returned by a successful completion of the CreateCase operation.
 type CreateCaseOutput struct {
 
@@ -169,24 +133,16 @@ type CreateCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCaseResponse_caseId:
-			v.CaseId = new(string)
-			return d.ReadString(schemas.CreateCaseResponse_caseId, v.CaseId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse), output: &CreateCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCase"); err != nil {

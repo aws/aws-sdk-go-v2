@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,28 +35,6 @@ type GetResponsePlanInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetResponsePlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResponsePlanInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResponsePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetResponsePlanInput_arn, *v.Arn)
-	}
-}
-func (v *GetResponsePlanInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResponsePlanInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResponsePlanInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetResponsePlanInput_arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 type GetResponsePlanOutput struct {
@@ -101,67 +77,16 @@ type GetResponsePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResponsePlanOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResponsePlanOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResponsePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.GetResponsePlanOutput_actions, v.Actions)
-	if v.Arn != nil {
-		s.WriteString(schemas.GetResponsePlanOutput_arn, *v.Arn)
-	}
-	serializeChatChannel(s, schemas.GetResponsePlanOutput_chatChannel, v.ChatChannel)
-	if v.DisplayName != nil {
-		s.WriteString(schemas.GetResponsePlanOutput_displayName, *v.DisplayName)
-	}
-	serializeEngagementSet(s, schemas.GetResponsePlanOutput_engagements, v.Engagements)
-	if v.IncidentTemplate != nil {
-		s.WriteStruct(schemas.GetResponsePlanOutput_incidentTemplate)
-		v.IncidentTemplate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIntegrations(s, schemas.GetResponsePlanOutput_integrations, v.Integrations)
-	if v.Name != nil {
-		s.WriteString(schemas.GetResponsePlanOutput_name, *v.Name)
-	}
-}
-func (v *GetResponsePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResponsePlanOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResponsePlanOutput_actions:
-			return deserializeActionsList(d, schemas.GetResponsePlanOutput_actions, &v.Actions)
-		case schemas.GetResponsePlanOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetResponsePlanOutput_arn, v.Arn)
-		case schemas.GetResponsePlanOutput_chatChannel:
-			return deserializeChatChannel(d, schemas.GetResponsePlanOutput_chatChannel, &v.ChatChannel)
-		case schemas.GetResponsePlanOutput_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetResponsePlanOutput_displayName, v.DisplayName)
-		case schemas.GetResponsePlanOutput_engagements:
-			return deserializeEngagementSet(d, schemas.GetResponsePlanOutput_engagements, &v.Engagements)
-		case schemas.GetResponsePlanOutput_incidentTemplate:
-			v.IncidentTemplate = &types.IncidentTemplate{}
-			return v.IncidentTemplate.Deserialize(d)
-		case schemas.GetResponsePlanOutput_integrations:
-			return deserializeIntegrations(d, schemas.GetResponsePlanOutput_integrations, &v.Integrations)
-		case schemas.GetResponsePlanOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetResponsePlanOutput_name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponsePlan, schemas.GetResponsePlanInput, schemas.GetResponsePlanOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResponsePlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponsePlan, schemas.GetResponsePlanInput, schemas.GetResponsePlanOutput), output: &GetResponsePlanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResponsePlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResponsePlan"); err != nil {

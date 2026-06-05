@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,32 +64,6 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.CreateApplicationRequest_appConfigs, v.AppConfigs)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
-	}
-	serializeDataSources(s, schemas.CreateApplicationRequest_dataSources, v.DataSources)
-	if v.IamIdentityCenterOptions != nil {
-		s.WriteStruct(schemas.CreateApplicationRequest_iamIdentityCenterOptions)
-		v.IamIdentityCenterOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateApplicationRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateApplicationRequest_tagList, v.TagList)
-}
-
 type CreateApplicationOutput struct {
 
 	// Configuration settings for the OpenSearch application, including administrative
@@ -132,45 +104,16 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateApplicationResponse_appConfigs:
-			return deserializeAppConfigs(d, schemas.CreateApplicationResponse_appConfigs, &v.AppConfigs)
-		case schemas.CreateApplicationResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_arn, v.Arn)
-		case schemas.CreateApplicationResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateApplicationResponse_createdAt, v.CreatedAt)
-		case schemas.CreateApplicationResponse_dataSources:
-			return deserializeDataSources(d, schemas.CreateApplicationResponse_dataSources, &v.DataSources)
-		case schemas.CreateApplicationResponse_iamIdentityCenterOptions:
-			v.IamIdentityCenterOptions = &types.IamIdentityCenterOptions{}
-			return v.IamIdentityCenterOptions.Deserialize(d)
-		case schemas.CreateApplicationResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_id, v.Id)
-		case schemas.CreateApplicationResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.CreateApplicationResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_name, v.Name)
-		case schemas.CreateApplicationResponse_tagList:
-			return deserializeTagList(d, schemas.CreateApplicationResponse_tagList, &v.TagList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {

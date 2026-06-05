@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type ListDbInstancesForClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbInstancesForClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDbInstancesForClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDbInstancesForClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DbClusterId != nil {
-		s.WriteString(schemas.ListDbInstancesForClusterInput_dbClusterId, *v.DbClusterId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDbInstancesForClusterInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDbInstancesForClusterInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDbInstancesForClusterOutput struct {
 
 	// A list of Timestream for InfluxDB instance summaries belonging to the cluster.
@@ -84,26 +64,16 @@ type ListDbInstancesForClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbInstancesForClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDbInstancesForClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDbInstancesForClusterOutput_items:
-			return deserializeDbInstanceForClusterSummaryList(d, schemas.ListDbInstancesForClusterOutput_items, &v.Items)
-		case schemas.ListDbInstancesForClusterOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDbInstancesForClusterOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDbInstancesForClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbInstancesForCluster, schemas.ListDbInstancesForClusterInput, schemas.ListDbInstancesForClusterOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbInstancesForCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbInstancesForCluster, schemas.ListDbInstancesForClusterInput, schemas.ListDbInstancesForClusterOutput), output: &ListDbInstancesForClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbInstancesForCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbInstancesForCluster"); err != nil {

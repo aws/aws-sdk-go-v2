@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -72,25 +70,6 @@ type UploadDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UploadDocumentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UploadDocumentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UploadDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContentType != "" {
-		s.WriteString(schemas.UploadDocumentsRequest_contentType, string(v.ContentType))
-	}
-}
-func (v *UploadDocumentsInput) GetPayloadStream() io.Reader { return v.Documents }
-
-var _ smithy.StreamingInput = (*UploadDocumentsInput)(nil)
-
-func (v *UploadDocumentsInput) SetPayloadStream(r io.ReadCloser) { v.Documents = r }
-
-var _ smithy.StreamingOutput = (*UploadDocumentsInput)(nil)
-
 // Contains the response to an UploadDocuments request.
 type UploadDocumentsOutput struct {
 
@@ -113,30 +92,16 @@ type UploadDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UploadDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UploadDocumentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UploadDocumentsResponse_adds:
-			return d.ReadInt64(schemas.UploadDocumentsResponse_adds, &v.Adds)
-		case schemas.UploadDocumentsResponse_deletes:
-			return d.ReadInt64(schemas.UploadDocumentsResponse_deletes, &v.Deletes)
-		case schemas.UploadDocumentsResponse_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.UploadDocumentsResponse_status, v.Status)
-		case schemas.UploadDocumentsResponse_warnings:
-			return deserializeDocumentServiceWarnings(d, schemas.UploadDocumentsResponse_warnings, &v.Warnings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadDocuments, schemas.UploadDocumentsRequest, schemas.UploadDocumentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadDocuments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadDocuments, schemas.UploadDocumentsRequest, schemas.UploadDocumentsResponse), output: &UploadDocumentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadDocuments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UploadDocuments"); err != nil {

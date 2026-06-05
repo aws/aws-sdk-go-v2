@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,27 +47,6 @@ type ListAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssociationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListAssociationsInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.FilterServiceTypes != nil {
-		s.WriteString(schemas.ListAssociationsInput_filterServiceTypes, *v.FilterServiceTypes)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAssociationsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssociationsInput_nextToken, *v.NextToken)
-	}
-}
-
 // Output containing a list of service associations and pagination token.
 type ListAssociationsOutput struct {
 
@@ -87,26 +64,16 @@ type ListAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssociationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssociationsOutput_associations:
-			return deserializeAssociationsList(d, schemas.ListAssociationsOutput_associations, &v.Associations)
-		case schemas.ListAssociationsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssociationsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociations, schemas.ListAssociationsInput, schemas.ListAssociationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociations, schemas.ListAssociationsInput, schemas.ListAssociationsOutput), output: &ListAssociationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssociations"); err != nil {

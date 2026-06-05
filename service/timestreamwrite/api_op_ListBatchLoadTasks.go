@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type ListBatchLoadTasksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBatchLoadTasksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBatchLoadTasksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBatchLoadTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListBatchLoadTasksRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListBatchLoadTasksRequest_NextToken, *v.NextToken)
-	}
-	if v.TaskStatus != "" {
-		s.WriteString(schemas.ListBatchLoadTasksRequest_TaskStatus, string(v.TaskStatus))
-	}
-}
-
 type ListBatchLoadTasksOutput struct {
 
 	// A list of batch load task details.
@@ -84,26 +64,16 @@ type ListBatchLoadTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBatchLoadTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBatchLoadTasksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBatchLoadTasksResponse_BatchLoadTasks:
-			return deserializeBatchLoadTaskList(d, schemas.ListBatchLoadTasksResponse_BatchLoadTasks, &v.BatchLoadTasks)
-		case schemas.ListBatchLoadTasksResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListBatchLoadTasksResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListBatchLoadTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchLoadTasks, schemas.ListBatchLoadTasksRequest, schemas.ListBatchLoadTasksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBatchLoadTasks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchLoadTasks, schemas.ListBatchLoadTasksRequest, schemas.ListBatchLoadTasksResponse), output: &ListBatchLoadTasksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBatchLoadTasks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBatchLoadTasks"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,44 +63,6 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.UpdateUserRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.GivenName != nil {
-		s.WriteString(schemas.UpdateUserRequest_GivenName, *v.GivenName)
-	}
-	if v.GrantPoweruserPrivileges != "" {
-		s.WriteString(schemas.UpdateUserRequest_GrantPoweruserPrivileges, string(v.GrantPoweruserPrivileges))
-	}
-	if v.Locale != "" {
-		s.WriteString(schemas.UpdateUserRequest_Locale, string(v.Locale))
-	}
-	if v.StorageRule != nil {
-		s.WriteStruct(schemas.UpdateUserRequest_StorageRule)
-		v.StorageRule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Surname != nil {
-		s.WriteString(schemas.UpdateUserRequest_Surname, *v.Surname)
-	}
-	if v.TimeZoneId != nil {
-		s.WriteString(schemas.UpdateUserRequest_TimeZoneId, *v.TimeZoneId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.UpdateUserRequest_Type, string(v.Type))
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.UpdateUserRequest_UserId, *v.UserId)
-	}
-}
-
 type UpdateUserOutput struct {
 
 	// The user information.
@@ -114,24 +74,16 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserResponse_User:
-			v.User = &types.User{}
-			return v.User.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse), output: &UpdateUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUser"); err != nil {

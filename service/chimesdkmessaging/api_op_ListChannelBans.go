@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,27 +52,6 @@ type ListChannelBansInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelBansInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelBansRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChannelBansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ListChannelBansRequest_ChannelArn, *v.ChannelArn)
-	}
-	if v.ChimeBearer != nil {
-		s.WriteString(schemas.ListChannelBansRequest_ChimeBearer, *v.ChimeBearer)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChannelBansRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChannelBansRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListChannelBansOutput struct {
 
 	// The ARN of the channel.
@@ -92,29 +69,16 @@ type ListChannelBansOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelBansOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChannelBansResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChannelBansResponse_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ListChannelBansResponse_ChannelArn, v.ChannelArn)
-		case schemas.ListChannelBansResponse_ChannelBans:
-			return deserializeChannelBanSummaryList(d, schemas.ListChannelBansResponse_ChannelBans, &v.ChannelBans)
-		case schemas.ListChannelBansResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChannelBansResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChannelBansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelBans, schemas.ListChannelBansRequest, schemas.ListChannelBansResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelBans{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelBans, schemas.ListChannelBansRequest, schemas.ListChannelBansResponse), output: &ListChannelBansOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelBans{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChannelBans"); err != nil {

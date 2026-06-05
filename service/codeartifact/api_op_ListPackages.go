@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -100,45 +98,6 @@ type ListPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackagesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.ListPackagesRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.ListPackagesRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.ListPackagesRequest_format, string(v.Format))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPackagesRequest_maxResults, *v.MaxResults)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.ListPackagesRequest_namespace, *v.Namespace)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackagesRequest_nextToken, *v.NextToken)
-	}
-	if v.PackagePrefix != nil {
-		s.WriteString(schemas.ListPackagesRequest_packagePrefix, *v.PackagePrefix)
-	}
-	if v.Publish != "" {
-		s.WriteString(schemas.ListPackagesRequest_publish, string(v.Publish))
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.ListPackagesRequest_repository, *v.Repository)
-	}
-	if v.Upstream != "" {
-		s.WriteString(schemas.ListPackagesRequest_upstream, string(v.Upstream))
-	}
-}
-
 type ListPackagesOutput struct {
 
 	//  If there are additional results, this is the token for the next set of
@@ -156,26 +115,16 @@ type ListPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackagesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackagesResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackagesResult_nextToken, v.NextToken)
-		case schemas.ListPackagesResult_packages:
-			return deserializePackageSummaryList(d, schemas.ListPackagesResult_packages, &v.Packages)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResult), output: &ListPackagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPackages"); err != nil {

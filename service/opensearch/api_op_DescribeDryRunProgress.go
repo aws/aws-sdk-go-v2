@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type DescribeDryRunProgressInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDryRunProgressInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDryRunProgressRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDryRunProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.DescribeDryRunProgressRequest_DomainName, *v.DomainName)
-	}
-	if v.DryRunId != nil {
-		s.WriteString(schemas.DescribeDryRunProgressRequest_DryRunId, *v.DryRunId)
-	}
-	if v.LoadDryRunConfig != nil {
-		s.WriteBool(schemas.DescribeDryRunProgressRequest_LoadDryRunConfig, *v.LoadDryRunConfig)
-	}
-}
-
 type DescribeDryRunProgressOutput struct {
 
 	// Details about the changes you're planning to make on the domain.
@@ -84,30 +64,16 @@ type DescribeDryRunProgressOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDryRunProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDryRunProgressResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDryRunProgressResponse_DryRunConfig:
-			v.DryRunConfig = &types.DomainStatus{}
-			return v.DryRunConfig.Deserialize(d)
-		case schemas.DescribeDryRunProgressResponse_DryRunProgressStatus:
-			v.DryRunProgressStatus = &types.DryRunProgressStatus{}
-			return v.DryRunProgressStatus.Deserialize(d)
-		case schemas.DescribeDryRunProgressResponse_DryRunResults:
-			v.DryRunResults = &types.DryRunResults{}
-			return v.DryRunResults.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDryRunProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDryRunProgress, schemas.DescribeDryRunProgressRequest, schemas.DescribeDryRunProgressResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDryRunProgress{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDryRunProgress, schemas.DescribeDryRunProgressRequest, schemas.DescribeDryRunProgressResponse), output: &DescribeDryRunProgressOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDryRunProgress{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDryRunProgress"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,29 +52,6 @@ type StartDevEnvironmentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDevEnvironmentSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDevEnvironmentSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDevEnvironmentSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.StartDevEnvironmentSessionRequest_id, *v.Id)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.StartDevEnvironmentSessionRequest_projectName, *v.ProjectName)
-	}
-	if v.SessionConfiguration != nil {
-		s.WriteStruct(schemas.StartDevEnvironmentSessionRequest_sessionConfiguration)
-		v.SessionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.StartDevEnvironmentSessionRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type StartDevEnvironmentSessionOutput struct {
 
 	// Information about connection details for a Dev Environment.
@@ -108,36 +83,16 @@ type StartDevEnvironmentSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDevEnvironmentSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDevEnvironmentSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartDevEnvironmentSessionResponse_accessDetails:
-			v.AccessDetails = &types.DevEnvironmentAccessDetails{}
-			return v.AccessDetails.Deserialize(d)
-		case schemas.StartDevEnvironmentSessionResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartDevEnvironmentSessionResponse_id, v.Id)
-		case schemas.StartDevEnvironmentSessionResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.StartDevEnvironmentSessionResponse_projectName, v.ProjectName)
-		case schemas.StartDevEnvironmentSessionResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.StartDevEnvironmentSessionResponse_sessionId, v.SessionId)
-		case schemas.StartDevEnvironmentSessionResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.StartDevEnvironmentSessionResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDevEnvironmentSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDevEnvironmentSession, schemas.StartDevEnvironmentSessionRequest, schemas.StartDevEnvironmentSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDevEnvironmentSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDevEnvironmentSession, schemas.StartDevEnvironmentSessionRequest, schemas.StartDevEnvironmentSessionResponse), output: &StartDevEnvironmentSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDevEnvironmentSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDevEnvironmentSession"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,32 +51,6 @@ type UpdateQAppInput struct {
 	Title *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateQAppInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateQAppInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppDefinition != nil {
-		s.WriteStruct(schemas.UpdateQAppInput_appDefinition)
-		v.AppDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AppId != nil {
-		s.WriteString(schemas.UpdateQAppInput_appId, *v.AppId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateQAppInput_description, *v.Description)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.UpdateQAppInput_instanceId, *v.InstanceId)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.UpdateQAppInput_title, *v.Title)
-	}
 }
 
 type UpdateQAppOutput struct {
@@ -143,60 +115,16 @@ type UpdateQAppOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateQAppOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateQAppOutput_appArn:
-			v.AppArn = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_appArn, v.AppArn)
-		case schemas.UpdateQAppOutput_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_appId, v.AppId)
-		case schemas.UpdateQAppOutput_appVersion:
-			v.AppVersion = new(int32)
-			return d.ReadInt32(schemas.UpdateQAppOutput_appVersion, v.AppVersion)
-		case schemas.UpdateQAppOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateQAppOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateQAppOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_createdBy, v.CreatedBy)
-		case schemas.UpdateQAppOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_description, v.Description)
-		case schemas.UpdateQAppOutput_initialPrompt:
-			v.InitialPrompt = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_initialPrompt, v.InitialPrompt)
-		case schemas.UpdateQAppOutput_requiredCapabilities:
-			return deserializeAppRequiredCapabilities(d, schemas.UpdateQAppOutput_requiredCapabilities, &v.RequiredCapabilities)
-		case schemas.UpdateQAppOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateQAppOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AppStatus(ev)
-			return nil
-		case schemas.UpdateQAppOutput_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_title, v.Title)
-		case schemas.UpdateQAppOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateQAppOutput_updatedAt, v.UpdatedAt)
-		case schemas.UpdateQAppOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.UpdateQAppOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateQAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQApp, schemas.UpdateQAppInput, schemas.UpdateQAppOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQApp, schemas.UpdateQAppInput, schemas.UpdateQAppOutput), output: &UpdateQAppOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQApp"); err != nil {

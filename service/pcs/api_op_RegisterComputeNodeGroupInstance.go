@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type RegisterComputeNodeGroupInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterComputeNodeGroupInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterComputeNodeGroupInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterComputeNodeGroupInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BootstrapId != nil {
-		s.WriteString(schemas.RegisterComputeNodeGroupInstanceRequest_bootstrapId, *v.BootstrapId)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.RegisterComputeNodeGroupInstanceRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-}
-
 type RegisterComputeNodeGroupInstanceOutput struct {
 
 	// The list of endpoints available for interaction with the scheduler.
@@ -86,29 +69,16 @@ type RegisterComputeNodeGroupInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterComputeNodeGroupInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterComputeNodeGroupInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterComputeNodeGroupInstanceResponse_endpoints:
-			return deserializeEndpoints(d, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, &v.Endpoints)
-		case schemas.RegisterComputeNodeGroupInstanceResponse_nodeID:
-			v.NodeID = new(string)
-			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, v.NodeID)
-		case schemas.RegisterComputeNodeGroupInstanceResponse_sharedSecret:
-			v.SharedSecret = new(string)
-			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_sharedSecret, v.SharedSecret)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterComputeNodeGroupInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceRequest, schemas.RegisterComputeNodeGroupInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterComputeNodeGroupInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceRequest, schemas.RegisterComputeNodeGroupInstanceResponse), output: &RegisterComputeNodeGroupInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterComputeNodeGroupInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterComputeNodeGroupInstance"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,30 +58,6 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDatasetRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DatasetName != nil {
-		s.WriteString(schemas.CreateDatasetRequest_DatasetName, *v.DatasetName)
-	}
-	if v.DatasetSchema != nil {
-		s.WriteStruct(schemas.CreateDatasetRequest_DatasetSchema)
-		v.DatasetSchema.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServerSideKmsKeyId != nil {
-		s.WriteString(schemas.CreateDatasetRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
-	}
-	serializeTagList(s, schemas.CreateDatasetRequest_Tags, v.Tags)
-}
-
 type CreateDatasetOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the dataset being created.
@@ -101,34 +75,16 @@ type CreateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDatasetResponse_DatasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.CreateDatasetResponse_DatasetArn, v.DatasetArn)
-		case schemas.CreateDatasetResponse_DatasetName:
-			v.DatasetName = new(string)
-			return d.ReadString(schemas.CreateDatasetResponse_DatasetName, v.DatasetName)
-		case schemas.CreateDatasetResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDatasetResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse), output: &CreateDatasetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataset"); err != nil {

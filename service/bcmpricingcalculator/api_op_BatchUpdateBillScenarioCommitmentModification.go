@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,19 +50,6 @@ type BatchUpdateBillScenarioCommitmentModificationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateBillScenarioCommitmentModificationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateBillScenarioCommitmentModificationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateBillScenarioCommitmentModificationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillScenarioId != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationRequest_billScenarioId, *v.BillScenarioId)
-	}
-	serializeBatchUpdateBillScenarioCommitmentModificationEntries(s, schemas.BatchUpdateBillScenarioCommitmentModificationRequest_commitmentModifications, v.CommitmentModifications)
-}
-
 type BatchUpdateBillScenarioCommitmentModificationOutput struct {
 
 	//  Returns the list of error reasons and commitment line item IDs that could not
@@ -81,25 +66,16 @@ type BatchUpdateBillScenarioCommitmentModificationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateBillScenarioCommitmentModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioCommitmentModificationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateBillScenarioCommitmentModificationResponse_errors:
-			return deserializeBatchUpdateBillScenarioCommitmentModificationErrors(d, schemas.BatchUpdateBillScenarioCommitmentModificationResponse_errors, &v.Errors)
-		case schemas.BatchUpdateBillScenarioCommitmentModificationResponse_items:
-			return deserializeBillScenarioCommitmentModificationItems(d, schemas.BatchUpdateBillScenarioCommitmentModificationResponse_items, &v.Items)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateBillScenarioCommitmentModificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateBillScenarioCommitmentModification, schemas.BatchUpdateBillScenarioCommitmentModificationRequest, schemas.BatchUpdateBillScenarioCommitmentModificationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateBillScenarioCommitmentModification{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateBillScenarioCommitmentModification, schemas.BatchUpdateBillScenarioCommitmentModificationRequest, schemas.BatchUpdateBillScenarioCommitmentModificationResponse), output: &BatchUpdateBillScenarioCommitmentModificationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateBillScenarioCommitmentModification{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateBillScenarioCommitmentModification"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DeletePartnershipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePartnershipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePartnershipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePartnershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PartnershipId != nil {
-		s.WriteString(schemas.DeletePartnershipRequest_partnershipId, *v.PartnershipId)
-	}
-}
-
 type DeletePartnershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,29 +45,16 @@ type DeletePartnershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePartnershipOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePartnershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeletePartnershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePartnershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartnership, schemas.DeletePartnershipRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePartnership{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePartnership, schemas.DeletePartnershipRequest, nil), output: &DeletePartnershipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePartnership{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePartnership"); err != nil {

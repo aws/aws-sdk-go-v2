@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,23 +48,6 @@ type CreateFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFlowTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFlowTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFlowTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompatibleNamespaceVersion != nil {
-		s.WriteInt64(schemas.CreateFlowTemplateRequest_compatibleNamespaceVersion, *v.CompatibleNamespaceVersion)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.CreateFlowTemplateRequest_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateFlowTemplateOutput struct {
 
 	// The summary object that describes the created workflow.
@@ -78,24 +59,16 @@ type CreateFlowTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFlowTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFlowTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFlowTemplateResponse_summary:
-			v.Summary = &types.FlowTemplateSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowTemplate, schemas.CreateFlowTemplateRequest, schemas.CreateFlowTemplateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFlowTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowTemplate, schemas.CreateFlowTemplateRequest, schemas.CreateFlowTemplateResponse), output: &CreateFlowTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFlowTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFlowTemplate"); err != nil {

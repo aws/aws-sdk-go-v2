@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,24 +62,6 @@ type CreateStarterMappingTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStarterMappingTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateStarterMappingTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateStarterMappingTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MappingType != "" {
-		s.WriteString(schemas.CreateStarterMappingTemplateRequest_mappingType, string(v.MappingType))
-	}
-	if v.OutputSampleLocation != nil {
-		s.WriteStruct(schemas.CreateStarterMappingTemplateRequest_outputSampleLocation)
-		v.OutputSampleLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTemplateDetails(s, schemas.CreateStarterMappingTemplateRequest_templateDetails, v.TemplateDetails)
-}
-
 type CreateStarterMappingTemplateOutput struct {
 
 	// Returns a string that represents the mapping template.
@@ -95,24 +75,16 @@ type CreateStarterMappingTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStarterMappingTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateStarterMappingTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateStarterMappingTemplateResponse_mappingTemplate:
-			v.MappingTemplate = new(string)
-			return d.ReadString(schemas.CreateStarterMappingTemplateResponse_mappingTemplate, v.MappingTemplate)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateStarterMappingTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStarterMappingTemplate, schemas.CreateStarterMappingTemplateRequest, schemas.CreateStarterMappingTemplateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStarterMappingTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStarterMappingTemplate, schemas.CreateStarterMappingTemplateRequest, schemas.CreateStarterMappingTemplateResponse), output: &CreateStarterMappingTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStarterMappingTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStarterMappingTemplate"); err != nil {

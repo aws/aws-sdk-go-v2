@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -93,57 +91,6 @@ type CreateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateKeyRequest_Description, *v.Description)
-	}
-	if v.ExpireTime != nil {
-		s.WriteTime(schemas.CreateKeyRequest_ExpireTime, *v.ExpireTime)
-	}
-	if v.KeyName != nil {
-		s.WriteString(schemas.CreateKeyRequest_KeyName, *v.KeyName)
-	}
-	if v.NoExpiry != nil {
-		s.WriteBool(schemas.CreateKeyRequest_NoExpiry, *v.NoExpiry)
-	}
-	if v.Restrictions != nil {
-		s.WriteStruct(schemas.CreateKeyRequest_Restrictions)
-		v.Restrictions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateKeyRequest_Tags, v.Tags)
-}
-func (v *CreateKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKeyRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKeyRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateKeyRequest_Description, v.Description)
-		case schemas.CreateKeyRequest_ExpireTime:
-			v.ExpireTime = new(time.Time)
-			return d.ReadTime(schemas.CreateKeyRequest_ExpireTime, v.ExpireTime)
-		case schemas.CreateKeyRequest_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.CreateKeyRequest_KeyName, v.KeyName)
-		case schemas.CreateKeyRequest_NoExpiry:
-			v.NoExpiry = new(bool)
-			return d.ReadBool(schemas.CreateKeyRequest_NoExpiry, v.NoExpiry)
-		case schemas.CreateKeyRequest_Restrictions:
-			v.Restrictions = &types.ApiKeyRestrictions{}
-			return v.Restrictions.Deserialize(d)
-		case schemas.CreateKeyRequest_Tags:
-			return deserializeTagMap(d, schemas.CreateKeyRequest_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateKeyOutput struct {
 
 	// The timestamp for when the API key resource was created in [ISO 8601] format:
@@ -181,53 +128,16 @@ type CreateKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateKeyOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateKeyResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.CreateKeyResponse_CreateTime, *v.CreateTime)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.CreateKeyResponse_Key, *v.Key)
-	}
-	if v.KeyArn != nil {
-		s.WriteString(schemas.CreateKeyResponse_KeyArn, *v.KeyArn)
-	}
-	if v.KeyName != nil {
-		s.WriteString(schemas.CreateKeyResponse_KeyName, *v.KeyName)
-	}
-}
-func (v *CreateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateKeyResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.CreateKeyResponse_CreateTime, v.CreateTime)
-		case schemas.CreateKeyResponse_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.CreateKeyResponse_Key, v.Key)
-		case schemas.CreateKeyResponse_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.CreateKeyResponse_KeyArn, v.KeyArn)
-		case schemas.CreateKeyResponse_KeyName:
-			v.KeyName = new(string)
-			return d.ReadString(schemas.CreateKeyResponse_KeyName, v.KeyName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyRequest, schemas.CreateKeyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyRequest, schemas.CreateKeyResponse), output: &CreateKeyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKey"); err != nil {

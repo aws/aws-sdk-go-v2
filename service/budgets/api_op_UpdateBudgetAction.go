@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,44 +70,6 @@ type UpdateBudgetActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBudgetActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBudgetActionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBudgetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.UpdateBudgetActionRequest_AccountId, *v.AccountId)
-	}
-	if v.ActionId != nil {
-		s.WriteString(schemas.UpdateBudgetActionRequest_ActionId, *v.ActionId)
-	}
-	if v.ActionThreshold != nil {
-		s.WriteStruct(schemas.UpdateBudgetActionRequest_ActionThreshold)
-		v.ActionThreshold.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApprovalModel != "" {
-		s.WriteString(schemas.UpdateBudgetActionRequest_ApprovalModel, string(v.ApprovalModel))
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.UpdateBudgetActionRequest_BudgetName, *v.BudgetName)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.UpdateBudgetActionRequest_Definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateBudgetActionRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.NotificationType != "" {
-		s.WriteString(schemas.UpdateBudgetActionRequest_NotificationType, string(v.NotificationType))
-	}
-	serializeSubscribers(s, schemas.UpdateBudgetActionRequest_Subscribers, v.Subscribers)
-}
-
 type UpdateBudgetActionOutput struct {
 
 	// The account ID of the user. It's a 12-digit number.
@@ -142,33 +102,16 @@ type UpdateBudgetActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBudgetActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBudgetActionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBudgetActionResponse_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.UpdateBudgetActionResponse_AccountId, v.AccountId)
-		case schemas.UpdateBudgetActionResponse_BudgetName:
-			v.BudgetName = new(string)
-			return d.ReadString(schemas.UpdateBudgetActionResponse_BudgetName, v.BudgetName)
-		case schemas.UpdateBudgetActionResponse_NewAction:
-			v.NewAction = &types.Action{}
-			return v.NewAction.Deserialize(d)
-		case schemas.UpdateBudgetActionResponse_OldAction:
-			v.OldAction = &types.Action{}
-			return v.OldAction.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudgetAction, schemas.UpdateBudgetActionRequest, schemas.UpdateBudgetActionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBudgetAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudgetAction, schemas.UpdateBudgetActionRequest, schemas.UpdateBudgetActionResponse), output: &UpdateBudgetActionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBudgetAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBudgetAction"); err != nil {

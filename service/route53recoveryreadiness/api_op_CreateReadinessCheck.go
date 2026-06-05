@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type CreateReadinessCheckInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateReadinessCheckInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateReadinessCheckRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateReadinessCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReadinessCheckName != nil {
-		s.WriteString(schemas.CreateReadinessCheckRequest_ReadinessCheckName, *v.ReadinessCheckName)
-	}
-	if v.ResourceSetName != nil {
-		s.WriteString(schemas.CreateReadinessCheckRequest_ResourceSetName, *v.ResourceSetName)
-	}
-	serializeTags(s, schemas.CreateReadinessCheckRequest_Tags, v.Tags)
-}
-
 type CreateReadinessCheckOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with a readiness check.
@@ -86,32 +68,16 @@ type CreateReadinessCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateReadinessCheckResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateReadinessCheckResponse_ReadinessCheckArn:
-			v.ReadinessCheckArn = new(string)
-			return d.ReadString(schemas.CreateReadinessCheckResponse_ReadinessCheckArn, v.ReadinessCheckArn)
-		case schemas.CreateReadinessCheckResponse_ReadinessCheckName:
-			v.ReadinessCheckName = new(string)
-			return d.ReadString(schemas.CreateReadinessCheckResponse_ReadinessCheckName, v.ReadinessCheckName)
-		case schemas.CreateReadinessCheckResponse_ResourceSet:
-			v.ResourceSet = new(string)
-			return d.ReadString(schemas.CreateReadinessCheckResponse_ResourceSet, v.ResourceSet)
-		case schemas.CreateReadinessCheckResponse_Tags:
-			return deserializeTags(d, schemas.CreateReadinessCheckResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateReadinessCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReadinessCheck, schemas.CreateReadinessCheckRequest, schemas.CreateReadinessCheckResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReadinessCheck{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReadinessCheck, schemas.CreateReadinessCheckRequest, schemas.CreateReadinessCheckResponse), output: &CreateReadinessCheckOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReadinessCheck{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateReadinessCheck"); err != nil {

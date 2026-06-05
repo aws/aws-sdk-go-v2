@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type DescribePrivateConnectionInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribePrivateConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePrivateConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePrivateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribePrivateConnectionInput_name, *v.Name)
-	}
 }
 
 // Output containing the Private Connection details.
@@ -100,55 +86,16 @@ type DescribePrivateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePrivateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePrivateConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePrivateConnectionOutput_certificateExpiryTime:
-			v.CertificateExpiryTime = new(time.Time)
-			return d.ReadTime(schemas.DescribePrivateConnectionOutput_certificateExpiryTime, v.CertificateExpiryTime)
-		case schemas.DescribePrivateConnectionOutput_hostAddress:
-			v.HostAddress = new(string)
-			return d.ReadString(schemas.DescribePrivateConnectionOutput_hostAddress, v.HostAddress)
-		case schemas.DescribePrivateConnectionOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribePrivateConnectionOutput_name, v.Name)
-		case schemas.DescribePrivateConnectionOutput_resourceConfigurationId:
-			v.ResourceConfigurationId = new(string)
-			return d.ReadString(schemas.DescribePrivateConnectionOutput_resourceConfigurationId, v.ResourceConfigurationId)
-		case schemas.DescribePrivateConnectionOutput_resourceGatewayId:
-			v.ResourceGatewayId = new(string)
-			return d.ReadString(schemas.DescribePrivateConnectionOutput_resourceGatewayId, v.ResourceGatewayId)
-		case schemas.DescribePrivateConnectionOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DescribePrivateConnectionOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PrivateConnectionStatus(ev)
-			return nil
-		case schemas.DescribePrivateConnectionOutput_tags:
-			return deserializeTags(d, schemas.DescribePrivateConnectionOutput_tags, &v.Tags)
-		case schemas.DescribePrivateConnectionOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.DescribePrivateConnectionOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.PrivateConnectionType(ev)
-			return nil
-		case schemas.DescribePrivateConnectionOutput_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.DescribePrivateConnectionOutput_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePrivateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrivateConnection, schemas.DescribePrivateConnectionInput, schemas.DescribePrivateConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePrivateConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrivateConnection, schemas.DescribePrivateConnectionInput, schemas.DescribePrivateConnectionOutput), output: &DescribePrivateConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePrivateConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePrivateConnection"); err != nil {

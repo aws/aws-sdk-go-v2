@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,46 +108,6 @@ type CreateMeetingWithAttendeesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMeetingWithAttendeesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMeetingWithAttendeesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateMeetingWithAttendeesRequestItemList(s, schemas.CreateMeetingWithAttendeesRequest_Attendees, v.Attendees)
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.ExternalMeetingId != nil {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_ExternalMeetingId, *v.ExternalMeetingId)
-	}
-	if v.MediaPlacementNetworkType != "" {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MediaPlacementNetworkType, string(v.MediaPlacementNetworkType))
-	}
-	if v.MediaRegion != nil {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MediaRegion, *v.MediaRegion)
-	}
-	if v.MeetingFeatures != nil {
-		s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest_MeetingFeatures)
-		v.MeetingFeatures.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MeetingHostId != nil {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MeetingHostId, *v.MeetingHostId)
-	}
-	if v.NotificationsConfiguration != nil {
-		s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest_NotificationsConfiguration)
-		v.NotificationsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrimaryMeetingId != nil {
-		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_PrimaryMeetingId, *v.PrimaryMeetingId)
-	}
-	serializeTagList(s, schemas.CreateMeetingWithAttendeesRequest_Tags, v.Tags)
-	serializeTenantIdList(s, schemas.CreateMeetingWithAttendeesRequest_TenantIds, v.TenantIds)
-}
-
 type CreateMeetingWithAttendeesOutput struct {
 
 	// The attendee information, including attendees' IDs and join tokens.
@@ -168,28 +126,16 @@ type CreateMeetingWithAttendeesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMeetingWithAttendeesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMeetingWithAttendeesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMeetingWithAttendeesResponse_Attendees:
-			return deserializeAttendeeList(d, schemas.CreateMeetingWithAttendeesResponse_Attendees, &v.Attendees)
-		case schemas.CreateMeetingWithAttendeesResponse_Errors:
-			return deserializeBatchCreateAttendeeErrorList(d, schemas.CreateMeetingWithAttendeesResponse_Errors, &v.Errors)
-		case schemas.CreateMeetingWithAttendeesResponse_Meeting:
-			v.Meeting = &types.Meeting{}
-			return v.Meeting.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingWithAttendees, schemas.CreateMeetingWithAttendeesRequest, schemas.CreateMeetingWithAttendeesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeetingWithAttendees{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingWithAttendees, schemas.CreateMeetingWithAttendeesRequest, schemas.CreateMeetingWithAttendeesResponse), output: &CreateMeetingWithAttendeesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMeetingWithAttendees{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMeetingWithAttendees"); err != nil {

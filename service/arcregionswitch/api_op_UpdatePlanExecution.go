@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type UpdatePlanExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePlanExecutionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePlanExecutionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePlanExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.UpdatePlanExecutionRequest_action, string(v.Action))
-	}
-	if v.Comment != nil {
-		s.WriteString(schemas.UpdatePlanExecutionRequest_comment, *v.Comment)
-	}
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.UpdatePlanExecutionRequest_executionId, *v.ExecutionId)
-	}
-	if v.PlanArn != nil {
-		s.WriteString(schemas.UpdatePlanExecutionRequest_planArn, *v.PlanArn)
-	}
-}
-
 type UpdatePlanExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,21 +60,16 @@ type UpdatePlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePlanExecutionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlanExecution, schemas.UpdatePlanExecutionRequest, schemas.UpdatePlanExecutionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdatePlanExecution{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlanExecution, schemas.UpdatePlanExecutionRequest, schemas.UpdatePlanExecutionResponse), output: &UpdatePlanExecutionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdatePlanExecution{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePlanExecution"); err != nil {

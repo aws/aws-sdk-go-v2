@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,30 +51,6 @@ type UpdateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDocumentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDocumentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.UpdateDocumentRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.DocumentId != nil {
-		s.WriteString(schemas.UpdateDocumentRequest_DocumentId, *v.DocumentId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateDocumentRequest_Name, *v.Name)
-	}
-	if v.ParentFolderId != nil {
-		s.WriteString(schemas.UpdateDocumentRequest_ParentFolderId, *v.ParentFolderId)
-	}
-	if v.ResourceState != "" {
-		s.WriteString(schemas.UpdateDocumentRequest_ResourceState, string(v.ResourceState))
-	}
-}
-
 type UpdateDocumentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,29 +58,16 @@ type UpdateDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDocumentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocument, schemas.UpdateDocumentRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDocument{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDocument, schemas.UpdateDocumentRequest, nil), output: &UpdateDocumentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDocument{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDocument"); err != nil {

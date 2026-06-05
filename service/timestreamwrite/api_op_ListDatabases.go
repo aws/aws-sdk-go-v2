@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDatabasesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDatabasesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDatabasesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDatabasesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDatabasesOutput struct {
 
 	// A list of database names.
@@ -77,26 +60,16 @@ type ListDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDatabasesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDatabasesResponse_Databases:
-			return deserializeDatabaseList(d, schemas.ListDatabasesResponse_Databases, &v.Databases)
-		case schemas.ListDatabasesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDatabasesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDatabases{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesRequest, schemas.ListDatabasesResponse), output: &ListDatabasesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDatabases{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDatabases"); err != nil {

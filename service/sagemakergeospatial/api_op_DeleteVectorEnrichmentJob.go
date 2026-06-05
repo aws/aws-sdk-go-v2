@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteVectorEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteVectorEnrichmentJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DeleteVectorEnrichmentJobInput_Arn, *v.Arn)
-	}
-}
-
 type DeleteVectorEnrichmentJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DeleteVectorEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteVectorEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteVectorEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectorEnrichmentJob, schemas.DeleteVectorEnrichmentJobInput, schemas.DeleteVectorEnrichmentJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVectorEnrichmentJob, schemas.DeleteVectorEnrichmentJobInput, schemas.DeleteVectorEnrichmentJobOutput), output: &DeleteVectorEnrichmentJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteVectorEnrichmentJob"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,33 +74,6 @@ type StartImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartImportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartImportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartImportJobRequest_clientToken, *v.ClientToken)
-	}
-	if v.ExternalSourceConfiguration != nil {
-		s.WriteStruct(schemas.StartImportJobRequest_externalSourceConfiguration)
-		v.ExternalSourceConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ImportJobType != "" {
-		s.WriteString(schemas.StartImportJobRequest_importJobType, string(v.ImportJobType))
-	}
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.StartImportJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	serializeContentMetadata(s, schemas.StartImportJobRequest_metadata, v.Metadata)
-	if v.UploadId != nil {
-		s.WriteString(schemas.StartImportJobRequest_uploadId, *v.UploadId)
-	}
-}
-
 type StartImportJobOutput struct {
 
 	// The import job.
@@ -114,24 +85,16 @@ type StartImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartImportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartImportJobResponse_importJob:
-			v.ImportJob = &types.ImportJobData{}
-			return v.ImportJob.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportJob, schemas.StartImportJobRequest, schemas.StartImportJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportJob, schemas.StartImportJobRequest, schemas.StartImportJobResponse), output: &StartImportJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImportJob"); err != nil {

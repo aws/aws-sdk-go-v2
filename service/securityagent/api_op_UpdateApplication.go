@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_applicationId, *v.ApplicationId)
-	}
-	if v.DefaultKmsKeyId != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_defaultKmsKeyId, *v.DefaultKmsKeyId)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_roleArn, *v.RoleArn)
-	}
-}
-
 type UpdateApplicationOutput struct {
 
 	// The unique identifier of the updated application.
@@ -76,24 +56,16 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateApplicationResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.UpdateApplicationResponse_applicationId, v.ApplicationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {

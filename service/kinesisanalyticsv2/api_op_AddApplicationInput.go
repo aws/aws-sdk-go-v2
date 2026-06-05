@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,26 +58,6 @@ type AddApplicationInputInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddApplicationInputInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddApplicationInputRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddApplicationInputInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.AddApplicationInputRequest_ApplicationName, *v.ApplicationName)
-	}
-	if v.CurrentApplicationVersionId != nil {
-		s.WriteInt64(schemas.AddApplicationInputRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
-	}
-	if v.Input != nil {
-		s.WriteStruct(schemas.AddApplicationInputRequest_Input)
-		v.Input.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AddApplicationInputOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.
@@ -97,29 +75,16 @@ type AddApplicationInputOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddApplicationInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddApplicationInputResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddApplicationInputResponse_ApplicationARN:
-			v.ApplicationARN = new(string)
-			return d.ReadString(schemas.AddApplicationInputResponse_ApplicationARN, v.ApplicationARN)
-		case schemas.AddApplicationInputResponse_ApplicationVersionId:
-			v.ApplicationVersionId = new(int64)
-			return d.ReadInt64(schemas.AddApplicationInputResponse_ApplicationVersionId, v.ApplicationVersionId)
-		case schemas.AddApplicationInputResponse_InputDescriptions:
-			return deserializeInputDescriptions(d, schemas.AddApplicationInputResponse_InputDescriptions, &v.InputDescriptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddApplicationInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInput, schemas.AddApplicationInputRequest, schemas.AddApplicationInputResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationInput{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInput, schemas.AddApplicationInputRequest, schemas.AddApplicationInputResponse), output: &AddApplicationInputOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationInput{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddApplicationInput"); err != nil {

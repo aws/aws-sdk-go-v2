@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type GetMemberInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMemberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMemberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetMemberRequest_id, *v.Id)
-	}
 }
 
 type GetMemberOutput struct {
@@ -97,51 +83,16 @@ type GetMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMemberResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMemberResponse_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.GetMemberResponse_accountId, v.AccountId)
-		case schemas.GetMemberResponse_administratorAccountId:
-			v.AdministratorAccountId = new(string)
-			return d.ReadString(schemas.GetMemberResponse_administratorAccountId, v.AdministratorAccountId)
-		case schemas.GetMemberResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetMemberResponse_arn, v.Arn)
-		case schemas.GetMemberResponse_email:
-			v.Email = new(string)
-			return d.ReadString(schemas.GetMemberResponse_email, v.Email)
-		case schemas.GetMemberResponse_invitedAt:
-			v.InvitedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMemberResponse_invitedAt, v.InvitedAt)
-		case schemas.GetMemberResponse_masterAccountId:
-			v.MasterAccountId = new(string)
-			return d.ReadString(schemas.GetMemberResponse_masterAccountId, v.MasterAccountId)
-		case schemas.GetMemberResponse_relationshipStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetMemberResponse_relationshipStatus, &ev); err != nil {
-				return err
-			}
-			v.RelationshipStatus = types.RelationshipStatus(ev)
-			return nil
-		case schemas.GetMemberResponse_tags:
-			return deserializeTagMap(d, schemas.GetMemberResponse_tags, &v.Tags)
-		case schemas.GetMemberResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMemberResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMember, schemas.GetMemberRequest, schemas.GetMemberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMember, schemas.GetMemberRequest, schemas.GetMemberResponse), output: &GetMemberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMember"); err != nil {

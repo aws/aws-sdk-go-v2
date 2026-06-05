@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DescribeValidDBInstanceModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeValidDBInstanceModificationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeValidDBInstanceModificationsMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeValidDBInstanceModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-}
-
 type DescribeValidDBInstanceModificationsOutput struct {
 
 	// Information about valid modifications that you can make to your DB instance.
@@ -65,24 +51,16 @@ type DescribeValidDBInstanceModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeValidDBInstanceModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeValidDBInstanceModificationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeValidDBInstanceModificationsResult_ValidDBInstanceModificationsMessage:
-			v.ValidDBInstanceModificationsMessage = &types.ValidDBInstanceModificationsMessage{}
-			return v.ValidDBInstanceModificationsMessage.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeValidDBInstanceModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeValidDBInstanceModifications, schemas.DescribeValidDBInstanceModificationsMessage, schemas.DescribeValidDBInstanceModificationsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeValidDBInstanceModifications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeValidDBInstanceModifications, schemas.DescribeValidDBInstanceModificationsMessage, schemas.DescribeValidDBInstanceModificationsResult), output: &DescribeValidDBInstanceModificationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeValidDBInstanceModifications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeValidDBInstanceModifications"); err != nil {

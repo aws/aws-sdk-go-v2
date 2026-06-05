@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,44 +22,6 @@ type AcceptChannelHandshakeDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptChannelHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptChannelHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptChannelHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeDetail_id, *v.Id)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AcceptChannelHandshakeDetail_status, string(v.Status))
-	}
-}
-func (v *AcceptChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptChannelHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptChannelHandshakeDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AcceptChannelHandshakeDetail_arn, v.Arn)
-		case schemas.AcceptChannelHandshakeDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AcceptChannelHandshakeDetail_id, v.Id)
-		case schemas.AcceptChannelHandshakeDetail_status:
-			var ev string
-			if err := d.ReadString(schemas.AcceptChannelHandshakeDetail_status, &ev); err != nil {
-				return err
-			}
-			v.Status = HandshakeStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains details about a canceled channel handshake.
 type CancelChannelHandshakeDetail struct {
 
@@ -75,44 +35,6 @@ type CancelChannelHandshakeDetail struct {
 	Status HandshakeStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *CancelChannelHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelChannelHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelChannelHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CancelChannelHandshakeDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CancelChannelHandshakeDetail_id, *v.Id)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CancelChannelHandshakeDetail_status, string(v.Status))
-	}
-}
-func (v *CancelChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelChannelHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelChannelHandshakeDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CancelChannelHandshakeDetail_arn, v.Arn)
-		case schemas.CancelChannelHandshakeDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CancelChannelHandshakeDetail_id, v.Id)
-		case schemas.CancelChannelHandshakeDetail_status:
-			var ev string
-			if err := d.ReadString(schemas.CancelChannelHandshakeDetail_status, &ev); err != nil {
-				return err
-			}
-			v.Status = HandshakeStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains the payload data for different types of channel handshakes.
@@ -133,14 +55,6 @@ type ChannelHandshakePayloadMemberRevokeServicePeriodPayload struct {
 }
 
 func (*ChannelHandshakePayloadMemberRevokeServicePeriodPayload) isChannelHandshakePayload() {}
-func (v *ChannelHandshakePayloadMemberRevokeServicePeriodPayload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelHandshakePayload_revokeServicePeriodPayload)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelHandshakePayloadMemberRevokeServicePeriodPayload) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Payload for starting a service period handshake.
 type ChannelHandshakePayloadMemberStartServicePeriodPayload struct {
@@ -150,14 +64,6 @@ type ChannelHandshakePayloadMemberStartServicePeriodPayload struct {
 }
 
 func (*ChannelHandshakePayloadMemberStartServicePeriodPayload) isChannelHandshakePayload() {}
-func (v *ChannelHandshakePayloadMemberStartServicePeriodPayload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelHandshakePayload_startServicePeriodPayload)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelHandshakePayloadMemberStartServicePeriodPayload) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Summary information about a channel handshake.
 type ChannelHandshakeSummary struct {
@@ -204,105 +110,6 @@ type ChannelHandshakeSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelHandshakeSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelHandshakeSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelHandshakeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_arn, *v.Arn)
-	}
-	if v.AssociatedResourceId != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_associatedResourceId, *v.AssociatedResourceId)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ChannelHandshakeSummary_createdAt, *v.CreatedAt)
-	}
-	serializeHandshakeDetail(s, schemas.ChannelHandshakeSummary_detail, v.Detail)
-	if v.HandshakeType != "" {
-		s.WriteString(schemas.ChannelHandshakeSummary_handshakeType, string(v.HandshakeType))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_id, *v.Id)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_ownerAccountId, *v.OwnerAccountId)
-	}
-	if v.ReceiverAccountId != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_receiverAccountId, *v.ReceiverAccountId)
-	}
-	if v.SenderAccountId != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_senderAccountId, *v.SenderAccountId)
-	}
-	if v.SenderDisplayName != nil {
-		s.WriteString(schemas.ChannelHandshakeSummary_senderDisplayName, *v.SenderDisplayName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ChannelHandshakeSummary_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ChannelHandshakeSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ChannelHandshakeSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelHandshakeSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelHandshakeSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_arn, v.Arn)
-		case schemas.ChannelHandshakeSummary_associatedResourceId:
-			v.AssociatedResourceId = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_associatedResourceId, v.AssociatedResourceId)
-		case schemas.ChannelHandshakeSummary_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_catalog, v.Catalog)
-		case schemas.ChannelHandshakeSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelHandshakeSummary_createdAt, v.CreatedAt)
-		case schemas.ChannelHandshakeSummary_detail:
-			return deserializeHandshakeDetail(d, schemas.ChannelHandshakeSummary_detail, &v.Detail)
-		case schemas.ChannelHandshakeSummary_handshakeType:
-			var ev string
-			if err := d.ReadString(schemas.ChannelHandshakeSummary_handshakeType, &ev); err != nil {
-				return err
-			}
-			v.HandshakeType = HandshakeType(ev)
-			return nil
-		case schemas.ChannelHandshakeSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_id, v.Id)
-		case schemas.ChannelHandshakeSummary_ownerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_ownerAccountId, v.OwnerAccountId)
-		case schemas.ChannelHandshakeSummary_receiverAccountId:
-			v.ReceiverAccountId = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_receiverAccountId, v.ReceiverAccountId)
-		case schemas.ChannelHandshakeSummary_senderAccountId:
-			v.SenderAccountId = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_senderAccountId, v.SenderAccountId)
-		case schemas.ChannelHandshakeSummary_senderDisplayName:
-			v.SenderDisplayName = new(string)
-			return d.ReadString(schemas.ChannelHandshakeSummary_senderDisplayName, v.SenderDisplayName)
-		case schemas.ChannelHandshakeSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.ChannelHandshakeSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = HandshakeStatus(ev)
-			return nil
-		case schemas.ChannelHandshakeSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelHandshakeSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains details about a newly created channel handshake.
 type CreateChannelHandshakeDetail struct {
 
@@ -313,34 +120,6 @@ type CreateChannelHandshakeDetail struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateChannelHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateChannelHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateChannelHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateChannelHandshakeDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CreateChannelHandshakeDetail_id, *v.Id)
-	}
-}
-func (v *CreateChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateChannelHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateChannelHandshakeDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateChannelHandshakeDetail_arn, v.Arn)
-		case schemas.CreateChannelHandshakeDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateChannelHandshakeDetail_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Contains details about a newly created program management account.
@@ -355,34 +134,6 @@ type CreateProgramManagementAccountDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProgramManagementAccountDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProgramManagementAccountDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProgramManagementAccountDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateProgramManagementAccountDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CreateProgramManagementAccountDetail_id, *v.Id)
-	}
-}
-func (v *CreateProgramManagementAccountDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProgramManagementAccountDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProgramManagementAccountDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateProgramManagementAccountDetail_arn, v.Arn)
-		case schemas.CreateProgramManagementAccountDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateProgramManagementAccountDetail_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Contains details about a newly created relationship.
 type CreateRelationshipDetail struct {
 
@@ -393,34 +144,6 @@ type CreateRelationshipDetail struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateRelationshipDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRelationshipDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateRelationshipDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CreateRelationshipDetail_id, *v.Id)
-	}
-}
-func (v *CreateRelationshipDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRelationshipDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRelationshipDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateRelationshipDetail_arn, v.Arn)
-		case schemas.CreateRelationshipDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateRelationshipDetail_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Contains detailed information about different types of handshakes.
@@ -442,14 +165,6 @@ type HandshakeDetailMemberProgramManagementAccountHandshakeDetail struct {
 }
 
 func (*HandshakeDetailMemberProgramManagementAccountHandshakeDetail) isHandshakeDetail() {}
-func (v *HandshakeDetailMemberProgramManagementAccountHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HandshakeDetail_programManagementAccountHandshakeDetail)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *HandshakeDetailMemberProgramManagementAccountHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details for a revoke service period handshake.
 type HandshakeDetailMemberRevokeServicePeriodHandshakeDetail struct {
@@ -459,14 +174,6 @@ type HandshakeDetailMemberRevokeServicePeriodHandshakeDetail struct {
 }
 
 func (*HandshakeDetailMemberRevokeServicePeriodHandshakeDetail) isHandshakeDetail() {}
-func (v *HandshakeDetailMemberRevokeServicePeriodHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HandshakeDetail_revokeServicePeriodHandshakeDetail)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *HandshakeDetailMemberRevokeServicePeriodHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details for a start service period handshake.
 type HandshakeDetailMemberStartServicePeriodHandshakeDetail struct {
@@ -476,14 +183,6 @@ type HandshakeDetailMemberStartServicePeriodHandshakeDetail struct {
 }
 
 func (*HandshakeDetailMemberStartServicePeriodHandshakeDetail) isHandshakeDetail() {}
-func (v *HandshakeDetailMemberStartServicePeriodHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HandshakeDetail_startServicePeriodHandshakeDetail)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *HandshakeDetailMemberStartServicePeriodHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Type-specific filters for listing channel handshakes.
 //
@@ -505,14 +204,6 @@ type ListChannelHandshakesTypeFiltersMemberProgramManagementAccountTypeFilters s
 
 func (*ListChannelHandshakesTypeFiltersMemberProgramManagementAccountTypeFilters) isListChannelHandshakesTypeFilters() {
 }
-func (v *ListChannelHandshakesTypeFiltersMemberProgramManagementAccountTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeFilters_programManagementAccountTypeFilters)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeFiltersMemberProgramManagementAccountTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Filters specific to revoke service period handshakes.
 type ListChannelHandshakesTypeFiltersMemberRevokeServicePeriodTypeFilters struct {
@@ -523,14 +214,6 @@ type ListChannelHandshakesTypeFiltersMemberRevokeServicePeriodTypeFilters struct
 
 func (*ListChannelHandshakesTypeFiltersMemberRevokeServicePeriodTypeFilters) isListChannelHandshakesTypeFilters() {
 }
-func (v *ListChannelHandshakesTypeFiltersMemberRevokeServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeFiltersMemberRevokeServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Filters specific to start service period handshakes.
 type ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters struct {
@@ -540,14 +223,6 @@ type ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters struct 
 }
 
 func (*ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters) isListChannelHandshakesTypeFilters() {
-}
-func (v *ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeFilters_startServicePeriodTypeFilters)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeFiltersMemberStartServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // Type-specific sorting options for listing channel handshakes.
@@ -570,14 +245,6 @@ type ListChannelHandshakesTypeSortMemberProgramManagementAccountTypeSort struct 
 
 func (*ListChannelHandshakesTypeSortMemberProgramManagementAccountTypeSort) isListChannelHandshakesTypeSort() {
 }
-func (v *ListChannelHandshakesTypeSortMemberProgramManagementAccountTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeSort_programManagementAccountTypeSort)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeSortMemberProgramManagementAccountTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Sorting options specific to revoke service period handshakes.
 type ListChannelHandshakesTypeSortMemberRevokeServicePeriodTypeSort struct {
@@ -588,14 +255,6 @@ type ListChannelHandshakesTypeSortMemberRevokeServicePeriodTypeSort struct {
 
 func (*ListChannelHandshakesTypeSortMemberRevokeServicePeriodTypeSort) isListChannelHandshakesTypeSort() {
 }
-func (v *ListChannelHandshakesTypeSortMemberRevokeServicePeriodTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeSort_revokeServicePeriodTypeSort)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeSortMemberRevokeServicePeriodTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Sorting options specific to start service period handshakes.
 type ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort struct {
@@ -605,14 +264,6 @@ type ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort struct {
 }
 
 func (*ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort) isListChannelHandshakesTypeSort() {
-}
-func (v *ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelHandshakesTypeSort_startServicePeriodTypeSort)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ListChannelHandshakesTypeSortMemberStartServicePeriodTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // Base sorting configuration for program management accounts.
@@ -631,42 +282,6 @@ type ListProgramManagementAccountsSortBase struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProgramManagementAccountsSortBase) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProgramManagementAccountsSortBase)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProgramManagementAccountsSortBase) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListProgramManagementAccountsSortBase_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListProgramManagementAccountsSortBase_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ListProgramManagementAccountsSortBase) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProgramManagementAccountsSortBase, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProgramManagementAccountsSortBase_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ListProgramManagementAccountsSortBase_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = ListProgramManagementAccountsSortName(ev)
-			return nil
-		case schemas.ListProgramManagementAccountsSortBase_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ListProgramManagementAccountsSortBase_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Base sorting configuration for relationships.
 type ListRelationshipsSortBase struct {
 
@@ -681,42 +296,6 @@ type ListRelationshipsSortBase struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListRelationshipsSortBase) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRelationshipsSortBase)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRelationshipsSortBase) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListRelationshipsSortBase_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListRelationshipsSortBase_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ListRelationshipsSortBase) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRelationshipsSortBase, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRelationshipsSortBase_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ListRelationshipsSortBase_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = ListRelationshipsSortName(ev)
-			return nil
-		case schemas.ListRelationshipsSortBase_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ListRelationshipsSortBase_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration for partner-led support plans.
@@ -738,48 +317,6 @@ type PartnerLedSupport struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PartnerLedSupport) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartnerLedSupport)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartnerLedSupport) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Coverage != "" {
-		s.WriteString(schemas.PartnerLedSupport_coverage, string(v.Coverage))
-	}
-	if v.Provider != "" {
-		s.WriteString(schemas.PartnerLedSupport_provider, string(v.Provider))
-	}
-	if v.TamLocation != nil {
-		s.WriteString(schemas.PartnerLedSupport_tamLocation, *v.TamLocation)
-	}
-}
-func (v *PartnerLedSupport) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartnerLedSupport, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartnerLedSupport_coverage:
-			var ev string
-			if err := d.ReadString(schemas.PartnerLedSupport_coverage, &ev); err != nil {
-				return err
-			}
-			v.Coverage = Coverage(ev)
-			return nil
-		case schemas.PartnerLedSupport_provider:
-			var ev string
-			if err := d.ReadString(schemas.PartnerLedSupport_provider, &ev); err != nil {
-				return err
-			}
-			v.Provider = Provider(ev)
-			return nil
-		case schemas.PartnerLedSupport_tamLocation:
-			v.TamLocation = new(string)
-			return d.ReadString(schemas.PartnerLedSupport_tamLocation, v.TamLocation)
-		}
-		return nil
-	})
-}
-
 // Details specific to program management account handshakes.
 type ProgramManagementAccountHandshakeDetail struct {
 
@@ -787,32 +324,6 @@ type ProgramManagementAccountHandshakeDetail struct {
 	Program Program
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProgramManagementAccountHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgramManagementAccountHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgramManagementAccountHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Program != "" {
-		s.WriteString(schemas.ProgramManagementAccountHandshakeDetail_program, string(v.Program))
-	}
-}
-func (v *ProgramManagementAccountHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgramManagementAccountHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgramManagementAccountHandshakeDetail_program:
-			var ev string
-			if err := d.ReadString(schemas.ProgramManagementAccountHandshakeDetail_program, &ev); err != nil {
-				return err
-			}
-			v.Program = Program(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary information about a program management account.
@@ -854,96 +365,6 @@ type ProgramManagementAccountSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProgramManagementAccountSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgramManagementAccountSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgramManagementAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ProgramManagementAccountSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_id, *v.Id)
-	}
-	if v.Program != "" {
-		s.WriteString(schemas.ProgramManagementAccountSummary_program, string(v.Program))
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.ProgramManagementAccountSummary_revision, *v.Revision)
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.ProgramManagementAccountSummary_startDate, *v.StartDate)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ProgramManagementAccountSummary_status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ProgramManagementAccountSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ProgramManagementAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgramManagementAccountSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgramManagementAccountSummary_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_accountId, v.AccountId)
-		case schemas.ProgramManagementAccountSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_arn, v.Arn)
-		case schemas.ProgramManagementAccountSummary_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_catalog, v.Catalog)
-		case schemas.ProgramManagementAccountSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ProgramManagementAccountSummary_createdAt, v.CreatedAt)
-		case schemas.ProgramManagementAccountSummary_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_displayName, v.DisplayName)
-		case schemas.ProgramManagementAccountSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_id, v.Id)
-		case schemas.ProgramManagementAccountSummary_program:
-			var ev string
-			if err := d.ReadString(schemas.ProgramManagementAccountSummary_program, &ev); err != nil {
-				return err
-			}
-			v.Program = Program(ev)
-			return nil
-		case schemas.ProgramManagementAccountSummary_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.ProgramManagementAccountSummary_revision, v.Revision)
-		case schemas.ProgramManagementAccountSummary_startDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.ProgramManagementAccountSummary_startDate, v.StartDate)
-		case schemas.ProgramManagementAccountSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.ProgramManagementAccountSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ProgramManagementAccountStatus(ev)
-			return nil
-		case schemas.ProgramManagementAccountSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ProgramManagementAccountSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Type-specific filters for program management accounts.
 type ProgramManagementAccountTypeFilters struct {
 
@@ -951,25 +372,6 @@ type ProgramManagementAccountTypeFilters struct {
 	Programs []Program
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProgramManagementAccountTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgramManagementAccountTypeFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgramManagementAccountTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramList(s, schemas.ProgramManagementAccountTypeFilters_programs, v.Programs)
-}
-func (v *ProgramManagementAccountTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgramManagementAccountTypeFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgramManagementAccountTypeFilters_programs:
-			return deserializeProgramList(d, schemas.ProgramManagementAccountTypeFilters_programs, &v.Programs)
-		}
-		return nil
-	})
 }
 
 // Type-specific sorting options for program management accounts.
@@ -988,42 +390,6 @@ type ProgramManagementAccountTypeSort struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProgramManagementAccountTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgramManagementAccountTypeSort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgramManagementAccountTypeSort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.ProgramManagementAccountTypeSort_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ProgramManagementAccountTypeSort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ProgramManagementAccountTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgramManagementAccountTypeSort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgramManagementAccountTypeSort_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ProgramManagementAccountTypeSort_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = ProgramManagementAccountTypeSortName(ev)
-			return nil
-		case schemas.ProgramManagementAccountTypeSort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ProgramManagementAccountTypeSort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains details about a rejected channel handshake.
 type RejectChannelHandshakeDetail struct {
 
@@ -1037,44 +403,6 @@ type RejectChannelHandshakeDetail struct {
 	Status HandshakeStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *RejectChannelHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectChannelHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectChannelHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.RejectChannelHandshakeDetail_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RejectChannelHandshakeDetail_id, *v.Id)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RejectChannelHandshakeDetail_status, string(v.Status))
-	}
-}
-func (v *RejectChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectChannelHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectChannelHandshakeDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RejectChannelHandshakeDetail_arn, v.Arn)
-		case schemas.RejectChannelHandshakeDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RejectChannelHandshakeDetail_id, v.Id)
-		case schemas.RejectChannelHandshakeDetail_status:
-			var ev string
-			if err := d.ReadString(schemas.RejectChannelHandshakeDetail_status, &ev); err != nil {
-				return err
-			}
-			v.Status = HandshakeStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Detailed information about a partner relationship.
@@ -1122,112 +450,6 @@ type RelationshipDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RelationshipDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RelationshipDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.RelationshipDetail_arn, *v.Arn)
-	}
-	if v.AssociatedAccountId != nil {
-		s.WriteString(schemas.RelationshipDetail_associatedAccountId, *v.AssociatedAccountId)
-	}
-	if v.AssociationType != "" {
-		s.WriteString(schemas.RelationshipDetail_associationType, string(v.AssociationType))
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.RelationshipDetail_catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.RelationshipDetail_createdAt, *v.CreatedAt)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.RelationshipDetail_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RelationshipDetail_id, *v.Id)
-	}
-	if v.ProgramManagementAccountId != nil {
-		s.WriteString(schemas.RelationshipDetail_programManagementAccountId, *v.ProgramManagementAccountId)
-	}
-	if v.ResaleAccountModel != "" {
-		s.WriteString(schemas.RelationshipDetail_resaleAccountModel, string(v.ResaleAccountModel))
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.RelationshipDetail_revision, *v.Revision)
-	}
-	if v.Sector != "" {
-		s.WriteString(schemas.RelationshipDetail_sector, string(v.Sector))
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.RelationshipDetail_startDate, *v.StartDate)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.RelationshipDetail_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *RelationshipDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RelationshipDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RelationshipDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RelationshipDetail_arn, v.Arn)
-		case schemas.RelationshipDetail_associatedAccountId:
-			v.AssociatedAccountId = new(string)
-			return d.ReadString(schemas.RelationshipDetail_associatedAccountId, v.AssociatedAccountId)
-		case schemas.RelationshipDetail_associationType:
-			var ev string
-			if err := d.ReadString(schemas.RelationshipDetail_associationType, &ev); err != nil {
-				return err
-			}
-			v.AssociationType = AssociationType(ev)
-			return nil
-		case schemas.RelationshipDetail_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.RelationshipDetail_catalog, v.Catalog)
-		case schemas.RelationshipDetail_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.RelationshipDetail_createdAt, v.CreatedAt)
-		case schemas.RelationshipDetail_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.RelationshipDetail_displayName, v.DisplayName)
-		case schemas.RelationshipDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RelationshipDetail_id, v.Id)
-		case schemas.RelationshipDetail_programManagementAccountId:
-			v.ProgramManagementAccountId = new(string)
-			return d.ReadString(schemas.RelationshipDetail_programManagementAccountId, v.ProgramManagementAccountId)
-		case schemas.RelationshipDetail_resaleAccountModel:
-			var ev string
-			if err := d.ReadString(schemas.RelationshipDetail_resaleAccountModel, &ev); err != nil {
-				return err
-			}
-			v.ResaleAccountModel = ResaleAccountModel(ev)
-			return nil
-		case schemas.RelationshipDetail_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.RelationshipDetail_revision, v.Revision)
-		case schemas.RelationshipDetail_sector:
-			var ev string
-			if err := d.ReadString(schemas.RelationshipDetail_sector, &ev); err != nil {
-				return err
-			}
-			v.Sector = Sector(ev)
-			return nil
-		case schemas.RelationshipDetail_startDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.RelationshipDetail_startDate, v.StartDate)
-		case schemas.RelationshipDetail_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.RelationshipDetail_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Summary information about a partner relationship.
 type RelationshipSummary struct {
 
@@ -1270,102 +492,6 @@ type RelationshipSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RelationshipSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RelationshipSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RelationshipSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.RelationshipSummary_arn, *v.Arn)
-	}
-	if v.AssociatedAccountId != nil {
-		s.WriteString(schemas.RelationshipSummary_associatedAccountId, *v.AssociatedAccountId)
-	}
-	if v.AssociationType != "" {
-		s.WriteString(schemas.RelationshipSummary_associationType, string(v.AssociationType))
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.RelationshipSummary_catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.RelationshipSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.RelationshipSummary_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RelationshipSummary_id, *v.Id)
-	}
-	if v.ProgramManagementAccountId != nil {
-		s.WriteString(schemas.RelationshipSummary_programManagementAccountId, *v.ProgramManagementAccountId)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.RelationshipSummary_revision, *v.Revision)
-	}
-	if v.Sector != "" {
-		s.WriteString(schemas.RelationshipSummary_sector, string(v.Sector))
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.RelationshipSummary_startDate, *v.StartDate)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.RelationshipSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *RelationshipSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RelationshipSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RelationshipSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RelationshipSummary_arn, v.Arn)
-		case schemas.RelationshipSummary_associatedAccountId:
-			v.AssociatedAccountId = new(string)
-			return d.ReadString(schemas.RelationshipSummary_associatedAccountId, v.AssociatedAccountId)
-		case schemas.RelationshipSummary_associationType:
-			var ev string
-			if err := d.ReadString(schemas.RelationshipSummary_associationType, &ev); err != nil {
-				return err
-			}
-			v.AssociationType = AssociationType(ev)
-			return nil
-		case schemas.RelationshipSummary_catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.RelationshipSummary_catalog, v.Catalog)
-		case schemas.RelationshipSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.RelationshipSummary_createdAt, v.CreatedAt)
-		case schemas.RelationshipSummary_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.RelationshipSummary_displayName, v.DisplayName)
-		case schemas.RelationshipSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RelationshipSummary_id, v.Id)
-		case schemas.RelationshipSummary_programManagementAccountId:
-			v.ProgramManagementAccountId = new(string)
-			return d.ReadString(schemas.RelationshipSummary_programManagementAccountId, v.ProgramManagementAccountId)
-		case schemas.RelationshipSummary_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.RelationshipSummary_revision, v.Revision)
-		case schemas.RelationshipSummary_sector:
-			var ev string
-			if err := d.ReadString(schemas.RelationshipSummary_sector, &ev); err != nil {
-				return err
-			}
-			v.Sector = Sector(ev)
-			return nil
-		case schemas.RelationshipSummary_startDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.RelationshipSummary_startDate, v.StartDate)
-		case schemas.RelationshipSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.RelationshipSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Configuration for resold enterprise support plans.
 type ResoldEnterprise struct {
 
@@ -1385,44 +511,6 @@ type ResoldEnterprise struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResoldEnterprise) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResoldEnterprise)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResoldEnterprise) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChargeAccountId != nil {
-		s.WriteString(schemas.ResoldEnterprise_chargeAccountId, *v.ChargeAccountId)
-	}
-	if v.Coverage != "" {
-		s.WriteString(schemas.ResoldEnterprise_coverage, string(v.Coverage))
-	}
-	if v.TamLocation != nil {
-		s.WriteString(schemas.ResoldEnterprise_tamLocation, *v.TamLocation)
-	}
-}
-func (v *ResoldEnterprise) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResoldEnterprise, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResoldEnterprise_chargeAccountId:
-			v.ChargeAccountId = new(string)
-			return d.ReadString(schemas.ResoldEnterprise_chargeAccountId, v.ChargeAccountId)
-		case schemas.ResoldEnterprise_coverage:
-			var ev string
-			if err := d.ReadString(schemas.ResoldEnterprise_coverage, &ev); err != nil {
-				return err
-			}
-			v.Coverage = Coverage(ev)
-			return nil
-		case schemas.ResoldEnterprise_tamLocation:
-			v.TamLocation = new(string)
-			return d.ReadString(schemas.ResoldEnterprise_tamLocation, v.TamLocation)
-		}
-		return nil
-	})
-}
-
 // Configuration for resold unified operations support plans.
 type ResoldUnifiedOperations struct {
 
@@ -1440,44 +528,6 @@ type ResoldUnifiedOperations struct {
 	ChargeAccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResoldUnifiedOperations) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResoldUnifiedOperations)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResoldUnifiedOperations) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChargeAccountId != nil {
-		s.WriteString(schemas.ResoldUnifiedOperations_chargeAccountId, *v.ChargeAccountId)
-	}
-	if v.Coverage != "" {
-		s.WriteString(schemas.ResoldUnifiedOperations_coverage, string(v.Coverage))
-	}
-	if v.TamLocation != nil {
-		s.WriteString(schemas.ResoldUnifiedOperations_tamLocation, *v.TamLocation)
-	}
-}
-func (v *ResoldUnifiedOperations) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResoldUnifiedOperations, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResoldUnifiedOperations_chargeAccountId:
-			v.ChargeAccountId = new(string)
-			return d.ReadString(schemas.ResoldUnifiedOperations_chargeAccountId, v.ChargeAccountId)
-		case schemas.ResoldUnifiedOperations_coverage:
-			var ev string
-			if err := d.ReadString(schemas.ResoldUnifiedOperations_coverage, &ev); err != nil {
-				return err
-			}
-			v.Coverage = Coverage(ev)
-			return nil
-		case schemas.ResoldUnifiedOperations_tamLocation:
-			v.TamLocation = new(string)
-			return d.ReadString(schemas.ResoldUnifiedOperations_tamLocation, v.TamLocation)
-		}
-		return nil
-	})
 }
 
 // Details specific to revoke service period handshakes.
@@ -1501,56 +551,6 @@ type RevokeServicePeriodHandshakeDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RevokeServicePeriodHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokeServicePeriodHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokeServicePeriodHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteTime(schemas.RevokeServicePeriodHandshakeDetail_endDate, *v.EndDate)
-	}
-	if v.MinimumNoticeDays != nil {
-		s.WriteString(schemas.RevokeServicePeriodHandshakeDetail_minimumNoticeDays, *v.MinimumNoticeDays)
-	}
-	if v.Note != nil {
-		s.WriteString(schemas.RevokeServicePeriodHandshakeDetail_note, *v.Note)
-	}
-	if v.ServicePeriodType != "" {
-		s.WriteString(schemas.RevokeServicePeriodHandshakeDetail_servicePeriodType, string(v.ServicePeriodType))
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.RevokeServicePeriodHandshakeDetail_startDate, *v.StartDate)
-	}
-}
-func (v *RevokeServicePeriodHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokeServicePeriodHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevokeServicePeriodHandshakeDetail_endDate:
-			v.EndDate = new(time.Time)
-			return d.ReadTime(schemas.RevokeServicePeriodHandshakeDetail_endDate, v.EndDate)
-		case schemas.RevokeServicePeriodHandshakeDetail_minimumNoticeDays:
-			v.MinimumNoticeDays = new(string)
-			return d.ReadString(schemas.RevokeServicePeriodHandshakeDetail_minimumNoticeDays, v.MinimumNoticeDays)
-		case schemas.RevokeServicePeriodHandshakeDetail_note:
-			v.Note = new(string)
-			return d.ReadString(schemas.RevokeServicePeriodHandshakeDetail_note, v.Note)
-		case schemas.RevokeServicePeriodHandshakeDetail_servicePeriodType:
-			var ev string
-			if err := d.ReadString(schemas.RevokeServicePeriodHandshakeDetail_servicePeriodType, &ev); err != nil {
-				return err
-			}
-			v.ServicePeriodType = ServicePeriodType(ev)
-			return nil
-		case schemas.RevokeServicePeriodHandshakeDetail_startDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.RevokeServicePeriodHandshakeDetail_startDate, v.StartDate)
-		}
-		return nil
-	})
-}
-
 // Payload for revoke service period handshake requests.
 type RevokeServicePeriodPayload struct {
 
@@ -1565,34 +565,6 @@ type RevokeServicePeriodPayload struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RevokeServicePeriodPayload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokeServicePeriodPayload)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokeServicePeriodPayload) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Note != nil {
-		s.WriteString(schemas.RevokeServicePeriodPayload_note, *v.Note)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.RevokeServicePeriodPayload_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-}
-func (v *RevokeServicePeriodPayload) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokeServicePeriodPayload, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevokeServicePeriodPayload_note:
-			v.Note = new(string)
-			return d.ReadString(schemas.RevokeServicePeriodPayload_note, v.Note)
-		case schemas.RevokeServicePeriodPayload_programManagementAccountIdentifier:
-			v.ProgramManagementAccountIdentifier = new(string)
-			return d.ReadString(schemas.RevokeServicePeriodPayload_programManagementAccountIdentifier, v.ProgramManagementAccountIdentifier)
-		}
-		return nil
-	})
-}
-
 // Filters specific to revoke service period handshakes.
 type RevokeServicePeriodTypeFilters struct {
 
@@ -1600,25 +572,6 @@ type RevokeServicePeriodTypeFilters struct {
 	ServicePeriodTypes []ServicePeriodType
 
 	noSmithyDocumentSerde
-}
-
-func (v *RevokeServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokeServicePeriodTypeFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokeServicePeriodTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServicePeriodTypeList(s, schemas.RevokeServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
-}
-func (v *RevokeServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokeServicePeriodTypeFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevokeServicePeriodTypeFilters_servicePeriodTypes:
-			return deserializeServicePeriodTypeList(d, schemas.RevokeServicePeriodTypeFilters_servicePeriodTypes, &v.ServicePeriodTypes)
-		}
-		return nil
-	})
 }
 
 // Sorting options specific to revoke service period handshakes.
@@ -1635,42 +588,6 @@ type RevokeServicePeriodTypeSort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
-}
-
-func (v *RevokeServicePeriodTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokeServicePeriodTypeSort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokeServicePeriodTypeSort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.RevokeServicePeriodTypeSort_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.RevokeServicePeriodTypeSort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *RevokeServicePeriodTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokeServicePeriodTypeSort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevokeServicePeriodTypeSort_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.RevokeServicePeriodTypeSort_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = RevokeServicePeriodTypeSortName(ev)
-			return nil
-		case schemas.RevokeServicePeriodTypeSort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.RevokeServicePeriodTypeSort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Details specific to start service period handshakes.
@@ -1692,56 +609,6 @@ type StartServicePeriodHandshakeDetail struct {
 	StartDate *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartServicePeriodHandshakeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartServicePeriodHandshakeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartServicePeriodHandshakeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteTime(schemas.StartServicePeriodHandshakeDetail_endDate, *v.EndDate)
-	}
-	if v.MinimumNoticeDays != nil {
-		s.WriteString(schemas.StartServicePeriodHandshakeDetail_minimumNoticeDays, *v.MinimumNoticeDays)
-	}
-	if v.Note != nil {
-		s.WriteString(schemas.StartServicePeriodHandshakeDetail_note, *v.Note)
-	}
-	if v.ServicePeriodType != "" {
-		s.WriteString(schemas.StartServicePeriodHandshakeDetail_servicePeriodType, string(v.ServicePeriodType))
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.StartServicePeriodHandshakeDetail_startDate, *v.StartDate)
-	}
-}
-func (v *StartServicePeriodHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartServicePeriodHandshakeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartServicePeriodHandshakeDetail_endDate:
-			v.EndDate = new(time.Time)
-			return d.ReadTime(schemas.StartServicePeriodHandshakeDetail_endDate, v.EndDate)
-		case schemas.StartServicePeriodHandshakeDetail_minimumNoticeDays:
-			v.MinimumNoticeDays = new(string)
-			return d.ReadString(schemas.StartServicePeriodHandshakeDetail_minimumNoticeDays, v.MinimumNoticeDays)
-		case schemas.StartServicePeriodHandshakeDetail_note:
-			v.Note = new(string)
-			return d.ReadString(schemas.StartServicePeriodHandshakeDetail_note, v.Note)
-		case schemas.StartServicePeriodHandshakeDetail_servicePeriodType:
-			var ev string
-			if err := d.ReadString(schemas.StartServicePeriodHandshakeDetail_servicePeriodType, &ev); err != nil {
-				return err
-			}
-			v.ServicePeriodType = ServicePeriodType(ev)
-			return nil
-		case schemas.StartServicePeriodHandshakeDetail_startDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.StartServicePeriodHandshakeDetail_startDate, v.StartDate)
-		}
-		return nil
-	})
 }
 
 // Payload for start service period handshake requests.
@@ -1769,56 +636,6 @@ type StartServicePeriodPayload struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartServicePeriodPayload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartServicePeriodPayload)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartServicePeriodPayload) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteTime(schemas.StartServicePeriodPayload_endDate, *v.EndDate)
-	}
-	if v.MinimumNoticeDays != nil {
-		s.WriteString(schemas.StartServicePeriodPayload_minimumNoticeDays, *v.MinimumNoticeDays)
-	}
-	if v.Note != nil {
-		s.WriteString(schemas.StartServicePeriodPayload_note, *v.Note)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.StartServicePeriodPayload_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-	if v.ServicePeriodType != "" {
-		s.WriteString(schemas.StartServicePeriodPayload_servicePeriodType, string(v.ServicePeriodType))
-	}
-}
-func (v *StartServicePeriodPayload) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartServicePeriodPayload, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartServicePeriodPayload_endDate:
-			v.EndDate = new(time.Time)
-			return d.ReadTime(schemas.StartServicePeriodPayload_endDate, v.EndDate)
-		case schemas.StartServicePeriodPayload_minimumNoticeDays:
-			v.MinimumNoticeDays = new(string)
-			return d.ReadString(schemas.StartServicePeriodPayload_minimumNoticeDays, v.MinimumNoticeDays)
-		case schemas.StartServicePeriodPayload_note:
-			v.Note = new(string)
-			return d.ReadString(schemas.StartServicePeriodPayload_note, v.Note)
-		case schemas.StartServicePeriodPayload_programManagementAccountIdentifier:
-			v.ProgramManagementAccountIdentifier = new(string)
-			return d.ReadString(schemas.StartServicePeriodPayload_programManagementAccountIdentifier, v.ProgramManagementAccountIdentifier)
-		case schemas.StartServicePeriodPayload_servicePeriodType:
-			var ev string
-			if err := d.ReadString(schemas.StartServicePeriodPayload_servicePeriodType, &ev); err != nil {
-				return err
-			}
-			v.ServicePeriodType = ServicePeriodType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Filters specific to start service period handshakes.
 type StartServicePeriodTypeFilters struct {
 
@@ -1826,25 +643,6 @@ type StartServicePeriodTypeFilters struct {
 	ServicePeriodTypes []ServicePeriodType
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartServicePeriodTypeFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartServicePeriodTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServicePeriodTypeList(s, schemas.StartServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
-}
-func (v *StartServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartServicePeriodTypeFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartServicePeriodTypeFilters_servicePeriodTypes:
-			return deserializeServicePeriodTypeList(d, schemas.StartServicePeriodTypeFilters_servicePeriodTypes, &v.ServicePeriodTypes)
-		}
-		return nil
-	})
 }
 
 // Sorting options specific to start service period handshakes.
@@ -1861,42 +659,6 @@ type StartServicePeriodTypeSort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartServicePeriodTypeSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartServicePeriodTypeSort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartServicePeriodTypeSort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.StartServicePeriodTypeSort_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.StartServicePeriodTypeSort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *StartServicePeriodTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartServicePeriodTypeSort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartServicePeriodTypeSort_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.StartServicePeriodTypeSort_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = StartServicePeriodTypeSortName(ev)
-			return nil
-		case schemas.StartServicePeriodTypeSort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.StartServicePeriodTypeSort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration for different types of support plans.
@@ -1918,14 +680,6 @@ type SupportPlanMemberPartnerLedSupport struct {
 }
 
 func (*SupportPlanMemberPartnerLedSupport) isSupportPlan() {}
-func (v *SupportPlanMemberPartnerLedSupport) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SupportPlan_partnerLedSupport)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SupportPlanMemberPartnerLedSupport) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration for resold enterprise support plans.
 type SupportPlanMemberResoldEnterprise struct {
@@ -1935,14 +689,6 @@ type SupportPlanMemberResoldEnterprise struct {
 }
 
 func (*SupportPlanMemberResoldEnterprise) isSupportPlan() {}
-func (v *SupportPlanMemberResoldEnterprise) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SupportPlan_resoldEnterprise)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SupportPlanMemberResoldEnterprise) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration for resold unified operations support plans.
 type SupportPlanMemberResoldUnifiedOperations struct {
@@ -1952,14 +698,6 @@ type SupportPlanMemberResoldUnifiedOperations struct {
 }
 
 func (*SupportPlanMemberResoldUnifiedOperations) isSupportPlan() {}
-func (v *SupportPlanMemberResoldUnifiedOperations) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SupportPlan_resoldUnifiedOperations)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SupportPlanMemberResoldUnifiedOperations) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A key-value pair that can be associated with a resource.
 type Tag struct {
@@ -1975,34 +713,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_key, v.Key)
-		case schemas.Tag_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Contains details about an updated program management account.
@@ -2023,46 +733,6 @@ type UpdateProgramManagementAccountDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProgramManagementAccountDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProgramManagementAccountDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProgramManagementAccountDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateProgramManagementAccountDetail_arn, *v.Arn)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateProgramManagementAccountDetail_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateProgramManagementAccountDetail_id, *v.Id)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.UpdateProgramManagementAccountDetail_revision, *v.Revision)
-	}
-}
-func (v *UpdateProgramManagementAccountDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProgramManagementAccountDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProgramManagementAccountDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateProgramManagementAccountDetail_arn, v.Arn)
-		case schemas.UpdateProgramManagementAccountDetail_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.UpdateProgramManagementAccountDetail_displayName, v.DisplayName)
-		case schemas.UpdateProgramManagementAccountDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateProgramManagementAccountDetail_id, v.Id)
-		case schemas.UpdateProgramManagementAccountDetail_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.UpdateProgramManagementAccountDetail_revision, v.Revision)
-		}
-		return nil
-	})
-}
-
 // Contains details about an updated relationship.
 type UpdateRelationshipDetail struct {
 
@@ -2079,46 +749,6 @@ type UpdateRelationshipDetail struct {
 	Revision *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateRelationshipDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRelationshipDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateRelationshipDetail_arn, *v.Arn)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateRelationshipDetail_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateRelationshipDetail_id, *v.Id)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.UpdateRelationshipDetail_revision, *v.Revision)
-	}
-}
-func (v *UpdateRelationshipDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRelationshipDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRelationshipDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateRelationshipDetail_arn, v.Arn)
-		case schemas.UpdateRelationshipDetail_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.UpdateRelationshipDetail_displayName, v.DisplayName)
-		case schemas.UpdateRelationshipDetail_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateRelationshipDetail_id, v.Id)
-		case schemas.UpdateRelationshipDetail_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.UpdateRelationshipDetail_revision, v.Revision)
-		}
-		return nil
-	})
 }
 
 // Information about a field that failed validation.
@@ -2140,40 +770,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.ValidationExceptionField_code, *v.Code)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_code, v.Code)
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

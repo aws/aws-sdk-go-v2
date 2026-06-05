@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,36 +65,6 @@ type CreateInvoiceUnitInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvoiceUnitInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateInvoiceUnitRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateInvoiceUnitRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateInvoiceUnitRequest_Description, *v.Description)
-	}
-	if v.InvoiceReceiver != nil {
-		s.WriteString(schemas.CreateInvoiceUnitRequest_InvoiceReceiver, *v.InvoiceReceiver)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateInvoiceUnitRequest_Name, *v.Name)
-	}
-	serializeResourceTagList(s, schemas.CreateInvoiceUnitRequest_ResourceTags, v.ResourceTags)
-	if v.Rule != nil {
-		s.WriteStruct(schemas.CreateInvoiceUnitRequest_Rule)
-		v.Rule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaxInheritanceDisabled != false {
-		s.WriteBool(schemas.CreateInvoiceUnitRequest_TaxInheritanceDisabled, v.TaxInheritanceDisabled)
-	}
-}
-
 type CreateInvoiceUnitOutput struct {
 
 	//  The ARN to identify an invoice unit. This information can't be modified or
@@ -109,24 +77,16 @@ type CreateInvoiceUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvoiceUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateInvoiceUnitResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateInvoiceUnitResponse_InvoiceUnitArn:
-			v.InvoiceUnitArn = new(string)
-			return d.ReadString(schemas.CreateInvoiceUnitResponse_InvoiceUnitArn, v.InvoiceUnitArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateInvoiceUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvoiceUnit, schemas.CreateInvoiceUnitRequest, schemas.CreateInvoiceUnitResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateInvoiceUnit{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvoiceUnit, schemas.CreateInvoiceUnitRequest, schemas.CreateInvoiceUnitResponse), output: &CreateInvoiceUnitOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateInvoiceUnit{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInvoiceUnit"); err != nil {

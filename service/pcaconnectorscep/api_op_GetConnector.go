@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type GetConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.GetConnectorRequest_ConnectorArn, *v.ConnectorArn)
-	}
-}
-
 type GetConnectorOutput struct {
 
 	// The properties of the connector.
@@ -66,24 +52,16 @@ type GetConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetConnectorResponse_Connector:
-			v.Connector = &types.Connector{}
-			return v.Connector.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnector, schemas.GetConnectorRequest, schemas.GetConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnector, schemas.GetConnectorRequest, schemas.GetConnectorResponse), output: &GetConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConnector"); err != nil {

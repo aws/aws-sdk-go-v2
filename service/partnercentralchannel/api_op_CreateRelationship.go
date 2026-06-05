@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,41 +74,6 @@ type CreateRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelationshipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRelationshipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedAccountId != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_associatedAccountId, *v.AssociatedAccountId)
-	}
-	if v.AssociationType != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_associationType, string(v.AssociationType))
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_catalog, *v.Catalog)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_clientToken, *v.ClientToken)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_displayName, *v.DisplayName)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.CreateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-	serializeSupportPlan(s, schemas.CreateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
-	if v.ResaleAccountModel != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_resaleAccountModel, string(v.ResaleAccountModel))
-	}
-	if v.Sector != "" {
-		s.WriteString(schemas.CreateRelationshipRequest_sector, string(v.Sector))
-	}
-	serializeTagList(s, schemas.CreateRelationshipRequest_tags, v.Tags)
-}
-
 type CreateRelationshipOutput struct {
 
 	// Details of the created relationship.
@@ -122,24 +85,16 @@ type CreateRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRelationshipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRelationshipResponse_relationshipDetail:
-			v.RelationshipDetail = &types.CreateRelationshipDetail{}
-			return v.RelationshipDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationship, schemas.CreateRelationshipRequest, schemas.CreateRelationshipResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationship, schemas.CreateRelationshipRequest, schemas.CreateRelationshipResponse), output: &CreateRelationshipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelationship"); err != nil {

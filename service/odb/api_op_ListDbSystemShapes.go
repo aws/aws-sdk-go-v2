@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type ListDbSystemShapesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbSystemShapesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDbSystemShapesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDbSystemShapesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.ListDbSystemShapesInput_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.ListDbSystemShapesInput_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDbSystemShapesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDbSystemShapesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDbSystemShapesOutput struct {
 
 	// The list of shapes and their properties.
@@ -91,26 +68,16 @@ type ListDbSystemShapesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbSystemShapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDbSystemShapesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDbSystemShapesOutput_dbSystemShapes:
-			return deserializeDbSystemShapeList(d, schemas.ListDbSystemShapesOutput_dbSystemShapes, &v.DbSystemShapes)
-		case schemas.ListDbSystemShapesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDbSystemShapesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDbSystemShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbSystemShapes, schemas.ListDbSystemShapesInput, schemas.ListDbSystemShapesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbSystemShapes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbSystemShapes, schemas.ListDbSystemShapesInput, schemas.ListDbSystemShapesOutput), output: &ListDbSystemShapesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbSystemShapes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbSystemShapes"); err != nil {

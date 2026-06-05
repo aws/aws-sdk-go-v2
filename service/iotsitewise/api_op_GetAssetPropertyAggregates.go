@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -102,44 +100,6 @@ type GetAssetPropertyAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssetPropertyAggregatesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssetPropertyAggregatesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssetPropertyAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateTypes(s, schemas.GetAssetPropertyAggregatesRequest_aggregateTypes, v.AggregateTypes)
-	if v.AssetId != nil {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_assetId, *v.AssetId)
-	}
-	if v.EndDate != nil {
-		s.WriteTime(schemas.GetAssetPropertyAggregatesRequest_endDate, *v.EndDate)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetAssetPropertyAggregatesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_nextToken, *v.NextToken)
-	}
-	if v.PropertyAlias != nil {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_propertyAlias, *v.PropertyAlias)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_propertyId, *v.PropertyId)
-	}
-	serializeQualities(s, schemas.GetAssetPropertyAggregatesRequest_qualities, v.Qualities)
-	if v.Resolution != nil {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_resolution, *v.Resolution)
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.GetAssetPropertyAggregatesRequest_startDate, *v.StartDate)
-	}
-	if v.TimeOrdering != "" {
-		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_timeOrdering, string(v.TimeOrdering))
-	}
-}
-
 type GetAssetPropertyAggregatesOutput struct {
 
 	// The requested aggregated values.
@@ -157,26 +117,16 @@ type GetAssetPropertyAggregatesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssetPropertyAggregatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssetPropertyAggregatesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssetPropertyAggregatesResponse_aggregatedValues:
-			return deserializeAggregatedValues(d, schemas.GetAssetPropertyAggregatesResponse_aggregatedValues, &v.AggregatedValues)
-		case schemas.GetAssetPropertyAggregatesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetAssetPropertyAggregatesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAssetPropertyAggregatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyAggregates, schemas.GetAssetPropertyAggregatesRequest, schemas.GetAssetPropertyAggregatesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetPropertyAggregates{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetPropertyAggregates, schemas.GetAssetPropertyAggregatesRequest, schemas.GetAssetPropertyAggregatesResponse), output: &GetAssetPropertyAggregatesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetPropertyAggregates{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssetPropertyAggregates"); err != nil {

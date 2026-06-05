@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,18 +49,6 @@ type DescribeStatementInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeStatementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeStatementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeStatementRequest_Id, *v.Id)
-	}
 }
 
 type DescribeStatementOutput struct {
@@ -164,85 +150,16 @@ type DescribeStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeStatementResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeStatementResponse_ClusterIdentifier:
-			v.ClusterIdentifier = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_ClusterIdentifier, v.ClusterIdentifier)
-		case schemas.DescribeStatementResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeStatementResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeStatementResponse_Database:
-			v.Database = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Database, v.Database)
-		case schemas.DescribeStatementResponse_DbUser:
-			v.DbUser = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_DbUser, v.DbUser)
-		case schemas.DescribeStatementResponse_Duration:
-			return d.ReadInt64(schemas.DescribeStatementResponse_Duration, &v.Duration)
-		case schemas.DescribeStatementResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Error, v.Error)
-		case schemas.DescribeStatementResponse_HasResultSet:
-			v.HasResultSet = new(bool)
-			return d.ReadBool(schemas.DescribeStatementResponse_HasResultSet, v.HasResultSet)
-		case schemas.DescribeStatementResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_Id, v.Id)
-		case schemas.DescribeStatementResponse_QueryParameters:
-			return deserializeSqlParametersList(d, schemas.DescribeStatementResponse_QueryParameters, &v.QueryParameters)
-		case schemas.DescribeStatementResponse_QueryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_QueryString, v.QueryString)
-		case schemas.DescribeStatementResponse_RedshiftPid:
-			return d.ReadInt64(schemas.DescribeStatementResponse_RedshiftPid, &v.RedshiftPid)
-		case schemas.DescribeStatementResponse_RedshiftQueryId:
-			return d.ReadInt64(schemas.DescribeStatementResponse_RedshiftQueryId, &v.RedshiftQueryId)
-		case schemas.DescribeStatementResponse_ResultFormat:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStatementResponse_ResultFormat, &ev); err != nil {
-				return err
-			}
-			v.ResultFormat = types.ResultFormatString(ev)
-			return nil
-		case schemas.DescribeStatementResponse_ResultRows:
-			return d.ReadInt64(schemas.DescribeStatementResponse_ResultRows, &v.ResultRows)
-		case schemas.DescribeStatementResponse_ResultSize:
-			return d.ReadInt64(schemas.DescribeStatementResponse_ResultSize, &v.ResultSize)
-		case schemas.DescribeStatementResponse_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_SecretArn, v.SecretArn)
-		case schemas.DescribeStatementResponse_SessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_SessionId, v.SessionId)
-		case schemas.DescribeStatementResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeStatementResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.StatusString(ev)
-			return nil
-		case schemas.DescribeStatementResponse_SubStatements:
-			return deserializeSubStatementList(d, schemas.DescribeStatementResponse_SubStatements, &v.SubStatements)
-		case schemas.DescribeStatementResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeStatementResponse_UpdatedAt, v.UpdatedAt)
-		case schemas.DescribeStatementResponse_WorkgroupName:
-			v.WorkgroupName = new(string)
-			return d.ReadString(schemas.DescribeStatementResponse_WorkgroupName, v.WorkgroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStatement, schemas.DescribeStatementRequest, schemas.DescribeStatementResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStatement, schemas.DescribeStatementRequest, schemas.DescribeStatementResponse), output: &DescribeStatementOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeStatement"); err != nil {

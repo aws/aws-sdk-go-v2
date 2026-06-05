@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,21 +44,6 @@ type GetBillingAdjustmentRequestInput struct {
 	BillingAdjustmentRequestId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetBillingAdjustmentRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBillingAdjustmentRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBillingAdjustmentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementId != nil {
-		s.WriteString(schemas.GetBillingAdjustmentRequestInput_agreementId, *v.AgreementId)
-	}
-	if v.BillingAdjustmentRequestId != nil {
-		s.WriteString(schemas.GetBillingAdjustmentRequestInput_billingAdjustmentRequestId, *v.BillingAdjustmentRequestId)
-	}
 }
 
 type GetBillingAdjustmentRequestOutput struct {
@@ -124,62 +107,16 @@ type GetBillingAdjustmentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBillingAdjustmentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBillingAdjustmentRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBillingAdjustmentRequestOutput_adjustmentAmount:
-			v.AdjustmentAmount = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_adjustmentAmount, v.AdjustmentAmount)
-		case schemas.GetBillingAdjustmentRequestOutput_adjustmentReasonCode:
-			var ev string
-			if err := d.ReadString(schemas.GetBillingAdjustmentRequestOutput_adjustmentReasonCode, &ev); err != nil {
-				return err
-			}
-			v.AdjustmentReasonCode = types.BillingAdjustmentReasonCode(ev)
-			return nil
-		case schemas.GetBillingAdjustmentRequestOutput_agreementId:
-			v.AgreementId = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_agreementId, v.AgreementId)
-		case schemas.GetBillingAdjustmentRequestOutput_billingAdjustmentRequestId:
-			v.BillingAdjustmentRequestId = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_billingAdjustmentRequestId, v.BillingAdjustmentRequestId)
-		case schemas.GetBillingAdjustmentRequestOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetBillingAdjustmentRequestOutput_createdAt, v.CreatedAt)
-		case schemas.GetBillingAdjustmentRequestOutput_currencyCode:
-			v.CurrencyCode = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_currencyCode, v.CurrencyCode)
-		case schemas.GetBillingAdjustmentRequestOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_description, v.Description)
-		case schemas.GetBillingAdjustmentRequestOutput_originalInvoiceId:
-			v.OriginalInvoiceId = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_originalInvoiceId, v.OriginalInvoiceId)
-		case schemas.GetBillingAdjustmentRequestOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetBillingAdjustmentRequestOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.BillingAdjustmentStatus(ev)
-			return nil
-		case schemas.GetBillingAdjustmentRequestOutput_statusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.GetBillingAdjustmentRequestOutput_statusMessage, v.StatusMessage)
-		case schemas.GetBillingAdjustmentRequestOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetBillingAdjustmentRequestOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBillingAdjustmentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingAdjustmentRequest, schemas.GetBillingAdjustmentRequestInput, schemas.GetBillingAdjustmentRequestOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBillingAdjustmentRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingAdjustmentRequest, schemas.GetBillingAdjustmentRequestInput, schemas.GetBillingAdjustmentRequestOutput), output: &GetBillingAdjustmentRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBillingAdjustmentRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBillingAdjustmentRequest"); err != nil {

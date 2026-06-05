@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,27 +54,6 @@ type GetCaseAttachmentUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCaseAttachmentUploadUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCaseAttachmentUploadUrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCaseAttachmentUploadUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.GetCaseAttachmentUploadUrlRequest_caseId, *v.CaseId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.GetCaseAttachmentUploadUrlRequest_clientToken, *v.ClientToken)
-	}
-	if v.ContentLength != nil {
-		s.WriteInt64(schemas.GetCaseAttachmentUploadUrlRequest_contentLength, *v.ContentLength)
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.GetCaseAttachmentUploadUrlRequest_fileName, *v.FileName)
-	}
-}
-
 type GetCaseAttachmentUploadUrlOutput struct {
 
 	// Response element providing the Amazon S3 presigned URL to upload the attachment.
@@ -90,24 +67,16 @@ type GetCaseAttachmentUploadUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCaseAttachmentUploadUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCaseAttachmentUploadUrlResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCaseAttachmentUploadUrlResponse_attachmentPresignedUrl:
-			v.AttachmentPresignedUrl = new(string)
-			return d.ReadString(schemas.GetCaseAttachmentUploadUrlResponse_attachmentPresignedUrl, v.AttachmentPresignedUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCaseAttachmentUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAttachmentUploadUrl, schemas.GetCaseAttachmentUploadUrlRequest, schemas.GetCaseAttachmentUploadUrlResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaseAttachmentUploadUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAttachmentUploadUrl, schemas.GetCaseAttachmentUploadUrlRequest, schemas.GetCaseAttachmentUploadUrlResponse), output: &GetCaseAttachmentUploadUrlOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaseAttachmentUploadUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCaseAttachmentUploadUrl"); err != nil {

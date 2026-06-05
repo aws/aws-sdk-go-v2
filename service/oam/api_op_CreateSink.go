@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,19 +58,6 @@ type CreateSinkInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSinkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSinkInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSinkInput_Name, *v.Name)
-	}
-	serializeTagMapInput(s, schemas.CreateSinkInput_Tags, v.Tags)
-}
-
 type CreateSinkOutput struct {
 
 	// The ARN of the sink that is newly created.
@@ -93,32 +78,16 @@ type CreateSinkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSinkOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSinkOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateSinkOutput_Arn, v.Arn)
-		case schemas.CreateSinkOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateSinkOutput_Id, v.Id)
-		case schemas.CreateSinkOutput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateSinkOutput_Name, v.Name)
-		case schemas.CreateSinkOutput_Tags:
-			return deserializeTagMapOutput(d, schemas.CreateSinkOutput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSink, schemas.CreateSinkInput, schemas.CreateSinkOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSink{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSink, schemas.CreateSinkInput, schemas.CreateSinkOutput), output: &CreateSinkOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSink{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSink"); err != nil {

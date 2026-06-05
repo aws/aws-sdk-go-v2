@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,33 +60,6 @@ type ImportBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportBackendAuthInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportBackendAuthRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportBackendAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_AppId, *v.AppId)
-	}
-	if v.BackendEnvironmentName != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
-	}
-	if v.IdentityPoolId != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_IdentityPoolId, *v.IdentityPoolId)
-	}
-	if v.NativeClientId != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_NativeClientId, *v.NativeClientId)
-	}
-	if v.UserPoolId != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_UserPoolId, *v.UserPoolId)
-	}
-	if v.WebClientId != nil {
-		s.WriteString(schemas.ImportBackendAuthRequest_WebClientId, *v.WebClientId)
-	}
-}
-
 type ImportBackendAuthOutput struct {
 
 	// The app ID.
@@ -115,39 +86,16 @@ type ImportBackendAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportBackendAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImportBackendAuthResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImportBackendAuthResponse_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_AppId, v.AppId)
-		case schemas.ImportBackendAuthResponse_BackendEnvironmentName:
-			v.BackendEnvironmentName = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_BackendEnvironmentName, v.BackendEnvironmentName)
-		case schemas.ImportBackendAuthResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_Error, v.Error)
-		case schemas.ImportBackendAuthResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_JobId, v.JobId)
-		case schemas.ImportBackendAuthResponse_Operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_Operation, v.Operation)
-		case schemas.ImportBackendAuthResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.ImportBackendAuthResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationImportBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportBackendAuth, schemas.ImportBackendAuthRequest, schemas.ImportBackendAuthResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportBackendAuth{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportBackendAuth, schemas.ImportBackendAuthRequest, schemas.ImportBackendAuthResponse), output: &ImportBackendAuthOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportBackendAuth{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportBackendAuth"); err != nil {

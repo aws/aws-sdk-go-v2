@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type GetPropertygraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPropertygraphSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPropertygraphSummaryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPropertygraphSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Mode != "" {
-		s.WriteString(schemas.GetPropertygraphSummaryInput_mode, string(v.Mode))
-	}
-}
-
 type GetPropertygraphSummaryOutput struct {
 
 	// Payload containing the property graph summary response.
@@ -69,27 +55,16 @@ type GetPropertygraphSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPropertygraphSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPropertygraphSummaryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPropertygraphSummaryOutput_payload:
-			v.Payload = &types.PropertygraphSummaryValueMap{}
-			return v.Payload.Deserialize(d)
-		case schemas.GetPropertygraphSummaryOutput_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.GetPropertygraphSummaryOutput_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPropertygraphSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphSummary, schemas.GetPropertygraphSummaryInput, schemas.GetPropertygraphSummaryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPropertygraphSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertygraphSummary, schemas.GetPropertygraphSummaryInput, schemas.GetPropertygraphSummaryOutput), output: &GetPropertygraphSummaryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPropertygraphSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPropertygraphSummary"); err != nil {

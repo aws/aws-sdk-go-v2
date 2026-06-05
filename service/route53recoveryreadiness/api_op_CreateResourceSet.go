@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,23 +63,6 @@ type CreateResourceSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResourceSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateResourceSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateResourceSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceSetName != nil {
-		s.WriteString(schemas.CreateResourceSetRequest_ResourceSetName, *v.ResourceSetName)
-	}
-	if v.ResourceSetType != nil {
-		s.WriteString(schemas.CreateResourceSetRequest_ResourceSetType, *v.ResourceSetType)
-	}
-	serialize__listOfResource(s, schemas.CreateResourceSetRequest_Resources, v.Resources)
-	serializeTags(s, schemas.CreateResourceSetRequest_Tags, v.Tags)
-}
-
 type CreateResourceSetOutput struct {
 
 	// The Amazon Resource Name (ARN) for the resource set.
@@ -116,34 +97,16 @@ type CreateResourceSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateResourceSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateResourceSetResponse_ResourceSetArn:
-			v.ResourceSetArn = new(string)
-			return d.ReadString(schemas.CreateResourceSetResponse_ResourceSetArn, v.ResourceSetArn)
-		case schemas.CreateResourceSetResponse_ResourceSetName:
-			v.ResourceSetName = new(string)
-			return d.ReadString(schemas.CreateResourceSetResponse_ResourceSetName, v.ResourceSetName)
-		case schemas.CreateResourceSetResponse_ResourceSetType:
-			v.ResourceSetType = new(string)
-			return d.ReadString(schemas.CreateResourceSetResponse_ResourceSetType, v.ResourceSetType)
-		case schemas.CreateResourceSetResponse_Resources:
-			return deserialize__listOfResource(d, schemas.CreateResourceSetResponse_Resources, &v.Resources)
-		case schemas.CreateResourceSetResponse_Tags:
-			return deserializeTags(d, schemas.CreateResourceSetResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateResourceSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSet, schemas.CreateResourceSetRequest, schemas.CreateResourceSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourceSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSet, schemas.CreateResourceSetRequest, schemas.CreateResourceSetResponse), output: &CreateResourceSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourceSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResourceSet"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,18 +43,6 @@ type CancelStatementInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelStatementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelStatementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.CancelStatementRequest_Id, *v.Id)
-	}
-}
-
 type CancelStatementOutput struct {
 
 	// A value that indicates whether the cancel statement succeeded (true).
@@ -68,24 +54,16 @@ type CancelStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelStatementResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelStatementResponse_Status:
-			v.Status = new(bool)
-			return d.ReadBool(schemas.CancelStatementResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelStatement, schemas.CancelStatementRequest, schemas.CancelStatementResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelStatement, schemas.CancelStatementRequest, schemas.CancelStatementResponse), output: &CancelStatementOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelStatement{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelStatement"); err != nil {

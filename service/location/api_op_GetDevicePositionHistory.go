@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -82,58 +80,6 @@ type GetDevicePositionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDevicePositionHistoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDevicePositionHistoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDevicePositionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeviceId != nil {
-		s.WriteString(schemas.GetDevicePositionHistoryRequest_DeviceId, *v.DeviceId)
-	}
-	if v.EndTimeExclusive != nil {
-		s.WriteTime(schemas.GetDevicePositionHistoryRequest_EndTimeExclusive, *v.EndTimeExclusive)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetDevicePositionHistoryRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetDevicePositionHistoryRequest_NextToken, *v.NextToken)
-	}
-	if v.StartTimeInclusive != nil {
-		s.WriteTime(schemas.GetDevicePositionHistoryRequest_StartTimeInclusive, *v.StartTimeInclusive)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.GetDevicePositionHistoryRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *GetDevicePositionHistoryInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDevicePositionHistoryRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDevicePositionHistoryRequest_DeviceId:
-			v.DeviceId = new(string)
-			return d.ReadString(schemas.GetDevicePositionHistoryRequest_DeviceId, v.DeviceId)
-		case schemas.GetDevicePositionHistoryRequest_EndTimeExclusive:
-			v.EndTimeExclusive = new(time.Time)
-			return d.ReadTime(schemas.GetDevicePositionHistoryRequest_EndTimeExclusive, v.EndTimeExclusive)
-		case schemas.GetDevicePositionHistoryRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.GetDevicePositionHistoryRequest_MaxResults, v.MaxResults)
-		case schemas.GetDevicePositionHistoryRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetDevicePositionHistoryRequest_NextToken, v.NextToken)
-		case schemas.GetDevicePositionHistoryRequest_StartTimeInclusive:
-			v.StartTimeInclusive = new(time.Time)
-			return d.ReadTime(schemas.GetDevicePositionHistoryRequest_StartTimeInclusive, v.StartTimeInclusive)
-		case schemas.GetDevicePositionHistoryRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.GetDevicePositionHistoryRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type GetDevicePositionHistoryOutput struct {
 
 	// Contains the position history details for the requested device.
@@ -151,38 +97,16 @@ type GetDevicePositionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDevicePositionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDevicePositionHistoryResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDevicePositionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicePositionList(s, schemas.GetDevicePositionHistoryResponse_DevicePositions, v.DevicePositions)
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetDevicePositionHistoryResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *GetDevicePositionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDevicePositionHistoryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDevicePositionHistoryResponse_DevicePositions:
-			return deserializeDevicePositionList(d, schemas.GetDevicePositionHistoryResponse_DevicePositions, &v.DevicePositions)
-		case schemas.GetDevicePositionHistoryResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetDevicePositionHistoryResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDevicePositionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePositionHistory, schemas.GetDevicePositionHistoryRequest, schemas.GetDevicePositionHistoryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevicePositionHistory{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePositionHistory, schemas.GetDevicePositionHistoryRequest, schemas.GetDevicePositionHistoryResponse), output: &GetDevicePositionHistoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevicePositionHistory{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevicePositionHistory"); err != nil {

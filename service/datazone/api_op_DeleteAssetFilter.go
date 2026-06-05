@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,24 +54,6 @@ type DeleteAssetFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssetFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAssetFilterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAssetFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetIdentifier != nil {
-		s.WriteString(schemas.DeleteAssetFilterInput_assetIdentifier, *v.AssetIdentifier)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.DeleteAssetFilterInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteAssetFilterInput_identifier, *v.Identifier)
-	}
-}
-
 type DeleteAssetFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,29 +61,16 @@ type DeleteAssetFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssetFilterOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteAssetFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAssetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetFilter, schemas.DeleteAssetFilterInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssetFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetFilter, schemas.DeleteAssetFilterInput, nil), output: &DeleteAssetFilterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssetFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAssetFilter"); err != nil {

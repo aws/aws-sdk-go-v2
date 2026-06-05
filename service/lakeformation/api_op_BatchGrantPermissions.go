@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,19 +44,6 @@ type BatchGrantPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGrantPermissionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGrantPermissionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGrantPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.BatchGrantPermissionsRequest_CatalogId, *v.CatalogId)
-	}
-	serializeBatchPermissionsRequestEntryList(s, schemas.BatchGrantPermissionsRequest_Entries, v.Entries)
-}
-
 type BatchGrantPermissionsOutput struct {
 
 	// A list of failures to grant permissions to the resources.
@@ -70,23 +55,16 @@ type BatchGrantPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGrantPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGrantPermissionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGrantPermissionsResponse_Failures:
-			return deserializeBatchPermissionsFailureList(d, schemas.BatchGrantPermissionsResponse_Failures, &v.Failures)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGrantPermissions, schemas.BatchGrantPermissionsRequest, schemas.BatchGrantPermissionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGrantPermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGrantPermissions, schemas.BatchGrantPermissionsRequest, schemas.BatchGrantPermissionsResponse), output: &BatchGrantPermissionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGrantPermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGrantPermissions"); err != nil {

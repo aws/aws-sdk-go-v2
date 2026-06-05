@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,31 +49,6 @@ type UpdateModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LabelsInputConfiguration != nil {
-		s.WriteStruct(schemas.UpdateModelRequest_LabelsInputConfiguration)
-		v.LabelsInputConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ModelDiagnosticsOutputConfiguration != nil {
-		s.WriteStruct(schemas.UpdateModelRequest_ModelDiagnosticsOutputConfiguration)
-		v.ModelDiagnosticsOutputConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ModelName != nil {
-		s.WriteString(schemas.UpdateModelRequest_ModelName, *v.ModelName)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateModelRequest_RoleArn, *v.RoleArn)
-	}
-}
-
 type UpdateModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,29 +56,16 @@ type UpdateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateModelOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModel, schemas.UpdateModelRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModel, schemas.UpdateModelRequest, nil), output: &UpdateModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateModel"); err != nil {

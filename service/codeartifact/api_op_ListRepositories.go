@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type ListRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRepositoriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRepositoriesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRepositoriesRequest_nextToken, *v.NextToken)
-	}
-	if v.RepositoryPrefix != nil {
-		s.WriteString(schemas.ListRepositoriesRequest_repositoryPrefix, *v.RepositoryPrefix)
-	}
-}
-
 type ListRepositoriesOutput struct {
 
 	//  If there are additional results, this is the token for the next set of
@@ -85,26 +65,16 @@ type ListRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRepositoriesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRepositoriesResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRepositoriesResult_nextToken, v.NextToken)
-		case schemas.ListRepositoriesResult_repositories:
-			return deserializeRepositorySummaryList(d, schemas.ListRepositoriesResult_repositories, &v.Repositories)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositories, schemas.ListRepositoriesRequest, schemas.ListRepositoriesResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRepositories{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositories, schemas.ListRepositoriesRequest, schemas.ListRepositoriesResult), output: &ListRepositoriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRepositories{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRepositories"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,23 +42,6 @@ type SetTokenVaultCMKInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SetTokenVaultCMKInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SetTokenVaultCMKRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SetTokenVaultCMKInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsConfiguration != nil {
-		s.WriteStruct(schemas.SetTokenVaultCMKRequest_kmsConfiguration)
-		v.KmsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TokenVaultId != nil {
-		s.WriteString(schemas.SetTokenVaultCMKRequest_tokenVaultId, *v.TokenVaultId)
-	}
-}
-
 type SetTokenVaultCMKOutput struct {
 
 	// The KMS configuration for the token vault.
@@ -84,30 +65,16 @@ type SetTokenVaultCMKOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SetTokenVaultCMKOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SetTokenVaultCMKResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SetTokenVaultCMKResponse_kmsConfiguration:
-			v.KmsConfiguration = &types.KmsConfiguration{}
-			return v.KmsConfiguration.Deserialize(d)
-		case schemas.SetTokenVaultCMKResponse_lastModifiedDate:
-			v.LastModifiedDate = new(time.Time)
-			return d.ReadTime(schemas.SetTokenVaultCMKResponse_lastModifiedDate, v.LastModifiedDate)
-		case schemas.SetTokenVaultCMKResponse_tokenVaultId:
-			v.TokenVaultId = new(string)
-			return d.ReadString(schemas.SetTokenVaultCMKResponse_tokenVaultId, v.TokenVaultId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSetTokenVaultCMKMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTokenVaultCMK, schemas.SetTokenVaultCMKRequest, schemas.SetTokenVaultCMKResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetTokenVaultCMK{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTokenVaultCMK, schemas.SetTokenVaultCMKRequest, schemas.SetTokenVaultCMKResponse), output: &SetTokenVaultCMKOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSetTokenVaultCMK{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetTokenVaultCMK"); err != nil {

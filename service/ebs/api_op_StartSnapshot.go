@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -134,37 +132,6 @@ type StartSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartSnapshotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartSnapshotRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.StartSnapshotRequest_Description, *v.Description)
-	}
-	if v.Encrypted != nil {
-		s.WriteBool(schemas.StartSnapshotRequest_Encrypted, *v.Encrypted)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.StartSnapshotRequest_KmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.ParentSnapshotId != nil {
-		s.WriteString(schemas.StartSnapshotRequest_ParentSnapshotId, *v.ParentSnapshotId)
-	}
-	serializeTags(s, schemas.StartSnapshotRequest_Tags, v.Tags)
-	if v.Timeout != nil {
-		s.WriteInt32(schemas.StartSnapshotRequest_Timeout, *v.Timeout)
-	}
-	if v.VolumeSize != nil {
-		s.WriteInt64(schemas.StartSnapshotRequest_VolumeSize, *v.VolumeSize)
-	}
-}
-
 type StartSnapshotOutput struct {
 
 	// The size of the blocks in the snapshot, in bytes.
@@ -210,61 +177,16 @@ type StartSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartSnapshotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartSnapshotResponse_BlockSize:
-			v.BlockSize = new(int32)
-			return d.ReadInt32(schemas.StartSnapshotResponse_BlockSize, v.BlockSize)
-		case schemas.StartSnapshotResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.StartSnapshotResponse_Description, v.Description)
-		case schemas.StartSnapshotResponse_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.StartSnapshotResponse_KmsKeyArn, v.KmsKeyArn)
-		case schemas.StartSnapshotResponse_OwnerId:
-			v.OwnerId = new(string)
-			return d.ReadString(schemas.StartSnapshotResponse_OwnerId, v.OwnerId)
-		case schemas.StartSnapshotResponse_ParentSnapshotId:
-			v.ParentSnapshotId = new(string)
-			return d.ReadString(schemas.StartSnapshotResponse_ParentSnapshotId, v.ParentSnapshotId)
-		case schemas.StartSnapshotResponse_SnapshotId:
-			v.SnapshotId = new(string)
-			return d.ReadString(schemas.StartSnapshotResponse_SnapshotId, v.SnapshotId)
-		case schemas.StartSnapshotResponse_SseType:
-			var ev string
-			if err := d.ReadString(schemas.StartSnapshotResponse_SseType, &ev); err != nil {
-				return err
-			}
-			v.SseType = types.SSEType(ev)
-			return nil
-		case schemas.StartSnapshotResponse_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.StartSnapshotResponse_StartTime, v.StartTime)
-		case schemas.StartSnapshotResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.StartSnapshotResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.StartSnapshotResponse_Tags:
-			return deserializeTags(d, schemas.StartSnapshotResponse_Tags, &v.Tags)
-		case schemas.StartSnapshotResponse_VolumeSize:
-			v.VolumeSize = new(int64)
-			return d.ReadInt64(schemas.StartSnapshotResponse_VolumeSize, v.VolumeSize)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSnapshot, schemas.StartSnapshotRequest, schemas.StartSnapshotResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSnapshot, schemas.StartSnapshotRequest, schemas.StartSnapshotResponse), output: &StartSnapshotOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSnapshot"); err != nil {

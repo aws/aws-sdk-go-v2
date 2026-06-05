@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type DeleteEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteEmailIdentityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EmailIdentity != nil {
-		s.WriteString(schemas.DeleteEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
-	}
-}
-
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteEmailIdentityOutput struct {
@@ -65,21 +51,16 @@ type DeleteEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteEmailIdentityResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailIdentity, schemas.DeleteEmailIdentityRequest, schemas.DeleteEmailIdentityResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEmailIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailIdentity, schemas.DeleteEmailIdentityRequest, schemas.DeleteEmailIdentityResponse), output: &DeleteEmailIdentityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEmailIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEmailIdentity"); err != nil {

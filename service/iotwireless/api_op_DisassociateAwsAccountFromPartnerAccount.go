@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DisassociateAwsAccountFromPartnerAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateAwsAccountFromPartnerAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateAwsAccountFromPartnerAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateAwsAccountFromPartnerAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PartnerAccountId != nil {
-		s.WriteString(schemas.DisassociateAwsAccountFromPartnerAccountRequest_PartnerAccountId, *v.PartnerAccountId)
-	}
-	if v.PartnerType != "" {
-		s.WriteString(schemas.DisassociateAwsAccountFromPartnerAccountRequest_PartnerType, string(v.PartnerType))
-	}
-}
-
 type DisassociateAwsAccountFromPartnerAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type DisassociateAwsAccountFromPartnerAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateAwsAccountFromPartnerAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateAwsAccountFromPartnerAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateAwsAccountFromPartnerAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAwsAccountFromPartnerAccount, schemas.DisassociateAwsAccountFromPartnerAccountRequest, schemas.DisassociateAwsAccountFromPartnerAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAwsAccountFromPartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAwsAccountFromPartnerAccount, schemas.DisassociateAwsAccountFromPartnerAccountRequest, schemas.DisassociateAwsAccountFromPartnerAccountResponse), output: &DisassociateAwsAccountFromPartnerAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAwsAccountFromPartnerAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateAwsAccountFromPartnerAccount"); err != nil {

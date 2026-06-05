@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListCloudVmClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCloudVmClustersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCloudVmClustersInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCloudVmClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudExadataInfrastructureId != nil {
-		s.WriteString(schemas.ListCloudVmClustersInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCloudVmClustersInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCloudVmClustersInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListCloudVmClustersOutput struct {
 
 	// The list of VM clusters along with their properties.
@@ -83,26 +63,16 @@ type ListCloudVmClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCloudVmClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCloudVmClustersOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCloudVmClustersOutput_cloudVmClusters:
-			return deserializeCloudVmClusterList(d, schemas.ListCloudVmClustersOutput_cloudVmClusters, &v.CloudVmClusters)
-		case schemas.ListCloudVmClustersOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCloudVmClustersOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCloudVmClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudVmClusters, schemas.ListCloudVmClustersInput, schemas.ListCloudVmClustersOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCloudVmClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudVmClusters, schemas.ListCloudVmClustersInput, schemas.ListCloudVmClustersOutput), output: &ListCloudVmClustersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCloudVmClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCloudVmClusters"); err != nil {

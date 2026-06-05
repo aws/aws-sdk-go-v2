@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,18 +48,6 @@ type GetRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRegexPatternSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRegexPatternSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RegexPatternSetId != nil {
-		s.WriteString(schemas.GetRegexPatternSetRequest_RegexPatternSetId, *v.RegexPatternSetId)
-	}
-}
-
 type GetRegexPatternSetOutput struct {
 
 	// Information about the RegexPatternSet that you specified in the GetRegexPatternSet request,
@@ -75,24 +61,16 @@ type GetRegexPatternSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRegexPatternSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRegexPatternSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRegexPatternSetResponse_RegexPatternSet:
-			v.RegexPatternSet = &types.RegexPatternSet{}
-			return v.RegexPatternSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegexPatternSet, schemas.GetRegexPatternSetRequest, schemas.GetRegexPatternSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegexPatternSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegexPatternSet, schemas.GetRegexPatternSetRequest, schemas.GetRegexPatternSetResponse), output: &GetRegexPatternSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegexPatternSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRegexPatternSet"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DeleteLibraryItemInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteLibraryItemInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DeleteLibraryItemInput_instanceId, *v.InstanceId)
-	}
-	if v.LibraryItemId != nil {
-		s.WriteString(schemas.DeleteLibraryItemInput_libraryItemId, *v.LibraryItemId)
-	}
-}
-
 type DeleteLibraryItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,29 +49,16 @@ type DeleteLibraryItemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLibraryItemOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLibraryItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteLibraryItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLibraryItem, schemas.DeleteLibraryItemInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLibraryItem, schemas.DeleteLibraryItemInput, nil), output: &DeleteLibraryItemOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLibraryItem"); err != nil {

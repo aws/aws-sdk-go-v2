@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DeleteAudienceGenerationJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAudienceGenerationJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAudienceGenerationJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAudienceGenerationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AudienceGenerationJobArn != nil {
-		s.WriteString(schemas.DeleteAudienceGenerationJobRequest_audienceGenerationJobArn, *v.AudienceGenerationJobArn)
-	}
-}
-
 type DeleteAudienceGenerationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,29 +45,16 @@ type DeleteAudienceGenerationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAudienceGenerationJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAudienceGenerationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteAudienceGenerationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAudienceGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAudienceGenerationJob, schemas.DeleteAudienceGenerationJobRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAudienceGenerationJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAudienceGenerationJob, schemas.DeleteAudienceGenerationJobRequest, nil), output: &DeleteAudienceGenerationJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAudienceGenerationJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAudienceGenerationJob"); err != nil {

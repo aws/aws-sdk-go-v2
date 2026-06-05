@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListIdNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIdNamespacesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIdNamespacesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIdNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIdNamespacesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIdNamespacesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListIdNamespacesOutput struct {
 
 	// A list of IdNamespaceSummaries objects.
@@ -69,26 +52,16 @@ type ListIdNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIdNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIdNamespacesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIdNamespacesOutput_idNamespaceSummaries:
-			return deserializeIdNamespaceList(d, schemas.ListIdNamespacesOutput_idNamespaceSummaries, &v.IdNamespaceSummaries)
-		case schemas.ListIdNamespacesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIdNamespacesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIdNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdNamespaces, schemas.ListIdNamespacesInput, schemas.ListIdNamespacesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdNamespaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdNamespaces, schemas.ListIdNamespacesInput, schemas.ListIdNamespacesOutput), output: &ListIdNamespacesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdNamespaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdNamespaces"); err != nil {

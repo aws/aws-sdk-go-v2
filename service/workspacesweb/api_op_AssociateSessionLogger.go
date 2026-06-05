@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type AssociateSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateSessionLoggerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.AssociateSessionLoggerRequest_portalArn, *v.PortalArn)
-	}
-	if v.SessionLoggerArn != nil {
-		s.WriteString(schemas.AssociateSessionLoggerRequest_sessionLoggerArn, *v.SessionLoggerArn)
-	}
-}
-
 type AssociateSessionLoggerOutput struct {
 
 	// The ARN of the portal.
@@ -76,27 +59,16 @@ type AssociateSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateSessionLoggerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateSessionLoggerResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.AssociateSessionLoggerResponse_portalArn, v.PortalArn)
-		case schemas.AssociateSessionLoggerResponse_sessionLoggerArn:
-			v.SessionLoggerArn = new(string)
-			return d.ReadString(schemas.AssociateSessionLoggerResponse_sessionLoggerArn, v.SessionLoggerArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSessionLogger, schemas.AssociateSessionLoggerRequest, schemas.AssociateSessionLoggerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSessionLogger, schemas.AssociateSessionLoggerRequest, schemas.AssociateSessionLoggerResponse), output: &AssociateSessionLoggerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSessionLogger"); err != nil {

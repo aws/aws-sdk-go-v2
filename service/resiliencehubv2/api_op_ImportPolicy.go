@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,36 +55,6 @@ type ImportPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilitySlo != nil {
-		s.WriteStruct(schemas.ImportPolicyRequest_availabilitySlo)
-		v.AvailabilitySlo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ImportPolicyRequest_clientToken, *v.ClientToken)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.ImportPolicyRequest_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.MultiAzDisasterRecoveryApproach != "" {
-		s.WriteString(schemas.ImportPolicyRequest_multiAzDisasterRecoveryApproach, string(v.MultiAzDisasterRecoveryApproach))
-	}
-	if v.MultiRegionDisasterRecoveryApproach != "" {
-		s.WriteString(schemas.ImportPolicyRequest_multiRegionDisasterRecoveryApproach, string(v.MultiRegionDisasterRecoveryApproach))
-	}
-	serializeTagMap(s, schemas.ImportPolicyRequest_tags, v.Tags)
-	if v.V1PolicyArn != nil {
-		s.WriteString(schemas.ImportPolicyRequest_v1PolicyArn, *v.V1PolicyArn)
-	}
-}
-
 type ImportPolicyOutput struct {
 
 	// The imported policy.
@@ -100,24 +68,16 @@ type ImportPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImportPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImportPolicyResponse_policy:
-			v.Policy = &types.Policy{}
-			return v.Policy.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationImportPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPolicy, schemas.ImportPolicyRequest, schemas.ImportPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPolicy, schemas.ImportPolicyRequest, schemas.ImportPolicyResponse), output: &ImportPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportPolicy"); err != nil {

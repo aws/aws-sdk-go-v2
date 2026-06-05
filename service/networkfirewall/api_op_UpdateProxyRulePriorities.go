@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,28 +68,6 @@ type UpdateProxyRulePrioritiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxyRulePrioritiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProxyRulePrioritiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProxyRulePrioritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProxyRuleGroupArn != nil {
-		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-	if v.RuleGroupRequestPhase != "" {
-		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase, string(v.RuleGroupRequestPhase))
-	}
-	serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesRequest_Rules, v.Rules)
-	if v.UpdateToken != nil {
-		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_UpdateToken, *v.UpdateToken)
-	}
-}
-
 type UpdateProxyRulePrioritiesOutput struct {
 
 	// The Amazon Resource Name (ARN) of a proxy rule group.
@@ -126,39 +102,16 @@ type UpdateProxyRulePrioritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxyRulePrioritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProxyRulePrioritiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn:
-			v.ProxyRuleGroupArn = new(string)
-			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn, v.ProxyRuleGroupArn)
-		case schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		case schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase:
-			var ev string
-			if err := d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase, &ev); err != nil {
-				return err
-			}
-			v.RuleGroupRequestPhase = types.RuleGroupRequestPhase(ev)
-			return nil
-		case schemas.UpdateProxyRulePrioritiesResponse_Rules:
-			return deserializeProxyRulePriorityList(d, schemas.UpdateProxyRulePrioritiesResponse_Rules, &v.Rules)
-		case schemas.UpdateProxyRulePrioritiesResponse_UpdateToken:
-			v.UpdateToken = new(string)
-			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_UpdateToken, v.UpdateToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProxyRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRulePriorities, schemas.UpdateProxyRulePrioritiesRequest, schemas.UpdateProxyRulePrioritiesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxyRulePriorities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRulePriorities, schemas.UpdateProxyRulePrioritiesRequest, schemas.UpdateProxyRulePrioritiesResponse), output: &UpdateProxyRulePrioritiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxyRulePriorities{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxyRulePriorities"); err != nil {

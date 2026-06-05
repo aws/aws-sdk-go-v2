@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type ListRequesterGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRequesterGatewaysInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRequesterGatewaysRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRequesterGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRequesterGatewaysRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRequesterGatewaysRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListRequesterGatewaysOutput struct {
 
 	// The unique identifier of the gateways.
@@ -80,26 +63,16 @@ type ListRequesterGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRequesterGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRequesterGatewaysResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRequesterGatewaysResponse_gatewayIds:
-			return deserializeGatewayIdList(d, schemas.ListRequesterGatewaysResponse_gatewayIds, &v.GatewayIds)
-		case schemas.ListRequesterGatewaysResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRequesterGatewaysResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRequesterGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequesterGateways, schemas.ListRequesterGatewaysRequest, schemas.ListRequesterGatewaysResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRequesterGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequesterGateways, schemas.ListRequesterGatewaysRequest, schemas.ListRequesterGatewaysResponse), output: &ListRequesterGatewaysOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRequesterGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRequesterGateways"); err != nil {

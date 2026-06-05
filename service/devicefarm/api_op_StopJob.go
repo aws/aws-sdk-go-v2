@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type StopJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.StopJobRequest_arn, *v.Arn)
-	}
-}
-
 type StopJobOutput struct {
 
 	// The job that was stopped.
@@ -66,24 +52,16 @@ type StopJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopJobResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopJobResult_job:
-			v.Job = &types.Job{}
-			return v.Job.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult), output: &StopJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopJob"); err != nil {

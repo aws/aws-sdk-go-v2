@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,28 +19,6 @@ type AssociateClientDeviceWithCoreDeviceEntry struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociateClientDeviceWithCoreDeviceEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateClientDeviceWithCoreDeviceEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateClientDeviceWithCoreDeviceEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ThingName != nil {
-		s.WriteString(schemas.AssociateClientDeviceWithCoreDeviceEntry_thingName, *v.ThingName)
-	}
-}
-func (v *AssociateClientDeviceWithCoreDeviceEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateClientDeviceWithCoreDeviceEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateClientDeviceWithCoreDeviceEntry_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.AssociateClientDeviceWithCoreDeviceEntry_thingName, v.ThingName)
-		}
-		return nil
-	})
 }
 
 // Contains an error that occurs from a request to associate a client device with
@@ -63,40 +39,6 @@ type AssociateClientDeviceWithCoreDeviceErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateClientDeviceWithCoreDeviceErrorEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateClientDeviceWithCoreDeviceErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_code, *v.Code)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_message, *v.Message)
-	}
-	if v.ThingName != nil {
-		s.WriteString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_thingName, *v.ThingName)
-	}
-}
-func (v *AssociateClientDeviceWithCoreDeviceErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateClientDeviceWithCoreDeviceErrorEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_code, v.Code)
-		case schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_message, v.Message)
-		case schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.AssociateClientDeviceWithCoreDeviceErrorEntry_thingName, v.ThingName)
-		}
-		return nil
-	})
-}
-
 // Contains information about a client device that is associated to a core device
 // for cloud discovery.
 type AssociatedClientDevice struct {
@@ -108,34 +50,6 @@ type AssociatedClientDevice struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociatedClientDevice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatedClientDevice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatedClientDevice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociationTimestamp != nil {
-		s.WriteTime(schemas.AssociatedClientDevice_associationTimestamp, *v.AssociationTimestamp)
-	}
-	if v.ThingName != nil {
-		s.WriteString(schemas.AssociatedClientDevice_thingName, *v.ThingName)
-	}
-}
-func (v *AssociatedClientDevice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatedClientDevice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatedClientDevice_associationTimestamp:
-			v.AssociationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AssociatedClientDevice_associationTimestamp, v.AssociationTimestamp)
-		case schemas.AssociatedClientDevice_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.AssociatedClientDevice_thingName, v.ThingName)
-		}
-		return nil
-	})
 }
 
 // Contains the status of a component version in the IoT Greengrass service.
@@ -177,57 +91,6 @@ type CloudComponentStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudComponentStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudComponentStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudComponentStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentState != "" {
-		s.WriteString(schemas.CloudComponentStatus_componentState, string(v.ComponentState))
-	}
-	serializeStringMap(s, schemas.CloudComponentStatus_errors, v.Errors)
-	if v.Message != nil {
-		s.WriteString(schemas.CloudComponentStatus_message, *v.Message)
-	}
-	if v.VendorGuidance != "" {
-		s.WriteString(schemas.CloudComponentStatus_vendorGuidance, string(v.VendorGuidance))
-	}
-	if v.VendorGuidanceMessage != nil {
-		s.WriteString(schemas.CloudComponentStatus_vendorGuidanceMessage, *v.VendorGuidanceMessage)
-	}
-}
-func (v *CloudComponentStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudComponentStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudComponentStatus_componentState:
-			var ev string
-			if err := d.ReadString(schemas.CloudComponentStatus_componentState, &ev); err != nil {
-				return err
-			}
-			v.ComponentState = CloudComponentState(ev)
-			return nil
-		case schemas.CloudComponentStatus_errors:
-			return deserializeStringMap(d, schemas.CloudComponentStatus_errors, &v.Errors)
-		case schemas.CloudComponentStatus_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CloudComponentStatus_message, v.Message)
-		case schemas.CloudComponentStatus_vendorGuidance:
-			var ev string
-			if err := d.ReadString(schemas.CloudComponentStatus_vendorGuidance, &ev); err != nil {
-				return err
-			}
-			v.VendorGuidance = VendorGuidance(ev)
-			return nil
-		case schemas.CloudComponentStatus_vendorGuidanceMessage:
-			v.VendorGuidanceMessage = new(string)
-			return d.ReadString(schemas.CloudComponentStatus_vendorGuidanceMessage, v.VendorGuidanceMessage)
-		}
-		return nil
-	})
-}
-
 // Contains information about a component.
 type Component struct {
 
@@ -243,42 +106,6 @@ type Component struct {
 	LatestVersion *ComponentLatestVersion
 
 	noSmithyDocumentSerde
-}
-
-func (v *Component) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Component)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Component) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Component_arn, *v.Arn)
-	}
-	if v.ComponentName != nil {
-		s.WriteString(schemas.Component_componentName, *v.ComponentName)
-	}
-	if v.LatestVersion != nil {
-		s.WriteStruct(schemas.Component_latestVersion)
-		v.LatestVersion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Component) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Component, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Component_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Component_arn, v.Arn)
-		case schemas.Component_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.Component_componentName, v.ComponentName)
-		case schemas.Component_latestVersion:
-			v.LatestVersion = &ComponentLatestVersion{}
-			return v.LatestVersion.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains information about a component that is a candidate to deploy to a
@@ -300,37 +127,6 @@ type ComponentCandidate struct {
 	VersionRequirements map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ComponentCandidate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentCandidate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentCandidate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentName != nil {
-		s.WriteString(schemas.ComponentCandidate_componentName, *v.ComponentName)
-	}
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.ComponentCandidate_componentVersion, *v.ComponentVersion)
-	}
-	serializeComponentVersionRequirementMap(s, schemas.ComponentCandidate_versionRequirements, v.VersionRequirements)
-}
-func (v *ComponentCandidate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentCandidate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentCandidate_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.ComponentCandidate_componentName, v.ComponentName)
-		case schemas.ComponentCandidate_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.ComponentCandidate_componentVersion, v.ComponentVersion)
-		case schemas.ComponentCandidate_versionRequirements:
-			return deserializeComponentVersionRequirementMap(d, schemas.ComponentCandidate_versionRequirements, &v.VersionRequirements)
-		}
-		return nil
-	})
 }
 
 // Contains information about a deployment's update to a component's configuration
@@ -364,31 +160,6 @@ type ComponentConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ComponentConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentConfigurationUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Merge != nil {
-		s.WriteString(schemas.ComponentConfigurationUpdate_merge, *v.Merge)
-	}
-	serializeComponentConfigurationPathList(s, schemas.ComponentConfigurationUpdate_reset, v.Reset)
-}
-func (v *ComponentConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentConfigurationUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentConfigurationUpdate_merge:
-			v.Merge = new(string)
-			return d.ReadString(schemas.ComponentConfigurationUpdate_merge, v.Merge)
-		case schemas.ComponentConfigurationUpdate_reset:
-			return deserializeComponentConfigurationPathList(d, schemas.ComponentConfigurationUpdate_reset, &v.Reset)
-		}
-		return nil
-	})
-}
-
 // Contains information about a component dependency for a Lambda function
 // component.
 type ComponentDependencyRequirement struct {
@@ -410,38 +181,6 @@ type ComponentDependencyRequirement struct {
 	VersionRequirement *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ComponentDependencyRequirement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentDependencyRequirement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentDependencyRequirement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DependencyType != "" {
-		s.WriteString(schemas.ComponentDependencyRequirement_dependencyType, string(v.DependencyType))
-	}
-	if v.VersionRequirement != nil {
-		s.WriteString(schemas.ComponentDependencyRequirement_versionRequirement, *v.VersionRequirement)
-	}
-}
-func (v *ComponentDependencyRequirement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentDependencyRequirement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentDependencyRequirement_dependencyType:
-			var ev string
-			if err := d.ReadString(schemas.ComponentDependencyRequirement_dependencyType, &ev); err != nil {
-				return err
-			}
-			v.DependencyType = ComponentDependencyType(ev)
-			return nil
-		case schemas.ComponentDependencyRequirement_versionRequirement:
-			v.VersionRequirement = new(string)
-			return d.ReadString(schemas.ComponentDependencyRequirement_versionRequirement, v.VersionRequirement)
-		}
-		return nil
-	})
 }
 
 // Contains information about a component to deploy.
@@ -474,44 +213,6 @@ type ComponentDeploymentSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ComponentDeploymentSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentDeploymentSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentDeploymentSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.ComponentDeploymentSpecification_componentVersion, *v.ComponentVersion)
-	}
-	if v.ConfigurationUpdate != nil {
-		s.WriteStruct(schemas.ComponentDeploymentSpecification_configurationUpdate)
-		v.ConfigurationUpdate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RunWith != nil {
-		s.WriteStruct(schemas.ComponentDeploymentSpecification_runWith)
-		v.RunWith.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ComponentDeploymentSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentDeploymentSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentDeploymentSpecification_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.ComponentDeploymentSpecification_componentVersion, v.ComponentVersion)
-		case schemas.ComponentDeploymentSpecification_configurationUpdate:
-			v.ConfigurationUpdate = &ComponentConfigurationUpdate{}
-			return v.ConfigurationUpdate.Deserialize(d)
-		case schemas.ComponentDeploymentSpecification_runWith:
-			v.RunWith = &ComponentRunWith{}
-			return v.RunWith.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains information about the latest version of a component.
 type ComponentLatestVersion struct {
 
@@ -538,55 +239,6 @@ type ComponentLatestVersion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ComponentLatestVersion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentLatestVersion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentLatestVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ComponentLatestVersion_arn, *v.Arn)
-	}
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.ComponentLatestVersion_componentVersion, *v.ComponentVersion)
-	}
-	if v.CreationTimestamp != nil {
-		s.WriteTime(schemas.ComponentLatestVersion_creationTimestamp, *v.CreationTimestamp)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ComponentLatestVersion_description, *v.Description)
-	}
-	serializeComponentPlatformList(s, schemas.ComponentLatestVersion_platforms, v.Platforms)
-	if v.Publisher != nil {
-		s.WriteString(schemas.ComponentLatestVersion_publisher, *v.Publisher)
-	}
-}
-func (v *ComponentLatestVersion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentLatestVersion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentLatestVersion_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ComponentLatestVersion_arn, v.Arn)
-		case schemas.ComponentLatestVersion_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.ComponentLatestVersion_componentVersion, v.ComponentVersion)
-		case schemas.ComponentLatestVersion_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ComponentLatestVersion_creationTimestamp, v.CreationTimestamp)
-		case schemas.ComponentLatestVersion_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ComponentLatestVersion_description, v.Description)
-		case schemas.ComponentLatestVersion_platforms:
-			return deserializeComponentPlatformList(d, schemas.ComponentLatestVersion_platforms, &v.Platforms)
-		case schemas.ComponentLatestVersion_publisher:
-			v.Publisher = new(string)
-			return d.ReadString(schemas.ComponentLatestVersion_publisher, v.Publisher)
-		}
-		return nil
-	})
-}
-
 // Contains information about a platform that a component supports.
 type ComponentPlatform struct {
 
@@ -605,31 +257,6 @@ type ComponentPlatform struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ComponentPlatform) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentPlatform)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentPlatform) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlatformAttributesMap(s, schemas.ComponentPlatform_attributes, v.Attributes)
-	if v.Name != nil {
-		s.WriteString(schemas.ComponentPlatform_name, *v.Name)
-	}
-}
-func (v *ComponentPlatform) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentPlatform, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentPlatform_attributes:
-			return deserializePlatformAttributesMap(d, schemas.ComponentPlatform_attributes, &v.Attributes)
-		case schemas.ComponentPlatform_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ComponentPlatform_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Contains information system user and group that the IoT Greengrass Core
@@ -677,42 +304,6 @@ type ComponentRunWith struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ComponentRunWith) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentRunWith)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentRunWith) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PosixUser != nil {
-		s.WriteString(schemas.ComponentRunWith_posixUser, *v.PosixUser)
-	}
-	if v.SystemResourceLimits != nil {
-		s.WriteStruct(schemas.ComponentRunWith_systemResourceLimits)
-		v.SystemResourceLimits.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WindowsUser != nil {
-		s.WriteString(schemas.ComponentRunWith_windowsUser, *v.WindowsUser)
-	}
-}
-func (v *ComponentRunWith) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentRunWith, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentRunWith_posixUser:
-			v.PosixUser = new(string)
-			return d.ReadString(schemas.ComponentRunWith_posixUser, v.PosixUser)
-		case schemas.ComponentRunWith_systemResourceLimits:
-			v.SystemResourceLimits = &SystemResourceLimits{}
-			return v.SystemResourceLimits.Deserialize(d)
-		case schemas.ComponentRunWith_windowsUser:
-			v.WindowsUser = new(string)
-			return d.ReadString(schemas.ComponentRunWith_windowsUser, v.WindowsUser)
-		}
-		return nil
-	})
-}
-
 // Contains information about a component version in a list.
 type ComponentVersionListItem struct {
 
@@ -728,40 +319,6 @@ type ComponentVersionListItem struct {
 	ComponentVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ComponentVersionListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ComponentVersionListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ComponentVersionListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ComponentVersionListItem_arn, *v.Arn)
-	}
-	if v.ComponentName != nil {
-		s.WriteString(schemas.ComponentVersionListItem_componentName, *v.ComponentName)
-	}
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.ComponentVersionListItem_componentVersion, *v.ComponentVersion)
-	}
-}
-func (v *ComponentVersionListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ComponentVersionListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ComponentVersionListItem_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ComponentVersionListItem_arn, v.Arn)
-		case schemas.ComponentVersionListItem_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.ComponentVersionListItem_componentName, v.ComponentName)
-		case schemas.ComponentVersionListItem_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.ComponentVersionListItem_componentVersion, v.ComponentVersion)
-		}
-		return nil
-	})
 }
 
 // Contains information about an endpoint and port where client devices can
@@ -785,45 +342,6 @@ type ConnectivityInfo struct {
 	PortNumber int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConnectivityInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectivityInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectivityInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HostAddress != nil {
-		s.WriteString(schemas.ConnectivityInfo_hostAddress, *v.HostAddress)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ConnectivityInfo_id, *v.Id)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ConnectivityInfo_metadata, *v.Metadata)
-	}
-	if v.PortNumber != 0 {
-		s.WriteInt32(schemas.ConnectivityInfo_portNumber, v.PortNumber)
-	}
-}
-func (v *ConnectivityInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectivityInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectivityInfo_hostAddress:
-			v.HostAddress = new(string)
-			return d.ReadString(schemas.ConnectivityInfo_hostAddress, v.HostAddress)
-		case schemas.ConnectivityInfo_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ConnectivityInfo_id, v.Id)
-		case schemas.ConnectivityInfo_metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ConnectivityInfo_metadata, v.Metadata)
-		case schemas.ConnectivityInfo_portNumber:
-			return d.ReadInt32(schemas.ConnectivityInfo_portNumber, &v.PortNumber)
-		}
-		return nil
-	})
 }
 
 // Contains information about a Greengrass core device, which is an IoT thing that
@@ -862,62 +380,6 @@ type CoreDevice struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CoreDevice) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CoreDevice)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CoreDevice) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Architecture != nil {
-		s.WriteString(schemas.CoreDevice_architecture, *v.Architecture)
-	}
-	if v.CoreDeviceThingName != nil {
-		s.WriteString(schemas.CoreDevice_coreDeviceThingName, *v.CoreDeviceThingName)
-	}
-	if v.LastStatusUpdateTimestamp != nil {
-		s.WriteTime(schemas.CoreDevice_lastStatusUpdateTimestamp, *v.LastStatusUpdateTimestamp)
-	}
-	if v.Platform != nil {
-		s.WriteString(schemas.CoreDevice_platform, *v.Platform)
-	}
-	if v.Runtime != nil {
-		s.WriteString(schemas.CoreDevice_runtime, *v.Runtime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CoreDevice_status, string(v.Status))
-	}
-}
-func (v *CoreDevice) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CoreDevice, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CoreDevice_architecture:
-			v.Architecture = new(string)
-			return d.ReadString(schemas.CoreDevice_architecture, v.Architecture)
-		case schemas.CoreDevice_coreDeviceThingName:
-			v.CoreDeviceThingName = new(string)
-			return d.ReadString(schemas.CoreDevice_coreDeviceThingName, v.CoreDeviceThingName)
-		case schemas.CoreDevice_lastStatusUpdateTimestamp:
-			v.LastStatusUpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.CoreDevice_lastStatusUpdateTimestamp, v.LastStatusUpdateTimestamp)
-		case schemas.CoreDevice_platform:
-			v.Platform = new(string)
-			return d.ReadString(schemas.CoreDevice_platform, v.Platform)
-		case schemas.CoreDevice_runtime:
-			v.Runtime = new(string)
-			return d.ReadString(schemas.CoreDevice_runtime, v.Runtime)
-		case schemas.CoreDevice_status:
-			var ev string
-			if err := d.ReadString(schemas.CoreDevice_status, &ev); err != nil {
-				return err
-			}
-			v.Status = CoreDeviceStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about a deployment.
 type Deployment struct {
 
@@ -951,73 +413,6 @@ type Deployment struct {
 	TargetArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Deployment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Deployment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Deployment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTimestamp != nil {
-		s.WriteTime(schemas.Deployment_creationTimestamp, *v.CreationTimestamp)
-	}
-	if v.DeploymentId != nil {
-		s.WriteString(schemas.Deployment_deploymentId, *v.DeploymentId)
-	}
-	if v.DeploymentName != nil {
-		s.WriteString(schemas.Deployment_deploymentName, *v.DeploymentName)
-	}
-	if v.DeploymentStatus != "" {
-		s.WriteString(schemas.Deployment_deploymentStatus, string(v.DeploymentStatus))
-	}
-	if v.IsLatestForTarget != false {
-		s.WriteBool(schemas.Deployment_isLatestForTarget, v.IsLatestForTarget)
-	}
-	if v.ParentTargetArn != nil {
-		s.WriteString(schemas.Deployment_parentTargetArn, *v.ParentTargetArn)
-	}
-	if v.RevisionId != nil {
-		s.WriteString(schemas.Deployment_revisionId, *v.RevisionId)
-	}
-	if v.TargetArn != nil {
-		s.WriteString(schemas.Deployment_targetArn, *v.TargetArn)
-	}
-}
-func (v *Deployment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Deployment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Deployment_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Deployment_creationTimestamp, v.CreationTimestamp)
-		case schemas.Deployment_deploymentId:
-			v.DeploymentId = new(string)
-			return d.ReadString(schemas.Deployment_deploymentId, v.DeploymentId)
-		case schemas.Deployment_deploymentName:
-			v.DeploymentName = new(string)
-			return d.ReadString(schemas.Deployment_deploymentName, v.DeploymentName)
-		case schemas.Deployment_deploymentStatus:
-			var ev string
-			if err := d.ReadString(schemas.Deployment_deploymentStatus, &ev); err != nil {
-				return err
-			}
-			v.DeploymentStatus = DeploymentStatus(ev)
-			return nil
-		case schemas.Deployment_isLatestForTarget:
-			return d.ReadBool(schemas.Deployment_isLatestForTarget, &v.IsLatestForTarget)
-		case schemas.Deployment_parentTargetArn:
-			v.ParentTargetArn = new(string)
-			return d.ReadString(schemas.Deployment_parentTargetArn, v.ParentTargetArn)
-		case schemas.Deployment_revisionId:
-			v.RevisionId = new(string)
-			return d.ReadString(schemas.Deployment_revisionId, v.RevisionId)
-		case schemas.Deployment_targetArn:
-			v.TargetArn = new(string)
-			return d.ReadString(schemas.Deployment_targetArn, v.TargetArn)
-		}
-		return nil
-	})
 }
 
 // Contains information about a deployment's policy that defines when components
@@ -1058,38 +453,6 @@ type DeploymentComponentUpdatePolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeploymentComponentUpdatePolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploymentComponentUpdatePolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploymentComponentUpdatePolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.DeploymentComponentUpdatePolicy_action, string(v.Action))
-	}
-	if v.TimeoutInSeconds != nil {
-		s.WriteInt32(schemas.DeploymentComponentUpdatePolicy_timeoutInSeconds, *v.TimeoutInSeconds)
-	}
-}
-func (v *DeploymentComponentUpdatePolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploymentComponentUpdatePolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploymentComponentUpdatePolicy_action:
-			var ev string
-			if err := d.ReadString(schemas.DeploymentComponentUpdatePolicy_action, &ev); err != nil {
-				return err
-			}
-			v.Action = DeploymentComponentUpdatePolicyAction(ev)
-			return nil
-		case schemas.DeploymentComponentUpdatePolicy_timeoutInSeconds:
-			v.TimeoutInSeconds = new(int32)
-			return d.ReadInt32(schemas.DeploymentComponentUpdatePolicy_timeoutInSeconds, v.TimeoutInSeconds)
-		}
-		return nil
-	})
-}
-
 // Contains information about how long a component on a core device can validate
 // its configuration updates before it times out. Components can use the [SubscribeToValidateConfigurationUpdates]IPC
 // operation to receive notifications when a deployment specifies a configuration
@@ -1111,28 +474,6 @@ type DeploymentConfigurationValidationPolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeploymentConfigurationValidationPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploymentConfigurationValidationPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploymentConfigurationValidationPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TimeoutInSeconds != nil {
-		s.WriteInt32(schemas.DeploymentConfigurationValidationPolicy_timeoutInSeconds, *v.TimeoutInSeconds)
-	}
-}
-func (v *DeploymentConfigurationValidationPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploymentConfigurationValidationPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploymentConfigurationValidationPolicy_timeoutInSeconds:
-			v.TimeoutInSeconds = new(int32)
-			return d.ReadInt32(schemas.DeploymentConfigurationValidationPolicy_timeoutInSeconds, v.TimeoutInSeconds)
-		}
-		return nil
-	})
-}
-
 // Contains information about an IoT job configuration.
 type DeploymentIoTJobConfiguration struct {
 
@@ -1149,46 +490,6 @@ type DeploymentIoTJobConfiguration struct {
 	TimeoutConfig *IoTJobTimeoutConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeploymentIoTJobConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploymentIoTJobConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploymentIoTJobConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AbortConfig != nil {
-		s.WriteStruct(schemas.DeploymentIoTJobConfiguration_abortConfig)
-		v.AbortConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.JobExecutionsRolloutConfig != nil {
-		s.WriteStruct(schemas.DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig)
-		v.JobExecutionsRolloutConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TimeoutConfig != nil {
-		s.WriteStruct(schemas.DeploymentIoTJobConfiguration_timeoutConfig)
-		v.TimeoutConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DeploymentIoTJobConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploymentIoTJobConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploymentIoTJobConfiguration_abortConfig:
-			v.AbortConfig = &IoTJobAbortConfig{}
-			return v.AbortConfig.Deserialize(d)
-		case schemas.DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig:
-			v.JobExecutionsRolloutConfig = &IoTJobExecutionsRolloutConfig{}
-			return v.JobExecutionsRolloutConfig.Deserialize(d)
-		case schemas.DeploymentIoTJobConfiguration_timeoutConfig:
-			v.TimeoutConfig = &IoTJobTimeoutConfig{}
-			return v.TimeoutConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains information about policies that define how a deployment updates
@@ -1212,48 +513,6 @@ type DeploymentPolicies struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeploymentPolicies) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploymentPolicies)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploymentPolicies) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentUpdatePolicy != nil {
-		s.WriteStruct(schemas.DeploymentPolicies_componentUpdatePolicy)
-		v.ComponentUpdatePolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfigurationValidationPolicy != nil {
-		s.WriteStruct(schemas.DeploymentPolicies_configurationValidationPolicy)
-		v.ConfigurationValidationPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FailureHandlingPolicy != "" {
-		s.WriteString(schemas.DeploymentPolicies_failureHandlingPolicy, string(v.FailureHandlingPolicy))
-	}
-}
-func (v *DeploymentPolicies) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploymentPolicies, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploymentPolicies_componentUpdatePolicy:
-			v.ComponentUpdatePolicy = &DeploymentComponentUpdatePolicy{}
-			return v.ComponentUpdatePolicy.Deserialize(d)
-		case schemas.DeploymentPolicies_configurationValidationPolicy:
-			v.ConfigurationValidationPolicy = &DeploymentConfigurationValidationPolicy{}
-			return v.ConfigurationValidationPolicy.Deserialize(d)
-		case schemas.DeploymentPolicies_failureHandlingPolicy:
-			var ev string
-			if err := d.ReadString(schemas.DeploymentPolicies_failureHandlingPolicy, &ev); err != nil {
-				return err
-			}
-			v.FailureHandlingPolicy = DeploymentFailureHandlingPolicy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains a request to disassociate a client device from a core device. The [BatchDisassociateClientDeviceWithCoreDevice]
 // operation consumes a list of these requests.
 //
@@ -1266,28 +525,6 @@ type DisassociateClientDeviceFromCoreDeviceEntry struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DisassociateClientDeviceFromCoreDeviceEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateClientDeviceFromCoreDeviceEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateClientDeviceFromCoreDeviceEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ThingName != nil {
-		s.WriteString(schemas.DisassociateClientDeviceFromCoreDeviceEntry_thingName, *v.ThingName)
-	}
-}
-func (v *DisassociateClientDeviceFromCoreDeviceEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateClientDeviceFromCoreDeviceEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateClientDeviceFromCoreDeviceEntry_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.DisassociateClientDeviceFromCoreDeviceEntry_thingName, v.ThingName)
-		}
-		return nil
-	})
 }
 
 // Contains an error that occurs from a request to disassociate a client device
@@ -1306,40 +543,6 @@ type DisassociateClientDeviceFromCoreDeviceErrorEntry struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DisassociateClientDeviceFromCoreDeviceErrorEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateClientDeviceFromCoreDeviceErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_code, *v.Code)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_message, *v.Message)
-	}
-	if v.ThingName != nil {
-		s.WriteString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName, *v.ThingName)
-	}
-}
-func (v *DisassociateClientDeviceFromCoreDeviceErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_code, v.Code)
-		case schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_message, v.Message)
-		case schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName, v.ThingName)
-		}
-		return nil
-	})
 }
 
 // Contains information about a deployment job that IoT Greengrass sends to a
@@ -1418,94 +621,6 @@ type EffectiveDeployment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EffectiveDeployment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EffectiveDeployment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EffectiveDeployment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CoreDeviceExecutionStatus != "" {
-		s.WriteString(schemas.EffectiveDeployment_coreDeviceExecutionStatus, string(v.CoreDeviceExecutionStatus))
-	}
-	if v.CreationTimestamp != nil {
-		s.WriteTime(schemas.EffectiveDeployment_creationTimestamp, *v.CreationTimestamp)
-	}
-	if v.DeploymentId != nil {
-		s.WriteString(schemas.EffectiveDeployment_deploymentId, *v.DeploymentId)
-	}
-	if v.DeploymentName != nil {
-		s.WriteString(schemas.EffectiveDeployment_deploymentName, *v.DeploymentName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.EffectiveDeployment_description, *v.Description)
-	}
-	if v.IotJobArn != nil {
-		s.WriteString(schemas.EffectiveDeployment_iotJobArn, *v.IotJobArn)
-	}
-	if v.IotJobId != nil {
-		s.WriteString(schemas.EffectiveDeployment_iotJobId, *v.IotJobId)
-	}
-	if v.ModifiedTimestamp != nil {
-		s.WriteTime(schemas.EffectiveDeployment_modifiedTimestamp, *v.ModifiedTimestamp)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.EffectiveDeployment_reason, *v.Reason)
-	}
-	if v.StatusDetails != nil {
-		s.WriteStruct(schemas.EffectiveDeployment_statusDetails)
-		v.StatusDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TargetArn != nil {
-		s.WriteString(schemas.EffectiveDeployment_targetArn, *v.TargetArn)
-	}
-}
-func (v *EffectiveDeployment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EffectiveDeployment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EffectiveDeployment_coreDeviceExecutionStatus:
-			var ev string
-			if err := d.ReadString(schemas.EffectiveDeployment_coreDeviceExecutionStatus, &ev); err != nil {
-				return err
-			}
-			v.CoreDeviceExecutionStatus = EffectiveDeploymentExecutionStatus(ev)
-			return nil
-		case schemas.EffectiveDeployment_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.EffectiveDeployment_creationTimestamp, v.CreationTimestamp)
-		case schemas.EffectiveDeployment_deploymentId:
-			v.DeploymentId = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_deploymentId, v.DeploymentId)
-		case schemas.EffectiveDeployment_deploymentName:
-			v.DeploymentName = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_deploymentName, v.DeploymentName)
-		case schemas.EffectiveDeployment_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_description, v.Description)
-		case schemas.EffectiveDeployment_iotJobArn:
-			v.IotJobArn = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_iotJobArn, v.IotJobArn)
-		case schemas.EffectiveDeployment_iotJobId:
-			v.IotJobId = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_iotJobId, v.IotJobId)
-		case schemas.EffectiveDeployment_modifiedTimestamp:
-			v.ModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.EffectiveDeployment_modifiedTimestamp, v.ModifiedTimestamp)
-		case schemas.EffectiveDeployment_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_reason, v.Reason)
-		case schemas.EffectiveDeployment_statusDetails:
-			v.StatusDetails = &EffectiveDeploymentStatusDetails{}
-			return v.StatusDetails.Deserialize(d)
-		case schemas.EffectiveDeployment_targetArn:
-			v.TargetArn = new(string)
-			return d.ReadString(schemas.EffectiveDeployment_targetArn, v.TargetArn)
-		}
-		return nil
-	})
-}
-
 // Contains all error-related information for the deployment record. The status
 // details will be null if the deployment is in a success state.
 //
@@ -1526,28 +641,6 @@ type EffectiveDeploymentStatusDetails struct {
 	ErrorTypes []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EffectiveDeploymentStatusDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EffectiveDeploymentStatusDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EffectiveDeploymentStatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectiveDeploymentErrorStack(s, schemas.EffectiveDeploymentStatusDetails_errorStack, v.ErrorStack)
-	serializeEffectiveDeploymentErrorTypeList(s, schemas.EffectiveDeploymentStatusDetails_errorTypes, v.ErrorTypes)
-}
-func (v *EffectiveDeploymentStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EffectiveDeploymentStatusDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EffectiveDeploymentStatusDetails_errorStack:
-			return deserializeEffectiveDeploymentErrorStack(d, schemas.EffectiveDeploymentStatusDetails_errorStack, &v.ErrorStack)
-		case schemas.EffectiveDeploymentStatusDetails_errorTypes:
-			return deserializeEffectiveDeploymentErrorTypeList(d, schemas.EffectiveDeploymentStatusDetails_errorTypes, &v.ErrorTypes)
-		}
-		return nil
-	})
 }
 
 // Contains information about a component on a Greengrass core device.
@@ -1603,76 +696,6 @@ type InstalledComponent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstalledComponent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstalledComponent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstalledComponent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentName != nil {
-		s.WriteString(schemas.InstalledComponent_componentName, *v.ComponentName)
-	}
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.InstalledComponent_componentVersion, *v.ComponentVersion)
-	}
-	if v.IsRoot != false {
-		s.WriteBool(schemas.InstalledComponent_isRoot, v.IsRoot)
-	}
-	if v.LastInstallationSource != nil {
-		s.WriteString(schemas.InstalledComponent_lastInstallationSource, *v.LastInstallationSource)
-	}
-	if v.LastReportedTimestamp != nil {
-		s.WriteTime(schemas.InstalledComponent_lastReportedTimestamp, *v.LastReportedTimestamp)
-	}
-	if v.LastStatusChangeTimestamp != nil {
-		s.WriteTime(schemas.InstalledComponent_lastStatusChangeTimestamp, *v.LastStatusChangeTimestamp)
-	}
-	if v.LifecycleState != "" {
-		s.WriteString(schemas.InstalledComponent_lifecycleState, string(v.LifecycleState))
-	}
-	if v.LifecycleStateDetails != nil {
-		s.WriteString(schemas.InstalledComponent_lifecycleStateDetails, *v.LifecycleStateDetails)
-	}
-	serializeInstalledComponentLifecycleStatusCodeList(s, schemas.InstalledComponent_lifecycleStatusCodes, v.LifecycleStatusCodes)
-}
-func (v *InstalledComponent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstalledComponent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstalledComponent_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.InstalledComponent_componentName, v.ComponentName)
-		case schemas.InstalledComponent_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.InstalledComponent_componentVersion, v.ComponentVersion)
-		case schemas.InstalledComponent_isRoot:
-			return d.ReadBool(schemas.InstalledComponent_isRoot, &v.IsRoot)
-		case schemas.InstalledComponent_lastInstallationSource:
-			v.LastInstallationSource = new(string)
-			return d.ReadString(schemas.InstalledComponent_lastInstallationSource, v.LastInstallationSource)
-		case schemas.InstalledComponent_lastReportedTimestamp:
-			v.LastReportedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.InstalledComponent_lastReportedTimestamp, v.LastReportedTimestamp)
-		case schemas.InstalledComponent_lastStatusChangeTimestamp:
-			v.LastStatusChangeTimestamp = new(time.Time)
-			return d.ReadTime(schemas.InstalledComponent_lastStatusChangeTimestamp, v.LastStatusChangeTimestamp)
-		case schemas.InstalledComponent_lifecycleState:
-			var ev string
-			if err := d.ReadString(schemas.InstalledComponent_lifecycleState, &ev); err != nil {
-				return err
-			}
-			v.LifecycleState = InstalledComponentLifecycleState(ev)
-			return nil
-		case schemas.InstalledComponent_lifecycleStateDetails:
-			v.LifecycleStateDetails = new(string)
-			return d.ReadString(schemas.InstalledComponent_lifecycleStateDetails, v.LifecycleStateDetails)
-		case schemas.InstalledComponent_lifecycleStatusCodes:
-			return deserializeInstalledComponentLifecycleStatusCodeList(d, schemas.InstalledComponent_lifecycleStatusCodes, &v.LifecycleStatusCodes)
-		}
-		return nil
-	})
-}
-
 // Contains a list of criteria that define when and how to cancel a configuration
 // deployment.
 type IoTJobAbortConfig struct {
@@ -1684,25 +707,6 @@ type IoTJobAbortConfig struct {
 	CriteriaList []IoTJobAbortCriteria
 
 	noSmithyDocumentSerde
-}
-
-func (v *IoTJobAbortConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobAbortConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobAbortConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIoTJobAbortCriteriaList(s, schemas.IoTJobAbortConfig_criteriaList, v.CriteriaList)
-}
-func (v *IoTJobAbortConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobAbortConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobAbortConfig_criteriaList:
-			return deserializeIoTJobAbortCriteriaList(d, schemas.IoTJobAbortConfig_criteriaList, &v.CriteriaList)
-		}
-		return nil
-	})
 }
 
 // Contains criteria that define when and how to cancel a job.
@@ -1744,51 +748,6 @@ type IoTJobAbortCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IoTJobAbortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobAbortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobAbortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.IoTJobAbortCriteria_action, string(v.Action))
-	}
-	if v.FailureType != "" {
-		s.WriteString(schemas.IoTJobAbortCriteria_failureType, string(v.FailureType))
-	}
-	if v.MinNumberOfExecutedThings != nil {
-		s.WriteInt32(schemas.IoTJobAbortCriteria_minNumberOfExecutedThings, *v.MinNumberOfExecutedThings)
-	}
-	s.WriteFloat64(schemas.IoTJobAbortCriteria_thresholdPercentage, v.ThresholdPercentage)
-}
-func (v *IoTJobAbortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobAbortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobAbortCriteria_action:
-			var ev string
-			if err := d.ReadString(schemas.IoTJobAbortCriteria_action, &ev); err != nil {
-				return err
-			}
-			v.Action = IoTJobAbortAction(ev)
-			return nil
-		case schemas.IoTJobAbortCriteria_failureType:
-			var ev string
-			if err := d.ReadString(schemas.IoTJobAbortCriteria_failureType, &ev); err != nil {
-				return err
-			}
-			v.FailureType = IoTJobExecutionFailureType(ev)
-			return nil
-		case schemas.IoTJobAbortCriteria_minNumberOfExecutedThings:
-			v.MinNumberOfExecutedThings = new(int32)
-			return d.ReadInt32(schemas.IoTJobAbortCriteria_minNumberOfExecutedThings, v.MinNumberOfExecutedThings)
-		case schemas.IoTJobAbortCriteria_thresholdPercentage:
-			return d.ReadFloat64(schemas.IoTJobAbortCriteria_thresholdPercentage, &v.ThresholdPercentage)
-		}
-		return nil
-	})
-}
-
 // Contains information about the rollout configuration for a job. This
 // configuration defines the rate at which the job deploys a configuration to a
 // fleet of target devices.
@@ -1802,36 +761,6 @@ type IoTJobExecutionsRolloutConfig struct {
 	MaximumPerMinute *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *IoTJobExecutionsRolloutConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobExecutionsRolloutConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobExecutionsRolloutConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExponentialRate != nil {
-		s.WriteStruct(schemas.IoTJobExecutionsRolloutConfig_exponentialRate)
-		v.ExponentialRate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaximumPerMinute != nil {
-		s.WriteInt32(schemas.IoTJobExecutionsRolloutConfig_maximumPerMinute, *v.MaximumPerMinute)
-	}
-}
-func (v *IoTJobExecutionsRolloutConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobExecutionsRolloutConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobExecutionsRolloutConfig_exponentialRate:
-			v.ExponentialRate = &IoTJobExponentialRolloutRate{}
-			return v.ExponentialRate.Deserialize(d)
-		case schemas.IoTJobExecutionsRolloutConfig_maximumPerMinute:
-			v.MaximumPerMinute = new(int32)
-			return d.ReadInt32(schemas.IoTJobExecutionsRolloutConfig_maximumPerMinute, v.MaximumPerMinute)
-		}
-		return nil
-	})
 }
 
 // Contains information about an exponential rollout rate for a configuration
@@ -1861,42 +790,6 @@ type IoTJobExponentialRolloutRate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IoTJobExponentialRolloutRate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobExponentialRolloutRate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobExponentialRolloutRate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BaseRatePerMinute != nil {
-		s.WriteInt32(schemas.IoTJobExponentialRolloutRate_baseRatePerMinute, *v.BaseRatePerMinute)
-	}
-	if v.IncrementFactor != nil {
-		s.WriteFloat64(schemas.IoTJobExponentialRolloutRate_incrementFactor, *v.IncrementFactor)
-	}
-	if v.RateIncreaseCriteria != nil {
-		s.WriteStruct(schemas.IoTJobExponentialRolloutRate_rateIncreaseCriteria)
-		v.RateIncreaseCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IoTJobExponentialRolloutRate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobExponentialRolloutRate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobExponentialRolloutRate_baseRatePerMinute:
-			v.BaseRatePerMinute = new(int32)
-			return d.ReadInt32(schemas.IoTJobExponentialRolloutRate_baseRatePerMinute, v.BaseRatePerMinute)
-		case schemas.IoTJobExponentialRolloutRate_incrementFactor:
-			v.IncrementFactor = new(float64)
-			return d.ReadFloat64(schemas.IoTJobExponentialRolloutRate_incrementFactor, v.IncrementFactor)
-		case schemas.IoTJobExponentialRolloutRate_rateIncreaseCriteria:
-			v.RateIncreaseCriteria = &IoTJobRateIncreaseCriteria{}
-			return v.RateIncreaseCriteria.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains information about criteria to meet before a job increases its rollout
 // rate. Specify either numberOfNotifiedThings or numberOfSucceededThings .
 type IoTJobRateIncreaseCriteria struct {
@@ -1912,34 +805,6 @@ type IoTJobRateIncreaseCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IoTJobRateIncreaseCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobRateIncreaseCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobRateIncreaseCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NumberOfNotifiedThings != nil {
-		s.WriteInt32(schemas.IoTJobRateIncreaseCriteria_numberOfNotifiedThings, *v.NumberOfNotifiedThings)
-	}
-	if v.NumberOfSucceededThings != nil {
-		s.WriteInt32(schemas.IoTJobRateIncreaseCriteria_numberOfSucceededThings, *v.NumberOfSucceededThings)
-	}
-}
-func (v *IoTJobRateIncreaseCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobRateIncreaseCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobRateIncreaseCriteria_numberOfNotifiedThings:
-			v.NumberOfNotifiedThings = new(int32)
-			return d.ReadInt32(schemas.IoTJobRateIncreaseCriteria_numberOfNotifiedThings, v.NumberOfNotifiedThings)
-		case schemas.IoTJobRateIncreaseCriteria_numberOfSucceededThings:
-			v.NumberOfSucceededThings = new(int32)
-			return d.ReadInt32(schemas.IoTJobRateIncreaseCriteria_numberOfSucceededThings, v.NumberOfSucceededThings)
-		}
-		return nil
-	})
-}
-
 // Contains information about the timeout configuration for a job.
 type IoTJobTimeoutConfig struct {
 
@@ -1952,28 +817,6 @@ type IoTJobTimeoutConfig struct {
 	InProgressTimeoutInMinutes *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *IoTJobTimeoutConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IoTJobTimeoutConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IoTJobTimeoutConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InProgressTimeoutInMinutes != nil {
-		s.WriteInt64(schemas.IoTJobTimeoutConfig_inProgressTimeoutInMinutes, *v.InProgressTimeoutInMinutes)
-	}
-}
-func (v *IoTJobTimeoutConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IoTJobTimeoutConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IoTJobTimeoutConfig_inProgressTimeoutInMinutes:
-			v.InProgressTimeoutInMinutes = new(int64)
-			return d.ReadInt64(schemas.IoTJobTimeoutConfig_inProgressTimeoutInMinutes, v.InProgressTimeoutInMinutes)
-		}
-		return nil
-	})
 }
 
 // Contains information about a container in which Lambda functions run on
@@ -1999,40 +842,6 @@ type LambdaContainerParams struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaContainerParams) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaContainerParams)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaContainerParams) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaDeviceList(s, schemas.LambdaContainerParams_devices, v.Devices)
-	if v.MemorySizeInKB != nil {
-		s.WriteInt32(schemas.LambdaContainerParams_memorySizeInKB, *v.MemorySizeInKB)
-	}
-	if v.MountROSysfs != nil {
-		s.WriteBool(schemas.LambdaContainerParams_mountROSysfs, *v.MountROSysfs)
-	}
-	serializeLambdaVolumeList(s, schemas.LambdaContainerParams_volumes, v.Volumes)
-}
-func (v *LambdaContainerParams) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaContainerParams, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaContainerParams_devices:
-			return deserializeLambdaDeviceList(d, schemas.LambdaContainerParams_devices, &v.Devices)
-		case schemas.LambdaContainerParams_memorySizeInKB:
-			v.MemorySizeInKB = new(int32)
-			return d.ReadInt32(schemas.LambdaContainerParams_memorySizeInKB, v.MemorySizeInKB)
-		case schemas.LambdaContainerParams_mountROSysfs:
-			v.MountROSysfs = new(bool)
-			return d.ReadBool(schemas.LambdaContainerParams_mountROSysfs, v.MountROSysfs)
-		case schemas.LambdaContainerParams_volumes:
-			return deserializeLambdaVolumeList(d, schemas.LambdaContainerParams_volumes, &v.Volumes)
-		}
-		return nil
-	})
-}
-
 // Contains information about a device that Linux processes in a container can
 // access.
 type LambdaDeviceMount struct {
@@ -2053,44 +862,6 @@ type LambdaDeviceMount struct {
 	Permission LambdaFilesystemPermission
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaDeviceMount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaDeviceMount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaDeviceMount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AddGroupOwner != nil {
-		s.WriteBool(schemas.LambdaDeviceMount_addGroupOwner, *v.AddGroupOwner)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.LambdaDeviceMount_path, *v.Path)
-	}
-	if v.Permission != "" {
-		s.WriteString(schemas.LambdaDeviceMount_permission, string(v.Permission))
-	}
-}
-func (v *LambdaDeviceMount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaDeviceMount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaDeviceMount_addGroupOwner:
-			v.AddGroupOwner = new(bool)
-			return d.ReadBool(schemas.LambdaDeviceMount_addGroupOwner, v.AddGroupOwner)
-		case schemas.LambdaDeviceMount_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.LambdaDeviceMount_path, v.Path)
-		case schemas.LambdaDeviceMount_permission:
-			var ev string
-			if err := d.ReadString(schemas.LambdaDeviceMount_permission, &ev); err != nil {
-				return err
-			}
-			v.Permission = LambdaFilesystemPermission(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains information about an event source for an Lambda function. The event
@@ -2116,38 +887,6 @@ type LambdaEventSource struct {
 	Type LambdaEventSourceType
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaEventSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEventSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEventSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Topic != nil {
-		s.WriteString(schemas.LambdaEventSource_topic, *v.Topic)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.LambdaEventSource_type, string(v.Type))
-	}
-}
-func (v *LambdaEventSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEventSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEventSource_topic:
-			v.Topic = new(string)
-			return d.ReadString(schemas.LambdaEventSource_topic, v.Topic)
-		case schemas.LambdaEventSource_type:
-			var ev string
-			if err := d.ReadString(schemas.LambdaEventSource_type, &ev); err != nil {
-				return err
-			}
-			v.Type = LambdaEventSourceType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains parameters for a Lambda function that runs on IoT Greengrass.
@@ -2211,85 +950,6 @@ type LambdaExecutionParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaExecutionParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaExecutionParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaExecutionParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaEnvironmentVariables(s, schemas.LambdaExecutionParameters_environmentVariables, v.EnvironmentVariables)
-	serializeLambdaEventSourceList(s, schemas.LambdaExecutionParameters_eventSources, v.EventSources)
-	serializeLambdaExecArgsList(s, schemas.LambdaExecutionParameters_execArgs, v.ExecArgs)
-	if v.InputPayloadEncodingType != "" {
-		s.WriteString(schemas.LambdaExecutionParameters_inputPayloadEncodingType, string(v.InputPayloadEncodingType))
-	}
-	if v.LinuxProcessParams != nil {
-		s.WriteStruct(schemas.LambdaExecutionParameters_linuxProcessParams)
-		v.LinuxProcessParams.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxIdleTimeInSeconds != nil {
-		s.WriteInt32(schemas.LambdaExecutionParameters_maxIdleTimeInSeconds, *v.MaxIdleTimeInSeconds)
-	}
-	if v.MaxInstancesCount != nil {
-		s.WriteInt32(schemas.LambdaExecutionParameters_maxInstancesCount, *v.MaxInstancesCount)
-	}
-	if v.MaxQueueSize != nil {
-		s.WriteInt32(schemas.LambdaExecutionParameters_maxQueueSize, *v.MaxQueueSize)
-	}
-	if v.Pinned != nil {
-		s.WriteBool(schemas.LambdaExecutionParameters_pinned, *v.Pinned)
-	}
-	if v.StatusTimeoutInSeconds != nil {
-		s.WriteInt32(schemas.LambdaExecutionParameters_statusTimeoutInSeconds, *v.StatusTimeoutInSeconds)
-	}
-	if v.TimeoutInSeconds != nil {
-		s.WriteInt32(schemas.LambdaExecutionParameters_timeoutInSeconds, *v.TimeoutInSeconds)
-	}
-}
-func (v *LambdaExecutionParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaExecutionParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaExecutionParameters_environmentVariables:
-			return deserializeLambdaEnvironmentVariables(d, schemas.LambdaExecutionParameters_environmentVariables, &v.EnvironmentVariables)
-		case schemas.LambdaExecutionParameters_eventSources:
-			return deserializeLambdaEventSourceList(d, schemas.LambdaExecutionParameters_eventSources, &v.EventSources)
-		case schemas.LambdaExecutionParameters_execArgs:
-			return deserializeLambdaExecArgsList(d, schemas.LambdaExecutionParameters_execArgs, &v.ExecArgs)
-		case schemas.LambdaExecutionParameters_inputPayloadEncodingType:
-			var ev string
-			if err := d.ReadString(schemas.LambdaExecutionParameters_inputPayloadEncodingType, &ev); err != nil {
-				return err
-			}
-			v.InputPayloadEncodingType = LambdaInputPayloadEncodingType(ev)
-			return nil
-		case schemas.LambdaExecutionParameters_linuxProcessParams:
-			v.LinuxProcessParams = &LambdaLinuxProcessParams{}
-			return v.LinuxProcessParams.Deserialize(d)
-		case schemas.LambdaExecutionParameters_maxIdleTimeInSeconds:
-			v.MaxIdleTimeInSeconds = new(int32)
-			return d.ReadInt32(schemas.LambdaExecutionParameters_maxIdleTimeInSeconds, v.MaxIdleTimeInSeconds)
-		case schemas.LambdaExecutionParameters_maxInstancesCount:
-			v.MaxInstancesCount = new(int32)
-			return d.ReadInt32(schemas.LambdaExecutionParameters_maxInstancesCount, v.MaxInstancesCount)
-		case schemas.LambdaExecutionParameters_maxQueueSize:
-			v.MaxQueueSize = new(int32)
-			return d.ReadInt32(schemas.LambdaExecutionParameters_maxQueueSize, v.MaxQueueSize)
-		case schemas.LambdaExecutionParameters_pinned:
-			v.Pinned = new(bool)
-			return d.ReadBool(schemas.LambdaExecutionParameters_pinned, v.Pinned)
-		case schemas.LambdaExecutionParameters_statusTimeoutInSeconds:
-			v.StatusTimeoutInSeconds = new(int32)
-			return d.ReadInt32(schemas.LambdaExecutionParameters_statusTimeoutInSeconds, v.StatusTimeoutInSeconds)
-		case schemas.LambdaExecutionParameters_timeoutInSeconds:
-			v.TimeoutInSeconds = new(int32)
-			return d.ReadInt32(schemas.LambdaExecutionParameters_timeoutInSeconds, v.TimeoutInSeconds)
-		}
-		return nil
-	})
-}
-
 // Contains information about an Lambda function to import to create a component.
 type LambdaFunctionRecipeSource struct {
 
@@ -2325,54 +985,6 @@ type LambdaFunctionRecipeSource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaFunctionRecipeSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaFunctionRecipeSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaFunctionRecipeSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentDependencyMap(s, schemas.LambdaFunctionRecipeSource_componentDependencies, v.ComponentDependencies)
-	if v.ComponentLambdaParameters != nil {
-		s.WriteStruct(schemas.LambdaFunctionRecipeSource_componentLambdaParameters)
-		v.ComponentLambdaParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ComponentName != nil {
-		s.WriteString(schemas.LambdaFunctionRecipeSource_componentName, *v.ComponentName)
-	}
-	serializeComponentPlatformList(s, schemas.LambdaFunctionRecipeSource_componentPlatforms, v.ComponentPlatforms)
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.LambdaFunctionRecipeSource_componentVersion, *v.ComponentVersion)
-	}
-	if v.LambdaArn != nil {
-		s.WriteString(schemas.LambdaFunctionRecipeSource_lambdaArn, *v.LambdaArn)
-	}
-}
-func (v *LambdaFunctionRecipeSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaFunctionRecipeSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaFunctionRecipeSource_componentDependencies:
-			return deserializeComponentDependencyMap(d, schemas.LambdaFunctionRecipeSource_componentDependencies, &v.ComponentDependencies)
-		case schemas.LambdaFunctionRecipeSource_componentLambdaParameters:
-			v.ComponentLambdaParameters = &LambdaExecutionParameters{}
-			return v.ComponentLambdaParameters.Deserialize(d)
-		case schemas.LambdaFunctionRecipeSource_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.LambdaFunctionRecipeSource_componentName, v.ComponentName)
-		case schemas.LambdaFunctionRecipeSource_componentPlatforms:
-			return deserializeComponentPlatformList(d, schemas.LambdaFunctionRecipeSource_componentPlatforms, &v.ComponentPlatforms)
-		case schemas.LambdaFunctionRecipeSource_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.LambdaFunctionRecipeSource_componentVersion, v.ComponentVersion)
-		case schemas.LambdaFunctionRecipeSource_lambdaArn:
-			v.LambdaArn = new(string)
-			return d.ReadString(schemas.LambdaFunctionRecipeSource_lambdaArn, v.LambdaArn)
-		}
-		return nil
-	})
-}
-
 // Contains parameters for a Linux process that contains an Lambda function.
 type LambdaLinuxProcessParams struct {
 
@@ -2387,40 +999,6 @@ type LambdaLinuxProcessParams struct {
 	IsolationMode LambdaIsolationMode
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaLinuxProcessParams) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaLinuxProcessParams)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaLinuxProcessParams) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContainerParams != nil {
-		s.WriteStruct(schemas.LambdaLinuxProcessParams_containerParams)
-		v.ContainerParams.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IsolationMode != "" {
-		s.WriteString(schemas.LambdaLinuxProcessParams_isolationMode, string(v.IsolationMode))
-	}
-}
-func (v *LambdaLinuxProcessParams) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaLinuxProcessParams, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaLinuxProcessParams_containerParams:
-			v.ContainerParams = &LambdaContainerParams{}
-			return v.ContainerParams.Deserialize(d)
-		case schemas.LambdaLinuxProcessParams_isolationMode:
-			var ev string
-			if err := d.ReadString(schemas.LambdaLinuxProcessParams_isolationMode, &ev); err != nil {
-				return err
-			}
-			v.IsolationMode = LambdaIsolationMode(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains information about a volume that Linux processes in a container can
@@ -2449,50 +1027,6 @@ type LambdaVolumeMount struct {
 	Permission LambdaFilesystemPermission
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaVolumeMount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaVolumeMount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaVolumeMount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AddGroupOwner != nil {
-		s.WriteBool(schemas.LambdaVolumeMount_addGroupOwner, *v.AddGroupOwner)
-	}
-	if v.DestinationPath != nil {
-		s.WriteString(schemas.LambdaVolumeMount_destinationPath, *v.DestinationPath)
-	}
-	if v.Permission != "" {
-		s.WriteString(schemas.LambdaVolumeMount_permission, string(v.Permission))
-	}
-	if v.SourcePath != nil {
-		s.WriteString(schemas.LambdaVolumeMount_sourcePath, *v.SourcePath)
-	}
-}
-func (v *LambdaVolumeMount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaVolumeMount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaVolumeMount_addGroupOwner:
-			v.AddGroupOwner = new(bool)
-			return d.ReadBool(schemas.LambdaVolumeMount_addGroupOwner, v.AddGroupOwner)
-		case schemas.LambdaVolumeMount_destinationPath:
-			v.DestinationPath = new(string)
-			return d.ReadString(schemas.LambdaVolumeMount_destinationPath, v.DestinationPath)
-		case schemas.LambdaVolumeMount_permission:
-			var ev string
-			if err := d.ReadString(schemas.LambdaVolumeMount_permission, &ev); err != nil {
-				return err
-			}
-			v.Permission = LambdaFilesystemPermission(ev)
-			return nil
-		case schemas.LambdaVolumeMount_sourcePath:
-			v.SourcePath = new(string)
-			return d.ReadString(schemas.LambdaVolumeMount_sourcePath, v.SourcePath)
-		}
-		return nil
-	})
 }
 
 // Contains information about a component version that is compatible to run on a
@@ -2536,61 +1070,6 @@ type ResolvedComponentVersion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResolvedComponentVersion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResolvedComponentVersion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResolvedComponentVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ResolvedComponentVersion_arn, *v.Arn)
-	}
-	if v.ComponentName != nil {
-		s.WriteString(schemas.ResolvedComponentVersion_componentName, *v.ComponentName)
-	}
-	if v.ComponentVersion != nil {
-		s.WriteString(schemas.ResolvedComponentVersion_componentVersion, *v.ComponentVersion)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ResolvedComponentVersion_message, *v.Message)
-	}
-	if v.Recipe != nil {
-		s.WriteBlob(schemas.ResolvedComponentVersion_recipe, v.Recipe)
-	}
-	if v.VendorGuidance != "" {
-		s.WriteString(schemas.ResolvedComponentVersion_vendorGuidance, string(v.VendorGuidance))
-	}
-}
-func (v *ResolvedComponentVersion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResolvedComponentVersion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResolvedComponentVersion_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ResolvedComponentVersion_arn, v.Arn)
-		case schemas.ResolvedComponentVersion_componentName:
-			v.ComponentName = new(string)
-			return d.ReadString(schemas.ResolvedComponentVersion_componentName, v.ComponentName)
-		case schemas.ResolvedComponentVersion_componentVersion:
-			v.ComponentVersion = new(string)
-			return d.ReadString(schemas.ResolvedComponentVersion_componentVersion, v.ComponentVersion)
-		case schemas.ResolvedComponentVersion_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResolvedComponentVersion_message, v.Message)
-		case schemas.ResolvedComponentVersion_recipe:
-			return d.ReadBlob(schemas.ResolvedComponentVersion_recipe, &v.Recipe)
-		case schemas.ResolvedComponentVersion_vendorGuidance:
-			var ev string
-			if err := d.ReadString(schemas.ResolvedComponentVersion_vendorGuidance, &ev); err != nil {
-				return err
-			}
-			v.VendorGuidance = VendorGuidance(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about system resource limits that the IoT Greengrass Core
 // software applies to a component's processes. For more information, see [Configure system resource limits for components].
 //
@@ -2614,32 +1093,6 @@ type SystemResourceLimits struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SystemResourceLimits) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemResourceLimits)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemResourceLimits) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cpus != 0 {
-		s.WriteFloat64(schemas.SystemResourceLimits_cpus, v.Cpus)
-	}
-	if v.Memory != 0 {
-		s.WriteInt64(schemas.SystemResourceLimits_memory, v.Memory)
-	}
-}
-func (v *SystemResourceLimits) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemResourceLimits, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemResourceLimits_cpus:
-			return d.ReadFloat64(schemas.SystemResourceLimits_cpus, &v.Cpus)
-		case schemas.SystemResourceLimits_memory:
-			return d.ReadInt64(schemas.SystemResourceLimits_memory, &v.Memory)
-		}
-		return nil
-	})
-}
-
 // Contains information about a validation exception field.
 type ValidationExceptionField struct {
 
@@ -2654,34 +1107,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

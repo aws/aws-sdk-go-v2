@@ -7,9 +7,7 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,18 +39,6 @@ type GetFeedInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetFeedRequest_id, *v.Id)
-	}
 }
 
 type GetFeedOutput struct {
@@ -100,46 +86,16 @@ type GetFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetFeedResponse_arn, v.Arn)
-		case schemas.GetFeedResponse_association:
-			v.Association = &types.FeedAssociation{}
-			return v.Association.Deserialize(d)
-		case schemas.GetFeedResponse_dataEndpoints:
-			return deserializeStringList(d, schemas.GetFeedResponse_dataEndpoints, &v.DataEndpoints)
-		case schemas.GetFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetFeedResponse_id, v.Id)
-		case schemas.GetFeedResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetFeedResponse_name, v.Name)
-		case schemas.GetFeedResponse_outputs:
-			return deserializeGetOutputList(d, schemas.GetFeedResponse_outputs, &v.Outputs)
-		case schemas.GetFeedResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetFeedResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FeedStatus(ev)
-			return nil
-		case schemas.GetFeedResponse_tags:
-			return deserializeTagMap(d, schemas.GetFeedResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFeed, schemas.GetFeedRequest, schemas.GetFeedResponse), output: &GetFeedOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFeed"); err != nil {

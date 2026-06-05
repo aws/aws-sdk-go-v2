@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,24 +71,6 @@ type CreateWebACLMigrationStackInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebACLMigrationStackInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebACLMigrationStackRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebACLMigrationStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IgnoreUnsupportedType != nil {
-		s.WriteBool(schemas.CreateWebACLMigrationStackRequest_IgnoreUnsupportedType, *v.IgnoreUnsupportedType)
-	}
-	if v.S3BucketName != nil {
-		s.WriteString(schemas.CreateWebACLMigrationStackRequest_S3BucketName, *v.S3BucketName)
-	}
-	if v.WebACLId != nil {
-		s.WriteString(schemas.CreateWebACLMigrationStackRequest_WebACLId, *v.WebACLId)
-	}
-}
-
 type CreateWebACLMigrationStackOutput struct {
 
 	// The URL of the template created in Amazon S3.
@@ -104,24 +84,16 @@ type CreateWebACLMigrationStackOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebACLMigrationStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebACLMigrationStackResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebACLMigrationStackResponse_S3ObjectUrl:
-			v.S3ObjectUrl = new(string)
-			return d.ReadString(schemas.CreateWebACLMigrationStackResponse_S3ObjectUrl, v.S3ObjectUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWebACLMigrationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACLMigrationStack, schemas.CreateWebACLMigrationStackRequest, schemas.CreateWebACLMigrationStackResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebACLMigrationStack{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACLMigrationStack, schemas.CreateWebACLMigrationStackRequest, schemas.CreateWebACLMigrationStackResponse), output: &CreateWebACLMigrationStackOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebACLMigrationStack{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebACLMigrationStack"); err != nil {

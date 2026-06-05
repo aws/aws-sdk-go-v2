@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type GetABTestInput struct {
 	AbTestId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetABTestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetABTestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AbTestId != nil {
-		s.WriteString(schemas.GetABTestRequest_abTestId, *v.AbTestId)
-	}
 }
 
 type GetABTestOutput struct {
@@ -139,83 +125,16 @@ type GetABTestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetABTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetABTestResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetABTestResponse_abTestArn:
-			v.AbTestArn = new(string)
-			return d.ReadString(schemas.GetABTestResponse_abTestArn, v.AbTestArn)
-		case schemas.GetABTestResponse_abTestId:
-			v.AbTestId = new(string)
-			return d.ReadString(schemas.GetABTestResponse_abTestId, v.AbTestId)
-		case schemas.GetABTestResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetABTestResponse_createdAt, v.CreatedAt)
-		case schemas.GetABTestResponse_currentRunId:
-			v.CurrentRunId = new(string)
-			return d.ReadString(schemas.GetABTestResponse_currentRunId, v.CurrentRunId)
-		case schemas.GetABTestResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetABTestResponse_description, v.Description)
-		case schemas.GetABTestResponse_errorDetails:
-			return deserializeErrorDetailsList(d, schemas.GetABTestResponse_errorDetails, &v.ErrorDetails)
-		case schemas.GetABTestResponse_evaluationConfig:
-			return deserializeABTestEvaluationConfig(d, schemas.GetABTestResponse_evaluationConfig, &v.EvaluationConfig)
-		case schemas.GetABTestResponse_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetABTestResponse_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = types.ABTestExecutionStatus(ev)
-			return nil
-		case schemas.GetABTestResponse_gatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.GetABTestResponse_gatewayArn, v.GatewayArn)
-		case schemas.GetABTestResponse_gatewayFilter:
-			v.GatewayFilter = &types.GatewayFilter{}
-			return v.GatewayFilter.Deserialize(d)
-		case schemas.GetABTestResponse_maxDurationExpiresAt:
-			v.MaxDurationExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetABTestResponse_maxDurationExpiresAt, v.MaxDurationExpiresAt)
-		case schemas.GetABTestResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetABTestResponse_name, v.Name)
-		case schemas.GetABTestResponse_results:
-			v.Results = &types.ABTestResults{}
-			return v.Results.Deserialize(d)
-		case schemas.GetABTestResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetABTestResponse_roleArn, v.RoleArn)
-		case schemas.GetABTestResponse_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.GetABTestResponse_startedAt, v.StartedAt)
-		case schemas.GetABTestResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetABTestResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ABTestStatus(ev)
-			return nil
-		case schemas.GetABTestResponse_stoppedAt:
-			v.StoppedAt = new(time.Time)
-			return d.ReadTime(schemas.GetABTestResponse_stoppedAt, v.StoppedAt)
-		case schemas.GetABTestResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetABTestResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetABTestResponse_variants:
-			return deserializeVariantList(d, schemas.GetABTestResponse_variants, &v.Variants)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetABTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetABTest, schemas.GetABTestRequest, schemas.GetABTestResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetABTest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetABTest, schemas.GetABTestRequest, schemas.GetABTestResponse), output: &GetABTestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetABTest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetABTest"); err != nil {

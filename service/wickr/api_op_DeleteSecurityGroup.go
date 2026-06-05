@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DeleteSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSecurityGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.DeleteSecurityGroupRequest_groupId, *v.GroupId)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.DeleteSecurityGroupRequest_networkId, *v.NetworkId)
-	}
-}
-
 type DeleteSecurityGroupOutput struct {
 
 	// The ID of the security group that was deleted.
@@ -76,30 +59,16 @@ type DeleteSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSecurityGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSecurityGroupResponse_groupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_groupId, v.GroupId)
-		case schemas.DeleteSecurityGroupResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_message, v.Message)
-		case schemas.DeleteSecurityGroupResponse_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.DeleteSecurityGroupResponse_networkId, v.NetworkId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityGroup, schemas.DeleteSecurityGroupRequest, schemas.DeleteSecurityGroupResponse), output: &DeleteSecurityGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSecurityGroup"); err != nil {

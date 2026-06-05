@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,28 +55,6 @@ type DescribePlaceIndexInput struct {
 	IndexName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribePlaceIndexInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePlaceIndexRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePlaceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexName != nil {
-		s.WriteString(schemas.DescribePlaceIndexRequest_IndexName, *v.IndexName)
-	}
-}
-func (v *DescribePlaceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePlaceIndexRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePlaceIndexRequest_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.DescribePlaceIndexRequest_IndexName, v.IndexName)
-		}
-		return nil
-	})
 }
 
 type DescribePlaceIndexOutput struct {
@@ -151,86 +127,16 @@ type DescribePlaceIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePlaceIndexOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePlaceIndexResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePlaceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.DescribePlaceIndexResponse_CreateTime, *v.CreateTime)
-	}
-	if v.DataSource != nil {
-		s.WriteString(schemas.DescribePlaceIndexResponse_DataSource, *v.DataSource)
-	}
-	if v.DataSourceConfiguration != nil {
-		s.WriteStruct(schemas.DescribePlaceIndexResponse_DataSourceConfiguration)
-		v.DataSourceConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DescribePlaceIndexResponse_Description, *v.Description)
-	}
-	if v.IndexArn != nil {
-		s.WriteString(schemas.DescribePlaceIndexResponse_IndexArn, *v.IndexArn)
-	}
-	if v.IndexName != nil {
-		s.WriteString(schemas.DescribePlaceIndexResponse_IndexName, *v.IndexName)
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.DescribePlaceIndexResponse_PricingPlan, string(v.PricingPlan))
-	}
-	serializeTagMap(s, schemas.DescribePlaceIndexResponse_Tags, v.Tags)
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.DescribePlaceIndexResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *DescribePlaceIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePlaceIndexResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePlaceIndexResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribePlaceIndexResponse_CreateTime, v.CreateTime)
-		case schemas.DescribePlaceIndexResponse_DataSource:
-			v.DataSource = new(string)
-			return d.ReadString(schemas.DescribePlaceIndexResponse_DataSource, v.DataSource)
-		case schemas.DescribePlaceIndexResponse_DataSourceConfiguration:
-			v.DataSourceConfiguration = &types.DataSourceConfiguration{}
-			return v.DataSourceConfiguration.Deserialize(d)
-		case schemas.DescribePlaceIndexResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribePlaceIndexResponse_Description, v.Description)
-		case schemas.DescribePlaceIndexResponse_IndexArn:
-			v.IndexArn = new(string)
-			return d.ReadString(schemas.DescribePlaceIndexResponse_IndexArn, v.IndexArn)
-		case schemas.DescribePlaceIndexResponse_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.DescribePlaceIndexResponse_IndexName, v.IndexName)
-		case schemas.DescribePlaceIndexResponse_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.DescribePlaceIndexResponse_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		case schemas.DescribePlaceIndexResponse_Tags:
-			return deserializeTagMap(d, schemas.DescribePlaceIndexResponse_Tags, &v.Tags)
-		case schemas.DescribePlaceIndexResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribePlaceIndexResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePlaceIndex, schemas.DescribePlaceIndexRequest, schemas.DescribePlaceIndexResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePlaceIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePlaceIndex, schemas.DescribePlaceIndexRequest, schemas.DescribePlaceIndexResponse), output: &DescribePlaceIndexOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePlaceIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePlaceIndex"); err != nil {

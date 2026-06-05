@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type DescribeServicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeServicesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeServicesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FormatVersion != nil {
-		s.WriteString(schemas.DescribeServicesRequest_FormatVersion, *v.FormatVersion)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeServicesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeServicesRequest_NextToken, *v.NextToken)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.DescribeServicesRequest_ServiceCode, *v.ServiceCode)
-	}
-}
-
 type DescribeServicesOutput struct {
 
 	// The format version of the response. For example, aws_v1 .
@@ -95,29 +72,16 @@ type DescribeServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeServicesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeServicesResponse_FormatVersion:
-			v.FormatVersion = new(string)
-			return d.ReadString(schemas.DescribeServicesResponse_FormatVersion, v.FormatVersion)
-		case schemas.DescribeServicesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeServicesResponse_NextToken, v.NextToken)
-		case schemas.DescribeServicesResponse_Services:
-			return deserializeServiceList(d, schemas.DescribeServicesResponse_Services, &v.Services)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServices{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServices, schemas.DescribeServicesRequest, schemas.DescribeServicesResponse), output: &DescribeServicesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServices{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeServices"); err != nil {

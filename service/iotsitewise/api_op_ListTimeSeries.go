@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,30 +56,6 @@ type ListTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTimeSeriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AliasPrefix != nil {
-		s.WriteString(schemas.ListTimeSeriesRequest_aliasPrefix, *v.AliasPrefix)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.ListTimeSeriesRequest_assetId, *v.AssetId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTimeSeriesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTimeSeriesRequest_nextToken, *v.NextToken)
-	}
-	if v.TimeSeriesType != "" {
-		s.WriteString(schemas.ListTimeSeriesRequest_timeSeriesType, string(v.TimeSeriesType))
-	}
-}
-
 type ListTimeSeriesOutput struct {
 
 	// One or more time series summaries to list.
@@ -99,26 +73,16 @@ type ListTimeSeriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTimeSeriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTimeSeriesResponse_TimeSeriesSummaries:
-			return deserializeTimeSeriesSummaries(d, schemas.ListTimeSeriesResponse_TimeSeriesSummaries, &v.TimeSeriesSummaries)
-		case schemas.ListTimeSeriesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTimeSeriesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimeSeries, schemas.ListTimeSeriesRequest, schemas.ListTimeSeriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimeSeries, schemas.ListTimeSeriesRequest, schemas.ListTimeSeriesResponse), output: &ListTimeSeriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTimeSeries"); err != nil {

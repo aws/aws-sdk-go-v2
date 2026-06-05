@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,30 +51,6 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSessionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSessionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSessionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSessionsRequest_nextToken, *v.NextToken)
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListSessionsRequest_sortOrder, string(v.SortOrder))
-	}
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.ListSessionsRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.ListSessionsRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type ListSessionsOutput struct {
 
 	// A list of summary information for sessions in the workflow run.
@@ -93,26 +67,16 @@ type ListSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSessionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSessionsResponse_nextToken, v.NextToken)
-		case schemas.ListSessionsResponse_sessionSummaries:
-			return deserializeSessionSummaries(d, schemas.ListSessionsResponse_sessionSummaries, &v.SessionSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse), output: &ListSessionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSessions"); err != nil {

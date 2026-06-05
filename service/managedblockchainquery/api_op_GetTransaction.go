@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,24 +51,6 @@ type GetTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTransactionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTransactionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Network != "" {
-		s.WriteString(schemas.GetTransactionInput_network, string(v.Network))
-	}
-	if v.TransactionHash != nil {
-		s.WriteString(schemas.GetTransactionInput_transactionHash, *v.TransactionHash)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.GetTransactionInput_transactionId, *v.TransactionId)
-	}
-}
-
 type GetTransactionOutput struct {
 
 	// Contains the details of the transaction.
@@ -84,24 +64,16 @@ type GetTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTransactionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTransactionOutput_transaction:
-			v.Transaction = &types.Transaction{}
-			return v.Transaction.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransaction, schemas.GetTransactionInput, schemas.GetTransactionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransaction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransaction, schemas.GetTransactionInput, schemas.GetTransactionOutput), output: &GetTransactionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTransaction{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTransaction"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListConnectInstanceIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectInstanceIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectInstanceIntegrationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectInstanceIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.ListConnectInstanceIntegrationsRequest_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConnectInstanceIntegrationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectInstanceIntegrationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // The response for ListConnectInstanceIntegrations API.
 type ListConnectInstanceIntegrationsOutput struct {
 
@@ -80,26 +60,16 @@ type ListConnectInstanceIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectInstanceIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConnectInstanceIntegrationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConnectInstanceIntegrationsResponse_integrationSummaryList:
-			return deserializeIntegrationSummaryList(d, schemas.ListConnectInstanceIntegrationsResponse_integrationSummaryList, &v.IntegrationSummaryList)
-		case schemas.ListConnectInstanceIntegrationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConnectInstanceIntegrationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConnectInstanceIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectInstanceIntegrations, schemas.ListConnectInstanceIntegrationsRequest, schemas.ListConnectInstanceIntegrationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectInstanceIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectInstanceIntegrations, schemas.ListConnectInstanceIntegrationsRequest, schemas.ListConnectInstanceIntegrationsResponse), output: &ListConnectInstanceIntegrationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectInstanceIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectInstanceIntegrations"); err != nil {

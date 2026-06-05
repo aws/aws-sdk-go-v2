@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,44 +47,6 @@ type PutResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutResourcePermissionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutResourcePermissionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutResourcePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionType != "" {
-		s.WriteString(schemas.PutResourcePermissionInput_ActionType, string(v.ActionType))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.PutResourcePermissionInput_ResourceArn, *v.ResourceArn)
-	}
-	if v.SourceResourceArn != nil {
-		s.WriteString(schemas.PutResourcePermissionInput_SourceResourceArn, *v.SourceResourceArn)
-	}
-}
-func (v *PutResourcePermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutResourcePermissionInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutResourcePermissionInput_ActionType:
-			var ev string
-			if err := d.ReadString(schemas.PutResourcePermissionInput_ActionType, &ev); err != nil {
-				return err
-			}
-			v.ActionType = types.PermissionActionType(ev)
-			return nil
-		case schemas.PutResourcePermissionInput_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.PutResourcePermissionInput_ResourceArn, v.ResourceArn)
-		case schemas.PutResourcePermissionInput_SourceResourceArn:
-			v.SourceResourceArn = new(string)
-			return d.ReadString(schemas.PutResourcePermissionInput_SourceResourceArn, v.SourceResourceArn)
-		}
-		return nil
-	})
-}
-
 type PutResourcePermissionOutput struct {
 
 	//
@@ -98,35 +58,16 @@ type PutResourcePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutResourcePermissionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutResourcePermissionOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutResourcePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Policy != nil {
-		s.WriteString(schemas.PutResourcePermissionOutput_Policy, *v.Policy)
-	}
-}
-func (v *PutResourcePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutResourcePermissionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutResourcePermissionOutput_Policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.PutResourcePermissionOutput_Policy, v.Policy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutResourcePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePermission, schemas.PutResourcePermissionInput, schemas.PutResourcePermissionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutResourcePermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePermission, schemas.PutResourcePermissionInput, schemas.PutResourcePermissionOutput), output: &PutResourcePermissionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutResourcePermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutResourcePermission"); err != nil {

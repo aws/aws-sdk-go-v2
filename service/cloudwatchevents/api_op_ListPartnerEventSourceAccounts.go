@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type ListPartnerEventSourceAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPartnerEventSourceAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPartnerEventSourceAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPartnerEventSourceAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventSourceName != nil {
-		s.WriteString(schemas.ListPartnerEventSourceAccountsRequest_EventSourceName, *v.EventSourceName)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListPartnerEventSourceAccountsRequest_Limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPartnerEventSourceAccountsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListPartnerEventSourceAccountsOutput struct {
 
 	// A token you can use in a subsequent operation to retrieve the next set of
@@ -83,26 +63,16 @@ type ListPartnerEventSourceAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPartnerEventSourceAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPartnerEventSourceAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPartnerEventSourceAccountsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPartnerEventSourceAccountsResponse_NextToken, v.NextToken)
-		case schemas.ListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts:
-			return deserializePartnerEventSourceAccountList(d, schemas.ListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts, &v.PartnerEventSourceAccounts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPartnerEventSourceAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerEventSourceAccounts, schemas.ListPartnerEventSourceAccountsRequest, schemas.ListPartnerEventSourceAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPartnerEventSourceAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerEventSourceAccounts, schemas.ListPartnerEventSourceAccountsRequest, schemas.ListPartnerEventSourceAccountsResponse), output: &ListPartnerEventSourceAccountsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPartnerEventSourceAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPartnerEventSourceAccounts"); err != nil {

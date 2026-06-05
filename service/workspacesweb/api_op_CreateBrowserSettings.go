@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,31 +62,6 @@ type CreateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBrowserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBrowserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateBrowserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.BrowserPolicy != nil {
-		s.WriteString(schemas.CreateBrowserSettingsRequest_browserPolicy, *v.BrowserPolicy)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateBrowserSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreateBrowserSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	serializeTagList(s, schemas.CreateBrowserSettingsRequest_tags, v.Tags)
-	if v.WebContentFilteringPolicy != nil {
-		s.WriteStruct(schemas.CreateBrowserSettingsRequest_webContentFilteringPolicy)
-		v.WebContentFilteringPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateBrowserSettingsOutput struct {
 
 	// The ARN of the browser settings.
@@ -102,24 +75,16 @@ type CreateBrowserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBrowserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBrowserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBrowserSettingsResponse_browserSettingsArn:
-			v.BrowserSettingsArn = new(string)
-			return d.ReadString(schemas.CreateBrowserSettingsResponse_browserSettingsArn, v.BrowserSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBrowserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowserSettings, schemas.CreateBrowserSettingsRequest, schemas.CreateBrowserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBrowserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowserSettings, schemas.CreateBrowserSettingsRequest, schemas.CreateBrowserSettingsResponse), output: &CreateBrowserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBrowserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBrowserSettings"); err != nil {

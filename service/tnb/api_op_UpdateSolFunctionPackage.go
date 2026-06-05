@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,21 +47,6 @@ type UpdateSolFunctionPackageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSolFunctionPackageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSolFunctionPackageInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSolFunctionPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OperationalState != "" {
-		s.WriteString(schemas.UpdateSolFunctionPackageInput_operationalState, string(v.OperationalState))
-	}
-	if v.VnfPkgId != nil {
-		s.WriteString(schemas.UpdateSolFunctionPackageInput_vnfPkgId, *v.VnfPkgId)
-	}
-}
-
 type UpdateSolFunctionPackageOutput struct {
 
 	// Operational state of the function package.
@@ -77,28 +60,16 @@ type UpdateSolFunctionPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSolFunctionPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSolFunctionPackageOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSolFunctionPackageOutput_operationalState:
-			var ev string
-			if err := d.ReadString(schemas.UpdateSolFunctionPackageOutput_operationalState, &ev); err != nil {
-				return err
-			}
-			v.OperationalState = types.OperationalState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSolFunctionPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolFunctionPackage, schemas.UpdateSolFunctionPackageInput, schemas.UpdateSolFunctionPackageOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSolFunctionPackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolFunctionPackage, schemas.UpdateSolFunctionPackageInput, schemas.UpdateSolFunctionPackageOutput), output: &UpdateSolFunctionPackageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSolFunctionPackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSolFunctionPackage"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,27 +77,6 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociatePrincipalFromPortfolioInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociatePrincipalFromPortfolioInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociatePrincipalFromPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DisassociatePrincipalFromPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.DisassociatePrincipalFromPortfolioInput_PortfolioId, *v.PortfolioId)
-	}
-	if v.PrincipalARN != nil {
-		s.WriteString(schemas.DisassociatePrincipalFromPortfolioInput_PrincipalARN, *v.PrincipalARN)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.DisassociatePrincipalFromPortfolioInput_PrincipalType, string(v.PrincipalType))
-	}
-}
-
 type DisassociatePrincipalFromPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,21 +84,16 @@ type DisassociatePrincipalFromPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociatePrincipalFromPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociatePrincipalFromPortfolioOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociatePrincipalFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePrincipalFromPortfolio, schemas.DisassociatePrincipalFromPortfolioInput, schemas.DisassociatePrincipalFromPortfolioOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociatePrincipalFromPortfolio{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePrincipalFromPortfolio, schemas.DisassociatePrincipalFromPortfolioInput, schemas.DisassociatePrincipalFromPortfolioOutput), output: &DisassociatePrincipalFromPortfolioOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociatePrincipalFromPortfolio{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociatePrincipalFromPortfolio"); err != nil {

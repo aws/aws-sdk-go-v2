@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ebs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,27 +65,6 @@ type ListSnapshotBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSnapshotBlocksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSnapshotBlocksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSnapshotBlocksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSnapshotBlocksRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSnapshotBlocksRequest_NextToken, *v.NextToken)
-	}
-	if v.SnapshotId != nil {
-		s.WriteString(schemas.ListSnapshotBlocksRequest_SnapshotId, *v.SnapshotId)
-	}
-	if v.StartingBlockIndex != nil {
-		s.WriteInt32(schemas.ListSnapshotBlocksRequest_StartingBlockIndex, *v.StartingBlockIndex)
-	}
-}
-
 type ListSnapshotBlocksOutput struct {
 
 	// The size of the blocks in the snapshot, in bytes.
@@ -112,35 +89,16 @@ type ListSnapshotBlocksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSnapshotBlocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSnapshotBlocksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSnapshotBlocksResponse_BlockSize:
-			v.BlockSize = new(int32)
-			return d.ReadInt32(schemas.ListSnapshotBlocksResponse_BlockSize, v.BlockSize)
-		case schemas.ListSnapshotBlocksResponse_Blocks:
-			return deserializeBlocks(d, schemas.ListSnapshotBlocksResponse_Blocks, &v.Blocks)
-		case schemas.ListSnapshotBlocksResponse_ExpiryTime:
-			v.ExpiryTime = new(time.Time)
-			return d.ReadTime(schemas.ListSnapshotBlocksResponse_ExpiryTime, v.ExpiryTime)
-		case schemas.ListSnapshotBlocksResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSnapshotBlocksResponse_NextToken, v.NextToken)
-		case schemas.ListSnapshotBlocksResponse_VolumeSize:
-			v.VolumeSize = new(int64)
-			return d.ReadInt64(schemas.ListSnapshotBlocksResponse_VolumeSize, v.VolumeSize)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshotBlocks, schemas.ListSnapshotBlocksRequest, schemas.ListSnapshotBlocksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSnapshotBlocks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshotBlocks, schemas.ListSnapshotBlocksRequest, schemas.ListSnapshotBlocksResponse), output: &ListSnapshotBlocksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSnapshotBlocks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSnapshotBlocks"); err != nil {

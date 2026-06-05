@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type SetTextMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SetTextMessageSpendLimitOverrideInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SetTextMessageSpendLimitOverrideRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SetTextMessageSpendLimitOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MonthlyLimit != nil {
-		s.WriteInt64(schemas.SetTextMessageSpendLimitOverrideRequest_MonthlyLimit, *v.MonthlyLimit)
-	}
-}
-
 type SetTextMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit to enforce on sending text messages.
@@ -63,24 +49,16 @@ type SetTextMessageSpendLimitOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SetTextMessageSpendLimitOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SetTextMessageSpendLimitOverrideResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SetTextMessageSpendLimitOverrideResult_MonthlyLimit:
-			v.MonthlyLimit = new(int64)
-			return d.ReadInt64(schemas.SetTextMessageSpendLimitOverrideResult_MonthlyLimit, v.MonthlyLimit)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSetTextMessageSpendLimitOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTextMessageSpendLimitOverride, schemas.SetTextMessageSpendLimitOverrideRequest, schemas.SetTextMessageSpendLimitOverrideResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetTextMessageSpendLimitOverride{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTextMessageSpendLimitOverride, schemas.SetTextMessageSpendLimitOverrideRequest, schemas.SetTextMessageSpendLimitOverrideResult), output: &SetTextMessageSpendLimitOverrideOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetTextMessageSpendLimitOverride{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetTextMessageSpendLimitOverride"); err != nil {

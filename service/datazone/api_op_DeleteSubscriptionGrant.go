@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type DeleteSubscriptionGrantInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteSubscriptionGrantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSubscriptionGrantInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSubscriptionGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.DeleteSubscriptionGrantInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.DeleteSubscriptionGrantInput_identifier, *v.Identifier)
-	}
 }
 
 type DeleteSubscriptionGrantOutput struct {
@@ -123,59 +106,16 @@ type DeleteSubscriptionGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSubscriptionGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSubscriptionGrantOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSubscriptionGrantOutput_assets:
-			return deserializeSubscribedAssets(d, schemas.DeleteSubscriptionGrantOutput_assets, &v.Assets)
-		case schemas.DeleteSubscriptionGrantOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteSubscriptionGrantOutput_createdAt, v.CreatedAt)
-		case schemas.DeleteSubscriptionGrantOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_createdBy, v.CreatedBy)
-		case schemas.DeleteSubscriptionGrantOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_domainId, v.DomainId)
-		case schemas.DeleteSubscriptionGrantOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_environmentId, v.EnvironmentId)
-		case schemas.DeleteSubscriptionGrantOutput_grantedEntity:
-			return deserializeGrantedEntity(d, schemas.DeleteSubscriptionGrantOutput_grantedEntity, &v.GrantedEntity)
-		case schemas.DeleteSubscriptionGrantOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_id, v.Id)
-		case schemas.DeleteSubscriptionGrantOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteSubscriptionGrantOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.SubscriptionGrantOverallStatus(ev)
-			return nil
-		case schemas.DeleteSubscriptionGrantOutput_subscriptionId:
-			v.SubscriptionId = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_subscriptionId, v.SubscriptionId)
-		case schemas.DeleteSubscriptionGrantOutput_subscriptionTargetId:
-			v.SubscriptionTargetId = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_subscriptionTargetId, v.SubscriptionTargetId)
-		case schemas.DeleteSubscriptionGrantOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteSubscriptionGrantOutput_updatedAt, v.UpdatedAt)
-		case schemas.DeleteSubscriptionGrantOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.DeleteSubscriptionGrantOutput_updatedBy, v.UpdatedBy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSubscriptionGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriptionGrant, schemas.DeleteSubscriptionGrantInput, schemas.DeleteSubscriptionGrantOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSubscriptionGrant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriptionGrant, schemas.DeleteSubscriptionGrantInput, schemas.DeleteSubscriptionGrantOutput), output: &DeleteSubscriptionGrantOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSubscriptionGrant{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSubscriptionGrant"); err != nil {

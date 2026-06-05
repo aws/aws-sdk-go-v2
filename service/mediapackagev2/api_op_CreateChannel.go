@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -92,41 +90,6 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateChannelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.CreateChannelRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.CreateChannelRequest_ChannelName, *v.ChannelName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateChannelRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateChannelRequest_Description, *v.Description)
-	}
-	if v.InputSwitchConfiguration != nil {
-		s.WriteStruct(schemas.CreateChannelRequest_InputSwitchConfiguration)
-		v.InputSwitchConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InputType != "" {
-		s.WriteString(schemas.CreateChannelRequest_InputType, string(v.InputType))
-	}
-	if v.OutputHeaderConfiguration != nil {
-		s.WriteStruct(schemas.CreateChannelRequest_OutputHeaderConfiguration)
-		v.OutputHeaderConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateChannelRequest_Tags, v.Tags)
-}
-
 type CreateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the resource.
@@ -199,59 +162,16 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateChannelResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateChannelResponse_Arn, v.Arn)
-		case schemas.CreateChannelResponse_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.CreateChannelResponse_ChannelGroupName, v.ChannelGroupName)
-		case schemas.CreateChannelResponse_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.CreateChannelResponse_ChannelName, v.ChannelName)
-		case schemas.CreateChannelResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateChannelResponse_CreatedAt, v.CreatedAt)
-		case schemas.CreateChannelResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateChannelResponse_Description, v.Description)
-		case schemas.CreateChannelResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.CreateChannelResponse_ETag, v.ETag)
-		case schemas.CreateChannelResponse_IngestEndpoints:
-			return deserializeIngestEndpointList(d, schemas.CreateChannelResponse_IngestEndpoints, &v.IngestEndpoints)
-		case schemas.CreateChannelResponse_InputSwitchConfiguration:
-			v.InputSwitchConfiguration = &types.InputSwitchConfiguration{}
-			return v.InputSwitchConfiguration.Deserialize(d)
-		case schemas.CreateChannelResponse_InputType:
-			var ev string
-			if err := d.ReadString(schemas.CreateChannelResponse_InputType, &ev); err != nil {
-				return err
-			}
-			v.InputType = types.InputType(ev)
-			return nil
-		case schemas.CreateChannelResponse_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateChannelResponse_ModifiedAt, v.ModifiedAt)
-		case schemas.CreateChannelResponse_OutputHeaderConfiguration:
-			v.OutputHeaderConfiguration = &types.OutputHeaderConfiguration{}
-			return v.OutputHeaderConfiguration.Deserialize(d)
-		case schemas.CreateChannelResponse_Tags:
-			return deserializeTagMap(d, schemas.CreateChannelResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse), output: &CreateChannelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannel"); err != nil {

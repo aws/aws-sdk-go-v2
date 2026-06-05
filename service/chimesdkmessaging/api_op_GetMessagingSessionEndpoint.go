@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetMessagingSessionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMessagingSessionEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMessagingSessionEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMessagingSessionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkType != "" {
-		s.WriteString(schemas.GetMessagingSessionEndpointRequest_NetworkType, string(v.NetworkType))
-	}
-}
-
 type GetMessagingSessionEndpointOutput struct {
 
 	// The endpoint returned in the response.
@@ -61,24 +47,16 @@ type GetMessagingSessionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMessagingSessionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMessagingSessionEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMessagingSessionEndpointResponse_Endpoint:
-			v.Endpoint = &types.MessagingSessionEndpoint{}
-			return v.Endpoint.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMessagingSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMessagingSessionEndpoint, schemas.GetMessagingSessionEndpointRequest, schemas.GetMessagingSessionEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMessagingSessionEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMessagingSessionEndpoint, schemas.GetMessagingSessionEndpointRequest, schemas.GetMessagingSessionEndpointResponse), output: &GetMessagingSessionEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMessagingSessionEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMessagingSessionEndpoint"); err != nil {

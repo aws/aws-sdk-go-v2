@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,27 +52,6 @@ type CreateProbeInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateProbeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProbeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateProbeInput_clientToken, *v.ClientToken)
-	}
-	if v.MonitorName != nil {
-		s.WriteString(schemas.CreateProbeInput_monitorName, *v.MonitorName)
-	}
-	if v.Probe != nil {
-		s.WriteStruct(schemas.CreateProbeInput_probe)
-		v.Probe.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateProbeInput_tags, v.Tags)
 }
 
 type CreateProbeOutput struct {
@@ -134,71 +111,16 @@ type CreateProbeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProbeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProbeOutput_addressFamily:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_addressFamily, &ev); err != nil {
-				return err
-			}
-			v.AddressFamily = types.AddressFamily(ev)
-			return nil
-		case schemas.CreateProbeOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProbeOutput_createdAt, v.CreatedAt)
-		case schemas.CreateProbeOutput_destination:
-			v.Destination = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_destination, v.Destination)
-		case schemas.CreateProbeOutput_destinationPort:
-			v.DestinationPort = new(int32)
-			return d.ReadInt32(schemas.CreateProbeOutput_destinationPort, v.DestinationPort)
-		case schemas.CreateProbeOutput_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProbeOutput_modifiedAt, v.ModifiedAt)
-		case schemas.CreateProbeOutput_packetSize:
-			v.PacketSize = new(int32)
-			return d.ReadInt32(schemas.CreateProbeOutput_packetSize, v.PacketSize)
-		case schemas.CreateProbeOutput_probeArn:
-			v.ProbeArn = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_probeArn, v.ProbeArn)
-		case schemas.CreateProbeOutput_probeId:
-			v.ProbeId = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_probeId, v.ProbeId)
-		case schemas.CreateProbeOutput_protocol:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = types.Protocol(ev)
-			return nil
-		case schemas.CreateProbeOutput_sourceArn:
-			v.SourceArn = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_sourceArn, v.SourceArn)
-		case schemas.CreateProbeOutput_state:
-			var ev string
-			if err := d.ReadString(schemas.CreateProbeOutput_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.ProbeState(ev)
-			return nil
-		case schemas.CreateProbeOutput_tags:
-			return deserializeTagMap(d, schemas.CreateProbeOutput_tags, &v.Tags)
-		case schemas.CreateProbeOutput_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.CreateProbeOutput_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProbe, schemas.CreateProbeInput, schemas.CreateProbeOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProbe{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProbe, schemas.CreateProbeInput, schemas.CreateProbeOutput), output: &CreateProbeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProbe{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProbe"); err != nil {

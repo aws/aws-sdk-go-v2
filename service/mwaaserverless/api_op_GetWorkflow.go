@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type GetWorkflowInput struct {
 	WorkflowVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWorkflowRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkflowArn != nil {
-		s.WriteString(schemas.GetWorkflowRequest_WorkflowArn, *v.WorkflowArn)
-	}
-	if v.WorkflowVersion != nil {
-		s.WriteString(schemas.GetWorkflowRequest_WorkflowVersion, *v.WorkflowVersion)
-	}
 }
 
 type GetWorkflowOutput struct {
@@ -124,77 +107,16 @@ type GetWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWorkflowResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWorkflowResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetWorkflowResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetWorkflowResponse_DefinitionS3Location:
-			v.DefinitionS3Location = &types.DefinitionS3Location{}
-			return v.DefinitionS3Location.Deserialize(d)
-		case schemas.GetWorkflowResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_Description, v.Description)
-		case schemas.GetWorkflowResponse_EncryptionConfiguration:
-			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
-			return v.EncryptionConfiguration.Deserialize(d)
-		case schemas.GetWorkflowResponse_EngineVersion:
-			var ev int32
-			if err := d.ReadInt32(schemas.GetWorkflowResponse_EngineVersion, &ev); err != nil {
-				return err
-			}
-			v.EngineVersion = types.EngineVersion(ev)
-			return nil
-		case schemas.GetWorkflowResponse_LoggingConfiguration:
-			v.LoggingConfiguration = &types.LoggingConfiguration{}
-			return v.LoggingConfiguration.Deserialize(d)
-		case schemas.GetWorkflowResponse_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetWorkflowResponse_ModifiedAt, v.ModifiedAt)
-		case schemas.GetWorkflowResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_Name, v.Name)
-		case schemas.GetWorkflowResponse_NetworkConfiguration:
-			v.NetworkConfiguration = &types.NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.GetWorkflowResponse_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_RoleArn, v.RoleArn)
-		case schemas.GetWorkflowResponse_ScheduleConfiguration:
-			v.ScheduleConfiguration = &types.ScheduleConfiguration{}
-			return v.ScheduleConfiguration.Deserialize(d)
-		case schemas.GetWorkflowResponse_TriggerMode:
-			v.TriggerMode = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_TriggerMode, v.TriggerMode)
-		case schemas.GetWorkflowResponse_WorkflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_WorkflowArn, v.WorkflowArn)
-		case schemas.GetWorkflowResponse_WorkflowDefinition:
-			v.WorkflowDefinition = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_WorkflowDefinition, v.WorkflowDefinition)
-		case schemas.GetWorkflowResponse_WorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetWorkflowResponse_WorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.WorkflowStatus = types.WorkflowStatus(ev)
-			return nil
-		case schemas.GetWorkflowResponse_WorkflowVersion:
-			v.WorkflowVersion = new(string)
-			return d.ReadString(schemas.GetWorkflowResponse_WorkflowVersion, v.WorkflowVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse), output: &GetWorkflowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflow"); err != nil {

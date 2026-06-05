@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,28 +53,6 @@ type StartFHIRExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartFHIRExportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartFHIRExportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartFHIRExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartFHIRExportJobRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DataAccessRoleArn != nil {
-		s.WriteString(schemas.StartFHIRExportJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.StartFHIRExportJobRequest_DatastoreId, *v.DatastoreId)
-	}
-	if v.JobName != nil {
-		s.WriteString(schemas.StartFHIRExportJobRequest_JobName, *v.JobName)
-	}
-	serializeOutputDataConfig(s, schemas.StartFHIRExportJobRequest_OutputDataConfig, v.OutputDataConfig)
-}
-
 type StartFHIRExportJobOutput struct {
 
 	// The export job identifier.
@@ -98,34 +74,16 @@ type StartFHIRExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartFHIRExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartFHIRExportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartFHIRExportJobResponse_DatastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.StartFHIRExportJobResponse_DatastoreId, v.DatastoreId)
-		case schemas.StartFHIRExportJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.StartFHIRExportJobResponse_JobId, v.JobId)
-		case schemas.StartFHIRExportJobResponse_JobStatus:
-			var ev string
-			if err := d.ReadString(schemas.StartFHIRExportJobResponse_JobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = types.JobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartFHIRExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFHIRExportJob, schemas.StartFHIRExportJobRequest, schemas.StartFHIRExportJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartFHIRExportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFHIRExportJob, schemas.StartFHIRExportJobRequest, schemas.StartFHIRExportJobResponse), output: &StartFHIRExportJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartFHIRExportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFHIRExportJob"); err != nil {

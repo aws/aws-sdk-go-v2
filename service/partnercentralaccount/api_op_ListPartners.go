@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListPartnersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPartnersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPartnersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPartnersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.ListPartnersRequest_Catalog, *v.Catalog)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPartnersRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListPartnersOutput struct {
 
 	// A list of partner summaries including basic information about each partner
@@ -74,26 +57,16 @@ type ListPartnersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPartnersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPartnersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPartnersResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPartnersResponse_NextToken, v.NextToken)
-		case schemas.ListPartnersResponse_PartnerSummaryList:
-			return deserializePartnerSummaryList(d, schemas.ListPartnersResponse_PartnerSummaryList, &v.PartnerSummaryList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPartnersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartners, schemas.ListPartnersRequest, schemas.ListPartnersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPartners{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartners, schemas.ListPartnersRequest, schemas.ListPartnersResponse), output: &ListPartnersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPartners{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPartners"); err != nil {

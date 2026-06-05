@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,15 +34,6 @@ type GetEnrollmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnrollmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnrollmentConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnrollmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetEnrollmentConfigurationOutput struct {
 
 	//  The current enrollment status.
@@ -68,41 +57,16 @@ type GetEnrollmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnrollmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnrollmentConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.GetEnrollmentConfigurationResponse_organizationRuleMode:
-			var ev string
-			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_organizationRuleMode, &ev); err != nil {
-				return err
-			}
-			v.OrganizationRuleMode = types.OrganizationRuleMode(ev)
-			return nil
-		case schemas.GetEnrollmentConfigurationResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EnrollmentStatus(ev)
-			return nil
-		case schemas.GetEnrollmentConfigurationResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.GetEnrollmentConfigurationResponse_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnrollmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentConfiguration, schemas.GetEnrollmentConfigurationRequest, schemas.GetEnrollmentConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEnrollmentConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentConfiguration, schemas.GetEnrollmentConfigurationRequest, schemas.GetEnrollmentConfigurationResponse), output: &GetEnrollmentConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEnrollmentConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnrollmentConfiguration"); err != nil {

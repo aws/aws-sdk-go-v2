@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,40 +45,6 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListApplicationsRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListApplicationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListApplicationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.ListApplicationsRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.ListApplicationsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListApplicationsRequest_MaxResults, v.MaxResults)
-		case schemas.ListApplicationsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListApplicationsOutput struct {
 
 	// The list of ApplicationSummary objects.
@@ -95,38 +59,16 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaryList, v.ApplicationSummaryList)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsResponse_ApplicationSummaryList:
-			return deserializeApplicationSummaries(d, schemas.ListApplicationsResponse_ApplicationSummaryList, &v.ApplicationSummaryList)
-		case schemas.ListApplicationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplications"); err != nil {

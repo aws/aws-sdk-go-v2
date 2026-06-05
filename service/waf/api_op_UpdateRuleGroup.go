@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -90,22 +88,6 @@ type UpdateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRuleGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.UpdateRuleGroupRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.RuleGroupId != nil {
-		s.WriteString(schemas.UpdateRuleGroupRequest_RuleGroupId, *v.RuleGroupId)
-	}
-	serializeRuleGroupUpdates(s, schemas.UpdateRuleGroupRequest_Updates, v.Updates)
-}
-
 type UpdateRuleGroupOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRuleGroup request. You can
@@ -119,24 +101,16 @@ type UpdateRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRuleGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRuleGroupResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.UpdateRuleGroupResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleGroup, schemas.UpdateRuleGroupRequest, schemas.UpdateRuleGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleGroup, schemas.UpdateRuleGroupRequest, schemas.UpdateRuleGroupResponse), output: &UpdateRuleGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRuleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRuleGroup"); err != nil {

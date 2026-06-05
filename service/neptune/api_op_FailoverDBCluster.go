@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,21 +56,6 @@ type FailoverDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailoverDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailoverDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailoverDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.FailoverDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.TargetDBInstanceIdentifier != nil {
-		s.WriteString(schemas.FailoverDBClusterMessage_TargetDBInstanceIdentifier, *v.TargetDBInstanceIdentifier)
-	}
-}
-
 type FailoverDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -86,24 +69,16 @@ type FailoverDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailoverDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailoverDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailoverDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverDBCluster, schemas.FailoverDBClusterMessage, schemas.FailoverDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverDBCluster, schemas.FailoverDBClusterMessage, schemas.FailoverDBClusterResult), output: &FailoverDBClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpFailoverDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "FailoverDBCluster"); err != nil {

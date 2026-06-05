@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,21 +61,6 @@ type DescribeRegionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRegionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRegionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.DescribeRegionRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.RegionName != nil {
-		s.WriteString(schemas.DescribeRegionRequest_RegionName, *v.RegionName)
-	}
-}
-
 type DescribeRegionOutput struct {
 
 	// The timestamp when the Region was added to the IAM Identity Center instance.
@@ -105,36 +88,16 @@ type DescribeRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRegionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRegionResponse_AddedDate:
-			v.AddedDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeRegionResponse_AddedDate, v.AddedDate)
-		case schemas.DescribeRegionResponse_IsPrimaryRegion:
-			return d.ReadBool(schemas.DescribeRegionResponse_IsPrimaryRegion, &v.IsPrimaryRegion)
-		case schemas.DescribeRegionResponse_RegionName:
-			v.RegionName = new(string)
-			return d.ReadString(schemas.DescribeRegionResponse_RegionName, v.RegionName)
-		case schemas.DescribeRegionResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeRegionResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RegionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegion, schemas.DescribeRegionRequest, schemas.DescribeRegionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRegion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegion, schemas.DescribeRegionRequest, schemas.DescribeRegionResponse), output: &DescribeRegionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRegion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRegion"); err != nil {

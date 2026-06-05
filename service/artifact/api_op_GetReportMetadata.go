@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type GetReportMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReportMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetReportMetadataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetReportMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReportId != nil {
-		s.WriteString(schemas.GetReportMetadataRequest_reportId, *v.ReportId)
-	}
-	if v.ReportVersion != nil {
-		s.WriteInt64(schemas.GetReportMetadataRequest_reportVersion, *v.ReportVersion)
-	}
-}
-
 type GetReportMetadataOutput struct {
 
 	// Report resource detail.
@@ -68,24 +51,16 @@ type GetReportMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReportMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetReportMetadataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetReportMetadataResponse_reportDetails:
-			v.ReportDetails = &types.ReportDetail{}
-			return v.ReportDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetReportMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportMetadata, schemas.GetReportMetadataRequest, schemas.GetReportMetadataResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReportMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportMetadata, schemas.GetReportMetadataRequest, schemas.GetReportMetadataResponse), output: &GetReportMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReportMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReportMetadata"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,31 +60,6 @@ type CreatePackageGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePackageGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePackageGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactInfo != nil {
-		s.WriteString(schemas.CreatePackageGroupRequest_contactInfo, *v.ContactInfo)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePackageGroupRequest_description, *v.Description)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.CreatePackageGroupRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.CreatePackageGroupRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.PackageGroup != nil {
-		s.WriteString(schemas.CreatePackageGroupRequest_packageGroup, *v.PackageGroup)
-	}
-	serializeTagList(s, schemas.CreatePackageGroupRequest_tags, v.Tags)
-}
-
 type CreatePackageGroupOutput struct {
 
 	//  Information about the created package group after processing the request.
@@ -98,24 +71,16 @@ type CreatePackageGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePackageGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePackageGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePackageGroupResult_packageGroup:
-			v.PackageGroup = &types.PackageGroupDescription{}
-			return v.PackageGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackageGroup, schemas.CreatePackageGroupRequest, schemas.CreatePackageGroupResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackageGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackageGroup, schemas.CreatePackageGroupRequest, schemas.CreatePackageGroupResult), output: &CreatePackageGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackageGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackageGroup"); err != nil {

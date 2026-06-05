@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type ListEdgeAgentConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEdgeAgentConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEdgeAgentConfigurationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEdgeAgentConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HubDeviceArn != nil {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsInput_HubDeviceArn, *v.HubDeviceArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEdgeAgentConfigurationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListEdgeAgentConfigurationsOutput struct {
 
 	// A description of a single stream's edge configuration.
@@ -85,26 +65,16 @@ type ListEdgeAgentConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEdgeAgentConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEdgeAgentConfigurationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEdgeAgentConfigurationsOutput_EdgeConfigs:
-			return deserializeListEdgeAgentConfigurationsEdgeConfigList(d, schemas.ListEdgeAgentConfigurationsOutput_EdgeConfigs, &v.EdgeConfigs)
-		case schemas.ListEdgeAgentConfigurationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEdgeAgentConfigurationsOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEdgeAgentConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEdgeAgentConfigurations, schemas.ListEdgeAgentConfigurationsInput, schemas.ListEdgeAgentConfigurationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEdgeAgentConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEdgeAgentConfigurations, schemas.ListEdgeAgentConfigurationsInput, schemas.ListEdgeAgentConfigurationsOutput), output: &ListEdgeAgentConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEdgeAgentConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEdgeAgentConfigurations"); err != nil {

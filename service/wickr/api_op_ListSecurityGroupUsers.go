@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,33 +59,6 @@ type ListSecurityGroupUsersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSecurityGroupUsersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSecurityGroupUsersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSecurityGroupUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.ListSecurityGroupUsersRequest_groupId, *v.GroupId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSecurityGroupUsersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.ListSecurityGroupUsersRequest_networkId, *v.NetworkId)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSecurityGroupUsersRequest_nextToken, *v.NextToken)
-	}
-	if v.SortDirection != "" {
-		s.WriteString(schemas.ListSecurityGroupUsersRequest_sortDirection, string(v.SortDirection))
-	}
-	if v.SortFields != nil {
-		s.WriteString(schemas.ListSecurityGroupUsersRequest_sortFields, *v.SortFields)
-	}
-}
-
 type ListSecurityGroupUsersOutput struct {
 
 	// A list of user objects belonging to the security group within the current page.
@@ -105,26 +76,16 @@ type ListSecurityGroupUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSecurityGroupUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSecurityGroupUsersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSecurityGroupUsersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSecurityGroupUsersResponse_nextToken, v.NextToken)
-		case schemas.ListSecurityGroupUsersResponse_users:
-			return deserializeUsers(d, schemas.ListSecurityGroupUsersResponse_users, &v.Users)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSecurityGroupUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityGroupUsers, schemas.ListSecurityGroupUsersRequest, schemas.ListSecurityGroupUsersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityGroupUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityGroupUsers, schemas.ListSecurityGroupUsersRequest, schemas.ListSecurityGroupUsersResponse), output: &ListSecurityGroupUsersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityGroupUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSecurityGroupUsers"); err != nil {

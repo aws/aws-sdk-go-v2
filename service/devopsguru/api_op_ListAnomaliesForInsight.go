@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,37 +57,6 @@ type ListAnomaliesForInsightInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAnomaliesForInsightInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAnomaliesForInsightRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAnomaliesForInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ListAnomaliesForInsightRequest_AccountId, *v.AccountId)
-	}
-	if v.Filters != nil {
-		s.WriteStruct(schemas.ListAnomaliesForInsightRequest_Filters)
-		v.Filters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InsightId != nil {
-		s.WriteString(schemas.ListAnomaliesForInsightRequest_InsightId, *v.InsightId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAnomaliesForInsightRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAnomaliesForInsightRequest_NextToken, *v.NextToken)
-	}
-	if v.StartTimeRange != nil {
-		s.WriteStruct(schemas.ListAnomaliesForInsightRequest_StartTimeRange)
-		v.StartTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListAnomaliesForInsightOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -110,28 +77,16 @@ type ListAnomaliesForInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAnomaliesForInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAnomaliesForInsightResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAnomaliesForInsightResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAnomaliesForInsightResponse_NextToken, v.NextToken)
-		case schemas.ListAnomaliesForInsightResponse_ProactiveAnomalies:
-			return deserializeProactiveAnomalies(d, schemas.ListAnomaliesForInsightResponse_ProactiveAnomalies, &v.ProactiveAnomalies)
-		case schemas.ListAnomaliesForInsightResponse_ReactiveAnomalies:
-			return deserializeReactiveAnomalies(d, schemas.ListAnomaliesForInsightResponse_ReactiveAnomalies, &v.ReactiveAnomalies)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomaliesForInsight, schemas.ListAnomaliesForInsightRequest, schemas.ListAnomaliesForInsightResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnomaliesForInsight{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnomaliesForInsight, schemas.ListAnomaliesForInsightRequest, schemas.ListAnomaliesForInsightResponse), output: &ListAnomaliesForInsightOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnomaliesForInsight{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnomaliesForInsight"); err != nil {

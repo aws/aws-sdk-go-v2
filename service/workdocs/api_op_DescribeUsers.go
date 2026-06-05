@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,45 +87,6 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeUsersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeUsersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.DescribeUsersRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.Fields != nil {
-		s.WriteString(schemas.DescribeUsersRequest_Fields, *v.Fields)
-	}
-	if v.Include != "" {
-		s.WriteString(schemas.DescribeUsersRequest_Include, string(v.Include))
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.DescribeUsersRequest_Limit, *v.Limit)
-	}
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribeUsersRequest_Marker, *v.Marker)
-	}
-	if v.Order != "" {
-		s.WriteString(schemas.DescribeUsersRequest_Order, string(v.Order))
-	}
-	if v.OrganizationId != nil {
-		s.WriteString(schemas.DescribeUsersRequest_OrganizationId, *v.OrganizationId)
-	}
-	if v.Query != nil {
-		s.WriteString(schemas.DescribeUsersRequest_Query, *v.Query)
-	}
-	if v.Sort != "" {
-		s.WriteString(schemas.DescribeUsersRequest_Sort, string(v.Sort))
-	}
-	if v.UserIds != nil {
-		s.WriteString(schemas.DescribeUsersRequest_UserIds, *v.UserIds)
-	}
-}
-
 type DescribeUsersOutput struct {
 
 	// The marker to use when requesting the next set of results. If there are no
@@ -148,29 +107,16 @@ type DescribeUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeUsersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeUsersResponse_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.DescribeUsersResponse_Marker, v.Marker)
-		case schemas.DescribeUsersResponse_TotalNumberOfUsers:
-			v.TotalNumberOfUsers = new(int64)
-			return d.ReadInt64(schemas.DescribeUsersResponse_TotalNumberOfUsers, v.TotalNumberOfUsers)
-		case schemas.DescribeUsersResponse_Users:
-			return deserializeOrganizationUserList(d, schemas.DescribeUsersResponse_Users, &v.Users)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersRequest, schemas.DescribeUsersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersRequest, schemas.DescribeUsersResponse), output: &DescribeUsersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUsers"); err != nil {

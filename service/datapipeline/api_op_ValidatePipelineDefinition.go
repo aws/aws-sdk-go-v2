@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -106,21 +104,6 @@ type ValidatePipelineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidatePipelineDefinitionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidatePipelineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterObjectList(s, schemas.ValidatePipelineDefinitionInput_parameterObjects, v.ParameterObjects)
-	serializeParameterValueList(s, schemas.ValidatePipelineDefinitionInput_parameterValues, v.ParameterValues)
-	if v.PipelineId != nil {
-		s.WriteString(schemas.ValidatePipelineDefinitionInput_pipelineId, *v.PipelineId)
-	}
-	serializePipelineObjectList(s, schemas.ValidatePipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
-}
-
 // Contains the output of ValidatePipelineDefinition.
 type ValidatePipelineDefinitionOutput struct {
 
@@ -141,27 +124,16 @@ type ValidatePipelineDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidatePipelineDefinitionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidatePipelineDefinitionOutput_errored:
-			return d.ReadBool(schemas.ValidatePipelineDefinitionOutput_errored, &v.Errored)
-		case schemas.ValidatePipelineDefinitionOutput_validationErrors:
-			return deserializeValidationErrors(d, schemas.ValidatePipelineDefinitionOutput_validationErrors, &v.ValidationErrors)
-		case schemas.ValidatePipelineDefinitionOutput_validationWarnings:
-			return deserializeValidationWarnings(d, schemas.ValidatePipelineDefinitionOutput_validationWarnings, &v.ValidationWarnings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationValidatePipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipelineDefinition, schemas.ValidatePipelineDefinitionInput, schemas.ValidatePipelineDefinitionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpValidatePipelineDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipelineDefinition, schemas.ValidatePipelineDefinitionInput, schemas.ValidatePipelineDefinitionOutput), output: &ValidatePipelineDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpValidatePipelineDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidatePipelineDefinition"); err != nil {

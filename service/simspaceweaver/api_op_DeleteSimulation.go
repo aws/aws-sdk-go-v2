@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,28 +39,6 @@ type DeleteSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSimulationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSimulationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSimulationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Simulation != nil {
-		s.WriteString(schemas.DeleteSimulationInput_Simulation, *v.Simulation)
-	}
-}
-func (v *DeleteSimulationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSimulationInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSimulationInput_Simulation:
-			v.Simulation = new(string)
-			return d.ReadString(schemas.DeleteSimulationInput_Simulation, v.Simulation)
-		}
-		return nil
-	})
-}
-
 type DeleteSimulationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,29 +46,16 @@ type DeleteSimulationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSimulationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSimulationOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSimulationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteSimulationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSimulationOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSimulationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSimulation, schemas.DeleteSimulationInput, schemas.DeleteSimulationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSimulation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSimulation, schemas.DeleteSimulationInput, schemas.DeleteSimulationOutput), output: &DeleteSimulationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSimulation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSimulation"); err != nil {

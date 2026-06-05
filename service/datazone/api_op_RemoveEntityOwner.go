@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,28 +56,6 @@ type RemoveEntityOwnerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveEntityOwnerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveEntityOwnerInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveEntityOwnerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.RemoveEntityOwnerInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.RemoveEntityOwnerInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.RemoveEntityOwnerInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.RemoveEntityOwnerInput_entityType, string(v.EntityType))
-	}
-	serializeOwnerProperties(s, schemas.RemoveEntityOwnerInput_owner, v.Owner)
-}
-
 type RemoveEntityOwnerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,21 +63,16 @@ type RemoveEntityOwnerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveEntityOwnerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveEntityOwnerOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveEntityOwnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveEntityOwner, schemas.RemoveEntityOwnerInput, schemas.RemoveEntityOwnerOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveEntityOwner{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveEntityOwner, schemas.RemoveEntityOwnerInput, schemas.RemoveEntityOwnerOutput), output: &RemoveEntityOwnerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveEntityOwner{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveEntityOwner"); err != nil {

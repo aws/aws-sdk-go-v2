@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type AssociateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateVolumeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateVolumeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Device != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_Device, *v.Device)
-	}
-	if v.VolumeId != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_VolumeId, *v.VolumeId)
-	}
-	if v.WorkspaceInstanceId != nil {
-		s.WriteString(schemas.AssociateVolumeRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
-	}
-}
-
 // Confirms volume attachment.
 type AssociateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -75,21 +55,16 @@ type AssociateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateVolumeResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateVolume{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVolume, schemas.AssociateVolumeRequest, schemas.AssociateVolumeResponse), output: &AssociateVolumeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateVolume{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateVolume"); err != nil {

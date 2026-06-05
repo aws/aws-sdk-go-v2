@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,23 +48,6 @@ type ConfigureHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigureHealthCheckInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfigureHealthCheckInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConfigureHealthCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthCheck != nil {
-		s.WriteStruct(schemas.ConfigureHealthCheckInput_HealthCheck)
-		v.HealthCheck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.ConfigureHealthCheckInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output of ConfigureHealthCheck.
 type ConfigureHealthCheckOutput struct {
 
@@ -79,24 +60,16 @@ type ConfigureHealthCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigureHealthCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfigureHealthCheckOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfigureHealthCheckOutput_HealthCheck:
-			v.HealthCheck = &types.HealthCheck{}
-			return v.HealthCheck.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationConfigureHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureHealthCheck, schemas.ConfigureHealthCheckInput, schemas.ConfigureHealthCheckOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpConfigureHealthCheck{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureHealthCheck, schemas.ConfigureHealthCheckInput, schemas.ConfigureHealthCheckOutput), output: &ConfigureHealthCheckOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpConfigureHealthCheck{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfigureHealthCheck"); err != nil {

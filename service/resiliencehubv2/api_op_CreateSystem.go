@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,31 +52,6 @@ type CreateSystemInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSystemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSystemRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSystemRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateSystemRequest_description, *v.Description)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateSystemRequest_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSystemRequest_name, *v.Name)
-	}
-	if v.SharingEnabled != nil {
-		s.WriteBool(schemas.CreateSystemRequest_sharingEnabled, *v.SharingEnabled)
-	}
-	serializeTagMap(s, schemas.CreateSystemRequest_tags, v.Tags)
-}
-
 type CreateSystemOutput struct {
 
 	// The created system.
@@ -92,24 +65,16 @@ type CreateSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSystemResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSystemResponse_system:
-			v.System = &types.System{}
-			return v.System.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSystem, schemas.CreateSystemRequest, schemas.CreateSystemResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSystem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSystem, schemas.CreateSystemRequest, schemas.CreateSystemResponse), output: &CreateSystemOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSystem{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSystem"); err != nil {

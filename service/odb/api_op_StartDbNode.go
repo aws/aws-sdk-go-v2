@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type StartDbNodeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDbNodeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDbNodeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudVmClusterId != nil {
-		s.WriteString(schemas.StartDbNodeInput_cloudVmClusterId, *v.CloudVmClusterId)
-	}
-	if v.DbNodeId != nil {
-		s.WriteString(schemas.StartDbNodeInput_dbNodeId, *v.DbNodeId)
-	}
-}
-
 type StartDbNodeOutput struct {
 
 	// The unique identifier of the DB node that was started.
@@ -79,34 +62,16 @@ type StartDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDbNodeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartDbNodeOutput_dbNodeId:
-			v.DbNodeId = new(string)
-			return d.ReadString(schemas.StartDbNodeOutput_dbNodeId, v.DbNodeId)
-		case schemas.StartDbNodeOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.StartDbNodeOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DbNodeResourceStatus(ev)
-			return nil
-		case schemas.StartDbNodeOutput_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.StartDbNodeOutput_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDbNode, schemas.StartDbNodeInput, schemas.StartDbNodeOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDbNode, schemas.StartDbNodeInput, schemas.StartDbNodeOutput), output: &StartDbNodeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDbNode"); err != nil {

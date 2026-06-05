@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,33 +60,6 @@ type ListAccountPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountPoolsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountPoolsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccountPoolsInput_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccountPoolsInput_nextToken, *v.NextToken)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListAccountPoolsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListAccountPoolsInput_sortOrder, string(v.SortOrder))
-	}
-}
-
 type ListAccountPoolsOutput struct {
 
 	// The results of the ListAccountPools operation.
@@ -107,26 +78,16 @@ type ListAccountPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountPoolsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountPoolsOutput_items:
-			return deserializeAccountPoolSummaries(d, schemas.ListAccountPoolsOutput_items, &v.Items)
-		case schemas.ListAccountPoolsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccountPoolsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccountPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPools, schemas.ListAccountPoolsInput, schemas.ListAccountPoolsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountPools{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountPools, schemas.ListAccountPoolsInput, schemas.ListAccountPoolsOutput), output: &ListAccountPoolsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountPools{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountPools"); err != nil {

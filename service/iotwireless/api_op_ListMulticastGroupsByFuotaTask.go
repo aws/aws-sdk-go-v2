@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListMulticastGroupsByFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMulticastGroupsByFuotaTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMulticastGroupsByFuotaTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMulticastGroupsByFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.ListMulticastGroupsByFuotaTaskRequest_Id, *v.Id)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListMulticastGroupsByFuotaTaskRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMulticastGroupsByFuotaTaskRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListMulticastGroupsByFuotaTaskOutput struct {
 
 	// List of multicast groups associated with a FUOTA task.
@@ -79,26 +59,16 @@ type ListMulticastGroupsByFuotaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMulticastGroupsByFuotaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMulticastGroupsByFuotaTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMulticastGroupsByFuotaTaskResponse_MulticastGroupList:
-			return deserializeMulticastGroupListByFuotaTask(d, schemas.ListMulticastGroupsByFuotaTaskResponse_MulticastGroupList, &v.MulticastGroupList)
-		case schemas.ListMulticastGroupsByFuotaTaskResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMulticastGroupsByFuotaTaskResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMulticastGroupsByFuotaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMulticastGroupsByFuotaTask, schemas.ListMulticastGroupsByFuotaTaskRequest, schemas.ListMulticastGroupsByFuotaTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMulticastGroupsByFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMulticastGroupsByFuotaTask, schemas.ListMulticastGroupsByFuotaTaskRequest, schemas.ListMulticastGroupsByFuotaTaskResponse), output: &ListMulticastGroupsByFuotaTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMulticastGroupsByFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMulticastGroupsByFuotaTask"); err != nil {

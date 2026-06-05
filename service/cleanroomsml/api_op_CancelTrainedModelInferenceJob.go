@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type CancelTrainedModelInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelTrainedModelInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelTrainedModelInferenceJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelTrainedModelInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.CancelTrainedModelInferenceJobRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.TrainedModelInferenceJobArn != nil {
-		s.WriteString(schemas.CancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn, *v.TrainedModelInferenceJobArn)
-	}
-}
-
 type CancelTrainedModelInferenceJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,29 +49,16 @@ type CancelTrainedModelInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelTrainedModelInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelTrainedModelInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *CancelTrainedModelInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelTrainedModelInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTrainedModelInferenceJob, schemas.CancelTrainedModelInferenceJobRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTrainedModelInferenceJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTrainedModelInferenceJob, schemas.CancelTrainedModelInferenceJobRequest, nil), output: &CancelTrainedModelInferenceJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTrainedModelInferenceJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelTrainedModelInferenceJob"); err != nil {

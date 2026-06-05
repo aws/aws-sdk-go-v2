@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -278,63 +276,6 @@ type PutBotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutBotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutBotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutBotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AbortStatement != nil {
-		s.WriteStruct(schemas.PutBotRequest_abortStatement)
-		v.AbortStatement.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Checksum != nil {
-		s.WriteString(schemas.PutBotRequest_checksum, *v.Checksum)
-	}
-	if v.ChildDirected != nil {
-		s.WriteBool(schemas.PutBotRequest_childDirected, *v.ChildDirected)
-	}
-	if v.ClarificationPrompt != nil {
-		s.WriteStruct(schemas.PutBotRequest_clarificationPrompt)
-		v.ClarificationPrompt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreateVersion != nil {
-		s.WriteBool(schemas.PutBotRequest_createVersion, *v.CreateVersion)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.PutBotRequest_description, *v.Description)
-	}
-	if v.DetectSentiment != nil {
-		s.WriteBool(schemas.PutBotRequest_detectSentiment, *v.DetectSentiment)
-	}
-	if v.EnableModelImprovements != nil {
-		s.WriteBool(schemas.PutBotRequest_enableModelImprovements, *v.EnableModelImprovements)
-	}
-	if v.IdleSessionTTLInSeconds != nil {
-		s.WriteInt32(schemas.PutBotRequest_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
-	}
-	serializeIntentList(s, schemas.PutBotRequest_intents, v.Intents)
-	if v.Locale != "" {
-		s.WriteString(schemas.PutBotRequest_locale, string(v.Locale))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PutBotRequest_name, *v.Name)
-	}
-	if v.NluIntentConfidenceThreshold != nil {
-		s.WriteFloat64(schemas.PutBotRequest_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
-	}
-	if v.ProcessBehavior != "" {
-		s.WriteString(schemas.PutBotRequest_processBehavior, string(v.ProcessBehavior))
-	}
-	serializeTagList(s, schemas.PutBotRequest_tags, v.Tags)
-	if v.VoiceId != nil {
-		s.WriteString(schemas.PutBotRequest_voiceId, *v.VoiceId)
-	}
-}
-
 type PutBotOutput struct {
 
 	// The message that Amazon Lex uses to cancel a conversation. For more
@@ -457,87 +398,16 @@ type PutBotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutBotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutBotResponse_abortStatement:
-			v.AbortStatement = &types.Statement{}
-			return v.AbortStatement.Deserialize(d)
-		case schemas.PutBotResponse_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.PutBotResponse_checksum, v.Checksum)
-		case schemas.PutBotResponse_childDirected:
-			v.ChildDirected = new(bool)
-			return d.ReadBool(schemas.PutBotResponse_childDirected, v.ChildDirected)
-		case schemas.PutBotResponse_clarificationPrompt:
-			v.ClarificationPrompt = &types.Prompt{}
-			return v.ClarificationPrompt.Deserialize(d)
-		case schemas.PutBotResponse_createVersion:
-			v.CreateVersion = new(bool)
-			return d.ReadBool(schemas.PutBotResponse_createVersion, v.CreateVersion)
-		case schemas.PutBotResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.PutBotResponse_createdDate, v.CreatedDate)
-		case schemas.PutBotResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PutBotResponse_description, v.Description)
-		case schemas.PutBotResponse_detectSentiment:
-			v.DetectSentiment = new(bool)
-			return d.ReadBool(schemas.PutBotResponse_detectSentiment, v.DetectSentiment)
-		case schemas.PutBotResponse_enableModelImprovements:
-			v.EnableModelImprovements = new(bool)
-			return d.ReadBool(schemas.PutBotResponse_enableModelImprovements, v.EnableModelImprovements)
-		case schemas.PutBotResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.PutBotResponse_failureReason, v.FailureReason)
-		case schemas.PutBotResponse_idleSessionTTLInSeconds:
-			v.IdleSessionTTLInSeconds = new(int32)
-			return d.ReadInt32(schemas.PutBotResponse_idleSessionTTLInSeconds, v.IdleSessionTTLInSeconds)
-		case schemas.PutBotResponse_intents:
-			return deserializeIntentList(d, schemas.PutBotResponse_intents, &v.Intents)
-		case schemas.PutBotResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.PutBotResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.PutBotResponse_locale:
-			var ev string
-			if err := d.ReadString(schemas.PutBotResponse_locale, &ev); err != nil {
-				return err
-			}
-			v.Locale = types.Locale(ev)
-			return nil
-		case schemas.PutBotResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PutBotResponse_name, v.Name)
-		case schemas.PutBotResponse_nluIntentConfidenceThreshold:
-			v.NluIntentConfidenceThreshold = new(float64)
-			return d.ReadFloat64(schemas.PutBotResponse_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
-		case schemas.PutBotResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.PutBotResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.Status(ev)
-			return nil
-		case schemas.PutBotResponse_tags:
-			return deserializeTagList(d, schemas.PutBotResponse_tags, &v.Tags)
-		case schemas.PutBotResponse_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.PutBotResponse_version, v.Version)
-		case schemas.PutBotResponse_voiceId:
-			v.VoiceId = new(string)
-			return d.ReadString(schemas.PutBotResponse_voiceId, v.VoiceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutBot, schemas.PutBotRequest, schemas.PutBotResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutBot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutBot, schemas.PutBotRequest, schemas.PutBotResponse), output: &PutBotOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutBot{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutBot"); err != nil {

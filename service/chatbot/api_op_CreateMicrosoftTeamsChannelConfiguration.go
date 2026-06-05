@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,45 +93,6 @@ type CreateMicrosoftTeamsChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMicrosoftTeamsChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTeamsChannelConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMicrosoftTeamsChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_ChannelId, *v.ChannelId)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_ChannelName, *v.ChannelName)
-	}
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_ConfigurationName, *v.ConfigurationName)
-	}
-	serializeGuardrailPolicyArnList(s, schemas.CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.LoggingLevel != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
-	}
-	serializeSnsTopicArnList(s, schemas.CreateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	serializeTags(s, schemas.CreateTeamsChannelConfigurationRequest_Tags, v.Tags)
-	if v.TeamId != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_TeamId, *v.TeamId)
-	}
-	if v.TeamName != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_TeamName, *v.TeamName)
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_TenantId, *v.TenantId)
-	}
-	if v.UserAuthorizationRequired != nil {
-		s.WriteBool(schemas.CreateTeamsChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
-	}
-}
-
 type CreateMicrosoftTeamsChannelConfigurationOutput struct {
 
 	// The configuration for a Microsoft Teams channel configured with AWS Chatbot.
@@ -145,24 +104,16 @@ type CreateMicrosoftTeamsChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMicrosoftTeamsChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateTeamsChannelConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateTeamsChannelConfigurationResult_ChannelConfiguration:
-			v.ChannelConfiguration = &types.TeamsChannelConfiguration{}
-			return v.ChannelConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMicrosoftTeamsChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrosoftTeamsChannelConfiguration, schemas.CreateTeamsChannelConfigurationRequest, schemas.CreateTeamsChannelConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMicrosoftTeamsChannelConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrosoftTeamsChannelConfiguration, schemas.CreateTeamsChannelConfigurationRequest, schemas.CreateTeamsChannelConfigurationResult), output: &CreateMicrosoftTeamsChannelConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMicrosoftTeamsChannelConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMicrosoftTeamsChannelConfiguration"); err != nil {

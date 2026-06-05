@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,21 +48,6 @@ type AcceptAgreementCancellationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptAgreementCancellationRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptAgreementCancellationRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptAgreementCancellationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementCancellationRequestId != nil {
-		s.WriteString(schemas.AcceptAgreementCancellationRequestInput_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
-	}
-	if v.AgreementId != nil {
-		s.WriteString(schemas.AcceptAgreementCancellationRequestInput_agreementId, *v.AgreementId)
-	}
-}
-
 type AcceptAgreementCancellationRequestOutput struct {
 
 	// The unique identifier of the accepted cancellation request.
@@ -95,50 +78,16 @@ type AcceptAgreementCancellationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptAgreementCancellationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptAgreementCancellationRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptAgreementCancellationRequestOutput_agreementCancellationRequestId:
-			v.AgreementCancellationRequestId = new(string)
-			return d.ReadString(schemas.AcceptAgreementCancellationRequestOutput_agreementCancellationRequestId, v.AgreementCancellationRequestId)
-		case schemas.AcceptAgreementCancellationRequestOutput_agreementId:
-			v.AgreementId = new(string)
-			return d.ReadString(schemas.AcceptAgreementCancellationRequestOutput_agreementId, v.AgreementId)
-		case schemas.AcceptAgreementCancellationRequestOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.AcceptAgreementCancellationRequestOutput_createdAt, v.CreatedAt)
-		case schemas.AcceptAgreementCancellationRequestOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AcceptAgreementCancellationRequestOutput_description, v.Description)
-		case schemas.AcceptAgreementCancellationRequestOutput_reasonCode:
-			var ev string
-			if err := d.ReadString(schemas.AcceptAgreementCancellationRequestOutput_reasonCode, &ev); err != nil {
-				return err
-			}
-			v.ReasonCode = types.AgreementCancellationRequestReasonCode(ev)
-			return nil
-		case schemas.AcceptAgreementCancellationRequestOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.AcceptAgreementCancellationRequestOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AgreementCancellationRequestStatus(ev)
-			return nil
-		case schemas.AcceptAgreementCancellationRequestOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AcceptAgreementCancellationRequestOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptAgreementCancellationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.AcceptAgreementCancellationRequestInput, schemas.AcceptAgreementCancellationRequestOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptAgreementCancellationRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementCancellationRequest, schemas.AcceptAgreementCancellationRequestInput, schemas.AcceptAgreementCancellationRequestOutput), output: &AcceptAgreementCancellationRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptAgreementCancellationRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptAgreementCancellationRequest"); err != nil {

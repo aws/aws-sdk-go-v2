@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,22 +51,6 @@ type GetMatchIdInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMatchIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMatchIdInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMatchIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplyNormalization != nil {
-		s.WriteBool(schemas.GetMatchIdInput_applyNormalization, *v.ApplyNormalization)
-	}
-	serializeRecordAttributeMap(s, schemas.GetMatchIdInput_record, v.Record)
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.GetMatchIdInput_workflowName, *v.WorkflowName)
-	}
-}
-
 type GetMatchIdOutput struct {
 
 	// The unique identifiers for this group of match records.
@@ -83,27 +65,16 @@ type GetMatchIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMatchIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMatchIdOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMatchIdOutput_matchId:
-			v.MatchId = new(string)
-			return d.ReadString(schemas.GetMatchIdOutput_matchId, v.MatchId)
-		case schemas.GetMatchIdOutput_matchRule:
-			v.MatchRule = new(string)
-			return d.ReadString(schemas.GetMatchIdOutput_matchRule, v.MatchRule)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMatchIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchId, schemas.GetMatchIdInput, schemas.GetMatchIdOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatchId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchId, schemas.GetMatchIdInput, schemas.GetMatchIdOutput), output: &GetMatchIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMatchId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMatchId"); err != nil {

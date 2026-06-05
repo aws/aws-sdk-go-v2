@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,23 +51,6 @@ type DescribeOrganizationOverviewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationOverviewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeOrganizationOverviewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeOrganizationOverviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationOverviewRequest_AccountIds, v.AccountIds)
-	if v.FromTime != nil {
-		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_FromTime, *v.FromTime)
-	}
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationOverviewRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
-	if v.ToTime != nil {
-		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_ToTime, *v.ToTime)
-	}
-}
-
 type DescribeOrganizationOverviewOutput struct {
 
 	// An integer that specifies the number of open proactive insights in your Amazon
@@ -90,25 +71,16 @@ type DescribeOrganizationOverviewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationOverviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeOrganizationOverviewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeOrganizationOverviewResponse_ProactiveInsights:
-			return d.ReadInt32(schemas.DescribeOrganizationOverviewResponse_ProactiveInsights, &v.ProactiveInsights)
-		case schemas.DescribeOrganizationOverviewResponse_ReactiveInsights:
-			return d.ReadInt32(schemas.DescribeOrganizationOverviewResponse_ReactiveInsights, &v.ReactiveInsights)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeOrganizationOverviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationOverview, schemas.DescribeOrganizationOverviewRequest, schemas.DescribeOrganizationOverviewResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationOverview{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationOverview, schemas.DescribeOrganizationOverviewRequest, schemas.DescribeOrganizationOverviewResponse), output: &DescribeOrganizationOverviewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationOverview{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrganizationOverview"); err != nil {

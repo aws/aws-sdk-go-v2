@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetRunRequest_arn, *v.Arn)
-	}
-}
-
 // Represents the result of a get run request.
 type GetRunOutput struct {
 
@@ -64,24 +50,16 @@ type GetRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRunResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRunResult_run:
-			v.Run = &types.Run{}
-			return v.Run.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRun, schemas.GetRunRequest, schemas.GetRunResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRun, schemas.GetRunRequest, schemas.GetRunResult), output: &GetRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRun"); err != nil {

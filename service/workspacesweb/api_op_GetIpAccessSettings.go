@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIpAccessSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IpAccessSettingsArn != nil {
-		s.WriteString(schemas.GetIpAccessSettingsRequest_ipAccessSettingsArn, *v.IpAccessSettingsArn)
-	}
-}
-
 type GetIpAccessSettingsOutput struct {
 
 	// The IP access settings.
@@ -62,24 +48,16 @@ type GetIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIpAccessSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIpAccessSettingsResponse_ipAccessSettings:
-			v.IpAccessSettings = &types.IpAccessSettings{}
-			return v.IpAccessSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIpAccessSettings, schemas.GetIpAccessSettingsRequest, schemas.GetIpAccessSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIpAccessSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIpAccessSettings, schemas.GetIpAccessSettingsRequest, schemas.GetIpAccessSettingsResponse), output: &GetIpAccessSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIpAccessSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIpAccessSettings"); err != nil {

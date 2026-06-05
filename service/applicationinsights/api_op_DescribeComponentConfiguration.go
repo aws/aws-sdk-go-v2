@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type DescribeComponentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeComponentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeComponentConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeComponentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.DescribeComponentConfigurationRequest_AccountId, *v.AccountId)
-	}
-	if v.ComponentName != nil {
-		s.WriteString(schemas.DescribeComponentConfigurationRequest_ComponentName, *v.ComponentName)
-	}
-	if v.ResourceGroupName != nil {
-		s.WriteString(schemas.DescribeComponentConfigurationRequest_ResourceGroupName, *v.ResourceGroupName)
-	}
-}
-
 type DescribeComponentConfigurationOutput struct {
 
 	// The configuration settings of the component. The value is the escaped JSON of
@@ -84,34 +64,16 @@ type DescribeComponentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeComponentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeComponentConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeComponentConfigurationResponse_ComponentConfiguration:
-			v.ComponentConfiguration = new(string)
-			return d.ReadString(schemas.DescribeComponentConfigurationResponse_ComponentConfiguration, v.ComponentConfiguration)
-		case schemas.DescribeComponentConfigurationResponse_Monitor:
-			v.Monitor = new(bool)
-			return d.ReadBool(schemas.DescribeComponentConfigurationResponse_Monitor, v.Monitor)
-		case schemas.DescribeComponentConfigurationResponse_Tier:
-			var ev string
-			if err := d.ReadString(schemas.DescribeComponentConfigurationResponse_Tier, &ev); err != nil {
-				return err
-			}
-			v.Tier = types.Tier(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfiguration, schemas.DescribeComponentConfigurationRequest, schemas.DescribeComponentConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponentConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfiguration, schemas.DescribeComponentConfigurationRequest, schemas.DescribeComponentConfigurationResponse), output: &DescribeComponentConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponentConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComponentConfiguration"); err != nil {

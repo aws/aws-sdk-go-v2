@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,25 +57,6 @@ type DescribeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.DescribeGroupRequest_DirectoryId, *v.DirectoryId)
-	}
-	serializeLdapDisplayNameList(s, schemas.DescribeGroupRequest_OtherAttributes, v.OtherAttributes)
-	if v.Realm != nil {
-		s.WriteString(schemas.DescribeGroupRequest_Realm, *v.Realm)
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.DescribeGroupRequest_SAMAccountName, *v.SAMAccountName)
-	}
-}
-
 type DescribeGroupOutput struct {
 
 	//  The identifier (ID) of the directory that's associated with the group.
@@ -117,52 +96,16 @@ type DescribeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeGroupResult_DirectoryId:
-			v.DirectoryId = new(string)
-			return d.ReadString(schemas.DescribeGroupResult_DirectoryId, v.DirectoryId)
-		case schemas.DescribeGroupResult_DistinguishedName:
-			v.DistinguishedName = new(string)
-			return d.ReadString(schemas.DescribeGroupResult_DistinguishedName, v.DistinguishedName)
-		case schemas.DescribeGroupResult_GroupScope:
-			var ev string
-			if err := d.ReadString(schemas.DescribeGroupResult_GroupScope, &ev); err != nil {
-				return err
-			}
-			v.GroupScope = types.GroupScope(ev)
-			return nil
-		case schemas.DescribeGroupResult_GroupType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeGroupResult_GroupType, &ev); err != nil {
-				return err
-			}
-			v.GroupType = types.GroupType(ev)
-			return nil
-		case schemas.DescribeGroupResult_OtherAttributes:
-			return deserializeAttributes(d, schemas.DescribeGroupResult_OtherAttributes, &v.OtherAttributes)
-		case schemas.DescribeGroupResult_Realm:
-			v.Realm = new(string)
-			return d.ReadString(schemas.DescribeGroupResult_Realm, v.Realm)
-		case schemas.DescribeGroupResult_SAMAccountName:
-			v.SAMAccountName = new(string)
-			return d.ReadString(schemas.DescribeGroupResult_SAMAccountName, v.SAMAccountName)
-		case schemas.DescribeGroupResult_SID:
-			v.SID = new(string)
-			return d.ReadString(schemas.DescribeGroupResult_SID, v.SID)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResult), output: &DescribeGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGroup"); err != nil {

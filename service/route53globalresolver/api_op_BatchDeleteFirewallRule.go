@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,16 +44,6 @@ type BatchDeleteFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteFirewallRuleInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteFirewallRuleInputItems(s, schemas.BatchDeleteFirewallRuleInput_firewallRules, v.FirewallRules)
-}
-
 type BatchDeleteFirewallRuleOutput struct {
 
 	// High level information about the DNS Firewall rules that failed to delete.
@@ -75,25 +63,16 @@ type BatchDeleteFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteFirewallRuleOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteFirewallRuleOutput_failures:
-			return deserializeBatchDeleteFirewallRuleOutputItems(d, schemas.BatchDeleteFirewallRuleOutput_failures, &v.Failures)
-		case schemas.BatchDeleteFirewallRuleOutput_successes:
-			return deserializeBatchDeleteFirewallRuleOutputItems(d, schemas.BatchDeleteFirewallRuleOutput_successes, &v.Successes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFirewallRule, schemas.BatchDeleteFirewallRuleInput, schemas.BatchDeleteFirewallRuleOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteFirewallRule, schemas.BatchDeleteFirewallRuleInput, schemas.BatchDeleteFirewallRuleOutput), output: &BatchDeleteFirewallRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteFirewallRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteFirewallRule"); err != nil {

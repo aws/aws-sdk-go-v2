@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DeleteTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteTokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.DeleteTokenRequest_AppId, *v.AppId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.DeleteTokenRequest_SessionId, *v.SessionId)
-	}
-}
-
 type DeleteTokenOutput struct {
 
 	// Indicates whether the request succeeded or failed.
@@ -69,24 +52,16 @@ type DeleteTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteTokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteTokenResponse_IsSuccess:
-			v.IsSuccess = new(bool)
-			return d.ReadBool(schemas.DeleteTokenResponse_IsSuccess, v.IsSuccess)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteToken, schemas.DeleteTokenRequest, schemas.DeleteTokenResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteToken, schemas.DeleteTokenRequest, schemas.DeleteTokenResponse), output: &DeleteTokenOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteToken"); err != nil {

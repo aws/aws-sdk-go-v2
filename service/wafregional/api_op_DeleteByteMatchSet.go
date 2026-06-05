@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,21 +65,6 @@ type DeleteByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteByteMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteByteMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteByteMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ByteMatchSetId != nil {
-		s.WriteString(schemas.DeleteByteMatchSetRequest_ByteMatchSetId, *v.ByteMatchSetId)
-	}
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.DeleteByteMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-}
-
 type DeleteByteMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteByteMatchSet request. You can
@@ -95,24 +78,16 @@ type DeleteByteMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteByteMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteByteMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteByteMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.DeleteByteMatchSetResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteByteMatchSet, schemas.DeleteByteMatchSetRequest, schemas.DeleteByteMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteByteMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteByteMatchSet, schemas.DeleteByteMatchSetRequest, schemas.DeleteByteMatchSetResponse), output: &DeleteByteMatchSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteByteMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteByteMatchSet"); err != nil {

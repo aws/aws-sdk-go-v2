@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,37 +50,6 @@ type CreateGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGroupMembershipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.CreateGroupMembershipRequest_GroupId, *v.GroupId)
-	}
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.CreateGroupMembershipRequest_IdentityStoreId, *v.IdentityStoreId)
-	}
-	serializeMemberId(s, schemas.CreateGroupMembershipRequest_MemberId, v.MemberId)
-}
-func (v *CreateGroupMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupMembershipRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupMembershipRequest_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.CreateGroupMembershipRequest_GroupId, v.GroupId)
-		case schemas.CreateGroupMembershipRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateGroupMembershipRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.CreateGroupMembershipRequest_MemberId:
-			return deserializeMemberId(d, schemas.CreateGroupMembershipRequest_MemberId, &v.MemberId)
-		}
-		return nil
-	})
-}
-
 type CreateGroupMembershipOutput struct {
 
 	// The globally unique identifier for the identity store.
@@ -101,41 +68,16 @@ type CreateGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGroupMembershipResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.CreateGroupMembershipResponse_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.MembershipId != nil {
-		s.WriteString(schemas.CreateGroupMembershipResponse_MembershipId, *v.MembershipId)
-	}
-}
-func (v *CreateGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupMembershipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupMembershipResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateGroupMembershipResponse_IdentityStoreId, v.IdentityStoreId)
-		case schemas.CreateGroupMembershipResponse_MembershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.CreateGroupMembershipResponse_MembershipId, v.MembershipId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupMembership, schemas.CreateGroupMembershipRequest, schemas.CreateGroupMembershipResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGroupMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupMembership, schemas.CreateGroupMembershipRequest, schemas.CreateGroupMembershipResponse), output: &CreateGroupMembershipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGroupMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGroupMembership"); err != nil {

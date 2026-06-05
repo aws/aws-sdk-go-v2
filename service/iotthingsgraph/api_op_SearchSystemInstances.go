@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type SearchSystemInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchSystemInstancesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchSystemInstancesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchSystemInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSystemInstanceFilters(s, schemas.SearchSystemInstancesRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchSystemInstancesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchSystemInstancesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type SearchSystemInstancesOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.
@@ -81,26 +63,16 @@ type SearchSystemInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchSystemInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchSystemInstancesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchSystemInstancesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchSystemInstancesResponse_nextToken, v.NextToken)
-		case schemas.SearchSystemInstancesResponse_summaries:
-			return deserializeSystemInstanceSummaries(d, schemas.SearchSystemInstancesResponse_summaries, &v.Summaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchSystemInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSystemInstances, schemas.SearchSystemInstancesRequest, schemas.SearchSystemInstancesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchSystemInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSystemInstances, schemas.SearchSystemInstancesRequest, schemas.SearchSystemInstancesResponse), output: &SearchSystemInstancesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchSystemInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchSystemInstances"); err != nil {

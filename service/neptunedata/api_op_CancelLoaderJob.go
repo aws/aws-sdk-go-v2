@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,18 +44,6 @@ type CancelLoaderJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelLoaderJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelLoaderJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelLoaderJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadId != nil {
-		s.WriteString(schemas.CancelLoaderJobInput_loadId, *v.LoadId)
-	}
-}
-
 type CancelLoaderJobOutput struct {
 
 	// The cancellation status.
@@ -69,24 +55,16 @@ type CancelLoaderJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelLoaderJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelLoaderJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelLoaderJobOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CancelLoaderJobOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelLoaderJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLoaderJob, schemas.CancelLoaderJobInput, schemas.CancelLoaderJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelLoaderJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLoaderJob, schemas.CancelLoaderJobInput, schemas.CancelLoaderJobOutput), output: &CancelLoaderJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelLoaderJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelLoaderJob"); err != nil {

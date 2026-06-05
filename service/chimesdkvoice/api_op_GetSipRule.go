@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSipRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSipRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSipRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SipRuleId != nil {
-		s.WriteString(schemas.GetSipRuleRequest_SipRuleId, *v.SipRuleId)
-	}
-}
-
 type GetSipRuleOutput struct {
 
 	// The SIP rule details.
@@ -63,24 +49,16 @@ type GetSipRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSipRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSipRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSipRuleResponse_SipRule:
-			v.SipRule = &types.SipRule{}
-			return v.SipRule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSipRule, schemas.GetSipRuleRequest, schemas.GetSipRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSipRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSipRule, schemas.GetSipRuleRequest, schemas.GetSipRuleResponse), output: &GetSipRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSipRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSipRule"); err != nil {

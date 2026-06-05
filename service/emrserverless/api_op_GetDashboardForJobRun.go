@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,46 +58,6 @@ type GetDashboardForJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashboardForJobRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashboardForJobRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashboardForJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessSystemProfileLogs != nil {
-		s.WriteBool(schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs, *v.AccessSystemProfileLogs)
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetDashboardForJobRunRequest_applicationId, *v.ApplicationId)
-	}
-	if v.Attempt != nil {
-		s.WriteInt32(schemas.GetDashboardForJobRunRequest_attempt, *v.Attempt)
-	}
-	if v.JobRunId != nil {
-		s.WriteString(schemas.GetDashboardForJobRunRequest_jobRunId, *v.JobRunId)
-	}
-}
-func (v *GetDashboardForJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashboardForJobRunRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs:
-			v.AccessSystemProfileLogs = new(bool)
-			return d.ReadBool(schemas.GetDashboardForJobRunRequest_accessSystemProfileLogs, v.AccessSystemProfileLogs)
-		case schemas.GetDashboardForJobRunRequest_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunRequest_applicationId, v.ApplicationId)
-		case schemas.GetDashboardForJobRunRequest_attempt:
-			v.Attempt = new(int32)
-			return d.ReadInt32(schemas.GetDashboardForJobRunRequest_attempt, v.Attempt)
-		case schemas.GetDashboardForJobRunRequest_jobRunId:
-			v.JobRunId = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunRequest_jobRunId, v.JobRunId)
-		}
-		return nil
-	})
-}
-
 type GetDashboardForJobRunOutput struct {
 
 	// The URL to view job run's dashboard.
@@ -111,35 +69,16 @@ type GetDashboardForJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashboardForJobRunOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashboardForJobRunResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashboardForJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Url != nil {
-		s.WriteString(schemas.GetDashboardForJobRunResponse_url, *v.Url)
-	}
-}
-func (v *GetDashboardForJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashboardForJobRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashboardForJobRunResponse_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetDashboardForJobRunResponse_url, v.Url)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardForJobRun, schemas.GetDashboardForJobRunRequest, schemas.GetDashboardForJobRunResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDashboardForJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboardForJobRun, schemas.GetDashboardForJobRunRequest, schemas.GetDashboardForJobRunResponse), output: &GetDashboardForJobRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDashboardForJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboardForJobRun"); err != nil {

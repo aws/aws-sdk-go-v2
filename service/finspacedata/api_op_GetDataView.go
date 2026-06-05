@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type GetDataViewInput struct {
 	DatasetId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDataViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDataViewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDataViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataViewId != nil {
-		s.WriteString(schemas.GetDataViewRequest_dataViewId, *v.DataViewId)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.GetDataViewRequest_datasetId, *v.DatasetId)
-	}
 }
 
 // Response from retrieving a dataview, which includes details on the target
@@ -131,56 +114,16 @@ type GetDataViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDataViewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDataViewResponse_asOfTimestamp:
-			v.AsOfTimestamp = new(int64)
-			return d.ReadInt64(schemas.GetDataViewResponse_asOfTimestamp, v.AsOfTimestamp)
-		case schemas.GetDataViewResponse_autoUpdate:
-			return d.ReadBool(schemas.GetDataViewResponse_autoUpdate, &v.AutoUpdate)
-		case schemas.GetDataViewResponse_createTime:
-			return d.ReadInt64(schemas.GetDataViewResponse_createTime, &v.CreateTime)
-		case schemas.GetDataViewResponse_dataViewArn:
-			v.DataViewArn = new(string)
-			return d.ReadString(schemas.GetDataViewResponse_dataViewArn, v.DataViewArn)
-		case schemas.GetDataViewResponse_dataViewId:
-			v.DataViewId = new(string)
-			return d.ReadString(schemas.GetDataViewResponse_dataViewId, v.DataViewId)
-		case schemas.GetDataViewResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.GetDataViewResponse_datasetId, v.DatasetId)
-		case schemas.GetDataViewResponse_destinationTypeParams:
-			v.DestinationTypeParams = &types.DataViewDestinationTypeParams{}
-			return v.DestinationTypeParams.Deserialize(d)
-		case schemas.GetDataViewResponse_errorInfo:
-			v.ErrorInfo = &types.DataViewErrorInfo{}
-			return v.ErrorInfo.Deserialize(d)
-		case schemas.GetDataViewResponse_lastModifiedTime:
-			return d.ReadInt64(schemas.GetDataViewResponse_lastModifiedTime, &v.LastModifiedTime)
-		case schemas.GetDataViewResponse_partitionColumns:
-			return deserializePartitionColumnList(d, schemas.GetDataViewResponse_partitionColumns, &v.PartitionColumns)
-		case schemas.GetDataViewResponse_sortColumns:
-			return deserializeSortColumnList(d, schemas.GetDataViewResponse_sortColumns, &v.SortColumns)
-		case schemas.GetDataViewResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDataViewResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataViewStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDataViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataView, schemas.GetDataViewRequest, schemas.GetDataViewResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataView, schemas.GetDataViewRequest, schemas.GetDataViewResponse), output: &GetDataViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataView"); err != nil {

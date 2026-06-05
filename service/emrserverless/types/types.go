@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -117,190 +115,6 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Application) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Application)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.Application_applicationId, *v.ApplicationId)
-	}
-	if v.Architecture != "" {
-		s.WriteString(schemas.Application_architecture, string(v.Architecture))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Application_arn, *v.Arn)
-	}
-	if v.AutoStartConfiguration != nil {
-		s.WriteStruct(schemas.Application_autoStartConfiguration)
-		v.AutoStartConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AutoStopConfiguration != nil {
-		s.WriteStruct(schemas.Application_autoStopConfiguration)
-		v.AutoStopConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Application_createdAt, *v.CreatedAt)
-	}
-	if v.DiskEncryptionConfiguration != nil {
-		s.WriteStruct(schemas.Application_diskEncryptionConfiguration)
-		v.DiskEncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IdentityCenterConfiguration != nil {
-		s.WriteStruct(schemas.Application_identityCenterConfiguration)
-		v.IdentityCenterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ImageConfiguration != nil {
-		s.WriteStruct(schemas.Application_imageConfiguration)
-		v.ImageConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInitialCapacityConfigMap(s, schemas.Application_initialCapacity, v.InitialCapacity)
-	if v.InteractiveConfiguration != nil {
-		s.WriteStruct(schemas.Application_interactiveConfiguration)
-		v.InteractiveConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.JobLevelCostAllocationConfiguration != nil {
-		s.WriteStruct(schemas.Application_jobLevelCostAllocationConfiguration)
-		v.JobLevelCostAllocationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaximumCapacity != nil {
-		s.WriteStruct(schemas.Application_maximumCapacity)
-		v.MaximumCapacity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MonitoringConfiguration != nil {
-		s.WriteStruct(schemas.Application_monitoringConfiguration)
-		v.MonitoringConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Application_name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.Application_networkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.Application_releaseLabel, *v.ReleaseLabel)
-	}
-	serializeConfigurationList(s, schemas.Application_runtimeConfiguration, v.RuntimeConfiguration)
-	if v.SchedulerConfiguration != nil {
-		s.WriteStruct(schemas.Application_schedulerConfiguration)
-		v.SchedulerConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Application_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.Application_stateDetails, *v.StateDetails)
-	}
-	serializeTagMap(s, schemas.Application_tags, v.Tags)
-	if v.Type != nil {
-		s.WriteString(schemas.Application_type, *v.Type)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Application_updatedAt, *v.UpdatedAt)
-	}
-	serializeWorkerTypeSpecificationMap(s, schemas.Application_workerTypeSpecifications, v.WorkerTypeSpecifications)
-}
-func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Application_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.Application_applicationId, v.ApplicationId)
-		case schemas.Application_architecture:
-			var ev string
-			if err := d.ReadString(schemas.Application_architecture, &ev); err != nil {
-				return err
-			}
-			v.Architecture = Architecture(ev)
-			return nil
-		case schemas.Application_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Application_arn, v.Arn)
-		case schemas.Application_autoStartConfiguration:
-			v.AutoStartConfiguration = &AutoStartConfig{}
-			return v.AutoStartConfiguration.Deserialize(d)
-		case schemas.Application_autoStopConfiguration:
-			v.AutoStopConfiguration = &AutoStopConfig{}
-			return v.AutoStopConfiguration.Deserialize(d)
-		case schemas.Application_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Application_createdAt, v.CreatedAt)
-		case schemas.Application_diskEncryptionConfiguration:
-			v.DiskEncryptionConfiguration = &DiskEncryptionConfiguration{}
-			return v.DiskEncryptionConfiguration.Deserialize(d)
-		case schemas.Application_identityCenterConfiguration:
-			v.IdentityCenterConfiguration = &IdentityCenterConfiguration{}
-			return v.IdentityCenterConfiguration.Deserialize(d)
-		case schemas.Application_imageConfiguration:
-			v.ImageConfiguration = &ImageConfiguration{}
-			return v.ImageConfiguration.Deserialize(d)
-		case schemas.Application_initialCapacity:
-			return deserializeInitialCapacityConfigMap(d, schemas.Application_initialCapacity, &v.InitialCapacity)
-		case schemas.Application_interactiveConfiguration:
-			v.InteractiveConfiguration = &InteractiveConfiguration{}
-			return v.InteractiveConfiguration.Deserialize(d)
-		case schemas.Application_jobLevelCostAllocationConfiguration:
-			v.JobLevelCostAllocationConfiguration = &JobLevelCostAllocationConfiguration{}
-			return v.JobLevelCostAllocationConfiguration.Deserialize(d)
-		case schemas.Application_maximumCapacity:
-			v.MaximumCapacity = &MaximumAllowedResources{}
-			return v.MaximumCapacity.Deserialize(d)
-		case schemas.Application_monitoringConfiguration:
-			v.MonitoringConfiguration = &MonitoringConfiguration{}
-			return v.MonitoringConfiguration.Deserialize(d)
-		case schemas.Application_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Application_name, v.Name)
-		case schemas.Application_networkConfiguration:
-			v.NetworkConfiguration = &NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.Application_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.Application_releaseLabel, v.ReleaseLabel)
-		case schemas.Application_runtimeConfiguration:
-			return deserializeConfigurationList(d, schemas.Application_runtimeConfiguration, &v.RuntimeConfiguration)
-		case schemas.Application_schedulerConfiguration:
-			v.SchedulerConfiguration = &SchedulerConfiguration{}
-			return v.SchedulerConfiguration.Deserialize(d)
-		case schemas.Application_state:
-			var ev string
-			if err := d.ReadString(schemas.Application_state, &ev); err != nil {
-				return err
-			}
-			v.State = ApplicationState(ev)
-			return nil
-		case schemas.Application_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.Application_stateDetails, v.StateDetails)
-		case schemas.Application_tags:
-			return deserializeTagMap(d, schemas.Application_tags, &v.Tags)
-		case schemas.Application_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Application_type, v.Type)
-		case schemas.Application_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Application_updatedAt, v.UpdatedAt)
-		case schemas.Application_workerTypeSpecifications:
-			return deserializeWorkerTypeSpecificationMap(d, schemas.Application_workerTypeSpecifications, &v.WorkerTypeSpecifications)
-		}
-		return nil
-	})
-}
-
 // The summary of attributes associated with an application.
 type ApplicationSummary struct {
 
@@ -351,90 +165,6 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Architecture != "" {
-		s.WriteString(schemas.ApplicationSummary_architecture, string(v.Architecture))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.ApplicationSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ApplicationSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ApplicationSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ApplicationSummary_name, *v.Name)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.ApplicationSummary_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ApplicationSummary_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.ApplicationSummary_stateDetails, *v.StateDetails)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ApplicationSummary_type, *v.Type)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ApplicationSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationSummary_architecture:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationSummary_architecture, &ev); err != nil {
-				return err
-			}
-			v.Architecture = Architecture(ev)
-			return nil
-		case schemas.ApplicationSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ApplicationSummary_arn, v.Arn)
-		case schemas.ApplicationSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ApplicationSummary_createdAt, v.CreatedAt)
-		case schemas.ApplicationSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ApplicationSummary_id, v.Id)
-		case schemas.ApplicationSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ApplicationSummary_name, v.Name)
-		case schemas.ApplicationSummary_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.ApplicationSummary_releaseLabel, v.ReleaseLabel)
-		case schemas.ApplicationSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = ApplicationState(ev)
-			return nil
-		case schemas.ApplicationSummary_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.ApplicationSummary_stateDetails, v.StateDetails)
-		case schemas.ApplicationSummary_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ApplicationSummary_type, v.Type)
-		case schemas.ApplicationSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ApplicationSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The configuration for an application to automatically start on job submission.
 type AutoStartConfig struct {
 
@@ -443,28 +173,6 @@ type AutoStartConfig struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutoStartConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutoStartConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutoStartConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.AutoStartConfig_enabled, *v.Enabled)
-	}
-}
-func (v *AutoStartConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutoStartConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutoStartConfig_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.AutoStartConfig_enabled, v.Enabled)
-		}
-		return nil
-	})
 }
 
 // The configuration for an application to automatically stop after a certain
@@ -480,34 +188,6 @@ type AutoStopConfig struct {
 	IdleTimeoutMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutoStopConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutoStopConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutoStopConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.AutoStopConfig_enabled, *v.Enabled)
-	}
-	if v.IdleTimeoutMinutes != nil {
-		s.WriteInt32(schemas.AutoStopConfig_idleTimeoutMinutes, *v.IdleTimeoutMinutes)
-	}
-}
-func (v *AutoStopConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutoStopConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutoStopConfig_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.AutoStopConfig_enabled, v.Enabled)
-		case schemas.AutoStopConfig_idleTimeoutMinutes:
-			v.IdleTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.AutoStopConfig_idleTimeoutMinutes, v.IdleTimeoutMinutes)
-		}
-		return nil
-	})
 }
 
 // The Amazon CloudWatch configuration for monitoring logs. You can configure your
@@ -546,49 +226,6 @@ type CloudWatchLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloudWatchLoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchLoggingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchLoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.CloudWatchLoggingConfiguration_enabled, *v.Enabled)
-	}
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.CloudWatchLoggingConfiguration_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.LogGroupName != nil {
-		s.WriteString(schemas.CloudWatchLoggingConfiguration_logGroupName, *v.LogGroupName)
-	}
-	if v.LogStreamNamePrefix != nil {
-		s.WriteString(schemas.CloudWatchLoggingConfiguration_logStreamNamePrefix, *v.LogStreamNamePrefix)
-	}
-	serializeLogTypeMap(s, schemas.CloudWatchLoggingConfiguration_logTypes, v.LogTypes)
-}
-func (v *CloudWatchLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchLoggingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchLoggingConfiguration_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.CloudWatchLoggingConfiguration_enabled, v.Enabled)
-		case schemas.CloudWatchLoggingConfiguration_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.CloudWatchLoggingConfiguration_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.CloudWatchLoggingConfiguration_logGroupName:
-			v.LogGroupName = new(string)
-			return d.ReadString(schemas.CloudWatchLoggingConfiguration_logGroupName, v.LogGroupName)
-		case schemas.CloudWatchLoggingConfiguration_logStreamNamePrefix:
-			v.LogStreamNamePrefix = new(string)
-			return d.ReadString(schemas.CloudWatchLoggingConfiguration_logStreamNamePrefix, v.LogStreamNamePrefix)
-		case schemas.CloudWatchLoggingConfiguration_logTypes:
-			return deserializeLogTypeMap(d, schemas.CloudWatchLoggingConfiguration_logTypes, &v.LogTypes)
-		}
-		return nil
-	})
-}
-
 // A configuration specification to be used when provisioning an application. A
 // configuration consists of a classification, properties, and optional nested
 // configurations. A classification refers to an application-specific configuration
@@ -609,34 +246,6 @@ type Configuration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Classification != nil {
-		s.WriteString(schemas.Configuration_classification, *v.Classification)
-	}
-	serializeConfigurationList(s, schemas.Configuration_configurations, v.Configurations)
-	serializeSensitivePropertiesMap(s, schemas.Configuration_properties, v.Properties)
-}
-func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Configuration_classification:
-			v.Classification = new(string)
-			return d.ReadString(schemas.Configuration_classification, v.Classification)
-		case schemas.Configuration_configurations:
-			return deserializeConfigurationList(d, schemas.Configuration_configurations, &v.Configurations)
-		case schemas.Configuration_properties:
-			return deserializeSensitivePropertiesMap(d, schemas.Configuration_properties, &v.Properties)
-		}
-		return nil
-	})
-}
-
 // A configuration specification to be used to override existing configurations.
 type ConfigurationOverrides struct {
 
@@ -652,41 +261,6 @@ type ConfigurationOverrides struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConfigurationOverrides) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfigurationOverrides)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConfigurationOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationList(s, schemas.ConfigurationOverrides_applicationConfiguration, v.ApplicationConfiguration)
-	if v.DiskEncryptionConfiguration != nil {
-		s.WriteStruct(schemas.ConfigurationOverrides_diskEncryptionConfiguration)
-		v.DiskEncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MonitoringConfiguration != nil {
-		s.WriteStruct(schemas.ConfigurationOverrides_monitoringConfiguration)
-		v.MonitoringConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ConfigurationOverrides) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfigurationOverrides, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfigurationOverrides_applicationConfiguration:
-			return deserializeConfigurationList(d, schemas.ConfigurationOverrides_applicationConfiguration, &v.ApplicationConfiguration)
-		case schemas.ConfigurationOverrides_diskEncryptionConfiguration:
-			v.DiskEncryptionConfiguration = &DiskEncryptionConfiguration{}
-			return v.DiskEncryptionConfiguration.Deserialize(d)
-		case schemas.ConfigurationOverrides_monitoringConfiguration:
-			v.MonitoringConfiguration = &MonitoringConfiguration{}
-			return v.MonitoringConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The configuration object that allows encrypting local disks.
 type DiskEncryptionConfiguration struct {
 
@@ -699,31 +273,6 @@ type DiskEncryptionConfiguration struct {
 	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DiskEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DiskEncryptionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DiskEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContext(s, schemas.DiskEncryptionConfiguration_encryptionContext, v.EncryptionContext)
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.DiskEncryptionConfiguration_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-}
-func (v *DiskEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DiskEncryptionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DiskEncryptionConfiguration_encryptionContext:
-			return deserializeEncryptionContext(d, schemas.DiskEncryptionConfiguration_encryptionContext, &v.EncryptionContext)
-		case schemas.DiskEncryptionConfiguration_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.DiskEncryptionConfiguration_encryptionKeyArn, v.EncryptionKeyArn)
-		}
-		return nil
-	})
 }
 
 // The configurations for the Hive job driver.
@@ -741,40 +290,6 @@ type Hive struct {
 	Parameters *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Hive) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Hive)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Hive) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InitQueryFile != nil {
-		s.WriteString(schemas.Hive_initQueryFile, *v.InitQueryFile)
-	}
-	if v.Parameters != nil {
-		s.WriteString(schemas.Hive_parameters, *v.Parameters)
-	}
-	if v.Query != nil {
-		s.WriteString(schemas.Hive_query, *v.Query)
-	}
-}
-func (v *Hive) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Hive, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Hive_initQueryFile:
-			v.InitQueryFile = new(string)
-			return d.ReadString(schemas.Hive_initQueryFile, v.InitQueryFile)
-		case schemas.Hive_parameters:
-			v.Parameters = new(string)
-			return d.ReadString(schemas.Hive_parameters, v.Parameters)
-		case schemas.Hive_query:
-			v.Query = new(string)
-			return d.ReadString(schemas.Hive_query, v.Query)
-		}
-		return nil
-	})
 }
 
 // The IAM Identity Center Configuration accepts the Identity Center instance
@@ -798,40 +313,6 @@ type IdentityCenterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IdentityCenterConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentityCenterConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IdentityCenterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityCenterApplicationArn != nil {
-		s.WriteString(schemas.IdentityCenterConfiguration_identityCenterApplicationArn, *v.IdentityCenterApplicationArn)
-	}
-	if v.IdentityCenterInstanceArn != nil {
-		s.WriteString(schemas.IdentityCenterConfiguration_identityCenterInstanceArn, *v.IdentityCenterInstanceArn)
-	}
-	if v.UserBackgroundSessionsEnabled != nil {
-		s.WriteBool(schemas.IdentityCenterConfiguration_userBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
-	}
-}
-func (v *IdentityCenterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdentityCenterConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdentityCenterConfiguration_identityCenterApplicationArn:
-			v.IdentityCenterApplicationArn = new(string)
-			return d.ReadString(schemas.IdentityCenterConfiguration_identityCenterApplicationArn, v.IdentityCenterApplicationArn)
-		case schemas.IdentityCenterConfiguration_identityCenterInstanceArn:
-			v.IdentityCenterInstanceArn = new(string)
-			return d.ReadString(schemas.IdentityCenterConfiguration_identityCenterInstanceArn, v.IdentityCenterInstanceArn)
-		case schemas.IdentityCenterConfiguration_userBackgroundSessionsEnabled:
-			v.UserBackgroundSessionsEnabled = new(bool)
-			return d.ReadBool(schemas.IdentityCenterConfiguration_userBackgroundSessionsEnabled, v.UserBackgroundSessionsEnabled)
-		}
-		return nil
-	})
-}
-
 // The IAM Identity Center Configuration accepts the Identity Center instance
 // parameter required to enable trusted identity propagation. This configuration
 // allows identity propagation between integrated services and the Identity Center
@@ -847,34 +328,6 @@ type IdentityCenterConfigurationInput struct {
 	UserBackgroundSessionsEnabled *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *IdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IdentityCenterConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityCenterInstanceArn != nil {
-		s.WriteString(schemas.IdentityCenterConfigurationInput_identityCenterInstanceArn, *v.IdentityCenterInstanceArn)
-	}
-	if v.UserBackgroundSessionsEnabled != nil {
-		s.WriteBool(schemas.IdentityCenterConfigurationInput_userBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
-	}
-}
-func (v *IdentityCenterConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdentityCenterConfigurationInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdentityCenterConfigurationInput_identityCenterInstanceArn:
-			v.IdentityCenterInstanceArn = new(string)
-			return d.ReadString(schemas.IdentityCenterConfigurationInput_identityCenterInstanceArn, v.IdentityCenterInstanceArn)
-		case schemas.IdentityCenterConfigurationInput_userBackgroundSessionsEnabled:
-			v.UserBackgroundSessionsEnabled = new(bool)
-			return d.ReadBool(schemas.IdentityCenterConfigurationInput_userBackgroundSessionsEnabled, v.UserBackgroundSessionsEnabled)
-		}
-		return nil
-	})
 }
 
 // The applied image configuration.
@@ -899,40 +352,6 @@ type ImageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImageConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationLevelDigestResolution != nil {
-		s.WriteBool(schemas.ImageConfiguration_applicationLevelDigestResolution, *v.ApplicationLevelDigestResolution)
-	}
-	if v.ImageUri != nil {
-		s.WriteString(schemas.ImageConfiguration_imageUri, *v.ImageUri)
-	}
-	if v.ResolvedImageDigest != nil {
-		s.WriteString(schemas.ImageConfiguration_resolvedImageDigest, *v.ResolvedImageDigest)
-	}
-}
-func (v *ImageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageConfiguration_applicationLevelDigestResolution:
-			v.ApplicationLevelDigestResolution = new(bool)
-			return d.ReadBool(schemas.ImageConfiguration_applicationLevelDigestResolution, v.ApplicationLevelDigestResolution)
-		case schemas.ImageConfiguration_imageUri:
-			v.ImageUri = new(string)
-			return d.ReadString(schemas.ImageConfiguration_imageUri, v.ImageUri)
-		case schemas.ImageConfiguration_resolvedImageDigest:
-			v.ResolvedImageDigest = new(string)
-			return d.ReadString(schemas.ImageConfiguration_resolvedImageDigest, v.ResolvedImageDigest)
-		}
-		return nil
-	})
-}
-
 // The image configuration.
 type ImageConfigurationInput struct {
 
@@ -950,34 +369,6 @@ type ImageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationLevelDigestResolution != nil {
-		s.WriteBool(schemas.ImageConfigurationInput_applicationLevelDigestResolution, *v.ApplicationLevelDigestResolution)
-	}
-	if v.ImageUri != nil {
-		s.WriteString(schemas.ImageConfigurationInput_imageUri, *v.ImageUri)
-	}
-}
-func (v *ImageConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageConfigurationInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageConfigurationInput_applicationLevelDigestResolution:
-			v.ApplicationLevelDigestResolution = new(bool)
-			return d.ReadBool(schemas.ImageConfigurationInput_applicationLevelDigestResolution, v.ApplicationLevelDigestResolution)
-		case schemas.ImageConfigurationInput_imageUri:
-			v.ImageUri = new(string)
-			return d.ReadString(schemas.ImageConfigurationInput_imageUri, v.ImageUri)
-		}
-		return nil
-	})
-}
-
 // The initial capacity configuration per worker.
 type InitialCapacityConfig struct {
 
@@ -990,36 +381,6 @@ type InitialCapacityConfig struct {
 	WorkerConfiguration *WorkerResourceConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *InitialCapacityConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InitialCapacityConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InitialCapacityConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkerConfiguration != nil {
-		s.WriteStruct(schemas.InitialCapacityConfig_workerConfiguration)
-		v.WorkerConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WorkerCount != nil {
-		s.WriteInt64(schemas.InitialCapacityConfig_workerCount, *v.WorkerCount)
-	}
-}
-func (v *InitialCapacityConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InitialCapacityConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InitialCapacityConfig_workerConfiguration:
-			v.WorkerConfiguration = &WorkerResourceConfig{}
-			return v.WorkerConfiguration.Deserialize(d)
-		case schemas.InitialCapacityConfig_workerCount:
-			v.WorkerCount = new(int64)
-			return d.ReadInt64(schemas.InitialCapacityConfig_workerCount, v.WorkerCount)
-		}
-		return nil
-	})
 }
 
 // The configuration to use to enable the different types of interactive use cases
@@ -1041,40 +402,6 @@ type InteractiveConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InteractiveConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InteractiveConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InteractiveConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LivyEndpointEnabled != nil {
-		s.WriteBool(schemas.InteractiveConfiguration_livyEndpointEnabled, *v.LivyEndpointEnabled)
-	}
-	if v.SessionEnabled != nil {
-		s.WriteBool(schemas.InteractiveConfiguration_sessionEnabled, *v.SessionEnabled)
-	}
-	if v.StudioEnabled != nil {
-		s.WriteBool(schemas.InteractiveConfiguration_studioEnabled, *v.StudioEnabled)
-	}
-}
-func (v *InteractiveConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InteractiveConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InteractiveConfiguration_livyEndpointEnabled:
-			v.LivyEndpointEnabled = new(bool)
-			return d.ReadBool(schemas.InteractiveConfiguration_livyEndpointEnabled, v.LivyEndpointEnabled)
-		case schemas.InteractiveConfiguration_sessionEnabled:
-			v.SessionEnabled = new(bool)
-			return d.ReadBool(schemas.InteractiveConfiguration_sessionEnabled, v.SessionEnabled)
-		case schemas.InteractiveConfiguration_studioEnabled:
-			v.StudioEnabled = new(bool)
-			return d.ReadBool(schemas.InteractiveConfiguration_studioEnabled, v.StudioEnabled)
-		}
-		return nil
-	})
-}
-
 // The driver that the job runs on.
 //
 // The following types satisfy this interface:
@@ -1093,14 +420,6 @@ type JobDriverMemberHive struct {
 }
 
 func (*JobDriverMemberHive) isJobDriver() {}
-func (v *JobDriverMemberHive) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobDriver_hive)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *JobDriverMemberHive) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The job driver parameters specified for Spark.
 type JobDriverMemberSparkSubmit struct {
@@ -1110,14 +429,6 @@ type JobDriverMemberSparkSubmit struct {
 }
 
 func (*JobDriverMemberSparkSubmit) isJobDriver() {}
-func (v *JobDriverMemberSparkSubmit) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobDriver_sparkSubmit)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *JobDriverMemberSparkSubmit) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The configuration object that enables job level cost allocation.
 type JobLevelCostAllocationConfiguration struct {
@@ -1126,28 +437,6 @@ type JobLevelCostAllocationConfiguration struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobLevelCostAllocationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobLevelCostAllocationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobLevelCostAllocationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.JobLevelCostAllocationConfiguration_enabled, *v.Enabled)
-	}
-}
-func (v *JobLevelCostAllocationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobLevelCostAllocationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobLevelCostAllocationConfiguration_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.JobLevelCostAllocationConfiguration_enabled, v.Enabled)
-		}
-		return nil
-	})
 }
 
 // Information about a job run. A job run is a unit of work, such as a Spark JAR,
@@ -1281,215 +570,6 @@ type JobRun struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobRun) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobRun)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.JobRun_applicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.JobRun_arn, *v.Arn)
-	}
-	if v.Attempt != nil {
-		s.WriteInt32(schemas.JobRun_attempt, *v.Attempt)
-	}
-	if v.AttemptCreatedAt != nil {
-		s.WriteTime(schemas.JobRun_attemptCreatedAt, *v.AttemptCreatedAt)
-	}
-	if v.AttemptUpdatedAt != nil {
-		s.WriteTime(schemas.JobRun_attemptUpdatedAt, *v.AttemptUpdatedAt)
-	}
-	if v.BilledResourceUtilization != nil {
-		s.WriteStruct(schemas.JobRun_billedResourceUtilization)
-		v.BilledResourceUtilization.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfigurationOverrides != nil {
-		s.WriteStruct(schemas.JobRun_configurationOverrides)
-		v.ConfigurationOverrides.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.JobRun_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.JobRun_createdBy, *v.CreatedBy)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.JobRun_endedAt, *v.EndedAt)
-	}
-	if v.ExecutionIamPolicy != nil {
-		s.WriteStruct(schemas.JobRun_executionIamPolicy)
-		v.ExecutionIamPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.JobRun_executionRole, *v.ExecutionRole)
-	}
-	if v.ExecutionTimeoutMinutes != nil {
-		s.WriteInt64(schemas.JobRun_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
-	}
-	if v.ImageConfiguration != nil {
-		s.WriteStruct(schemas.JobRun_imageConfiguration)
-		v.ImageConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeJobDriver(s, schemas.JobRun_jobDriver, v.JobDriver)
-	if v.JobRunId != nil {
-		s.WriteString(schemas.JobRun_jobRunId, *v.JobRunId)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.JobRun_mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.JobRun_name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.JobRun_networkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueuedDurationMilliseconds != nil {
-		s.WriteInt64(schemas.JobRun_queuedDurationMilliseconds, *v.QueuedDurationMilliseconds)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.JobRun_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.RetryPolicy != nil {
-		s.WriteStruct(schemas.JobRun_retryPolicy)
-		v.RetryPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.JobRun_startedAt, *v.StartedAt)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.JobRun_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.JobRun_stateDetails, *v.StateDetails)
-	}
-	serializeTagMap(s, schemas.JobRun_tags, v.Tags)
-	if v.TotalExecutionDurationSeconds != nil {
-		s.WriteInt32(schemas.JobRun_totalExecutionDurationSeconds, *v.TotalExecutionDurationSeconds)
-	}
-	if v.TotalResourceUtilization != nil {
-		s.WriteStruct(schemas.JobRun_totalResourceUtilization)
-		v.TotalResourceUtilization.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.JobRun_updatedAt, *v.UpdatedAt)
-	}
-	serializeWorkerTypeSpecificationMap(s, schemas.JobRun_workerTypeSpecifications, v.WorkerTypeSpecifications)
-}
-func (v *JobRun) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobRun, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobRun_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.JobRun_applicationId, v.ApplicationId)
-		case schemas.JobRun_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.JobRun_arn, v.Arn)
-		case schemas.JobRun_attempt:
-			v.Attempt = new(int32)
-			return d.ReadInt32(schemas.JobRun_attempt, v.Attempt)
-		case schemas.JobRun_attemptCreatedAt:
-			v.AttemptCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_attemptCreatedAt, v.AttemptCreatedAt)
-		case schemas.JobRun_attemptUpdatedAt:
-			v.AttemptUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_attemptUpdatedAt, v.AttemptUpdatedAt)
-		case schemas.JobRun_billedResourceUtilization:
-			v.BilledResourceUtilization = &ResourceUtilization{}
-			return v.BilledResourceUtilization.Deserialize(d)
-		case schemas.JobRun_configurationOverrides:
-			v.ConfigurationOverrides = &ConfigurationOverrides{}
-			return v.ConfigurationOverrides.Deserialize(d)
-		case schemas.JobRun_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_createdAt, v.CreatedAt)
-		case schemas.JobRun_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.JobRun_createdBy, v.CreatedBy)
-		case schemas.JobRun_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_endedAt, v.EndedAt)
-		case schemas.JobRun_executionIamPolicy:
-			v.ExecutionIamPolicy = &JobRunExecutionIamPolicy{}
-			return v.ExecutionIamPolicy.Deserialize(d)
-		case schemas.JobRun_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.JobRun_executionRole, v.ExecutionRole)
-		case schemas.JobRun_executionTimeoutMinutes:
-			v.ExecutionTimeoutMinutes = new(int64)
-			return d.ReadInt64(schemas.JobRun_executionTimeoutMinutes, v.ExecutionTimeoutMinutes)
-		case schemas.JobRun_imageConfiguration:
-			v.ImageConfiguration = &ImageConfiguration{}
-			return v.ImageConfiguration.Deserialize(d)
-		case schemas.JobRun_jobDriver:
-			return deserializeJobDriver(d, schemas.JobRun_jobDriver, &v.JobDriver)
-		case schemas.JobRun_jobRunId:
-			v.JobRunId = new(string)
-			return d.ReadString(schemas.JobRun_jobRunId, v.JobRunId)
-		case schemas.JobRun_mode:
-			var ev string
-			if err := d.ReadString(schemas.JobRun_mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = JobRunMode(ev)
-			return nil
-		case schemas.JobRun_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.JobRun_name, v.Name)
-		case schemas.JobRun_networkConfiguration:
-			v.NetworkConfiguration = &NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.JobRun_queuedDurationMilliseconds:
-			v.QueuedDurationMilliseconds = new(int64)
-			return d.ReadInt64(schemas.JobRun_queuedDurationMilliseconds, v.QueuedDurationMilliseconds)
-		case schemas.JobRun_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.JobRun_releaseLabel, v.ReleaseLabel)
-		case schemas.JobRun_retryPolicy:
-			v.RetryPolicy = &RetryPolicy{}
-			return v.RetryPolicy.Deserialize(d)
-		case schemas.JobRun_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_startedAt, v.StartedAt)
-		case schemas.JobRun_state:
-			var ev string
-			if err := d.ReadString(schemas.JobRun_state, &ev); err != nil {
-				return err
-			}
-			v.State = JobRunState(ev)
-			return nil
-		case schemas.JobRun_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.JobRun_stateDetails, v.StateDetails)
-		case schemas.JobRun_tags:
-			return deserializeTagMap(d, schemas.JobRun_tags, &v.Tags)
-		case schemas.JobRun_totalExecutionDurationSeconds:
-			v.TotalExecutionDurationSeconds = new(int32)
-			return d.ReadInt32(schemas.JobRun_totalExecutionDurationSeconds, v.TotalExecutionDurationSeconds)
-		case schemas.JobRun_totalResourceUtilization:
-			v.TotalResourceUtilization = &TotalResourceUtilization{}
-			return v.TotalResourceUtilization.Deserialize(d)
-		case schemas.JobRun_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRun_updatedAt, v.UpdatedAt)
-		case schemas.JobRun_workerTypeSpecifications:
-			return deserializeWorkerTypeSpecificationMap(d, schemas.JobRun_workerTypeSpecifications, &v.WorkerTypeSpecifications)
-		}
-		return nil
-	})
-}
-
 // The summary of attributes associated with a job run attempt.
 type JobRunAttemptSummary struct {
 
@@ -1563,120 +643,6 @@ type JobRunAttemptSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobRunAttemptSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobRunAttemptSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobRunAttemptSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_applicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_arn, *v.Arn)
-	}
-	if v.Attempt != nil {
-		s.WriteInt32(schemas.JobRunAttemptSummary_attempt, *v.Attempt)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.JobRunAttemptSummary_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_createdBy, *v.CreatedBy)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_executionRole, *v.ExecutionRole)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_id, *v.Id)
-	}
-	if v.JobCreatedAt != nil {
-		s.WriteTime(schemas.JobRunAttemptSummary_jobCreatedAt, *v.JobCreatedAt)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.JobRunAttemptSummary_mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_name, *v.Name)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.JobRunAttemptSummary_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_stateDetails, *v.StateDetails)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.JobRunAttemptSummary_type, *v.Type)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.JobRunAttemptSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *JobRunAttemptSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobRunAttemptSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobRunAttemptSummary_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_applicationId, v.ApplicationId)
-		case schemas.JobRunAttemptSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_arn, v.Arn)
-		case schemas.JobRunAttemptSummary_attempt:
-			v.Attempt = new(int32)
-			return d.ReadInt32(schemas.JobRunAttemptSummary_attempt, v.Attempt)
-		case schemas.JobRunAttemptSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunAttemptSummary_createdAt, v.CreatedAt)
-		case schemas.JobRunAttemptSummary_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_createdBy, v.CreatedBy)
-		case schemas.JobRunAttemptSummary_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_executionRole, v.ExecutionRole)
-		case schemas.JobRunAttemptSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_id, v.Id)
-		case schemas.JobRunAttemptSummary_jobCreatedAt:
-			v.JobCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunAttemptSummary_jobCreatedAt, v.JobCreatedAt)
-		case schemas.JobRunAttemptSummary_mode:
-			var ev string
-			if err := d.ReadString(schemas.JobRunAttemptSummary_mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = JobRunMode(ev)
-			return nil
-		case schemas.JobRunAttemptSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_name, v.Name)
-		case schemas.JobRunAttemptSummary_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_releaseLabel, v.ReleaseLabel)
-		case schemas.JobRunAttemptSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.JobRunAttemptSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = JobRunState(ev)
-			return nil
-		case schemas.JobRunAttemptSummary_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_stateDetails, v.StateDetails)
-		case schemas.JobRunAttemptSummary_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.JobRunAttemptSummary_type, v.Type)
-		case schemas.JobRunAttemptSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunAttemptSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Optional IAM policy. The resulting job IAM role permissions will be an
 // intersection of the policies passed and the policy associated with your job
 // execution role.
@@ -1689,31 +655,6 @@ type JobRunExecutionIamPolicy struct {
 	PolicyArns []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobRunExecutionIamPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobRunExecutionIamPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobRunExecutionIamPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Policy != nil {
-		s.WriteString(schemas.JobRunExecutionIamPolicy_policy, *v.Policy)
-	}
-	serializePolicyArnList(s, schemas.JobRunExecutionIamPolicy_policyArns, v.PolicyArns)
-}
-func (v *JobRunExecutionIamPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobRunExecutionIamPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobRunExecutionIamPolicy_policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.JobRunExecutionIamPolicy_policy, v.Policy)
-		case schemas.JobRunExecutionIamPolicy_policyArns:
-			return deserializePolicyArnList(d, schemas.JobRunExecutionIamPolicy_policyArns, &v.PolicyArns)
-		}
-		return nil
-	})
 }
 
 // The summary of attributes associated with a job run.
@@ -1790,126 +731,6 @@ type JobRunSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobRunSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobRunSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.JobRunSummary_applicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.JobRunSummary_arn, *v.Arn)
-	}
-	if v.Attempt != nil {
-		s.WriteInt32(schemas.JobRunSummary_attempt, *v.Attempt)
-	}
-	if v.AttemptCreatedAt != nil {
-		s.WriteTime(schemas.JobRunSummary_attemptCreatedAt, *v.AttemptCreatedAt)
-	}
-	if v.AttemptUpdatedAt != nil {
-		s.WriteTime(schemas.JobRunSummary_attemptUpdatedAt, *v.AttemptUpdatedAt)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.JobRunSummary_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.JobRunSummary_createdBy, *v.CreatedBy)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.JobRunSummary_executionRole, *v.ExecutionRole)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.JobRunSummary_id, *v.Id)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.JobRunSummary_mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.JobRunSummary_name, *v.Name)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.JobRunSummary_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.JobRunSummary_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.JobRunSummary_stateDetails, *v.StateDetails)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.JobRunSummary_type, *v.Type)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.JobRunSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *JobRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobRunSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobRunSummary_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.JobRunSummary_applicationId, v.ApplicationId)
-		case schemas.JobRunSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.JobRunSummary_arn, v.Arn)
-		case schemas.JobRunSummary_attempt:
-			v.Attempt = new(int32)
-			return d.ReadInt32(schemas.JobRunSummary_attempt, v.Attempt)
-		case schemas.JobRunSummary_attemptCreatedAt:
-			v.AttemptCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunSummary_attemptCreatedAt, v.AttemptCreatedAt)
-		case schemas.JobRunSummary_attemptUpdatedAt:
-			v.AttemptUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunSummary_attemptUpdatedAt, v.AttemptUpdatedAt)
-		case schemas.JobRunSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunSummary_createdAt, v.CreatedAt)
-		case schemas.JobRunSummary_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.JobRunSummary_createdBy, v.CreatedBy)
-		case schemas.JobRunSummary_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.JobRunSummary_executionRole, v.ExecutionRole)
-		case schemas.JobRunSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.JobRunSummary_id, v.Id)
-		case schemas.JobRunSummary_mode:
-			var ev string
-			if err := d.ReadString(schemas.JobRunSummary_mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = JobRunMode(ev)
-			return nil
-		case schemas.JobRunSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.JobRunSummary_name, v.Name)
-		case schemas.JobRunSummary_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.JobRunSummary_releaseLabel, v.ReleaseLabel)
-		case schemas.JobRunSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.JobRunSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = JobRunState(ev)
-			return nil
-		case schemas.JobRunSummary_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.JobRunSummary_stateDetails, v.StateDetails)
-		case schemas.JobRunSummary_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.JobRunSummary_type, v.Type)
-		case schemas.JobRunSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobRunSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The managed log persistence configuration for a job run.
 type ManagedPersistenceMonitoringConfiguration struct {
 
@@ -1921,34 +742,6 @@ type ManagedPersistenceMonitoringConfiguration struct {
 	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ManagedPersistenceMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedPersistenceMonitoringConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ManagedPersistenceMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != nil {
-		s.WriteBool(schemas.ManagedPersistenceMonitoringConfiguration_enabled, *v.Enabled)
-	}
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.ManagedPersistenceMonitoringConfiguration_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-}
-func (v *ManagedPersistenceMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ManagedPersistenceMonitoringConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ManagedPersistenceMonitoringConfiguration_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.ManagedPersistenceMonitoringConfiguration_enabled, v.Enabled)
-		case schemas.ManagedPersistenceMonitoringConfiguration_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.ManagedPersistenceMonitoringConfiguration_encryptionKeyArn, v.EncryptionKeyArn)
-		}
-		return nil
-	})
 }
 
 // The maximum allowed cumulative resources for an application. No new resources
@@ -1971,40 +764,6 @@ type MaximumAllowedResources struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MaximumAllowedResources) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MaximumAllowedResources)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MaximumAllowedResources) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cpu != nil {
-		s.WriteString(schemas.MaximumAllowedResources_cpu, *v.Cpu)
-	}
-	if v.Disk != nil {
-		s.WriteString(schemas.MaximumAllowedResources_disk, *v.Disk)
-	}
-	if v.Memory != nil {
-		s.WriteString(schemas.MaximumAllowedResources_memory, *v.Memory)
-	}
-}
-func (v *MaximumAllowedResources) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MaximumAllowedResources, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MaximumAllowedResources_cpu:
-			v.Cpu = new(string)
-			return d.ReadString(schemas.MaximumAllowedResources_cpu, v.Cpu)
-		case schemas.MaximumAllowedResources_disk:
-			v.Disk = new(string)
-			return d.ReadString(schemas.MaximumAllowedResources_disk, v.Disk)
-		case schemas.MaximumAllowedResources_memory:
-			v.Memory = new(string)
-			return d.ReadString(schemas.MaximumAllowedResources_memory, v.Memory)
-		}
-		return nil
-	})
-}
-
 // The configuration setting for monitoring.
 type MonitoringConfiguration struct {
 
@@ -2025,54 +784,6 @@ type MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitoringConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudWatchLoggingConfiguration != nil {
-		s.WriteStruct(schemas.MonitoringConfiguration_cloudWatchLoggingConfiguration)
-		v.CloudWatchLoggingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManagedPersistenceMonitoringConfiguration != nil {
-		s.WriteStruct(schemas.MonitoringConfiguration_managedPersistenceMonitoringConfiguration)
-		v.ManagedPersistenceMonitoringConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrometheusMonitoringConfiguration != nil {
-		s.WriteStruct(schemas.MonitoringConfiguration_prometheusMonitoringConfiguration)
-		v.PrometheusMonitoringConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3MonitoringConfiguration != nil {
-		s.WriteStruct(schemas.MonitoringConfiguration_s3MonitoringConfiguration)
-		v.S3MonitoringConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitoringConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitoringConfiguration_cloudWatchLoggingConfiguration:
-			v.CloudWatchLoggingConfiguration = &CloudWatchLoggingConfiguration{}
-			return v.CloudWatchLoggingConfiguration.Deserialize(d)
-		case schemas.MonitoringConfiguration_managedPersistenceMonitoringConfiguration:
-			v.ManagedPersistenceMonitoringConfiguration = &ManagedPersistenceMonitoringConfiguration{}
-			return v.ManagedPersistenceMonitoringConfiguration.Deserialize(d)
-		case schemas.MonitoringConfiguration_prometheusMonitoringConfiguration:
-			v.PrometheusMonitoringConfiguration = &PrometheusMonitoringConfiguration{}
-			return v.PrometheusMonitoringConfiguration.Deserialize(d)
-		case schemas.MonitoringConfiguration_s3MonitoringConfiguration:
-			v.S3MonitoringConfiguration = &S3MonitoringConfiguration{}
-			return v.S3MonitoringConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The network configuration for customer VPC connectivity.
 type NetworkConfiguration struct {
 
@@ -2085,28 +796,6 @@ type NetworkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.NetworkConfiguration_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.NetworkConfiguration_subnetIds, v.SubnetIds)
-}
-func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkConfiguration_securityGroupIds:
-			return deserializeSecurityGroupIds(d, schemas.NetworkConfiguration_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.NetworkConfiguration_subnetIds:
-			return deserializeSubnetIds(d, schemas.NetworkConfiguration_subnetIds, &v.SubnetIds)
-		}
-		return nil
-	})
-}
-
 // The monitoring configuration object you can configure to send metrics to Amazon
 // Managed Service for Prometheus for a job run.
 type PrometheusMonitoringConfiguration struct {
@@ -2116,28 +805,6 @@ type PrometheusMonitoringConfiguration struct {
 	RemoteWriteUrl *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PrometheusMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PrometheusMonitoringConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PrometheusMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RemoteWriteUrl != nil {
-		s.WriteString(schemas.PrometheusMonitoringConfiguration_remoteWriteUrl, *v.RemoteWriteUrl)
-	}
-}
-func (v *PrometheusMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PrometheusMonitoringConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PrometheusMonitoringConfiguration_remoteWriteUrl:
-			v.RemoteWriteUrl = new(string)
-			return d.ReadString(schemas.PrometheusMonitoringConfiguration_remoteWriteUrl, v.RemoteWriteUrl)
-		}
-		return nil
-	})
 }
 
 // The resource utilization for memory, storage, and vCPU for jobs.
@@ -2158,40 +825,6 @@ type ResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceUtilization) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceUtilization)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemoryGBHour != nil {
-		s.WriteFloat64(schemas.ResourceUtilization_memoryGBHour, *v.MemoryGBHour)
-	}
-	if v.StorageGBHour != nil {
-		s.WriteFloat64(schemas.ResourceUtilization_storageGBHour, *v.StorageGBHour)
-	}
-	if v.VCPUHour != nil {
-		s.WriteFloat64(schemas.ResourceUtilization_vCPUHour, *v.VCPUHour)
-	}
-}
-func (v *ResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceUtilization, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceUtilization_memoryGBHour:
-			v.MemoryGBHour = new(float64)
-			return d.ReadFloat64(schemas.ResourceUtilization_memoryGBHour, v.MemoryGBHour)
-		case schemas.ResourceUtilization_storageGBHour:
-			v.StorageGBHour = new(float64)
-			return d.ReadFloat64(schemas.ResourceUtilization_storageGBHour, v.StorageGBHour)
-		case schemas.ResourceUtilization_vCPUHour:
-			v.VCPUHour = new(float64)
-			return d.ReadFloat64(schemas.ResourceUtilization_vCPUHour, v.VCPUHour)
-		}
-		return nil
-	})
-}
-
 // The retry policy to use for a job run.
 type RetryPolicy struct {
 
@@ -2206,34 +839,6 @@ type RetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RetryPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RetryPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RetryPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxAttempts != nil {
-		s.WriteInt32(schemas.RetryPolicy_maxAttempts, *v.MaxAttempts)
-	}
-	if v.MaxFailedAttemptsPerHour != nil {
-		s.WriteInt32(schemas.RetryPolicy_maxFailedAttemptsPerHour, *v.MaxFailedAttemptsPerHour)
-	}
-}
-func (v *RetryPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RetryPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RetryPolicy_maxAttempts:
-			v.MaxAttempts = new(int32)
-			return d.ReadInt32(schemas.RetryPolicy_maxAttempts, v.MaxAttempts)
-		case schemas.RetryPolicy_maxFailedAttemptsPerHour:
-			v.MaxFailedAttemptsPerHour = new(int32)
-			return d.ReadInt32(schemas.RetryPolicy_maxFailedAttemptsPerHour, v.MaxFailedAttemptsPerHour)
-		}
-		return nil
-	})
-}
-
 // The Amazon S3 configuration for monitoring log publishing. You can configure
 // your jobs to send log information to Amazon S3.
 type S3MonitoringConfiguration struct {
@@ -2246,34 +851,6 @@ type S3MonitoringConfiguration struct {
 	LogUri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3MonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3MonitoringConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3MonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.S3MonitoringConfiguration_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.LogUri != nil {
-		s.WriteString(schemas.S3MonitoringConfiguration_logUri, *v.LogUri)
-	}
-}
-func (v *S3MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3MonitoringConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3MonitoringConfiguration_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.S3MonitoringConfiguration_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.S3MonitoringConfiguration_logUri:
-			v.LogUri = new(string)
-			return d.ReadString(schemas.S3MonitoringConfiguration_logUri, v.LogUri)
-		}
-		return nil
-	})
 }
 
 // The scheduler configuration for batch and streaming jobs running on this
@@ -2291,34 +868,6 @@ type SchedulerConfiguration struct {
 	QueueTimeoutMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *SchedulerConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SchedulerConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SchedulerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxConcurrentRuns != nil {
-		s.WriteInt32(schemas.SchedulerConfiguration_maxConcurrentRuns, *v.MaxConcurrentRuns)
-	}
-	if v.QueueTimeoutMinutes != nil {
-		s.WriteInt32(schemas.SchedulerConfiguration_queueTimeoutMinutes, *v.QueueTimeoutMinutes)
-	}
-}
-func (v *SchedulerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SchedulerConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SchedulerConfiguration_maxConcurrentRuns:
-			v.MaxConcurrentRuns = new(int32)
-			return d.ReadInt32(schemas.SchedulerConfiguration_maxConcurrentRuns, v.MaxConcurrentRuns)
-		case schemas.SchedulerConfiguration_queueTimeoutMinutes:
-			v.QueueTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.SchedulerConfiguration_queueTimeoutMinutes, v.QueueTimeoutMinutes)
-		}
-		return nil
-	})
 }
 
 // Information about a session, including the session state, configuration, and
@@ -2418,157 +967,6 @@ type Session struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Session) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Session)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Session) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.Session_applicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Session_arn, *v.Arn)
-	}
-	if v.BilledResourceUtilization != nil {
-		s.WriteStruct(schemas.Session_billedResourceUtilization)
-		v.BilledResourceUtilization.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfigurationOverrides != nil {
-		s.WriteStruct(schemas.Session_configurationOverrides)
-		v.ConfigurationOverrides.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Session_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.Session_createdBy, *v.CreatedBy)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.Session_endedAt, *v.EndedAt)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.Session_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.IdleSince != nil {
-		s.WriteTime(schemas.Session_idleSince, *v.IdleSince)
-	}
-	if v.IdleTimeoutMinutes != nil {
-		s.WriteInt64(schemas.Session_idleTimeoutMinutes, *v.IdleTimeoutMinutes)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Session_name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.Session_networkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.Session_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.Session_sessionId, *v.SessionId)
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.Session_startedAt, *v.StartedAt)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Session_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.Session_stateDetails, *v.StateDetails)
-	}
-	serializeTagMap(s, schemas.Session_tags, v.Tags)
-	if v.TotalExecutionDurationSeconds != nil {
-		s.WriteInt64(schemas.Session_totalExecutionDurationSeconds, *v.TotalExecutionDurationSeconds)
-	}
-	if v.TotalResourceUtilization != nil {
-		s.WriteStruct(schemas.Session_totalResourceUtilization)
-		v.TotalResourceUtilization.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Session_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Session) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Session, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Session_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.Session_applicationId, v.ApplicationId)
-		case schemas.Session_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Session_arn, v.Arn)
-		case schemas.Session_billedResourceUtilization:
-			v.BilledResourceUtilization = &ResourceUtilization{}
-			return v.BilledResourceUtilization.Deserialize(d)
-		case schemas.Session_configurationOverrides:
-			v.ConfigurationOverrides = &SessionConfigurationOverrides{}
-			return v.ConfigurationOverrides.Deserialize(d)
-		case schemas.Session_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Session_createdAt, v.CreatedAt)
-		case schemas.Session_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.Session_createdBy, v.CreatedBy)
-		case schemas.Session_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.Session_endedAt, v.EndedAt)
-		case schemas.Session_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.Session_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.Session_idleSince:
-			v.IdleSince = new(time.Time)
-			return d.ReadTime(schemas.Session_idleSince, v.IdleSince)
-		case schemas.Session_idleTimeoutMinutes:
-			v.IdleTimeoutMinutes = new(int64)
-			return d.ReadInt64(schemas.Session_idleTimeoutMinutes, v.IdleTimeoutMinutes)
-		case schemas.Session_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Session_name, v.Name)
-		case schemas.Session_networkConfiguration:
-			v.NetworkConfiguration = &NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.Session_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.Session_releaseLabel, v.ReleaseLabel)
-		case schemas.Session_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.Session_sessionId, v.SessionId)
-		case schemas.Session_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.Session_startedAt, v.StartedAt)
-		case schemas.Session_state:
-			var ev string
-			if err := d.ReadString(schemas.Session_state, &ev); err != nil {
-				return err
-			}
-			v.State = SessionState(ev)
-			return nil
-		case schemas.Session_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.Session_stateDetails, v.StateDetails)
-		case schemas.Session_tags:
-			return deserializeTagMap(d, schemas.Session_tags, &v.Tags)
-		case schemas.Session_totalExecutionDurationSeconds:
-			v.TotalExecutionDurationSeconds = new(int64)
-			return d.ReadInt64(schemas.Session_totalExecutionDurationSeconds, v.TotalExecutionDurationSeconds)
-		case schemas.Session_totalResourceUtilization:
-			v.TotalResourceUtilization = &TotalResourceUtilization{}
-			return v.TotalResourceUtilization.Deserialize(d)
-		case schemas.Session_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Session_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The configuration overrides for a session.
 type SessionConfigurationOverrides struct {
 
@@ -2577,25 +975,6 @@ type SessionConfigurationOverrides struct {
 	RuntimeConfiguration []Configuration
 
 	noSmithyDocumentSerde
-}
-
-func (v *SessionConfigurationOverrides) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionConfigurationOverrides)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionConfigurationOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationList(s, schemas.SessionConfigurationOverrides_runtimeConfiguration, v.RuntimeConfiguration)
-}
-func (v *SessionConfigurationOverrides) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionConfigurationOverrides, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionConfigurationOverrides_runtimeConfiguration:
-			return deserializeConfigurationList(d, schemas.SessionConfigurationOverrides_runtimeConfiguration, &v.RuntimeConfiguration)
-		}
-		return nil
-	})
 }
 
 // The summary of attributes associated with a session.
@@ -2657,92 +1036,6 @@ type SessionSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.SessionSummary_applicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.SessionSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SessionSummary_createdAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.SessionSummary_createdBy, *v.CreatedBy)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.SessionSummary_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SessionSummary_name, *v.Name)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.SessionSummary_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.SessionSummary_sessionId, *v.SessionId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.SessionSummary_state, string(v.State))
-	}
-	if v.StateDetails != nil {
-		s.WriteString(schemas.SessionSummary_stateDetails, *v.StateDetails)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.SessionSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *SessionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionSummary_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.SessionSummary_applicationId, v.ApplicationId)
-		case schemas.SessionSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SessionSummary_arn, v.Arn)
-		case schemas.SessionSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SessionSummary_createdAt, v.CreatedAt)
-		case schemas.SessionSummary_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.SessionSummary_createdBy, v.CreatedBy)
-		case schemas.SessionSummary_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.SessionSummary_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.SessionSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SessionSummary_name, v.Name)
-		case schemas.SessionSummary_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.SessionSummary_releaseLabel, v.ReleaseLabel)
-		case schemas.SessionSummary_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.SessionSummary_sessionId, v.SessionId)
-		case schemas.SessionSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.SessionSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = SessionState(ev)
-			return nil
-		case schemas.SessionSummary_stateDetails:
-			v.StateDetails = new(string)
-			return d.ReadString(schemas.SessionSummary_stateDetails, v.StateDetails)
-		case schemas.SessionSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SessionSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The configurations for the Spark submit job driver.
 type SparkSubmit struct {
 
@@ -2758,37 +1051,6 @@ type SparkSubmit struct {
 	SparkSubmitParameters *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SparkSubmit) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SparkSubmit)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SparkSubmit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EntryPoint != nil {
-		s.WriteString(schemas.SparkSubmit_entryPoint, *v.EntryPoint)
-	}
-	serializeEntryPointArguments(s, schemas.SparkSubmit_entryPointArguments, v.EntryPointArguments)
-	if v.SparkSubmitParameters != nil {
-		s.WriteString(schemas.SparkSubmit_sparkSubmitParameters, *v.SparkSubmitParameters)
-	}
-}
-func (v *SparkSubmit) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SparkSubmit, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SparkSubmit_entryPoint:
-			v.EntryPoint = new(string)
-			return d.ReadString(schemas.SparkSubmit_entryPoint, v.EntryPoint)
-		case schemas.SparkSubmit_entryPointArguments:
-			return deserializeEntryPointArguments(d, schemas.SparkSubmit_entryPointArguments, &v.EntryPointArguments)
-		case schemas.SparkSubmit_sparkSubmitParameters:
-			v.SparkSubmitParameters = new(string)
-			return d.ReadString(schemas.SparkSubmit_sparkSubmitParameters, v.SparkSubmitParameters)
-		}
-		return nil
-	})
 }
 
 // The aggregate vCPU, memory, and storage resources used from the time job start
@@ -2808,40 +1070,6 @@ type TotalResourceUtilization struct {
 	VCPUHour *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *TotalResourceUtilization) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TotalResourceUtilization)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TotalResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemoryGBHour != nil {
-		s.WriteFloat64(schemas.TotalResourceUtilization_memoryGBHour, *v.MemoryGBHour)
-	}
-	if v.StorageGBHour != nil {
-		s.WriteFloat64(schemas.TotalResourceUtilization_storageGBHour, *v.StorageGBHour)
-	}
-	if v.VCPUHour != nil {
-		s.WriteFloat64(schemas.TotalResourceUtilization_vCPUHour, *v.VCPUHour)
-	}
-}
-func (v *TotalResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TotalResourceUtilization, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TotalResourceUtilization_memoryGBHour:
-			v.MemoryGBHour = new(float64)
-			return d.ReadFloat64(schemas.TotalResourceUtilization_memoryGBHour, v.MemoryGBHour)
-		case schemas.TotalResourceUtilization_storageGBHour:
-			v.StorageGBHour = new(float64)
-			return d.ReadFloat64(schemas.TotalResourceUtilization_storageGBHour, v.StorageGBHour)
-		case schemas.TotalResourceUtilization_vCPUHour:
-			v.VCPUHour = new(float64)
-			return d.ReadFloat64(schemas.TotalResourceUtilization_vCPUHour, v.VCPUHour)
-		}
-		return nil
-	})
 }
 
 // The cumulative configuration requirements for every worker instance of the
@@ -2869,46 +1097,6 @@ type WorkerResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WorkerResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkerResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkerResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cpu != nil {
-		s.WriteString(schemas.WorkerResourceConfig_cpu, *v.Cpu)
-	}
-	if v.Disk != nil {
-		s.WriteString(schemas.WorkerResourceConfig_disk, *v.Disk)
-	}
-	if v.DiskType != nil {
-		s.WriteString(schemas.WorkerResourceConfig_diskType, *v.DiskType)
-	}
-	if v.Memory != nil {
-		s.WriteString(schemas.WorkerResourceConfig_memory, *v.Memory)
-	}
-}
-func (v *WorkerResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkerResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkerResourceConfig_cpu:
-			v.Cpu = new(string)
-			return d.ReadString(schemas.WorkerResourceConfig_cpu, v.Cpu)
-		case schemas.WorkerResourceConfig_disk:
-			v.Disk = new(string)
-			return d.ReadString(schemas.WorkerResourceConfig_disk, v.Disk)
-		case schemas.WorkerResourceConfig_diskType:
-			v.DiskType = new(string)
-			return d.ReadString(schemas.WorkerResourceConfig_diskType, v.DiskType)
-		case schemas.WorkerResourceConfig_memory:
-			v.Memory = new(string)
-			return d.ReadString(schemas.WorkerResourceConfig_memory, v.Memory)
-		}
-		return nil
-	})
-}
-
 // The specifications for a worker type.
 type WorkerTypeSpecification struct {
 
@@ -2918,30 +1106,6 @@ type WorkerTypeSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WorkerTypeSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkerTypeSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkerTypeSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImageConfiguration != nil {
-		s.WriteStruct(schemas.WorkerTypeSpecification_imageConfiguration)
-		v.ImageConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WorkerTypeSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkerTypeSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkerTypeSpecification_imageConfiguration:
-			v.ImageConfiguration = &ImageConfiguration{}
-			return v.ImageConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The specifications for a worker type.
 type WorkerTypeSpecificationInput struct {
 
@@ -2949,30 +1113,6 @@ type WorkerTypeSpecificationInput struct {
 	ImageConfiguration *ImageConfigurationInput
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkerTypeSpecificationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkerTypeSpecificationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkerTypeSpecificationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImageConfiguration != nil {
-		s.WriteStruct(schemas.WorkerTypeSpecificationInput_imageConfiguration)
-		v.ImageConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WorkerTypeSpecificationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkerTypeSpecificationInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkerTypeSpecificationInput_imageConfiguration:
-			v.ImageConfiguration = &ImageConfigurationInput{}
-			return v.ImageConfiguration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

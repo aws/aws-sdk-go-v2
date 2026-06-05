@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetUsageLimitInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUsageLimitInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUsageLimitRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUsageLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.UsageLimitId != nil {
-		s.WriteString(schemas.GetUsageLimitRequest_usageLimitId, *v.UsageLimitId)
-	}
-}
-
 type GetUsageLimitOutput struct {
 
 	// The returned usage limit object.
@@ -62,24 +48,16 @@ type GetUsageLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUsageLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUsageLimitResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUsageLimitResponse_usageLimit:
-			v.UsageLimit = &types.UsageLimit{}
-			return v.UsageLimit.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageLimit, schemas.GetUsageLimitRequest, schemas.GetUsageLimitResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageLimit{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageLimit, schemas.GetUsageLimitRequest, schemas.GetUsageLimitResponse), output: &GetUsageLimitOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUsageLimit{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsageLimit"); err != nil {

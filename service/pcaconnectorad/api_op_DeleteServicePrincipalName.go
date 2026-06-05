@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type DeleteServicePrincipalNameInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteServicePrincipalNameInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteServicePrincipalNameRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteServicePrincipalNameInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.DeleteServicePrincipalNameRequest_ConnectorArn, *v.ConnectorArn)
-	}
-	if v.DirectoryRegistrationArn != nil {
-		s.WriteString(schemas.DeleteServicePrincipalNameRequest_DirectoryRegistrationArn, *v.DirectoryRegistrationArn)
-	}
-}
-
 type DeleteServicePrincipalNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,29 +53,16 @@ type DeleteServicePrincipalNameOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteServicePrincipalNameOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteServicePrincipalNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteServicePrincipalNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteServicePrincipalNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServicePrincipalName, schemas.DeleteServicePrincipalNameRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServicePrincipalName{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServicePrincipalName, schemas.DeleteServicePrincipalNameRequest, nil), output: &DeleteServicePrincipalNameOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServicePrincipalName{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteServicePrincipalName"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,31 +41,6 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UntagResourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UntagResourceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceARN != nil {
-		s.WriteString(schemas.UntagResourceInput_ResourceARN, *v.ResourceARN)
-	}
-	serializeTagKeys(s, schemas.UntagResourceInput_TagKeys, v.TagKeys)
-}
-func (v *UntagResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UntagResourceInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UntagResourceInput_ResourceARN:
-			v.ResourceARN = new(string)
-			return d.ReadString(schemas.UntagResourceInput_ResourceARN, v.ResourceARN)
-		case schemas.UntagResourceInput_TagKeys:
-			return deserializeTagKeys(d, schemas.UntagResourceInput_TagKeys, &v.TagKeys)
-		}
-		return nil
-	})
-}
-
 type UntagResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource from which you removed tags.
@@ -79,35 +52,16 @@ type UntagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UntagResourceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UntagResourceOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UntagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceARN != nil {
-		s.WriteString(schemas.UntagResourceOutput_ResourceARN, *v.ResourceARN)
-	}
-}
-func (v *UntagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UntagResourceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UntagResourceOutput_ResourceARN:
-			v.ResourceARN = new(string)
-			return d.ReadString(schemas.UntagResourceOutput_ResourceARN, v.ResourceARN)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUntagResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput), output: &UntagResourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUntagResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UntagResource"); err != nil {

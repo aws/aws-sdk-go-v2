@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtraildata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,37 +51,6 @@ type PutAuditEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAuditEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutAuditEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutAuditEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditEvents(s, schemas.PutAuditEventsRequest_auditEvents, v.AuditEvents)
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.PutAuditEventsRequest_channelArn, *v.ChannelArn)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.PutAuditEventsRequest_externalId, *v.ExternalId)
-	}
-}
-func (v *PutAuditEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutAuditEventsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutAuditEventsRequest_auditEvents:
-			return deserializeAuditEvents(d, schemas.PutAuditEventsRequest_auditEvents, &v.AuditEvents)
-		case schemas.PutAuditEventsRequest_channelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.PutAuditEventsRequest_channelArn, v.ChannelArn)
-		case schemas.PutAuditEventsRequest_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.PutAuditEventsRequest_externalId, v.ExternalId)
-		}
-		return nil
-	})
-}
-
 type PutAuditEventsOutput struct {
 
 	// Lists events in the provided event payload that could not be ingested into
@@ -105,35 +72,16 @@ type PutAuditEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutAuditEventsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultErrorEntries(s, schemas.PutAuditEventsResponse_failed, v.Failed)
-	serializeAuditEventResultEntries(s, schemas.PutAuditEventsResponse_successful, v.Successful)
-}
-func (v *PutAuditEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutAuditEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutAuditEventsResponse_failed:
-			return deserializeResultErrorEntries(d, schemas.PutAuditEventsResponse_failed, &v.Failed)
-		case schemas.PutAuditEventsResponse_successful:
-			return deserializeAuditEventResultEntries(d, schemas.PutAuditEventsResponse_successful, &v.Successful)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutAuditEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuditEvents, schemas.PutAuditEventsRequest, schemas.PutAuditEventsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAuditEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuditEvents, schemas.PutAuditEventsRequest, schemas.PutAuditEventsResponse), output: &PutAuditEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAuditEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAuditEvents"); err != nil {

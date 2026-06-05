@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,29 +48,6 @@ type ListMembersOfAddressListInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMembersOfAddressListInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMembersOfAddressListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMembersOfAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AddressListId != nil {
-		s.WriteString(schemas.ListMembersOfAddressListRequest_AddressListId, *v.AddressListId)
-	}
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListMembersOfAddressListRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMembersOfAddressListRequest_NextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListMembersOfAddressListRequest_PageSize, *v.PageSize)
-	}
-}
-
 type ListMembersOfAddressListOutput struct {
 
 	// The list of addresses.
@@ -91,26 +66,16 @@ type ListMembersOfAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMembersOfAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMembersOfAddressListResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMembersOfAddressListResponse_Addresses:
-			return deserializeSavedAddresses(d, schemas.ListMembersOfAddressListResponse_Addresses, &v.Addresses)
-		case schemas.ListMembersOfAddressListResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMembersOfAddressListResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMembersOfAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembersOfAddressList, schemas.ListMembersOfAddressListRequest, schemas.ListMembersOfAddressListResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListMembersOfAddressList{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembersOfAddressList, schemas.ListMembersOfAddressListRequest, schemas.ListMembersOfAddressListResponse), output: &ListMembersOfAddressListOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListMembersOfAddressList{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMembersOfAddressList"); err != nil {

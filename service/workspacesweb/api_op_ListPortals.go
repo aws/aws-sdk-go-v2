@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListPortalsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortalsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPortalsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPortalsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPortalsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPortalsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListPortalsOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this
@@ -71,26 +54,16 @@ type ListPortalsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPortalsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPortalsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPortalsResponse_nextToken, v.NextToken)
-		case schemas.ListPortalsResponse_portals:
-			return deserializePortalList(d, schemas.ListPortalsResponse_portals, &v.Portals)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortals, schemas.ListPortalsRequest, schemas.ListPortalsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPortals{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortals, schemas.ListPortalsRequest, schemas.ListPortalsResponse), output: &ListPortalsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPortals{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPortals"); err != nil {

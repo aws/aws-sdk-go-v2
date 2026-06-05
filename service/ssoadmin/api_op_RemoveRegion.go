@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,21 +62,6 @@ type RemoveRegionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveRegionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveRegionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.RemoveRegionRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.RegionName != nil {
-		s.WriteString(schemas.RemoveRegionRequest_RegionName, *v.RegionName)
-	}
-}
-
 type RemoveRegionOutput struct {
 
 	// The status of the Region after the remove operation. The status is REMOVING
@@ -92,28 +75,16 @@ type RemoveRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveRegionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoveRegionResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.RemoveRegionResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RegionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegion, schemas.RemoveRegionRequest, schemas.RemoveRegionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveRegion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegion, schemas.RemoveRegionRequest, schemas.RemoveRegionResponse), output: &RemoveRegionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveRegion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveRegion"); err != nil {

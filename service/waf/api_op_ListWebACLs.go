@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,21 +56,6 @@ type ListWebACLsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWebACLsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWebACLsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWebACLsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Limit != 0 {
-		s.WriteInt32(schemas.ListWebACLsRequest_Limit, v.Limit)
-	}
-	if v.NextMarker != nil {
-		s.WriteString(schemas.ListWebACLsRequest_NextMarker, *v.NextMarker)
-	}
-}
-
 type ListWebACLsOutput struct {
 
 	// If you have more WebACL objects than the number that you specified for Limit in
@@ -90,26 +73,16 @@ type ListWebACLsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWebACLsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWebACLsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWebACLsResponse_NextMarker:
-			v.NextMarker = new(string)
-			return d.ReadString(schemas.ListWebACLsResponse_NextMarker, v.NextMarker)
-		case schemas.ListWebACLsResponse_WebACLs:
-			return deserializeWebACLSummaries(d, schemas.ListWebACLsResponse_WebACLs, &v.WebACLs)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWebACLsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebACLs, schemas.ListWebACLsRequest, schemas.ListWebACLsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWebACLs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebACLs, schemas.ListWebACLsRequest, schemas.ListWebACLsResponse), output: &ListWebACLsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWebACLs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWebACLs"); err != nil {

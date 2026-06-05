@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteDataIntegrationFlowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataIntegrationFlowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataIntegrationFlowRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataIntegrationFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DeleteDataIntegrationFlowRequest_instanceId, *v.InstanceId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteDataIntegrationFlowRequest_name, *v.Name)
-	}
-}
-
 // The response parameters for DeleteDataIntegrationFlow.
 type DeleteDataIntegrationFlowOutput struct {
 
@@ -79,27 +62,16 @@ type DeleteDataIntegrationFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataIntegrationFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataIntegrationFlowResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDataIntegrationFlowResponse_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DeleteDataIntegrationFlowResponse_instanceId, v.InstanceId)
-		case schemas.DeleteDataIntegrationFlowResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteDataIntegrationFlowResponse_name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataIntegrationFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataIntegrationFlow, schemas.DeleteDataIntegrationFlowRequest, schemas.DeleteDataIntegrationFlowResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataIntegrationFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataIntegrationFlow, schemas.DeleteDataIntegrationFlowRequest, schemas.DeleteDataIntegrationFlowResponse), output: &DeleteDataIntegrationFlowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataIntegrationFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataIntegrationFlow"); err != nil {

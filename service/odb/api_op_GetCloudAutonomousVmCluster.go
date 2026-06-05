@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetCloudAutonomousVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCloudAutonomousVmClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCloudAutonomousVmClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCloudAutonomousVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudAutonomousVmClusterId != nil {
-		s.WriteString(schemas.GetCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId, *v.CloudAutonomousVmClusterId)
-	}
-}
-
 type GetCloudAutonomousVmClusterOutput struct {
 
 	// The details of the requested Autonomous VM cluster.
@@ -63,24 +49,16 @@ type GetCloudAutonomousVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCloudAutonomousVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCloudAutonomousVmClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCloudAutonomousVmClusterOutput_cloudAutonomousVmCluster:
-			v.CloudAutonomousVmCluster = &types.CloudAutonomousVmCluster{}
-			return v.CloudAutonomousVmCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCloudAutonomousVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudAutonomousVmCluster, schemas.GetCloudAutonomousVmClusterInput, schemas.GetCloudAutonomousVmClusterOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCloudAutonomousVmCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudAutonomousVmCluster, schemas.GetCloudAutonomousVmClusterInput, schemas.GetCloudAutonomousVmClusterOutput), output: &GetCloudAutonomousVmClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCloudAutonomousVmCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCloudAutonomousVmCluster"); err != nil {

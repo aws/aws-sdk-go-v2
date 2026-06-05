@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedByMetaException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedByMetaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedByMetaException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedByMetaException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedByMetaException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedByMetaException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
@@ -69,16 +58,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Thrown when performing an action because a dependency would be broken.
 type DependencyException struct {
@@ -105,16 +84,6 @@ func (e *DependencyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *DependencyException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DependencyException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DependencyException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DependencyException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
@@ -142,16 +111,6 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServiceException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServiceException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more parameters provided to the action are not valid.
 type InvalidParametersException struct {
@@ -178,16 +137,6 @@ func (e *InvalidParametersException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidParametersException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidParametersException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidParametersException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidParametersException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied because it would exceed one or more service quotas or
 // limits.
@@ -215,16 +164,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource was not found.
 type ResourceNotFoundException struct {
@@ -251,16 +190,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling.
 type ThrottledRequestException struct {
@@ -287,16 +216,6 @@ func (e *ThrottledRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottledRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottledRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottledRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottledRequestException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottledRequestException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request contains an invalid parameter value.
 type ValidationException struct {
@@ -323,13 +242,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		}
-		return nil
-	})
-}

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DeleteDataAutomationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataAutomationProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataAutomationProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataAutomationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProjectArn != nil {
-		s.WriteString(schemas.DeleteDataAutomationProjectRequest_projectArn, *v.ProjectArn)
-	}
-}
-
 // Delete DataAutomationProject Response
 type DeleteDataAutomationProjectOutput struct {
 
@@ -69,31 +55,16 @@ type DeleteDataAutomationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataAutomationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataAutomationProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDataAutomationProjectResponse_projectArn:
-			v.ProjectArn = new(string)
-			return d.ReadString(schemas.DeleteDataAutomationProjectResponse_projectArn, v.ProjectArn)
-		case schemas.DeleteDataAutomationProjectResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDataAutomationProjectResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataAutomationProjectStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataAutomationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataAutomationProject, schemas.DeleteDataAutomationProjectRequest, schemas.DeleteDataAutomationProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataAutomationProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataAutomationProject, schemas.DeleteDataAutomationProjectRequest, schemas.DeleteDataAutomationProjectResponse), output: &DeleteDataAutomationProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataAutomationProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataAutomationProject"); err != nil {

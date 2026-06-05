@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DescribeAppInstanceAdminInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAppInstanceAdminInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAppInstanceAdminRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAppInstanceAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceAdminArn != nil {
-		s.WriteString(schemas.DescribeAppInstanceAdminRequest_AppInstanceAdminArn, *v.AppInstanceAdminArn)
-	}
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.DescribeAppInstanceAdminRequest_AppInstanceArn, *v.AppInstanceArn)
-	}
-}
-
 type DescribeAppInstanceAdminOutput struct {
 
 	// The ARN and name of the AppInstanceUser , the ARN of the AppInstance , and the
@@ -71,24 +54,16 @@ type DescribeAppInstanceAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAppInstanceAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAppInstanceAdminResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAppInstanceAdminResponse_AppInstanceAdmin:
-			v.AppInstanceAdmin = &types.AppInstanceAdmin{}
-			return v.AppInstanceAdmin.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceAdmin, schemas.DescribeAppInstanceAdminRequest, schemas.DescribeAppInstanceAdminResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstanceAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceAdmin, schemas.DescribeAppInstanceAdminRequest, schemas.DescribeAppInstanceAdminResponse), output: &DescribeAppInstanceAdminOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppInstanceAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAppInstanceAdmin"); err != nil {

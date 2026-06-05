@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,17 +39,6 @@ type GetPlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetPlanRequest_arn, *v.Arn)
-	}
-}
 func (in *GetPlanInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -68,24 +55,16 @@ type GetPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlanResponse_plan:
-			v.Plan = &types.Plan{}
-			return v.Plan.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse), output: &GetPlanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlan"); err != nil {

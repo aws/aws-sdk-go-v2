@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type StopQueryMonitorTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopQueryMonitorTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopQueryMonitorTopContributorsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopQueryMonitorTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MonitorName != nil {
-		s.WriteString(schemas.StopQueryMonitorTopContributorsInput_monitorName, *v.MonitorName)
-	}
-	if v.QueryId != nil {
-		s.WriteString(schemas.StopQueryMonitorTopContributorsInput_queryId, *v.QueryId)
-	}
-}
-
 type StopQueryMonitorTopContributorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,21 +55,16 @@ type StopQueryMonitorTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopQueryMonitorTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopQueryMonitorTopContributorsOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopQueryMonitorTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQueryMonitorTopContributors, schemas.StopQueryMonitorTopContributorsInput, schemas.StopQueryMonitorTopContributorsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopQueryMonitorTopContributors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQueryMonitorTopContributors, schemas.StopQueryMonitorTopContributorsInput, schemas.StopQueryMonitorTopContributorsOutput), output: &StopQueryMonitorTopContributorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopQueryMonitorTopContributors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopQueryMonitorTopContributors"); err != nil {

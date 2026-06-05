@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,33 +58,6 @@ type ListProgramManagementAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProgramManagementAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProgramManagementAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProgramManagementAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListProgramManagementAccountsRequest_accountIds, v.AccountIds)
-	if v.Catalog != nil {
-		s.WriteString(schemas.ListProgramManagementAccountsRequest_catalog, *v.Catalog)
-	}
-	serializeProgramManagementAccountDisplayNameList(s, schemas.ListProgramManagementAccountsRequest_displayNames, v.DisplayNames)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProgramManagementAccountsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProgramManagementAccountsRequest_nextToken, *v.NextToken)
-	}
-	serializeProgramList(s, schemas.ListProgramManagementAccountsRequest_programs, v.Programs)
-	if v.Sort != nil {
-		s.WriteStruct(schemas.ListProgramManagementAccountsRequest_sort)
-		v.Sort.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeProgramManagementAccountStatusList(s, schemas.ListProgramManagementAccountsRequest_statuses, v.Statuses)
-}
-
 type ListProgramManagementAccountsOutput struct {
 
 	// List of program management accounts matching the criteria.
@@ -101,26 +72,16 @@ type ListProgramManagementAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProgramManagementAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProgramManagementAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProgramManagementAccountsResponse_items:
-			return deserializeProgramManagementAccountSummaries(d, schemas.ListProgramManagementAccountsResponse_items, &v.Items)
-		case schemas.ListProgramManagementAccountsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProgramManagementAccountsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProgramManagementAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProgramManagementAccounts, schemas.ListProgramManagementAccountsRequest, schemas.ListProgramManagementAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProgramManagementAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProgramManagementAccounts, schemas.ListProgramManagementAccountsRequest, schemas.ListProgramManagementAccountsResponse), output: &ListProgramManagementAccountsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProgramManagementAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProgramManagementAccounts"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,26 +41,6 @@ type ListDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataCellsFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataCellsFilterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataCellsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataCellsFilterRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataCellsFilterRequest_NextToken, *v.NextToken)
-	}
-	if v.Table != nil {
-		s.WriteStruct(schemas.ListDataCellsFilterRequest_Table)
-		v.Table.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListDataCellsFilterOutput struct {
 
 	// A list of DataCellFilter structures.
@@ -77,26 +55,16 @@ type ListDataCellsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataCellsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataCellsFilterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataCellsFilterResponse_DataCellsFilters:
-			return deserializeDataCellsFilterList(d, schemas.ListDataCellsFilterResponse_DataCellsFilters, &v.DataCellsFilters)
-		case schemas.ListDataCellsFilterResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataCellsFilterResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataCellsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataCellsFilter, schemas.ListDataCellsFilterRequest, schemas.ListDataCellsFilterResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataCellsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataCellsFilter, schemas.ListDataCellsFilterRequest, schemas.ListDataCellsFilterResponse), output: &ListDataCellsFilterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataCellsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataCellsFilter"); err != nil {

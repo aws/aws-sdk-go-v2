@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,24 +54,6 @@ type ListLinksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLinksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLinksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayId != nil {
-		s.WriteString(schemas.ListLinksRequest_gatewayId, *v.GatewayId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListLinksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLinksRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListLinksOutput struct {
 
 	// Information about created links.
@@ -92,26 +72,16 @@ type ListLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLinksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLinksResponse_links:
-			return deserializeLinkList(d, schemas.ListLinksResponse_links, &v.Links)
-		case schemas.ListLinksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLinksResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinks, schemas.ListLinksRequest, schemas.ListLinksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinks, schemas.ListLinksRequest, schemas.ListLinksResponse), output: &ListLinksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLinks"); err != nil {

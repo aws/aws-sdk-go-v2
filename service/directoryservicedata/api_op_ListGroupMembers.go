@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,33 +72,6 @@ type ListGroupMembersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupMembersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGroupMembersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGroupMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListGroupMembersRequest_MaxResults, *v.MaxResults)
-	}
-	if v.MemberRealm != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_MemberRealm, *v.MemberRealm)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_NextToken, *v.NextToken)
-	}
-	if v.Realm != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_Realm, *v.Realm)
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.ListGroupMembersRequest_SAMAccountName, *v.SAMAccountName)
-	}
-}
-
 type ListGroupMembersOutput struct {
 
 	// Identifier (ID) of the directory associated with the group.
@@ -125,35 +96,16 @@ type ListGroupMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGroupMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGroupMembersResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGroupMembersResult_DirectoryId:
-			v.DirectoryId = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_DirectoryId, v.DirectoryId)
-		case schemas.ListGroupMembersResult_MemberRealm:
-			v.MemberRealm = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_MemberRealm, v.MemberRealm)
-		case schemas.ListGroupMembersResult_Members:
-			return deserializeMemberList(d, schemas.ListGroupMembersResult_Members, &v.Members)
-		case schemas.ListGroupMembersResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_NextToken, v.NextToken)
-		case schemas.ListGroupMembersResult_Realm:
-			v.Realm = new(string)
-			return d.ReadString(schemas.ListGroupMembersResult_Realm, v.Realm)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGroupMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMembers, schemas.ListGroupMembersRequest, schemas.ListGroupMembersResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupMembers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMembers, schemas.ListGroupMembersRequest, schemas.ListGroupMembersResult), output: &ListGroupMembersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupMembers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroupMembers"); err != nil {

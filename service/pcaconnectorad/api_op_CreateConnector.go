@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,30 +54,6 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CertificateAuthorityArn != nil {
-		s.WriteString(schemas.CreateConnectorRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateConnectorRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.CreateConnectorRequest_DirectoryId, *v.DirectoryId)
-	}
-	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
-	if v.VpcInformation != nil {
-		s.WriteStruct(schemas.CreateConnectorRequest_VpcInformation)
-		v.VpcInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateConnectorOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the connector for Active
@@ -92,24 +66,16 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateConnectorResponse_ConnectorArn:
-			v.ConnectorArn = new(string)
-			return d.ReadString(schemas.CreateConnectorResponse_ConnectorArn, v.ConnectorArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnector"); err != nil {

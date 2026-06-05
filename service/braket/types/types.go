@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,40 +27,6 @@ type ActionMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ActionMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActionMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionType != nil {
-		s.WriteString(schemas.ActionMetadata_actionType, *v.ActionType)
-	}
-	if v.ExecutableCount != nil {
-		s.WriteInt64(schemas.ActionMetadata_executableCount, *v.ExecutableCount)
-	}
-	if v.ProgramCount != nil {
-		s.WriteInt64(schemas.ActionMetadata_programCount, *v.ProgramCount)
-	}
-}
-func (v *ActionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActionMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActionMetadata_actionType:
-			v.ActionType = new(string)
-			return d.ReadString(schemas.ActionMetadata_actionType, v.ActionType)
-		case schemas.ActionMetadata_executableCount:
-			v.ExecutableCount = new(int64)
-			return d.ReadInt64(schemas.ActionMetadata_executableCount, v.ExecutableCount)
-		case schemas.ActionMetadata_programCount:
-			v.ProgramCount = new(int64)
-			return d.ReadInt64(schemas.ActionMetadata_programCount, v.ProgramCount)
-		}
-		return nil
-	})
-}
-
 // Defines the Amazon Braket hybrid job to be created. Specifies the container
 // image the job uses and the paths to the Python scripts used for entry and
 // training.
@@ -75,38 +39,6 @@ type AlgorithmSpecification struct {
 	ScriptModeConfig *ScriptModeConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *AlgorithmSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AlgorithmSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AlgorithmSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContainerImage != nil {
-		s.WriteStruct(schemas.AlgorithmSpecification_containerImage)
-		v.ContainerImage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScriptModeConfig != nil {
-		s.WriteStruct(schemas.AlgorithmSpecification_scriptModeConfig)
-		v.ScriptModeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AlgorithmSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AlgorithmSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AlgorithmSpecification_containerImage:
-			v.ContainerImage = &ContainerImage{}
-			return v.ContainerImage.Deserialize(d)
-		case schemas.AlgorithmSpecification_scriptModeConfig:
-			v.ScriptModeConfig = &ScriptModeConfig{}
-			return v.ScriptModeConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The Amazon Braket resource and the association type.
@@ -125,38 +57,6 @@ type Association struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Association) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Association)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Association) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Association_arn, *v.Arn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Association_type, string(v.Type))
-	}
-}
-func (v *Association) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Association, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Association_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Association_arn, v.Arn)
-		case schemas.Association_type:
-			var ev string
-			if err := d.ReadString(schemas.Association_type, &ev); err != nil {
-				return err
-			}
-			v.Type = AssociationType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The container image used to create an Amazon Braket hybrid job.
 type ContainerImage struct {
 
@@ -166,28 +66,6 @@ type ContainerImage struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ContainerImage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContainerImage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContainerImage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uri != nil {
-		s.WriteString(schemas.ContainerImage_uri, *v.Uri)
-	}
-}
-func (v *ContainerImage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContainerImage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContainerImage_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.ContainerImage_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Information about the source of the input data used by the Amazon Braket hybrid
@@ -202,30 +80,6 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3DataSource != nil {
-		s.WriteStruct(schemas.DataSource_s3DataSource)
-		v.S3DataSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataSource_s3DataSource:
-			v.S3DataSource = &S3DataSource{}
-			return v.S3DataSource.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configures the primary device used to create and run an Amazon Braket hybrid
 // job.
 type DeviceConfig struct {
@@ -236,28 +90,6 @@ type DeviceConfig struct {
 	Device *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeviceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Device != nil {
-		s.WriteString(schemas.DeviceConfig_device, *v.Device)
-	}
-}
-func (v *DeviceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceConfig_device:
-			v.Device = new(string)
-			return d.ReadString(schemas.DeviceConfig_device, v.Device)
-		}
-		return nil
-	})
 }
 
 // Information about quantum tasks and hybrid jobs queued on a device.
@@ -278,48 +110,6 @@ type DeviceQueueInfo struct {
 	QueuePriority QueuePriority
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeviceQueueInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceQueueInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceQueueInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Queue != "" {
-		s.WriteString(schemas.DeviceQueueInfo_queue, string(v.Queue))
-	}
-	if v.QueuePriority != "" {
-		s.WriteString(schemas.DeviceQueueInfo_queuePriority, string(v.QueuePriority))
-	}
-	if v.QueueSize != nil {
-		s.WriteString(schemas.DeviceQueueInfo_queueSize, *v.QueueSize)
-	}
-}
-func (v *DeviceQueueInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceQueueInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceQueueInfo_queue:
-			var ev string
-			if err := d.ReadString(schemas.DeviceQueueInfo_queue, &ev); err != nil {
-				return err
-			}
-			v.Queue = QueueName(ev)
-			return nil
-		case schemas.DeviceQueueInfo_queuePriority:
-			var ev string
-			if err := d.ReadString(schemas.DeviceQueueInfo_queuePriority, &ev); err != nil {
-				return err
-			}
-			v.QueuePriority = QueuePriority(ev)
-			return nil
-		case schemas.DeviceQueueInfo_queueSize:
-			v.QueueSize = new(string)
-			return d.ReadString(schemas.DeviceQueueInfo_queueSize, v.QueueSize)
-		}
-		return nil
-	})
 }
 
 // Includes information about the device.
@@ -353,60 +143,6 @@ type DeviceSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeviceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.DeviceSummary_deviceArn, *v.DeviceArn)
-	}
-	if v.DeviceName != nil {
-		s.WriteString(schemas.DeviceSummary_deviceName, *v.DeviceName)
-	}
-	if v.DeviceStatus != "" {
-		s.WriteString(schemas.DeviceSummary_deviceStatus, string(v.DeviceStatus))
-	}
-	if v.DeviceType != "" {
-		s.WriteString(schemas.DeviceSummary_deviceType, string(v.DeviceType))
-	}
-	if v.ProviderName != nil {
-		s.WriteString(schemas.DeviceSummary_providerName, *v.ProviderName)
-	}
-}
-func (v *DeviceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceSummary_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.DeviceSummary_deviceArn, v.DeviceArn)
-		case schemas.DeviceSummary_deviceName:
-			v.DeviceName = new(string)
-			return d.ReadString(schemas.DeviceSummary_deviceName, v.DeviceName)
-		case schemas.DeviceSummary_deviceStatus:
-			var ev string
-			if err := d.ReadString(schemas.DeviceSummary_deviceStatus, &ev); err != nil {
-				return err
-			}
-			v.DeviceStatus = DeviceStatus(ev)
-			return nil
-		case schemas.DeviceSummary_deviceType:
-			var ev string
-			if err := d.ReadString(schemas.DeviceSummary_deviceType, &ev); err != nil {
-				return err
-			}
-			v.DeviceType = DeviceType(ev)
-			return nil
-		case schemas.DeviceSummary_providerName:
-			v.ProviderName = new(string)
-			return d.ReadString(schemas.DeviceSummary_providerName, v.ProviderName)
-		}
-		return nil
-	})
-}
-
 // Enabled experimental capabilities for quantum hardware. Note that the use of
 // these features may impact device capabilities and performance beyond its
 // standard specifications.
@@ -426,17 +162,6 @@ type ExperimentalCapabilitiesMemberEnabled struct {
 }
 
 func (*ExperimentalCapabilitiesMemberEnabled) isExperimentalCapabilities() {}
-func (v *ExperimentalCapabilitiesMemberEnabled) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.ExperimentalCapabilities_enabled, string(v.Value))
-}
-func (v *ExperimentalCapabilitiesMemberEnabled) Deserialize(d smithy.ShapeDeserializer) error {
-	var s string
-	if err := d.ReadString(schemas.ExperimentalCapabilities_enabled, &s); err != nil {
-		return err
-	}
-	v.Value = ExperimentalCapabilitiesEnablementType(s)
-	return nil
-}
 
 // Information about the queue for a specified hybrid job.
 type HybridJobQueueInfo struct {
@@ -459,44 +184,6 @@ type HybridJobQueueInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HybridJobQueueInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HybridJobQueueInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HybridJobQueueInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.HybridJobQueueInfo_message, *v.Message)
-	}
-	if v.Position != nil {
-		s.WriteString(schemas.HybridJobQueueInfo_position, *v.Position)
-	}
-	if v.Queue != "" {
-		s.WriteString(schemas.HybridJobQueueInfo_queue, string(v.Queue))
-	}
-}
-func (v *HybridJobQueueInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HybridJobQueueInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HybridJobQueueInfo_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.HybridJobQueueInfo_message, v.Message)
-		case schemas.HybridJobQueueInfo_position:
-			v.Position = new(string)
-			return d.ReadString(schemas.HybridJobQueueInfo_position, v.Position)
-		case schemas.HybridJobQueueInfo_queue:
-			var ev string
-			if err := d.ReadString(schemas.HybridJobQueueInfo_queue, &ev); err != nil {
-				return err
-			}
-			v.Queue = QueueName(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A list of parameters that specify the input channels, type of input data, and
 // where it is located.
 type InputFileConfig struct {
@@ -515,42 +202,6 @@ type InputFileConfig struct {
 	ContentType *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InputFileConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InputFileConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InputFileConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelName != nil {
-		s.WriteString(schemas.InputFileConfig_channelName, *v.ChannelName)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InputFileConfig_contentType, *v.ContentType)
-	}
-	if v.DataSource != nil {
-		s.WriteStruct(schemas.InputFileConfig_dataSource)
-		v.DataSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *InputFileConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputFileConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputFileConfig_channelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.InputFileConfig_channelName, v.ChannelName)
-		case schemas.InputFileConfig_contentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.InputFileConfig_contentType, v.ContentType)
-		case schemas.InputFileConfig_dataSource:
-			v.DataSource = &DataSource{}
-			return v.DataSource.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Configures the resource instances to use while running the Amazon Braket hybrid
@@ -575,44 +226,6 @@ type InstanceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstanceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceCount != nil {
-		s.WriteInt32(schemas.InstanceConfig_instanceCount, *v.InstanceCount)
-	}
-	if v.InstanceType != "" {
-		s.WriteString(schemas.InstanceConfig_instanceType, string(v.InstanceType))
-	}
-	if v.VolumeSizeInGb != nil {
-		s.WriteInt32(schemas.InstanceConfig_volumeSizeInGb, *v.VolumeSizeInGb)
-	}
-}
-func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceConfig_instanceCount:
-			v.InstanceCount = new(int32)
-			return d.ReadInt32(schemas.InstanceConfig_instanceCount, v.InstanceCount)
-		case schemas.InstanceConfig_instanceType:
-			var ev string
-			if err := d.ReadString(schemas.InstanceConfig_instanceType, &ev); err != nil {
-				return err
-			}
-			v.InstanceType = InstanceType(ev)
-			return nil
-		case schemas.InstanceConfig_volumeSizeInGb:
-			v.VolumeSizeInGb = new(int32)
-			return d.ReadInt32(schemas.InstanceConfig_volumeSizeInGb, v.VolumeSizeInGb)
-		}
-		return nil
-	})
-}
-
 // Contains information about the output locations for hybrid job checkpoint data.
 type JobCheckpointConfig struct {
 
@@ -627,34 +240,6 @@ type JobCheckpointConfig struct {
 	LocalPath *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobCheckpointConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobCheckpointConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobCheckpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LocalPath != nil {
-		s.WriteString(schemas.JobCheckpointConfig_localPath, *v.LocalPath)
-	}
-	if v.S3Uri != nil {
-		s.WriteString(schemas.JobCheckpointConfig_s3Uri, *v.S3Uri)
-	}
-}
-func (v *JobCheckpointConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobCheckpointConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobCheckpointConfig_localPath:
-			v.LocalPath = new(string)
-			return d.ReadString(schemas.JobCheckpointConfig_localPath, v.LocalPath)
-		case schemas.JobCheckpointConfig_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.JobCheckpointConfig_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
 }
 
 // Details about the type and time events that occurred related to the Amazon
@@ -672,44 +257,6 @@ type JobEventDetails struct {
 	TimeOfEvent *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobEventDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobEventDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventType != "" {
-		s.WriteString(schemas.JobEventDetails_eventType, string(v.EventType))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.JobEventDetails_message, *v.Message)
-	}
-	if v.TimeOfEvent != nil {
-		s.WriteTime(schemas.JobEventDetails_timeOfEvent, *v.TimeOfEvent)
-	}
-}
-func (v *JobEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobEventDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobEventDetails_eventType:
-			var ev string
-			if err := d.ReadString(schemas.JobEventDetails_eventType, &ev); err != nil {
-				return err
-			}
-			v.EventType = JobEventType(ev)
-			return nil
-		case schemas.JobEventDetails_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.JobEventDetails_message, v.Message)
-		case schemas.JobEventDetails_timeOfEvent:
-			v.TimeOfEvent = new(time.Time)
-			return d.ReadTime(schemas.JobEventDetails_timeOfEvent, v.TimeOfEvent)
-		}
-		return nil
-	})
 }
 
 // Specifies the path to the S3 location where you want to store hybrid job
@@ -730,34 +277,6 @@ type JobOutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobOutputDataConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.JobOutputDataConfig_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.S3Path != nil {
-		s.WriteString(schemas.JobOutputDataConfig_s3Path, *v.S3Path)
-	}
-}
-func (v *JobOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobOutputDataConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobOutputDataConfig_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.JobOutputDataConfig_kmsKeyId, v.KmsKeyId)
-		case schemas.JobOutputDataConfig_s3Path:
-			v.S3Path = new(string)
-			return d.ReadString(schemas.JobOutputDataConfig_s3Path, v.S3Path)
-		}
-		return nil
-	})
-}
-
 // Specifies limits for how long an Amazon Braket hybrid job can run.
 type JobStoppingCondition struct {
 
@@ -766,28 +285,6 @@ type JobStoppingCondition struct {
 	MaxRuntimeInSeconds *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobStoppingCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobStoppingCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobStoppingCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxRuntimeInSeconds != nil {
-		s.WriteInt32(schemas.JobStoppingCondition_maxRuntimeInSeconds, *v.MaxRuntimeInSeconds)
-	}
-}
-func (v *JobStoppingCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobStoppingCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobStoppingCondition_maxRuntimeInSeconds:
-			v.MaxRuntimeInSeconds = new(int32)
-			return d.ReadInt32(schemas.JobStoppingCondition_maxRuntimeInSeconds, v.MaxRuntimeInSeconds)
-		}
-		return nil
-	})
 }
 
 // Provides summary information about an Amazon Braket hybrid job.
@@ -830,71 +327,6 @@ type JobSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.JobSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Device != nil {
-		s.WriteString(schemas.JobSummary_device, *v.Device)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.JobSummary_endedAt, *v.EndedAt)
-	}
-	if v.JobArn != nil {
-		s.WriteString(schemas.JobSummary_jobArn, *v.JobArn)
-	}
-	if v.JobName != nil {
-		s.WriteString(schemas.JobSummary_jobName, *v.JobName)
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.JobSummary_startedAt, *v.StartedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.JobSummary_status, string(v.Status))
-	}
-	serializeTagsMap(s, schemas.JobSummary_tags, v.Tags)
-}
-func (v *JobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobSummary_createdAt, v.CreatedAt)
-		case schemas.JobSummary_device:
-			v.Device = new(string)
-			return d.ReadString(schemas.JobSummary_device, v.Device)
-		case schemas.JobSummary_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.JobSummary_endedAt, v.EndedAt)
-		case schemas.JobSummary_jobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.JobSummary_jobArn, v.JobArn)
-		case schemas.JobSummary_jobName:
-			v.JobName = new(string)
-			return d.ReadString(schemas.JobSummary_jobName, v.JobName)
-		case schemas.JobSummary_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.JobSummary_startedAt, v.StartedAt)
-		case schemas.JobSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.JobSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = JobPrimaryStatus(ev)
-			return nil
-		case schemas.JobSummary_tags:
-			return deserializeTagsMap(d, schemas.JobSummary_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // Contains information about validation failures that occurred during the
 // processing of a program set in a quantum task.
 type ProgramSetValidationFailure struct {
@@ -911,37 +343,6 @@ type ProgramSetValidationFailure struct {
 	InputsIndex *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProgramSetValidationFailure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgramSetValidationFailure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgramSetValidationFailure) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramValidationFailuresList(s, schemas.ProgramSetValidationFailure_errors, v.Errors)
-	if v.InputsIndex != nil {
-		s.WriteInt64(schemas.ProgramSetValidationFailure_inputsIndex, *v.InputsIndex)
-	}
-	if v.ProgramIndex != nil {
-		s.WriteInt64(schemas.ProgramSetValidationFailure_programIndex, *v.ProgramIndex)
-	}
-}
-func (v *ProgramSetValidationFailure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgramSetValidationFailure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgramSetValidationFailure_errors:
-			return deserializeProgramValidationFailuresList(d, schemas.ProgramSetValidationFailure_errors, &v.Errors)
-		case schemas.ProgramSetValidationFailure_inputsIndex:
-			v.InputsIndex = new(int64)
-			return d.ReadInt64(schemas.ProgramSetValidationFailure_inputsIndex, v.InputsIndex)
-		case schemas.ProgramSetValidationFailure_programIndex:
-			v.ProgramIndex = new(int64)
-			return d.ReadInt64(schemas.ProgramSetValidationFailure_programIndex, v.ProgramIndex)
-		}
-		return nil
-	})
 }
 
 // The queue information for the specified quantum task.
@@ -967,54 +368,6 @@ type QuantumTaskQueueInfo struct {
 	QueuePriority QueuePriority
 
 	noSmithyDocumentSerde
-}
-
-func (v *QuantumTaskQueueInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuantumTaskQueueInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuantumTaskQueueInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.QuantumTaskQueueInfo_message, *v.Message)
-	}
-	if v.Position != nil {
-		s.WriteString(schemas.QuantumTaskQueueInfo_position, *v.Position)
-	}
-	if v.Queue != "" {
-		s.WriteString(schemas.QuantumTaskQueueInfo_queue, string(v.Queue))
-	}
-	if v.QueuePriority != "" {
-		s.WriteString(schemas.QuantumTaskQueueInfo_queuePriority, string(v.QueuePriority))
-	}
-}
-func (v *QuantumTaskQueueInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuantumTaskQueueInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuantumTaskQueueInfo_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.QuantumTaskQueueInfo_message, v.Message)
-		case schemas.QuantumTaskQueueInfo_position:
-			v.Position = new(string)
-			return d.ReadString(schemas.QuantumTaskQueueInfo_position, v.Position)
-		case schemas.QuantumTaskQueueInfo_queue:
-			var ev string
-			if err := d.ReadString(schemas.QuantumTaskQueueInfo_queue, &ev); err != nil {
-				return err
-			}
-			v.Queue = QueueName(ev)
-			return nil
-		case schemas.QuantumTaskQueueInfo_queuePriority:
-			var ev string
-			if err := d.ReadString(schemas.QuantumTaskQueueInfo_queuePriority, &ev); err != nil {
-				return err
-			}
-			v.QueuePriority = QueuePriority(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Includes information about a quantum task.
@@ -1064,77 +417,6 @@ type QuantumTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QuantumTaskSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuantumTaskSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuantumTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.QuantumTaskSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.QuantumTaskSummary_deviceArn, *v.DeviceArn)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.QuantumTaskSummary_endedAt, *v.EndedAt)
-	}
-	if v.OutputS3Bucket != nil {
-		s.WriteString(schemas.QuantumTaskSummary_outputS3Bucket, *v.OutputS3Bucket)
-	}
-	if v.OutputS3Directory != nil {
-		s.WriteString(schemas.QuantumTaskSummary_outputS3Directory, *v.OutputS3Directory)
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.QuantumTaskSummary_quantumTaskArn, *v.QuantumTaskArn)
-	}
-	if v.Shots != nil {
-		s.WriteInt64(schemas.QuantumTaskSummary_shots, *v.Shots)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.QuantumTaskSummary_status, string(v.Status))
-	}
-	serializeTagsMap(s, schemas.QuantumTaskSummary_tags, v.Tags)
-}
-func (v *QuantumTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuantumTaskSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuantumTaskSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.QuantumTaskSummary_createdAt, v.CreatedAt)
-		case schemas.QuantumTaskSummary_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.QuantumTaskSummary_deviceArn, v.DeviceArn)
-		case schemas.QuantumTaskSummary_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.QuantumTaskSummary_endedAt, v.EndedAt)
-		case schemas.QuantumTaskSummary_outputS3Bucket:
-			v.OutputS3Bucket = new(string)
-			return d.ReadString(schemas.QuantumTaskSummary_outputS3Bucket, v.OutputS3Bucket)
-		case schemas.QuantumTaskSummary_outputS3Directory:
-			v.OutputS3Directory = new(string)
-			return d.ReadString(schemas.QuantumTaskSummary_outputS3Directory, v.OutputS3Directory)
-		case schemas.QuantumTaskSummary_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.QuantumTaskSummary_quantumTaskArn, v.QuantumTaskArn)
-		case schemas.QuantumTaskSummary_shots:
-			v.Shots = new(int64)
-			return d.ReadInt64(schemas.QuantumTaskSummary_shots, v.Shots)
-		case schemas.QuantumTaskSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.QuantumTaskSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = QuantumTaskStatus(ev)
-			return nil
-		case schemas.QuantumTaskSummary_tags:
-			return deserializeTagsMap(d, schemas.QuantumTaskSummary_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // Information about the Amazon S3 storage used by the Amazon Braket hybrid job.
 type S3DataSource struct {
 
@@ -1145,28 +427,6 @@ type S3DataSource struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3DataSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3DataSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3DataSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Uri != nil {
-		s.WriteString(schemas.S3DataSource_s3Uri, *v.S3Uri)
-	}
-}
-func (v *S3DataSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3DataSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3DataSource_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.S3DataSource_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
 }
 
 // Contains information about algorithm scripts used for the Amazon Braket hybrid
@@ -1192,44 +452,6 @@ type ScriptModeConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScriptModeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScriptModeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScriptModeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompressionType != "" {
-		s.WriteString(schemas.ScriptModeConfig_compressionType, string(v.CompressionType))
-	}
-	if v.EntryPoint != nil {
-		s.WriteString(schemas.ScriptModeConfig_entryPoint, *v.EntryPoint)
-	}
-	if v.S3Uri != nil {
-		s.WriteString(schemas.ScriptModeConfig_s3Uri, *v.S3Uri)
-	}
-}
-func (v *ScriptModeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScriptModeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScriptModeConfig_compressionType:
-			var ev string
-			if err := d.ReadString(schemas.ScriptModeConfig_compressionType, &ev); err != nil {
-				return err
-			}
-			v.CompressionType = CompressionType(ev)
-			return nil
-		case schemas.ScriptModeConfig_entryPoint:
-			v.EntryPoint = new(string)
-			return d.ReadString(schemas.ScriptModeConfig_entryPoint, v.EntryPoint)
-		case schemas.ScriptModeConfig_s3Uri:
-			v.S3Uri = new(string)
-			return d.ReadString(schemas.ScriptModeConfig_s3Uri, v.S3Uri)
-		}
-		return nil
-	})
-}
-
 // The filter used to search for devices.
 type SearchDevicesFilter struct {
 
@@ -1245,31 +467,6 @@ type SearchDevicesFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchDevicesFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchDevicesFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchDevicesFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SearchDevicesFilter_name, *v.Name)
-	}
-	serializeString256List(s, schemas.SearchDevicesFilter_values, v.Values)
-}
-func (v *SearchDevicesFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchDevicesFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchDevicesFilter_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SearchDevicesFilter_name, v.Name)
-		case schemas.SearchDevicesFilter_values:
-			return deserializeString256List(d, schemas.SearchDevicesFilter_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // A filter used to search for Amazon Braket hybrid jobs.
@@ -1294,41 +491,6 @@ type SearchJobsFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchJobsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchJobsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchJobsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SearchJobsFilter_name, *v.Name)
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchJobsFilter_operator, string(v.Operator))
-	}
-	serializeString256List(s, schemas.SearchJobsFilter_values, v.Values)
-}
-func (v *SearchJobsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchJobsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchJobsFilter_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SearchJobsFilter_name, v.Name)
-		case schemas.SearchJobsFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.SearchJobsFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = SearchJobsFilterOperator(ev)
-			return nil
-		case schemas.SearchJobsFilter_values:
-			return deserializeString256List(d, schemas.SearchJobsFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // A filter used to search for quantum tasks.
 type SearchQuantumTasksFilter struct {
 
@@ -1351,41 +513,6 @@ type SearchQuantumTasksFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchQuantumTasksFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchQuantumTasksFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchQuantumTasksFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SearchQuantumTasksFilter_name, *v.Name)
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchQuantumTasksFilter_operator, string(v.Operator))
-	}
-	serializeString256List(s, schemas.SearchQuantumTasksFilter_values, v.Values)
-}
-func (v *SearchQuantumTasksFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchQuantumTasksFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchQuantumTasksFilter_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SearchQuantumTasksFilter_name, v.Name)
-		case schemas.SearchQuantumTasksFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.SearchQuantumTasksFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = SearchQuantumTasksFilterOperator(ev)
-			return nil
-		case schemas.SearchQuantumTasksFilter_values:
-			return deserializeString256List(d, schemas.SearchQuantumTasksFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Specifies filter criteria for searching spending limits. Use filters to narrow
 // down results based on specific attributes.
 type SearchSpendingLimitsFilter struct {
@@ -1406,41 +533,6 @@ type SearchSpendingLimitsFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchSpendingLimitsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchSpendingLimitsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchSpendingLimitsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SearchSpendingLimitsFilter_name, *v.Name)
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchSpendingLimitsFilter_operator, string(v.Operator))
-	}
-	serializeString256List(s, schemas.SearchSpendingLimitsFilter_values, v.Values)
-}
-func (v *SearchSpendingLimitsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchSpendingLimitsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchSpendingLimitsFilter_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SearchSpendingLimitsFilter_name, v.Name)
-		case schemas.SearchSpendingLimitsFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.SearchSpendingLimitsFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = SearchSpendingLimitsFilterOperator(ev)
-			return nil
-		case schemas.SearchSpendingLimitsFilter_values:
-			return deserializeString256List(d, schemas.SearchSpendingLimitsFilter_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Contains summary information about a spending limit, including current spending
@@ -1497,75 +589,6 @@ type SpendingLimitSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SpendingLimitSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SpendingLimitSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SpendingLimitSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SpendingLimitSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.SpendingLimitSummary_deviceArn, *v.DeviceArn)
-	}
-	if v.QueuedSpend != nil {
-		s.WriteString(schemas.SpendingLimitSummary_queuedSpend, *v.QueuedSpend)
-	}
-	if v.SpendingLimit != nil {
-		s.WriteString(schemas.SpendingLimitSummary_spendingLimit, *v.SpendingLimit)
-	}
-	if v.SpendingLimitArn != nil {
-		s.WriteString(schemas.SpendingLimitSummary_spendingLimitArn, *v.SpendingLimitArn)
-	}
-	serializeTagsMap(s, schemas.SpendingLimitSummary_tags, v.Tags)
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.SpendingLimitSummary_timePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TotalSpend != nil {
-		s.WriteString(schemas.SpendingLimitSummary_totalSpend, *v.TotalSpend)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.SpendingLimitSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *SpendingLimitSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SpendingLimitSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SpendingLimitSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SpendingLimitSummary_createdAt, v.CreatedAt)
-		case schemas.SpendingLimitSummary_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.SpendingLimitSummary_deviceArn, v.DeviceArn)
-		case schemas.SpendingLimitSummary_queuedSpend:
-			v.QueuedSpend = new(string)
-			return d.ReadString(schemas.SpendingLimitSummary_queuedSpend, v.QueuedSpend)
-		case schemas.SpendingLimitSummary_spendingLimit:
-			v.SpendingLimit = new(string)
-			return d.ReadString(schemas.SpendingLimitSummary_spendingLimit, v.SpendingLimit)
-		case schemas.SpendingLimitSummary_spendingLimitArn:
-			v.SpendingLimitArn = new(string)
-			return d.ReadString(schemas.SpendingLimitSummary_spendingLimitArn, v.SpendingLimitArn)
-		case schemas.SpendingLimitSummary_tags:
-			return deserializeTagsMap(d, schemas.SpendingLimitSummary_tags, &v.Tags)
-		case schemas.SpendingLimitSummary_timePeriod:
-			v.TimePeriod = &TimePeriod{}
-			return v.TimePeriod.Deserialize(d)
-		case schemas.SpendingLimitSummary_totalSpend:
-			v.TotalSpend = new(string)
-			return d.ReadString(schemas.SpendingLimitSummary_totalSpend, v.TotalSpend)
-		case schemas.SpendingLimitSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SpendingLimitSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Defines a time range for spending limits, specifying when the limit is active.
 type TimePeriod struct {
 
@@ -1580,34 +603,6 @@ type TimePeriod struct {
 	StartAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimePeriod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimePeriod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimePeriod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndAt != nil {
-		s.WriteTime(schemas.TimePeriod_endAt, *v.EndAt)
-	}
-	if v.StartAt != nil {
-		s.WriteTime(schemas.TimePeriod_startAt, *v.StartAt)
-	}
-}
-func (v *TimePeriod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimePeriod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimePeriod_endAt:
-			v.EndAt = new(time.Time)
-			return d.ReadTime(schemas.TimePeriod_endAt, v.EndAt)
-		case schemas.TimePeriod_startAt:
-			v.StartAt = new(time.Time)
-			return d.ReadTime(schemas.TimePeriod_startAt, v.StartAt)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

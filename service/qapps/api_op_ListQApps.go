@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListQAppsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQAppsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListQAppsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListQAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListQAppsInput_instanceId, *v.InstanceId)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListQAppsInput_limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListQAppsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListQAppsOutput struct {
 
 	// The list of Amazon Q Apps meeting the request criteria.
@@ -81,26 +61,16 @@ type ListQAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListQAppsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListQAppsOutput_apps:
-			return deserializeUserAppsList(d, schemas.ListQAppsOutput_apps, &v.Apps)
-		case schemas.ListQAppsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListQAppsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListQAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQApps, schemas.ListQAppsInput, schemas.ListQAppsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQApps{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQApps, schemas.ListQAppsInput, schemas.ListQAppsOutput), output: &ListQAppsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQApps{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQApps"); err != nil {

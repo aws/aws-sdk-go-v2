@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request is not understood by the server.
 type BadRequestException struct {
@@ -69,16 +58,6 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BadRequestException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BadRequestException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The server encountered an internal error and is unable to complete the request.
 type InternalServerException struct {
@@ -105,16 +84,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource is already created or in use.
 type ResourceInUseException struct {
@@ -141,16 +110,6 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceInUseException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource does not exist in the customer account.
 type ResourceNotFoundException struct {
@@ -177,16 +136,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Tags are already registered for the specified application ARN.
 type TagsAlreadyExistException struct {
@@ -213,16 +162,6 @@ func (e *TagsAlreadyExistException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TagsAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TagsAlreadyExistException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagsAlreadyExistException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagsAlreadyExistException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TagsAlreadyExistException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The number of the provided tags is beyond the limit, or the number of total
 // tags you are trying to attach to the specified resource exceeds the limit.
@@ -252,19 +191,6 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyTagsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
-		case schemas.TooManyTagsException_ResourceName:
-			v.ResourceName = new(string)
-			return d.ReadString(schemas.TooManyTagsException_ResourceName, v.ResourceName)
-		}
-		return nil
-	})
-}
 
 // The parameter is not valid.
 type ValidationException struct {
@@ -291,13 +217,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		}
-		return nil
-	})
-}

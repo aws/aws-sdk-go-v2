@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DisassociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateCertificateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcmCertificateArn != nil {
-		s.WriteString(schemas.DisassociateCertificateRequest_acmCertificateArn, *v.AcmCertificateArn)
-	}
-	if v.GatewayId != nil {
-		s.WriteString(schemas.DisassociateCertificateRequest_gatewayId, *v.GatewayId)
-	}
-}
-
 type DisassociateCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the ACM certificate.
@@ -82,34 +65,16 @@ type DisassociateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateCertificateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateCertificateResponse_acmCertificateArn:
-			v.AcmCertificateArn = new(string)
-			return d.ReadString(schemas.DisassociateCertificateResponse_acmCertificateArn, v.AcmCertificateArn)
-		case schemas.DisassociateCertificateResponse_gatewayId:
-			v.GatewayId = new(string)
-			return d.ReadString(schemas.DisassociateCertificateResponse_gatewayId, v.GatewayId)
-		case schemas.DisassociateCertificateResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DisassociateCertificateResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CertificateAssociationStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCertificate, schemas.DisassociateCertificateRequest, schemas.DisassociateCertificateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCertificate, schemas.DisassociateCertificateRequest, schemas.DisassociateCertificateResponse), output: &DisassociateCertificateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateCertificate"); err != nil {

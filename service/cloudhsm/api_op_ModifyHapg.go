@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,22 +57,6 @@ type ModifyHapgInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyHapgInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyHapgRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HapgArn != nil {
-		s.WriteString(schemas.ModifyHapgRequest_HapgArn, *v.HapgArn)
-	}
-	if v.Label != nil {
-		s.WriteString(schemas.ModifyHapgRequest_Label, *v.Label)
-	}
-	serializePartitionSerialList(s, schemas.ModifyHapgRequest_PartitionSerialList, v.PartitionSerialList)
-}
-
 type ModifyHapgOutput struct {
 
 	// The ARN of the high-availability partition group.
@@ -86,24 +68,16 @@ type ModifyHapgOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyHapgOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyHapgResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyHapgResponse_HapgArn:
-			v.HapgArn = new(string)
-			return d.ReadString(schemas.ModifyHapgResponse_HapgArn, v.HapgArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyHapg, schemas.ModifyHapgRequest, schemas.ModifyHapgResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyHapg{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyHapg, schemas.ModifyHapgRequest, schemas.ModifyHapgResponse), output: &ModifyHapgOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyHapg{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyHapg"); err != nil {

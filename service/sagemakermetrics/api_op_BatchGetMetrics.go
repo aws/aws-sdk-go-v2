@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,16 +37,6 @@ type BatchGetMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetMetricsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetMetricsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricQueryList(s, schemas.BatchGetMetricsRequest_MetricQueries, v.MetricQueries)
-}
-
 type BatchGetMetricsOutput struct {
 
 	// The results of a query to retrieve training metrics from SageMaker.
@@ -60,23 +48,16 @@ type BatchGetMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetMetricsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetMetricsResponse_MetricQueryResults:
-			return deserializeMetricQueryResultList(d, schemas.BatchGetMetricsResponse_MetricQueryResults, &v.MetricQueryResults)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMetrics, schemas.BatchGetMetricsRequest, schemas.BatchGetMetricsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMetrics{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMetrics, schemas.BatchGetMetricsRequest, schemas.BatchGetMetricsResponse), output: &BatchGetMetricsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMetrics{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetMetrics"); err != nil {

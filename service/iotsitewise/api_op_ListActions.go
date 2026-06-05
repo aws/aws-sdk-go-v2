@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,33 +54,6 @@ type ListActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListActionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListActionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListActionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListActionsRequest_nextToken, *v.NextToken)
-	}
-	if v.ResolveToResourceId != nil {
-		s.WriteString(schemas.ListActionsRequest_resolveToResourceId, *v.ResolveToResourceId)
-	}
-	if v.ResolveToResourceType != "" {
-		s.WriteString(schemas.ListActionsRequest_resolveToResourceType, string(v.ResolveToResourceType))
-	}
-	if v.TargetResourceId != nil {
-		s.WriteString(schemas.ListActionsRequest_targetResourceId, *v.TargetResourceId)
-	}
-	if v.TargetResourceType != "" {
-		s.WriteString(schemas.ListActionsRequest_targetResourceType, string(v.TargetResourceType))
-	}
-}
-
 type ListActionsOutput struct {
 
 	// A list that summarizes the actions associated with the specified asset.
@@ -102,26 +73,16 @@ type ListActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListActionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListActionsResponse_actionSummaries:
-			return deserializeActionSummaries(d, schemas.ListActionsResponse_actionSummaries, &v.ActionSummaries)
-		case schemas.ListActionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListActionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActions, schemas.ListActionsRequest, schemas.ListActionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActions, schemas.ListActionsRequest, schemas.ListActionsResponse), output: &ListActionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListActions"); err != nil {

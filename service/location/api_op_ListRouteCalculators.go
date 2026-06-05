@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,34 +62,6 @@ type ListRouteCalculatorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRouteCalculatorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRouteCalculatorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRouteCalculatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRouteCalculatorsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRouteCalculatorsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListRouteCalculatorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRouteCalculatorsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRouteCalculatorsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListRouteCalculatorsRequest_MaxResults, v.MaxResults)
-		case schemas.ListRouteCalculatorsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRouteCalculatorsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListRouteCalculatorsOutput struct {
 
 	// Lists the route calculator resources that exist in your Amazon Web Services
@@ -110,38 +80,16 @@ type ListRouteCalculatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRouteCalculatorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRouteCalculatorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRouteCalculatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListRouteCalculatorsResponseEntryList(s, schemas.ListRouteCalculatorsResponse_Entries, v.Entries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRouteCalculatorsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListRouteCalculatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRouteCalculatorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRouteCalculatorsResponse_Entries:
-			return deserializeListRouteCalculatorsResponseEntryList(d, schemas.ListRouteCalculatorsResponse_Entries, &v.Entries)
-		case schemas.ListRouteCalculatorsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRouteCalculatorsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRouteCalculatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouteCalculators, schemas.ListRouteCalculatorsRequest, schemas.ListRouteCalculatorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRouteCalculators{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRouteCalculators, schemas.ListRouteCalculatorsRequest, schemas.ListRouteCalculatorsResponse), output: &ListRouteCalculatorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRouteCalculators{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRouteCalculators"); err != nil {

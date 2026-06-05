@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,15 +31,6 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeOrganizationConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Specifies whether Amazon Macie is enabled automatically for accounts that are
@@ -58,27 +47,16 @@ type DescribeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeOrganizationConfigurationResponse_autoEnable:
-			v.AutoEnable = new(bool)
-			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_autoEnable, v.AutoEnable)
-		case schemas.DescribeOrganizationConfigurationResponse_maxAccountLimitReached:
-			v.MaxAccountLimitReached = new(bool)
-			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_maxAccountLimitReached, v.MaxAccountLimitReached)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse), output: &DescribeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrganizationConfiguration"); err != nil {

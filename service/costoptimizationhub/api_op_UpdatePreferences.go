@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,26 +44,6 @@ type UpdatePreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemberAccountDiscountVisibility != "" {
-		s.WriteString(schemas.UpdatePreferencesRequest_memberAccountDiscountVisibility, string(v.MemberAccountDiscountVisibility))
-	}
-	if v.PreferredCommitment != nil {
-		s.WriteStruct(schemas.UpdatePreferencesRequest_preferredCommitment)
-		v.PreferredCommitment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SavingsEstimationMode != "" {
-		s.WriteString(schemas.UpdatePreferencesRequest_savingsEstimationMode, string(v.SavingsEstimationMode))
-	}
-}
-
 type UpdatePreferencesOutput struct {
 
 	// Shows the status of the "member account discount visibility" preference.
@@ -85,38 +63,16 @@ type UpdatePreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePreferencesResponse_memberAccountDiscountVisibility:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePreferencesResponse_memberAccountDiscountVisibility, &ev); err != nil {
-				return err
-			}
-			v.MemberAccountDiscountVisibility = types.MemberAccountDiscountVisibility(ev)
-			return nil
-		case schemas.UpdatePreferencesResponse_preferredCommitment:
-			v.PreferredCommitment = &types.PreferredCommitment{}
-			return v.PreferredCommitment.Deserialize(d)
-		case schemas.UpdatePreferencesResponse_savingsEstimationMode:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePreferencesResponse_savingsEstimationMode, &ev); err != nil {
-				return err
-			}
-			v.SavingsEstimationMode = types.SavingsEstimationMode(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePreferences, schemas.UpdatePreferencesRequest, schemas.UpdatePreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePreferences, schemas.UpdatePreferencesRequest, schemas.UpdatePreferencesResponse), output: &UpdatePreferencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePreferences"); err != nil {

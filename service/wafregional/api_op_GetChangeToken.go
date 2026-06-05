@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,15 +54,6 @@ type GetChangeTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChangeTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetChangeTokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetChangeTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetChangeTokenOutput struct {
 
 	// The ChangeToken that you used in the request. Use this value in a
@@ -77,24 +66,16 @@ type GetChangeTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChangeTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetChangeTokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetChangeTokenResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.GetChangeTokenResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetChangeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeToken, schemas.GetChangeTokenRequest, schemas.GetChangeTokenResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetChangeToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeToken, schemas.GetChangeTokenRequest, schemas.GetChangeTokenResponse), output: &GetChangeTokenOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetChangeToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChangeToken"); err != nil {

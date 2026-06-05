@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,27 +59,6 @@ type CreateAIAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIAgentVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAIAgentVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAIAgentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiAgentId != nil {
-		s.WriteString(schemas.CreateAIAgentVersionRequest_aiAgentId, *v.AiAgentId)
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.CreateAIAgentVersionRequest_assistantId, *v.AssistantId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAIAgentVersionRequest_clientToken, *v.ClientToken)
-	}
-	if v.ModifiedTime != nil {
-		s.WriteTime(schemas.CreateAIAgentVersionRequest_modifiedTime, *v.ModifiedTime)
-	}
-}
-
 type CreateAIAgentVersionOutput struct {
 
 	// The data of the AI Agent version.
@@ -96,27 +73,16 @@ type CreateAIAgentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIAgentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAIAgentVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAIAgentVersionResponse_aiAgent:
-			v.AiAgent = &types.AIAgentData{}
-			return v.AiAgent.Deserialize(d)
-		case schemas.CreateAIAgentVersionResponse_versionNumber:
-			v.VersionNumber = new(int64)
-			return d.ReadInt64(schemas.CreateAIAgentVersionResponse_versionNumber, v.VersionNumber)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAIAgentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIAgentVersion, schemas.CreateAIAgentVersionRequest, schemas.CreateAIAgentVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAIAgentVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIAgentVersion, schemas.CreateAIAgentVersionRequest, schemas.CreateAIAgentVersionResponse), output: &CreateAIAgentVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAIAgentVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAIAgentVersion"); err != nil {

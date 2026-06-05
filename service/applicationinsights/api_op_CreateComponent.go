@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,22 +46,6 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComponentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComponentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentName != nil {
-		s.WriteString(schemas.CreateComponentRequest_ComponentName, *v.ComponentName)
-	}
-	if v.ResourceGroupName != nil {
-		s.WriteString(schemas.CreateComponentRequest_ResourceGroupName, *v.ResourceGroupName)
-	}
-	serializeResourceList(s, schemas.CreateComponentRequest_ResourceList, v.ResourceList)
-}
-
 type CreateComponentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,21 +53,16 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComponentResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse), output: &CreateComponentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComponent"); err != nil {

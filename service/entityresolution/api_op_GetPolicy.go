@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPolicyInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetPolicyInput_arn, *v.Arn)
-	}
-}
-
 type GetPolicyOutput struct {
 
 	// The Entity Resolution resource ARN.
@@ -72,30 +58,16 @@ type GetPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPolicyOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPolicyOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetPolicyOutput_arn, v.Arn)
-		case schemas.GetPolicyOutput_policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.GetPolicyOutput_policy, v.Policy)
-		case schemas.GetPolicyOutput_token:
-			v.Token = new(string)
-			return d.ReadString(schemas.GetPolicyOutput_token, v.Token)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyInput, schemas.GetPolicyOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyInput, schemas.GetPolicyOutput), output: &GetPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicy"); err != nil {

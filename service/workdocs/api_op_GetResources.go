@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,30 +51,6 @@ type GetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourcesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.GetResourcesRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.CollectionType != "" {
-		s.WriteString(schemas.GetResourcesRequest_CollectionType, string(v.CollectionType))
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.GetResourcesRequest_Limit, *v.Limit)
-	}
-	if v.Marker != nil {
-		s.WriteString(schemas.GetResourcesRequest_Marker, *v.Marker)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.GetResourcesRequest_UserId, *v.UserId)
-	}
-}
-
 type GetResourcesOutput struct {
 
 	// The documents in the specified collection.
@@ -95,28 +69,16 @@ type GetResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourcesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourcesResponse_Documents:
-			return deserializeDocumentMetadataList(d, schemas.GetResourcesResponse_Documents, &v.Documents)
-		case schemas.GetResourcesResponse_Folders:
-			return deserializeFolderMetadataList(d, schemas.GetResourcesResponse_Folders, &v.Folders)
-		case schemas.GetResourcesResponse_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.GetResourcesResponse_Marker, v.Marker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResources, schemas.GetResourcesRequest, schemas.GetResourcesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResources, schemas.GetResourcesRequest, schemas.GetResourcesResponse), output: &GetResourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResources"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,59 +71,6 @@ type PutRumEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutRumEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutRumEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutRumEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.PutRumEventsRequest_Alias, *v.Alias)
-	}
-	if v.AppMonitorDetails != nil {
-		s.WriteStruct(schemas.PutRumEventsRequest_AppMonitorDetails)
-		v.AppMonitorDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BatchId != nil {
-		s.WriteString(schemas.PutRumEventsRequest_BatchId, *v.BatchId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.PutRumEventsRequest_Id, *v.Id)
-	}
-	serializeRumEventList(s, schemas.PutRumEventsRequest_RumEvents, v.RumEvents)
-	if v.UserDetails != nil {
-		s.WriteStruct(schemas.PutRumEventsRequest_UserDetails)
-		v.UserDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PutRumEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutRumEventsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutRumEventsRequest_Alias:
-			v.Alias = new(string)
-			return d.ReadString(schemas.PutRumEventsRequest_Alias, v.Alias)
-		case schemas.PutRumEventsRequest_AppMonitorDetails:
-			v.AppMonitorDetails = &types.AppMonitorDetails{}
-			return v.AppMonitorDetails.Deserialize(d)
-		case schemas.PutRumEventsRequest_BatchId:
-			v.BatchId = new(string)
-			return d.ReadString(schemas.PutRumEventsRequest_BatchId, v.BatchId)
-		case schemas.PutRumEventsRequest_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PutRumEventsRequest_Id, v.Id)
-		case schemas.PutRumEventsRequest_RumEvents:
-			return deserializeRumEventList(d, schemas.PutRumEventsRequest_RumEvents, &v.RumEvents)
-		case schemas.PutRumEventsRequest_UserDetails:
-			v.UserDetails = &types.UserDetails{}
-			return v.UserDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type PutRumEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -133,29 +78,16 @@ type PutRumEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutRumEventsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutRumEventsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutRumEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutRumEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutRumEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutRumEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRumEvents, schemas.PutRumEventsRequest, schemas.PutRumEventsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRumEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRumEvents, schemas.PutRumEventsRequest, schemas.PutRumEventsResponse), output: &PutRumEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRumEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRumEvents"); err != nil {

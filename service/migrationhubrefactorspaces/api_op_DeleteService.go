@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,40 +52,6 @@ type DeleteServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteServiceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.DeleteServiceRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.DeleteServiceRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.ServiceIdentifier != nil {
-		s.WriteString(schemas.DeleteServiceRequest_ServiceIdentifier, *v.ServiceIdentifier)
-	}
-}
-func (v *DeleteServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteServiceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteServiceRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.DeleteServiceRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.DeleteServiceRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.DeleteServiceRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.DeleteServiceRequest_ServiceIdentifier:
-			v.ServiceIdentifier = new(string)
-			return d.ReadString(schemas.DeleteServiceRequest_ServiceIdentifier, v.ServiceIdentifier)
-		}
-		return nil
-	})
-}
-
 type DeleteServiceOutput struct {
 
 	// The ID of the application that the service is in.
@@ -117,75 +81,16 @@ type DeleteServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteServiceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteServiceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.DeleteServiceResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.DeleteServiceResponse_Arn, *v.Arn)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.DeleteServiceResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.DeleteServiceResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteServiceResponse_Name, *v.Name)
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.DeleteServiceResponse_ServiceId, *v.ServiceId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.DeleteServiceResponse_State, string(v.State))
-	}
-}
-func (v *DeleteServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteServiceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteServiceResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.DeleteServiceResponse_ApplicationId, v.ApplicationId)
-		case schemas.DeleteServiceResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeleteServiceResponse_Arn, v.Arn)
-		case schemas.DeleteServiceResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.DeleteServiceResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.DeleteServiceResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.DeleteServiceResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.DeleteServiceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteServiceResponse_Name, v.Name)
-		case schemas.DeleteServiceResponse_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.DeleteServiceResponse_ServiceId, v.ServiceId)
-		case schemas.DeleteServiceResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.DeleteServiceResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ServiceState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteService, schemas.DeleteServiceRequest, schemas.DeleteServiceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteService, schemas.DeleteServiceRequest, schemas.DeleteServiceResponse), output: &DeleteServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteService"); err != nil {

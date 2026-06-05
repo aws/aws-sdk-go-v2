@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,46 +48,6 @@ type ListThemesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListThemesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListThemesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListThemesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.ListThemesRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.ListThemesRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListThemesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListThemesRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListThemesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListThemesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListThemesRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.ListThemesRequest_appId, v.AppId)
-		case schemas.ListThemesRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.ListThemesRequest_environmentName, v.EnvironmentName)
-		case schemas.ListThemesRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListThemesRequest_maxResults, v.MaxResults)
-		case schemas.ListThemesRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListThemesRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListThemesOutput struct {
 
 	// The list of themes for the Amplify app.
@@ -106,38 +64,16 @@ type ListThemesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListThemesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListThemesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThemeSummaryList(s, schemas.ListThemesResponse_entities, v.Entities)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListThemesResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListThemesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListThemesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListThemesResponse_entities:
-			return deserializeThemeSummaryList(d, schemas.ListThemesResponse_entities, &v.Entities)
-		case schemas.ListThemesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListThemesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListThemesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThemes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse), output: &ListThemesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThemes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThemes"); err != nil {

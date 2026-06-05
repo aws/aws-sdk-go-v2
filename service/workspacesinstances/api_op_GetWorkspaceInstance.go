@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetWorkspaceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkspaceInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWorkspaceInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWorkspaceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkspaceInstanceId != nil {
-		s.WriteString(schemas.GetWorkspaceInstanceRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
-	}
-}
-
 // Provides comprehensive details about the requested WorkSpaces Instance.
 type GetWorkspaceInstanceOutput struct {
 
@@ -80,41 +66,16 @@ type GetWorkspaceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkspaceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWorkspaceInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWorkspaceInstanceResponse_BillingConfiguration:
-			v.BillingConfiguration = &types.BillingConfiguration{}
-			return v.BillingConfiguration.Deserialize(d)
-		case schemas.GetWorkspaceInstanceResponse_EC2InstanceErrors:
-			return deserializeEC2InstanceErrors(d, schemas.GetWorkspaceInstanceResponse_EC2InstanceErrors, &v.EC2InstanceErrors)
-		case schemas.GetWorkspaceInstanceResponse_EC2ManagedInstance:
-			v.EC2ManagedInstance = &types.EC2ManagedInstance{}
-			return v.EC2ManagedInstance.Deserialize(d)
-		case schemas.GetWorkspaceInstanceResponse_ProvisionState:
-			var ev string
-			if err := d.ReadString(schemas.GetWorkspaceInstanceResponse_ProvisionState, &ev); err != nil {
-				return err
-			}
-			v.ProvisionState = types.ProvisionStateEnum(ev)
-			return nil
-		case schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceErrors:
-			return deserializeWorkspaceInstanceErrors(d, schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceErrors, &v.WorkspaceInstanceErrors)
-		case schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceId:
-			v.WorkspaceInstanceId = new(string)
-			return d.ReadString(schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceId, v.WorkspaceInstanceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWorkspaceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkspaceInstance, schemas.GetWorkspaceInstanceRequest, schemas.GetWorkspaceInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkspaceInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkspaceInstance, schemas.GetWorkspaceInstanceRequest, schemas.GetWorkspaceInstanceResponse), output: &GetWorkspaceInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkspaceInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkspaceInstance"); err != nil {

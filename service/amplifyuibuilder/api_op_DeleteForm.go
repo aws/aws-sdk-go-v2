@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,40 +46,6 @@ type DeleteFormInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFormInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteFormRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteFormInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.DeleteFormRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.DeleteFormRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DeleteFormRequest_id, *v.Id)
-	}
-}
-func (v *DeleteFormInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteFormRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteFormRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.DeleteFormRequest_appId, v.AppId)
-		case schemas.DeleteFormRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.DeleteFormRequest_environmentName, v.EnvironmentName)
-		case schemas.DeleteFormRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteFormRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 type DeleteFormOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,29 +53,16 @@ type DeleteFormOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFormOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteForm, schemas.DeleteFormRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteForm{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteForm, schemas.DeleteFormRequest, nil), output: &DeleteFormOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteForm{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteForm"); err != nil {

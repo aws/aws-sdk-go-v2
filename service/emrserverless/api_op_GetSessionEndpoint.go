@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,21 +45,6 @@ type GetSessionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSessionEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSessionEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSessionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetSessionEndpointRequest_applicationId, *v.ApplicationId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.GetSessionEndpointRequest_sessionId, *v.SessionId)
-	}
-}
-
 type GetSessionEndpointOutput struct {
 
 	// The output contains the ID of the application.
@@ -96,36 +79,16 @@ type GetSessionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSessionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSessionEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSessionEndpointResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetSessionEndpointResponse_applicationId, v.ApplicationId)
-		case schemas.GetSessionEndpointResponse_authToken:
-			v.AuthToken = new(string)
-			return d.ReadString(schemas.GetSessionEndpointResponse_authToken, v.AuthToken)
-		case schemas.GetSessionEndpointResponse_authTokenExpiresAt:
-			v.AuthTokenExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetSessionEndpointResponse_authTokenExpiresAt, v.AuthTokenExpiresAt)
-		case schemas.GetSessionEndpointResponse_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.GetSessionEndpointResponse_endpoint, v.Endpoint)
-		case schemas.GetSessionEndpointResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.GetSessionEndpointResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointRequest, schemas.GetSessionEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointRequest, schemas.GetSessionEndpointResponse), output: &GetSessionEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionEndpoint"); err != nil {

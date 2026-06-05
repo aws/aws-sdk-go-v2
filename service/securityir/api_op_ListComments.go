@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListCommentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCommentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCommentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCommentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.ListCommentsRequest_caseId, *v.CaseId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCommentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCommentsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListCommentsOutput struct {
 
 	// Response element for ListComments providing the body, commentID, createDate,
@@ -84,29 +64,16 @@ type ListCommentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCommentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCommentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCommentsResponse_items:
-			return deserializeListCommentsItems(d, schemas.ListCommentsResponse_items, &v.Items)
-		case schemas.ListCommentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCommentsResponse_nextToken, v.NextToken)
-		case schemas.ListCommentsResponse_total:
-			v.Total = new(int32)
-			return d.ReadInt32(schemas.ListCommentsResponse_total, v.Total)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCommentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComments, schemas.ListCommentsRequest, schemas.ListCommentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComments, schemas.ListCommentsRequest, schemas.ListCommentsResponse), output: &ListCommentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComments"); err != nil {

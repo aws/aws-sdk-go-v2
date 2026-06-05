@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -180,22 +178,6 @@ type PutTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutTargetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutTargetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventBusName != nil {
-		s.WriteString(schemas.PutTargetsRequest_EventBusName, *v.EventBusName)
-	}
-	if v.Rule != nil {
-		s.WriteString(schemas.PutTargetsRequest_Rule, *v.Rule)
-	}
-	serializeTargetList(s, schemas.PutTargetsRequest_Targets, v.Targets)
-}
-
 type PutTargetsOutput struct {
 
 	// The failed target entries.
@@ -210,25 +192,16 @@ type PutTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutTargetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutTargetsResponse_FailedEntries:
-			return deserializePutTargetsResultEntryList(d, schemas.PutTargetsResponse_FailedEntries, &v.FailedEntries)
-		case schemas.PutTargetsResponse_FailedEntryCount:
-			return d.ReadInt32(schemas.PutTargetsResponse_FailedEntryCount, &v.FailedEntryCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTargets, schemas.PutTargetsRequest, schemas.PutTargetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTargets, schemas.PutTargetsRequest, schemas.PutTargetsResponse), output: &PutTargetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutTargets"); err != nil {

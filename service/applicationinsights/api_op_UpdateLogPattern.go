@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,30 +62,6 @@ type UpdateLogPatternInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLogPatternInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateLogPatternRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateLogPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Pattern != nil {
-		s.WriteString(schemas.UpdateLogPatternRequest_Pattern, *v.Pattern)
-	}
-	if v.PatternName != nil {
-		s.WriteString(schemas.UpdateLogPatternRequest_PatternName, *v.PatternName)
-	}
-	if v.PatternSetName != nil {
-		s.WriteString(schemas.UpdateLogPatternRequest_PatternSetName, *v.PatternSetName)
-	}
-	if v.Rank != 0 {
-		s.WriteInt32(schemas.UpdateLogPatternRequest_Rank, v.Rank)
-	}
-	if v.ResourceGroupName != nil {
-		s.WriteString(schemas.UpdateLogPatternRequest_ResourceGroupName, *v.ResourceGroupName)
-	}
-}
-
 type UpdateLogPatternOutput struct {
 
 	// The successfully created log pattern.
@@ -102,27 +76,16 @@ type UpdateLogPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLogPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateLogPatternResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateLogPatternResponse_LogPattern:
-			v.LogPattern = &types.LogPattern{}
-			return v.LogPattern.Deserialize(d)
-		case schemas.UpdateLogPatternResponse_ResourceGroupName:
-			v.ResourceGroupName = new(string)
-			return d.ReadString(schemas.UpdateLogPatternResponse_ResourceGroupName, v.ResourceGroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLogPattern, schemas.UpdateLogPatternRequest, schemas.UpdateLogPatternResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLogPattern{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLogPattern, schemas.UpdateLogPatternRequest, schemas.UpdateLogPatternResponse), output: &UpdateLogPatternOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLogPattern{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLogPattern"); err != nil {

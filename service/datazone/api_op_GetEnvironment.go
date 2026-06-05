@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type GetEnvironmentInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEnvironmentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetEnvironmentInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetEnvironmentInput_identifier, *v.Identifier)
-	}
 }
 
 type GetEnvironmentOutput struct {
@@ -147,89 +130,16 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEnvironmentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEnvironmentOutput_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_awsAccountId, v.AwsAccountId)
-		case schemas.GetEnvironmentOutput_awsAccountRegion:
-			v.AwsAccountRegion = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_awsAccountRegion, v.AwsAccountRegion)
-		case schemas.GetEnvironmentOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentOutput_createdAt, v.CreatedAt)
-		case schemas.GetEnvironmentOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_createdBy, v.CreatedBy)
-		case schemas.GetEnvironmentOutput_deploymentProperties:
-			v.DeploymentProperties = &types.DeploymentProperties{}
-			return v.DeploymentProperties.Deserialize(d)
-		case schemas.GetEnvironmentOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_description, v.Description)
-		case schemas.GetEnvironmentOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_domainId, v.DomainId)
-		case schemas.GetEnvironmentOutput_environmentActions:
-			return deserializeEnvironmentActionList(d, schemas.GetEnvironmentOutput_environmentActions, &v.EnvironmentActions)
-		case schemas.GetEnvironmentOutput_environmentBlueprintId:
-			v.EnvironmentBlueprintId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
-		case schemas.GetEnvironmentOutput_environmentConfigurationId:
-			v.EnvironmentConfigurationId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_environmentConfigurationId, v.EnvironmentConfigurationId)
-		case schemas.GetEnvironmentOutput_environmentConfigurationName:
-			v.EnvironmentConfigurationName = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_environmentConfigurationName, v.EnvironmentConfigurationName)
-		case schemas.GetEnvironmentOutput_environmentProfileId:
-			v.EnvironmentProfileId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_environmentProfileId, v.EnvironmentProfileId)
-		case schemas.GetEnvironmentOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.GetEnvironmentOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.GetEnvironmentOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_id, v.Id)
-		case schemas.GetEnvironmentOutput_lastDeployment:
-			v.LastDeployment = &types.Deployment{}
-			return v.LastDeployment.Deserialize(d)
-		case schemas.GetEnvironmentOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_name, v.Name)
-		case schemas.GetEnvironmentOutput_projectId:
-			v.ProjectId = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_projectId, v.ProjectId)
-		case schemas.GetEnvironmentOutput_provider:
-			v.Provider = new(string)
-			return d.ReadString(schemas.GetEnvironmentOutput_provider, v.Provider)
-		case schemas.GetEnvironmentOutput_provisionedResources:
-			return deserializeResourceList(d, schemas.GetEnvironmentOutput_provisionedResources, &v.ProvisionedResources)
-		case schemas.GetEnvironmentOutput_provisioningProperties:
-			return deserializeProvisioningProperties(d, schemas.GetEnvironmentOutput_provisioningProperties, &v.ProvisioningProperties)
-		case schemas.GetEnvironmentOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetEnvironmentOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EnvironmentStatus(ev)
-			return nil
-		case schemas.GetEnvironmentOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetEnvironmentOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetEnvironmentOutput_userParameters:
-			return deserializeCustomParameterList(d, schemas.GetEnvironmentOutput_userParameters, &v.UserParameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput), output: &GetEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironment"); err != nil {

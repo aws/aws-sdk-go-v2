@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -101,39 +99,6 @@ type CreateHsmInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateHsmInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateHsmRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateHsmInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateHsmRequest_ClientToken, *v.ClientToken)
-	}
-	if v.EniIp != nil {
-		s.WriteString(schemas.CreateHsmRequest_EniIp, *v.EniIp)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.CreateHsmRequest_ExternalId, *v.ExternalId)
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.CreateHsmRequest_IamRoleArn, *v.IamRoleArn)
-	}
-	if v.SshKey != nil {
-		s.WriteString(schemas.CreateHsmRequest_SshKey, *v.SshKey)
-	}
-	if v.SubnetId != nil {
-		s.WriteString(schemas.CreateHsmRequest_SubnetId, *v.SubnetId)
-	}
-	if v.SubscriptionType != "" {
-		s.WriteString(schemas.CreateHsmRequest_SubscriptionType, string(v.SubscriptionType))
-	}
-	if v.SyslogIp != nil {
-		s.WriteString(schemas.CreateHsmRequest_SyslogIp, *v.SyslogIp)
-	}
-}
-
 // Contains the output of the CreateHsm operation.
 type CreateHsmOutput struct {
 
@@ -146,24 +111,16 @@ type CreateHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateHsmResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateHsmResponse_HsmArn:
-			v.HsmArn = new(string)
-			return d.ReadString(schemas.CreateHsmResponse_HsmArn, v.HsmArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsm, schemas.CreateHsmRequest, schemas.CreateHsmResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHsm{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsm, schemas.CreateHsmRequest, schemas.CreateHsmResponse), output: &CreateHsmOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHsm{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHsm"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,28 +57,6 @@ type DeleteRouteCalculatorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRouteCalculatorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRouteCalculatorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRouteCalculatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CalculatorName != nil {
-		s.WriteString(schemas.DeleteRouteCalculatorRequest_CalculatorName, *v.CalculatorName)
-	}
-}
-func (v *DeleteRouteCalculatorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRouteCalculatorRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteRouteCalculatorRequest_CalculatorName:
-			v.CalculatorName = new(string)
-			return d.ReadString(schemas.DeleteRouteCalculatorRequest_CalculatorName, v.CalculatorName)
-		}
-		return nil
-	})
-}
-
 type DeleteRouteCalculatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -88,29 +64,16 @@ type DeleteRouteCalculatorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRouteCalculatorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRouteCalculatorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRouteCalculatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteRouteCalculatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRouteCalculatorResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRouteCalculator, schemas.DeleteRouteCalculatorRequest, schemas.DeleteRouteCalculatorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouteCalculator{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRouteCalculator, schemas.DeleteRouteCalculatorRequest, schemas.DeleteRouteCalculatorResponse), output: &DeleteRouteCalculatorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRouteCalculator{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRouteCalculator"); err != nil {

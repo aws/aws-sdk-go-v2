@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -89,26 +87,6 @@ type GetClipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetClipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetClipInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetClipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClipFragmentSelector != nil {
-		s.WriteStruct(schemas.GetClipInput_ClipFragmentSelector)
-		v.ClipFragmentSelector.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.GetClipInput_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.GetClipInput_StreamName, *v.StreamName)
-	}
-}
-
 type GetClipOutput struct {
 
 	// The content type of the media in the requested clip.
@@ -127,32 +105,16 @@ type GetClipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetClipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetClipOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetClipOutput_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetClipOutput_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
-func (v *GetClipOutput) GetPayloadStream() io.Reader { return v.Payload }
-
-var _ smithy.StreamingInput = (*GetClipOutput)(nil)
-
-func (v *GetClipOutput) SetPayloadStream(r io.ReadCloser) { v.Payload = r }
-
-var _ smithy.StreamingOutput = (*GetClipOutput)(nil)
-
 func (c *Client) addOperationGetClipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClip, schemas.GetClipInput, schemas.GetClipOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClip{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClip, schemas.GetClipInput, schemas.GetClipOutput), output: &GetClipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClip{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetClip"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ReleaseSenderIdInput struct {
 	SenderId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReleaseSenderIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReleaseSenderIdRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReleaseSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsoCountryCode != nil {
-		s.WriteString(schemas.ReleaseSenderIdRequest_IsoCountryCode, *v.IsoCountryCode)
-	}
-	if v.SenderId != nil {
-		s.WriteString(schemas.ReleaseSenderIdRequest_SenderId, *v.SenderId)
-	}
 }
 
 type ReleaseSenderIdOutput struct {
@@ -102,40 +85,16 @@ type ReleaseSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReleaseSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReleaseSenderIdResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReleaseSenderIdResult_IsoCountryCode:
-			v.IsoCountryCode = new(string)
-			return d.ReadString(schemas.ReleaseSenderIdResult_IsoCountryCode, v.IsoCountryCode)
-		case schemas.ReleaseSenderIdResult_MessageTypes:
-			return deserializeMessageTypeList(d, schemas.ReleaseSenderIdResult_MessageTypes, &v.MessageTypes)
-		case schemas.ReleaseSenderIdResult_MonthlyLeasingPrice:
-			v.MonthlyLeasingPrice = new(string)
-			return d.ReadString(schemas.ReleaseSenderIdResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
-		case schemas.ReleaseSenderIdResult_Registered:
-			return d.ReadBool(schemas.ReleaseSenderIdResult_Registered, &v.Registered)
-		case schemas.ReleaseSenderIdResult_RegistrationId:
-			v.RegistrationId = new(string)
-			return d.ReadString(schemas.ReleaseSenderIdResult_RegistrationId, v.RegistrationId)
-		case schemas.ReleaseSenderIdResult_SenderId:
-			v.SenderId = new(string)
-			return d.ReadString(schemas.ReleaseSenderIdResult_SenderId, v.SenderId)
-		case schemas.ReleaseSenderIdResult_SenderIdArn:
-			v.SenderIdArn = new(string)
-			return d.ReadString(schemas.ReleaseSenderIdResult_SenderIdArn, v.SenderIdArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationReleaseSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleaseSenderId, schemas.ReleaseSenderIdRequest, schemas.ReleaseSenderIdResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpReleaseSenderId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleaseSenderId, schemas.ReleaseSenderIdRequest, schemas.ReleaseSenderIdResult), output: &ReleaseSenderIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpReleaseSenderId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ReleaseSenderId"); err != nil {

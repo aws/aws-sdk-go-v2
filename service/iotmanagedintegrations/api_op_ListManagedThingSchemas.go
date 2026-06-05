@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,30 +49,6 @@ type ListManagedThingSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListManagedThingSchemasInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListManagedThingSchemasRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListManagedThingSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CapabilityIdFilter != nil {
-		s.WriteString(schemas.ListManagedThingSchemasRequest_CapabilityIdFilter, *v.CapabilityIdFilter)
-	}
-	if v.EndpointIdFilter != nil {
-		s.WriteString(schemas.ListManagedThingSchemasRequest_EndpointIdFilter, *v.EndpointIdFilter)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.ListManagedThingSchemasRequest_Identifier, *v.Identifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListManagedThingSchemasRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListManagedThingSchemasRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListManagedThingSchemasOutput struct {
 
 	// The list of managed thing schemas.
@@ -89,26 +63,16 @@ type ListManagedThingSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListManagedThingSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListManagedThingSchemasResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListManagedThingSchemasResponse_Items:
-			return deserializeManagedThingSchemaListDefinition(d, schemas.ListManagedThingSchemasResponse_Items, &v.Items)
-		case schemas.ListManagedThingSchemasResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListManagedThingSchemasResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListManagedThingSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThingSchemas, schemas.ListManagedThingSchemasRequest, schemas.ListManagedThingSchemasResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedThingSchemas{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThingSchemas, schemas.ListManagedThingSchemasRequest, schemas.ListManagedThingSchemasResponse), output: &ListManagedThingSchemasOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedThingSchemas{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedThingSchemas"); err != nil {

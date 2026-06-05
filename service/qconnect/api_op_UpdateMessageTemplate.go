@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,31 +66,6 @@ type UpdateMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMessageTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateContentProvider(s, schemas.UpdateMessageTemplateRequest_content, v.Content)
-	if v.DefaultAttributes != nil {
-		s.WriteStruct(schemas.UpdateMessageTemplateRequest_defaultAttributes)
-		v.DefaultAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.UpdateMessageTemplateRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.UpdateMessageTemplateRequest_language, *v.Language)
-	}
-	if v.MessageTemplateId != nil {
-		s.WriteString(schemas.UpdateMessageTemplateRequest_messageTemplateId, *v.MessageTemplateId)
-	}
-	serializeMessageTemplateSourceConfiguration(s, schemas.UpdateMessageTemplateRequest_sourceConfiguration, v.SourceConfiguration)
-}
-
 type UpdateMessageTemplateOutput struct {
 
 	// The message template.
@@ -104,24 +77,16 @@ type UpdateMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMessageTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMessageTemplateResponse_messageTemplate:
-			v.MessageTemplate = &types.MessageTemplateData{}
-			return v.MessageTemplate.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMessageTemplate, schemas.UpdateMessageTemplateRequest, schemas.UpdateMessageTemplateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMessageTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMessageTemplate, schemas.UpdateMessageTemplateRequest, schemas.UpdateMessageTemplateResponse), output: &UpdateMessageTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMessageTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMessageTemplate"); err != nil {

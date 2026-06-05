@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,46 +48,6 @@ type ListFormsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFormsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFormsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFormsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.ListFormsRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.ListFormsRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListFormsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFormsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListFormsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFormsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFormsRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.ListFormsRequest_appId, v.AppId)
-		case schemas.ListFormsRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.ListFormsRequest_environmentName, v.EnvironmentName)
-		case schemas.ListFormsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListFormsRequest_maxResults, v.MaxResults)
-		case schemas.ListFormsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFormsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListFormsOutput struct {
 
 	// The list of forms for the Amplify app.
@@ -106,38 +64,16 @@ type ListFormsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFormsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFormsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormSummaryList(s, schemas.ListFormsResponse_entities, v.Entities)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFormsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFormsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFormsResponse_entities:
-			return deserializeFormSummaryList(d, schemas.ListFormsResponse_entities, &v.Entities)
-		case schemas.ListFormsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFormsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListFormsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListForms, schemas.ListFormsRequest, schemas.ListFormsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListForms{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListForms, schemas.ListFormsRequest, schemas.ListFormsResponse), output: &ListFormsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListForms{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListForms"); err != nil {

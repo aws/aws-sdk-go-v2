@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListMediaPipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMediaPipelinesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMediaPipelinesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMediaPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListMediaPipelinesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMediaPipelinesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListMediaPipelinesOutput struct {
 
 	// The media pipeline objects in the list.
@@ -69,26 +52,16 @@ type ListMediaPipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMediaPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMediaPipelinesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMediaPipelinesResponse_MediaPipelines:
-			return deserializeMediaPipelineList(d, schemas.ListMediaPipelinesResponse_MediaPipelines, &v.MediaPipelines)
-		case schemas.ListMediaPipelinesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMediaPipelinesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMediaPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaPipelines, schemas.ListMediaPipelinesRequest, schemas.ListMediaPipelinesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMediaPipelines{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaPipelines, schemas.ListMediaPipelinesRequest, schemas.ListMediaPipelinesResponse), output: &ListMediaPipelinesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMediaPipelines{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMediaPipelines"); err != nil {

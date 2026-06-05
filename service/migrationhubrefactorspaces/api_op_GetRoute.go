@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,40 +46,6 @@ type GetRouteInput struct {
 	RouteIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetRouteInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRouteRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.GetRouteRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.GetRouteRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.RouteIdentifier != nil {
-		s.WriteString(schemas.GetRouteRequest_RouteIdentifier, *v.RouteIdentifier)
-	}
-}
-func (v *GetRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRouteRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRouteRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.GetRouteRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.GetRouteRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.GetRouteRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.GetRouteRequest_RouteIdentifier:
-			v.RouteIdentifier = new(string)
-			return d.ReadString(schemas.GetRouteRequest_RouteIdentifier, v.RouteIdentifier)
-		}
-		return nil
-	})
 }
 
 type GetRouteOutput struct {
@@ -160,138 +124,16 @@ type GetRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRouteOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRouteResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppendSourcePath != nil {
-		s.WriteBool(schemas.GetRouteResponse_AppendSourcePath, *v.AppendSourcePath)
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetRouteResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.GetRouteResponse_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.GetRouteResponse_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.GetRouteResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetRouteResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.GetRouteResponse_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncludeChildPaths != nil {
-		s.WriteBool(schemas.GetRouteResponse_IncludeChildPaths, *v.IncludeChildPaths)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.GetRouteResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	serializeHttpMethods(s, schemas.GetRouteResponse_Methods, v.Methods)
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.GetRouteResponse_OwnerAccountId, *v.OwnerAccountId)
-	}
-	serializePathResourceToId(s, schemas.GetRouteResponse_PathResourceToId, v.PathResourceToId)
-	if v.RouteId != nil {
-		s.WriteString(schemas.GetRouteResponse_RouteId, *v.RouteId)
-	}
-	if v.RouteType != "" {
-		s.WriteString(schemas.GetRouteResponse_RouteType, string(v.RouteType))
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.GetRouteResponse_ServiceId, *v.ServiceId)
-	}
-	if v.SourcePath != nil {
-		s.WriteString(schemas.GetRouteResponse_SourcePath, *v.SourcePath)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.GetRouteResponse_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.GetRouteResponse_Tags, v.Tags)
-}
-func (v *GetRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRouteResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRouteResponse_AppendSourcePath:
-			v.AppendSourcePath = new(bool)
-			return d.ReadBool(schemas.GetRouteResponse_AppendSourcePath, v.AppendSourcePath)
-		case schemas.GetRouteResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_ApplicationId, v.ApplicationId)
-		case schemas.GetRouteResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetRouteResponse_Arn, v.Arn)
-		case schemas.GetRouteResponse_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.GetRouteResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetRouteResponse_CreatedTime, v.CreatedTime)
-		case schemas.GetRouteResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.GetRouteResponse_Error:
-			v.Error = &types.ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.GetRouteResponse_IncludeChildPaths:
-			v.IncludeChildPaths = new(bool)
-			return d.ReadBool(schemas.GetRouteResponse_IncludeChildPaths, v.IncludeChildPaths)
-		case schemas.GetRouteResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetRouteResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.GetRouteResponse_Methods:
-			return deserializeHttpMethods(d, schemas.GetRouteResponse_Methods, &v.Methods)
-		case schemas.GetRouteResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.GetRouteResponse_PathResourceToId:
-			return deserializePathResourceToId(d, schemas.GetRouteResponse_PathResourceToId, &v.PathResourceToId)
-		case schemas.GetRouteResponse_RouteId:
-			v.RouteId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_RouteId, v.RouteId)
-		case schemas.GetRouteResponse_RouteType:
-			var ev string
-			if err := d.ReadString(schemas.GetRouteResponse_RouteType, &ev); err != nil {
-				return err
-			}
-			v.RouteType = types.RouteType(ev)
-			return nil
-		case schemas.GetRouteResponse_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.GetRouteResponse_ServiceId, v.ServiceId)
-		case schemas.GetRouteResponse_SourcePath:
-			v.SourcePath = new(string)
-			return d.ReadString(schemas.GetRouteResponse_SourcePath, v.SourcePath)
-		case schemas.GetRouteResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetRouteResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.RouteState(ev)
-			return nil
-		case schemas.GetRouteResponse_Tags:
-			return deserializeTagMap(d, schemas.GetRouteResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoute, schemas.GetRouteRequest, schemas.GetRouteResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoute{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoute, schemas.GetRouteRequest, schemas.GetRouteResponse), output: &GetRouteOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoute{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRoute"); err != nil {

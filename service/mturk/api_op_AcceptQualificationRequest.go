@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,21 +49,6 @@ type AcceptQualificationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptQualificationRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptQualificationRequestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptQualificationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IntegerValue != nil {
-		s.WriteInt32(schemas.AcceptQualificationRequestRequest_IntegerValue, *v.IntegerValue)
-	}
-	if v.QualificationRequestId != nil {
-		s.WriteString(schemas.AcceptQualificationRequestRequest_QualificationRequestId, *v.QualificationRequestId)
-	}
-}
-
 type AcceptQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,21 +56,16 @@ type AcceptQualificationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptQualificationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptQualificationRequestResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptQualificationRequest, schemas.AcceptQualificationRequestRequest, schemas.AcceptQualificationRequestResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptQualificationRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptQualificationRequest, schemas.AcceptQualificationRequestRequest, schemas.AcceptQualificationRequestResponse), output: &AcceptQualificationRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptQualificationRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptQualificationRequest"); err != nil {

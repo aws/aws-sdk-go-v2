@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,23 +42,6 @@ type StartCostEstimationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartCostEstimationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartCostEstimationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartCostEstimationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartCostEstimationRequest_ClientToken, *v.ClientToken)
-	}
-	if v.ResourceCollection != nil {
-		s.WriteStruct(schemas.StartCostEstimationRequest_ResourceCollection)
-		v.ResourceCollection.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type StartCostEstimationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,21 +49,16 @@ type StartCostEstimationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartCostEstimationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartCostEstimationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCostEstimation, schemas.StartCostEstimationRequest, schemas.StartCostEstimationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCostEstimation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCostEstimation, schemas.StartCostEstimationRequest, schemas.StartCostEstimationResponse), output: &StartCostEstimationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCostEstimation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartCostEstimation"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListSchemaMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSchemaMappingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSchemaMappingsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSchemaMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSchemaMappingsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSchemaMappingsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListSchemaMappingsOutput struct {
 
 	// The pagination token from the previous API call.
@@ -71,26 +54,16 @@ type ListSchemaMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSchemaMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSchemaMappingsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSchemaMappingsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSchemaMappingsOutput_nextToken, v.NextToken)
-		case schemas.ListSchemaMappingsOutput_schemaList:
-			return deserializeSchemaMappingList(d, schemas.ListSchemaMappingsOutput_schemaList, &v.SchemaList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSchemaMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaMappings, schemas.ListSchemaMappingsInput, schemas.ListSchemaMappingsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchemaMappings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaMappings, schemas.ListSchemaMappingsInput, schemas.ListSchemaMappingsOutput), output: &ListSchemaMappingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchemaMappings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSchemaMappings"); err != nil {

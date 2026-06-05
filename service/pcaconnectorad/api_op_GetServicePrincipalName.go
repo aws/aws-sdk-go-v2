@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,21 +47,6 @@ type GetServicePrincipalNameInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServicePrincipalNameInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServicePrincipalNameRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServicePrincipalNameInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.GetServicePrincipalNameRequest_ConnectorArn, *v.ConnectorArn)
-	}
-	if v.DirectoryRegistrationArn != nil {
-		s.WriteString(schemas.GetServicePrincipalNameRequest_DirectoryRegistrationArn, *v.DirectoryRegistrationArn)
-	}
-}
-
 type GetServicePrincipalNameOutput struct {
 
 	// The service principal name that the connector uses to authenticate with Active
@@ -76,24 +59,16 @@ type GetServicePrincipalNameOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServicePrincipalNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServicePrincipalNameResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServicePrincipalNameResponse_ServicePrincipalName:
-			v.ServicePrincipalName = &types.ServicePrincipalName{}
-			return v.ServicePrincipalName.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServicePrincipalNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServicePrincipalName, schemas.GetServicePrincipalNameRequest, schemas.GetServicePrincipalNameResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServicePrincipalName{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServicePrincipalName, schemas.GetServicePrincipalNameRequest, schemas.GetServicePrincipalNameResponse), output: &GetServicePrincipalNameOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServicePrincipalName{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServicePrincipalName"); err != nil {

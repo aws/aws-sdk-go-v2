@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/aiops/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -92,32 +90,6 @@ type UpdateInvestigationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateInvestigationGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatbotNotificationChannel(s, schemas.UpdateInvestigationGroupRequest_chatbotNotificationChannel, v.ChatbotNotificationChannel)
-	serializeCrossAccountConfigurations(s, schemas.UpdateInvestigationGroupRequest_crossAccountConfigurations, v.CrossAccountConfigurations)
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.UpdateInvestigationGroupRequest_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateInvestigationGroupRequest_identifier, *v.Identifier)
-	}
-	if v.IsCloudTrailEventHistoryEnabled != nil {
-		s.WriteBool(schemas.UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled, *v.IsCloudTrailEventHistoryEnabled)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateInvestigationGroupRequest_roleArn, *v.RoleArn)
-	}
-	serializeTagKeyBoundaries(s, schemas.UpdateInvestigationGroupRequest_tagKeyBoundaries, v.TagKeyBoundaries)
-}
-
 type UpdateInvestigationGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -125,21 +97,16 @@ type UpdateInvestigationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateInvestigationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateInvestigationGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateInvestigationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvestigationGroup, schemas.UpdateInvestigationGroupRequest, schemas.UpdateInvestigationGroupOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInvestigationGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvestigationGroup, schemas.UpdateInvestigationGroupRequest, schemas.UpdateInvestigationGroupOutput), output: &UpdateInvestigationGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInvestigationGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInvestigationGroup"); err != nil {

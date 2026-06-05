@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteCampaignCommunicationTimeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCampaignCommunicationTimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCampaignCommunicationTimeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCampaignCommunicationTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Config != "" {
-		s.WriteString(schemas.DeleteCampaignCommunicationTimeRequest_config, string(v.Config))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DeleteCampaignCommunicationTimeRequest_id, *v.Id)
-	}
-}
-
 type DeleteCampaignCommunicationTimeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,29 +50,16 @@ type DeleteCampaignCommunicationTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCampaignCommunicationTimeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCampaignCommunicationTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteCampaignCommunicationTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteCampaignCommunicationTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignCommunicationTime, schemas.DeleteCampaignCommunicationTimeRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCampaignCommunicationTime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignCommunicationTime, schemas.DeleteCampaignCommunicationTimeRequest, nil), output: &DeleteCampaignCommunicationTimeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCampaignCommunicationTime{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCampaignCommunicationTime"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,22 +47,6 @@ type ListAutomatedDiscoveryAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutomatedDiscoveryAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAutomatedDiscoveryAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAutomatedDiscoveryAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ListAutomatedDiscoveryAccountsRequest_accountIds, v.AccountIds)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAutomatedDiscoveryAccountsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAutomatedDiscoveryAccountsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAutomatedDiscoveryAccountsOutput struct {
 
 	// An array of objects, one for each account specified in the request. Each object
@@ -82,26 +64,16 @@ type ListAutomatedDiscoveryAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutomatedDiscoveryAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAutomatedDiscoveryAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAutomatedDiscoveryAccountsResponse_items:
-			return deserialize__listOfAutomatedDiscoveryAccount(d, schemas.ListAutomatedDiscoveryAccountsResponse_items, &v.Items)
-		case schemas.ListAutomatedDiscoveryAccountsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAutomatedDiscoveryAccountsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAutomatedDiscoveryAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedDiscoveryAccounts, schemas.ListAutomatedDiscoveryAccountsRequest, schemas.ListAutomatedDiscoveryAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedDiscoveryAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedDiscoveryAccounts, schemas.ListAutomatedDiscoveryAccountsRequest, schemas.ListAutomatedDiscoveryAccountsResponse), output: &ListAutomatedDiscoveryAccountsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedDiscoveryAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomatedDiscoveryAccounts"); err != nil {

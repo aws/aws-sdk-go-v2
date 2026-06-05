@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,28 +65,6 @@ type CreateSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSipRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSipRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSipRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Disabled != nil {
-		s.WriteBool(schemas.CreateSipRuleRequest_Disabled, *v.Disabled)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSipRuleRequest_Name, *v.Name)
-	}
-	serializeSipRuleTargetApplicationList(s, schemas.CreateSipRuleRequest_TargetApplications, v.TargetApplications)
-	if v.TriggerType != "" {
-		s.WriteString(schemas.CreateSipRuleRequest_TriggerType, string(v.TriggerType))
-	}
-	if v.TriggerValue != nil {
-		s.WriteString(schemas.CreateSipRuleRequest_TriggerValue, *v.TriggerValue)
-	}
-}
-
 type CreateSipRuleOutput struct {
 
 	// The SIP rule information, including the rule ID, triggers, and target
@@ -101,24 +77,16 @@ type CreateSipRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSipRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSipRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSipRuleResponse_SipRule:
-			v.SipRule = &types.SipRule{}
-			return v.SipRule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSipRule, schemas.CreateSipRuleRequest, schemas.CreateSipRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSipRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSipRule, schemas.CreateSipRuleRequest, schemas.CreateSipRuleResponse), output: &CreateSipRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSipRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSipRule"); err != nil {

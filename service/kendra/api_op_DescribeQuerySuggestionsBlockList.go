@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,21 +46,6 @@ type DescribeQuerySuggestionsBlockListInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeQuerySuggestionsBlockListInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeQuerySuggestionsBlockListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeQuerySuggestionsBlockListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeQuerySuggestionsBlockListRequest_Id, *v.Id)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.DescribeQuerySuggestionsBlockListRequest_IndexId, *v.IndexId)
-	}
 }
 
 type DescribeQuerySuggestionsBlockListOutput struct {
@@ -122,61 +105,16 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeQuerySuggestionsBlockListOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeQuerySuggestionsBlockListResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeQuerySuggestionsBlockListResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeQuerySuggestionsBlockListResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Description, v.Description)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_ErrorMessage, v.ErrorMessage)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_FileSizeBytes:
-			v.FileSizeBytes = new(int64)
-			return d.ReadInt64(schemas.DescribeQuerySuggestionsBlockListResponse_FileSizeBytes, v.FileSizeBytes)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Id, v.Id)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_IndexId:
-			v.IndexId = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_IndexId, v.IndexId)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_ItemCount:
-			v.ItemCount = new(int32)
-			return d.ReadInt32(schemas.DescribeQuerySuggestionsBlockListResponse_ItemCount, v.ItemCount)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Name, v.Name)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_RoleArn, v.RoleArn)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_SourceS3Path:
-			v.SourceS3Path = &types.S3Path{}
-			return v.SourceS3Path.Deserialize(d)
-		case schemas.DescribeQuerySuggestionsBlockListResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.QuerySuggestionsBlockListStatus(ev)
-			return nil
-		case schemas.DescribeQuerySuggestionsBlockListResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeQuerySuggestionsBlockListResponse_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsBlockList, schemas.DescribeQuerySuggestionsBlockListRequest, schemas.DescribeQuerySuggestionsBlockListResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQuerySuggestionsBlockList{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsBlockList, schemas.DescribeQuerySuggestionsBlockListRequest, schemas.DescribeQuerySuggestionsBlockListResponse), output: &DescribeQuerySuggestionsBlockListOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeQuerySuggestionsBlockList{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQuerySuggestionsBlockList"); err != nil {

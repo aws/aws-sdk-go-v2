@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -154,51 +152,6 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBInstanceMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplyImmediately != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_ApplyImmediately, *v.ApplyImmediately)
-	}
-	if v.AutoMinorVersionUpgrade != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
-	}
-	if v.CACertificateIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
-	}
-	if v.CertificateRotationRestart != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_CertificateRotationRestart, *v.CertificateRotationRestart)
-	}
-	if v.CopyTagsToSnapshot != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
-	}
-	if v.DBInstanceClass != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
-	}
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-	if v.EnablePerformanceInsights != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
-	}
-	if v.NewDBInstanceIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_NewDBInstanceIdentifier, *v.NewDBInstanceIdentifier)
-	}
-	if v.PerformanceInsightsKMSKeyId != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.PromotionTier != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_PromotionTier, *v.PromotionTier)
-	}
-}
-
 type ModifyDBInstanceOutput struct {
 
 	// Detailed information about an instance.
@@ -210,24 +163,16 @@ type ModifyDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyDBInstanceResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyDBInstanceResult_DBInstance:
-			v.DBInstance = &types.DBInstance{}
-			return v.DBInstance.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult), output: &ModifyDBInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBInstance"); err != nil {

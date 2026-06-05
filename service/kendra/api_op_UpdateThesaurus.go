@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,35 +55,6 @@ type UpdateThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateThesaurusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateThesaurusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateThesaurusRequest_Description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateThesaurusRequest_Id, *v.Id)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.UpdateThesaurusRequest_IndexId, *v.IndexId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateThesaurusRequest_Name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateThesaurusRequest_RoleArn, *v.RoleArn)
-	}
-	if v.SourceS3Path != nil {
-		s.WriteStruct(schemas.UpdateThesaurusRequest_SourceS3Path)
-		v.SourceS3Path.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateThesaurusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -93,29 +62,16 @@ type UpdateThesaurusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateThesaurusOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateThesaurusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateThesaurusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThesaurus, schemas.UpdateThesaurusRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateThesaurus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThesaurus, schemas.UpdateThesaurusRequest, nil), output: &UpdateThesaurusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateThesaurus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateThesaurus"); err != nil {

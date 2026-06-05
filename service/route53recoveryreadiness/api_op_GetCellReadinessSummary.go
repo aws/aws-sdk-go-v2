@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type GetCellReadinessSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCellReadinessSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCellReadinessSummaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCellReadinessSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellName != nil {
-		s.WriteString(schemas.GetCellReadinessSummaryRequest_CellName, *v.CellName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetCellReadinessSummaryRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetCellReadinessSummaryRequest_NextToken, *v.NextToken)
-	}
-}
-
 type GetCellReadinessSummaryOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -81,33 +61,16 @@ type GetCellReadinessSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCellReadinessSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCellReadinessSummaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCellReadinessSummaryResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetCellReadinessSummaryResponse_NextToken, v.NextToken)
-		case schemas.GetCellReadinessSummaryResponse_Readiness:
-			var ev string
-			if err := d.ReadString(schemas.GetCellReadinessSummaryResponse_Readiness, &ev); err != nil {
-				return err
-			}
-			v.Readiness = types.Readiness(ev)
-			return nil
-		case schemas.GetCellReadinessSummaryResponse_ReadinessChecks:
-			return deserialize__listOfReadinessCheckSummary(d, schemas.GetCellReadinessSummaryResponse_ReadinessChecks, &v.ReadinessChecks)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCellReadinessSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCellReadinessSummary, schemas.GetCellReadinessSummaryRequest, schemas.GetCellReadinessSummaryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCellReadinessSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCellReadinessSummary, schemas.GetCellReadinessSummaryRequest, schemas.GetCellReadinessSummaryResponse), output: &GetCellReadinessSummaryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCellReadinessSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCellReadinessSummary"); err != nil {

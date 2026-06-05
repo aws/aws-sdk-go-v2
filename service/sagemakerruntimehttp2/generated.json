@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/smithy-go": "v1.4.0"
@@ -10,7 +11,7 @@
         "api_client_test.go",
         "api_op_InvokeEndpointWithBidirectionalStream.go",
         "auth.go",
-        "common_serde.go",
+        "deserializers.go",
         "doc.go",
         "endpoints.go",
         "endpoints_config_test.go",
@@ -20,11 +21,9 @@
         "internal/endpoints/endpoints.go",
         "internal/endpoints/endpoints_test.go",
         "options.go",
-        "schemas/schemas.go",
+        "serializers.go",
         "snapshot_test.go",
         "sra_operation_order_test.go",
-        "type_registry.go",
-        "types/common_serde.go",
         "types/errors.go",
         "types/types.go",
         "types/types_exported_test.go",

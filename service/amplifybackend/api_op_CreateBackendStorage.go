@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,29 +53,6 @@ type CreateBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendStorageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendStorageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreateBackendStorageRequest_AppId, *v.AppId)
-	}
-	if v.BackendEnvironmentName != nil {
-		s.WriteString(schemas.CreateBackendStorageRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
-	}
-	if v.ResourceConfig != nil {
-		s.WriteStruct(schemas.CreateBackendStorageRequest_ResourceConfig)
-		v.ResourceConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceName != nil {
-		s.WriteString(schemas.CreateBackendStorageRequest_ResourceName, *v.ResourceName)
-	}
-}
-
 type CreateBackendStorageOutput struct {
 
 	// The app ID.
@@ -98,33 +73,16 @@ type CreateBackendStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendStorageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendStorageResponse_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.CreateBackendStorageResponse_AppId, v.AppId)
-		case schemas.CreateBackendStorageResponse_BackendEnvironmentName:
-			v.BackendEnvironmentName = new(string)
-			return d.ReadString(schemas.CreateBackendStorageResponse_BackendEnvironmentName, v.BackendEnvironmentName)
-		case schemas.CreateBackendStorageResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreateBackendStorageResponse_JobId, v.JobId)
-		case schemas.CreateBackendStorageResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CreateBackendStorageResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBackendStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendStorage, schemas.CreateBackendStorageRequest, schemas.CreateBackendStorageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackendStorage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendStorage, schemas.CreateBackendStorageRequest, schemas.CreateBackendStorageResponse), output: &CreateBackendStorageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBackendStorage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBackendStorage"); err != nil {

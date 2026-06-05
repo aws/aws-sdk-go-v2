@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetClassificationScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetClassificationScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetClassificationScopeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetClassificationScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetClassificationScopeRequest_id, *v.Id)
-	}
-}
-
 type GetClassificationScopeOutput struct {
 
 	// The unique identifier for the classification scope.
@@ -68,30 +54,16 @@ type GetClassificationScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetClassificationScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetClassificationScopeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetClassificationScopeResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetClassificationScopeResponse_id, v.Id)
-		case schemas.GetClassificationScopeResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetClassificationScopeResponse_name, v.Name)
-		case schemas.GetClassificationScopeResponse_s3:
-			v.S3 = &types.S3ClassificationScope{}
-			return v.S3.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetClassificationScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClassificationScope, schemas.GetClassificationScopeRequest, schemas.GetClassificationScopeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClassificationScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClassificationScope, schemas.GetClassificationScopeRequest, schemas.GetClassificationScopeResponse), output: &GetClassificationScopeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClassificationScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetClassificationScope"); err != nil {

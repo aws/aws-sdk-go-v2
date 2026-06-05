@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,25 +83,6 @@ type CreateDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDBClusterParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.CreateDBClusterParameterGroupMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DBParameterGroupFamily != nil {
-		s.WriteString(schemas.CreateDBClusterParameterGroupMessage_DBParameterGroupFamily, *v.DBParameterGroupFamily)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDBClusterParameterGroupMessage_Description, *v.Description)
-	}
-	serializeTagList(s, schemas.CreateDBClusterParameterGroupMessage_Tags, v.Tags)
-}
-
 type CreateDBClusterParameterGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster parameter group.
@@ -117,24 +96,16 @@ type CreateDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDBClusterParameterGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDBClusterParameterGroupResult_DBClusterParameterGroup:
-			v.DBClusterParameterGroup = &types.DBClusterParameterGroup{}
-			return v.DBClusterParameterGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterParameterGroup, schemas.CreateDBClusterParameterGroupMessage, schemas.CreateDBClusterParameterGroupResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterParameterGroup, schemas.CreateDBClusterParameterGroupMessage, schemas.CreateDBClusterParameterGroupResult), output: &CreateDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBClusterParameterGroup"); err != nil {

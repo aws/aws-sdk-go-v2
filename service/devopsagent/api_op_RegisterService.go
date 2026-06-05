@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,29 +57,6 @@ type RegisterServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterServiceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.RegisterServiceInput_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RegisterServiceInput_name, *v.Name)
-	}
-	if v.PrivateConnectionName != nil {
-		s.WriteString(schemas.RegisterServiceInput_privateConnectionName, *v.PrivateConnectionName)
-	}
-	if v.Service != "" {
-		s.WriteString(schemas.RegisterServiceInput_service, string(v.Service))
-	}
-	serializeServiceDetails(s, schemas.RegisterServiceInput_serviceDetails, v.ServiceDetails)
-	serializeTags(s, schemas.RegisterServiceInput_tags, v.Tags)
-}
-
 // Output containing the service ID and any additional steps required for
 // registration.
 type RegisterServiceOutput struct {
@@ -107,31 +82,16 @@ type RegisterServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterServiceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterServiceOutput_additionalStep:
-			return deserializeAdditionalServiceRegistrationStep(d, schemas.RegisterServiceOutput_additionalStep, &v.AdditionalStep)
-		case schemas.RegisterServiceOutput_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.RegisterServiceOutput_kmsKeyArn, v.KmsKeyArn)
-		case schemas.RegisterServiceOutput_serviceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.RegisterServiceOutput_serviceId, v.ServiceId)
-		case schemas.RegisterServiceOutput_tags:
-			return deserializeTags(d, schemas.RegisterServiceOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterService, schemas.RegisterServiceInput, schemas.RegisterServiceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterService, schemas.RegisterServiceInput, schemas.RegisterServiceOutput), output: &RegisterServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterService"); err != nil {

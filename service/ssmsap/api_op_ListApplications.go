@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,37 +42,6 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListApplicationsInput_Filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListApplicationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationsInput_NextToken, *v.NextToken)
-	}
-}
-func (v *ListApplicationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsInput_Filters:
-			return deserializeFilterList(d, schemas.ListApplicationsInput_Filters, &v.Filters)
-		case schemas.ListApplicationsInput_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListApplicationsInput_MaxResults, v.MaxResults)
-		case schemas.ListApplicationsInput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationsInput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListApplicationsOutput struct {
 
 	// The applications registered with AWS Systems Manager for SAP.
@@ -90,38 +57,16 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSummaryList(s, schemas.ListApplicationsOutput_Applications, v.Applications)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationsOutput_NextToken, *v.NextToken)
-	}
-}
-func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsOutput_Applications:
-			return deserializeApplicationSummaryList(d, schemas.ListApplicationsOutput_Applications, &v.Applications)
-		case schemas.ListApplicationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationsOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplications"); err != nil {

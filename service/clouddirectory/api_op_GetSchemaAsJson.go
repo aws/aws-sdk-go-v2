@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetSchemaAsJsonInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaAsJsonInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSchemaAsJsonRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSchemaAsJsonInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.GetSchemaAsJsonRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type GetSchemaAsJsonOutput struct {
 
 	// The JSON representation of the schema document.
@@ -66,27 +52,16 @@ type GetSchemaAsJsonOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaAsJsonOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSchemaAsJsonResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSchemaAsJsonResponse_Document:
-			v.Document = new(string)
-			return d.ReadString(schemas.GetSchemaAsJsonResponse_Document, v.Document)
-		case schemas.GetSchemaAsJsonResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetSchemaAsJsonResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSchemaAsJsonMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaAsJson, schemas.GetSchemaAsJsonRequest, schemas.GetSchemaAsJsonResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchemaAsJson{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaAsJson, schemas.GetSchemaAsJsonRequest, schemas.GetSchemaAsJsonResponse), output: &GetSchemaAsJsonOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSchemaAsJson{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchemaAsJson"); err != nil {

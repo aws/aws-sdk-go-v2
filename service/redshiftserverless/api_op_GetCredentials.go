@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -76,27 +74,6 @@ type GetCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCredentialsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCredentialsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomDomainName != nil {
-		s.WriteString(schemas.GetCredentialsRequest_customDomainName, *v.CustomDomainName)
-	}
-	if v.DbName != nil {
-		s.WriteString(schemas.GetCredentialsRequest_dbName, *v.DbName)
-	}
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.GetCredentialsRequest_durationSeconds, *v.DurationSeconds)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.GetCredentialsRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type GetCredentialsOutput struct {
 
 	// A temporary password that authorizes the user name returned by DbUser to log on
@@ -121,33 +98,16 @@ type GetCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCredentialsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCredentialsResponse_dbPassword:
-			v.DbPassword = new(string)
-			return d.ReadString(schemas.GetCredentialsResponse_dbPassword, v.DbPassword)
-		case schemas.GetCredentialsResponse_dbUser:
-			v.DbUser = new(string)
-			return d.ReadString(schemas.GetCredentialsResponse_dbUser, v.DbUser)
-		case schemas.GetCredentialsResponse_expiration:
-			v.Expiration = new(time.Time)
-			return d.ReadTime(schemas.GetCredentialsResponse_expiration, v.Expiration)
-		case schemas.GetCredentialsResponse_nextRefreshTime:
-			v.NextRefreshTime = new(time.Time)
-			return d.ReadTime(schemas.GetCredentialsResponse_nextRefreshTime, v.NextRefreshTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentials, schemas.GetCredentialsRequest, schemas.GetCredentialsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentials, schemas.GetCredentialsRequest, schemas.GetCredentialsResponse), output: &GetCredentialsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCredentials"); err != nil {

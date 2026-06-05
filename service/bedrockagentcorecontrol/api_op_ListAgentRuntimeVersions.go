@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListAgentRuntimeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAgentRuntimeVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAgentRuntimeVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAgentRuntimeVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentRuntimeId != nil {
-		s.WriteString(schemas.ListAgentRuntimeVersionsRequest_agentRuntimeId, *v.AgentRuntimeId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAgentRuntimeVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAgentRuntimeVersionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAgentRuntimeVersionsOutput struct {
 
 	// The list of AgentCore Runtime versions.
@@ -79,26 +59,16 @@ type ListAgentRuntimeVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAgentRuntimeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAgentRuntimeVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAgentRuntimeVersionsResponse_agentRuntimes:
-			return deserializeAgentRuntimes(d, schemas.ListAgentRuntimeVersionsResponse_agentRuntimes, &v.AgentRuntimes)
-		case schemas.ListAgentRuntimeVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAgentRuntimeVersionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAgentRuntimeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRuntimeVersions, schemas.ListAgentRuntimeVersionsRequest, schemas.ListAgentRuntimeVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentRuntimeVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRuntimeVersions, schemas.ListAgentRuntimeVersionsRequest, schemas.ListAgentRuntimeVersionsResponse), output: &ListAgentRuntimeVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentRuntimeVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAgentRuntimeVersions"); err != nil {

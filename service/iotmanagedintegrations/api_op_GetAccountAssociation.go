@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetAccountAssociationInput struct {
 	AccountAssociationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAccountAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAccountAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAccountAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountAssociationId != nil {
-		s.WriteString(schemas.GetAccountAssociationRequest_AccountAssociationId, *v.AccountAssociationId)
-	}
 }
 
 type GetAccountAssociationOutput struct {
@@ -99,54 +85,16 @@ type GetAccountAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAccountAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAccountAssociationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAccountAssociationResponse_AccountAssociationId:
-			v.AccountAssociationId = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_AccountAssociationId, v.AccountAssociationId)
-		case schemas.GetAccountAssociationResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_Arn, v.Arn)
-		case schemas.GetAccountAssociationResponse_AssociationState:
-			var ev string
-			if err := d.ReadString(schemas.GetAccountAssociationResponse_AssociationState, &ev); err != nil {
-				return err
-			}
-			v.AssociationState = types.AssociationState(ev)
-			return nil
-		case schemas.GetAccountAssociationResponse_ConnectorDestinationId:
-			v.ConnectorDestinationId = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_ConnectorDestinationId, v.ConnectorDestinationId)
-		case schemas.GetAccountAssociationResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_Description, v.Description)
-		case schemas.GetAccountAssociationResponse_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_ErrorMessage, v.ErrorMessage)
-		case schemas.GetAccountAssociationResponse_GeneralAuthorization:
-			v.GeneralAuthorization = &types.GeneralAuthorizationName{}
-			return v.GeneralAuthorization.Deserialize(d)
-		case schemas.GetAccountAssociationResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_Name, v.Name)
-		case schemas.GetAccountAssociationResponse_OAuthAuthorizationUrl:
-			v.OAuthAuthorizationUrl = new(string)
-			return d.ReadString(schemas.GetAccountAssociationResponse_OAuthAuthorizationUrl, v.OAuthAuthorizationUrl)
-		case schemas.GetAccountAssociationResponse_Tags:
-			return deserializeTagsMap(d, schemas.GetAccountAssociationResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAccountAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountAssociation, schemas.GetAccountAssociationRequest, schemas.GetAccountAssociationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountAssociation, schemas.GetAccountAssociationRequest, schemas.GetAccountAssociationResponse), output: &GetAccountAssociationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountAssociation"); err != nil {

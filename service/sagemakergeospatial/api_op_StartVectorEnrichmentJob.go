@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,34 +61,6 @@ type StartVectorEnrichmentJobInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartVectorEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartVectorEnrichmentJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobInput_ClientToken, *v.ClientToken)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobInput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.InputConfig != nil {
-		s.WriteStruct(schemas.StartVectorEnrichmentJobInput_InputConfig)
-		v.InputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobInput_JobConfig, v.JobConfig)
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobInput_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobInput_Name, *v.Name)
-	}
-	serializeTags(s, schemas.StartVectorEnrichmentJobInput_Tags, v.Tags)
 }
 
 type StartVectorEnrichmentJobOutput struct {
@@ -152,99 +122,16 @@ type StartVectorEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartVectorEnrichmentJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartVectorEnrichmentJobOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartVectorEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.StartVectorEnrichmentJobOutput_CreationTime, *v.CreationTime)
-	}
-	if v.DurationInSeconds != nil {
-		s.WriteInt32(schemas.StartVectorEnrichmentJobOutput_DurationInSeconds, *v.DurationInSeconds)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.InputConfig != nil {
-		s.WriteStruct(schemas.StartVectorEnrichmentJobOutput_InputConfig)
-		v.InputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobOutput_JobConfig, v.JobConfig)
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Status, string(v.Status))
-	}
-	serializeTags(s, schemas.StartVectorEnrichmentJobOutput_Tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Type, string(v.Type))
-	}
-}
-func (v *StartVectorEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartVectorEnrichmentJobOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.StartVectorEnrichmentJobOutput_Arn, v.Arn)
-		case schemas.StartVectorEnrichmentJobOutput_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.StartVectorEnrichmentJobOutput_CreationTime, v.CreationTime)
-		case schemas.StartVectorEnrichmentJobOutput_DurationInSeconds:
-			v.DurationInSeconds = new(int32)
-			return d.ReadInt32(schemas.StartVectorEnrichmentJobOutput_DurationInSeconds, v.DurationInSeconds)
-		case schemas.StartVectorEnrichmentJobOutput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.StartVectorEnrichmentJobOutput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.StartVectorEnrichmentJobOutput_InputConfig:
-			v.InputConfig = &types.VectorEnrichmentJobInputConfig{}
-			return v.InputConfig.Deserialize(d)
-		case schemas.StartVectorEnrichmentJobOutput_JobConfig:
-			return deserializeVectorEnrichmentJobConfig(d, schemas.StartVectorEnrichmentJobOutput_JobConfig, &v.JobConfig)
-		case schemas.StartVectorEnrichmentJobOutput_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.StartVectorEnrichmentJobOutput_KmsKeyId, v.KmsKeyId)
-		case schemas.StartVectorEnrichmentJobOutput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.StartVectorEnrichmentJobOutput_Name, v.Name)
-		case schemas.StartVectorEnrichmentJobOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.StartVectorEnrichmentJobOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.VectorEnrichmentJobStatus(ev)
-			return nil
-		case schemas.StartVectorEnrichmentJobOutput_Tags:
-			return deserializeTags(d, schemas.StartVectorEnrichmentJobOutput_Tags, &v.Tags)
-		case schemas.StartVectorEnrichmentJobOutput_Type:
-			var ev string
-			if err := d.ReadString(schemas.StartVectorEnrichmentJobOutput_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.VectorEnrichmentJobType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartVectorEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVectorEnrichmentJob, schemas.StartVectorEnrichmentJobInput, schemas.StartVectorEnrichmentJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVectorEnrichmentJob, schemas.StartVectorEnrichmentJobInput, schemas.StartVectorEnrichmentJobOutput), output: &StartVectorEnrichmentJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartVectorEnrichmentJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartVectorEnrichmentJob"); err != nil {

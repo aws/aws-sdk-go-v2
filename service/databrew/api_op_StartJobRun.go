@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartJobRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartJobRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.StartJobRunRequest_Name, *v.Name)
-	}
-}
-
 type StartJobRunOutput struct {
 
 	// A system-generated identifier for this particular job run.
@@ -63,24 +49,16 @@ type StartJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartJobRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartJobRunResponse_RunId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.StartJobRunResponse_RunId, v.RunId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse), output: &StartJobRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartJobRun"); err != nil {

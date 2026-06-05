@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,28 +56,6 @@ type BatchPutAttributesMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutAttributesMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchPutAttributesMetadataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchPutAttributesMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.BatchPutAttributesMetadataInput_attributes, v.Attributes)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchPutAttributesMetadataInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.BatchPutAttributesMetadataInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.BatchPutAttributesMetadataInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.BatchPutAttributesMetadataInput_entityType, string(v.EntityType))
-	}
-}
-
 type BatchPutAttributesMetadataOutput struct {
 
 	// The results of the BatchPutAttributeMetadata action.
@@ -94,25 +70,16 @@ type BatchPutAttributesMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutAttributesMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchPutAttributesMetadataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchPutAttributesMetadataOutput_attributes:
-			return deserializeBatchPutAttributeItems(d, schemas.BatchPutAttributesMetadataOutput_attributes, &v.Attributes)
-		case schemas.BatchPutAttributesMetadataOutput_errors:
-			return deserializeAttributesErrors(d, schemas.BatchPutAttributesMetadataOutput_errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchPutAttributesMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutAttributesMetadata, schemas.BatchPutAttributesMetadataInput, schemas.BatchPutAttributesMetadataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutAttributesMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutAttributesMetadata, schemas.BatchPutAttributesMetadataInput, schemas.BatchPutAttributesMetadataOutput), output: &BatchPutAttributesMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutAttributesMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutAttributesMetadata"); err != nil {

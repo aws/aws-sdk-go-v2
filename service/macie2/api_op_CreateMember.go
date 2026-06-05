@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type CreateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMemberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMemberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Account != nil {
-		s.WriteStruct(schemas.CreateMemberRequest_account)
-		v.Account.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateMemberRequest_tags, v.Tags)
-}
-
 type CreateMemberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account that was associated with the
@@ -74,24 +57,16 @@ type CreateMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMemberResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMemberResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateMemberResponse_arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMember, schemas.CreateMemberRequest, schemas.CreateMemberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMember, schemas.CreateMemberRequest, schemas.CreateMemberResponse), output: &CreateMemberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMember{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMember"); err != nil {

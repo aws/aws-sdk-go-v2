@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,24 +68,6 @@ type ReportTaskRunnerHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReportTaskRunnerHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportTaskRunnerHeartbeatInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportTaskRunnerHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hostname != nil {
-		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_hostname, *v.Hostname)
-	}
-	if v.TaskrunnerId != nil {
-		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_taskrunnerId, *v.TaskrunnerId)
-	}
-	if v.WorkerGroup != nil {
-		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_workerGroup, *v.WorkerGroup)
-	}
-}
-
 // Contains the output of ReportTaskRunnerHeartbeat.
 type ReportTaskRunnerHeartbeatOutput struct {
 
@@ -102,23 +82,16 @@ type ReportTaskRunnerHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReportTaskRunnerHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportTaskRunnerHeartbeatOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportTaskRunnerHeartbeatOutput_terminate:
-			return d.ReadBool(schemas.ReportTaskRunnerHeartbeatOutput_terminate, &v.Terminate)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskRunnerHeartbeat, schemas.ReportTaskRunnerHeartbeatInput, schemas.ReportTaskRunnerHeartbeatOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskRunnerHeartbeat{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskRunnerHeartbeat, schemas.ReportTaskRunnerHeartbeatInput, schemas.ReportTaskRunnerHeartbeatOutput), output: &ReportTaskRunnerHeartbeatOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReportTaskRunnerHeartbeat{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ReportTaskRunnerHeartbeat"); err != nil {

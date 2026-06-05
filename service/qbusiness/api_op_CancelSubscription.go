@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type CancelSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelSubscriptionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CancelSubscriptionRequest_applicationId, *v.ApplicationId)
-	}
-	if v.SubscriptionId != nil {
-		s.WriteString(schemas.CancelSubscriptionRequest_subscriptionId, *v.SubscriptionId)
-	}
-}
-
 type CancelSubscriptionOutput struct {
 
 	// The type of your current Amazon Q Business subscription.
@@ -80,30 +63,16 @@ type CancelSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelSubscriptionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelSubscriptionResponse_currentSubscription:
-			v.CurrentSubscription = &types.SubscriptionDetails{}
-			return v.CurrentSubscription.Deserialize(d)
-		case schemas.CancelSubscriptionResponse_nextSubscription:
-			v.NextSubscription = &types.SubscriptionDetails{}
-			return v.NextSubscription.Deserialize(d)
-		case schemas.CancelSubscriptionResponse_subscriptionArn:
-			v.SubscriptionArn = new(string)
-			return d.ReadString(schemas.CancelSubscriptionResponse_subscriptionArn, v.SubscriptionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionRequest, schemas.CancelSubscriptionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSubscription, schemas.CancelSubscriptionRequest, schemas.CancelSubscriptionResponse), output: &CancelSubscriptionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelSubscription"); err != nil {

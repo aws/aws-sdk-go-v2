@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -30,50 +28,6 @@ type AttachmentItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachmentItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttachmentItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttachmentItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttachmentId != nil {
-		s.WriteString(schemas.AttachmentItem_AttachmentId, *v.AttachmentId)
-	}
-	if v.AttachmentName != nil {
-		s.WriteString(schemas.AttachmentItem_AttachmentName, *v.AttachmentName)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.AttachmentItem_ContentType, *v.ContentType)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AttachmentItem_Status, string(v.Status))
-	}
-}
-func (v *AttachmentItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentItem_AttachmentId:
-			v.AttachmentId = new(string)
-			return d.ReadString(schemas.AttachmentItem_AttachmentId, v.AttachmentId)
-		case schemas.AttachmentItem_AttachmentName:
-			v.AttachmentName = new(string)
-			return d.ReadString(schemas.AttachmentItem_AttachmentName, v.AttachmentName)
-		case schemas.AttachmentItem_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.AttachmentItem_ContentType, v.ContentType)
-		case schemas.AttachmentItem_Status:
-			var ev string
-			if err := d.ReadString(schemas.AttachmentItem_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ArtifactStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The attendee information, including attendee ID and join token.
 type Attendee struct {
 
@@ -86,34 +40,6 @@ type Attendee struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Attendee) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Attendee)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Attendee) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttendeeId != nil {
-		s.WriteString(schemas.Attendee_AttendeeId, *v.AttendeeId)
-	}
-	if v.JoinToken != nil {
-		s.WriteString(schemas.Attendee_JoinToken, *v.JoinToken)
-	}
-}
-func (v *Attendee) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Attendee, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Attendee_AttendeeId:
-			v.AttendeeId = new(string)
-			return d.ReadString(schemas.Attendee_AttendeeId, v.AttendeeId)
-		case schemas.Attendee_JoinToken:
-			v.JoinToken = new(string)
-			return d.ReadString(schemas.Attendee_JoinToken, v.JoinToken)
-		}
-		return nil
-	})
-}
-
 // Has audio-specific configurations as the operating parameter for Echo Reduction.
 type AudioFeatures struct {
 
@@ -121,32 +47,6 @@ type AudioFeatures struct {
 	EchoReduction MeetingFeatureStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *AudioFeatures) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AudioFeatures)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AudioFeatures) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EchoReduction != "" {
-		s.WriteString(schemas.AudioFeatures_EchoReduction, string(v.EchoReduction))
-	}
-}
-func (v *AudioFeatures) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AudioFeatures, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AudioFeatures_EchoReduction:
-			var ev string
-			if err := d.ReadString(schemas.AudioFeatures_EchoReduction, &ev); err != nil {
-				return err
-			}
-			v.EchoReduction = MeetingFeatureStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Connection credentials.
@@ -162,34 +62,6 @@ type ConnectionCredentials struct {
 	Expiry *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConnectionCredentials) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionCredentials)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionCredentials) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionToken != nil {
-		s.WriteString(schemas.ConnectionCredentials_ConnectionToken, *v.ConnectionToken)
-	}
-	if v.Expiry != nil {
-		s.WriteString(schemas.ConnectionCredentials_Expiry, *v.Expiry)
-	}
-}
-func (v *ConnectionCredentials) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionCredentials, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionCredentials_ConnectionToken:
-			v.ConnectionToken = new(string)
-			return d.ReadString(schemas.ConnectionCredentials_ConnectionToken, v.ConnectionToken)
-		case schemas.ConnectionCredentials_Expiry:
-			v.Expiry = new(string)
-			return d.ReadString(schemas.ConnectionCredentials_Expiry, v.Expiry)
-		}
-		return nil
-	})
 }
 
 // An item - message or event - that has been sent.
@@ -243,101 +115,6 @@ type Item struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Item) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Item)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AbsoluteTime != nil {
-		s.WriteString(schemas.Item_AbsoluteTime, *v.AbsoluteTime)
-	}
-	serializeAttachments(s, schemas.Item_Attachments, v.Attachments)
-	if v.ContactId != nil {
-		s.WriteString(schemas.Item_ContactId, *v.ContactId)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.Item_Content, *v.Content)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.Item_ContentType, *v.ContentType)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.Item_DisplayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Item_Id, *v.Id)
-	}
-	if v.MessageMetadata != nil {
-		s.WriteStruct(schemas.Item_MessageMetadata)
-		v.MessageMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ParticipantId != nil {
-		s.WriteString(schemas.Item_ParticipantId, *v.ParticipantId)
-	}
-	if v.ParticipantRole != "" {
-		s.WriteString(schemas.Item_ParticipantRole, string(v.ParticipantRole))
-	}
-	if v.RelatedContactId != nil {
-		s.WriteString(schemas.Item_RelatedContactId, *v.RelatedContactId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Item_Type, string(v.Type))
-	}
-}
-func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Item, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Item_AbsoluteTime:
-			v.AbsoluteTime = new(string)
-			return d.ReadString(schemas.Item_AbsoluteTime, v.AbsoluteTime)
-		case schemas.Item_Attachments:
-			return deserializeAttachments(d, schemas.Item_Attachments, &v.Attachments)
-		case schemas.Item_ContactId:
-			v.ContactId = new(string)
-			return d.ReadString(schemas.Item_ContactId, v.ContactId)
-		case schemas.Item_Content:
-			v.Content = new(string)
-			return d.ReadString(schemas.Item_Content, v.Content)
-		case schemas.Item_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.Item_ContentType, v.ContentType)
-		case schemas.Item_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.Item_DisplayName, v.DisplayName)
-		case schemas.Item_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Item_Id, v.Id)
-		case schemas.Item_MessageMetadata:
-			v.MessageMetadata = &MessageMetadata{}
-			return v.MessageMetadata.Deserialize(d)
-		case schemas.Item_ParticipantId:
-			v.ParticipantId = new(string)
-			return d.ReadString(schemas.Item_ParticipantId, v.ParticipantId)
-		case schemas.Item_ParticipantRole:
-			var ev string
-			if err := d.ReadString(schemas.Item_ParticipantRole, &ev); err != nil {
-				return err
-			}
-			v.ParticipantRole = ParticipantRole(ev)
-			return nil
-		case schemas.Item_RelatedContactId:
-			v.RelatedContactId = new(string)
-			return d.ReadString(schemas.Item_RelatedContactId, v.RelatedContactId)
-		case schemas.Item_Type:
-			var ev string
-			if err := d.ReadString(schemas.Item_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChatItemType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The configuration settings of the features available to a meeting.
 type MeetingFeaturesConfiguration struct {
 
@@ -345,30 +122,6 @@ type MeetingFeaturesConfiguration struct {
 	Audio *AudioFeatures
 
 	noSmithyDocumentSerde
-}
-
-func (v *MeetingFeaturesConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MeetingFeaturesConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MeetingFeaturesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Audio != nil {
-		s.WriteStruct(schemas.MeetingFeaturesConfiguration_Audio)
-		v.Audio.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MeetingFeaturesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MeetingFeaturesConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MeetingFeaturesConfiguration_Audio:
-			v.Audio = &AudioFeatures{}
-			return v.Audio.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Contains metadata related to a message.
@@ -386,41 +139,6 @@ type MessageMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MessageMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MessageMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MessageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageId != nil {
-		s.WriteString(schemas.MessageMetadata_MessageId, *v.MessageId)
-	}
-	if v.MessageProcessingStatus != "" {
-		s.WriteString(schemas.MessageMetadata_MessageProcessingStatus, string(v.MessageProcessingStatus))
-	}
-	serializeReceipts(s, schemas.MessageMetadata_Receipts, v.Receipts)
-}
-func (v *MessageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MessageMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MessageMetadata_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.MessageMetadata_MessageId, v.MessageId)
-		case schemas.MessageMetadata_MessageProcessingStatus:
-			var ev string
-			if err := d.ReadString(schemas.MessageMetadata_MessageProcessingStatus, &ev); err != nil {
-				return err
-			}
-			v.MessageProcessingStatus = MessageProcessingStatus(ev)
-			return nil
-		case schemas.MessageMetadata_Receipts:
-			return deserializeReceipts(d, schemas.MessageMetadata_Receipts, &v.Receipts)
-		}
-		return nil
-	})
-}
-
 // Contains metadata for chat messages.
 type MessageProcessingMetadata struct {
 
@@ -428,32 +146,6 @@ type MessageProcessingMetadata struct {
 	MessageProcessingStatus MessageProcessingStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *MessageProcessingMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MessageProcessingMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MessageProcessingMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageProcessingStatus != "" {
-		s.WriteString(schemas.MessageProcessingMetadata_MessageProcessingStatus, string(v.MessageProcessingStatus))
-	}
-}
-func (v *MessageProcessingMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MessageProcessingMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MessageProcessingMetadata_MessageProcessingStatus:
-			var ev string
-			if err := d.ReadString(schemas.MessageProcessingMetadata_MessageProcessingStatus, &ev); err != nil {
-				return err
-			}
-			v.MessageProcessingStatus = MessageProcessingStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The receipt for the message delivered to the recipient.
@@ -469,40 +161,6 @@ type Receipt struct {
 	RecipientParticipantId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Receipt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Receipt)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Receipt) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveredTimestamp != nil {
-		s.WriteString(schemas.Receipt_DeliveredTimestamp, *v.DeliveredTimestamp)
-	}
-	if v.ReadTimestamp != nil {
-		s.WriteString(schemas.Receipt_ReadTimestamp, *v.ReadTimestamp)
-	}
-	if v.RecipientParticipantId != nil {
-		s.WriteString(schemas.Receipt_RecipientParticipantId, *v.RecipientParticipantId)
-	}
-}
-func (v *Receipt) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Receipt, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Receipt_DeliveredTimestamp:
-			v.DeliveredTimestamp = new(string)
-			return d.ReadString(schemas.Receipt_DeliveredTimestamp, v.DeliveredTimestamp)
-		case schemas.Receipt_ReadTimestamp:
-			v.ReadTimestamp = new(string)
-			return d.ReadString(schemas.Receipt_ReadTimestamp, v.ReadTimestamp)
-		case schemas.Receipt_RecipientParticipantId:
-			v.RecipientParticipantId = new(string)
-			return d.ReadString(schemas.Receipt_RecipientParticipantId, v.RecipientParticipantId)
-		}
-		return nil
-	})
 }
 
 // A filtering option for where to start. For example, if you sent 100 messages,
@@ -524,39 +182,6 @@ type StartPosition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartPosition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartPosition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartPosition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AbsoluteTime != nil {
-		s.WriteString(schemas.StartPosition_AbsoluteTime, *v.AbsoluteTime)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.StartPosition_Id, *v.Id)
-	}
-	if v.MostRecent != 0 {
-		s.WriteInt32(schemas.StartPosition_MostRecent, v.MostRecent)
-	}
-}
-func (v *StartPosition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartPosition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartPosition_AbsoluteTime:
-			v.AbsoluteTime = new(string)
-			return d.ReadString(schemas.StartPosition_AbsoluteTime, v.AbsoluteTime)
-		case schemas.StartPosition_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartPosition_Id, v.Id)
-		case schemas.StartPosition_MostRecent:
-			return d.ReadInt32(schemas.StartPosition_MostRecent, &v.MostRecent)
-		}
-		return nil
-	})
-}
-
 // Fields to be used while uploading the attachment.
 type UploadMetadata struct {
 
@@ -574,37 +199,6 @@ type UploadMetadata struct {
 	UrlExpiry *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UploadMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UploadMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UploadMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUploadMetadataSignedHeaders(s, schemas.UploadMetadata_HeadersToInclude, v.HeadersToInclude)
-	if v.Url != nil {
-		s.WriteString(schemas.UploadMetadata_Url, *v.Url)
-	}
-	if v.UrlExpiry != nil {
-		s.WriteString(schemas.UploadMetadata_UrlExpiry, *v.UrlExpiry)
-	}
-}
-func (v *UploadMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UploadMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UploadMetadata_HeadersToInclude:
-			return deserializeUploadMetadataSignedHeaders(d, schemas.UploadMetadata_HeadersToInclude, &v.HeadersToInclude)
-		case schemas.UploadMetadata_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.UploadMetadata_Url, v.Url)
-		case schemas.UploadMetadata_UrlExpiry:
-			v.UrlExpiry = new(string)
-			return d.ReadString(schemas.UploadMetadata_UrlExpiry, v.UrlExpiry)
-		}
-		return nil
-	})
 }
 
 // A view resource object. Contains metadata and content necessary to render the
@@ -630,54 +224,6 @@ type View struct {
 	noSmithyDocumentSerde
 }
 
-func (v *View) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.View)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *View) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.View_Arn, *v.Arn)
-	}
-	if v.Content != nil {
-		s.WriteStruct(schemas.View_Content)
-		v.Content.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.View_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.View_Name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteInt32(schemas.View_Version, *v.Version)
-	}
-}
-func (v *View) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.View, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.View_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.View_Arn, v.Arn)
-		case schemas.View_Content:
-			v.Content = &ViewContent{}
-			return v.Content.Deserialize(d)
-		case schemas.View_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.View_Id, v.Id)
-		case schemas.View_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.View_Name, v.Name)
-		case schemas.View_Version:
-			v.Version = new(int32)
-			return d.ReadInt32(schemas.View_Version, v.Version)
-		}
-		return nil
-	})
-}
-
 // View content containing all content necessary to render a view except for
 // runtime input data.
 type ViewContent struct {
@@ -695,37 +241,6 @@ type ViewContent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ViewContent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ViewContent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ViewContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeViewActions(s, schemas.ViewContent_Actions, v.Actions)
-	if v.InputSchema != nil {
-		s.WriteString(schemas.ViewContent_InputSchema, *v.InputSchema)
-	}
-	if v.Template != nil {
-		s.WriteString(schemas.ViewContent_Template, *v.Template)
-	}
-}
-func (v *ViewContent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ViewContent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ViewContent_Actions:
-			return deserializeViewActions(d, schemas.ViewContent_Actions, &v.Actions)
-		case schemas.ViewContent_InputSchema:
-			v.InputSchema = new(string)
-			return d.ReadString(schemas.ViewContent_InputSchema, v.InputSchema)
-		case schemas.ViewContent_Template:
-			v.Template = new(string)
-			return d.ReadString(schemas.ViewContent_Template, v.Template)
-		}
-		return nil
-	})
-}
-
 // Creates the participant’s WebRTC connection data required for the client
 // application (mobile or web) to connect to the call.
 type WebRTCConnection struct {
@@ -737,38 +252,6 @@ type WebRTCConnection struct {
 	Meeting *WebRTCMeeting
 
 	noSmithyDocumentSerde
-}
-
-func (v *WebRTCConnection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WebRTCConnection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WebRTCConnection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attendee != nil {
-		s.WriteStruct(schemas.WebRTCConnection_Attendee)
-		v.Attendee.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Meeting != nil {
-		s.WriteStruct(schemas.WebRTCConnection_Meeting)
-		v.Meeting.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *WebRTCConnection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WebRTCConnection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WebRTCConnection_Attendee:
-			v.Attendee = &Attendee{}
-			return v.Attendee.Deserialize(d)
-		case schemas.WebRTCConnection_Meeting:
-			v.Meeting = &WebRTCMeeting{}
-			return v.Meeting.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A set of endpoints used by clients to connect to the media service group for an
@@ -790,46 +273,6 @@ type WebRTCMediaPlacement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WebRTCMediaPlacement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WebRTCMediaPlacement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WebRTCMediaPlacement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AudioFallbackUrl != nil {
-		s.WriteString(schemas.WebRTCMediaPlacement_AudioFallbackUrl, *v.AudioFallbackUrl)
-	}
-	if v.AudioHostUrl != nil {
-		s.WriteString(schemas.WebRTCMediaPlacement_AudioHostUrl, *v.AudioHostUrl)
-	}
-	if v.EventIngestionUrl != nil {
-		s.WriteString(schemas.WebRTCMediaPlacement_EventIngestionUrl, *v.EventIngestionUrl)
-	}
-	if v.SignalingUrl != nil {
-		s.WriteString(schemas.WebRTCMediaPlacement_SignalingUrl, *v.SignalingUrl)
-	}
-}
-func (v *WebRTCMediaPlacement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WebRTCMediaPlacement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WebRTCMediaPlacement_AudioFallbackUrl:
-			v.AudioFallbackUrl = new(string)
-			return d.ReadString(schemas.WebRTCMediaPlacement_AudioFallbackUrl, v.AudioFallbackUrl)
-		case schemas.WebRTCMediaPlacement_AudioHostUrl:
-			v.AudioHostUrl = new(string)
-			return d.ReadString(schemas.WebRTCMediaPlacement_AudioHostUrl, v.AudioHostUrl)
-		case schemas.WebRTCMediaPlacement_EventIngestionUrl:
-			v.EventIngestionUrl = new(string)
-			return d.ReadString(schemas.WebRTCMediaPlacement_EventIngestionUrl, v.EventIngestionUrl)
-		case schemas.WebRTCMediaPlacement_SignalingUrl:
-			v.SignalingUrl = new(string)
-			return d.ReadString(schemas.WebRTCMediaPlacement_SignalingUrl, v.SignalingUrl)
-		}
-		return nil
-	})
-}
-
 // A meeting created using the Amazon Chime SDK.
 type WebRTCMeeting struct {
 
@@ -845,44 +288,6 @@ type WebRTCMeeting struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WebRTCMeeting) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WebRTCMeeting)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WebRTCMeeting) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MediaPlacement != nil {
-		s.WriteStruct(schemas.WebRTCMeeting_MediaPlacement)
-		v.MediaPlacement.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MeetingFeatures != nil {
-		s.WriteStruct(schemas.WebRTCMeeting_MeetingFeatures)
-		v.MeetingFeatures.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MeetingId != nil {
-		s.WriteString(schemas.WebRTCMeeting_MeetingId, *v.MeetingId)
-	}
-}
-func (v *WebRTCMeeting) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WebRTCMeeting, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WebRTCMeeting_MediaPlacement:
-			v.MediaPlacement = &WebRTCMediaPlacement{}
-			return v.MediaPlacement.Deserialize(d)
-		case schemas.WebRTCMeeting_MeetingFeatures:
-			v.MeetingFeatures = &MeetingFeaturesConfiguration{}
-			return v.MeetingFeatures.Deserialize(d)
-		case schemas.WebRTCMeeting_MeetingId:
-			v.MeetingId = new(string)
-			return d.ReadString(schemas.WebRTCMeeting_MeetingId, v.MeetingId)
-		}
-		return nil
-	})
-}
-
 // The websocket for the participant's connection.
 type Websocket struct {
 
@@ -896,34 +301,6 @@ type Websocket struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Websocket) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Websocket)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Websocket) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionExpiry != nil {
-		s.WriteString(schemas.Websocket_ConnectionExpiry, *v.ConnectionExpiry)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.Websocket_Url, *v.Url)
-	}
-}
-func (v *Websocket) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Websocket, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Websocket_ConnectionExpiry:
-			v.ConnectionExpiry = new(string)
-			return d.ReadString(schemas.Websocket_ConnectionExpiry, v.ConnectionExpiry)
-		case schemas.Websocket_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.Websocket_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

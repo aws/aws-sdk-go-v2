@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,24 +55,6 @@ type DescribeApplicationAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeApplicationAssignmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeApplicationAssignmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeApplicationAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.DescribeApplicationAssignmentRequest_PrincipalType, string(v.PrincipalType))
-	}
-}
-
 type DescribeApplicationAssignmentOutput struct {
 
 	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
@@ -97,34 +77,16 @@ type DescribeApplicationAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeApplicationAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeApplicationAssignmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeApplicationAssignmentResponse_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.DescribeApplicationAssignmentResponse_ApplicationArn, v.ApplicationArn)
-		case schemas.DescribeApplicationAssignmentResponse_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.DescribeApplicationAssignmentResponse_PrincipalId, v.PrincipalId)
-		case schemas.DescribeApplicationAssignmentResponse_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeApplicationAssignmentResponse_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = types.PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssignment, schemas.DescribeApplicationAssignmentRequest, schemas.DescribeApplicationAssignmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationAssignment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssignment, schemas.DescribeApplicationAssignmentRequest, schemas.DescribeApplicationAssignmentResponse), output: &DescribeApplicationAssignmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationAssignment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplicationAssignment"); err != nil {

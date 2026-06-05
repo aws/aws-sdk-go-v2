@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -118,45 +116,6 @@ type DescribeTableInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTableInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTableRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.DescribeTableRequest_ClusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ConnectedDatabase != nil {
-		s.WriteString(schemas.DescribeTableRequest_ConnectedDatabase, *v.ConnectedDatabase)
-	}
-	if v.Database != nil {
-		s.WriteString(schemas.DescribeTableRequest_Database, *v.Database)
-	}
-	if v.DbUser != nil {
-		s.WriteString(schemas.DescribeTableRequest_DbUser, *v.DbUser)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.DescribeTableRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeTableRequest_NextToken, *v.NextToken)
-	}
-	if v.Schema != nil {
-		s.WriteString(schemas.DescribeTableRequest_Schema, *v.Schema)
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.DescribeTableRequest_SecretArn, *v.SecretArn)
-	}
-	if v.Table != nil {
-		s.WriteString(schemas.DescribeTableRequest_Table, *v.Table)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.DescribeTableRequest_WorkgroupName, *v.WorkgroupName)
-	}
-}
-
 type DescribeTableOutput struct {
 
 	// A list of columns in the table.
@@ -178,29 +137,16 @@ type DescribeTableOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTableResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTableResponse_ColumnList:
-			return deserializeColumnList(d, schemas.DescribeTableResponse_ColumnList, &v.ColumnList)
-		case schemas.DescribeTableResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeTableResponse_NextToken, v.NextToken)
-		case schemas.DescribeTableResponse_TableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.DescribeTableResponse_TableName, v.TableName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTable, schemas.DescribeTableRequest, schemas.DescribeTableResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTable{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTable, schemas.DescribeTableRequest, schemas.DescribeTableResponse), output: &DescribeTableOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTable{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTable"); err != nil {

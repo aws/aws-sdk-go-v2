@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -86,33 +84,6 @@ type SaveBrowserSessionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SaveBrowserSessionProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SaveBrowserSessionProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SaveBrowserSessionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BrowserIdentifier != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_browserIdentifier, *v.BrowserIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_clientToken, *v.ClientToken)
-	}
-	if v.ProfileIdentifier != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_profileIdentifier, *v.ProfileIdentifier)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_sessionId, *v.SessionId)
-	}
-	if v.TraceId != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_traceId, *v.TraceId)
-	}
-	if v.TraceParent != nil {
-		s.WriteString(schemas.SaveBrowserSessionProfileRequest_traceParent, *v.TraceParent)
-	}
-}
-
 type SaveBrowserSessionProfileOutput struct {
 
 	// The unique identifier of the browser associated with the session from which the
@@ -143,33 +114,16 @@ type SaveBrowserSessionProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SaveBrowserSessionProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SaveBrowserSessionProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SaveBrowserSessionProfileResponse_browserIdentifier:
-			v.BrowserIdentifier = new(string)
-			return d.ReadString(schemas.SaveBrowserSessionProfileResponse_browserIdentifier, v.BrowserIdentifier)
-		case schemas.SaveBrowserSessionProfileResponse_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SaveBrowserSessionProfileResponse_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.SaveBrowserSessionProfileResponse_profileIdentifier:
-			v.ProfileIdentifier = new(string)
-			return d.ReadString(schemas.SaveBrowserSessionProfileResponse_profileIdentifier, v.ProfileIdentifier)
-		case schemas.SaveBrowserSessionProfileResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.SaveBrowserSessionProfileResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSaveBrowserSessionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SaveBrowserSessionProfile, schemas.SaveBrowserSessionProfileRequest, schemas.SaveBrowserSessionProfileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSaveBrowserSessionProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SaveBrowserSessionProfile, schemas.SaveBrowserSessionProfileRequest, schemas.SaveBrowserSessionProfileResponse), output: &SaveBrowserSessionProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSaveBrowserSessionProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SaveBrowserSessionProfile"); err != nil {

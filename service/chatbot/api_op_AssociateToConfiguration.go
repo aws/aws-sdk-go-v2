@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type AssociateToConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateToConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateToConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateToConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfiguration != nil {
-		s.WriteString(schemas.AssociateToConfigurationRequest_ChatConfiguration, *v.ChatConfiguration)
-	}
-	if v.Resource != nil {
-		s.WriteString(schemas.AssociateToConfigurationRequest_Resource, *v.Resource)
-	}
-}
-
 type AssociateToConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,21 +48,16 @@ type AssociateToConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateToConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateToConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateToConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateToConfiguration, schemas.AssociateToConfigurationRequest, schemas.AssociateToConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateToConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateToConfiguration, schemas.AssociateToConfigurationRequest, schemas.AssociateToConfigurationResult), output: &AssociateToConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateToConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateToConfiguration"); err != nil {

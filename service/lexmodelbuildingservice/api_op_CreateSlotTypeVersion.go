@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,21 +59,6 @@ type CreateSlotTypeVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSlotTypeVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSlotTypeVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSlotTypeVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Checksum != nil {
-		s.WriteString(schemas.CreateSlotTypeVersionRequest_checksum, *v.Checksum)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSlotTypeVersionRequest_name, *v.Name)
-	}
-}
-
 type CreateSlotTypeVersionOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.
@@ -117,53 +100,16 @@ type CreateSlotTypeVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSlotTypeVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSlotTypeVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSlotTypeVersionResponse_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.CreateSlotTypeVersionResponse_checksum, v.Checksum)
-		case schemas.CreateSlotTypeVersionResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.CreateSlotTypeVersionResponse_createdDate, v.CreatedDate)
-		case schemas.CreateSlotTypeVersionResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateSlotTypeVersionResponse_description, v.Description)
-		case schemas.CreateSlotTypeVersionResponse_enumerationValues:
-			return deserializeEnumerationValues(d, schemas.CreateSlotTypeVersionResponse_enumerationValues, &v.EnumerationValues)
-		case schemas.CreateSlotTypeVersionResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.CreateSlotTypeVersionResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.CreateSlotTypeVersionResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateSlotTypeVersionResponse_name, v.Name)
-		case schemas.CreateSlotTypeVersionResponse_parentSlotTypeSignature:
-			v.ParentSlotTypeSignature = new(string)
-			return d.ReadString(schemas.CreateSlotTypeVersionResponse_parentSlotTypeSignature, v.ParentSlotTypeSignature)
-		case schemas.CreateSlotTypeVersionResponse_slotTypeConfigurations:
-			return deserializeSlotTypeConfigurations(d, schemas.CreateSlotTypeVersionResponse_slotTypeConfigurations, &v.SlotTypeConfigurations)
-		case schemas.CreateSlotTypeVersionResponse_valueSelectionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.CreateSlotTypeVersionResponse_valueSelectionStrategy, &ev); err != nil {
-				return err
-			}
-			v.ValueSelectionStrategy = types.SlotValueSelectionStrategy(ev)
-			return nil
-		case schemas.CreateSlotTypeVersionResponse_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.CreateSlotTypeVersionResponse_version, v.Version)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlotTypeVersion, schemas.CreateSlotTypeVersionRequest, schemas.CreateSlotTypeVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSlotTypeVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlotTypeVersion, schemas.CreateSlotTypeVersionRequest, schemas.CreateSlotTypeVersionResponse), output: &CreateSlotTypeVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSlotTypeVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSlotTypeVersion"); err != nil {

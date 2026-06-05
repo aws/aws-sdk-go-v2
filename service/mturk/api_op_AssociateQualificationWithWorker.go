@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,27 +64,6 @@ type AssociateQualificationWithWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateQualificationWithWorkerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateQualificationWithWorkerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateQualificationWithWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IntegerValue != nil {
-		s.WriteInt32(schemas.AssociateQualificationWithWorkerRequest_IntegerValue, *v.IntegerValue)
-	}
-	if v.QualificationTypeId != nil {
-		s.WriteString(schemas.AssociateQualificationWithWorkerRequest_QualificationTypeId, *v.QualificationTypeId)
-	}
-	if v.SendNotification != nil {
-		s.WriteBool(schemas.AssociateQualificationWithWorkerRequest_SendNotification, *v.SendNotification)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.AssociateQualificationWithWorkerRequest_WorkerId, *v.WorkerId)
-	}
-}
-
 type AssociateQualificationWithWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -94,21 +71,16 @@ type AssociateQualificationWithWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateQualificationWithWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateQualificationWithWorkerResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateQualificationWithWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQualificationWithWorker, schemas.AssociateQualificationWithWorkerRequest, schemas.AssociateQualificationWithWorkerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateQualificationWithWorker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQualificationWithWorker, schemas.AssociateQualificationWithWorkerRequest, schemas.AssociateQualificationWithWorkerResponse), output: &AssociateQualificationWithWorkerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateQualificationWithWorker{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateQualificationWithWorker"); err != nil {

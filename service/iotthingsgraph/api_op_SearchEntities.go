@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,26 +60,6 @@ type SearchEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchEntitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchEntitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityTypes(s, schemas.SearchEntitiesRequest_entityTypes, v.EntityTypes)
-	serializeEntityFilters(s, schemas.SearchEntitiesRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchEntitiesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NamespaceVersion != nil {
-		s.WriteInt64(schemas.SearchEntitiesRequest_namespaceVersion, *v.NamespaceVersion)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchEntitiesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type SearchEntitiesOutput struct {
 
 	// An array of descriptions for each entity returned in the search result.
@@ -96,26 +74,16 @@ type SearchEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchEntitiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchEntitiesResponse_descriptions:
-			return deserializeEntityDescriptions(d, schemas.SearchEntitiesResponse_descriptions, &v.Descriptions)
-		case schemas.SearchEntitiesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchEntitiesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEntities, schemas.SearchEntitiesRequest, schemas.SearchEntitiesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchEntities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEntities, schemas.SearchEntitiesRequest, schemas.SearchEntitiesResponse), output: &SearchEntitiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchEntities{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchEntities"); err != nil {

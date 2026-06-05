@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,19 +47,6 @@ type AddTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddTagsToResourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddTagsToResourceMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddTagsToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceName != nil {
-		s.WriteString(schemas.AddTagsToResourceMessage_ResourceName, *v.ResourceName)
-	}
-	serializeTagList(s, schemas.AddTagsToResourceMessage_Tags, v.Tags)
-}
-
 type AddTagsToResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,29 +54,16 @@ type AddTagsToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddTagsToResourceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddTagsToResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *AddTagsToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.AddTagsToResourceMessage, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToResource, schemas.AddTagsToResourceMessage, nil), output: &AddTagsToResourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddTagsToResource"); err != nil {

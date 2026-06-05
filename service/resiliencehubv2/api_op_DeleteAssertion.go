@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DeleteAssertionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssertionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAssertionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAssertionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssertionId != nil {
-		s.WriteString(schemas.DeleteAssertionRequest_assertionId, *v.AssertionId)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.DeleteAssertionRequest_serviceArn, *v.ServiceArn)
-	}
-}
-
 type DeleteAssertionOutput struct {
 
 	// The unique identifier of the deleted assertion.
@@ -69,24 +52,16 @@ type DeleteAssertionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssertionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAssertionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteAssertionResponse_assertionId:
-			v.AssertionId = new(string)
-			return d.ReadString(schemas.DeleteAssertionResponse_assertionId, v.AssertionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAssertionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssertion, schemas.DeleteAssertionRequest, schemas.DeleteAssertionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssertion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssertion, schemas.DeleteAssertionRequest, schemas.DeleteAssertionResponse), output: &DeleteAssertionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssertion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAssertion"); err != nil {

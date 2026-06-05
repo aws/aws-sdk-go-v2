@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,21 +50,6 @@ type GetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRecordsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetRecordsInput_maxResults, *v.MaxResults)
-	}
-	if v.ShardIterator != nil {
-		s.WriteString(schemas.GetRecordsInput_shardIterator, *v.ShardIterator)
-	}
-}
-
 type GetRecordsOutput struct {
 
 	//  An array of change data records retrieved from the specified shard. Each
@@ -90,29 +73,16 @@ type GetRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRecordsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRecordsOutput_changeRecords:
-			return deserializeRecordList(d, schemas.GetRecordsOutput_changeRecords, &v.ChangeRecords)
-		case schemas.GetRecordsOutput_iteratorDescription:
-			v.IteratorDescription = &types.IteratorDescription{}
-			return v.IteratorDescription.Deserialize(d)
-		case schemas.GetRecordsOutput_nextShardIterator:
-			v.NextShardIterator = new(string)
-			return d.ReadString(schemas.GetRecordsOutput_nextShardIterator, v.NextShardIterator)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput), output: &GetRecordsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecords"); err != nil {

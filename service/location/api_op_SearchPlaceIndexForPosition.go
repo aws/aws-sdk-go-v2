@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -102,49 +100,6 @@ type SearchPlaceIndexForPositionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchPlaceIndexForPositionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchPlaceIndexForPositionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchPlaceIndexForPositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexName != nil {
-		s.WriteString(schemas.SearchPlaceIndexForPositionRequest_IndexName, *v.IndexName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.SearchPlaceIndexForPositionRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.SearchPlaceIndexForPositionRequest_Language, *v.Language)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchPlaceIndexForPositionRequest_MaxResults, *v.MaxResults)
-	}
-	serializePosition(s, schemas.SearchPlaceIndexForPositionRequest_Position, v.Position)
-}
-func (v *SearchPlaceIndexForPositionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForPositionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchPlaceIndexForPositionRequest_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForPositionRequest_IndexName, v.IndexName)
-		case schemas.SearchPlaceIndexForPositionRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForPositionRequest_Key, v.Key)
-		case schemas.SearchPlaceIndexForPositionRequest_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.SearchPlaceIndexForPositionRequest_Language, v.Language)
-		case schemas.SearchPlaceIndexForPositionRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.SearchPlaceIndexForPositionRequest_MaxResults, v.MaxResults)
-		case schemas.SearchPlaceIndexForPositionRequest_Position:
-			return deserializePosition(d, schemas.SearchPlaceIndexForPositionRequest_Position, &v.Position)
-		}
-		return nil
-	})
-}
-
 type SearchPlaceIndexForPositionOutput struct {
 
 	// Returns a list of Places closest to the specified position. Each result
@@ -165,40 +120,16 @@ type SearchPlaceIndexForPositionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchPlaceIndexForPositionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchPlaceIndexForPositionResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchPlaceIndexForPositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchForPositionResultList(s, schemas.SearchPlaceIndexForPositionResponse_Results, v.Results)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.SearchPlaceIndexForPositionResponse_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SearchPlaceIndexForPositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForPositionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchPlaceIndexForPositionResponse_Results:
-			return deserializeSearchForPositionResultList(d, schemas.SearchPlaceIndexForPositionResponse_Results, &v.Results)
-		case schemas.SearchPlaceIndexForPositionResponse_Summary:
-			v.Summary = &types.SearchPlaceIndexForPositionSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchPlaceIndexForPositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPlaceIndexForPosition, schemas.SearchPlaceIndexForPositionRequest, schemas.SearchPlaceIndexForPositionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPlaceIndexForPosition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPlaceIndexForPosition, schemas.SearchPlaceIndexForPositionRequest, schemas.SearchPlaceIndexForPositionResponse), output: &SearchPlaceIndexForPositionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchPlaceIndexForPosition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchPlaceIndexForPosition"); err != nil {

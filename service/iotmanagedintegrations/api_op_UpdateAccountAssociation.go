@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,24 +42,6 @@ type UpdateAccountAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAccountAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccountAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountAssociationId != nil {
-		s.WriteString(schemas.UpdateAccountAssociationRequest_AccountAssociationId, *v.AccountAssociationId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateAccountAssociationRequest_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateAccountAssociationRequest_Name, *v.Name)
-	}
-}
-
 type UpdateAccountAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,29 +49,16 @@ type UpdateAccountAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountAssociationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccountAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateAccountAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAccountAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountAssociation, schemas.UpdateAccountAssociationRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountAssociation, schemas.UpdateAccountAssociationRequest, nil), output: &UpdateAccountAssociationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountAssociation"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,24 +42,6 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRulesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRulesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRulesRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceType != nil {
-		s.WriteString(schemas.ListRulesRequest_ResourceType, *v.ResourceType)
-	}
-}
-
 type ListRulesOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -76,26 +56,16 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRulesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRulesResponse_NextToken, v.NextToken)
-		case schemas.ListRulesResponse_Rules:
-			return deserialize__listOfListRulesOutput(d, schemas.ListRulesResponse_Rules, &v.Rules)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRules{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse), output: &ListRulesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRules{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRules"); err != nil {

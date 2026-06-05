@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,34 +64,6 @@ type ListMapsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMapsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMapsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListMapsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMapsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMapsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMapsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListMapsRequest_MaxResults, v.MaxResults)
-		case schemas.ListMapsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMapsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListMapsOutput struct {
 
 	// Contains a list of maps in your Amazon Web Services account
@@ -111,38 +81,16 @@ type ListMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMapsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMapsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListMapsResponseEntryList(s, schemas.ListMapsResponse_Entries, v.Entries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMapsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMapsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMapsResponse_Entries:
-			return deserializeListMapsResponseEntryList(d, schemas.ListMapsResponse_Entries, &v.Entries)
-		case schemas.ListMapsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMapsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaps, schemas.ListMapsRequest, schemas.ListMapsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMaps{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaps, schemas.ListMapsRequest, schemas.ListMapsResponse), output: &ListMapsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMaps{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMaps"); err != nil {

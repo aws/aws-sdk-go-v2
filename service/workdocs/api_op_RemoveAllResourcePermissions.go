@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type RemoveAllResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAllResourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveAllResourcePermissionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveAllResourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.RemoveAllResourcePermissionsRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.RemoveAllResourcePermissionsRequest_ResourceId, *v.ResourceId)
-	}
-}
-
 type RemoveAllResourcePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,29 +47,16 @@ type RemoveAllResourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAllResourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveAllResourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *RemoveAllResourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveAllResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllResourcePermissions, schemas.RemoveAllResourcePermissionsRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAllResourcePermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllResourcePermissions, schemas.RemoveAllResourcePermissionsRequest, nil), output: &RemoveAllResourcePermissionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAllResourcePermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAllResourcePermissions"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,25 +66,6 @@ type ListAssignmentsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssignmentsForHITInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssignmentsForHITRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssignmentsForHITInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssignmentStatusList(s, schemas.ListAssignmentsForHITRequest_AssignmentStatuses, v.AssignmentStatuses)
-	if v.HITId != nil {
-		s.WriteString(schemas.ListAssignmentsForHITRequest_HITId, *v.HITId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAssignmentsForHITRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssignmentsForHITRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListAssignmentsForHITOutput struct {
 
 	//  The collection of Assignment data structures returned by this call.
@@ -107,29 +86,16 @@ type ListAssignmentsForHITOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssignmentsForHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssignmentsForHITResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssignmentsForHITResponse_Assignments:
-			return deserializeAssignmentList(d, schemas.ListAssignmentsForHITResponse_Assignments, &v.Assignments)
-		case schemas.ListAssignmentsForHITResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssignmentsForHITResponse_NextToken, v.NextToken)
-		case schemas.ListAssignmentsForHITResponse_NumResults:
-			v.NumResults = new(int32)
-			return d.ReadInt32(schemas.ListAssignmentsForHITResponse_NumResults, v.NumResults)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssignmentsForHIT, schemas.ListAssignmentsForHITRequest, schemas.ListAssignmentsForHITResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssignmentsForHIT{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssignmentsForHIT, schemas.ListAssignmentsForHITRequest, schemas.ListAssignmentsForHITResponse), output: &ListAssignmentsForHITOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssignmentsForHIT{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssignmentsForHIT"); err != nil {

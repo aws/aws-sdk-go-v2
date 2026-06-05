@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,19 +55,6 @@ type DisableAvailabilityZonesForLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableAvailabilityZonesForLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveAvailabilityZonesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableAvailabilityZonesForLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.RemoveAvailabilityZonesInput_AvailabilityZones, v.AvailabilityZones)
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.RemoveAvailabilityZonesInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output for DisableAvailabilityZonesForLoadBalancer.
 type DisableAvailabilityZonesForLoadBalancerOutput struct {
 
@@ -82,23 +67,16 @@ type DisableAvailabilityZonesForLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableAvailabilityZonesForLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveAvailabilityZonesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoveAvailabilityZonesOutput_AvailabilityZones:
-			return deserializeAvailabilityZones(d, schemas.RemoveAvailabilityZonesOutput_AvailabilityZones, &v.AvailabilityZones)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableAvailabilityZonesForLoadBalancer, schemas.RemoveAvailabilityZonesInput, schemas.RemoveAvailabilityZonesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableAvailabilityZonesForLoadBalancer, schemas.RemoveAvailabilityZonesInput, schemas.RemoveAvailabilityZonesOutput), output: &DisableAvailabilityZonesForLoadBalancerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDisableAvailabilityZonesForLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableAvailabilityZonesForLoadBalancer"); err != nil {

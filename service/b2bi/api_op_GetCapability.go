@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,18 +38,6 @@ type GetCapabilityInput struct {
 	CapabilityId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetCapabilityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCapabilityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CapabilityId != nil {
-		s.WriteString(schemas.GetCapabilityRequest_capabilityId, *v.CapabilityId)
-	}
 }
 
 type GetCapabilityOutput struct {
@@ -101,47 +87,16 @@ type GetCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCapabilityResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCapabilityResponse_capabilityArn:
-			v.CapabilityArn = new(string)
-			return d.ReadString(schemas.GetCapabilityResponse_capabilityArn, v.CapabilityArn)
-		case schemas.GetCapabilityResponse_capabilityId:
-			v.CapabilityId = new(string)
-			return d.ReadString(schemas.GetCapabilityResponse_capabilityId, v.CapabilityId)
-		case schemas.GetCapabilityResponse_configuration:
-			return deserializeCapabilityConfiguration(d, schemas.GetCapabilityResponse_configuration, &v.Configuration)
-		case schemas.GetCapabilityResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCapabilityResponse_createdAt, v.CreatedAt)
-		case schemas.GetCapabilityResponse_instructionsDocuments:
-			return deserializeInstructionsDocuments(d, schemas.GetCapabilityResponse_instructionsDocuments, &v.InstructionsDocuments)
-		case schemas.GetCapabilityResponse_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetCapabilityResponse_modifiedAt, v.ModifiedAt)
-		case schemas.GetCapabilityResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetCapabilityResponse_name, v.Name)
-		case schemas.GetCapabilityResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetCapabilityResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.CapabilityType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapability, schemas.GetCapabilityRequest, schemas.GetCapabilityResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCapability{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapability, schemas.GetCapabilityRequest, schemas.GetCapabilityResponse), output: &GetCapabilityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCapability{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCapability"); err != nil {

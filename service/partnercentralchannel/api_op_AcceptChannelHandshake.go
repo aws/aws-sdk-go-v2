@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type AcceptChannelHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptChannelHandshakeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptChannelHandshakeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptChannelHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeRequest_catalog, *v.Catalog)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.AcceptChannelHandshakeRequest_identifier, *v.Identifier)
-	}
-}
-
 type AcceptChannelHandshakeOutput struct {
 
 	// Details of the accepted channel handshake.
@@ -70,24 +53,16 @@ type AcceptChannelHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptChannelHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptChannelHandshakeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptChannelHandshakeResponse_channelHandshakeDetail:
-			v.ChannelHandshakeDetail = &types.AcceptChannelHandshakeDetail{}
-			return v.ChannelHandshakeDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptChannelHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptChannelHandshake, schemas.AcceptChannelHandshakeRequest, schemas.AcceptChannelHandshakeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptChannelHandshake, schemas.AcceptChannelHandshakeRequest, schemas.AcceptChannelHandshakeResponse), output: &AcceptChannelHandshakeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptChannelHandshake{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptChannelHandshake"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,40 +47,6 @@ type GetThemeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetThemeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetThemeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.GetThemeRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.GetThemeRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.GetThemeRequest_id, *v.Id)
-	}
-}
-func (v *GetThemeInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetThemeRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetThemeRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.GetThemeRequest_appId, v.AppId)
-		case schemas.GetThemeRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.GetThemeRequest_environmentName, v.EnvironmentName)
-		case schemas.GetThemeRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetThemeRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 type GetThemeOutput struct {
 
 	// Represents the configuration settings for the theme.
@@ -94,37 +58,16 @@ type GetThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetThemeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetThemeResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Theme != nil {
-		s.WriteStruct(schemas.GetThemeResponse_theme)
-		v.Theme.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetThemeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetThemeResponse_theme:
-			v.Theme = &types.Theme{}
-			return v.Theme.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTheme, schemas.GetThemeRequest, schemas.GetThemeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTheme{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTheme, schemas.GetThemeRequest, schemas.GetThemeResponse), output: &GetThemeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTheme{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTheme"); err != nil {

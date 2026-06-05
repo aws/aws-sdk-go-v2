@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -93,72 +91,6 @@ type UpdateTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTrackerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTrackerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateTrackerRequest_Description, *v.Description)
-	}
-	if v.EventBridgeEnabled != nil {
-		s.WriteBool(schemas.UpdateTrackerRequest_EventBridgeEnabled, *v.EventBridgeEnabled)
-	}
-	if v.KmsKeyEnableGeospatialQueries != nil {
-		s.WriteBool(schemas.UpdateTrackerRequest_KmsKeyEnableGeospatialQueries, *v.KmsKeyEnableGeospatialQueries)
-	}
-	if v.PositionFiltering != "" {
-		s.WriteString(schemas.UpdateTrackerRequest_PositionFiltering, string(v.PositionFiltering))
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.UpdateTrackerRequest_PricingPlan, string(v.PricingPlan))
-	}
-	if v.PricingPlanDataSource != nil {
-		s.WriteString(schemas.UpdateTrackerRequest_PricingPlanDataSource, *v.PricingPlanDataSource)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.UpdateTrackerRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *UpdateTrackerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTrackerRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTrackerRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateTrackerRequest_Description, v.Description)
-		case schemas.UpdateTrackerRequest_EventBridgeEnabled:
-			v.EventBridgeEnabled = new(bool)
-			return d.ReadBool(schemas.UpdateTrackerRequest_EventBridgeEnabled, v.EventBridgeEnabled)
-		case schemas.UpdateTrackerRequest_KmsKeyEnableGeospatialQueries:
-			v.KmsKeyEnableGeospatialQueries = new(bool)
-			return d.ReadBool(schemas.UpdateTrackerRequest_KmsKeyEnableGeospatialQueries, v.KmsKeyEnableGeospatialQueries)
-		case schemas.UpdateTrackerRequest_PositionFiltering:
-			var ev string
-			if err := d.ReadString(schemas.UpdateTrackerRequest_PositionFiltering, &ev); err != nil {
-				return err
-			}
-			v.PositionFiltering = types.PositionFiltering(ev)
-			return nil
-		case schemas.UpdateTrackerRequest_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.UpdateTrackerRequest_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		case schemas.UpdateTrackerRequest_PricingPlanDataSource:
-			v.PricingPlanDataSource = new(string)
-			return d.ReadString(schemas.UpdateTrackerRequest_PricingPlanDataSource, v.PricingPlanDataSource)
-		case schemas.UpdateTrackerRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.UpdateTrackerRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type UpdateTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated tracker resource. Used to specify
@@ -188,47 +120,16 @@ type UpdateTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateTrackerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateTrackerResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrackerArn != nil {
-		s.WriteString(schemas.UpdateTrackerResponse_TrackerArn, *v.TrackerArn)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.UpdateTrackerResponse_TrackerName, *v.TrackerName)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.UpdateTrackerResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *UpdateTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateTrackerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateTrackerResponse_TrackerArn:
-			v.TrackerArn = new(string)
-			return d.ReadString(schemas.UpdateTrackerResponse_TrackerArn, v.TrackerArn)
-		case schemas.UpdateTrackerResponse_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.UpdateTrackerResponse_TrackerName, v.TrackerName)
-		case schemas.UpdateTrackerResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateTrackerResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTracker, schemas.UpdateTrackerRequest, schemas.UpdateTrackerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTracker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTracker, schemas.UpdateTrackerRequest, schemas.UpdateTrackerResponse), output: &UpdateTrackerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTracker{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTracker"); err != nil {

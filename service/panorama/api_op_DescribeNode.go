@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,34 +39,6 @@ type DescribeNodeInput struct {
 	OwnerAccount *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeNodeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeNodeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NodeId != nil {
-		s.WriteString(schemas.DescribeNodeRequest_NodeId, *v.NodeId)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.DescribeNodeRequest_OwnerAccount, *v.OwnerAccount)
-	}
-}
-func (v *DescribeNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeNodeRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeNodeRequest_NodeId:
-			v.NodeId = new(string)
-			return d.ReadString(schemas.DescribeNodeRequest_NodeId, v.NodeId)
-		case schemas.DescribeNodeRequest_OwnerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.DescribeNodeRequest_OwnerAccount, v.OwnerAccount)
-		}
-		return nil
-	})
 }
 
 type DescribeNodeOutput struct {
@@ -145,119 +115,16 @@ type DescribeNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeNodeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeNodeResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetName != nil {
-		s.WriteString(schemas.DescribeNodeResponse_AssetName, *v.AssetName)
-	}
-	if v.Category != "" {
-		s.WriteString(schemas.DescribeNodeResponse_Category, string(v.Category))
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DescribeNodeResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DescribeNodeResponse_Description, *v.Description)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.DescribeNodeResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeNodeResponse_Name, *v.Name)
-	}
-	if v.NodeId != nil {
-		s.WriteString(schemas.DescribeNodeResponse_NodeId, *v.NodeId)
-	}
-	if v.NodeInterface != nil {
-		s.WriteStruct(schemas.DescribeNodeResponse_NodeInterface)
-		v.NodeInterface.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.DescribeNodeResponse_OwnerAccount, *v.OwnerAccount)
-	}
-	if v.PackageArn != nil {
-		s.WriteString(schemas.DescribeNodeResponse_PackageArn, *v.PackageArn)
-	}
-	if v.PackageId != nil {
-		s.WriteString(schemas.DescribeNodeResponse_PackageId, *v.PackageId)
-	}
-	if v.PackageName != nil {
-		s.WriteString(schemas.DescribeNodeResponse_PackageName, *v.PackageName)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.DescribeNodeResponse_PackageVersion, *v.PackageVersion)
-	}
-	if v.PatchVersion != nil {
-		s.WriteString(schemas.DescribeNodeResponse_PatchVersion, *v.PatchVersion)
-	}
-}
-func (v *DescribeNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeNodeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeNodeResponse_AssetName:
-			v.AssetName = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_AssetName, v.AssetName)
-		case schemas.DescribeNodeResponse_Category:
-			var ev string
-			if err := d.ReadString(schemas.DescribeNodeResponse_Category, &ev); err != nil {
-				return err
-			}
-			v.Category = types.NodeCategory(ev)
-			return nil
-		case schemas.DescribeNodeResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeNodeResponse_CreatedTime, v.CreatedTime)
-		case schemas.DescribeNodeResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_Description, v.Description)
-		case schemas.DescribeNodeResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeNodeResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.DescribeNodeResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_Name, v.Name)
-		case schemas.DescribeNodeResponse_NodeId:
-			v.NodeId = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_NodeId, v.NodeId)
-		case schemas.DescribeNodeResponse_NodeInterface:
-			v.NodeInterface = &types.NodeInterface{}
-			return v.NodeInterface.Deserialize(d)
-		case schemas.DescribeNodeResponse_OwnerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_OwnerAccount, v.OwnerAccount)
-		case schemas.DescribeNodeResponse_PackageArn:
-			v.PackageArn = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_PackageArn, v.PackageArn)
-		case schemas.DescribeNodeResponse_PackageId:
-			v.PackageId = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_PackageId, v.PackageId)
-		case schemas.DescribeNodeResponse_PackageName:
-			v.PackageName = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_PackageName, v.PackageName)
-		case schemas.DescribeNodeResponse_PackageVersion:
-			v.PackageVersion = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_PackageVersion, v.PackageVersion)
-		case schemas.DescribeNodeResponse_PatchVersion:
-			v.PatchVersion = new(string)
-			return d.ReadString(schemas.DescribeNodeResponse_PatchVersion, v.PatchVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNode, schemas.DescribeNodeRequest, schemas.DescribeNodeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNode, schemas.DescribeNodeRequest, schemas.DescribeNodeResponse), output: &DescribeNodeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNode"); err != nil {

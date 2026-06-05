@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -213,77 +211,6 @@ type ModifyDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowMajorVersionUpgrade != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_AllowMajorVersionUpgrade, *v.AllowMajorVersionUpgrade)
-	}
-	if v.ApplyImmediately != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_ApplyImmediately, *v.ApplyImmediately)
-	}
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.ModifyDBClusterMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.CloudwatchLogsExportConfiguration != nil {
-		s.WriteStruct(schemas.ModifyDBClusterMessage_CloudwatchLogsExportConfiguration)
-		v.CloudwatchLogsExportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CopyTagsToSnapshot != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-	if v.DBInstanceParameterGroupName != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_DBInstanceParameterGroupName, *v.DBInstanceParameterGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.EnableIAMDatabaseAuthentication != nil {
-		s.WriteBool(schemas.ModifyDBClusterMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.MasterUserPassword != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_MasterUserPassword, *v.MasterUserPassword)
-	}
-	if v.NewDBClusterIdentifier != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_NewDBClusterIdentifier, *v.NewDBClusterIdentifier)
-	}
-	if v.OptionGroupName != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_OptionGroupName, *v.OptionGroupName)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.ModifyDBClusterMessage_Port, *v.Port)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.ServerlessV2ScalingConfiguration != nil {
-		s.WriteStruct(schemas.ModifyDBClusterMessage_ServerlessV2ScalingConfiguration)
-		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.ModifyDBClusterMessage_StorageType, *v.StorageType)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.ModifyDBClusterMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type ModifyDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -297,24 +224,16 @@ type ModifyDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCluster, schemas.ModifyDBClusterMessage, schemas.ModifyDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBCluster, schemas.ModifyDBClusterMessage, schemas.ModifyDBClusterResult), output: &ModifyDBClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBCluster"); err != nil {

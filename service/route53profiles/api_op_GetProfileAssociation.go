@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type GetProfileAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProfileAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetProfileAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetProfileAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProfileAssociationId != nil {
-		s.WriteString(schemas.GetProfileAssociationRequest_ProfileAssociationId, *v.ProfileAssociationId)
-	}
-}
-
 type GetProfileAssociationOutput struct {
 
 	//  Information about the Profile association that you specified in a
@@ -65,24 +51,16 @@ type GetProfileAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProfileAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetProfileAssociationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetProfileAssociationResponse_ProfileAssociation:
-			v.ProfileAssociation = &types.ProfileAssociation{}
-			return v.ProfileAssociation.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetProfileAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileAssociation, schemas.GetProfileAssociationRequest, schemas.GetProfileAssociationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileAssociation, schemas.GetProfileAssociationRequest, schemas.GetProfileAssociationResponse), output: &GetProfileAssociationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfileAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProfileAssociation"); err != nil {

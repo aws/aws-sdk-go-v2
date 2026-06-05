@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,30 +64,6 @@ type RequestServiceQuotaIncreaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RequestServiceQuotaIncreaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RequestServiceQuotaIncreaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RequestServiceQuotaIncreaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContextId != nil {
-		s.WriteString(schemas.RequestServiceQuotaIncreaseRequest_ContextId, *v.ContextId)
-	}
-	if v.DesiredValue != nil {
-		s.WriteFloat64(schemas.RequestServiceQuotaIncreaseRequest_DesiredValue, *v.DesiredValue)
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.RequestServiceQuotaIncreaseRequest_QuotaCode, *v.QuotaCode)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.RequestServiceQuotaIncreaseRequest_ServiceCode, *v.ServiceCode)
-	}
-	if v.SupportCaseAllowed != nil {
-		s.WriteBool(schemas.RequestServiceQuotaIncreaseRequest_SupportCaseAllowed, *v.SupportCaseAllowed)
-	}
-}
-
 type RequestServiceQuotaIncreaseOutput struct {
 
 	// Information about the quota increase request.
@@ -101,24 +75,16 @@ type RequestServiceQuotaIncreaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RequestServiceQuotaIncreaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestServiceQuotaIncreaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestServiceQuotaIncreaseResponse_RequestedQuota:
-			v.RequestedQuota = &types.RequestedServiceQuotaChange{}
-			return v.RequestedQuota.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRequestServiceQuotaIncreaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestServiceQuotaIncrease, schemas.RequestServiceQuotaIncreaseRequest, schemas.RequestServiceQuotaIncreaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRequestServiceQuotaIncrease{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestServiceQuotaIncrease, schemas.RequestServiceQuotaIncreaseRequest, schemas.RequestServiceQuotaIncreaseResponse), output: &RequestServiceQuotaIncreaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRequestServiceQuotaIncrease{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestServiceQuotaIncrease"); err != nil {

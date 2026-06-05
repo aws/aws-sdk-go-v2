@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type UpdateMediaInsightsPipelineStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMediaInsightsPipelineStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMediaInsightsPipelineStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMediaInsightsPipelineStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateMediaInsightsPipelineStatusRequest_Identifier, *v.Identifier)
-	}
-	if v.UpdateStatus != "" {
-		s.WriteString(schemas.UpdateMediaInsightsPipelineStatusRequest_UpdateStatus, string(v.UpdateStatus))
-	}
-}
-
 type UpdateMediaInsightsPipelineStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,29 +50,16 @@ type UpdateMediaInsightsPipelineStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMediaInsightsPipelineStatusOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMediaInsightsPipelineStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateMediaInsightsPipelineStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMediaInsightsPipelineStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaInsightsPipelineStatus, schemas.UpdateMediaInsightsPipelineStatusRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMediaInsightsPipelineStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaInsightsPipelineStatus, schemas.UpdateMediaInsightsPipelineStatusRequest, nil), output: &UpdateMediaInsightsPipelineStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMediaInsightsPipelineStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMediaInsightsPipelineStatus"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,21 +42,6 @@ type ExportQAppSessionDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportQAppSessionDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportQAppSessionDataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportQAppSessionDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ExportQAppSessionDataInput_instanceId, *v.InstanceId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.ExportQAppSessionDataInput_sessionId, *v.SessionId)
-	}
-}
-
 type ExportQAppSessionDataOutput struct {
 
 	// The link where the exported Q App session data can be downloaded from.
@@ -82,30 +65,16 @@ type ExportQAppSessionDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportQAppSessionDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportQAppSessionDataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportQAppSessionDataOutput_csvFileLink:
-			v.CsvFileLink = new(string)
-			return d.ReadString(schemas.ExportQAppSessionDataOutput_csvFileLink, v.CsvFileLink)
-		case schemas.ExportQAppSessionDataOutput_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.ExportQAppSessionDataOutput_expiresAt, v.ExpiresAt)
-		case schemas.ExportQAppSessionDataOutput_sessionArn:
-			v.SessionArn = new(string)
-			return d.ReadString(schemas.ExportQAppSessionDataOutput_sessionArn, v.SessionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExportQAppSessionDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportQAppSessionData, schemas.ExportQAppSessionDataInput, schemas.ExportQAppSessionDataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportQAppSessionData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportQAppSessionData, schemas.ExportQAppSessionDataInput, schemas.ExportQAppSessionDataOutput), output: &ExportQAppSessionDataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportQAppSessionData{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportQAppSessionData"); err != nil {

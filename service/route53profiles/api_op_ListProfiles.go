@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,21 +49,6 @@ type ListProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProfilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProfilesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProfilesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProfilesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListProfilesOutput struct {
 
 	//  If more than MaxResults resource associations match the specified criteria,
@@ -82,26 +65,16 @@ type ListProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProfilesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProfilesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProfilesResponse_NextToken, v.NextToken)
-		case schemas.ListProfilesResponse_ProfileSummaries:
-			return deserializeProfileSummaryList(d, schemas.ListProfilesResponse_ProfileSummaries, &v.ProfileSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesRequest, schemas.ListProfilesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesRequest, schemas.ListProfilesResponse), output: &ListProfilesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProfiles"); err != nil {

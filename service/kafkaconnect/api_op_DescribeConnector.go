@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type DescribeConnectorInput struct {
 	ConnectorArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.DescribeConnectorRequest_connectorArn, *v.ConnectorArn)
-	}
 }
 
 type DescribeConnectorOutput struct {
@@ -119,153 +105,16 @@ type DescribeConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConnectorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeConnectorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_capacity)
-		v.Capacity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_connectorArn, *v.ConnectorArn)
-	}
-	serializeConnectorConfiguration(s, schemas.DescribeConnectorResponse_connectorConfiguration, v.ConnectorConfiguration)
-	if v.ConnectorDescription != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_connectorDescription, *v.ConnectorDescription)
-	}
-	if v.ConnectorName != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_connectorName, *v.ConnectorName)
-	}
-	if v.ConnectorState != "" {
-		s.WriteString(schemas.DescribeConnectorResponse_connectorState, string(v.ConnectorState))
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.DescribeConnectorResponse_creationTime, *v.CreationTime)
-	}
-	if v.CurrentVersion != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_currentVersion, *v.CurrentVersion)
-	}
-	if v.KafkaCluster != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_kafkaCluster)
-		v.KafkaCluster.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KafkaClusterClientAuthentication != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_kafkaClusterClientAuthentication)
-		v.KafkaClusterClientAuthentication.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KafkaClusterEncryptionInTransit != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_kafkaClusterEncryptionInTransit)
-		v.KafkaClusterEncryptionInTransit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KafkaConnectVersion != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_kafkaConnectVersion, *v.KafkaConnectVersion)
-	}
-	if v.LogDelivery != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_logDelivery)
-		v.LogDelivery.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NetworkType != "" {
-		s.WriteString(schemas.DescribeConnectorResponse_networkType, string(v.NetworkType))
-	}
-	serialize__listOfPluginDescription(s, schemas.DescribeConnectorResponse_plugins, v.Plugins)
-	if v.ServiceExecutionRoleArn != nil {
-		s.WriteString(schemas.DescribeConnectorResponse_serviceExecutionRoleArn, *v.ServiceExecutionRoleArn)
-	}
-	if v.StateDescription != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_stateDescription)
-		v.StateDescription.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WorkerConfiguration != nil {
-		s.WriteStruct(schemas.DescribeConnectorResponse_workerConfiguration)
-		v.WorkerConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DescribeConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeConnectorResponse_capacity:
-			v.Capacity = &types.CapacityDescription{}
-			return v.Capacity.Deserialize(d)
-		case schemas.DescribeConnectorResponse_connectorArn:
-			v.ConnectorArn = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_connectorArn, v.ConnectorArn)
-		case schemas.DescribeConnectorResponse_connectorConfiguration:
-			return deserializeConnectorConfiguration(d, schemas.DescribeConnectorResponse_connectorConfiguration, &v.ConnectorConfiguration)
-		case schemas.DescribeConnectorResponse_connectorDescription:
-			v.ConnectorDescription = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_connectorDescription, v.ConnectorDescription)
-		case schemas.DescribeConnectorResponse_connectorName:
-			v.ConnectorName = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_connectorName, v.ConnectorName)
-		case schemas.DescribeConnectorResponse_connectorState:
-			var ev string
-			if err := d.ReadString(schemas.DescribeConnectorResponse_connectorState, &ev); err != nil {
-				return err
-			}
-			v.ConnectorState = types.ConnectorState(ev)
-			return nil
-		case schemas.DescribeConnectorResponse_creationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeConnectorResponse_creationTime, v.CreationTime)
-		case schemas.DescribeConnectorResponse_currentVersion:
-			v.CurrentVersion = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_currentVersion, v.CurrentVersion)
-		case schemas.DescribeConnectorResponse_kafkaCluster:
-			v.KafkaCluster = &types.KafkaClusterDescription{}
-			return v.KafkaCluster.Deserialize(d)
-		case schemas.DescribeConnectorResponse_kafkaClusterClientAuthentication:
-			v.KafkaClusterClientAuthentication = &types.KafkaClusterClientAuthenticationDescription{}
-			return v.KafkaClusterClientAuthentication.Deserialize(d)
-		case schemas.DescribeConnectorResponse_kafkaClusterEncryptionInTransit:
-			v.KafkaClusterEncryptionInTransit = &types.KafkaClusterEncryptionInTransitDescription{}
-			return v.KafkaClusterEncryptionInTransit.Deserialize(d)
-		case schemas.DescribeConnectorResponse_kafkaConnectVersion:
-			v.KafkaConnectVersion = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_kafkaConnectVersion, v.KafkaConnectVersion)
-		case schemas.DescribeConnectorResponse_logDelivery:
-			v.LogDelivery = &types.LogDeliveryDescription{}
-			return v.LogDelivery.Deserialize(d)
-		case schemas.DescribeConnectorResponse_networkType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeConnectorResponse_networkType, &ev); err != nil {
-				return err
-			}
-			v.NetworkType = types.NetworkType(ev)
-			return nil
-		case schemas.DescribeConnectorResponse_plugins:
-			return deserialize__listOfPluginDescription(d, schemas.DescribeConnectorResponse_plugins, &v.Plugins)
-		case schemas.DescribeConnectorResponse_serviceExecutionRoleArn:
-			v.ServiceExecutionRoleArn = new(string)
-			return d.ReadString(schemas.DescribeConnectorResponse_serviceExecutionRoleArn, v.ServiceExecutionRoleArn)
-		case schemas.DescribeConnectorResponse_stateDescription:
-			v.StateDescription = &types.StateDescription{}
-			return v.StateDescription.Deserialize(d)
-		case schemas.DescribeConnectorResponse_workerConfiguration:
-			v.WorkerConfiguration = &types.WorkerConfigurationDescription{}
-			return v.WorkerConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnector, schemas.DescribeConnectorRequest, schemas.DescribeConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnector, schemas.DescribeConnectorRequest, schemas.DescribeConnectorResponse), output: &DescribeConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnector"); err != nil {

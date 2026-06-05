@@ -4,9 +4,6 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/ssoadmin/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,36 +31,6 @@ type AccessControlAttribute struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccessControlAttribute) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccessControlAttribute)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccessControlAttribute) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.AccessControlAttribute_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteStruct(schemas.AccessControlAttribute_Value)
-		v.Value.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AccessControlAttribute) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessControlAttribute, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessControlAttribute_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.AccessControlAttribute_Key, v.Key)
-		case schemas.AccessControlAttribute_Value:
-			v.Value = &AccessControlAttributeValue{}
-			return v.Value.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The value used for mapping a specified attribute to an identity source. For
 // more information, see [Attribute mappings]in the IAM Identity Center User Guide.
 //
@@ -77,25 +44,6 @@ type AccessControlAttributeValue struct {
 	Source []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccessControlAttributeValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccessControlAttributeValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccessControlAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeValueSourceList(s, schemas.AccessControlAttributeValue_Source, v.Source)
-}
-func (v *AccessControlAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessControlAttributeValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessControlAttributeValue_Source:
-			return deserializeAccessControlAttributeValueSourceList(d, schemas.AccessControlAttributeValue_Source, &v.Source)
-		}
-		return nil
-	})
 }
 
 // The assignment that indicates a principal's limited access to a specified
@@ -123,50 +71,6 @@ type AccountAssignment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountAssignment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountAssignment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountAssignment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AccountAssignment_AccountId, *v.AccountId)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.AccountAssignment_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.AccountAssignment_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.AccountAssignment_PrincipalType, string(v.PrincipalType))
-	}
-}
-func (v *AccountAssignment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountAssignment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountAssignment_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AccountAssignment_AccountId, v.AccountId)
-		case schemas.AccountAssignment_PermissionSetArn:
-			v.PermissionSetArn = new(string)
-			return d.ReadString(schemas.AccountAssignment_PermissionSetArn, v.PermissionSetArn)
-		case schemas.AccountAssignment_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.AccountAssignment_PrincipalId, v.PrincipalId)
-		case schemas.AccountAssignment_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignment_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes an assignment of an Amazon Web Services account to a
 // principal and the permissions that principal has in the account.
 type AccountAssignmentForPrincipal struct {
@@ -185,50 +89,6 @@ type AccountAssignmentForPrincipal struct {
 	PrincipalType PrincipalType
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountAssignmentForPrincipal) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountAssignmentForPrincipal)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountAssignmentForPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AccountAssignmentForPrincipal_AccountId, *v.AccountId)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.AccountAssignmentForPrincipal_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.AccountAssignmentForPrincipal_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.AccountAssignmentForPrincipal_PrincipalType, string(v.PrincipalType))
-	}
-}
-func (v *AccountAssignmentForPrincipal) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountAssignmentForPrincipal, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountAssignmentForPrincipal_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AccountAssignmentForPrincipal_AccountId, v.AccountId)
-		case schemas.AccountAssignmentForPrincipal_PermissionSetArn:
-			v.PermissionSetArn = new(string)
-			return d.ReadString(schemas.AccountAssignmentForPrincipal_PermissionSetArn, v.PermissionSetArn)
-		case schemas.AccountAssignmentForPrincipal_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.AccountAssignmentForPrincipal_PrincipalId, v.PrincipalId)
-		case schemas.AccountAssignmentForPrincipal_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignmentForPrincipal_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The status of the creation or deletion operation of an assignment that a
@@ -270,88 +130,6 @@ type AccountAssignmentOperationStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountAssignmentOperationStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountAssignmentOperationStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountAssignmentOperationStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.AccountAssignmentOperationStatus_CreatedDate, *v.CreatedDate)
-	}
-	if v.FailureReason != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_FailureReason, *v.FailureReason)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_PrincipalType, string(v.PrincipalType))
-	}
-	if v.RequestId != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_RequestId, *v.RequestId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_Status, string(v.Status))
-	}
-	if v.TargetId != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_TargetId, *v.TargetId)
-	}
-	if v.TargetType != "" {
-		s.WriteString(schemas.AccountAssignmentOperationStatus_TargetType, string(v.TargetType))
-	}
-}
-func (v *AccountAssignmentOperationStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountAssignmentOperationStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountAssignmentOperationStatus_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.AccountAssignmentOperationStatus_CreatedDate, v.CreatedDate)
-		case schemas.AccountAssignmentOperationStatus_FailureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatus_FailureReason, v.FailureReason)
-		case schemas.AccountAssignmentOperationStatus_PermissionSetArn:
-			v.PermissionSetArn = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatus_PermissionSetArn, v.PermissionSetArn)
-		case schemas.AccountAssignmentOperationStatus_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatus_PrincipalId, v.PrincipalId)
-		case schemas.AccountAssignmentOperationStatus_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignmentOperationStatus_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = PrincipalType(ev)
-			return nil
-		case schemas.AccountAssignmentOperationStatus_RequestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatus_RequestId, v.RequestId)
-		case schemas.AccountAssignmentOperationStatus_Status:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignmentOperationStatus_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusValues(ev)
-			return nil
-		case schemas.AccountAssignmentOperationStatus_TargetId:
-			v.TargetId = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatus_TargetId, v.TargetId)
-		case schemas.AccountAssignmentOperationStatus_TargetType:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignmentOperationStatus_TargetType, &ev); err != nil {
-				return err
-			}
-			v.TargetType = TargetType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about the AccountAssignment creation request.
 type AccountAssignmentOperationStatusMetadata struct {
 
@@ -366,44 +144,6 @@ type AccountAssignmentOperationStatusMetadata struct {
 	Status StatusValues
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountAssignmentOperationStatusMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountAssignmentOperationStatusMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountAssignmentOperationStatusMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.AccountAssignmentOperationStatusMetadata_CreatedDate, *v.CreatedDate)
-	}
-	if v.RequestId != nil {
-		s.WriteString(schemas.AccountAssignmentOperationStatusMetadata_RequestId, *v.RequestId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AccountAssignmentOperationStatusMetadata_Status, string(v.Status))
-	}
-}
-func (v *AccountAssignmentOperationStatusMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountAssignmentOperationStatusMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountAssignmentOperationStatusMetadata_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.AccountAssignmentOperationStatusMetadata_CreatedDate, v.CreatedDate)
-		case schemas.AccountAssignmentOperationStatusMetadata_RequestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.AccountAssignmentOperationStatusMetadata_RequestId, v.RequestId)
-		case schemas.AccountAssignmentOperationStatusMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.AccountAssignmentOperationStatusMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusValues(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that describes an application that uses IAM Identity Center for
@@ -450,94 +190,6 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Application) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Application)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationAccount != nil {
-		s.WriteString(schemas.Application_ApplicationAccount, *v.ApplicationAccount)
-	}
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.Application_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.ApplicationProviderArn != nil {
-		s.WriteString(schemas.Application_ApplicationProviderArn, *v.ApplicationProviderArn)
-	}
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.Application_CreatedDate, *v.CreatedDate)
-	}
-	if v.CreatedFrom != nil {
-		s.WriteString(schemas.Application_CreatedFrom, *v.CreatedFrom)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Application_Description, *v.Description)
-	}
-	if v.IdentityStoreArn != nil {
-		s.WriteString(schemas.Application_IdentityStoreArn, *v.IdentityStoreArn)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.Application_InstanceArn, *v.InstanceArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Application_Name, *v.Name)
-	}
-	if v.PortalOptions != nil {
-		s.WriteStruct(schemas.Application_PortalOptions)
-		v.PortalOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Application_Status, string(v.Status))
-	}
-}
-func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Application_ApplicationAccount:
-			v.ApplicationAccount = new(string)
-			return d.ReadString(schemas.Application_ApplicationAccount, v.ApplicationAccount)
-		case schemas.Application_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.Application_ApplicationArn, v.ApplicationArn)
-		case schemas.Application_ApplicationProviderArn:
-			v.ApplicationProviderArn = new(string)
-			return d.ReadString(schemas.Application_ApplicationProviderArn, v.ApplicationProviderArn)
-		case schemas.Application_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.Application_CreatedDate, v.CreatedDate)
-		case schemas.Application_CreatedFrom:
-			v.CreatedFrom = new(string)
-			return d.ReadString(schemas.Application_CreatedFrom, v.CreatedFrom)
-		case schemas.Application_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Application_Description, v.Description)
-		case schemas.Application_IdentityStoreArn:
-			v.IdentityStoreArn = new(string)
-			return d.ReadString(schemas.Application_IdentityStoreArn, v.IdentityStoreArn)
-		case schemas.Application_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.Application_InstanceArn, v.InstanceArn)
-		case schemas.Application_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Application_Name, v.Name)
-		case schemas.Application_PortalOptions:
-			v.PortalOptions = &PortalOptions{}
-			return v.PortalOptions.Deserialize(d)
-		case schemas.Application_Status:
-			var ev string
-			if err := d.ReadString(schemas.Application_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ApplicationStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes an assignment of a principal to an application.
 type ApplicationAssignment struct {
 
@@ -559,44 +211,6 @@ type ApplicationAssignment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplicationAssignment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationAssignment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationAssignment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ApplicationAssignment_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.ApplicationAssignment_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.ApplicationAssignment_PrincipalType, string(v.PrincipalType))
-	}
-}
-func (v *ApplicationAssignment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationAssignment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationAssignment_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.ApplicationAssignment_ApplicationArn, v.ApplicationArn)
-		case schemas.ApplicationAssignment_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.ApplicationAssignment_PrincipalId, v.PrincipalId)
-		case schemas.ApplicationAssignment_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationAssignment_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes an application to which a principal is assigned.
 type ApplicationAssignmentForPrincipal struct {
 
@@ -610,44 +224,6 @@ type ApplicationAssignmentForPrincipal struct {
 	PrincipalType PrincipalType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApplicationAssignmentForPrincipal) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationAssignmentForPrincipal)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationAssignmentForPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ApplicationAssignmentForPrincipal_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.ApplicationAssignmentForPrincipal_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.ApplicationAssignmentForPrincipal_PrincipalType, string(v.PrincipalType))
-	}
-}
-func (v *ApplicationAssignmentForPrincipal) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationAssignmentForPrincipal, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationAssignmentForPrincipal_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.ApplicationAssignmentForPrincipal_ApplicationArn, v.ApplicationArn)
-		case schemas.ApplicationAssignmentForPrincipal_PrincipalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.ApplicationAssignmentForPrincipal_PrincipalId, v.PrincipalId)
-		case schemas.ApplicationAssignmentForPrincipal_PrincipalType:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationAssignmentForPrincipal_PrincipalType, &ev); err != nil {
-				return err
-			}
-			v.PrincipalType = PrincipalType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that describes a provider that can be used to connect an Amazon Web
@@ -673,54 +249,6 @@ type ApplicationProvider struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplicationProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplicationProvider)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplicationProvider) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationProviderArn != nil {
-		s.WriteString(schemas.ApplicationProvider_ApplicationProviderArn, *v.ApplicationProviderArn)
-	}
-	if v.DisplayData != nil {
-		s.WriteStruct(schemas.ApplicationProvider_DisplayData)
-		v.DisplayData.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FederationProtocol != "" {
-		s.WriteString(schemas.ApplicationProvider_FederationProtocol, string(v.FederationProtocol))
-	}
-	if v.ResourceServerConfig != nil {
-		s.WriteStruct(schemas.ApplicationProvider_ResourceServerConfig)
-		v.ResourceServerConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ApplicationProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplicationProvider, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplicationProvider_ApplicationProviderArn:
-			v.ApplicationProviderArn = new(string)
-			return d.ReadString(schemas.ApplicationProvider_ApplicationProviderArn, v.ApplicationProviderArn)
-		case schemas.ApplicationProvider_DisplayData:
-			v.DisplayData = &DisplayData{}
-			return v.DisplayData.Deserialize(d)
-		case schemas.ApplicationProvider_FederationProtocol:
-			var ev string
-			if err := d.ReadString(schemas.ApplicationProvider_FederationProtocol, &ev); err != nil {
-				return err
-			}
-			v.FederationProtocol = FederationProtocol(ev)
-			return nil
-		case schemas.ApplicationProvider_ResourceServerConfig:
-			v.ResourceServerConfig = &ResourceServerConfig{}
-			return v.ResourceServerConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A structure that stores a list of managed policy ARNs that describe the
 // associated Amazon Web Services managed policy.
 type AttachedManagedPolicy struct {
@@ -733,34 +261,6 @@ type AttachedManagedPolicy struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AttachedManagedPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttachedManagedPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttachedManagedPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AttachedManagedPolicy_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AttachedManagedPolicy_Name, *v.Name)
-	}
-}
-func (v *AttachedManagedPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachedManagedPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachedManagedPolicy_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AttachedManagedPolicy_Arn, v.Arn)
-		case schemas.AttachedManagedPolicy_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AttachedManagedPolicy_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // A structure that describes an authentication method that can be used by an
@@ -781,14 +281,6 @@ type AuthenticationMethodMemberIam struct {
 }
 
 func (*AuthenticationMethodMemberIam) isAuthenticationMethod() {}
-func (v *AuthenticationMethodMemberIam) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuthenticationMethod_Iam)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *AuthenticationMethodMemberIam) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A structure that describes an authentication method and its type.
 type AuthenticationMethodItem struct {
@@ -801,35 +293,6 @@ type AuthenticationMethodItem struct {
 	AuthenticationMethodType AuthenticationMethodType
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuthenticationMethodItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuthenticationMethodItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuthenticationMethodItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationMethod(s, schemas.AuthenticationMethodItem_AuthenticationMethod, v.AuthenticationMethod)
-	if v.AuthenticationMethodType != "" {
-		s.WriteString(schemas.AuthenticationMethodItem_AuthenticationMethodType, string(v.AuthenticationMethodType))
-	}
-}
-func (v *AuthenticationMethodItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuthenticationMethodItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuthenticationMethodItem_AuthenticationMethod:
-			return deserializeAuthenticationMethod(d, schemas.AuthenticationMethodItem_AuthenticationMethod, &v.AuthenticationMethod)
-		case schemas.AuthenticationMethodItem_AuthenticationMethodType:
-			var ev string
-			if err := d.ReadString(schemas.AuthenticationMethodItem_AuthenticationMethodType, &ev); err != nil {
-				return err
-			}
-			v.AuthenticationMethodType = AuthenticationMethodType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that defines configuration settings for an application that
@@ -845,25 +308,6 @@ type AuthorizationCodeGrant struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AuthorizationCodeGrant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuthorizationCodeGrant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuthorizationCodeGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRedirectUris(s, schemas.AuthorizationCodeGrant_RedirectUris, v.RedirectUris)
-}
-func (v *AuthorizationCodeGrant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuthorizationCodeGrant, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuthorizationCodeGrant_RedirectUris:
-			return deserializeRedirectUris(d, schemas.AuthorizationCodeGrant_RedirectUris, &v.RedirectUris)
-		}
-		return nil
-	})
-}
-
 // A structure that describes a trusted token issuer and associates it with a set
 // of authorized audiences.
 type AuthorizedTokenIssuer struct {
@@ -876,31 +320,6 @@ type AuthorizedTokenIssuer struct {
 	TrustedTokenIssuerArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuthorizedTokenIssuer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuthorizedTokenIssuer)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuthorizedTokenIssuer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTokenIssuerAudiences(s, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, v.AuthorizedAudiences)
-	if v.TrustedTokenIssuerArn != nil {
-		s.WriteString(schemas.AuthorizedTokenIssuer_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
-	}
-}
-func (v *AuthorizedTokenIssuer) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuthorizedTokenIssuer, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuthorizedTokenIssuer_AuthorizedAudiences:
-			return deserializeTokenIssuerAudiences(d, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, &v.AuthorizedAudiences)
-		case schemas.AuthorizedTokenIssuer_TrustedTokenIssuerArn:
-			v.TrustedTokenIssuerArn = new(string)
-			return d.ReadString(schemas.AuthorizedTokenIssuer_TrustedTokenIssuerArn, v.TrustedTokenIssuerArn)
-		}
-		return nil
-	})
 }
 
 // Specifies the name and path of a customer managed policy. You must have an IAM
@@ -924,34 +343,6 @@ type CustomerManagedPolicyReference struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomerManagedPolicyReference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomerManagedPolicyReference)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomerManagedPolicyReference) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.CustomerManagedPolicyReference_Name, *v.Name)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.CustomerManagedPolicyReference_Path, *v.Path)
-	}
-}
-func (v *CustomerManagedPolicyReference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomerManagedPolicyReference, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomerManagedPolicyReference_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CustomerManagedPolicyReference_Name, v.Name)
-		case schemas.CustomerManagedPolicyReference_Path:
-			v.Path = new(string)
-			return d.ReadString(schemas.CustomerManagedPolicyReference_Path, v.Path)
-		}
-		return nil
-	})
-}
-
 // A structure that describes how the portal represents an application provider.
 type DisplayData struct {
 
@@ -965,40 +356,6 @@ type DisplayData struct {
 	IconUrl *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DisplayData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisplayData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisplayData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.DisplayData_Description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.DisplayData_DisplayName, *v.DisplayName)
-	}
-	if v.IconUrl != nil {
-		s.WriteString(schemas.DisplayData_IconUrl, *v.IconUrl)
-	}
-}
-func (v *DisplayData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisplayData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisplayData_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DisplayData_Description, v.Description)
-		case schemas.DisplayData_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.DisplayData_DisplayName, v.DisplayName)
-		case schemas.DisplayData_IconUrl:
-			v.IconUrl = new(string)
-			return d.ReadString(schemas.DisplayData_IconUrl, v.IconUrl)
-		}
-		return nil
-	})
 }
 
 //	A structure that specifies the KMS key type and KMS key ARN used to encrypt
@@ -1016,38 +373,6 @@ type EncryptionConfiguration struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyType != "" {
-		s.WriteString(schemas.EncryptionConfiguration_KeyType, string(v.KeyType))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.EncryptionConfiguration_KmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfiguration_KeyType:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionConfiguration_KeyType, &ev); err != nil {
-				return err
-			}
-			v.KeyType = KmsKeyType(ev)
-			return nil
-		case schemas.EncryptionConfiguration_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.EncryptionConfiguration_KmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
 }
 
 // The encryption configuration of your IAM Identity Center instance, including
@@ -1074,54 +399,6 @@ type EncryptionConfigurationDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionConfigurationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfigurationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionStatus != "" {
-		s.WriteString(schemas.EncryptionConfigurationDetails_EncryptionStatus, string(v.EncryptionStatus))
-	}
-	if v.EncryptionStatusReason != nil {
-		s.WriteString(schemas.EncryptionConfigurationDetails_EncryptionStatusReason, *v.EncryptionStatusReason)
-	}
-	if v.KeyType != "" {
-		s.WriteString(schemas.EncryptionConfigurationDetails_KeyType, string(v.KeyType))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.EncryptionConfigurationDetails_KmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *EncryptionConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfigurationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfigurationDetails_EncryptionStatus:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionConfigurationDetails_EncryptionStatus, &ev); err != nil {
-				return err
-			}
-			v.EncryptionStatus = KmsKeyStatus(ev)
-			return nil
-		case schemas.EncryptionConfigurationDetails_EncryptionStatusReason:
-			v.EncryptionStatusReason = new(string)
-			return d.ReadString(schemas.EncryptionConfigurationDetails_EncryptionStatusReason, v.EncryptionStatusReason)
-		case schemas.EncryptionConfigurationDetails_KeyType:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionConfigurationDetails_KeyType, &ev); err != nil {
-				return err
-			}
-			v.KeyType = KmsKeyType(ev)
-			return nil
-		case schemas.EncryptionConfigurationDetails_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.EncryptionConfigurationDetails_KmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
-}
-
 // The Grant union represents the set of possible configuration options for the
 // selected grant type. Exactly one member of the union must be specified, and must
 // match the grant type selected.
@@ -1144,14 +421,6 @@ type GrantMemberAuthorizationCode struct {
 }
 
 func (*GrantMemberAuthorizationCode) isGrant() {}
-func (v *GrantMemberAuthorizationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Grant_AuthorizationCode)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *GrantMemberAuthorizationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration options for the urn:ietf:params:oauth:grant-type:jwt-bearer grant
 // type.
@@ -1162,14 +431,6 @@ type GrantMemberJwtBearer struct {
 }
 
 func (*GrantMemberJwtBearer) isGrant() {}
-func (v *GrantMemberJwtBearer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Grant_JwtBearer)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *GrantMemberJwtBearer) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration options for the refresh_token grant type.
 type GrantMemberRefreshToken struct {
@@ -1179,14 +440,6 @@ type GrantMemberRefreshToken struct {
 }
 
 func (*GrantMemberRefreshToken) isGrant() {}
-func (v *GrantMemberRefreshToken) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Grant_RefreshToken)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *GrantMemberRefreshToken) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration options for the urn:ietf:params:oauth:grant-type:token-exchange
 // grant type.
@@ -1197,14 +450,6 @@ type GrantMemberTokenExchange struct {
 }
 
 func (*GrantMemberTokenExchange) isGrant() {}
-func (v *GrantMemberTokenExchange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Grant_TokenExchange)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *GrantMemberTokenExchange) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A structure that defines a single grant and its configuration.
 type GrantItem struct {
@@ -1222,35 +467,6 @@ type GrantItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GrantItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GrantItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrant(s, schemas.GrantItem_Grant, v.Grant)
-	if v.GrantType != "" {
-		s.WriteString(schemas.GrantItem_GrantType, string(v.GrantType))
-	}
-}
-func (v *GrantItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GrantItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GrantItem_Grant:
-			return deserializeGrant(d, schemas.GrantItem_Grant, &v.Grant)
-		case schemas.GrantItem_GrantType:
-			var ev string
-			if err := d.ReadString(schemas.GrantItem_GrantType, &ev); err != nil {
-				return err
-			}
-			v.GrantType = GrantType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes details for authentication that uses IAM.
 type IamAuthenticationMethod struct {
 
@@ -1260,32 +476,6 @@ type IamAuthenticationMethod struct {
 	ActorPolicy document.Interface
 
 	noSmithyDocumentSerde
-}
-
-func (v *IamAuthenticationMethod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamAuthenticationMethod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamAuthenticationMethod) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.IamAuthenticationMethod_ActorPolicy, &smithydocument.Opaque{Value: v.ActorPolicy})
-}
-func (v *IamAuthenticationMethod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamAuthenticationMethod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamAuthenticationMethod_ActorPolicy:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.IamAuthenticationMethod_ActorPolicy, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.ActorPolicy = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		}
-		return nil
-	})
 }
 
 // Specifies the attributes to add to your attribute-based access control (ABAC)
@@ -1299,25 +489,6 @@ type InstanceAccessControlAttributeConfiguration struct {
 	AccessControlAttributes []AccessControlAttribute
 
 	noSmithyDocumentSerde
-}
-
-func (v *InstanceAccessControlAttributeConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceAccessControlAttributeConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceAccessControlAttributeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeList(s, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, v.AccessControlAttributes)
-}
-func (v *InstanceAccessControlAttributeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceAccessControlAttributeConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes:
-			return deserializeAccessControlAttributeList(d, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, &v.AccessControlAttributes)
-		}
-		return nil
-	})
 }
 
 // Provides information about the IAM Identity Center instance.
@@ -1355,68 +526,6 @@ type InstanceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstanceMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.InstanceMetadata_CreatedDate, *v.CreatedDate)
-	}
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.InstanceMetadata_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.InstanceMetadata_InstanceArn, *v.InstanceArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.InstanceMetadata_Name, *v.Name)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.InstanceMetadata_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.InstanceMetadata_Status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.InstanceMetadata_StatusReason, *v.StatusReason)
-	}
-}
-func (v *InstanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceMetadata_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.InstanceMetadata_CreatedDate, v.CreatedDate)
-		case schemas.InstanceMetadata_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.InstanceMetadata_IdentityStoreId, v.IdentityStoreId)
-		case schemas.InstanceMetadata_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.InstanceMetadata_InstanceArn, v.InstanceArn)
-		case schemas.InstanceMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.InstanceMetadata_Name, v.Name)
-		case schemas.InstanceMetadata_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.InstanceMetadata_OwnerAccountId, v.OwnerAccountId)
-		case schemas.InstanceMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.InstanceMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InstanceStatus(ev)
-			return nil
-		case schemas.InstanceMetadata_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.InstanceMetadata_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
-
 // A structure that defines configuration settings for an application that
 // supports the JWT Bearer Token Authorization Grant. The AuthorizedAudience field
 // is the aud claim. For more information, see [RFC 7523].
@@ -1433,25 +542,6 @@ type JwtBearerGrant struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JwtBearerGrant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JwtBearerGrant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JwtBearerGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedTokenIssuers(s, schemas.JwtBearerGrant_AuthorizedTokenIssuers, v.AuthorizedTokenIssuers)
-}
-func (v *JwtBearerGrant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JwtBearerGrant, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JwtBearerGrant_AuthorizedTokenIssuers:
-			return deserializeAuthorizedTokenIssuers(d, schemas.JwtBearerGrant_AuthorizedTokenIssuers, &v.AuthorizedTokenIssuers)
-		}
-		return nil
-	})
-}
-
 // A structure that describes a filter for account assignments.
 type ListAccountAssignmentsFilter struct {
 
@@ -1462,28 +552,6 @@ type ListAccountAssignmentsFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountAssignmentsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountAssignmentsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountAssignmentsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ListAccountAssignmentsFilter_AccountId, *v.AccountId)
-	}
-}
-func (v *ListAccountAssignmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountAssignmentsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountAssignmentsFilter_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ListAccountAssignmentsFilter_AccountId, v.AccountId)
-		}
-		return nil
-	})
-}
-
 // A structure that describes a filter for application assignments.
 type ListApplicationAssignmentsFilter struct {
 
@@ -1491,28 +559,6 @@ type ListApplicationAssignmentsFilter struct {
 	ApplicationArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListApplicationAssignmentsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationAssignmentsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationAssignmentsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ListApplicationAssignmentsFilter_ApplicationArn, *v.ApplicationArn)
-	}
-}
-func (v *ListApplicationAssignmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationAssignmentsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationAssignmentsFilter_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.ListApplicationAssignmentsFilter_ApplicationArn, v.ApplicationArn)
-		}
-		return nil
-	})
 }
 
 // A structure that describes a filter for applications.
@@ -1526,34 +572,6 @@ type ListApplicationsFilter struct {
 	ApplicationProvider *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListApplicationsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationAccount != nil {
-		s.WriteString(schemas.ListApplicationsFilter_ApplicationAccount, *v.ApplicationAccount)
-	}
-	if v.ApplicationProvider != nil {
-		s.WriteString(schemas.ListApplicationsFilter_ApplicationProvider, *v.ApplicationProvider)
-	}
-}
-func (v *ListApplicationsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsFilter_ApplicationAccount:
-			v.ApplicationAccount = new(string)
-			return d.ReadString(schemas.ListApplicationsFilter_ApplicationAccount, v.ApplicationAccount)
-		case schemas.ListApplicationsFilter_ApplicationProvider:
-			v.ApplicationProvider = new(string)
-			return d.ReadString(schemas.ListApplicationsFilter_ApplicationProvider, v.ApplicationProvider)
-		}
-		return nil
-	})
 }
 
 // A structure that describes configuration settings for a trusted token issuer
@@ -1592,50 +610,6 @@ type OidcJwtConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OidcJwtConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OidcJwtConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OidcJwtConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClaimAttributePath != nil {
-		s.WriteString(schemas.OidcJwtConfiguration_ClaimAttributePath, *v.ClaimAttributePath)
-	}
-	if v.IdentityStoreAttributePath != nil {
-		s.WriteString(schemas.OidcJwtConfiguration_IdentityStoreAttributePath, *v.IdentityStoreAttributePath)
-	}
-	if v.IssuerUrl != nil {
-		s.WriteString(schemas.OidcJwtConfiguration_IssuerUrl, *v.IssuerUrl)
-	}
-	if v.JwksRetrievalOption != "" {
-		s.WriteString(schemas.OidcJwtConfiguration_JwksRetrievalOption, string(v.JwksRetrievalOption))
-	}
-}
-func (v *OidcJwtConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OidcJwtConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OidcJwtConfiguration_ClaimAttributePath:
-			v.ClaimAttributePath = new(string)
-			return d.ReadString(schemas.OidcJwtConfiguration_ClaimAttributePath, v.ClaimAttributePath)
-		case schemas.OidcJwtConfiguration_IdentityStoreAttributePath:
-			v.IdentityStoreAttributePath = new(string)
-			return d.ReadString(schemas.OidcJwtConfiguration_IdentityStoreAttributePath, v.IdentityStoreAttributePath)
-		case schemas.OidcJwtConfiguration_IssuerUrl:
-			v.IssuerUrl = new(string)
-			return d.ReadString(schemas.OidcJwtConfiguration_IssuerUrl, v.IssuerUrl)
-		case schemas.OidcJwtConfiguration_JwksRetrievalOption:
-			var ev string
-			if err := d.ReadString(schemas.OidcJwtConfiguration_JwksRetrievalOption, &ev); err != nil {
-				return err
-			}
-			v.JwksRetrievalOption = JwksRetrievalOption(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes updated configuration settings for a trusted token
 // issuer that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).
 type OidcJwtUpdateConfiguration struct {
@@ -1659,44 +633,6 @@ type OidcJwtUpdateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OidcJwtUpdateConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OidcJwtUpdateConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OidcJwtUpdateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClaimAttributePath != nil {
-		s.WriteString(schemas.OidcJwtUpdateConfiguration_ClaimAttributePath, *v.ClaimAttributePath)
-	}
-	if v.IdentityStoreAttributePath != nil {
-		s.WriteString(schemas.OidcJwtUpdateConfiguration_IdentityStoreAttributePath, *v.IdentityStoreAttributePath)
-	}
-	if v.JwksRetrievalOption != "" {
-		s.WriteString(schemas.OidcJwtUpdateConfiguration_JwksRetrievalOption, string(v.JwksRetrievalOption))
-	}
-}
-func (v *OidcJwtUpdateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OidcJwtUpdateConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OidcJwtUpdateConfiguration_ClaimAttributePath:
-			v.ClaimAttributePath = new(string)
-			return d.ReadString(schemas.OidcJwtUpdateConfiguration_ClaimAttributePath, v.ClaimAttributePath)
-		case schemas.OidcJwtUpdateConfiguration_IdentityStoreAttributePath:
-			v.IdentityStoreAttributePath = new(string)
-			return d.ReadString(schemas.OidcJwtUpdateConfiguration_IdentityStoreAttributePath, v.IdentityStoreAttributePath)
-		case schemas.OidcJwtUpdateConfiguration_JwksRetrievalOption:
-			var ev string
-			if err := d.ReadString(schemas.OidcJwtUpdateConfiguration_JwksRetrievalOption, &ev); err != nil {
-				return err
-			}
-			v.JwksRetrievalOption = JwksRetrievalOption(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Filters the operation status list based on the passed attribute value.
 type OperationStatusFilter struct {
 
@@ -1704,32 +640,6 @@ type OperationStatusFilter struct {
 	Status StatusValues
 
 	noSmithyDocumentSerde
-}
-
-func (v *OperationStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OperationStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OperationStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.OperationStatusFilter_Status, string(v.Status))
-	}
-}
-func (v *OperationStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OperationStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OperationStatusFilter_Status:
-			var ev string
-			if err := d.ReadString(schemas.OperationStatusFilter_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusValues(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Specifies the configuration of the Amazon Web Services managed or customer
@@ -1759,36 +669,6 @@ type PermissionsBoundary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PermissionsBoundary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PermissionsBoundary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PermissionsBoundary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomerManagedPolicyReference != nil {
-		s.WriteStruct(schemas.PermissionsBoundary_CustomerManagedPolicyReference)
-		v.CustomerManagedPolicyReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManagedPolicyArn != nil {
-		s.WriteString(schemas.PermissionsBoundary_ManagedPolicyArn, *v.ManagedPolicyArn)
-	}
-}
-func (v *PermissionsBoundary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PermissionsBoundary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PermissionsBoundary_CustomerManagedPolicyReference:
-			v.CustomerManagedPolicyReference = &CustomerManagedPolicyReference{}
-			return v.CustomerManagedPolicyReference.Deserialize(d)
-		case schemas.PermissionsBoundary_ManagedPolicyArn:
-			v.ManagedPolicyArn = new(string)
-			return d.ReadString(schemas.PermissionsBoundary_ManagedPolicyArn, v.ManagedPolicyArn)
-		}
-		return nil
-	})
-}
-
 // An entity that contains IAM policies.
 type PermissionSet struct {
 
@@ -1814,58 +694,6 @@ type PermissionSet struct {
 	SessionDuration *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PermissionSet) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PermissionSet)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PermissionSet) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.PermissionSet_CreatedDate, *v.CreatedDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.PermissionSet_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PermissionSet_Name, *v.Name)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.PermissionSet_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.RelayState != nil {
-		s.WriteString(schemas.PermissionSet_RelayState, *v.RelayState)
-	}
-	if v.SessionDuration != nil {
-		s.WriteString(schemas.PermissionSet_SessionDuration, *v.SessionDuration)
-	}
-}
-func (v *PermissionSet) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PermissionSet, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PermissionSet_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.PermissionSet_CreatedDate, v.CreatedDate)
-		case schemas.PermissionSet_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PermissionSet_Description, v.Description)
-		case schemas.PermissionSet_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PermissionSet_Name, v.Name)
-		case schemas.PermissionSet_PermissionSetArn:
-			v.PermissionSetArn = new(string)
-			return d.ReadString(schemas.PermissionSet_PermissionSetArn, v.PermissionSetArn)
-		case schemas.PermissionSet_RelayState:
-			v.RelayState = new(string)
-			return d.ReadString(schemas.PermissionSet_RelayState, v.RelayState)
-		case schemas.PermissionSet_SessionDuration:
-			v.SessionDuration = new(string)
-			return d.ReadString(schemas.PermissionSet_SessionDuration, v.SessionDuration)
-		}
-		return nil
-	})
 }
 
 // A structure that is used to provide the status of the provisioning operation
@@ -1896,62 +724,6 @@ type PermissionSetProvisioningStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PermissionSetProvisioningStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PermissionSetProvisioningStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PermissionSetProvisioningStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.PermissionSetProvisioningStatus_AccountId, *v.AccountId)
-	}
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.PermissionSetProvisioningStatus_CreatedDate, *v.CreatedDate)
-	}
-	if v.FailureReason != nil {
-		s.WriteString(schemas.PermissionSetProvisioningStatus_FailureReason, *v.FailureReason)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.PermissionSetProvisioningStatus_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.RequestId != nil {
-		s.WriteString(schemas.PermissionSetProvisioningStatus_RequestId, *v.RequestId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PermissionSetProvisioningStatus_Status, string(v.Status))
-	}
-}
-func (v *PermissionSetProvisioningStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PermissionSetProvisioningStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PermissionSetProvisioningStatus_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.PermissionSetProvisioningStatus_AccountId, v.AccountId)
-		case schemas.PermissionSetProvisioningStatus_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.PermissionSetProvisioningStatus_CreatedDate, v.CreatedDate)
-		case schemas.PermissionSetProvisioningStatus_FailureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.PermissionSetProvisioningStatus_FailureReason, v.FailureReason)
-		case schemas.PermissionSetProvisioningStatus_PermissionSetArn:
-			v.PermissionSetArn = new(string)
-			return d.ReadString(schemas.PermissionSetProvisioningStatus_PermissionSetArn, v.PermissionSetArn)
-		case schemas.PermissionSetProvisioningStatus_RequestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.PermissionSetProvisioningStatus_RequestId, v.RequestId)
-		case schemas.PermissionSetProvisioningStatus_Status:
-			var ev string
-			if err := d.ReadString(schemas.PermissionSetProvisioningStatus_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusValues(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about the permission set provisioning status.
 type PermissionSetProvisioningStatusMetadata struct {
 
@@ -1968,44 +740,6 @@ type PermissionSetProvisioningStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PermissionSetProvisioningStatusMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PermissionSetProvisioningStatusMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PermissionSetProvisioningStatusMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedDate != nil {
-		s.WriteTime(schemas.PermissionSetProvisioningStatusMetadata_CreatedDate, *v.CreatedDate)
-	}
-	if v.RequestId != nil {
-		s.WriteString(schemas.PermissionSetProvisioningStatusMetadata_RequestId, *v.RequestId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.PermissionSetProvisioningStatusMetadata_Status, string(v.Status))
-	}
-}
-func (v *PermissionSetProvisioningStatusMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PermissionSetProvisioningStatusMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PermissionSetProvisioningStatusMetadata_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.PermissionSetProvisioningStatusMetadata_CreatedDate, v.CreatedDate)
-		case schemas.PermissionSetProvisioningStatusMetadata_RequestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.PermissionSetProvisioningStatusMetadata_RequestId, v.RequestId)
-		case schemas.PermissionSetProvisioningStatusMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.PermissionSetProvisioningStatusMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusValues(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes the options for the access portal associated with an
 // application.
 type PortalOptions struct {
@@ -2019,62 +753,12 @@ type PortalOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PortalOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PortalOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PortalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SignInOptions != nil {
-		s.WriteStruct(schemas.PortalOptions_SignInOptions)
-		v.SignInOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Visibility != "" {
-		s.WriteString(schemas.PortalOptions_Visibility, string(v.Visibility))
-	}
-}
-func (v *PortalOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PortalOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PortalOptions_SignInOptions:
-			v.SignInOptions = &SignInOptions{}
-			return v.SignInOptions.Deserialize(d)
-		case schemas.PortalOptions_Visibility:
-			var ev string
-			if err := d.ReadString(schemas.PortalOptions_Visibility, &ev); err != nil {
-				return err
-			}
-			v.Visibility = ApplicationVisibility(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that defines configuration settings for an application that
 // supports the OAuth 2.0 Refresh Token Grant. For more, see [RFC 6749].
 //
 // [RFC 6749]: https://datatracker.ietf.org/doc/html/rfc6749#section-1.5
 type RefreshTokenGrant struct {
 	noSmithyDocumentSerde
-}
-
-func (v *RefreshTokenGrant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RefreshTokenGrant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RefreshTokenGrant) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *RefreshTokenGrant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RefreshTokenGrant, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // Contains information about an enabled Region of an IAM Identity Center
@@ -2101,49 +785,6 @@ type RegionMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegionMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegionMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AddedDate != nil {
-		s.WriteTime(schemas.RegionMetadata_AddedDate, *v.AddedDate)
-	}
-	if v.IsPrimaryRegion != false {
-		s.WriteBool(schemas.RegionMetadata_IsPrimaryRegion, v.IsPrimaryRegion)
-	}
-	if v.RegionName != nil {
-		s.WriteString(schemas.RegionMetadata_RegionName, *v.RegionName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RegionMetadata_Status, string(v.Status))
-	}
-}
-func (v *RegionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegionMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegionMetadata_AddedDate:
-			v.AddedDate = new(time.Time)
-			return d.ReadTime(schemas.RegionMetadata_AddedDate, v.AddedDate)
-		case schemas.RegionMetadata_IsPrimaryRegion:
-			return d.ReadBool(schemas.RegionMetadata_IsPrimaryRegion, &v.IsPrimaryRegion)
-		case schemas.RegionMetadata_RegionName:
-			v.RegionName = new(string)
-			return d.ReadString(schemas.RegionMetadata_RegionName, v.RegionName)
-		case schemas.RegionMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.RegionMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = RegionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that describes the configuration of a resource server.
 type ResourceServerConfig struct {
 
@@ -2152,25 +793,6 @@ type ResourceServerConfig struct {
 	Scopes map[string]ResourceServerScopeDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResourceServerConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceServerConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceServerConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceServerScopes(s, schemas.ResourceServerConfig_Scopes, v.Scopes)
-}
-func (v *ResourceServerConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceServerConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceServerConfig_Scopes:
-			return deserializeResourceServerScopes(d, schemas.ResourceServerConfig_Scopes, &v.Scopes)
-		}
-		return nil
-	})
 }
 
 // A structure that describes details for an IAM Identity Center access scope that
@@ -2186,34 +808,6 @@ type ResourceServerScopeDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceServerScopeDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceServerScopeDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceServerScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DetailedTitle != nil {
-		s.WriteString(schemas.ResourceServerScopeDetails_DetailedTitle, *v.DetailedTitle)
-	}
-	if v.LongDescription != nil {
-		s.WriteString(schemas.ResourceServerScopeDetails_LongDescription, *v.LongDescription)
-	}
-}
-func (v *ResourceServerScopeDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceServerScopeDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceServerScopeDetails_DetailedTitle:
-			v.DetailedTitle = new(string)
-			return d.ReadString(schemas.ResourceServerScopeDetails_DetailedTitle, v.DetailedTitle)
-		case schemas.ResourceServerScopeDetails_LongDescription:
-			v.LongDescription = new(string)
-			return d.ReadString(schemas.ResourceServerScopeDetails_LongDescription, v.LongDescription)
-		}
-		return nil
-	})
-}
-
 // A structure that describes an IAM Identity Center access scope and its
 // authorized targets.
 type ScopeDetails struct {
@@ -2227,31 +821,6 @@ type ScopeDetails struct {
 	AuthorizedTargets []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScopeDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScopeDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopeTargets(s, schemas.ScopeDetails_AuthorizedTargets, v.AuthorizedTargets)
-	if v.Scope != nil {
-		s.WriteString(schemas.ScopeDetails_Scope, *v.Scope)
-	}
-}
-func (v *ScopeDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScopeDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScopeDetails_AuthorizedTargets:
-			return deserializeScopeTargets(d, schemas.ScopeDetails_AuthorizedTargets, &v.AuthorizedTargets)
-		case schemas.ScopeDetails_Scope:
-			v.Scope = new(string)
-			return d.ReadString(schemas.ScopeDetails_Scope, v.Scope)
-		}
-		return nil
-	})
 }
 
 // A structure that describes the sign-in options for an application portal.
@@ -2276,38 +845,6 @@ type SignInOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SignInOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SignInOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SignInOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationUrl != nil {
-		s.WriteString(schemas.SignInOptions_ApplicationUrl, *v.ApplicationUrl)
-	}
-	if v.Origin != "" {
-		s.WriteString(schemas.SignInOptions_Origin, string(v.Origin))
-	}
-}
-func (v *SignInOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SignInOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SignInOptions_ApplicationUrl:
-			v.ApplicationUrl = new(string)
-			return d.ReadString(schemas.SignInOptions_ApplicationUrl, v.ApplicationUrl)
-		case schemas.SignInOptions_Origin:
-			var ev string
-			if err := d.ReadString(schemas.SignInOptions_Origin, &ev); err != nil {
-				return err
-			}
-			v.Origin = SignInOrigin(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A set of key-value pairs that are used to manage the resource. Tags can only be
 // applied to permission sets and cannot be applied to corresponding roles that IAM
 // Identity Center creates in Amazon Web Services accounts.
@@ -2326,56 +863,12 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A structure that defines configuration settings for an application that
 // supports the OAuth 2.0 Token Exchange Grant. For more information, see [RFC 8693].
 //
 // [RFC 8693]: https://datatracker.ietf.org/doc/html/rfc8693
 type TokenExchangeGrant struct {
 	noSmithyDocumentSerde
-}
-
-func (v *TokenExchangeGrant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TokenExchangeGrant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TokenExchangeGrant) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *TokenExchangeGrant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TokenExchangeGrant, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // A structure that describes the configuration of a trusted token issuer. The
@@ -2399,14 +892,6 @@ type TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration struct {
 
 func (*TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration) isTrustedTokenIssuerConfiguration() {
 }
-func (v *TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrustedTokenIssuerConfiguration_OidcJwtConfiguration)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A structure that describes a trusted token issuer.
 type TrustedTokenIssuerMetadata struct {
@@ -2423,44 +908,6 @@ type TrustedTokenIssuerMetadata struct {
 	TrustedTokenIssuerType TrustedTokenIssuerType
 
 	noSmithyDocumentSerde
-}
-
-func (v *TrustedTokenIssuerMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrustedTokenIssuerMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TrustedTokenIssuerMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.TrustedTokenIssuerMetadata_Name, *v.Name)
-	}
-	if v.TrustedTokenIssuerArn != nil {
-		s.WriteString(schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
-	}
-	if v.TrustedTokenIssuerType != "" {
-		s.WriteString(schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerType, string(v.TrustedTokenIssuerType))
-	}
-}
-func (v *TrustedTokenIssuerMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TrustedTokenIssuerMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TrustedTokenIssuerMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.TrustedTokenIssuerMetadata_Name, v.Name)
-		case schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerArn:
-			v.TrustedTokenIssuerArn = new(string)
-			return d.ReadString(schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerArn, v.TrustedTokenIssuerArn)
-		case schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerType:
-			var ev string
-			if err := d.ReadString(schemas.TrustedTokenIssuerMetadata_TrustedTokenIssuerType, &ev); err != nil {
-				return err
-			}
-			v.TrustedTokenIssuerType = TrustedTokenIssuerType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that contains details to be updated for a trusted token issuer
@@ -2484,14 +931,6 @@ type TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration struct {
 
 func (*TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration) isTrustedTokenIssuerUpdateConfiguration() {
 }
-func (v *TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrustedTokenIssuerUpdateConfiguration_OidcJwtConfiguration)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A structure that describes the options for the access portal associated with an
 // application that can be updated.
@@ -2501,30 +940,6 @@ type UpdateApplicationPortalOptions struct {
 	SignInOptions *SignInOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateApplicationPortalOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationPortalOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationPortalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SignInOptions != nil {
-		s.WriteStruct(schemas.UpdateApplicationPortalOptions_SignInOptions)
-		v.SignInOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateApplicationPortalOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationPortalOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateApplicationPortalOptions_SignInOptions:
-			v.SignInOptions = &SignInOptions{}
-			return v.SignInOptions.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

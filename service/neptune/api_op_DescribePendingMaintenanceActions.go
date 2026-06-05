@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,25 +65,6 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePendingMaintenanceActionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePendingMaintenanceActionsMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePendingMaintenanceActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribePendingMaintenanceActionsMessage_Filters, v.Filters)
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_Marker, *v.Marker)
-	}
-	if v.MaxRecords != nil {
-		s.WriteInt32(schemas.DescribePendingMaintenanceActionsMessage_MaxRecords, *v.MaxRecords)
-	}
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_ResourceIdentifier, *v.ResourceIdentifier)
-	}
-}
-
 type DescribePendingMaintenanceActionsOutput struct {
 
 	//  An optional pagination token provided by a previous
@@ -103,26 +82,16 @@ type DescribePendingMaintenanceActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePendingMaintenanceActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PendingMaintenanceActionsMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PendingMaintenanceActionsMessage_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.PendingMaintenanceActionsMessage_Marker, v.Marker)
-		case schemas.PendingMaintenanceActionsMessage_PendingMaintenanceActions:
-			return deserializePendingMaintenanceActions(d, schemas.PendingMaintenanceActionsMessage_PendingMaintenanceActions, &v.PendingMaintenanceActions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.PendingMaintenanceActionsMessage)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePendingMaintenanceActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.PendingMaintenanceActionsMessage), output: &DescribePendingMaintenanceActionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribePendingMaintenanceActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePendingMaintenanceActions"); err != nil {

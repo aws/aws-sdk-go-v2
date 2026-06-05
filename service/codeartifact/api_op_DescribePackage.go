@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,33 +80,6 @@ type DescribePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePackageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePackageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.DescribePackageRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.DescribePackageRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.DescribePackageRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.DescribePackageRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.DescribePackageRequest_package, *v.Package)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.DescribePackageRequest_repository, *v.Repository)
-	}
-}
-
 type DescribePackageOutput struct {
 
 	// A [PackageDescription] object that contains information about the requested package.
@@ -124,24 +95,16 @@ type DescribePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePackageResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePackageResult_package:
-			v.Package = &types.PackageDescription{}
-			return v.Package.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackage, schemas.DescribePackageRequest, schemas.DescribePackageResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackage, schemas.DescribePackageRequest, schemas.DescribePackageResult), output: &DescribePackageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePackage"); err != nil {

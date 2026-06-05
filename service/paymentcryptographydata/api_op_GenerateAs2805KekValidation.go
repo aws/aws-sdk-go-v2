@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,22 +87,6 @@ type GenerateAs2805KekValidationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateAs2805KekValidationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GenerateAs2805KekValidationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GenerateAs2805KekValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAs2805KekValidationType(s, schemas.GenerateAs2805KekValidationInput_KekValidationType, v.KekValidationType)
-	if v.KeyIdentifier != nil {
-		s.WriteString(schemas.GenerateAs2805KekValidationInput_KeyIdentifier, *v.KeyIdentifier)
-	}
-	if v.RandomKeySendVariantMask != "" {
-		s.WriteString(schemas.GenerateAs2805KekValidationInput_RandomKeySendVariantMask, string(v.RandomKeySendVariantMask))
-	}
-}
-
 type GenerateAs2805KekValidationOutput struct {
 
 	// The keyARN of sending KEK that Amazon Web Services Payment Cryptography
@@ -136,33 +118,16 @@ type GenerateAs2805KekValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GenerateAs2805KekValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GenerateAs2805KekValidationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GenerateAs2805KekValidationOutput_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_KeyArn, v.KeyArn)
-		case schemas.GenerateAs2805KekValidationOutput_KeyCheckValue:
-			v.KeyCheckValue = new(string)
-			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_KeyCheckValue, v.KeyCheckValue)
-		case schemas.GenerateAs2805KekValidationOutput_RandomKeyReceive:
-			v.RandomKeyReceive = new(string)
-			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_RandomKeyReceive, v.RandomKeyReceive)
-		case schemas.GenerateAs2805KekValidationOutput_RandomKeySend:
-			v.RandomKeySend = new(string)
-			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_RandomKeySend, v.RandomKeySend)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGenerateAs2805KekValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateAs2805KekValidation, schemas.GenerateAs2805KekValidationInput, schemas.GenerateAs2805KekValidationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateAs2805KekValidation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateAs2805KekValidation, schemas.GenerateAs2805KekValidationInput, schemas.GenerateAs2805KekValidationOutput), output: &GenerateAs2805KekValidationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateAs2805KekValidation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateAs2805KekValidation"); err != nil {

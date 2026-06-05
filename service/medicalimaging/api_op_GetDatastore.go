@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDatastoreInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDatastoreRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.GetDatastoreRequest_datastoreId, *v.DatastoreId)
-	}
-}
-
 type GetDatastoreOutput struct {
 
 	// The data store properties.
@@ -64,24 +50,16 @@ type GetDatastoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDatastoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDatastoreResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDatastoreResponse_datastoreProperties:
-			v.DatastoreProperties = &types.DatastoreProperties{}
-			return v.DatastoreProperties.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatastore, schemas.GetDatastoreRequest, schemas.GetDatastoreResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatastore, schemas.GetDatastoreRequest, schemas.GetDatastoreResponse), output: &GetDatastoreOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDatastore"); err != nil {

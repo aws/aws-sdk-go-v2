@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,28 +56,6 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDataSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceType(s, schemas.UpdateDataSourceRequest_DataSourceType, v.DataSourceType)
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateDataSourceRequest_Description, *v.Description)
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.UpdateDataSourceRequest_DomainName, *v.DomainName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateDataSourceRequest_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateDataSourceRequest_Status, string(v.Status))
-	}
-}
-
 // The result of an UpdateDataSource operation.
 type UpdateDataSourceOutput struct {
 
@@ -92,24 +68,16 @@ type UpdateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDataSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDataSourceResponse_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UpdateDataSourceResponse_Message, v.Message)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceRequest, schemas.UpdateDataSourceResponse), output: &UpdateDataSourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataSource"); err != nil {

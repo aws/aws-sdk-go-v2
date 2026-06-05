@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type DescribeBudgetActionsForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionsForAccountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeBudgetActionsForAccountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeBudgetActionsForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.DescribeBudgetActionsForAccountRequest_AccountId, *v.AccountId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeBudgetActionsForAccountRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeBudgetActionsForAccountRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeBudgetActionsForAccountOutput struct {
 
 	//  A list of the budget action resources information.
@@ -80,26 +60,16 @@ type DescribeBudgetActionsForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionsForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeBudgetActionsForAccountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeBudgetActionsForAccountResponse_Actions:
-			return deserializeActions(d, schemas.DescribeBudgetActionsForAccountResponse_Actions, &v.Actions)
-		case schemas.DescribeBudgetActionsForAccountResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeBudgetActionsForAccountResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeBudgetActionsForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionsForAccount, schemas.DescribeBudgetActionsForAccountRequest, schemas.DescribeBudgetActionsForAccountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetActionsForAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionsForAccount, schemas.DescribeBudgetActionsForAccountRequest, schemas.DescribeBudgetActionsForAccountResponse), output: &DescribeBudgetActionsForAccountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgetActionsForAccount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetActionsForAccount"); err != nil {

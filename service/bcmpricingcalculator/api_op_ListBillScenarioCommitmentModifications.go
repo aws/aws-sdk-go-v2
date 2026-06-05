@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListBillScenarioCommitmentModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBillScenarioCommitmentModificationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBillScenarioCommitmentModificationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBillScenarioCommitmentModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillScenarioId != nil {
-		s.WriteString(schemas.ListBillScenarioCommitmentModificationsRequest_billScenarioId, *v.BillScenarioId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListBillScenarioCommitmentModificationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListBillScenarioCommitmentModificationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListBillScenarioCommitmentModificationsOutput struct {
 
 	//  The list of commitment modifications associated with the bill scenario.
@@ -78,26 +58,16 @@ type ListBillScenarioCommitmentModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBillScenarioCommitmentModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBillScenarioCommitmentModificationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBillScenarioCommitmentModificationsResponse_items:
-			return deserializeBillScenarioCommitmentModificationItems(d, schemas.ListBillScenarioCommitmentModificationsResponse_items, &v.Items)
-		case schemas.ListBillScenarioCommitmentModificationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListBillScenarioCommitmentModificationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListBillScenarioCommitmentModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioCommitmentModifications, schemas.ListBillScenarioCommitmentModificationsRequest, schemas.ListBillScenarioCommitmentModificationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillScenarioCommitmentModifications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioCommitmentModifications, schemas.ListBillScenarioCommitmentModificationsRequest, schemas.ListBillScenarioCommitmentModificationsResponse), output: &ListBillScenarioCommitmentModificationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillScenarioCommitmentModifications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillScenarioCommitmentModifications"); err != nil {

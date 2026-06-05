@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type CreateInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvitationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateInvitationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateInvitationsRequest_accountIds, v.AccountIds)
-	if v.DisableEmailNotification != nil {
-		s.WriteBool(schemas.CreateInvitationsRequest_disableEmailNotification, *v.DisableEmailNotification)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.CreateInvitationsRequest_message, *v.Message)
-	}
-}
-
 type CreateInvitationsOutput struct {
 
 	// An array of objects, one for each account whose invitation hasn't been
@@ -79,23 +61,16 @@ type CreateInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateInvitationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateInvitationsResponse_unprocessedAccounts:
-			return deserialize__listOfUnprocessedAccount(d, schemas.CreateInvitationsResponse_unprocessedAccounts, &v.UnprocessedAccounts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvitations, schemas.CreateInvitationsRequest, schemas.CreateInvitationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInvitations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvitations, schemas.CreateInvitationsRequest, schemas.CreateInvitationsResponse), output: &CreateInvitationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInvitations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInvitations"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,26 +67,6 @@ type UploadEntityDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UploadEntityDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UploadEntityDefinitionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UploadEntityDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeprecateExistingEntities != false {
-		s.WriteBool(schemas.UploadEntityDefinitionsRequest_deprecateExistingEntities, v.DeprecateExistingEntities)
-	}
-	if v.Document != nil {
-		s.WriteStruct(schemas.UploadEntityDefinitionsRequest_document)
-		v.Document.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SyncWithPublicNamespace != false {
-		s.WriteBool(schemas.UploadEntityDefinitionsRequest_syncWithPublicNamespace, v.SyncWithPublicNamespace)
-	}
-}
-
 type UploadEntityDefinitionsOutput struct {
 
 	// The ID that specifies the upload action. You can use this to track the status
@@ -103,24 +81,16 @@ type UploadEntityDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UploadEntityDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UploadEntityDefinitionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UploadEntityDefinitionsResponse_uploadId:
-			v.UploadId = new(string)
-			return d.ReadString(schemas.UploadEntityDefinitionsResponse_uploadId, v.UploadId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUploadEntityDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadEntityDefinitions, schemas.UploadEntityDefinitionsRequest, schemas.UploadEntityDefinitionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUploadEntityDefinitions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadEntityDefinitions, schemas.UploadEntityDefinitionsRequest, schemas.UploadEntityDefinitionsResponse), output: &UploadEntityDefinitionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUploadEntityDefinitions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UploadEntityDefinitions"); err != nil {

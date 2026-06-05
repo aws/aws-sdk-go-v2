@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type StopRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.StopRunRequest_arn, *v.Arn)
-	}
-}
-
 // Represents the results of your stop run attempt.
 type StopRunOutput struct {
 
@@ -68,24 +54,16 @@ type StopRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopRunResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopRunResult_run:
-			v.Run = &types.Run{}
-			return v.Run.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRun, schemas.StopRunRequest, schemas.StopRunResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRun, schemas.StopRunRequest, schemas.StopRunResult), output: &StopRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopRun"); err != nil {

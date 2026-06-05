@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,15 +34,6 @@ type DescribeEventSourcesConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventSourcesConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEventSourcesConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEventSourcesConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DescribeEventSourcesConfigOutput struct {
 
 	// Lists the event sources in the configuration.
@@ -56,24 +45,16 @@ type DescribeEventSourcesConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventSourcesConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEventSourcesConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEventSourcesConfigResponse_EventSources:
-			v.EventSources = &types.EventSourcesConfig{}
-			return v.EventSources.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEventSourcesConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSourcesConfig, schemas.DescribeEventSourcesConfigRequest, schemas.DescribeEventSourcesConfigResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEventSourcesConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSourcesConfig, schemas.DescribeEventSourcesConfigRequest, schemas.DescribeEventSourcesConfigResponse), output: &DescribeEventSourcesConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEventSourcesConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEventSourcesConfig"); err != nil {

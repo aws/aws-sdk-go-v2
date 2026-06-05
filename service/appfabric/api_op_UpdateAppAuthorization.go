@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,27 +60,6 @@ type UpdateAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAppAuthorizationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppAuthorizationIdentifier != nil {
-		s.WriteString(schemas.UpdateAppAuthorizationRequest_appAuthorizationIdentifier, *v.AppAuthorizationIdentifier)
-	}
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.UpdateAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	serializeCredential(s, schemas.UpdateAppAuthorizationRequest_credential, v.Credential)
-	if v.Tenant != nil {
-		s.WriteStruct(schemas.UpdateAppAuthorizationRequest_tenant)
-		v.Tenant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.
@@ -96,24 +73,16 @@ type UpdateAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAppAuthorizationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateAppAuthorizationResponse_appAuthorization:
-			v.AppAuthorization = &types.AppAuthorization{}
-			return v.AppAuthorization.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppAuthorization, schemas.UpdateAppAuthorizationRequest, schemas.UpdateAppAuthorizationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppAuthorization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppAuthorization, schemas.UpdateAppAuthorizationRequest, schemas.UpdateAppAuthorizationResponse), output: &UpdateAppAuthorizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppAuthorization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppAuthorization"); err != nil {

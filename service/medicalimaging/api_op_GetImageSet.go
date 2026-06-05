@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,24 +44,6 @@ type GetImageSetInput struct {
 	VersionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetImageSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImageSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImageSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.GetImageSetRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.GetImageSetRequest_imageSetId, *v.ImageSetId)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.GetImageSetRequest_versionId, *v.VersionId)
-	}
 }
 
 type GetImageSetOutput struct {
@@ -126,75 +106,16 @@ type GetImageSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImageSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImageSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImageSetResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetImageSetResponse_createdAt, v.CreatedAt)
-		case schemas.GetImageSetResponse_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.GetImageSetResponse_datastoreId, v.DatastoreId)
-		case schemas.GetImageSetResponse_deletedAt:
-			v.DeletedAt = new(time.Time)
-			return d.ReadTime(schemas.GetImageSetResponse_deletedAt, v.DeletedAt)
-		case schemas.GetImageSetResponse_imageSetArn:
-			v.ImageSetArn = new(string)
-			return d.ReadString(schemas.GetImageSetResponse_imageSetArn, v.ImageSetArn)
-		case schemas.GetImageSetResponse_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.GetImageSetResponse_imageSetId, v.ImageSetId)
-		case schemas.GetImageSetResponse_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.GetImageSetResponse_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = types.ImageSetState(ev)
-			return nil
-		case schemas.GetImageSetResponse_imageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetImageSetResponse_imageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(ev)
-			return nil
-		case schemas.GetImageSetResponse_isPrimary:
-			v.IsPrimary = new(bool)
-			return d.ReadBool(schemas.GetImageSetResponse_isPrimary, v.IsPrimary)
-		case schemas.GetImageSetResponse_lastAccessedAt:
-			v.LastAccessedAt = new(time.Time)
-			return d.ReadTime(schemas.GetImageSetResponse_lastAccessedAt, v.LastAccessedAt)
-		case schemas.GetImageSetResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.GetImageSetResponse_message, v.Message)
-		case schemas.GetImageSetResponse_overrides:
-			v.Overrides = &types.Overrides{}
-			return v.Overrides.Deserialize(d)
-		case schemas.GetImageSetResponse_storageTier:
-			var ev string
-			if err := d.ReadString(schemas.GetImageSetResponse_storageTier, &ev); err != nil {
-				return err
-			}
-			v.StorageTier = types.StorageTier(ev)
-			return nil
-		case schemas.GetImageSetResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetImageSetResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetImageSetResponse_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.GetImageSetResponse_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetImageSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageSet, schemas.GetImageSetRequest, schemas.GetImageSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageSet, schemas.GetImageSetRequest, schemas.GetImageSetResponse), output: &GetImageSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImageSet"); err != nil {

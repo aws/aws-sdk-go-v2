@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListOrganizationAdminAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationAdminAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOrganizationAdminAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOrganizationAdminAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOrganizationAdminAccountsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOrganizationAdminAccountsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListOrganizationAdminAccountsOutput struct {
 
 	// An array of objects, one for each delegated Amazon Macie administrator account
@@ -73,26 +56,16 @@ type ListOrganizationAdminAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationAdminAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOrganizationAdminAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOrganizationAdminAccountsResponse_adminAccounts:
-			return deserialize__listOfAdminAccount(d, schemas.ListOrganizationAdminAccountsResponse_adminAccounts, &v.AdminAccounts)
-		case schemas.ListOrganizationAdminAccountsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOrganizationAdminAccountsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOrganizationAdminAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationAdminAccounts, schemas.ListOrganizationAdminAccountsRequest, schemas.ListOrganizationAdminAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationAdminAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationAdminAccounts, schemas.ListOrganizationAdminAccountsRequest, schemas.ListOrganizationAdminAccountsResponse), output: &ListOrganizationAdminAccountsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationAdminAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOrganizationAdminAccounts"); err != nil {

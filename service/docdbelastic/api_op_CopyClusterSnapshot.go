@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,28 +82,6 @@ type CopyClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyClusterSnapshotInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CopyTags != nil {
-		s.WriteBool(schemas.CopyClusterSnapshotInput_copyTags, *v.CopyTags)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.SnapshotArn != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_snapshotArn, *v.SnapshotArn)
-	}
-	serializeTagMap(s, schemas.CopyClusterSnapshotInput_tags, v.Tags)
-	if v.TargetSnapshotName != nil {
-		s.WriteString(schemas.CopyClusterSnapshotInput_targetSnapshotName, *v.TargetSnapshotName)
-	}
-}
-
 type CopyClusterSnapshotOutput struct {
 
 	// Returns information about a specific elastic cluster snapshot.
@@ -119,24 +95,16 @@ type CopyClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyClusterSnapshotOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyClusterSnapshotOutput_snapshot:
-			v.Snapshot = &types.ClusterSnapshot{}
-			return v.Snapshot.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotInput, schemas.CopyClusterSnapshotOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyClusterSnapshot, schemas.CopyClusterSnapshotInput, schemas.CopyClusterSnapshotOutput), output: &CopyClusterSnapshotOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyClusterSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyClusterSnapshot"); err != nil {

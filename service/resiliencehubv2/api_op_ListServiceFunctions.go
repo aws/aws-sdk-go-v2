@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListServiceFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceFunctionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListServiceFunctionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListServiceFunctionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListServiceFunctionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListServiceFunctionsRequest_nextToken, *v.NextToken)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.ListServiceFunctionsRequest_serviceArn, *v.ServiceArn)
-	}
-}
-
 type ListServiceFunctionsOutput struct {
 
 	// The list of service functions.
@@ -79,26 +59,16 @@ type ListServiceFunctionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceFunctionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListServiceFunctionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListServiceFunctionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListServiceFunctionsResponse_nextToken, v.NextToken)
-		case schemas.ListServiceFunctionsResponse_serviceFunctions:
-			return deserializeServiceFunctionList(d, schemas.ListServiceFunctionsResponse_serviceFunctions, &v.ServiceFunctions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListServiceFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceFunctions, schemas.ListServiceFunctionsRequest, schemas.ListServiceFunctionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceFunctions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceFunctions, schemas.ListServiceFunctionsRequest, schemas.ListServiceFunctionsResponse), output: &ListServiceFunctionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceFunctions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceFunctions"); err != nil {

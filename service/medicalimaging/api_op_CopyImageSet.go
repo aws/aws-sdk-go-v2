@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,32 +57,6 @@ type CopyImageSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyImageSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyImageSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyImageSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CopyImageSetInformation != nil {
-		s.WriteStruct(schemas.CopyImageSetRequest_copyImageSetInformation)
-		v.CopyImageSetInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.CopyImageSetRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.Force != nil {
-		s.WriteBool(schemas.CopyImageSetRequest_force, *v.Force)
-	}
-	if v.PromoteToPrimary != nil {
-		s.WriteBool(schemas.CopyImageSetRequest_promoteToPrimary, *v.PromoteToPrimary)
-	}
-	if v.SourceImageSetId != nil {
-		s.WriteString(schemas.CopyImageSetRequest_sourceImageSetId, *v.SourceImageSetId)
-	}
-}
-
 type CopyImageSetOutput struct {
 
 	// The data store identifier.
@@ -108,30 +80,16 @@ type CopyImageSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyImageSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyImageSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyImageSetResponse_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.CopyImageSetResponse_datastoreId, v.DatastoreId)
-		case schemas.CopyImageSetResponse_destinationImageSetProperties:
-			v.DestinationImageSetProperties = &types.CopyDestinationImageSetProperties{}
-			return v.DestinationImageSetProperties.Deserialize(d)
-		case schemas.CopyImageSetResponse_sourceImageSetProperties:
-			v.SourceImageSetProperties = &types.CopySourceImageSetProperties{}
-			return v.SourceImageSetProperties.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyImageSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImageSet, schemas.CopyImageSetRequest, schemas.CopyImageSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImageSet, schemas.CopyImageSetRequest, schemas.CopyImageSetResponse), output: &CopyImageSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyImageSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyImageSet"); err != nil {

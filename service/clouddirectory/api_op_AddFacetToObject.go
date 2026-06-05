@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,29 +51,6 @@ type AddFacetToObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddFacetToObjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddFacetToObjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddFacetToObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.AddFacetToObjectRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	serializeAttributeKeyAndValueList(s, schemas.AddFacetToObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.AddFacetToObjectRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SchemaFacet != nil {
-		s.WriteStruct(schemas.AddFacetToObjectRequest_SchemaFacet)
-		v.SchemaFacet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AddFacetToObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,21 +58,16 @@ type AddFacetToObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddFacetToObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddFacetToObjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddFacetToObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFacetToObject, schemas.AddFacetToObjectRequest, schemas.AddFacetToObjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddFacetToObject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddFacetToObject, schemas.AddFacetToObjectRequest, schemas.AddFacetToObjectResponse), output: &AddFacetToObjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddFacetToObject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddFacetToObject"); err != nil {

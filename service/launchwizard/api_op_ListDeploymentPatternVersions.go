@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,28 +58,6 @@ type ListDeploymentPatternVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeploymentPatternVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDeploymentPatternVersionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDeploymentPatternVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeploymentPatternName != nil {
-		s.WriteString(schemas.ListDeploymentPatternVersionsInput_deploymentPatternName, *v.DeploymentPatternName)
-	}
-	serializeFilterList(s, schemas.ListDeploymentPatternVersionsInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDeploymentPatternVersionsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDeploymentPatternVersionsInput_nextToken, *v.NextToken)
-	}
-	if v.WorkloadName != nil {
-		s.WriteString(schemas.ListDeploymentPatternVersionsInput_workloadName, *v.WorkloadName)
-	}
-}
-
 type ListDeploymentPatternVersionsOutput struct {
 
 	// The deployment pattern versions.
@@ -96,26 +72,16 @@ type ListDeploymentPatternVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeploymentPatternVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDeploymentPatternVersionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDeploymentPatternVersionsOutput_deploymentPatternVersions:
-			return deserializeDeploymentPatternVersionDataSummaryList(d, schemas.ListDeploymentPatternVersionsOutput_deploymentPatternVersions, &v.DeploymentPatternVersions)
-		case schemas.ListDeploymentPatternVersionsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDeploymentPatternVersionsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDeploymentPatternVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentPatternVersions, schemas.ListDeploymentPatternVersionsInput, schemas.ListDeploymentPatternVersionsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeploymentPatternVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentPatternVersions, schemas.ListDeploymentPatternVersionsInput, schemas.ListDeploymentPatternVersionsOutput), output: &ListDeploymentPatternVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeploymentPatternVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeploymentPatternVersions"); err != nil {

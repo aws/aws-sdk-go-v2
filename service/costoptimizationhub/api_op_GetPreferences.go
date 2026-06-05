@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,15 +34,6 @@ type GetPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetPreferencesOutput struct {
 
 	// Retrieves the status of the "member account discount visibility" preference.
@@ -64,38 +53,16 @@ type GetPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPreferencesResponse_memberAccountDiscountVisibility:
-			var ev string
-			if err := d.ReadString(schemas.GetPreferencesResponse_memberAccountDiscountVisibility, &ev); err != nil {
-				return err
-			}
-			v.MemberAccountDiscountVisibility = types.MemberAccountDiscountVisibility(ev)
-			return nil
-		case schemas.GetPreferencesResponse_preferredCommitment:
-			v.PreferredCommitment = &types.PreferredCommitment{}
-			return v.PreferredCommitment.Deserialize(d)
-		case schemas.GetPreferencesResponse_savingsEstimationMode:
-			var ev string
-			if err := d.ReadString(schemas.GetPreferencesResponse_savingsEstimationMode, &ev); err != nil {
-				return err
-			}
-			v.SavingsEstimationMode = types.SavingsEstimationMode(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreferences, schemas.GetPreferencesRequest, schemas.GetPreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreferences, schemas.GetPreferencesRequest, schemas.GetPreferencesResponse), output: &GetPreferencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPreferences"); err != nil {

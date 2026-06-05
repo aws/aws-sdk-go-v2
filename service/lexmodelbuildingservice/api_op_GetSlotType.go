@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,21 +46,6 @@ type GetSlotTypeInput struct {
 	Version *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSlotTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSlotTypeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSlotTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GetSlotTypeRequest_name, *v.Name)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.GetSlotTypeRequest_version, *v.Version)
-	}
 }
 
 type GetSlotTypeOutput struct {
@@ -106,53 +89,16 @@ type GetSlotTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSlotTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSlotTypeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSlotTypeResponse_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.GetSlotTypeResponse_checksum, v.Checksum)
-		case schemas.GetSlotTypeResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSlotTypeResponse_createdDate, v.CreatedDate)
-		case schemas.GetSlotTypeResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetSlotTypeResponse_description, v.Description)
-		case schemas.GetSlotTypeResponse_enumerationValues:
-			return deserializeEnumerationValues(d, schemas.GetSlotTypeResponse_enumerationValues, &v.EnumerationValues)
-		case schemas.GetSlotTypeResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSlotTypeResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetSlotTypeResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetSlotTypeResponse_name, v.Name)
-		case schemas.GetSlotTypeResponse_parentSlotTypeSignature:
-			v.ParentSlotTypeSignature = new(string)
-			return d.ReadString(schemas.GetSlotTypeResponse_parentSlotTypeSignature, v.ParentSlotTypeSignature)
-		case schemas.GetSlotTypeResponse_slotTypeConfigurations:
-			return deserializeSlotTypeConfigurations(d, schemas.GetSlotTypeResponse_slotTypeConfigurations, &v.SlotTypeConfigurations)
-		case schemas.GetSlotTypeResponse_valueSelectionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.GetSlotTypeResponse_valueSelectionStrategy, &ev); err != nil {
-				return err
-			}
-			v.ValueSelectionStrategy = types.SlotValueSelectionStrategy(ev)
-			return nil
-		case schemas.GetSlotTypeResponse_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.GetSlotTypeResponse_version, v.Version)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSlotType, schemas.GetSlotTypeRequest, schemas.GetSlotTypeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSlotType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSlotType, schemas.GetSlotTypeRequest, schemas.GetSlotTypeResponse), output: &GetSlotTypeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSlotType{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSlotType"); err != nil {

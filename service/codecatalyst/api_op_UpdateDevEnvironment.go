@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,37 +76,6 @@ type UpdateDevEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDevEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDevEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_alias, *v.Alias)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_clientToken, *v.ClientToken)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_id, *v.Id)
-	}
-	serializeIdeConfigurationList(s, schemas.UpdateDevEnvironmentRequest_ides, v.Ides)
-	if v.InactivityTimeoutMinutes != 0 {
-		s.WriteInt32(schemas.UpdateDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
-	}
-	if v.InstanceType != "" {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_instanceType, string(v.InstanceType))
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.UpdateDevEnvironmentRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type UpdateDevEnvironmentOutput struct {
 
 	// The system-generated unique ID of the Dev Environment.
@@ -152,47 +119,16 @@ type UpdateDevEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDevEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDevEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDevEnvironmentResponse_alias:
-			v.Alias = new(string)
-			return d.ReadString(schemas.UpdateDevEnvironmentResponse_alias, v.Alias)
-		case schemas.UpdateDevEnvironmentResponse_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateDevEnvironmentResponse_clientToken, v.ClientToken)
-		case schemas.UpdateDevEnvironmentResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateDevEnvironmentResponse_id, v.Id)
-		case schemas.UpdateDevEnvironmentResponse_ides:
-			return deserializeIdeConfigurationList(d, schemas.UpdateDevEnvironmentResponse_ides, &v.Ides)
-		case schemas.UpdateDevEnvironmentResponse_inactivityTimeoutMinutes:
-			return d.ReadInt32(schemas.UpdateDevEnvironmentResponse_inactivityTimeoutMinutes, &v.InactivityTimeoutMinutes)
-		case schemas.UpdateDevEnvironmentResponse_instanceType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateDevEnvironmentResponse_instanceType, &ev); err != nil {
-				return err
-			}
-			v.InstanceType = types.InstanceType(ev)
-			return nil
-		case schemas.UpdateDevEnvironmentResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.UpdateDevEnvironmentResponse_projectName, v.ProjectName)
-		case schemas.UpdateDevEnvironmentResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.UpdateDevEnvironmentResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDevEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevEnvironment, schemas.UpdateDevEnvironmentRequest, schemas.UpdateDevEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDevEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevEnvironment, schemas.UpdateDevEnvironmentRequest, schemas.UpdateDevEnvironmentResponse), output: &UpdateDevEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDevEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDevEnvironment"); err != nil {

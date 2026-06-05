@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,21 +39,6 @@ type GetAccountActivityInput struct {
 	LanguageCode types.LanguageCode
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAccountActivityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAccountActivityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAccountActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivityId != nil {
-		s.WriteString(schemas.GetAccountActivityRequest_activityId, *v.ActivityId)
-	}
-	if v.LanguageCode != "" {
-		s.WriteString(schemas.GetAccountActivityRequest_languageCode, string(v.LanguageCode))
-	}
 }
 
 type GetAccountActivityOutput struct {
@@ -111,54 +94,16 @@ type GetAccountActivityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAccountActivityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAccountActivityResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAccountActivityResponse_activityId:
-			v.ActivityId = new(string)
-			return d.ReadString(schemas.GetAccountActivityResponse_activityId, v.ActivityId)
-		case schemas.GetAccountActivityResponse_completedAt:
-			v.CompletedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccountActivityResponse_completedAt, v.CompletedAt)
-		case schemas.GetAccountActivityResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAccountActivityResponse_description, v.Description)
-		case schemas.GetAccountActivityResponse_estimatedTimeToCompleteInMinutes:
-			v.EstimatedTimeToCompleteInMinutes = new(int32)
-			return d.ReadInt32(schemas.GetAccountActivityResponse_estimatedTimeToCompleteInMinutes, v.EstimatedTimeToCompleteInMinutes)
-		case schemas.GetAccountActivityResponse_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccountActivityResponse_expiresAt, v.ExpiresAt)
-		case schemas.GetAccountActivityResponse_instructionsUrl:
-			v.InstructionsUrl = new(string)
-			return d.ReadString(schemas.GetAccountActivityResponse_instructionsUrl, v.InstructionsUrl)
-		case schemas.GetAccountActivityResponse_reward:
-			return deserializeActivityReward(d, schemas.GetAccountActivityResponse_reward, &v.Reward)
-		case schemas.GetAccountActivityResponse_startedAt:
-			v.StartedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccountActivityResponse_startedAt, v.StartedAt)
-		case schemas.GetAccountActivityResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetAccountActivityResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ActivityStatus(ev)
-			return nil
-		case schemas.GetAccountActivityResponse_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.GetAccountActivityResponse_title, v.Title)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAccountActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountActivity, schemas.GetAccountActivityRequest, schemas.GetAccountActivityResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccountActivity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountActivity, schemas.GetAccountActivityRequest, schemas.GetAccountActivityResponse), output: &GetAccountActivityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccountActivity{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountActivity"); err != nil {

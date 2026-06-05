@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,32 +58,6 @@ type UpdateReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateReportDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateReportDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationS3Location != nil {
-		s.WriteStruct(schemas.UpdateReportDefinitionRequest_destinationS3Location)
-		v.DestinationS3Location.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.UpdateReportDefinitionRequest_format, string(v.Format))
-	}
-	if v.ReportDescription != nil {
-		s.WriteString(schemas.UpdateReportDefinitionRequest_reportDescription, *v.ReportDescription)
-	}
-	if v.ReportFrequency != "" {
-		s.WriteString(schemas.UpdateReportDefinitionRequest_reportFrequency, string(v.ReportFrequency))
-	}
-	if v.ReportId != nil {
-		s.WriteString(schemas.UpdateReportDefinitionRequest_reportId, *v.ReportId)
-	}
-}
-
 type UpdateReportDefinitionOutput struct {
 
 	// ID of the report.
@@ -97,24 +69,16 @@ type UpdateReportDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateReportDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateReportDefinitionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateReportDefinitionResult_reportId:
-			v.ReportId = new(string)
-			return d.ReadString(schemas.UpdateReportDefinitionResult_reportId, v.ReportId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportDefinition, schemas.UpdateReportDefinitionRequest, schemas.UpdateReportDefinitionResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReportDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportDefinition, schemas.UpdateReportDefinitionRequest, schemas.UpdateReportDefinitionResult), output: &UpdateReportDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReportDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateReportDefinition"); err != nil {

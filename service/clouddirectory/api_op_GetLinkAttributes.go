@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type GetLinkAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkAttributesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLinkAttributesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLinkAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetLinkAttributesRequest_AttributeNames, v.AttributeNames)
-	if v.ConsistencyLevel != "" {
-		s.WriteString(schemas.GetLinkAttributesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
-	}
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.GetLinkAttributesRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.TypedLinkSpecifier != nil {
-		s.WriteStruct(schemas.GetLinkAttributesRequest_TypedLinkSpecifier)
-		v.TypedLinkSpecifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type GetLinkAttributesOutput struct {
 
 	// The attributes that are associated with the typed link.
@@ -87,23 +64,16 @@ type GetLinkAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLinkAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLinkAttributesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLinkAttributesResponse_Attributes:
-			return deserializeAttributeKeyAndValueList(d, schemas.GetLinkAttributesResponse_Attributes, &v.Attributes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkAttributes, schemas.GetLinkAttributesRequest, schemas.GetLinkAttributesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkAttributes, schemas.GetLinkAttributesRequest, schemas.GetLinkAttributesResponse), output: &GetLinkAttributesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinkAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLinkAttributes"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,21 +72,6 @@ type CreateSqlInjectionMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSqlInjectionMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSqlInjectionMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSqlInjectionMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.CreateSqlInjectionMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSqlInjectionMatchSetRequest_Name, *v.Name)
-	}
-}
-
 // The response to a CreateSqlInjectionMatchSet request.
 type CreateSqlInjectionMatchSetOutput struct {
 
@@ -106,27 +89,16 @@ type CreateSqlInjectionMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSqlInjectionMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSqlInjectionMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSqlInjectionMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.CreateSqlInjectionMatchSetResponse_ChangeToken, v.ChangeToken)
-		case schemas.CreateSqlInjectionMatchSetResponse_SqlInjectionMatchSet:
-			v.SqlInjectionMatchSet = &types.SqlInjectionMatchSet{}
-			return v.SqlInjectionMatchSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSqlInjectionMatchSet, schemas.CreateSqlInjectionMatchSetRequest, schemas.CreateSqlInjectionMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSqlInjectionMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSqlInjectionMatchSet, schemas.CreateSqlInjectionMatchSetRequest, schemas.CreateSqlInjectionMatchSetResponse), output: &CreateSqlInjectionMatchSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSqlInjectionMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSqlInjectionMatchSet"); err != nil {

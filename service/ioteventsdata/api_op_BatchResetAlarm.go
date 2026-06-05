@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,16 +39,6 @@ type BatchResetAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchResetAlarmInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchResetAlarmRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchResetAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResetAlarmActionRequests(s, schemas.BatchResetAlarmRequest_resetActionRequests, v.ResetActionRequests)
-}
-
 type BatchResetAlarmOutput struct {
 
 	// A list of errors associated with the request, or null if there are no errors.
@@ -64,23 +52,16 @@ type BatchResetAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchResetAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchResetAlarmResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchResetAlarmResponse_errorEntries:
-			return deserializeBatchAlarmActionErrorEntries(d, schemas.BatchResetAlarmResponse_errorEntries, &v.ErrorEntries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchResetAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchResetAlarm, schemas.BatchResetAlarmRequest, schemas.BatchResetAlarmResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchResetAlarm{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchResetAlarm, schemas.BatchResetAlarmRequest, schemas.BatchResetAlarmResponse), output: &BatchResetAlarmOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchResetAlarm{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchResetAlarm"); err != nil {

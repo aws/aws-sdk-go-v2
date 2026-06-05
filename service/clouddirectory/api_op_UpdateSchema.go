@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSchemaInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSchemaRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateSchemaRequest_Name, *v.Name)
-	}
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.UpdateSchemaRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type UpdateSchemaOutput struct {
 
 	// The ARN that is associated with the updated schema. For more information, see arns.
@@ -71,24 +54,16 @@ type UpdateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSchemaResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSchemaResponse_SchemaArn:
-			v.SchemaArn = new(string)
-			return d.ReadString(schemas.UpdateSchemaResponse_SchemaArn, v.SchemaArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse), output: &UpdateSchemaOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSchema"); err != nil {

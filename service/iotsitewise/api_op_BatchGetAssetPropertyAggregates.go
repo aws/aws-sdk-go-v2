@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,22 +53,6 @@ type BatchGetAssetPropertyAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAssetPropertyAggregatesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetAssetPropertyAggregatesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetAssetPropertyAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyAggregatesEntries(s, schemas.BatchGetAssetPropertyAggregatesRequest_entries, v.Entries)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.BatchGetAssetPropertyAggregatesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.BatchGetAssetPropertyAggregatesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type BatchGetAssetPropertyAggregatesOutput struct {
 
 	// A list of the errors (if any) associated with the batch request. Each error
@@ -103,30 +85,16 @@ type BatchGetAssetPropertyAggregatesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetAssetPropertyAggregatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetAssetPropertyAggregatesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetAssetPropertyAggregatesResponse_errorEntries:
-			return deserializeBatchGetAssetPropertyAggregatesErrorEntries(d, schemas.BatchGetAssetPropertyAggregatesResponse_errorEntries, &v.ErrorEntries)
-		case schemas.BatchGetAssetPropertyAggregatesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.BatchGetAssetPropertyAggregatesResponse_nextToken, v.NextToken)
-		case schemas.BatchGetAssetPropertyAggregatesResponse_skippedEntries:
-			return deserializeBatchGetAssetPropertyAggregatesSkippedEntries(d, schemas.BatchGetAssetPropertyAggregatesResponse_skippedEntries, &v.SkippedEntries)
-		case schemas.BatchGetAssetPropertyAggregatesResponse_successEntries:
-			return deserializeBatchGetAssetPropertyAggregatesSuccessEntries(d, schemas.BatchGetAssetPropertyAggregatesResponse_successEntries, &v.SuccessEntries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAssetPropertyAggregates, schemas.BatchGetAssetPropertyAggregatesRequest, schemas.BatchGetAssetPropertyAggregatesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAssetPropertyAggregates{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAssetPropertyAggregates, schemas.BatchGetAssetPropertyAggregatesRequest, schemas.BatchGetAssetPropertyAggregatesResponse), output: &BatchGetAssetPropertyAggregatesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAssetPropertyAggregates{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetAssetPropertyAggregates"); err != nil {

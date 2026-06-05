@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -45,70 +43,6 @@ type BackendAPIAppSyncAuthSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BackendAPIAppSyncAuthSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAPIAppSyncAuthSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAPIAppSyncAuthSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CognitoUserPoolId != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_CognitoUserPoolId, *v.CognitoUserPoolId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_Description, *v.Description)
-	}
-	if v.ExpirationTime != nil {
-		s.WriteFloat64(schemas.BackendAPIAppSyncAuthSettings_ExpirationTime, *v.ExpirationTime)
-	}
-	if v.OpenIDAuthTTL != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_OpenIDAuthTTL, *v.OpenIDAuthTTL)
-	}
-	if v.OpenIDClientId != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_OpenIDClientId, *v.OpenIDClientId)
-	}
-	if v.OpenIDIatTTL != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_OpenIDIatTTL, *v.OpenIDIatTTL)
-	}
-	if v.OpenIDIssueURL != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_OpenIDIssueURL, *v.OpenIDIssueURL)
-	}
-	if v.OpenIDProviderName != nil {
-		s.WriteString(schemas.BackendAPIAppSyncAuthSettings_OpenIDProviderName, *v.OpenIDProviderName)
-	}
-}
-func (v *BackendAPIAppSyncAuthSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAPIAppSyncAuthSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAPIAppSyncAuthSettings_CognitoUserPoolId:
-			v.CognitoUserPoolId = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_CognitoUserPoolId, v.CognitoUserPoolId)
-		case schemas.BackendAPIAppSyncAuthSettings_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_Description, v.Description)
-		case schemas.BackendAPIAppSyncAuthSettings_ExpirationTime:
-			v.ExpirationTime = new(float64)
-			return d.ReadFloat64(schemas.BackendAPIAppSyncAuthSettings_ExpirationTime, v.ExpirationTime)
-		case schemas.BackendAPIAppSyncAuthSettings_OpenIDAuthTTL:
-			v.OpenIDAuthTTL = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_OpenIDAuthTTL, v.OpenIDAuthTTL)
-		case schemas.BackendAPIAppSyncAuthSettings_OpenIDClientId:
-			v.OpenIDClientId = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_OpenIDClientId, v.OpenIDClientId)
-		case schemas.BackendAPIAppSyncAuthSettings_OpenIDIatTTL:
-			v.OpenIDIatTTL = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_OpenIDIatTTL, v.OpenIDIatTTL)
-		case schemas.BackendAPIAppSyncAuthSettings_OpenIDIssueURL:
-			v.OpenIDIssueURL = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_OpenIDIssueURL, v.OpenIDIssueURL)
-		case schemas.BackendAPIAppSyncAuthSettings_OpenIDProviderName:
-			v.OpenIDProviderName = new(string)
-			return d.ReadString(schemas.BackendAPIAppSyncAuthSettings_OpenIDProviderName, v.OpenIDProviderName)
-		}
-		return nil
-	})
-}
-
 // Describes the auth types for your configured data models.
 type BackendAPIAuthType struct {
 
@@ -121,40 +55,6 @@ type BackendAPIAuthType struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BackendAPIAuthType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAPIAuthType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAPIAuthType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Mode != "" {
-		s.WriteString(schemas.BackendAPIAuthType_Mode, string(v.Mode))
-	}
-	if v.Settings != nil {
-		s.WriteStruct(schemas.BackendAPIAuthType_Settings)
-		v.Settings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BackendAPIAuthType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAPIAuthType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAPIAuthType_Mode:
-			var ev string
-			if err := d.ReadString(schemas.BackendAPIAuthType_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = Mode(ev)
-			return nil
-		case schemas.BackendAPIAuthType_Settings:
-			v.Settings = &BackendAPIAppSyncAuthSettings{}
-			return v.Settings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Describes the conflict resolution configuration for your data model configured
 // in your Amplify project.
 type BackendAPIConflictResolution struct {
@@ -163,32 +63,6 @@ type BackendAPIConflictResolution struct {
 	ResolutionStrategy ResolutionStrategy
 
 	noSmithyDocumentSerde
-}
-
-func (v *BackendAPIConflictResolution) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAPIConflictResolution)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAPIConflictResolution) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResolutionStrategy != "" {
-		s.WriteString(schemas.BackendAPIConflictResolution_ResolutionStrategy, string(v.ResolutionStrategy))
-	}
-}
-func (v *BackendAPIConflictResolution) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAPIConflictResolution, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAPIConflictResolution_ResolutionStrategy:
-			var ev string
-			if err := d.ReadString(schemas.BackendAPIConflictResolution_ResolutionStrategy, &ev); err != nil {
-				return err
-			}
-			v.ResolutionStrategy = ResolutionStrategy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The resource config for the data model, configured as a part of the Amplify
@@ -219,59 +93,6 @@ type BackendAPIResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BackendAPIResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAPIResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAPIResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfBackendAPIAuthType(s, schemas.BackendAPIResourceConfig_AdditionalAuthTypes, v.AdditionalAuthTypes)
-	if v.ApiName != nil {
-		s.WriteString(schemas.BackendAPIResourceConfig_ApiName, *v.ApiName)
-	}
-	if v.ConflictResolution != nil {
-		s.WriteStruct(schemas.BackendAPIResourceConfig_ConflictResolution)
-		v.ConflictResolution.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DefaultAuthType != nil {
-		s.WriteStruct(schemas.BackendAPIResourceConfig_DefaultAuthType)
-		v.DefaultAuthType.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Service != nil {
-		s.WriteString(schemas.BackendAPIResourceConfig_Service, *v.Service)
-	}
-	if v.TransformSchema != nil {
-		s.WriteString(schemas.BackendAPIResourceConfig_TransformSchema, *v.TransformSchema)
-	}
-}
-func (v *BackendAPIResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAPIResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAPIResourceConfig_AdditionalAuthTypes:
-			return deserializeListOfBackendAPIAuthType(d, schemas.BackendAPIResourceConfig_AdditionalAuthTypes, &v.AdditionalAuthTypes)
-		case schemas.BackendAPIResourceConfig_ApiName:
-			v.ApiName = new(string)
-			return d.ReadString(schemas.BackendAPIResourceConfig_ApiName, v.ApiName)
-		case schemas.BackendAPIResourceConfig_ConflictResolution:
-			v.ConflictResolution = &BackendAPIConflictResolution{}
-			return v.ConflictResolution.Deserialize(d)
-		case schemas.BackendAPIResourceConfig_DefaultAuthType:
-			v.DefaultAuthType = &BackendAPIAuthType{}
-			return v.DefaultAuthType.Deserialize(d)
-		case schemas.BackendAPIResourceConfig_Service:
-			v.Service = new(string)
-			return d.ReadString(schemas.BackendAPIResourceConfig_Service, v.Service)
-		case schemas.BackendAPIResourceConfig_TransformSchema:
-			v.TransformSchema = new(string)
-			return d.ReadString(schemas.BackendAPIResourceConfig_TransformSchema, v.TransformSchema)
-		}
-		return nil
-	})
-}
-
 // Describes Apple social federation configurations for allowing your app users to
 // sign in using OAuth.
 type BackendAuthAppleProviderConfig struct {
@@ -291,46 +112,6 @@ type BackendAuthAppleProviderConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BackendAuthAppleProviderConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAuthAppleProviderConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAuthAppleProviderConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientId != nil {
-		s.WriteString(schemas.BackendAuthAppleProviderConfig_ClientId, *v.ClientId)
-	}
-	if v.KeyId != nil {
-		s.WriteString(schemas.BackendAuthAppleProviderConfig_KeyId, *v.KeyId)
-	}
-	if v.PrivateKey != nil {
-		s.WriteString(schemas.BackendAuthAppleProviderConfig_PrivateKey, *v.PrivateKey)
-	}
-	if v.TeamId != nil {
-		s.WriteString(schemas.BackendAuthAppleProviderConfig_TeamId, *v.TeamId)
-	}
-}
-func (v *BackendAuthAppleProviderConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAuthAppleProviderConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAuthAppleProviderConfig_ClientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.BackendAuthAppleProviderConfig_ClientId, v.ClientId)
-		case schemas.BackendAuthAppleProviderConfig_KeyId:
-			v.KeyId = new(string)
-			return d.ReadString(schemas.BackendAuthAppleProviderConfig_KeyId, v.KeyId)
-		case schemas.BackendAuthAppleProviderConfig_PrivateKey:
-			v.PrivateKey = new(string)
-			return d.ReadString(schemas.BackendAuthAppleProviderConfig_PrivateKey, v.PrivateKey)
-		case schemas.BackendAuthAppleProviderConfig_TeamId:
-			v.TeamId = new(string)
-			return d.ReadString(schemas.BackendAuthAppleProviderConfig_TeamId, v.TeamId)
-		}
-		return nil
-	})
-}
-
 // Describes third-party social federation configurations for allowing your app
 // users to sign in using OAuth.
 type BackendAuthSocialProviderConfig struct {
@@ -344,34 +125,6 @@ type BackendAuthSocialProviderConfig struct {
 	ClientSecret *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BackendAuthSocialProviderConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendAuthSocialProviderConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendAuthSocialProviderConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientId != nil {
-		s.WriteString(schemas.BackendAuthSocialProviderConfig_ClientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.BackendAuthSocialProviderConfig_ClientSecret, *v.ClientSecret)
-	}
-}
-func (v *BackendAuthSocialProviderConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendAuthSocialProviderConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendAuthSocialProviderConfig_ClientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.BackendAuthSocialProviderConfig_ClientId, v.ClientId)
-		case schemas.BackendAuthSocialProviderConfig_ClientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.BackendAuthSocialProviderConfig_ClientSecret, v.ClientSecret)
-		}
-		return nil
-	})
 }
 
 // The response object for this operation.
@@ -408,70 +161,6 @@ type BackendJobRespObj struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BackendJobRespObj) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendJobRespObj)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendJobRespObj) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.BackendJobRespObj_AppId, *v.AppId)
-	}
-	if v.BackendEnvironmentName != nil {
-		s.WriteString(schemas.BackendJobRespObj_BackendEnvironmentName, *v.BackendEnvironmentName)
-	}
-	if v.CreateTime != nil {
-		s.WriteString(schemas.BackendJobRespObj_CreateTime, *v.CreateTime)
-	}
-	if v.Error != nil {
-		s.WriteString(schemas.BackendJobRespObj_Error, *v.Error)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.BackendJobRespObj_JobId, *v.JobId)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BackendJobRespObj_Operation, *v.Operation)
-	}
-	if v.Status != nil {
-		s.WriteString(schemas.BackendJobRespObj_Status, *v.Status)
-	}
-	if v.UpdateTime != nil {
-		s.WriteString(schemas.BackendJobRespObj_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *BackendJobRespObj) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendJobRespObj, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendJobRespObj_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_AppId, v.AppId)
-		case schemas.BackendJobRespObj_BackendEnvironmentName:
-			v.BackendEnvironmentName = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_BackendEnvironmentName, v.BackendEnvironmentName)
-		case schemas.BackendJobRespObj_CreateTime:
-			v.CreateTime = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_CreateTime, v.CreateTime)
-		case schemas.BackendJobRespObj_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_Error, v.Error)
-		case schemas.BackendJobRespObj_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_JobId, v.JobId)
-		case schemas.BackendJobRespObj_Operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_Operation, v.Operation)
-		case schemas.BackendJobRespObj_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_Status, v.Status)
-		case schemas.BackendJobRespObj_UpdateTime:
-			v.UpdateTime = new(string)
-			return d.ReadString(schemas.BackendJobRespObj_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
 // Describes the read, write, and delete permissions users have against your
 // storage S3 bucket.
 type BackendStoragePermissions struct {
@@ -487,28 +176,6 @@ type BackendStoragePermissions struct {
 	UnAuthenticated []UnAuthenticatedElement
 
 	noSmithyDocumentSerde
-}
-
-func (v *BackendStoragePermissions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendStoragePermissions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendStoragePermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAuthenticatedElement(s, schemas.BackendStoragePermissions_Authenticated, v.Authenticated)
-	serializeListOfUnAuthenticatedElement(s, schemas.BackendStoragePermissions_UnAuthenticated, v.UnAuthenticated)
-}
-func (v *BackendStoragePermissions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendStoragePermissions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendStoragePermissions_Authenticated:
-			return deserializeListOfAuthenticatedElement(d, schemas.BackendStoragePermissions_Authenticated, &v.Authenticated)
-		case schemas.BackendStoragePermissions_UnAuthenticated:
-			return deserializeListOfUnAuthenticatedElement(d, schemas.BackendStoragePermissions_UnAuthenticated, &v.UnAuthenticated)
-		}
-		return nil
-	})
 }
 
 // (DEPRECATED) Describes the forgot password policy for authenticating into the
@@ -532,48 +199,6 @@ type CreateBackendAuthForgotPasswordConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAuthForgotPasswordConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthForgotPasswordConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthForgotPasswordConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveryMethod != "" {
-		s.WriteString(schemas.CreateBackendAuthForgotPasswordConfig_DeliveryMethod, string(v.DeliveryMethod))
-	}
-	if v.EmailSettings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthForgotPasswordConfig_EmailSettings)
-		v.EmailSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SmsSettings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthForgotPasswordConfig_SmsSettings)
-		v.SmsSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthForgotPasswordConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthForgotPasswordConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthForgotPasswordConfig_DeliveryMethod:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthForgotPasswordConfig_DeliveryMethod, &ev); err != nil {
-				return err
-			}
-			v.DeliveryMethod = DeliveryMethod(ev)
-			return nil
-		case schemas.CreateBackendAuthForgotPasswordConfig_EmailSettings:
-			v.EmailSettings = &EmailSettings{}
-			return v.EmailSettings.Deserialize(d)
-		case schemas.CreateBackendAuthForgotPasswordConfig_SmsSettings:
-			v.SmsSettings = &SmsSettings{}
-			return v.SmsSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Describes authorization configurations for the auth resources, configured as a
 // part of your Amplify project.
 type CreateBackendAuthIdentityPoolConfig struct {
@@ -592,34 +217,6 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAuthIdentityPoolConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthIdentityPoolConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthIdentityPoolConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityPoolName != nil {
-		s.WriteString(schemas.CreateBackendAuthIdentityPoolConfig_IdentityPoolName, *v.IdentityPoolName)
-	}
-	if v.UnauthenticatedLogin != nil {
-		s.WriteBool(schemas.CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin, *v.UnauthenticatedLogin)
-	}
-}
-func (v *CreateBackendAuthIdentityPoolConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthIdentityPoolConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthIdentityPoolConfig_IdentityPoolName:
-			v.IdentityPoolName = new(string)
-			return d.ReadString(schemas.CreateBackendAuthIdentityPoolConfig_IdentityPoolName, v.IdentityPoolName)
-		case schemas.CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin:
-			v.UnauthenticatedLogin = new(bool)
-			return d.ReadBool(schemas.CreateBackendAuthIdentityPoolConfig_UnauthenticatedLogin, v.UnauthenticatedLogin)
-		}
-		return nil
-	})
-}
-
 // Describes whether to apply multi-factor authentication policies for your Amazon
 // Cognito user pool configured as a part of your Amplify project.
 type CreateBackendAuthMFAConfig struct {
@@ -635,40 +232,6 @@ type CreateBackendAuthMFAConfig struct {
 	Settings *Settings
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateBackendAuthMFAConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthMFAConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthMFAConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MFAMode != "" {
-		s.WriteString(schemas.CreateBackendAuthMFAConfig_MFAMode, string(v.MFAMode))
-	}
-	if v.Settings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthMFAConfig_Settings)
-		v.Settings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthMFAConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthMFAConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthMFAConfig_MFAMode:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthMFAConfig_MFAMode, &ev); err != nil {
-				return err
-			}
-			v.MFAMode = MFAMode(ev)
-			return nil
-		case schemas.CreateBackendAuthMFAConfig_Settings:
-			v.Settings = &Settings{}
-			return v.Settings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Creates the OAuth configuration for your Amplify project.
@@ -705,55 +268,6 @@ type CreateBackendAuthOAuthConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAuthOAuthConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthOAuthConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthOAuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainPrefix != nil {
-		s.WriteString(schemas.CreateBackendAuthOAuthConfig_DomainPrefix, *v.DomainPrefix)
-	}
-	if v.OAuthGrantType != "" {
-		s.WriteString(schemas.CreateBackendAuthOAuthConfig_OAuthGrantType, string(v.OAuthGrantType))
-	}
-	serializeListOfOAuthScopesElement(s, schemas.CreateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
-	serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
-	serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
-	if v.SocialProviderSettings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthOAuthConfig_SocialProviderSettings)
-		v.SocialProviderSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthOAuthConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthOAuthConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthOAuthConfig_DomainPrefix:
-			v.DomainPrefix = new(string)
-			return d.ReadString(schemas.CreateBackendAuthOAuthConfig_DomainPrefix, v.DomainPrefix)
-		case schemas.CreateBackendAuthOAuthConfig_OAuthGrantType:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthOAuthConfig_OAuthGrantType, &ev); err != nil {
-				return err
-			}
-			v.OAuthGrantType = OAuthGrantType(ev)
-			return nil
-		case schemas.CreateBackendAuthOAuthConfig_OAuthScopes:
-			return deserializeListOfOAuthScopesElement(d, schemas.CreateBackendAuthOAuthConfig_OAuthScopes, &v.OAuthScopes)
-		case schemas.CreateBackendAuthOAuthConfig_RedirectSignInURIs:
-			return deserializeListOf__string(d, schemas.CreateBackendAuthOAuthConfig_RedirectSignInURIs, &v.RedirectSignInURIs)
-		case schemas.CreateBackendAuthOAuthConfig_RedirectSignOutURIs:
-			return deserializeListOf__string(d, schemas.CreateBackendAuthOAuthConfig_RedirectSignOutURIs, &v.RedirectSignOutURIs)
-		case schemas.CreateBackendAuthOAuthConfig_SocialProviderSettings:
-			v.SocialProviderSettings = &SocialProviderSettings{}
-			return v.SocialProviderSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The password policy configuration for the backend to your Amplify project.
 type CreateBackendAuthPasswordPolicyConfig struct {
 
@@ -768,31 +282,6 @@ type CreateBackendAuthPasswordPolicyConfig struct {
 	AdditionalConstraints []AdditionalConstraintsElement
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateBackendAuthPasswordPolicyConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthPasswordPolicyConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthPasswordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAdditionalConstraintsElement(s, schemas.CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
-	if v.MinimumLength != nil {
-		s.WriteFloat64(schemas.CreateBackendAuthPasswordPolicyConfig_MinimumLength, *v.MinimumLength)
-	}
-}
-func (v *CreateBackendAuthPasswordPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthPasswordPolicyConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints:
-			return deserializeListOfAdditionalConstraintsElement(d, schemas.CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints, &v.AdditionalConstraints)
-		case schemas.CreateBackendAuthPasswordPolicyConfig_MinimumLength:
-			v.MinimumLength = new(float64)
-			return d.ReadFloat64(schemas.CreateBackendAuthPasswordPolicyConfig_MinimumLength, v.MinimumLength)
-		}
-		return nil
-	})
 }
 
 // Defines the resource configuration when creating an auth resource in your
@@ -822,58 +311,6 @@ type CreateBackendAuthResourceConfig struct {
 	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateBackendAuthResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthResources != "" {
-		s.WriteString(schemas.CreateBackendAuthResourceConfig_AuthResources, string(v.AuthResources))
-	}
-	if v.IdentityPoolConfigs != nil {
-		s.WriteStruct(schemas.CreateBackendAuthResourceConfig_IdentityPoolConfigs)
-		v.IdentityPoolConfigs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Service != "" {
-		s.WriteString(schemas.CreateBackendAuthResourceConfig_Service, string(v.Service))
-	}
-	if v.UserPoolConfigs != nil {
-		s.WriteStruct(schemas.CreateBackendAuthResourceConfig_UserPoolConfigs)
-		v.UserPoolConfigs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthResourceConfig_AuthResources:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthResourceConfig_AuthResources, &ev); err != nil {
-				return err
-			}
-			v.AuthResources = AuthResources(ev)
-			return nil
-		case schemas.CreateBackendAuthResourceConfig_IdentityPoolConfigs:
-			v.IdentityPoolConfigs = &CreateBackendAuthIdentityPoolConfig{}
-			return v.IdentityPoolConfigs.Deserialize(d)
-		case schemas.CreateBackendAuthResourceConfig_Service:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthResourceConfig_Service, &ev); err != nil {
-				return err
-			}
-			v.Service = Service(ev)
-			return nil
-		case schemas.CreateBackendAuthResourceConfig_UserPoolConfigs:
-			v.UserPoolConfigs = &CreateBackendAuthUserPoolConfig{}
-			return v.UserPoolConfigs.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Describes the Amazon Cognito user pool configuration for the auth resource to
@@ -919,81 +356,6 @@ type CreateBackendAuthUserPoolConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendAuthUserPoolConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthUserPoolConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ForgotPassword != nil {
-		s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig_ForgotPassword)
-		v.ForgotPassword.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Mfa != nil {
-		s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig_Mfa)
-		v.Mfa.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OAuth != nil {
-		s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig_OAuth)
-		v.OAuth.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PasswordPolicy != nil {
-		s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig_PasswordPolicy)
-		v.PasswordPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeListOfRequiredSignUpAttributesElement(s, schemas.CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes, v.RequiredSignUpAttributes)
-	if v.SignInMethod != "" {
-		s.WriteString(schemas.CreateBackendAuthUserPoolConfig_SignInMethod, string(v.SignInMethod))
-	}
-	if v.UserPoolName != nil {
-		s.WriteString(schemas.CreateBackendAuthUserPoolConfig_UserPoolName, *v.UserPoolName)
-	}
-	if v.VerificationMessage != nil {
-		s.WriteStruct(schemas.CreateBackendAuthUserPoolConfig_VerificationMessage)
-		v.VerificationMessage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthUserPoolConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthUserPoolConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthUserPoolConfig_ForgotPassword:
-			v.ForgotPassword = &CreateBackendAuthForgotPasswordConfig{}
-			return v.ForgotPassword.Deserialize(d)
-		case schemas.CreateBackendAuthUserPoolConfig_Mfa:
-			v.Mfa = &CreateBackendAuthMFAConfig{}
-			return v.Mfa.Deserialize(d)
-		case schemas.CreateBackendAuthUserPoolConfig_OAuth:
-			v.OAuth = &CreateBackendAuthOAuthConfig{}
-			return v.OAuth.Deserialize(d)
-		case schemas.CreateBackendAuthUserPoolConfig_PasswordPolicy:
-			v.PasswordPolicy = &CreateBackendAuthPasswordPolicyConfig{}
-			return v.PasswordPolicy.Deserialize(d)
-		case schemas.CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes:
-			return deserializeListOfRequiredSignUpAttributesElement(d, schemas.CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes, &v.RequiredSignUpAttributes)
-		case schemas.CreateBackendAuthUserPoolConfig_SignInMethod:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthUserPoolConfig_SignInMethod, &ev); err != nil {
-				return err
-			}
-			v.SignInMethod = SignInMethod(ev)
-			return nil
-		case schemas.CreateBackendAuthUserPoolConfig_UserPoolName:
-			v.UserPoolName = new(string)
-			return d.ReadString(schemas.CreateBackendAuthUserPoolConfig_UserPoolName, v.UserPoolName)
-		case schemas.CreateBackendAuthUserPoolConfig_VerificationMessage:
-			v.VerificationMessage = &CreateBackendAuthVerificationMessageConfig{}
-			return v.VerificationMessage.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Creates an email or SMS verification message for the auth resource configured
 // for your Amplify project.
 type CreateBackendAuthVerificationMessageConfig struct {
@@ -1010,48 +372,6 @@ type CreateBackendAuthVerificationMessageConfig struct {
 	SmsSettings *SmsSettings
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateBackendAuthVerificationMessageConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendAuthVerificationMessageConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendAuthVerificationMessageConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveryMethod != "" {
-		s.WriteString(schemas.CreateBackendAuthVerificationMessageConfig_DeliveryMethod, string(v.DeliveryMethod))
-	}
-	if v.EmailSettings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthVerificationMessageConfig_EmailSettings)
-		v.EmailSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SmsSettings != nil {
-		s.WriteStruct(schemas.CreateBackendAuthVerificationMessageConfig_SmsSettings)
-		v.SmsSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateBackendAuthVerificationMessageConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendAuthVerificationMessageConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendAuthVerificationMessageConfig_DeliveryMethod:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendAuthVerificationMessageConfig_DeliveryMethod, &ev); err != nil {
-				return err
-			}
-			v.DeliveryMethod = DeliveryMethod(ev)
-			return nil
-		case schemas.CreateBackendAuthVerificationMessageConfig_EmailSettings:
-			v.EmailSettings = &EmailSettings{}
-			return v.EmailSettings.Deserialize(d)
-		case schemas.CreateBackendAuthVerificationMessageConfig_SmsSettings:
-			v.SmsSettings = &SmsSettings{}
-			return v.SmsSettings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The resource configuration for creating backend storage.
@@ -1073,46 +393,6 @@ type CreateBackendStorageResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBackendStorageResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBackendStorageResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBackendStorageResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.CreateBackendStorageResourceConfig_BucketName, *v.BucketName)
-	}
-	if v.Permissions != nil {
-		s.WriteStruct(schemas.CreateBackendStorageResourceConfig_Permissions)
-		v.Permissions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceName != "" {
-		s.WriteString(schemas.CreateBackendStorageResourceConfig_ServiceName, string(v.ServiceName))
-	}
-}
-func (v *CreateBackendStorageResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBackendStorageResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBackendStorageResourceConfig_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.CreateBackendStorageResourceConfig_BucketName, v.BucketName)
-		case schemas.CreateBackendStorageResourceConfig_Permissions:
-			v.Permissions = &BackendStoragePermissions{}
-			return v.Permissions.Deserialize(d)
-		case schemas.CreateBackendStorageResourceConfig_ServiceName:
-			var ev string
-			if err := d.ReadString(schemas.CreateBackendStorageResourceConfig_ServiceName, &ev); err != nil {
-				return err
-			}
-			v.ServiceName = ServiceName(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The configuration for the email sent when an app user forgets their password.
 type EmailSettings struct {
 
@@ -1123,34 +403,6 @@ type EmailSettings struct {
 	EmailSubject *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EmailSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmailSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmailSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EmailMessage != nil {
-		s.WriteString(schemas.EmailSettings_EmailMessage, *v.EmailMessage)
-	}
-	if v.EmailSubject != nil {
-		s.WriteString(schemas.EmailSettings_EmailSubject, *v.EmailSubject)
-	}
-}
-func (v *EmailSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmailSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmailSettings_EmailMessage:
-			v.EmailMessage = new(string)
-			return d.ReadString(schemas.EmailSettings_EmailMessage, v.EmailMessage)
-		case schemas.EmailSettings_EmailSubject:
-			v.EmailSubject = new(string)
-			return d.ReadString(schemas.EmailSettings_EmailSubject, v.EmailSubject)
-		}
-		return nil
-	})
 }
 
 // The details for a backend storage resource.
@@ -1175,52 +427,6 @@ type GetBackendStorageResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBackendStorageResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBackendStorageResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBackendStorageResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.GetBackendStorageResourceConfig_BucketName, *v.BucketName)
-	}
-	if v.Imported != nil {
-		s.WriteBool(schemas.GetBackendStorageResourceConfig_Imported, *v.Imported)
-	}
-	if v.Permissions != nil {
-		s.WriteStruct(schemas.GetBackendStorageResourceConfig_Permissions)
-		v.Permissions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceName != "" {
-		s.WriteString(schemas.GetBackendStorageResourceConfig_ServiceName, string(v.ServiceName))
-	}
-}
-func (v *GetBackendStorageResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBackendStorageResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBackendStorageResourceConfig_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.GetBackendStorageResourceConfig_BucketName, v.BucketName)
-		case schemas.GetBackendStorageResourceConfig_Imported:
-			v.Imported = new(bool)
-			return d.ReadBool(schemas.GetBackendStorageResourceConfig_Imported, v.Imported)
-		case schemas.GetBackendStorageResourceConfig_Permissions:
-			v.Permissions = &BackendStoragePermissions{}
-			return v.Permissions.Deserialize(d)
-		case schemas.GetBackendStorageResourceConfig_ServiceName:
-			var ev string
-			if err := d.ReadString(schemas.GetBackendStorageResourceConfig_ServiceName, &ev); err != nil {
-				return err
-			}
-			v.ServiceName = ServiceName(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The request object for this operation.
 type LoginAuthConfigReqObj struct {
 
@@ -1240,65 +446,9 @@ type LoginAuthConfigReqObj struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LoginAuthConfigReqObj) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoginAuthConfigReqObj)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoginAuthConfigReqObj) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsCognitoIdentityPoolId != nil {
-		s.WriteString(schemas.LoginAuthConfigReqObj_AwsCognitoIdentityPoolId, *v.AwsCognitoIdentityPoolId)
-	}
-	if v.AwsCognitoRegion != nil {
-		s.WriteString(schemas.LoginAuthConfigReqObj_AwsCognitoRegion, *v.AwsCognitoRegion)
-	}
-	if v.AwsUserPoolsId != nil {
-		s.WriteString(schemas.LoginAuthConfigReqObj_AwsUserPoolsId, *v.AwsUserPoolsId)
-	}
-	if v.AwsUserPoolsWebClientId != nil {
-		s.WriteString(schemas.LoginAuthConfigReqObj_AwsUserPoolsWebClientId, *v.AwsUserPoolsWebClientId)
-	}
-}
-func (v *LoginAuthConfigReqObj) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoginAuthConfigReqObj, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoginAuthConfigReqObj_AwsCognitoIdentityPoolId:
-			v.AwsCognitoIdentityPoolId = new(string)
-			return d.ReadString(schemas.LoginAuthConfigReqObj_AwsCognitoIdentityPoolId, v.AwsCognitoIdentityPoolId)
-		case schemas.LoginAuthConfigReqObj_AwsCognitoRegion:
-			v.AwsCognitoRegion = new(string)
-			return d.ReadString(schemas.LoginAuthConfigReqObj_AwsCognitoRegion, v.AwsCognitoRegion)
-		case schemas.LoginAuthConfigReqObj_AwsUserPoolsId:
-			v.AwsUserPoolsId = new(string)
-			return d.ReadString(schemas.LoginAuthConfigReqObj_AwsUserPoolsId, v.AwsUserPoolsId)
-		case schemas.LoginAuthConfigReqObj_AwsUserPoolsWebClientId:
-			v.AwsUserPoolsWebClientId = new(string)
-			return d.ReadString(schemas.LoginAuthConfigReqObj_AwsUserPoolsWebClientId, v.AwsUserPoolsWebClientId)
-		}
-		return nil
-	})
-}
-
 // Defines the resource configuration for the data model in your Amplify project.
 type ResourceConfig struct {
 	noSmithyDocumentSerde
-}
-
-func (v *ResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *ResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // Describes the metadata of the S3 bucket.
@@ -1313,34 +463,6 @@ type S3BucketInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3BucketInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3BucketInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3BucketInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationDate != nil {
-		s.WriteString(schemas.S3BucketInfo_CreationDate, *v.CreationDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.S3BucketInfo_Name, *v.Name)
-	}
-}
-func (v *S3BucketInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3BucketInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3BucketInfo_CreationDate:
-			v.CreationDate = new(string)
-			return d.ReadString(schemas.S3BucketInfo_CreationDate, v.CreationDate)
-		case schemas.S3BucketInfo_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.S3BucketInfo_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // The settings of your MFA configuration for the backend of your Amplify project.
 type Settings struct {
 
@@ -1353,31 +475,6 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Settings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Settings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfMfaTypesElement(s, schemas.Settings_MfaTypes, v.MfaTypes)
-	if v.SmsMessage != nil {
-		s.WriteString(schemas.Settings_SmsMessage, *v.SmsMessage)
-	}
-}
-func (v *Settings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Settings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Settings_MfaTypes:
-			return deserializeListOfMfaTypesElement(d, schemas.Settings_MfaTypes, &v.MfaTypes)
-		case schemas.Settings_SmsMessage:
-			v.SmsMessage = new(string)
-			return d.ReadString(schemas.Settings_SmsMessage, v.SmsMessage)
-		}
-		return nil
-	})
-}
-
 // SMS settings for authentication.
 type SmsSettings struct {
 
@@ -1385,28 +482,6 @@ type SmsSettings struct {
 	SmsMessage *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SmsSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SmsSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SmsSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SmsMessage != nil {
-		s.WriteString(schemas.SmsSettings_SmsMessage, *v.SmsMessage)
-	}
-}
-func (v *SmsSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SmsSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SmsSettings_SmsMessage:
-			v.SmsMessage = new(string)
-			return d.ReadString(schemas.SmsSettings_SmsMessage, v.SmsMessage)
-		}
-		return nil
-	})
 }
 
 // The settings for using the social identity providers for access to your Amplify
@@ -1432,54 +507,6 @@ type SocialProviderSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SocialProviderSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SocialProviderSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SocialProviderSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Facebook != nil {
-		s.WriteStruct(schemas.SocialProviderSettings_Facebook)
-		v.Facebook.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Google != nil {
-		s.WriteStruct(schemas.SocialProviderSettings_Google)
-		v.Google.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LoginWithAmazon != nil {
-		s.WriteStruct(schemas.SocialProviderSettings_LoginWithAmazon)
-		v.LoginWithAmazon.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SignInWithApple != nil {
-		s.WriteStruct(schemas.SocialProviderSettings_SignInWithApple)
-		v.SignInWithApple.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SocialProviderSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SocialProviderSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SocialProviderSettings_Facebook:
-			v.Facebook = &BackendAuthSocialProviderConfig{}
-			return v.Facebook.Deserialize(d)
-		case schemas.SocialProviderSettings_Google:
-			v.Google = &BackendAuthSocialProviderConfig{}
-			return v.Google.Deserialize(d)
-		case schemas.SocialProviderSettings_LoginWithAmazon:
-			v.LoginWithAmazon = &BackendAuthSocialProviderConfig{}
-			return v.LoginWithAmazon.Deserialize(d)
-		case schemas.SocialProviderSettings_SignInWithApple:
-			v.SignInWithApple = &BackendAuthAppleProviderConfig{}
-			return v.SignInWithApple.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // (DEPRECATED) Describes the forgot password policy for authenticating into the
 // Amplify app.
 type UpdateBackendAuthForgotPasswordConfig struct {
@@ -1499,48 +526,6 @@ type UpdateBackendAuthForgotPasswordConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBackendAuthForgotPasswordConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthForgotPasswordConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthForgotPasswordConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveryMethod != "" {
-		s.WriteString(schemas.UpdateBackendAuthForgotPasswordConfig_DeliveryMethod, string(v.DeliveryMethod))
-	}
-	if v.EmailSettings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthForgotPasswordConfig_EmailSettings)
-		v.EmailSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SmsSettings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthForgotPasswordConfig_SmsSettings)
-		v.SmsSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthForgotPasswordConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthForgotPasswordConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthForgotPasswordConfig_DeliveryMethod:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthForgotPasswordConfig_DeliveryMethod, &ev); err != nil {
-				return err
-			}
-			v.DeliveryMethod = DeliveryMethod(ev)
-			return nil
-		case schemas.UpdateBackendAuthForgotPasswordConfig_EmailSettings:
-			v.EmailSettings = &EmailSettings{}
-			return v.EmailSettings.Deserialize(d)
-		case schemas.UpdateBackendAuthForgotPasswordConfig_SmsSettings:
-			v.SmsSettings = &SmsSettings{}
-			return v.SmsSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Describes the authorization configuration for the Amazon Cognito identity pool,
 // provisioned as a part of your auth resource in the Amplify project.
 type UpdateBackendAuthIdentityPoolConfig struct {
@@ -1550,28 +535,6 @@ type UpdateBackendAuthIdentityPoolConfig struct {
 	UnauthenticatedLogin *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateBackendAuthIdentityPoolConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthIdentityPoolConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthIdentityPoolConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.UnauthenticatedLogin != nil {
-		s.WriteBool(schemas.UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin, *v.UnauthenticatedLogin)
-	}
-}
-func (v *UpdateBackendAuthIdentityPoolConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthIdentityPoolConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin:
-			v.UnauthenticatedLogin = new(bool)
-			return d.ReadBool(schemas.UpdateBackendAuthIdentityPoolConfig_UnauthenticatedLogin, v.UnauthenticatedLogin)
-		}
-		return nil
-	})
 }
 
 // Updates the multi-factor authentication (MFA) configuration for the backend of
@@ -1585,40 +548,6 @@ type UpdateBackendAuthMFAConfig struct {
 	Settings *Settings
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateBackendAuthMFAConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthMFAConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthMFAConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MFAMode != "" {
-		s.WriteString(schemas.UpdateBackendAuthMFAConfig_MFAMode, string(v.MFAMode))
-	}
-	if v.Settings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthMFAConfig_Settings)
-		v.Settings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthMFAConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthMFAConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthMFAConfig_MFAMode:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthMFAConfig_MFAMode, &ev); err != nil {
-				return err
-			}
-			v.MFAMode = MFAMode(ev)
-			return nil
-		case schemas.UpdateBackendAuthMFAConfig_Settings:
-			v.Settings = &Settings{}
-			return v.Settings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The OAuth configurations for authenticating users into your Amplify app.
@@ -1647,55 +576,6 @@ type UpdateBackendAuthOAuthConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBackendAuthOAuthConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthOAuthConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthOAuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainPrefix != nil {
-		s.WriteString(schemas.UpdateBackendAuthOAuthConfig_DomainPrefix, *v.DomainPrefix)
-	}
-	if v.OAuthGrantType != "" {
-		s.WriteString(schemas.UpdateBackendAuthOAuthConfig_OAuthGrantType, string(v.OAuthGrantType))
-	}
-	serializeListOfOAuthScopesElement(s, schemas.UpdateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
-	serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
-	serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
-	if v.SocialProviderSettings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthOAuthConfig_SocialProviderSettings)
-		v.SocialProviderSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthOAuthConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthOAuthConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthOAuthConfig_DomainPrefix:
-			v.DomainPrefix = new(string)
-			return d.ReadString(schemas.UpdateBackendAuthOAuthConfig_DomainPrefix, v.DomainPrefix)
-		case schemas.UpdateBackendAuthOAuthConfig_OAuthGrantType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthOAuthConfig_OAuthGrantType, &ev); err != nil {
-				return err
-			}
-			v.OAuthGrantType = OAuthGrantType(ev)
-			return nil
-		case schemas.UpdateBackendAuthOAuthConfig_OAuthScopes:
-			return deserializeListOfOAuthScopesElement(d, schemas.UpdateBackendAuthOAuthConfig_OAuthScopes, &v.OAuthScopes)
-		case schemas.UpdateBackendAuthOAuthConfig_RedirectSignInURIs:
-			return deserializeListOf__string(d, schemas.UpdateBackendAuthOAuthConfig_RedirectSignInURIs, &v.RedirectSignInURIs)
-		case schemas.UpdateBackendAuthOAuthConfig_RedirectSignOutURIs:
-			return deserializeListOf__string(d, schemas.UpdateBackendAuthOAuthConfig_RedirectSignOutURIs, &v.RedirectSignOutURIs)
-		case schemas.UpdateBackendAuthOAuthConfig_SocialProviderSettings:
-			v.SocialProviderSettings = &SocialProviderSettings{}
-			return v.SocialProviderSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Describes the password policy for your Amazon Cognito user pool configured as a
 // part of your Amplify project.
 type UpdateBackendAuthPasswordPolicyConfig struct {
@@ -1709,31 +589,6 @@ type UpdateBackendAuthPasswordPolicyConfig struct {
 	MinimumLength *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateBackendAuthPasswordPolicyConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthPasswordPolicyConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthPasswordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAdditionalConstraintsElement(s, schemas.UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
-	if v.MinimumLength != nil {
-		s.WriteFloat64(schemas.UpdateBackendAuthPasswordPolicyConfig_MinimumLength, *v.MinimumLength)
-	}
-}
-func (v *UpdateBackendAuthPasswordPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthPasswordPolicyConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints:
-			return deserializeListOfAdditionalConstraintsElement(d, schemas.UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints, &v.AdditionalConstraints)
-		case schemas.UpdateBackendAuthPasswordPolicyConfig_MinimumLength:
-			v.MinimumLength = new(float64)
-			return d.ReadFloat64(schemas.UpdateBackendAuthPasswordPolicyConfig_MinimumLength, v.MinimumLength)
-		}
-		return nil
-	})
 }
 
 // Defines the resource configuration when updating an authentication resource in
@@ -1765,58 +620,6 @@ type UpdateBackendAuthResourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBackendAuthResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthResources != "" {
-		s.WriteString(schemas.UpdateBackendAuthResourceConfig_AuthResources, string(v.AuthResources))
-	}
-	if v.IdentityPoolConfigs != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthResourceConfig_IdentityPoolConfigs)
-		v.IdentityPoolConfigs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Service != "" {
-		s.WriteString(schemas.UpdateBackendAuthResourceConfig_Service, string(v.Service))
-	}
-	if v.UserPoolConfigs != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthResourceConfig_UserPoolConfigs)
-		v.UserPoolConfigs.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthResourceConfig_AuthResources:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthResourceConfig_AuthResources, &ev); err != nil {
-				return err
-			}
-			v.AuthResources = AuthResources(ev)
-			return nil
-		case schemas.UpdateBackendAuthResourceConfig_IdentityPoolConfigs:
-			v.IdentityPoolConfigs = &UpdateBackendAuthIdentityPoolConfig{}
-			return v.IdentityPoolConfigs.Deserialize(d)
-		case schemas.UpdateBackendAuthResourceConfig_Service:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthResourceConfig_Service, &ev); err != nil {
-				return err
-			}
-			v.Service = Service(ev)
-			return nil
-		case schemas.UpdateBackendAuthResourceConfig_UserPoolConfigs:
-			v.UserPoolConfigs = &UpdateBackendAuthUserPoolConfig{}
-			return v.UserPoolConfigs.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Describes the Amazon Cognito user pool configuration for the authorization
 // resource to be configured for your Amplify project on an update.
 type UpdateBackendAuthUserPoolConfig struct {
@@ -1844,62 +647,6 @@ type UpdateBackendAuthUserPoolConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBackendAuthUserPoolConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthUserPoolConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ForgotPassword != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig_ForgotPassword)
-		v.ForgotPassword.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Mfa != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig_Mfa)
-		v.Mfa.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OAuth != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig_OAuth)
-		v.OAuth.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PasswordPolicy != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig_PasswordPolicy)
-		v.PasswordPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VerificationMessage != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthUserPoolConfig_VerificationMessage)
-		v.VerificationMessage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthUserPoolConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthUserPoolConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthUserPoolConfig_ForgotPassword:
-			v.ForgotPassword = &UpdateBackendAuthForgotPasswordConfig{}
-			return v.ForgotPassword.Deserialize(d)
-		case schemas.UpdateBackendAuthUserPoolConfig_Mfa:
-			v.Mfa = &UpdateBackendAuthMFAConfig{}
-			return v.Mfa.Deserialize(d)
-		case schemas.UpdateBackendAuthUserPoolConfig_OAuth:
-			v.OAuth = &UpdateBackendAuthOAuthConfig{}
-			return v.OAuth.Deserialize(d)
-		case schemas.UpdateBackendAuthUserPoolConfig_PasswordPolicy:
-			v.PasswordPolicy = &UpdateBackendAuthPasswordPolicyConfig{}
-			return v.PasswordPolicy.Deserialize(d)
-		case schemas.UpdateBackendAuthUserPoolConfig_VerificationMessage:
-			v.VerificationMessage = &UpdateBackendAuthVerificationMessageConfig{}
-			return v.VerificationMessage.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Updates the configuration of the email or SMS message for the auth resource
 // configured for your Amplify project.
 type UpdateBackendAuthVerificationMessageConfig struct {
@@ -1918,48 +665,6 @@ type UpdateBackendAuthVerificationMessageConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateBackendAuthVerificationMessageConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendAuthVerificationMessageConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendAuthVerificationMessageConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeliveryMethod != "" {
-		s.WriteString(schemas.UpdateBackendAuthVerificationMessageConfig_DeliveryMethod, string(v.DeliveryMethod))
-	}
-	if v.EmailSettings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthVerificationMessageConfig_EmailSettings)
-		v.EmailSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SmsSettings != nil {
-		s.WriteStruct(schemas.UpdateBackendAuthVerificationMessageConfig_SmsSettings)
-		v.SmsSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateBackendAuthVerificationMessageConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendAuthVerificationMessageConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendAuthVerificationMessageConfig_DeliveryMethod:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendAuthVerificationMessageConfig_DeliveryMethod, &ev); err != nil {
-				return err
-			}
-			v.DeliveryMethod = DeliveryMethod(ev)
-			return nil
-		case schemas.UpdateBackendAuthVerificationMessageConfig_EmailSettings:
-			v.EmailSettings = &EmailSettings{}
-			return v.EmailSettings.Deserialize(d)
-		case schemas.UpdateBackendAuthVerificationMessageConfig_SmsSettings:
-			v.SmsSettings = &SmsSettings{}
-			return v.SmsSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The resource configuration for updating backend storage.
 type UpdateBackendStorageResourceConfig struct {
 
@@ -1974,40 +679,6 @@ type UpdateBackendStorageResourceConfig struct {
 	ServiceName ServiceName
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateBackendStorageResourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateBackendStorageResourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateBackendStorageResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Permissions != nil {
-		s.WriteStruct(schemas.UpdateBackendStorageResourceConfig_Permissions)
-		v.Permissions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceName != "" {
-		s.WriteString(schemas.UpdateBackendStorageResourceConfig_ServiceName, string(v.ServiceName))
-	}
-}
-func (v *UpdateBackendStorageResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateBackendStorageResourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateBackendStorageResourceConfig_Permissions:
-			v.Permissions = &BackendStoragePermissions{}
-			return v.Permissions.Deserialize(d)
-		case schemas.UpdateBackendStorageResourceConfig_ServiceName:
-			var ev string
-			if err := d.ReadString(schemas.UpdateBackendStorageResourceConfig_ServiceName, &ev); err != nil {
-				return err
-			}
-			v.ServiceName = ServiceName(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

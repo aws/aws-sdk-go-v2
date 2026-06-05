@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -73,40 +71,6 @@ type CreateProjectInput struct {
 	UserParameters []types.EnvironmentConfigurationUserParameter
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProjectInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateProjectInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateProjectInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.DomainUnitId != nil {
-		s.WriteString(schemas.CreateProjectInput_domainUnitId, *v.DomainUnitId)
-	}
-	serializeGlossaryTerms(s, schemas.CreateProjectInput_glossaryTerms, v.GlossaryTerms)
-	serializeProjectMembershipAssignments(s, schemas.CreateProjectInput_membershipAssignments, v.MembershipAssignments)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProjectInput_name, *v.Name)
-	}
-	if v.ProjectCategory != nil {
-		s.WriteString(schemas.CreateProjectInput_projectCategory, *v.ProjectCategory)
-	}
-	if v.ProjectExecutionRole != nil {
-		s.WriteString(schemas.CreateProjectInput_projectExecutionRole, *v.ProjectExecutionRole)
-	}
-	if v.ProjectProfileId != nil {
-		s.WriteString(schemas.CreateProjectInput_projectProfileId, *v.ProjectProfileId)
-	}
-	serializeTags(s, schemas.CreateProjectInput_resourceTags, v.ResourceTags)
-	serializeEnvironmentConfigurationUserParametersList(s, schemas.CreateProjectInput_userParameters, v.UserParameters)
 }
 
 type CreateProjectOutput struct {
@@ -174,69 +138,16 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProjectOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProjectOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProjectOutput_createdAt, v.CreatedAt)
-		case schemas.CreateProjectOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_createdBy, v.CreatedBy)
-		case schemas.CreateProjectOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_description, v.Description)
-		case schemas.CreateProjectOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_domainId, v.DomainId)
-		case schemas.CreateProjectOutput_domainUnitId:
-			v.DomainUnitId = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_domainUnitId, v.DomainUnitId)
-		case schemas.CreateProjectOutput_environmentDeploymentDetails:
-			v.EnvironmentDeploymentDetails = &types.EnvironmentDeploymentDetails{}
-			return v.EnvironmentDeploymentDetails.Deserialize(d)
-		case schemas.CreateProjectOutput_failureReasons:
-			return deserializeFailureReasons(d, schemas.CreateProjectOutput_failureReasons, &v.FailureReasons)
-		case schemas.CreateProjectOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.CreateProjectOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.CreateProjectOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_id, v.Id)
-		case schemas.CreateProjectOutput_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateProjectOutput_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.CreateProjectOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_name, v.Name)
-		case schemas.CreateProjectOutput_projectCategory:
-			v.ProjectCategory = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_projectCategory, v.ProjectCategory)
-		case schemas.CreateProjectOutput_projectProfileId:
-			v.ProjectProfileId = new(string)
-			return d.ReadString(schemas.CreateProjectOutput_projectProfileId, v.ProjectProfileId)
-		case schemas.CreateProjectOutput_projectStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateProjectOutput_projectStatus, &ev); err != nil {
-				return err
-			}
-			v.ProjectStatus = types.ProjectStatus(ev)
-			return nil
-		case schemas.CreateProjectOutput_resourceTags:
-			return deserializeResourceTags(d, schemas.CreateProjectOutput_resourceTags, &v.ResourceTags)
-		case schemas.CreateProjectOutput_userParameters:
-			return deserializeEnvironmentConfigurationUserParametersList(d, schemas.CreateProjectOutput_userParameters, &v.UserParameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput), output: &CreateProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProject"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,19 +53,6 @@ type BatchDeleteWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteWorkloadEstimateUsageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteWorkloadEstimateUsageEntries(s, schemas.BatchDeleteWorkloadEstimateUsageRequest_ids, v.Ids)
-	if v.WorkloadEstimateId != nil {
-		s.WriteString(schemas.BatchDeleteWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
-	}
-}
-
 type BatchDeleteWorkloadEstimateUsageOutput struct {
 
 	//  Returns the list of errors reason and the usage item keys that cannot be
@@ -80,23 +65,16 @@ type BatchDeleteWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteWorkloadEstimateUsageResponse_errors:
-			return deserializeBatchDeleteWorkloadEstimateUsageErrors(d, schemas.BatchDeleteWorkloadEstimateUsageResponse_errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDeleteWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteWorkloadEstimateUsage, schemas.BatchDeleteWorkloadEstimateUsageRequest, schemas.BatchDeleteWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchDeleteWorkloadEstimateUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteWorkloadEstimateUsage, schemas.BatchDeleteWorkloadEstimateUsageRequest, schemas.BatchDeleteWorkloadEstimateUsageResponse), output: &BatchDeleteWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchDeleteWorkloadEstimateUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteWorkloadEstimateUsage"); err != nil {

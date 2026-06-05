@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServiceId != nil {
-		s.WriteString(schemas.GetServiceInput_serviceId, *v.ServiceId)
-	}
-}
-
 // Output containing the requested service details.
 type GetServiceOutput struct {
 
@@ -69,26 +55,16 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceOutput_service:
-			v.Service = &types.RegisteredService{}
-			return v.Service.Deserialize(d)
-		case schemas.GetServiceOutput_tags:
-			return deserializeTags(d, schemas.GetServiceOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput), output: &GetServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetService"); err != nil {

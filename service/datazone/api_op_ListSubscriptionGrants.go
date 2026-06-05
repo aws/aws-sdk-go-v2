@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,54 +84,6 @@ type ListSubscriptionGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionGrantsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSubscriptionGrantsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSubscriptionGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_environmentId, *v.EnvironmentId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSubscriptionGrantsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_nextToken, *v.NextToken)
-	}
-	if v.OwningGroupId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_owningGroupId, *v.OwningGroupId)
-	}
-	if v.OwningIamPrincipalArn != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_owningIamPrincipalArn, *v.OwningIamPrincipalArn)
-	}
-	if v.OwningProjectId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_owningProjectId, *v.OwningProjectId)
-	}
-	if v.OwningUserId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_owningUserId, *v.OwningUserId)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_sortOrder, string(v.SortOrder))
-	}
-	if v.SubscribedListingId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_subscribedListingId, *v.SubscribedListingId)
-	}
-	if v.SubscriptionId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_subscriptionId, *v.SubscriptionId)
-	}
-	if v.SubscriptionTargetId != nil {
-		s.WriteString(schemas.ListSubscriptionGrantsInput_subscriptionTargetId, *v.SubscriptionTargetId)
-	}
-}
-
 type ListSubscriptionGrantsOutput struct {
 
 	// The results of the ListSubscriptionGrants action.
@@ -155,26 +105,16 @@ type ListSubscriptionGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSubscriptionGrantsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSubscriptionGrantsOutput_items:
-			return deserializeSubscriptionGrants(d, schemas.ListSubscriptionGrantsOutput_items, &v.Items)
-		case schemas.ListSubscriptionGrantsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSubscriptionGrantsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSubscriptionGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionGrants, schemas.ListSubscriptionGrantsInput, schemas.ListSubscriptionGrantsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptionGrants{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionGrants, schemas.ListSubscriptionGrantsInput, schemas.ListSubscriptionGrantsOutput), output: &ListSubscriptionGrantsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptionGrants{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubscriptionGrants"); err != nil {

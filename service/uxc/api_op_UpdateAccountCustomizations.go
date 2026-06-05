@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/uxc/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/uxc/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,20 +59,6 @@ type UpdateAccountCustomizationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountCustomizationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAccountCustomizationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccountCustomizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountColor != "" {
-		s.WriteString(schemas.UpdateAccountCustomizationsInput_accountColor, string(v.AccountColor))
-	}
-	serializeRegionsList(s, schemas.UpdateAccountCustomizationsInput_visibleRegions, v.VisibleRegions)
-	serializeServiceList(s, schemas.UpdateAccountCustomizationsInput_visibleServices, v.VisibleServices)
-}
-
 type UpdateAccountCustomizationsOutput struct {
 
 	// The current account color preference after the update.
@@ -92,32 +76,16 @@ type UpdateAccountCustomizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccountCustomizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAccountCustomizationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateAccountCustomizationsOutput_accountColor:
-			var ev string
-			if err := d.ReadString(schemas.UpdateAccountCustomizationsOutput_accountColor, &ev); err != nil {
-				return err
-			}
-			v.AccountColor = types.AccountColor(ev)
-			return nil
-		case schemas.UpdateAccountCustomizationsOutput_visibleRegions:
-			return deserializeRegionsList(d, schemas.UpdateAccountCustomizationsOutput_visibleRegions, &v.VisibleRegions)
-		case schemas.UpdateAccountCustomizationsOutput_visibleServices:
-			return deserializeServiceList(d, schemas.UpdateAccountCustomizationsOutput_visibleServices, &v.VisibleServices)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAccountCustomizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomizations, schemas.UpdateAccountCustomizationsInput, schemas.UpdateAccountCustomizationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountCustomizations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomizations, schemas.UpdateAccountCustomizationsInput, schemas.UpdateAccountCustomizationsOutput), output: &UpdateAccountCustomizationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountCustomizations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountCustomizations"); err != nil {

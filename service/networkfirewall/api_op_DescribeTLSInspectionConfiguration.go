@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DescribeTLSInspectionConfigurationInput struct {
 	TLSInspectionConfigurationName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeTLSInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTLSInspectionConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTLSInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TLSInspectionConfigurationArn != nil {
-		s.WriteString(schemas.DescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn, *v.TLSInspectionConfigurationArn)
-	}
-	if v.TLSInspectionConfigurationName != nil {
-		s.WriteString(schemas.DescribeTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, *v.TLSInspectionConfigurationName)
-	}
 }
 
 type DescribeTLSInspectionConfigurationOutput struct {
@@ -108,30 +91,16 @@ type DescribeTLSInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTLSInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTLSInspectionConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTLSInspectionConfigurationResponse_TLSInspectionConfiguration:
-			v.TLSInspectionConfiguration = &types.TLSInspectionConfiguration{}
-			return v.TLSInspectionConfiguration.Deserialize(d)
-		case schemas.DescribeTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse:
-			v.TLSInspectionConfigurationResponse = &types.TLSInspectionConfigurationResponse{}
-			return v.TLSInspectionConfigurationResponse.Deserialize(d)
-		case schemas.DescribeTLSInspectionConfigurationResponse_UpdateToken:
-			v.UpdateToken = new(string)
-			return d.ReadString(schemas.DescribeTLSInspectionConfigurationResponse_UpdateToken, v.UpdateToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTLSInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTLSInspectionConfiguration, schemas.DescribeTLSInspectionConfigurationRequest, schemas.DescribeTLSInspectionConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeTLSInspectionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTLSInspectionConfiguration, schemas.DescribeTLSInspectionConfigurationRequest, schemas.DescribeTLSInspectionConfigurationResponse), output: &DescribeTLSInspectionConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeTLSInspectionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTLSInspectionConfiguration"); err != nil {

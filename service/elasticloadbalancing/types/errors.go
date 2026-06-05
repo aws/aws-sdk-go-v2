@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessPointNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessPointNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessPointNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessPointNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessPointNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified ARN does not refer to a valid SSL certificate in AWS Identity and
 // Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you
@@ -72,16 +61,6 @@ func (e *CertificateNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *CertificateNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CertificateNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CertificateNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CertificateNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A request made by Elastic Load Balancing to another service exceeds the maximum
 // request rate permitted for your account.
@@ -109,16 +88,6 @@ func (e *DependencyThrottleException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DependencyThrottleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DependencyThrottleException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DependencyThrottleException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DependencyThrottleException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DependencyThrottleException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified load balancer name already exists for this account.
 type DuplicateAccessPointNameException struct {
@@ -145,16 +114,6 @@ func (e *DuplicateAccessPointNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateAccessPointNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DuplicateAccessPointNameException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DuplicateAccessPointNameException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DuplicateAccessPointNameException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DuplicateAccessPointNameException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A listener already exists for the specified load balancer name and port, but
 // with a different instance port, protocol, or SSL certificate.
@@ -182,16 +141,6 @@ func (e *DuplicateListenerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DuplicateListenerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DuplicateListenerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DuplicateListenerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DuplicateListenerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A policy with the specified name already exists for this load balancer.
 type DuplicatePolicyNameException struct {
@@ -218,16 +167,6 @@ func (e *DuplicatePolicyNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicatePolicyNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DuplicatePolicyNameException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DuplicatePolicyNameException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DuplicatePolicyNameException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DuplicatePolicyNameException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -254,16 +193,6 @@ func (e *DuplicateTagKeysException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DuplicateTagKeysException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DuplicateTagKeysException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DuplicateTagKeysException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DuplicateTagKeysException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The requested configuration change is not valid.
 type InvalidConfigurationRequestException struct {
@@ -292,16 +221,6 @@ func (e *InvalidConfigurationRequestException) ErrorCode() string {
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *InvalidConfigurationRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidConfigurationRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidConfigurationRequestException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidConfigurationRequestException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified endpoint is not valid.
 type InvalidEndPointException struct {
@@ -328,16 +247,6 @@ func (e *InvalidEndPointException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidEndPointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidEndPointException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidEndPointException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidEndPointException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidEndPointException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified value for the schema is not valid. You can only specify a scheme
 // for load balancers in a VPC.
@@ -365,16 +274,6 @@ func (e *InvalidSchemeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidSchemeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidSchemeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidSchemeException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidSchemeException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more of the specified security groups do not exist.
 type InvalidSecurityGroupException struct {
@@ -401,16 +300,6 @@ func (e *InvalidSecurityGroupException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidSecurityGroupException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidSecurityGroupException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidSecurityGroupException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidSecurityGroupException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified VPC has no associated Internet gateway.
 type InvalidSubnetException struct {
@@ -437,16 +326,6 @@ func (e *InvalidSubnetException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidSubnetException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidSubnetException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidSubnetException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidSubnetException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The load balancer does not have a listener configured at the specified port.
 type ListenerNotFoundException struct {
@@ -473,16 +352,6 @@ func (e *ListenerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ListenerNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListenerNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListenerNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ListenerNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified load balancer attribute does not exist.
 type LoadBalancerAttributeNotFoundException struct {
@@ -511,16 +380,6 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorCode() string {
 func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *LoadBalancerAttributeNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoadBalancerAttributeNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoadBalancerAttributeNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LoadBalancerAttributeNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
@@ -547,16 +406,6 @@ func (e *OperationNotPermittedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *OperationNotPermittedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OperationNotPermittedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OperationNotPermittedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.OperationNotPermittedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more of the specified policies do not exist.
 type PolicyNotFoundException struct {
@@ -583,16 +432,6 @@ func (e *PolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *PolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.PolicyNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more of the specified policy types do not exist.
 type PolicyTypeNotFoundException struct {
@@ -619,16 +458,6 @@ func (e *PolicyTypeNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *PolicyTypeNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyTypeNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyTypeNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.PolicyTypeNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more of the specified subnets do not exist.
 type SubnetNotFoundException struct {
@@ -655,16 +484,6 @@ func (e *SubnetNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *SubnetNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubnetNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubnetNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.SubnetNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The quota for the number of load balancers has been reached.
 type TooManyAccessPointsException struct {
@@ -691,16 +510,6 @@ func (e *TooManyAccessPointsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyAccessPointsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyAccessPointsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyAccessPointsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyAccessPointsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyAccessPointsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The quota for the number of policies for this load balancer has been reached.
 type TooManyPoliciesException struct {
@@ -727,16 +536,6 @@ func (e *TooManyPoliciesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyPoliciesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyPoliciesException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyPoliciesException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyPoliciesException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyPoliciesException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The quota for the number of tags that can be assigned to a load balancer has
 // been reached.
@@ -764,16 +563,6 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyTagsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified protocol or signature version is not supported.
 type UnsupportedProtocolException struct {
@@ -800,13 +589,3 @@ func (e *UnsupportedProtocolException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *UnsupportedProtocolException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnsupportedProtocolException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnsupportedProtocolException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UnsupportedProtocolException_Message, v.Message)
-		}
-		return nil
-	})
-}

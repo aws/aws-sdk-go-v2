@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,25 +58,6 @@ type DescribeDBParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBParameterGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDBParameterGroupsMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDBParameterGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBParameterGroupName != nil {
-		s.WriteString(schemas.DescribeDBParameterGroupsMessage_DBParameterGroupName, *v.DBParameterGroupName)
-	}
-	serializeFilterList(s, schemas.DescribeDBParameterGroupsMessage_Filters, v.Filters)
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribeDBParameterGroupsMessage_Marker, *v.Marker)
-	}
-	if v.MaxRecords != nil {
-		s.WriteInt32(schemas.DescribeDBParameterGroupsMessage_MaxRecords, *v.MaxRecords)
-	}
-}
-
 type DescribeDBParameterGroupsOutput struct {
 
 	// A list of DBParameterGroup instances.
@@ -95,26 +74,16 @@ type DescribeDBParameterGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDBParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DBParameterGroupsMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DBParameterGroupsMessage_DBParameterGroups:
-			return deserializeDBParameterGroupList(d, schemas.DBParameterGroupsMessage_DBParameterGroups, &v.DBParameterGroups)
-		case schemas.DBParameterGroupsMessage_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.DBParameterGroupsMessage_Marker, v.Marker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDBParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBParameterGroups, schemas.DescribeDBParameterGroupsMessage, schemas.DBParameterGroupsMessage)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBParameterGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBParameterGroups, schemas.DescribeDBParameterGroupsMessage, schemas.DBParameterGroupsMessage), output: &DescribeDBParameterGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBParameterGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBParameterGroups"); err != nil {

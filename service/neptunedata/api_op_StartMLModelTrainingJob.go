@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -122,67 +120,6 @@ type StartMLModelTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMLModelTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartMLModelTrainingJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartMLModelTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BaseProcessingInstanceType != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_baseProcessingInstanceType, *v.BaseProcessingInstanceType)
-	}
-	if v.CustomModelTrainingParameters != nil {
-		s.WriteStruct(schemas.StartMLModelTrainingJobInput_customModelTrainingParameters)
-		v.CustomModelTrainingParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataProcessingJobId != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_dataProcessingJobId, *v.DataProcessingJobId)
-	}
-	if v.EnableManagedSpotTraining != nil {
-		s.WriteBool(schemas.StartMLModelTrainingJobInput_enableManagedSpotTraining, *v.EnableManagedSpotTraining)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_id, *v.Id)
-	}
-	if v.MaxHPONumberOfTrainingJobs != nil {
-		s.WriteInt32(schemas.StartMLModelTrainingJobInput_maxHPONumberOfTrainingJobs, *v.MaxHPONumberOfTrainingJobs)
-	}
-	if v.MaxHPOParallelTrainingJobs != nil {
-		s.WriteInt32(schemas.StartMLModelTrainingJobInput_maxHPOParallelTrainingJobs, *v.MaxHPOParallelTrainingJobs)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-	if v.PreviousModelTrainingJobId != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_previousModelTrainingJobId, *v.PreviousModelTrainingJobId)
-	}
-	if v.S3OutputEncryptionKMSKey != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_s3OutputEncryptionKMSKey, *v.S3OutputEncryptionKMSKey)
-	}
-	if v.SagemakerIamRoleArn != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
-	}
-	serializeStringList(s, schemas.StartMLModelTrainingJobInput_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.StartMLModelTrainingJobInput_subnets, v.Subnets)
-	if v.TrainModelS3Location != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_trainModelS3Location, *v.TrainModelS3Location)
-	}
-	if v.TrainingInstanceType != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_trainingInstanceType, *v.TrainingInstanceType)
-	}
-	if v.TrainingInstanceVolumeSizeInGB != nil {
-		s.WriteInt32(schemas.StartMLModelTrainingJobInput_trainingInstanceVolumeSizeInGB, *v.TrainingInstanceVolumeSizeInGB)
-	}
-	if v.TrainingTimeOutInSeconds != nil {
-		s.WriteInt32(schemas.StartMLModelTrainingJobInput_trainingTimeOutInSeconds, *v.TrainingTimeOutInSeconds)
-	}
-	if v.VolumeEncryptionKMSKey != nil {
-		s.WriteString(schemas.StartMLModelTrainingJobInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
-	}
-}
-
 type StartMLModelTrainingJobOutput struct {
 
 	// The ARN of the new model training job.
@@ -200,30 +137,16 @@ type StartMLModelTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartMLModelTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartMLModelTrainingJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartMLModelTrainingJobOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.StartMLModelTrainingJobOutput_arn, v.Arn)
-		case schemas.StartMLModelTrainingJobOutput_creationTimeInMillis:
-			v.CreationTimeInMillis = new(int64)
-			return d.ReadInt64(schemas.StartMLModelTrainingJobOutput_creationTimeInMillis, v.CreationTimeInMillis)
-		case schemas.StartMLModelTrainingJobOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StartMLModelTrainingJobOutput_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartMLModelTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLModelTrainingJob, schemas.StartMLModelTrainingJobInput, schemas.StartMLModelTrainingJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMLModelTrainingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLModelTrainingJob, schemas.StartMLModelTrainingJobInput, schemas.StartMLModelTrainingJobOutput), output: &StartMLModelTrainingJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMLModelTrainingJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMLModelTrainingJob"); err != nil {

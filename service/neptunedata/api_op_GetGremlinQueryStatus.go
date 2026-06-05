@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,18 +48,6 @@ type GetGremlinQueryStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGremlinQueryStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGremlinQueryStatusInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGremlinQueryStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryId != nil {
-		s.WriteString(schemas.GetGremlinQueryStatusInput_queryId, *v.QueryId)
-	}
-}
-
 type GetGremlinQueryStatusOutput struct {
 
 	// The evaluation status of the Gremlin query.
@@ -79,30 +65,16 @@ type GetGremlinQueryStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGremlinQueryStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGremlinQueryStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGremlinQueryStatusOutput_queryEvalStats:
-			v.QueryEvalStats = &types.QueryEvalStats{}
-			return v.QueryEvalStats.Deserialize(d)
-		case schemas.GetGremlinQueryStatusOutput_queryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.GetGremlinQueryStatusOutput_queryId, v.QueryId)
-		case schemas.GetGremlinQueryStatusOutput_queryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.GetGremlinQueryStatusOutput_queryString, v.QueryString)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGremlinQueryStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGremlinQueryStatus, schemas.GetGremlinQueryStatusInput, schemas.GetGremlinQueryStatusOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGremlinQueryStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGremlinQueryStatus, schemas.GetGremlinQueryStatusInput, schemas.GetGremlinQueryStatusOutput), output: &GetGremlinQueryStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGremlinQueryStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGremlinQueryStatus"); err != nil {

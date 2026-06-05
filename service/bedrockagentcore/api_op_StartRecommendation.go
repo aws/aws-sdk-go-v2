@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,28 +61,6 @@ type StartRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRecommendationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartRecommendationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartRecommendationRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.StartRecommendationRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartRecommendationRequest_name, *v.Name)
-	}
-	serializeRecommendationConfig(s, schemas.StartRecommendationRequest_recommendationConfig, v.RecommendationConfig)
-	if v.Type != "" {
-		s.WriteString(schemas.StartRecommendationRequest_type, string(v.Type))
-	}
-}
-
 type StartRecommendationOutput struct {
 
 	// The timestamp when the recommendation was created.
@@ -136,55 +112,16 @@ type StartRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartRecommendationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartRecommendationResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.StartRecommendationResponse_createdAt, v.CreatedAt)
-		case schemas.StartRecommendationResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.StartRecommendationResponse_description, v.Description)
-		case schemas.StartRecommendationResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.StartRecommendationResponse_name, v.Name)
-		case schemas.StartRecommendationResponse_recommendationArn:
-			v.RecommendationArn = new(string)
-			return d.ReadString(schemas.StartRecommendationResponse_recommendationArn, v.RecommendationArn)
-		case schemas.StartRecommendationResponse_recommendationConfig:
-			return deserializeRecommendationConfig(d, schemas.StartRecommendationResponse_recommendationConfig, &v.RecommendationConfig)
-		case schemas.StartRecommendationResponse_recommendationId:
-			v.RecommendationId = new(string)
-			return d.ReadString(schemas.StartRecommendationResponse_recommendationId, v.RecommendationId)
-		case schemas.StartRecommendationResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.StartRecommendationResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RecommendationStatus(ev)
-			return nil
-		case schemas.StartRecommendationResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.StartRecommendationResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.RecommendationType(ev)
-			return nil
-		case schemas.StartRecommendationResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.StartRecommendationResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendation, schemas.StartRecommendationRequest, schemas.StartRecommendationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecommendation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendation, schemas.StartRecommendationRequest, schemas.StartRecommendationResponse), output: &StartRecommendationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecommendation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRecommendation"); err != nil {

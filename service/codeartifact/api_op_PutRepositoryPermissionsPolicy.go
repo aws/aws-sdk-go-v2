@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,30 +65,6 @@ type PutRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutRepositoryPermissionsPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutRepositoryPermissionsPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutRepositoryPermissionsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.PutRepositoryPermissionsPolicyRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.PutRepositoryPermissionsPolicyRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.PolicyDocument != nil {
-		s.WriteString(schemas.PutRepositoryPermissionsPolicyRequest_policyDocument, *v.PolicyDocument)
-	}
-	if v.PolicyRevision != nil {
-		s.WriteString(schemas.PutRepositoryPermissionsPolicyRequest_policyRevision, *v.PolicyRevision)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.PutRepositoryPermissionsPolicyRequest_repository, *v.Repository)
-	}
-}
-
 type PutRepositoryPermissionsPolicyOutput struct {
 
 	//  The resource policy that was set after processing the request.
@@ -102,24 +76,16 @@ type PutRepositoryPermissionsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutRepositoryPermissionsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutRepositoryPermissionsPolicyResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutRepositoryPermissionsPolicyResult_policy:
-			v.Policy = &types.ResourcePolicy{}
-			return v.Policy.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRepositoryPermissionsPolicy, schemas.PutRepositoryPermissionsPolicyRequest, schemas.PutRepositoryPermissionsPolicyResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRepositoryPermissionsPolicy, schemas.PutRepositoryPermissionsPolicyRequest, schemas.PutRepositoryPermissionsPolicyResult), output: &PutRepositoryPermissionsPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRepositoryPermissionsPolicy"); err != nil {

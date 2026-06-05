@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,33 +57,6 @@ type RejectPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectPredictionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectPredictionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.RejectPredictionsInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.RejectPredictionsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.RejectPredictionsInput_identifier, *v.Identifier)
-	}
-	serializeRejectChoices(s, schemas.RejectPredictionsInput_rejectChoices, v.RejectChoices)
-	if v.RejectRule != nil {
-		s.WriteStruct(schemas.RejectPredictionsInput_rejectRule)
-		v.RejectRule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.RejectPredictionsInput_revision, *v.Revision)
-	}
-}
-
 type RejectPredictionsOutput struct {
 
 	// The ID of the asset.
@@ -109,30 +80,16 @@ type RejectPredictionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectPredictionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectPredictionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectPredictionsOutput_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.RejectPredictionsOutput_assetId, v.AssetId)
-		case schemas.RejectPredictionsOutput_assetRevision:
-			v.AssetRevision = new(string)
-			return d.ReadString(schemas.RejectPredictionsOutput_assetRevision, v.AssetRevision)
-		case schemas.RejectPredictionsOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.RejectPredictionsOutput_domainId, v.DomainId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRejectPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectPredictions, schemas.RejectPredictionsInput, schemas.RejectPredictionsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectPredictions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectPredictions, schemas.RejectPredictionsInput, schemas.RejectPredictionsOutput), output: &RejectPredictionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectPredictions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectPredictions"); err != nil {

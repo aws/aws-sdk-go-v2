@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type AddLFTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddLFTagsToResourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddLFTagsToResourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddLFTagsToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.AddLFTagsToResourceRequest_CatalogId, *v.CatalogId)
-	}
-	serializeLFTagsList(s, schemas.AddLFTagsToResourceRequest_LFTags, v.LFTags)
-	if v.Resource != nil {
-		s.WriteStruct(schemas.AddLFTagsToResourceRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type AddLFTagsToResourceOutput struct {
 
 	// A list of failures to tag the resource.
@@ -79,23 +59,16 @@ type AddLFTagsToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddLFTagsToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddLFTagsToResourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddLFTagsToResourceResponse_Failures:
-			return deserializeLFTagErrors(d, schemas.AddLFTagsToResourceResponse_Failures, &v.Failures)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLFTagsToResource, schemas.AddLFTagsToResourceRequest, schemas.AddLFTagsToResourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddLFTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLFTagsToResource, schemas.AddLFTagsToResourceRequest, schemas.AddLFTagsToResourceResponse), output: &AddLFTagsToResourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddLFTagsToResource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddLFTagsToResource"); err != nil {

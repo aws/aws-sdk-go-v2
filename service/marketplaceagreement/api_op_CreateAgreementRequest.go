@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,33 +74,6 @@ type CreateAgreementRequestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAgreementRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAgreementRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementProposalIdentifier != nil {
-		s.WriteString(schemas.CreateAgreementRequestInput_agreementProposalIdentifier, *v.AgreementProposalIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAgreementRequestInput_clientToken, *v.ClientToken)
-	}
-	if v.Intent != "" {
-		s.WriteString(schemas.CreateAgreementRequestInput_intent, string(v.Intent))
-	}
-	serializeRequestedTermList(s, schemas.CreateAgreementRequestInput_requestedTerms, v.RequestedTerms)
-	if v.SourceAgreementIdentifier != nil {
-		s.WriteString(schemas.CreateAgreementRequestInput_sourceAgreementIdentifier, *v.SourceAgreementIdentifier)
-	}
-	if v.TaxConfiguration != nil {
-		s.WriteStruct(schemas.CreateAgreementRequestInput_taxConfiguration)
-		v.TaxConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateAgreementRequestOutput struct {
 
 	// The unique identifier of the agreement request created. Use this identifier
@@ -119,27 +90,16 @@ type CreateAgreementRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAgreementRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAgreementRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAgreementRequestOutput_agreementRequestId:
-			v.AgreementRequestId = new(string)
-			return d.ReadString(schemas.CreateAgreementRequestOutput_agreementRequestId, v.AgreementRequestId)
-		case schemas.CreateAgreementRequestOutput_chargeSummary:
-			v.ChargeSummary = &types.ChargeSummary{}
-			return v.ChargeSummary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAgreementRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgreementRequest, schemas.CreateAgreementRequestInput, schemas.CreateAgreementRequestOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAgreementRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgreementRequest, schemas.CreateAgreementRequestInput, schemas.CreateAgreementRequestOutput), output: &CreateAgreementRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAgreementRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgreementRequest"); err != nil {

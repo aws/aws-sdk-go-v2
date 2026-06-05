@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +40,6 @@ type DeleteConfiguredAudienceModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteConfiguredAudienceModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteConfiguredAudienceModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteConfiguredAudienceModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfiguredAudienceModelArn != nil {
-		s.WriteString(schemas.DeleteConfiguredAudienceModelRequest_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
-	}
-}
-
 type DeleteConfiguredAudienceModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,29 +47,16 @@ type DeleteConfiguredAudienceModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteConfiguredAudienceModelOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteConfiguredAudienceModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteConfiguredAudienceModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteConfiguredAudienceModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredAudienceModel, schemas.DeleteConfiguredAudienceModelRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredAudienceModel, schemas.DeleteConfiguredAudienceModelRequest, nil), output: &DeleteConfiguredAudienceModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConfiguredAudienceModel"); err != nil {

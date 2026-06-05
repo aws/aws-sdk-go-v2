@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,28 +23,6 @@ type CloudWatchLogsLogGroup struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CloudWatchLogsLogGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloudWatchLogsLogGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloudWatchLogsLogGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroupArn != nil {
-		s.WriteString(schemas.CloudWatchLogsLogGroup_LogGroupArn, *v.LogGroupArn)
-	}
-}
-func (v *CloudWatchLogsLogGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloudWatchLogsLogGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloudWatchLogsLogGroup_LogGroupArn:
-			v.LogGroupArn = new(string)
-			return d.ReadString(schemas.CloudWatchLogsLogGroup_LogGroupArn, v.LogGroupArn)
-		}
-		return nil
-	})
 }
 
 // A collection of app instances that run the same executable app code and have
@@ -78,38 +54,6 @@ type Domain struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Domain) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Domain)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Lifecycle != "" {
-		s.WriteString(schemas.Domain_Lifecycle, string(v.Lifecycle))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Domain_Name, *v.Name)
-	}
-}
-func (v *Domain) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Domain, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Domain_Lifecycle:
-			var ev string
-			if err := d.ReadString(schemas.Domain_Lifecycle, &ev); err != nil {
-				return err
-			}
-			v.Lifecycle = LifecycleManagementStrategy(ev)
-			return nil
-		case schemas.Domain_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Domain_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Options that apply when the app starts. These options override default behavior.
 type LaunchOverrides struct {
 
@@ -118,25 +62,6 @@ type LaunchOverrides struct {
 	LaunchCommands []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LaunchOverrides) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LaunchOverrides)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LaunchOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLaunchCommandList(s, schemas.LaunchOverrides_LaunchCommands, v.LaunchCommands)
-}
-func (v *LaunchOverrides) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LaunchOverrides, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LaunchOverrides_LaunchCommands:
-			return deserializeLaunchCommandList(d, schemas.LaunchOverrides_LaunchCommands, &v.LaunchCommands)
-		}
-		return nil
-	})
 }
 
 // A collection of additional state information, such as domain and clock
@@ -157,28 +82,6 @@ type LiveSimulationState struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LiveSimulationState) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LiveSimulationState)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LiveSimulationState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSimulationClockList(s, schemas.LiveSimulationState_Clocks, v.Clocks)
-	serializeDomainList(s, schemas.LiveSimulationState_Domains, v.Domains)
-}
-func (v *LiveSimulationState) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LiveSimulationState, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LiveSimulationState_Clocks:
-			return deserializeSimulationClockList(d, schemas.LiveSimulationState_Clocks, &v.Clocks)
-		case schemas.LiveSimulationState_Domains:
-			return deserializeDomainList(d, schemas.LiveSimulationState_Domains, &v.Domains)
-		}
-		return nil
-	})
-}
-
 // The location where SimSpace Weaver sends simulation log data.
 type LogDestination struct {
 
@@ -191,30 +94,6 @@ type LogDestination struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudWatchLogsLogGroup != nil {
-		s.WriteStruct(schemas.LogDestination_CloudWatchLogsLogGroup)
-		v.CloudWatchLogsLogGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LogDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogDestination_CloudWatchLogsLogGroup:
-			v.CloudWatchLogsLogGroup = &CloudWatchLogsLogGroup{}
-			return v.CloudWatchLogsLogGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The logging configuration for a simulation.
 type LoggingConfiguration struct {
 
@@ -222,25 +101,6 @@ type LoggingConfiguration struct {
 	Destinations []LogDestination
 
 	noSmithyDocumentSerde
-}
-
-func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoggingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogDestinations(s, schemas.LoggingConfiguration_Destinations, v.Destinations)
-}
-func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoggingConfiguration_Destinations:
-			return deserializeLogDestinations(d, schemas.LoggingConfiguration_Destinations, &v.Destinations)
-		}
-		return nil
-	})
 }
 
 // An Amazon S3 bucket and optional folder (object key prefix) where SimSpace
@@ -263,34 +123,6 @@ type S3Destination struct {
 	ObjectKeyPrefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Destination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3Destination_BucketName, *v.BucketName)
-	}
-	if v.ObjectKeyPrefix != nil {
-		s.WriteString(schemas.S3Destination_ObjectKeyPrefix, *v.ObjectKeyPrefix)
-	}
-}
-func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Destination_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3Destination_BucketName, v.BucketName)
-		case schemas.S3Destination_ObjectKeyPrefix:
-			v.ObjectKeyPrefix = new(string)
-			return d.ReadString(schemas.S3Destination_ObjectKeyPrefix, v.ObjectKeyPrefix)
-		}
-		return nil
-	})
 }
 
 // A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
@@ -319,34 +151,6 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Location)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3Location_BucketName, *v.BucketName)
-	}
-	if v.ObjectKey != nil {
-		s.WriteString(schemas.S3Location_ObjectKey, *v.ObjectKey)
-	}
-}
-func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Location_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3Location_BucketName, v.BucketName)
-		case schemas.S3Location_ObjectKey:
-			v.ObjectKey = new(string)
-			return d.ReadString(schemas.S3Location_ObjectKey, v.ObjectKey)
-		}
-		return nil
-	})
-}
-
 // Information about the network endpoint that you can use to connect to your
 // custom or service app. For more information about SimSpace Weaver apps, see [Key concepts: Apps]in
 // the SimSpace Weaver User Guide..
@@ -363,31 +167,6 @@ type SimulationAppEndpointInfo struct {
 	IngressPortMappings []SimulationAppPortMapping
 
 	noSmithyDocumentSerde
-}
-
-func (v *SimulationAppEndpointInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimulationAppEndpointInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimulationAppEndpointInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Address != nil {
-		s.WriteString(schemas.SimulationAppEndpointInfo_Address, *v.Address)
-	}
-	serializeAppPortMappings(s, schemas.SimulationAppEndpointInfo_IngressPortMappings, v.IngressPortMappings)
-}
-func (v *SimulationAppEndpointInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimulationAppEndpointInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimulationAppEndpointInfo_Address:
-			v.Address = new(string)
-			return d.ReadString(schemas.SimulationAppEndpointInfo_Address, v.Address)
-		case schemas.SimulationAppEndpointInfo_IngressPortMappings:
-			return deserializeAppPortMappings(d, schemas.SimulationAppEndpointInfo_IngressPortMappings, &v.IngressPortMappings)
-		}
-		return nil
-	})
 }
 
 // A collection of metadata about the app.
@@ -414,60 +193,6 @@ type SimulationAppMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SimulationAppMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimulationAppMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimulationAppMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.SimulationAppMetadata_Domain, *v.Domain)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SimulationAppMetadata_Name, *v.Name)
-	}
-	if v.Simulation != nil {
-		s.WriteString(schemas.SimulationAppMetadata_Simulation, *v.Simulation)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SimulationAppMetadata_Status, string(v.Status))
-	}
-	if v.TargetStatus != "" {
-		s.WriteString(schemas.SimulationAppMetadata_TargetStatus, string(v.TargetStatus))
-	}
-}
-func (v *SimulationAppMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimulationAppMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimulationAppMetadata_Domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.SimulationAppMetadata_Domain, v.Domain)
-		case schemas.SimulationAppMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SimulationAppMetadata_Name, v.Name)
-		case schemas.SimulationAppMetadata_Simulation:
-			v.Simulation = new(string)
-			return d.ReadString(schemas.SimulationAppMetadata_Simulation, v.Simulation)
-		case schemas.SimulationAppMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.SimulationAppMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = SimulationAppStatus(ev)
-			return nil
-		case schemas.SimulationAppMetadata_TargetStatus:
-			var ev string
-			if err := d.ReadString(schemas.SimulationAppMetadata_TargetStatus, &ev); err != nil {
-				return err
-			}
-			v.TargetStatus = SimulationAppTargetStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A collection of TCP/UDP ports for a custom or service app.
 type SimulationAppPortMapping struct {
 
@@ -485,34 +210,6 @@ type SimulationAppPortMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SimulationAppPortMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimulationAppPortMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimulationAppPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Actual != nil {
-		s.WriteInt32(schemas.SimulationAppPortMapping_Actual, *v.Actual)
-	}
-	if v.Declared != nil {
-		s.WriteInt32(schemas.SimulationAppPortMapping_Declared, *v.Declared)
-	}
-}
-func (v *SimulationAppPortMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimulationAppPortMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimulationAppPortMapping_Actual:
-			v.Actual = new(int32)
-			return d.ReadInt32(schemas.SimulationAppPortMapping_Actual, v.Actual)
-		case schemas.SimulationAppPortMapping_Declared:
-			v.Declared = new(int32)
-			return d.ReadInt32(schemas.SimulationAppPortMapping_Declared, v.Declared)
-		}
-		return nil
-	})
-}
-
 // Status information about the simulation clock.
 type SimulationClock struct {
 
@@ -523,42 +220,6 @@ type SimulationClock struct {
 	TargetStatus ClockTargetStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *SimulationClock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimulationClock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimulationClock) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.SimulationClock_Status, string(v.Status))
-	}
-	if v.TargetStatus != "" {
-		s.WriteString(schemas.SimulationClock_TargetStatus, string(v.TargetStatus))
-	}
-}
-func (v *SimulationClock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimulationClock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimulationClock_Status:
-			var ev string
-			if err := d.ReadString(schemas.SimulationClock_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ClockStatus(ev)
-			return nil
-		case schemas.SimulationClock_TargetStatus:
-			var ev string
-			if err := d.ReadString(schemas.SimulationClock_TargetStatus, &ev); err != nil {
-				return err
-			}
-			v.TargetStatus = ClockTargetStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A collection of data about the simulation.
@@ -584,60 +245,6 @@ type SimulationMetadata struct {
 	TargetStatus SimulationTargetStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *SimulationMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimulationMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimulationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.SimulationMetadata_Arn, *v.Arn)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.SimulationMetadata_CreationTime, *v.CreationTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SimulationMetadata_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SimulationMetadata_Status, string(v.Status))
-	}
-	if v.TargetStatus != "" {
-		s.WriteString(schemas.SimulationMetadata_TargetStatus, string(v.TargetStatus))
-	}
-}
-func (v *SimulationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimulationMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimulationMetadata_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SimulationMetadata_Arn, v.Arn)
-		case schemas.SimulationMetadata_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.SimulationMetadata_CreationTime, v.CreationTime)
-		case schemas.SimulationMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SimulationMetadata_Name, v.Name)
-		case schemas.SimulationMetadata_Status:
-			var ev string
-			if err := d.ReadString(schemas.SimulationMetadata_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = SimulationStatus(ev)
-			return nil
-		case schemas.SimulationMetadata_TargetStatus:
-			var ev string
-			if err := d.ReadString(schemas.SimulationMetadata_TargetStatus, &ev); err != nil {
-				return err
-			}
-			v.TargetStatus = SimulationTargetStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

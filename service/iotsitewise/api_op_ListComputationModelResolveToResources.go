@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListComputationModelResolveToResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComputationModelResolveToResourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListComputationModelResolveToResourcesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListComputationModelResolveToResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComputationModelId != nil {
-		s.WriteString(schemas.ListComputationModelResolveToResourcesRequest_computationModelId, *v.ComputationModelId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListComputationModelResolveToResourcesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListComputationModelResolveToResourcesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListComputationModelResolveToResourcesOutput struct {
 
 	// A list of summaries describing the distinct resources that this computation
@@ -82,26 +62,16 @@ type ListComputationModelResolveToResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComputationModelResolveToResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListComputationModelResolveToResourcesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListComputationModelResolveToResourcesResponse_computationModelResolveToResourceSummaries:
-			return deserializeComputationModelResolveToResourceSummaries(d, schemas.ListComputationModelResolveToResourcesResponse_computationModelResolveToResourceSummaries, &v.ComputationModelResolveToResourceSummaries)
-		case schemas.ListComputationModelResolveToResourcesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListComputationModelResolveToResourcesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListComputationModelResolveToResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModelResolveToResources, schemas.ListComputationModelResolveToResourcesRequest, schemas.ListComputationModelResolveToResourcesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComputationModelResolveToResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputationModelResolveToResources, schemas.ListComputationModelResolveToResourcesRequest, schemas.ListComputationModelResolveToResourcesResponse), output: &ListComputationModelResolveToResourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComputationModelResolveToResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComputationModelResolveToResources"); err != nil {

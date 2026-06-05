@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,25 +55,6 @@ type GetRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRecordRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExpirationTimeResponse != "" {
-		s.WriteString(schemas.GetRecordRequest_ExpirationTimeResponse, string(v.ExpirationTimeResponse))
-	}
-	if v.FeatureGroupName != nil {
-		s.WriteString(schemas.GetRecordRequest_FeatureGroupName, *v.FeatureGroupName)
-	}
-	serializeFeatureNames(s, schemas.GetRecordRequest_FeatureNames, v.FeatureNames)
-	if v.RecordIdentifierValueAsString != nil {
-		s.WriteString(schemas.GetRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
-	}
-}
-
 type GetRecordOutput struct {
 
 	// The ExpiresAt ISO string of the requested record.
@@ -90,26 +69,16 @@ type GetRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRecordResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRecordResponse_ExpiresAt:
-			v.ExpiresAt = new(string)
-			return d.ReadString(schemas.GetRecordResponse_ExpiresAt, v.ExpiresAt)
-		case schemas.GetRecordResponse_Record:
-			return deserializeRecord(d, schemas.GetRecordResponse_Record, &v.Record)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecord, schemas.GetRecordRequest, schemas.GetRecordResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecord, schemas.GetRecordRequest, schemas.GetRecordResponse), output: &GetRecordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecord"); err != nil {

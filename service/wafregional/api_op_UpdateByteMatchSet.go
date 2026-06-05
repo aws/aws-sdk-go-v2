@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -107,22 +105,6 @@ type UpdateByteMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateByteMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateByteMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateByteMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ByteMatchSetId != nil {
-		s.WriteString(schemas.UpdateByteMatchSetRequest_ByteMatchSetId, *v.ByteMatchSetId)
-	}
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.UpdateByteMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	serializeByteMatchSetUpdates(s, schemas.UpdateByteMatchSetRequest_Updates, v.Updates)
-}
-
 type UpdateByteMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateByteMatchSet request. You can
@@ -136,24 +118,16 @@ type UpdateByteMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateByteMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateByteMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateByteMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.UpdateByteMatchSetResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateByteMatchSet, schemas.UpdateByteMatchSetRequest, schemas.UpdateByteMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateByteMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateByteMatchSet, schemas.UpdateByteMatchSetRequest, schemas.UpdateByteMatchSetResponse), output: &UpdateByteMatchSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateByteMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateByteMatchSet"); err != nil {

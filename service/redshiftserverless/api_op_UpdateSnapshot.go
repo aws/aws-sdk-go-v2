@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type UpdateSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSnapshotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RetentionPeriod != nil {
-		s.WriteInt32(schemas.UpdateSnapshotRequest_retentionPeriod, *v.RetentionPeriod)
-	}
-	if v.SnapshotName != nil {
-		s.WriteString(schemas.UpdateSnapshotRequest_snapshotName, *v.SnapshotName)
-	}
-}
-
 type UpdateSnapshotOutput struct {
 
 	// The updated snapshot object.
@@ -68,24 +51,16 @@ type UpdateSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSnapshotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSnapshotResponse_snapshot:
-			v.Snapshot = &types.Snapshot{}
-			return v.Snapshot.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshot, schemas.UpdateSnapshotRequest, schemas.UpdateSnapshotResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshot, schemas.UpdateSnapshotRequest, schemas.UpdateSnapshotResponse), output: &UpdateSnapshotOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSnapshot"); err != nil {

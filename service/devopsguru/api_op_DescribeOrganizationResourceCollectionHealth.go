@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,26 +57,6 @@ type DescribeOrganizationResourceCollectionHealthInput struct {
 	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeOrganizationResourceCollectionHealthInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeOrganizationResourceCollectionHealthRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeOrganizationResourceCollectionHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_AccountIds, v.AccountIds)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeOrganizationResourceCollectionHealthRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeOrganizationResourceCollectionHealthRequest_NextToken, *v.NextToken)
-	}
-	if v.OrganizationResourceCollectionType != "" {
-		s.WriteString(schemas.DescribeOrganizationResourceCollectionHealthRequest_OrganizationResourceCollectionType, string(v.OrganizationResourceCollectionType))
-	}
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
 }
 
 type DescribeOrganizationResourceCollectionHealthOutput struct {
@@ -135,32 +113,16 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOrganizationResourceCollectionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeOrganizationResourceCollectionHealthResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeOrganizationResourceCollectionHealthResponse_Account:
-			return deserializeAccountHealths(d, schemas.DescribeOrganizationResourceCollectionHealthResponse_Account, &v.Account)
-		case schemas.DescribeOrganizationResourceCollectionHealthResponse_CloudFormation:
-			return deserializeCloudFormationHealths(d, schemas.DescribeOrganizationResourceCollectionHealthResponse_CloudFormation, &v.CloudFormation)
-		case schemas.DescribeOrganizationResourceCollectionHealthResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeOrganizationResourceCollectionHealthResponse_NextToken, v.NextToken)
-		case schemas.DescribeOrganizationResourceCollectionHealthResponse_Service:
-			return deserializeServiceHealths(d, schemas.DescribeOrganizationResourceCollectionHealthResponse_Service, &v.Service)
-		case schemas.DescribeOrganizationResourceCollectionHealthResponse_Tags:
-			return deserializeTagHealths(d, schemas.DescribeOrganizationResourceCollectionHealthResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeOrganizationResourceCollectionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationResourceCollectionHealth, schemas.DescribeOrganizationResourceCollectionHealthRequest, schemas.DescribeOrganizationResourceCollectionHealthResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationResourceCollectionHealth{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationResourceCollectionHealth, schemas.DescribeOrganizationResourceCollectionHealthRequest, schemas.DescribeOrganizationResourceCollectionHealthResponse), output: &DescribeOrganizationResourceCollectionHealthOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationResourceCollectionHealth{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrganizationResourceCollectionHealth"); err != nil {

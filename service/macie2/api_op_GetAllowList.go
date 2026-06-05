@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetAllowListInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAllowListInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAllowListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAllowListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetAllowListRequest_id, *v.Id)
-	}
 }
 
 type GetAllowListOutput struct {
@@ -94,47 +80,16 @@ type GetAllowListOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAllowListOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAllowListResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAllowListResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetAllowListResponse_arn, v.Arn)
-		case schemas.GetAllowListResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAllowListResponse_createdAt, v.CreatedAt)
-		case schemas.GetAllowListResponse_criteria:
-			v.Criteria = &types.AllowListCriteria{}
-			return v.Criteria.Deserialize(d)
-		case schemas.GetAllowListResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAllowListResponse_description, v.Description)
-		case schemas.GetAllowListResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAllowListResponse_id, v.Id)
-		case schemas.GetAllowListResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAllowListResponse_name, v.Name)
-		case schemas.GetAllowListResponse_status:
-			v.Status = &types.AllowListStatus{}
-			return v.Status.Deserialize(d)
-		case schemas.GetAllowListResponse_tags:
-			return deserializeTagMap(d, schemas.GetAllowListResponse_tags, &v.Tags)
-		case schemas.GetAllowListResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAllowListResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAllowListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAllowList, schemas.GetAllowListRequest, schemas.GetAllowListResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAllowList{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAllowList, schemas.GetAllowListRequest, schemas.GetAllowListResponse), output: &GetAllowListOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAllowList{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAllowList"); err != nil {

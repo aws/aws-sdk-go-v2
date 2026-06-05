@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetWorkloadAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkloadAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWorkloadAccessTokenRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWorkloadAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkloadName != nil {
-		s.WriteString(schemas.GetWorkloadAccessTokenRequest_workloadName, *v.WorkloadName)
-	}
-}
-
 type GetWorkloadAccessTokenOutput struct {
 
 	// An opaque token representing the identity of both the workload and the user.
@@ -64,24 +50,16 @@ type GetWorkloadAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWorkloadAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWorkloadAccessTokenResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWorkloadAccessTokenResponse_workloadAccessToken:
-			v.WorkloadAccessToken = new(string)
-			return d.ReadString(schemas.GetWorkloadAccessTokenResponse_workloadAccessToken, v.WorkloadAccessToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWorkloadAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadAccessToken, schemas.GetWorkloadAccessTokenRequest, schemas.GetWorkloadAccessTokenResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkloadAccessToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkloadAccessToken, schemas.GetWorkloadAccessTokenRequest, schemas.GetWorkloadAccessTokenResponse), output: &GetWorkloadAccessTokenOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkloadAccessToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkloadAccessToken"); err != nil {

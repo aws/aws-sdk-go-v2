@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,29 +59,6 @@ type RequestSenderIdInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RequestSenderIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RequestSenderIdRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RequestSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.RequestSenderIdRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DeletionProtectionEnabled != nil {
-		s.WriteBool(schemas.RequestSenderIdRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
-	}
-	if v.IsoCountryCode != nil {
-		s.WriteString(schemas.RequestSenderIdRequest_IsoCountryCode, *v.IsoCountryCode)
-	}
-	serializeMessageTypeList(s, schemas.RequestSenderIdRequest_MessageTypes, v.MessageTypes)
-	if v.SenderId != nil {
-		s.WriteString(schemas.RequestSenderIdRequest_SenderId, *v.SenderId)
-	}
-	serializeTagList(s, schemas.RequestSenderIdRequest_Tags, v.Tags)
-}
-
 type RequestSenderIdOutput struct {
 
 	// By default this is set to false. When set to true the sender ID can't be
@@ -133,41 +108,16 @@ type RequestSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RequestSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestSenderIdResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestSenderIdResult_DeletionProtectionEnabled:
-			return d.ReadBool(schemas.RequestSenderIdResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
-		case schemas.RequestSenderIdResult_IsoCountryCode:
-			v.IsoCountryCode = new(string)
-			return d.ReadString(schemas.RequestSenderIdResult_IsoCountryCode, v.IsoCountryCode)
-		case schemas.RequestSenderIdResult_MessageTypes:
-			return deserializeMessageTypeList(d, schemas.RequestSenderIdResult_MessageTypes, &v.MessageTypes)
-		case schemas.RequestSenderIdResult_MonthlyLeasingPrice:
-			v.MonthlyLeasingPrice = new(string)
-			return d.ReadString(schemas.RequestSenderIdResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
-		case schemas.RequestSenderIdResult_Registered:
-			return d.ReadBool(schemas.RequestSenderIdResult_Registered, &v.Registered)
-		case schemas.RequestSenderIdResult_SenderId:
-			v.SenderId = new(string)
-			return d.ReadString(schemas.RequestSenderIdResult_SenderId, v.SenderId)
-		case schemas.RequestSenderIdResult_SenderIdArn:
-			v.SenderIdArn = new(string)
-			return d.ReadString(schemas.RequestSenderIdResult_SenderIdArn, v.SenderIdArn)
-		case schemas.RequestSenderIdResult_Tags:
-			return deserializeTagList(d, schemas.RequestSenderIdResult_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRequestSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestSenderId, schemas.RequestSenderIdRequest, schemas.RequestSenderIdResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRequestSenderId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestSenderId, schemas.RequestSenderIdRequest, schemas.RequestSenderIdResult), output: &RequestSenderIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRequestSenderId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestSenderId"); err != nil {

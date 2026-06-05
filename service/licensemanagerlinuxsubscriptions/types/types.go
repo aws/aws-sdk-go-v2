@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -22,41 +20,6 @@ type Filter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Filter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Filter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.Filter_Name, *v.Name)
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.Filter_Operator, string(v.Operator))
-	}
-	serializeStringList(s, schemas.Filter_Values, v.Values)
-}
-func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Filter_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Filter_Name, v.Name)
-		case schemas.Filter_Operator:
-			var ev string
-			if err := d.ReadString(schemas.Filter_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = Operator(ev)
-			return nil
-		case schemas.Filter_Values:
-			return deserializeStringList(d, schemas.Filter_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Details discovered information about a running instance using Linux
@@ -122,109 +85,6 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Instance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Instance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountID != nil {
-		s.WriteString(schemas.Instance_AccountID, *v.AccountID)
-	}
-	if v.AmiId != nil {
-		s.WriteString(schemas.Instance_AmiId, *v.AmiId)
-	}
-	if v.DualSubscription != nil {
-		s.WriteString(schemas.Instance_DualSubscription, *v.DualSubscription)
-	}
-	if v.InstanceID != nil {
-		s.WriteString(schemas.Instance_InstanceID, *v.InstanceID)
-	}
-	if v.InstanceType != nil {
-		s.WriteString(schemas.Instance_InstanceType, *v.InstanceType)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteString(schemas.Instance_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.OsVersion != nil {
-		s.WriteString(schemas.Instance_OsVersion, *v.OsVersion)
-	}
-	serializeProductCodeList(s, schemas.Instance_ProductCode, v.ProductCode)
-	if v.Region != nil {
-		s.WriteString(schemas.Instance_Region, *v.Region)
-	}
-	if v.RegisteredWithSubscriptionProvider != nil {
-		s.WriteString(schemas.Instance_RegisteredWithSubscriptionProvider, *v.RegisteredWithSubscriptionProvider)
-	}
-	if v.Status != nil {
-		s.WriteString(schemas.Instance_Status, *v.Status)
-	}
-	if v.SubscriptionName != nil {
-		s.WriteString(schemas.Instance_SubscriptionName, *v.SubscriptionName)
-	}
-	if v.SubscriptionProviderCreateTime != nil {
-		s.WriteString(schemas.Instance_SubscriptionProviderCreateTime, *v.SubscriptionProviderCreateTime)
-	}
-	if v.SubscriptionProviderUpdateTime != nil {
-		s.WriteString(schemas.Instance_SubscriptionProviderUpdateTime, *v.SubscriptionProviderUpdateTime)
-	}
-	if v.UsageOperation != nil {
-		s.WriteString(schemas.Instance_UsageOperation, *v.UsageOperation)
-	}
-}
-func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Instance_AccountID:
-			v.AccountID = new(string)
-			return d.ReadString(schemas.Instance_AccountID, v.AccountID)
-		case schemas.Instance_AmiId:
-			v.AmiId = new(string)
-			return d.ReadString(schemas.Instance_AmiId, v.AmiId)
-		case schemas.Instance_DualSubscription:
-			v.DualSubscription = new(string)
-			return d.ReadString(schemas.Instance_DualSubscription, v.DualSubscription)
-		case schemas.Instance_InstanceID:
-			v.InstanceID = new(string)
-			return d.ReadString(schemas.Instance_InstanceID, v.InstanceID)
-		case schemas.Instance_InstanceType:
-			v.InstanceType = new(string)
-			return d.ReadString(schemas.Instance_InstanceType, v.InstanceType)
-		case schemas.Instance_LastUpdatedTime:
-			v.LastUpdatedTime = new(string)
-			return d.ReadString(schemas.Instance_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.Instance_OsVersion:
-			v.OsVersion = new(string)
-			return d.ReadString(schemas.Instance_OsVersion, v.OsVersion)
-		case schemas.Instance_ProductCode:
-			return deserializeProductCodeList(d, schemas.Instance_ProductCode, &v.ProductCode)
-		case schemas.Instance_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.Instance_Region, v.Region)
-		case schemas.Instance_RegisteredWithSubscriptionProvider:
-			v.RegisteredWithSubscriptionProvider = new(string)
-			return d.ReadString(schemas.Instance_RegisteredWithSubscriptionProvider, v.RegisteredWithSubscriptionProvider)
-		case schemas.Instance_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.Instance_Status, v.Status)
-		case schemas.Instance_SubscriptionName:
-			v.SubscriptionName = new(string)
-			return d.ReadString(schemas.Instance_SubscriptionName, v.SubscriptionName)
-		case schemas.Instance_SubscriptionProviderCreateTime:
-			v.SubscriptionProviderCreateTime = new(string)
-			return d.ReadString(schemas.Instance_SubscriptionProviderCreateTime, v.SubscriptionProviderCreateTime)
-		case schemas.Instance_SubscriptionProviderUpdateTime:
-			v.SubscriptionProviderUpdateTime = new(string)
-			return d.ReadString(schemas.Instance_SubscriptionProviderUpdateTime, v.SubscriptionProviderUpdateTime)
-		case schemas.Instance_UsageOperation:
-			v.UsageOperation = new(string)
-			return d.ReadString(schemas.Instance_UsageOperation, v.UsageOperation)
-		}
-		return nil
-	})
-}
-
 // Lists the settings defined for discovering Linux subscriptions.
 type LinuxSubscriptionsDiscoverySettings struct {
 
@@ -240,35 +100,6 @@ type LinuxSubscriptionsDiscoverySettings struct {
 	SourceRegions []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LinuxSubscriptionsDiscoverySettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinuxSubscriptionsDiscoverySettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinuxSubscriptionsDiscoverySettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OrganizationIntegration != "" {
-		s.WriteString(schemas.LinuxSubscriptionsDiscoverySettings_OrganizationIntegration, string(v.OrganizationIntegration))
-	}
-	serializeStringList(s, schemas.LinuxSubscriptionsDiscoverySettings_SourceRegions, v.SourceRegions)
-}
-func (v *LinuxSubscriptionsDiscoverySettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinuxSubscriptionsDiscoverySettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinuxSubscriptionsDiscoverySettings_OrganizationIntegration:
-			var ev string
-			if err := d.ReadString(schemas.LinuxSubscriptionsDiscoverySettings_OrganizationIntegration, &ev); err != nil {
-				return err
-			}
-			v.OrganizationIntegration = OrganizationIntegration(ev)
-			return nil
-		case schemas.LinuxSubscriptionsDiscoverySettings_SourceRegions:
-			return deserializeStringList(d, schemas.LinuxSubscriptionsDiscoverySettings_SourceRegions, &v.SourceRegions)
-		}
-		return nil
-	})
 }
 
 // A third-party provider for operating system (OS) platform software and license
@@ -307,66 +138,6 @@ type RegisteredSubscriptionProvider struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisteredSubscriptionProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisteredSubscriptionProvider)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisteredSubscriptionProvider) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastSuccessfulDataRetrievalTime != nil {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime, *v.LastSuccessfulDataRetrievalTime)
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_SecretArn, *v.SecretArn)
-	}
-	if v.SubscriptionProviderArn != nil {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderArn, *v.SubscriptionProviderArn)
-	}
-	if v.SubscriptionProviderSource != "" {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderSource, string(v.SubscriptionProviderSource))
-	}
-	if v.SubscriptionProviderStatus != "" {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatus, string(v.SubscriptionProviderStatus))
-	}
-	if v.SubscriptionProviderStatusMessage != nil {
-		s.WriteString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage, *v.SubscriptionProviderStatusMessage)
-	}
-}
-func (v *RegisteredSubscriptionProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisteredSubscriptionProvider, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime:
-			v.LastSuccessfulDataRetrievalTime = new(string)
-			return d.ReadString(schemas.RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime, v.LastSuccessfulDataRetrievalTime)
-		case schemas.RegisteredSubscriptionProvider_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.RegisteredSubscriptionProvider_SecretArn, v.SecretArn)
-		case schemas.RegisteredSubscriptionProvider_SubscriptionProviderArn:
-			v.SubscriptionProviderArn = new(string)
-			return d.ReadString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderArn, v.SubscriptionProviderArn)
-		case schemas.RegisteredSubscriptionProvider_SubscriptionProviderSource:
-			var ev string
-			if err := d.ReadString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderSource, &ev); err != nil {
-				return err
-			}
-			v.SubscriptionProviderSource = SubscriptionProviderSource(ev)
-			return nil
-		case schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatus:
-			var ev string
-			if err := d.ReadString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatus, &ev); err != nil {
-				return err
-			}
-			v.SubscriptionProviderStatus = SubscriptionProviderStatus(ev)
-			return nil
-		case schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage:
-			v.SubscriptionProviderStatusMessage = new(string)
-			return d.ReadString(schemas.RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage, v.SubscriptionProviderStatusMessage)
-		}
-		return nil
-	})
-}
-
 // An object which details a discovered Linux subscription.
 type Subscription struct {
 
@@ -383,40 +154,6 @@ type Subscription struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Subscription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceCount != nil {
-		s.WriteInt64(schemas.Subscription_InstanceCount, *v.InstanceCount)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Subscription_Name, *v.Name)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.Subscription_Type, *v.Type)
-	}
-}
-func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Subscription_InstanceCount:
-			v.InstanceCount = new(int64)
-			return d.ReadInt64(schemas.Subscription_InstanceCount, v.InstanceCount)
-		case schemas.Subscription_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Subscription_Name, v.Name)
-		case schemas.Subscription_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Subscription_Type, v.Type)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

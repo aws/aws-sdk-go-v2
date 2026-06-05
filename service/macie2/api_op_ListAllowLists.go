@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListAllowListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAllowListsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAllowListsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAllowListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAllowListsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAllowListsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAllowListsOutput struct {
 
 	// An array of objects, one for each allow list.
@@ -71,26 +54,16 @@ type ListAllowListsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAllowListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAllowListsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAllowListsResponse_allowLists:
-			return deserialize__listOfAllowListSummary(d, schemas.ListAllowListsResponse_allowLists, &v.AllowLists)
-		case schemas.ListAllowListsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAllowListsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAllowListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowLists, schemas.ListAllowListsRequest, schemas.ListAllowListsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAllowLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowLists, schemas.ListAllowListsRequest, schemas.ListAllowListsResponse), output: &ListAllowListsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAllowLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAllowLists"); err != nil {

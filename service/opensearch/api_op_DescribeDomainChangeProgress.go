@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type DescribeDomainChangeProgressInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDomainChangeProgressInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDomainChangeProgressRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDomainChangeProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeId != nil {
-		s.WriteString(schemas.DescribeDomainChangeProgressRequest_ChangeId, *v.ChangeId)
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.DescribeDomainChangeProgressRequest_DomainName, *v.DomainName)
-	}
-}
-
 // The result of a DescribeDomainChangeProgress request. Contains progress
 // information for the requested domain change.
 type DescribeDomainChangeProgressOutput struct {
@@ -77,24 +60,16 @@ type DescribeDomainChangeProgressOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDomainChangeProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDomainChangeProgressResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDomainChangeProgressResponse_ChangeProgressStatus:
-			v.ChangeProgressStatus = &types.ChangeProgressStatusDetails{}
-			return v.ChangeProgressStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDomainChangeProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainChangeProgress, schemas.DescribeDomainChangeProgressRequest, schemas.DescribeDomainChangeProgressResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainChangeProgress{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainChangeProgress, schemas.DescribeDomainChangeProgressRequest, schemas.DescribeDomainChangeProgressResponse), output: &DescribeDomainChangeProgressOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainChangeProgress{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDomainChangeProgress"); err != nil {

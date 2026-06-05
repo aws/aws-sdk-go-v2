@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,25 +54,6 @@ type ListPoolOriginationIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPoolOriginationIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPoolOriginationIdentitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPoolOriginationIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePoolOriginationIdentitiesFilterList(s, schemas.ListPoolOriginationIdentitiesRequest_Filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPoolOriginationIdentitiesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPoolOriginationIdentitiesRequest_NextToken, *v.NextToken)
-	}
-	if v.PoolId != nil {
-		s.WriteString(schemas.ListPoolOriginationIdentitiesRequest_PoolId, *v.PoolId)
-	}
-}
-
 type ListPoolOriginationIdentitiesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -96,32 +75,16 @@ type ListPoolOriginationIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPoolOriginationIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPoolOriginationIdentitiesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPoolOriginationIdentitiesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_NextToken, v.NextToken)
-		case schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities:
-			return deserializeOriginationIdentityMetadataList(d, schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities, &v.OriginationIdentities)
-		case schemas.ListPoolOriginationIdentitiesResult_PoolArn:
-			v.PoolArn = new(string)
-			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_PoolArn, v.PoolArn)
-		case schemas.ListPoolOriginationIdentitiesResult_PoolId:
-			v.PoolId = new(string)
-			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_PoolId, v.PoolId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPoolOriginationIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoolOriginationIdentities, schemas.ListPoolOriginationIdentitiesRequest, schemas.ListPoolOriginationIdentitiesResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPoolOriginationIdentities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoolOriginationIdentities, schemas.ListPoolOriginationIdentitiesRequest, schemas.ListPoolOriginationIdentitiesResult), output: &ListPoolOriginationIdentitiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPoolOriginationIdentities{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPoolOriginationIdentities"); err != nil {

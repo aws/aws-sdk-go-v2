@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type RejectInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectInboundConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectInboundConnectionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectInboundConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionId != nil {
-		s.WriteString(schemas.RejectInboundConnectionRequest_ConnectionId, *v.ConnectionId)
-	}
-}
-
 // Represents the output of a RejectInboundConnection operation.
 type RejectInboundConnectionOutput struct {
 
@@ -65,24 +51,16 @@ type RejectInboundConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectInboundConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectInboundConnectionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectInboundConnectionResponse_Connection:
-			v.Connection = &types.InboundConnection{}
-			return v.Connection.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRejectInboundConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectInboundConnection, schemas.RejectInboundConnectionRequest, schemas.RejectInboundConnectionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectInboundConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectInboundConnection, schemas.RejectInboundConnectionRequest, schemas.RejectInboundConnectionResponse), output: &RejectInboundConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectInboundConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectInboundConnection"); err != nil {

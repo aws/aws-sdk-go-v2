@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,18 +45,6 @@ type DeleteDefaultMessageTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDefaultMessageTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDefaultMessageTypeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDefaultMessageTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationSetName != nil {
-		s.WriteString(schemas.DeleteDefaultMessageTypeRequest_ConfigurationSetName, *v.ConfigurationSetName)
-	}
-}
-
 type DeleteDefaultMessageTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.
@@ -76,34 +62,16 @@ type DeleteDefaultMessageTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDefaultMessageTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDefaultMessageTypeResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDefaultMessageTypeResult_ConfigurationSetArn:
-			v.ConfigurationSetArn = new(string)
-			return d.ReadString(schemas.DeleteDefaultMessageTypeResult_ConfigurationSetArn, v.ConfigurationSetArn)
-		case schemas.DeleteDefaultMessageTypeResult_ConfigurationSetName:
-			v.ConfigurationSetName = new(string)
-			return d.ReadString(schemas.DeleteDefaultMessageTypeResult_ConfigurationSetName, v.ConfigurationSetName)
-		case schemas.DeleteDefaultMessageTypeResult_MessageType:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDefaultMessageTypeResult_MessageType, &ev); err != nil {
-				return err
-			}
-			v.MessageType = types.MessageType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDefaultMessageTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultMessageType, schemas.DeleteDefaultMessageTypeRequest, schemas.DeleteDefaultMessageTypeResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDefaultMessageType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDefaultMessageType, schemas.DeleteDefaultMessageTypeRequest, schemas.DeleteDefaultMessageTypeResult), output: &DeleteDefaultMessageTypeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDefaultMessageType{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDefaultMessageType"); err != nil {

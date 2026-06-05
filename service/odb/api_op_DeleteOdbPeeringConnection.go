@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type DeleteOdbPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOdbPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteOdbPeeringConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OdbPeeringConnectionId != nil {
-		s.WriteString(schemas.DeleteOdbPeeringConnectionInput_odbPeeringConnectionId, *v.OdbPeeringConnectionId)
-	}
-}
-
 type DeleteOdbPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,21 +46,16 @@ type DeleteOdbPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOdbPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteOdbPeeringConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteOdbPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOdbPeeringConnection, schemas.DeleteOdbPeeringConnectionInput, schemas.DeleteOdbPeeringConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOdbPeeringConnection, schemas.DeleteOdbPeeringConnectionInput, schemas.DeleteOdbPeeringConnectionOutput), output: &DeleteOdbPeeringConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOdbPeeringConnection"); err != nil {

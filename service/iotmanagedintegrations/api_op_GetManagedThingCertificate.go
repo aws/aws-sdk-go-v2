@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetManagedThingCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCertificateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedThingCertificateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedThingCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetManagedThingCertificateRequest_Identifier, *v.Identifier)
-	}
-}
-
 type GetManagedThingCertificateOutput struct {
 
 	// The PEM-encoded certificate for the managed thing.
@@ -64,27 +50,16 @@ type GetManagedThingCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedThingCertificateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedThingCertificateResponse_CertificatePem:
-			v.CertificatePem = new(string)
-			return d.ReadString(schemas.GetManagedThingCertificateResponse_CertificatePem, v.CertificatePem)
-		case schemas.GetManagedThingCertificateResponse_ManagedThingId:
-			v.ManagedThingId = new(string)
-			return d.ReadString(schemas.GetManagedThingCertificateResponse_ManagedThingId, v.ManagedThingId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedThingCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCertificate, schemas.GetManagedThingCertificateRequest, schemas.GetManagedThingCertificateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThingCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThingCertificate, schemas.GetManagedThingCertificateRequest, schemas.GetManagedThingCertificateResponse), output: &GetManagedThingCertificateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThingCertificate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedThingCertificate"); err != nil {

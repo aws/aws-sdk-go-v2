@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,21 +44,6 @@ type GetDomainMaintenanceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDomainMaintenanceStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDomainMaintenanceStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDomainMaintenanceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.GetDomainMaintenanceStatusRequest_DomainName, *v.DomainName)
-	}
-	if v.MaintenanceId != nil {
-		s.WriteString(schemas.GetDomainMaintenanceStatusRequest_MaintenanceId, *v.MaintenanceId)
-	}
-}
-
 // The result of a GetDomainMaintenanceStatus request that information about the
 // requested action.
 type GetDomainMaintenanceStatusOutput struct {
@@ -89,47 +72,16 @@ type GetDomainMaintenanceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDomainMaintenanceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDomainMaintenanceStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDomainMaintenanceStatusResponse_Action:
-			var ev string
-			if err := d.ReadString(schemas.GetDomainMaintenanceStatusResponse_Action, &ev); err != nil {
-				return err
-			}
-			v.Action = types.MaintenanceType(ev)
-			return nil
-		case schemas.GetDomainMaintenanceStatusResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDomainMaintenanceStatusResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetDomainMaintenanceStatusResponse_NodeId:
-			v.NodeId = new(string)
-			return d.ReadString(schemas.GetDomainMaintenanceStatusResponse_NodeId, v.NodeId)
-		case schemas.GetDomainMaintenanceStatusResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetDomainMaintenanceStatusResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.MaintenanceStatus(ev)
-			return nil
-		case schemas.GetDomainMaintenanceStatusResponse_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.GetDomainMaintenanceStatusResponse_StatusMessage, v.StatusMessage)
-		case schemas.GetDomainMaintenanceStatusResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDomainMaintenanceStatusResponse_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDomainMaintenanceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainMaintenanceStatus, schemas.GetDomainMaintenanceStatusRequest, schemas.GetDomainMaintenanceStatusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainMaintenanceStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainMaintenanceStatus, schemas.GetDomainMaintenanceStatusRequest, schemas.GetDomainMaintenanceStatusResponse), output: &GetDomainMaintenanceStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainMaintenanceStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainMaintenanceStatus"); err != nil {

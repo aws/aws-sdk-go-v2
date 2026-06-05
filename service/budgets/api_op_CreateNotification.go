@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,27 +57,6 @@ type CreateNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNotificationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateNotificationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.CreateNotificationRequest_AccountId, *v.AccountId)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.CreateNotificationRequest_BudgetName, *v.BudgetName)
-	}
-	if v.Notification != nil {
-		s.WriteStruct(schemas.CreateNotificationRequest_Notification)
-		v.Notification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSubscribers(s, schemas.CreateNotificationRequest_Subscribers, v.Subscribers)
-}
-
 // Response of CreateNotification
 type CreateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -88,21 +65,16 @@ type CreateNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateNotificationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotification, schemas.CreateNotificationRequest, schemas.CreateNotificationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotification{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotification, schemas.CreateNotificationRequest, schemas.CreateNotificationResponse), output: &CreateNotificationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNotification{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNotification"); err != nil {

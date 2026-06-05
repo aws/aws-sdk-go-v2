@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -98,49 +96,6 @@ type UpdateWebExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWebExperienceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateWebExperienceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_applicationId, *v.ApplicationId)
-	}
-	serializeWebExperienceAuthConfiguration(s, schemas.UpdateWebExperienceRequest_authenticationConfiguration, v.AuthenticationConfiguration)
-	if v.BrowserExtensionConfiguration != nil {
-		s.WriteStruct(schemas.UpdateWebExperienceRequest_browserExtensionConfiguration)
-		v.BrowserExtensionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CustomizationConfiguration != nil {
-		s.WriteStruct(schemas.UpdateWebExperienceRequest_customizationConfiguration)
-		v.CustomizationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIdentityProviderConfiguration(s, schemas.UpdateWebExperienceRequest_identityProviderConfiguration, v.IdentityProviderConfiguration)
-	serializeWebExperienceOrigins(s, schemas.UpdateWebExperienceRequest_origins, v.Origins)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_roleArn, *v.RoleArn)
-	}
-	if v.SamplePromptsControlMode != "" {
-		s.WriteString(schemas.UpdateWebExperienceRequest_samplePromptsControlMode, string(v.SamplePromptsControlMode))
-	}
-	if v.Subtitle != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_subtitle, *v.Subtitle)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_title, *v.Title)
-	}
-	if v.WebExperienceId != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_webExperienceId, *v.WebExperienceId)
-	}
-	if v.WelcomeMessage != nil {
-		s.WriteString(schemas.UpdateWebExperienceRequest_welcomeMessage, *v.WelcomeMessage)
-	}
-}
-
 type UpdateWebExperienceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -148,21 +103,16 @@ type UpdateWebExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWebExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateWebExperienceResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateWebExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebExperience, schemas.UpdateWebExperienceRequest, schemas.UpdateWebExperienceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWebExperience{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebExperience, schemas.UpdateWebExperienceRequest, schemas.UpdateWebExperienceResponse), output: &UpdateWebExperienceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWebExperience{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWebExperience"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -101,49 +99,6 @@ type CreateAIPromptInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIPromptInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAIPromptRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAIPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiFormat != "" {
-		s.WriteString(schemas.CreateAIPromptRequest_apiFormat, string(v.ApiFormat))
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.CreateAIPromptRequest_assistantId, *v.AssistantId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAIPromptRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAIPromptRequest_description, *v.Description)
-	}
-	if v.InferenceConfiguration != nil {
-		s.WriteStruct(schemas.CreateAIPromptRequest_inferenceConfiguration)
-		v.InferenceConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ModelId != nil {
-		s.WriteString(schemas.CreateAIPromptRequest_modelId, *v.ModelId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAIPromptRequest_name, *v.Name)
-	}
-	serializeTags(s, schemas.CreateAIPromptRequest_tags, v.Tags)
-	serializeAIPromptTemplateConfiguration(s, schemas.CreateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
-	if v.TemplateType != "" {
-		s.WriteString(schemas.CreateAIPromptRequest_templateType, string(v.TemplateType))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.CreateAIPromptRequest_type, string(v.Type))
-	}
-	if v.VisibilityStatus != "" {
-		s.WriteString(schemas.CreateAIPromptRequest_visibilityStatus, string(v.VisibilityStatus))
-	}
-}
-
 type CreateAIPromptOutput struct {
 
 	// The data of the AI Prompt.
@@ -155,24 +110,16 @@ type CreateAIPromptOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIPromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAIPromptResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAIPromptResponse_aiPrompt:
-			v.AiPrompt = &types.AIPromptData{}
-			return v.AiPrompt.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAIPromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIPrompt, schemas.CreateAIPromptRequest, schemas.CreateAIPromptResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAIPrompt{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIPrompt, schemas.CreateAIPromptRequest, schemas.CreateAIPromptResponse), output: &CreateAIPromptOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAIPrompt{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAIPrompt"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,27 +43,6 @@ type DeleteDataCellsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataCellsFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataCellsFilterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataCellsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.DeleteDataCellsFilterRequest_DatabaseName, *v.DatabaseName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteDataCellsFilterRequest_Name, *v.Name)
-	}
-	if v.TableCatalogId != nil {
-		s.WriteString(schemas.DeleteDataCellsFilterRequest_TableCatalogId, *v.TableCatalogId)
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.DeleteDataCellsFilterRequest_TableName, *v.TableName)
-	}
-}
-
 type DeleteDataCellsFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,21 +50,16 @@ type DeleteDataCellsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataCellsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataCellsFilterResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataCellsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataCellsFilter, schemas.DeleteDataCellsFilterRequest, schemas.DeleteDataCellsFilterResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataCellsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataCellsFilter, schemas.DeleteDataCellsFilterRequest, schemas.DeleteDataCellsFilterResponse), output: &DeleteDataCellsFilterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataCellsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataCellsFilter"); err != nil {

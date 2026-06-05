@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type DescribeJobRunInput struct {
 	RunId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeJobRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeJobRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeJobRunRequest_Name, *v.Name)
-	}
-	if v.RunId != nil {
-		s.WriteString(schemas.DescribeJobRunRequest_RunId, *v.RunId)
-	}
 }
 
 type DescribeJobRunOutput struct {
@@ -135,80 +118,16 @@ type DescribeJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeJobRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeJobRunResponse_Attempt:
-			return d.ReadInt32(schemas.DescribeJobRunResponse_Attempt, &v.Attempt)
-		case schemas.DescribeJobRunResponse_CompletedOn:
-			v.CompletedOn = new(time.Time)
-			return d.ReadTime(schemas.DescribeJobRunResponse_CompletedOn, v.CompletedOn)
-		case schemas.DescribeJobRunResponse_DataCatalogOutputs:
-			return deserializeDataCatalogOutputList(d, schemas.DescribeJobRunResponse_DataCatalogOutputs, &v.DataCatalogOutputs)
-		case schemas.DescribeJobRunResponse_DatabaseOutputs:
-			return deserializeDatabaseOutputList(d, schemas.DescribeJobRunResponse_DatabaseOutputs, &v.DatabaseOutputs)
-		case schemas.DescribeJobRunResponse_DatasetName:
-			v.DatasetName = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_DatasetName, v.DatasetName)
-		case schemas.DescribeJobRunResponse_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_ErrorMessage, v.ErrorMessage)
-		case schemas.DescribeJobRunResponse_ExecutionTime:
-			return d.ReadInt32(schemas.DescribeJobRunResponse_ExecutionTime, &v.ExecutionTime)
-		case schemas.DescribeJobRunResponse_JobName:
-			v.JobName = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_JobName, v.JobName)
-		case schemas.DescribeJobRunResponse_JobSample:
-			v.JobSample = &types.JobSample{}
-			return v.JobSample.Deserialize(d)
-		case schemas.DescribeJobRunResponse_LogGroupName:
-			v.LogGroupName = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_LogGroupName, v.LogGroupName)
-		case schemas.DescribeJobRunResponse_LogSubscription:
-			var ev string
-			if err := d.ReadString(schemas.DescribeJobRunResponse_LogSubscription, &ev); err != nil {
-				return err
-			}
-			v.LogSubscription = types.LogSubscription(ev)
-			return nil
-		case schemas.DescribeJobRunResponse_Outputs:
-			return deserializeOutputList(d, schemas.DescribeJobRunResponse_Outputs, &v.Outputs)
-		case schemas.DescribeJobRunResponse_ProfileConfiguration:
-			v.ProfileConfiguration = &types.ProfileConfiguration{}
-			return v.ProfileConfiguration.Deserialize(d)
-		case schemas.DescribeJobRunResponse_RecipeReference:
-			v.RecipeReference = &types.RecipeReference{}
-			return v.RecipeReference.Deserialize(d)
-		case schemas.DescribeJobRunResponse_RunId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_RunId, v.RunId)
-		case schemas.DescribeJobRunResponse_StartedBy:
-			v.StartedBy = new(string)
-			return d.ReadString(schemas.DescribeJobRunResponse_StartedBy, v.StartedBy)
-		case schemas.DescribeJobRunResponse_StartedOn:
-			v.StartedOn = new(time.Time)
-			return d.ReadTime(schemas.DescribeJobRunResponse_StartedOn, v.StartedOn)
-		case schemas.DescribeJobRunResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.DescribeJobRunResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.JobRunState(ev)
-			return nil
-		case schemas.DescribeJobRunResponse_ValidationConfigurations:
-			return deserializeValidationConfigurationList(d, schemas.DescribeJobRunResponse_ValidationConfigurations, &v.ValidationConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobRun, schemas.DescribeJobRunRequest, schemas.DescribeJobRunResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobRun, schemas.DescribeJobRunRequest, schemas.DescribeJobRunResponse), output: &DescribeJobRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeJobRun"); err != nil {

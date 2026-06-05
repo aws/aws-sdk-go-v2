@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -118,65 +116,6 @@ type CreateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateUserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateUserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.BrandingConfigurationInput != nil {
-		s.WriteStruct(schemas.CreateUserSettingsRequest_brandingConfigurationInput)
-		v.BrandingConfigurationInput.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateUserSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.CookieSynchronizationConfiguration != nil {
-		s.WriteStruct(schemas.CreateUserSettingsRequest_cookieSynchronizationConfiguration)
-		v.CookieSynchronizationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CopyAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_copyAllowed, string(v.CopyAllowed))
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreateUserSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	if v.DeepLinkAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_deepLinkAllowed, string(v.DeepLinkAllowed))
-	}
-	if v.DisconnectTimeoutInMinutes != nil {
-		s.WriteInt32(schemas.CreateUserSettingsRequest_disconnectTimeoutInMinutes, *v.DisconnectTimeoutInMinutes)
-	}
-	if v.DownloadAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_downloadAllowed, string(v.DownloadAllowed))
-	}
-	if v.IdleDisconnectTimeoutInMinutes != nil {
-		s.WriteInt32(schemas.CreateUserSettingsRequest_idleDisconnectTimeoutInMinutes, *v.IdleDisconnectTimeoutInMinutes)
-	}
-	if v.PasteAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_pasteAllowed, string(v.PasteAllowed))
-	}
-	if v.PrintAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_printAllowed, string(v.PrintAllowed))
-	}
-	serializeTagList(s, schemas.CreateUserSettingsRequest_tags, v.Tags)
-	if v.ToolbarConfiguration != nil {
-		s.WriteStruct(schemas.CreateUserSettingsRequest_toolbarConfiguration)
-		v.ToolbarConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UploadAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_uploadAllowed, string(v.UploadAllowed))
-	}
-	if v.WebAuthnAllowed != "" {
-		s.WriteString(schemas.CreateUserSettingsRequest_webAuthnAllowed, string(v.WebAuthnAllowed))
-	}
-}
-
 type CreateUserSettingsOutput struct {
 
 	// The ARN of the user settings.
@@ -190,24 +129,16 @@ type CreateUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateUserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateUserSettingsResponse_userSettingsArn:
-			v.UserSettingsArn = new(string)
-			return d.ReadString(schemas.CreateUserSettingsResponse_userSettingsArn, v.UserSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserSettings, schemas.CreateUserSettingsRequest, schemas.CreateUserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserSettings, schemas.CreateUserSettingsRequest, schemas.CreateUserSettingsResponse), output: &CreateUserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserSettings"); err != nil {

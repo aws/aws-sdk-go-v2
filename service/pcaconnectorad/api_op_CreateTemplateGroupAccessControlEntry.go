@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,32 +62,6 @@ type CreateTemplateGroupAccessControlEntryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTemplateGroupAccessControlEntryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTemplateGroupAccessControlEntryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTemplateGroupAccessControlEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessRights != nil {
-		s.WriteStruct(schemas.CreateTemplateGroupAccessControlEntryRequest_AccessRights)
-		v.AccessRights.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateTemplateGroupAccessControlEntryRequest_ClientToken, *v.ClientToken)
-	}
-	if v.GroupDisplayName != nil {
-		s.WriteString(schemas.CreateTemplateGroupAccessControlEntryRequest_GroupDisplayName, *v.GroupDisplayName)
-	}
-	if v.GroupSecurityIdentifier != nil {
-		s.WriteString(schemas.CreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier, *v.GroupSecurityIdentifier)
-	}
-	if v.TemplateArn != nil {
-		s.WriteString(schemas.CreateTemplateGroupAccessControlEntryRequest_TemplateArn, *v.TemplateArn)
-	}
-}
-
 type CreateTemplateGroupAccessControlEntryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -97,29 +69,16 @@ type CreateTemplateGroupAccessControlEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTemplateGroupAccessControlEntryOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTemplateGroupAccessControlEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *CreateTemplateGroupAccessControlEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateTemplateGroupAccessControlEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateGroupAccessControlEntry, schemas.CreateTemplateGroupAccessControlEntryRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplateGroupAccessControlEntry{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateGroupAccessControlEntry, schemas.CreateTemplateGroupAccessControlEntryRequest, nil), output: &CreateTemplateGroupAccessControlEntryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTemplateGroupAccessControlEntry{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTemplateGroupAccessControlEntry"); err != nil {

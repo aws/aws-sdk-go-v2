@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectorNamePrefix != nil {
-		s.WriteString(schemas.ListConnectorsRequest_connectorNamePrefix, *v.ConnectorNamePrefix)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConnectorsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectorsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListConnectorsOutput struct {
 
 	// An array of connector descriptions.
@@ -81,38 +61,16 @@ type ListConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfConnectorSummary(s, schemas.ListConnectorsResponse_connectors, v.Connectors)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectorsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConnectorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConnectorsResponse_connectors:
-			return deserialize__listOfConnectorSummary(d, schemas.ListConnectorsResponse_connectors, &v.Connectors)
-		case schemas.ListConnectorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConnectorsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectors, schemas.ListConnectorsRequest, schemas.ListConnectorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectors, schemas.ListConnectorsRequest, schemas.ListConnectorsResponse), output: &ListConnectorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectors"); err != nil {

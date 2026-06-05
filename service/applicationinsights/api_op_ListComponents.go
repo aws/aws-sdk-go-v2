@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,27 +47,6 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListComponentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ListComponentsRequest_AccountId, *v.AccountId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListComponentsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListComponentsRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceGroupName != nil {
-		s.WriteString(schemas.ListComponentsRequest_ResourceGroupName, *v.ResourceGroupName)
-	}
-}
-
 type ListComponentsOutput struct {
 
 	// The list of application components.
@@ -84,26 +61,16 @@ type ListComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListComponentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListComponentsResponse_ApplicationComponentList:
-			return deserializeApplicationComponentList(d, schemas.ListComponentsResponse_ApplicationComponentList, &v.ApplicationComponentList)
-		case schemas.ListComponentsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListComponentsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComponents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse), output: &ListComponentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListComponents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponents"); err != nil {

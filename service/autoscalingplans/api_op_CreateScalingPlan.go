@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,24 +57,6 @@ type CreateScalingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScalingPlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateScalingPlanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateScalingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationSource != nil {
-		s.WriteStruct(schemas.CreateScalingPlanRequest_ApplicationSource)
-		v.ApplicationSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeScalingInstructions(s, schemas.CreateScalingPlanRequest_ScalingInstructions, v.ScalingInstructions)
-	if v.ScalingPlanName != nil {
-		s.WriteString(schemas.CreateScalingPlanRequest_ScalingPlanName, *v.ScalingPlanName)
-	}
-}
-
 type CreateScalingPlanOutput struct {
 
 	// The version number of the scaling plan. This value is always 1 . Currently, you
@@ -91,24 +71,16 @@ type CreateScalingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateScalingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateScalingPlanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateScalingPlanResponse_ScalingPlanVersion:
-			v.ScalingPlanVersion = new(int64)
-			return d.ReadInt64(schemas.CreateScalingPlanResponse_ScalingPlanVersion, v.ScalingPlanVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScalingPlan, schemas.CreateScalingPlanRequest, schemas.CreateScalingPlanResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateScalingPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScalingPlan, schemas.CreateScalingPlanRequest, schemas.CreateScalingPlanResponse), output: &CreateScalingPlanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateScalingPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScalingPlan"); err != nil {

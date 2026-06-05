@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,19 +46,6 @@ type DescribeLoadBalancerPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeLoadBalancerPoliciesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeLoadBalancerPoliciesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeLoadBalancerPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.DescribeLoadBalancerPoliciesInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-	serializePolicyNames(s, schemas.DescribeLoadBalancerPoliciesInput_PolicyNames, v.PolicyNames)
-}
-
 // Contains the output of DescribeLoadBalancerPolicies.
 type DescribeLoadBalancerPoliciesOutput struct {
 
@@ -73,23 +58,16 @@ type DescribeLoadBalancerPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeLoadBalancerPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeLoadBalancerPoliciesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeLoadBalancerPoliciesOutput_PolicyDescriptions:
-			return deserializePolicyDescriptions(d, schemas.DescribeLoadBalancerPoliciesOutput_PolicyDescriptions, &v.PolicyDescriptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeLoadBalancerPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerPolicies, schemas.DescribeLoadBalancerPoliciesInput, schemas.DescribeLoadBalancerPoliciesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoadBalancerPolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerPolicies, schemas.DescribeLoadBalancerPoliciesInput, schemas.DescribeLoadBalancerPoliciesOutput), output: &DescribeLoadBalancerPoliciesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLoadBalancerPolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLoadBalancerPolicies"); err != nil {

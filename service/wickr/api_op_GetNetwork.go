@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetNetworkInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetNetworkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetNetworkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetNetworkRequest_networkId, *v.NetworkId)
-	}
 }
 
 type GetNetworkOutput struct {
@@ -100,52 +86,16 @@ type GetNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetNetworkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetNetworkResponse_accessLevel:
-			var ev string
-			if err := d.ReadString(schemas.GetNetworkResponse_accessLevel, &ev); err != nil {
-				return err
-			}
-			v.AccessLevel = types.AccessLevel(ev)
-			return nil
-		case schemas.GetNetworkResponse_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_awsAccountId, v.AwsAccountId)
-		case schemas.GetNetworkResponse_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.GetNetworkResponse_freeTrialExpiration:
-			v.FreeTrialExpiration = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_freeTrialExpiration, v.FreeTrialExpiration)
-		case schemas.GetNetworkResponse_migrationState:
-			v.MigrationState = new(int32)
-			return d.ReadInt32(schemas.GetNetworkResponse_migrationState, v.MigrationState)
-		case schemas.GetNetworkResponse_networkArn:
-			v.NetworkArn = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkArn, v.NetworkArn)
-		case schemas.GetNetworkResponse_networkId:
-			v.NetworkId = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkId, v.NetworkId)
-		case schemas.GetNetworkResponse_networkName:
-			v.NetworkName = new(string)
-			return d.ReadString(schemas.GetNetworkResponse_networkName, v.NetworkName)
-		case schemas.GetNetworkResponse_standing:
-			v.Standing = new(int32)
-			return d.ReadInt32(schemas.GetNetworkResponse_standing, v.Standing)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkRequest, schemas.GetNetworkResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkRequest, schemas.GetNetworkResponse), output: &GetNetworkOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNetwork"); err != nil {

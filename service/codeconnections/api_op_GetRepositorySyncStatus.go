@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type GetRepositorySyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRepositorySyncStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRepositorySyncStatusInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRepositorySyncStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Branch != nil {
-		s.WriteString(schemas.GetRepositorySyncStatusInput_Branch, *v.Branch)
-	}
-	if v.RepositoryLinkId != nil {
-		s.WriteString(schemas.GetRepositorySyncStatusInput_RepositoryLinkId, *v.RepositoryLinkId)
-	}
-	if v.SyncType != "" {
-		s.WriteString(schemas.GetRepositorySyncStatusInput_SyncType, string(v.SyncType))
-	}
-}
-
 type GetRepositorySyncStatusOutput struct {
 
 	// The status of the latest sync returned for a specified repository and branch.
@@ -81,24 +61,16 @@ type GetRepositorySyncStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRepositorySyncStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRepositorySyncStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRepositorySyncStatusOutput_LatestSync:
-			v.LatestSync = &types.RepositorySyncAttempt{}
-			return v.LatestSync.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositorySyncStatus, schemas.GetRepositorySyncStatusInput, schemas.GetRepositorySyncStatusOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRepositorySyncStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositorySyncStatus, schemas.GetRepositorySyncStatusInput, schemas.GetRepositorySyncStatusOutput), output: &GetRepositorySyncStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRepositorySyncStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRepositorySyncStatus"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -356,75 +354,6 @@ type GetStaticMapInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStaticMapInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStaticMapRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStaticMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BoundedPositions != nil {
-		s.WriteString(schemas.GetStaticMapRequest_BoundedPositions, *v.BoundedPositions)
-	}
-	if v.BoundingBox != nil {
-		s.WriteString(schemas.GetStaticMapRequest_BoundingBox, *v.BoundingBox)
-	}
-	if v.Center != nil {
-		s.WriteString(schemas.GetStaticMapRequest_Center, *v.Center)
-	}
-	if v.ColorScheme != "" {
-		s.WriteString(schemas.GetStaticMapRequest_ColorScheme, string(v.ColorScheme))
-	}
-	if v.CompactOverlay != nil {
-		s.WriteString(schemas.GetStaticMapRequest_CompactOverlay, *v.CompactOverlay)
-	}
-	if v.CropLabels != nil {
-		s.WriteBool(schemas.GetStaticMapRequest_CropLabels, *v.CropLabels)
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.GetStaticMapRequest_FileName, *v.FileName)
-	}
-	if v.GeoJsonOverlay != nil {
-		s.WriteString(schemas.GetStaticMapRequest_GeoJsonOverlay, *v.GeoJsonOverlay)
-	}
-	if v.Height != nil {
-		s.WriteInt32(schemas.GetStaticMapRequest_Height, *v.Height)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetStaticMapRequest_Key, *v.Key)
-	}
-	if v.LabelSize != "" {
-		s.WriteString(schemas.GetStaticMapRequest_LabelSize, string(v.LabelSize))
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.GetStaticMapRequest_Language, *v.Language)
-	}
-	if v.Padding != nil {
-		s.WriteInt32(schemas.GetStaticMapRequest_Padding, *v.Padding)
-	}
-	if v.PointsOfInterests != "" {
-		s.WriteString(schemas.GetStaticMapRequest_PointsOfInterests, string(v.PointsOfInterests))
-	}
-	if v.PoliticalView != nil {
-		s.WriteString(schemas.GetStaticMapRequest_PoliticalView, *v.PoliticalView)
-	}
-	if v.Radius != nil {
-		s.WriteInt64(schemas.GetStaticMapRequest_Radius, *v.Radius)
-	}
-	if v.ScaleBarUnit != "" {
-		s.WriteString(schemas.GetStaticMapRequest_ScaleBarUnit, string(v.ScaleBarUnit))
-	}
-	if v.Style != "" {
-		s.WriteString(schemas.GetStaticMapRequest_Style, string(v.Style))
-	}
-	if v.Width != nil {
-		s.WriteInt32(schemas.GetStaticMapRequest_Width, *v.Width)
-	}
-	if v.Zoom != nil {
-		s.WriteFloat32(schemas.GetStaticMapRequest_Zoom, *v.Zoom)
-	}
-}
-
 type GetStaticMapOutput struct {
 
 	// The pricing bucket for which the request is charged at.
@@ -451,35 +380,16 @@ type GetStaticMapOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStaticMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStaticMapResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStaticMapResponse_Blob:
-			return d.ReadBlob(schemas.GetStaticMapResponse_Blob, &v.Blob)
-		case schemas.GetStaticMapResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetStaticMapResponse_CacheControl, v.CacheControl)
-		case schemas.GetStaticMapResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetStaticMapResponse_ContentType, v.ContentType)
-		case schemas.GetStaticMapResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.GetStaticMapResponse_ETag, v.ETag)
-		case schemas.GetStaticMapResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.GetStaticMapResponse_PricingBucket, v.PricingBucket)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStaticMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStaticMap, schemas.GetStaticMapRequest, schemas.GetStaticMapResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStaticMap{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStaticMap, schemas.GetStaticMapRequest, schemas.GetStaticMapResponse), output: &GetStaticMapOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStaticMap{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStaticMap"); err != nil {

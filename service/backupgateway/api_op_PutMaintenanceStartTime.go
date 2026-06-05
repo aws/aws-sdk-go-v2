@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,52 +55,6 @@ type PutMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutMaintenanceStartTimeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutMaintenanceStartTimeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutMaintenanceStartTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfMonth != nil {
-		s.WriteInt32(schemas.PutMaintenanceStartTimeInput_DayOfMonth, *v.DayOfMonth)
-	}
-	if v.DayOfWeek != nil {
-		s.WriteInt32(schemas.PutMaintenanceStartTimeInput_DayOfWeek, *v.DayOfWeek)
-	}
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.PutMaintenanceStartTimeInput_GatewayArn, *v.GatewayArn)
-	}
-	if v.HourOfDay != nil {
-		s.WriteInt32(schemas.PutMaintenanceStartTimeInput_HourOfDay, *v.HourOfDay)
-	}
-	if v.MinuteOfHour != nil {
-		s.WriteInt32(schemas.PutMaintenanceStartTimeInput_MinuteOfHour, *v.MinuteOfHour)
-	}
-}
-func (v *PutMaintenanceStartTimeInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutMaintenanceStartTimeInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutMaintenanceStartTimeInput_DayOfMonth:
-			v.DayOfMonth = new(int32)
-			return d.ReadInt32(schemas.PutMaintenanceStartTimeInput_DayOfMonth, v.DayOfMonth)
-		case schemas.PutMaintenanceStartTimeInput_DayOfWeek:
-			v.DayOfWeek = new(int32)
-			return d.ReadInt32(schemas.PutMaintenanceStartTimeInput_DayOfWeek, v.DayOfWeek)
-		case schemas.PutMaintenanceStartTimeInput_GatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.PutMaintenanceStartTimeInput_GatewayArn, v.GatewayArn)
-		case schemas.PutMaintenanceStartTimeInput_HourOfDay:
-			v.HourOfDay = new(int32)
-			return d.ReadInt32(schemas.PutMaintenanceStartTimeInput_HourOfDay, v.HourOfDay)
-		case schemas.PutMaintenanceStartTimeInput_MinuteOfHour:
-			v.MinuteOfHour = new(int32)
-			return d.ReadInt32(schemas.PutMaintenanceStartTimeInput_MinuteOfHour, v.MinuteOfHour)
-		}
-		return nil
-	})
-}
-
 type PutMaintenanceStartTimeOutput struct {
 
 	// The Amazon Resource Name (ARN) of a gateway for which you set the maintenance
@@ -115,35 +67,16 @@ type PutMaintenanceStartTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutMaintenanceStartTimeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutMaintenanceStartTimeOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutMaintenanceStartTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.PutMaintenanceStartTimeOutput_GatewayArn, *v.GatewayArn)
-	}
-}
-func (v *PutMaintenanceStartTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutMaintenanceStartTimeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutMaintenanceStartTimeOutput_GatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.PutMaintenanceStartTimeOutput_GatewayArn, v.GatewayArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMaintenanceStartTime, schemas.PutMaintenanceStartTimeInput, schemas.PutMaintenanceStartTimeOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutMaintenanceStartTime{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMaintenanceStartTime, schemas.PutMaintenanceStartTimeInput, schemas.PutMaintenanceStartTimeOutput), output: &PutMaintenanceStartTimeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutMaintenanceStartTime{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMaintenanceStartTime"); err != nil {

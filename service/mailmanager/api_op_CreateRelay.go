@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,29 +62,6 @@ type CreateRelayInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRelayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelayAuthentication(s, schemas.CreateRelayRequest_Authentication, v.Authentication)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateRelayRequest_ClientToken, *v.ClientToken)
-	}
-	if v.RelayName != nil {
-		s.WriteString(schemas.CreateRelayRequest_RelayName, *v.RelayName)
-	}
-	if v.ServerName != nil {
-		s.WriteString(schemas.CreateRelayRequest_ServerName, *v.ServerName)
-	}
-	if v.ServerPort != nil {
-		s.WriteInt32(schemas.CreateRelayRequest_ServerPort, *v.ServerPort)
-	}
-	serializeTagList(s, schemas.CreateRelayRequest_Tags, v.Tags)
-}
-
 type CreateRelayOutput struct {
 
 	// A unique identifier of the created relay resource.
@@ -100,24 +75,16 @@ type CreateRelayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRelayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRelayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRelayResponse_RelayId:
-			v.RelayId = new(string)
-			return d.ReadString(schemas.CreateRelayResponse_RelayId, v.RelayId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRelay{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse), output: &CreateRelayOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRelay{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelay"); err != nil {

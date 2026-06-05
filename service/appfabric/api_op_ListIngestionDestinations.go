@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,27 +58,6 @@ type ListIngestionDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestionDestinationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIngestionDestinationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIngestionDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.ListIngestionDestinationsRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	if v.IngestionIdentifier != nil {
-		s.WriteString(schemas.ListIngestionDestinationsRequest_ingestionIdentifier, *v.IngestionIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIngestionDestinationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIngestionDestinationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListIngestionDestinationsOutput struct {
 
 	// Contains a list of ingestion destination summaries.
@@ -101,26 +78,16 @@ type ListIngestionDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestionDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIngestionDestinationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIngestionDestinationsResponse_ingestionDestinations:
-			return deserializeIngestionDestinationList(d, schemas.ListIngestionDestinationsResponse_ingestionDestinations, &v.IngestionDestinations)
-		case schemas.ListIngestionDestinationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIngestionDestinationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIngestionDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestionDestinations, schemas.ListIngestionDestinationsRequest, schemas.ListIngestionDestinationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestionDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestionDestinations, schemas.ListIngestionDestinationsRequest, schemas.ListIngestionDestinationsResponse), output: &ListIngestionDestinationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestionDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIngestionDestinations"); err != nil {

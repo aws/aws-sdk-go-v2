@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetComponentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetComponentRequest_arn, *v.Arn)
-	}
-	if v.RecipeOutputFormat != "" {
-		s.WriteString(schemas.GetComponentRequest_recipeOutputFormat, string(v.RecipeOutputFormat))
-	}
-}
-
 type GetComponentOutput struct {
 
 	// The recipe of the component version.
@@ -83,32 +66,16 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetComponentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetComponentResponse_recipe:
-			return d.ReadBlob(schemas.GetComponentResponse_recipe, &v.Recipe)
-		case schemas.GetComponentResponse_recipeOutputFormat:
-			var ev string
-			if err := d.ReadString(schemas.GetComponentResponse_recipeOutputFormat, &ev); err != nil {
-				return err
-			}
-			v.RecipeOutputFormat = types.RecipeOutputFormat(ev)
-			return nil
-		case schemas.GetComponentResponse_tags:
-			return deserializeTagMap(d, schemas.GetComponentResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse), output: &GetComponentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComponent"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,31 +72,6 @@ type UpdateDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDevicePoolInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDevicePoolRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateDevicePoolRequest_arn, *v.Arn)
-	}
-	if v.ClearMaxDevices != nil {
-		s.WriteBool(schemas.UpdateDevicePoolRequest_clearMaxDevices, *v.ClearMaxDevices)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateDevicePoolRequest_description, *v.Description)
-	}
-	if v.MaxDevices != nil {
-		s.WriteInt32(schemas.UpdateDevicePoolRequest_maxDevices, *v.MaxDevices)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateDevicePoolRequest_name, *v.Name)
-	}
-	serializeRules(s, schemas.UpdateDevicePoolRequest_rules, v.Rules)
-}
-
 // Represents the result of an update device pool request.
 type UpdateDevicePoolOutput struct {
 
@@ -111,24 +84,16 @@ type UpdateDevicePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDevicePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDevicePoolResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDevicePoolResult_devicePool:
-			v.DevicePool = &types.DevicePool{}
-			return v.DevicePool.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevicePool, schemas.UpdateDevicePoolRequest, schemas.UpdateDevicePoolResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDevicePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevicePool, schemas.UpdateDevicePoolRequest, schemas.UpdateDevicePoolResult), output: &UpdateDevicePoolOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDevicePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDevicePool"); err != nil {

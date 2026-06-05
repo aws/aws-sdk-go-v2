@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +38,6 @@ type BatchGetTargetDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTargetDomainsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetTargetDomainsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetTargetDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetDomainIdList(s, schemas.BatchGetTargetDomainsInput_targetDomainIds, v.TargetDomainIds)
-}
-
 // Output for the BatchGetTargetDomains operation.
 type BatchGetTargetDomainsOutput struct {
 
@@ -65,25 +53,16 @@ type BatchGetTargetDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTargetDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetTargetDomainsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetTargetDomainsOutput_notFound:
-			return deserializeTargetDomainIdList(d, schemas.BatchGetTargetDomainsOutput_notFound, &v.NotFound)
-		case schemas.BatchGetTargetDomainsOutput_targetDomains:
-			return deserializeTargetDomainList(d, schemas.BatchGetTargetDomainsOutput_targetDomains, &v.TargetDomains)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchGetTargetDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTargetDomains, schemas.BatchGetTargetDomainsInput, schemas.BatchGetTargetDomainsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTargetDomains{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTargetDomains, schemas.BatchGetTargetDomainsInput, schemas.BatchGetTargetDomainsOutput), output: &BatchGetTargetDomainsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTargetDomains{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetTargetDomains"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -31,52 +29,6 @@ type Challenge struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Challenge) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Challenge)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Challenge) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Challenge_Arn, *v.Arn)
-	}
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.Challenge_ConnectorArn, *v.ConnectorArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Challenge_CreatedAt, *v.CreatedAt)
-	}
-	if v.Password != nil {
-		s.WriteString(schemas.Challenge_Password, *v.Password)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Challenge_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Challenge) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Challenge, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Challenge_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Challenge_Arn, v.Arn)
-		case schemas.Challenge_ConnectorArn:
-			v.ConnectorArn = new(string)
-			return d.ReadString(schemas.Challenge_ConnectorArn, v.ConnectorArn)
-		case schemas.Challenge_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Challenge_CreatedAt, v.CreatedAt)
-		case schemas.Challenge_Password:
-			v.Password = new(string)
-			return d.ReadString(schemas.Challenge_Password, v.Password)
-		case schemas.Challenge_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Challenge_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains details about the connector's challenge.
 type ChallengeMetadata struct {
 
@@ -93,46 +45,6 @@ type ChallengeMetadata struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChallengeMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChallengeMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChallengeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ChallengeMetadata_Arn, *v.Arn)
-	}
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.ChallengeMetadata_ConnectorArn, *v.ConnectorArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ChallengeMetadata_CreatedAt, *v.CreatedAt)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ChallengeMetadata_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ChallengeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChallengeMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChallengeMetadata_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ChallengeMetadata_Arn, v.Arn)
-		case schemas.ChallengeMetadata_ConnectorArn:
-			v.ConnectorArn = new(string)
-			return d.ReadString(schemas.ChallengeMetadata_ConnectorArn, v.ConnectorArn)
-		case schemas.ChallengeMetadata_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChallengeMetadata_CreatedAt, v.CreatedAt)
-		case schemas.ChallengeMetadata_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChallengeMetadata_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Details about the specified challenge, returned by the [GetChallengeMetadata] action.
@@ -153,46 +65,6 @@ type ChallengeMetadataSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChallengeMetadataSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChallengeMetadataSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChallengeMetadataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ChallengeMetadataSummary_Arn, *v.Arn)
-	}
-	if v.ConnectorArn != nil {
-		s.WriteString(schemas.ChallengeMetadataSummary_ConnectorArn, *v.ConnectorArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ChallengeMetadataSummary_CreatedAt, *v.CreatedAt)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ChallengeMetadataSummary_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ChallengeMetadataSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChallengeMetadataSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChallengeMetadataSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ChallengeMetadataSummary_Arn, v.Arn)
-		case schemas.ChallengeMetadataSummary_ConnectorArn:
-			v.ConnectorArn = new(string)
-			return d.ReadString(schemas.ChallengeMetadataSummary_ConnectorArn, v.ConnectorArn)
-		case schemas.ChallengeMetadataSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChallengeMetadataSummary_CreatedAt, v.CreatedAt)
-		case schemas.ChallengeMetadataSummary_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChallengeMetadataSummary_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Connector for SCEP is a service that links Amazon Web Services Private
@@ -242,93 +114,6 @@ type Connector struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Connector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Connector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Connector_Arn, *v.Arn)
-	}
-	if v.CertificateAuthorityArn != nil {
-		s.WriteString(schemas.Connector_CertificateAuthorityArn, *v.CertificateAuthorityArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Connector_CreatedAt, *v.CreatedAt)
-	}
-	if v.Endpoint != nil {
-		s.WriteString(schemas.Connector_Endpoint, *v.Endpoint)
-	}
-	serializeMobileDeviceManagement(s, schemas.Connector_MobileDeviceManagement, v.MobileDeviceManagement)
-	if v.OpenIdConfiguration != nil {
-		s.WriteStruct(schemas.Connector_OpenIdConfiguration)
-		v.OpenIdConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Connector_Status, string(v.Status))
-	}
-	if v.StatusReason != "" {
-		s.WriteString(schemas.Connector_StatusReason, string(v.StatusReason))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Connector_Type, string(v.Type))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Connector_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Connector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Connector_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Connector_Arn, v.Arn)
-		case schemas.Connector_CertificateAuthorityArn:
-			v.CertificateAuthorityArn = new(string)
-			return d.ReadString(schemas.Connector_CertificateAuthorityArn, v.CertificateAuthorityArn)
-		case schemas.Connector_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Connector_CreatedAt, v.CreatedAt)
-		case schemas.Connector_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.Connector_Endpoint, v.Endpoint)
-		case schemas.Connector_MobileDeviceManagement:
-			return deserializeMobileDeviceManagement(d, schemas.Connector_MobileDeviceManagement, &v.MobileDeviceManagement)
-		case schemas.Connector_OpenIdConfiguration:
-			v.OpenIdConfiguration = &OpenIdConfiguration{}
-			return v.OpenIdConfiguration.Deserialize(d)
-		case schemas.Connector_Status:
-			var ev string
-			if err := d.ReadString(schemas.Connector_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConnectorStatus(ev)
-			return nil
-		case schemas.Connector_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.Connector_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = ConnectorStatusReason(ev)
-			return nil
-		case schemas.Connector_Type:
-			var ev string
-			if err := d.ReadString(schemas.Connector_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ConnectorType(ev)
-			return nil
-		case schemas.Connector_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Connector_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Lists the Amazon Web Services Private CA SCEP connectors belonging to your
 // Amazon Web Services account.
 type ConnectorSummary struct {
@@ -369,93 +154,6 @@ type ConnectorSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectorSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectorSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ConnectorSummary_Arn, *v.Arn)
-	}
-	if v.CertificateAuthorityArn != nil {
-		s.WriteString(schemas.ConnectorSummary_CertificateAuthorityArn, *v.CertificateAuthorityArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ConnectorSummary_CreatedAt, *v.CreatedAt)
-	}
-	if v.Endpoint != nil {
-		s.WriteString(schemas.ConnectorSummary_Endpoint, *v.Endpoint)
-	}
-	serializeMobileDeviceManagement(s, schemas.ConnectorSummary_MobileDeviceManagement, v.MobileDeviceManagement)
-	if v.OpenIdConfiguration != nil {
-		s.WriteStruct(schemas.ConnectorSummary_OpenIdConfiguration)
-		v.OpenIdConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ConnectorSummary_Status, string(v.Status))
-	}
-	if v.StatusReason != "" {
-		s.WriteString(schemas.ConnectorSummary_StatusReason, string(v.StatusReason))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ConnectorSummary_Type, string(v.Type))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ConnectorSummary_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectorSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectorSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ConnectorSummary_Arn, v.Arn)
-		case schemas.ConnectorSummary_CertificateAuthorityArn:
-			v.CertificateAuthorityArn = new(string)
-			return d.ReadString(schemas.ConnectorSummary_CertificateAuthorityArn, v.CertificateAuthorityArn)
-		case schemas.ConnectorSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectorSummary_CreatedAt, v.CreatedAt)
-		case schemas.ConnectorSummary_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.ConnectorSummary_Endpoint, v.Endpoint)
-		case schemas.ConnectorSummary_MobileDeviceManagement:
-			return deserializeMobileDeviceManagement(d, schemas.ConnectorSummary_MobileDeviceManagement, &v.MobileDeviceManagement)
-		case schemas.ConnectorSummary_OpenIdConfiguration:
-			v.OpenIdConfiguration = &OpenIdConfiguration{}
-			return v.OpenIdConfiguration.Deserialize(d)
-		case schemas.ConnectorSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ConnectorSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConnectorStatus(ev)
-			return nil
-		case schemas.ConnectorSummary_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.ConnectorSummary_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = ConnectorStatusReason(ev)
-			return nil
-		case schemas.ConnectorSummary_Type:
-			var ev string
-			if err := d.ReadString(schemas.ConnectorSummary_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ConnectorType(ev)
-			return nil
-		case schemas.ConnectorSummary_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectorSummary_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains configuration details for use with Microsoft Intune. For information
 // about using Connector for SCEP for Microsoft Intune, see [Using Connector for SCEP for Microsoft Intune].
 //
@@ -480,34 +178,6 @@ type IntuneConfiguration struct {
 	Domain *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IntuneConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntuneConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IntuneConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AzureApplicationId != nil {
-		s.WriteString(schemas.IntuneConfiguration_AzureApplicationId, *v.AzureApplicationId)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.IntuneConfiguration_Domain, *v.Domain)
-	}
-}
-func (v *IntuneConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IntuneConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IntuneConfiguration_AzureApplicationId:
-			v.AzureApplicationId = new(string)
-			return d.ReadString(schemas.IntuneConfiguration_AzureApplicationId, v.AzureApplicationId)
-		case schemas.IntuneConfiguration_Domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.IntuneConfiguration_Domain, v.Domain)
-		}
-		return nil
-	})
 }
 
 // If you don't supply a value, by default Connector for SCEP creates a connector
@@ -541,14 +211,6 @@ type MobileDeviceManagementMemberIntune struct {
 }
 
 func (*MobileDeviceManagementMemberIntune) isMobileDeviceManagement() {}
-func (v *MobileDeviceManagementMemberIntune) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MobileDeviceManagement_Intune)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MobileDeviceManagementMemberIntune) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains OpenID Connect (OIDC) parameters for use with Microsoft Intune. For
 // more information about using Connector for SCEP for Microsoft Intune, see [Using Connector for SCEP for Microsoft Intune].
@@ -566,40 +228,6 @@ type OpenIdConfiguration struct {
 	Subject *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OpenIdConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OpenIdConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OpenIdConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Audience != nil {
-		s.WriteString(schemas.OpenIdConfiguration_Audience, *v.Audience)
-	}
-	if v.Issuer != nil {
-		s.WriteString(schemas.OpenIdConfiguration_Issuer, *v.Issuer)
-	}
-	if v.Subject != nil {
-		s.WriteString(schemas.OpenIdConfiguration_Subject, *v.Subject)
-	}
-}
-func (v *OpenIdConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OpenIdConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OpenIdConfiguration_Audience:
-			v.Audience = new(string)
-			return d.ReadString(schemas.OpenIdConfiguration_Audience, v.Audience)
-		case schemas.OpenIdConfiguration_Issuer:
-			v.Issuer = new(string)
-			return d.ReadString(schemas.OpenIdConfiguration_Issuer, v.Issuer)
-		case schemas.OpenIdConfiguration_Subject:
-			v.Subject = new(string)
-			return d.ReadString(schemas.OpenIdConfiguration_Subject, v.Subject)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

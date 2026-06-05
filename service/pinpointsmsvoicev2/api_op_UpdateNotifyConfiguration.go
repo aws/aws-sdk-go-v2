@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,29 +58,6 @@ type UpdateNotifyConfigurationInput struct {
 	PoolId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateNotifyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateNotifyConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateNotifyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultTemplateId != nil {
-		s.WriteString(schemas.UpdateNotifyConfigurationRequest_DefaultTemplateId, *v.DefaultTemplateId)
-	}
-	if v.DeletionProtectionEnabled != nil {
-		s.WriteBool(schemas.UpdateNotifyConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
-	}
-	serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
-	if v.NotifyConfigurationId != nil {
-		s.WriteString(schemas.UpdateNotifyConfigurationRequest_NotifyConfigurationId, *v.NotifyConfigurationId)
-	}
-	if v.PoolId != nil {
-		s.WriteString(schemas.UpdateNotifyConfigurationRequest_PoolId, *v.PoolId)
-	}
 }
 
 type UpdateNotifyConfigurationOutput struct {
@@ -160,76 +135,16 @@ type UpdateNotifyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateNotifyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateNotifyConfigurationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateNotifyConfigurationResult_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.UpdateNotifyConfigurationResult_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.UpdateNotifyConfigurationResult_DefaultTemplateId:
-			v.DefaultTemplateId = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_DefaultTemplateId, v.DefaultTemplateId)
-		case schemas.UpdateNotifyConfigurationResult_DeletionProtectionEnabled:
-			return d.ReadBool(schemas.UpdateNotifyConfigurationResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
-		case schemas.UpdateNotifyConfigurationResult_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_DisplayName, v.DisplayName)
-		case schemas.UpdateNotifyConfigurationResult_EnabledChannels:
-			return deserializeNotifyEnabledChannelsList(d, schemas.UpdateNotifyConfigurationResult_EnabledChannels, &v.EnabledChannels)
-		case schemas.UpdateNotifyConfigurationResult_EnabledCountries:
-			return deserializeIsoCountryCodeList(d, schemas.UpdateNotifyConfigurationResult_EnabledCountries, &v.EnabledCountries)
-		case schemas.UpdateNotifyConfigurationResult_NotifyConfigurationArn:
-			v.NotifyConfigurationArn = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_NotifyConfigurationArn, v.NotifyConfigurationArn)
-		case schemas.UpdateNotifyConfigurationResult_NotifyConfigurationId:
-			v.NotifyConfigurationId = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_NotifyConfigurationId, v.NotifyConfigurationId)
-		case schemas.UpdateNotifyConfigurationResult_PoolId:
-			v.PoolId = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_PoolId, v.PoolId)
-		case schemas.UpdateNotifyConfigurationResult_RejectionReason:
-			v.RejectionReason = new(string)
-			return d.ReadString(schemas.UpdateNotifyConfigurationResult_RejectionReason, v.RejectionReason)
-		case schemas.UpdateNotifyConfigurationResult_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateNotifyConfigurationResult_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotifyConfigurationStatus(ev)
-			return nil
-		case schemas.UpdateNotifyConfigurationResult_Tier:
-			var ev string
-			if err := d.ReadString(schemas.UpdateNotifyConfigurationResult_Tier, &ev); err != nil {
-				return err
-			}
-			v.Tier = types.NotifyConfigurationTier(ev)
-			return nil
-		case schemas.UpdateNotifyConfigurationResult_TierUpgradeStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateNotifyConfigurationResult_TierUpgradeStatus, &ev); err != nil {
-				return err
-			}
-			v.TierUpgradeStatus = types.TierUpgradeStatus(ev)
-			return nil
-		case schemas.UpdateNotifyConfigurationResult_UseCase:
-			var ev string
-			if err := d.ReadString(schemas.UpdateNotifyConfigurationResult_UseCase, &ev); err != nil {
-				return err
-			}
-			v.UseCase = types.NotifyConfigurationUseCase(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateNotifyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotifyConfiguration, schemas.UpdateNotifyConfigurationRequest, schemas.UpdateNotifyConfigurationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateNotifyConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotifyConfiguration, schemas.UpdateNotifyConfigurationRequest, schemas.UpdateNotifyConfigurationResult), output: &UpdateNotifyConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateNotifyConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNotifyConfiguration"); err != nil {

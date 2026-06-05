@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,28 +36,6 @@ type DescribePackageImportJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribePackageImportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePackageImportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePackageImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.DescribePackageImportJobRequest_JobId, *v.JobId)
-	}
-}
-func (v *DescribePackageImportJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePackageImportJobRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePackageImportJobRequest_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DescribePackageImportJobRequest_JobId, v.JobId)
-		}
-		return nil
-	})
 }
 
 type DescribePackageImportJobOutput struct {
@@ -121,106 +97,16 @@ type DescribePackageImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePackageImportJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePackageImportJobResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePackageImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DescribePackageImportJobResponse_ClientToken, *v.ClientToken)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DescribePackageImportJobResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.InputConfig != nil {
-		s.WriteStruct(schemas.DescribePackageImportJobResponse_InputConfig)
-		v.InputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.DescribePackageImportJobResponse_JobId, *v.JobId)
-	}
-	serializeJobTagsList(s, schemas.DescribePackageImportJobResponse_JobTags, v.JobTags)
-	if v.JobType != "" {
-		s.WriteString(schemas.DescribePackageImportJobResponse_JobType, string(v.JobType))
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.DescribePackageImportJobResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Output != nil {
-		s.WriteStruct(schemas.DescribePackageImportJobResponse_Output)
-		v.Output.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutputConfig != nil {
-		s.WriteStruct(schemas.DescribePackageImportJobResponse_OutputConfig)
-		v.OutputConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DescribePackageImportJobResponse_Status, string(v.Status))
-	}
-	if v.StatusMessage != nil {
-		s.WriteString(schemas.DescribePackageImportJobResponse_StatusMessage, *v.StatusMessage)
-	}
-}
-func (v *DescribePackageImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePackageImportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePackageImportJobResponse_ClientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.DescribePackageImportJobResponse_ClientToken, v.ClientToken)
-		case schemas.DescribePackageImportJobResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribePackageImportJobResponse_CreatedTime, v.CreatedTime)
-		case schemas.DescribePackageImportJobResponse_InputConfig:
-			v.InputConfig = &types.PackageImportJobInputConfig{}
-			return v.InputConfig.Deserialize(d)
-		case schemas.DescribePackageImportJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DescribePackageImportJobResponse_JobId, v.JobId)
-		case schemas.DescribePackageImportJobResponse_JobTags:
-			return deserializeJobTagsList(d, schemas.DescribePackageImportJobResponse_JobTags, &v.JobTags)
-		case schemas.DescribePackageImportJobResponse_JobType:
-			var ev string
-			if err := d.ReadString(schemas.DescribePackageImportJobResponse_JobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = types.PackageImportJobType(ev)
-			return nil
-		case schemas.DescribePackageImportJobResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribePackageImportJobResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.DescribePackageImportJobResponse_Output:
-			v.Output = &types.PackageImportJobOutput{}
-			return v.Output.Deserialize(d)
-		case schemas.DescribePackageImportJobResponse_OutputConfig:
-			v.OutputConfig = &types.PackageImportJobOutputConfig{}
-			return v.OutputConfig.Deserialize(d)
-		case schemas.DescribePackageImportJobResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribePackageImportJobResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PackageImportJobStatus(ev)
-			return nil
-		case schemas.DescribePackageImportJobResponse_StatusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.DescribePackageImportJobResponse_StatusMessage, v.StatusMessage)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePackageImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageImportJob, schemas.DescribePackageImportJobRequest, schemas.DescribePackageImportJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackageImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageImportJob, schemas.DescribePackageImportJobRequest, schemas.DescribePackageImportJobResponse), output: &DescribePackageImportJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackageImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePackageImportJob"); err != nil {

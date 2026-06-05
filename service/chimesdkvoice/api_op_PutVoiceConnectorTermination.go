@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,23 +42,6 @@ type PutVoiceConnectorTerminationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorTerminationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutVoiceConnectorTerminationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutVoiceConnectorTerminationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Termination != nil {
-		s.WriteStruct(schemas.PutVoiceConnectorTerminationRequest_Termination)
-		v.Termination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.PutVoiceConnectorTerminationRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type PutVoiceConnectorTerminationOutput struct {
 
 	// The updated termination settings.
@@ -72,24 +53,16 @@ type PutVoiceConnectorTerminationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorTerminationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutVoiceConnectorTerminationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutVoiceConnectorTerminationResponse_Termination:
-			v.Termination = &types.Termination{}
-			return v.Termination.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutVoiceConnectorTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorTermination, schemas.PutVoiceConnectorTerminationRequest, schemas.PutVoiceConnectorTerminationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorTermination{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorTermination, schemas.PutVoiceConnectorTerminationRequest, schemas.PutVoiceConnectorTerminationResponse), output: &PutVoiceConnectorTerminationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorTermination{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorTermination"); err != nil {

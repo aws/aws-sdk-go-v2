@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,34 +41,6 @@ type GetApplicationInput struct {
 	EnvironmentIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.GetApplicationRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.GetApplicationRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-}
-func (v *GetApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.GetApplicationRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.GetApplicationRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.GetApplicationRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		}
-		return nil
-	})
 }
 
 type GetApplicationOutput struct {
@@ -125,122 +95,16 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiGatewayProxy != nil {
-		s.WriteStruct(schemas.GetApplicationResponse_ApiGatewayProxy)
-		v.ApiGatewayProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetApplicationResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.GetApplicationResponse_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.GetApplicationResponse_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.GetApplicationResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetApplicationResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.GetApplicationResponse_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.GetApplicationResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetApplicationResponse_Name, *v.Name)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.GetApplicationResponse_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.ProxyType != "" {
-		s.WriteString(schemas.GetApplicationResponse_ProxyType, string(v.ProxyType))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.GetApplicationResponse_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
-	if v.VpcId != nil {
-		s.WriteString(schemas.GetApplicationResponse_VpcId, *v.VpcId)
-	}
-}
-func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationResponse_ApiGatewayProxy:
-			v.ApiGatewayProxy = &types.ApiGatewayProxyConfig{}
-			return v.ApiGatewayProxy.Deserialize(d)
-		case schemas.GetApplicationResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_ApplicationId, v.ApplicationId)
-		case schemas.GetApplicationResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Arn, v.Arn)
-		case schemas.GetApplicationResponse_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.GetApplicationResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_CreatedTime, v.CreatedTime)
-		case schemas.GetApplicationResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.GetApplicationResponse_Error:
-			v.Error = &types.ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.GetApplicationResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.GetApplicationResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Name, v.Name)
-		case schemas.GetApplicationResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.GetApplicationResponse_ProxyType:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationResponse_ProxyType, &ev); err != nil {
-				return err
-			}
-			v.ProxyType = types.ProxyType(ev)
-			return nil
-		case schemas.GetApplicationResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ApplicationState(ev)
-			return nil
-		case schemas.GetApplicationResponse_Tags:
-			return deserializeTagMap(d, schemas.GetApplicationResponse_Tags, &v.Tags)
-		case schemas.GetApplicationResponse_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {

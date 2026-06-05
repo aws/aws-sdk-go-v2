@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -100,42 +98,6 @@ type GetPackageVersionAssetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionAssetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPackageVersionAssetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPackageVersionAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Asset != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_asset, *v.Asset)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_package, *v.Package)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_packageVersion, *v.PackageVersion)
-	}
-	if v.PackageVersionRevision != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_packageVersionRevision, *v.PackageVersionRevision)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.GetPackageVersionAssetRequest_repository, *v.Repository)
-	}
-}
-
 type GetPackageVersionAssetOutput struct {
 
 	//  The binary file, or asset, that is downloaded.
@@ -156,38 +118,16 @@ type GetPackageVersionAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPackageVersionAssetResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPackageVersionAssetResult_assetName:
-			v.AssetName = new(string)
-			return d.ReadString(schemas.GetPackageVersionAssetResult_assetName, v.AssetName)
-		case schemas.GetPackageVersionAssetResult_packageVersion:
-			v.PackageVersion = new(string)
-			return d.ReadString(schemas.GetPackageVersionAssetResult_packageVersion, v.PackageVersion)
-		case schemas.GetPackageVersionAssetResult_packageVersionRevision:
-			v.PackageVersionRevision = new(string)
-			return d.ReadString(schemas.GetPackageVersionAssetResult_packageVersionRevision, v.PackageVersionRevision)
-		}
-		return nil
-	})
-}
-func (v *GetPackageVersionAssetOutput) GetPayloadStream() io.Reader { return v.Asset }
-
-var _ smithy.StreamingInput = (*GetPackageVersionAssetOutput)(nil)
-
-func (v *GetPackageVersionAssetOutput) SetPayloadStream(r io.ReadCloser) { v.Asset = r }
-
-var _ smithy.StreamingOutput = (*GetPackageVersionAssetOutput)(nil)
-
 func (c *Client) addOperationGetPackageVersionAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionAsset, schemas.GetPackageVersionAssetRequest, schemas.GetPackageVersionAssetResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionAsset, schemas.GetPackageVersionAssetRequest, schemas.GetPackageVersionAssetResult), output: &GetPackageVersionAssetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPackageVersionAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPackageVersionAsset"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,35 +65,6 @@ type RevokePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RevokePermissionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevokePermissionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevokePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.RevokePermissionsRequest_CatalogId, *v.CatalogId)
-	}
-	if v.Condition != nil {
-		s.WriteStruct(schemas.RevokePermissionsRequest_Condition)
-		v.Condition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePermissionList(s, schemas.RevokePermissionsRequest_Permissions, v.Permissions)
-	serializePermissionList(s, schemas.RevokePermissionsRequest_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
-	if v.Principal != nil {
-		s.WriteStruct(schemas.RevokePermissionsRequest_Principal)
-		v.Principal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.RevokePermissionsRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type RevokePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,21 +72,16 @@ type RevokePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RevokePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevokePermissionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokePermissions, schemas.RevokePermissionsRequest, schemas.RevokePermissionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokePermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokePermissions, schemas.RevokePermissionsRequest, schemas.RevokePermissionsResponse), output: &RevokePermissionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokePermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RevokePermissions"); err != nil {

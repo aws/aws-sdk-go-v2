@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type ListTagsForResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagsForResourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTagsForResourcesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTagsForResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.ListTagsForResourcesRequest_ResourceArn, *v.ResourceArn)
-	}
-}
-
 type ListTagsForResourcesOutput struct {
 
 	//
@@ -61,23 +47,16 @@ type ListTagsForResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagsForResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTagsForResourcesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTagsForResourcesResponse_Tags:
-			return deserializeTags(d, schemas.ListTagsForResourcesResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTagsForResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResources, schemas.ListTagsForResourcesRequest, schemas.ListTagsForResourcesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResources, schemas.ListTagsForResourcesRequest, schemas.ListTagsForResourcesResponse), output: &ListTagsForResourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagsForResources"); err != nil {

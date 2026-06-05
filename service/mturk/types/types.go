@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -72,98 +70,6 @@ type Assignment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Assignment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Assignment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Assignment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptTime != nil {
-		s.WriteTime(schemas.Assignment_AcceptTime, *v.AcceptTime)
-	}
-	if v.Answer != nil {
-		s.WriteString(schemas.Assignment_Answer, *v.Answer)
-	}
-	if v.ApprovalTime != nil {
-		s.WriteTime(schemas.Assignment_ApprovalTime, *v.ApprovalTime)
-	}
-	if v.AssignmentId != nil {
-		s.WriteString(schemas.Assignment_AssignmentId, *v.AssignmentId)
-	}
-	if v.AssignmentStatus != "" {
-		s.WriteString(schemas.Assignment_AssignmentStatus, string(v.AssignmentStatus))
-	}
-	if v.AutoApprovalTime != nil {
-		s.WriteTime(schemas.Assignment_AutoApprovalTime, *v.AutoApprovalTime)
-	}
-	if v.Deadline != nil {
-		s.WriteTime(schemas.Assignment_Deadline, *v.Deadline)
-	}
-	if v.HITId != nil {
-		s.WriteString(schemas.Assignment_HITId, *v.HITId)
-	}
-	if v.RejectionTime != nil {
-		s.WriteTime(schemas.Assignment_RejectionTime, *v.RejectionTime)
-	}
-	if v.RequesterFeedback != nil {
-		s.WriteString(schemas.Assignment_RequesterFeedback, *v.RequesterFeedback)
-	}
-	if v.SubmitTime != nil {
-		s.WriteTime(schemas.Assignment_SubmitTime, *v.SubmitTime)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.Assignment_WorkerId, *v.WorkerId)
-	}
-}
-func (v *Assignment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Assignment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Assignment_AcceptTime:
-			v.AcceptTime = new(time.Time)
-			return d.ReadTime(schemas.Assignment_AcceptTime, v.AcceptTime)
-		case schemas.Assignment_Answer:
-			v.Answer = new(string)
-			return d.ReadString(schemas.Assignment_Answer, v.Answer)
-		case schemas.Assignment_ApprovalTime:
-			v.ApprovalTime = new(time.Time)
-			return d.ReadTime(schemas.Assignment_ApprovalTime, v.ApprovalTime)
-		case schemas.Assignment_AssignmentId:
-			v.AssignmentId = new(string)
-			return d.ReadString(schemas.Assignment_AssignmentId, v.AssignmentId)
-		case schemas.Assignment_AssignmentStatus:
-			var ev string
-			if err := d.ReadString(schemas.Assignment_AssignmentStatus, &ev); err != nil {
-				return err
-			}
-			v.AssignmentStatus = AssignmentStatus(ev)
-			return nil
-		case schemas.Assignment_AutoApprovalTime:
-			v.AutoApprovalTime = new(time.Time)
-			return d.ReadTime(schemas.Assignment_AutoApprovalTime, v.AutoApprovalTime)
-		case schemas.Assignment_Deadline:
-			v.Deadline = new(time.Time)
-			return d.ReadTime(schemas.Assignment_Deadline, v.Deadline)
-		case schemas.Assignment_HITId:
-			v.HITId = new(string)
-			return d.ReadString(schemas.Assignment_HITId, v.HITId)
-		case schemas.Assignment_RejectionTime:
-			v.RejectionTime = new(time.Time)
-			return d.ReadTime(schemas.Assignment_RejectionTime, v.RejectionTime)
-		case schemas.Assignment_RequesterFeedback:
-			v.RequesterFeedback = new(string)
-			return d.ReadString(schemas.Assignment_RequesterFeedback, v.RequesterFeedback)
-		case schemas.Assignment_SubmitTime:
-			v.SubmitTime = new(time.Time)
-			return d.ReadTime(schemas.Assignment_SubmitTime, v.SubmitTime)
-		case schemas.Assignment_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.Assignment_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
-}
-
 // An object representing a Bonus payment paid to a Worker.
 type BonusPayment struct {
 
@@ -183,52 +89,6 @@ type BonusPayment struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BonusPayment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BonusPayment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BonusPayment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssignmentId != nil {
-		s.WriteString(schemas.BonusPayment_AssignmentId, *v.AssignmentId)
-	}
-	if v.BonusAmount != nil {
-		s.WriteString(schemas.BonusPayment_BonusAmount, *v.BonusAmount)
-	}
-	if v.GrantTime != nil {
-		s.WriteTime(schemas.BonusPayment_GrantTime, *v.GrantTime)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.BonusPayment_Reason, *v.Reason)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.BonusPayment_WorkerId, *v.WorkerId)
-	}
-}
-func (v *BonusPayment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BonusPayment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BonusPayment_AssignmentId:
-			v.AssignmentId = new(string)
-			return d.ReadString(schemas.BonusPayment_AssignmentId, v.AssignmentId)
-		case schemas.BonusPayment_BonusAmount:
-			v.BonusAmount = new(string)
-			return d.ReadString(schemas.BonusPayment_BonusAmount, v.BonusAmount)
-		case schemas.BonusPayment_GrantTime:
-			v.GrantTime = new(time.Time)
-			return d.ReadTime(schemas.BonusPayment_GrantTime, v.GrantTime)
-		case schemas.BonusPayment_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.BonusPayment_Reason, v.Reason)
-		case schemas.BonusPayment_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.BonusPayment_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
 }
 
 //	The HIT data structure represents a single HIT, including all the information
@@ -320,153 +180,6 @@ type HIT struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HIT) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HIT)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HIT) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssignmentDurationInSeconds != nil {
-		s.WriteInt64(schemas.HIT_AssignmentDurationInSeconds, *v.AssignmentDurationInSeconds)
-	}
-	if v.AutoApprovalDelayInSeconds != nil {
-		s.WriteInt64(schemas.HIT_AutoApprovalDelayInSeconds, *v.AutoApprovalDelayInSeconds)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.HIT_CreationTime, *v.CreationTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.HIT_Description, *v.Description)
-	}
-	if v.Expiration != nil {
-		s.WriteTime(schemas.HIT_Expiration, *v.Expiration)
-	}
-	if v.HITGroupId != nil {
-		s.WriteString(schemas.HIT_HITGroupId, *v.HITGroupId)
-	}
-	if v.HITId != nil {
-		s.WriteString(schemas.HIT_HITId, *v.HITId)
-	}
-	if v.HITLayoutId != nil {
-		s.WriteString(schemas.HIT_HITLayoutId, *v.HITLayoutId)
-	}
-	if v.HITReviewStatus != "" {
-		s.WriteString(schemas.HIT_HITReviewStatus, string(v.HITReviewStatus))
-	}
-	if v.HITStatus != "" {
-		s.WriteString(schemas.HIT_HITStatus, string(v.HITStatus))
-	}
-	if v.HITTypeId != nil {
-		s.WriteString(schemas.HIT_HITTypeId, *v.HITTypeId)
-	}
-	if v.Keywords != nil {
-		s.WriteString(schemas.HIT_Keywords, *v.Keywords)
-	}
-	if v.MaxAssignments != nil {
-		s.WriteInt32(schemas.HIT_MaxAssignments, *v.MaxAssignments)
-	}
-	if v.NumberOfAssignmentsAvailable != nil {
-		s.WriteInt32(schemas.HIT_NumberOfAssignmentsAvailable, *v.NumberOfAssignmentsAvailable)
-	}
-	if v.NumberOfAssignmentsCompleted != nil {
-		s.WriteInt32(schemas.HIT_NumberOfAssignmentsCompleted, *v.NumberOfAssignmentsCompleted)
-	}
-	if v.NumberOfAssignmentsPending != nil {
-		s.WriteInt32(schemas.HIT_NumberOfAssignmentsPending, *v.NumberOfAssignmentsPending)
-	}
-	serializeQualificationRequirementList(s, schemas.HIT_QualificationRequirements, v.QualificationRequirements)
-	if v.Question != nil {
-		s.WriteString(schemas.HIT_Question, *v.Question)
-	}
-	if v.RequesterAnnotation != nil {
-		s.WriteString(schemas.HIT_RequesterAnnotation, *v.RequesterAnnotation)
-	}
-	if v.Reward != nil {
-		s.WriteString(schemas.HIT_Reward, *v.Reward)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.HIT_Title, *v.Title)
-	}
-}
-func (v *HIT) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HIT, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HIT_AssignmentDurationInSeconds:
-			v.AssignmentDurationInSeconds = new(int64)
-			return d.ReadInt64(schemas.HIT_AssignmentDurationInSeconds, v.AssignmentDurationInSeconds)
-		case schemas.HIT_AutoApprovalDelayInSeconds:
-			v.AutoApprovalDelayInSeconds = new(int64)
-			return d.ReadInt64(schemas.HIT_AutoApprovalDelayInSeconds, v.AutoApprovalDelayInSeconds)
-		case schemas.HIT_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.HIT_CreationTime, v.CreationTime)
-		case schemas.HIT_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.HIT_Description, v.Description)
-		case schemas.HIT_Expiration:
-			v.Expiration = new(time.Time)
-			return d.ReadTime(schemas.HIT_Expiration, v.Expiration)
-		case schemas.HIT_HITGroupId:
-			v.HITGroupId = new(string)
-			return d.ReadString(schemas.HIT_HITGroupId, v.HITGroupId)
-		case schemas.HIT_HITId:
-			v.HITId = new(string)
-			return d.ReadString(schemas.HIT_HITId, v.HITId)
-		case schemas.HIT_HITLayoutId:
-			v.HITLayoutId = new(string)
-			return d.ReadString(schemas.HIT_HITLayoutId, v.HITLayoutId)
-		case schemas.HIT_HITReviewStatus:
-			var ev string
-			if err := d.ReadString(schemas.HIT_HITReviewStatus, &ev); err != nil {
-				return err
-			}
-			v.HITReviewStatus = HITReviewStatus(ev)
-			return nil
-		case schemas.HIT_HITStatus:
-			var ev string
-			if err := d.ReadString(schemas.HIT_HITStatus, &ev); err != nil {
-				return err
-			}
-			v.HITStatus = HITStatus(ev)
-			return nil
-		case schemas.HIT_HITTypeId:
-			v.HITTypeId = new(string)
-			return d.ReadString(schemas.HIT_HITTypeId, v.HITTypeId)
-		case schemas.HIT_Keywords:
-			v.Keywords = new(string)
-			return d.ReadString(schemas.HIT_Keywords, v.Keywords)
-		case schemas.HIT_MaxAssignments:
-			v.MaxAssignments = new(int32)
-			return d.ReadInt32(schemas.HIT_MaxAssignments, v.MaxAssignments)
-		case schemas.HIT_NumberOfAssignmentsAvailable:
-			v.NumberOfAssignmentsAvailable = new(int32)
-			return d.ReadInt32(schemas.HIT_NumberOfAssignmentsAvailable, v.NumberOfAssignmentsAvailable)
-		case schemas.HIT_NumberOfAssignmentsCompleted:
-			v.NumberOfAssignmentsCompleted = new(int32)
-			return d.ReadInt32(schemas.HIT_NumberOfAssignmentsCompleted, v.NumberOfAssignmentsCompleted)
-		case schemas.HIT_NumberOfAssignmentsPending:
-			v.NumberOfAssignmentsPending = new(int32)
-			return d.ReadInt32(schemas.HIT_NumberOfAssignmentsPending, v.NumberOfAssignmentsPending)
-		case schemas.HIT_QualificationRequirements:
-			return deserializeQualificationRequirementList(d, schemas.HIT_QualificationRequirements, &v.QualificationRequirements)
-		case schemas.HIT_Question:
-			v.Question = new(string)
-			return d.ReadString(schemas.HIT_Question, v.Question)
-		case schemas.HIT_RequesterAnnotation:
-			v.RequesterAnnotation = new(string)
-			return d.ReadString(schemas.HIT_RequesterAnnotation, v.RequesterAnnotation)
-		case schemas.HIT_Reward:
-			v.Reward = new(string)
-			return d.ReadString(schemas.HIT_Reward, v.Reward)
-		case schemas.HIT_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.HIT_Title, v.Title)
-		}
-		return nil
-	})
-}
-
 //	The HITLayoutParameter data structure defines parameter values used with a
 //
 // HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template
@@ -486,34 +199,6 @@ type HITLayoutParameter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HITLayoutParameter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HITLayoutParameter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HITLayoutParameter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.HITLayoutParameter_Name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.HITLayoutParameter_Value, *v.Value)
-	}
-}
-func (v *HITLayoutParameter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HITLayoutParameter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HITLayoutParameter_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.HITLayoutParameter_Name, v.Name)
-		case schemas.HITLayoutParameter_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.HITLayoutParameter_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // The Locale data structure represents a geographical region or location.
 type Locale struct {
 
@@ -528,34 +213,6 @@ type Locale struct {
 	Subdivision *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Locale) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Locale)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Locale) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Country != nil {
-		s.WriteString(schemas.Locale_Country, *v.Country)
-	}
-	if v.Subdivision != nil {
-		s.WriteString(schemas.Locale_Subdivision, *v.Subdivision)
-	}
-}
-func (v *Locale) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Locale, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Locale_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.Locale_Country, v.Country)
-		case schemas.Locale_Subdivision:
-			v.Subdivision = new(string)
-			return d.ReadString(schemas.Locale_Subdivision, v.Subdivision)
-		}
-		return nil
-	})
 }
 
 // The NotificationSpecification data structure describes a HIT event notification
@@ -597,47 +254,6 @@ type NotificationSpecification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotificationSpecification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationSpecification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Destination != nil {
-		s.WriteString(schemas.NotificationSpecification_Destination, *v.Destination)
-	}
-	serializeEventTypeList(s, schemas.NotificationSpecification_EventTypes, v.EventTypes)
-	if v.Transport != "" {
-		s.WriteString(schemas.NotificationSpecification_Transport, string(v.Transport))
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.NotificationSpecification_Version, *v.Version)
-	}
-}
-func (v *NotificationSpecification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationSpecification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationSpecification_Destination:
-			v.Destination = new(string)
-			return d.ReadString(schemas.NotificationSpecification_Destination, v.Destination)
-		case schemas.NotificationSpecification_EventTypes:
-			return deserializeEventTypeList(d, schemas.NotificationSpecification_EventTypes, &v.EventTypes)
-		case schemas.NotificationSpecification_Transport:
-			var ev string
-			if err := d.ReadString(schemas.NotificationSpecification_Transport, &ev); err != nil {
-				return err
-			}
-			v.Transport = NotificationTransport(ev)
-			return nil
-		case schemas.NotificationSpecification_Version:
-			v.Version = new(string)
-			return d.ReadString(schemas.NotificationSpecification_Version, v.Version)
-		}
-		return nil
-	})
-}
-
 //	When MTurk encounters an issue with notifying the Workers you specified, it
 //
 // returns back this object with failure details.
@@ -653,44 +269,6 @@ type NotifyWorkersFailureStatus struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NotifyWorkersFailureStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotifyWorkersFailureStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotifyWorkersFailureStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NotifyWorkersFailureCode != "" {
-		s.WriteString(schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureCode, string(v.NotifyWorkersFailureCode))
-	}
-	if v.NotifyWorkersFailureMessage != nil {
-		s.WriteString(schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureMessage, *v.NotifyWorkersFailureMessage)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.NotifyWorkersFailureStatus_WorkerId, *v.WorkerId)
-	}
-}
-func (v *NotifyWorkersFailureStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotifyWorkersFailureStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureCode:
-			var ev string
-			if err := d.ReadString(schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureCode, &ev); err != nil {
-				return err
-			}
-			v.NotifyWorkersFailureCode = NotifyWorkersFailureCode(ev)
-			return nil
-		case schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureMessage:
-			v.NotifyWorkersFailureMessage = new(string)
-			return d.ReadString(schemas.NotifyWorkersFailureStatus_NotifyWorkersFailureMessage, v.NotifyWorkersFailureMessage)
-		case schemas.NotifyWorkersFailureStatus_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.NotifyWorkersFailureStatus_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
 }
 
 //	This data structure is the data type for the AnswerKey parameter of the
@@ -710,31 +288,6 @@ type ParameterMapEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ParameterMapEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ParameterMapEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ParameterMapEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.ParameterMapEntry_Key, *v.Key)
-	}
-	serializeStringList(s, schemas.ParameterMapEntry_Values, v.Values)
-}
-func (v *ParameterMapEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ParameterMapEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ParameterMapEntry_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.ParameterMapEntry_Key, v.Key)
-		case schemas.ParameterMapEntry_Values:
-			return deserializeStringList(d, schemas.ParameterMapEntry_Values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Name of the parameter from the Review policy.
 type PolicyParameter struct {
 
@@ -748,34 +301,6 @@ type PolicyParameter struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyParameter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyParameter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyParameter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.PolicyParameter_Key, *v.Key)
-	}
-	serializeParameterMapEntryList(s, schemas.PolicyParameter_MapEntries, v.MapEntries)
-	serializeStringList(s, schemas.PolicyParameter_Values, v.Values)
-}
-func (v *PolicyParameter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyParameter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyParameter_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.PolicyParameter_Key, v.Key)
-		case schemas.PolicyParameter_MapEntries:
-			return deserializeParameterMapEntryList(d, schemas.PolicyParameter_MapEntries, &v.MapEntries)
-		case schemas.PolicyParameter_Values:
-			return deserializeStringList(d, schemas.PolicyParameter_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // The Qualification data structure represents a Qualification assigned to a user,
@@ -805,64 +330,6 @@ type Qualification struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Qualification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Qualification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Qualification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GrantTime != nil {
-		s.WriteTime(schemas.Qualification_GrantTime, *v.GrantTime)
-	}
-	if v.IntegerValue != nil {
-		s.WriteInt32(schemas.Qualification_IntegerValue, *v.IntegerValue)
-	}
-	if v.LocaleValue != nil {
-		s.WriteStruct(schemas.Qualification_LocaleValue)
-		v.LocaleValue.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QualificationTypeId != nil {
-		s.WriteString(schemas.Qualification_QualificationTypeId, *v.QualificationTypeId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Qualification_Status, string(v.Status))
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.Qualification_WorkerId, *v.WorkerId)
-	}
-}
-func (v *Qualification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Qualification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Qualification_GrantTime:
-			v.GrantTime = new(time.Time)
-			return d.ReadTime(schemas.Qualification_GrantTime, v.GrantTime)
-		case schemas.Qualification_IntegerValue:
-			v.IntegerValue = new(int32)
-			return d.ReadInt32(schemas.Qualification_IntegerValue, v.IntegerValue)
-		case schemas.Qualification_LocaleValue:
-			v.LocaleValue = &Locale{}
-			return v.LocaleValue.Deserialize(d)
-		case schemas.Qualification_QualificationTypeId:
-			v.QualificationTypeId = new(string)
-			return d.ReadString(schemas.Qualification_QualificationTypeId, v.QualificationTypeId)
-		case schemas.Qualification_Status:
-			var ev string
-			if err := d.ReadString(schemas.Qualification_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = QualificationStatus(ev)
-			return nil
-		case schemas.Qualification_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.Qualification_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
 }
 
 //	The QualificationRequest data structure represents a request a Worker has made
@@ -900,58 +367,6 @@ type QualificationRequest struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *QualificationRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QualificationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QualificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Answer != nil {
-		s.WriteString(schemas.QualificationRequest_Answer, *v.Answer)
-	}
-	if v.QualificationRequestId != nil {
-		s.WriteString(schemas.QualificationRequest_QualificationRequestId, *v.QualificationRequestId)
-	}
-	if v.QualificationTypeId != nil {
-		s.WriteString(schemas.QualificationRequest_QualificationTypeId, *v.QualificationTypeId)
-	}
-	if v.SubmitTime != nil {
-		s.WriteTime(schemas.QualificationRequest_SubmitTime, *v.SubmitTime)
-	}
-	if v.Test != nil {
-		s.WriteString(schemas.QualificationRequest_Test, *v.Test)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.QualificationRequest_WorkerId, *v.WorkerId)
-	}
-}
-func (v *QualificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QualificationRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QualificationRequest_Answer:
-			v.Answer = new(string)
-			return d.ReadString(schemas.QualificationRequest_Answer, v.Answer)
-		case schemas.QualificationRequest_QualificationRequestId:
-			v.QualificationRequestId = new(string)
-			return d.ReadString(schemas.QualificationRequest_QualificationRequestId, v.QualificationRequestId)
-		case schemas.QualificationRequest_QualificationTypeId:
-			v.QualificationTypeId = new(string)
-			return d.ReadString(schemas.QualificationRequest_QualificationTypeId, v.QualificationTypeId)
-		case schemas.QualificationRequest_SubmitTime:
-			v.SubmitTime = new(time.Time)
-			return d.ReadTime(schemas.QualificationRequest_SubmitTime, v.SubmitTime)
-		case schemas.QualificationRequest_Test:
-			v.Test = new(string)
-			return d.ReadString(schemas.QualificationRequest_Test, v.Test)
-		case schemas.QualificationRequest_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.QualificationRequest_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
 }
 
 //	The QualificationRequirement data structure describes a Qualification that a
@@ -1032,60 +447,6 @@ type QualificationRequirement struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QualificationRequirement) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QualificationRequirement)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QualificationRequirement) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionsGuarded != "" {
-		s.WriteString(schemas.QualificationRequirement_ActionsGuarded, string(v.ActionsGuarded))
-	}
-	if v.Comparator != "" {
-		s.WriteString(schemas.QualificationRequirement_Comparator, string(v.Comparator))
-	}
-	serializeIntegerList(s, schemas.QualificationRequirement_IntegerValues, v.IntegerValues)
-	serializeLocaleList(s, schemas.QualificationRequirement_LocaleValues, v.LocaleValues)
-	if v.QualificationTypeId != nil {
-		s.WriteString(schemas.QualificationRequirement_QualificationTypeId, *v.QualificationTypeId)
-	}
-	if v.RequiredToPreview != nil {
-		s.WriteBool(schemas.QualificationRequirement_RequiredToPreview, *v.RequiredToPreview)
-	}
-}
-func (v *QualificationRequirement) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QualificationRequirement, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QualificationRequirement_ActionsGuarded:
-			var ev string
-			if err := d.ReadString(schemas.QualificationRequirement_ActionsGuarded, &ev); err != nil {
-				return err
-			}
-			v.ActionsGuarded = HITAccessActions(ev)
-			return nil
-		case schemas.QualificationRequirement_Comparator:
-			var ev string
-			if err := d.ReadString(schemas.QualificationRequirement_Comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = Comparator(ev)
-			return nil
-		case schemas.QualificationRequirement_IntegerValues:
-			return deserializeIntegerList(d, schemas.QualificationRequirement_IntegerValues, &v.IntegerValues)
-		case schemas.QualificationRequirement_LocaleValues:
-			return deserializeLocaleList(d, schemas.QualificationRequirement_LocaleValues, &v.LocaleValues)
-		case schemas.QualificationRequirement_QualificationTypeId:
-			v.QualificationTypeId = new(string)
-			return d.ReadString(schemas.QualificationRequirement_QualificationTypeId, v.QualificationTypeId)
-		case schemas.QualificationRequirement_RequiredToPreview:
-			v.RequiredToPreview = new(bool)
-			return d.ReadBool(schemas.QualificationRequirement_RequiredToPreview, v.RequiredToPreview)
-		}
-		return nil
-	})
-}
-
 //	The QualificationType data structure represents a Qualification type, a
 //
 // description of a property of a Worker that must match the requirements of a HIT
@@ -1158,104 +519,6 @@ type QualificationType struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QualificationType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QualificationType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QualificationType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnswerKey != nil {
-		s.WriteString(schemas.QualificationType_AnswerKey, *v.AnswerKey)
-	}
-	if v.AutoGranted != nil {
-		s.WriteBool(schemas.QualificationType_AutoGranted, *v.AutoGranted)
-	}
-	if v.AutoGrantedValue != nil {
-		s.WriteInt32(schemas.QualificationType_AutoGrantedValue, *v.AutoGrantedValue)
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.QualificationType_CreationTime, *v.CreationTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.QualificationType_Description, *v.Description)
-	}
-	if v.IsRequestable != nil {
-		s.WriteBool(schemas.QualificationType_IsRequestable, *v.IsRequestable)
-	}
-	if v.Keywords != nil {
-		s.WriteString(schemas.QualificationType_Keywords, *v.Keywords)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.QualificationType_Name, *v.Name)
-	}
-	if v.QualificationTypeId != nil {
-		s.WriteString(schemas.QualificationType_QualificationTypeId, *v.QualificationTypeId)
-	}
-	if v.QualificationTypeStatus != "" {
-		s.WriteString(schemas.QualificationType_QualificationTypeStatus, string(v.QualificationTypeStatus))
-	}
-	if v.RetryDelayInSeconds != nil {
-		s.WriteInt64(schemas.QualificationType_RetryDelayInSeconds, *v.RetryDelayInSeconds)
-	}
-	if v.Test != nil {
-		s.WriteString(schemas.QualificationType_Test, *v.Test)
-	}
-	if v.TestDurationInSeconds != nil {
-		s.WriteInt64(schemas.QualificationType_TestDurationInSeconds, *v.TestDurationInSeconds)
-	}
-}
-func (v *QualificationType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QualificationType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QualificationType_AnswerKey:
-			v.AnswerKey = new(string)
-			return d.ReadString(schemas.QualificationType_AnswerKey, v.AnswerKey)
-		case schemas.QualificationType_AutoGranted:
-			v.AutoGranted = new(bool)
-			return d.ReadBool(schemas.QualificationType_AutoGranted, v.AutoGranted)
-		case schemas.QualificationType_AutoGrantedValue:
-			v.AutoGrantedValue = new(int32)
-			return d.ReadInt32(schemas.QualificationType_AutoGrantedValue, v.AutoGrantedValue)
-		case schemas.QualificationType_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.QualificationType_CreationTime, v.CreationTime)
-		case schemas.QualificationType_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.QualificationType_Description, v.Description)
-		case schemas.QualificationType_IsRequestable:
-			v.IsRequestable = new(bool)
-			return d.ReadBool(schemas.QualificationType_IsRequestable, v.IsRequestable)
-		case schemas.QualificationType_Keywords:
-			v.Keywords = new(string)
-			return d.ReadString(schemas.QualificationType_Keywords, v.Keywords)
-		case schemas.QualificationType_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.QualificationType_Name, v.Name)
-		case schemas.QualificationType_QualificationTypeId:
-			v.QualificationTypeId = new(string)
-			return d.ReadString(schemas.QualificationType_QualificationTypeId, v.QualificationTypeId)
-		case schemas.QualificationType_QualificationTypeStatus:
-			var ev string
-			if err := d.ReadString(schemas.QualificationType_QualificationTypeStatus, &ev); err != nil {
-				return err
-			}
-			v.QualificationTypeStatus = QualificationTypeStatus(ev)
-			return nil
-		case schemas.QualificationType_RetryDelayInSeconds:
-			v.RetryDelayInSeconds = new(int64)
-			return d.ReadInt64(schemas.QualificationType_RetryDelayInSeconds, v.RetryDelayInSeconds)
-		case schemas.QualificationType_Test:
-			v.Test = new(string)
-			return d.ReadString(schemas.QualificationType_Test, v.Test)
-		case schemas.QualificationType_TestDurationInSeconds:
-			v.TestDurationInSeconds = new(int64)
-			return d.ReadInt64(schemas.QualificationType_TestDurationInSeconds, v.TestDurationInSeconds)
-		}
-		return nil
-	})
-}
-
 //	Both the AssignmentReviewReport and the HITReviewReport elements contains the
 //
 // ReviewActionDetail data structure. This structure is returned multiple times for
@@ -1292,74 +555,6 @@ type ReviewActionDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReviewActionDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReviewActionDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReviewActionDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionId != nil {
-		s.WriteString(schemas.ReviewActionDetail_ActionId, *v.ActionId)
-	}
-	if v.ActionName != nil {
-		s.WriteString(schemas.ReviewActionDetail_ActionName, *v.ActionName)
-	}
-	if v.CompleteTime != nil {
-		s.WriteTime(schemas.ReviewActionDetail_CompleteTime, *v.CompleteTime)
-	}
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.ReviewActionDetail_ErrorCode, *v.ErrorCode)
-	}
-	if v.Result != nil {
-		s.WriteString(schemas.ReviewActionDetail_Result, *v.Result)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ReviewActionDetail_Status, string(v.Status))
-	}
-	if v.TargetId != nil {
-		s.WriteString(schemas.ReviewActionDetail_TargetId, *v.TargetId)
-	}
-	if v.TargetType != nil {
-		s.WriteString(schemas.ReviewActionDetail_TargetType, *v.TargetType)
-	}
-}
-func (v *ReviewActionDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReviewActionDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReviewActionDetail_ActionId:
-			v.ActionId = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_ActionId, v.ActionId)
-		case schemas.ReviewActionDetail_ActionName:
-			v.ActionName = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_ActionName, v.ActionName)
-		case schemas.ReviewActionDetail_CompleteTime:
-			v.CompleteTime = new(time.Time)
-			return d.ReadTime(schemas.ReviewActionDetail_CompleteTime, v.CompleteTime)
-		case schemas.ReviewActionDetail_ErrorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_ErrorCode, v.ErrorCode)
-		case schemas.ReviewActionDetail_Result:
-			v.Result = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_Result, v.Result)
-		case schemas.ReviewActionDetail_Status:
-			var ev string
-			if err := d.ReadString(schemas.ReviewActionDetail_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ReviewActionStatus(ev)
-			return nil
-		case schemas.ReviewActionDetail_TargetId:
-			v.TargetId = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_TargetId, v.TargetId)
-		case schemas.ReviewActionDetail_TargetType:
-			v.TargetType = new(string)
-			return d.ReadString(schemas.ReviewActionDetail_TargetType, v.TargetType)
-		}
-		return nil
-	})
-}
-
 //	HIT Review Policy data structures represent HIT review policies, which you
 //
 // specify when you create a HIT.
@@ -1377,31 +572,6 @@ type ReviewPolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReviewPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReviewPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReviewPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyParameterList(s, schemas.ReviewPolicy_Parameters, v.Parameters)
-	if v.PolicyName != nil {
-		s.WriteString(schemas.ReviewPolicy_PolicyName, *v.PolicyName)
-	}
-}
-func (v *ReviewPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReviewPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReviewPolicy_Parameters:
-			return deserializePolicyParameterList(d, schemas.ReviewPolicy_Parameters, &v.Parameters)
-		case schemas.ReviewPolicy_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.ReviewPolicy_PolicyName, v.PolicyName)
-		}
-		return nil
-	})
-}
-
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
 type ReviewReport struct {
 
@@ -1413,28 +583,6 @@ type ReviewReport struct {
 	ReviewResults []ReviewResultDetail
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReviewReport) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReviewReport)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReviewReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReviewActionDetailList(s, schemas.ReviewReport_ReviewActions, v.ReviewActions)
-	serializeReviewResultDetailList(s, schemas.ReviewReport_ReviewResults, v.ReviewResults)
-}
-func (v *ReviewReport) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReviewReport, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReviewReport_ReviewActions:
-			return deserializeReviewActionDetailList(d, schemas.ReviewReport_ReviewActions, &v.ReviewActions)
-		case schemas.ReviewReport_ReviewResults:
-			return deserializeReviewResultDetailList(d, schemas.ReviewReport_ReviewResults, &v.ReviewResults)
-		}
-		return nil
-	})
 }
 
 //	This data structure is returned multiple times for each result specified in
@@ -1471,58 +619,6 @@ type ReviewResultDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReviewResultDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReviewResultDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReviewResultDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionId != nil {
-		s.WriteString(schemas.ReviewResultDetail_ActionId, *v.ActionId)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.ReviewResultDetail_Key, *v.Key)
-	}
-	if v.QuestionId != nil {
-		s.WriteString(schemas.ReviewResultDetail_QuestionId, *v.QuestionId)
-	}
-	if v.SubjectId != nil {
-		s.WriteString(schemas.ReviewResultDetail_SubjectId, *v.SubjectId)
-	}
-	if v.SubjectType != nil {
-		s.WriteString(schemas.ReviewResultDetail_SubjectType, *v.SubjectType)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.ReviewResultDetail_Value, *v.Value)
-	}
-}
-func (v *ReviewResultDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReviewResultDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReviewResultDetail_ActionId:
-			v.ActionId = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_ActionId, v.ActionId)
-		case schemas.ReviewResultDetail_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_Key, v.Key)
-		case schemas.ReviewResultDetail_QuestionId:
-			v.QuestionId = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_QuestionId, v.QuestionId)
-		case schemas.ReviewResultDetail_SubjectId:
-			v.SubjectId = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_SubjectId, v.SubjectId)
-		case schemas.ReviewResultDetail_SubjectType:
-			v.SubjectType = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_SubjectType, v.SubjectType)
-		case schemas.ReviewResultDetail_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.ReviewResultDetail_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 //	The WorkerBlock data structure represents a Worker who has been blocked. It
 //
 // has two elements: the WorkerId and the Reason for the block.
@@ -1535,34 +631,6 @@ type WorkerBlock struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkerBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkerBlock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkerBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Reason != nil {
-		s.WriteString(schemas.WorkerBlock_Reason, *v.Reason)
-	}
-	if v.WorkerId != nil {
-		s.WriteString(schemas.WorkerBlock_WorkerId, *v.WorkerId)
-	}
-}
-func (v *WorkerBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkerBlock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkerBlock_Reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.WorkerBlock_Reason, v.Reason)
-		case schemas.WorkerBlock_WorkerId:
-			v.WorkerId = new(string)
-			return d.ReadString(schemas.WorkerBlock_WorkerId, v.WorkerId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

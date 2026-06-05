@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type DescribeProductAsAdminInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProductAsAdminInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProductAsAdminInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProductAsAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeProductAsAdminInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeProductAsAdminInput_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeProductAsAdminInput_Name, *v.Name)
-	}
-	if v.SourcePortfolioId != nil {
-		s.WriteString(schemas.DescribeProductAsAdminInput_SourcePortfolioId, *v.SourcePortfolioId)
-	}
-}
-
 type DescribeProductAsAdminOutput struct {
 
 	// Information about the associated budgets.
@@ -102,32 +79,16 @@ type DescribeProductAsAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProductAsAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProductAsAdminOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProductAsAdminOutput_Budgets:
-			return deserializeBudgets(d, schemas.DescribeProductAsAdminOutput_Budgets, &v.Budgets)
-		case schemas.DescribeProductAsAdminOutput_ProductViewDetail:
-			v.ProductViewDetail = &types.ProductViewDetail{}
-			return v.ProductViewDetail.Deserialize(d)
-		case schemas.DescribeProductAsAdminOutput_ProvisioningArtifactSummaries:
-			return deserializeProvisioningArtifactSummaries(d, schemas.DescribeProductAsAdminOutput_ProvisioningArtifactSummaries, &v.ProvisioningArtifactSummaries)
-		case schemas.DescribeProductAsAdminOutput_TagOptions:
-			return deserializeTagOptionDetails(d, schemas.DescribeProductAsAdminOutput_TagOptions, &v.TagOptions)
-		case schemas.DescribeProductAsAdminOutput_Tags:
-			return deserializeTags(d, schemas.DescribeProductAsAdminOutput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProductAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductAsAdmin, schemas.DescribeProductAsAdminInput, schemas.DescribeProductAsAdminOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProductAsAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductAsAdmin, schemas.DescribeProductAsAdminInput, schemas.DescribeProductAsAdminOutput), output: &DescribeProductAsAdminOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProductAsAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProductAsAdmin"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type ListMicrosoftTeamsChannelConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMicrosoftTeamsChannelConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTeamsChannelConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMicrosoftTeamsChannelConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTeamsChannelConfigurationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTeamsChannelConfigurationsRequest_NextToken, *v.NextToken)
-	}
-	if v.TeamId != nil {
-		s.WriteString(schemas.ListTeamsChannelConfigurationsRequest_TeamId, *v.TeamId)
-	}
-}
-
 type ListMicrosoftTeamsChannelConfigurationsOutput struct {
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -88,26 +68,16 @@ type ListMicrosoftTeamsChannelConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMicrosoftTeamsChannelConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTeamsChannelConfigurationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTeamsChannelConfigurationsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTeamsChannelConfigurationsResult_NextToken, v.NextToken)
-		case schemas.ListTeamsChannelConfigurationsResult_TeamChannelConfigurations:
-			return deserializeTeamChannelConfigurationsList(d, schemas.ListTeamsChannelConfigurationsResult_TeamChannelConfigurations, &v.TeamChannelConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMicrosoftTeamsChannelConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsChannelConfigurations, schemas.ListTeamsChannelConfigurationsRequest, schemas.ListTeamsChannelConfigurationsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrosoftTeamsChannelConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrosoftTeamsChannelConfigurations, schemas.ListTeamsChannelConfigurationsRequest, schemas.ListTeamsChannelConfigurationsResult), output: &ListMicrosoftTeamsChannelConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrosoftTeamsChannelConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMicrosoftTeamsChannelConfigurations"); err != nil {

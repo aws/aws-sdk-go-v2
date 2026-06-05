@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateProjectRequest_clientToken, *v.ClientToken)
-	}
-	if v.ProjectDescription != nil {
-		s.WriteString(schemas.UpdateProjectRequest_projectDescription, *v.ProjectDescription)
-	}
-	if v.ProjectId != nil {
-		s.WriteString(schemas.UpdateProjectRequest_projectId, *v.ProjectId)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.UpdateProjectRequest_projectName, *v.ProjectName)
-	}
-}
-
 type UpdateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +56,16 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProject"); err != nil {

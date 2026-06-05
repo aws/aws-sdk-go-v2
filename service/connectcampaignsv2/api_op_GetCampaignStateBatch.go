@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +38,6 @@ type GetCampaignStateBatchInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateBatchInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCampaignStateBatchRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCampaignStateBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCampaignIdList(s, schemas.GetCampaignStateBatchRequest_campaignIds, v.CampaignIds)
-}
-
 // The response for GetCampaignStateBatch API.
 type GetCampaignStateBatchOutput struct {
 
@@ -65,25 +53,16 @@ type GetCampaignStateBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCampaignStateBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCampaignStateBatchResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCampaignStateBatchResponse_failedRequests:
-			return deserializeFailedCampaignStateResponseList(d, schemas.GetCampaignStateBatchResponse_failedRequests, &v.FailedRequests)
-		case schemas.GetCampaignStateBatchResponse_successfulRequests:
-			return deserializeSuccessfulCampaignStateResponseList(d, schemas.GetCampaignStateBatchResponse_successfulRequests, &v.SuccessfulRequests)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCampaignStateBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignStateBatch, schemas.GetCampaignStateBatchRequest, schemas.GetCampaignStateBatchResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignStateBatch{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignStateBatch, schemas.GetCampaignStateBatchRequest, schemas.GetCampaignStateBatchResponse), output: &GetCampaignStateBatchOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaignStateBatch{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCampaignStateBatch"); err != nil {

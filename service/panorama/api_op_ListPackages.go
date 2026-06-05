@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,33 +39,6 @@ type ListPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackagesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListPackagesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackagesRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListPackagesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackagesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackagesRequest_MaxResults:
-			return d.ReadInt32(schemas.ListPackagesRequest_MaxResults, &v.MaxResults)
-		case schemas.ListPackagesRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackagesRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListPackagesOutput struct {
 
 	// A pagination token that's included if more results are available.
@@ -82,38 +53,16 @@ type ListPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackagesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackagesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackagesResponse_NextToken, *v.NextToken)
-	}
-	serializePackageList(s, schemas.ListPackagesResponse_Packages, v.Packages)
-}
-func (v *ListPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackagesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackagesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackagesResponse_NextToken, v.NextToken)
-		case schemas.ListPackagesResponse_Packages:
-			return deserializePackageList(d, schemas.ListPackagesResponse_Packages, &v.Packages)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResponse), output: &ListPackagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPackages"); err != nil {

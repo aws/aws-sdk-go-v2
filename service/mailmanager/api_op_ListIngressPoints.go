@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListIngressPointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngressPointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIngressPointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIngressPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIngressPointsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListIngressPointsRequest_PageSize, *v.PageSize)
-	}
-}
-
 type ListIngressPointsOutput struct {
 
 	// The list of ingress endpoints.
@@ -73,26 +56,16 @@ type ListIngressPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngressPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIngressPointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIngressPointsResponse_IngressPoints:
-			return deserializeIngressPointsList(d, schemas.ListIngressPointsResponse_IngressPoints, &v.IngressPoints)
-		case schemas.ListIngressPointsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIngressPointsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIngressPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngressPoints, schemas.ListIngressPointsRequest, schemas.ListIngressPointsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListIngressPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngressPoints, schemas.ListIngressPointsRequest, schemas.ListIngressPointsResponse), output: &ListIngressPointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListIngressPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIngressPoints"); err != nil {

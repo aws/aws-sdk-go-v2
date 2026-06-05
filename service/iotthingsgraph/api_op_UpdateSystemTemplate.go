@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,26 +56,6 @@ type UpdateSystemTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSystemTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateSystemTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateSystemTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompatibleNamespaceVersion != nil {
-		s.WriteInt64(schemas.UpdateSystemTemplateRequest_compatibleNamespaceVersion, *v.CompatibleNamespaceVersion)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.UpdateSystemTemplateRequest_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateSystemTemplateRequest_id, *v.Id)
-	}
-}
-
 type UpdateSystemTemplateOutput struct {
 
 	// An object containing summary information about the updated system.
@@ -89,24 +67,16 @@ type UpdateSystemTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateSystemTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateSystemTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateSystemTemplateResponse_summary:
-			v.Summary = &types.SystemTemplateSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSystemTemplate, schemas.UpdateSystemTemplateRequest, schemas.UpdateSystemTemplateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSystemTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSystemTemplate, schemas.UpdateSystemTemplateRequest, schemas.UpdateSystemTemplateResponse), output: &UpdateSystemTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSystemTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSystemTemplate"); err != nil {

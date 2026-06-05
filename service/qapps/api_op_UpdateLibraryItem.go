@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,25 +47,6 @@ type UpdateLibraryItemInput struct {
 	Status types.LibraryItemStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateLibraryItemInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryIdList(s, schemas.UpdateLibraryItemInput_categories, v.Categories)
-	if v.InstanceId != nil {
-		s.WriteString(schemas.UpdateLibraryItemInput_instanceId, *v.InstanceId)
-	}
-	if v.LibraryItemId != nil {
-		s.WriteString(schemas.UpdateLibraryItemInput_libraryItemId, *v.LibraryItemId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateLibraryItemInput_status, string(v.Status))
-	}
 }
 
 type UpdateLibraryItemOutput struct {
@@ -133,59 +112,16 @@ type UpdateLibraryItemOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLibraryItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateLibraryItemOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateLibraryItemOutput_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.UpdateLibraryItemOutput_appId, v.AppId)
-		case schemas.UpdateLibraryItemOutput_appVersion:
-			v.AppVersion = new(int32)
-			return d.ReadInt32(schemas.UpdateLibraryItemOutput_appVersion, v.AppVersion)
-		case schemas.UpdateLibraryItemOutput_categories:
-			return deserializeCategoryList(d, schemas.UpdateLibraryItemOutput_categories, &v.Categories)
-		case schemas.UpdateLibraryItemOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateLibraryItemOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateLibraryItemOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.UpdateLibraryItemOutput_createdBy, v.CreatedBy)
-		case schemas.UpdateLibraryItemOutput_isRatedByUser:
-			v.IsRatedByUser = new(bool)
-			return d.ReadBool(schemas.UpdateLibraryItemOutput_isRatedByUser, v.IsRatedByUser)
-		case schemas.UpdateLibraryItemOutput_isVerified:
-			v.IsVerified = new(bool)
-			return d.ReadBool(schemas.UpdateLibraryItemOutput_isVerified, v.IsVerified)
-		case schemas.UpdateLibraryItemOutput_libraryItemId:
-			v.LibraryItemId = new(string)
-			return d.ReadString(schemas.UpdateLibraryItemOutput_libraryItemId, v.LibraryItemId)
-		case schemas.UpdateLibraryItemOutput_ratingCount:
-			v.RatingCount = new(int32)
-			return d.ReadInt32(schemas.UpdateLibraryItemOutput_ratingCount, v.RatingCount)
-		case schemas.UpdateLibraryItemOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.UpdateLibraryItemOutput_status, v.Status)
-		case schemas.UpdateLibraryItemOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateLibraryItemOutput_updatedAt, v.UpdatedAt)
-		case schemas.UpdateLibraryItemOutput_updatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.UpdateLibraryItemOutput_updatedBy, v.UpdatedBy)
-		case schemas.UpdateLibraryItemOutput_userCount:
-			v.UserCount = new(int32)
-			return d.ReadInt32(schemas.UpdateLibraryItemOutput_userCount, v.UserCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLibraryItem, schemas.UpdateLibraryItemInput, schemas.UpdateLibraryItemOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLibraryItem, schemas.UpdateLibraryItemInput, schemas.UpdateLibraryItemOutput), output: &UpdateLibraryItemOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLibraryItem{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLibraryItem"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,24 +59,6 @@ type DescribeRuleGroupSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRuleGroupSummaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRuleGroupSummaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRuleGroupSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleGroupArn != nil {
-		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_RuleGroupArn, *v.RuleGroupArn)
-	}
-	if v.RuleGroupName != nil {
-		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_RuleGroupName, *v.RuleGroupName)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_Type, string(v.Type))
-	}
-}
-
 type DescribeRuleGroupSummaryOutput struct {
 
 	// The descriptive name of the rule group. You can't change the name of a rule
@@ -108,30 +88,16 @@ type DescribeRuleGroupSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRuleGroupSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRuleGroupSummaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRuleGroupSummaryResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupSummaryResponse_Description, v.Description)
-		case schemas.DescribeRuleGroupSummaryResponse_RuleGroupName:
-			v.RuleGroupName = new(string)
-			return d.ReadString(schemas.DescribeRuleGroupSummaryResponse_RuleGroupName, v.RuleGroupName)
-		case schemas.DescribeRuleGroupSummaryResponse_Summary:
-			v.Summary = &types.Summary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRuleGroupSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupSummary, schemas.DescribeRuleGroupSummaryRequest, schemas.DescribeRuleGroupSummaryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRuleGroupSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupSummary, schemas.DescribeRuleGroupSummaryRequest, schemas.DescribeRuleGroupSummaryResponse), output: &DescribeRuleGroupSummaryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRuleGroupSummary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRuleGroupSummary"); err != nil {

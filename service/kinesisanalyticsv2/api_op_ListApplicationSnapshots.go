@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListApplicationSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationSnapshotsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.ListApplicationSnapshotsRequest_ApplicationName, *v.ApplicationName)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListApplicationSnapshotsRequest_Limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationSnapshotsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListApplicationSnapshotsOutput struct {
 
 	// The token for the next set of results, or null if there are no additional
@@ -81,26 +61,16 @@ type ListApplicationSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationSnapshotsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationSnapshotsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationSnapshotsResponse_NextToken, v.NextToken)
-		case schemas.ListApplicationSnapshotsResponse_SnapshotSummaries:
-			return deserializeSnapshotSummaries(d, schemas.ListApplicationSnapshotsResponse_SnapshotSummaries, &v.SnapshotSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationSnapshots, schemas.ListApplicationSnapshotsRequest, schemas.ListApplicationSnapshotsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationSnapshots{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationSnapshots, schemas.ListApplicationSnapshotsRequest, schemas.ListApplicationSnapshotsResponse), output: &ListApplicationSnapshotsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationSnapshots{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationSnapshots"); err != nil {

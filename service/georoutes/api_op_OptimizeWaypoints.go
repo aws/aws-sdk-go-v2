@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -113,70 +111,6 @@ type OptimizeWaypointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OptimizeWaypointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OptimizeWaypointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OptimizeWaypointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Avoid != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_Avoid)
-		v.Avoid.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Clustering != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_Clustering)
-		v.Clustering.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DepartureTime != nil {
-		s.WriteString(schemas.OptimizeWaypointsRequest_DepartureTime, *v.DepartureTime)
-	}
-	serializePosition(s, schemas.OptimizeWaypointsRequest_Destination, v.Destination)
-	if v.DestinationOptions != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_DestinationOptions)
-		v.DestinationOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Driver != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_Driver)
-		v.Driver.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Exclude != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_Exclude)
-		v.Exclude.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.OptimizeWaypointsRequest_Key, *v.Key)
-	}
-	if v.OptimizeSequencingFor != "" {
-		s.WriteString(schemas.OptimizeWaypointsRequest_OptimizeSequencingFor, string(v.OptimizeSequencingFor))
-	}
-	serializePosition(s, schemas.OptimizeWaypointsRequest_Origin, v.Origin)
-	if v.OriginOptions != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_OriginOptions)
-		v.OriginOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Traffic != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_Traffic)
-		v.Traffic.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TravelMode != "" {
-		s.WriteString(schemas.OptimizeWaypointsRequest_TravelMode, string(v.TravelMode))
-	}
-	if v.TravelModeOptions != nil {
-		s.WriteStruct(schemas.OptimizeWaypointsRequest_TravelModeOptions)
-		v.TravelModeOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeWaypointOptimizationWaypointList(s, schemas.OptimizeWaypointsRequest_Waypoints, v.Waypoints)
-}
-
 type OptimizeWaypointsOutput struct {
 
 	// Details about the connection from one waypoint to the next, within the
@@ -224,37 +158,16 @@ type OptimizeWaypointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OptimizeWaypointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OptimizeWaypointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OptimizeWaypointsResponse_Connections:
-			return deserializeWaypointOptimizationConnectionList(d, schemas.OptimizeWaypointsResponse_Connections, &v.Connections)
-		case schemas.OptimizeWaypointsResponse_Distance:
-			return d.ReadInt64(schemas.OptimizeWaypointsResponse_Distance, &v.Distance)
-		case schemas.OptimizeWaypointsResponse_Duration:
-			return d.ReadInt64(schemas.OptimizeWaypointsResponse_Duration, &v.Duration)
-		case schemas.OptimizeWaypointsResponse_ImpedingWaypoints:
-			return deserializeWaypointOptimizationImpedingWaypointList(d, schemas.OptimizeWaypointsResponse_ImpedingWaypoints, &v.ImpedingWaypoints)
-		case schemas.OptimizeWaypointsResponse_OptimizedWaypoints:
-			return deserializeWaypointOptimizationOptimizedWaypointList(d, schemas.OptimizeWaypointsResponse_OptimizedWaypoints, &v.OptimizedWaypoints)
-		case schemas.OptimizeWaypointsResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.OptimizeWaypointsResponse_PricingBucket, v.PricingBucket)
-		case schemas.OptimizeWaypointsResponse_TimeBreakdown:
-			v.TimeBreakdown = &types.WaypointOptimizationTimeBreakdown{}
-			return v.TimeBreakdown.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationOptimizeWaypointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizeWaypoints, schemas.OptimizeWaypointsRequest, schemas.OptimizeWaypointsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpOptimizeWaypoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizeWaypoints, schemas.OptimizeWaypointsRequest, schemas.OptimizeWaypointsResponse), output: &OptimizeWaypointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpOptimizeWaypoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "OptimizeWaypoints"); err != nil {

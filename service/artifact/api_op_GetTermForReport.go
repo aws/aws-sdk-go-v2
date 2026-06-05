@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type GetTermForReportInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTermForReportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTermForReportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTermForReportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReportId != nil {
-		s.WriteString(schemas.GetTermForReportRequest_reportId, *v.ReportId)
-	}
-	if v.ReportVersion != nil {
-		s.WriteInt64(schemas.GetTermForReportRequest_reportVersion, *v.ReportVersion)
-	}
-}
-
 type GetTermForReportOutput struct {
 
 	// Presigned S3 url to access the term content.
@@ -70,27 +53,16 @@ type GetTermForReportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTermForReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTermForReportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTermForReportResponse_documentPresignedUrl:
-			v.DocumentPresignedUrl = new(string)
-			return d.ReadString(schemas.GetTermForReportResponse_documentPresignedUrl, v.DocumentPresignedUrl)
-		case schemas.GetTermForReportResponse_termToken:
-			v.TermToken = new(string)
-			return d.ReadString(schemas.GetTermForReportResponse_termToken, v.TermToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTermForReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTermForReport, schemas.GetTermForReportRequest, schemas.GetTermForReportResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTermForReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTermForReport, schemas.GetTermForReportRequest, schemas.GetTermForReportResponse), output: &GetTermForReportOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTermForReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTermForReport"); err != nil {

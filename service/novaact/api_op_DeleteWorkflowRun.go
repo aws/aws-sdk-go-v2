@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteWorkflowRunRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.DeleteWorkflowRunRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.DeleteWorkflowRunRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type DeleteWorkflowRunOutput struct {
 
 	// The status of the workflow run after deletion request.
@@ -73,28 +56,16 @@ type DeleteWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteWorkflowRunResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteWorkflowRunResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteWorkflowRunResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.WorkflowRunStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowRun, schemas.DeleteWorkflowRunRequest, schemas.DeleteWorkflowRunResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkflowRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowRun, schemas.DeleteWorkflowRunRequest, schemas.DeleteWorkflowRunResponse), output: &DeleteWorkflowRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkflowRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWorkflowRun"); err != nil {

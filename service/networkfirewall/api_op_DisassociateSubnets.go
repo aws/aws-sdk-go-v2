@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,25 +66,6 @@ type DisassociateSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateSubnetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateSubnetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FirewallArn != nil {
-		s.WriteString(schemas.DisassociateSubnetsRequest_FirewallArn, *v.FirewallArn)
-	}
-	if v.FirewallName != nil {
-		s.WriteString(schemas.DisassociateSubnetsRequest_FirewallName, *v.FirewallName)
-	}
-	serializeAzSubnets(s, schemas.DisassociateSubnetsRequest_SubnetIds, v.SubnetIds)
-	if v.UpdateToken != nil {
-		s.WriteString(schemas.DisassociateSubnetsRequest_UpdateToken, *v.UpdateToken)
-	}
-}
-
 type DisassociateSubnetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -121,32 +100,16 @@ type DisassociateSubnetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateSubnetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateSubnetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateSubnetsResponse_FirewallArn:
-			v.FirewallArn = new(string)
-			return d.ReadString(schemas.DisassociateSubnetsResponse_FirewallArn, v.FirewallArn)
-		case schemas.DisassociateSubnetsResponse_FirewallName:
-			v.FirewallName = new(string)
-			return d.ReadString(schemas.DisassociateSubnetsResponse_FirewallName, v.FirewallName)
-		case schemas.DisassociateSubnetsResponse_SubnetMappings:
-			return deserializeSubnetMappings(d, schemas.DisassociateSubnetsResponse_SubnetMappings, &v.SubnetMappings)
-		case schemas.DisassociateSubnetsResponse_UpdateToken:
-			v.UpdateToken = new(string)
-			return d.ReadString(schemas.DisassociateSubnetsResponse_UpdateToken, v.UpdateToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSubnets, schemas.DisassociateSubnetsRequest, schemas.DisassociateSubnetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateSubnets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSubnets, schemas.DisassociateSubnetsRequest, schemas.DisassociateSubnetsResponse), output: &DisassociateSubnetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateSubnets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateSubnets"); err != nil {

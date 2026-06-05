@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,42 +73,6 @@ type RegisterOidcConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOidcConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterOidcConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterOidcConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompanyId != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_companyId, *v.CompanyId)
-	}
-	if v.CustomUsername != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_customUsername, *v.CustomUsername)
-	}
-	if v.ExtraAuthParams != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_extraAuthParams, *v.ExtraAuthParams)
-	}
-	if v.Issuer != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_issuer, *v.Issuer)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_networkId, *v.NetworkId)
-	}
-	if v.Scopes != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_scopes, *v.Scopes)
-	}
-	if v.Secret != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_secret, *v.Secret)
-	}
-	if v.SsoTokenBufferMinutes != nil {
-		s.WriteInt32(schemas.RegisterOidcConfigRequest_ssoTokenBufferMinutes, *v.SsoTokenBufferMinutes)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.RegisterOidcConfigRequest_userId, *v.UserId)
-	}
-}
-
 type RegisterOidcConfigOutput struct {
 
 	// Custom identifier your end users will use to sign in with SSO.
@@ -167,63 +129,16 @@ type RegisterOidcConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterOidcConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterOidcConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterOidcConfigResponse_applicationId:
-			v.ApplicationId = new(int32)
-			return d.ReadInt32(schemas.RegisterOidcConfigResponse_applicationId, v.ApplicationId)
-		case schemas.RegisterOidcConfigResponse_applicationName:
-			v.ApplicationName = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_applicationName, v.ApplicationName)
-		case schemas.RegisterOidcConfigResponse_caCertificate:
-			v.CaCertificate = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_caCertificate, v.CaCertificate)
-		case schemas.RegisterOidcConfigResponse_clientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_clientId, v.ClientId)
-		case schemas.RegisterOidcConfigResponse_clientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_clientSecret, v.ClientSecret)
-		case schemas.RegisterOidcConfigResponse_companyId:
-			v.CompanyId = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_companyId, v.CompanyId)
-		case schemas.RegisterOidcConfigResponse_customUsername:
-			v.CustomUsername = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_customUsername, v.CustomUsername)
-		case schemas.RegisterOidcConfigResponse_extraAuthParams:
-			v.ExtraAuthParams = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_extraAuthParams, v.ExtraAuthParams)
-		case schemas.RegisterOidcConfigResponse_issuer:
-			v.Issuer = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_issuer, v.Issuer)
-		case schemas.RegisterOidcConfigResponse_redirectUrl:
-			v.RedirectUrl = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_redirectUrl, v.RedirectUrl)
-		case schemas.RegisterOidcConfigResponse_scopes:
-			v.Scopes = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_scopes, v.Scopes)
-		case schemas.RegisterOidcConfigResponse_secret:
-			v.Secret = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_secret, v.Secret)
-		case schemas.RegisterOidcConfigResponse_ssoTokenBufferMinutes:
-			v.SsoTokenBufferMinutes = new(int32)
-			return d.ReadInt32(schemas.RegisterOidcConfigResponse_ssoTokenBufferMinutes, v.SsoTokenBufferMinutes)
-		case schemas.RegisterOidcConfigResponse_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.RegisterOidcConfigResponse_userId, v.UserId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterOidcConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOidcConfig, schemas.RegisterOidcConfigRequest, schemas.RegisterOidcConfigResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterOidcConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOidcConfig, schemas.RegisterOidcConfigRequest, schemas.RegisterOidcConfigResponse), output: &RegisterOidcConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterOidcConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterOidcConfig"); err != nil {

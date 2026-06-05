@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,28 +65,6 @@ type StartParticipantReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartParticipantReplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartParticipantReplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartParticipantReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantAttributes(s, schemas.StartParticipantReplicationRequest_attributes, v.Attributes)
-	if v.DestinationStageArn != nil {
-		s.WriteString(schemas.StartParticipantReplicationRequest_destinationStageArn, *v.DestinationStageArn)
-	}
-	if v.ParticipantId != nil {
-		s.WriteString(schemas.StartParticipantReplicationRequest_participantId, *v.ParticipantId)
-	}
-	if v.ReconnectWindowSeconds != nil {
-		s.WriteInt32(schemas.StartParticipantReplicationRequest_reconnectWindowSeconds, *v.ReconnectWindowSeconds)
-	}
-	if v.SourceStageArn != nil {
-		s.WriteString(schemas.StartParticipantReplicationRequest_sourceStageArn, *v.SourceStageArn)
-	}
-}
-
 type StartParticipantReplicationOutput struct {
 
 	// See [Access-Control-Allow-Origin] in the MDN Web Docs.
@@ -132,42 +108,16 @@ type StartParticipantReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartParticipantReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartParticipantReplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartParticipantReplicationResponse_accessControlAllowOrigin:
-			v.AccessControlAllowOrigin = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
-		case schemas.StartParticipantReplicationResponse_accessControlExposeHeaders:
-			v.AccessControlExposeHeaders = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
-		case schemas.StartParticipantReplicationResponse_cacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_cacheControl, v.CacheControl)
-		case schemas.StartParticipantReplicationResponse_contentSecurityPolicy:
-			v.ContentSecurityPolicy = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
-		case schemas.StartParticipantReplicationResponse_strictTransportSecurity:
-			v.StrictTransportSecurity = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_strictTransportSecurity, v.StrictTransportSecurity)
-		case schemas.StartParticipantReplicationResponse_xContentTypeOptions:
-			v.XContentTypeOptions = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_xContentTypeOptions, v.XContentTypeOptions)
-		case schemas.StartParticipantReplicationResponse_xFrameOptions:
-			v.XFrameOptions = new(string)
-			return d.ReadString(schemas.StartParticipantReplicationResponse_xFrameOptions, v.XFrameOptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartParticipantReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartParticipantReplication, schemas.StartParticipantReplicationRequest, schemas.StartParticipantReplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartParticipantReplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartParticipantReplication, schemas.StartParticipantReplicationRequest, schemas.StartParticipantReplicationResponse), output: &StartParticipantReplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartParticipantReplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartParticipantReplication"); err != nil {

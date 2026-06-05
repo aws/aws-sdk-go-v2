@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListEventConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEventConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEventConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEventConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListEventConfigurationsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEventConfigurationsRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.ListEventConfigurationsRequest_ResourceType, string(v.ResourceType))
-	}
-}
-
 type ListEventConfigurationsOutput struct {
 
 	// Event configurations of all events for a single resource.
@@ -79,26 +59,16 @@ type ListEventConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEventConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEventConfigurationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEventConfigurationsResponse_EventConfigurationsList:
-			return deserializeEventConfigurationsList(d, schemas.ListEventConfigurationsResponse_EventConfigurationsList, &v.EventConfigurationsList)
-		case schemas.ListEventConfigurationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEventConfigurationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventConfigurations, schemas.ListEventConfigurationsRequest, schemas.ListEventConfigurationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventConfigurations, schemas.ListEventConfigurationsRequest, schemas.ListEventConfigurationsResponse), output: &ListEventConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEventConfigurations"); err != nil {

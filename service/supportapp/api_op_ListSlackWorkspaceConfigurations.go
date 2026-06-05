@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,28 +39,6 @@ type ListSlackWorkspaceConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSlackWorkspaceConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSlackWorkspaceConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSlackWorkspaceConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSlackWorkspaceConfigurationsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListSlackWorkspaceConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSlackWorkspaceConfigurationsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSlackWorkspaceConfigurationsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSlackWorkspaceConfigurationsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListSlackWorkspaceConfigurationsOutput struct {
 
 	// The point where pagination should resume when the response returns only partial
@@ -78,38 +54,16 @@ type ListSlackWorkspaceConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSlackWorkspaceConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSlackWorkspaceConfigurationsResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSlackWorkspaceConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSlackWorkspaceConfigurationsResult_nextToken, *v.NextToken)
-	}
-	serializeSlackWorkspaceConfigurationList(s, schemas.ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations, v.SlackWorkspaceConfigurations)
-}
-func (v *ListSlackWorkspaceConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSlackWorkspaceConfigurationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSlackWorkspaceConfigurationsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSlackWorkspaceConfigurationsResult_nextToken, v.NextToken)
-		case schemas.ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations:
-			return deserializeSlackWorkspaceConfigurationList(d, schemas.ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations, &v.SlackWorkspaceConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSlackWorkspaceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlackWorkspaceConfigurations, schemas.ListSlackWorkspaceConfigurationsRequest, schemas.ListSlackWorkspaceConfigurationsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSlackWorkspaceConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlackWorkspaceConfigurations, schemas.ListSlackWorkspaceConfigurationsRequest, schemas.ListSlackWorkspaceConfigurationsResult), output: &ListSlackWorkspaceConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSlackWorkspaceConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSlackWorkspaceConfigurations"); err != nil {

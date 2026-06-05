@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,17 +44,6 @@ type DescribeEntityAggregatesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEntityAggregatesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEntityAggregatesForOrganizationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEntityAggregatesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrganizationAccountIdsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_awsAccountIds, v.AwsAccountIds)
-	serializeOrganizationEventArnsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_eventArns, v.EventArns)
-}
-
 type DescribeEntityAggregatesForOrganizationOutput struct {
 
 	// The list of entity aggregates for each of the specified accounts that are
@@ -69,23 +56,16 @@ type DescribeEntityAggregatesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEntityAggregatesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEntityAggregatesForOrganizationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates:
-			return deserializeOrganizationEntityAggregatesList(d, schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates, &v.OrganizationEntityAggregates)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEntityAggregatesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityAggregatesForOrganization, schemas.DescribeEntityAggregatesForOrganizationRequest, schemas.DescribeEntityAggregatesForOrganizationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntityAggregatesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityAggregatesForOrganization, schemas.DescribeEntityAggregatesForOrganizationRequest, schemas.DescribeEntityAggregatesForOrganizationResponse), output: &DescribeEntityAggregatesForOrganizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntityAggregatesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEntityAggregatesForOrganization"); err != nil {

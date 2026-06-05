@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,18 +42,6 @@ type EnableDNSViewInput struct {
 	DnsViewId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EnableDNSViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnableDNSViewInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnableDNSViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DnsViewId != nil {
-		s.WriteString(schemas.EnableDNSViewInput_dnsViewId, *v.DnsViewId)
-	}
 }
 
 type EnableDNSViewOutput struct {
@@ -123,73 +109,16 @@ type EnableDNSViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnableDNSViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnableDNSViewOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EnableDNSViewOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_arn, v.Arn)
-		case schemas.EnableDNSViewOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_clientToken, v.ClientToken)
-		case schemas.EnableDNSViewOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.EnableDNSViewOutput_createdAt, v.CreatedAt)
-		case schemas.EnableDNSViewOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_description, v.Description)
-		case schemas.EnableDNSViewOutput_dnssecValidation:
-			var ev string
-			if err := d.ReadString(schemas.EnableDNSViewOutput_dnssecValidation, &ev); err != nil {
-				return err
-			}
-			v.DnssecValidation = types.DnsSecValidationType(ev)
-			return nil
-		case schemas.EnableDNSViewOutput_ednsClientSubnet:
-			var ev string
-			if err := d.ReadString(schemas.EnableDNSViewOutput_ednsClientSubnet, &ev); err != nil {
-				return err
-			}
-			v.EdnsClientSubnet = types.EdnsClientSubnetType(ev)
-			return nil
-		case schemas.EnableDNSViewOutput_firewallRulesFailOpen:
-			var ev string
-			if err := d.ReadString(schemas.EnableDNSViewOutput_firewallRulesFailOpen, &ev); err != nil {
-				return err
-			}
-			v.FirewallRulesFailOpen = types.FirewallRulesFailOpenType(ev)
-			return nil
-		case schemas.EnableDNSViewOutput_globalResolverId:
-			v.GlobalResolverId = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_globalResolverId, v.GlobalResolverId)
-		case schemas.EnableDNSViewOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_id, v.Id)
-		case schemas.EnableDNSViewOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.EnableDNSViewOutput_name, v.Name)
-		case schemas.EnableDNSViewOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.EnableDNSViewOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ProfileResourceStatus(ev)
-			return nil
-		case schemas.EnableDNSViewOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.EnableDNSViewOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationEnableDNSViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDNSView, schemas.EnableDNSViewInput, schemas.EnableDNSViewOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDNSView, schemas.EnableDNSViewInput, schemas.EnableDNSViewOutput), output: &EnableDNSViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableDNSView"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,27 +47,6 @@ type ListAudienceGenerationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAudienceGenerationJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAudienceGenerationJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAudienceGenerationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollaborationId != nil {
-		s.WriteString(schemas.ListAudienceGenerationJobsRequest_collaborationId, *v.CollaborationId)
-	}
-	if v.ConfiguredAudienceModelArn != nil {
-		s.WriteString(schemas.ListAudienceGenerationJobsRequest_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAudienceGenerationJobsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAudienceGenerationJobsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAudienceGenerationJobsOutput struct {
 
 	// The audience generation jobs that match the request.
@@ -86,26 +63,16 @@ type ListAudienceGenerationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAudienceGenerationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAudienceGenerationJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAudienceGenerationJobsResponse_audienceGenerationJobs:
-			return deserializeAudienceGenerationJobList(d, schemas.ListAudienceGenerationJobsResponse_audienceGenerationJobs, &v.AudienceGenerationJobs)
-		case schemas.ListAudienceGenerationJobsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAudienceGenerationJobsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAudienceGenerationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceGenerationJobs, schemas.ListAudienceGenerationJobsRequest, schemas.ListAudienceGenerationJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAudienceGenerationJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAudienceGenerationJobs, schemas.ListAudienceGenerationJobsRequest, schemas.ListAudienceGenerationJobsResponse), output: &ListAudienceGenerationJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAudienceGenerationJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAudienceGenerationJobs"); err != nil {

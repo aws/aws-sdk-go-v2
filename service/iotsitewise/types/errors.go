@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Your request has conflicting operations. This can occur if you're trying to
 // perform more than one operation on the same resource at the same time.
@@ -73,22 +62,6 @@ func (e *ConflictingOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictingOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictingOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictingOperationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictingOperationException_message, v.Message)
-		case schemas.ConflictingOperationException_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.ConflictingOperationException_resourceArn, v.ResourceArn)
-		case schemas.ConflictingOperationException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ConflictingOperationException_resourceId, v.ResourceId)
-		}
-		return nil
-	})
-}
 
 // IoT SiteWise can't process your request right now. Try again later.
 type InternalFailureException struct {
@@ -115,16 +88,6 @@ func (e *InternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalFailureException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalFailureException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalFailureException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request isn't valid. This can occur if your request contains malformed JSON
 // or unsupported characters. Check your request and try again.
@@ -152,16 +115,6 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidRequestException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You've reached the quota for a resource. For example, this can occur if you're
 // trying to associate more than the allowed number of child assets or attempting
@@ -194,16 +147,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The precondition in one or more of the request-header fields evaluated to FALSE .
 type PreconditionFailedException struct {
@@ -233,22 +176,6 @@ func (e *PreconditionFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *PreconditionFailedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PreconditionFailedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PreconditionFailedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.PreconditionFailedException_message, v.Message)
-		case schemas.PreconditionFailedException_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.PreconditionFailedException_resourceArn, v.ResourceArn)
-		case schemas.PreconditionFailedException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.PreconditionFailedException_resourceId, v.ResourceId)
-		}
-		return nil
-	})
-}
 
 // The query timed out.
 type QueryTimeoutException struct {
@@ -275,16 +202,6 @@ func (e *QueryTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *QueryTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryTimeoutException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryTimeoutException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.QueryTimeoutException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The resource already exists.
 type ResourceAlreadyExistsException struct {
@@ -314,22 +231,6 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceAlreadyExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceAlreadyExistsException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceAlreadyExistsException_message, v.Message)
-		case schemas.ResourceAlreadyExistsException_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.ResourceAlreadyExistsException_resourceArn, v.ResourceArn)
-		case schemas.ResourceAlreadyExistsException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ResourceAlreadyExistsException_resourceId, v.ResourceId)
-		}
-		return nil
-	})
-}
 
 // The requested resource can't be found.
 type ResourceNotFoundException struct {
@@ -356,16 +257,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The requested service is unavailable.
 type ServiceUnavailableException struct {
@@ -392,16 +283,6 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Your request exceeded a rate limit. For example, you might have exceeded the
 // number of IoT SiteWise assets that can be created per second, the allowed number
@@ -434,16 +315,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You've reached the quota for the number of tags allowed for a resource. For
 // more information, see [Tag naming limits and requirements]in the Amazon Web Services General Reference.
@@ -475,19 +346,6 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyTagsException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
-		case schemas.TooManyTagsException_resourceName:
-			v.ResourceName = new(string)
-			return d.ReadString(schemas.TooManyTagsException_resourceName, v.ResourceName)
-		}
-		return nil
-	})
-}
 
 // You are not authorized.
 type UnauthorizedException struct {
@@ -514,16 +372,6 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnauthorizedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UnauthorizedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The validation failed for this query.
 type ValidationException struct {
@@ -550,13 +398,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		}
-		return nil
-	})
-}

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type CreateEventLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEventLogConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEventLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEventLogConfigurationRequest_ClientToken, *v.ClientToken)
-	}
-	if v.EventLogLevel != "" {
-		s.WriteString(schemas.CreateEventLogConfigurationRequest_EventLogLevel, string(v.EventLogLevel))
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.CreateEventLogConfigurationRequest_ResourceId, *v.ResourceId)
-	}
-	if v.ResourceType != nil {
-		s.WriteString(schemas.CreateEventLogConfigurationRequest_ResourceType, *v.ResourceType)
-	}
-}
-
 type CreateEventLogConfigurationOutput struct {
 
 	// The identifier of the event log configuration request.
@@ -85,24 +62,16 @@ type CreateEventLogConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventLogConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEventLogConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEventLogConfigurationResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateEventLogConfigurationResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEventLogConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventLogConfiguration, schemas.CreateEventLogConfigurationRequest, schemas.CreateEventLogConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventLogConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventLogConfiguration, schemas.CreateEventLogConfigurationRequest, schemas.CreateEventLogConfigurationResponse), output: &CreateEventLogConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventLogConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventLogConfiguration"); err != nil {

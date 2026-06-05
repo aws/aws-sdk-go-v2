@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSpacesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSpacesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSpacesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSpacesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListSpacesOutput struct {
 
 	// An array of structures that contain some information about the private re:Posts
@@ -74,26 +57,16 @@ type ListSpacesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSpacesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSpacesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSpacesOutput_nextToken, v.NextToken)
-		case schemas.ListSpacesOutput_spaces:
-			return deserializeSpacesList(d, schemas.ListSpacesOutput_spaces, &v.Spaces)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSpacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaces, schemas.ListSpacesInput, schemas.ListSpacesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSpaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpaces, schemas.ListSpacesInput, schemas.ListSpacesOutput), output: &ListSpacesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSpaces{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSpaces"); err != nil {

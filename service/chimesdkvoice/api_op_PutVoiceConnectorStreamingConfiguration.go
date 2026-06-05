@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,23 +42,6 @@ type PutVoiceConnectorStreamingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorStreamingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutVoiceConnectorStreamingConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutVoiceConnectorStreamingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StreamingConfiguration != nil {
-		s.WriteStruct(schemas.PutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration)
-		v.StreamingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type PutVoiceConnectorStreamingConfigurationOutput struct {
 
 	// The updated streaming settings.
@@ -72,24 +53,16 @@ type PutVoiceConnectorStreamingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorStreamingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutVoiceConnectorStreamingConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration:
-			v.StreamingConfiguration = &types.StreamingConfiguration{}
-			return v.StreamingConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutVoiceConnectorStreamingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorStreamingConfiguration, schemas.PutVoiceConnectorStreamingConfigurationRequest, schemas.PutVoiceConnectorStreamingConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorStreamingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorStreamingConfiguration, schemas.PutVoiceConnectorStreamingConfigurationRequest, schemas.PutVoiceConnectorStreamingConfigurationResponse), output: &PutVoiceConnectorStreamingConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorStreamingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorStreamingConfiguration"); err != nil {

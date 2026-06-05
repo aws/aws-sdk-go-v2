@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,24 +50,6 @@ type DeletePaymentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePaymentConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePaymentConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeletePaymentConnectorRequest_clientToken, *v.ClientToken)
-	}
-	if v.PaymentConnectorId != nil {
-		s.WriteString(schemas.DeletePaymentConnectorRequest_paymentConnectorId, *v.PaymentConnectorId)
-	}
-	if v.PaymentManagerId != nil {
-		s.WriteString(schemas.DeletePaymentConnectorRequest_paymentManagerId, *v.PaymentManagerId)
-	}
-}
-
 type DeletePaymentConnectorOutput struct {
 
 	// The current status of the payment connector, set to DELETING when deletion is
@@ -88,31 +68,16 @@ type DeletePaymentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePaymentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletePaymentConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletePaymentConnectorResponse_paymentConnectorId:
-			v.PaymentConnectorId = new(string)
-			return d.ReadString(schemas.DeletePaymentConnectorResponse_paymentConnectorId, v.PaymentConnectorId)
-		case schemas.DeletePaymentConnectorResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeletePaymentConnectorResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PaymentConnectorStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePaymentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentConnector, schemas.DeletePaymentConnectorRequest, schemas.DeletePaymentConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePaymentConnector, schemas.DeletePaymentConnectorRequest, schemas.DeletePaymentConnectorResponse), output: &DeletePaymentConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePaymentConnector"); err != nil {

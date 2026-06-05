@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetOpentdfConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOpentdfConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOpentdfConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOpentdfConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetOpentdfConfigRequest_networkId, *v.NetworkId)
-	}
-}
-
 type GetOpentdfConfigOutput struct {
 
 	// The OIDC client ID used for authenticating with the OpenTDF provider.
@@ -78,33 +64,16 @@ type GetOpentdfConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOpentdfConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOpentdfConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOpentdfConfigResponse_clientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.GetOpentdfConfigResponse_clientId, v.ClientId)
-		case schemas.GetOpentdfConfigResponse_clientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.GetOpentdfConfigResponse_clientSecret, v.ClientSecret)
-		case schemas.GetOpentdfConfigResponse_domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.GetOpentdfConfigResponse_domain, v.Domain)
-		case schemas.GetOpentdfConfigResponse_provider:
-			v.Provider = new(string)
-			return d.ReadString(schemas.GetOpentdfConfigResponse_provider, v.Provider)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOpentdfConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpentdfConfig, schemas.GetOpentdfConfigRequest, schemas.GetOpentdfConfigResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOpentdfConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpentdfConfig, schemas.GetOpentdfConfigRequest, schemas.GetOpentdfConfigResponse), output: &GetOpentdfConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOpentdfConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOpentdfConfig"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -317,124 +315,6 @@ type ModifyDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ModifyDBInstanceMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ModifyDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllocatedStorage != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_AllocatedStorage, *v.AllocatedStorage)
-	}
-	if v.AllowMajorVersionUpgrade != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_AllowMajorVersionUpgrade, *v.AllowMajorVersionUpgrade)
-	}
-	if v.ApplyImmediately != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_ApplyImmediately, *v.ApplyImmediately)
-	}
-	if v.AutoMinorVersionUpgrade != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
-	}
-	if v.BackupRetentionPeriod != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_BackupRetentionPeriod, *v.BackupRetentionPeriod)
-	}
-	if v.CACertificateIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_CACertificateIdentifier, *v.CACertificateIdentifier)
-	}
-	if v.CloudwatchLogsExportConfiguration != nil {
-		s.WriteStruct(schemas.ModifyDBInstanceMessage_CloudwatchLogsExportConfiguration)
-		v.CloudwatchLogsExportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CopyTagsToSnapshot != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_CopyTagsToSnapshot, *v.CopyTagsToSnapshot)
-	}
-	if v.DBInstanceClass != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceClass, *v.DBInstanceClass)
-	}
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-	if v.DBParameterGroupName != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBParameterGroupName, *v.DBParameterGroupName)
-	}
-	if v.DBPortNumber != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_DBPortNumber, *v.DBPortNumber)
-	}
-	serializeDBSecurityGroupNameList(s, schemas.ModifyDBInstanceMessage_DBSecurityGroups, v.DBSecurityGroups)
-	if v.DBSubnetGroupName != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_Domain, *v.Domain)
-	}
-	if v.DomainIAMRoleName != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_DomainIAMRoleName, *v.DomainIAMRoleName)
-	}
-	if v.EnableIAMDatabaseAuthentication != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
-	}
-	if v.EnablePerformanceInsights != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.Iops != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_Iops, *v.Iops)
-	}
-	if v.LicenseModel != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_LicenseModel, *v.LicenseModel)
-	}
-	if v.MasterUserPassword != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_MasterUserPassword, *v.MasterUserPassword)
-	}
-	if v.MonitoringInterval != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_MonitoringInterval, *v.MonitoringInterval)
-	}
-	if v.MonitoringRoleArn != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_MonitoringRoleArn, *v.MonitoringRoleArn)
-	}
-	if v.MultiAZ != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_MultiAZ, *v.MultiAZ)
-	}
-	if v.NewDBInstanceIdentifier != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_NewDBInstanceIdentifier, *v.NewDBInstanceIdentifier)
-	}
-	if v.OptionGroupName != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_OptionGroupName, *v.OptionGroupName)
-	}
-	if v.PerformanceInsightsKMSKeyId != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_PerformanceInsightsKMSKeyId, *v.PerformanceInsightsKMSKeyId)
-	}
-	if v.PreferredBackupWindow != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredBackupWindow, *v.PreferredBackupWindow)
-	}
-	if v.PreferredMaintenanceWindow != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
-	}
-	if v.PromotionTier != nil {
-		s.WriteInt32(schemas.ModifyDBInstanceMessage_PromotionTier, *v.PromotionTier)
-	}
-	if v.PubliclyAccessible != nil {
-		s.WriteBool(schemas.ModifyDBInstanceMessage_PubliclyAccessible, *v.PubliclyAccessible)
-	}
-	if v.StorageType != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_StorageType, *v.StorageType)
-	}
-	if v.TdeCredentialArn != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialArn, *v.TdeCredentialArn)
-	}
-	if v.TdeCredentialPassword != nil {
-		s.WriteString(schemas.ModifyDBInstanceMessage_TdeCredentialPassword, *v.TdeCredentialPassword)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.ModifyDBInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
-}
-
 type ModifyDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance.
@@ -448,24 +328,16 @@ type ModifyDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ModifyDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ModifyDBInstanceResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ModifyDBInstanceResult_DBInstance:
-			v.DBInstance = &types.DBInstance{}
-			return v.DBInstance.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBInstance, schemas.ModifyDBInstanceMessage, schemas.ModifyDBInstanceResult), output: &ModifyDBInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBInstance"); err != nil {

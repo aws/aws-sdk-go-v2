@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,35 +67,6 @@ type ListBillingViewsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBillingViewsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBillingViewsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBillingViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActiveTimeRange != nil {
-		s.WriteStruct(schemas.ListBillingViewsRequest_activeTimeRange)
-		v.ActiveTimeRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeBillingViewArnList(s, schemas.ListBillingViewsRequest_arns, v.Arns)
-	serializeBillingViewTypeList(s, schemas.ListBillingViewsRequest_billingViewTypes, v.BillingViewTypes)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListBillingViewsRequest_maxResults, *v.MaxResults)
-	}
-	serializeStringSearches(s, schemas.ListBillingViewsRequest_names, v.Names)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListBillingViewsRequest_nextToken, *v.NextToken)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.ListBillingViewsRequest_ownerAccountId, *v.OwnerAccountId)
-	}
-	if v.SourceAccountId != nil {
-		s.WriteString(schemas.ListBillingViewsRequest_sourceAccountId, *v.SourceAccountId)
-	}
-}
-
 type ListBillingViewsOutput struct {
 
 	// A list of BillingViewListElement retrieved.
@@ -114,26 +83,16 @@ type ListBillingViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBillingViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBillingViewsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBillingViewsResponse_billingViews:
-			return deserializeBillingViewList(d, schemas.ListBillingViewsResponse_billingViews, &v.BillingViews)
-		case schemas.ListBillingViewsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListBillingViewsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListBillingViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingViews, schemas.ListBillingViewsRequest, schemas.ListBillingViewsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillingViews{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingViews, schemas.ListBillingViewsRequest, schemas.ListBillingViewsResponse), output: &ListBillingViewsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillingViews{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillingViews"); err != nil {

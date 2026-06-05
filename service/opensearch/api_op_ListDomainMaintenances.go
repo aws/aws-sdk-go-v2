@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,30 +53,6 @@ type ListDomainMaintenancesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainMaintenancesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDomainMaintenancesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDomainMaintenancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.ListDomainMaintenancesRequest_Action, string(v.Action))
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.ListDomainMaintenancesRequest_DomainName, *v.DomainName)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListDomainMaintenancesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDomainMaintenancesRequest_NextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListDomainMaintenancesRequest_Status, string(v.Status))
-	}
-}
-
 // The result of a ListDomainMaintenances request that contains information about
 // the requested actions.
 type ListDomainMaintenancesOutput struct {
@@ -97,26 +71,16 @@ type ListDomainMaintenancesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainMaintenancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDomainMaintenancesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDomainMaintenancesResponse_DomainMaintenances:
-			return deserializeDomainMaintenanceList(d, schemas.ListDomainMaintenancesResponse_DomainMaintenances, &v.DomainMaintenances)
-		case schemas.ListDomainMaintenancesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDomainMaintenancesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDomainMaintenancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainMaintenances, schemas.ListDomainMaintenancesRequest, schemas.ListDomainMaintenancesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainMaintenances{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainMaintenances, schemas.ListDomainMaintenancesRequest, schemas.ListDomainMaintenancesResponse), output: &ListDomainMaintenancesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainMaintenances{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomainMaintenances"); err != nil {

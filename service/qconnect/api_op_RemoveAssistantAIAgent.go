@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type RemoveAssistantAIAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAssistantAIAgentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveAssistantAIAgentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveAssistantAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiAgentType != "" {
-		s.WriteString(schemas.RemoveAssistantAIAgentRequest_aiAgentType, string(v.AiAgentType))
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.RemoveAssistantAIAgentRequest_assistantId, *v.AssistantId)
-	}
-	if v.OrchestratorUseCase != nil {
-		s.WriteString(schemas.RemoveAssistantAIAgentRequest_orchestratorUseCase, *v.OrchestratorUseCase)
-	}
-}
-
 type RemoveAssistantAIAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,21 +55,16 @@ type RemoveAssistantAIAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAssistantAIAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveAssistantAIAgentResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveAssistantAIAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAssistantAIAgent, schemas.RemoveAssistantAIAgentRequest, schemas.RemoveAssistantAIAgentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAssistantAIAgent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAssistantAIAgent, schemas.RemoveAssistantAIAgentRequest, schemas.RemoveAssistantAIAgentResponse), output: &RemoveAssistantAIAgentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAssistantAIAgent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAssistantAIAgent"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,18 +39,6 @@ type GetResourceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourceProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.GetResourceProfileRequest_resourceArn, *v.ResourceArn)
-	}
-}
-
 type GetResourceProfileOutput struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -83,33 +69,16 @@ type GetResourceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourceProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourceProfileResponse_profileUpdatedAt:
-			v.ProfileUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetResourceProfileResponse_profileUpdatedAt, v.ProfileUpdatedAt)
-		case schemas.GetResourceProfileResponse_sensitivityScore:
-			v.SensitivityScore = new(int32)
-			return d.ReadInt32(schemas.GetResourceProfileResponse_sensitivityScore, v.SensitivityScore)
-		case schemas.GetResourceProfileResponse_sensitivityScoreOverridden:
-			v.SensitivityScoreOverridden = new(bool)
-			return d.ReadBool(schemas.GetResourceProfileResponse_sensitivityScoreOverridden, v.SensitivityScoreOverridden)
-		case schemas.GetResourceProfileResponse_statistics:
-			v.Statistics = &types.ResourceStatistics{}
-			return v.Statistics.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceProfile, schemas.GetResourceProfileRequest, schemas.GetResourceProfileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceProfile, schemas.GetResourceProfileRequest, schemas.GetResourceProfileResponse), output: &GetResourceProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceProfile"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,37 +45,6 @@ type SearchJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchJobsFilterList(s, schemas.SearchJobsRequest_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchJobsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchJobsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *SearchJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchJobsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchJobsRequest_filters:
-			return deserializeSearchJobsFilterList(d, schemas.SearchJobsRequest_filters, &v.Filters)
-		case schemas.SearchJobsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.SearchJobsRequest_maxResults, v.MaxResults)
-		case schemas.SearchJobsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchJobsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type SearchJobsOutput struct {
 
 	// An array of JobSummary objects for devices that match the specified filter
@@ -97,38 +64,16 @@ type SearchJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchJobsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchJobsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobSummaryList(s, schemas.SearchJobsResponse_jobs, v.Jobs)
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchJobsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *SearchJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchJobsResponse_jobs:
-			return deserializeJobSummaryList(d, schemas.SearchJobsResponse_jobs, &v.Jobs)
-		case schemas.SearchJobsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchJobsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchJobs, schemas.SearchJobsRequest, schemas.SearchJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchJobs, schemas.SearchJobsRequest, schemas.SearchJobsResponse), output: &SearchJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchJobs"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -103,25 +101,6 @@ type UpdateRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRateBasedRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRateBasedRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRateBasedRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.UpdateRateBasedRuleRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.RateLimit != nil {
-		s.WriteInt64(schemas.UpdateRateBasedRuleRequest_RateLimit, *v.RateLimit)
-	}
-	if v.RuleId != nil {
-		s.WriteString(schemas.UpdateRateBasedRuleRequest_RuleId, *v.RuleId)
-	}
-	serializeRuleUpdates(s, schemas.UpdateRateBasedRuleRequest_Updates, v.Updates)
-}
-
 type UpdateRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateRateBasedRule request. You
@@ -135,24 +114,16 @@ type UpdateRateBasedRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRateBasedRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRateBasedRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRateBasedRuleResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.UpdateRateBasedRuleResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRateBasedRule, schemas.UpdateRateBasedRuleRequest, schemas.UpdateRateBasedRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRateBasedRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRateBasedRule, schemas.UpdateRateBasedRuleRequest, schemas.UpdateRateBasedRuleResponse), output: &UpdateRateBasedRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRateBasedRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRateBasedRule"); err != nil {

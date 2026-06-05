@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,25 +50,6 @@ type UpdateProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxySessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProxySessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.UpdateProxySessionRequest_Capabilities, v.Capabilities)
-	if v.ExpiryMinutes != nil {
-		s.WriteInt32(schemas.UpdateProxySessionRequest_ExpiryMinutes, *v.ExpiryMinutes)
-	}
-	if v.ProxySessionId != nil {
-		s.WriteString(schemas.UpdateProxySessionRequest_ProxySessionId, *v.ProxySessionId)
-	}
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.UpdateProxySessionRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type UpdateProxySessionOutput struct {
 
 	// The updated proxy session details.
@@ -82,24 +61,16 @@ type UpdateProxySessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxySessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProxySessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProxySessionResponse_ProxySession:
-			v.ProxySession = &types.ProxySession{}
-			return v.ProxySession.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxySession, schemas.UpdateProxySessionRequest, schemas.UpdateProxySessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProxySession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxySession, schemas.UpdateProxySessionRequest, schemas.UpdateProxySessionResponse), output: &UpdateProxySessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProxySession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxySession"); err != nil {

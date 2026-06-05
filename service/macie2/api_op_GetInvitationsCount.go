@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,15 +31,6 @@ type GetInvitationsCountInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInvitationsCountInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetInvitationsCountRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetInvitationsCountInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetInvitationsCountOutput struct {
 
 	// The total number of invitations that were received by the account, not
@@ -54,24 +43,16 @@ type GetInvitationsCountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInvitationsCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetInvitationsCountResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetInvitationsCountResponse_invitationsCount:
-			v.InvitationsCount = new(int64)
-			return d.ReadInt64(schemas.GetInvitationsCountResponse_invitationsCount, v.InvitationsCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetInvitationsCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvitationsCount, schemas.GetInvitationsCountRequest, schemas.GetInvitationsCountResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvitationsCount{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvitationsCount, schemas.GetInvitationsCountRequest, schemas.GetInvitationsCountResponse), output: &GetInvitationsCountOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvitationsCount{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvitationsCount"); err != nil {

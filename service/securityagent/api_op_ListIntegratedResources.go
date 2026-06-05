@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,30 +52,6 @@ type ListIntegratedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIntegratedResourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIntegratedResourcesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIntegratedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListIntegratedResourcesInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.IntegrationId != nil {
-		s.WriteString(schemas.ListIntegratedResourcesInput_integrationId, *v.IntegrationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIntegratedResourcesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIntegratedResourcesInput_nextToken, *v.NextToken)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.ListIntegratedResourcesInput_resourceType, string(v.ResourceType))
-	}
-}
-
 type ListIntegratedResourcesOutput struct {
 
 	// The list of integrated resource summaries.
@@ -96,26 +70,16 @@ type ListIntegratedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIntegratedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIntegratedResourcesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIntegratedResourcesOutput_integratedResourceSummaries:
-			return deserializeIntegratedResourceSummaryList(d, schemas.ListIntegratedResourcesOutput_integratedResourceSummaries, &v.IntegratedResourceSummaries)
-		case schemas.ListIntegratedResourcesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIntegratedResourcesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIntegratedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegratedResources, schemas.ListIntegratedResourcesInput, schemas.ListIntegratedResourcesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegratedResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegratedResources, schemas.ListIntegratedResourcesInput, schemas.ListIntegratedResourcesOutput), output: &ListIntegratedResourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntegratedResources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIntegratedResources"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DisassociateWirelessDeviceFromFuotaTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateWirelessDeviceFromFuotaTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateWirelessDeviceFromFuotaTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateWirelessDeviceFromFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DisassociateWirelessDeviceFromFuotaTaskRequest_Id, *v.Id)
-	}
-	if v.WirelessDeviceId != nil {
-		s.WriteString(schemas.DisassociateWirelessDeviceFromFuotaTaskRequest_WirelessDeviceId, *v.WirelessDeviceId)
-	}
-}
-
 type DisassociateWirelessDeviceFromFuotaTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,21 +48,16 @@ type DisassociateWirelessDeviceFromFuotaTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateWirelessDeviceFromFuotaTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateWirelessDeviceFromFuotaTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateWirelessDeviceFromFuotaTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWirelessDeviceFromFuotaTask, schemas.DisassociateWirelessDeviceFromFuotaTaskRequest, schemas.DisassociateWirelessDeviceFromFuotaTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWirelessDeviceFromFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWirelessDeviceFromFuotaTask, schemas.DisassociateWirelessDeviceFromFuotaTaskRequest, schemas.DisassociateWirelessDeviceFromFuotaTaskResponse), output: &DisassociateWirelessDeviceFromFuotaTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateWirelessDeviceFromFuotaTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateWirelessDeviceFromFuotaTask"); err != nil {

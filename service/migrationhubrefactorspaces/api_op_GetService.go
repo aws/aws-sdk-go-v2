@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,40 +46,6 @@ type GetServiceInput struct {
 	ServiceIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.GetServiceRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.GetServiceRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.ServiceIdentifier != nil {
-		s.WriteString(schemas.GetServiceRequest_ServiceIdentifier, *v.ServiceIdentifier)
-	}
-}
-func (v *GetServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.GetServiceRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.GetServiceRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.GetServiceRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.GetServiceRequest_ServiceIdentifier:
-			v.ServiceIdentifier = new(string)
-			return d.ReadString(schemas.GetServiceRequest_ServiceIdentifier, v.ServiceIdentifier)
-		}
-		return nil
-	})
 }
 
 type GetServiceOutput struct {
@@ -151,142 +115,16 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetServiceResponse_ApplicationId, *v.ApplicationId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.GetServiceResponse_Arn, *v.Arn)
-	}
-	if v.CreatedByAccountId != nil {
-		s.WriteString(schemas.GetServiceResponse_CreatedByAccountId, *v.CreatedByAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.GetServiceResponse_CreatedTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.GetServiceResponse_Description, *v.Description)
-	}
-	if v.EndpointType != "" {
-		s.WriteString(schemas.GetServiceResponse_EndpointType, string(v.EndpointType))
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetServiceResponse_EnvironmentId, *v.EnvironmentId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.GetServiceResponse_Error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LambdaEndpoint != nil {
-		s.WriteStruct(schemas.GetServiceResponse_LambdaEndpoint)
-		v.LambdaEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.GetServiceResponse_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetServiceResponse_Name, *v.Name)
-	}
-	if v.OwnerAccountId != nil {
-		s.WriteString(schemas.GetServiceResponse_OwnerAccountId, *v.OwnerAccountId)
-	}
-	if v.ServiceId != nil {
-		s.WriteString(schemas.GetServiceResponse_ServiceId, *v.ServiceId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.GetServiceResponse_State, string(v.State))
-	}
-	serializeTagMap(s, schemas.GetServiceResponse_Tags, v.Tags)
-	if v.UrlEndpoint != nil {
-		s.WriteStruct(schemas.GetServiceResponse_UrlEndpoint)
-		v.UrlEndpoint.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.GetServiceResponse_VpcId, *v.VpcId)
-	}
-}
-func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceResponse_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_ApplicationId, v.ApplicationId)
-		case schemas.GetServiceResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetServiceResponse_Arn, v.Arn)
-		case schemas.GetServiceResponse_CreatedByAccountId:
-			v.CreatedByAccountId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_CreatedByAccountId, v.CreatedByAccountId)
-		case schemas.GetServiceResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetServiceResponse_CreatedTime, v.CreatedTime)
-		case schemas.GetServiceResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetServiceResponse_Description, v.Description)
-		case schemas.GetServiceResponse_EndpointType:
-			var ev string
-			if err := d.ReadString(schemas.GetServiceResponse_EndpointType, &ev); err != nil {
-				return err
-			}
-			v.EndpointType = types.ServiceEndpointType(ev)
-			return nil
-		case schemas.GetServiceResponse_EnvironmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_EnvironmentId, v.EnvironmentId)
-		case schemas.GetServiceResponse_Error:
-			v.Error = &types.ErrorResponse{}
-			return v.Error.Deserialize(d)
-		case schemas.GetServiceResponse_LambdaEndpoint:
-			v.LambdaEndpoint = &types.LambdaEndpointConfig{}
-			return v.LambdaEndpoint.Deserialize(d)
-		case schemas.GetServiceResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetServiceResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.GetServiceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetServiceResponse_Name, v.Name)
-		case schemas.GetServiceResponse_OwnerAccountId:
-			v.OwnerAccountId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_OwnerAccountId, v.OwnerAccountId)
-		case schemas.GetServiceResponse_ServiceId:
-			v.ServiceId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_ServiceId, v.ServiceId)
-		case schemas.GetServiceResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetServiceResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ServiceState(ev)
-			return nil
-		case schemas.GetServiceResponse_Tags:
-			return deserializeTagMap(d, schemas.GetServiceResponse_Tags, &v.Tags)
-		case schemas.GetServiceResponse_UrlEndpoint:
-			v.UrlEndpoint = &types.UrlEndpointConfig{}
-			return v.UrlEndpoint.Deserialize(d)
-		case schemas.GetServiceResponse_VpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.GetServiceResponse_VpcId, v.VpcId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse), output: &GetServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetService"); err != nil {

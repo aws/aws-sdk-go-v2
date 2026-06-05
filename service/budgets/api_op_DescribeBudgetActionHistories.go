@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,35 +63,6 @@ type DescribeBudgetActionHistoriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionHistoriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeBudgetActionHistoriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeBudgetActionHistoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.DescribeBudgetActionHistoriesRequest_AccountId, *v.AccountId)
-	}
-	if v.ActionId != nil {
-		s.WriteString(schemas.DescribeBudgetActionHistoriesRequest_ActionId, *v.ActionId)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.DescribeBudgetActionHistoriesRequest_BudgetName, *v.BudgetName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeBudgetActionHistoriesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeBudgetActionHistoriesRequest_NextToken, *v.NextToken)
-	}
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.DescribeBudgetActionHistoriesRequest_TimePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type DescribeBudgetActionHistoriesOutput struct {
 
 	//  The historical record of the budget action resource.
@@ -110,26 +79,16 @@ type DescribeBudgetActionHistoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionHistoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeBudgetActionHistoriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeBudgetActionHistoriesResponse_ActionHistories:
-			return deserializeActionHistories(d, schemas.DescribeBudgetActionHistoriesResponse_ActionHistories, &v.ActionHistories)
-		case schemas.DescribeBudgetActionHistoriesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeBudgetActionHistoriesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeBudgetActionHistoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionHistories, schemas.DescribeBudgetActionHistoriesRequest, schemas.DescribeBudgetActionHistoriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetActionHistories{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionHistories, schemas.DescribeBudgetActionHistoriesRequest, schemas.DescribeBudgetActionHistoriesResponse), output: &DescribeBudgetActionHistoriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgetActionHistories{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetActionHistories"); err != nil {

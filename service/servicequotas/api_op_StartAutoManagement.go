@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,25 +58,6 @@ type StartAutoManagementInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartAutoManagementInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartAutoManagementRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartAutoManagementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionList(s, schemas.StartAutoManagementRequest_ExclusionList, v.ExclusionList)
-	if v.NotificationArn != nil {
-		s.WriteString(schemas.StartAutoManagementRequest_NotificationArn, *v.NotificationArn)
-	}
-	if v.OptInLevel != "" {
-		s.WriteString(schemas.StartAutoManagementRequest_OptInLevel, string(v.OptInLevel))
-	}
-	if v.OptInType != "" {
-		s.WriteString(schemas.StartAutoManagementRequest_OptInType, string(v.OptInType))
-	}
-}
-
 type StartAutoManagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,21 +65,16 @@ type StartAutoManagementOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartAutoManagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartAutoManagementResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartAutoManagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutoManagement, schemas.StartAutoManagementRequest, schemas.StartAutoManagementResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAutoManagement{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutoManagement, schemas.StartAutoManagementRequest, schemas.StartAutoManagementResponse), output: &StartAutoManagementOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAutoManagement{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAutoManagement"); err != nil {

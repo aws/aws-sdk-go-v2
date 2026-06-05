@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,15 +35,6 @@ type DescribeDefaultEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDefaultEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeDefaultEncryptionConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeDefaultEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DescribeDefaultEncryptionConfigurationOutput struct {
 
 	// The status of the account configuration. This contains the ConfigurationState .
@@ -69,34 +58,16 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeDefaultEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeDefaultEncryptionConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeDefaultEncryptionConfigurationResponse_configurationStatus:
-			v.ConfigurationStatus = &types.ConfigurationStatus{}
-			return v.ConfigurationStatus.Deserialize(d)
-		case schemas.DescribeDefaultEncryptionConfigurationResponse_encryptionType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeDefaultEncryptionConfigurationResponse_encryptionType, &ev); err != nil {
-				return err
-			}
-			v.EncryptionType = types.EncryptionType(ev)
-			return nil
-		case schemas.DescribeDefaultEncryptionConfigurationResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.DescribeDefaultEncryptionConfigurationResponse_kmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeDefaultEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultEncryptionConfiguration, schemas.DescribeDefaultEncryptionConfigurationRequest, schemas.DescribeDefaultEncryptionConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDefaultEncryptionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultEncryptionConfiguration, schemas.DescribeDefaultEncryptionConfigurationRequest, schemas.DescribeDefaultEncryptionConfigurationResponse), output: &DescribeDefaultEncryptionConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDefaultEncryptionConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDefaultEncryptionConfiguration"); err != nil {

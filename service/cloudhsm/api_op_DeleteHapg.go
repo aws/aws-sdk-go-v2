@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,18 +51,6 @@ type DeleteHapgInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteHapgInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteHapgRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HapgArn != nil {
-		s.WriteString(schemas.DeleteHapgRequest_HapgArn, *v.HapgArn)
-	}
-}
-
 // Contains the output of the DeleteHapg action.
 type DeleteHapgOutput struct {
 
@@ -79,24 +65,16 @@ type DeleteHapgOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteHapgOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteHapgResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteHapgResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.DeleteHapgResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHapg, schemas.DeleteHapgRequest, schemas.DeleteHapgResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHapg{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHapg, schemas.DeleteHapgRequest, schemas.DeleteHapgResponse), output: &DeleteHapgOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHapg{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteHapg"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,27 +51,6 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.GetUserRequest_endTime, *v.EndTime)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetUserRequest_networkId, *v.NetworkId)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.GetUserRequest_startTime, *v.StartTime)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.GetUserRequest_userId, *v.UserId)
-	}
-}
-
 type GetUserOutput struct {
 
 	// The unique identifier of the user.
@@ -116,50 +93,16 @@ type GetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetUserResponse_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.GetUserResponse_firstName, v.FirstName)
-		case schemas.GetUserResponse_isAdmin:
-			v.IsAdmin = new(bool)
-			return d.ReadBool(schemas.GetUserResponse_isAdmin, v.IsAdmin)
-		case schemas.GetUserResponse_lastActivity:
-			v.LastActivity = new(int32)
-			return d.ReadInt32(schemas.GetUserResponse_lastActivity, v.LastActivity)
-		case schemas.GetUserResponse_lastLogin:
-			v.LastLogin = new(int32)
-			return d.ReadInt32(schemas.GetUserResponse_lastLogin, v.LastLogin)
-		case schemas.GetUserResponse_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.GetUserResponse_lastName, v.LastName)
-		case schemas.GetUserResponse_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.GetUserResponse_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.GetUserResponse_status:
-			v.Status = new(int32)
-			return d.ReadInt32(schemas.GetUserResponse_status, v.Status)
-		case schemas.GetUserResponse_suspended:
-			v.Suspended = new(bool)
-			return d.ReadBool(schemas.GetUserResponse_suspended, v.Suspended)
-		case schemas.GetUserResponse_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.GetUserResponse_userId, v.UserId)
-		case schemas.GetUserResponse_username:
-			v.Username = new(string)
-			return d.ReadString(schemas.GetUserResponse_username, v.Username)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse), output: &GetUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUser"); err != nil {

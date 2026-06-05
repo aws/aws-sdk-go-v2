@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,38 +108,6 @@ type UpdateQuerySuggestionsConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQuerySuggestionsConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateQuerySuggestionsConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateQuerySuggestionsConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeSuggestionsConfig != nil {
-		s.WriteStruct(schemas.UpdateQuerySuggestionsConfigRequest_AttributeSuggestionsConfig)
-		v.AttributeSuggestionsConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncludeQueriesWithoutUserInformation != nil {
-		s.WriteBool(schemas.UpdateQuerySuggestionsConfigRequest_IncludeQueriesWithoutUserInformation, *v.IncludeQueriesWithoutUserInformation)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.UpdateQuerySuggestionsConfigRequest_IndexId, *v.IndexId)
-	}
-	if v.MinimumNumberOfQueryingUsers != nil {
-		s.WriteInt32(schemas.UpdateQuerySuggestionsConfigRequest_MinimumNumberOfQueryingUsers, *v.MinimumNumberOfQueryingUsers)
-	}
-	if v.MinimumQueryCount != nil {
-		s.WriteInt32(schemas.UpdateQuerySuggestionsConfigRequest_MinimumQueryCount, *v.MinimumQueryCount)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.UpdateQuerySuggestionsConfigRequest_Mode, string(v.Mode))
-	}
-	if v.QueryLogLookBackWindowInDays != nil {
-		s.WriteInt32(schemas.UpdateQuerySuggestionsConfigRequest_QueryLogLookBackWindowInDays, *v.QueryLogLookBackWindowInDays)
-	}
-}
-
 type UpdateQuerySuggestionsConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -149,29 +115,16 @@ type UpdateQuerySuggestionsConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQuerySuggestionsConfigOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateQuerySuggestionsConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateQuerySuggestionsConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuerySuggestionsConfig, schemas.UpdateQuerySuggestionsConfigRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateQuerySuggestionsConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuerySuggestionsConfig, schemas.UpdateQuerySuggestionsConfigRequest, nil), output: &UpdateQuerySuggestionsConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateQuerySuggestionsConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQuerySuggestionsConfig"); err != nil {

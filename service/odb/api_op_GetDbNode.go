@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type GetDbNodeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDbNodeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDbNodeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudVmClusterId != nil {
-		s.WriteString(schemas.GetDbNodeInput_cloudVmClusterId, *v.CloudVmClusterId)
-	}
-	if v.DbNodeId != nil {
-		s.WriteString(schemas.GetDbNodeInput_dbNodeId, *v.DbNodeId)
-	}
-}
-
 type GetDbNodeOutput struct {
 
 	// Information about a DB node.
@@ -70,24 +53,16 @@ type GetDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDbNodeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDbNodeOutput_dbNode:
-			v.DbNode = &types.DbNode{}
-			return v.DbNode.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbNode, schemas.GetDbNodeInput, schemas.GetDbNodeOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbNode, schemas.GetDbNodeInput, schemas.GetDbNodeOutput), output: &GetDbNodeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbNode"); err != nil {

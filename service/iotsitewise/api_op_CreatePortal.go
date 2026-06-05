@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -124,51 +122,6 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePortalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePortalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alarms != nil {
-		s.WriteStruct(schemas.CreatePortalRequest_alarms)
-		v.Alarms.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePortalRequest_clientToken, *v.ClientToken)
-	}
-	if v.NotificationSenderEmail != nil {
-		s.WriteString(schemas.CreatePortalRequest_notificationSenderEmail, *v.NotificationSenderEmail)
-	}
-	if v.PortalAuthMode != "" {
-		s.WriteString(schemas.CreatePortalRequest_portalAuthMode, string(v.PortalAuthMode))
-	}
-	if v.PortalContactEmail != nil {
-		s.WriteString(schemas.CreatePortalRequest_portalContactEmail, *v.PortalContactEmail)
-	}
-	if v.PortalDescription != nil {
-		s.WriteString(schemas.CreatePortalRequest_portalDescription, *v.PortalDescription)
-	}
-	if v.PortalLogoImageFile != nil {
-		s.WriteStruct(schemas.CreatePortalRequest_portalLogoImageFile)
-		v.PortalLogoImageFile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PortalName != nil {
-		s.WriteString(schemas.CreatePortalRequest_portalName, *v.PortalName)
-	}
-	if v.PortalType != "" {
-		s.WriteString(schemas.CreatePortalRequest_portalType, string(v.PortalType))
-	}
-	serializePortalTypeConfiguration(s, schemas.CreatePortalRequest_portalTypeConfiguration, v.PortalTypeConfiguration)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreatePortalRequest_roleArn, *v.RoleArn)
-	}
-	serializeTagMap(s, schemas.CreatePortalRequest_tags, v.Tags)
-}
-
 type CreatePortalOutput struct {
 
 	// The [ARN] of the portal, which has the following format.
@@ -211,36 +164,16 @@ type CreatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePortalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePortalResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_portalArn, v.PortalArn)
-		case schemas.CreatePortalResponse_portalId:
-			v.PortalId = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_portalId, v.PortalId)
-		case schemas.CreatePortalResponse_portalStartUrl:
-			v.PortalStartUrl = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_portalStartUrl, v.PortalStartUrl)
-		case schemas.CreatePortalResponse_portalStatus:
-			v.PortalStatus = &types.PortalStatus{}
-			return v.PortalStatus.Deserialize(d)
-		case schemas.CreatePortalResponse_ssoApplicationId:
-			v.SsoApplicationId = new(string)
-			return d.ReadString(schemas.CreatePortalResponse_ssoApplicationId, v.SsoApplicationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePortal{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse), output: &CreatePortalOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePortal{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePortal"); err != nil {

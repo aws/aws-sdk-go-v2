@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type PutInlinePolicyToPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutInlinePolicyToPermissionSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutInlinePolicyToPermissionSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutInlinePolicyToPermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InlinePolicy != nil {
-		s.WriteString(schemas.PutInlinePolicyToPermissionSetRequest_InlinePolicy, *v.InlinePolicy)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.PutInlinePolicyToPermissionSetRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.PutInlinePolicyToPermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
-	}
-}
-
 type PutInlinePolicyToPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +59,16 @@ type PutInlinePolicyToPermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutInlinePolicyToPermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutInlinePolicyToPermissionSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutInlinePolicyToPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInlinePolicyToPermissionSet, schemas.PutInlinePolicyToPermissionSetRequest, schemas.PutInlinePolicyToPermissionSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInlinePolicyToPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInlinePolicyToPermissionSet, schemas.PutInlinePolicyToPermissionSetRequest, schemas.PutInlinePolicyToPermissionSetResponse), output: &PutInlinePolicyToPermissionSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutInlinePolicyToPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutInlinePolicyToPermissionSet"); err != nil {

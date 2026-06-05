@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,18 +40,6 @@ type GetResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourcePolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.GetResourcePolicyRequest_ResourceArn, *v.ResourceArn)
-	}
-}
-
 type GetResourcePolicyOutput struct {
 
 	// The time when the resource-based policy was created, in [UNIX epoch time] format.
@@ -75,30 +61,16 @@ type GetResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourcePolicyResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourcePolicyResult_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetResourcePolicyResult_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.GetResourcePolicyResult_Policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.GetResourcePolicyResult_Policy, v.Policy)
-		case schemas.GetResourcePolicyResult_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.GetResourcePolicyResult_ResourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourcePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyRequest, schemas.GetResourcePolicyResult), output: &GetResourcePolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetResourcePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourcePolicy"); err != nil {

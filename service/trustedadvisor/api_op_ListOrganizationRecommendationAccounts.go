@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,27 +50,6 @@ type ListOrganizationRecommendationAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationRecommendationAccountsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOrganizationRecommendationAccountsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOrganizationRecommendationAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AffectedAccountId != nil {
-		s.WriteString(schemas.ListOrganizationRecommendationAccountsRequest_affectedAccountId, *v.AffectedAccountId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOrganizationRecommendationAccountsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOrganizationRecommendationAccountsRequest_nextToken, *v.NextToken)
-	}
-	if v.OrganizationRecommendationIdentifier != nil {
-		s.WriteString(schemas.ListOrganizationRecommendationAccountsRequest_organizationRecommendationIdentifier, *v.OrganizationRecommendationIdentifier)
-	}
-}
-
 type ListOrganizationRecommendationAccountsOutput struct {
 
 	// The account recommendations lifecycles that are applicable to the Recommendation
@@ -90,26 +67,16 @@ type ListOrganizationRecommendationAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOrganizationRecommendationAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOrganizationRecommendationAccountsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOrganizationRecommendationAccountsResponse_accountRecommendationLifecycleSummaries:
-			return deserializeAccountRecommendationLifecycleSummaryList(d, schemas.ListOrganizationRecommendationAccountsResponse_accountRecommendationLifecycleSummaries, &v.AccountRecommendationLifecycleSummaries)
-		case schemas.ListOrganizationRecommendationAccountsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOrganizationRecommendationAccountsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOrganizationRecommendationAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationRecommendationAccounts, schemas.ListOrganizationRecommendationAccountsRequest, schemas.ListOrganizationRecommendationAccountsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationRecommendationAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationRecommendationAccounts, schemas.ListOrganizationRecommendationAccountsRequest, schemas.ListOrganizationRecommendationAccountsResponse), output: &ListOrganizationRecommendationAccountsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationRecommendationAccounts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOrganizationRecommendationAccounts"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,15 +33,6 @@ type GetAWSOrganizationsAccessStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAWSOrganizationsAccessStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAWSOrganizationsAccessStatusInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAWSOrganizationsAccessStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetAWSOrganizationsAccessStatusOutput struct {
 
 	// The status of the portfolio share feature.
@@ -55,28 +44,16 @@ type GetAWSOrganizationsAccessStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAWSOrganizationsAccessStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAWSOrganizationsAccessStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAWSOrganizationsAccessStatusOutput_AccessStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetAWSOrganizationsAccessStatusOutput_AccessStatus, &ev); err != nil {
-				return err
-			}
-			v.AccessStatus = types.AccessStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAWSOrganizationsAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSOrganizationsAccessStatus, schemas.GetAWSOrganizationsAccessStatusInput, schemas.GetAWSOrganizationsAccessStatusOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAWSOrganizationsAccessStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSOrganizationsAccessStatus, schemas.GetAWSOrganizationsAccessStatusInput, schemas.GetAWSOrganizationsAccessStatusOutput), output: &GetAWSOrganizationsAccessStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAWSOrganizationsAccessStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAWSOrganizationsAccessStatus"); err != nil {

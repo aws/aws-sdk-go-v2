@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,18 +39,6 @@ type GetDataAutomationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataAutomationStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDataAutomationStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDataAutomationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InvocationArn != nil {
-		s.WriteString(schemas.GetDataAutomationStatusRequest_invocationArn, *v.InvocationArn)
-	}
-}
-
 // Response of GetDataAutomationStatus API.
 type GetDataAutomationStatusOutput struct {
 
@@ -83,46 +69,16 @@ type GetDataAutomationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataAutomationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDataAutomationStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDataAutomationStatusResponse_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.GetDataAutomationStatusResponse_errorMessage, v.ErrorMessage)
-		case schemas.GetDataAutomationStatusResponse_errorType:
-			v.ErrorType = new(string)
-			return d.ReadString(schemas.GetDataAutomationStatusResponse_errorType, v.ErrorType)
-		case schemas.GetDataAutomationStatusResponse_jobCompletionTime:
-			v.JobCompletionTime = new(time.Time)
-			return d.ReadTime(schemas.GetDataAutomationStatusResponse_jobCompletionTime, v.JobCompletionTime)
-		case schemas.GetDataAutomationStatusResponse_jobDurationInSeconds:
-			v.JobDurationInSeconds = new(int32)
-			return d.ReadInt32(schemas.GetDataAutomationStatusResponse_jobDurationInSeconds, v.JobDurationInSeconds)
-		case schemas.GetDataAutomationStatusResponse_jobSubmissionTime:
-			v.JobSubmissionTime = new(time.Time)
-			return d.ReadTime(schemas.GetDataAutomationStatusResponse_jobSubmissionTime, v.JobSubmissionTime)
-		case schemas.GetDataAutomationStatusResponse_outputConfiguration:
-			v.OutputConfiguration = &types.OutputConfiguration{}
-			return v.OutputConfiguration.Deserialize(d)
-		case schemas.GetDataAutomationStatusResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDataAutomationStatusResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AutomationJobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDataAutomationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationStatus, schemas.GetDataAutomationStatusRequest, schemas.GetDataAutomationStatusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataAutomationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationStatus, schemas.GetDataAutomationStatusRequest, schemas.GetDataAutomationStatusResponse), output: &GetDataAutomationStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataAutomationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataAutomationStatus"); err != nil {

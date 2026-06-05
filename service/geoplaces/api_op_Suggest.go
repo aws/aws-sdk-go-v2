@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -112,43 +110,6 @@ type SuggestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuggestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuggestRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuggestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuggestAdditionalFeatureList(s, schemas.SuggestRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.SuggestRequest_BiasPosition, v.BiasPosition)
-	if v.Filter != nil {
-		s.WriteStruct(schemas.SuggestRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IntendedUse != "" {
-		s.WriteString(schemas.SuggestRequest_IntendedUse, string(v.IntendedUse))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.SuggestRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.SuggestRequest_Language, *v.Language)
-	}
-	if v.MaxQueryRefinements != nil {
-		s.WriteInt32(schemas.SuggestRequest_MaxQueryRefinements, *v.MaxQueryRefinements)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SuggestRequest_MaxResults, *v.MaxResults)
-	}
-	if v.PoliticalView != nil {
-		s.WriteString(schemas.SuggestRequest_PoliticalView, *v.PoliticalView)
-	}
-	if v.QueryText != nil {
-		s.WriteString(schemas.SuggestRequest_QueryText, *v.QueryText)
-	}
-}
-
 type SuggestOutput struct {
 
 	// The pricing bucket for which the query is charged at.
@@ -175,28 +136,16 @@ type SuggestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuggestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuggestResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuggestResponse_PricingBucket:
-			v.PricingBucket = new(string)
-			return d.ReadString(schemas.SuggestResponse_PricingBucket, v.PricingBucket)
-		case schemas.SuggestResponse_QueryRefinements:
-			return deserializeQueryRefinementList(d, schemas.SuggestResponse_QueryRefinements, &v.QueryRefinements)
-		case schemas.SuggestResponse_ResultItems:
-			return deserializeSuggestResultItemList(d, schemas.SuggestResponse_ResultItems, &v.ResultItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuggest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse), output: &SuggestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSuggest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Suggest"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNetworkSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListNetworkSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListNetworkSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListNetworkSettingsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListNetworkSettingsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListNetworkSettingsOutput struct {
 
 	// The network settings.
@@ -71,26 +54,16 @@ type ListNetworkSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNetworkSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListNetworkSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListNetworkSettingsResponse_networkSettings:
-			return deserializeNetworkSettingsList(d, schemas.ListNetworkSettingsResponse_networkSettings, &v.NetworkSettings)
-		case schemas.ListNetworkSettingsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListNetworkSettingsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListNetworkSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkSettings, schemas.ListNetworkSettingsRequest, schemas.ListNetworkSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkSettings, schemas.ListNetworkSettingsRequest, schemas.ListNetworkSettingsResponse), output: &ListNetworkSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNetworkSettings"); err != nil {

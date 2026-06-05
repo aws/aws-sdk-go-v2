@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,36 +71,6 @@ type CreateGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGlobalClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_DatabaseName, *v.DatabaseName)
-	}
-	if v.DeletionProtection != nil {
-		s.WriteBool(schemas.CreateGlobalClusterMessage_DeletionProtection, *v.DeletionProtection)
-	}
-	if v.Engine != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_Engine, *v.Engine)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_EngineVersion, *v.EngineVersion)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.SourceDBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateGlobalClusterMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
-	}
-	if v.StorageEncrypted != nil {
-		s.WriteBool(schemas.CreateGlobalClusterMessage_StorageEncrypted, *v.StorageEncrypted)
-	}
-}
-
 type CreateGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -114,24 +82,16 @@ type CreateGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGlobalClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGlobalClusterResult_GlobalCluster:
-			v.GlobalCluster = &types.GlobalCluster{}
-			return v.GlobalCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult), output: &CreateGlobalClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGlobalCluster"); err != nil {

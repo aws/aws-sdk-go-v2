@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,25 +49,6 @@ type CreateWorkerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkerConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateWorkerConfigurationRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWorkerConfigurationRequest_name, *v.Name)
-	}
-	if v.PropertiesFileContent != nil {
-		s.WriteString(schemas.CreateWorkerConfigurationRequest_propertiesFileContent, *v.PropertiesFileContent)
-	}
-	serializeTags(s, schemas.CreateWorkerConfigurationRequest_tags, v.Tags)
-}
-
 type CreateWorkerConfigurationOutput struct {
 
 	// The time that the worker configuration was created.
@@ -93,65 +72,16 @@ type CreateWorkerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkerConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkerConfigurationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkerConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.CreateWorkerConfigurationResponse_creationTime, *v.CreationTime)
-	}
-	if v.LatestRevision != nil {
-		s.WriteStruct(schemas.CreateWorkerConfigurationResponse_latestRevision)
-		v.LatestRevision.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWorkerConfigurationResponse_name, *v.Name)
-	}
-	if v.WorkerConfigurationArn != nil {
-		s.WriteString(schemas.CreateWorkerConfigurationResponse_workerConfigurationArn, *v.WorkerConfigurationArn)
-	}
-	if v.WorkerConfigurationState != "" {
-		s.WriteString(schemas.CreateWorkerConfigurationResponse_workerConfigurationState, string(v.WorkerConfigurationState))
-	}
-}
-func (v *CreateWorkerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkerConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkerConfigurationResponse_creationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.CreateWorkerConfigurationResponse_creationTime, v.CreationTime)
-		case schemas.CreateWorkerConfigurationResponse_latestRevision:
-			v.LatestRevision = &types.WorkerConfigurationRevisionSummary{}
-			return v.LatestRevision.Deserialize(d)
-		case schemas.CreateWorkerConfigurationResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateWorkerConfigurationResponse_name, v.Name)
-		case schemas.CreateWorkerConfigurationResponse_workerConfigurationArn:
-			v.WorkerConfigurationArn = new(string)
-			return d.ReadString(schemas.CreateWorkerConfigurationResponse_workerConfigurationArn, v.WorkerConfigurationArn)
-		case schemas.CreateWorkerConfigurationResponse_workerConfigurationState:
-			var ev string
-			if err := d.ReadString(schemas.CreateWorkerConfigurationResponse_workerConfigurationState, &ev); err != nil {
-				return err
-			}
-			v.WorkerConfigurationState = types.WorkerConfigurationState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkerConfiguration, schemas.CreateWorkerConfigurationRequest, schemas.CreateWorkerConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkerConfiguration, schemas.CreateWorkerConfigurationRequest, schemas.CreateWorkerConfigurationResponse), output: &CreateWorkerConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkerConfiguration"); err != nil {

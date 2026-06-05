@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetApplicationInput struct {
 	ApplicationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetApplicationRequest_applicationId, *v.ApplicationId)
-	}
 }
 
 type GetApplicationOutput struct {
@@ -128,85 +114,16 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationResponse_applicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_applicationArn, v.ApplicationArn)
-		case schemas.GetApplicationResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_applicationId, v.ApplicationId)
-		case schemas.GetApplicationResponse_attachmentsConfiguration:
-			v.AttachmentsConfiguration = &types.AppliedAttachmentsConfiguration{}
-			return v.AttachmentsConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_autoSubscriptionConfiguration:
-			v.AutoSubscriptionConfiguration = &types.AutoSubscriptionConfiguration{}
-			return v.AutoSubscriptionConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_clientIdsForOIDC:
-			return deserializeClientIdsForOIDC(d, schemas.GetApplicationResponse_clientIdsForOIDC, &v.ClientIdsForOIDC)
-		case schemas.GetApplicationResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_createdAt, v.CreatedAt)
-		case schemas.GetApplicationResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_description, v.Description)
-		case schemas.GetApplicationResponse_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_displayName, v.DisplayName)
-		case schemas.GetApplicationResponse_encryptionConfiguration:
-			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
-			return v.EncryptionConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_error:
-			v.Error = &types.ErrorDetail{}
-			return v.Error.Deserialize(d)
-		case schemas.GetApplicationResponse_iamIdentityProviderArn:
-			v.IamIdentityProviderArn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_iamIdentityProviderArn, v.IamIdentityProviderArn)
-		case schemas.GetApplicationResponse_identityCenterApplicationArn:
-			v.IdentityCenterApplicationArn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_identityCenterApplicationArn, v.IdentityCenterApplicationArn)
-		case schemas.GetApplicationResponse_identityType:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationResponse_identityType, &ev); err != nil {
-				return err
-			}
-			v.IdentityType = types.IdentityType(ev)
-			return nil
-		case schemas.GetApplicationResponse_personalizationConfiguration:
-			v.PersonalizationConfiguration = &types.PersonalizationConfiguration{}
-			return v.PersonalizationConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_qAppsConfiguration:
-			v.QAppsConfiguration = &types.QAppsConfiguration{}
-			return v.QAppsConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_quickSightConfiguration:
-			v.QuickSightConfiguration = &types.QuickSightConfiguration{}
-			return v.QuickSightConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_roleArn, v.RoleArn)
-		case schemas.GetApplicationResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ApplicationStatus(ev)
-			return nil
-		case schemas.GetApplicationResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {

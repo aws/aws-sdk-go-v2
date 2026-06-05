@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,29 +52,6 @@ type CreateSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSecurityGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_name, *v.Name)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.CreateSecurityGroupRequest_networkId, *v.NetworkId)
-	}
-	if v.SecurityGroupSettings != nil {
-		s.WriteStruct(schemas.CreateSecurityGroupRequest_securityGroupSettings)
-		v.SecurityGroupSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateSecurityGroupOutput struct {
 
 	// The details of the newly created security group, including its ID, name, and
@@ -91,24 +66,16 @@ type CreateSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSecurityGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSecurityGroupResponse_securityGroup:
-			v.SecurityGroup = &types.SecurityGroup{}
-			return v.SecurityGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityGroup, schemas.CreateSecurityGroupRequest, schemas.CreateSecurityGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityGroup, schemas.CreateSecurityGroupRequest, schemas.CreateSecurityGroupResponse), output: &CreateSecurityGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSecurityGroup"); err != nil {

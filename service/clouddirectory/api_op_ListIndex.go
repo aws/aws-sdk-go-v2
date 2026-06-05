@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,33 +57,6 @@ type ListIndexInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIndexInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIndexRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsistencyLevel != "" {
-		s.WriteString(schemas.ListIndexRequest_ConsistencyLevel, string(v.ConsistencyLevel))
-	}
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.ListIndexRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.IndexReference != nil {
-		s.WriteStruct(schemas.ListIndexRequest_IndexReference)
-		v.IndexReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIndexRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIndexRequest_NextToken, *v.NextToken)
-	}
-	serializeObjectAttributeRangeList(s, schemas.ListIndexRequest_RangesOnIndexedValues, v.RangesOnIndexedValues)
-}
-
 type ListIndexOutput struct {
 
 	// The objects and indexed values attached to the index.
@@ -100,26 +71,16 @@ type ListIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIndexResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIndexResponse_IndexAttachments:
-			return deserializeIndexAttachmentList(d, schemas.ListIndexResponse_IndexAttachments, &v.IndexAttachments)
-		case schemas.ListIndexResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIndexResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndex, schemas.ListIndexRequest, schemas.ListIndexResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndex, schemas.ListIndexRequest, schemas.ListIndexResponse), output: &ListIndexOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIndex"); err != nil {

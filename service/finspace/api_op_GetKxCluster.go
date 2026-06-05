@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type GetKxClusterInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxClusterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterName != nil {
-		s.WriteString(schemas.GetKxClusterRequest_clusterName, *v.ClusterName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxClusterRequest_environmentId, *v.EnvironmentId)
-	}
 }
 
 type GetKxClusterOutput struct {
@@ -207,98 +190,16 @@ type GetKxClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxClusterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxClusterResponse_autoScalingConfiguration:
-			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
-			return v.AutoScalingConfiguration.Deserialize(d)
-		case schemas.GetKxClusterResponse_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.GetKxClusterResponse_azMode:
-			var ev string
-			if err := d.ReadString(schemas.GetKxClusterResponse_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = types.KxAzMode(ev)
-			return nil
-		case schemas.GetKxClusterResponse_cacheStorageConfigurations:
-			return deserializeKxCacheStorageConfigurations(d, schemas.GetKxClusterResponse_cacheStorageConfigurations, &v.CacheStorageConfigurations)
-		case schemas.GetKxClusterResponse_capacityConfiguration:
-			v.CapacityConfiguration = &types.CapacityConfiguration{}
-			return v.CapacityConfiguration.Deserialize(d)
-		case schemas.GetKxClusterResponse_clusterDescription:
-			v.ClusterDescription = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_clusterDescription, v.ClusterDescription)
-		case schemas.GetKxClusterResponse_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_clusterName, v.ClusterName)
-		case schemas.GetKxClusterResponse_clusterType:
-			var ev string
-			if err := d.ReadString(schemas.GetKxClusterResponse_clusterType, &ev); err != nil {
-				return err
-			}
-			v.ClusterType = types.KxClusterType(ev)
-			return nil
-		case schemas.GetKxClusterResponse_code:
-			v.Code = &types.CodeConfiguration{}
-			return v.Code.Deserialize(d)
-		case schemas.GetKxClusterResponse_commandLineArguments:
-			return deserializeKxCommandLineArguments(d, schemas.GetKxClusterResponse_commandLineArguments, &v.CommandLineArguments)
-		case schemas.GetKxClusterResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxClusterResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxClusterResponse_databases:
-			return deserializeKxDatabaseConfigurations(d, schemas.GetKxClusterResponse_databases, &v.Databases)
-		case schemas.GetKxClusterResponse_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_executionRole, v.ExecutionRole)
-		case schemas.GetKxClusterResponse_initializationScript:
-			v.InitializationScript = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_initializationScript, v.InitializationScript)
-		case schemas.GetKxClusterResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxClusterResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxClusterResponse_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_releaseLabel, v.ReleaseLabel)
-		case schemas.GetKxClusterResponse_savedownStorageConfiguration:
-			v.SavedownStorageConfiguration = &types.KxSavedownStorageConfiguration{}
-			return v.SavedownStorageConfiguration.Deserialize(d)
-		case schemas.GetKxClusterResponse_scalingGroupConfiguration:
-			v.ScalingGroupConfiguration = &types.KxScalingGroupConfiguration{}
-			return v.ScalingGroupConfiguration.Deserialize(d)
-		case schemas.GetKxClusterResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxClusterResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.KxClusterStatus(ev)
-			return nil
-		case schemas.GetKxClusterResponse_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.GetKxClusterResponse_statusReason, v.StatusReason)
-		case schemas.GetKxClusterResponse_tickerplantLogConfiguration:
-			v.TickerplantLogConfiguration = &types.TickerplantLogConfiguration{}
-			return v.TickerplantLogConfiguration.Deserialize(d)
-		case schemas.GetKxClusterResponse_volumes:
-			return deserializeVolumes(d, schemas.GetKxClusterResponse_volumes, &v.Volumes)
-		case schemas.GetKxClusterResponse_vpcConfiguration:
-			v.VpcConfiguration = &types.VpcConfiguration{}
-			return v.VpcConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxCluster, schemas.GetKxClusterRequest, schemas.GetKxClusterResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxCluster, schemas.GetKxClusterRequest, schemas.GetKxClusterResponse), output: &GetKxClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxCluster"); err != nil {

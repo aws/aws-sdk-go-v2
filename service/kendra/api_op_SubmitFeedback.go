@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,23 +55,6 @@ type SubmitFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubmitFeedbackInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubmitFeedbackRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubmitFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClickFeedbackList(s, schemas.SubmitFeedbackRequest_ClickFeedbackItems, v.ClickFeedbackItems)
-	if v.IndexId != nil {
-		s.WriteString(schemas.SubmitFeedbackRequest_IndexId, *v.IndexId)
-	}
-	if v.QueryId != nil {
-		s.WriteString(schemas.SubmitFeedbackRequest_QueryId, *v.QueryId)
-	}
-	serializeRelevanceFeedbackList(s, schemas.SubmitFeedbackRequest_RelevanceFeedbackItems, v.RelevanceFeedbackItems)
-}
-
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,29 +62,16 @@ type SubmitFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubmitFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubmitFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *SubmitFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitFeedback{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, nil), output: &SubmitFeedbackOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubmitFeedback{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitFeedback"); err != nil {
