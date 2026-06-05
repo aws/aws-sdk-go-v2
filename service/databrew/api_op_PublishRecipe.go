@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type PublishRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishRecipeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishRecipeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.PublishRecipeRequest_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PublishRecipeRequest_Name, *v.Name)
-	}
-}
-
 type PublishRecipeOutput struct {
 
 	// The name of the recipe that you published.
@@ -69,24 +52,16 @@ type PublishRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishRecipeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PublishRecipeResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PublishRecipeResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishRecipe, schemas.PublishRecipeRequest, schemas.PublishRecipeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishRecipe{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishRecipe, schemas.PublishRecipeRequest, schemas.PublishRecipeResponse), output: &PublishRecipeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishRecipe{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishRecipe"); err != nil {

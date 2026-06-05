@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListStreamsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListStreamsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyspaceName != nil {
-		s.WriteString(schemas.ListStreamsInput_keyspaceName, *v.KeyspaceName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListStreamsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListStreamsInput_nextToken, *v.NextToken)
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.ListStreamsInput_tableName, *v.TableName)
-	}
-}
-
 type ListStreamsOutput struct {
 
 	//  A pagination token that can be used in a subsequent ListStreams request. This
@@ -96,26 +73,16 @@ type ListStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListStreamsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListStreamsOutput_nextToken, v.NextToken)
-		case schemas.ListStreamsOutput_streams:
-			return deserializeStreamList(d, schemas.ListStreamsOutput_streams, &v.Streams)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStreams{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput), output: &ListStreamsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStreams{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreams"); err != nil {

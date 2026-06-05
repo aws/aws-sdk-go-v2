@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type GetTypedLinkFacetInformationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTypedLinkFacetInformationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTypedLinkFacetInformationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTypedLinkFacetInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GetTypedLinkFacetInformationRequest_Name, *v.Name)
-	}
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.GetTypedLinkFacetInformationRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type GetTypedLinkFacetInformationOutput struct {
 
 	// The order of identity attributes for the facet, from most significant to least
@@ -82,23 +65,16 @@ type GetTypedLinkFacetInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTypedLinkFacetInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTypedLinkFacetInformationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTypedLinkFacetInformationResponse_IdentityAttributeOrder:
-			return deserializeAttributeNameList(d, schemas.GetTypedLinkFacetInformationResponse_IdentityAttributeOrder, &v.IdentityAttributeOrder)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTypedLinkFacetInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTypedLinkFacetInformation, schemas.GetTypedLinkFacetInformationRequest, schemas.GetTypedLinkFacetInformationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTypedLinkFacetInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTypedLinkFacetInformation, schemas.GetTypedLinkFacetInformationRequest, schemas.GetTypedLinkFacetInformationResponse), output: &GetTypedLinkFacetInformationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTypedLinkFacetInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTypedLinkFacetInformation"); err != nil {

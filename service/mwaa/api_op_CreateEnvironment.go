@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -249,178 +247,6 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
-	if v.AirflowVersion != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
-	}
-	if v.DagS3Path != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_DagS3Path, *v.DagS3Path)
-	}
-	if v.EndpointManagement != "" {
-		s.WriteString(schemas.CreateEnvironmentInput_EndpointManagement, string(v.EndpointManagement))
-	}
-	if v.EnvironmentClass != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_EnvironmentClass, *v.EnvironmentClass)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.KmsKey != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_KmsKey, *v.KmsKey)
-	}
-	if v.LoggingConfiguration != nil {
-		s.WriteStruct(schemas.CreateEnvironmentInput_LoggingConfiguration)
-		v.LoggingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxWebservers != nil {
-		s.WriteInt32(schemas.CreateEnvironmentInput_MaxWebservers, *v.MaxWebservers)
-	}
-	if v.MaxWorkers != nil {
-		s.WriteInt32(schemas.CreateEnvironmentInput_MaxWorkers, *v.MaxWorkers)
-	}
-	if v.MinWebservers != nil {
-		s.WriteInt32(schemas.CreateEnvironmentInput_MinWebservers, *v.MinWebservers)
-	}
-	if v.MinWorkers != nil {
-		s.WriteInt32(schemas.CreateEnvironmentInput_MinWorkers, *v.MinWorkers)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_Name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.CreateEnvironmentInput_NetworkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PluginsS3ObjectVersion != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_PluginsS3ObjectVersion, *v.PluginsS3ObjectVersion)
-	}
-	if v.PluginsS3Path != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_PluginsS3Path, *v.PluginsS3Path)
-	}
-	if v.RequirementsS3ObjectVersion != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_RequirementsS3ObjectVersion, *v.RequirementsS3ObjectVersion)
-	}
-	if v.RequirementsS3Path != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_RequirementsS3Path, *v.RequirementsS3Path)
-	}
-	if v.Schedulers != nil {
-		s.WriteInt32(schemas.CreateEnvironmentInput_Schedulers, *v.Schedulers)
-	}
-	if v.SourceBucketArn != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_SourceBucketArn, *v.SourceBucketArn)
-	}
-	if v.StartupScriptS3ObjectVersion != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_StartupScriptS3ObjectVersion, *v.StartupScriptS3ObjectVersion)
-	}
-	if v.StartupScriptS3Path != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_StartupScriptS3Path, *v.StartupScriptS3Path)
-	}
-	serializeTagMap(s, schemas.CreateEnvironmentInput_Tags, v.Tags)
-	if v.WebserverAccessMode != "" {
-		s.WriteString(schemas.CreateEnvironmentInput_WebserverAccessMode, string(v.WebserverAccessMode))
-	}
-	if v.WeeklyMaintenanceWindowStart != nil {
-		s.WriteString(schemas.CreateEnvironmentInput_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
-	}
-}
-func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentInput_AirflowConfigurationOptions:
-			return deserializeAirflowConfigurationOptions(d, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, &v.AirflowConfigurationOptions)
-		case schemas.CreateEnvironmentInput_AirflowVersion:
-			v.AirflowVersion = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_AirflowVersion, v.AirflowVersion)
-		case schemas.CreateEnvironmentInput_DagS3Path:
-			v.DagS3Path = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_DagS3Path, v.DagS3Path)
-		case schemas.CreateEnvironmentInput_EndpointManagement:
-			var ev string
-			if err := d.ReadString(schemas.CreateEnvironmentInput_EndpointManagement, &ev); err != nil {
-				return err
-			}
-			v.EndpointManagement = types.EndpointManagement(ev)
-			return nil
-		case schemas.CreateEnvironmentInput_EnvironmentClass:
-			v.EnvironmentClass = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_EnvironmentClass, v.EnvironmentClass)
-		case schemas.CreateEnvironmentInput_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.CreateEnvironmentInput_KmsKey:
-			v.KmsKey = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_KmsKey, v.KmsKey)
-		case schemas.CreateEnvironmentInput_LoggingConfiguration:
-			v.LoggingConfiguration = &types.LoggingConfigurationInput{}
-			return v.LoggingConfiguration.Deserialize(d)
-		case schemas.CreateEnvironmentInput_MaxWebservers:
-			v.MaxWebservers = new(int32)
-			return d.ReadInt32(schemas.CreateEnvironmentInput_MaxWebservers, v.MaxWebservers)
-		case schemas.CreateEnvironmentInput_MaxWorkers:
-			v.MaxWorkers = new(int32)
-			return d.ReadInt32(schemas.CreateEnvironmentInput_MaxWorkers, v.MaxWorkers)
-		case schemas.CreateEnvironmentInput_MinWebservers:
-			v.MinWebservers = new(int32)
-			return d.ReadInt32(schemas.CreateEnvironmentInput_MinWebservers, v.MinWebservers)
-		case schemas.CreateEnvironmentInput_MinWorkers:
-			v.MinWorkers = new(int32)
-			return d.ReadInt32(schemas.CreateEnvironmentInput_MinWorkers, v.MinWorkers)
-		case schemas.CreateEnvironmentInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_Name, v.Name)
-		case schemas.CreateEnvironmentInput_NetworkConfiguration:
-			v.NetworkConfiguration = &types.NetworkConfiguration{}
-			return v.NetworkConfiguration.Deserialize(d)
-		case schemas.CreateEnvironmentInput_PluginsS3ObjectVersion:
-			v.PluginsS3ObjectVersion = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_PluginsS3ObjectVersion, v.PluginsS3ObjectVersion)
-		case schemas.CreateEnvironmentInput_PluginsS3Path:
-			v.PluginsS3Path = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_PluginsS3Path, v.PluginsS3Path)
-		case schemas.CreateEnvironmentInput_RequirementsS3ObjectVersion:
-			v.RequirementsS3ObjectVersion = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_RequirementsS3ObjectVersion, v.RequirementsS3ObjectVersion)
-		case schemas.CreateEnvironmentInput_RequirementsS3Path:
-			v.RequirementsS3Path = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_RequirementsS3Path, v.RequirementsS3Path)
-		case schemas.CreateEnvironmentInput_Schedulers:
-			v.Schedulers = new(int32)
-			return d.ReadInt32(schemas.CreateEnvironmentInput_Schedulers, v.Schedulers)
-		case schemas.CreateEnvironmentInput_SourceBucketArn:
-			v.SourceBucketArn = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_SourceBucketArn, v.SourceBucketArn)
-		case schemas.CreateEnvironmentInput_StartupScriptS3ObjectVersion:
-			v.StartupScriptS3ObjectVersion = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_StartupScriptS3ObjectVersion, v.StartupScriptS3ObjectVersion)
-		case schemas.CreateEnvironmentInput_StartupScriptS3Path:
-			v.StartupScriptS3Path = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_StartupScriptS3Path, v.StartupScriptS3Path)
-		case schemas.CreateEnvironmentInput_Tags:
-			return deserializeTagMap(d, schemas.CreateEnvironmentInput_Tags, &v.Tags)
-		case schemas.CreateEnvironmentInput_WebserverAccessMode:
-			var ev string
-			if err := d.ReadString(schemas.CreateEnvironmentInput_WebserverAccessMode, &ev); err != nil {
-				return err
-			}
-			v.WebserverAccessMode = types.WebserverAccessMode(ev)
-			return nil
-		case schemas.CreateEnvironmentInput_WeeklyMaintenanceWindowStart:
-			v.WeeklyMaintenanceWindowStart = new(string)
-			return d.ReadString(schemas.CreateEnvironmentInput_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
-		}
-		return nil
-	})
-}
-
 type CreateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) returned in the response for the environment.
@@ -432,35 +258,16 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateEnvironmentOutput_Arn, *v.Arn)
-	}
-}
-func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateEnvironmentOutput_Arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentInput, schemas.CreateEnvironmentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentInput, schemas.CreateEnvironmentOutput), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironment"); err != nil {

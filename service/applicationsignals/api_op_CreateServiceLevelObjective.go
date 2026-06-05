@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -166,44 +164,6 @@ type CreateServiceLevelObjectiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceLevelObjectiveInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateServiceLevelObjectiveInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoInvestigationEnabled != nil {
-		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
-	}
-	serializeBurnRateConfigurations(s, schemas.CreateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
-	if v.CreateRecommendedSlo != false {
-		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_CreateRecommendedSlo, v.CreateRecommendedSlo)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateServiceLevelObjectiveInput_Description, *v.Description)
-	}
-	if v.Goal != nil {
-		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_Goal)
-		v.Goal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateServiceLevelObjectiveInput_Name, *v.Name)
-	}
-	if v.RequestBasedSliConfig != nil {
-		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_RequestBasedSliConfig)
-		v.RequestBasedSliConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SliConfig != nil {
-		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_SliConfig)
-		v.SliConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateServiceLevelObjectiveInput_Tags, v.Tags)
-}
-
 type CreateServiceLevelObjectiveOutput struct {
 
 	// A structure that contains information about the SLO that you just created.
@@ -217,24 +177,16 @@ type CreateServiceLevelObjectiveOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceLevelObjectiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateServiceLevelObjectiveOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateServiceLevelObjectiveOutput_Slo:
-			v.Slo = &types.ServiceLevelObjective{}
-			return v.Slo.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateServiceLevelObjectiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLevelObjective, schemas.CreateServiceLevelObjectiveInput, schemas.CreateServiceLevelObjectiveOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceLevelObjective{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLevelObjective, schemas.CreateServiceLevelObjectiveInput, schemas.CreateServiceLevelObjectiveOutput), output: &CreateServiceLevelObjectiveOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceLevelObjective{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateServiceLevelObjective"); err != nil {

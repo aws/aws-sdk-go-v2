@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -151,32 +149,6 @@ type QueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QueryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.QueryRequest_ClientToken, *v.ClientToken)
-	}
-	if v.MaxRows != nil {
-		s.WriteInt32(schemas.QueryRequest_MaxRows, *v.MaxRows)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.QueryRequest_NextToken, *v.NextToken)
-	}
-	if v.QueryInsights != nil {
-		s.WriteStruct(schemas.QueryRequest_QueryInsights)
-		v.QueryInsights.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.QueryRequest_QueryString, *v.QueryString)
-	}
-}
-
 type QueryOutput struct {
 
 	//  The column data types of the returned result set.
@@ -211,37 +183,16 @@ type QueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryResponse_ColumnInfo:
-			return deserializeColumnInfoList(d, schemas.QueryResponse_ColumnInfo, &v.ColumnInfo)
-		case schemas.QueryResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.QueryResponse_NextToken, v.NextToken)
-		case schemas.QueryResponse_QueryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.QueryResponse_QueryId, v.QueryId)
-		case schemas.QueryResponse_QueryInsightsResponse:
-			v.QueryInsightsResponse = &types.QueryInsightsResponse{}
-			return v.QueryInsightsResponse.Deserialize(d)
-		case schemas.QueryResponse_QueryStatus:
-			v.QueryStatus = &types.QueryStatus{}
-			return v.QueryStatus.Deserialize(d)
-		case schemas.QueryResponse_Rows:
-			return deserializeRowList(d, schemas.QueryResponse_Rows, &v.Rows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Query, schemas.QueryRequest, schemas.QueryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Query, schemas.QueryRequest, schemas.QueryResponse), output: &QueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Query"); err != nil {

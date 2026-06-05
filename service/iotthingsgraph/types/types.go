@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,38 +23,6 @@ type DefinitionDocument struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DefinitionDocument) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DefinitionDocument)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DefinitionDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Language != "" {
-		s.WriteString(schemas.DefinitionDocument_language, string(v.Language))
-	}
-	if v.Text != nil {
-		s.WriteString(schemas.DefinitionDocument_text, *v.Text)
-	}
-}
-func (v *DefinitionDocument) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DefinitionDocument, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DefinitionDocument_language:
-			var ev string
-			if err := d.ReadString(schemas.DefinitionDocument_language, &ev); err != nil {
-				return err
-			}
-			v.Language = DefinitionLanguage(ev)
-			return nil
-		case schemas.DefinitionDocument_text:
-			v.Text = new(string)
-			return d.ReadString(schemas.DefinitionDocument_text, v.Text)
-		}
-		return nil
-	})
-}
-
 // An object that contains the ID and revision number of a workflow or system that
 // is part of a deployment.
 type DependencyRevision struct {
@@ -68,34 +34,6 @@ type DependencyRevision struct {
 	RevisionNumber *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *DependencyRevision) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DependencyRevision)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DependencyRevision) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DependencyRevision_id, *v.Id)
-	}
-	if v.RevisionNumber != nil {
-		s.WriteInt64(schemas.DependencyRevision_revisionNumber, *v.RevisionNumber)
-	}
-}
-func (v *DependencyRevision) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DependencyRevision, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DependencyRevision_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DependencyRevision_id, v.Id)
-		case schemas.DependencyRevision_revisionNumber:
-			v.RevisionNumber = new(int64)
-			return d.ReadInt64(schemas.DependencyRevision_revisionNumber, v.RevisionNumber)
-		}
-		return nil
-	})
 }
 
 // Describes the properties of an entity.
@@ -119,58 +57,6 @@ type EntityDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EntityDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EntityDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EntityDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.EntityDescription_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.EntityDescription_createdAt, *v.CreatedAt)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.EntityDescription_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.EntityDescription_id, *v.Id)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.EntityDescription_type, string(v.Type))
-	}
-}
-func (v *EntityDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EntityDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EntityDescription_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.EntityDescription_arn, v.Arn)
-		case schemas.EntityDescription_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.EntityDescription_createdAt, v.CreatedAt)
-		case schemas.EntityDescription_definition:
-			v.Definition = &DefinitionDocument{}
-			return v.Definition.Deserialize(d)
-		case schemas.EntityDescription_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.EntityDescription_id, v.Id)
-		case schemas.EntityDescription_type:
-			var ev string
-			if err := d.ReadString(schemas.EntityDescription_type, &ev); err != nil {
-				return err
-			}
-			v.Type = EntityType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // An object that filters an entity search. Multiple filters function as OR
 // criteria in the search. For example a search that includes a NAMESPACE and a
 // REFERENCED_ENTITY_ID filter searches for entities in the specified namespace
@@ -189,35 +75,6 @@ type EntityFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EntityFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EntityFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EntityFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.EntityFilter_name, string(v.Name))
-	}
-	serializeEntityFilterValues(s, schemas.EntityFilter_value, v.Value)
-}
-func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EntityFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EntityFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.EntityFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = EntityFilterName(ev)
-			return nil
-		case schemas.EntityFilter_value:
-			return deserializeEntityFilterValues(d, schemas.EntityFilter_value, &v.Value)
-		}
-		return nil
-	})
-}
-
 // An object that contains information about a flow event.
 type FlowExecutionMessage struct {
 
@@ -234,50 +91,6 @@ type FlowExecutionMessage struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *FlowExecutionMessage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FlowExecutionMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FlowExecutionMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventType != "" {
-		s.WriteString(schemas.FlowExecutionMessage_eventType, string(v.EventType))
-	}
-	if v.MessageId != nil {
-		s.WriteString(schemas.FlowExecutionMessage_messageId, *v.MessageId)
-	}
-	if v.Payload != nil {
-		s.WriteString(schemas.FlowExecutionMessage_payload, *v.Payload)
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.FlowExecutionMessage_timestamp, *v.Timestamp)
-	}
-}
-func (v *FlowExecutionMessage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FlowExecutionMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FlowExecutionMessage_eventType:
-			var ev string
-			if err := d.ReadString(schemas.FlowExecutionMessage_eventType, &ev); err != nil {
-				return err
-			}
-			v.EventType = FlowExecutionEventType(ev)
-			return nil
-		case schemas.FlowExecutionMessage_messageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.FlowExecutionMessage_messageId, v.MessageId)
-		case schemas.FlowExecutionMessage_payload:
-			v.Payload = new(string)
-			return d.ReadString(schemas.FlowExecutionMessage_payload, v.Payload)
-		case schemas.FlowExecutionMessage_timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.FlowExecutionMessage_timestamp, v.Timestamp)
-		}
-		return nil
-	})
 }
 
 // An object that contains summary information about a flow execution.
@@ -304,62 +117,6 @@ type FlowExecutionSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FlowExecutionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FlowExecutionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FlowExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.FlowExecutionSummary_createdAt, *v.CreatedAt)
-	}
-	if v.FlowExecutionId != nil {
-		s.WriteString(schemas.FlowExecutionSummary_flowExecutionId, *v.FlowExecutionId)
-	}
-	if v.FlowTemplateId != nil {
-		s.WriteString(schemas.FlowExecutionSummary_flowTemplateId, *v.FlowTemplateId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.FlowExecutionSummary_status, string(v.Status))
-	}
-	if v.SystemInstanceId != nil {
-		s.WriteString(schemas.FlowExecutionSummary_systemInstanceId, *v.SystemInstanceId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.FlowExecutionSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *FlowExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FlowExecutionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FlowExecutionSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.FlowExecutionSummary_createdAt, v.CreatedAt)
-		case schemas.FlowExecutionSummary_flowExecutionId:
-			v.FlowExecutionId = new(string)
-			return d.ReadString(schemas.FlowExecutionSummary_flowExecutionId, v.FlowExecutionId)
-		case schemas.FlowExecutionSummary_flowTemplateId:
-			v.FlowTemplateId = new(string)
-			return d.ReadString(schemas.FlowExecutionSummary_flowTemplateId, v.FlowTemplateId)
-		case schemas.FlowExecutionSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.FlowExecutionSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = FlowExecutionStatus(ev)
-			return nil
-		case schemas.FlowExecutionSummary_systemInstanceId:
-			v.SystemInstanceId = new(string)
-			return d.ReadString(schemas.FlowExecutionSummary_systemInstanceId, v.SystemInstanceId)
-		case schemas.FlowExecutionSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.FlowExecutionSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // An object that contains a workflow's definition and summary information.
 type FlowTemplateDescription struct {
 
@@ -374,44 +131,6 @@ type FlowTemplateDescription struct {
 	ValidatedNamespaceVersion *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *FlowTemplateDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FlowTemplateDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FlowTemplateDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Definition != nil {
-		s.WriteStruct(schemas.FlowTemplateDescription_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Summary != nil {
-		s.WriteStruct(schemas.FlowTemplateDescription_summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ValidatedNamespaceVersion != nil {
-		s.WriteInt64(schemas.FlowTemplateDescription_validatedNamespaceVersion, *v.ValidatedNamespaceVersion)
-	}
-}
-func (v *FlowTemplateDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FlowTemplateDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FlowTemplateDescription_definition:
-			v.Definition = &DefinitionDocument{}
-			return v.Definition.Deserialize(d)
-		case schemas.FlowTemplateDescription_summary:
-			v.Summary = &FlowTemplateSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.FlowTemplateDescription_validatedNamespaceVersion:
-			v.ValidatedNamespaceVersion = new(int64)
-			return d.ReadInt64(schemas.FlowTemplateDescription_validatedNamespaceVersion, v.ValidatedNamespaceVersion)
-		}
-		return nil
-	})
 }
 
 // An object that filters a workflow search.
@@ -429,35 +148,6 @@ type FlowTemplateFilter struct {
 	Value []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FlowTemplateFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FlowTemplateFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FlowTemplateFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.FlowTemplateFilter_name, string(v.Name))
-	}
-	serializeFlowTemplateFilterValues(s, schemas.FlowTemplateFilter_value, v.Value)
-}
-func (v *FlowTemplateFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FlowTemplateFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FlowTemplateFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.FlowTemplateFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = FlowTemplateFilterName(ev)
-			return nil
-		case schemas.FlowTemplateFilter_value:
-			return deserializeFlowTemplateFilterValues(d, schemas.FlowTemplateFilter_value, &v.Value)
-		}
-		return nil
-	})
 }
 
 // An object that contains summary information about a workflow.
@@ -478,46 +168,6 @@ type FlowTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FlowTemplateSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FlowTemplateSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FlowTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.FlowTemplateSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.FlowTemplateSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.FlowTemplateSummary_id, *v.Id)
-	}
-	if v.RevisionNumber != nil {
-		s.WriteInt64(schemas.FlowTemplateSummary_revisionNumber, *v.RevisionNumber)
-	}
-}
-func (v *FlowTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FlowTemplateSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FlowTemplateSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.FlowTemplateSummary_arn, v.Arn)
-		case schemas.FlowTemplateSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.FlowTemplateSummary_createdAt, v.CreatedAt)
-		case schemas.FlowTemplateSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.FlowTemplateSummary_id, v.Id)
-		case schemas.FlowTemplateSummary_revisionNumber:
-			v.RevisionNumber = new(int64)
-			return d.ReadInt64(schemas.FlowTemplateSummary_revisionNumber, v.RevisionNumber)
-		}
-		return nil
-	})
-}
-
 // An object that specifies whether cloud metrics are collected in a deployment
 // and, if so, what role is used to collect metrics.
 type MetricsConfiguration struct {
@@ -529,33 +179,6 @@ type MetricsConfiguration struct {
 	MetricRuleRoleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricsConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricsConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudMetricEnabled != false {
-		s.WriteBool(schemas.MetricsConfiguration_cloudMetricEnabled, v.CloudMetricEnabled)
-	}
-	if v.MetricRuleRoleArn != nil {
-		s.WriteString(schemas.MetricsConfiguration_metricRuleRoleArn, *v.MetricRuleRoleArn)
-	}
-}
-func (v *MetricsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricsConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricsConfiguration_cloudMetricEnabled:
-			return d.ReadBool(schemas.MetricsConfiguration_cloudMetricEnabled, &v.CloudMetricEnabled)
-		case schemas.MetricsConfiguration_metricRuleRoleArn:
-			v.MetricRuleRoleArn = new(string)
-			return d.ReadString(schemas.MetricsConfiguration_metricRuleRoleArn, v.MetricRuleRoleArn)
-		}
-		return nil
-	})
 }
 
 // An object that contains a system instance definition and summary information.
@@ -592,67 +215,6 @@ type SystemInstanceDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SystemInstanceDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemInstanceDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemInstanceDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Definition != nil {
-		s.WriteStruct(schemas.SystemInstanceDescription_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FlowActionsRoleArn != nil {
-		s.WriteString(schemas.SystemInstanceDescription_flowActionsRoleArn, *v.FlowActionsRoleArn)
-	}
-	if v.MetricsConfiguration != nil {
-		s.WriteStruct(schemas.SystemInstanceDescription_metricsConfiguration)
-		v.MetricsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3BucketName != nil {
-		s.WriteString(schemas.SystemInstanceDescription_s3BucketName, *v.S3BucketName)
-	}
-	if v.Summary != nil {
-		s.WriteStruct(schemas.SystemInstanceDescription_summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeDependencyRevisions(s, schemas.SystemInstanceDescription_validatedDependencyRevisions, v.ValidatedDependencyRevisions)
-	if v.ValidatedNamespaceVersion != nil {
-		s.WriteInt64(schemas.SystemInstanceDescription_validatedNamespaceVersion, *v.ValidatedNamespaceVersion)
-	}
-}
-func (v *SystemInstanceDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemInstanceDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemInstanceDescription_definition:
-			v.Definition = &DefinitionDocument{}
-			return v.Definition.Deserialize(d)
-		case schemas.SystemInstanceDescription_flowActionsRoleArn:
-			v.FlowActionsRoleArn = new(string)
-			return d.ReadString(schemas.SystemInstanceDescription_flowActionsRoleArn, v.FlowActionsRoleArn)
-		case schemas.SystemInstanceDescription_metricsConfiguration:
-			v.MetricsConfiguration = &MetricsConfiguration{}
-			return v.MetricsConfiguration.Deserialize(d)
-		case schemas.SystemInstanceDescription_s3BucketName:
-			v.S3BucketName = new(string)
-			return d.ReadString(schemas.SystemInstanceDescription_s3BucketName, v.S3BucketName)
-		case schemas.SystemInstanceDescription_summary:
-			v.Summary = &SystemInstanceSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.SystemInstanceDescription_validatedDependencyRevisions:
-			return deserializeDependencyRevisions(d, schemas.SystemInstanceDescription_validatedDependencyRevisions, &v.ValidatedDependencyRevisions)
-		case schemas.SystemInstanceDescription_validatedNamespaceVersion:
-			v.ValidatedNamespaceVersion = new(int64)
-			return d.ReadInt64(schemas.SystemInstanceDescription_validatedNamespaceVersion, v.ValidatedNamespaceVersion)
-		}
-		return nil
-	})
-}
-
 // An object that filters a system instance search. Multiple filters function as
 // OR criteria in the search. For example a search that includes a
 // GREENGRASS_GROUP_NAME and a STATUS filter searches for system instances in the
@@ -667,35 +229,6 @@ type SystemInstanceFilter struct {
 	Value []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SystemInstanceFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemInstanceFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemInstanceFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SystemInstanceFilter_name, string(v.Name))
-	}
-	serializeSystemInstanceFilterValues(s, schemas.SystemInstanceFilter_value, v.Value)
-}
-func (v *SystemInstanceFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemInstanceFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemInstanceFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.SystemInstanceFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SystemInstanceFilterName(ev)
-			return nil
-		case schemas.SystemInstanceFilter_value:
-			return deserializeSystemInstanceFilterValues(d, schemas.SystemInstanceFilter_value, &v.Value)
-		}
-		return nil
-	})
 }
 
 // An object that contains summary information about a system instance.
@@ -731,84 +264,6 @@ type SystemInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SystemInstanceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemInstanceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.SystemInstanceSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SystemInstanceSummary_createdAt, *v.CreatedAt)
-	}
-	if v.GreengrassGroupId != nil {
-		s.WriteString(schemas.SystemInstanceSummary_greengrassGroupId, *v.GreengrassGroupId)
-	}
-	if v.GreengrassGroupName != nil {
-		s.WriteString(schemas.SystemInstanceSummary_greengrassGroupName, *v.GreengrassGroupName)
-	}
-	if v.GreengrassGroupVersionId != nil {
-		s.WriteString(schemas.SystemInstanceSummary_greengrassGroupVersionId, *v.GreengrassGroupVersionId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SystemInstanceSummary_id, *v.Id)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SystemInstanceSummary_status, string(v.Status))
-	}
-	if v.Target != "" {
-		s.WriteString(schemas.SystemInstanceSummary_target, string(v.Target))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.SystemInstanceSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *SystemInstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemInstanceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemInstanceSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SystemInstanceSummary_arn, v.Arn)
-		case schemas.SystemInstanceSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SystemInstanceSummary_createdAt, v.CreatedAt)
-		case schemas.SystemInstanceSummary_greengrassGroupId:
-			v.GreengrassGroupId = new(string)
-			return d.ReadString(schemas.SystemInstanceSummary_greengrassGroupId, v.GreengrassGroupId)
-		case schemas.SystemInstanceSummary_greengrassGroupName:
-			v.GreengrassGroupName = new(string)
-			return d.ReadString(schemas.SystemInstanceSummary_greengrassGroupName, v.GreengrassGroupName)
-		case schemas.SystemInstanceSummary_greengrassGroupVersionId:
-			v.GreengrassGroupVersionId = new(string)
-			return d.ReadString(schemas.SystemInstanceSummary_greengrassGroupVersionId, v.GreengrassGroupVersionId)
-		case schemas.SystemInstanceSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SystemInstanceSummary_id, v.Id)
-		case schemas.SystemInstanceSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.SystemInstanceSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = SystemInstanceDeploymentStatus(ev)
-			return nil
-		case schemas.SystemInstanceSummary_target:
-			var ev string
-			if err := d.ReadString(schemas.SystemInstanceSummary_target, &ev); err != nil {
-				return err
-			}
-			v.Target = DeploymentTarget(ev)
-			return nil
-		case schemas.SystemInstanceSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SystemInstanceSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // An object that contains a system's definition document and summary information.
 type SystemTemplateDescription struct {
 
@@ -823,44 +278,6 @@ type SystemTemplateDescription struct {
 	ValidatedNamespaceVersion *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *SystemTemplateDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemTemplateDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemTemplateDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Definition != nil {
-		s.WriteStruct(schemas.SystemTemplateDescription_definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Summary != nil {
-		s.WriteStruct(schemas.SystemTemplateDescription_summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ValidatedNamespaceVersion != nil {
-		s.WriteInt64(schemas.SystemTemplateDescription_validatedNamespaceVersion, *v.ValidatedNamespaceVersion)
-	}
-}
-func (v *SystemTemplateDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemTemplateDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemTemplateDescription_definition:
-			v.Definition = &DefinitionDocument{}
-			return v.Definition.Deserialize(d)
-		case schemas.SystemTemplateDescription_summary:
-			v.Summary = &SystemTemplateSummary{}
-			return v.Summary.Deserialize(d)
-		case schemas.SystemTemplateDescription_validatedNamespaceVersion:
-			v.ValidatedNamespaceVersion = new(int64)
-			return d.ReadInt64(schemas.SystemTemplateDescription_validatedNamespaceVersion, v.ValidatedNamespaceVersion)
-		}
-		return nil
-	})
 }
 
 // An object that filters a system search.
@@ -880,35 +297,6 @@ type SystemTemplateFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SystemTemplateFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemTemplateFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemTemplateFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != "" {
-		s.WriteString(schemas.SystemTemplateFilter_name, string(v.Name))
-	}
-	serializeSystemTemplateFilterValues(s, schemas.SystemTemplateFilter_value, v.Value)
-}
-func (v *SystemTemplateFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemTemplateFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemTemplateFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.SystemTemplateFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = SystemTemplateFilterName(ev)
-			return nil
-		case schemas.SystemTemplateFilter_value:
-			return deserializeSystemTemplateFilterValues(d, schemas.SystemTemplateFilter_value, &v.Value)
-		}
-		return nil
-	})
-}
-
 // An object that contains information about a system.
 type SystemTemplateSummary struct {
 
@@ -925,46 +313,6 @@ type SystemTemplateSummary struct {
 	RevisionNumber *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *SystemTemplateSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SystemTemplateSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SystemTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.SystemTemplateSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SystemTemplateSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SystemTemplateSummary_id, *v.Id)
-	}
-	if v.RevisionNumber != nil {
-		s.WriteInt64(schemas.SystemTemplateSummary_revisionNumber, *v.RevisionNumber)
-	}
-}
-func (v *SystemTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SystemTemplateSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SystemTemplateSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SystemTemplateSummary_arn, v.Arn)
-		case schemas.SystemTemplateSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SystemTemplateSummary_createdAt, v.CreatedAt)
-		case schemas.SystemTemplateSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SystemTemplateSummary_id, v.Id)
-		case schemas.SystemTemplateSummary_revisionNumber:
-			v.RevisionNumber = new(int64)
-			return d.ReadInt64(schemas.SystemTemplateSummary_revisionNumber, v.RevisionNumber)
-		}
-		return nil
-	})
 }
 
 // Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value
@@ -986,34 +334,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_key, v.Key)
-		case schemas.Tag_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // An AWS IoT thing.
 type Thing struct {
 
@@ -1024,34 +344,6 @@ type Thing struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Thing) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Thing)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Thing) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ThingArn != nil {
-		s.WriteString(schemas.Thing_thingArn, *v.ThingArn)
-	}
-	if v.ThingName != nil {
-		s.WriteString(schemas.Thing_thingName, *v.ThingName)
-	}
-}
-func (v *Thing) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Thing, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Thing_thingArn:
-			v.ThingArn = new(string)
-			return d.ReadString(schemas.Thing_thingArn, v.ThingArn)
-		case schemas.Thing_thingName:
-			v.ThingName = new(string)
-			return d.ReadString(schemas.Thing_thingName, v.ThingName)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

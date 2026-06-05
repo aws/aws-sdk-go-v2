@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,22 +53,6 @@ type CreateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventBusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEventBusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventSourceName != nil {
-		s.WriteString(schemas.CreateEventBusRequest_EventSourceName, *v.EventSourceName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateEventBusRequest_Name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateEventBusRequest_Tags, v.Tags)
-}
-
 type CreateEventBusOutput struct {
 
 	// The ARN of the new event bus.
@@ -82,24 +64,16 @@ type CreateEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEventBusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEventBusResponse_EventBusArn:
-			v.EventBusArn = new(string)
-			return d.ReadString(schemas.CreateEventBusResponse_EventBusArn, v.EventBusArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventBus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse), output: &CreateEventBusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventBus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventBus"); err != nil {

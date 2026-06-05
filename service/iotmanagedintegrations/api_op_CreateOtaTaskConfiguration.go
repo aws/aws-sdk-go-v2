@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,29 +46,6 @@ type CreateOtaTaskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateOtaTaskConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateOtaTaskConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateOtaTaskConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateOtaTaskConfigurationRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateOtaTaskConfigurationRequest_Description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateOtaTaskConfigurationRequest_Name, *v.Name)
-	}
-	if v.PushConfig != nil {
-		s.WriteStruct(schemas.CreateOtaTaskConfigurationRequest_PushConfig)
-		v.PushConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateOtaTaskConfigurationOutput struct {
 
 	// The identifier of the over-the-air (OTA) task configuration.
@@ -82,24 +57,16 @@ type CreateOtaTaskConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateOtaTaskConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateOtaTaskConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateOtaTaskConfigurationResponse_TaskConfigurationId:
-			v.TaskConfigurationId = new(string)
-			return d.ReadString(schemas.CreateOtaTaskConfigurationResponse_TaskConfigurationId, v.TaskConfigurationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateOtaTaskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOtaTaskConfiguration, schemas.CreateOtaTaskConfigurationRequest, schemas.CreateOtaTaskConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOtaTaskConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOtaTaskConfiguration, schemas.CreateOtaTaskConfigurationRequest, schemas.CreateOtaTaskConfigurationResponse), output: &CreateOtaTaskConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOtaTaskConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOtaTaskConfiguration"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,21 +51,6 @@ type DescribeLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeLunaClientInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeLunaClientRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeLunaClientInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CertificateFingerprint != nil {
-		s.WriteString(schemas.DescribeLunaClientRequest_CertificateFingerprint, *v.CertificateFingerprint)
-	}
-	if v.ClientArn != nil {
-		s.WriteString(schemas.DescribeLunaClientRequest_ClientArn, *v.ClientArn)
-	}
-}
-
 type DescribeLunaClientOutput struct {
 
 	// The certificate installed on the HSMs used by this client.
@@ -91,36 +74,16 @@ type DescribeLunaClientOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeLunaClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeLunaClientResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeLunaClientResponse_Certificate:
-			v.Certificate = new(string)
-			return d.ReadString(schemas.DescribeLunaClientResponse_Certificate, v.Certificate)
-		case schemas.DescribeLunaClientResponse_CertificateFingerprint:
-			v.CertificateFingerprint = new(string)
-			return d.ReadString(schemas.DescribeLunaClientResponse_CertificateFingerprint, v.CertificateFingerprint)
-		case schemas.DescribeLunaClientResponse_ClientArn:
-			v.ClientArn = new(string)
-			return d.ReadString(schemas.DescribeLunaClientResponse_ClientArn, v.ClientArn)
-		case schemas.DescribeLunaClientResponse_Label:
-			v.Label = new(string)
-			return d.ReadString(schemas.DescribeLunaClientResponse_Label, v.Label)
-		case schemas.DescribeLunaClientResponse_LastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(string)
-			return d.ReadString(schemas.DescribeLunaClientResponse_LastModifiedTimestamp, v.LastModifiedTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLunaClient, schemas.DescribeLunaClientRequest, schemas.DescribeLunaClientResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLunaClient{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLunaClient, schemas.DescribeLunaClientRequest, schemas.DescribeLunaClientResponse), output: &DescribeLunaClientOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLunaClient{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLunaClient"); err != nil {

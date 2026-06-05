@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -199,62 +197,6 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_clientToken, *v.ClientToken)
-	}
-	if v.ConnectivityInfo != nil {
-		s.WriteStruct(schemas.CreateEnvironmentRequest_connectivityInfo)
-		v.ConnectivityInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_environmentName, *v.EnvironmentName)
-	}
-	serializeHostInfoForCreateList(s, schemas.CreateEnvironmentRequest_hosts, v.Hosts)
-	if v.InitialVlans != nil {
-		s.WriteStruct(schemas.CreateEnvironmentRequest_initialVlans)
-		v.InitialVlans.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_kmsKeyId, *v.KmsKeyId)
-	}
-	serializeLicenseInfoList(s, schemas.CreateEnvironmentRequest_licenseInfo, v.LicenseInfo)
-	if v.ServiceAccessSecurityGroups != nil {
-		s.WriteStruct(schemas.CreateEnvironmentRequest_serviceAccessSecurityGroups)
-		v.ServiceAccessSecurityGroups.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceAccessSubnetId != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_serviceAccessSubnetId, *v.ServiceAccessSubnetId)
-	}
-	if v.SiteId != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_siteId, *v.SiteId)
-	}
-	serializeRequestTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
-	if v.TermsAccepted != nil {
-		s.WriteBool(schemas.CreateEnvironmentRequest_termsAccepted, *v.TermsAccepted)
-	}
-	if v.VcfHostnames != nil {
-		s.WriteStruct(schemas.CreateEnvironmentRequest_vcfHostnames)
-		v.VcfHostnames.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VcfVersion != "" {
-		s.WriteString(schemas.CreateEnvironmentRequest_vcfVersion, string(v.VcfVersion))
-	}
-	if v.VpcId != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_vpcId, *v.VpcId)
-	}
-}
-
 type CreateEnvironmentOutput struct {
 
 	// A description of the created environment.
@@ -266,24 +208,16 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentResponse_environment:
-			v.Environment = &types.Environment{}
-			return v.Environment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironment"); err != nil {

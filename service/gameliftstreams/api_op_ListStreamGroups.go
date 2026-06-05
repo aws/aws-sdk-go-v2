@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type ListStreamGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListStreamGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListStreamGroupsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListStreamGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListStreamGroupsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListStreamGroupsInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListStreamGroupsOutput struct {
 
 	// A collection of Amazon GameLift Streams stream groups that are associated with
@@ -79,26 +62,16 @@ type ListStreamGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListStreamGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListStreamGroupsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListStreamGroupsOutput_Items:
-			return deserializeStreamGroupSummaryList(d, schemas.ListStreamGroupsOutput_Items, &v.Items)
-		case schemas.ListStreamGroupsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListStreamGroupsOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListStreamGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamGroups, schemas.ListStreamGroupsInput, schemas.ListStreamGroupsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamGroups, schemas.ListStreamGroupsInput, schemas.ListStreamGroupsOutput), output: &ListStreamGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreamGroups"); err != nil {

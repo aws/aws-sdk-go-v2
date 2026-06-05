@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetChallengePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChallengePasswordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetChallengePasswordRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetChallengePasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChallengeArn != nil {
-		s.WriteString(schemas.GetChallengePasswordRequest_ChallengeArn, *v.ChallengeArn)
-	}
-}
-
 type GetChallengePasswordOutput struct {
 
 	// The SCEP challenge password.
@@ -63,24 +49,16 @@ type GetChallengePasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChallengePasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetChallengePasswordResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetChallengePasswordResponse_Password:
-			v.Password = new(string)
-			return d.ReadString(schemas.GetChallengePasswordResponse_Password, v.Password)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetChallengePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChallengePassword, schemas.GetChallengePasswordRequest, schemas.GetChallengePasswordResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChallengePassword{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChallengePassword, schemas.GetChallengePasswordRequest, schemas.GetChallengePasswordResponse), output: &GetChallengePasswordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChallengePassword{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChallengePassword"); err != nil {

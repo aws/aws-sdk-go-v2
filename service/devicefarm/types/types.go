@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -47,63 +45,6 @@ type AccountSettings struct {
 	UnmeteredRemoteAccessDevices map[string]int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsAccountNumber != nil {
-		s.WriteString(schemas.AccountSettings_awsAccountNumber, *v.AwsAccountNumber)
-	}
-	if v.DefaultJobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.AccountSettings_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
-	}
-	if v.MaxJobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.AccountSettings_maxJobTimeoutMinutes, *v.MaxJobTimeoutMinutes)
-	}
-	serializeMaxSlotMap(s, schemas.AccountSettings_maxSlots, v.MaxSlots)
-	if v.SkipAppResign != nil {
-		s.WriteBool(schemas.AccountSettings_skipAppResign, *v.SkipAppResign)
-	}
-	if v.TrialMinutes != nil {
-		s.WriteStruct(schemas.AccountSettings_trialMinutes)
-		v.TrialMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredDevices, v.UnmeteredDevices)
-	serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredRemoteAccessDevices, v.UnmeteredRemoteAccessDevices)
-}
-func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountSettings_awsAccountNumber:
-			v.AwsAccountNumber = new(string)
-			return d.ReadString(schemas.AccountSettings_awsAccountNumber, v.AwsAccountNumber)
-		case schemas.AccountSettings_defaultJobTimeoutMinutes:
-			v.DefaultJobTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.AccountSettings_defaultJobTimeoutMinutes, v.DefaultJobTimeoutMinutes)
-		case schemas.AccountSettings_maxJobTimeoutMinutes:
-			v.MaxJobTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.AccountSettings_maxJobTimeoutMinutes, v.MaxJobTimeoutMinutes)
-		case schemas.AccountSettings_maxSlots:
-			return deserializeMaxSlotMap(d, schemas.AccountSettings_maxSlots, &v.MaxSlots)
-		case schemas.AccountSettings_skipAppResign:
-			v.SkipAppResign = new(bool)
-			return d.ReadBool(schemas.AccountSettings_skipAppResign, v.SkipAppResign)
-		case schemas.AccountSettings_trialMinutes:
-			v.TrialMinutes = &TrialMinutes{}
-			return v.TrialMinutes.Deserialize(d)
-		case schemas.AccountSettings_unmeteredDevices:
-			return deserializePurchasedDevicesMap(d, schemas.AccountSettings_unmeteredDevices, &v.UnmeteredDevices)
-		case schemas.AccountSettings_unmeteredRemoteAccessDevices:
-			return deserializePurchasedDevicesMap(d, schemas.AccountSettings_unmeteredRemoteAccessDevices, &v.UnmeteredRemoteAccessDevices)
-		}
-		return nil
-	})
 }
 
 // Represents the output of a test. Examples of artifacts include logs and
@@ -174,56 +115,6 @@ type Artifact struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Artifact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Artifact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Artifact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Artifact_arn, *v.Arn)
-	}
-	if v.Extension != nil {
-		s.WriteString(schemas.Artifact_extension, *v.Extension)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Artifact_name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Artifact_type, string(v.Type))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.Artifact_url, *v.Url)
-	}
-}
-func (v *Artifact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Artifact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Artifact_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Artifact_arn, v.Arn)
-		case schemas.Artifact_extension:
-			v.Extension = new(string)
-			return d.ReadString(schemas.Artifact_extension, v.Extension)
-		case schemas.Artifact_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Artifact_name, v.Name)
-		case schemas.Artifact_type:
-			var ev string
-			if err := d.ReadString(schemas.Artifact_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ArtifactType(ev)
-			return nil
-		case schemas.Artifact_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.Artifact_url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Represents entity counters.
 type Counters struct {
 
@@ -251,64 +142,6 @@ type Counters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Counters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Counters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Counters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Errored != nil {
-		s.WriteInt32(schemas.Counters_errored, *v.Errored)
-	}
-	if v.Failed != nil {
-		s.WriteInt32(schemas.Counters_failed, *v.Failed)
-	}
-	if v.Passed != nil {
-		s.WriteInt32(schemas.Counters_passed, *v.Passed)
-	}
-	if v.Skipped != nil {
-		s.WriteInt32(schemas.Counters_skipped, *v.Skipped)
-	}
-	if v.Stopped != nil {
-		s.WriteInt32(schemas.Counters_stopped, *v.Stopped)
-	}
-	if v.Total != nil {
-		s.WriteInt32(schemas.Counters_total, *v.Total)
-	}
-	if v.Warned != nil {
-		s.WriteInt32(schemas.Counters_warned, *v.Warned)
-	}
-}
-func (v *Counters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Counters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Counters_errored:
-			v.Errored = new(int32)
-			return d.ReadInt32(schemas.Counters_errored, v.Errored)
-		case schemas.Counters_failed:
-			v.Failed = new(int32)
-			return d.ReadInt32(schemas.Counters_failed, v.Failed)
-		case schemas.Counters_passed:
-			v.Passed = new(int32)
-			return d.ReadInt32(schemas.Counters_passed, v.Passed)
-		case schemas.Counters_skipped:
-			v.Skipped = new(int32)
-			return d.ReadInt32(schemas.Counters_skipped, v.Skipped)
-		case schemas.Counters_stopped:
-			v.Stopped = new(int32)
-			return d.ReadInt32(schemas.Counters_stopped, v.Stopped)
-		case schemas.Counters_total:
-			v.Total = new(int32)
-			return d.ReadInt32(schemas.Counters_total, v.Total)
-		case schemas.Counters_warned:
-			v.Warned = new(int32)
-			return d.ReadInt32(schemas.Counters_warned, v.Warned)
-		}
-		return nil
-	})
-}
-
 // Represents the amount of CPU that an app is using on a physical device. Does
 // not represent system-wide CPU usage.
 type CPU struct {
@@ -324,40 +157,6 @@ type CPU struct {
 	Frequency *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CPU) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CPU)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CPU) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Architecture != nil {
-		s.WriteString(schemas.CPU_architecture, *v.Architecture)
-	}
-	if v.Clock != nil {
-		s.WriteFloat64(schemas.CPU_clock, *v.Clock)
-	}
-	if v.Frequency != nil {
-		s.WriteString(schemas.CPU_frequency, *v.Frequency)
-	}
-}
-func (v *CPU) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CPU, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CPU_architecture:
-			v.Architecture = new(string)
-			return d.ReadString(schemas.CPU_architecture, v.Architecture)
-		case schemas.CPU_clock:
-			v.Clock = new(float64)
-			return d.ReadFloat64(schemas.CPU_clock, v.Clock)
-		case schemas.CPU_frequency:
-			v.Frequency = new(string)
-			return d.ReadString(schemas.CPU_frequency, v.Frequency)
-		}
-		return nil
-	})
 }
 
 // Configuration settings for a remote access session, including billing method.
@@ -377,46 +176,6 @@ type CreateRemoteAccessSessionConfiguration struct {
 	VpceConfigurationArns []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateRemoteAccessSessionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRemoteAccessSessionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRemoteAccessSessionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuxiliaryAppArnList(s, schemas.CreateRemoteAccessSessionConfiguration_auxiliaryApps, v.AuxiliaryApps)
-	if v.BillingMethod != "" {
-		s.WriteString(schemas.CreateRemoteAccessSessionConfiguration_billingMethod, string(v.BillingMethod))
-	}
-	if v.DeviceProxy != nil {
-		s.WriteStruct(schemas.CreateRemoteAccessSessionConfiguration_deviceProxy)
-		v.DeviceProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAmazonResourceNames(s, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
-}
-func (v *CreateRemoteAccessSessionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRemoteAccessSessionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRemoteAccessSessionConfiguration_auxiliaryApps:
-			return deserializeAuxiliaryAppArnList(d, schemas.CreateRemoteAccessSessionConfiguration_auxiliaryApps, &v.AuxiliaryApps)
-		case schemas.CreateRemoteAccessSessionConfiguration_billingMethod:
-			var ev string
-			if err := d.ReadString(schemas.CreateRemoteAccessSessionConfiguration_billingMethod, &ev); err != nil {
-				return err
-			}
-			v.BillingMethod = BillingMethod(ev)
-			return nil
-		case schemas.CreateRemoteAccessSessionConfiguration_deviceProxy:
-			v.DeviceProxy = &DeviceProxy{}
-			return v.DeviceProxy.Deserialize(d)
-		case schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns:
-			return deserializeAmazonResourceNames(d, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, &v.VpceConfigurationArns)
-		}
-		return nil
-	})
 }
 
 // A JSON object that specifies the paths where the artifacts generated by the
@@ -440,31 +199,6 @@ type CustomerArtifactPaths struct {
 	IosPaths []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomerArtifactPaths) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomerArtifactPaths)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomerArtifactPaths) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAndroidPaths(s, schemas.CustomerArtifactPaths_androidPaths, v.AndroidPaths)
-	serializeDeviceHostPaths(s, schemas.CustomerArtifactPaths_deviceHostPaths, v.DeviceHostPaths)
-	serializeIosPaths(s, schemas.CustomerArtifactPaths_iosPaths, v.IosPaths)
-}
-func (v *CustomerArtifactPaths) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomerArtifactPaths, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomerArtifactPaths_androidPaths:
-			return deserializeAndroidPaths(d, schemas.CustomerArtifactPaths_androidPaths, &v.AndroidPaths)
-		case schemas.CustomerArtifactPaths_deviceHostPaths:
-			return deserializeDeviceHostPaths(d, schemas.CustomerArtifactPaths_deviceHostPaths, &v.DeviceHostPaths)
-		case schemas.CustomerArtifactPaths_iosPaths:
-			return deserializeIosPaths(d, schemas.CustomerArtifactPaths_iosPaths, &v.IosPaths)
-		}
-		return nil
-	})
 }
 
 // Represents a device type that an app is tested against.
@@ -554,161 +288,6 @@ type Device struct {
 	Resolution *Resolution
 
 	noSmithyDocumentSerde
-}
-
-func (v *Device) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Device)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Device_arn, *v.Arn)
-	}
-	if v.Availability != "" {
-		s.WriteString(schemas.Device_availability, string(v.Availability))
-	}
-	if v.Carrier != nil {
-		s.WriteString(schemas.Device_carrier, *v.Carrier)
-	}
-	if v.Cpu != nil {
-		s.WriteStruct(schemas.Device_cpu)
-		v.Cpu.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FleetName != nil {
-		s.WriteString(schemas.Device_fleetName, *v.FleetName)
-	}
-	if v.FleetType != nil {
-		s.WriteString(schemas.Device_fleetType, *v.FleetType)
-	}
-	if v.FormFactor != "" {
-		s.WriteString(schemas.Device_formFactor, string(v.FormFactor))
-	}
-	if v.HeapSize != nil {
-		s.WriteInt64(schemas.Device_heapSize, *v.HeapSize)
-	}
-	if v.Image != nil {
-		s.WriteString(schemas.Device_image, *v.Image)
-	}
-	serializeDeviceInstances(s, schemas.Device_instances, v.Instances)
-	if v.Manufacturer != nil {
-		s.WriteString(schemas.Device_manufacturer, *v.Manufacturer)
-	}
-	if v.Memory != nil {
-		s.WriteInt64(schemas.Device_memory, *v.Memory)
-	}
-	if v.Model != nil {
-		s.WriteString(schemas.Device_model, *v.Model)
-	}
-	if v.ModelId != nil {
-		s.WriteString(schemas.Device_modelId, *v.ModelId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Device_name, *v.Name)
-	}
-	if v.Os != nil {
-		s.WriteString(schemas.Device_os, *v.Os)
-	}
-	if v.Platform != "" {
-		s.WriteString(schemas.Device_platform, string(v.Platform))
-	}
-	if v.Radio != nil {
-		s.WriteString(schemas.Device_radio, *v.Radio)
-	}
-	if v.RemoteAccessEnabled != nil {
-		s.WriteBool(schemas.Device_remoteAccessEnabled, *v.RemoteAccessEnabled)
-	}
-	if v.RemoteDebugEnabled != nil {
-		s.WriteBool(schemas.Device_remoteDebugEnabled, *v.RemoteDebugEnabled)
-	}
-	if v.Resolution != nil {
-		s.WriteStruct(schemas.Device_resolution)
-		v.Resolution.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Device, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Device_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Device_arn, v.Arn)
-		case schemas.Device_availability:
-			var ev string
-			if err := d.ReadString(schemas.Device_availability, &ev); err != nil {
-				return err
-			}
-			v.Availability = DeviceAvailability(ev)
-			return nil
-		case schemas.Device_carrier:
-			v.Carrier = new(string)
-			return d.ReadString(schemas.Device_carrier, v.Carrier)
-		case schemas.Device_cpu:
-			v.Cpu = &CPU{}
-			return v.Cpu.Deserialize(d)
-		case schemas.Device_fleetName:
-			v.FleetName = new(string)
-			return d.ReadString(schemas.Device_fleetName, v.FleetName)
-		case schemas.Device_fleetType:
-			v.FleetType = new(string)
-			return d.ReadString(schemas.Device_fleetType, v.FleetType)
-		case schemas.Device_formFactor:
-			var ev string
-			if err := d.ReadString(schemas.Device_formFactor, &ev); err != nil {
-				return err
-			}
-			v.FormFactor = DeviceFormFactor(ev)
-			return nil
-		case schemas.Device_heapSize:
-			v.HeapSize = new(int64)
-			return d.ReadInt64(schemas.Device_heapSize, v.HeapSize)
-		case schemas.Device_image:
-			v.Image = new(string)
-			return d.ReadString(schemas.Device_image, v.Image)
-		case schemas.Device_instances:
-			return deserializeDeviceInstances(d, schemas.Device_instances, &v.Instances)
-		case schemas.Device_manufacturer:
-			v.Manufacturer = new(string)
-			return d.ReadString(schemas.Device_manufacturer, v.Manufacturer)
-		case schemas.Device_memory:
-			v.Memory = new(int64)
-			return d.ReadInt64(schemas.Device_memory, v.Memory)
-		case schemas.Device_model:
-			v.Model = new(string)
-			return d.ReadString(schemas.Device_model, v.Model)
-		case schemas.Device_modelId:
-			v.ModelId = new(string)
-			return d.ReadString(schemas.Device_modelId, v.ModelId)
-		case schemas.Device_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Device_name, v.Name)
-		case schemas.Device_os:
-			v.Os = new(string)
-			return d.ReadString(schemas.Device_os, v.Os)
-		case schemas.Device_platform:
-			var ev string
-			if err := d.ReadString(schemas.Device_platform, &ev); err != nil {
-				return err
-			}
-			v.Platform = DevicePlatform(ev)
-			return nil
-		case schemas.Device_radio:
-			v.Radio = new(string)
-			return d.ReadString(schemas.Device_radio, v.Radio)
-		case schemas.Device_remoteAccessEnabled:
-			v.RemoteAccessEnabled = new(bool)
-			return d.ReadBool(schemas.Device_remoteAccessEnabled, v.RemoteAccessEnabled)
-		case schemas.Device_remoteDebugEnabled:
-			v.RemoteDebugEnabled = new(bool)
-			return d.ReadBool(schemas.Device_remoteDebugEnabled, v.RemoteDebugEnabled)
-		case schemas.Device_resolution:
-			v.Resolution = &Resolution{}
-			return v.Resolution.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents a device filter used to select a set of devices to be included in a
@@ -816,45 +395,6 @@ type DeviceFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeviceFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attribute != "" {
-		s.WriteString(schemas.DeviceFilter_attribute, string(v.Attribute))
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.DeviceFilter_operator, string(v.Operator))
-	}
-	serializeDeviceFilterValues(s, schemas.DeviceFilter_values, v.Values)
-}
-func (v *DeviceFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceFilter_attribute:
-			var ev string
-			if err := d.ReadString(schemas.DeviceFilter_attribute, &ev); err != nil {
-				return err
-			}
-			v.Attribute = DeviceFilterAttribute(ev)
-			return nil
-		case schemas.DeviceFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.DeviceFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = RuleOperator(ev)
-			return nil
-		case schemas.DeviceFilter_values:
-			return deserializeDeviceFilterValues(d, schemas.DeviceFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Represents the device instance.
 type DeviceInstance struct {
 
@@ -879,61 +419,6 @@ type DeviceInstance struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeviceInstance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceInstance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceInstance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DeviceInstance_arn, *v.Arn)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.DeviceInstance_deviceArn, *v.DeviceArn)
-	}
-	if v.InstanceProfile != nil {
-		s.WriteStruct(schemas.DeviceInstance_instanceProfile)
-		v.InstanceProfile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInstanceLabels(s, schemas.DeviceInstance_labels, v.Labels)
-	if v.Status != "" {
-		s.WriteString(schemas.DeviceInstance_status, string(v.Status))
-	}
-	if v.Udid != nil {
-		s.WriteString(schemas.DeviceInstance_udid, *v.Udid)
-	}
-}
-func (v *DeviceInstance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceInstance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceInstance_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeviceInstance_arn, v.Arn)
-		case schemas.DeviceInstance_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.DeviceInstance_deviceArn, v.DeviceArn)
-		case schemas.DeviceInstance_instanceProfile:
-			v.InstanceProfile = &InstanceProfile{}
-			return v.InstanceProfile.Deserialize(d)
-		case schemas.DeviceInstance_labels:
-			return deserializeInstanceLabels(d, schemas.DeviceInstance_labels, &v.Labels)
-		case schemas.DeviceInstance_status:
-			var ev string
-			if err := d.ReadString(schemas.DeviceInstance_status, &ev); err != nil {
-				return err
-			}
-			v.Status = InstanceStatus(ev)
-			return nil
-		case schemas.DeviceInstance_udid:
-			v.Udid = new(string)
-			return d.ReadString(schemas.DeviceInstance_udid, v.Udid)
-		}
-		return nil
-	})
-}
-
 // Represents the total (metered or unmetered) minutes used by the resource to run
 // tests. Contains the sum of minutes consumed by all children.
 type DeviceMinutes struct {
@@ -950,40 +435,6 @@ type DeviceMinutes struct {
 	Unmetered *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeviceMinutes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceMinutes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceMinutes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Metered != nil {
-		s.WriteFloat64(schemas.DeviceMinutes_metered, *v.Metered)
-	}
-	if v.Total != nil {
-		s.WriteFloat64(schemas.DeviceMinutes_total, *v.Total)
-	}
-	if v.Unmetered != nil {
-		s.WriteFloat64(schemas.DeviceMinutes_unmetered, *v.Unmetered)
-	}
-}
-func (v *DeviceMinutes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceMinutes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceMinutes_metered:
-			v.Metered = new(float64)
-			return d.ReadFloat64(schemas.DeviceMinutes_metered, v.Metered)
-		case schemas.DeviceMinutes_total:
-			v.Total = new(float64)
-			return d.ReadFloat64(schemas.DeviceMinutes_total, v.Total)
-		case schemas.DeviceMinutes_unmetered:
-			v.Unmetered = new(float64)
-			return d.ReadFloat64(schemas.DeviceMinutes_unmetered, v.Unmetered)
-		}
-		return nil
-	})
 }
 
 // Represents a collection of device types.
@@ -1023,59 +474,6 @@ type DevicePool struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DevicePool) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DevicePool)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DevicePool) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DevicePool_arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DevicePool_description, *v.Description)
-	}
-	if v.MaxDevices != nil {
-		s.WriteInt32(schemas.DevicePool_maxDevices, *v.MaxDevices)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DevicePool_name, *v.Name)
-	}
-	serializeRules(s, schemas.DevicePool_rules, v.Rules)
-	if v.Type != "" {
-		s.WriteString(schemas.DevicePool_type, string(v.Type))
-	}
-}
-func (v *DevicePool) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DevicePool, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DevicePool_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DevicePool_arn, v.Arn)
-		case schemas.DevicePool_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DevicePool_description, v.Description)
-		case schemas.DevicePool_maxDevices:
-			v.MaxDevices = new(int32)
-			return d.ReadInt32(schemas.DevicePool_maxDevices, v.MaxDevices)
-		case schemas.DevicePool_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DevicePool_name, v.Name)
-		case schemas.DevicePool_rules:
-			return deserializeRules(d, schemas.DevicePool_rules, &v.Rules)
-		case schemas.DevicePool_type:
-			var ev string
-			if err := d.ReadString(schemas.DevicePool_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DevicePoolType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a device pool compatibility result.
 type DevicePoolCompatibilityResult struct {
 
@@ -1089,39 +487,6 @@ type DevicePoolCompatibilityResult struct {
 	IncompatibilityMessages []IncompatibilityMessage
 
 	noSmithyDocumentSerde
-}
-
-func (v *DevicePoolCompatibilityResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DevicePoolCompatibilityResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DevicePoolCompatibilityResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Compatible != nil {
-		s.WriteBool(schemas.DevicePoolCompatibilityResult_compatible, *v.Compatible)
-	}
-	if v.Device != nil {
-		s.WriteStruct(schemas.DevicePoolCompatibilityResult_device)
-		v.Device.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIncompatibilityMessages(s, schemas.DevicePoolCompatibilityResult_incompatibilityMessages, v.IncompatibilityMessages)
-}
-func (v *DevicePoolCompatibilityResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DevicePoolCompatibilityResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DevicePoolCompatibilityResult_compatible:
-			v.Compatible = new(bool)
-			return d.ReadBool(schemas.DevicePoolCompatibilityResult_compatible, v.Compatible)
-		case schemas.DevicePoolCompatibilityResult_device:
-			v.Device = &Device{}
-			return v.Device.Deserialize(d)
-		case schemas.DevicePoolCompatibilityResult_incompatibilityMessages:
-			return deserializeIncompatibilityMessages(d, schemas.DevicePoolCompatibilityResult_incompatibilityMessages, &v.IncompatibilityMessages)
-		}
-		return nil
-	})
 }
 
 // Represents the http/s proxy configuration that will be applied to a device
@@ -1139,34 +504,6 @@ type DeviceProxy struct {
 	Port *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeviceProxy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceProxy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceProxy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Host != nil {
-		s.WriteString(schemas.DeviceProxy_host, *v.Host)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.DeviceProxy_port, *v.Port)
-	}
-}
-func (v *DeviceProxy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceProxy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceProxy_host:
-			v.Host = new(string)
-			return d.ReadString(schemas.DeviceProxy_host, v.Host)
-		case schemas.DeviceProxy_port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.DeviceProxy_port, v.Port)
-		}
-		return nil
-	})
 }
 
 // Represents the device filters used in a test run and the maximum number of
@@ -1264,31 +601,6 @@ type DeviceSelectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeviceSelectionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceSelectionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceSelectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceFilters(s, schemas.DeviceSelectionConfiguration_filters, v.Filters)
-	if v.MaxDevices != nil {
-		s.WriteInt32(schemas.DeviceSelectionConfiguration_maxDevices, *v.MaxDevices)
-	}
-}
-func (v *DeviceSelectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceSelectionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceSelectionConfiguration_filters:
-			return deserializeDeviceFilters(d, schemas.DeviceSelectionConfiguration_filters, &v.Filters)
-		case schemas.DeviceSelectionConfiguration_maxDevices:
-			v.MaxDevices = new(int32)
-			return d.ReadInt32(schemas.DeviceSelectionConfiguration_maxDevices, v.MaxDevices)
-		}
-		return nil
-	})
-}
-
 // Contains the run results requested by the device selection configuration and
 // how many devices were returned. For an example of the JSON response syntax, see ScheduleRun
 // .
@@ -1307,37 +619,6 @@ type DeviceSelectionResult struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeviceSelectionResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeviceSelectionResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeviceSelectionResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceFilters(s, schemas.DeviceSelectionResult_filters, v.Filters)
-	if v.MatchedDevicesCount != nil {
-		s.WriteInt32(schemas.DeviceSelectionResult_matchedDevicesCount, *v.MatchedDevicesCount)
-	}
-	if v.MaxDevices != nil {
-		s.WriteInt32(schemas.DeviceSelectionResult_maxDevices, *v.MaxDevices)
-	}
-}
-func (v *DeviceSelectionResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeviceSelectionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeviceSelectionResult_filters:
-			return deserializeDeviceFilters(d, schemas.DeviceSelectionResult_filters, &v.Filters)
-		case schemas.DeviceSelectionResult_matchedDevicesCount:
-			v.MatchedDevicesCount = new(int32)
-			return d.ReadInt32(schemas.DeviceSelectionResult_matchedDevicesCount, v.MatchedDevicesCount)
-		case schemas.DeviceSelectionResult_maxDevices:
-			v.MaxDevices = new(int32)
-			return d.ReadInt32(schemas.DeviceSelectionResult_maxDevices, v.MaxDevices)
-		}
-		return nil
-	})
-}
-
 // Information about an environment variable for a project or a run.
 type EnvironmentVariable struct {
 
@@ -1352,34 +633,6 @@ type EnvironmentVariable struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EnvironmentVariable) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnvironmentVariable)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnvironmentVariable) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.EnvironmentVariable_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.EnvironmentVariable_value, *v.Value)
-	}
-}
-func (v *EnvironmentVariable) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnvironmentVariable, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EnvironmentVariable_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.EnvironmentVariable_name, v.Name)
-		case schemas.EnvironmentVariable_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.EnvironmentVariable_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents configuration information about a test run, such as the execution
@@ -1413,52 +666,6 @@ type ExecutionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecutionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecutionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountsCleanup != nil {
-		s.WriteBool(schemas.ExecutionConfiguration_accountsCleanup, *v.AccountsCleanup)
-	}
-	if v.AppPackagesCleanup != nil {
-		s.WriteBool(schemas.ExecutionConfiguration_appPackagesCleanup, *v.AppPackagesCleanup)
-	}
-	if v.JobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.ExecutionConfiguration_jobTimeoutMinutes, *v.JobTimeoutMinutes)
-	}
-	if v.SkipAppResign != nil {
-		s.WriteBool(schemas.ExecutionConfiguration_skipAppResign, *v.SkipAppResign)
-	}
-	if v.VideoCapture != nil {
-		s.WriteBool(schemas.ExecutionConfiguration_videoCapture, *v.VideoCapture)
-	}
-}
-func (v *ExecutionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecutionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecutionConfiguration_accountsCleanup:
-			v.AccountsCleanup = new(bool)
-			return d.ReadBool(schemas.ExecutionConfiguration_accountsCleanup, v.AccountsCleanup)
-		case schemas.ExecutionConfiguration_appPackagesCleanup:
-			v.AppPackagesCleanup = new(bool)
-			return d.ReadBool(schemas.ExecutionConfiguration_appPackagesCleanup, v.AppPackagesCleanup)
-		case schemas.ExecutionConfiguration_jobTimeoutMinutes:
-			v.JobTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.ExecutionConfiguration_jobTimeoutMinutes, v.JobTimeoutMinutes)
-		case schemas.ExecutionConfiguration_skipAppResign:
-			v.SkipAppResign = new(bool)
-			return d.ReadBool(schemas.ExecutionConfiguration_skipAppResign, v.SkipAppResign)
-		case schemas.ExecutionConfiguration_videoCapture:
-			v.VideoCapture = new(bool)
-			return d.ReadBool(schemas.ExecutionConfiguration_videoCapture, v.VideoCapture)
-		}
-		return nil
-	})
-}
-
 // Represents information about incompatibility.
 type IncompatibilityMessage struct {
 
@@ -1483,38 +690,6 @@ type IncompatibilityMessage struct {
 	Type DeviceAttribute
 
 	noSmithyDocumentSerde
-}
-
-func (v *IncompatibilityMessage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IncompatibilityMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IncompatibilityMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.IncompatibilityMessage_message, *v.Message)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.IncompatibilityMessage_type, string(v.Type))
-	}
-}
-func (v *IncompatibilityMessage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IncompatibilityMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IncompatibilityMessage_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IncompatibilityMessage_message, v.Message)
-		case schemas.IncompatibilityMessage_type:
-			var ev string
-			if err := d.ReadString(schemas.IncompatibilityMessage_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DeviceAttribute(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents the instance profile.
@@ -1544,55 +719,6 @@ type InstanceProfile struct {
 	RebootAfterUse *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *InstanceProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceProfile)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceProfile) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.InstanceProfile_arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.InstanceProfile_description, *v.Description)
-	}
-	serializePackageIds(s, schemas.InstanceProfile_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
-	if v.Name != nil {
-		s.WriteString(schemas.InstanceProfile_name, *v.Name)
-	}
-	if v.PackageCleanup != nil {
-		s.WriteBool(schemas.InstanceProfile_packageCleanup, *v.PackageCleanup)
-	}
-	if v.RebootAfterUse != nil {
-		s.WriteBool(schemas.InstanceProfile_rebootAfterUse, *v.RebootAfterUse)
-	}
-}
-func (v *InstanceProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceProfile, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceProfile_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.InstanceProfile_arn, v.Arn)
-		case schemas.InstanceProfile_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.InstanceProfile_description, v.Description)
-		case schemas.InstanceProfile_excludeAppPackagesFromCleanup:
-			return deserializePackageIds(d, schemas.InstanceProfile_excludeAppPackagesFromCleanup, &v.ExcludeAppPackagesFromCleanup)
-		case schemas.InstanceProfile_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.InstanceProfile_name, v.Name)
-		case schemas.InstanceProfile_packageCleanup:
-			v.PackageCleanup = new(bool)
-			return d.ReadBool(schemas.InstanceProfile_packageCleanup, v.PackageCleanup)
-		case schemas.InstanceProfile_rebootAfterUse:
-			v.RebootAfterUse = new(bool)
-			return d.ReadBool(schemas.InstanceProfile_rebootAfterUse, v.RebootAfterUse)
-		}
-		return nil
-	})
 }
 
 // Represents a device.
@@ -1713,130 +839,6 @@ type Job struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Job) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Job)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Job_arn, *v.Arn)
-	}
-	if v.Counters != nil {
-		s.WriteStruct(schemas.Job_counters)
-		v.Counters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Job_created, *v.Created)
-	}
-	if v.Device != nil {
-		s.WriteStruct(schemas.Job_device)
-		v.Device.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceMinutes != nil {
-		s.WriteStruct(schemas.Job_deviceMinutes)
-		v.DeviceMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.Job_instanceArn, *v.InstanceArn)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Job_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Job_name, *v.Name)
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.Job_result, string(v.Result))
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.Job_started, *v.Started)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Job_status, string(v.Status))
-	}
-	if v.Stopped != nil {
-		s.WriteTime(schemas.Job_stopped, *v.Stopped)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Job_type, string(v.Type))
-	}
-	if v.VideoCapture != nil {
-		s.WriteBool(schemas.Job_videoCapture, *v.VideoCapture)
-	}
-	if v.VideoEndpoint != nil {
-		s.WriteString(schemas.Job_videoEndpoint, *v.VideoEndpoint)
-	}
-}
-func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Job, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Job_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Job_arn, v.Arn)
-		case schemas.Job_counters:
-			v.Counters = &Counters{}
-			return v.Counters.Deserialize(d)
-		case schemas.Job_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Job_created, v.Created)
-		case schemas.Job_device:
-			v.Device = &Device{}
-			return v.Device.Deserialize(d)
-		case schemas.Job_deviceMinutes:
-			v.DeviceMinutes = &DeviceMinutes{}
-			return v.DeviceMinutes.Deserialize(d)
-		case schemas.Job_instanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.Job_instanceArn, v.InstanceArn)
-		case schemas.Job_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Job_message, v.Message)
-		case schemas.Job_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Job_name, v.Name)
-		case schemas.Job_result:
-			var ev string
-			if err := d.ReadString(schemas.Job_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.Job_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.Job_started, v.Started)
-		case schemas.Job_status:
-			var ev string
-			if err := d.ReadString(schemas.Job_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExecutionStatus(ev)
-			return nil
-		case schemas.Job_stopped:
-			v.Stopped = new(time.Time)
-			return d.ReadTime(schemas.Job_stopped, v.Stopped)
-		case schemas.Job_type:
-			var ev string
-			if err := d.ReadString(schemas.Job_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestType(ev)
-			return nil
-		case schemas.Job_videoCapture:
-			v.VideoCapture = new(bool)
-			return d.ReadBool(schemas.Job_videoCapture, v.VideoCapture)
-		case schemas.Job_videoEndpoint:
-			v.VideoEndpoint = new(string)
-			return d.ReadString(schemas.Job_videoEndpoint, v.VideoEndpoint)
-		}
-		return nil
-	})
-}
-
 // Represents a latitude and longitude pair, expressed in geographic coordinate
 // system degrees (for example, 47.6204, -122.3491).
 //
@@ -1856,34 +858,6 @@ type Location struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Location) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Location)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Latitude != nil {
-		s.WriteFloat64(schemas.Location_latitude, *v.Latitude)
-	}
-	if v.Longitude != nil {
-		s.WriteFloat64(schemas.Location_longitude, *v.Longitude)
-	}
-}
-func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Location_latitude:
-			v.Latitude = new(float64)
-			return d.ReadFloat64(schemas.Location_latitude, v.Latitude)
-		case schemas.Location_longitude:
-			v.Longitude = new(float64)
-			return d.ReadFloat64(schemas.Location_longitude, v.Longitude)
-		}
-		return nil
-	})
-}
-
 // A number that represents the monetary amount for an offering or transaction.
 type MonetaryAmount struct {
 
@@ -1894,38 +868,6 @@ type MonetaryAmount struct {
 	CurrencyCode CurrencyCode
 
 	noSmithyDocumentSerde
-}
-
-func (v *MonetaryAmount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonetaryAmount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonetaryAmount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.MonetaryAmount_amount, *v.Amount)
-	}
-	if v.CurrencyCode != "" {
-		s.WriteString(schemas.MonetaryAmount_currencyCode, string(v.CurrencyCode))
-	}
-}
-func (v *MonetaryAmount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonetaryAmount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonetaryAmount_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.MonetaryAmount_amount, v.Amount)
-		case schemas.MonetaryAmount_currencyCode:
-			var ev string
-			if err := d.ReadString(schemas.MonetaryAmount_currencyCode, &ev); err != nil {
-				return err
-			}
-			v.CurrencyCode = CurrencyCode(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // An array of settings that describes characteristics of a network profile.
@@ -1974,96 +916,6 @@ type NetworkProfile struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NetworkProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkProfile)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkProfile) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.NetworkProfile_arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.NetworkProfile_description, *v.Description)
-	}
-	if v.DownlinkBandwidthBits != nil {
-		s.WriteInt64(schemas.NetworkProfile_downlinkBandwidthBits, *v.DownlinkBandwidthBits)
-	}
-	if v.DownlinkDelayMs != nil {
-		s.WriteInt64(schemas.NetworkProfile_downlinkDelayMs, *v.DownlinkDelayMs)
-	}
-	if v.DownlinkJitterMs != nil {
-		s.WriteInt64(schemas.NetworkProfile_downlinkJitterMs, *v.DownlinkJitterMs)
-	}
-	if v.DownlinkLossPercent != 0 {
-		s.WriteInt32(schemas.NetworkProfile_downlinkLossPercent, v.DownlinkLossPercent)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.NetworkProfile_name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.NetworkProfile_type, string(v.Type))
-	}
-	if v.UplinkBandwidthBits != nil {
-		s.WriteInt64(schemas.NetworkProfile_uplinkBandwidthBits, *v.UplinkBandwidthBits)
-	}
-	if v.UplinkDelayMs != nil {
-		s.WriteInt64(schemas.NetworkProfile_uplinkDelayMs, *v.UplinkDelayMs)
-	}
-	if v.UplinkJitterMs != nil {
-		s.WriteInt64(schemas.NetworkProfile_uplinkJitterMs, *v.UplinkJitterMs)
-	}
-	if v.UplinkLossPercent != 0 {
-		s.WriteInt32(schemas.NetworkProfile_uplinkLossPercent, v.UplinkLossPercent)
-	}
-}
-func (v *NetworkProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkProfile, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkProfile_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.NetworkProfile_arn, v.Arn)
-		case schemas.NetworkProfile_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.NetworkProfile_description, v.Description)
-		case schemas.NetworkProfile_downlinkBandwidthBits:
-			v.DownlinkBandwidthBits = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_downlinkBandwidthBits, v.DownlinkBandwidthBits)
-		case schemas.NetworkProfile_downlinkDelayMs:
-			v.DownlinkDelayMs = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_downlinkDelayMs, v.DownlinkDelayMs)
-		case schemas.NetworkProfile_downlinkJitterMs:
-			v.DownlinkJitterMs = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_downlinkJitterMs, v.DownlinkJitterMs)
-		case schemas.NetworkProfile_downlinkLossPercent:
-			return d.ReadInt32(schemas.NetworkProfile_downlinkLossPercent, &v.DownlinkLossPercent)
-		case schemas.NetworkProfile_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.NetworkProfile_name, v.Name)
-		case schemas.NetworkProfile_type:
-			var ev string
-			if err := d.ReadString(schemas.NetworkProfile_type, &ev); err != nil {
-				return err
-			}
-			v.Type = NetworkProfileType(ev)
-			return nil
-		case schemas.NetworkProfile_uplinkBandwidthBits:
-			v.UplinkBandwidthBits = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_uplinkBandwidthBits, v.UplinkBandwidthBits)
-		case schemas.NetworkProfile_uplinkDelayMs:
-			v.UplinkDelayMs = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_uplinkDelayMs, v.UplinkDelayMs)
-		case schemas.NetworkProfile_uplinkJitterMs:
-			v.UplinkJitterMs = new(int64)
-			return d.ReadInt64(schemas.NetworkProfile_uplinkJitterMs, v.UplinkJitterMs)
-		case schemas.NetworkProfile_uplinkLossPercent:
-			return d.ReadInt32(schemas.NetworkProfile_uplinkLossPercent, &v.UplinkLossPercent)
-		}
-		return nil
-	})
-}
-
 // Represents the metadata of a device offering.
 type Offering struct {
 
@@ -2085,57 +937,6 @@ type Offering struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Offering) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Offering)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Offering) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.Offering_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Offering_id, *v.Id)
-	}
-	if v.Platform != "" {
-		s.WriteString(schemas.Offering_platform, string(v.Platform))
-	}
-	serializeRecurringCharges(s, schemas.Offering_recurringCharges, v.RecurringCharges)
-	if v.Type != "" {
-		s.WriteString(schemas.Offering_type, string(v.Type))
-	}
-}
-func (v *Offering) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Offering, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Offering_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Offering_description, v.Description)
-		case schemas.Offering_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Offering_id, v.Id)
-		case schemas.Offering_platform:
-			var ev string
-			if err := d.ReadString(schemas.Offering_platform, &ev); err != nil {
-				return err
-			}
-			v.Platform = DevicePlatform(ev)
-			return nil
-		case schemas.Offering_recurringCharges:
-			return deserializeRecurringCharges(d, schemas.Offering_recurringCharges, &v.RecurringCharges)
-		case schemas.Offering_type:
-			var ev string
-			if err := d.ReadString(schemas.Offering_type, &ev); err != nil {
-				return err
-			}
-			v.Type = OfferingType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents information about an offering promotion.
 type OfferingPromotion struct {
 
@@ -2146,34 +947,6 @@ type OfferingPromotion struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OfferingPromotion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OfferingPromotion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OfferingPromotion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.OfferingPromotion_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.OfferingPromotion_id, *v.Id)
-	}
-}
-func (v *OfferingPromotion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OfferingPromotion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OfferingPromotion_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.OfferingPromotion_description, v.Description)
-		case schemas.OfferingPromotion_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.OfferingPromotion_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // The status of the offering.
@@ -2192,52 +965,6 @@ type OfferingStatus struct {
 	Type OfferingTransactionType
 
 	noSmithyDocumentSerde
-}
-
-func (v *OfferingStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OfferingStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OfferingStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EffectiveOn != nil {
-		s.WriteTime(schemas.OfferingStatus_effectiveOn, *v.EffectiveOn)
-	}
-	if v.Offering != nil {
-		s.WriteStruct(schemas.OfferingStatus_offering)
-		v.Offering.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Quantity != nil {
-		s.WriteInt32(schemas.OfferingStatus_quantity, *v.Quantity)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.OfferingStatus_type, string(v.Type))
-	}
-}
-func (v *OfferingStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OfferingStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OfferingStatus_effectiveOn:
-			v.EffectiveOn = new(time.Time)
-			return d.ReadTime(schemas.OfferingStatus_effectiveOn, v.EffectiveOn)
-		case schemas.OfferingStatus_offering:
-			v.Offering = &Offering{}
-			return v.Offering.Deserialize(d)
-		case schemas.OfferingStatus_quantity:
-			v.Quantity = new(int32)
-			return d.ReadInt32(schemas.OfferingStatus_quantity, v.Quantity)
-		case schemas.OfferingStatus_type:
-			var ev string
-			if err := d.ReadString(schemas.OfferingStatus_type, &ev); err != nil {
-				return err
-			}
-			v.Type = OfferingTransactionType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents the metadata of an offering transaction.
@@ -2259,56 +986,6 @@ type OfferingTransaction struct {
 	TransactionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OfferingTransaction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OfferingTransaction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OfferingTransaction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cost != nil {
-		s.WriteStruct(schemas.OfferingTransaction_cost)
-		v.Cost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedOn != nil {
-		s.WriteTime(schemas.OfferingTransaction_createdOn, *v.CreatedOn)
-	}
-	if v.OfferingPromotionId != nil {
-		s.WriteString(schemas.OfferingTransaction_offeringPromotionId, *v.OfferingPromotionId)
-	}
-	if v.OfferingStatus != nil {
-		s.WriteStruct(schemas.OfferingTransaction_offeringStatus)
-		v.OfferingStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.OfferingTransaction_transactionId, *v.TransactionId)
-	}
-}
-func (v *OfferingTransaction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OfferingTransaction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OfferingTransaction_cost:
-			v.Cost = &MonetaryAmount{}
-			return v.Cost.Deserialize(d)
-		case schemas.OfferingTransaction_createdOn:
-			v.CreatedOn = new(time.Time)
-			return d.ReadTime(schemas.OfferingTransaction_createdOn, v.CreatedOn)
-		case schemas.OfferingTransaction_offeringPromotionId:
-			v.OfferingPromotionId = new(string)
-			return d.ReadString(schemas.OfferingTransaction_offeringPromotionId, v.OfferingPromotionId)
-		case schemas.OfferingTransaction_offeringStatus:
-			v.OfferingStatus = &OfferingStatus{}
-			return v.OfferingStatus.Deserialize(d)
-		case schemas.OfferingTransaction_transactionId:
-			v.TransactionId = new(string)
-			return d.ReadString(schemas.OfferingTransaction_transactionId, v.TransactionId)
-		}
-		return nil
-	})
 }
 
 // Represents a specific warning or failure.
@@ -2354,78 +1031,6 @@ type Problem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Problem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Problem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Problem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Device != nil {
-		s.WriteStruct(schemas.Problem_device)
-		v.Device.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Job != nil {
-		s.WriteStruct(schemas.Problem_job)
-		v.Job.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Problem_message, *v.Message)
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.Problem_result, string(v.Result))
-	}
-	if v.Run != nil {
-		s.WriteStruct(schemas.Problem_run)
-		v.Run.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Suite != nil {
-		s.WriteStruct(schemas.Problem_suite)
-		v.Suite.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Test != nil {
-		s.WriteStruct(schemas.Problem_test)
-		v.Test.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Problem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Problem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Problem_device:
-			v.Device = &Device{}
-			return v.Device.Deserialize(d)
-		case schemas.Problem_job:
-			v.Job = &ProblemDetail{}
-			return v.Job.Deserialize(d)
-		case schemas.Problem_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Problem_message, v.Message)
-		case schemas.Problem_result:
-			var ev string
-			if err := d.ReadString(schemas.Problem_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.Problem_run:
-			v.Run = &ProblemDetail{}
-			return v.Run.Deserialize(d)
-		case schemas.Problem_suite:
-			v.Suite = &ProblemDetail{}
-			return v.Suite.Deserialize(d)
-		case schemas.Problem_test:
-			v.Test = &ProblemDetail{}
-			return v.Test.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Information about a problem detail.
 type ProblemDetail struct {
 
@@ -2436,34 +1041,6 @@ type ProblemDetail struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProblemDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProblemDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProblemDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ProblemDetail_arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProblemDetail_name, *v.Name)
-	}
-}
-func (v *ProblemDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProblemDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProblemDetail_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ProblemDetail_arn, v.Arn)
-		case schemas.ProblemDetail_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProblemDetail_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Represents an operating-system neutral workspace for running and managing tests.
@@ -2494,63 +1071,6 @@ type Project struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Project) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Project)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Project_arn, *v.Arn)
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Project_created, *v.Created)
-	}
-	if v.DefaultJobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.Project_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
-	}
-	serializeEnvironmentVariables(s, schemas.Project_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.Project_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Project_name, *v.Name)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.Project_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Project) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Project, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Project_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Project_arn, v.Arn)
-		case schemas.Project_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Project_created, v.Created)
-		case schemas.Project_defaultJobTimeoutMinutes:
-			v.DefaultJobTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.Project_defaultJobTimeoutMinutes, v.DefaultJobTimeoutMinutes)
-		case schemas.Project_environmentVariables:
-			return deserializeEnvironmentVariables(d, schemas.Project_environmentVariables, &v.EnvironmentVariables)
-		case schemas.Project_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.Project_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.Project_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Project_name, v.Name)
-		case schemas.Project_vpcConfig:
-			v.VpcConfig = &VpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Represents the set of radios and their states on a device. Examples of radios
 // include Wi-Fi, GPS, Bluetooth, and NFC.
 type Radios struct {
@@ -2570,46 +1090,6 @@ type Radios struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Radios) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Radios)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Radios) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bluetooth != nil {
-		s.WriteBool(schemas.Radios_bluetooth, *v.Bluetooth)
-	}
-	if v.Gps != nil {
-		s.WriteBool(schemas.Radios_gps, *v.Gps)
-	}
-	if v.Nfc != nil {
-		s.WriteBool(schemas.Radios_nfc, *v.Nfc)
-	}
-	if v.Wifi != nil {
-		s.WriteBool(schemas.Radios_wifi, *v.Wifi)
-	}
-}
-func (v *Radios) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Radios, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Radios_bluetooth:
-			v.Bluetooth = new(bool)
-			return d.ReadBool(schemas.Radios_bluetooth, v.Bluetooth)
-		case schemas.Radios_gps:
-			v.Gps = new(bool)
-			return d.ReadBool(schemas.Radios_gps, v.Gps)
-		case schemas.Radios_nfc:
-			v.Nfc = new(bool)
-			return d.ReadBool(schemas.Radios_nfc, v.Nfc)
-		case schemas.Radios_wifi:
-			v.Wifi = new(bool)
-			return d.ReadBool(schemas.Radios_wifi, v.Wifi)
-		}
-		return nil
-	})
-}
-
 // Specifies whether charges for devices are recurring.
 type RecurringCharge struct {
 
@@ -2620,40 +1100,6 @@ type RecurringCharge struct {
 	Frequency RecurringChargeFrequency
 
 	noSmithyDocumentSerde
-}
-
-func (v *RecurringCharge) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecurringCharge)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecurringCharge) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cost != nil {
-		s.WriteStruct(schemas.RecurringCharge_cost)
-		v.Cost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Frequency != "" {
-		s.WriteString(schemas.RecurringCharge_frequency, string(v.Frequency))
-	}
-}
-func (v *RecurringCharge) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecurringCharge, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecurringCharge_cost:
-			v.Cost = &MonetaryAmount{}
-			return v.Cost.Deserialize(d)
-		case schemas.RecurringCharge_frequency:
-			var ev string
-			if err := d.ReadString(schemas.RecurringCharge_frequency, &ev); err != nil {
-				return err
-			}
-			v.Frequency = RecurringChargeFrequency(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents the remote endpoints for viewing and controlling a device during a
@@ -2669,34 +1115,6 @@ type RemoteAccessEndpoints struct {
 	RemoteDriverEndpoint *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RemoteAccessEndpoints) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoteAccessEndpoints)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoteAccessEndpoints) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InteractiveEndpoint != nil {
-		s.WriteString(schemas.RemoteAccessEndpoints_interactiveEndpoint, *v.InteractiveEndpoint)
-	}
-	if v.RemoteDriverEndpoint != nil {
-		s.WriteString(schemas.RemoteAccessEndpoints_remoteDriverEndpoint, *v.RemoteDriverEndpoint)
-	}
-}
-func (v *RemoteAccessEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoteAccessEndpoints, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoteAccessEndpoints_interactiveEndpoint:
-			v.InteractiveEndpoint = new(string)
-			return d.ReadString(schemas.RemoteAccessEndpoints_interactiveEndpoint, v.InteractiveEndpoint)
-		case schemas.RemoteAccessEndpoints_remoteDriverEndpoint:
-			v.RemoteDriverEndpoint = new(string)
-			return d.ReadString(schemas.RemoteAccessEndpoints_remoteDriverEndpoint, v.RemoteDriverEndpoint)
-		}
-		return nil
-	})
 }
 
 // Represents information about the remote access session.
@@ -2821,168 +1239,6 @@ type RemoteAccessSession struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoteAccessSession) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoteAccessSession)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoteAccessSession) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppUpload != nil {
-		s.WriteString(schemas.RemoteAccessSession_appUpload, *v.AppUpload)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.RemoteAccessSession_arn, *v.Arn)
-	}
-	if v.BillingMethod != "" {
-		s.WriteString(schemas.RemoteAccessSession_billingMethod, string(v.BillingMethod))
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.RemoteAccessSession_created, *v.Created)
-	}
-	if v.Device != nil {
-		s.WriteStruct(schemas.RemoteAccessSession_device)
-		v.Device.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceMinutes != nil {
-		s.WriteStruct(schemas.RemoteAccessSession_deviceMinutes)
-		v.DeviceMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceProxy != nil {
-		s.WriteStruct(schemas.RemoteAccessSession_deviceProxy)
-		v.DeviceProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceUdid != nil {
-		s.WriteString(schemas.RemoteAccessSession_deviceUdid, *v.DeviceUdid)
-	}
-	if v.Endpoint != nil {
-		s.WriteString(schemas.RemoteAccessSession_endpoint, *v.Endpoint)
-	}
-	if v.Endpoints != nil {
-		s.WriteStruct(schemas.RemoteAccessSession_endpoints)
-		v.Endpoints.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.RemoteAccessSession_instanceArn, *v.InstanceArn)
-	}
-	if v.InteractionMode != "" {
-		s.WriteString(schemas.RemoteAccessSession_interactionMode, string(v.InteractionMode))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.RemoteAccessSession_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RemoteAccessSession_name, *v.Name)
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.RemoteAccessSession_result, string(v.Result))
-	}
-	if v.SkipAppResign != nil {
-		s.WriteBool(schemas.RemoteAccessSession_skipAppResign, *v.SkipAppResign)
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.RemoteAccessSession_started, *v.Started)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RemoteAccessSession_status, string(v.Status))
-	}
-	if v.Stopped != nil {
-		s.WriteTime(schemas.RemoteAccessSession_stopped, *v.Stopped)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.RemoteAccessSession_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RemoteAccessSession) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoteAccessSession, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoteAccessSession_appUpload:
-			v.AppUpload = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_appUpload, v.AppUpload)
-		case schemas.RemoteAccessSession_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_arn, v.Arn)
-		case schemas.RemoteAccessSession_billingMethod:
-			var ev string
-			if err := d.ReadString(schemas.RemoteAccessSession_billingMethod, &ev); err != nil {
-				return err
-			}
-			v.BillingMethod = BillingMethod(ev)
-			return nil
-		case schemas.RemoteAccessSession_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.RemoteAccessSession_created, v.Created)
-		case schemas.RemoteAccessSession_device:
-			v.Device = &Device{}
-			return v.Device.Deserialize(d)
-		case schemas.RemoteAccessSession_deviceMinutes:
-			v.DeviceMinutes = &DeviceMinutes{}
-			return v.DeviceMinutes.Deserialize(d)
-		case schemas.RemoteAccessSession_deviceProxy:
-			v.DeviceProxy = &DeviceProxy{}
-			return v.DeviceProxy.Deserialize(d)
-		case schemas.RemoteAccessSession_deviceUdid:
-			v.DeviceUdid = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_deviceUdid, v.DeviceUdid)
-		case schemas.RemoteAccessSession_endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_endpoint, v.Endpoint)
-		case schemas.RemoteAccessSession_endpoints:
-			v.Endpoints = &RemoteAccessEndpoints{}
-			return v.Endpoints.Deserialize(d)
-		case schemas.RemoteAccessSession_instanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_instanceArn, v.InstanceArn)
-		case schemas.RemoteAccessSession_interactionMode:
-			var ev string
-			if err := d.ReadString(schemas.RemoteAccessSession_interactionMode, &ev); err != nil {
-				return err
-			}
-			v.InteractionMode = InteractionMode(ev)
-			return nil
-		case schemas.RemoteAccessSession_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_message, v.Message)
-		case schemas.RemoteAccessSession_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RemoteAccessSession_name, v.Name)
-		case schemas.RemoteAccessSession_result:
-			var ev string
-			if err := d.ReadString(schemas.RemoteAccessSession_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.RemoteAccessSession_skipAppResign:
-			v.SkipAppResign = new(bool)
-			return d.ReadBool(schemas.RemoteAccessSession_skipAppResign, v.SkipAppResign)
-		case schemas.RemoteAccessSession_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.RemoteAccessSession_started, v.Started)
-		case schemas.RemoteAccessSession_status:
-			var ev string
-			if err := d.ReadString(schemas.RemoteAccessSession_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExecutionStatus(ev)
-			return nil
-		case schemas.RemoteAccessSession_stopped:
-			v.Stopped = new(time.Time)
-			return d.ReadTime(schemas.RemoteAccessSession_stopped, v.Stopped)
-		case schemas.RemoteAccessSession_vpcConfig:
-			v.VpcConfig = &VpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Represents the screen resolution of a device in height and width, expressed in
 // pixels.
 type Resolution struct {
@@ -2994,34 +1250,6 @@ type Resolution struct {
 	Width *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Resolution) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Resolution)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Resolution) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Height != nil {
-		s.WriteInt32(schemas.Resolution_height, *v.Height)
-	}
-	if v.Width != nil {
-		s.WriteInt32(schemas.Resolution_width, *v.Width)
-	}
-}
-func (v *Resolution) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Resolution, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Resolution_height:
-			v.Height = new(int32)
-			return d.ReadInt32(schemas.Resolution_height, v.Height)
-		case schemas.Resolution_width:
-			v.Width = new(int32)
-			return d.ReadInt32(schemas.Resolution_width, v.Width)
-		}
-		return nil
-	})
 }
 
 // Represents a condition for a device pool.
@@ -3101,48 +1329,6 @@ type Rule struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Rule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Rule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attribute != "" {
-		s.WriteString(schemas.Rule_attribute, string(v.Attribute))
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.Rule_operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Rule_value, *v.Value)
-	}
-}
-func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Rule_attribute:
-			var ev string
-			if err := d.ReadString(schemas.Rule_attribute, &ev); err != nil {
-				return err
-			}
-			v.Attribute = DeviceAttribute(ev)
-			return nil
-		case schemas.Rule_operator:
-			var ev string
-			if err := d.ReadString(schemas.Rule_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = RuleOperator(ev)
-			return nil
-		case schemas.Rule_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Rule_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents a test run on a set of devices with a given app package, test
@@ -3344,271 +1530,6 @@ type Run struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Run) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Run)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Run) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppUpload != nil {
-		s.WriteString(schemas.Run_appUpload, *v.AppUpload)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Run_arn, *v.Arn)
-	}
-	if v.BillingMethod != "" {
-		s.WriteString(schemas.Run_billingMethod, string(v.BillingMethod))
-	}
-	if v.CompletedJobs != nil {
-		s.WriteInt32(schemas.Run_completedJobs, *v.CompletedJobs)
-	}
-	if v.Counters != nil {
-		s.WriteStruct(schemas.Run_counters)
-		v.Counters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Run_created, *v.Created)
-	}
-	if v.CustomerArtifactPaths != nil {
-		s.WriteStruct(schemas.Run_customerArtifactPaths)
-		v.CustomerArtifactPaths.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceMinutes != nil {
-		s.WriteStruct(schemas.Run_deviceMinutes)
-		v.DeviceMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DevicePoolArn != nil {
-		s.WriteString(schemas.Run_devicePoolArn, *v.DevicePoolArn)
-	}
-	if v.DeviceProxy != nil {
-		s.WriteStruct(schemas.Run_deviceProxy)
-		v.DeviceProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceSelectionResult != nil {
-		s.WriteStruct(schemas.Run_deviceSelectionResult)
-		v.DeviceSelectionResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEnvironmentVariables(s, schemas.Run_environmentVariables, v.EnvironmentVariables)
-	if v.EventCount != nil {
-		s.WriteInt32(schemas.Run_eventCount, *v.EventCount)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.Run_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.JobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.Run_jobTimeoutMinutes, *v.JobTimeoutMinutes)
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.Run_locale, *v.Locale)
-	}
-	if v.Location != nil {
-		s.WriteStruct(schemas.Run_location)
-		v.Location.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Run_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Run_name, *v.Name)
-	}
-	if v.NetworkProfile != nil {
-		s.WriteStruct(schemas.Run_networkProfile)
-		v.NetworkProfile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ParsingResultUrl != nil {
-		s.WriteString(schemas.Run_parsingResultUrl, *v.ParsingResultUrl)
-	}
-	if v.Platform != "" {
-		s.WriteString(schemas.Run_platform, string(v.Platform))
-	}
-	if v.Radios != nil {
-		s.WriteStruct(schemas.Run_radios)
-		v.Radios.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.Run_result, string(v.Result))
-	}
-	if v.ResultCode != "" {
-		s.WriteString(schemas.Run_resultCode, string(v.ResultCode))
-	}
-	if v.Seed != nil {
-		s.WriteInt32(schemas.Run_seed, *v.Seed)
-	}
-	if v.SkipAppResign != nil {
-		s.WriteBool(schemas.Run_skipAppResign, *v.SkipAppResign)
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.Run_started, *v.Started)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Run_status, string(v.Status))
-	}
-	if v.Stopped != nil {
-		s.WriteTime(schemas.Run_stopped, *v.Stopped)
-	}
-	if v.TestSpecArn != nil {
-		s.WriteString(schemas.Run_testSpecArn, *v.TestSpecArn)
-	}
-	if v.TotalJobs != nil {
-		s.WriteInt32(schemas.Run_totalJobs, *v.TotalJobs)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Run_type, string(v.Type))
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.Run_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WebUrl != nil {
-		s.WriteString(schemas.Run_webUrl, *v.WebUrl)
-	}
-}
-func (v *Run) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Run, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Run_appUpload:
-			v.AppUpload = new(string)
-			return d.ReadString(schemas.Run_appUpload, v.AppUpload)
-		case schemas.Run_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Run_arn, v.Arn)
-		case schemas.Run_billingMethod:
-			var ev string
-			if err := d.ReadString(schemas.Run_billingMethod, &ev); err != nil {
-				return err
-			}
-			v.BillingMethod = BillingMethod(ev)
-			return nil
-		case schemas.Run_completedJobs:
-			v.CompletedJobs = new(int32)
-			return d.ReadInt32(schemas.Run_completedJobs, v.CompletedJobs)
-		case schemas.Run_counters:
-			v.Counters = &Counters{}
-			return v.Counters.Deserialize(d)
-		case schemas.Run_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Run_created, v.Created)
-		case schemas.Run_customerArtifactPaths:
-			v.CustomerArtifactPaths = &CustomerArtifactPaths{}
-			return v.CustomerArtifactPaths.Deserialize(d)
-		case schemas.Run_deviceMinutes:
-			v.DeviceMinutes = &DeviceMinutes{}
-			return v.DeviceMinutes.Deserialize(d)
-		case schemas.Run_devicePoolArn:
-			v.DevicePoolArn = new(string)
-			return d.ReadString(schemas.Run_devicePoolArn, v.DevicePoolArn)
-		case schemas.Run_deviceProxy:
-			v.DeviceProxy = &DeviceProxy{}
-			return v.DeviceProxy.Deserialize(d)
-		case schemas.Run_deviceSelectionResult:
-			v.DeviceSelectionResult = &DeviceSelectionResult{}
-			return v.DeviceSelectionResult.Deserialize(d)
-		case schemas.Run_environmentVariables:
-			return deserializeEnvironmentVariables(d, schemas.Run_environmentVariables, &v.EnvironmentVariables)
-		case schemas.Run_eventCount:
-			v.EventCount = new(int32)
-			return d.ReadInt32(schemas.Run_eventCount, v.EventCount)
-		case schemas.Run_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.Run_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.Run_jobTimeoutMinutes:
-			v.JobTimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.Run_jobTimeoutMinutes, v.JobTimeoutMinutes)
-		case schemas.Run_locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.Run_locale, v.Locale)
-		case schemas.Run_location:
-			v.Location = &Location{}
-			return v.Location.Deserialize(d)
-		case schemas.Run_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Run_message, v.Message)
-		case schemas.Run_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Run_name, v.Name)
-		case schemas.Run_networkProfile:
-			v.NetworkProfile = &NetworkProfile{}
-			return v.NetworkProfile.Deserialize(d)
-		case schemas.Run_parsingResultUrl:
-			v.ParsingResultUrl = new(string)
-			return d.ReadString(schemas.Run_parsingResultUrl, v.ParsingResultUrl)
-		case schemas.Run_platform:
-			var ev string
-			if err := d.ReadString(schemas.Run_platform, &ev); err != nil {
-				return err
-			}
-			v.Platform = DevicePlatform(ev)
-			return nil
-		case schemas.Run_radios:
-			v.Radios = &Radios{}
-			return v.Radios.Deserialize(d)
-		case schemas.Run_result:
-			var ev string
-			if err := d.ReadString(schemas.Run_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.Run_resultCode:
-			var ev string
-			if err := d.ReadString(schemas.Run_resultCode, &ev); err != nil {
-				return err
-			}
-			v.ResultCode = ExecutionResultCode(ev)
-			return nil
-		case schemas.Run_seed:
-			v.Seed = new(int32)
-			return d.ReadInt32(schemas.Run_seed, v.Seed)
-		case schemas.Run_skipAppResign:
-			v.SkipAppResign = new(bool)
-			return d.ReadBool(schemas.Run_skipAppResign, v.SkipAppResign)
-		case schemas.Run_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.Run_started, v.Started)
-		case schemas.Run_status:
-			var ev string
-			if err := d.ReadString(schemas.Run_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExecutionStatus(ev)
-			return nil
-		case schemas.Run_stopped:
-			v.Stopped = new(time.Time)
-			return d.ReadTime(schemas.Run_stopped, v.Stopped)
-		case schemas.Run_testSpecArn:
-			v.TestSpecArn = new(string)
-			return d.ReadString(schemas.Run_testSpecArn, v.TestSpecArn)
-		case schemas.Run_totalJobs:
-			v.TotalJobs = new(int32)
-			return d.ReadInt32(schemas.Run_totalJobs, v.TotalJobs)
-		case schemas.Run_type:
-			var ev string
-			if err := d.ReadString(schemas.Run_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestType(ev)
-			return nil
-		case schemas.Run_vpcConfig:
-			v.VpcConfig = &VpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		case schemas.Run_webUrl:
-			v.WebUrl = new(string)
-			return d.ReadString(schemas.Run_webUrl, v.WebUrl)
-		}
-		return nil
-	})
-}
-
 // Represents a sample of performance data.
 type Sample struct {
 
@@ -3666,44 +1587,6 @@ type Sample struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Sample) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Sample)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Sample) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Sample_arn, *v.Arn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Sample_type, string(v.Type))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.Sample_url, *v.Url)
-	}
-}
-func (v *Sample) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Sample, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Sample_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Sample_arn, v.Arn)
-		case schemas.Sample_type:
-			var ev string
-			if err := d.ReadString(schemas.Sample_type, &ev); err != nil {
-				return err
-			}
-			v.Type = SampleType(ev)
-			return nil
-		case schemas.Sample_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.Sample_url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Represents the settings for a run. Includes things like location, radio states,
 // auxiliary apps, and network profiles.
 type ScheduleRunConfiguration struct {
@@ -3751,97 +1634,6 @@ type ScheduleRunConfiguration struct {
 	VpceConfigurationArns []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScheduleRunConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScheduleRunConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScheduleRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_auxiliaryApps, v.AuxiliaryApps)
-	if v.BillingMethod != "" {
-		s.WriteString(schemas.ScheduleRunConfiguration_billingMethod, string(v.BillingMethod))
-	}
-	if v.CustomerArtifactPaths != nil {
-		s.WriteStruct(schemas.ScheduleRunConfiguration_customerArtifactPaths)
-		v.CustomerArtifactPaths.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeviceProxy != nil {
-		s.WriteStruct(schemas.ScheduleRunConfiguration_deviceProxy)
-		v.DeviceProxy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEnvironmentVariables(s, schemas.ScheduleRunConfiguration_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.ScheduleRunConfiguration_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.ExtraDataPackageArn != nil {
-		s.WriteString(schemas.ScheduleRunConfiguration_extraDataPackageArn, *v.ExtraDataPackageArn)
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.ScheduleRunConfiguration_locale, *v.Locale)
-	}
-	if v.Location != nil {
-		s.WriteStruct(schemas.ScheduleRunConfiguration_location)
-		v.Location.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NetworkProfileArn != nil {
-		s.WriteString(schemas.ScheduleRunConfiguration_networkProfileArn, *v.NetworkProfileArn)
-	}
-	if v.Radios != nil {
-		s.WriteStruct(schemas.ScheduleRunConfiguration_radios)
-		v.Radios.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
-}
-func (v *ScheduleRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScheduleRunConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScheduleRunConfiguration_auxiliaryApps:
-			return deserializeAmazonResourceNames(d, schemas.ScheduleRunConfiguration_auxiliaryApps, &v.AuxiliaryApps)
-		case schemas.ScheduleRunConfiguration_billingMethod:
-			var ev string
-			if err := d.ReadString(schemas.ScheduleRunConfiguration_billingMethod, &ev); err != nil {
-				return err
-			}
-			v.BillingMethod = BillingMethod(ev)
-			return nil
-		case schemas.ScheduleRunConfiguration_customerArtifactPaths:
-			v.CustomerArtifactPaths = &CustomerArtifactPaths{}
-			return v.CustomerArtifactPaths.Deserialize(d)
-		case schemas.ScheduleRunConfiguration_deviceProxy:
-			v.DeviceProxy = &DeviceProxy{}
-			return v.DeviceProxy.Deserialize(d)
-		case schemas.ScheduleRunConfiguration_environmentVariables:
-			return deserializeEnvironmentVariables(d, schemas.ScheduleRunConfiguration_environmentVariables, &v.EnvironmentVariables)
-		case schemas.ScheduleRunConfiguration_executionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.ScheduleRunConfiguration_executionRoleArn, v.ExecutionRoleArn)
-		case schemas.ScheduleRunConfiguration_extraDataPackageArn:
-			v.ExtraDataPackageArn = new(string)
-			return d.ReadString(schemas.ScheduleRunConfiguration_extraDataPackageArn, v.ExtraDataPackageArn)
-		case schemas.ScheduleRunConfiguration_locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.ScheduleRunConfiguration_locale, v.Locale)
-		case schemas.ScheduleRunConfiguration_location:
-			v.Location = &Location{}
-			return v.Location.Deserialize(d)
-		case schemas.ScheduleRunConfiguration_networkProfileArn:
-			v.NetworkProfileArn = new(string)
-			return d.ReadString(schemas.ScheduleRunConfiguration_networkProfileArn, v.NetworkProfileArn)
-		case schemas.ScheduleRunConfiguration_radios:
-			v.Radios = &Radios{}
-			return v.Radios.Deserialize(d)
-		case schemas.ScheduleRunConfiguration_vpceConfigurationArns:
-			return deserializeAmazonResourceNames(d, schemas.ScheduleRunConfiguration_vpceConfigurationArns, &v.VpceConfigurationArns)
-		}
-		return nil
-	})
 }
 
 // Represents test settings. This data structure is passed in as the test
@@ -3950,53 +1742,6 @@ type ScheduleRunTest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScheduleRunTest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScheduleRunTest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScheduleRunTest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteString(schemas.ScheduleRunTest_filter, *v.Filter)
-	}
-	serializeTestParameters(s, schemas.ScheduleRunTest_parameters, v.Parameters)
-	if v.TestPackageArn != nil {
-		s.WriteString(schemas.ScheduleRunTest_testPackageArn, *v.TestPackageArn)
-	}
-	if v.TestSpecArn != nil {
-		s.WriteString(schemas.ScheduleRunTest_testSpecArn, *v.TestSpecArn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ScheduleRunTest_type, string(v.Type))
-	}
-}
-func (v *ScheduleRunTest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScheduleRunTest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScheduleRunTest_filter:
-			v.Filter = new(string)
-			return d.ReadString(schemas.ScheduleRunTest_filter, v.Filter)
-		case schemas.ScheduleRunTest_parameters:
-			return deserializeTestParameters(d, schemas.ScheduleRunTest_parameters, &v.Parameters)
-		case schemas.ScheduleRunTest_testPackageArn:
-			v.TestPackageArn = new(string)
-			return d.ReadString(schemas.ScheduleRunTest_testPackageArn, v.TestPackageArn)
-		case schemas.ScheduleRunTest_testSpecArn:
-			v.TestSpecArn = new(string)
-			return d.ReadString(schemas.ScheduleRunTest_testSpecArn, v.TestSpecArn)
-		case schemas.ScheduleRunTest_type:
-			var ev string
-			if err := d.ReadString(schemas.ScheduleRunTest_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a collection of one or more tests.
 type Suite struct {
 
@@ -4102,104 +1847,6 @@ type Suite struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Suite) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Suite)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Suite) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Suite_arn, *v.Arn)
-	}
-	if v.Counters != nil {
-		s.WriteStruct(schemas.Suite_counters)
-		v.Counters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Suite_created, *v.Created)
-	}
-	if v.DeviceMinutes != nil {
-		s.WriteStruct(schemas.Suite_deviceMinutes)
-		v.DeviceMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Suite_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Suite_name, *v.Name)
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.Suite_result, string(v.Result))
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.Suite_started, *v.Started)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Suite_status, string(v.Status))
-	}
-	if v.Stopped != nil {
-		s.WriteTime(schemas.Suite_stopped, *v.Stopped)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Suite_type, string(v.Type))
-	}
-}
-func (v *Suite) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Suite, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Suite_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Suite_arn, v.Arn)
-		case schemas.Suite_counters:
-			v.Counters = &Counters{}
-			return v.Counters.Deserialize(d)
-		case schemas.Suite_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Suite_created, v.Created)
-		case schemas.Suite_deviceMinutes:
-			v.DeviceMinutes = &DeviceMinutes{}
-			return v.DeviceMinutes.Deserialize(d)
-		case schemas.Suite_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Suite_message, v.Message)
-		case schemas.Suite_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Suite_name, v.Name)
-		case schemas.Suite_result:
-			var ev string
-			if err := d.ReadString(schemas.Suite_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.Suite_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.Suite_started, v.Started)
-		case schemas.Suite_status:
-			var ev string
-			if err := d.ReadString(schemas.Suite_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExecutionStatus(ev)
-			return nil
-		case schemas.Suite_stopped:
-			v.Stopped = new(time.Time)
-			return d.ReadTime(schemas.Suite_stopped, v.Stopped)
-		case schemas.Suite_type:
-			var ev string
-			if err := d.ReadString(schemas.Suite_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The metadata that you apply to a resource to help you categorize and organize
 // it. Each tag consists of a key and an optional value, both of which you define.
 // Tag keys can have a maximum character length of 128 characters. Tag values can
@@ -4219,34 +1866,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents a condition that is evaluated.
@@ -4354,104 +1973,6 @@ type Test struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Test) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Test)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Test) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Test_arn, *v.Arn)
-	}
-	if v.Counters != nil {
-		s.WriteStruct(schemas.Test_counters)
-		v.Counters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Test_created, *v.Created)
-	}
-	if v.DeviceMinutes != nil {
-		s.WriteStruct(schemas.Test_deviceMinutes)
-		v.DeviceMinutes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Test_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Test_name, *v.Name)
-	}
-	if v.Result != "" {
-		s.WriteString(schemas.Test_result, string(v.Result))
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.Test_started, *v.Started)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Test_status, string(v.Status))
-	}
-	if v.Stopped != nil {
-		s.WriteTime(schemas.Test_stopped, *v.Stopped)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Test_type, string(v.Type))
-	}
-}
-func (v *Test) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Test, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Test_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Test_arn, v.Arn)
-		case schemas.Test_counters:
-			v.Counters = &Counters{}
-			return v.Counters.Deserialize(d)
-		case schemas.Test_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Test_created, v.Created)
-		case schemas.Test_deviceMinutes:
-			v.DeviceMinutes = &DeviceMinutes{}
-			return v.DeviceMinutes.Deserialize(d)
-		case schemas.Test_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Test_message, v.Message)
-		case schemas.Test_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Test_name, v.Name)
-		case schemas.Test_result:
-			var ev string
-			if err := d.ReadString(schemas.Test_result, &ev); err != nil {
-				return err
-			}
-			v.Result = ExecutionResult(ev)
-			return nil
-		case schemas.Test_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.Test_started, v.Started)
-		case schemas.Test_status:
-			var ev string
-			if err := d.ReadString(schemas.Test_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ExecutionStatus(ev)
-			return nil
-		case schemas.Test_stopped:
-			v.Stopped = new(time.Time)
-			return d.ReadTime(schemas.Test_stopped, v.Stopped)
-		case schemas.Test_type:
-			var ev string
-			if err := d.ReadString(schemas.Test_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A Selenium testing project. Projects are used to collect and collate sessions.
 type TestGridProject struct {
 
@@ -4471,54 +1992,6 @@ type TestGridProject struct {
 	VpcConfig *TestGridVpcConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *TestGridProject) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestGridProject)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestGridProject) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.TestGridProject_arn, *v.Arn)
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.TestGridProject_created, *v.Created)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.TestGridProject_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.TestGridProject_name, *v.Name)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.TestGridProject_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *TestGridProject) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestGridProject, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestGridProject_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.TestGridProject_arn, v.Arn)
-		case schemas.TestGridProject_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.TestGridProject_created, v.Created)
-		case schemas.TestGridProject_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.TestGridProject_description, v.Description)
-		case schemas.TestGridProject_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.TestGridProject_name, v.Name)
-		case schemas.TestGridProject_vpcConfig:
-			v.VpcConfig = &TestGridVpcConfig{}
-			return v.VpcConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A TestGridSession is a single instance of a browser launched from the URL provided by a call
@@ -4546,62 +2019,6 @@ type TestGridSession struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestGridSession) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestGridSession)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestGridSession) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.TestGridSession_arn, *v.Arn)
-	}
-	if v.BillingMinutes != nil {
-		s.WriteFloat64(schemas.TestGridSession_billingMinutes, *v.BillingMinutes)
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.TestGridSession_created, *v.Created)
-	}
-	if v.Ended != nil {
-		s.WriteTime(schemas.TestGridSession_ended, *v.Ended)
-	}
-	if v.SeleniumProperties != nil {
-		s.WriteString(schemas.TestGridSession_seleniumProperties, *v.SeleniumProperties)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.TestGridSession_status, string(v.Status))
-	}
-}
-func (v *TestGridSession) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestGridSession, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestGridSession_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.TestGridSession_arn, v.Arn)
-		case schemas.TestGridSession_billingMinutes:
-			v.BillingMinutes = new(float64)
-			return d.ReadFloat64(schemas.TestGridSession_billingMinutes, v.BillingMinutes)
-		case schemas.TestGridSession_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.TestGridSession_created, v.Created)
-		case schemas.TestGridSession_ended:
-			v.Ended = new(time.Time)
-			return d.ReadTime(schemas.TestGridSession_ended, v.Ended)
-		case schemas.TestGridSession_seleniumProperties:
-			v.SeleniumProperties = new(string)
-			return d.ReadString(schemas.TestGridSession_seleniumProperties, v.SeleniumProperties)
-		case schemas.TestGridSession_status:
-			var ev string
-			if err := d.ReadString(schemas.TestGridSession_status, &ev); err != nil {
-				return err
-			}
-			v.Status = TestGridSessionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // An action taken by a TestGridSession browser instance.
 type TestGridSessionAction struct {
 
@@ -4623,52 +2040,6 @@ type TestGridSessionAction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestGridSessionAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestGridSessionAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestGridSessionAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteString(schemas.TestGridSessionAction_action, *v.Action)
-	}
-	if v.Duration != nil {
-		s.WriteInt64(schemas.TestGridSessionAction_duration, *v.Duration)
-	}
-	if v.RequestMethod != nil {
-		s.WriteString(schemas.TestGridSessionAction_requestMethod, *v.RequestMethod)
-	}
-	if v.Started != nil {
-		s.WriteTime(schemas.TestGridSessionAction_started, *v.Started)
-	}
-	if v.StatusCode != nil {
-		s.WriteString(schemas.TestGridSessionAction_statusCode, *v.StatusCode)
-	}
-}
-func (v *TestGridSessionAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestGridSessionAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestGridSessionAction_action:
-			v.Action = new(string)
-			return d.ReadString(schemas.TestGridSessionAction_action, v.Action)
-		case schemas.TestGridSessionAction_duration:
-			v.Duration = new(int64)
-			return d.ReadInt64(schemas.TestGridSessionAction_duration, v.Duration)
-		case schemas.TestGridSessionAction_requestMethod:
-			v.RequestMethod = new(string)
-			return d.ReadString(schemas.TestGridSessionAction_requestMethod, v.RequestMethod)
-		case schemas.TestGridSessionAction_started:
-			v.Started = new(time.Time)
-			return d.ReadTime(schemas.TestGridSessionAction_started, v.Started)
-		case schemas.TestGridSessionAction_statusCode:
-			v.StatusCode = new(string)
-			return d.ReadString(schemas.TestGridSessionAction_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
-
 // Artifacts are video and other files that are produced in the process of running
 // a browser in an automated context.
 //
@@ -4686,44 +2057,6 @@ type TestGridSessionArtifact struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TestGridSessionArtifact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestGridSessionArtifact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestGridSessionArtifact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filename != nil {
-		s.WriteString(schemas.TestGridSessionArtifact_filename, *v.Filename)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.TestGridSessionArtifact_type, string(v.Type))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.TestGridSessionArtifact_url, *v.Url)
-	}
-}
-func (v *TestGridSessionArtifact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestGridSessionArtifact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestGridSessionArtifact_filename:
-			v.Filename = new(string)
-			return d.ReadString(schemas.TestGridSessionArtifact_filename, v.Filename)
-		case schemas.TestGridSessionArtifact_type:
-			var ev string
-			if err := d.ReadString(schemas.TestGridSessionArtifact_type, &ev); err != nil {
-				return err
-			}
-			v.Type = TestGridSessionArtifactType(ev)
-			return nil
-		case schemas.TestGridSessionArtifact_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.TestGridSessionArtifact_url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The VPC security groups and subnets that are attached to a project.
@@ -4747,34 +2080,6 @@ type TestGridVpcConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestGridVpcConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestGridVpcConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestGridVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.TestGridVpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.TestGridVpcConfig_subnetIds, v.SubnetIds)
-	if v.VpcId != nil {
-		s.WriteString(schemas.TestGridVpcConfig_vpcId, *v.VpcId)
-	}
-}
-func (v *TestGridVpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestGridVpcConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestGridVpcConfig_securityGroupIds:
-			return deserializeSecurityGroupIds(d, schemas.TestGridVpcConfig_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.TestGridVpcConfig_subnetIds:
-			return deserializeSubnetIds(d, schemas.TestGridVpcConfig_subnetIds, &v.SubnetIds)
-		case schemas.TestGridVpcConfig_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.TestGridVpcConfig_vpcId, v.VpcId)
-		}
-		return nil
-	})
-}
-
 // Represents information about free trial device minutes for an AWS account.
 type TrialMinutes struct {
 
@@ -4787,34 +2092,6 @@ type TrialMinutes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TrialMinutes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TrialMinutes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TrialMinutes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Remaining != nil {
-		s.WriteFloat64(schemas.TrialMinutes_remaining, *v.Remaining)
-	}
-	if v.Total != nil {
-		s.WriteFloat64(schemas.TrialMinutes_total, *v.Total)
-	}
-}
-func (v *TrialMinutes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TrialMinutes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TrialMinutes_remaining:
-			v.Remaining = new(float64)
-			return d.ReadFloat64(schemas.TrialMinutes_remaining, v.Remaining)
-		case schemas.TrialMinutes_total:
-			v.Total = new(float64)
-			return d.ReadFloat64(schemas.TrialMinutes_total, v.Total)
-		}
-		return nil
-	})
-}
-
 // A collection of one or more problems, grouped by their result.
 type UniqueProblem struct {
 
@@ -4825,31 +2102,6 @@ type UniqueProblem struct {
 	Problems []Problem
 
 	noSmithyDocumentSerde
-}
-
-func (v *UniqueProblem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UniqueProblem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UniqueProblem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.UniqueProblem_message, *v.Message)
-	}
-	serializeProblems(s, schemas.UniqueProblem_problems, v.Problems)
-}
-func (v *UniqueProblem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UniqueProblem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UniqueProblem_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UniqueProblem_message, v.Message)
-		case schemas.UniqueProblem_problems:
-			return deserializeProblems(d, schemas.UniqueProblem_problems, &v.Problems)
-		}
-		return nil
-	})
 }
 
 // An app or a set of one or more tests to upload or that have been uploaded.
@@ -4964,94 +2216,6 @@ type Upload struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Upload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Upload)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Upload) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Upload_arn, *v.Arn)
-	}
-	if v.Category != "" {
-		s.WriteString(schemas.Upload_category, string(v.Category))
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.Upload_contentType, *v.ContentType)
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.Upload_created, *v.Created)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.Upload_message, *v.Message)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.Upload_metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Upload_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Upload_status, string(v.Status))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Upload_type, string(v.Type))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.Upload_url, *v.Url)
-	}
-}
-func (v *Upload) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Upload, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Upload_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Upload_arn, v.Arn)
-		case schemas.Upload_category:
-			var ev string
-			if err := d.ReadString(schemas.Upload_category, &ev); err != nil {
-				return err
-			}
-			v.Category = UploadCategory(ev)
-			return nil
-		case schemas.Upload_contentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.Upload_contentType, v.ContentType)
-		case schemas.Upload_created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.Upload_created, v.Created)
-		case schemas.Upload_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.Upload_message, v.Message)
-		case schemas.Upload_metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.Upload_metadata, v.Metadata)
-		case schemas.Upload_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Upload_name, v.Name)
-		case schemas.Upload_status:
-			var ev string
-			if err := d.ReadString(schemas.Upload_status, &ev); err != nil {
-				return err
-			}
-			v.Status = UploadStatus(ev)
-			return nil
-		case schemas.Upload_type:
-			var ev string
-			if err := d.ReadString(schemas.Upload_type, &ev); err != nil {
-				return err
-			}
-			v.Type = UploadType(ev)
-			return nil
-		case schemas.Upload_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.Upload_url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Contains the VPC configuration data necessary to interface with AWS Device
 // Farm's services.
 type VpcConfig struct {
@@ -5072,34 +2236,6 @@ type VpcConfig struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeVpcSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
-	if v.VpcId != nil {
-		s.WriteString(schemas.VpcConfig_vpcId, *v.VpcId)
-	}
-}
-func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcConfig_securityGroupIds:
-			return deserializeVpcSecurityGroupIds(d, schemas.VpcConfig_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.VpcConfig_subnetIds:
-			return deserializeVpcSubnetIds(d, schemas.VpcConfig_subnetIds, &v.SubnetIds)
-		case schemas.VpcConfig_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.VpcConfig_vpcId, v.VpcId)
-		}
-		return nil
-	})
 }
 
 // Represents an Amazon Virtual Private Cloud (VPC) endpoint configuration.
@@ -5125,52 +2261,6 @@ type VPCEConfiguration struct {
 	VpceServiceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VPCEConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VPCEConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VPCEConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.VPCEConfiguration_arn, *v.Arn)
-	}
-	if v.ServiceDnsName != nil {
-		s.WriteString(schemas.VPCEConfiguration_serviceDnsName, *v.ServiceDnsName)
-	}
-	if v.VpceConfigurationDescription != nil {
-		s.WriteString(schemas.VPCEConfiguration_vpceConfigurationDescription, *v.VpceConfigurationDescription)
-	}
-	if v.VpceConfigurationName != nil {
-		s.WriteString(schemas.VPCEConfiguration_vpceConfigurationName, *v.VpceConfigurationName)
-	}
-	if v.VpceServiceName != nil {
-		s.WriteString(schemas.VPCEConfiguration_vpceServiceName, *v.VpceServiceName)
-	}
-}
-func (v *VPCEConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VPCEConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VPCEConfiguration_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.VPCEConfiguration_arn, v.Arn)
-		case schemas.VPCEConfiguration_serviceDnsName:
-			v.ServiceDnsName = new(string)
-			return d.ReadString(schemas.VPCEConfiguration_serviceDnsName, v.ServiceDnsName)
-		case schemas.VPCEConfiguration_vpceConfigurationDescription:
-			v.VpceConfigurationDescription = new(string)
-			return d.ReadString(schemas.VPCEConfiguration_vpceConfigurationDescription, v.VpceConfigurationDescription)
-		case schemas.VPCEConfiguration_vpceConfigurationName:
-			v.VpceConfigurationName = new(string)
-			return d.ReadString(schemas.VPCEConfiguration_vpceConfigurationName, v.VpceConfigurationName)
-		case schemas.VPCEConfiguration_vpceServiceName:
-			v.VpceServiceName = new(string)
-			return d.ReadString(schemas.VPCEConfiguration_vpceServiceName, v.VpceServiceName)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

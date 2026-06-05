@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,39 +65,6 @@ type InitiateDocumentVersionUploadInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InitiateDocumentVersionUploadInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InitiateDocumentVersionUploadRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InitiateDocumentVersionUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.InitiateDocumentVersionUploadRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.ContentCreatedTimestamp != nil {
-		s.WriteTime(schemas.InitiateDocumentVersionUploadRequest_ContentCreatedTimestamp, *v.ContentCreatedTimestamp)
-	}
-	if v.ContentModifiedTimestamp != nil {
-		s.WriteTime(schemas.InitiateDocumentVersionUploadRequest_ContentModifiedTimestamp, *v.ContentModifiedTimestamp)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.InitiateDocumentVersionUploadRequest_ContentType, *v.ContentType)
-	}
-	if v.DocumentSizeInBytes != nil {
-		s.WriteInt64(schemas.InitiateDocumentVersionUploadRequest_DocumentSizeInBytes, *v.DocumentSizeInBytes)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.InitiateDocumentVersionUploadRequest_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.InitiateDocumentVersionUploadRequest_Name, *v.Name)
-	}
-	if v.ParentFolderId != nil {
-		s.WriteString(schemas.InitiateDocumentVersionUploadRequest_ParentFolderId, *v.ParentFolderId)
-	}
-}
-
 type InitiateDocumentVersionUploadOutput struct {
 
 	// The document metadata.
@@ -114,27 +79,16 @@ type InitiateDocumentVersionUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InitiateDocumentVersionUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InitiateDocumentVersionUploadResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InitiateDocumentVersionUploadResponse_Metadata:
-			v.Metadata = &types.DocumentMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.InitiateDocumentVersionUploadResponse_UploadMetadata:
-			v.UploadMetadata = &types.UploadMetadata{}
-			return v.UploadMetadata.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationInitiateDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateDocumentVersionUpload, schemas.InitiateDocumentVersionUploadRequest, schemas.InitiateDocumentVersionUploadResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateDocumentVersionUpload{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateDocumentVersionUpload, schemas.InitiateDocumentVersionUploadRequest, schemas.InitiateDocumentVersionUploadResponse), output: &InitiateDocumentVersionUploadOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitiateDocumentVersionUpload{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InitiateDocumentVersionUpload"); err != nil {

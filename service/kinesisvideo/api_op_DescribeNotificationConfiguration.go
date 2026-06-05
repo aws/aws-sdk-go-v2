@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DescribeNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeNotificationConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StreamARN != nil {
-		s.WriteString(schemas.DescribeNotificationConfigurationInput_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.DescribeNotificationConfigurationInput_StreamName, *v.StreamName)
-	}
-}
-
 type DescribeNotificationConfigurationOutput struct {
 
 	// The structure that contains the information required for notifications. If the
@@ -70,24 +53,16 @@ type DescribeNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeNotificationConfigurationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeNotificationConfigurationOutput_NotificationConfiguration:
-			v.NotificationConfiguration = &types.NotificationConfiguration{}
-			return v.NotificationConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationConfiguration, schemas.DescribeNotificationConfigurationInput, schemas.DescribeNotificationConfigurationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotificationConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationConfiguration, schemas.DescribeNotificationConfigurationInput, schemas.DescribeNotificationConfigurationOutput), output: &DescribeNotificationConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNotificationConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNotificationConfiguration"); err != nil {

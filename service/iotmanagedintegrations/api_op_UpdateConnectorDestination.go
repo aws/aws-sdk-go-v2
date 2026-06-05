@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,37 +52,6 @@ type UpdateConnectorDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateConnectorDestinationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateConnectorDestinationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateConnectorDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthConfig != nil {
-		s.WriteStruct(schemas.UpdateConnectorDestinationRequest_AuthConfig)
-		v.AuthConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AuthType != "" {
-		s.WriteString(schemas.UpdateConnectorDestinationRequest_AuthType, string(v.AuthType))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateConnectorDestinationRequest_Description, *v.Description)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateConnectorDestinationRequest_Identifier, *v.Identifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateConnectorDestinationRequest_Name, *v.Name)
-	}
-	if v.SecretsManager != nil {
-		s.WriteStruct(schemas.UpdateConnectorDestinationRequest_SecretsManager)
-		v.SecretsManager.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateConnectorDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,29 +59,16 @@ type UpdateConnectorDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateConnectorDestinationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateConnectorDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateConnectorDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateConnectorDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorDestination, schemas.UpdateConnectorDestinationRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorDestination, schemas.UpdateConnectorDestinationRequest, nil), output: &UpdateConnectorDestinationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnectorDestination"); err != nil {

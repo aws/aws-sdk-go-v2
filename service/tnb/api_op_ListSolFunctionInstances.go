@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListSolFunctionInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSolFunctionInstancesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSolFunctionInstancesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSolFunctionInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSolFunctionInstancesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSolFunctionInstancesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListSolFunctionInstancesOutput struct {
 
 	// Network function instances.
@@ -72,26 +55,16 @@ type ListSolFunctionInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSolFunctionInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSolFunctionInstancesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSolFunctionInstancesOutput_functionInstances:
-			return deserializeListSolFunctionInstanceResources(d, schemas.ListSolFunctionInstancesOutput_functionInstances, &v.FunctionInstances)
-		case schemas.ListSolFunctionInstancesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSolFunctionInstancesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSolFunctionInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolFunctionInstances, schemas.ListSolFunctionInstancesInput, schemas.ListSolFunctionInstancesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSolFunctionInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolFunctionInstances, schemas.ListSolFunctionInstancesInput, schemas.ListSolFunctionInstancesOutput), output: &ListSolFunctionInstancesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSolFunctionInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSolFunctionInstances"); err != nil {

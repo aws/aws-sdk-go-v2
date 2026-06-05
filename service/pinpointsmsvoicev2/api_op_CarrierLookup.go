@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type CarrierLookupInput struct {
 	PhoneNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CarrierLookupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CarrierLookupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CarrierLookupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PhoneNumber != nil {
-		s.WriteString(schemas.CarrierLookupRequest_PhoneNumber, *v.PhoneNumber)
-	}
 }
 
 type CarrierLookupOutput struct {
@@ -97,49 +83,16 @@ type CarrierLookupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CarrierLookupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CarrierLookupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CarrierLookupResult_Carrier:
-			v.Carrier = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_Carrier, v.Carrier)
-		case schemas.CarrierLookupResult_Country:
-			v.Country = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_Country, v.Country)
-		case schemas.CarrierLookupResult_DialingCountryCode:
-			v.DialingCountryCode = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_DialingCountryCode, v.DialingCountryCode)
-		case schemas.CarrierLookupResult_E164PhoneNumber:
-			v.E164PhoneNumber = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_E164PhoneNumber, v.E164PhoneNumber)
-		case schemas.CarrierLookupResult_IsoCountryCode:
-			v.IsoCountryCode = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_IsoCountryCode, v.IsoCountryCode)
-		case schemas.CarrierLookupResult_MCC:
-			v.MCC = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_MCC, v.MCC)
-		case schemas.CarrierLookupResult_MNC:
-			v.MNC = new(string)
-			return d.ReadString(schemas.CarrierLookupResult_MNC, v.MNC)
-		case schemas.CarrierLookupResult_PhoneNumberType:
-			var ev string
-			if err := d.ReadString(schemas.CarrierLookupResult_PhoneNumberType, &ev); err != nil {
-				return err
-			}
-			v.PhoneNumberType = types.PhoneNumberType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCarrierLookupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CarrierLookup, schemas.CarrierLookupRequest, schemas.CarrierLookupResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCarrierLookup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CarrierLookup, schemas.CarrierLookupRequest, schemas.CarrierLookupResult), output: &CarrierLookupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCarrierLookup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CarrierLookup"); err != nil {

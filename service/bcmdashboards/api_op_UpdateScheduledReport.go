@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,47 +69,6 @@ type UpdateScheduledReportInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateScheduledReportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateScheduledReportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateScheduledReportRequest_arn, *v.Arn)
-	}
-	if v.ClearWidgetDateRangeOverride != false {
-		s.WriteBool(schemas.UpdateScheduledReportRequest_clearWidgetDateRangeOverride, v.ClearWidgetDateRangeOverride)
-	}
-	if v.ClearWidgetIds != false {
-		s.WriteBool(schemas.UpdateScheduledReportRequest_clearWidgetIds, v.ClearWidgetIds)
-	}
-	if v.DashboardArn != nil {
-		s.WriteString(schemas.UpdateScheduledReportRequest_dashboardArn, *v.DashboardArn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateScheduledReportRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateScheduledReportRequest_name, *v.Name)
-	}
-	if v.ScheduleConfig != nil {
-		s.WriteStruct(schemas.UpdateScheduledReportRequest_scheduleConfig)
-		v.ScheduleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScheduledReportExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateScheduledReportRequest_scheduledReportExecutionRoleArn, *v.ScheduledReportExecutionRoleArn)
-	}
-	if v.WidgetDateRangeOverride != nil {
-		s.WriteStruct(schemas.UpdateScheduledReportRequest_widgetDateRangeOverride)
-		v.WidgetDateRangeOverride.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeWidgetIdList(s, schemas.UpdateScheduledReportRequest_widgetIds, v.WidgetIds)
-}
-
 type UpdateScheduledReportOutput struct {
 
 	// The ARN of the updated scheduled report.
@@ -125,24 +82,16 @@ type UpdateScheduledReportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateScheduledReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateScheduledReportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateScheduledReportResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateScheduledReportResponse_arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateScheduledReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledReport, schemas.UpdateScheduledReportRequest, schemas.UpdateScheduledReportResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateScheduledReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledReport, schemas.UpdateScheduledReportRequest, schemas.UpdateScheduledReportResponse), output: &UpdateScheduledReportOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateScheduledReport{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScheduledReport"); err != nil {

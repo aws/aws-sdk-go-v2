@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,21 +47,6 @@ type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAccountAttributesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAccountAttributesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAccountAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeAccountAttributesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeAccountAttributesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeAccountAttributesOutput struct {
 
 	// An array of AccountAttributes objects.
@@ -79,26 +62,16 @@ type DescribeAccountAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAccountAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAccountAttributesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAccountAttributesResult_AccountAttributes:
-			return deserializeAccountAttributeList(d, schemas.DescribeAccountAttributesResult_AccountAttributes, &v.AccountAttributes)
-		case schemas.DescribeAccountAttributesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeAccountAttributesResult_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, schemas.DescribeAccountAttributesRequest, schemas.DescribeAccountAttributesResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAccountAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAttributes, schemas.DescribeAccountAttributesRequest, schemas.DescribeAccountAttributesResult), output: &DescribeAccountAttributesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAccountAttributes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountAttributes"); err != nil {

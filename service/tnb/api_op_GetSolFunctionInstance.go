@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type GetSolFunctionInstanceInput struct {
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetSolFunctionInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSolFunctionInstanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSolFunctionInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VnfInstanceId != nil {
-		s.WriteString(schemas.GetSolFunctionInstanceInput_vnfInstanceId, *v.VnfInstanceId)
-	}
 }
 
 type GetSolFunctionInstanceOutput struct {
@@ -119,60 +105,16 @@ type GetSolFunctionInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSolFunctionInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSolFunctionInstanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSolFunctionInstanceOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_arn, v.Arn)
-		case schemas.GetSolFunctionInstanceOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_id, v.Id)
-		case schemas.GetSolFunctionInstanceOutput_instantiatedVnfInfo:
-			v.InstantiatedVnfInfo = &types.GetSolVnfInfo{}
-			return v.InstantiatedVnfInfo.Deserialize(d)
-		case schemas.GetSolFunctionInstanceOutput_instantiationState:
-			var ev string
-			if err := d.ReadString(schemas.GetSolFunctionInstanceOutput_instantiationState, &ev); err != nil {
-				return err
-			}
-			v.InstantiationState = types.VnfInstantiationState(ev)
-			return nil
-		case schemas.GetSolFunctionInstanceOutput_metadata:
-			v.Metadata = &types.GetSolFunctionInstanceMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.GetSolFunctionInstanceOutput_nsInstanceId:
-			v.NsInstanceId = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_nsInstanceId, v.NsInstanceId)
-		case schemas.GetSolFunctionInstanceOutput_tags:
-			return deserializeTagMap(d, schemas.GetSolFunctionInstanceOutput_tags, &v.Tags)
-		case schemas.GetSolFunctionInstanceOutput_vnfPkgId:
-			v.VnfPkgId = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_vnfPkgId, v.VnfPkgId)
-		case schemas.GetSolFunctionInstanceOutput_vnfProductName:
-			v.VnfProductName = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_vnfProductName, v.VnfProductName)
-		case schemas.GetSolFunctionInstanceOutput_vnfProvider:
-			v.VnfProvider = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_vnfProvider, v.VnfProvider)
-		case schemas.GetSolFunctionInstanceOutput_vnfdId:
-			v.VnfdId = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_vnfdId, v.VnfdId)
-		case schemas.GetSolFunctionInstanceOutput_vnfdVersion:
-			v.VnfdVersion = new(string)
-			return d.ReadString(schemas.GetSolFunctionInstanceOutput_vnfdVersion, v.VnfdVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSolFunctionInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolFunctionInstance, schemas.GetSolFunctionInstanceInput, schemas.GetSolFunctionInstanceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSolFunctionInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolFunctionInstance, schemas.GetSolFunctionInstanceInput, schemas.GetSolFunctionInstanceOutput), output: &GetSolFunctionInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSolFunctionInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSolFunctionInstance"); err != nil {

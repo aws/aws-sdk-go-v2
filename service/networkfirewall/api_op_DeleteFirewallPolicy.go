@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFirewallPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteFirewallPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FirewallPolicyArn != nil {
-		s.WriteString(schemas.DeleteFirewallPolicyRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
-	}
-	if v.FirewallPolicyName != nil {
-		s.WriteString(schemas.DeleteFirewallPolicyRequest_FirewallPolicyName, *v.FirewallPolicyName)
-	}
-}
-
 type DeleteFirewallPolicyOutput struct {
 
 	// The object containing the definition of the FirewallPolicyResponse that you asked to delete.
@@ -73,24 +56,16 @@ type DeleteFirewallPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFirewallPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteFirewallPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteFirewallPolicyResponse_FirewallPolicyResponse:
-			v.FirewallPolicyResponse = &types.FirewallPolicyResponse{}
-			return v.FirewallPolicyResponse.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallPolicy, schemas.DeleteFirewallPolicyRequest, schemas.DeleteFirewallPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFirewallPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallPolicy, schemas.DeleteFirewallPolicyRequest, schemas.DeleteFirewallPolicyResponse), output: &DeleteFirewallPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFirewallPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewallPolicy"); err != nil {

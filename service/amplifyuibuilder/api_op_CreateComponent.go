@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,48 +50,6 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComponentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComponentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.CreateComponentRequest_appId, *v.AppId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateComponentRequest_clientToken, *v.ClientToken)
-	}
-	if v.ComponentToCreate != nil {
-		s.WriteStruct(schemas.CreateComponentRequest_componentToCreate)
-		v.ComponentToCreate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.CreateComponentRequest_environmentName, *v.EnvironmentName)
-	}
-}
-func (v *CreateComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComponentRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateComponentRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.CreateComponentRequest_appId, v.AppId)
-		case schemas.CreateComponentRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateComponentRequest_clientToken, v.ClientToken)
-		case schemas.CreateComponentRequest_componentToCreate:
-			v.ComponentToCreate = &types.CreateComponentData{}
-			return v.ComponentToCreate.Deserialize(d)
-		case schemas.CreateComponentRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.CreateComponentRequest_environmentName, v.EnvironmentName)
-		}
-		return nil
-	})
-}
-
 type CreateComponentOutput struct {
 
 	// Describes the configuration of the new component.
@@ -105,37 +61,16 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComponentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComponentResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Entity != nil {
-		s.WriteStruct(schemas.CreateComponentResponse_entity)
-		v.Entity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComponentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateComponentResponse_entity:
-			v.Entity = &types.Component{}
-			return v.Entity.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse), output: &CreateComponentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComponent"); err != nil {

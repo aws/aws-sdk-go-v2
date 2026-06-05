@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,26 +62,6 @@ type AcceptConnectionProposalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptConnectionProposalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptConnectionProposalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptConnectionProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationKey != nil {
-		s.WriteString(schemas.AcceptConnectionProposalRequest_activationKey, *v.ActivationKey)
-	}
-	serializeAttachPoint(s, schemas.AcceptConnectionProposalRequest_attachPoint, v.AttachPoint)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.AcceptConnectionProposalRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.AcceptConnectionProposalRequest_description, *v.Description)
-	}
-	serializeTagMap(s, schemas.AcceptConnectionProposalRequest_tags, v.Tags)
-}
-
 type AcceptConnectionProposalOutput struct {
 
 	// The created Connection object.
@@ -95,24 +73,16 @@ type AcceptConnectionProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptConnectionProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptConnectionProposalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptConnectionProposalResponse_connection:
-			v.Connection = &types.Connection{}
-			return v.Connection.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptConnectionProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionProposal, schemas.AcceptConnectionProposalRequest, schemas.AcceptConnectionProposalResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAcceptConnectionProposal{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionProposal, schemas.AcceptConnectionProposalRequest, schemas.AcceptConnectionProposalResponse), output: &AcceptConnectionProposalOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAcceptConnectionProposal{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptConnectionProposal"); err != nil {

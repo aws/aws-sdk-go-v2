@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type UpdateActiveModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateActiveModelVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateActiveModelVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateActiveModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ModelName != nil {
-		s.WriteString(schemas.UpdateActiveModelVersionRequest_ModelName, *v.ModelName)
-	}
-	if v.ModelVersion != nil {
-		s.WriteInt64(schemas.UpdateActiveModelVersionRequest_ModelVersion, *v.ModelVersion)
-	}
-}
-
 type UpdateActiveModelVersionOutput struct {
 
 	// The version that is currently active of the machine learning model for which
@@ -92,39 +75,16 @@ type UpdateActiveModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateActiveModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateActiveModelVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion:
-			v.CurrentActiveVersion = new(int64)
-			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion, v.CurrentActiveVersion)
-		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn:
-			v.CurrentActiveVersionArn = new(string)
-			return d.ReadString(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn, v.CurrentActiveVersionArn)
-		case schemas.UpdateActiveModelVersionResponse_ModelArn:
-			v.ModelArn = new(string)
-			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelArn, v.ModelArn)
-		case schemas.UpdateActiveModelVersionResponse_ModelName:
-			v.ModelName = new(string)
-			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelName, v.ModelName)
-		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion:
-			v.PreviousActiveVersion = new(int64)
-			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion, v.PreviousActiveVersion)
-		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn:
-			v.PreviousActiveVersionArn = new(string)
-			return d.ReadString(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn, v.PreviousActiveVersionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateActiveModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateActiveModelVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse), output: &UpdateActiveModelVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateActiveModelVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateActiveModelVersion"); err != nil {

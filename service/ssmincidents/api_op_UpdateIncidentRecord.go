@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,68 +81,6 @@ type UpdateIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIncidentRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIncidentRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIncidentRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateIncidentRecordInput_arn, *v.Arn)
-	}
-	serializeChatChannel(s, schemas.UpdateIncidentRecordInput_chatChannel, v.ChatChannel)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateIncidentRecordInput_clientToken, *v.ClientToken)
-	}
-	if v.Impact != nil {
-		s.WriteInt32(schemas.UpdateIncidentRecordInput_impact, *v.Impact)
-	}
-	serializeNotificationTargetSet(s, schemas.UpdateIncidentRecordInput_notificationTargets, v.NotificationTargets)
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateIncidentRecordInput_status, string(v.Status))
-	}
-	if v.Summary != nil {
-		s.WriteString(schemas.UpdateIncidentRecordInput_summary, *v.Summary)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.UpdateIncidentRecordInput_title, *v.Title)
-	}
-}
-func (v *UpdateIncidentRecordInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateIncidentRecordInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateIncidentRecordInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateIncidentRecordInput_arn, v.Arn)
-		case schemas.UpdateIncidentRecordInput_chatChannel:
-			return deserializeChatChannel(d, schemas.UpdateIncidentRecordInput_chatChannel, &v.ChatChannel)
-		case schemas.UpdateIncidentRecordInput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateIncidentRecordInput_clientToken, v.ClientToken)
-		case schemas.UpdateIncidentRecordInput_impact:
-			v.Impact = new(int32)
-			return d.ReadInt32(schemas.UpdateIncidentRecordInput_impact, v.Impact)
-		case schemas.UpdateIncidentRecordInput_notificationTargets:
-			return deserializeNotificationTargetSet(d, schemas.UpdateIncidentRecordInput_notificationTargets, &v.NotificationTargets)
-		case schemas.UpdateIncidentRecordInput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateIncidentRecordInput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.IncidentRecordStatus(ev)
-			return nil
-		case schemas.UpdateIncidentRecordInput_summary:
-			v.Summary = new(string)
-			return d.ReadString(schemas.UpdateIncidentRecordInput_summary, v.Summary)
-		case schemas.UpdateIncidentRecordInput_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.UpdateIncidentRecordInput_title, v.Title)
-		}
-		return nil
-	})
-}
-
 type UpdateIncidentRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -152,29 +88,16 @@ type UpdateIncidentRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIncidentRecordOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIncidentRecordOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIncidentRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateIncidentRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateIncidentRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIncidentRecord, schemas.UpdateIncidentRecordInput, schemas.UpdateIncidentRecordOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIncidentRecord, schemas.UpdateIncidentRecordInput, schemas.UpdateIncidentRecordOutput), output: &UpdateIncidentRecordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIncidentRecord"); err != nil {

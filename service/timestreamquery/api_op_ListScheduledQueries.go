@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type ListScheduledQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduledQueriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListScheduledQueriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListScheduledQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListScheduledQueriesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListScheduledQueriesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListScheduledQueriesOutput struct {
 
 	// A list of scheduled queries.
@@ -77,26 +60,16 @@ type ListScheduledQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduledQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListScheduledQueriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListScheduledQueriesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListScheduledQueriesResponse_NextToken, v.NextToken)
-		case schemas.ListScheduledQueriesResponse_ScheduledQueries:
-			return deserializeScheduledQueryList(d, schemas.ListScheduledQueriesResponse_ScheduledQueries, &v.ScheduledQueries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListScheduledQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledQueries, schemas.ListScheduledQueriesRequest, schemas.ListScheduledQueriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListScheduledQueries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledQueries, schemas.ListScheduledQueriesRequest, schemas.ListScheduledQueriesResponse), output: &ListScheduledQueriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListScheduledQueries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScheduledQueries"); err != nil {

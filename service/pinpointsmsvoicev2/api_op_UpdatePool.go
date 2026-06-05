@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -79,39 +77,6 @@ type UpdatePoolInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePoolInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePoolRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeletionProtectionEnabled != nil {
-		s.WriteBool(schemas.UpdatePoolRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
-	}
-	if v.OptOutListName != nil {
-		s.WriteString(schemas.UpdatePoolRequest_OptOutListName, *v.OptOutListName)
-	}
-	if v.PoolId != nil {
-		s.WriteString(schemas.UpdatePoolRequest_PoolId, *v.PoolId)
-	}
-	if v.SelfManagedOptOutsEnabled != nil {
-		s.WriteBool(schemas.UpdatePoolRequest_SelfManagedOptOutsEnabled, *v.SelfManagedOptOutsEnabled)
-	}
-	if v.SharedRoutesEnabled != nil {
-		s.WriteBool(schemas.UpdatePoolRequest_SharedRoutesEnabled, *v.SharedRoutesEnabled)
-	}
-	if v.TwoWayChannelArn != nil {
-		s.WriteString(schemas.UpdatePoolRequest_TwoWayChannelArn, *v.TwoWayChannelArn)
-	}
-	if v.TwoWayChannelRole != nil {
-		s.WriteString(schemas.UpdatePoolRequest_TwoWayChannelRole, *v.TwoWayChannelRole)
-	}
-	if v.TwoWayEnabled != nil {
-		s.WriteBool(schemas.UpdatePoolRequest_TwoWayEnabled, *v.TwoWayEnabled)
-	}
-}
-
 type UpdatePoolOutput struct {
 
 	// The time when the pool was created, in [UNIX epoch time] format.
@@ -164,61 +129,16 @@ type UpdatePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePoolResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePoolResult_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.UpdatePoolResult_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.UpdatePoolResult_DeletionProtectionEnabled:
-			return d.ReadBool(schemas.UpdatePoolResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
-		case schemas.UpdatePoolResult_MessageType:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePoolResult_MessageType, &ev); err != nil {
-				return err
-			}
-			v.MessageType = types.MessageType(ev)
-			return nil
-		case schemas.UpdatePoolResult_OptOutListName:
-			v.OptOutListName = new(string)
-			return d.ReadString(schemas.UpdatePoolResult_OptOutListName, v.OptOutListName)
-		case schemas.UpdatePoolResult_PoolArn:
-			v.PoolArn = new(string)
-			return d.ReadString(schemas.UpdatePoolResult_PoolArn, v.PoolArn)
-		case schemas.UpdatePoolResult_PoolId:
-			v.PoolId = new(string)
-			return d.ReadString(schemas.UpdatePoolResult_PoolId, v.PoolId)
-		case schemas.UpdatePoolResult_SelfManagedOptOutsEnabled:
-			return d.ReadBool(schemas.UpdatePoolResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
-		case schemas.UpdatePoolResult_SharedRoutesEnabled:
-			return d.ReadBool(schemas.UpdatePoolResult_SharedRoutesEnabled, &v.SharedRoutesEnabled)
-		case schemas.UpdatePoolResult_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdatePoolResult_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PoolStatus(ev)
-			return nil
-		case schemas.UpdatePoolResult_TwoWayChannelArn:
-			v.TwoWayChannelArn = new(string)
-			return d.ReadString(schemas.UpdatePoolResult_TwoWayChannelArn, v.TwoWayChannelArn)
-		case schemas.UpdatePoolResult_TwoWayChannelRole:
-			v.TwoWayChannelRole = new(string)
-			return d.ReadString(schemas.UpdatePoolResult_TwoWayChannelRole, v.TwoWayChannelRole)
-		case schemas.UpdatePoolResult_TwoWayEnabled:
-			return d.ReadBool(schemas.UpdatePoolResult_TwoWayEnabled, &v.TwoWayEnabled)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePool, schemas.UpdatePoolRequest, schemas.UpdatePoolResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePool, schemas.UpdatePoolRequest, schemas.UpdatePoolResult), output: &UpdatePoolOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePool"); err != nil {

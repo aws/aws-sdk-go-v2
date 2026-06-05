@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type GetComputeNodeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetComputeNodeGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.GetComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ComputeNodeGroupIdentifier != nil {
-		s.WriteString(schemas.GetComputeNodeGroupRequest_computeNodeGroupIdentifier, *v.ComputeNodeGroupIdentifier)
-	}
-}
-
 type GetComputeNodeGroupOutput struct {
 
 	// A compute node group associated with a cluster.
@@ -72,24 +55,16 @@ type GetComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetComputeNodeGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetComputeNodeGroupResponse_computeNodeGroup:
-			v.ComputeNodeGroup = &types.ComputeNodeGroup{}
-			return v.ComputeNodeGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeNodeGroup, schemas.GetComputeNodeGroupRequest, schemas.GetComputeNodeGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeNodeGroup, schemas.GetComputeNodeGroupRequest, schemas.GetComputeNodeGroupResponse), output: &GetComputeNodeGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComputeNodeGroup"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,25 +46,6 @@ type ListWhatsAppTemplateLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWhatsAppTemplateLibraryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWhatsAppTemplateLibraryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWhatsAppTemplateLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilter(s, schemas.ListWhatsAppTemplateLibraryInput_filters, v.Filters)
-	if v.Id != nil {
-		s.WriteString(schemas.ListWhatsAppTemplateLibraryInput_id, *v.Id)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListWhatsAppTemplateLibraryInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWhatsAppTemplateLibraryInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListWhatsAppTemplateLibraryOutput struct {
 
 	// A list of templates from Meta's library.
@@ -81,26 +60,16 @@ type ListWhatsAppTemplateLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWhatsAppTemplateLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWhatsAppTemplateLibraryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates:
-			return deserializeMetaLibraryTemplatesList(d, schemas.ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates, &v.MetaLibraryTemplates)
-		case schemas.ListWhatsAppTemplateLibraryOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWhatsAppTemplateLibraryOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWhatsAppTemplateLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppTemplateLibrary, schemas.ListWhatsAppTemplateLibraryInput, schemas.ListWhatsAppTemplateLibraryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWhatsAppTemplateLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppTemplateLibrary, schemas.ListWhatsAppTemplateLibraryInput, schemas.ListWhatsAppTemplateLibraryOutput), output: &ListWhatsAppTemplateLibraryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWhatsAppTemplateLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWhatsAppTemplateLibrary"); err != nil {

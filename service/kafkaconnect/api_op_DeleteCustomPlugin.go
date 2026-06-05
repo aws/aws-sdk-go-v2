@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type DeleteCustomPluginInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCustomPluginInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCustomPluginRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCustomPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomPluginArn != nil {
-		s.WriteString(schemas.DeleteCustomPluginRequest_customPluginArn, *v.CustomPluginArn)
-	}
-}
-
 type DeleteCustomPluginOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom plugin that you requested to
@@ -66,45 +52,16 @@ type DeleteCustomPluginOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCustomPluginOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCustomPluginResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCustomPluginOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomPluginArn != nil {
-		s.WriteString(schemas.DeleteCustomPluginResponse_customPluginArn, *v.CustomPluginArn)
-	}
-	if v.CustomPluginState != "" {
-		s.WriteString(schemas.DeleteCustomPluginResponse_customPluginState, string(v.CustomPluginState))
-	}
-}
-func (v *DeleteCustomPluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteCustomPluginResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteCustomPluginResponse_customPluginArn:
-			v.CustomPluginArn = new(string)
-			return d.ReadString(schemas.DeleteCustomPluginResponse_customPluginArn, v.CustomPluginArn)
-		case schemas.DeleteCustomPluginResponse_customPluginState:
-			var ev string
-			if err := d.ReadString(schemas.DeleteCustomPluginResponse_customPluginState, &ev); err != nil {
-				return err
-			}
-			v.CustomPluginState = types.CustomPluginState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteCustomPluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomPlugin, schemas.DeleteCustomPluginRequest, schemas.DeleteCustomPluginResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomPlugin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomPlugin, schemas.DeleteCustomPluginRequest, schemas.DeleteCustomPluginResponse), output: &DeleteCustomPluginOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomPlugin{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCustomPlugin"); err != nil {

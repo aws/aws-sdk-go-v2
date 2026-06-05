@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type ListAssociatedGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociatedGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssociatedGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssociatedGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAssociatedGroupsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssociatedGroupsRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.ListAssociatedGroupsRequest_ResourceArn, *v.ResourceArn)
-	}
-}
-
 type ListAssociatedGroupsOutput struct {
 
 	// An array of structures that contain information about the groups that this
@@ -84,26 +64,16 @@ type ListAssociatedGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociatedGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssociatedGroupsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssociatedGroupsResponse_Groups:
-			return deserializeGroupSummaryList(d, schemas.ListAssociatedGroupsResponse_Groups, &v.Groups)
-		case schemas.ListAssociatedGroupsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssociatedGroupsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAssociatedGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedGroups, schemas.ListAssociatedGroupsRequest, schemas.ListAssociatedGroupsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedGroups, schemas.ListAssociatedGroupsRequest, schemas.ListAssociatedGroupsResponse), output: &ListAssociatedGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssociatedGroups"); err != nil {

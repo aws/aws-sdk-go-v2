@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type DeleteSlackUserIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSlackUserIdentityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSlackUserIdentityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSlackUserIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChatConfigurationArn != nil {
-		s.WriteString(schemas.DeleteSlackUserIdentityRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
-	}
-	if v.SlackTeamId != nil {
-		s.WriteString(schemas.DeleteSlackUserIdentityRequest_SlackTeamId, *v.SlackTeamId)
-	}
-	if v.SlackUserId != nil {
-		s.WriteString(schemas.DeleteSlackUserIdentityRequest_SlackUserId, *v.SlackUserId)
-	}
-}
-
 type DeleteSlackUserIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,21 +54,16 @@ type DeleteSlackUserIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSlackUserIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSlackUserIdentityResult, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSlackUserIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackUserIdentity, schemas.DeleteSlackUserIdentityRequest, schemas.DeleteSlackUserIdentityResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSlackUserIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackUserIdentity, schemas.DeleteSlackUserIdentityRequest, schemas.DeleteSlackUserIdentityResult), output: &DeleteSlackUserIdentityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSlackUserIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSlackUserIdentity"); err != nil {

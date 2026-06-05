@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,13 +33,3 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServiceException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServiceException_Message, v.Message)
-		}
-		return nil
-	})
-}

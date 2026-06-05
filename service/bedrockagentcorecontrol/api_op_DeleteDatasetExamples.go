@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,22 +61,6 @@ type DeleteDatasetExamplesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetExamplesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDatasetExamplesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteDatasetExamplesRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.DeleteDatasetExamplesRequest_datasetId, *v.DatasetId)
-	}
-	serializeExampleIdList(s, schemas.DeleteDatasetExamplesRequest_exampleIds, v.ExampleIds)
-}
-
 type DeleteDatasetExamplesOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the dataset.
@@ -112,40 +94,16 @@ type DeleteDatasetExamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetExamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDatasetExamplesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDatasetExamplesResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.DeleteDatasetExamplesResponse_datasetArn, v.DatasetArn)
-		case schemas.DeleteDatasetExamplesResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.DeleteDatasetExamplesResponse_datasetId, v.DatasetId)
-		case schemas.DeleteDatasetExamplesResponse_deletedCount:
-			v.DeletedCount = new(int64)
-			return d.ReadInt64(schemas.DeleteDatasetExamplesResponse_deletedCount, v.DeletedCount)
-		case schemas.DeleteDatasetExamplesResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDatasetExamplesResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.DeleteDatasetExamplesResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDatasetExamplesResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDatasetExamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetExamples, schemas.DeleteDatasetExamplesRequest, schemas.DeleteDatasetExamplesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetExamples, schemas.DeleteDatasetExamplesRequest, schemas.DeleteDatasetExamplesResponse), output: &DeleteDatasetExamplesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatasetExamples{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDatasetExamples"); err != nil {

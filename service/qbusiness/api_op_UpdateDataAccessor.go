@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,30 +59,6 @@ type UpdateDataAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDataAccessorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationList(s, schemas.UpdateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdateDataAccessorRequest_applicationId, *v.ApplicationId)
-	}
-	if v.AuthenticationDetail != nil {
-		s.WriteStruct(schemas.UpdateDataAccessorRequest_authenticationDetail)
-		v.AuthenticationDetail.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataAccessorId != nil {
-		s.WriteString(schemas.UpdateDataAccessorRequest_dataAccessorId, *v.DataAccessorId)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateDataAccessorRequest_displayName, *v.DisplayName)
-	}
-}
-
 type UpdateDataAccessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,21 +66,16 @@ type UpdateDataAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDataAccessorResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDataAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAccessor, schemas.UpdateDataAccessorRequest, schemas.UpdateDataAccessorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAccessor, schemas.UpdateDataAccessorRequest, schemas.UpdateDataAccessorResponse), output: &UpdateDataAccessorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataAccessor{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataAccessor"); err != nil {

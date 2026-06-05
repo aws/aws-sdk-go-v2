@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,16 +37,6 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeVpcEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeVpcEndpointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeVpcEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcEndpointIdList(s, schemas.DescribeVpcEndpointsRequest_VpcEndpointIds, v.VpcEndpointIds)
-}
-
 type DescribeVpcEndpointsOutput struct {
 
 	// Any errors associated with the request.
@@ -67,25 +55,16 @@ type DescribeVpcEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeVpcEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeVpcEndpointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors:
-			return deserializeVpcEndpointErrorList(d, schemas.DescribeVpcEndpointsResponse_VpcEndpointErrors, &v.VpcEndpointErrors)
-		case schemas.DescribeVpcEndpointsResponse_VpcEndpoints:
-			return deserializeVpcEndpoints(d, schemas.DescribeVpcEndpointsResponse_VpcEndpoints, &v.VpcEndpoints)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpoints, schemas.DescribeVpcEndpointsRequest, schemas.DescribeVpcEndpointsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVpcEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpoints, schemas.DescribeVpcEndpointsRequest, schemas.DescribeVpcEndpointsResponse), output: &DescribeVpcEndpointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVpcEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVpcEndpoints"); err != nil {

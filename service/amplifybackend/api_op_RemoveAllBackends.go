@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type RemoveAllBackendsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAllBackendsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveAllBackendsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveAllBackendsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.RemoveAllBackendsRequest_AppId, *v.AppId)
-	}
-	if v.CleanAmplifyApp != nil {
-		s.WriteBool(schemas.RemoveAllBackendsRequest_CleanAmplifyApp, *v.CleanAmplifyApp)
-	}
-}
-
 type RemoveAllBackendsOutput struct {
 
 	// The app ID.
@@ -80,36 +63,16 @@ type RemoveAllBackendsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveAllBackendsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveAllBackendsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoveAllBackendsResponse_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.RemoveAllBackendsResponse_AppId, v.AppId)
-		case schemas.RemoveAllBackendsResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.RemoveAllBackendsResponse_Error, v.Error)
-		case schemas.RemoveAllBackendsResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.RemoveAllBackendsResponse_JobId, v.JobId)
-		case schemas.RemoveAllBackendsResponse_Operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.RemoveAllBackendsResponse_Operation, v.Operation)
-		case schemas.RemoveAllBackendsResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.RemoveAllBackendsResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllBackends, schemas.RemoveAllBackendsRequest, schemas.RemoveAllBackendsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAllBackends{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllBackends, schemas.RemoveAllBackendsRequest, schemas.RemoveAllBackendsResponse), output: &RemoveAllBackendsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAllBackends{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAllBackends"); err != nil {

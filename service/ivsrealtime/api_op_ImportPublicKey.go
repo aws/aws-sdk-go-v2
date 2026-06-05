@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,22 +49,6 @@ type ImportPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportPublicKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.ImportPublicKeyRequest_name, *v.Name)
-	}
-	if v.PublicKeyMaterial != nil {
-		s.WriteString(schemas.ImportPublicKeyRequest_publicKeyMaterial, *v.PublicKeyMaterial)
-	}
-	serializeTags(s, schemas.ImportPublicKeyRequest_tags, v.Tags)
-}
-
 type ImportPublicKeyOutput struct {
 
 	// The public key that was imported.
@@ -78,24 +60,16 @@ type ImportPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImportPublicKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImportPublicKeyResponse_publicKey:
-			v.PublicKey = &types.PublicKey{}
-			return v.PublicKey.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPublicKey, schemas.ImportPublicKeyRequest, schemas.ImportPublicKeyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPublicKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPublicKey, schemas.ImportPublicKeyRequest, schemas.ImportPublicKeyResponse), output: &ImportPublicKeyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPublicKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportPublicKey"); err != nil {

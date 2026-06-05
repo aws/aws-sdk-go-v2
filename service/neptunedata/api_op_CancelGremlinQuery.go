@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,18 +43,6 @@ type CancelGremlinQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelGremlinQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelGremlinQueryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelGremlinQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryId != nil {
-		s.WriteString(schemas.CancelGremlinQueryInput_queryId, *v.QueryId)
-	}
-}
-
 type CancelGremlinQueryOutput struct {
 
 	// The status of the cancelation
@@ -68,24 +54,16 @@ type CancelGremlinQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelGremlinQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelGremlinQueryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelGremlinQueryOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CancelGremlinQueryOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelGremlinQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelGremlinQuery, schemas.CancelGremlinQueryInput, schemas.CancelGremlinQueryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelGremlinQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelGremlinQuery, schemas.CancelGremlinQueryInput, schemas.CancelGremlinQueryOutput), output: &CancelGremlinQueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelGremlinQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelGremlinQuery"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +38,6 @@ type BatchUpdateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateDetectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateDetectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateDetectorRequests(s, schemas.BatchUpdateDetectorRequest_detectors, v.Detectors)
-}
-
 type BatchUpdateDetectorOutput struct {
 
 	// A list of those detector updates that resulted in errors. (If an error is
@@ -62,23 +50,16 @@ type BatchUpdateDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateDetectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateDetectorResponse_batchUpdateDetectorErrorEntries:
-			return deserializeBatchUpdateDetectorErrorEntries(d, schemas.BatchUpdateDetectorResponse_batchUpdateDetectorErrorEntries, &v.BatchUpdateDetectorErrorEntries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDetector, schemas.BatchUpdateDetectorRequest, schemas.BatchUpdateDetectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateDetector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateDetector, schemas.BatchUpdateDetectorRequest, schemas.BatchUpdateDetectorResponse), output: &BatchUpdateDetectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateDetector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateDetector"); err != nil {

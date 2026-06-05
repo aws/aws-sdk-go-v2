@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,16 +31,6 @@ func (e *InternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalFailureException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalFailureException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalFailureException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type InvalidRequestException struct {
 	Message *string
@@ -67,16 +56,6 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidRequestException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type LimitExceededException struct {
 	Message *string
@@ -102,16 +81,6 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LimitExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.LimitExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type ResourceAlreadyExistsException struct {
 	Message *string
@@ -137,16 +106,6 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceAlreadyExistsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceAlreadyExistsException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceAlreadyExistsException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type ResourceInUseException struct {
 	Message *string
@@ -172,16 +131,6 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceInUseException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceInUseException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type ResourceNotFoundException struct {
 	Message *string
@@ -207,16 +156,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 type ThrottlingException struct {
 	Message *string
@@ -242,13 +181,3 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -81,37 +79,6 @@ type CreateEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEventInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActorId != nil {
-		s.WriteString(schemas.CreateEventInput_actorId, *v.ActorId)
-	}
-	if v.Branch != nil {
-		s.WriteStruct(schemas.CreateEventInput_branch)
-		v.Branch.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEventInput_clientToken, *v.ClientToken)
-	}
-	if v.EventTimestamp != nil {
-		s.WriteTime(schemas.CreateEventInput_eventTimestamp, *v.EventTimestamp)
-	}
-	if v.MemoryId != nil {
-		s.WriteString(schemas.CreateEventInput_memoryId, *v.MemoryId)
-	}
-	serializeMetadataMap(s, schemas.CreateEventInput_metadata, v.Metadata)
-	serializePayloadTypeList(s, schemas.CreateEventInput_payload, v.Payload)
-	if v.SessionId != nil {
-		s.WriteString(schemas.CreateEventInput_sessionId, *v.SessionId)
-	}
-}
-
 type CreateEventOutput struct {
 
 	// The event that was created.
@@ -125,24 +92,16 @@ type CreateEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEventOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEventOutput_event:
-			v.Event = &types.Event{}
-			return v.Event.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvent, schemas.CreateEventInput, schemas.CreateEventOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvent, schemas.CreateEventInput, schemas.CreateEventOutput), output: &CreateEventOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEvent"); err != nil {

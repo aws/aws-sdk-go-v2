@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,39 +56,6 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServicesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListServicesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ListServicesRequest_accountId, *v.AccountId)
-	}
-	if v.AssessmentStatus != "" {
-		s.WriteString(schemas.ListServicesRequest_assessmentStatus, string(v.AssessmentStatus))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListServicesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListServicesRequest_nextToken, *v.NextToken)
-	}
-	if v.OuId != nil {
-		s.WriteString(schemas.ListServicesRequest_ouId, *v.OuId)
-	}
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.ListServicesRequest_policyArn, *v.PolicyArn)
-	}
-	if v.SystemArn != nil {
-		s.WriteString(schemas.ListServicesRequest_systemArn, *v.SystemArn)
-	}
-	if v.UserJourneyId != nil {
-		s.WriteString(schemas.ListServicesRequest_userJourneyId, *v.UserJourneyId)
-	}
-}
-
 type ListServicesOutput struct {
 
 	// The list of service summaries.
@@ -107,26 +72,16 @@ type ListServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListServicesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListServicesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListServicesResponse_nextToken, v.NextToken)
-		case schemas.ListServicesResponse_serviceSummaries:
-			return deserializeServiceSummaryList(d, schemas.ListServicesResponse_serviceSummaries, &v.ServiceSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServices{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse), output: &ListServicesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServices{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServices"); err != nil {

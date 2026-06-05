@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,18 +56,6 @@ type DeletePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePipelineInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PipelineId != nil {
-		s.WriteString(schemas.DeletePipelineInput_pipelineId, *v.PipelineId)
-	}
-}
-
 type DeletePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,29 +63,16 @@ type DeletePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePipelineOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeletePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipeline, schemas.DeletePipelineInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipeline, schemas.DeletePipelineInput, nil), output: &DeletePipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePipeline"); err != nil {

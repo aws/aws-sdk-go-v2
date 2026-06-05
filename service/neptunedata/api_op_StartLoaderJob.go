@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -298,50 +296,6 @@ type StartLoaderJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartLoaderJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartLoaderJobInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartLoaderJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.StartLoaderJobInput_dependencies, v.Dependencies)
-	if v.EdgeOnlyLoad != nil {
-		s.WriteBool(schemas.StartLoaderJobInput_edgeOnlyLoad, *v.EdgeOnlyLoad)
-	}
-	if v.FailOnError != nil {
-		s.WriteBool(schemas.StartLoaderJobInput_failOnError, *v.FailOnError)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.StartLoaderJobInput_format, string(v.Format))
-	}
-	if v.IamRoleArn != nil {
-		s.WriteString(schemas.StartLoaderJobInput_iamRoleArn, *v.IamRoleArn)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.StartLoaderJobInput_mode, string(v.Mode))
-	}
-	if v.Parallelism != "" {
-		s.WriteString(schemas.StartLoaderJobInput_parallelism, string(v.Parallelism))
-	}
-	serializeStringValuedMap(s, schemas.StartLoaderJobInput_parserConfiguration, v.ParserConfiguration)
-	if v.QueueRequest != nil {
-		s.WriteBool(schemas.StartLoaderJobInput_queueRequest, *v.QueueRequest)
-	}
-	if v.S3BucketRegion != "" {
-		s.WriteString(schemas.StartLoaderJobInput_s3BucketRegion, string(v.S3BucketRegion))
-	}
-	if v.Source != nil {
-		s.WriteString(schemas.StartLoaderJobInput_source, *v.Source)
-	}
-	if v.UpdateSingleCardinalityProperties != nil {
-		s.WriteBool(schemas.StartLoaderJobInput_updateSingleCardinalityProperties, *v.UpdateSingleCardinalityProperties)
-	}
-	if v.UserProvidedEdgeIds != nil {
-		s.WriteBool(schemas.StartLoaderJobInput_userProvidedEdgeIds, *v.UserProvidedEdgeIds)
-	}
-}
-
 type StartLoaderJobOutput struct {
 
 	// Contains a loadId name-value pair that provides an identifier for the load
@@ -361,26 +315,16 @@ type StartLoaderJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartLoaderJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartLoaderJobOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartLoaderJobOutput_payload:
-			return deserializeStringValuedMap(d, schemas.StartLoaderJobOutput_payload, &v.Payload)
-		case schemas.StartLoaderJobOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.StartLoaderJobOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartLoaderJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLoaderJob, schemas.StartLoaderJobInput, schemas.StartLoaderJobOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartLoaderJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLoaderJob, schemas.StartLoaderJobInput, schemas.StartLoaderJobOutput), output: &StartLoaderJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartLoaderJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartLoaderJob"); err != nil {

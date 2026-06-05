@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListDictionariesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDictionariesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDictionariesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDictionariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDictionariesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDictionariesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListDictionariesOutput struct {
 
 	// A list of DictionarySummary objects.
@@ -71,26 +54,16 @@ type ListDictionariesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDictionariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDictionariesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDictionariesResponse_dictionaries:
-			return deserializeDictionarySummaryList(d, schemas.ListDictionariesResponse_dictionaries, &v.Dictionaries)
-		case schemas.ListDictionariesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDictionariesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDictionariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDictionaries, schemas.ListDictionariesRequest, schemas.ListDictionariesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDictionaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDictionaries, schemas.ListDictionariesRequest, schemas.ListDictionariesResponse), output: &ListDictionariesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDictionaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDictionaries"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -92,24 +90,6 @@ type DeleteDBInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDBInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDBInstanceMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDBInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBInstanceIdentifier != nil {
-		s.WriteString(schemas.DeleteDBInstanceMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
-	}
-	if v.FinalDBSnapshotIdentifier != nil {
-		s.WriteString(schemas.DeleteDBInstanceMessage_FinalDBSnapshotIdentifier, *v.FinalDBSnapshotIdentifier)
-	}
-	if v.SkipFinalSnapshot != nil {
-		s.WriteBool(schemas.DeleteDBInstanceMessage_SkipFinalSnapshot, *v.SkipFinalSnapshot)
-	}
-}
-
 type DeleteDBInstanceOutput struct {
 
 	// Contains the details of an Amazon Neptune DB instance.
@@ -123,24 +103,16 @@ type DeleteDBInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDBInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDBInstanceResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDBInstanceResult_DBInstance:
-			v.DBInstance = &types.DBInstance{}
-			return v.DBInstance.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBInstance, schemas.DeleteDBInstanceMessage, schemas.DeleteDBInstanceResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBInstance, schemas.DeleteDBInstanceMessage, schemas.DeleteDBInstanceResult), output: &DeleteDBInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDBInstance"); err != nil {

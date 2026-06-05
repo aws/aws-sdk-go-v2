@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -127,56 +125,6 @@ type CreateComputeNodeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputeNodeGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateComputeNodeGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AmiId != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_amiId, *v.AmiId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterIdentifier != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_clusterIdentifier, *v.ClusterIdentifier)
-	}
-	if v.ComputeNodeGroupName != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_computeNodeGroupName, *v.ComputeNodeGroupName)
-	}
-	if v.CustomLaunchTemplate != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_customLaunchTemplate)
-		v.CustomLaunchTemplate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IamInstanceProfileArn != nil {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
-	}
-	serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
-	if v.PurchaseOption != "" {
-		s.WriteString(schemas.CreateComputeNodeGroupRequest_purchaseOption, string(v.PurchaseOption))
-	}
-	if v.ScalingConfiguration != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_scalingConfiguration)
-		v.ScalingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SlurmConfiguration != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_slurmConfiguration)
-		v.SlurmConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SpotOptions != nil {
-		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_spotOptions)
-		v.SpotOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
-	serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
-}
-
 type CreateComputeNodeGroupOutput struct {
 
 	// A compute node group associated with a cluster.
@@ -188,24 +136,16 @@ type CreateComputeNodeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateComputeNodeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateComputeNodeGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateComputeNodeGroupResponse_computeNodeGroup:
-			v.ComputeNodeGroup = &types.ComputeNodeGroup{}
-			return v.ComputeNodeGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateComputeNodeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeNodeGroup, schemas.CreateComputeNodeGroupRequest, schemas.CreateComputeNodeGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeNodeGroup, schemas.CreateComputeNodeGroupRequest, schemas.CreateComputeNodeGroupResponse), output: &CreateComputeNodeGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateComputeNodeGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComputeNodeGroup"); err != nil {

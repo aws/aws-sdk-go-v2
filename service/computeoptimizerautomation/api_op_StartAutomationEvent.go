@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type StartAutomationEventInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartAutomationEventInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartAutomationEventRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartAutomationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartAutomationEventRequest_clientToken, *v.ClientToken)
-	}
-	if v.RecommendedActionId != nil {
-		s.WriteString(schemas.StartAutomationEventRequest_recommendedActionId, *v.RecommendedActionId)
-	}
-}
-
 type StartAutomationEventOutput struct {
 
 	// The ID of the automation event.
@@ -82,34 +65,16 @@ type StartAutomationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartAutomationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartAutomationEventResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartAutomationEventResponse_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.StartAutomationEventResponse_eventId, v.EventId)
-		case schemas.StartAutomationEventResponse_eventStatus:
-			var ev string
-			if err := d.ReadString(schemas.StartAutomationEventResponse_eventStatus, &ev); err != nil {
-				return err
-			}
-			v.EventStatus = types.EventStatus(ev)
-			return nil
-		case schemas.StartAutomationEventResponse_recommendedActionId:
-			v.RecommendedActionId = new(string)
-			return d.ReadString(schemas.StartAutomationEventResponse_recommendedActionId, v.RecommendedActionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartAutomationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationEvent, schemas.StartAutomationEventRequest, schemas.StartAutomationEventResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartAutomationEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationEvent, schemas.StartAutomationEventRequest, schemas.StartAutomationEventResponse), output: &StartAutomationEventOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartAutomationEvent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAutomationEvent"); err != nil {

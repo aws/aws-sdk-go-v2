@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -144,45 +142,6 @@ type CreateMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMeetingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMeetingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMeetingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateMeetingRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.ExternalMeetingId != nil {
-		s.WriteString(schemas.CreateMeetingRequest_ExternalMeetingId, *v.ExternalMeetingId)
-	}
-	if v.MediaPlacementNetworkType != "" {
-		s.WriteString(schemas.CreateMeetingRequest_MediaPlacementNetworkType, string(v.MediaPlacementNetworkType))
-	}
-	if v.MediaRegion != nil {
-		s.WriteString(schemas.CreateMeetingRequest_MediaRegion, *v.MediaRegion)
-	}
-	if v.MeetingFeatures != nil {
-		s.WriteStruct(schemas.CreateMeetingRequest_MeetingFeatures)
-		v.MeetingFeatures.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MeetingHostId != nil {
-		s.WriteString(schemas.CreateMeetingRequest_MeetingHostId, *v.MeetingHostId)
-	}
-	if v.NotificationsConfiguration != nil {
-		s.WriteStruct(schemas.CreateMeetingRequest_NotificationsConfiguration)
-		v.NotificationsConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrimaryMeetingId != nil {
-		s.WriteString(schemas.CreateMeetingRequest_PrimaryMeetingId, *v.PrimaryMeetingId)
-	}
-	serializeTagList(s, schemas.CreateMeetingRequest_Tags, v.Tags)
-	serializeTenantIdList(s, schemas.CreateMeetingRequest_TenantIds, v.TenantIds)
-}
-
 type CreateMeetingOutput struct {
 
 	// The meeting information, including the meeting ID and MediaPlacement .
@@ -194,24 +153,16 @@ type CreateMeetingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMeetingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMeetingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMeetingResponse_Meeting:
-			v.Meeting = &types.Meeting{}
-			return v.Meeting.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeeting, schemas.CreateMeetingRequest, schemas.CreateMeetingResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeeting{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeeting, schemas.CreateMeetingRequest, schemas.CreateMeetingResponse), output: &CreateMeetingOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMeeting{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMeeting"); err != nil {

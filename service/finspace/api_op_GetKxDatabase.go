@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,21 +40,6 @@ type GetKxDatabaseInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxDatabaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxDatabaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.GetKxDatabaseRequest_databaseName, *v.DatabaseName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxDatabaseRequest_environmentId, *v.EnvironmentId)
-	}
 }
 
 type GetKxDatabaseOutput struct {
@@ -101,48 +84,16 @@ type GetKxDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxDatabaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxDatabaseResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxDatabaseResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxDatabaseResponse_databaseArn:
-			v.DatabaseArn = new(string)
-			return d.ReadString(schemas.GetKxDatabaseResponse_databaseArn, v.DatabaseArn)
-		case schemas.GetKxDatabaseResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.GetKxDatabaseResponse_databaseName, v.DatabaseName)
-		case schemas.GetKxDatabaseResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetKxDatabaseResponse_description, v.Description)
-		case schemas.GetKxDatabaseResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxDatabaseResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxDatabaseResponse_lastCompletedChangesetId:
-			v.LastCompletedChangesetId = new(string)
-			return d.ReadString(schemas.GetKxDatabaseResponse_lastCompletedChangesetId, v.LastCompletedChangesetId)
-		case schemas.GetKxDatabaseResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxDatabaseResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxDatabaseResponse_numBytes:
-			return d.ReadInt64(schemas.GetKxDatabaseResponse_numBytes, &v.NumBytes)
-		case schemas.GetKxDatabaseResponse_numChangesets:
-			return d.ReadInt32(schemas.GetKxDatabaseResponse_numChangesets, &v.NumChangesets)
-		case schemas.GetKxDatabaseResponse_numFiles:
-			return d.ReadInt32(schemas.GetKxDatabaseResponse_numFiles, &v.NumFiles)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxDatabase, schemas.GetKxDatabaseRequest, schemas.GetKxDatabaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxDatabase, schemas.GetKxDatabaseRequest, schemas.GetKxDatabaseResponse), output: &GetKxDatabaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxDatabase"); err != nil {

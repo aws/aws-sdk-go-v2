@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,24 +51,6 @@ type DescribeReservedInstanceOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeReservedInstanceOfferingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeReservedInstanceOfferingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeReservedInstanceOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.DescribeReservedInstanceOfferingsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeReservedInstanceOfferingsRequest_NextToken, *v.NextToken)
-	}
-	if v.ReservedInstanceOfferingId != nil {
-		s.WriteString(schemas.DescribeReservedInstanceOfferingsRequest_ReservedInstanceOfferingId, *v.ReservedInstanceOfferingId)
-	}
-}
-
 // Container for results of a DescribeReservedInstanceOfferings request.
 type DescribeReservedInstanceOfferingsOutput struct {
 
@@ -88,26 +68,16 @@ type DescribeReservedInstanceOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeReservedInstanceOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeReservedInstanceOfferingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeReservedInstanceOfferingsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeReservedInstanceOfferingsResponse_NextToken, v.NextToken)
-		case schemas.DescribeReservedInstanceOfferingsResponse_ReservedInstanceOfferings:
-			return deserializeReservedInstanceOfferingList(d, schemas.DescribeReservedInstanceOfferingsResponse_ReservedInstanceOfferings, &v.ReservedInstanceOfferings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeReservedInstanceOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstanceOfferings, schemas.DescribeReservedInstanceOfferingsRequest, schemas.DescribeReservedInstanceOfferingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservedInstanceOfferings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstanceOfferings, schemas.DescribeReservedInstanceOfferingsRequest, schemas.DescribeReservedInstanceOfferingsResponse), output: &DescribeReservedInstanceOfferingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservedInstanceOfferings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReservedInstanceOfferings"); err != nil {

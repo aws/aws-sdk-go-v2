@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,19 +43,6 @@ type PredictQAppInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PredictQAppInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredictQAppInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredictQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.PredictQAppInput_instanceId, *v.InstanceId)
-	}
-	serializePredictQAppInputOptions(s, schemas.PredictQAppInput_options, v.Options)
-}
-
 type PredictQAppOutput struct {
 
 	// The generated Q App definition.
@@ -76,27 +61,16 @@ type PredictQAppOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PredictQAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredictQAppOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredictQAppOutput_app:
-			v.App = &types.PredictAppDefinition{}
-			return v.App.Deserialize(d)
-		case schemas.PredictQAppOutput_problemStatement:
-			v.ProblemStatement = new(string)
-			return d.ReadString(schemas.PredictQAppOutput_problemStatement, v.ProblemStatement)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPredictQAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PredictQApp, schemas.PredictQAppInput, schemas.PredictQAppOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPredictQApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PredictQApp, schemas.PredictQAppInput, schemas.PredictQAppOutput), output: &PredictQAppOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPredictQApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PredictQApp"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,34 +21,6 @@ type CopyDestinationImageSet struct {
 	LatestVersionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CopyDestinationImageSet) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyDestinationImageSet)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyDestinationImageSet) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.CopyDestinationImageSet_imageSetId, *v.ImageSetId)
-	}
-	if v.LatestVersionId != nil {
-		s.WriteString(schemas.CopyDestinationImageSet_latestVersionId, *v.LatestVersionId)
-	}
-}
-func (v *CopyDestinationImageSet) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyDestinationImageSet, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyDestinationImageSet_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.CopyDestinationImageSet_imageSetId, v.ImageSetId)
-		case schemas.CopyDestinationImageSet_latestVersionId:
-			v.LatestVersionId = new(string)
-			return d.ReadString(schemas.CopyDestinationImageSet_latestVersionId, v.LatestVersionId)
-		}
-		return nil
-	})
 }
 
 // Copy the image set properties of the destination image set.
@@ -84,72 +54,6 @@ type CopyDestinationImageSetProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyDestinationImageSetProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyDestinationImageSetProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyDestinationImageSetProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CopyDestinationImageSetProperties_createdAt, *v.CreatedAt)
-	}
-	if v.ImageSetArn != nil {
-		s.WriteString(schemas.CopyDestinationImageSetProperties_imageSetArn, *v.ImageSetArn)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.CopyDestinationImageSetProperties_imageSetId, *v.ImageSetId)
-	}
-	if v.ImageSetState != "" {
-		s.WriteString(schemas.CopyDestinationImageSetProperties_imageSetState, string(v.ImageSetState))
-	}
-	if v.ImageSetWorkflowStatus != "" {
-		s.WriteString(schemas.CopyDestinationImageSetProperties_imageSetWorkflowStatus, string(v.ImageSetWorkflowStatus))
-	}
-	if v.LatestVersionId != nil {
-		s.WriteString(schemas.CopyDestinationImageSetProperties_latestVersionId, *v.LatestVersionId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CopyDestinationImageSetProperties_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CopyDestinationImageSetProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyDestinationImageSetProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyDestinationImageSetProperties_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CopyDestinationImageSetProperties_createdAt, v.CreatedAt)
-		case schemas.CopyDestinationImageSetProperties_imageSetArn:
-			v.ImageSetArn = new(string)
-			return d.ReadString(schemas.CopyDestinationImageSetProperties_imageSetArn, v.ImageSetArn)
-		case schemas.CopyDestinationImageSetProperties_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.CopyDestinationImageSetProperties_imageSetId, v.ImageSetId)
-		case schemas.CopyDestinationImageSetProperties_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.CopyDestinationImageSetProperties_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = ImageSetState(ev)
-			return nil
-		case schemas.CopyDestinationImageSetProperties_imageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.CopyDestinationImageSetProperties_imageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = ImageSetWorkflowStatus(ev)
-			return nil
-		case schemas.CopyDestinationImageSetProperties_latestVersionId:
-			v.LatestVersionId = new(string)
-			return d.ReadString(schemas.CopyDestinationImageSetProperties_latestVersionId, v.LatestVersionId)
-		case schemas.CopyDestinationImageSetProperties_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CopyDestinationImageSetProperties_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Copy image set information.
 type CopyImageSetInformation struct {
 
@@ -162,38 +66,6 @@ type CopyImageSetInformation struct {
 	DestinationImageSet *CopyDestinationImageSet
 
 	noSmithyDocumentSerde
-}
-
-func (v *CopyImageSetInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyImageSetInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyImageSetInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationImageSet != nil {
-		s.WriteStruct(schemas.CopyImageSetInformation_destinationImageSet)
-		v.DestinationImageSet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceImageSet != nil {
-		s.WriteStruct(schemas.CopyImageSetInformation_sourceImageSet)
-		v.SourceImageSet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CopyImageSetInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyImageSetInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyImageSetInformation_destinationImageSet:
-			v.DestinationImageSet = &CopyDestinationImageSet{}
-			return v.DestinationImageSet.Deserialize(d)
-		case schemas.CopyImageSetInformation_sourceImageSet:
-			v.SourceImageSet = &CopySourceImageSetInformation{}
-			return v.SourceImageSet.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Copy source image set information.
@@ -209,36 +81,6 @@ type CopySourceImageSetInformation struct {
 	DICOMCopies *MetadataCopies
 
 	noSmithyDocumentSerde
-}
-
-func (v *CopySourceImageSetInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopySourceImageSetInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopySourceImageSetInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DICOMCopies != nil {
-		s.WriteStruct(schemas.CopySourceImageSetInformation_DICOMCopies)
-		v.DICOMCopies.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LatestVersionId != nil {
-		s.WriteString(schemas.CopySourceImageSetInformation_latestVersionId, *v.LatestVersionId)
-	}
-}
-func (v *CopySourceImageSetInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopySourceImageSetInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopySourceImageSetInformation_DICOMCopies:
-			v.DICOMCopies = &MetadataCopies{}
-			return v.DICOMCopies.Deserialize(d)
-		case schemas.CopySourceImageSetInformation_latestVersionId:
-			v.LatestVersionId = new(string)
-			return d.ReadString(schemas.CopySourceImageSetInformation_latestVersionId, v.LatestVersionId)
-		}
-		return nil
-	})
 }
 
 // Copy source image set properties.
@@ -270,72 +112,6 @@ type CopySourceImageSetProperties struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *CopySourceImageSetProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopySourceImageSetProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopySourceImageSetProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CopySourceImageSetProperties_createdAt, *v.CreatedAt)
-	}
-	if v.ImageSetArn != nil {
-		s.WriteString(schemas.CopySourceImageSetProperties_imageSetArn, *v.ImageSetArn)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.CopySourceImageSetProperties_imageSetId, *v.ImageSetId)
-	}
-	if v.ImageSetState != "" {
-		s.WriteString(schemas.CopySourceImageSetProperties_imageSetState, string(v.ImageSetState))
-	}
-	if v.ImageSetWorkflowStatus != "" {
-		s.WriteString(schemas.CopySourceImageSetProperties_imageSetWorkflowStatus, string(v.ImageSetWorkflowStatus))
-	}
-	if v.LatestVersionId != nil {
-		s.WriteString(schemas.CopySourceImageSetProperties_latestVersionId, *v.LatestVersionId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.CopySourceImageSetProperties_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *CopySourceImageSetProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopySourceImageSetProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopySourceImageSetProperties_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CopySourceImageSetProperties_createdAt, v.CreatedAt)
-		case schemas.CopySourceImageSetProperties_imageSetArn:
-			v.ImageSetArn = new(string)
-			return d.ReadString(schemas.CopySourceImageSetProperties_imageSetArn, v.ImageSetArn)
-		case schemas.CopySourceImageSetProperties_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.CopySourceImageSetProperties_imageSetId, v.ImageSetId)
-		case schemas.CopySourceImageSetProperties_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.CopySourceImageSetProperties_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = ImageSetState(ev)
-			return nil
-		case schemas.CopySourceImageSetProperties_imageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.CopySourceImageSetProperties_imageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = ImageSetWorkflowStatus(ev)
-			return nil
-		case schemas.CopySourceImageSetProperties_latestVersionId:
-			v.LatestVersionId = new(string)
-			return d.ReadString(schemas.CopySourceImageSetProperties_latestVersionId, v.LatestVersionId)
-		case schemas.CopySourceImageSetProperties_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CopySourceImageSetProperties_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // The properties associated with the data store.
@@ -378,84 +154,6 @@ type DatastoreProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DatastoreProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DatastoreProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DatastoreProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.DatastoreProperties_createdAt, *v.CreatedAt)
-	}
-	if v.DatastoreArn != nil {
-		s.WriteString(schemas.DatastoreProperties_datastoreArn, *v.DatastoreArn)
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DatastoreProperties_datastoreId, *v.DatastoreId)
-	}
-	if v.DatastoreName != nil {
-		s.WriteString(schemas.DatastoreProperties_datastoreName, *v.DatastoreName)
-	}
-	if v.DatastoreStatus != "" {
-		s.WriteString(schemas.DatastoreProperties_datastoreStatus, string(v.DatastoreStatus))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.DatastoreProperties_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.LambdaAuthorizerArn != nil {
-		s.WriteString(schemas.DatastoreProperties_lambdaAuthorizerArn, *v.LambdaAuthorizerArn)
-	}
-	if v.LosslessStorageFormat != "" {
-		s.WriteString(schemas.DatastoreProperties_losslessStorageFormat, string(v.LosslessStorageFormat))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.DatastoreProperties_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *DatastoreProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DatastoreProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DatastoreProperties_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DatastoreProperties_createdAt, v.CreatedAt)
-		case schemas.DatastoreProperties_datastoreArn:
-			v.DatastoreArn = new(string)
-			return d.ReadString(schemas.DatastoreProperties_datastoreArn, v.DatastoreArn)
-		case schemas.DatastoreProperties_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.DatastoreProperties_datastoreId, v.DatastoreId)
-		case schemas.DatastoreProperties_datastoreName:
-			v.DatastoreName = new(string)
-			return d.ReadString(schemas.DatastoreProperties_datastoreName, v.DatastoreName)
-		case schemas.DatastoreProperties_datastoreStatus:
-			var ev string
-			if err := d.ReadString(schemas.DatastoreProperties_datastoreStatus, &ev); err != nil {
-				return err
-			}
-			v.DatastoreStatus = DatastoreStatus(ev)
-			return nil
-		case schemas.DatastoreProperties_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.DatastoreProperties_kmsKeyArn, v.KmsKeyArn)
-		case schemas.DatastoreProperties_lambdaAuthorizerArn:
-			v.LambdaAuthorizerArn = new(string)
-			return d.ReadString(schemas.DatastoreProperties_lambdaAuthorizerArn, v.LambdaAuthorizerArn)
-		case schemas.DatastoreProperties_losslessStorageFormat:
-			var ev string
-			if err := d.ReadString(schemas.DatastoreProperties_losslessStorageFormat, &ev); err != nil {
-				return err
-			}
-			v.LosslessStorageFormat = LosslessStorageFormat(ev)
-			return nil
-		case schemas.DatastoreProperties_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DatastoreProperties_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // List of summaries of data stores.
 type DatastoreSummary struct {
 
@@ -484,62 +182,6 @@ type DatastoreSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *DatastoreSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DatastoreSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DatastoreSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.DatastoreSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DatastoreArn != nil {
-		s.WriteString(schemas.DatastoreSummary_datastoreArn, *v.DatastoreArn)
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DatastoreSummary_datastoreId, *v.DatastoreId)
-	}
-	if v.DatastoreName != nil {
-		s.WriteString(schemas.DatastoreSummary_datastoreName, *v.DatastoreName)
-	}
-	if v.DatastoreStatus != "" {
-		s.WriteString(schemas.DatastoreSummary_datastoreStatus, string(v.DatastoreStatus))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.DatastoreSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *DatastoreSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DatastoreSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DatastoreSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DatastoreSummary_createdAt, v.CreatedAt)
-		case schemas.DatastoreSummary_datastoreArn:
-			v.DatastoreArn = new(string)
-			return d.ReadString(schemas.DatastoreSummary_datastoreArn, v.DatastoreArn)
-		case schemas.DatastoreSummary_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.DatastoreSummary_datastoreId, v.DatastoreId)
-		case schemas.DatastoreSummary_datastoreName:
-			v.DatastoreName = new(string)
-			return d.ReadString(schemas.DatastoreSummary_datastoreName, v.DatastoreName)
-		case schemas.DatastoreSummary_datastoreStatus:
-			var ev string
-			if err := d.ReadString(schemas.DatastoreSummary_datastoreStatus, &ev); err != nil {
-				return err
-			}
-			v.DatastoreStatus = DatastoreStatus(ev)
-			return nil
-		case schemas.DatastoreSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DatastoreSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Properties of the import job.
@@ -598,89 +240,6 @@ type DICOMImportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DICOMImportJobProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DICOMImportJobProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DICOMImportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataAccessRoleArn != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_dataAccessRoleArn, *v.DataAccessRoleArn)
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_datastoreId, *v.DatastoreId)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.DICOMImportJobProperties_endedAt, *v.EndedAt)
-	}
-	serializeImportConfiguration(s, schemas.DICOMImportJobProperties_importConfiguration, v.ImportConfiguration)
-	if v.InputS3Uri != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_inputS3Uri, *v.InputS3Uri)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_jobId, *v.JobId)
-	}
-	if v.JobName != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_jobName, *v.JobName)
-	}
-	if v.JobStatus != "" {
-		s.WriteString(schemas.DICOMImportJobProperties_jobStatus, string(v.JobStatus))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_message, *v.Message)
-	}
-	if v.OutputS3Uri != nil {
-		s.WriteString(schemas.DICOMImportJobProperties_outputS3Uri, *v.OutputS3Uri)
-	}
-	if v.SubmittedAt != nil {
-		s.WriteTime(schemas.DICOMImportJobProperties_submittedAt, *v.SubmittedAt)
-	}
-}
-func (v *DICOMImportJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DICOMImportJobProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DICOMImportJobProperties_dataAccessRoleArn:
-			v.DataAccessRoleArn = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_dataAccessRoleArn, v.DataAccessRoleArn)
-		case schemas.DICOMImportJobProperties_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_datastoreId, v.DatastoreId)
-		case schemas.DICOMImportJobProperties_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.DICOMImportJobProperties_endedAt, v.EndedAt)
-		case schemas.DICOMImportJobProperties_importConfiguration:
-			return deserializeImportConfiguration(d, schemas.DICOMImportJobProperties_importConfiguration, &v.ImportConfiguration)
-		case schemas.DICOMImportJobProperties_inputS3Uri:
-			v.InputS3Uri = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_inputS3Uri, v.InputS3Uri)
-		case schemas.DICOMImportJobProperties_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_jobId, v.JobId)
-		case schemas.DICOMImportJobProperties_jobName:
-			v.JobName = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_jobName, v.JobName)
-		case schemas.DICOMImportJobProperties_jobStatus:
-			var ev string
-			if err := d.ReadString(schemas.DICOMImportJobProperties_jobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = JobStatus(ev)
-			return nil
-		case schemas.DICOMImportJobProperties_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_message, v.Message)
-		case schemas.DICOMImportJobProperties_outputS3Uri:
-			v.OutputS3Uri = new(string)
-			return d.ReadString(schemas.DICOMImportJobProperties_outputS3Uri, v.OutputS3Uri)
-		case schemas.DICOMImportJobProperties_submittedAt:
-			v.SubmittedAt = new(time.Time)
-			return d.ReadTime(schemas.DICOMImportJobProperties_submittedAt, v.SubmittedAt)
-		}
-		return nil
-	})
-}
-
 // Summary of import job.
 type DICOMImportJobSummary struct {
 
@@ -720,74 +279,6 @@ type DICOMImportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DICOMImportJobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DICOMImportJobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DICOMImportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataAccessRoleArn != nil {
-		s.WriteString(schemas.DICOMImportJobSummary_dataAccessRoleArn, *v.DataAccessRoleArn)
-	}
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DICOMImportJobSummary_datastoreId, *v.DatastoreId)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.DICOMImportJobSummary_endedAt, *v.EndedAt)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.DICOMImportJobSummary_jobId, *v.JobId)
-	}
-	if v.JobName != nil {
-		s.WriteString(schemas.DICOMImportJobSummary_jobName, *v.JobName)
-	}
-	if v.JobStatus != "" {
-		s.WriteString(schemas.DICOMImportJobSummary_jobStatus, string(v.JobStatus))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.DICOMImportJobSummary_message, *v.Message)
-	}
-	if v.SubmittedAt != nil {
-		s.WriteTime(schemas.DICOMImportJobSummary_submittedAt, *v.SubmittedAt)
-	}
-}
-func (v *DICOMImportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DICOMImportJobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DICOMImportJobSummary_dataAccessRoleArn:
-			v.DataAccessRoleArn = new(string)
-			return d.ReadString(schemas.DICOMImportJobSummary_dataAccessRoleArn, v.DataAccessRoleArn)
-		case schemas.DICOMImportJobSummary_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.DICOMImportJobSummary_datastoreId, v.DatastoreId)
-		case schemas.DICOMImportJobSummary_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.DICOMImportJobSummary_endedAt, v.EndedAt)
-		case schemas.DICOMImportJobSummary_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DICOMImportJobSummary_jobId, v.JobId)
-		case schemas.DICOMImportJobSummary_jobName:
-			v.JobName = new(string)
-			return d.ReadString(schemas.DICOMImportJobSummary_jobName, v.JobName)
-		case schemas.DICOMImportJobSummary_jobStatus:
-			var ev string
-			if err := d.ReadString(schemas.DICOMImportJobSummary_jobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = JobStatus(ev)
-			return nil
-		case schemas.DICOMImportJobSummary_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DICOMImportJobSummary_message, v.Message)
-		case schemas.DICOMImportJobSummary_submittedAt:
-			v.SubmittedAt = new(time.Time)
-			return d.ReadTime(schemas.DICOMImportJobSummary_submittedAt, v.SubmittedAt)
-		}
-		return nil
-	})
-}
-
 // The configuration parameters that are specific to DICOM JSON metadata import
 // operations.
 type DicomJsonMetadataImportConfiguration struct {
@@ -798,25 +289,6 @@ type DicomJsonMetadataImportConfiguration struct {
 	DicomMetadataMappings []DicomMetadataMapping
 
 	noSmithyDocumentSerde
-}
-
-func (v *DicomJsonMetadataImportConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DicomJsonMetadataImportConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DicomJsonMetadataImportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDicomMetadataMappings(s, schemas.DicomJsonMetadataImportConfiguration_dicomMetadataMappings, v.DicomMetadataMappings)
-}
-func (v *DicomJsonMetadataImportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DicomJsonMetadataImportConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DicomJsonMetadataImportConfiguration_dicomMetadataMappings:
-			return deserializeDicomMetadataMappings(d, schemas.DicomJsonMetadataImportConfiguration_dicomMetadataMappings, &v.DicomMetadataMappings)
-		}
-		return nil
-	})
 }
 
 // Maps DCM files to their metadata.
@@ -839,40 +311,6 @@ type DicomMetadataMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DicomMetadataMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DicomMetadataMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DicomMetadataMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetadataFilePath != nil {
-		s.WriteString(schemas.DicomMetadataMapping_metadataFilePath, *v.MetadataFilePath)
-	}
-	if v.SeriesInstanceUID != nil {
-		s.WriteString(schemas.DicomMetadataMapping_seriesInstanceUID, *v.SeriesInstanceUID)
-	}
-	if v.StudyInstanceUID != nil {
-		s.WriteString(schemas.DicomMetadataMapping_studyInstanceUID, *v.StudyInstanceUID)
-	}
-}
-func (v *DicomMetadataMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DicomMetadataMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DicomMetadataMapping_metadataFilePath:
-			v.MetadataFilePath = new(string)
-			return d.ReadString(schemas.DicomMetadataMapping_metadataFilePath, v.MetadataFilePath)
-		case schemas.DicomMetadataMapping_seriesInstanceUID:
-			v.SeriesInstanceUID = new(string)
-			return d.ReadString(schemas.DicomMetadataMapping_seriesInstanceUID, v.SeriesInstanceUID)
-		case schemas.DicomMetadataMapping_studyInstanceUID:
-			v.StudyInstanceUID = new(string)
-			return d.ReadString(schemas.DicomMetadataMapping_studyInstanceUID, v.StudyInstanceUID)
-		}
-		return nil
-	})
-}
-
 // The aggregated structure to store DICOM study date and study time for search
 // capabilities.
 type DICOMStudyDateAndTime struct {
@@ -886,34 +324,6 @@ type DICOMStudyDateAndTime struct {
 	DICOMStudyTime *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DICOMStudyDateAndTime) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DICOMStudyDateAndTime)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DICOMStudyDateAndTime) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DICOMStudyDate != nil {
-		s.WriteString(schemas.DICOMStudyDateAndTime_DICOMStudyDate, *v.DICOMStudyDate)
-	}
-	if v.DICOMStudyTime != nil {
-		s.WriteString(schemas.DICOMStudyDateAndTime_DICOMStudyTime, *v.DICOMStudyTime)
-	}
-}
-func (v *DICOMStudyDateAndTime) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DICOMStudyDateAndTime, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DICOMStudyDateAndTime_DICOMStudyDate:
-			v.DICOMStudyDate = new(string)
-			return d.ReadString(schemas.DICOMStudyDateAndTime_DICOMStudyDate, v.DICOMStudyDate)
-		case schemas.DICOMStudyDateAndTime_DICOMStudyTime:
-			v.DICOMStudyTime = new(string)
-			return d.ReadString(schemas.DICOMStudyDateAndTime_DICOMStudyTime, v.DICOMStudyTime)
-		}
-		return nil
-	})
 }
 
 // The DICOM attributes returned as a part of a response. Each image set has these
@@ -971,116 +381,6 @@ type DICOMTags struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DICOMTags) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DICOMTags)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DICOMTags) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DICOMAccessionNumber != nil {
-		s.WriteString(schemas.DICOMTags_DICOMAccessionNumber, *v.DICOMAccessionNumber)
-	}
-	if v.DICOMNumberOfStudyRelatedInstances != 0 {
-		s.WriteInt32(schemas.DICOMTags_DICOMNumberOfStudyRelatedInstances, v.DICOMNumberOfStudyRelatedInstances)
-	}
-	if v.DICOMNumberOfStudyRelatedSeries != 0 {
-		s.WriteInt32(schemas.DICOMTags_DICOMNumberOfStudyRelatedSeries, v.DICOMNumberOfStudyRelatedSeries)
-	}
-	if v.DICOMPatientBirthDate != nil {
-		s.WriteString(schemas.DICOMTags_DICOMPatientBirthDate, *v.DICOMPatientBirthDate)
-	}
-	if v.DICOMPatientId != nil {
-		s.WriteString(schemas.DICOMTags_DICOMPatientId, *v.DICOMPatientId)
-	}
-	if v.DICOMPatientName != nil {
-		s.WriteString(schemas.DICOMTags_DICOMPatientName, *v.DICOMPatientName)
-	}
-	if v.DICOMPatientSex != nil {
-		s.WriteString(schemas.DICOMTags_DICOMPatientSex, *v.DICOMPatientSex)
-	}
-	if v.DICOMSeriesBodyPart != nil {
-		s.WriteString(schemas.DICOMTags_DICOMSeriesBodyPart, *v.DICOMSeriesBodyPart)
-	}
-	if v.DICOMSeriesInstanceUID != nil {
-		s.WriteString(schemas.DICOMTags_DICOMSeriesInstanceUID, *v.DICOMSeriesInstanceUID)
-	}
-	if v.DICOMSeriesModality != nil {
-		s.WriteString(schemas.DICOMTags_DICOMSeriesModality, *v.DICOMSeriesModality)
-	}
-	if v.DICOMSeriesNumber != nil {
-		s.WriteInt32(schemas.DICOMTags_DICOMSeriesNumber, *v.DICOMSeriesNumber)
-	}
-	if v.DICOMStudyDate != nil {
-		s.WriteString(schemas.DICOMTags_DICOMStudyDate, *v.DICOMStudyDate)
-	}
-	if v.DICOMStudyDescription != nil {
-		s.WriteString(schemas.DICOMTags_DICOMStudyDescription, *v.DICOMStudyDescription)
-	}
-	if v.DICOMStudyId != nil {
-		s.WriteString(schemas.DICOMTags_DICOMStudyId, *v.DICOMStudyId)
-	}
-	if v.DICOMStudyInstanceUID != nil {
-		s.WriteString(schemas.DICOMTags_DICOMStudyInstanceUID, *v.DICOMStudyInstanceUID)
-	}
-	if v.DICOMStudyTime != nil {
-		s.WriteString(schemas.DICOMTags_DICOMStudyTime, *v.DICOMStudyTime)
-	}
-}
-func (v *DICOMTags) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DICOMTags, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DICOMTags_DICOMAccessionNumber:
-			v.DICOMAccessionNumber = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMAccessionNumber, v.DICOMAccessionNumber)
-		case schemas.DICOMTags_DICOMNumberOfStudyRelatedInstances:
-			return d.ReadInt32(schemas.DICOMTags_DICOMNumberOfStudyRelatedInstances, &v.DICOMNumberOfStudyRelatedInstances)
-		case schemas.DICOMTags_DICOMNumberOfStudyRelatedSeries:
-			return d.ReadInt32(schemas.DICOMTags_DICOMNumberOfStudyRelatedSeries, &v.DICOMNumberOfStudyRelatedSeries)
-		case schemas.DICOMTags_DICOMPatientBirthDate:
-			v.DICOMPatientBirthDate = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMPatientBirthDate, v.DICOMPatientBirthDate)
-		case schemas.DICOMTags_DICOMPatientId:
-			v.DICOMPatientId = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMPatientId, v.DICOMPatientId)
-		case schemas.DICOMTags_DICOMPatientName:
-			v.DICOMPatientName = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMPatientName, v.DICOMPatientName)
-		case schemas.DICOMTags_DICOMPatientSex:
-			v.DICOMPatientSex = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMPatientSex, v.DICOMPatientSex)
-		case schemas.DICOMTags_DICOMSeriesBodyPart:
-			v.DICOMSeriesBodyPart = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMSeriesBodyPart, v.DICOMSeriesBodyPart)
-		case schemas.DICOMTags_DICOMSeriesInstanceUID:
-			v.DICOMSeriesInstanceUID = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMSeriesInstanceUID, v.DICOMSeriesInstanceUID)
-		case schemas.DICOMTags_DICOMSeriesModality:
-			v.DICOMSeriesModality = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMSeriesModality, v.DICOMSeriesModality)
-		case schemas.DICOMTags_DICOMSeriesNumber:
-			v.DICOMSeriesNumber = new(int32)
-			return d.ReadInt32(schemas.DICOMTags_DICOMSeriesNumber, v.DICOMSeriesNumber)
-		case schemas.DICOMTags_DICOMStudyDate:
-			v.DICOMStudyDate = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMStudyDate, v.DICOMStudyDate)
-		case schemas.DICOMTags_DICOMStudyDescription:
-			v.DICOMStudyDescription = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMStudyDescription, v.DICOMStudyDescription)
-		case schemas.DICOMTags_DICOMStudyId:
-			v.DICOMStudyId = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMStudyId, v.DICOMStudyId)
-		case schemas.DICOMTags_DICOMStudyInstanceUID:
-			v.DICOMStudyInstanceUID = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMStudyInstanceUID, v.DICOMStudyInstanceUID)
-		case schemas.DICOMTags_DICOMStudyTime:
-			v.DICOMStudyTime = new(string)
-			return d.ReadString(schemas.DICOMTags_DICOMStudyTime, v.DICOMStudyTime)
-		}
-		return nil
-	})
-}
-
 // The object containing removableAttributes and updatableAttributes .
 type DICOMUpdates struct {
 
@@ -1093,32 +393,6 @@ type DICOMUpdates struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DICOMUpdates) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DICOMUpdates)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DICOMUpdates) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RemovableAttributes != nil {
-		s.WriteBlob(schemas.DICOMUpdates_removableAttributes, v.RemovableAttributes)
-	}
-	if v.UpdatableAttributes != nil {
-		s.WriteBlob(schemas.DICOMUpdates_updatableAttributes, v.UpdatableAttributes)
-	}
-}
-func (v *DICOMUpdates) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DICOMUpdates, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DICOMUpdates_removableAttributes:
-			return d.ReadBlob(schemas.DICOMUpdates_removableAttributes, &v.RemovableAttributes)
-		case schemas.DICOMUpdates_updatableAttributes:
-			return d.ReadBlob(schemas.DICOMUpdates_updatableAttributes, &v.UpdatableAttributes)
-		}
-		return nil
-	})
-}
-
 // Information about the image frame (pixel data) identifier.
 type ImageFrameInformation struct {
 
@@ -1128,28 +402,6 @@ type ImageFrameInformation struct {
 	ImageFrameId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ImageFrameInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageFrameInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageFrameInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImageFrameId != nil {
-		s.WriteString(schemas.ImageFrameInformation_imageFrameId, *v.ImageFrameId)
-	}
-}
-func (v *ImageFrameInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageFrameInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageFrameInformation_imageFrameId:
-			v.ImageFrameId = new(string)
-			return d.ReadString(schemas.ImageFrameInformation_imageFrameId, v.ImageFrameId)
-		}
-		return nil
-	})
 }
 
 // The image set properties.
@@ -1196,92 +448,6 @@ type ImageSetProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImageSetProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageSetProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageSetProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImageSetWorkflowStatus != "" {
-		s.WriteString(schemas.ImageSetProperties_ImageSetWorkflowStatus, string(v.ImageSetWorkflowStatus))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ImageSetProperties_createdAt, *v.CreatedAt)
-	}
-	if v.DeletedAt != nil {
-		s.WriteTime(schemas.ImageSetProperties_deletedAt, *v.DeletedAt)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.ImageSetProperties_imageSetId, *v.ImageSetId)
-	}
-	if v.ImageSetState != "" {
-		s.WriteString(schemas.ImageSetProperties_imageSetState, string(v.ImageSetState))
-	}
-	if v.IsPrimary != nil {
-		s.WriteBool(schemas.ImageSetProperties_isPrimary, *v.IsPrimary)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ImageSetProperties_message, *v.Message)
-	}
-	if v.Overrides != nil {
-		s.WriteStruct(schemas.ImageSetProperties_overrides)
-		v.Overrides.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ImageSetProperties_updatedAt, *v.UpdatedAt)
-	}
-	if v.VersionId != nil {
-		s.WriteString(schemas.ImageSetProperties_versionId, *v.VersionId)
-	}
-}
-func (v *ImageSetProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageSetProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageSetProperties_ImageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.ImageSetProperties_ImageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = ImageSetWorkflowStatus(ev)
-			return nil
-		case schemas.ImageSetProperties_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetProperties_createdAt, v.CreatedAt)
-		case schemas.ImageSetProperties_deletedAt:
-			v.DeletedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetProperties_deletedAt, v.DeletedAt)
-		case schemas.ImageSetProperties_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.ImageSetProperties_imageSetId, v.ImageSetId)
-		case schemas.ImageSetProperties_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.ImageSetProperties_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = ImageSetState(ev)
-			return nil
-		case schemas.ImageSetProperties_isPrimary:
-			v.IsPrimary = new(bool)
-			return d.ReadBool(schemas.ImageSetProperties_isPrimary, v.IsPrimary)
-		case schemas.ImageSetProperties_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ImageSetProperties_message, v.Message)
-		case schemas.ImageSetProperties_overrides:
-			v.Overrides = &Overrides{}
-			return v.Overrides.Deserialize(d)
-		case schemas.ImageSetProperties_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetProperties_updatedAt, v.UpdatedAt)
-		case schemas.ImageSetProperties_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.ImageSetProperties_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // Summary of the image set metadata.
 type ImageSetsMetadataSummary struct {
 
@@ -1315,76 +481,6 @@ type ImageSetsMetadataSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImageSetsMetadataSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageSetsMetadataSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageSetsMetadataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DICOMTags != nil {
-		s.WriteStruct(schemas.ImageSetsMetadataSummary_DICOMTags)
-		v.DICOMTags.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ImageSetsMetadataSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.ImageSetsMetadataSummary_imageSetId, *v.ImageSetId)
-	}
-	if v.IsPrimary != nil {
-		s.WriteBool(schemas.ImageSetsMetadataSummary_isPrimary, *v.IsPrimary)
-	}
-	if v.LastAccessedAt != nil {
-		s.WriteTime(schemas.ImageSetsMetadataSummary_lastAccessedAt, *v.LastAccessedAt)
-	}
-	if v.StorageTier != "" {
-		s.WriteString(schemas.ImageSetsMetadataSummary_storageTier, string(v.StorageTier))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ImageSetsMetadataSummary_updatedAt, *v.UpdatedAt)
-	}
-	if v.Version != nil {
-		s.WriteInt32(schemas.ImageSetsMetadataSummary_version, *v.Version)
-	}
-}
-func (v *ImageSetsMetadataSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageSetsMetadataSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageSetsMetadataSummary_DICOMTags:
-			v.DICOMTags = &DICOMTags{}
-			return v.DICOMTags.Deserialize(d)
-		case schemas.ImageSetsMetadataSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetsMetadataSummary_createdAt, v.CreatedAt)
-		case schemas.ImageSetsMetadataSummary_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.ImageSetsMetadataSummary_imageSetId, v.ImageSetId)
-		case schemas.ImageSetsMetadataSummary_isPrimary:
-			v.IsPrimary = new(bool)
-			return d.ReadBool(schemas.ImageSetsMetadataSummary_isPrimary, v.IsPrimary)
-		case schemas.ImageSetsMetadataSummary_lastAccessedAt:
-			v.LastAccessedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetsMetadataSummary_lastAccessedAt, v.LastAccessedAt)
-		case schemas.ImageSetsMetadataSummary_storageTier:
-			var ev string
-			if err := d.ReadString(schemas.ImageSetsMetadataSummary_storageTier, &ev); err != nil {
-				return err
-			}
-			v.StorageTier = StorageTier(ev)
-			return nil
-		case schemas.ImageSetsMetadataSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ImageSetsMetadataSummary_updatedAt, v.UpdatedAt)
-		case schemas.ImageSetsMetadataSummary_version:
-			v.Version = new(int32)
-			return d.ReadInt32(schemas.ImageSetsMetadataSummary_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // The configuration options for different types of import operations.
 //
 // The following types satisfy this interface:
@@ -1403,14 +499,6 @@ type ImportConfigurationMemberDicomJsonMetadataImportConfiguration struct {
 }
 
 func (*ImportConfigurationMemberDicomJsonMetadataImportConfiguration) isImportConfiguration() {}
-func (v *ImportConfigurationMemberDicomJsonMetadataImportConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportConfiguration_dicomJsonMetadataImportConfiguration)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ImportConfigurationMemberDicomJsonMetadataImportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains copiable Attributes structure and wraps information related to
 // specific copy use cases. For example, when copying subsets.
@@ -1423,28 +511,6 @@ type MetadataCopies struct {
 	CopiableAttributes *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetadataCopies) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetadataCopies)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetadataCopies) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CopiableAttributes != nil {
-		s.WriteString(schemas.MetadataCopies_copiableAttributes, *v.CopiableAttributes)
-	}
-}
-func (v *MetadataCopies) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetadataCopies, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetadataCopies_copiableAttributes:
-			v.CopiableAttributes = new(string)
-			return d.ReadString(schemas.MetadataCopies_copiableAttributes, v.CopiableAttributes)
-		}
-		return nil
-	})
 }
 
 // Contains DICOMUpdates.
@@ -1465,14 +531,6 @@ type MetadataUpdatesMemberDICOMUpdates struct {
 }
 
 func (*MetadataUpdatesMemberDICOMUpdates) isMetadataUpdates() {}
-func (v *MetadataUpdatesMemberDICOMUpdates) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetadataUpdates_DICOMUpdates)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MetadataUpdatesMemberDICOMUpdates) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Specifies the previous image set version ID to revert the current image set
 // back to.
@@ -1487,12 +545,6 @@ type MetadataUpdatesMemberRevertToVersionId struct {
 }
 
 func (*MetadataUpdatesMemberRevertToVersionId) isMetadataUpdates() {}
-func (v *MetadataUpdatesMemberRevertToVersionId) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.MetadataUpdates_revertToVersionId, v.Value)
-}
-func (v *MetadataUpdatesMemberRevertToVersionId) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.MetadataUpdates_revertToVersionId, &v.Value)
-}
 
 // Specifies the overrides used in image set modification calls to CopyImageSet
 // and UpdateImageSetMetadata .
@@ -1504,28 +556,6 @@ type Overrides struct {
 	Forced *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *Overrides) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Overrides)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Overrides) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Forced != nil {
-		s.WriteBool(schemas.Overrides_forced, *v.Forced)
-	}
-}
-func (v *Overrides) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Overrides, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Overrides_forced:
-			v.Forced = new(bool)
-			return d.ReadBool(schemas.Overrides_forced, v.Forced)
-		}
-		return nil
-	})
 }
 
 // The search input attribute value.
@@ -1553,12 +583,6 @@ type SearchByAttributeValueMemberCreatedAt struct {
 }
 
 func (*SearchByAttributeValueMemberCreatedAt) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberCreatedAt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteTime(schemas.SearchByAttributeValue_createdAt, v.Value)
-}
-func (v *SearchByAttributeValueMemberCreatedAt) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadTime(schemas.SearchByAttributeValue_createdAt, &v.Value)
-}
 
 // The DICOM accession number for search.
 type SearchByAttributeValueMemberDICOMAccessionNumber struct {
@@ -1568,12 +592,6 @@ type SearchByAttributeValueMemberDICOMAccessionNumber struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMAccessionNumber) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMAccessionNumber) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SearchByAttributeValue_DICOMAccessionNumber, v.Value)
-}
-func (v *SearchByAttributeValueMemberDICOMAccessionNumber) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SearchByAttributeValue_DICOMAccessionNumber, &v.Value)
-}
 
 // The patient ID input for search.
 type SearchByAttributeValueMemberDICOMPatientId struct {
@@ -1583,12 +601,6 @@ type SearchByAttributeValueMemberDICOMPatientId struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMPatientId) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMPatientId) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SearchByAttributeValue_DICOMPatientId, v.Value)
-}
-func (v *SearchByAttributeValueMemberDICOMPatientId) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SearchByAttributeValue_DICOMPatientId, &v.Value)
-}
 
 // The Series Instance UID input for search.
 type SearchByAttributeValueMemberDICOMSeriesInstanceUID struct {
@@ -1598,12 +610,6 @@ type SearchByAttributeValueMemberDICOMSeriesInstanceUID struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMSeriesInstanceUID) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMSeriesInstanceUID) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SearchByAttributeValue_DICOMSeriesInstanceUID, v.Value)
-}
-func (v *SearchByAttributeValueMemberDICOMSeriesInstanceUID) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SearchByAttributeValue_DICOMSeriesInstanceUID, &v.Value)
-}
 
 // The aggregated structure containing DICOM study date and study time for search.
 type SearchByAttributeValueMemberDICOMStudyDateAndTime struct {
@@ -1613,14 +619,6 @@ type SearchByAttributeValueMemberDICOMStudyDateAndTime struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMStudyDateAndTime) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMStudyDateAndTime) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchByAttributeValue_DICOMStudyDateAndTime)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SearchByAttributeValueMemberDICOMStudyDateAndTime) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The DICOM study ID for search.
 type SearchByAttributeValueMemberDICOMStudyId struct {
@@ -1630,12 +628,6 @@ type SearchByAttributeValueMemberDICOMStudyId struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMStudyId) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMStudyId) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SearchByAttributeValue_DICOMStudyId, v.Value)
-}
-func (v *SearchByAttributeValueMemberDICOMStudyId) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SearchByAttributeValue_DICOMStudyId, &v.Value)
-}
 
 // The DICOM study instance UID for search.
 type SearchByAttributeValueMemberDICOMStudyInstanceUID struct {
@@ -1645,12 +637,6 @@ type SearchByAttributeValueMemberDICOMStudyInstanceUID struct {
 }
 
 func (*SearchByAttributeValueMemberDICOMStudyInstanceUID) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberDICOMStudyInstanceUID) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SearchByAttributeValue_DICOMStudyInstanceUID, v.Value)
-}
-func (v *SearchByAttributeValueMemberDICOMStudyInstanceUID) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SearchByAttributeValue_DICOMStudyInstanceUID, &v.Value)
-}
 
 // The primary image set flag provided for search.
 type SearchByAttributeValueMemberIsPrimary struct {
@@ -1660,12 +646,6 @@ type SearchByAttributeValueMemberIsPrimary struct {
 }
 
 func (*SearchByAttributeValueMemberIsPrimary) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberIsPrimary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.SearchByAttributeValue_isPrimary, v.Value)
-}
-func (v *SearchByAttributeValueMemberIsPrimary) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadBool(schemas.SearchByAttributeValue_isPrimary, &v.Value)
-}
 
 // The timestamp input for search.
 type SearchByAttributeValueMemberUpdatedAt struct {
@@ -1675,12 +655,6 @@ type SearchByAttributeValueMemberUpdatedAt struct {
 }
 
 func (*SearchByAttributeValueMemberUpdatedAt) isSearchByAttributeValue() {}
-func (v *SearchByAttributeValueMemberUpdatedAt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteTime(schemas.SearchByAttributeValue_updatedAt, v.Value)
-}
-func (v *SearchByAttributeValueMemberUpdatedAt) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadTime(schemas.SearchByAttributeValue_updatedAt, &v.Value)
-}
 
 // The search criteria.
 type SearchCriteria struct {
@@ -1692,33 +666,6 @@ type SearchCriteria struct {
 	Sort *Sort
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchFilters(s, schemas.SearchCriteria_filters, v.Filters)
-	if v.Sort != nil {
-		s.WriteStruct(schemas.SearchCriteria_sort)
-		v.Sort.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SearchCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchCriteria_filters:
-			return deserializeSearchFilters(d, schemas.SearchCriteria_filters, &v.Filters)
-		case schemas.SearchCriteria_sort:
-			v.Sort = &Sort{}
-			return v.Sort.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The search filter.
@@ -1737,35 +684,6 @@ type SearchFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchFilter_operator, string(v.Operator))
-	}
-	serializeSearchByAttributeValues(s, schemas.SearchFilter_values, v.Values)
-}
-func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.SearchFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = Operator(ev)
-			return nil
-		case schemas.SearchFilter_values:
-			return deserializeSearchByAttributeValues(d, schemas.SearchFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Sort search results.
 type Sort struct {
 
@@ -1780,42 +698,6 @@ type Sort struct {
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
-}
-
-func (v *Sort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Sort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Sort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortField != "" {
-		s.WriteString(schemas.Sort_sortField, string(v.SortField))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.Sort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *Sort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Sort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Sort_sortField:
-			var ev string
-			if err := d.ReadString(schemas.Sort_sortField, &ev); err != nil {
-				return err
-			}
-			v.SortField = SortField(ev)
-			return nil
-		case schemas.Sort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.Sort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

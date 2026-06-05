@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type ListApplicationAuthenticationMethodsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationAuthenticationMethodsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationAuthenticationMethodsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationAuthenticationMethodsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ListApplicationAuthenticationMethodsRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationAuthenticationMethodsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListApplicationAuthenticationMethodsOutput struct {
 
 	// An array list of authentication methods for the specified application.
@@ -79,26 +62,16 @@ type ListApplicationAuthenticationMethodsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationAuthenticationMethodsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationAuthenticationMethodsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationAuthenticationMethodsResponse_AuthenticationMethods:
-			return deserializeAuthenticationMethods(d, schemas.ListApplicationAuthenticationMethodsResponse_AuthenticationMethods, &v.AuthenticationMethods)
-		case schemas.ListApplicationAuthenticationMethodsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationAuthenticationMethodsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationAuthenticationMethodsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAuthenticationMethods, schemas.ListApplicationAuthenticationMethodsRequest, schemas.ListApplicationAuthenticationMethodsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationAuthenticationMethods{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAuthenticationMethods, schemas.ListApplicationAuthenticationMethodsRequest, schemas.ListApplicationAuthenticationMethodsResponse), output: &ListApplicationAuthenticationMethodsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationAuthenticationMethods{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationAuthenticationMethods"); err != nil {

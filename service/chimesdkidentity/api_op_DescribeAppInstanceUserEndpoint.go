@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DescribeAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAppInstanceUserEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeAppInstanceUserEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeAppInstanceUserEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceUserArn != nil {
-		s.WriteString(schemas.DescribeAppInstanceUserEndpointRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
-	}
-	if v.EndpointId != nil {
-		s.WriteString(schemas.DescribeAppInstanceUserEndpointRequest_EndpointId, *v.EndpointId)
-	}
-}
-
 type DescribeAppInstanceUserEndpointOutput struct {
 
 	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn , ID,
@@ -72,24 +55,16 @@ type DescribeAppInstanceUserEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeAppInstanceUserEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAppInstanceUserEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAppInstanceUserEndpointResponse_AppInstanceUserEndpoint:
-			v.AppInstanceUserEndpoint = &types.AppInstanceUserEndpoint{}
-			return v.AppInstanceUserEndpoint.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeAppInstanceUserEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceUserEndpoint, schemas.DescribeAppInstanceUserEndpointRequest, schemas.DescribeAppInstanceUserEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstanceUserEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceUserEndpoint, schemas.DescribeAppInstanceUserEndpointRequest, schemas.DescribeAppInstanceUserEndpointResponse), output: &DescribeAppInstanceUserEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppInstanceUserEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAppInstanceUserEndpoint"); err != nil {

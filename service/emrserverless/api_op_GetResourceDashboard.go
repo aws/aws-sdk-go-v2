@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,24 +56,6 @@ type GetResourceDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetResourceDashboardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetResourceDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetResourceDashboardRequest_applicationId, *v.ApplicationId)
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.GetResourceDashboardRequest_resourceId, *v.ResourceId)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.GetResourceDashboardRequest_resourceType, string(v.ResourceType))
-	}
-}
-
 type GetResourceDashboardOutput struct {
 
 	// A URL to the resource dashboard. For an active resource, this URL opens the
@@ -90,24 +70,16 @@ type GetResourceDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetResourceDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetResourceDashboardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetResourceDashboardResponse_url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetResourceDashboardResponse_url, v.Url)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetResourceDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDashboard, schemas.GetResourceDashboardRequest, schemas.GetResourceDashboardResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDashboard, schemas.GetResourceDashboardRequest, schemas.GetResourceDashboardResponse), output: &GetResourceDashboardOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceDashboard"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -97,49 +95,6 @@ type CreateWebExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebExperienceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebExperienceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_applicationId, *v.ApplicationId)
-	}
-	if v.BrowserExtensionConfiguration != nil {
-		s.WriteStruct(schemas.CreateWebExperienceRequest_browserExtensionConfiguration)
-		v.BrowserExtensionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomizationConfiguration != nil {
-		s.WriteStruct(schemas.CreateWebExperienceRequest_customizationConfiguration)
-		v.CustomizationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIdentityProviderConfiguration(s, schemas.CreateWebExperienceRequest_identityProviderConfiguration, v.IdentityProviderConfiguration)
-	serializeWebExperienceOrigins(s, schemas.CreateWebExperienceRequest_origins, v.Origins)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_roleArn, *v.RoleArn)
-	}
-	if v.SamplePromptsControlMode != "" {
-		s.WriteString(schemas.CreateWebExperienceRequest_samplePromptsControlMode, string(v.SamplePromptsControlMode))
-	}
-	if v.Subtitle != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_subtitle, *v.Subtitle)
-	}
-	serializeTags(s, schemas.CreateWebExperienceRequest_tags, v.Tags)
-	if v.Title != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_title, *v.Title)
-	}
-	if v.WelcomeMessage != nil {
-		s.WriteString(schemas.CreateWebExperienceRequest_welcomeMessage, *v.WelcomeMessage)
-	}
-}
-
 type CreateWebExperienceOutput struct {
 
 	//  The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
@@ -154,27 +109,16 @@ type CreateWebExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebExperienceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebExperienceResponse_webExperienceArn:
-			v.WebExperienceArn = new(string)
-			return d.ReadString(schemas.CreateWebExperienceResponse_webExperienceArn, v.WebExperienceArn)
-		case schemas.CreateWebExperienceResponse_webExperienceId:
-			v.WebExperienceId = new(string)
-			return d.ReadString(schemas.CreateWebExperienceResponse_webExperienceId, v.WebExperienceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWebExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebExperience, schemas.CreateWebExperienceRequest, schemas.CreateWebExperienceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWebExperience{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebExperience, schemas.CreateWebExperienceRequest, schemas.CreateWebExperienceResponse), output: &CreateWebExperienceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWebExperience{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebExperience"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTagsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ARN != nil {
-		s.WriteString(schemas.ListTagsRequest_ARN, *v.ARN)
-	}
-}
-
 // The results of a ListTags operation.
 type ListTagsOutput struct {
 
@@ -69,23 +55,16 @@ type ListTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTagsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTagsResponse_TagList:
-			return deserializeTagList(d, schemas.ListTagsResponse_TagList, &v.TagList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsRequest, schemas.ListTagsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsRequest, schemas.ListTagsResponse), output: &ListTagsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTags"); err != nil {

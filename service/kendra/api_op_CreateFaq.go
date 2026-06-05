@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -97,42 +95,6 @@ type CreateFaqInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFaqInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFaqRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFaqInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateFaqRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateFaqRequest_Description, *v.Description)
-	}
-	if v.FileFormat != "" {
-		s.WriteString(schemas.CreateFaqRequest_FileFormat, string(v.FileFormat))
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.CreateFaqRequest_IndexId, *v.IndexId)
-	}
-	if v.LanguageCode != nil {
-		s.WriteString(schemas.CreateFaqRequest_LanguageCode, *v.LanguageCode)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateFaqRequest_Name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateFaqRequest_RoleArn, *v.RoleArn)
-	}
-	if v.S3Path != nil {
-		s.WriteStruct(schemas.CreateFaqRequest_S3Path)
-		v.S3Path.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateFaqRequest_Tags, v.Tags)
-}
-
 type CreateFaqOutput struct {
 
 	// The identifier of the FAQ.
@@ -144,24 +106,16 @@ type CreateFaqOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFaqOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFaqResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFaqResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateFaqResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaq, schemas.CreateFaqRequest, schemas.CreateFaqResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFaq{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaq, schemas.CreateFaqRequest, schemas.CreateFaqResponse), output: &CreateFaqOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFaq{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFaq"); err != nil {

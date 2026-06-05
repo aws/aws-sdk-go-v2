@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -26,12 +24,6 @@ type AttachPointMemberArn struct {
 }
 
 func (*AttachPointMemberArn) isAttachPoint() {}
-func (v *AttachPointMemberArn) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.AttachPoint_arn, v.Value)
-}
-func (v *AttachPointMemberArn) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.AttachPoint_arn, &v.Value)
-}
 
 // Identifies an DirectConnect Gateway attach point by DirectConnectGatewayID.
 type AttachPointMemberDirectConnectGateway struct {
@@ -41,12 +33,6 @@ type AttachPointMemberDirectConnectGateway struct {
 }
 
 func (*AttachPointMemberDirectConnectGateway) isAttachPoint() {}
-func (v *AttachPointMemberDirectConnectGateway) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.AttachPoint_directConnectGateway, v.Value)
-}
-func (v *AttachPointMemberDirectConnectGateway) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.AttachPoint_directConnectGateway, &v.Value)
-}
 
 // Describes a possible Attach Point for a Connection.
 type AttachPointDescriptor struct {
@@ -75,44 +61,6 @@ type AttachPointDescriptor struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachPointDescriptor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttachPointDescriptor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttachPointDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.AttachPointDescriptor_identifier, *v.Identifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AttachPointDescriptor_name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.AttachPointDescriptor_type, string(v.Type))
-	}
-}
-func (v *AttachPointDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachPointDescriptor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachPointDescriptor_identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.AttachPointDescriptor_identifier, v.Identifier)
-		case schemas.AttachPointDescriptor_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AttachPointDescriptor_name, v.Name)
-		case schemas.AttachPointDescriptor_type:
-			var ev string
-			if err := d.ReadString(schemas.AttachPointDescriptor_type, &ev); err != nil {
-				return err
-			}
-			v.Type = AttachPointType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains the details about the available and supported bandwidths.
 type Bandwidths struct {
 
@@ -123,28 +71,6 @@ type Bandwidths struct {
 	Supported []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Bandwidths) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Bandwidths)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Bandwidths) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBandwidthList(s, schemas.Bandwidths_available, v.Available)
-	serializeBandwidthList(s, schemas.Bandwidths_supported, v.Supported)
-}
-func (v *Bandwidths) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Bandwidths, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Bandwidths_available:
-			return deserializeBandwidthList(d, schemas.Bandwidths_available, &v.Available)
-		case schemas.Bandwidths_supported:
-			return deserializeBandwidthList(d, schemas.Bandwidths_supported, &v.Supported)
-		}
-		return nil
-	})
 }
 
 // The object describing the provided connectivity from the AWS region to the
@@ -241,107 +167,6 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Connection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Connection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationKey != nil {
-		s.WriteString(schemas.Connection_activationKey, *v.ActivationKey)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Connection_arn, *v.Arn)
-	}
-	serializeAttachPoint(s, schemas.Connection_attachPoint, v.AttachPoint)
-	if v.Bandwidth != nil {
-		s.WriteString(schemas.Connection_bandwidth, *v.Bandwidth)
-	}
-	if v.BillingTier != nil {
-		s.WriteInt32(schemas.Connection_billingTier, *v.BillingTier)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Connection_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.Connection_environmentId, *v.EnvironmentId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Connection_id, *v.Id)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.Connection_location, *v.Location)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
-	}
-	serializeProvider(s, schemas.Connection_provider, v.Provider)
-	if v.SharedId != nil {
-		s.WriteString(schemas.Connection_sharedId, *v.SharedId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Connection_state, string(v.State))
-	}
-	serializeTagMap(s, schemas.Connection_tags, v.Tags)
-	if v.Type != nil {
-		s.WriteString(schemas.Connection_type, *v.Type)
-	}
-}
-func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Connection_activationKey:
-			v.ActivationKey = new(string)
-			return d.ReadString(schemas.Connection_activationKey, v.ActivationKey)
-		case schemas.Connection_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Connection_arn, v.Arn)
-		case schemas.Connection_attachPoint:
-			return deserializeAttachPoint(d, schemas.Connection_attachPoint, &v.AttachPoint)
-		case schemas.Connection_bandwidth:
-			v.Bandwidth = new(string)
-			return d.ReadString(schemas.Connection_bandwidth, v.Bandwidth)
-		case schemas.Connection_billingTier:
-			v.BillingTier = new(int32)
-			return d.ReadInt32(schemas.Connection_billingTier, v.BillingTier)
-		case schemas.Connection_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Connection_description, v.Description)
-		case schemas.Connection_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.Connection_environmentId, v.EnvironmentId)
-		case schemas.Connection_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Connection_id, v.Id)
-		case schemas.Connection_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.Connection_location, v.Location)
-		case schemas.Connection_ownerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.Connection_ownerAccount, v.OwnerAccount)
-		case schemas.Connection_provider:
-			return deserializeProvider(d, schemas.Connection_provider, &v.Provider)
-		case schemas.Connection_sharedId:
-			v.SharedId = new(string)
-			return d.ReadString(schemas.Connection_sharedId, v.SharedId)
-		case schemas.Connection_state:
-			var ev string
-			if err := d.ReadString(schemas.Connection_state, &ev); err != nil {
-				return err
-			}
-			v.State = ConnectionState(ev)
-			return nil
-		case schemas.Connection_tags:
-			return deserializeTagMap(d, schemas.Connection_tags, &v.Tags)
-		case schemas.Connection_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Connection_type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Summarized view of a Connection object.
 type ConnectionSummary struct {
 
@@ -422,92 +247,6 @@ type ConnectionSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ConnectionSummary_arn, *v.Arn)
-	}
-	serializeAttachPoint(s, schemas.ConnectionSummary_attachPoint, v.AttachPoint)
-	if v.Bandwidth != nil {
-		s.WriteString(schemas.ConnectionSummary_bandwidth, *v.Bandwidth)
-	}
-	if v.BillingTier != nil {
-		s.WriteInt32(schemas.ConnectionSummary_billingTier, *v.BillingTier)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ConnectionSummary_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ConnectionSummary_environmentId, *v.EnvironmentId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ConnectionSummary_id, *v.Id)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.ConnectionSummary_location, *v.Location)
-	}
-	serializeProvider(s, schemas.ConnectionSummary_provider, v.Provider)
-	if v.SharedId != nil {
-		s.WriteString(schemas.ConnectionSummary_sharedId, *v.SharedId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ConnectionSummary_state, string(v.State))
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ConnectionSummary_type, *v.Type)
-	}
-}
-func (v *ConnectionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ConnectionSummary_arn, v.Arn)
-		case schemas.ConnectionSummary_attachPoint:
-			return deserializeAttachPoint(d, schemas.ConnectionSummary_attachPoint, &v.AttachPoint)
-		case schemas.ConnectionSummary_bandwidth:
-			v.Bandwidth = new(string)
-			return d.ReadString(schemas.ConnectionSummary_bandwidth, v.Bandwidth)
-		case schemas.ConnectionSummary_billingTier:
-			v.BillingTier = new(int32)
-			return d.ReadInt32(schemas.ConnectionSummary_billingTier, v.BillingTier)
-		case schemas.ConnectionSummary_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ConnectionSummary_description, v.Description)
-		case schemas.ConnectionSummary_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.ConnectionSummary_environmentId, v.EnvironmentId)
-		case schemas.ConnectionSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ConnectionSummary_id, v.Id)
-		case schemas.ConnectionSummary_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.ConnectionSummary_location, v.Location)
-		case schemas.ConnectionSummary_provider:
-			return deserializeProvider(d, schemas.ConnectionSummary_provider, &v.Provider)
-		case schemas.ConnectionSummary_sharedId:
-			v.SharedId = new(string)
-			return d.ReadString(schemas.ConnectionSummary_sharedId, v.SharedId)
-		case schemas.ConnectionSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = ConnectionState(ev)
-			return nil
-		case schemas.ConnectionSummary_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ConnectionSummary_type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Defines the logical topology that an AWS Interconnect Connection is created
 // upon.
 //
@@ -565,77 +304,6 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Environment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Environment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationPageUrl != nil {
-		s.WriteString(schemas.Environment_activationPageUrl, *v.ActivationPageUrl)
-	}
-	if v.Bandwidths != nil {
-		s.WriteStruct(schemas.Environment_bandwidths)
-		v.Bandwidths.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.Environment_environmentId, *v.EnvironmentId)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.Environment_location, *v.Location)
-	}
-	serializeProvider(s, schemas.Environment_provider, v.Provider)
-	if v.RemoteIdentifierType != "" {
-		s.WriteString(schemas.Environment_remoteIdentifierType, string(v.RemoteIdentifierType))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Environment_state, string(v.State))
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.Environment_type, *v.Type)
-	}
-}
-func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Environment_activationPageUrl:
-			v.ActivationPageUrl = new(string)
-			return d.ReadString(schemas.Environment_activationPageUrl, v.ActivationPageUrl)
-		case schemas.Environment_bandwidths:
-			v.Bandwidths = &Bandwidths{}
-			return v.Bandwidths.Deserialize(d)
-		case schemas.Environment_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.Environment_environmentId, v.EnvironmentId)
-		case schemas.Environment_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.Environment_location, v.Location)
-		case schemas.Environment_provider:
-			return deserializeProvider(d, schemas.Environment_provider, &v.Provider)
-		case schemas.Environment_remoteIdentifierType:
-			var ev string
-			if err := d.ReadString(schemas.Environment_remoteIdentifierType, &ev); err != nil {
-				return err
-			}
-			v.RemoteIdentifierType = RemoteAccountIdentifierType(ev)
-			return nil
-		case schemas.Environment_state:
-			var ev string
-			if err := d.ReadString(schemas.Environment_state, &ev); err != nil {
-				return err
-			}
-			v.State = EnvironmentState(ev)
-			return nil
-		case schemas.Environment_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.Environment_type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Describes the respective AWS Interconnect Partner organization.
 //
 // The following types satisfy this interface:
@@ -655,12 +323,6 @@ type ProviderMemberCloudServiceProvider struct {
 }
 
 func (*ProviderMemberCloudServiceProvider) isProvider() {}
-func (v *ProviderMemberCloudServiceProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.Provider_cloudServiceProvider, v.Value)
-}
-func (v *ProviderMemberCloudServiceProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.Provider_cloudServiceProvider, &v.Value)
-}
 
 // The provider's name. Specifically, connections to/from this Last Mile Provider
 // will be considered LastMile connections.
@@ -671,12 +333,6 @@ type ProviderMemberLastMileProvider struct {
 }
 
 func (*ProviderMemberLastMileProvider) isProvider() {}
-func (v *ProviderMemberLastMileProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.Provider_lastMileProvider, v.Value)
-}
-func (v *ProviderMemberLastMileProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.Provider_lastMileProvider, &v.Value)
-}
 
 // The types of identifiers that may be needed for remote account specification.
 //
@@ -696,12 +352,6 @@ type RemoteAccountIdentifierMemberIdentifier struct {
 }
 
 func (*RemoteAccountIdentifierMemberIdentifier) isRemoteAccountIdentifier() {}
-func (v *RemoteAccountIdentifierMemberIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.RemoteAccountIdentifier_identifier, v.Value)
-}
-func (v *RemoteAccountIdentifierMemberIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.RemoteAccountIdentifier_identifier, &v.Value)
-}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

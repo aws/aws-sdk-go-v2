@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,56 +44,6 @@ type PutPortfolioPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPortfolioPreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPortfolioPreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPortfolioPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationMode != "" {
-		s.WriteString(schemas.PutPortfolioPreferencesRequest_applicationMode, string(v.ApplicationMode))
-	}
-	if v.ApplicationPreferences != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_applicationPreferences)
-		v.ApplicationPreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatabasePreferences != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_databasePreferences)
-		v.DatabasePreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrioritizeBusinessGoals != nil {
-		s.WriteStruct(schemas.PutPortfolioPreferencesRequest_prioritizeBusinessGoals)
-		v.PrioritizeBusinessGoals.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PutPortfolioPreferencesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPortfolioPreferencesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutPortfolioPreferencesRequest_applicationMode:
-			var ev string
-			if err := d.ReadString(schemas.PutPortfolioPreferencesRequest_applicationMode, &ev); err != nil {
-				return err
-			}
-			v.ApplicationMode = types.ApplicationMode(ev)
-			return nil
-		case schemas.PutPortfolioPreferencesRequest_applicationPreferences:
-			v.ApplicationPreferences = &types.ApplicationPreferences{}
-			return v.ApplicationPreferences.Deserialize(d)
-		case schemas.PutPortfolioPreferencesRequest_databasePreferences:
-			v.DatabasePreferences = &types.DatabasePreferences{}
-			return v.DatabasePreferences.Deserialize(d)
-		case schemas.PutPortfolioPreferencesRequest_prioritizeBusinessGoals:
-			v.PrioritizeBusinessGoals = &types.PrioritizeBusinessGoals{}
-			return v.PrioritizeBusinessGoals.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type PutPortfolioPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,29 +51,16 @@ type PutPortfolioPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPortfolioPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPortfolioPreferencesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPortfolioPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutPortfolioPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPortfolioPreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPortfolioPreferences, schemas.PutPortfolioPreferencesRequest, schemas.PutPortfolioPreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPortfolioPreferences, schemas.PutPortfolioPreferencesRequest, schemas.PutPortfolioPreferencesResponse), output: &PutPortfolioPreferencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPortfolioPreferences"); err != nil {

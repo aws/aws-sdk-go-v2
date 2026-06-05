@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -139,70 +137,6 @@ type CreateDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDbClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDbClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllocatedStorage != nil {
-		s.WriteInt32(schemas.CreateDbClusterInput_allocatedStorage, *v.AllocatedStorage)
-	}
-	if v.Bucket != nil {
-		s.WriteString(schemas.CreateDbClusterInput_bucket, *v.Bucket)
-	}
-	if v.DbInstanceType != "" {
-		s.WriteString(schemas.CreateDbClusterInput_dbInstanceType, string(v.DbInstanceType))
-	}
-	if v.DbParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CreateDbClusterInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
-	}
-	if v.DbStorageType != "" {
-		s.WriteString(schemas.CreateDbClusterInput_dbStorageType, string(v.DbStorageType))
-	}
-	if v.DeploymentType != "" {
-		s.WriteString(schemas.CreateDbClusterInput_deploymentType, string(v.DeploymentType))
-	}
-	if v.FailoverMode != "" {
-		s.WriteString(schemas.CreateDbClusterInput_failoverMode, string(v.FailoverMode))
-	}
-	if v.LogDeliveryConfiguration != nil {
-		s.WriteStruct(schemas.CreateDbClusterInput_logDeliveryConfiguration)
-		v.LogDeliveryConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaintenanceSchedule != nil {
-		s.WriteStruct(schemas.CreateDbClusterInput_maintenanceSchedule)
-		v.MaintenanceSchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDbClusterInput_name, *v.Name)
-	}
-	if v.NetworkType != "" {
-		s.WriteString(schemas.CreateDbClusterInput_networkType, string(v.NetworkType))
-	}
-	if v.Organization != nil {
-		s.WriteString(schemas.CreateDbClusterInput_organization, *v.Organization)
-	}
-	if v.Password != nil {
-		s.WriteString(schemas.CreateDbClusterInput_password, *v.Password)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateDbClusterInput_port, *v.Port)
-	}
-	if v.PubliclyAccessible != nil {
-		s.WriteBool(schemas.CreateDbClusterInput_publiclyAccessible, *v.PubliclyAccessible)
-	}
-	serializeRequestTagMap(s, schemas.CreateDbClusterInput_tags, v.Tags)
-	if v.Username != nil {
-		s.WriteString(schemas.CreateDbClusterInput_username, *v.Username)
-	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbClusterInput_vpcSubnetIds, v.VpcSubnetIds)
-}
-
 type CreateDbClusterOutput struct {
 
 	// A service-generated unique identifier.
@@ -217,31 +151,16 @@ type CreateDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDbClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDbClusterOutput_dbClusterId:
-			v.DbClusterId = new(string)
-			return d.ReadString(schemas.CreateDbClusterOutput_dbClusterId, v.DbClusterId)
-		case schemas.CreateDbClusterOutput_dbClusterStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateDbClusterOutput_dbClusterStatus, &ev); err != nil {
-				return err
-			}
-			v.DbClusterStatus = types.ClusterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbCluster, schemas.CreateDbClusterInput, schemas.CreateDbClusterOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDbCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDbCluster, schemas.CreateDbClusterInput, schemas.CreateDbClusterOutput), output: &CreateDbClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDbCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDbCluster"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,27 +57,6 @@ type ListDomainUnitsForParentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainUnitsForParentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDomainUnitsForParentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDomainUnitsForParentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListDomainUnitsForParentInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDomainUnitsForParentInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDomainUnitsForParentInput_nextToken, *v.NextToken)
-	}
-	if v.ParentDomainUnitIdentifier != nil {
-		s.WriteString(schemas.ListDomainUnitsForParentInput_parentDomainUnitIdentifier, *v.ParentDomainUnitIdentifier)
-	}
-}
-
 type ListDomainUnitsForParentOutput struct {
 
 	// The results returned by this action.
@@ -100,26 +77,16 @@ type ListDomainUnitsForParentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainUnitsForParentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDomainUnitsForParentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDomainUnitsForParentOutput_items:
-			return deserializeDomainUnitSummaries(d, schemas.ListDomainUnitsForParentOutput_items, &v.Items)
-		case schemas.ListDomainUnitsForParentOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDomainUnitsForParentOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDomainUnitsForParentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainUnitsForParent, schemas.ListDomainUnitsForParentInput, schemas.ListDomainUnitsForParentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainUnitsForParent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainUnitsForParent, schemas.ListDomainUnitsForParentInput, schemas.ListDomainUnitsForParentOutput), output: &ListDomainUnitsForParentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainUnitsForParent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomainUnitsForParent"); err != nil {

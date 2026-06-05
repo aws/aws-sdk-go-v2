@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DisassociateResourceFromProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateResourceFromProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateResourceFromProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateResourceFromProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProfileId != nil {
-		s.WriteString(schemas.DisassociateResourceFromProfileRequest_ProfileId, *v.ProfileId)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.DisassociateResourceFromProfileRequest_ResourceArn, *v.ResourceArn)
-	}
-}
-
 type DisassociateResourceFromProfileOutput struct {
 
 	//  Information about the DisassociateResourceFromProfile request, including the
@@ -71,24 +54,16 @@ type DisassociateResourceFromProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateResourceFromProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateResourceFromProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateResourceFromProfileResponse_ProfileResourceAssociation:
-			v.ProfileResourceAssociation = &types.ProfileResourceAssociation{}
-			return v.ProfileResourceAssociation.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateResourceFromProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceFromProfile, schemas.DisassociateResourceFromProfileRequest, schemas.DisassociateResourceFromProfileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResourceFromProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceFromProfile, schemas.DisassociateResourceFromProfileRequest, schemas.DisassociateResourceFromProfileResponse), output: &DisassociateResourceFromProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateResourceFromProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResourceFromProfile"); err != nil {

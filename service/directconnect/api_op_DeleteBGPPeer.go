@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,30 +69,6 @@ type DeleteBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBGPPeerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBGPPeerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBGPPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Asn != 0 {
-		s.WriteInt32(schemas.DeleteBGPPeerRequest_asn, v.Asn)
-	}
-	if v.AsnLong != nil {
-		s.WriteInt64(schemas.DeleteBGPPeerRequest_asnLong, *v.AsnLong)
-	}
-	if v.BgpPeerId != nil {
-		s.WriteString(schemas.DeleteBGPPeerRequest_bgpPeerId, *v.BgpPeerId)
-	}
-	if v.CustomerAddress != nil {
-		s.WriteString(schemas.DeleteBGPPeerRequest_customerAddress, *v.CustomerAddress)
-	}
-	if v.VirtualInterfaceId != nil {
-		s.WriteString(schemas.DeleteBGPPeerRequest_virtualInterfaceId, *v.VirtualInterfaceId)
-	}
-}
-
 type DeleteBGPPeerOutput struct {
 
 	// The virtual interface.
@@ -106,24 +80,16 @@ type DeleteBGPPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBGPPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteBGPPeerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteBGPPeerResponse_virtualInterface:
-			v.VirtualInterface = &types.VirtualInterface{}
-			return v.VirtualInterface.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBGPPeer, schemas.DeleteBGPPeerRequest, schemas.DeleteBGPPeerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBGPPeer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBGPPeer, schemas.DeleteBGPPeerRequest, schemas.DeleteBGPPeerResponse), output: &DeleteBGPPeerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBGPPeer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBGPPeer"); err != nil {

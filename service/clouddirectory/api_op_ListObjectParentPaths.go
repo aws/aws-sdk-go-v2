@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,29 +60,6 @@ type ListObjectParentPathsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectParentPathsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListObjectParentPathsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListObjectParentPathsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.ListObjectParentPathsRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListObjectParentPathsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListObjectParentPathsRequest_NextToken, *v.NextToken)
-	}
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.ListObjectParentPathsRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListObjectParentPathsOutput struct {
 
 	// The pagination token.
@@ -100,26 +75,16 @@ type ListObjectParentPathsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListObjectParentPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListObjectParentPathsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListObjectParentPathsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListObjectParentPathsResponse_NextToken, v.NextToken)
-		case schemas.ListObjectParentPathsResponse_PathToObjectIdentifiersList:
-			return deserializePathToObjectIdentifiersList(d, schemas.ListObjectParentPathsResponse_PathToObjectIdentifiersList, &v.PathToObjectIdentifiersList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectParentPaths, schemas.ListObjectParentPathsRequest, schemas.ListObjectParentPathsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectParentPaths{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectParentPaths, schemas.ListObjectParentPathsRequest, schemas.ListObjectParentPathsResponse), output: &ListObjectParentPathsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectParentPaths{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectParentPaths"); err != nil {

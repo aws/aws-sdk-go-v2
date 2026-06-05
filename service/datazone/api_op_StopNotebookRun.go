@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type StopNotebookRunInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopNotebookRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopNotebookRunInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopNotebookRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StopNotebookRunInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.StopNotebookRunInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.StopNotebookRunInput_identifier, *v.Identifier)
-	}
-}
-
 type StopNotebookRunOutput struct {
 
 	// The identifier of the Amazon SageMaker Unified Studio domain.
@@ -97,37 +77,16 @@ type StopNotebookRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopNotebookRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopNotebookRunOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopNotebookRunOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.StopNotebookRunOutput_domainId, v.DomainId)
-		case schemas.StopNotebookRunOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StopNotebookRunOutput_id, v.Id)
-		case schemas.StopNotebookRunOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.StopNotebookRunOutput_owningProjectId, v.OwningProjectId)
-		case schemas.StopNotebookRunOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.StopNotebookRunOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.NotebookRunStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopNotebookRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopNotebookRun, schemas.StopNotebookRunInput, schemas.StopNotebookRunOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopNotebookRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopNotebookRun, schemas.StopNotebookRunInput, schemas.StopNotebookRunOutput), output: &StopNotebookRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopNotebookRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopNotebookRun"); err != nil {

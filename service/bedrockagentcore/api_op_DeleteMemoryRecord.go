@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type DeleteMemoryRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMemoryRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMemoryRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMemoryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemoryId != nil {
-		s.WriteString(schemas.DeleteMemoryRecordInput_memoryId, *v.MemoryId)
-	}
-	if v.MemoryRecordId != nil {
-		s.WriteString(schemas.DeleteMemoryRecordInput_memoryRecordId, *v.MemoryRecordId)
-	}
-}
-
 type DeleteMemoryRecordOutput struct {
 
 	// The identifier of the memory record that was deleted.
@@ -76,24 +59,16 @@ type DeleteMemoryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMemoryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteMemoryRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteMemoryRecordOutput_memoryRecordId:
-			v.MemoryRecordId = new(string)
-			return d.ReadString(schemas.DeleteMemoryRecordOutput_memoryRecordId, v.MemoryRecordId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMemoryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMemoryRecord, schemas.DeleteMemoryRecordInput, schemas.DeleteMemoryRecordOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMemoryRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMemoryRecord, schemas.DeleteMemoryRecordInput, schemas.DeleteMemoryRecordOutput), output: &DeleteMemoryRecordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMemoryRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMemoryRecord"); err != nil {

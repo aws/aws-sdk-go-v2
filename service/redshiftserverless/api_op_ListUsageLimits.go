@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,27 +48,6 @@ type ListUsageLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListUsageLimitsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListUsageLimitsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListUsageLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListUsageLimitsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListUsageLimitsRequest_nextToken, *v.NextToken)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.ListUsageLimitsRequest_resourceArn, *v.ResourceArn)
-	}
-	if v.UsageType != "" {
-		s.WriteString(schemas.ListUsageLimitsRequest_usageType, string(v.UsageType))
-	}
-}
-
 type ListUsageLimitsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -87,26 +64,16 @@ type ListUsageLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListUsageLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListUsageLimitsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListUsageLimitsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListUsageLimitsResponse_nextToken, v.NextToken)
-		case schemas.ListUsageLimitsResponse_usageLimits:
-			return deserializeUsageLimits(d, schemas.ListUsageLimitsResponse_usageLimits, &v.UsageLimits)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListUsageLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageLimits, schemas.ListUsageLimitsRequest, schemas.ListUsageLimitsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsageLimits{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageLimits, schemas.ListUsageLimitsRequest, schemas.ListUsageLimitsResponse), output: &ListUsageLimitsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsageLimits{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsageLimits"); err != nil {

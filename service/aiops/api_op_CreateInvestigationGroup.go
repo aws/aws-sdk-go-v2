@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/aiops/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -138,36 +136,6 @@ type CreateInvestigationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateInvestigationGroupInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatbotNotificationChannel(s, schemas.CreateInvestigationGroupInput_chatbotNotificationChannel, v.ChatbotNotificationChannel)
-	serializeCrossAccountConfigurations(s, schemas.CreateInvestigationGroupInput_crossAccountConfigurations, v.CrossAccountConfigurations)
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateInvestigationGroupInput_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IsCloudTrailEventHistoryEnabled != nil {
-		s.WriteBool(schemas.CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled, *v.IsCloudTrailEventHistoryEnabled)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateInvestigationGroupInput_name, *v.Name)
-	}
-	if v.RetentionInDays != nil {
-		s.WriteInt64(schemas.CreateInvestigationGroupInput_retentionInDays, *v.RetentionInDays)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateInvestigationGroupInput_roleArn, *v.RoleArn)
-	}
-	serializeTagKeyBoundaries(s, schemas.CreateInvestigationGroupInput_tagKeyBoundaries, v.TagKeyBoundaries)
-	serializeTags(s, schemas.CreateInvestigationGroupInput_tags, v.Tags)
-}
-
 type CreateInvestigationGroupOutput struct {
 
 	// The ARN of the investigation group that you just created.
@@ -179,24 +147,16 @@ type CreateInvestigationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInvestigationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateInvestigationGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateInvestigationGroupOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateInvestigationGroupOutput_arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateInvestigationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvestigationGroup, schemas.CreateInvestigationGroupInput, schemas.CreateInvestigationGroupOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInvestigationGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvestigationGroup, schemas.CreateInvestigationGroupInput, schemas.CreateInvestigationGroupOutput), output: &CreateInvestigationGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInvestigationGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInvestigationGroup"); err != nil {

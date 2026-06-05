@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,44 +106,6 @@ type VerifyPinDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VerifyPinDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerifyPinDataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VerifyPinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DukptAttributes != nil {
-		s.WriteStruct(schemas.VerifyPinDataInput_DukptAttributes)
-		v.DukptAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EncryptedPinBlock != nil {
-		s.WriteString(schemas.VerifyPinDataInput_EncryptedPinBlock, *v.EncryptedPinBlock)
-	}
-	if v.EncryptionKeyIdentifier != nil {
-		s.WriteString(schemas.VerifyPinDataInput_EncryptionKeyIdentifier, *v.EncryptionKeyIdentifier)
-	}
-	if v.EncryptionWrappedKey != nil {
-		s.WriteStruct(schemas.VerifyPinDataInput_EncryptionWrappedKey)
-		v.EncryptionWrappedKey.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PinBlockFormat != "" {
-		s.WriteString(schemas.VerifyPinDataInput_PinBlockFormat, string(v.PinBlockFormat))
-	}
-	if v.PinDataLength != nil {
-		s.WriteInt32(schemas.VerifyPinDataInput_PinDataLength, *v.PinDataLength)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.VerifyPinDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-	serializePinVerificationAttributes(s, schemas.VerifyPinDataInput_VerificationAttributes, v.VerificationAttributes)
-	if v.VerificationKeyIdentifier != nil {
-		s.WriteString(schemas.VerifyPinDataInput_VerificationKeyIdentifier, *v.VerificationKeyIdentifier)
-	}
-}
-
 type VerifyPinDataOutput struct {
 
 	// The keyARN of the PEK that Amazon Web Services Payment Cryptography uses for
@@ -186,33 +146,16 @@ type VerifyPinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VerifyPinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerifyPinDataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerifyPinDataOutput_EncryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.VerifyPinDataOutput_EncryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.VerifyPinDataOutput_EncryptionKeyCheckValue:
-			v.EncryptionKeyCheckValue = new(string)
-			return d.ReadString(schemas.VerifyPinDataOutput_EncryptionKeyCheckValue, v.EncryptionKeyCheckValue)
-		case schemas.VerifyPinDataOutput_VerificationKeyArn:
-			v.VerificationKeyArn = new(string)
-			return d.ReadString(schemas.VerifyPinDataOutput_VerificationKeyArn, v.VerificationKeyArn)
-		case schemas.VerifyPinDataOutput_VerificationKeyCheckValue:
-			v.VerificationKeyCheckValue = new(string)
-			return d.ReadString(schemas.VerifyPinDataOutput_VerificationKeyCheckValue, v.VerificationKeyCheckValue)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationVerifyPinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyPinData, schemas.VerifyPinDataInput, schemas.VerifyPinDataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyPinData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyPinData, schemas.VerifyPinDataInput, schemas.VerifyPinDataOutput), output: &VerifyPinDataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyPinData{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyPinData"); err != nil {

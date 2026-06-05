@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -91,36 +89,6 @@ type DescribePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePackageVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribePackageVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.DescribePackageVersionRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_package, *v.Package)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_packageVersion, *v.PackageVersion)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.DescribePackageVersionRequest_repository, *v.Repository)
-	}
-}
-
 type DescribePackageVersionOutput struct {
 
 	//  A [PackageVersionDescription] object that contains information about the requested package version.
@@ -136,24 +104,16 @@ type DescribePackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribePackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribePackageVersionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribePackageVersionResult_packageVersion:
-			v.PackageVersion = &types.PackageVersionDescription{}
-			return v.PackageVersion.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageVersion, schemas.DescribePackageVersionRequest, schemas.DescribePackageVersionResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackageVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageVersion, schemas.DescribePackageVersionRequest, schemas.DescribePackageVersionResult), output: &DescribePackageVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackageVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePackageVersion"); err != nil {

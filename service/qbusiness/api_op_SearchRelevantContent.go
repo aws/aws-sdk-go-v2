@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,33 +63,6 @@ type SearchRelevantContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchRelevantContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchRelevantContentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchRelevantContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.SearchRelevantContentRequest_applicationId, *v.ApplicationId)
-	}
-	if v.AttributeFilter != nil {
-		s.WriteStruct(schemas.SearchRelevantContentRequest_attributeFilter)
-		v.AttributeFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeContentSource(s, schemas.SearchRelevantContentRequest_contentSource, v.ContentSource)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchRelevantContentRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchRelevantContentRequest_nextToken, *v.NextToken)
-	}
-	if v.QueryText != nil {
-		s.WriteString(schemas.SearchRelevantContentRequest_queryText, *v.QueryText)
-	}
-}
-
 type SearchRelevantContentOutput struct {
 
 	// The token to use to retrieve the next set of results, if there are any.
@@ -106,26 +77,16 @@ type SearchRelevantContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchRelevantContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchRelevantContentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchRelevantContentResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchRelevantContentResponse_nextToken, v.NextToken)
-		case schemas.SearchRelevantContentResponse_relevantContent:
-			return deserializeRelevantContentList(d, schemas.SearchRelevantContentResponse_relevantContent, &v.RelevantContent)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchRelevantContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRelevantContent, schemas.SearchRelevantContentRequest, schemas.SearchRelevantContentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRelevantContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRelevantContent, schemas.SearchRelevantContentRequest, schemas.SearchRelevantContentResponse), output: &SearchRelevantContentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRelevantContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchRelevantContent"); err != nil {

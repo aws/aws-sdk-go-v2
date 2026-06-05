@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,34 +40,6 @@ type ListAppMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAppMonitorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAppMonitorsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAppMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAppMonitorsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAppMonitorsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListAppMonitorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAppMonitorsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAppMonitorsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListAppMonitorsRequest_MaxResults, v.MaxResults)
-		case schemas.ListAppMonitorsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAppMonitorsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListAppMonitorsOutput struct {
 
 	// An array of structures that contain information about the returned app monitors.
@@ -85,38 +55,16 @@ type ListAppMonitorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAppMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAppMonitorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAppMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppMonitorSummaryList(s, schemas.ListAppMonitorsResponse_AppMonitorSummaries, v.AppMonitorSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAppMonitorsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListAppMonitorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAppMonitorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAppMonitorsResponse_AppMonitorSummaries:
-			return deserializeAppMonitorSummaryList(d, schemas.ListAppMonitorsResponse_AppMonitorSummaries, &v.AppMonitorSummaries)
-		case schemas.ListAppMonitorsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAppMonitorsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAppMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppMonitors, schemas.ListAppMonitorsRequest, schemas.ListAppMonitorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppMonitors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppMonitors, schemas.ListAppMonitorsRequest, schemas.ListAppMonitorsResponse), output: &ListAppMonitorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppMonitors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppMonitors"); err != nil {

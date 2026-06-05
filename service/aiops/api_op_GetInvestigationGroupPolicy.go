@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/aiops/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +40,6 @@ type GetInvestigationGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInvestigationGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetInvestigationGroupPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetInvestigationGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetInvestigationGroupPolicyRequest_identifier, *v.Identifier)
-	}
-}
-
 type GetInvestigationGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the investigation group that you want to view
@@ -69,27 +55,16 @@ type GetInvestigationGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInvestigationGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetInvestigationGroupPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetInvestigationGroupPolicyResponse_investigationGroupArn:
-			v.InvestigationGroupArn = new(string)
-			return d.ReadString(schemas.GetInvestigationGroupPolicyResponse_investigationGroupArn, v.InvestigationGroupArn)
-		case schemas.GetInvestigationGroupPolicyResponse_policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.GetInvestigationGroupPolicyResponse_policy, v.Policy)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetInvestigationGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigationGroupPolicy, schemas.GetInvestigationGroupPolicyRequest, schemas.GetInvestigationGroupPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvestigationGroupPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigationGroupPolicy, schemas.GetInvestigationGroupPolicyRequest, schemas.GetInvestigationGroupPolicyResponse), output: &GetInvestigationGroupPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvestigationGroupPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvestigationGroupPolicy"); err != nil {

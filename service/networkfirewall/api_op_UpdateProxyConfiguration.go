@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,29 +63,6 @@ type UpdateProxyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProxyConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProxyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultRulePhaseActions != nil {
-		s.WriteStruct(schemas.UpdateProxyConfigurationRequest_DefaultRulePhaseActions)
-		v.DefaultRulePhaseActions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ProxyConfigurationArn != nil {
-		s.WriteString(schemas.UpdateProxyConfigurationRequest_ProxyConfigurationArn, *v.ProxyConfigurationArn)
-	}
-	if v.ProxyConfigurationName != nil {
-		s.WriteString(schemas.UpdateProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
-	}
-	if v.UpdateToken != nil {
-		s.WriteString(schemas.UpdateProxyConfigurationRequest_UpdateToken, *v.UpdateToken)
-	}
-}
-
 type UpdateProxyConfigurationOutput struct {
 
 	// The updated proxy configuration resource that reflects the updates from the
@@ -112,27 +87,16 @@ type UpdateProxyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProxyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProxyConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProxyConfigurationResponse_ProxyConfiguration:
-			v.ProxyConfiguration = &types.ProxyConfiguration{}
-			return v.ProxyConfiguration.Deserialize(d)
-		case schemas.UpdateProxyConfigurationResponse_UpdateToken:
-			v.UpdateToken = new(string)
-			return d.ReadString(schemas.UpdateProxyConfigurationResponse_UpdateToken, v.UpdateToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProxyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyConfiguration, schemas.UpdateProxyConfigurationRequest, schemas.UpdateProxyConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxyConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyConfiguration, schemas.UpdateProxyConfigurationRequest, schemas.UpdateProxyConfigurationResponse), output: &UpdateProxyConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxyConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxyConfiguration"); err != nil {

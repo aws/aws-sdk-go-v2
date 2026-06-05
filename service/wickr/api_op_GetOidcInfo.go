@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,42 +63,6 @@ type GetOidcInfoInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOidcInfoInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOidcInfoRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOidcInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Certificate != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_certificate, *v.Certificate)
-	}
-	if v.ClientId != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_clientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_clientSecret, *v.ClientSecret)
-	}
-	if v.Code != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_code, *v.Code)
-	}
-	if v.CodeVerifier != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_codeVerifier, *v.CodeVerifier)
-	}
-	if v.GrantType != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_grantType, *v.GrantType)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_networkId, *v.NetworkId)
-	}
-	if v.RedirectUri != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_redirectUri, *v.RedirectUri)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetOidcInfoRequest_url, *v.Url)
-	}
-}
-
 type GetOidcInfoOutput struct {
 
 	// The OpenID Connect configuration information for the network, including issuer,
@@ -117,27 +79,16 @@ type GetOidcInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOidcInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOidcInfoResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOidcInfoResponse_openidConnectInfo:
-			v.OpenidConnectInfo = &types.OidcConfigInfo{}
-			return v.OpenidConnectInfo.Deserialize(d)
-		case schemas.GetOidcInfoResponse_tokenInfo:
-			v.TokenInfo = &types.OidcTokenInfo{}
-			return v.TokenInfo.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOidcInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOidcInfo, schemas.GetOidcInfoRequest, schemas.GetOidcInfoResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOidcInfo{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOidcInfo, schemas.GetOidcInfoRequest, schemas.GetOidcInfoResponse), output: &GetOidcInfoOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOidcInfo{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOidcInfo"); err != nil {

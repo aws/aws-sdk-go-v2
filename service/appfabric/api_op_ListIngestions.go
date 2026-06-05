@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type ListIngestionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIngestionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIngestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.ListIngestionsRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIngestionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIngestionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListIngestionsOutput struct {
 
 	// Contains a list of ingestion summaries.
@@ -92,26 +72,16 @@ type ListIngestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIngestionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIngestionsResponse_ingestions:
-			return deserializeIngestionList(d, schemas.ListIngestionsResponse_ingestions, &v.Ingestions)
-		case schemas.ListIngestionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIngestionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIngestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestions, schemas.ListIngestionsRequest, schemas.ListIngestionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestions, schemas.ListIngestionsRequest, schemas.ListIngestionsResponse), output: &ListIngestionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIngestions"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,22 +42,6 @@ type ListWorkspaceInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWorkspaceInstancesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWorkspaceInstancesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWorkspaceInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListWorkspaceInstancesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWorkspaceInstancesRequest_NextToken, *v.NextToken)
-	}
-	serializeProvisionStates(s, schemas.ListWorkspaceInstancesRequest_ProvisionStates, v.ProvisionStates)
-}
-
 // Contains the list of WorkSpaces Instances matching the specified criteria.
 type ListWorkspaceInstancesOutput struct {
 
@@ -78,26 +60,16 @@ type ListWorkspaceInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWorkspaceInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWorkspaceInstancesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWorkspaceInstancesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWorkspaceInstancesResponse_NextToken, v.NextToken)
-		case schemas.ListWorkspaceInstancesResponse_WorkspaceInstances:
-			return deserializeWorkspaceInstances(d, schemas.ListWorkspaceInstancesResponse_WorkspaceInstances, &v.WorkspaceInstances)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWorkspaceInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceInstances, schemas.ListWorkspaceInstancesRequest, schemas.ListWorkspaceInstancesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkspaceInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceInstances, schemas.ListWorkspaceInstancesRequest, schemas.ListWorkspaceInstancesResponse), output: &ListWorkspaceInstancesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkspaceInstances{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkspaceInstances"); err != nil {

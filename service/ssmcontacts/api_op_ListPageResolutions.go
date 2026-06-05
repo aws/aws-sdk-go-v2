@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type ListPageResolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPageResolutionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPageResolutionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPageResolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPageResolutionsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageId != nil {
-		s.WriteString(schemas.ListPageResolutionsRequest_PageId, *v.PageId)
-	}
-}
-
 type ListPageResolutionsOutput struct {
 
 	// Information about the resolution for an engagement.
@@ -78,26 +61,16 @@ type ListPageResolutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPageResolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPageResolutionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPageResolutionsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPageResolutionsResult_NextToken, v.NextToken)
-		case schemas.ListPageResolutionsResult_PageResolutions:
-			return deserializeResolutionList(d, schemas.ListPageResolutionsResult_PageResolutions, &v.PageResolutions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPageResolutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPageResolutions, schemas.ListPageResolutionsRequest, schemas.ListPageResolutionsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPageResolutions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPageResolutions, schemas.ListPageResolutionsRequest, schemas.ListPageResolutionsResult), output: &ListPageResolutionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPageResolutions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPageResolutions"); err != nil {

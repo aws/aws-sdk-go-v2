@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,24 +52,6 @@ type GetDataProductInput struct {
 	Revision *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDataProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDataProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDataProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetDataProductInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetDataProductInput_identifier, *v.Identifier)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.GetDataProductInput_revision, *v.Revision)
-	}
 }
 
 type GetDataProductOutput struct {
@@ -136,64 +116,16 @@ type GetDataProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDataProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDataProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDataProductOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDataProductOutput_createdAt, v.CreatedAt)
-		case schemas.GetDataProductOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_createdBy, v.CreatedBy)
-		case schemas.GetDataProductOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_description, v.Description)
-		case schemas.GetDataProductOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_domainId, v.DomainId)
-		case schemas.GetDataProductOutput_firstRevisionCreatedAt:
-			v.FirstRevisionCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDataProductOutput_firstRevisionCreatedAt, v.FirstRevisionCreatedAt)
-		case schemas.GetDataProductOutput_firstRevisionCreatedBy:
-			v.FirstRevisionCreatedBy = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_firstRevisionCreatedBy, v.FirstRevisionCreatedBy)
-		case schemas.GetDataProductOutput_formsOutput:
-			return deserializeFormOutputList(d, schemas.GetDataProductOutput_formsOutput, &v.FormsOutput)
-		case schemas.GetDataProductOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.GetDataProductOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.GetDataProductOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_id, v.Id)
-		case schemas.GetDataProductOutput_items:
-			return deserializeDataProductItems(d, schemas.GetDataProductOutput_items, &v.Items)
-		case schemas.GetDataProductOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_name, v.Name)
-		case schemas.GetDataProductOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetDataProductOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.GetDataProductOutput_revision, v.Revision)
-		case schemas.GetDataProductOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetDataProductOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataProductStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDataProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataProduct, schemas.GetDataProductInput, schemas.GetDataProductOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataProduct, schemas.GetDataProductInput, schemas.GetDataProductOutput), output: &GetDataProductOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataProduct"); err != nil {

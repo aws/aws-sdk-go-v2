@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteSipMediaApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSipMediaApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSipMediaApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSipMediaApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SipMediaApplicationId != nil {
-		s.WriteString(schemas.DeleteSipMediaApplicationRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
-	}
-}
-
 type DeleteSipMediaApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,29 +43,16 @@ type DeleteSipMediaApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSipMediaApplicationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSipMediaApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteSipMediaApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSipMediaApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSipMediaApplication, schemas.DeleteSipMediaApplicationRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSipMediaApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSipMediaApplication, schemas.DeleteSipMediaApplicationRequest, nil), output: &DeleteSipMediaApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSipMediaApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSipMediaApplication"); err != nil {

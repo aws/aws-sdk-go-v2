@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type PublishWhatsAppFlowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishWhatsAppFlowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FlowId != nil {
-		s.WriteString(schemas.PublishWhatsAppFlowInput_flowId, *v.FlowId)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.PublishWhatsAppFlowInput_id, *v.Id)
-	}
-}
-
 type PublishWhatsAppFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type PublishWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishWhatsAppFlowOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishWhatsAppFlow, schemas.PublishWhatsAppFlowInput, schemas.PublishWhatsAppFlowOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishWhatsAppFlow, schemas.PublishWhatsAppFlowInput, schemas.PublishWhatsAppFlowOutput), output: &PublishWhatsAppFlowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishWhatsAppFlow"); err != nil {

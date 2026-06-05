@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,15 +33,6 @@ type DisassociateServiceQuotaTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateServiceQuotaTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateServiceQuotaTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateServiceQuotaTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DisassociateServiceQuotaTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,21 +40,16 @@ type DisassociateServiceQuotaTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateServiceQuotaTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateServiceQuotaTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateServiceQuotaTemplate, schemas.DisassociateServiceQuotaTemplateRequest, schemas.DisassociateServiceQuotaTemplateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateServiceQuotaTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateServiceQuotaTemplate, schemas.DisassociateServiceQuotaTemplateRequest, schemas.DisassociateServiceQuotaTemplateResponse), output: &DisassociateServiceQuotaTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateServiceQuotaTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateServiceQuotaTemplate"); err != nil {

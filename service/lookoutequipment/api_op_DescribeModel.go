@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,18 +38,6 @@ type DescribeModelInput struct {
 	ModelName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ModelName != nil {
-		s.WriteString(schemas.DescribeModelRequest_ModelName, *v.ModelName)
-	}
 }
 
 type DescribeModelOutput struct {
@@ -247,163 +233,16 @@ type DescribeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeModelResponse_AccumulatedInferenceDataEndTime:
-			v.AccumulatedInferenceDataEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_AccumulatedInferenceDataEndTime, v.AccumulatedInferenceDataEndTime)
-		case schemas.DescribeModelResponse_AccumulatedInferenceDataStartTime:
-			v.AccumulatedInferenceDataStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_AccumulatedInferenceDataStartTime, v.AccumulatedInferenceDataStartTime)
-		case schemas.DescribeModelResponse_ActiveModelVersion:
-			v.ActiveModelVersion = new(int64)
-			return d.ReadInt64(schemas.DescribeModelResponse_ActiveModelVersion, v.ActiveModelVersion)
-		case schemas.DescribeModelResponse_ActiveModelVersionArn:
-			v.ActiveModelVersionArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_ActiveModelVersionArn, v.ActiveModelVersionArn)
-		case schemas.DescribeModelResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeModelResponse_DataPreProcessingConfiguration:
-			v.DataPreProcessingConfiguration = &types.DataPreProcessingConfiguration{}
-			return v.DataPreProcessingConfiguration.Deserialize(d)
-		case schemas.DescribeModelResponse_DatasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_DatasetArn, v.DatasetArn)
-		case schemas.DescribeModelResponse_DatasetName:
-			v.DatasetName = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_DatasetName, v.DatasetName)
-		case schemas.DescribeModelResponse_EvaluationDataEndTime:
-			v.EvaluationDataEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_EvaluationDataEndTime, v.EvaluationDataEndTime)
-		case schemas.DescribeModelResponse_EvaluationDataStartTime:
-			v.EvaluationDataStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_EvaluationDataStartTime, v.EvaluationDataStartTime)
-		case schemas.DescribeModelResponse_FailedReason:
-			v.FailedReason = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_FailedReason, v.FailedReason)
-		case schemas.DescribeModelResponse_ImportJobEndTime:
-			v.ImportJobEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_ImportJobEndTime, v.ImportJobEndTime)
-		case schemas.DescribeModelResponse_ImportJobStartTime:
-			v.ImportJobStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_ImportJobStartTime, v.ImportJobStartTime)
-		case schemas.DescribeModelResponse_LabelsInputConfiguration:
-			v.LabelsInputConfiguration = &types.LabelsInputConfiguration{}
-			return v.LabelsInputConfiguration.Deserialize(d)
-		case schemas.DescribeModelResponse_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays:
-			v.LatestScheduledRetrainingAvailableDataInDays = new(int32)
-			return d.ReadInt32(schemas.DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays, v.LatestScheduledRetrainingAvailableDataInDays)
-		case schemas.DescribeModelResponse_LatestScheduledRetrainingFailedReason:
-			v.LatestScheduledRetrainingFailedReason = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_LatestScheduledRetrainingFailedReason, v.LatestScheduledRetrainingFailedReason)
-		case schemas.DescribeModelResponse_LatestScheduledRetrainingModelVersion:
-			v.LatestScheduledRetrainingModelVersion = new(int64)
-			return d.ReadInt64(schemas.DescribeModelResponse_LatestScheduledRetrainingModelVersion, v.LatestScheduledRetrainingModelVersion)
-		case schemas.DescribeModelResponse_LatestScheduledRetrainingStartTime:
-			v.LatestScheduledRetrainingStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_LatestScheduledRetrainingStartTime, v.LatestScheduledRetrainingStartTime)
-		case schemas.DescribeModelResponse_LatestScheduledRetrainingStatus:
-			var ev string
-			if err := d.ReadString(schemas.DescribeModelResponse_LatestScheduledRetrainingStatus, &ev); err != nil {
-				return err
-			}
-			v.LatestScheduledRetrainingStatus = types.ModelVersionStatus(ev)
-			return nil
-		case schemas.DescribeModelResponse_ModelArn:
-			v.ModelArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_ModelArn, v.ModelArn)
-		case schemas.DescribeModelResponse_ModelDiagnosticsOutputConfiguration:
-			v.ModelDiagnosticsOutputConfiguration = &types.ModelDiagnosticsOutputConfiguration{}
-			return v.ModelDiagnosticsOutputConfiguration.Deserialize(d)
-		case schemas.DescribeModelResponse_ModelMetrics:
-			v.ModelMetrics = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_ModelMetrics, v.ModelMetrics)
-		case schemas.DescribeModelResponse_ModelName:
-			v.ModelName = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_ModelName, v.ModelName)
-		case schemas.DescribeModelResponse_ModelQuality:
-			var ev string
-			if err := d.ReadString(schemas.DescribeModelResponse_ModelQuality, &ev); err != nil {
-				return err
-			}
-			v.ModelQuality = types.ModelQuality(ev)
-			return nil
-		case schemas.DescribeModelResponse_ModelVersionActivatedAt:
-			v.ModelVersionActivatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_ModelVersionActivatedAt, v.ModelVersionActivatedAt)
-		case schemas.DescribeModelResponse_NextScheduledRetrainingStartDate:
-			v.NextScheduledRetrainingStartDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_NextScheduledRetrainingStartDate, v.NextScheduledRetrainingStartDate)
-		case schemas.DescribeModelResponse_OffCondition:
-			v.OffCondition = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_OffCondition, v.OffCondition)
-		case schemas.DescribeModelResponse_PreviousActiveModelVersion:
-			v.PreviousActiveModelVersion = new(int64)
-			return d.ReadInt64(schemas.DescribeModelResponse_PreviousActiveModelVersion, v.PreviousActiveModelVersion)
-		case schemas.DescribeModelResponse_PreviousActiveModelVersionArn:
-			v.PreviousActiveModelVersionArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_PreviousActiveModelVersionArn, v.PreviousActiveModelVersionArn)
-		case schemas.DescribeModelResponse_PreviousModelVersionActivatedAt:
-			v.PreviousModelVersionActivatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_PreviousModelVersionActivatedAt, v.PreviousModelVersionActivatedAt)
-		case schemas.DescribeModelResponse_PriorModelMetrics:
-			v.PriorModelMetrics = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_PriorModelMetrics, v.PriorModelMetrics)
-		case schemas.DescribeModelResponse_RetrainingSchedulerStatus:
-			var ev string
-			if err := d.ReadString(schemas.DescribeModelResponse_RetrainingSchedulerStatus, &ev); err != nil {
-				return err
-			}
-			v.RetrainingSchedulerStatus = types.RetrainingSchedulerStatus(ev)
-			return nil
-		case schemas.DescribeModelResponse_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_RoleArn, v.RoleArn)
-		case schemas.DescribeModelResponse_Schema:
-			v.Schema = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_Schema, v.Schema)
-		case schemas.DescribeModelResponse_ServerSideKmsKeyId:
-			v.ServerSideKmsKeyId = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
-		case schemas.DescribeModelResponse_SourceModelVersionArn:
-			v.SourceModelVersionArn = new(string)
-			return d.ReadString(schemas.DescribeModelResponse_SourceModelVersionArn, v.SourceModelVersionArn)
-		case schemas.DescribeModelResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeModelResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ModelStatus(ev)
-			return nil
-		case schemas.DescribeModelResponse_TrainingDataEndTime:
-			v.TrainingDataEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_TrainingDataEndTime, v.TrainingDataEndTime)
-		case schemas.DescribeModelResponse_TrainingDataStartTime:
-			v.TrainingDataStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_TrainingDataStartTime, v.TrainingDataStartTime)
-		case schemas.DescribeModelResponse_TrainingExecutionEndTime:
-			v.TrainingExecutionEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_TrainingExecutionEndTime, v.TrainingExecutionEndTime)
-		case schemas.DescribeModelResponse_TrainingExecutionStartTime:
-			v.TrainingExecutionStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeModelResponse_TrainingExecutionStartTime, v.TrainingExecutionStartTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelRequest, schemas.DescribeModelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelRequest, schemas.DescribeModelResponse), output: &DescribeModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModel"); err != nil {

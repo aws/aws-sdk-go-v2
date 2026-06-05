@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type AssociateLibraryItemReviewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateLibraryItemReviewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateLibraryItemReviewInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateLibraryItemReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.AssociateLibraryItemReviewInput_instanceId, *v.InstanceId)
-	}
-	if v.LibraryItemId != nil {
-		s.WriteString(schemas.AssociateLibraryItemReviewInput_libraryItemId, *v.LibraryItemId)
-	}
-}
-
 type AssociateLibraryItemReviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,29 +50,16 @@ type AssociateLibraryItemReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateLibraryItemReviewOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateLibraryItemReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *AssociateLibraryItemReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateLibraryItemReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLibraryItemReview, schemas.AssociateLibraryItemReviewInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLibraryItemReview{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLibraryItemReview, schemas.AssociateLibraryItemReviewInput, nil), output: &AssociateLibraryItemReviewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateLibraryItemReview{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateLibraryItemReview"); err != nil {

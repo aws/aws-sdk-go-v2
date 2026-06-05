@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,38 +103,6 @@ type DisposePackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisposePackageVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisposePackageVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisposePackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.DisposePackageVersionsRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.DisposePackageVersionsRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.ExpectedStatus != "" {
-		s.WriteString(schemas.DisposePackageVersionsRequest_expectedStatus, string(v.ExpectedStatus))
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.DisposePackageVersionsRequest_format, string(v.Format))
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.DisposePackageVersionsRequest_namespace, *v.Namespace)
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.DisposePackageVersionsRequest_package, *v.Package)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.DisposePackageVersionsRequest_repository, *v.Repository)
-	}
-	serializePackageVersionRevisionMap(s, schemas.DisposePackageVersionsRequest_versionRevisions, v.VersionRevisions)
-	serializePackageVersionList(s, schemas.DisposePackageVersionsRequest_versions, v.Versions)
-}
-
 type DisposePackageVersionsOutput struct {
 
 	//  A PackageVersionError object that contains a map of errors codes for the
@@ -164,25 +130,16 @@ type DisposePackageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisposePackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisposePackageVersionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisposePackageVersionsResult_failedVersions:
-			return deserializePackageVersionErrorMap(d, schemas.DisposePackageVersionsResult_failedVersions, &v.FailedVersions)
-		case schemas.DisposePackageVersionsResult_successfulVersions:
-			return deserializeSuccessfulPackageVersionInfoMap(d, schemas.DisposePackageVersionsResult_successfulVersions, &v.SuccessfulVersions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisposePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisposePackageVersions, schemas.DisposePackageVersionsRequest, schemas.DisposePackageVersionsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisposePackageVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisposePackageVersions, schemas.DisposePackageVersionsRequest, schemas.DisposePackageVersionsResult), output: &DisposePackageVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisposePackageVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisposePackageVersions"); err != nil {

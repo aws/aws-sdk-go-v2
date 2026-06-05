@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -146,51 +144,6 @@ type TranslatePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TranslatePinDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslatePinDataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TranslatePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptedPinBlock != nil {
-		s.WriteString(schemas.TranslatePinDataInput_EncryptedPinBlock, *v.EncryptedPinBlock)
-	}
-	if v.IncomingAs2805Attributes != nil {
-		s.WriteStruct(schemas.TranslatePinDataInput_IncomingAs2805Attributes)
-		v.IncomingAs2805Attributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncomingDukptAttributes != nil {
-		s.WriteStruct(schemas.TranslatePinDataInput_IncomingDukptAttributes)
-		v.IncomingDukptAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncomingKeyIdentifier != nil {
-		s.WriteString(schemas.TranslatePinDataInput_IncomingKeyIdentifier, *v.IncomingKeyIdentifier)
-	}
-	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_IncomingTranslationAttributes, v.IncomingTranslationAttributes)
-	if v.IncomingWrappedKey != nil {
-		s.WriteStruct(schemas.TranslatePinDataInput_IncomingWrappedKey)
-		v.IncomingWrappedKey.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutgoingDukptAttributes != nil {
-		s.WriteStruct(schemas.TranslatePinDataInput_OutgoingDukptAttributes)
-		v.OutgoingDukptAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutgoingKeyIdentifier != nil {
-		s.WriteString(schemas.TranslatePinDataInput_OutgoingKeyIdentifier, *v.OutgoingKeyIdentifier)
-	}
-	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_OutgoingTranslationAttributes, v.OutgoingTranslationAttributes)
-	if v.OutgoingWrappedKey != nil {
-		s.WriteStruct(schemas.TranslatePinDataInput_OutgoingWrappedKey)
-		v.OutgoingWrappedKey.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type TranslatePinDataOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
@@ -220,30 +173,16 @@ type TranslatePinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TranslatePinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TranslatePinDataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TranslatePinDataOutput_KeyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.TranslatePinDataOutput_KeyArn, v.KeyArn)
-		case schemas.TranslatePinDataOutput_KeyCheckValue:
-			v.KeyCheckValue = new(string)
-			return d.ReadString(schemas.TranslatePinDataOutput_KeyCheckValue, v.KeyCheckValue)
-		case schemas.TranslatePinDataOutput_PinBlock:
-			v.PinBlock = new(string)
-			return d.ReadString(schemas.TranslatePinDataOutput_PinBlock, v.PinBlock)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationTranslatePinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslatePinData, schemas.TranslatePinDataInput, schemas.TranslatePinDataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTranslatePinData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslatePinData, schemas.TranslatePinDataInput, schemas.TranslatePinDataOutput), output: &TranslatePinDataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTranslatePinData{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TranslatePinData"); err != nil {

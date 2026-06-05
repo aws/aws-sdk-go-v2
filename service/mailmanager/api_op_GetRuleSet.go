@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetRuleSetInput struct {
 	RuleSetId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetRuleSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRuleSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleSetId != nil {
-		s.WriteString(schemas.GetRuleSetRequest_RuleSetId, *v.RuleSetId)
-	}
 }
 
 type GetRuleSetOutput struct {
@@ -90,38 +76,16 @@ type GetRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRuleSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRuleSetResponse_CreatedDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetRuleSetResponse_CreatedDate, v.CreatedDate)
-		case schemas.GetRuleSetResponse_LastModificationDate:
-			v.LastModificationDate = new(time.Time)
-			return d.ReadTime(schemas.GetRuleSetResponse_LastModificationDate, v.LastModificationDate)
-		case schemas.GetRuleSetResponse_RuleSetArn:
-			v.RuleSetArn = new(string)
-			return d.ReadString(schemas.GetRuleSetResponse_RuleSetArn, v.RuleSetArn)
-		case schemas.GetRuleSetResponse_RuleSetId:
-			v.RuleSetId = new(string)
-			return d.ReadString(schemas.GetRuleSetResponse_RuleSetId, v.RuleSetId)
-		case schemas.GetRuleSetResponse_RuleSetName:
-			v.RuleSetName = new(string)
-			return d.ReadString(schemas.GetRuleSetResponse_RuleSetName, v.RuleSetName)
-		case schemas.GetRuleSetResponse_Rules:
-			return deserializeRules(d, schemas.GetRuleSetResponse_Rules, &v.Rules)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuleSet, schemas.GetRuleSetRequest, schemas.GetRuleSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRuleSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuleSet, schemas.GetRuleSetRequest, schemas.GetRuleSetResponse), output: &GetRuleSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRuleSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRuleSet"); err != nil {

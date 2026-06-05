@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,27 +46,6 @@ type ListLogPatternSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLogPatternSetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLogPatternSetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLogPatternSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.ListLogPatternSetsRequest_AccountId, *v.AccountId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListLogPatternSetsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLogPatternSetsRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceGroupName != nil {
-		s.WriteString(schemas.ListLogPatternSetsRequest_ResourceGroupName, *v.ResourceGroupName)
-	}
-}
-
 type ListLogPatternSetsOutput struct {
 
 	// The Amazon Web Services account ID for the resource group owner.
@@ -90,32 +67,16 @@ type ListLogPatternSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLogPatternSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLogPatternSetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLogPatternSetsResponse_AccountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.ListLogPatternSetsResponse_AccountId, v.AccountId)
-		case schemas.ListLogPatternSetsResponse_LogPatternSets:
-			return deserializeLogPatternSetList(d, schemas.ListLogPatternSetsResponse_LogPatternSets, &v.LogPatternSets)
-		case schemas.ListLogPatternSetsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLogPatternSetsResponse_NextToken, v.NextToken)
-		case schemas.ListLogPatternSetsResponse_ResourceGroupName:
-			v.ResourceGroupName = new(string)
-			return d.ReadString(schemas.ListLogPatternSetsResponse_ResourceGroupName, v.ResourceGroupName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogPatternSets, schemas.ListLogPatternSetsRequest, schemas.ListLogPatternSetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogPatternSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogPatternSets, schemas.ListLogPatternSetsRequest, schemas.ListLogPatternSetsResponse), output: &ListLogPatternSetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogPatternSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLogPatternSets"); err != nil {

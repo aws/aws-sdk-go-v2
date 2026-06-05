@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSubscriptionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ListSubscriptionsRequest_applicationId, *v.ApplicationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSubscriptionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSubscriptionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListSubscriptionsOutput struct {
 
 	// If the response is truncated, Amazon Q Business returns this token. You can use
@@ -82,26 +62,16 @@ type ListSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSubscriptionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSubscriptionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSubscriptionsResponse_nextToken, v.NextToken)
-		case schemas.ListSubscriptionsResponse_subscriptions:
-			return deserializeSubscriptions(d, schemas.ListSubscriptionsResponse_subscriptions, &v.Subscriptions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptions, schemas.ListSubscriptionsRequest, schemas.ListSubscriptionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptions, schemas.ListSubscriptionsRequest, schemas.ListSubscriptionsResponse), output: &ListSubscriptionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubscriptions"); err != nil {

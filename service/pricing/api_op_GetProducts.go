@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,28 +53,6 @@ type GetProductsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProductsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetProductsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.GetProductsRequest_Filters, v.Filters)
-	if v.FormatVersion != nil {
-		s.WriteString(schemas.GetProductsRequest_FormatVersion, *v.FormatVersion)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetProductsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetProductsRequest_NextToken, *v.NextToken)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.GetProductsRequest_ServiceCode, *v.ServiceCode)
-	}
-}
-
 type GetProductsOutput struct {
 
 	// The format version of the response. For example, aws_v1.
@@ -95,29 +71,16 @@ type GetProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetProductsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetProductsResponse_FormatVersion:
-			v.FormatVersion = new(string)
-			return d.ReadString(schemas.GetProductsResponse_FormatVersion, v.FormatVersion)
-		case schemas.GetProductsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetProductsResponse_NextToken, v.NextToken)
-		case schemas.GetProductsResponse_PriceList:
-			return deserializePriceListJsonItems(d, schemas.GetProductsResponse_PriceList, &v.PriceList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProducts, schemas.GetProductsRequest, schemas.GetProductsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProducts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProducts, schemas.GetProductsRequest, schemas.GetProductsResponse), output: &GetProductsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetProducts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProducts"); err != nil {

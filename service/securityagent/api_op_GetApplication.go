@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,18 +35,6 @@ type GetApplicationInput struct {
 	ApplicationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetApplicationRequest_applicationId, *v.ApplicationId)
-	}
 }
 
 type GetApplicationOutput struct {
@@ -82,39 +68,16 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_applicationId, v.ApplicationId)
-		case schemas.GetApplicationResponse_applicationName:
-			v.ApplicationName = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_applicationName, v.ApplicationName)
-		case schemas.GetApplicationResponse_defaultKmsKeyId:
-			v.DefaultKmsKeyId = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_defaultKmsKeyId, v.DefaultKmsKeyId)
-		case schemas.GetApplicationResponse_domain:
-			v.Domain = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_domain, v.Domain)
-		case schemas.GetApplicationResponse_idcConfiguration:
-			v.IdcConfiguration = &types.IdCConfiguration{}
-			return v.IdcConfiguration.Deserialize(d)
-		case schemas.GetApplicationResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_roleArn, v.RoleArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,19 +39,6 @@ type StartApprovalTeamBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartApprovalTeamBaselineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartApprovalTeamBaselineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartApprovalTeamBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStartApprovalTeamBaselineApproverIds(s, schemas.StartApprovalTeamBaselineRequest_ApproverIds, v.ApproverIds)
-	if v.Arn != nil {
-		s.WriteString(schemas.StartApprovalTeamBaselineRequest_Arn, *v.Arn)
-	}
-}
-
 type StartApprovalTeamBaselineOutput struct {
 
 	// Amazon Resource Name (ARN) for the session.
@@ -65,24 +50,16 @@ type StartApprovalTeamBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartApprovalTeamBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartApprovalTeamBaselineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartApprovalTeamBaselineResponse_BaselineSessionArn:
-			v.BaselineSessionArn = new(string)
-			return d.ReadString(schemas.StartApprovalTeamBaselineResponse_BaselineSessionArn, v.BaselineSessionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartApprovalTeamBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApprovalTeamBaseline, schemas.StartApprovalTeamBaselineRequest, schemas.StartApprovalTeamBaselineResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartApprovalTeamBaseline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApprovalTeamBaseline, schemas.StartApprovalTeamBaselineRequest, schemas.StartApprovalTeamBaselineResponse), output: &StartApprovalTeamBaselineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartApprovalTeamBaseline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartApprovalTeamBaseline"); err != nil {

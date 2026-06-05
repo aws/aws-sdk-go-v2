@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,34 +58,6 @@ type ListConnectionInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectionInvitationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectionInvitationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectionInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.ListConnectionInvitationsRequest_Catalog, *v.Catalog)
-	}
-	if v.ConnectionType != "" {
-		s.WriteString(schemas.ListConnectionInvitationsRequest_ConnectionType, string(v.ConnectionType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConnectionInvitationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectionInvitationsRequest_NextToken, *v.NextToken)
-	}
-	serializeParticipantIdentifierList(s, schemas.ListConnectionInvitationsRequest_OtherParticipantIdentifiers, v.OtherParticipantIdentifiers)
-	if v.ParticipantType != "" {
-		s.WriteString(schemas.ListConnectionInvitationsRequest_ParticipantType, string(v.ParticipantType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListConnectionInvitationsRequest_Status, string(v.Status))
-	}
-}
-
 type ListConnectionInvitationsOutput struct {
 
 	// A list of connection invitation summaries matching the specified criteria.
@@ -104,26 +74,16 @@ type ListConnectionInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectionInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConnectionInvitationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConnectionInvitationsResponse_ConnectionInvitationSummaries:
-			return deserializeConnectionInvitationSummaryList(d, schemas.ListConnectionInvitationsResponse_ConnectionInvitationSummaries, &v.ConnectionInvitationSummaries)
-		case schemas.ListConnectionInvitationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConnectionInvitationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConnectionInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectionInvitations, schemas.ListConnectionInvitationsRequest, schemas.ListConnectionInvitationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListConnectionInvitations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectionInvitations, schemas.ListConnectionInvitationsRequest, schemas.ListConnectionInvitationsResponse), output: &ListConnectionInvitationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListConnectionInvitations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectionInvitations"); err != nil {

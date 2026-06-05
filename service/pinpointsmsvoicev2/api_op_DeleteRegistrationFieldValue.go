@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type DeleteRegistrationFieldValueInput struct {
 	RegistrationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteRegistrationFieldValueInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRegistrationFieldValueRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRegistrationFieldValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FieldPath != nil {
-		s.WriteString(schemas.DeleteRegistrationFieldValueRequest_FieldPath, *v.FieldPath)
-	}
-	if v.RegistrationId != nil {
-		s.WriteString(schemas.DeleteRegistrationFieldValueRequest_RegistrationId, *v.RegistrationId)
-	}
 }
 
 type DeleteRegistrationFieldValueOutput struct {
@@ -95,41 +78,16 @@ type DeleteRegistrationFieldValueOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRegistrationFieldValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRegistrationFieldValueResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteRegistrationFieldValueResult_FieldPath:
-			v.FieldPath = new(string)
-			return d.ReadString(schemas.DeleteRegistrationFieldValueResult_FieldPath, v.FieldPath)
-		case schemas.DeleteRegistrationFieldValueResult_RegistrationArn:
-			v.RegistrationArn = new(string)
-			return d.ReadString(schemas.DeleteRegistrationFieldValueResult_RegistrationArn, v.RegistrationArn)
-		case schemas.DeleteRegistrationFieldValueResult_RegistrationAttachmentId:
-			v.RegistrationAttachmentId = new(string)
-			return d.ReadString(schemas.DeleteRegistrationFieldValueResult_RegistrationAttachmentId, v.RegistrationAttachmentId)
-		case schemas.DeleteRegistrationFieldValueResult_RegistrationId:
-			v.RegistrationId = new(string)
-			return d.ReadString(schemas.DeleteRegistrationFieldValueResult_RegistrationId, v.RegistrationId)
-		case schemas.DeleteRegistrationFieldValueResult_SelectChoices:
-			return deserializeSelectChoiceList(d, schemas.DeleteRegistrationFieldValueResult_SelectChoices, &v.SelectChoices)
-		case schemas.DeleteRegistrationFieldValueResult_TextValue:
-			v.TextValue = new(string)
-			return d.ReadString(schemas.DeleteRegistrationFieldValueResult_TextValue, v.TextValue)
-		case schemas.DeleteRegistrationFieldValueResult_VersionNumber:
-			v.VersionNumber = new(int64)
-			return d.ReadInt64(schemas.DeleteRegistrationFieldValueResult_VersionNumber, v.VersionNumber)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteRegistrationFieldValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationFieldValue, schemas.DeleteRegistrationFieldValueRequest, schemas.DeleteRegistrationFieldValueResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRegistrationFieldValue{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationFieldValue, schemas.DeleteRegistrationFieldValueRequest, schemas.DeleteRegistrationFieldValueResult), output: &DeleteRegistrationFieldValueOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRegistrationFieldValue{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRegistrationFieldValue"); err != nil {

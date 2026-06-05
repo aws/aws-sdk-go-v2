@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteCloudVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCloudVmClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteCloudVmClusterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudVmClusterId != nil {
-		s.WriteString(schemas.DeleteCloudVmClusterInput_cloudVmClusterId, *v.CloudVmClusterId)
-	}
-}
-
 type DeleteCloudVmClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DeleteCloudVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteCloudVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteCloudVmClusterOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteCloudVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudVmCluster, schemas.DeleteCloudVmClusterInput, schemas.DeleteCloudVmClusterOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteCloudVmCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudVmCluster, schemas.DeleteCloudVmClusterInput, schemas.DeleteCloudVmClusterOutput), output: &DeleteCloudVmClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteCloudVmCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCloudVmCluster"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,28 +38,6 @@ type GetVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetVirtualMachineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetVirtualMachineInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetVirtualMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.GetVirtualMachineInput_ResourceArn, *v.ResourceArn)
-	}
-}
-func (v *GetVirtualMachineInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetVirtualMachineInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetVirtualMachineInput_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.GetVirtualMachineInput_ResourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
-
 type GetVirtualMachineOutput struct {
 
 	// This object contains the basic attributes of VirtualMachine contained by the
@@ -74,37 +50,16 @@ type GetVirtualMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetVirtualMachineOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetVirtualMachineOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetVirtualMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VirtualMachine != nil {
-		s.WriteStruct(schemas.GetVirtualMachineOutput_VirtualMachine)
-		v.VirtualMachine.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetVirtualMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetVirtualMachineOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetVirtualMachineOutput_VirtualMachine:
-			v.VirtualMachine = &types.VirtualMachineDetails{}
-			return v.VirtualMachine.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetVirtualMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVirtualMachine, schemas.GetVirtualMachineInput, schemas.GetVirtualMachineOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetVirtualMachine{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVirtualMachine, schemas.GetVirtualMachineInput, schemas.GetVirtualMachineOutput), output: &GetVirtualMachineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetVirtualMachine{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVirtualMachine"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,32 +57,6 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateEnvironmentRequest_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.UpdateEnvironmentRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.FederationMode != "" {
-		s.WriteString(schemas.UpdateEnvironmentRequest_federationMode, string(v.FederationMode))
-	}
-	if v.FederationParameters != nil {
-		s.WriteStruct(schemas.UpdateEnvironmentRequest_federationParameters)
-		v.FederationParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateEnvironmentRequest_name, *v.Name)
-	}
-}
-
 type UpdateEnvironmentOutput struct {
 
 	// Returns the FinSpace environment object.
@@ -96,24 +68,16 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateEnvironmentResponse_environment:
-			v.Environment = &types.Environment{}
-			return v.Environment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironment"); err != nil {

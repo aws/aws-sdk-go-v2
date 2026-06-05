@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,21 +61,6 @@ type AssociateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateWebACLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateWebACLRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.AssociateWebACLRequest_ResourceArn, *v.ResourceArn)
-	}
-	if v.WebACLId != nil {
-		s.WriteString(schemas.AssociateWebACLRequest_WebACLId, *v.WebACLId)
-	}
-}
-
 type AssociateWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,21 +68,16 @@ type AssociateWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateWebACLResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWebACL, schemas.AssociateWebACLRequest, schemas.AssociateWebACLResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateWebACL{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWebACL, schemas.AssociateWebACLRequest, schemas.AssociateWebACLResponse), output: &AssociateWebACLOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateWebACL{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateWebACL"); err != nil {

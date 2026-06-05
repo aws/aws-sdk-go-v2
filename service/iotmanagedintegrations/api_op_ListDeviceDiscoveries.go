@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,27 +44,6 @@ type ListDeviceDiscoveriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeviceDiscoveriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDeviceDiscoveriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDeviceDiscoveriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDeviceDiscoveriesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDeviceDiscoveriesRequest_NextToken, *v.NextToken)
-	}
-	if v.StatusFilter != "" {
-		s.WriteString(schemas.ListDeviceDiscoveriesRequest_StatusFilter, string(v.StatusFilter))
-	}
-	if v.TypeFilter != "" {
-		s.WriteString(schemas.ListDeviceDiscoveriesRequest_TypeFilter, string(v.TypeFilter))
-	}
-}
-
 type ListDeviceDiscoveriesOutput struct {
 
 	// The list of device discovery jobs that match the specified criteria.
@@ -82,26 +59,16 @@ type ListDeviceDiscoveriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeviceDiscoveriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDeviceDiscoveriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDeviceDiscoveriesResponse_Items:
-			return deserializeDeviceDiscoveryListDefinition(d, schemas.ListDeviceDiscoveriesResponse_Items, &v.Items)
-		case schemas.ListDeviceDiscoveriesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDeviceDiscoveriesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDeviceDiscoveriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceDiscoveries, schemas.ListDeviceDiscoveriesRequest, schemas.ListDeviceDiscoveriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeviceDiscoveries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceDiscoveries, schemas.ListDeviceDiscoveriesRequest, schemas.ListDeviceDiscoveriesResponse), output: &ListDeviceDiscoveriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeviceDiscoveries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeviceDiscoveries"); err != nil {

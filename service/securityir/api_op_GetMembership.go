@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetMembershipInput struct {
 	MembershipId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMembershipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMembershipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipId != nil {
-		s.WriteString(schemas.GetMembershipRequest_membershipId, *v.MembershipId)
-	}
 }
 
 type GetMembershipOutput struct {
@@ -119,70 +105,16 @@ type GetMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMembershipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMembershipResponse_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.GetMembershipResponse_accountId, v.AccountId)
-		case schemas.GetMembershipResponse_customerType:
-			var ev string
-			if err := d.ReadString(schemas.GetMembershipResponse_customerType, &ev); err != nil {
-				return err
-			}
-			v.CustomerType = types.CustomerType(ev)
-			return nil
-		case schemas.GetMembershipResponse_incidentResponseTeam:
-			return deserializeIncidentResponseTeam(d, schemas.GetMembershipResponse_incidentResponseTeam, &v.IncidentResponseTeam)
-		case schemas.GetMembershipResponse_membershipAccountsConfigurations:
-			v.MembershipAccountsConfigurations = &types.MembershipAccountsConfigurations{}
-			return v.MembershipAccountsConfigurations.Deserialize(d)
-		case schemas.GetMembershipResponse_membershipActivationTimestamp:
-			v.MembershipActivationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetMembershipResponse_membershipActivationTimestamp, v.MembershipActivationTimestamp)
-		case schemas.GetMembershipResponse_membershipArn:
-			v.MembershipArn = new(string)
-			return d.ReadString(schemas.GetMembershipResponse_membershipArn, v.MembershipArn)
-		case schemas.GetMembershipResponse_membershipDeactivationTimestamp:
-			v.MembershipDeactivationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetMembershipResponse_membershipDeactivationTimestamp, v.MembershipDeactivationTimestamp)
-		case schemas.GetMembershipResponse_membershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.GetMembershipResponse_membershipId, v.MembershipId)
-		case schemas.GetMembershipResponse_membershipName:
-			v.MembershipName = new(string)
-			return d.ReadString(schemas.GetMembershipResponse_membershipName, v.MembershipName)
-		case schemas.GetMembershipResponse_membershipStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetMembershipResponse_membershipStatus, &ev); err != nil {
-				return err
-			}
-			v.MembershipStatus = types.MembershipStatus(ev)
-			return nil
-		case schemas.GetMembershipResponse_numberOfAccountsCovered:
-			v.NumberOfAccountsCovered = new(int64)
-			return d.ReadInt64(schemas.GetMembershipResponse_numberOfAccountsCovered, v.NumberOfAccountsCovered)
-		case schemas.GetMembershipResponse_optInFeatures:
-			return deserializeOptInFeatures(d, schemas.GetMembershipResponse_optInFeatures, &v.OptInFeatures)
-		case schemas.GetMembershipResponse_region:
-			var ev string
-			if err := d.ReadString(schemas.GetMembershipResponse_region, &ev); err != nil {
-				return err
-			}
-			v.Region = types.AwsRegion(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipRequest, schemas.GetMembershipResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipRequest, schemas.GetMembershipResponse), output: &GetMembershipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMembership"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListIndicesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIndicesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIndicesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIndicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ListIndicesRequest_applicationId, *v.ApplicationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIndicesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIndicesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListIndicesOutput struct {
 
 	// An array of information on the items in one or more indexes.
@@ -80,26 +60,16 @@ type ListIndicesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIndicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIndicesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIndicesResponse_indices:
-			return deserializeIndices(d, schemas.ListIndicesResponse_indices, &v.Indices)
-		case schemas.ListIndicesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIndicesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndices, schemas.ListIndicesRequest, schemas.ListIndicesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndices{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndices, schemas.ListIndicesRequest, schemas.ListIndicesResponse), output: &ListIndicesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndices{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIndices"); err != nil {

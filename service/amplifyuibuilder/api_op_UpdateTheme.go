@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,54 +55,6 @@ type UpdateThemeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateThemeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateThemeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.UpdateThemeRequest_appId, *v.AppId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateThemeRequest_clientToken, *v.ClientToken)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.UpdateThemeRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateThemeRequest_id, *v.Id)
-	}
-	if v.UpdatedTheme != nil {
-		s.WriteStruct(schemas.UpdateThemeRequest_updatedTheme)
-		v.UpdatedTheme.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateThemeInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateThemeRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateThemeRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.UpdateThemeRequest_appId, v.AppId)
-		case schemas.UpdateThemeRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.UpdateThemeRequest_clientToken, v.ClientToken)
-		case schemas.UpdateThemeRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.UpdateThemeRequest_environmentName, v.EnvironmentName)
-		case schemas.UpdateThemeRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateThemeRequest_id, v.Id)
-		case schemas.UpdateThemeRequest_updatedTheme:
-			v.UpdatedTheme = &types.UpdateThemeData{}
-			return v.UpdatedTheme.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateThemeOutput struct {
 
 	// Describes the configuration of the updated theme.
@@ -116,37 +66,16 @@ type UpdateThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateThemeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateThemeResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Entity != nil {
-		s.WriteStruct(schemas.UpdateThemeResponse_entity)
-		v.Entity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateThemeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateThemeResponse_entity:
-			v.Entity = &types.Theme{}
-			return v.Entity.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTheme, schemas.UpdateThemeRequest, schemas.UpdateThemeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTheme{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTheme, schemas.UpdateThemeRequest, schemas.UpdateThemeResponse), output: &UpdateThemeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTheme{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTheme"); err != nil {

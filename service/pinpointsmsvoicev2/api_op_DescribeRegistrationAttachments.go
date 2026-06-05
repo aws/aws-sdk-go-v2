@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,23 +47,6 @@ type DescribeRegistrationAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRegistrationAttachmentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRegistrationAttachmentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRegistrationAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistrationAttachmentFilterList(s, schemas.DescribeRegistrationAttachmentsRequest_Filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeRegistrationAttachmentsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeRegistrationAttachmentsRequest_NextToken, *v.NextToken)
-	}
-	serializeRegistrationAttachmentIdList(s, schemas.DescribeRegistrationAttachmentsRequest_RegistrationAttachmentIds, v.RegistrationAttachmentIds)
-}
-
 type DescribeRegistrationAttachmentsOutput struct {
 
 	// An array of RegistrationAttachments objects that contain the details for the
@@ -84,26 +65,16 @@ type DescribeRegistrationAttachmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRegistrationAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRegistrationAttachmentsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRegistrationAttachmentsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeRegistrationAttachmentsResult_NextToken, v.NextToken)
-		case schemas.DescribeRegistrationAttachmentsResult_RegistrationAttachments:
-			return deserializeRegistrationAttachmentsInformationList(d, schemas.DescribeRegistrationAttachmentsResult_RegistrationAttachments, &v.RegistrationAttachments)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRegistrationAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationAttachments, schemas.DescribeRegistrationAttachmentsRequest, schemas.DescribeRegistrationAttachmentsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRegistrationAttachments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationAttachments, schemas.DescribeRegistrationAttachmentsRequest, schemas.DescribeRegistrationAttachmentsResult), output: &DescribeRegistrationAttachmentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRegistrationAttachments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRegistrationAttachments"); err != nil {

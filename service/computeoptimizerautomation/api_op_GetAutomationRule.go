@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetAutomationRuleInput struct {
 	RuleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAutomationRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAutomationRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAutomationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleArn != nil {
-		s.WriteString(schemas.GetAutomationRuleRequest_ruleArn, *v.RuleArn)
-	}
 }
 
 type GetAutomationRuleOutput struct {
@@ -113,75 +99,16 @@ type GetAutomationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAutomationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAutomationRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAutomationRuleResponse_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_accountId, v.AccountId)
-		case schemas.GetAutomationRuleResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetAutomationRuleResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetAutomationRuleResponse_criteria:
-			v.Criteria = &types.Criteria{}
-			return v.Criteria.Deserialize(d)
-		case schemas.GetAutomationRuleResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_description, v.Description)
-		case schemas.GetAutomationRuleResponse_lastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetAutomationRuleResponse_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.GetAutomationRuleResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_name, v.Name)
-		case schemas.GetAutomationRuleResponse_organizationConfiguration:
-			v.OrganizationConfiguration = &types.OrganizationConfiguration{}
-			return v.OrganizationConfiguration.Deserialize(d)
-		case schemas.GetAutomationRuleResponse_priority:
-			v.Priority = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_priority, v.Priority)
-		case schemas.GetAutomationRuleResponse_recommendedActionTypes:
-			return deserializeRecommendedActionTypeList(d, schemas.GetAutomationRuleResponse_recommendedActionTypes, &v.RecommendedActionTypes)
-		case schemas.GetAutomationRuleResponse_ruleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_ruleArn, v.RuleArn)
-		case schemas.GetAutomationRuleResponse_ruleId:
-			v.RuleId = new(string)
-			return d.ReadString(schemas.GetAutomationRuleResponse_ruleId, v.RuleId)
-		case schemas.GetAutomationRuleResponse_ruleRevision:
-			v.RuleRevision = new(int64)
-			return d.ReadInt64(schemas.GetAutomationRuleResponse_ruleRevision, v.RuleRevision)
-		case schemas.GetAutomationRuleResponse_ruleType:
-			var ev string
-			if err := d.ReadString(schemas.GetAutomationRuleResponse_ruleType, &ev); err != nil {
-				return err
-			}
-			v.RuleType = types.RuleType(ev)
-			return nil
-		case schemas.GetAutomationRuleResponse_schedule:
-			v.Schedule = &types.Schedule{}
-			return v.Schedule.Deserialize(d)
-		case schemas.GetAutomationRuleResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetAutomationRuleResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RuleStatus(ev)
-			return nil
-		case schemas.GetAutomationRuleResponse_tags:
-			return deserializeTagList(d, schemas.GetAutomationRuleResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAutomationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationRule, schemas.GetAutomationRuleRequest, schemas.GetAutomationRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAutomationRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationRule, schemas.GetAutomationRuleRequest, schemas.GetAutomationRuleResponse), output: &GetAutomationRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAutomationRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAutomationRule"); err != nil {

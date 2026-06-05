@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBrowserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BrowserSettingsArn != nil {
-		s.WriteString(schemas.DeleteBrowserSettingsRequest_browserSettingsArn, *v.BrowserSettingsArn)
-	}
-}
-
 type DeleteBrowserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DeleteBrowserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBrowserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteBrowserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBrowserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowserSettings, schemas.DeleteBrowserSettingsRequest, schemas.DeleteBrowserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBrowserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrowserSettings, schemas.DeleteBrowserSettingsRequest, schemas.DeleteBrowserSettingsResponse), output: &DeleteBrowserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBrowserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBrowserSettings"); err != nil {

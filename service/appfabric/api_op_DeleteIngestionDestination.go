@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,24 +55,6 @@ type DeleteIngestionDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteIngestionDestinationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteIngestionDestinationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteIngestionDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.DeleteIngestionDestinationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	if v.IngestionDestinationIdentifier != nil {
-		s.WriteString(schemas.DeleteIngestionDestinationRequest_ingestionDestinationIdentifier, *v.IngestionDestinationIdentifier)
-	}
-	if v.IngestionIdentifier != nil {
-		s.WriteString(schemas.DeleteIngestionDestinationRequest_ingestionIdentifier, *v.IngestionIdentifier)
-	}
-}
-
 type DeleteIngestionDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,21 +62,16 @@ type DeleteIngestionDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteIngestionDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteIngestionDestinationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteIngestionDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngestionDestination, schemas.DeleteIngestionDestinationRequest, schemas.DeleteIngestionDestinationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIngestionDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngestionDestination, schemas.DeleteIngestionDestinationRequest, schemas.DeleteIngestionDestinationResponse), output: &DeleteIngestionDestinationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIngestionDestination{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIngestionDestination"); err != nil {

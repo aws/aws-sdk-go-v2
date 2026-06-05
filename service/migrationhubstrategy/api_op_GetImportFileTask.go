@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,28 +36,6 @@ type GetImportFileTaskInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetImportFileTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImportFileTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImportFileTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetImportFileTaskRequest_id, *v.Id)
-	}
-}
-func (v *GetImportFileTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImportFileTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImportFileTaskRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetImportFileTaskRequest_id, v.Id)
-		}
-		return nil
-	})
 }
 
 type GetImportFileTaskOutput struct {
@@ -104,99 +80,16 @@ type GetImportFileTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImportFileTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImportFileTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImportFileTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompletionTime != nil {
-		s.WriteTime(schemas.GetImportFileTaskResponse_completionTime, *v.CompletionTime)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_id, *v.Id)
-	}
-	if v.ImportName != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_importName, *v.ImportName)
-	}
-	if v.InputS3Bucket != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_inputS3Bucket, *v.InputS3Bucket)
-	}
-	if v.InputS3Key != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_inputS3Key, *v.InputS3Key)
-	}
-	if v.NumberOfRecordsFailed != nil {
-		s.WriteInt32(schemas.GetImportFileTaskResponse_numberOfRecordsFailed, *v.NumberOfRecordsFailed)
-	}
-	if v.NumberOfRecordsSuccess != nil {
-		s.WriteInt32(schemas.GetImportFileTaskResponse_numberOfRecordsSuccess, *v.NumberOfRecordsSuccess)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.GetImportFileTaskResponse_startTime, *v.StartTime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.GetImportFileTaskResponse_status, string(v.Status))
-	}
-	if v.StatusReportS3Bucket != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_statusReportS3Bucket, *v.StatusReportS3Bucket)
-	}
-	if v.StatusReportS3Key != nil {
-		s.WriteString(schemas.GetImportFileTaskResponse_statusReportS3Key, *v.StatusReportS3Key)
-	}
-}
-func (v *GetImportFileTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImportFileTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImportFileTaskResponse_completionTime:
-			v.CompletionTime = new(time.Time)
-			return d.ReadTime(schemas.GetImportFileTaskResponse_completionTime, v.CompletionTime)
-		case schemas.GetImportFileTaskResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_id, v.Id)
-		case schemas.GetImportFileTaskResponse_importName:
-			v.ImportName = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_importName, v.ImportName)
-		case schemas.GetImportFileTaskResponse_inputS3Bucket:
-			v.InputS3Bucket = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_inputS3Bucket, v.InputS3Bucket)
-		case schemas.GetImportFileTaskResponse_inputS3Key:
-			v.InputS3Key = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_inputS3Key, v.InputS3Key)
-		case schemas.GetImportFileTaskResponse_numberOfRecordsFailed:
-			v.NumberOfRecordsFailed = new(int32)
-			return d.ReadInt32(schemas.GetImportFileTaskResponse_numberOfRecordsFailed, v.NumberOfRecordsFailed)
-		case schemas.GetImportFileTaskResponse_numberOfRecordsSuccess:
-			v.NumberOfRecordsSuccess = new(int32)
-			return d.ReadInt32(schemas.GetImportFileTaskResponse_numberOfRecordsSuccess, v.NumberOfRecordsSuccess)
-		case schemas.GetImportFileTaskResponse_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.GetImportFileTaskResponse_startTime, v.StartTime)
-		case schemas.GetImportFileTaskResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetImportFileTaskResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ImportFileTaskStatus(ev)
-			return nil
-		case schemas.GetImportFileTaskResponse_statusReportS3Bucket:
-			v.StatusReportS3Bucket = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_statusReportS3Bucket, v.StatusReportS3Bucket)
-		case schemas.GetImportFileTaskResponse_statusReportS3Key:
-			v.StatusReportS3Key = new(string)
-			return d.ReadString(schemas.GetImportFileTaskResponse_statusReportS3Key, v.StatusReportS3Key)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetImportFileTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportFileTask, schemas.GetImportFileTaskRequest, schemas.GetImportFileTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImportFileTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportFileTask, schemas.GetImportFileTaskRequest, schemas.GetImportFileTaskResponse), output: &GetImportFileTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImportFileTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImportFileTask"); err != nil {

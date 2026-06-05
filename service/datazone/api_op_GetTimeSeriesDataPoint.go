@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,30 +59,6 @@ type GetTimeSeriesDataPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTimeSeriesDataPointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTimeSeriesDataPointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTimeSeriesDataPointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetTimeSeriesDataPointInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.GetTimeSeriesDataPointInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.GetTimeSeriesDataPointInput_entityType, string(v.EntityType))
-	}
-	if v.FormName != nil {
-		s.WriteString(schemas.GetTimeSeriesDataPointInput_formName, *v.FormName)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetTimeSeriesDataPointInput_identifier, *v.Identifier)
-	}
-}
-
 type GetTimeSeriesDataPointOutput struct {
 
 	// The ID of the Amazon DataZone domain that houses the asset data point that you
@@ -110,40 +84,16 @@ type GetTimeSeriesDataPointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTimeSeriesDataPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTimeSeriesDataPointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTimeSeriesDataPointOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetTimeSeriesDataPointOutput_domainId, v.DomainId)
-		case schemas.GetTimeSeriesDataPointOutput_entityId:
-			v.EntityId = new(string)
-			return d.ReadString(schemas.GetTimeSeriesDataPointOutput_entityId, v.EntityId)
-		case schemas.GetTimeSeriesDataPointOutput_entityType:
-			var ev string
-			if err := d.ReadString(schemas.GetTimeSeriesDataPointOutput_entityType, &ev); err != nil {
-				return err
-			}
-			v.EntityType = types.TimeSeriesEntityType(ev)
-			return nil
-		case schemas.GetTimeSeriesDataPointOutput_form:
-			v.Form = &types.TimeSeriesDataPointFormOutput{}
-			return v.Form.Deserialize(d)
-		case schemas.GetTimeSeriesDataPointOutput_formName:
-			v.FormName = new(string)
-			return d.ReadString(schemas.GetTimeSeriesDataPointOutput_formName, v.FormName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTimeSeriesDataPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimeSeriesDataPoint, schemas.GetTimeSeriesDataPointInput, schemas.GetTimeSeriesDataPointOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTimeSeriesDataPoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimeSeriesDataPoint, schemas.GetTimeSeriesDataPointInput, schemas.GetTimeSeriesDataPointOutput), output: &GetTimeSeriesDataPointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTimeSeriesDataPoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTimeSeriesDataPoint"); err != nil {

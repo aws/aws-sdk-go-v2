@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,38 +58,6 @@ type CreateMediaInsightsPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMediaInsightsPipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMediaInsightsPipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMediaInsightsPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateMediaInsightsPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.KinesisVideoStreamRecordingSourceRuntimeConfiguration != nil {
-		s.WriteStruct(schemas.CreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration)
-		v.KinesisVideoStreamRecordingSourceRuntimeConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KinesisVideoStreamSourceRuntimeConfiguration != nil {
-		s.WriteStruct(schemas.CreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration)
-		v.KinesisVideoStreamSourceRuntimeConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MediaInsightsPipelineConfigurationArn != nil {
-		s.WriteString(schemas.CreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
-	}
-	serializeMediaInsightsRuntimeMetadata(s, schemas.CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
-	if v.S3RecordingSinkRuntimeConfiguration != nil {
-		s.WriteStruct(schemas.CreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration)
-		v.S3RecordingSinkRuntimeConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateMediaInsightsPipelineRequest_Tags, v.Tags)
-}
-
 type CreateMediaInsightsPipelineOutput struct {
 
 	// The media insights pipeline object.
@@ -105,24 +71,16 @@ type CreateMediaInsightsPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMediaInsightsPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMediaInsightsPipelineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMediaInsightsPipelineResponse_MediaInsightsPipeline:
-			v.MediaInsightsPipeline = &types.MediaInsightsPipeline{}
-			return v.MediaInsightsPipeline.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMediaInsightsPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaInsightsPipeline, schemas.CreateMediaInsightsPipelineRequest, schemas.CreateMediaInsightsPipelineResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaInsightsPipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaInsightsPipeline, schemas.CreateMediaInsightsPipelineRequest, schemas.CreateMediaInsightsPipelineResponse), output: &CreateMediaInsightsPipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaInsightsPipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMediaInsightsPipeline"); err != nil {

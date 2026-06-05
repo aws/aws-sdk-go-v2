@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type ListDbClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbClustersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDbClustersInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDbClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDbClustersInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDbClustersInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListDbClustersOutput struct {
 
 	// A list of Timestream for InfluxDB cluster summaries.
@@ -76,26 +59,16 @@ type ListDbClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDbClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDbClustersOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDbClustersOutput_items:
-			return deserializeDbClusterSummaryList(d, schemas.ListDbClustersOutput_items, &v.Items)
-		case schemas.ListDbClustersOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDbClustersOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDbClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbClusters, schemas.ListDbClustersInput, schemas.ListDbClustersOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbClusters, schemas.ListDbClustersInput, schemas.ListDbClustersOutput), output: &ListDbClustersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbClusters"); err != nil {

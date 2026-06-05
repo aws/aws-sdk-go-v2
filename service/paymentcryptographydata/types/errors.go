@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
@@ -70,16 +59,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to an invalid resource error.
 type ResourceNotFoundException struct {
@@ -108,16 +87,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_ResourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_ResourceId, v.ResourceId)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -144,16 +113,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to an invalid request error.
 type ValidationException struct {
@@ -182,18 +141,6 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_fieldList:
-			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fieldList, &v.FieldList)
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This request failed verification.
 type VerificationFailedException struct {
@@ -222,20 +169,3 @@ func (e *VerificationFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *VerificationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *VerificationFailedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VerificationFailedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VerificationFailedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.VerificationFailedException_Message, v.Message)
-		case schemas.VerificationFailedException_Reason:
-			var ev string
-			if err := d.ReadString(schemas.VerificationFailedException_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = VerificationFailedReason(ev)
-			return nil
-		}
-		return nil
-	})
-}

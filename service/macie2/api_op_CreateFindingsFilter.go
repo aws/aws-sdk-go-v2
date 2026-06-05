@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,36 +79,6 @@ type CreateFindingsFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFindingsFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFindingsFilterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFindingsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.CreateFindingsFilterRequest_action, string(v.Action))
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateFindingsFilterRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateFindingsFilterRequest_description, *v.Description)
-	}
-	if v.FindingCriteria != nil {
-		s.WriteStruct(schemas.CreateFindingsFilterRequest_findingCriteria)
-		v.FindingCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateFindingsFilterRequest_name, *v.Name)
-	}
-	if v.Position != nil {
-		s.WriteInt32(schemas.CreateFindingsFilterRequest_position, *v.Position)
-	}
-	serializeTagMap(s, schemas.CreateFindingsFilterRequest_tags, v.Tags)
-}
-
 type CreateFindingsFilterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the filter that was created.
@@ -125,27 +93,16 @@ type CreateFindingsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFindingsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFindingsFilterResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFindingsFilterResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateFindingsFilterResponse_arn, v.Arn)
-		case schemas.CreateFindingsFilterResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateFindingsFilterResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFindingsFilter, schemas.CreateFindingsFilterRequest, schemas.CreateFindingsFilterResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFindingsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFindingsFilter, schemas.CreateFindingsFilterRequest, schemas.CreateFindingsFilterResponse), output: &CreateFindingsFilterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFindingsFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFindingsFilter"); err != nil {

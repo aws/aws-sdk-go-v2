@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,61 +69,6 @@ type CreateAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssistantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssistantRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAssistantRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAssistantRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAssistantRequest_name, *v.Name)
-	}
-	if v.ServerSideEncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateAssistantRequest_serverSideEncryptionConfiguration)
-		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTags(s, schemas.CreateAssistantRequest_tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.CreateAssistantRequest_type, string(v.Type))
-	}
-}
-func (v *CreateAssistantInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssistantRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssistantRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateAssistantRequest_clientToken, v.ClientToken)
-		case schemas.CreateAssistantRequest_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateAssistantRequest_description, v.Description)
-		case schemas.CreateAssistantRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateAssistantRequest_name, v.Name)
-		case schemas.CreateAssistantRequest_serverSideEncryptionConfiguration:
-			v.ServerSideEncryptionConfiguration = &types.ServerSideEncryptionConfiguration{}
-			return v.ServerSideEncryptionConfiguration.Deserialize(d)
-		case schemas.CreateAssistantRequest_tags:
-			return deserializeTags(d, schemas.CreateAssistantRequest_tags, &v.Tags)
-		case schemas.CreateAssistantRequest_type:
-			var ev string
-			if err := d.ReadString(schemas.CreateAssistantRequest_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.AssistantType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type CreateAssistantOutput struct {
 
 	// Information about the assistant.
@@ -137,37 +80,16 @@ type CreateAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssistantOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssistantResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Assistant != nil {
-		s.WriteStruct(schemas.CreateAssistantResponse_assistant)
-		v.Assistant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssistantResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssistantResponse_assistant:
-			v.Assistant = &types.AssistantData{}
-			return v.Assistant.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssistant, schemas.CreateAssistantRequest, schemas.CreateAssistantResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssistant, schemas.CreateAssistantRequest, schemas.CreateAssistantResponse), output: &CreateAssistantOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAssistant"); err != nil {

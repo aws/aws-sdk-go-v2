@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,30 +59,6 @@ type ListInferenceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInferenceEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInferenceEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInferenceEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InferenceSchedulerName != nil {
-		s.WriteString(schemas.ListInferenceEventsRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
-	}
-	if v.IntervalEndTime != nil {
-		s.WriteTime(schemas.ListInferenceEventsRequest_IntervalEndTime, *v.IntervalEndTime)
-	}
-	if v.IntervalStartTime != nil {
-		s.WriteTime(schemas.ListInferenceEventsRequest_IntervalStartTime, *v.IntervalStartTime)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListInferenceEventsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListInferenceEventsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListInferenceEventsOutput struct {
 
 	// Provides an array of information about the individual inference events returned
@@ -102,26 +76,16 @@ type ListInferenceEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInferenceEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInferenceEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInferenceEventsResponse_InferenceEventSummaries:
-			return deserializeInferenceEventSummaries(d, schemas.ListInferenceEventsResponse_InferenceEventSummaries, &v.InferenceEventSummaries)
-		case schemas.ListInferenceEventsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListInferenceEventsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListInferenceEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceEvents, schemas.ListInferenceEventsRequest, schemas.ListInferenceEventsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInferenceEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceEvents, schemas.ListInferenceEventsRequest, schemas.ListInferenceEventsResponse), output: &ListInferenceEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInferenceEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInferenceEvents"); err != nil {

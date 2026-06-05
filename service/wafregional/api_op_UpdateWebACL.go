@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -133,27 +131,6 @@ type UpdateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWebACLInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateWebACLRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.UpdateWebACLRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.DefaultAction != nil {
-		s.WriteStruct(schemas.UpdateWebACLRequest_DefaultAction)
-		v.DefaultAction.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeWebACLUpdates(s, schemas.UpdateWebACLRequest_Updates, v.Updates)
-	if v.WebACLId != nil {
-		s.WriteString(schemas.UpdateWebACLRequest_WebACLId, *v.WebACLId)
-	}
-}
-
 type UpdateWebACLOutput struct {
 
 	// The ChangeToken that you used to submit the UpdateWebACL request. You can also
@@ -166,24 +143,16 @@ type UpdateWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateWebACLResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateWebACLResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.UpdateWebACLResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebACL, schemas.UpdateWebACLRequest, schemas.UpdateWebACLResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebACL{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebACL, schemas.UpdateWebACLRequest, schemas.UpdateWebACLResponse), output: &UpdateWebACLOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWebACL{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWebACL"); err != nil {

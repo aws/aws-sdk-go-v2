@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,18 +47,6 @@ type ResolveCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResolveCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResolveCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResolveCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.ResolveCaseRequest_caseId, *v.CaseId)
-	}
-}
-
 // The status of the case returned by the ResolveCase operation.
 type ResolveCaseOutput struct {
 
@@ -76,27 +62,16 @@ type ResolveCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResolveCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResolveCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResolveCaseResponse_finalCaseStatus:
-			v.FinalCaseStatus = new(string)
-			return d.ReadString(schemas.ResolveCaseResponse_finalCaseStatus, v.FinalCaseStatus)
-		case schemas.ResolveCaseResponse_initialCaseStatus:
-			v.InitialCaseStatus = new(string)
-			return d.ReadString(schemas.ResolveCaseResponse_initialCaseStatus, v.InitialCaseStatus)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveCase, schemas.ResolveCaseRequest, schemas.ResolveCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveCase, schemas.ResolveCaseRequest, schemas.ResolveCaseResponse), output: &ResolveCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResolveCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ResolveCase"); err != nil {

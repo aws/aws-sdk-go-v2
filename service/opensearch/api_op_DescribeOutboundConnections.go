@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type DescribeOutboundConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOutboundConnectionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeOutboundConnectionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeOutboundConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeOutboundConnectionsRequest_Filters, v.Filters)
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.DescribeOutboundConnectionsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeOutboundConnectionsRequest_NextToken, *v.NextToken)
-	}
-}
-
 // Contains a list of connections matching the filter criteria.
 type DescribeOutboundConnectionsOutput struct {
 
@@ -83,26 +65,16 @@ type DescribeOutboundConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeOutboundConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeOutboundConnectionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeOutboundConnectionsResponse_Connections:
-			return deserializeOutboundConnections(d, schemas.DescribeOutboundConnectionsResponse_Connections, &v.Connections)
-		case schemas.DescribeOutboundConnectionsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeOutboundConnectionsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeOutboundConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOutboundConnections, schemas.DescribeOutboundConnectionsRequest, schemas.DescribeOutboundConnectionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOutboundConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOutboundConnections, schemas.DescribeOutboundConnectionsRequest, schemas.DescribeOutboundConnectionsResponse), output: &DescribeOutboundConnectionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOutboundConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOutboundConnections"); err != nil {

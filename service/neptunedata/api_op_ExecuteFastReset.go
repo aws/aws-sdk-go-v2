@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,21 +59,6 @@ type ExecuteFastResetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteFastResetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteFastResetInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteFastResetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.ExecuteFastResetInput_action, string(v.Action))
-	}
-	if v.Token != nil {
-		s.WriteString(schemas.ExecuteFastResetInput_token, *v.Token)
-	}
-}
-
 type ExecuteFastResetOutput struct {
 
 	// The status is only returned for the performDatabaseReset action, and indicates
@@ -95,27 +78,16 @@ type ExecuteFastResetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteFastResetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteFastResetOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteFastResetOutput_payload:
-			v.Payload = &types.FastResetToken{}
-			return v.Payload.Deserialize(d)
-		case schemas.ExecuteFastResetOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.ExecuteFastResetOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteFastResetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteFastReset, schemas.ExecuteFastResetInput, schemas.ExecuteFastResetOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteFastReset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteFastReset, schemas.ExecuteFastResetInput, schemas.ExecuteFastResetOutput), output: &ExecuteFastResetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteFastReset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteFastReset"); err != nil {

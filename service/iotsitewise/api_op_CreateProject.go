@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,28 +58,6 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateProjectRequest_clientToken, *v.ClientToken)
-	}
-	if v.PortalId != nil {
-		s.WriteString(schemas.CreateProjectRequest_portalId, *v.PortalId)
-	}
-	if v.ProjectDescription != nil {
-		s.WriteString(schemas.CreateProjectRequest_projectDescription, *v.ProjectDescription)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.CreateProjectRequest_projectName, *v.ProjectName)
-	}
-	serializeTagMap(s, schemas.CreateProjectRequest_tags, v.Tags)
-}
-
 type CreateProjectOutput struct {
 
 	// The [ARN] of the project, which has the following format.
@@ -104,27 +80,16 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProjectResponse_projectArn:
-			v.ProjectArn = new(string)
-			return d.ReadString(schemas.CreateProjectResponse_projectArn, v.ProjectArn)
-		case schemas.CreateProjectResponse_projectId:
-			v.ProjectId = new(string)
-			return d.ReadString(schemas.CreateProjectResponse_projectId, v.ProjectId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResponse), output: &CreateProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProject"); err != nil {

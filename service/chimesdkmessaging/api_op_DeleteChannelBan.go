@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,24 +50,6 @@ type DeleteChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteChannelBanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteChannelBanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteChannelBanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.DeleteChannelBanRequest_ChannelArn, *v.ChannelArn)
-	}
-	if v.ChimeBearer != nil {
-		s.WriteString(schemas.DeleteChannelBanRequest_ChimeBearer, *v.ChimeBearer)
-	}
-	if v.MemberArn != nil {
-		s.WriteString(schemas.DeleteChannelBanRequest_MemberArn, *v.MemberArn)
-	}
-}
-
 type DeleteChannelBanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,29 +57,16 @@ type DeleteChannelBanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteChannelBanOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteChannelBanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteChannelBanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelBan, schemas.DeleteChannelBanRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannelBan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannelBan, schemas.DeleteChannelBanRequest, nil), output: &DeleteChannelBanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannelBan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteChannelBan"); err != nil {

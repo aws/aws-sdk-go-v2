@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecoveryPointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRecoveryPointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRecoveryPointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RecoveryPointId != nil {
-		s.WriteString(schemas.GetRecoveryPointRequest_recoveryPointId, *v.RecoveryPointId)
-	}
-}
-
 type GetRecoveryPointOutput struct {
 
 	// The returned recovery point object.
@@ -62,24 +48,16 @@ type GetRecoveryPointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecoveryPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRecoveryPointResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRecoveryPointResponse_recoveryPoint:
-			v.RecoveryPoint = &types.RecoveryPoint{}
-			return v.RecoveryPoint.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPoint, schemas.GetRecoveryPointRequest, schemas.GetRecoveryPointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRecoveryPoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPoint, schemas.GetRecoveryPointRequest, schemas.GetRecoveryPointResponse), output: &GetRecoveryPointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRecoveryPoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecoveryPoint"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,40 +44,6 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateGroupRequest_Description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateGroupRequest_DisplayName, *v.DisplayName)
-	}
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.CreateGroupRequest_IdentityStoreId, *v.IdentityStoreId)
-	}
-}
-func (v *CreateGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_Description, v.Description)
-		case schemas.CreateGroupRequest_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_DisplayName, v.DisplayName)
-		case schemas.CreateGroupRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateGroupRequest_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
-
 type CreateGroupOutput struct {
 
 	// The identifier of the newly created group in the identity store.
@@ -98,41 +62,16 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateGroupResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.CreateGroupResponse_GroupId, *v.GroupId)
-	}
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.CreateGroupResponse_IdentityStoreId, *v.IdentityStoreId)
-	}
-}
-func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateGroupResponse_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.CreateGroupResponse_GroupId, v.GroupId)
-		case schemas.CreateGroupResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.CreateGroupResponse_IdentityStoreId, v.IdentityStoreId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse), output: &CreateGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGroup"); err != nil {

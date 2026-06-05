@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetTelemetryRuleForOrganizationInput struct {
 	RuleIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetTelemetryRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTelemetryRuleForOrganizationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTelemetryRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleIdentifier != nil {
-		s.WriteString(schemas.GetTelemetryRuleForOrganizationInput_RuleIdentifier, *v.RuleIdentifier)
-	}
 }
 
 type GetTelemetryRuleForOrganizationOutput struct {
@@ -94,44 +80,16 @@ type GetTelemetryRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTelemetryRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTelemetryRuleForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTelemetryRuleForOrganizationOutput_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.GetTelemetryRuleForOrganizationOutput_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.GetTelemetryRuleForOrganizationOutput_HomeRegion:
-			v.HomeRegion = new(string)
-			return d.ReadString(schemas.GetTelemetryRuleForOrganizationOutput_HomeRegion, v.HomeRegion)
-		case schemas.GetTelemetryRuleForOrganizationOutput_IsReplicated:
-			v.IsReplicated = new(bool)
-			return d.ReadBool(schemas.GetTelemetryRuleForOrganizationOutput_IsReplicated, v.IsReplicated)
-		case schemas.GetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.GetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.GetTelemetryRuleForOrganizationOutput_RegionStatuses:
-			return deserializeRegionStatuses(d, schemas.GetTelemetryRuleForOrganizationOutput_RegionStatuses, &v.RegionStatuses)
-		case schemas.GetTelemetryRuleForOrganizationOutput_RuleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.GetTelemetryRuleForOrganizationOutput_RuleArn, v.RuleArn)
-		case schemas.GetTelemetryRuleForOrganizationOutput_RuleName:
-			v.RuleName = new(string)
-			return d.ReadString(schemas.GetTelemetryRuleForOrganizationOutput_RuleName, v.RuleName)
-		case schemas.GetTelemetryRuleForOrganizationOutput_TelemetryRule:
-			v.TelemetryRule = &types.TelemetryRule{}
-			return v.TelemetryRule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTelemetryRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryRuleForOrganization, schemas.GetTelemetryRuleForOrganizationInput, schemas.GetTelemetryRuleForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryRuleForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryRuleForOrganization, schemas.GetTelemetryRuleForOrganizationInput, schemas.GetTelemetryRuleForOrganizationOutput), output: &GetTelemetryRuleForOrganizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryRuleForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTelemetryRuleForOrganization"); err != nil {

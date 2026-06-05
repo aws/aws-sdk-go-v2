@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,46 +56,6 @@ type ListClusterSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListClusterSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListClusterSnapshotsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListClusterSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.ListClusterSnapshotsInput_clusterArn, *v.ClusterArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListClusterSnapshotsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListClusterSnapshotsInput_nextToken, *v.NextToken)
-	}
-	if v.SnapshotType != nil {
-		s.WriteString(schemas.ListClusterSnapshotsInput_snapshotType, *v.SnapshotType)
-	}
-}
-func (v *ListClusterSnapshotsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListClusterSnapshotsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListClusterSnapshotsInput_clusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.ListClusterSnapshotsInput_clusterArn, v.ClusterArn)
-		case schemas.ListClusterSnapshotsInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListClusterSnapshotsInput_maxResults, v.MaxResults)
-		case schemas.ListClusterSnapshotsInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListClusterSnapshotsInput_nextToken, v.NextToken)
-		case schemas.ListClusterSnapshotsInput_snapshotType:
-			v.SnapshotType = new(string)
-			return d.ReadString(schemas.ListClusterSnapshotsInput_snapshotType, v.SnapshotType)
-		}
-		return nil
-	})
-}
-
 type ListClusterSnapshotsOutput struct {
 
 	// A pagination token provided by a previous request. If this parameter is
@@ -116,38 +74,16 @@ type ListClusterSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListClusterSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListClusterSnapshotsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListClusterSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListClusterSnapshotsOutput_nextToken, *v.NextToken)
-	}
-	serializeClusterSnapshotList(s, schemas.ListClusterSnapshotsOutput_snapshots, v.Snapshots)
-}
-func (v *ListClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListClusterSnapshotsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListClusterSnapshotsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListClusterSnapshotsOutput_nextToken, v.NextToken)
-		case schemas.ListClusterSnapshotsOutput_snapshots:
-			return deserializeClusterSnapshotList(d, schemas.ListClusterSnapshotsOutput_snapshots, &v.Snapshots)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterSnapshots, schemas.ListClusterSnapshotsInput, schemas.ListClusterSnapshotsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClusterSnapshots{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterSnapshots, schemas.ListClusterSnapshotsInput, schemas.ListClusterSnapshotsOutput), output: &ListClusterSnapshotsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClusterSnapshots{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListClusterSnapshots"); err != nil {

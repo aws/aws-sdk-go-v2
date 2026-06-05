@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,15 +33,6 @@ type GetDefaultApplicationSettingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDefaultApplicationSettingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDefaultApplicationSettingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDefaultApplicationSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type GetDefaultApplicationSettingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
@@ -58,24 +47,16 @@ type GetDefaultApplicationSettingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDefaultApplicationSettingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDefaultApplicationSettingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDefaultApplicationSettingResponse_applicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.GetDefaultApplicationSettingResponse_applicationArn, v.ApplicationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDefaultApplicationSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultApplicationSetting, schemas.GetDefaultApplicationSettingRequest, schemas.GetDefaultApplicationSettingResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDefaultApplicationSetting{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultApplicationSetting, schemas.GetDefaultApplicationSettingRequest, schemas.GetDefaultApplicationSettingResponse), output: &GetDefaultApplicationSettingOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDefaultApplicationSetting{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDefaultApplicationSetting"); err != nil {

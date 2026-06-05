@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,18 +48,6 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSchemaInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.GetSchemaInput_policyStoreId, *v.PolicyStoreId)
-	}
-}
-
 type GetSchemaOutput struct {
 
 	// The date and time that the schema was originally created.
@@ -93,35 +79,16 @@ type GetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSchemaOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSchemaOutput_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSchemaOutput_createdDate, v.CreatedDate)
-		case schemas.GetSchemaOutput_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetSchemaOutput_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetSchemaOutput_namespaces:
-			return deserializeNamespaceList(d, schemas.GetSchemaOutput_namespaces, &v.Namespaces)
-		case schemas.GetSchemaOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.GetSchemaOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.GetSchemaOutput_schema:
-			v.Schema = new(string)
-			return d.ReadString(schemas.GetSchemaOutput_schema, v.Schema)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput), output: &GetSchemaOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetSchema{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchema"); err != nil {

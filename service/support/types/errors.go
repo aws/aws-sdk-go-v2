@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AttachmentIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AttachmentIdNotFound) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentIdNotFound, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentIdNotFound_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AttachmentIdNotFound_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The limit for the number of attachment sets created in a short period of time
 // has been exceeded.
@@ -70,16 +59,6 @@ func (e *AttachmentLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AttachmentLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentLimitExceeded, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentLimitExceeded_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AttachmentLimitExceeded_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The expiration time of the attachment set has passed. The set expires 1 hour
 // after it is created.
@@ -107,16 +86,6 @@ func (e *AttachmentSetExpired) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AttachmentSetExpired) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentSetExpired, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentSetExpired_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AttachmentSetExpired_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An attachment set with the specified ID could not be found.
 type AttachmentSetIdNotFound struct {
@@ -143,16 +112,6 @@ func (e *AttachmentSetIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AttachmentSetIdNotFound) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentSetIdNotFound, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentSetIdNotFound_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AttachmentSetIdNotFound_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A limit for the size of an attachment set has been exceeded. The limits are
 // three attachments and 5 MB per attachment.
@@ -180,16 +139,6 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AttachmentSetSizeLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachmentSetSizeLimitExceeded, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AttachmentSetSizeLimitExceeded_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AttachmentSetSizeLimitExceeded_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The case creation limit for the account has been exceeded.
 type CaseCreationLimitExceeded struct {
@@ -216,16 +165,6 @@ func (e *CaseCreationLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *CaseCreationLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CaseCreationLimitExceeded, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CaseCreationLimitExceeded_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CaseCreationLimitExceeded_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The requested caseId couldn't be located.
 type CaseIdNotFound struct {
@@ -252,16 +191,6 @@ func (e *CaseIdNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *CaseIdNotFound) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CaseIdNotFound, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CaseIdNotFound_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.CaseIdNotFound_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The limit for the number of DescribeAttachment requests in a short period of time has been
 // exceeded.
@@ -289,16 +218,6 @@ func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DescribeAttachmentLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeAttachmentLimitExceeded, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeAttachmentLimitExceeded_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DescribeAttachmentLimitExceeded_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An internal server error occurred.
 type InternalServerError struct {
@@ -325,16 +244,6 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerError_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerError_message, v.Message)
-		}
-		return nil
-	})
-}
 
 //	You have exceeded the maximum allowed TPS (Transactions Per Second) for the
 //
@@ -363,13 +272,3 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}

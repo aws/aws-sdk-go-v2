@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,27 +64,6 @@ type UpdateDataLakeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataLakeDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDataLakeDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDataLakeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateDataLakeDatasetRequest_description, *v.Description)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.UpdateDataLakeDatasetRequest_instanceId, *v.InstanceId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateDataLakeDatasetRequest_name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.UpdateDataLakeDatasetRequest_namespace, *v.Namespace)
-	}
-}
-
 // The response parameters of UpdateDataLakeDataset.
 type UpdateDataLakeDatasetOutput struct {
 
@@ -101,24 +78,16 @@ type UpdateDataLakeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDataLakeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDataLakeDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDataLakeDatasetResponse_dataset:
-			v.Dataset = &types.DataLakeDataset{}
-			return v.Dataset.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDataLakeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataLakeDataset, schemas.UpdateDataLakeDatasetRequest, schemas.UpdateDataLakeDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataLakeDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataLakeDataset, schemas.UpdateDataLakeDatasetRequest, schemas.UpdateDataLakeDatasetResponse), output: &UpdateDataLakeDatasetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataLakeDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataLakeDataset"); err != nil {

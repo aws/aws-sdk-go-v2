@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,40 +45,6 @@ type ListContentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListContentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListContentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListContentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.ListContentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListContentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListContentsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListContentsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListContentsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListContentsRequest_knowledgeBaseId:
-			v.KnowledgeBaseId = new(string)
-			return d.ReadString(schemas.ListContentsRequest_knowledgeBaseId, v.KnowledgeBaseId)
-		case schemas.ListContentsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListContentsRequest_maxResults, v.MaxResults)
-		case schemas.ListContentsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListContentsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListContentsOutput struct {
 
 	// Information about the content.
@@ -97,38 +61,16 @@ type ListContentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListContentsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListContentsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListContentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentSummaryList(s, schemas.ListContentsResponse_contentSummaries, v.ContentSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListContentsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListContentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListContentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListContentsResponse_contentSummaries:
-			return deserializeContentSummaryList(d, schemas.ListContentsResponse_contentSummaries, &v.ContentSummaries)
-		case schemas.ListContentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListContentsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContents, schemas.ListContentsRequest, schemas.ListContentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContents, schemas.ListContentsRequest, schemas.ListContentsResponse), output: &ListContentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContents"); err != nil {

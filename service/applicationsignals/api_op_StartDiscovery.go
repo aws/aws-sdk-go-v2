@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,15 +56,6 @@ type StartDiscoveryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDiscoveryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type StartDiscoveryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,21 +63,16 @@ type StartDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDiscoveryOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscovery, schemas.StartDiscoveryInput, schemas.StartDiscoveryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDiscovery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscovery, schemas.StartDiscoveryInput, schemas.StartDiscoveryOutput), output: &StartDiscoveryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDiscovery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDiscovery"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,30 +66,6 @@ type ListTransactionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTransactionEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTransactionEventsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTransactionEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTransactionEventsInput_maxResults, *v.MaxResults)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.ListTransactionEventsInput_network, string(v.Network))
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTransactionEventsInput_nextToken, *v.NextToken)
-	}
-	if v.TransactionHash != nil {
-		s.WriteString(schemas.ListTransactionEventsInput_transactionHash, *v.TransactionHash)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.ListTransactionEventsInput_transactionId, *v.TransactionId)
-	}
-}
-
 type ListTransactionEventsOutput struct {
 
 	// An array of TransactionEvent objects. Each object contains details about the
@@ -109,26 +83,16 @@ type ListTransactionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTransactionEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTransactionEventsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTransactionEventsOutput_events:
-			return deserializeTransactionEventList(d, schemas.ListTransactionEventsOutput_events, &v.Events)
-		case schemas.ListTransactionEventsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTransactionEventsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactionEvents, schemas.ListTransactionEventsInput, schemas.ListTransactionEventsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTransactionEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactionEvents, schemas.ListTransactionEventsInput, schemas.ListTransactionEventsOutput), output: &ListTransactionEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTransactionEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTransactionEvents"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,27 +71,6 @@ type GetQueryResultsWorkloadInsightsTopContributorsDataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryResultsWorkloadInsightsTopContributorsDataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQueryResultsWorkloadInsightsTopContributorsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput_nextToken, *v.NextToken)
-	}
-	if v.QueryId != nil {
-		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput_queryId, *v.QueryId)
-	}
-	if v.ScopeId != nil {
-		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId, *v.ScopeId)
-	}
-}
-
 type GetQueryResultsWorkloadInsightsTopContributorsDataOutput struct {
 
 	// The datapoints returned by the query.
@@ -116,33 +93,16 @@ type GetQueryResultsWorkloadInsightsTopContributorsDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryResultsWorkloadInsightsTopContributorsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints:
-			return deserializeWorkloadInsightsTopContributorsDataPoints(d, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints, &v.Datapoints)
-		case schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken, v.NextToken)
-		case schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit:
-			var ev string
-			if err := d.ReadString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_unit, &ev); err != nil {
-				return err
-			}
-			v.Unit = types.MetricUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetQueryResultsWorkloadInsightsTopContributorsDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsWorkloadInsightsTopContributorsData, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryResultsWorkloadInsightsTopContributorsData{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResultsWorkloadInsightsTopContributorsData, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataInput, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput), output: &GetQueryResultsWorkloadInsightsTopContributorsDataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryResultsWorkloadInsightsTopContributorsData{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryResultsWorkloadInsightsTopContributorsData"); err != nil {

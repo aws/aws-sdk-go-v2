@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type ListTransformersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTransformersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTransformersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTransformersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTransformersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTransformersRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListTransformersOutput struct {
 
 	// Returns an array of one or more transformer objects.
@@ -81,26 +64,16 @@ type ListTransformersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTransformersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTransformersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTransformersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTransformersResponse_nextToken, v.NextToken)
-		case schemas.ListTransformersResponse_transformers:
-			return deserializeTransformerList(d, schemas.ListTransformersResponse_transformers, &v.Transformers)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTransformersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransformers, schemas.ListTransformersRequest, schemas.ListTransformersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTransformers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransformers, schemas.ListTransformersRequest, schemas.ListTransformersResponse), output: &ListTransformersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTransformers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTransformers"); err != nil {

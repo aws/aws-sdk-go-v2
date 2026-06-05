@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPhoneNumberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PhoneNumberId != nil {
-		s.WriteString(schemas.GetPhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
-	}
-}
-
 type GetPhoneNumberOutput struct {
 
 	// The phone number details.
@@ -63,24 +49,16 @@ type GetPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPhoneNumberResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPhoneNumberResponse_PhoneNumber:
-			v.PhoneNumber = &types.PhoneNumber{}
-			return v.PhoneNumber.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPhoneNumber, schemas.GetPhoneNumberRequest, schemas.GetPhoneNumberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPhoneNumber, schemas.GetPhoneNumberRequest, schemas.GetPhoneNumberResponse), output: &GetPhoneNumberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPhoneNumber"); err != nil {

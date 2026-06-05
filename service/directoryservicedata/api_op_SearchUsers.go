@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,31 +82,6 @@ type SearchUsersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchUsersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchUsersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.SearchUsersRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchUsersRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchUsersRequest_NextToken, *v.NextToken)
-	}
-	if v.Realm != nil {
-		s.WriteString(schemas.SearchUsersRequest_Realm, *v.Realm)
-	}
-	serializeLdapDisplayNameList(s, schemas.SearchUsersRequest_SearchAttributes, v.SearchAttributes)
-	if v.SearchString != nil {
-		s.WriteString(schemas.SearchUsersRequest_SearchString, *v.SearchString)
-	}
-}
-
 type SearchUsersOutput struct {
 
 	//  The identifier (ID) of the directory where the address block is added.
@@ -130,32 +103,16 @@ type SearchUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchUsersResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchUsersResult_DirectoryId:
-			v.DirectoryId = new(string)
-			return d.ReadString(schemas.SearchUsersResult_DirectoryId, v.DirectoryId)
-		case schemas.SearchUsersResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchUsersResult_NextToken, v.NextToken)
-		case schemas.SearchUsersResult_Realm:
-			v.Realm = new(string)
-			return d.ReadString(schemas.SearchUsersResult_Realm, v.Realm)
-		case schemas.SearchUsersResult_Users:
-			return deserializeUserList(d, schemas.SearchUsersResult_Users, &v.Users)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsers, schemas.SearchUsersRequest, schemas.SearchUsersResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUsers, schemas.SearchUsersRequest, schemas.SearchUsersResult), output: &SearchUsersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchUsers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchUsers"); err != nil {

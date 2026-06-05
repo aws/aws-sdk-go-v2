@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteNetworkAnalyzerConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteNetworkAnalyzerConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteNetworkAnalyzerConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationName != nil {
-		s.WriteString(schemas.DeleteNetworkAnalyzerConfigurationRequest_ConfigurationName, *v.ConfigurationName)
-	}
-}
-
 type DeleteNetworkAnalyzerConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DeleteNetworkAnalyzerConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteNetworkAnalyzerConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkAnalyzerConfiguration, schemas.DeleteNetworkAnalyzerConfigurationRequest, schemas.DeleteNetworkAnalyzerConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNetworkAnalyzerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkAnalyzerConfiguration, schemas.DeleteNetworkAnalyzerConfigurationRequest, schemas.DeleteNetworkAnalyzerConfigurationResponse), output: &DeleteNetworkAnalyzerConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNetworkAnalyzerConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteNetworkAnalyzerConfiguration"); err != nil {

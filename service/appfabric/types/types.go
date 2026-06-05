@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -18,28 +16,6 @@ type ApiKeyCredential struct {
 	ApiKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApiKeyCredential) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApiKeyCredential)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApiKeyCredential) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiKey != nil {
-		s.WriteString(schemas.ApiKeyCredential_apiKey, *v.ApiKey)
-	}
-}
-func (v *ApiKeyCredential) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApiKeyCredential, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApiKeyCredential_apiKey:
-			v.ApiKey = new(string)
-			return d.ReadString(schemas.ApiKeyCredential_apiKey, v.ApiKey)
-		}
-		return nil
-	})
 }
 
 // Contains information about an app authorization.
@@ -114,96 +90,6 @@ type AppAuthorization struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppAuthorization) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppAuthorization)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppAuthorization) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.AppAuthorization_app, *v.App)
-	}
-	if v.AppAuthorizationArn != nil {
-		s.WriteString(schemas.AppAuthorization_appAuthorizationArn, *v.AppAuthorizationArn)
-	}
-	if v.AppBundleArn != nil {
-		s.WriteString(schemas.AppAuthorization_appBundleArn, *v.AppBundleArn)
-	}
-	if v.AuthType != "" {
-		s.WriteString(schemas.AppAuthorization_authType, string(v.AuthType))
-	}
-	if v.AuthUrl != nil {
-		s.WriteString(schemas.AppAuthorization_authUrl, *v.AuthUrl)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.AppAuthorization_createdAt, *v.CreatedAt)
-	}
-	if v.Persona != "" {
-		s.WriteString(schemas.AppAuthorization_persona, string(v.Persona))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AppAuthorization_status, string(v.Status))
-	}
-	if v.Tenant != nil {
-		s.WriteStruct(schemas.AppAuthorization_tenant)
-		v.Tenant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AppAuthorization_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *AppAuthorization) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppAuthorization, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppAuthorization_app:
-			v.App = new(string)
-			return d.ReadString(schemas.AppAuthorization_app, v.App)
-		case schemas.AppAuthorization_appAuthorizationArn:
-			v.AppAuthorizationArn = new(string)
-			return d.ReadString(schemas.AppAuthorization_appAuthorizationArn, v.AppAuthorizationArn)
-		case schemas.AppAuthorization_appBundleArn:
-			v.AppBundleArn = new(string)
-			return d.ReadString(schemas.AppAuthorization_appBundleArn, v.AppBundleArn)
-		case schemas.AppAuthorization_authType:
-			var ev string
-			if err := d.ReadString(schemas.AppAuthorization_authType, &ev); err != nil {
-				return err
-			}
-			v.AuthType = AuthType(ev)
-			return nil
-		case schemas.AppAuthorization_authUrl:
-			v.AuthUrl = new(string)
-			return d.ReadString(schemas.AppAuthorization_authUrl, v.AuthUrl)
-		case schemas.AppAuthorization_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.AppAuthorization_createdAt, v.CreatedAt)
-		case schemas.AppAuthorization_persona:
-			var ev string
-			if err := d.ReadString(schemas.AppAuthorization_persona, &ev); err != nil {
-				return err
-			}
-			v.Persona = Persona(ev)
-			return nil
-		case schemas.AppAuthorization_status:
-			var ev string
-			if err := d.ReadString(schemas.AppAuthorization_status, &ev); err != nil {
-				return err
-			}
-			v.Status = AppAuthorizationStatus(ev)
-			return nil
-		case schemas.AppAuthorization_tenant:
-			v.Tenant = &Tenant{}
-			return v.Tenant.Deserialize(d)
-		case schemas.AppAuthorization_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AppAuthorization_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains a summary of an app authorization.
 type AppAuthorizationSummary struct {
 
@@ -258,64 +144,6 @@ type AppAuthorizationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppAuthorizationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppAuthorizationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppAuthorizationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.AppAuthorizationSummary_app, *v.App)
-	}
-	if v.AppAuthorizationArn != nil {
-		s.WriteString(schemas.AppAuthorizationSummary_appAuthorizationArn, *v.AppAuthorizationArn)
-	}
-	if v.AppBundleArn != nil {
-		s.WriteString(schemas.AppAuthorizationSummary_appBundleArn, *v.AppBundleArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AppAuthorizationSummary_status, string(v.Status))
-	}
-	if v.Tenant != nil {
-		s.WriteStruct(schemas.AppAuthorizationSummary_tenant)
-		v.Tenant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AppAuthorizationSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *AppAuthorizationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppAuthorizationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppAuthorizationSummary_app:
-			v.App = new(string)
-			return d.ReadString(schemas.AppAuthorizationSummary_app, v.App)
-		case schemas.AppAuthorizationSummary_appAuthorizationArn:
-			v.AppAuthorizationArn = new(string)
-			return d.ReadString(schemas.AppAuthorizationSummary_appAuthorizationArn, v.AppAuthorizationArn)
-		case schemas.AppAuthorizationSummary_appBundleArn:
-			v.AppBundleArn = new(string)
-			return d.ReadString(schemas.AppAuthorizationSummary_appBundleArn, v.AppBundleArn)
-		case schemas.AppAuthorizationSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.AppAuthorizationSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = AppAuthorizationStatus(ev)
-			return nil
-		case schemas.AppAuthorizationSummary_tenant:
-			v.Tenant = &Tenant{}
-			return v.Tenant.Deserialize(d)
-		case schemas.AppAuthorizationSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AppAuthorizationSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains information about an app bundle.
 type AppBundle struct {
 
@@ -331,34 +159,6 @@ type AppBundle struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppBundle) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppBundle)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppBundle) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AppBundle_arn, *v.Arn)
-	}
-	if v.CustomerManagedKeyArn != nil {
-		s.WriteString(schemas.AppBundle_customerManagedKeyArn, *v.CustomerManagedKeyArn)
-	}
-}
-func (v *AppBundle) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppBundle, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppBundle_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AppBundle_arn, v.Arn)
-		case schemas.AppBundle_customerManagedKeyArn:
-			v.CustomerManagedKeyArn = new(string)
-			return d.ReadString(schemas.AppBundle_customerManagedKeyArn, v.CustomerManagedKeyArn)
-		}
-		return nil
-	})
-}
-
 // Contains a summary of an app bundle.
 type AppBundleSummary struct {
 
@@ -370,28 +170,6 @@ type AppBundleSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppBundleSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppBundleSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppBundleSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AppBundleSummary_arn, *v.Arn)
-	}
-}
-func (v *AppBundleSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppBundleSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppBundleSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AppBundleSummary_arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 // Contains information about an audit log destination configuration.
 type AuditLogDestinationConfiguration struct {
 
@@ -401,25 +179,6 @@ type AuditLogDestinationConfiguration struct {
 	Destination Destination
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuditLogDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuditLogDestinationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuditLogDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestination(s, schemas.AuditLogDestinationConfiguration_destination, v.Destination)
-}
-func (v *AuditLogDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuditLogDestinationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuditLogDestinationConfiguration_destination:
-			return deserializeDestination(d, schemas.AuditLogDestinationConfiguration_destination, &v.Destination)
-		}
-		return nil
-	})
 }
 
 // Contains information about an audit log processing configuration.
@@ -436,42 +195,6 @@ type AuditLogProcessingConfiguration struct {
 	Schema Schema
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuditLogProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuditLogProcessingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuditLogProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Format != "" {
-		s.WriteString(schemas.AuditLogProcessingConfiguration_format, string(v.Format))
-	}
-	if v.Schema != "" {
-		s.WriteString(schemas.AuditLogProcessingConfiguration_schema, string(v.Schema))
-	}
-}
-func (v *AuditLogProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuditLogProcessingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuditLogProcessingConfiguration_format:
-			var ev string
-			if err := d.ReadString(schemas.AuditLogProcessingConfiguration_format, &ev); err != nil {
-				return err
-			}
-			v.Format = Format(ev)
-			return nil
-		case schemas.AuditLogProcessingConfiguration_schema:
-			var ev string
-			if err := d.ReadString(schemas.AuditLogProcessingConfiguration_schema, &ev); err != nil {
-				return err
-			}
-			v.Schema = Schema(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains authorization request information, which is required for Amazon Web
@@ -492,34 +215,6 @@ type AuthRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AuthRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuthRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuthRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.AuthRequest_code, *v.Code)
-	}
-	if v.RedirectUri != nil {
-		s.WriteString(schemas.AuthRequest_redirectUri, *v.RedirectUri)
-	}
-}
-func (v *AuthRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuthRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuthRequest_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.AuthRequest_code, v.Code)
-		case schemas.AuthRequest_redirectUri:
-			v.RedirectUri = new(string)
-			return d.ReadString(schemas.AuthRequest_redirectUri, v.RedirectUri)
-		}
-		return nil
-	})
-}
-
 // Contains credential information for an application.
 //
 // The following types satisfy this interface:
@@ -538,14 +233,6 @@ type CredentialMemberApiKeyCredential struct {
 }
 
 func (*CredentialMemberApiKeyCredential) isCredential() {}
-func (v *CredentialMemberApiKeyCredential) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Credential_apiKeyCredential)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CredentialMemberApiKeyCredential) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains OAuth2 client credential information.
 type CredentialMemberOauth2Credential struct {
@@ -555,14 +242,6 @@ type CredentialMemberOauth2Credential struct {
 }
 
 func (*CredentialMemberOauth2Credential) isCredential() {}
-func (v *CredentialMemberOauth2Credential) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Credential_oauth2Credential)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CredentialMemberOauth2Credential) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains information about an audit log destination.
 //
@@ -582,14 +261,6 @@ type DestinationMemberFirehoseStream struct {
 }
 
 func (*DestinationMemberFirehoseStream) isDestination() {}
-func (v *DestinationMemberFirehoseStream) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Destination_firehoseStream)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationMemberFirehoseStream) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains information about an Amazon S3 bucket.
 type DestinationMemberS3Bucket struct {
@@ -599,14 +270,6 @@ type DestinationMemberS3Bucket struct {
 }
 
 func (*DestinationMemberS3Bucket) isDestination() {}
-func (v *DestinationMemberS3Bucket) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Destination_s3Bucket)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationMemberS3Bucket) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains information about the destination of ingested data.
 //
@@ -625,14 +288,6 @@ type DestinationConfigurationMemberAuditLog struct {
 }
 
 func (*DestinationConfigurationMemberAuditLog) isDestinationConfiguration() {}
-func (v *DestinationConfigurationMemberAuditLog) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DestinationConfiguration_auditLog)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DestinationConfigurationMemberAuditLog) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains information about an Amazon Kinesis Data Firehose delivery stream.
 type FirehoseStream struct {
@@ -643,28 +298,6 @@ type FirehoseStream struct {
 	StreamName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FirehoseStream) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FirehoseStream)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FirehoseStream) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StreamName != nil {
-		s.WriteString(schemas.FirehoseStream_streamName, *v.StreamName)
-	}
-}
-func (v *FirehoseStream) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FirehoseStream, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FirehoseStream_streamName:
-			v.StreamName = new(string)
-			return d.ReadString(schemas.FirehoseStream_streamName, v.StreamName)
-		}
-		return nil
-	})
 }
 
 // Contains information about an ingestion.
@@ -711,78 +344,6 @@ type Ingestion struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *Ingestion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ingestion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ingestion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.Ingestion_app, *v.App)
-	}
-	if v.AppBundleArn != nil {
-		s.WriteString(schemas.Ingestion_appBundleArn, *v.AppBundleArn)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Ingestion_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Ingestion_createdAt, *v.CreatedAt)
-	}
-	if v.IngestionType != "" {
-		s.WriteString(schemas.Ingestion_ingestionType, string(v.IngestionType))
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Ingestion_state, string(v.State))
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.Ingestion_tenantId, *v.TenantId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Ingestion_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Ingestion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ingestion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ingestion_app:
-			v.App = new(string)
-			return d.ReadString(schemas.Ingestion_app, v.App)
-		case schemas.Ingestion_appBundleArn:
-			v.AppBundleArn = new(string)
-			return d.ReadString(schemas.Ingestion_appBundleArn, v.AppBundleArn)
-		case schemas.Ingestion_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Ingestion_arn, v.Arn)
-		case schemas.Ingestion_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Ingestion_createdAt, v.CreatedAt)
-		case schemas.Ingestion_ingestionType:
-			var ev string
-			if err := d.ReadString(schemas.Ingestion_ingestionType, &ev); err != nil {
-				return err
-			}
-			v.IngestionType = IngestionType(ev)
-			return nil
-		case schemas.Ingestion_state:
-			var ev string
-			if err := d.ReadString(schemas.Ingestion_state, &ev); err != nil {
-				return err
-			}
-			v.State = IngestionState(ev)
-			return nil
-		case schemas.Ingestion_tenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.Ingestion_tenantId, v.TenantId)
-		case schemas.Ingestion_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Ingestion_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Contains information about an ingestion destination.
@@ -833,68 +394,6 @@ type IngestionDestination struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IngestionDestination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IngestionDestination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IngestionDestination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.IngestionDestination_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.IngestionDestination_createdAt, *v.CreatedAt)
-	}
-	serializeDestinationConfiguration(s, schemas.IngestionDestination_destinationConfiguration, v.DestinationConfiguration)
-	if v.IngestionArn != nil {
-		s.WriteString(schemas.IngestionDestination_ingestionArn, *v.IngestionArn)
-	}
-	serializeProcessingConfiguration(s, schemas.IngestionDestination_processingConfiguration, v.ProcessingConfiguration)
-	if v.Status != "" {
-		s.WriteString(schemas.IngestionDestination_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.IngestionDestination_statusReason, *v.StatusReason)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.IngestionDestination_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *IngestionDestination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IngestionDestination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IngestionDestination_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.IngestionDestination_arn, v.Arn)
-		case schemas.IngestionDestination_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.IngestionDestination_createdAt, v.CreatedAt)
-		case schemas.IngestionDestination_destinationConfiguration:
-			return deserializeDestinationConfiguration(d, schemas.IngestionDestination_destinationConfiguration, &v.DestinationConfiguration)
-		case schemas.IngestionDestination_ingestionArn:
-			v.IngestionArn = new(string)
-			return d.ReadString(schemas.IngestionDestination_ingestionArn, v.IngestionArn)
-		case schemas.IngestionDestination_processingConfiguration:
-			return deserializeProcessingConfiguration(d, schemas.IngestionDestination_processingConfiguration, &v.ProcessingConfiguration)
-		case schemas.IngestionDestination_status:
-			var ev string
-			if err := d.ReadString(schemas.IngestionDestination_status, &ev); err != nil {
-				return err
-			}
-			v.Status = IngestionDestinationStatus(ev)
-			return nil
-		case schemas.IngestionDestination_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.IngestionDestination_statusReason, v.StatusReason)
-		case schemas.IngestionDestination_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.IngestionDestination_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Contains a summary of an ingestion destination.
 type IngestionDestinationSummary struct {
 
@@ -904,28 +403,6 @@ type IngestionDestinationSummary struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IngestionDestinationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IngestionDestinationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IngestionDestinationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.IngestionDestinationSummary_arn, *v.Arn)
-	}
-}
-func (v *IngestionDestinationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IngestionDestinationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IngestionDestinationSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.IngestionDestinationSummary_arn, v.Arn)
-		}
-		return nil
-	})
 }
 
 // Contains a summary of an ingestion.
@@ -954,50 +431,6 @@ type IngestionSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IngestionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IngestionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IngestionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.IngestionSummary_app, *v.App)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.IngestionSummary_arn, *v.Arn)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.IngestionSummary_state, string(v.State))
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.IngestionSummary_tenantId, *v.TenantId)
-	}
-}
-func (v *IngestionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IngestionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IngestionSummary_app:
-			v.App = new(string)
-			return d.ReadString(schemas.IngestionSummary_app, v.App)
-		case schemas.IngestionSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.IngestionSummary_arn, v.Arn)
-		case schemas.IngestionSummary_state:
-			var ev string
-			if err := d.ReadString(schemas.IngestionSummary_state, &ev); err != nil {
-				return err
-			}
-			v.State = IngestionState(ev)
-			return nil
-		case schemas.IngestionSummary_tenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.IngestionSummary_tenantId, v.TenantId)
-		}
-		return nil
-	})
-}
-
 // Contains OAuth2 client credential information.
 type Oauth2Credential struct {
 
@@ -1012,34 +445,6 @@ type Oauth2Credential struct {
 	ClientSecret *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Oauth2Credential) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Oauth2Credential)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Oauth2Credential) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientId != nil {
-		s.WriteString(schemas.Oauth2Credential_clientId, *v.ClientId)
-	}
-	if v.ClientSecret != nil {
-		s.WriteString(schemas.Oauth2Credential_clientSecret, *v.ClientSecret)
-	}
-}
-func (v *Oauth2Credential) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Oauth2Credential, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Oauth2Credential_clientId:
-			v.ClientId = new(string)
-			return d.ReadString(schemas.Oauth2Credential_clientId, v.ClientId)
-		case schemas.Oauth2Credential_clientSecret:
-			v.ClientSecret = new(string)
-			return d.ReadString(schemas.Oauth2Credential_clientSecret, v.ClientSecret)
-		}
-		return nil
-	})
 }
 
 // Contains information about how ingested data is processed.
@@ -1059,14 +464,6 @@ type ProcessingConfigurationMemberAuditLog struct {
 }
 
 func (*ProcessingConfigurationMemberAuditLog) isProcessingConfiguration() {}
-func (v *ProcessingConfigurationMemberAuditLog) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProcessingConfiguration_auditLog)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ProcessingConfigurationMemberAuditLog) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Contains information about an Amazon S3 bucket.
 type S3Bucket struct {
@@ -1080,34 +477,6 @@ type S3Bucket struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3Bucket) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Bucket)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Bucket) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3Bucket_bucketName, *v.BucketName)
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.S3Bucket_prefix, *v.Prefix)
-	}
-}
-func (v *S3Bucket) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Bucket, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Bucket_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3Bucket_bucketName, v.BucketName)
-		case schemas.S3Bucket_prefix:
-			v.Prefix = new(string)
-			return d.ReadString(schemas.S3Bucket_prefix, v.Prefix)
-		}
-		return nil
-	})
 }
 
 // The key or keys of the key-value pairs for the tag or tags assigned to a
@@ -1127,34 +496,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_key, v.Key)
-		case schemas.Tag_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Contains information about an error returned from a user access task.
 type TaskError struct {
 
@@ -1165,34 +506,6 @@ type TaskError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TaskError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TaskError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TaskError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.TaskError_errorCode, *v.ErrorCode)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.TaskError_errorMessage, *v.ErrorMessage)
-	}
-}
-func (v *TaskError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TaskError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TaskError_errorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.TaskError_errorCode, v.ErrorCode)
-		case schemas.TaskError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.TaskError_errorMessage, v.ErrorMessage)
-		}
-		return nil
-	})
 }
 
 // Contains information about an application tenant.
@@ -1209,34 +522,6 @@ type Tenant struct {
 	TenantIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tenant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tenant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tenant) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TenantDisplayName != nil {
-		s.WriteString(schemas.Tenant_tenantDisplayName, *v.TenantDisplayName)
-	}
-	if v.TenantIdentifier != nil {
-		s.WriteString(schemas.Tenant_tenantIdentifier, *v.TenantIdentifier)
-	}
-}
-func (v *Tenant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tenant, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tenant_tenantDisplayName:
-			v.TenantDisplayName = new(string)
-			return d.ReadString(schemas.Tenant_tenantDisplayName, v.TenantDisplayName)
-		case schemas.Tenant_tenantIdentifier:
-			v.TenantIdentifier = new(string)
-			return d.ReadString(schemas.Tenant_tenantIdentifier, v.TenantIdentifier)
-		}
-		return nil
-	})
 }
 
 // Contains information about a user's access to an application.
@@ -1291,100 +576,6 @@ type UserAccessResultItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UserAccessResultItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserAccessResultItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserAccessResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.UserAccessResultItem_app, *v.App)
-	}
-	if v.Email != nil {
-		s.WriteString(schemas.UserAccessResultItem_email, *v.Email)
-	}
-	if v.ResultStatus != "" {
-		s.WriteString(schemas.UserAccessResultItem_resultStatus, string(v.ResultStatus))
-	}
-	if v.TaskError != nil {
-		s.WriteStruct(schemas.UserAccessResultItem_taskError)
-		v.TaskError.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.UserAccessResultItem_taskId, *v.TaskId)
-	}
-	if v.TenantDisplayName != nil {
-		s.WriteString(schemas.UserAccessResultItem_tenantDisplayName, *v.TenantDisplayName)
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.UserAccessResultItem_tenantId, *v.TenantId)
-	}
-	if v.UserFirstName != nil {
-		s.WriteString(schemas.UserAccessResultItem_userFirstName, *v.UserFirstName)
-	}
-	if v.UserFullName != nil {
-		s.WriteString(schemas.UserAccessResultItem_userFullName, *v.UserFullName)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.UserAccessResultItem_userId, *v.UserId)
-	}
-	if v.UserLastName != nil {
-		s.WriteString(schemas.UserAccessResultItem_userLastName, *v.UserLastName)
-	}
-	if v.UserStatus != nil {
-		s.WriteString(schemas.UserAccessResultItem_userStatus, *v.UserStatus)
-	}
-}
-func (v *UserAccessResultItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserAccessResultItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserAccessResultItem_app:
-			v.App = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_app, v.App)
-		case schemas.UserAccessResultItem_email:
-			v.Email = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_email, v.Email)
-		case schemas.UserAccessResultItem_resultStatus:
-			var ev string
-			if err := d.ReadString(schemas.UserAccessResultItem_resultStatus, &ev); err != nil {
-				return err
-			}
-			v.ResultStatus = ResultStatus(ev)
-			return nil
-		case schemas.UserAccessResultItem_taskError:
-			v.TaskError = &TaskError{}
-			return v.TaskError.Deserialize(d)
-		case schemas.UserAccessResultItem_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_taskId, v.TaskId)
-		case schemas.UserAccessResultItem_tenantDisplayName:
-			v.TenantDisplayName = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_tenantDisplayName, v.TenantDisplayName)
-		case schemas.UserAccessResultItem_tenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_tenantId, v.TenantId)
-		case schemas.UserAccessResultItem_userFirstName:
-			v.UserFirstName = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_userFirstName, v.UserFirstName)
-		case schemas.UserAccessResultItem_userFullName:
-			v.UserFullName = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_userFullName, v.UserFullName)
-		case schemas.UserAccessResultItem_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_userId, v.UserId)
-		case schemas.UserAccessResultItem_userLastName:
-			v.UserLastName = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_userLastName, v.UserLastName)
-		case schemas.UserAccessResultItem_userStatus:
-			v.UserStatus = new(string)
-			return d.ReadString(schemas.UserAccessResultItem_userStatus, v.UserStatus)
-		}
-		return nil
-	})
-}
-
 // Contains information about a user access task.
 type UserAccessTaskItem struct {
 
@@ -1407,48 +598,6 @@ type UserAccessTaskItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UserAccessTaskItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserAccessTaskItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserAccessTaskItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.UserAccessTaskItem_app, *v.App)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.UserAccessTaskItem_error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaskId != nil {
-		s.WriteString(schemas.UserAccessTaskItem_taskId, *v.TaskId)
-	}
-	if v.TenantId != nil {
-		s.WriteString(schemas.UserAccessTaskItem_tenantId, *v.TenantId)
-	}
-}
-func (v *UserAccessTaskItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserAccessTaskItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserAccessTaskItem_app:
-			v.App = new(string)
-			return d.ReadString(schemas.UserAccessTaskItem_app, v.App)
-		case schemas.UserAccessTaskItem_error:
-			v.Error = &TaskError{}
-			return v.Error.Deserialize(d)
-		case schemas.UserAccessTaskItem_taskId:
-			v.TaskId = new(string)
-			return d.ReadString(schemas.UserAccessTaskItem_taskId, v.TaskId)
-		case schemas.UserAccessTaskItem_tenantId:
-			v.TenantId = new(string)
-			return d.ReadString(schemas.UserAccessTaskItem_tenantId, v.TenantId)
-		}
-		return nil
-	})
-}
-
 // The input failed to meet the constraints specified by the Amazon Web Services
 // service in a specified field.
 type ValidationExceptionField struct {
@@ -1464,34 +613,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

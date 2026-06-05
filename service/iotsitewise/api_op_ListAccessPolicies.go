@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,36 +63,6 @@ type ListAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccessPoliciesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IamArn != nil {
-		s.WriteString(schemas.ListAccessPoliciesRequest_iamArn, *v.IamArn)
-	}
-	if v.IdentityId != nil {
-		s.WriteString(schemas.ListAccessPoliciesRequest_identityId, *v.IdentityId)
-	}
-	if v.IdentityType != "" {
-		s.WriteString(schemas.ListAccessPoliciesRequest_identityType, string(v.IdentityType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccessPoliciesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccessPoliciesRequest_nextToken, *v.NextToken)
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.ListAccessPoliciesRequest_resourceId, *v.ResourceId)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.ListAccessPoliciesRequest_resourceType, string(v.ResourceType))
-	}
-}
-
 type ListAccessPoliciesOutput struct {
 
 	// A list that summarizes each access policy.
@@ -112,26 +80,16 @@ type ListAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccessPoliciesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccessPoliciesResponse_accessPolicySummaries:
-			return deserializeAccessPolicySummaries(d, schemas.ListAccessPoliciesResponse_accessPolicySummaries, &v.AccessPolicySummaries)
-		case schemas.ListAccessPoliciesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccessPoliciesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessPolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse), output: &ListAccessPoliciesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessPolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccessPolicies"); err != nil {

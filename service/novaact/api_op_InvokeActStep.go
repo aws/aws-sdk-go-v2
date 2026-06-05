@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,31 +61,6 @@ type InvokeActStepInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeActStepInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeActStepRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeActStepInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActId != nil {
-		s.WriteString(schemas.InvokeActStepRequest_actId, *v.ActId)
-	}
-	serializeCallResults(s, schemas.InvokeActStepRequest_callResults, v.CallResults)
-	if v.PreviousStepId != nil {
-		s.WriteString(schemas.InvokeActStepRequest_previousStepId, *v.PreviousStepId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.InvokeActStepRequest_sessionId, *v.SessionId)
-	}
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.InvokeActStepRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.InvokeActStepRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type InvokeActStepOutput struct {
 
 	// A list of tool calls that the act wants to execute in this step.
@@ -106,26 +79,16 @@ type InvokeActStepOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeActStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeActStepResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokeActStepResponse_calls:
-			return deserializeCalls(d, schemas.InvokeActStepResponse_calls, &v.Calls)
-		case schemas.InvokeActStepResponse_stepId:
-			v.StepId = new(string)
-			return d.ReadString(schemas.InvokeActStepResponse_stepId, v.StepId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationInvokeActStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeActStep, schemas.InvokeActStepRequest, schemas.InvokeActStepResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeActStep{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeActStep, schemas.InvokeActStepRequest, schemas.InvokeActStepResponse), output: &InvokeActStepOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeActStep{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeActStep"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,23 +45,6 @@ type StartQueryPlanningInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartQueryPlanningInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartQueryPlanningRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartQueryPlanningInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryPlanningContext != nil {
-		s.WriteStruct(schemas.StartQueryPlanningRequest_QueryPlanningContext)
-		v.QueryPlanningContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.StartQueryPlanningRequest_QueryString, *v.QueryString)
-	}
-}
-
 // A structure for the output.
 type StartQueryPlanningOutput struct {
 
@@ -80,24 +61,16 @@ type StartQueryPlanningOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartQueryPlanningOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartQueryPlanningResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartQueryPlanningResponse_QueryId:
-			v.QueryId = new(string)
-			return d.ReadString(schemas.StartQueryPlanningResponse_QueryId, v.QueryId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartQueryPlanningMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryPlanning, schemas.StartQueryPlanningRequest, schemas.StartQueryPlanningResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQueryPlanning{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryPlanning, schemas.StartQueryPlanningRequest, schemas.StartQueryPlanningResponse), output: &StartQueryPlanningOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQueryPlanning{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartQueryPlanning"); err != nil {

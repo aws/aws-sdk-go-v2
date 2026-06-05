@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListCollaborationMLInputChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCollaborationMLInputChannelsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCollaborationMLInputChannelsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCollaborationMLInputChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollaborationIdentifier != nil {
-		s.WriteString(schemas.ListCollaborationMLInputChannelsRequest_collaborationIdentifier, *v.CollaborationIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCollaborationMLInputChannelsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCollaborationMLInputChannelsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListCollaborationMLInputChannelsOutput struct {
 
 	// The list of ML input channels that you wanted.
@@ -81,26 +61,16 @@ type ListCollaborationMLInputChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCollaborationMLInputChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCollaborationMLInputChannelsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList:
-			return deserializeCollaborationMLInputChannelsList(d, schemas.ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList, &v.CollaborationMLInputChannelsList)
-		case schemas.ListCollaborationMLInputChannelsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCollaborationMLInputChannelsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCollaborationMLInputChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationMLInputChannels, schemas.ListCollaborationMLInputChannelsRequest, schemas.ListCollaborationMLInputChannelsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationMLInputChannels{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationMLInputChannels, schemas.ListCollaborationMLInputChannelsRequest, schemas.ListCollaborationMLInputChannelsResponse), output: &ListCollaborationMLInputChannelsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationMLInputChannels{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCollaborationMLInputChannels"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,23 +45,6 @@ type CreateTypedLinkFacetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTypedLinkFacetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateTypedLinkFacetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateTypedLinkFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Facet != nil {
-		s.WriteStruct(schemas.CreateTypedLinkFacetRequest_Facet)
-		v.Facet.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SchemaArn != nil {
-		s.WriteString(schemas.CreateTypedLinkFacetRequest_SchemaArn, *v.SchemaArn)
-	}
-}
-
 type CreateTypedLinkFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,21 +52,16 @@ type CreateTypedLinkFacetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateTypedLinkFacetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateTypedLinkFacetResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTypedLinkFacet, schemas.CreateTypedLinkFacetRequest, schemas.CreateTypedLinkFacetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTypedLinkFacet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTypedLinkFacet, schemas.CreateTypedLinkFacetRequest, schemas.CreateTypedLinkFacetResponse), output: &CreateTypedLinkFacetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTypedLinkFacet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTypedLinkFacet"); err != nil {

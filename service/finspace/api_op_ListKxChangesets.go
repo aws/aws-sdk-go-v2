@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,27 +48,6 @@ type ListKxChangesetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxChangesetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListKxChangesetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListKxChangesetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.ListKxChangesetsRequest_databaseName, *v.DatabaseName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ListKxChangesetsRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListKxChangesetsRequest_maxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListKxChangesetsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListKxChangesetsOutput struct {
 
 	// A list of changesets for a database.
@@ -85,26 +62,16 @@ type ListKxChangesetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxChangesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListKxChangesetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListKxChangesetsResponse_kxChangesets:
-			return deserializeKxChangesets(d, schemas.ListKxChangesetsResponse_kxChangesets, &v.KxChangesets)
-		case schemas.ListKxChangesetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListKxChangesetsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListKxChangesetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxChangesets, schemas.ListKxChangesetsRequest, schemas.ListKxChangesetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxChangesets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxChangesets, schemas.ListKxChangesetsRequest, schemas.ListKxChangesetsResponse), output: &ListKxChangesetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxChangesets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxChangesets"); err != nil {

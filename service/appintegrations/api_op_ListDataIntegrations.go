@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type ListDataIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataIntegrationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataIntegrationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataIntegrationsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDataIntegrationsOutput struct {
 
 	// The DataIntegrations associated with this account.
@@ -76,26 +59,16 @@ type ListDataIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataIntegrationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataIntegrationsResponse_DataIntegrations:
-			return deserializeDataIntegrationsList(d, schemas.ListDataIntegrationsResponse_DataIntegrations, &v.DataIntegrations)
-		case schemas.ListDataIntegrationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataIntegrationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrations, schemas.ListDataIntegrationsRequest, schemas.ListDataIntegrationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrations, schemas.ListDataIntegrationsRequest, schemas.ListDataIntegrationsResponse), output: &ListDataIntegrationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataIntegrations"); err != nil {

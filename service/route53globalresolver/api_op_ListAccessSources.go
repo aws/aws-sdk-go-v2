@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type ListAccessSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessSourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccessSourcesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccessSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListAccessSourcesInput_filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccessSourcesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccessSourcesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListAccessSourcesOutput struct {
 
 	// An array containing information about the access sources, such as the ID, CIDR
@@ -85,26 +67,16 @@ type ListAccessSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccessSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccessSourcesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccessSourcesOutput_accessSources:
-			return deserializeAccessSources(d, schemas.ListAccessSourcesOutput_accessSources, &v.AccessSources)
-		case schemas.ListAccessSourcesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccessSourcesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccessSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessSources, schemas.ListAccessSourcesInput, schemas.ListAccessSourcesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessSources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessSources, schemas.ListAccessSourcesInput, schemas.ListAccessSourcesOutput), output: &ListAccessSourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessSources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccessSources"); err != nil {

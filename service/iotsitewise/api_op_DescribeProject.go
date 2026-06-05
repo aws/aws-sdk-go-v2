@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,18 +35,6 @@ type DescribeProjectInput struct {
 	ProjectId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProjectId != nil {
-		s.WriteString(schemas.DescribeProjectRequest_projectId, *v.ProjectId)
-	}
 }
 
 type DescribeProjectOutput struct {
@@ -96,42 +82,16 @@ type DescribeProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProjectResponse_portalId:
-			v.PortalId = new(string)
-			return d.ReadString(schemas.DescribeProjectResponse_portalId, v.PortalId)
-		case schemas.DescribeProjectResponse_projectArn:
-			v.ProjectArn = new(string)
-			return d.ReadString(schemas.DescribeProjectResponse_projectArn, v.ProjectArn)
-		case schemas.DescribeProjectResponse_projectCreationDate:
-			v.ProjectCreationDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeProjectResponse_projectCreationDate, v.ProjectCreationDate)
-		case schemas.DescribeProjectResponse_projectDescription:
-			v.ProjectDescription = new(string)
-			return d.ReadString(schemas.DescribeProjectResponse_projectDescription, v.ProjectDescription)
-		case schemas.DescribeProjectResponse_projectId:
-			v.ProjectId = new(string)
-			return d.ReadString(schemas.DescribeProjectResponse_projectId, v.ProjectId)
-		case schemas.DescribeProjectResponse_projectLastUpdateDate:
-			v.ProjectLastUpdateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeProjectResponse_projectLastUpdateDate, v.ProjectLastUpdateDate)
-		case schemas.DescribeProjectResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.DescribeProjectResponse_projectName, v.ProjectName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProject, schemas.DescribeProjectRequest, schemas.DescribeProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProject, schemas.DescribeProjectRequest, schemas.DescribeProjectResponse), output: &DescribeProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProject"); err != nil {

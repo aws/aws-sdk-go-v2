@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,27 +50,6 @@ type ListCustomerManagedPolicyReferencesInPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCustomerManagedPolicyReferencesInPermissionSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCustomerManagedPolicyReferencesInPermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest_NextToken, *v.NextToken)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
-	}
-}
-
 type ListCustomerManagedPolicyReferencesInPermissionSetOutput struct {
 
 	// Specifies the names and paths of the customer managed policies that you have
@@ -89,26 +66,16 @@ type ListCustomerManagedPolicyReferencesInPermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCustomerManagedPolicyReferencesInPermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_CustomerManagedPolicyReferences:
-			return deserializeCustomerManagedPolicyReferenceList(d, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_CustomerManagedPolicyReferences, &v.CustomerManagedPolicyReferences)
-		case schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCustomerManagedPolicyReferencesInPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomerManagedPolicyReferencesInPermissionSet, schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomerManagedPolicyReferencesInPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomerManagedPolicyReferencesInPermissionSet, schemas.ListCustomerManagedPolicyReferencesInPermissionSetRequest, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse), output: &ListCustomerManagedPolicyReferencesInPermissionSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomerManagedPolicyReferencesInPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomerManagedPolicyReferencesInPermissionSet"); err != nil {

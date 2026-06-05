@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,37 +54,6 @@ type GetGroupMembershipIdInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGroupMembershipIdInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGroupMembershipIdRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGroupMembershipIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupId != nil {
-		s.WriteString(schemas.GetGroupMembershipIdRequest_GroupId, *v.GroupId)
-	}
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.GetGroupMembershipIdRequest_IdentityStoreId, *v.IdentityStoreId)
-	}
-	serializeMemberId(s, schemas.GetGroupMembershipIdRequest_MemberId, v.MemberId)
-}
-func (v *GetGroupMembershipIdInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGroupMembershipIdRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGroupMembershipIdRequest_GroupId:
-			v.GroupId = new(string)
-			return d.ReadString(schemas.GetGroupMembershipIdRequest_GroupId, v.GroupId)
-		case schemas.GetGroupMembershipIdRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetGroupMembershipIdRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.GetGroupMembershipIdRequest_MemberId:
-			return deserializeMemberId(d, schemas.GetGroupMembershipIdRequest_MemberId, &v.MemberId)
-		}
-		return nil
-	})
-}
-
 type GetGroupMembershipIdOutput struct {
 
 	// The globally unique identifier for the identity store.
@@ -105,41 +72,16 @@ type GetGroupMembershipIdOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGroupMembershipIdOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetGroupMembershipIdResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGroupMembershipIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.GetGroupMembershipIdResponse_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.MembershipId != nil {
-		s.WriteString(schemas.GetGroupMembershipIdResponse_MembershipId, *v.MembershipId)
-	}
-}
-func (v *GetGroupMembershipIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGroupMembershipIdResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGroupMembershipIdResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.GetGroupMembershipIdResponse_IdentityStoreId, v.IdentityStoreId)
-		case schemas.GetGroupMembershipIdResponse_MembershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.GetGroupMembershipIdResponse_MembershipId, v.MembershipId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGroupMembershipIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupMembershipId, schemas.GetGroupMembershipIdRequest, schemas.GetGroupMembershipIdResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGroupMembershipId{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupMembershipId, schemas.GetGroupMembershipIdRequest, schemas.GetGroupMembershipIdResponse), output: &GetGroupMembershipIdOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetGroupMembershipId{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGroupMembershipId"); err != nil {

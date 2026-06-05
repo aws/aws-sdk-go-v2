@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,62 +63,6 @@ type CreateNodeFromTemplateJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNodeFromTemplateJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateNodeFromTemplateJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateNodeFromTemplateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobTagsList(s, schemas.CreateNodeFromTemplateJobRequest_JobTags, v.JobTags)
-	if v.NodeDescription != nil {
-		s.WriteString(schemas.CreateNodeFromTemplateJobRequest_NodeDescription, *v.NodeDescription)
-	}
-	if v.NodeName != nil {
-		s.WriteString(schemas.CreateNodeFromTemplateJobRequest_NodeName, *v.NodeName)
-	}
-	if v.OutputPackageName != nil {
-		s.WriteString(schemas.CreateNodeFromTemplateJobRequest_OutputPackageName, *v.OutputPackageName)
-	}
-	if v.OutputPackageVersion != nil {
-		s.WriteString(schemas.CreateNodeFromTemplateJobRequest_OutputPackageVersion, *v.OutputPackageVersion)
-	}
-	serializeTemplateParametersMap(s, schemas.CreateNodeFromTemplateJobRequest_TemplateParameters, v.TemplateParameters)
-	if v.TemplateType != "" {
-		s.WriteString(schemas.CreateNodeFromTemplateJobRequest_TemplateType, string(v.TemplateType))
-	}
-}
-func (v *CreateNodeFromTemplateJobInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateNodeFromTemplateJobRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateNodeFromTemplateJobRequest_JobTags:
-			return deserializeJobTagsList(d, schemas.CreateNodeFromTemplateJobRequest_JobTags, &v.JobTags)
-		case schemas.CreateNodeFromTemplateJobRequest_NodeDescription:
-			v.NodeDescription = new(string)
-			return d.ReadString(schemas.CreateNodeFromTemplateJobRequest_NodeDescription, v.NodeDescription)
-		case schemas.CreateNodeFromTemplateJobRequest_NodeName:
-			v.NodeName = new(string)
-			return d.ReadString(schemas.CreateNodeFromTemplateJobRequest_NodeName, v.NodeName)
-		case schemas.CreateNodeFromTemplateJobRequest_OutputPackageName:
-			v.OutputPackageName = new(string)
-			return d.ReadString(schemas.CreateNodeFromTemplateJobRequest_OutputPackageName, v.OutputPackageName)
-		case schemas.CreateNodeFromTemplateJobRequest_OutputPackageVersion:
-			v.OutputPackageVersion = new(string)
-			return d.ReadString(schemas.CreateNodeFromTemplateJobRequest_OutputPackageVersion, v.OutputPackageVersion)
-		case schemas.CreateNodeFromTemplateJobRequest_TemplateParameters:
-			return deserializeTemplateParametersMap(d, schemas.CreateNodeFromTemplateJobRequest_TemplateParameters, &v.TemplateParameters)
-		case schemas.CreateNodeFromTemplateJobRequest_TemplateType:
-			var ev string
-			if err := d.ReadString(schemas.CreateNodeFromTemplateJobRequest_TemplateType, &ev); err != nil {
-				return err
-			}
-			v.TemplateType = types.TemplateType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type CreateNodeFromTemplateJobOutput struct {
 
 	// The job's ID.
@@ -134,35 +76,16 @@ type CreateNodeFromTemplateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNodeFromTemplateJobOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateNodeFromTemplateJobResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateNodeFromTemplateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobId != nil {
-		s.WriteString(schemas.CreateNodeFromTemplateJobResponse_JobId, *v.JobId)
-	}
-}
-func (v *CreateNodeFromTemplateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateNodeFromTemplateJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateNodeFromTemplateJobResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreateNodeFromTemplateJobResponse_JobId, v.JobId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateNodeFromTemplateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeFromTemplateJob, schemas.CreateNodeFromTemplateJobRequest, schemas.CreateNodeFromTemplateJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNodeFromTemplateJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeFromTemplateJob, schemas.CreateNodeFromTemplateJobRequest, schemas.CreateNodeFromTemplateJobResponse), output: &CreateNodeFromTemplateJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNodeFromTemplateJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNodeFromTemplateJob"); err != nil {

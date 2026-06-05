@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -102,25 +100,6 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.CreateRuleRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.MetricName != nil {
-		s.WriteString(schemas.CreateRuleRequest_MetricName, *v.MetricName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateRuleRequest_Name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateRuleRequest_Tags, v.Tags)
-}
-
 type CreateRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRule request. You can also
@@ -136,27 +115,16 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRuleResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.CreateRuleResponse_ChangeToken, v.ChangeToken)
-		case schemas.CreateRuleResponse_Rule:
-			v.Rule = &types.Rule{}
-			return v.Rule.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse), output: &CreateRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRule"); err != nil {

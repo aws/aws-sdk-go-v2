@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -120,54 +118,6 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkflowRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateWorkflowRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DefinitionS3Location != nil {
-		s.WriteStruct(schemas.CreateWorkflowRequest_DefinitionS3Location)
-		v.DefinitionS3Location.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateWorkflowRequest_Description, *v.Description)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateWorkflowRequest_EncryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EngineVersion != 0 {
-		s.WriteInt32(schemas.CreateWorkflowRequest_EngineVersion, int32(v.EngineVersion))
-	}
-	if v.LoggingConfiguration != nil {
-		s.WriteStruct(schemas.CreateWorkflowRequest_LoggingConfiguration)
-		v.LoggingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWorkflowRequest_Name, *v.Name)
-	}
-	if v.NetworkConfiguration != nil {
-		s.WriteStruct(schemas.CreateWorkflowRequest_NetworkConfiguration)
-		v.NetworkConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateWorkflowRequest_RoleArn, *v.RoleArn)
-	}
-	serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
-	if v.TriggerMode != nil {
-		s.WriteString(schemas.CreateWorkflowRequest_TriggerMode, *v.TriggerMode)
-	}
-}
-
 type CreateWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created workflow. This ARN uniquely
@@ -212,45 +162,16 @@ type CreateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkflowResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkflowResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateWorkflowResponse_CreatedAt, v.CreatedAt)
-		case schemas.CreateWorkflowResponse_IsLatestVersion:
-			v.IsLatestVersion = new(bool)
-			return d.ReadBool(schemas.CreateWorkflowResponse_IsLatestVersion, v.IsLatestVersion)
-		case schemas.CreateWorkflowResponse_RevisionId:
-			v.RevisionId = new(string)
-			return d.ReadString(schemas.CreateWorkflowResponse_RevisionId, v.RevisionId)
-		case schemas.CreateWorkflowResponse_Warnings:
-			return deserializeWarningMessages(d, schemas.CreateWorkflowResponse_Warnings, &v.Warnings)
-		case schemas.CreateWorkflowResponse_WorkflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.CreateWorkflowResponse_WorkflowArn, v.WorkflowArn)
-		case schemas.CreateWorkflowResponse_WorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateWorkflowResponse_WorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.WorkflowStatus = types.WorkflowStatus(ev)
-			return nil
-		case schemas.CreateWorkflowResponse_WorkflowVersion:
-			v.WorkflowVersion = new(string)
-			return d.ReadString(schemas.CreateWorkflowResponse_WorkflowVersion, v.WorkflowVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse), output: &CreateWorkflowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkflow"); err != nil {

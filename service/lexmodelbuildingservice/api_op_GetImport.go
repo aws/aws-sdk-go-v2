@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,18 +40,6 @@ type GetImportInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImportInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImportRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ImportId != nil {
-		s.WriteString(schemas.GetImportRequest_importId, *v.ImportId)
-	}
-}
-
 type GetImportOutput struct {
 
 	// A timestamp for the date and time that the import job was created.
@@ -85,53 +71,16 @@ type GetImportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImportResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImportResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetImportResponse_createdDate, v.CreatedDate)
-		case schemas.GetImportResponse_failureReason:
-			return deserializeStringList(d, schemas.GetImportResponse_failureReason, &v.FailureReason)
-		case schemas.GetImportResponse_importId:
-			v.ImportId = new(string)
-			return d.ReadString(schemas.GetImportResponse_importId, v.ImportId)
-		case schemas.GetImportResponse_importStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetImportResponse_importStatus, &ev); err != nil {
-				return err
-			}
-			v.ImportStatus = types.ImportStatus(ev)
-			return nil
-		case schemas.GetImportResponse_mergeStrategy:
-			var ev string
-			if err := d.ReadString(schemas.GetImportResponse_mergeStrategy, &ev); err != nil {
-				return err
-			}
-			v.MergeStrategy = types.MergeStrategy(ev)
-			return nil
-		case schemas.GetImportResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetImportResponse_name, v.Name)
-		case schemas.GetImportResponse_resourceType:
-			var ev string
-			if err := d.ReadString(schemas.GetImportResponse_resourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = types.ResourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImport, schemas.GetImportRequest, schemas.GetImportResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImport{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImport, schemas.GetImportRequest, schemas.GetImportResponse), output: &GetImportOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImport{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImport"); err != nil {

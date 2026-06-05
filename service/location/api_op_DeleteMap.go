@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,28 +60,6 @@ type DeleteMapInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMapInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMapRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MapName != nil {
-		s.WriteString(schemas.DeleteMapRequest_MapName, *v.MapName)
-	}
-}
-func (v *DeleteMapInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteMapRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteMapRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.DeleteMapRequest_MapName, v.MapName)
-		}
-		return nil
-	})
-}
-
 type DeleteMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,29 +67,16 @@ type DeleteMapOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMapOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMapResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteMapResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMap, schemas.DeleteMapRequest, schemas.DeleteMapResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMap{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMap, schemas.DeleteMapRequest, schemas.DeleteMapResponse), output: &DeleteMapOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMap{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMap"); err != nil {

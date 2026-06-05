@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,34 +62,6 @@ type CreateDataViewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDataViewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDataViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AsOfTimestamp != nil {
-		s.WriteInt64(schemas.CreateDataViewRequest_asOfTimestamp, *v.AsOfTimestamp)
-	}
-	if v.AutoUpdate != false {
-		s.WriteBool(schemas.CreateDataViewRequest_autoUpdate, v.AutoUpdate)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDataViewRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatasetId != nil {
-		s.WriteString(schemas.CreateDataViewRequest_datasetId, *v.DatasetId)
-	}
-	if v.DestinationTypeParams != nil {
-		s.WriteStruct(schemas.CreateDataViewRequest_destinationTypeParams)
-		v.DestinationTypeParams.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePartitionColumnList(s, schemas.CreateDataViewRequest_partitionColumns, v.PartitionColumns)
-	serializeSortColumnList(s, schemas.CreateDataViewRequest_sortColumns, v.SortColumns)
-}
-
 // Response for creating a data view.
 type CreateDataViewOutput struct {
 
@@ -107,27 +77,16 @@ type CreateDataViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDataViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDataViewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDataViewResponse_dataViewId:
-			v.DataViewId = new(string)
-			return d.ReadString(schemas.CreateDataViewResponse_dataViewId, v.DataViewId)
-		case schemas.CreateDataViewResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.CreateDataViewResponse_datasetId, v.DatasetId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDataViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataView, schemas.CreateDataViewRequest, schemas.CreateDataViewResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataView, schemas.CreateDataViewRequest, schemas.CreateDataViewResponse), output: &CreateDataViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataView"); err != nil {

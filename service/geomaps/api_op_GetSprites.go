@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/geomaps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,27 +70,6 @@ type GetSpritesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSpritesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSpritesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSpritesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ColorScheme != "" {
-		s.WriteString(schemas.GetSpritesRequest_ColorScheme, string(v.ColorScheme))
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.GetSpritesRequest_FileName, *v.FileName)
-	}
-	if v.Style != "" {
-		s.WriteString(schemas.GetSpritesRequest_Style, string(v.Style))
-	}
-	if v.Variant != "" {
-		s.WriteString(schemas.GetSpritesRequest_Variant, string(v.Variant))
-	}
-}
-
 type GetSpritesOutput struct {
 
 	// The body of the sprite sheet or JSON offset file (image/png or
@@ -115,32 +92,16 @@ type GetSpritesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSpritesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSpritesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSpritesResponse_Blob:
-			return d.ReadBlob(schemas.GetSpritesResponse_Blob, &v.Blob)
-		case schemas.GetSpritesResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_CacheControl, v.CacheControl)
-		case schemas.GetSpritesResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_ContentType, v.ContentType)
-		case schemas.GetSpritesResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.GetSpritesResponse_ETag, v.ETag)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSprites, schemas.GetSpritesRequest, schemas.GetSpritesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSprites{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSprites, schemas.GetSpritesRequest, schemas.GetSpritesResponse), output: &GetSpritesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSprites{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSprites"); err != nil {

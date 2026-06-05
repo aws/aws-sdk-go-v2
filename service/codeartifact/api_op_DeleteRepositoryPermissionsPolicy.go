@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,27 +60,6 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRepositoryPermissionsPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteRepositoryPermissionsPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteRepositoryPermissionsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.PolicyRevision != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_policyRevision, *v.PolicyRevision)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.DeleteRepositoryPermissionsPolicyRequest_repository, *v.Repository)
-	}
-}
-
 type DeleteRepositoryPermissionsPolicyOutput struct {
 
 	//  Information about the deleted policy after processing the request.
@@ -94,24 +71,16 @@ type DeleteRepositoryPermissionsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteRepositoryPermissionsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteRepositoryPermissionsPolicyResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteRepositoryPermissionsPolicyResult_policy:
-			v.Policy = &types.ResourcePolicy{}
-			return v.Policy.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPermissionsPolicy, schemas.DeleteRepositoryPermissionsPolicyRequest, schemas.DeleteRepositoryPermissionsPolicyResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPermissionsPolicy, schemas.DeleteRepositoryPermissionsPolicyRequest, schemas.DeleteRepositoryPermissionsPolicyResult), output: &DeleteRepositoryPermissionsPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRepositoryPermissionsPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRepositoryPermissionsPolicy"); err != nil {

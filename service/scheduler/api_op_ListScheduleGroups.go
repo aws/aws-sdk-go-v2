@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,40 +44,6 @@ type ListScheduleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduleGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListScheduleGroupsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListScheduleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListScheduleGroupsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NamePrefix != nil {
-		s.WriteString(schemas.ListScheduleGroupsInput_NamePrefix, *v.NamePrefix)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListScheduleGroupsInput_NextToken, *v.NextToken)
-	}
-}
-func (v *ListScheduleGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListScheduleGroupsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListScheduleGroupsInput_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListScheduleGroupsInput_MaxResults, v.MaxResults)
-		case schemas.ListScheduleGroupsInput_NamePrefix:
-			v.NamePrefix = new(string)
-			return d.ReadString(schemas.ListScheduleGroupsInput_NamePrefix, v.NamePrefix)
-		case schemas.ListScheduleGroupsInput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListScheduleGroupsInput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListScheduleGroupsOutput struct {
 
 	// The schedule groups that match the specified criteria.
@@ -97,38 +61,16 @@ type ListScheduleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListScheduleGroupsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListScheduleGroupsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListScheduleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListScheduleGroupsOutput_NextToken, *v.NextToken)
-	}
-	serializeScheduleGroupList(s, schemas.ListScheduleGroupsOutput_ScheduleGroups, v.ScheduleGroups)
-}
-func (v *ListScheduleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListScheduleGroupsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListScheduleGroupsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListScheduleGroupsOutput_NextToken, v.NextToken)
-		case schemas.ListScheduleGroupsOutput_ScheduleGroups:
-			return deserializeScheduleGroupList(d, schemas.ListScheduleGroupsOutput_ScheduleGroups, &v.ScheduleGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListScheduleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduleGroups, schemas.ListScheduleGroupsInput, schemas.ListScheduleGroupsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScheduleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduleGroups, schemas.ListScheduleGroupsInput, schemas.ListScheduleGroupsOutput), output: &ListScheduleGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScheduleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScheduleGroups"); err != nil {

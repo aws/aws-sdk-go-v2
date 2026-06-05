@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,19 +40,6 @@ type StartConfigurationChecksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartConfigurationChecksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartConfigurationChecksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartConfigurationChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.StartConfigurationChecksInput_ApplicationId, *v.ApplicationId)
-	}
-	serializeConfigurationCheckTypeList(s, schemas.StartConfigurationChecksInput_ConfigurationCheckIds, v.ConfigurationCheckIds)
-}
-
 type StartConfigurationChecksOutput struct {
 
 	// The configuration check operations that were started.
@@ -66,23 +51,16 @@ type StartConfigurationChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartConfigurationChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartConfigurationChecksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartConfigurationChecksOutput_ConfigurationCheckOperations:
-			return deserializeConfigurationCheckOperationList(d, schemas.StartConfigurationChecksOutput_ConfigurationCheckOperations, &v.ConfigurationCheckOperations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartConfigurationChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationChecks, schemas.StartConfigurationChecksInput, schemas.StartConfigurationChecksOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConfigurationChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationChecks, schemas.StartConfigurationChecksInput, schemas.StartConfigurationChecksOutput), output: &StartConfigurationChecksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConfigurationChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartConfigurationChecks"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type AssociateProductWithPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateProductWithPortfolioInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateProductWithPortfolioInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateProductWithPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.AssociateProductWithPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.AssociateProductWithPortfolioInput_PortfolioId, *v.PortfolioId)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.AssociateProductWithPortfolioInput_ProductId, *v.ProductId)
-	}
-	if v.SourcePortfolioId != nil {
-		s.WriteString(schemas.AssociateProductWithPortfolioInput_SourcePortfolioId, *v.SourcePortfolioId)
-	}
-}
-
 type AssociateProductWithPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,21 +60,16 @@ type AssociateProductWithPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateProductWithPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateProductWithPortfolioOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateProductWithPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateProductWithPortfolio, schemas.AssociateProductWithPortfolioInput, schemas.AssociateProductWithPortfolioOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateProductWithPortfolio{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateProductWithPortfolio, schemas.AssociateProductWithPortfolioInput, schemas.AssociateProductWithPortfolioOutput), output: &AssociateProductWithPortfolioOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateProductWithPortfolio{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateProductWithPortfolio"); err != nil {

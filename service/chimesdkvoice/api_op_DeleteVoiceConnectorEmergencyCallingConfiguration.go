@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type DeleteVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteVoiceConnectorEmergencyCallingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteVoiceConnectorEmergencyCallingConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteVoiceConnectorEmergencyCallingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type DeleteVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,29 +44,16 @@ type DeleteVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteVoiceConnectorEmergencyCallingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteVoiceConnectorEmergencyCallingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteVoiceConnectorEmergencyCallingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceConnectorEmergencyCallingConfiguration, schemas.DeleteVoiceConnectorEmergencyCallingConfigurationRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceConnectorEmergencyCallingConfiguration, schemas.DeleteVoiceConnectorEmergencyCallingConfigurationRequest, nil), output: &DeleteVoiceConnectorEmergencyCallingConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteVoiceConnectorEmergencyCallingConfiguration"); err != nil {

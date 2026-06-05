@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -71,99 +69,6 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Action) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Action)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionId != nil {
-		s.WriteString(schemas.Action_ActionId, *v.ActionId)
-	}
-	if v.ActionThreshold != nil {
-		s.WriteStruct(schemas.Action_ActionThreshold)
-		v.ActionThreshold.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ActionType != "" {
-		s.WriteString(schemas.Action_ActionType, string(v.ActionType))
-	}
-	if v.ApprovalModel != "" {
-		s.WriteString(schemas.Action_ApprovalModel, string(v.ApprovalModel))
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.Action_BudgetName, *v.BudgetName)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.Action_Definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.Action_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.NotificationType != "" {
-		s.WriteString(schemas.Action_NotificationType, string(v.NotificationType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Action_Status, string(v.Status))
-	}
-	serializeSubscribers(s, schemas.Action_Subscribers, v.Subscribers)
-}
-func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Action_ActionId:
-			v.ActionId = new(string)
-			return d.ReadString(schemas.Action_ActionId, v.ActionId)
-		case schemas.Action_ActionThreshold:
-			v.ActionThreshold = &ActionThreshold{}
-			return v.ActionThreshold.Deserialize(d)
-		case schemas.Action_ActionType:
-			var ev string
-			if err := d.ReadString(schemas.Action_ActionType, &ev); err != nil {
-				return err
-			}
-			v.ActionType = ActionType(ev)
-			return nil
-		case schemas.Action_ApprovalModel:
-			var ev string
-			if err := d.ReadString(schemas.Action_ApprovalModel, &ev); err != nil {
-				return err
-			}
-			v.ApprovalModel = ApprovalModel(ev)
-			return nil
-		case schemas.Action_BudgetName:
-			v.BudgetName = new(string)
-			return d.ReadString(schemas.Action_BudgetName, v.BudgetName)
-		case schemas.Action_Definition:
-			v.Definition = &Definition{}
-			return v.Definition.Deserialize(d)
-		case schemas.Action_ExecutionRoleArn:
-			v.ExecutionRoleArn = new(string)
-			return d.ReadString(schemas.Action_ExecutionRoleArn, v.ExecutionRoleArn)
-		case schemas.Action_NotificationType:
-			var ev string
-			if err := d.ReadString(schemas.Action_NotificationType, &ev); err != nil {
-				return err
-			}
-			v.NotificationType = NotificationType(ev)
-			return nil
-		case schemas.Action_Status:
-			var ev string
-			if err := d.ReadString(schemas.Action_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ActionStatus(ev)
-			return nil
-		case schemas.Action_Subscribers:
-			return deserializeSubscribers(d, schemas.Action_Subscribers, &v.Subscribers)
-		}
-		return nil
-	})
-}
-
 // The historical records for a budget action.
 type ActionHistory struct {
 
@@ -191,56 +96,6 @@ type ActionHistory struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ActionHistory) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActionHistory)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActionHistory) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionHistoryDetails != nil {
-		s.WriteStruct(schemas.ActionHistory_ActionHistoryDetails)
-		v.ActionHistoryDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EventType != "" {
-		s.WriteString(schemas.ActionHistory_EventType, string(v.EventType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ActionHistory_Status, string(v.Status))
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.ActionHistory_Timestamp, *v.Timestamp)
-	}
-}
-func (v *ActionHistory) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActionHistory, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActionHistory_ActionHistoryDetails:
-			v.ActionHistoryDetails = &ActionHistoryDetails{}
-			return v.ActionHistoryDetails.Deserialize(d)
-		case schemas.ActionHistory_EventType:
-			var ev string
-			if err := d.ReadString(schemas.ActionHistory_EventType, &ev); err != nil {
-				return err
-			}
-			v.EventType = EventType(ev)
-			return nil
-		case schemas.ActionHistory_Status:
-			var ev string
-			if err := d.ReadString(schemas.ActionHistory_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ActionStatus(ev)
-			return nil
-		case schemas.ActionHistory_Timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.ActionHistory_Timestamp, v.Timestamp)
-		}
-		return nil
-	})
-}
-
 // The description of the details for the event.
 type ActionHistoryDetails struct {
 
@@ -257,36 +112,6 @@ type ActionHistoryDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ActionHistoryDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActionHistoryDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActionHistoryDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteStruct(schemas.ActionHistoryDetails_Action)
-		v.Action.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ActionHistoryDetails_Message, *v.Message)
-	}
-}
-func (v *ActionHistoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActionHistoryDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActionHistoryDetails_Action:
-			v.Action = &Action{}
-			return v.Action.Deserialize(d)
-		case schemas.ActionHistoryDetails_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ActionHistoryDetails_Message, v.Message)
-		}
-		return nil
-	})
-}
-
 // The trigger threshold of the action.
 type ActionThreshold struct {
 
@@ -301,35 +126,6 @@ type ActionThreshold struct {
 	ActionThresholdValue float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *ActionThreshold) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ActionThreshold)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ActionThreshold) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionThresholdType != "" {
-		s.WriteString(schemas.ActionThreshold_ActionThresholdType, string(v.ActionThresholdType))
-	}
-	s.WriteFloat64(schemas.ActionThreshold_ActionThresholdValue, v.ActionThresholdValue)
-}
-func (v *ActionThreshold) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ActionThreshold, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ActionThreshold_ActionThresholdType:
-			var ev string
-			if err := d.ReadString(schemas.ActionThreshold_ActionThresholdType, &ev); err != nil {
-				return err
-			}
-			v.ActionThresholdType = ThresholdType(ev)
-			return nil
-		case schemas.ActionThreshold_ActionThresholdValue:
-			return d.ReadFloat64(schemas.ActionThreshold_ActionThresholdValue, &v.ActionThresholdValue)
-		}
-		return nil
-	})
 }
 
 // The parameters that determine the budget amount for an auto-adjusting budget.
@@ -349,46 +145,6 @@ type AutoAdjustData struct {
 	LastAutoAdjustTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutoAdjustData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutoAdjustData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutoAdjustData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoAdjustType != "" {
-		s.WriteString(schemas.AutoAdjustData_AutoAdjustType, string(v.AutoAdjustType))
-	}
-	if v.HistoricalOptions != nil {
-		s.WriteStruct(schemas.AutoAdjustData_HistoricalOptions)
-		v.HistoricalOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastAutoAdjustTime != nil {
-		s.WriteTime(schemas.AutoAdjustData_LastAutoAdjustTime, *v.LastAutoAdjustTime)
-	}
-}
-func (v *AutoAdjustData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutoAdjustData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutoAdjustData_AutoAdjustType:
-			var ev string
-			if err := d.ReadString(schemas.AutoAdjustData_AutoAdjustType, &ev); err != nil {
-				return err
-			}
-			v.AutoAdjustType = AutoAdjustType(ev)
-			return nil
-		case schemas.AutoAdjustData_HistoricalOptions:
-			v.HistoricalOptions = &HistoricalOptions{}
-			return v.HistoricalOptions.Deserialize(d)
-		case schemas.AutoAdjustData_LastAutoAdjustTime:
-			v.LastAutoAdjustTime = new(time.Time)
-			return d.ReadTime(schemas.AutoAdjustData_LastAutoAdjustTime, v.LastAutoAdjustTime)
-		}
-		return nil
-	})
 }
 
 // Represents the output of the CreateBudget operation. The content consists of
@@ -538,125 +294,6 @@ type Budget struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Budget) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Budget)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Budget) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoAdjustData != nil {
-		s.WriteStruct(schemas.Budget_AutoAdjustData)
-		v.AutoAdjustData.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BillingViewArn != nil {
-		s.WriteString(schemas.Budget_BillingViewArn, *v.BillingViewArn)
-	}
-	if v.BudgetLimit != nil {
-		s.WriteStruct(schemas.Budget_BudgetLimit)
-		v.BudgetLimit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.Budget_BudgetName, *v.BudgetName)
-	}
-	if v.BudgetType != "" {
-		s.WriteString(schemas.Budget_BudgetType, string(v.BudgetType))
-	}
-	if v.CalculatedSpend != nil {
-		s.WriteStruct(schemas.Budget_CalculatedSpend)
-		v.CalculatedSpend.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeCostFilters(s, schemas.Budget_CostFilters, v.CostFilters)
-	if v.CostTypes != nil {
-		s.WriteStruct(schemas.Budget_CostTypes)
-		v.CostTypes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FilterExpression != nil {
-		s.WriteStruct(schemas.Budget_FilterExpression)
-		v.FilterExpression.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HealthStatus != nil {
-		s.WriteStruct(schemas.Budget_HealthStatus)
-		v.HealthStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.Budget_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	serializeMetrics(s, schemas.Budget_Metrics, v.Metrics)
-	serializePlannedBudgetLimits(s, schemas.Budget_PlannedBudgetLimits, v.PlannedBudgetLimits)
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.Budget_TimePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TimeUnit != "" {
-		s.WriteString(schemas.Budget_TimeUnit, string(v.TimeUnit))
-	}
-}
-func (v *Budget) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Budget, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Budget_AutoAdjustData:
-			v.AutoAdjustData = &AutoAdjustData{}
-			return v.AutoAdjustData.Deserialize(d)
-		case schemas.Budget_BillingViewArn:
-			v.BillingViewArn = new(string)
-			return d.ReadString(schemas.Budget_BillingViewArn, v.BillingViewArn)
-		case schemas.Budget_BudgetLimit:
-			v.BudgetLimit = &Spend{}
-			return v.BudgetLimit.Deserialize(d)
-		case schemas.Budget_BudgetName:
-			v.BudgetName = new(string)
-			return d.ReadString(schemas.Budget_BudgetName, v.BudgetName)
-		case schemas.Budget_BudgetType:
-			var ev string
-			if err := d.ReadString(schemas.Budget_BudgetType, &ev); err != nil {
-				return err
-			}
-			v.BudgetType = BudgetType(ev)
-			return nil
-		case schemas.Budget_CalculatedSpend:
-			v.CalculatedSpend = &CalculatedSpend{}
-			return v.CalculatedSpend.Deserialize(d)
-		case schemas.Budget_CostFilters:
-			return deserializeCostFilters(d, schemas.Budget_CostFilters, &v.CostFilters)
-		case schemas.Budget_CostTypes:
-			v.CostTypes = &CostTypes{}
-			return v.CostTypes.Deserialize(d)
-		case schemas.Budget_FilterExpression:
-			v.FilterExpression = &Expression{}
-			return v.FilterExpression.Deserialize(d)
-		case schemas.Budget_HealthStatus:
-			v.HealthStatus = &HealthStatus{}
-			return v.HealthStatus.Deserialize(d)
-		case schemas.Budget_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.Budget_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.Budget_Metrics:
-			return deserializeMetrics(d, schemas.Budget_Metrics, &v.Metrics)
-		case schemas.Budget_PlannedBudgetLimits:
-			return deserializePlannedBudgetLimits(d, schemas.Budget_PlannedBudgetLimits, &v.PlannedBudgetLimits)
-		case schemas.Budget_TimePeriod:
-			v.TimePeriod = &TimePeriod{}
-			return v.TimePeriod.Deserialize(d)
-		case schemas.Budget_TimeUnit:
-			var ev string
-			if err := d.ReadString(schemas.Budget_TimeUnit, &ev); err != nil {
-				return err
-			}
-			v.TimeUnit = TimeUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The amount of cost or usage that you created the budget for, compared to your
 // actual costs or usage.
 type BudgetedAndActualAmounts struct {
@@ -673,46 +310,6 @@ type BudgetedAndActualAmounts struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BudgetedAndActualAmounts) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BudgetedAndActualAmounts)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BudgetedAndActualAmounts) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActualAmount != nil {
-		s.WriteStruct(schemas.BudgetedAndActualAmounts_ActualAmount)
-		v.ActualAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BudgetedAmount != nil {
-		s.WriteStruct(schemas.BudgetedAndActualAmounts_BudgetedAmount)
-		v.BudgetedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.BudgetedAndActualAmounts_TimePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BudgetedAndActualAmounts) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BudgetedAndActualAmounts, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BudgetedAndActualAmounts_ActualAmount:
-			v.ActualAmount = &Spend{}
-			return v.ActualAmount.Deserialize(d)
-		case schemas.BudgetedAndActualAmounts_BudgetedAmount:
-			v.BudgetedAmount = &Spend{}
-			return v.BudgetedAmount.Deserialize(d)
-		case schemas.BudgetedAndActualAmounts_TimePeriod:
-			v.TimePeriod = &TimePeriod{}
-			return v.TimePeriod.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The budget name and associated notifications for an account.
 type BudgetNotificationsForAccount struct {
 
@@ -727,31 +324,6 @@ type BudgetNotificationsForAccount struct {
 	Notifications []Notification
 
 	noSmithyDocumentSerde
-}
-
-func (v *BudgetNotificationsForAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BudgetNotificationsForAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BudgetNotificationsForAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BudgetName != nil {
-		s.WriteString(schemas.BudgetNotificationsForAccount_BudgetName, *v.BudgetName)
-	}
-	serializeNotifications(s, schemas.BudgetNotificationsForAccount_Notifications, v.Notifications)
-}
-func (v *BudgetNotificationsForAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BudgetNotificationsForAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BudgetNotificationsForAccount_BudgetName:
-			v.BudgetName = new(string)
-			return d.ReadString(schemas.BudgetNotificationsForAccount_BudgetName, v.BudgetName)
-		case schemas.BudgetNotificationsForAccount_Notifications:
-			return deserializeNotifications(d, schemas.BudgetNotificationsForAccount_Notifications, &v.Notifications)
-		}
-		return nil
-	})
 }
 
 // A history of the state of a budget at the end of the budget's specified time
@@ -800,79 +372,6 @@ type BudgetPerformanceHistory struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BudgetPerformanceHistory) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BudgetPerformanceHistory)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BudgetPerformanceHistory) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillingViewArn != nil {
-		s.WriteString(schemas.BudgetPerformanceHistory_BillingViewArn, *v.BillingViewArn)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.BudgetPerformanceHistory_BudgetName, *v.BudgetName)
-	}
-	if v.BudgetType != "" {
-		s.WriteString(schemas.BudgetPerformanceHistory_BudgetType, string(v.BudgetType))
-	}
-	serializeBudgetedAndActualAmountsList(s, schemas.BudgetPerformanceHistory_BudgetedAndActualAmountsList, v.BudgetedAndActualAmountsList)
-	serializeCostFilters(s, schemas.BudgetPerformanceHistory_CostFilters, v.CostFilters)
-	if v.CostTypes != nil {
-		s.WriteStruct(schemas.BudgetPerformanceHistory_CostTypes)
-		v.CostTypes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FilterExpression != nil {
-		s.WriteStruct(schemas.BudgetPerformanceHistory_FilterExpression)
-		v.FilterExpression.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeMetrics(s, schemas.BudgetPerformanceHistory_Metrics, v.Metrics)
-	if v.TimeUnit != "" {
-		s.WriteString(schemas.BudgetPerformanceHistory_TimeUnit, string(v.TimeUnit))
-	}
-}
-func (v *BudgetPerformanceHistory) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BudgetPerformanceHistory, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BudgetPerformanceHistory_BillingViewArn:
-			v.BillingViewArn = new(string)
-			return d.ReadString(schemas.BudgetPerformanceHistory_BillingViewArn, v.BillingViewArn)
-		case schemas.BudgetPerformanceHistory_BudgetName:
-			v.BudgetName = new(string)
-			return d.ReadString(schemas.BudgetPerformanceHistory_BudgetName, v.BudgetName)
-		case schemas.BudgetPerformanceHistory_BudgetType:
-			var ev string
-			if err := d.ReadString(schemas.BudgetPerformanceHistory_BudgetType, &ev); err != nil {
-				return err
-			}
-			v.BudgetType = BudgetType(ev)
-			return nil
-		case schemas.BudgetPerformanceHistory_BudgetedAndActualAmountsList:
-			return deserializeBudgetedAndActualAmountsList(d, schemas.BudgetPerformanceHistory_BudgetedAndActualAmountsList, &v.BudgetedAndActualAmountsList)
-		case schemas.BudgetPerformanceHistory_CostFilters:
-			return deserializeCostFilters(d, schemas.BudgetPerformanceHistory_CostFilters, &v.CostFilters)
-		case schemas.BudgetPerformanceHistory_CostTypes:
-			v.CostTypes = &CostTypes{}
-			return v.CostTypes.Deserialize(d)
-		case schemas.BudgetPerformanceHistory_FilterExpression:
-			v.FilterExpression = &Expression{}
-			return v.FilterExpression.Deserialize(d)
-		case schemas.BudgetPerformanceHistory_Metrics:
-			return deserializeMetrics(d, schemas.BudgetPerformanceHistory_Metrics, &v.Metrics)
-		case schemas.BudgetPerformanceHistory_TimeUnit:
-			var ev string
-			if err := d.ReadString(schemas.BudgetPerformanceHistory_TimeUnit, &ev); err != nil {
-				return err
-			}
-			v.TimeUnit = TimeUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The spend objects that are associated with this budget. The actualSpend tracks
 // how much you've used, cost, usage, RI units, or Savings Plans units and the
 // forecastedSpend tracks how much that you're predicted to spend based on your
@@ -894,38 +393,6 @@ type CalculatedSpend struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CalculatedSpend) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CalculatedSpend)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CalculatedSpend) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActualSpend != nil {
-		s.WriteStruct(schemas.CalculatedSpend_ActualSpend)
-		v.ActualSpend.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ForecastedSpend != nil {
-		s.WriteStruct(schemas.CalculatedSpend_ForecastedSpend)
-		v.ForecastedSpend.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CalculatedSpend) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CalculatedSpend, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CalculatedSpend_ActualSpend:
-			v.ActualSpend = &Spend{}
-			return v.ActualSpend.Deserialize(d)
-		case schemas.CalculatedSpend_ForecastedSpend:
-			v.ForecastedSpend = &Spend{}
-			return v.ForecastedSpend.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The cost category values used for filtering the costs.
 type CostCategoryValues struct {
 
@@ -939,34 +406,6 @@ type CostCategoryValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CostCategoryValues) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostCategoryValues)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.CostCategoryValues_Key, *v.Key)
-	}
-	serializeMatchOptions(s, schemas.CostCategoryValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.CostCategoryValues_Values, v.Values)
-}
-func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostCategoryValues_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.CostCategoryValues_Key, v.Key)
-		case schemas.CostCategoryValues_MatchOptions:
-			return deserializeMatchOptions(d, schemas.CostCategoryValues_MatchOptions, &v.MatchOptions)
-		case schemas.CostCategoryValues_Values:
-			return deserializeValues(d, schemas.CostCategoryValues_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // The types of cost that are included in a COST budget, such as tax and
@@ -1034,88 +473,6 @@ type CostTypes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CostTypes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostTypes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostTypes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncludeCredit != nil {
-		s.WriteBool(schemas.CostTypes_IncludeCredit, *v.IncludeCredit)
-	}
-	if v.IncludeDiscount != nil {
-		s.WriteBool(schemas.CostTypes_IncludeDiscount, *v.IncludeDiscount)
-	}
-	if v.IncludeOtherSubscription != nil {
-		s.WriteBool(schemas.CostTypes_IncludeOtherSubscription, *v.IncludeOtherSubscription)
-	}
-	if v.IncludeRecurring != nil {
-		s.WriteBool(schemas.CostTypes_IncludeRecurring, *v.IncludeRecurring)
-	}
-	if v.IncludeRefund != nil {
-		s.WriteBool(schemas.CostTypes_IncludeRefund, *v.IncludeRefund)
-	}
-	if v.IncludeSubscription != nil {
-		s.WriteBool(schemas.CostTypes_IncludeSubscription, *v.IncludeSubscription)
-	}
-	if v.IncludeSupport != nil {
-		s.WriteBool(schemas.CostTypes_IncludeSupport, *v.IncludeSupport)
-	}
-	if v.IncludeTax != nil {
-		s.WriteBool(schemas.CostTypes_IncludeTax, *v.IncludeTax)
-	}
-	if v.IncludeUpfront != nil {
-		s.WriteBool(schemas.CostTypes_IncludeUpfront, *v.IncludeUpfront)
-	}
-	if v.UseAmortized != nil {
-		s.WriteBool(schemas.CostTypes_UseAmortized, *v.UseAmortized)
-	}
-	if v.UseBlended != nil {
-		s.WriteBool(schemas.CostTypes_UseBlended, *v.UseBlended)
-	}
-}
-func (v *CostTypes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostTypes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostTypes_IncludeCredit:
-			v.IncludeCredit = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeCredit, v.IncludeCredit)
-		case schemas.CostTypes_IncludeDiscount:
-			v.IncludeDiscount = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeDiscount, v.IncludeDiscount)
-		case schemas.CostTypes_IncludeOtherSubscription:
-			v.IncludeOtherSubscription = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeOtherSubscription, v.IncludeOtherSubscription)
-		case schemas.CostTypes_IncludeRecurring:
-			v.IncludeRecurring = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeRecurring, v.IncludeRecurring)
-		case schemas.CostTypes_IncludeRefund:
-			v.IncludeRefund = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeRefund, v.IncludeRefund)
-		case schemas.CostTypes_IncludeSubscription:
-			v.IncludeSubscription = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeSubscription, v.IncludeSubscription)
-		case schemas.CostTypes_IncludeSupport:
-			v.IncludeSupport = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeSupport, v.IncludeSupport)
-		case schemas.CostTypes_IncludeTax:
-			v.IncludeTax = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeTax, v.IncludeTax)
-		case schemas.CostTypes_IncludeUpfront:
-			v.IncludeUpfront = new(bool)
-			return d.ReadBool(schemas.CostTypes_IncludeUpfront, v.IncludeUpfront)
-		case schemas.CostTypes_UseAmortized:
-			v.UseAmortized = new(bool)
-			return d.ReadBool(schemas.CostTypes_UseAmortized, v.UseAmortized)
-		case schemas.CostTypes_UseBlended:
-			v.UseBlended = new(bool)
-			return d.ReadBool(schemas.CostTypes_UseBlended, v.UseBlended)
-		}
-		return nil
-	})
-}
-
 // Specifies all of the type-specific parameters.
 type Definition struct {
 
@@ -1129,46 +486,6 @@ type Definition struct {
 	SsmActionDefinition *SsmActionDefinition
 
 	noSmithyDocumentSerde
-}
-
-func (v *Definition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Definition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Definition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IamActionDefinition != nil {
-		s.WriteStruct(schemas.Definition_IamActionDefinition)
-		v.IamActionDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScpActionDefinition != nil {
-		s.WriteStruct(schemas.Definition_ScpActionDefinition)
-		v.ScpActionDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SsmActionDefinition != nil {
-		s.WriteStruct(schemas.Definition_SsmActionDefinition)
-		v.SsmActionDefinition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Definition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Definition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Definition_IamActionDefinition:
-			v.IamActionDefinition = &IamActionDefinition{}
-			return v.IamActionDefinition.Deserialize(d)
-		case schemas.Definition_ScpActionDefinition:
-			v.ScpActionDefinition = &ScpActionDefinition{}
-			return v.ScpActionDefinition.Deserialize(d)
-		case schemas.Definition_SsmActionDefinition:
-			v.SsmActionDefinition = &SsmActionDefinition{}
-			return v.SsmActionDefinition.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Use Expression to filter in various Budgets APIs.
@@ -1195,60 +512,6 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Expression) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Expression)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressions(s, schemas.Expression_And, v.And)
-	if v.CostCategories != nil {
-		s.WriteStruct(schemas.Expression_CostCategories)
-		v.CostCategories.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Dimensions != nil {
-		s.WriteStruct(schemas.Expression_Dimensions)
-		v.Dimensions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Not != nil {
-		s.WriteStruct(schemas.Expression_Not)
-		v.Not.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeExpressions(s, schemas.Expression_Or, v.Or)
-	if v.Tags != nil {
-		s.WriteStruct(schemas.Expression_Tags)
-		v.Tags.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Expression_And:
-			return deserializeExpressions(d, schemas.Expression_And, &v.And)
-		case schemas.Expression_CostCategories:
-			v.CostCategories = &CostCategoryValues{}
-			return v.CostCategories.Deserialize(d)
-		case schemas.Expression_Dimensions:
-			v.Dimensions = &ExpressionDimensionValues{}
-			return v.Dimensions.Deserialize(d)
-		case schemas.Expression_Not:
-			v.Not = &Expression{}
-			return v.Not.Deserialize(d)
-		case schemas.Expression_Or:
-			return deserializeExpressions(d, schemas.Expression_Or, &v.Or)
-		case schemas.Expression_Tags:
-			v.Tags = &TagValues{}
-			return v.Tags.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains the specifications for the filters to use for your request.
 type ExpressionDimensionValues struct {
 
@@ -1268,38 +531,6 @@ type ExpressionDimensionValues struct {
 	MatchOptions []MatchOption
 
 	noSmithyDocumentSerde
-}
-
-func (v *ExpressionDimensionValues) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExpressionDimensionValues)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExpressionDimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != "" {
-		s.WriteString(schemas.ExpressionDimensionValues_Key, string(v.Key))
-	}
-	serializeMatchOptions(s, schemas.ExpressionDimensionValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.ExpressionDimensionValues_Values, v.Values)
-}
-func (v *ExpressionDimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExpressionDimensionValues, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExpressionDimensionValues_Key:
-			var ev string
-			if err := d.ReadString(schemas.ExpressionDimensionValues_Key, &ev); err != nil {
-				return err
-			}
-			v.Key = Dimension(ev)
-			return nil
-		case schemas.ExpressionDimensionValues_MatchOptions:
-			return deserializeMatchOptions(d, schemas.ExpressionDimensionValues_MatchOptions, &v.MatchOptions)
-		case schemas.ExpressionDimensionValues_Values:
-			return deserializeValues(d, schemas.ExpressionDimensionValues_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Provides information about the current operational state of a billing view
@@ -1329,48 +560,6 @@ type HealthStatus struct {
 	StatusReason HealthStatusReason
 
 	noSmithyDocumentSerde
-}
-
-func (v *HealthStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HealthStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.HealthStatus_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.HealthStatus_Status, string(v.Status))
-	}
-	if v.StatusReason != "" {
-		s.WriteString(schemas.HealthStatus_StatusReason, string(v.StatusReason))
-	}
-}
-func (v *HealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HealthStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HealthStatus_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.HealthStatus_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.HealthStatus_Status:
-			var ev string
-			if err := d.ReadString(schemas.HealthStatus_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = HealthStatusValue(ev)
-			return nil
-		case schemas.HealthStatus_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.HealthStatus_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = HealthStatusReason(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The parameters that define or describe the historical data that your
@@ -1410,34 +599,6 @@ type HistoricalOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HistoricalOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HistoricalOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HistoricalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BudgetAdjustmentPeriod != nil {
-		s.WriteInt32(schemas.HistoricalOptions_BudgetAdjustmentPeriod, *v.BudgetAdjustmentPeriod)
-	}
-	if v.LookBackAvailablePeriods != nil {
-		s.WriteInt32(schemas.HistoricalOptions_LookBackAvailablePeriods, *v.LookBackAvailablePeriods)
-	}
-}
-func (v *HistoricalOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HistoricalOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HistoricalOptions_BudgetAdjustmentPeriod:
-			v.BudgetAdjustmentPeriod = new(int32)
-			return d.ReadInt32(schemas.HistoricalOptions_BudgetAdjustmentPeriod, v.BudgetAdjustmentPeriod)
-		case schemas.HistoricalOptions_LookBackAvailablePeriods:
-			v.LookBackAvailablePeriods = new(int32)
-			return d.ReadInt32(schemas.HistoricalOptions_LookBackAvailablePeriods, v.LookBackAvailablePeriods)
-		}
-		return nil
-	})
-}
-
 // The Identity and Access Management (IAM) action definition details.
 type IamActionDefinition struct {
 
@@ -1456,37 +617,6 @@ type IamActionDefinition struct {
 	Users []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IamActionDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamActionDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroups(s, schemas.IamActionDefinition_Groups, v.Groups)
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.IamActionDefinition_PolicyArn, *v.PolicyArn)
-	}
-	serializeRoles(s, schemas.IamActionDefinition_Roles, v.Roles)
-	serializeUsers(s, schemas.IamActionDefinition_Users, v.Users)
-}
-func (v *IamActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamActionDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamActionDefinition_Groups:
-			return deserializeGroups(d, schemas.IamActionDefinition_Groups, &v.Groups)
-		case schemas.IamActionDefinition_PolicyArn:
-			v.PolicyArn = new(string)
-			return d.ReadString(schemas.IamActionDefinition_PolicyArn, v.PolicyArn)
-		case schemas.IamActionDefinition_Roles:
-			return deserializeRoles(d, schemas.IamActionDefinition_Roles, &v.Roles)
-		case schemas.IamActionDefinition_Users:
-			return deserializeUsers(d, schemas.IamActionDefinition_Users, &v.Users)
-		}
-		return nil
-	})
 }
 
 // A notification that's associated with a budget. A budget can have up to ten
@@ -1544,65 +674,6 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Notification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Notification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Notification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComparisonOperator != "" {
-		s.WriteString(schemas.Notification_ComparisonOperator, string(v.ComparisonOperator))
-	}
-	if v.NotificationState != "" {
-		s.WriteString(schemas.Notification_NotificationState, string(v.NotificationState))
-	}
-	if v.NotificationType != "" {
-		s.WriteString(schemas.Notification_NotificationType, string(v.NotificationType))
-	}
-	s.WriteFloat64(schemas.Notification_Threshold, v.Threshold)
-	if v.ThresholdType != "" {
-		s.WriteString(schemas.Notification_ThresholdType, string(v.ThresholdType))
-	}
-}
-func (v *Notification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Notification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Notification_ComparisonOperator:
-			var ev string
-			if err := d.ReadString(schemas.Notification_ComparisonOperator, &ev); err != nil {
-				return err
-			}
-			v.ComparisonOperator = ComparisonOperator(ev)
-			return nil
-		case schemas.Notification_NotificationState:
-			var ev string
-			if err := d.ReadString(schemas.Notification_NotificationState, &ev); err != nil {
-				return err
-			}
-			v.NotificationState = NotificationState(ev)
-			return nil
-		case schemas.Notification_NotificationType:
-			var ev string
-			if err := d.ReadString(schemas.Notification_NotificationType, &ev); err != nil {
-				return err
-			}
-			v.NotificationType = NotificationType(ev)
-			return nil
-		case schemas.Notification_Threshold:
-			return d.ReadFloat64(schemas.Notification_Threshold, &v.Threshold)
-		case schemas.Notification_ThresholdType:
-			var ev string
-			if err := d.ReadString(schemas.Notification_ThresholdType, &ev); err != nil {
-				return err
-			}
-			v.ThresholdType = ThresholdType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A notification with subscribers. A notification can have one SNS subscriber and
 // up to 10 email subscribers, for a total of 11 subscribers.
 type NotificationWithSubscribers struct {
@@ -1618,33 +689,6 @@ type NotificationWithSubscribers struct {
 	Subscribers []Subscriber
 
 	noSmithyDocumentSerde
-}
-
-func (v *NotificationWithSubscribers) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationWithSubscribers)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationWithSubscribers) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Notification != nil {
-		s.WriteStruct(schemas.NotificationWithSubscribers_Notification)
-		v.Notification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSubscribers(s, schemas.NotificationWithSubscribers_Subscribers, v.Subscribers)
-}
-func (v *NotificationWithSubscribers) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationWithSubscribers, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationWithSubscribers_Notification:
-			v.Notification = &Notification{}
-			return v.Notification.Deserialize(d)
-		case schemas.NotificationWithSubscribers_Subscribers:
-			return deserializeSubscribers(d, schemas.NotificationWithSubscribers_Subscribers, &v.Subscribers)
-		}
-		return nil
-	})
 }
 
 // The tag structure that contains a tag key and value.
@@ -1663,34 +707,6 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceTag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.ResourceTag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.ResourceTag_Value, *v.Value)
-	}
-}
-func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceTag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.ResourceTag_Key, v.Key)
-		case schemas.ResourceTag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.ResourceTag_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // The service control policies (SCP) action definition details.
 type ScpActionDefinition struct {
 
@@ -1705,31 +721,6 @@ type ScpActionDefinition struct {
 	TargetIds []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScpActionDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScpActionDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScpActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyId != nil {
-		s.WriteString(schemas.ScpActionDefinition_PolicyId, *v.PolicyId)
-	}
-	serializeTargetIds(s, schemas.ScpActionDefinition_TargetIds, v.TargetIds)
-}
-func (v *ScpActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScpActionDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScpActionDefinition_PolicyId:
-			v.PolicyId = new(string)
-			return d.ReadString(schemas.ScpActionDefinition_PolicyId, v.PolicyId)
-		case schemas.ScpActionDefinition_TargetIds:
-			return deserializeTargetIds(d, schemas.ScpActionDefinition_TargetIds, &v.TargetIds)
-		}
-		return nil
-	})
 }
 
 // The amount of cost or usage that's measured for a budget.
@@ -1762,34 +753,6 @@ type Spend struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Spend) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Spend)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Spend) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteString(schemas.Spend_Amount, *v.Amount)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.Spend_Unit, *v.Unit)
-	}
-}
-func (v *Spend) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Spend, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Spend_Amount:
-			v.Amount = new(string)
-			return d.ReadString(schemas.Spend_Amount, v.Amount)
-		case schemas.Spend_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.Spend_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // The Amazon Web Services Systems Manager (SSM) action definition details.
 type SsmActionDefinition struct {
 
@@ -1809,41 +772,6 @@ type SsmActionDefinition struct {
 	Region *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SsmActionDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SsmActionDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SsmActionDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionSubType != "" {
-		s.WriteString(schemas.SsmActionDefinition_ActionSubType, string(v.ActionSubType))
-	}
-	serializeInstanceIds(s, schemas.SsmActionDefinition_InstanceIds, v.InstanceIds)
-	if v.Region != nil {
-		s.WriteString(schemas.SsmActionDefinition_Region, *v.Region)
-	}
-}
-func (v *SsmActionDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SsmActionDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SsmActionDefinition_ActionSubType:
-			var ev string
-			if err := d.ReadString(schemas.SsmActionDefinition_ActionSubType, &ev); err != nil {
-				return err
-			}
-			v.ActionSubType = ActionSubType(ev)
-			return nil
-		case schemas.SsmActionDefinition_InstanceIds:
-			return deserializeInstanceIds(d, schemas.SsmActionDefinition_InstanceIds, &v.InstanceIds)
-		case schemas.SsmActionDefinition_Region:
-			v.Region = new(string)
-			return d.ReadString(schemas.SsmActionDefinition_Region, v.Region)
-		}
-		return nil
-	})
 }
 
 // The subscriber to a budget notification. The subscriber consists of a
@@ -1872,38 +800,6 @@ type Subscriber struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Subscriber) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Subscriber)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Subscriber) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Address != nil {
-		s.WriteString(schemas.Subscriber_Address, *v.Address)
-	}
-	if v.SubscriptionType != "" {
-		s.WriteString(schemas.Subscriber_SubscriptionType, string(v.SubscriptionType))
-	}
-}
-func (v *Subscriber) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Subscriber, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Subscriber_Address:
-			v.Address = new(string)
-			return d.ReadString(schemas.Subscriber_Address, v.Address)
-		case schemas.Subscriber_SubscriptionType:
-			var ev string
-			if err := d.ReadString(schemas.Subscriber_SubscriptionType, &ev); err != nil {
-				return err
-			}
-			v.SubscriptionType = SubscriptionType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The values that are available for a tag.
 type TagValues struct {
 
@@ -1917,34 +813,6 @@ type TagValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagValues) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagValues)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.TagValues_Key, *v.Key)
-	}
-	serializeMatchOptions(s, schemas.TagValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.TagValues_Values, v.Values)
-}
-func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagValues_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagValues_Key, v.Key)
-		case schemas.TagValues_MatchOptions:
-			return deserializeMatchOptions(d, schemas.TagValues_MatchOptions, &v.MatchOptions)
-		case schemas.TagValues_Values:
-			return deserializeValues(d, schemas.TagValues_Values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // The period of time that's covered by a budget. The period has a start date and
@@ -1973,34 +841,6 @@ type TimePeriod struct {
 	Start *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimePeriod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimePeriod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimePeriod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.End != nil {
-		s.WriteTime(schemas.TimePeriod_End, *v.End)
-	}
-	if v.Start != nil {
-		s.WriteTime(schemas.TimePeriod_Start, *v.Start)
-	}
-}
-func (v *TimePeriod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimePeriod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimePeriod_End:
-			v.End = new(time.Time)
-			return d.ReadTime(schemas.TimePeriod_End, v.End)
-		case schemas.TimePeriod_Start:
-			v.Start = new(time.Time)
-			return d.ReadTime(schemas.TimePeriod_Start, v.Start)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

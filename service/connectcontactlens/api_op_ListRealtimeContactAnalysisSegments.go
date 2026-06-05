@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcontactlens/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcontactlens/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type ListRealtimeContactAnalysisSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRealtimeContactAnalysisSegmentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRealtimeContactAnalysisSegmentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRealtimeContactAnalysisSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContactId != nil {
-		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsRequest_ContactId, *v.ContactId)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsRequest_InstanceId, *v.InstanceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRealtimeContactAnalysisSegmentsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListRealtimeContactAnalysisSegmentsOutput struct {
 
 	// An analyzed transcript or category.
@@ -98,26 +75,16 @@ type ListRealtimeContactAnalysisSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRealtimeContactAnalysisSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRealtimeContactAnalysisSegmentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRealtimeContactAnalysisSegmentsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRealtimeContactAnalysisSegmentsResponse_NextToken, v.NextToken)
-		case schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments:
-			return deserializeRealtimeContactAnalysisSegments(d, schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments, &v.Segments)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRealtimeContactAnalysisSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRealtimeContactAnalysisSegments, schemas.ListRealtimeContactAnalysisSegmentsRequest, schemas.ListRealtimeContactAnalysisSegmentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRealtimeContactAnalysisSegments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRealtimeContactAnalysisSegments, schemas.ListRealtimeContactAnalysisSegmentsRequest, schemas.ListRealtimeContactAnalysisSegmentsResponse), output: &ListRealtimeContactAnalysisSegmentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRealtimeContactAnalysisSegments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRealtimeContactAnalysisSegments"); err != nil {

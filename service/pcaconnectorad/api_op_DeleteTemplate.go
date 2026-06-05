@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type DeleteTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTemplateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteTemplateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TemplateArn != nil {
-		s.WriteString(schemas.DeleteTemplateRequest_TemplateArn, *v.TemplateArn)
-	}
-}
-
 type DeleteTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,29 +46,16 @@ type DeleteTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteTemplateOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplate, schemas.DeleteTemplateRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplate, schemas.DeleteTemplateRequest, nil), output: &DeleteTemplateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTemplate{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTemplate"); err != nil {

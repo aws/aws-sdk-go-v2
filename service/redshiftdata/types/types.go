@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -55,93 +53,6 @@ type ColumnMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ColumnMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ColumnMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ColumnMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ColumnDefault != nil {
-		s.WriteString(schemas.ColumnMetadata_columnDefault, *v.ColumnDefault)
-	}
-	if v.IsCaseSensitive != false {
-		s.WriteBool(schemas.ColumnMetadata_isCaseSensitive, v.IsCaseSensitive)
-	}
-	if v.IsCurrency != false {
-		s.WriteBool(schemas.ColumnMetadata_isCurrency, v.IsCurrency)
-	}
-	if v.IsSigned != false {
-		s.WriteBool(schemas.ColumnMetadata_isSigned, v.IsSigned)
-	}
-	if v.Label != nil {
-		s.WriteString(schemas.ColumnMetadata_label, *v.Label)
-	}
-	if v.Length != 0 {
-		s.WriteInt32(schemas.ColumnMetadata_length, v.Length)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ColumnMetadata_name, *v.Name)
-	}
-	if v.Nullable != 0 {
-		s.WriteInt32(schemas.ColumnMetadata_nullable, v.Nullable)
-	}
-	if v.Precision != 0 {
-		s.WriteInt32(schemas.ColumnMetadata_precision, v.Precision)
-	}
-	if v.Scale != 0 {
-		s.WriteInt32(schemas.ColumnMetadata_scale, v.Scale)
-	}
-	if v.SchemaName != nil {
-		s.WriteString(schemas.ColumnMetadata_schemaName, *v.SchemaName)
-	}
-	if v.TableName != nil {
-		s.WriteString(schemas.ColumnMetadata_tableName, *v.TableName)
-	}
-	if v.TypeName != nil {
-		s.WriteString(schemas.ColumnMetadata_typeName, *v.TypeName)
-	}
-}
-func (v *ColumnMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ColumnMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ColumnMetadata_columnDefault:
-			v.ColumnDefault = new(string)
-			return d.ReadString(schemas.ColumnMetadata_columnDefault, v.ColumnDefault)
-		case schemas.ColumnMetadata_isCaseSensitive:
-			return d.ReadBool(schemas.ColumnMetadata_isCaseSensitive, &v.IsCaseSensitive)
-		case schemas.ColumnMetadata_isCurrency:
-			return d.ReadBool(schemas.ColumnMetadata_isCurrency, &v.IsCurrency)
-		case schemas.ColumnMetadata_isSigned:
-			return d.ReadBool(schemas.ColumnMetadata_isSigned, &v.IsSigned)
-		case schemas.ColumnMetadata_label:
-			v.Label = new(string)
-			return d.ReadString(schemas.ColumnMetadata_label, v.Label)
-		case schemas.ColumnMetadata_length:
-			return d.ReadInt32(schemas.ColumnMetadata_length, &v.Length)
-		case schemas.ColumnMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ColumnMetadata_name, v.Name)
-		case schemas.ColumnMetadata_nullable:
-			return d.ReadInt32(schemas.ColumnMetadata_nullable, &v.Nullable)
-		case schemas.ColumnMetadata_precision:
-			return d.ReadInt32(schemas.ColumnMetadata_precision, &v.Precision)
-		case schemas.ColumnMetadata_scale:
-			return d.ReadInt32(schemas.ColumnMetadata_scale, &v.Scale)
-		case schemas.ColumnMetadata_schemaName:
-			v.SchemaName = new(string)
-			return d.ReadString(schemas.ColumnMetadata_schemaName, v.SchemaName)
-		case schemas.ColumnMetadata_tableName:
-			v.TableName = new(string)
-			return d.ReadString(schemas.ColumnMetadata_tableName, v.TableName)
-		case schemas.ColumnMetadata_typeName:
-			v.TypeName = new(string)
-			return d.ReadString(schemas.ColumnMetadata_typeName, v.TypeName)
-		}
-		return nil
-	})
-}
-
 // A data value in a column.
 //
 // The following types satisfy this interface:
@@ -164,12 +75,6 @@ type FieldMemberBlobValue struct {
 }
 
 func (*FieldMemberBlobValue) isField() {}
-func (v *FieldMemberBlobValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteBlob(schemas.Field_blobValue, v.Value)
-}
-func (v *FieldMemberBlobValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadBlob(schemas.Field_blobValue, &v.Value)
-}
 
 // A value of the Boolean data type.
 type FieldMemberBooleanValue struct {
@@ -179,12 +84,6 @@ type FieldMemberBooleanValue struct {
 }
 
 func (*FieldMemberBooleanValue) isField() {}
-func (v *FieldMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.Field_booleanValue, v.Value)
-}
-func (v *FieldMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadBool(schemas.Field_booleanValue, &v.Value)
-}
 
 // A value of the double data type.
 type FieldMemberDoubleValue struct {
@@ -194,12 +93,6 @@ type FieldMemberDoubleValue struct {
 }
 
 func (*FieldMemberDoubleValue) isField() {}
-func (v *FieldMemberDoubleValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteFloat64(schemas.Field_doubleValue, v.Value)
-}
-func (v *FieldMemberDoubleValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadFloat64(schemas.Field_doubleValue, &v.Value)
-}
 
 // A value that indicates whether the data is NULL.
 type FieldMemberIsNull struct {
@@ -209,12 +102,6 @@ type FieldMemberIsNull struct {
 }
 
 func (*FieldMemberIsNull) isField() {}
-func (v *FieldMemberIsNull) Serialize(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.Field_isNull, v.Value)
-}
-func (v *FieldMemberIsNull) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadBool(schemas.Field_isNull, &v.Value)
-}
 
 // A value of the long data type.
 type FieldMemberLongValue struct {
@@ -224,12 +111,6 @@ type FieldMemberLongValue struct {
 }
 
 func (*FieldMemberLongValue) isField() {}
-func (v *FieldMemberLongValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteInt64(schemas.Field_longValue, v.Value)
-}
-func (v *FieldMemberLongValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadInt64(schemas.Field_longValue, &v.Value)
-}
 
 // A value of the string data type.
 type FieldMemberStringValue struct {
@@ -239,12 +120,6 @@ type FieldMemberStringValue struct {
 }
 
 func (*FieldMemberStringValue) isField() {}
-func (v *FieldMemberStringValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.Field_stringValue, v.Value)
-}
-func (v *FieldMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.Field_stringValue, &v.Value)
-}
 
 // The results of the SQL statement.
 //
@@ -263,12 +138,6 @@ type QueryRecordsMemberCSVRecords struct {
 }
 
 func (*QueryRecordsMemberCSVRecords) isQueryRecords() {}
-func (v *QueryRecordsMemberCSVRecords) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.QueryRecords_CSVRecords, v.Value)
-}
-func (v *QueryRecordsMemberCSVRecords) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.QueryRecords_CSVRecords, &v.Value)
-}
 
 // A parameter used in a SQL statement.
 type SqlParameter struct {
@@ -288,34 +157,6 @@ type SqlParameter struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SqlParameter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SqlParameter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SqlParameter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.SqlParameter_name, *v.Name)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.SqlParameter_value, *v.Value)
-	}
-}
-func (v *SqlParameter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SqlParameter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SqlParameter_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SqlParameter_name, v.Name)
-		case schemas.SqlParameter_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.SqlParameter_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The SQL statement to run.
@@ -364,96 +205,6 @@ type StatementData struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *StatementData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StatementData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StatementData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.StatementData_CreatedAt, *v.CreatedAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.StatementData_Id, *v.Id)
-	}
-	if v.IsBatchStatement != nil {
-		s.WriteBool(schemas.StatementData_IsBatchStatement, *v.IsBatchStatement)
-	}
-	serializeSqlParametersList(s, schemas.StatementData_QueryParameters, v.QueryParameters)
-	if v.QueryString != nil {
-		s.WriteString(schemas.StatementData_QueryString, *v.QueryString)
-	}
-	serializeStatementStringList(s, schemas.StatementData_QueryStrings, v.QueryStrings)
-	if v.ResultFormat != "" {
-		s.WriteString(schemas.StatementData_ResultFormat, string(v.ResultFormat))
-	}
-	if v.SecretArn != nil {
-		s.WriteString(schemas.StatementData_SecretArn, *v.SecretArn)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.StatementData_SessionId, *v.SessionId)
-	}
-	if v.StatementName != nil {
-		s.WriteString(schemas.StatementData_StatementName, *v.StatementName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.StatementData_Status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.StatementData_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *StatementData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StatementData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StatementData_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.StatementData_CreatedAt, v.CreatedAt)
-		case schemas.StatementData_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.StatementData_Id, v.Id)
-		case schemas.StatementData_IsBatchStatement:
-			v.IsBatchStatement = new(bool)
-			return d.ReadBool(schemas.StatementData_IsBatchStatement, v.IsBatchStatement)
-		case schemas.StatementData_QueryParameters:
-			return deserializeSqlParametersList(d, schemas.StatementData_QueryParameters, &v.QueryParameters)
-		case schemas.StatementData_QueryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.StatementData_QueryString, v.QueryString)
-		case schemas.StatementData_QueryStrings:
-			return deserializeStatementStringList(d, schemas.StatementData_QueryStrings, &v.QueryStrings)
-		case schemas.StatementData_ResultFormat:
-			var ev string
-			if err := d.ReadString(schemas.StatementData_ResultFormat, &ev); err != nil {
-				return err
-			}
-			v.ResultFormat = ResultFormatString(ev)
-			return nil
-		case schemas.StatementData_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.StatementData_SecretArn, v.SecretArn)
-		case schemas.StatementData_SessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.StatementData_SessionId, v.SessionId)
-		case schemas.StatementData_StatementName:
-			v.StatementName = new(string)
-			return d.ReadString(schemas.StatementData_StatementName, v.StatementName)
-		case schemas.StatementData_Status:
-			var ev string
-			if err := d.ReadString(schemas.StatementData_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatusString(ev)
-			return nil
-		case schemas.StatementData_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.StatementData_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Information about an SQL statement.
@@ -507,88 +258,6 @@ type SubStatementData struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubStatementData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubStatementData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubStatementData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SubStatementData_CreatedAt, *v.CreatedAt)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.SubStatementData_Duration, v.Duration)
-	}
-	if v.Error != nil {
-		s.WriteString(schemas.SubStatementData_Error, *v.Error)
-	}
-	if v.HasResultSet != nil {
-		s.WriteBool(schemas.SubStatementData_HasResultSet, *v.HasResultSet)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SubStatementData_Id, *v.Id)
-	}
-	if v.QueryString != nil {
-		s.WriteString(schemas.SubStatementData_QueryString, *v.QueryString)
-	}
-	if v.RedshiftQueryId != 0 {
-		s.WriteInt64(schemas.SubStatementData_RedshiftQueryId, v.RedshiftQueryId)
-	}
-	if v.ResultRows != 0 {
-		s.WriteInt64(schemas.SubStatementData_ResultRows, v.ResultRows)
-	}
-	if v.ResultSize != 0 {
-		s.WriteInt64(schemas.SubStatementData_ResultSize, v.ResultSize)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SubStatementData_Status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.SubStatementData_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *SubStatementData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubStatementData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubStatementData_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubStatementData_CreatedAt, v.CreatedAt)
-		case schemas.SubStatementData_Duration:
-			return d.ReadInt64(schemas.SubStatementData_Duration, &v.Duration)
-		case schemas.SubStatementData_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.SubStatementData_Error, v.Error)
-		case schemas.SubStatementData_HasResultSet:
-			v.HasResultSet = new(bool)
-			return d.ReadBool(schemas.SubStatementData_HasResultSet, v.HasResultSet)
-		case schemas.SubStatementData_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SubStatementData_Id, v.Id)
-		case schemas.SubStatementData_QueryString:
-			v.QueryString = new(string)
-			return d.ReadString(schemas.SubStatementData_QueryString, v.QueryString)
-		case schemas.SubStatementData_RedshiftQueryId:
-			return d.ReadInt64(schemas.SubStatementData_RedshiftQueryId, &v.RedshiftQueryId)
-		case schemas.SubStatementData_ResultRows:
-			return d.ReadInt64(schemas.SubStatementData_ResultRows, &v.ResultRows)
-		case schemas.SubStatementData_ResultSize:
-			return d.ReadInt64(schemas.SubStatementData_ResultSize, &v.ResultSize)
-		case schemas.SubStatementData_Status:
-			var ev string
-			if err := d.ReadString(schemas.SubStatementData_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = StatementStatusString(ev)
-			return nil
-		case schemas.SubStatementData_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubStatementData_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // The properties of a table.
 type TableMember struct {
 
@@ -603,40 +272,6 @@ type TableMember struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TableMember) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TableMember)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TableMember) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.TableMember_name, *v.Name)
-	}
-	if v.Schema != nil {
-		s.WriteString(schemas.TableMember_schema, *v.Schema)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.TableMember_type, *v.Type)
-	}
-}
-func (v *TableMember) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TableMember, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TableMember_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.TableMember_name, v.Name)
-		case schemas.TableMember_schema:
-			v.Schema = new(string)
-			return d.ReadString(schemas.TableMember_schema, v.Schema)
-		case schemas.TableMember_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.TableMember_type, v.Type)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,29 +72,6 @@ type PutDataExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDataExportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutDataExportConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutDataExportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.PutDataExportConfigurationInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.PutDataExportConfigurationInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnableExport != nil {
-		s.WriteBool(schemas.PutDataExportConfigurationInput_enableExport, *v.EnableExport)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.PutDataExportConfigurationInput_encryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type PutDataExportConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -104,21 +79,16 @@ type PutDataExportConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutDataExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutDataExportConfigurationOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutDataExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataExportConfiguration, schemas.PutDataExportConfigurationInput, schemas.PutDataExportConfigurationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDataExportConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataExportConfiguration, schemas.PutDataExportConfigurationInput, schemas.PutDataExportConfigurationOutput), output: &PutDataExportConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDataExportConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDataExportConfiguration"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,48 +102,6 @@ type ListPackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackageVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.ListPackageVersionsRequest_format, string(v.Format))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPackageVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_namespace, *v.Namespace)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_nextToken, *v.NextToken)
-	}
-	if v.OriginType != "" {
-		s.WriteString(schemas.ListPackageVersionsRequest_originType, string(v.OriginType))
-	}
-	if v.Package != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_package, *v.Package)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.ListPackageVersionsRequest_repository, *v.Repository)
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListPackageVersionsRequest_sortBy, string(v.SortBy))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListPackageVersionsRequest_status, string(v.Status))
-	}
-}
-
 type ListPackageVersionsOutput struct {
 
 	//  The default package version to display. This depends on the package format:
@@ -192,42 +148,16 @@ type ListPackageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackageVersionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackageVersionsResult_defaultDisplayVersion:
-			v.DefaultDisplayVersion = new(string)
-			return d.ReadString(schemas.ListPackageVersionsResult_defaultDisplayVersion, v.DefaultDisplayVersion)
-		case schemas.ListPackageVersionsResult_format:
-			var ev string
-			if err := d.ReadString(schemas.ListPackageVersionsResult_format, &ev); err != nil {
-				return err
-			}
-			v.Format = types.PackageFormat(ev)
-			return nil
-		case schemas.ListPackageVersionsResult_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.ListPackageVersionsResult_namespace, v.Namespace)
-		case schemas.ListPackageVersionsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackageVersionsResult_nextToken, v.NextToken)
-		case schemas.ListPackageVersionsResult_package:
-			v.Package = new(string)
-			return d.ReadString(schemas.ListPackageVersionsResult_package, v.Package)
-		case schemas.ListPackageVersionsResult_versions:
-			return deserializePackageVersionSummaryList(d, schemas.ListPackageVersionsResult_versions, &v.Versions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageVersions, schemas.ListPackageVersionsRequest, schemas.ListPackageVersionsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageVersions, schemas.ListPackageVersionsRequest, schemas.ListPackageVersionsResult), output: &ListPackageVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPackageVersions"); err != nil {

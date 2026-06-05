@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type DeleteInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteInferenceSchedulerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteInferenceSchedulerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InferenceSchedulerName != nil {
-		s.WriteString(schemas.DeleteInferenceSchedulerRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
-	}
-}
-
 type DeleteInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,29 +44,16 @@ type DeleteInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteInferenceSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteInferenceSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceScheduler, schemas.DeleteInferenceSchedulerRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteInferenceScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceScheduler, schemas.DeleteInferenceSchedulerRequest, nil), output: &DeleteInferenceSchedulerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteInferenceScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteInferenceScheduler"); err != nil {

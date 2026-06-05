@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,34 +41,6 @@ type DeleteGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteGroupMembershipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.DeleteGroupMembershipRequest_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.MembershipId != nil {
-		s.WriteString(schemas.DeleteGroupMembershipRequest_MembershipId, *v.MembershipId)
-	}
-}
-func (v *DeleteGroupMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGroupMembershipRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGroupMembershipRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DeleteGroupMembershipRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DeleteGroupMembershipRequest_MembershipId:
-			v.MembershipId = new(string)
-			return d.ReadString(schemas.DeleteGroupMembershipRequest_MembershipId, v.MembershipId)
-		}
-		return nil
-	})
-}
-
 type DeleteGroupMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,29 +48,16 @@ type DeleteGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteGroupMembershipResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGroupMembershipResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroupMembership, schemas.DeleteGroupMembershipRequest, schemas.DeleteGroupMembershipResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGroupMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroupMembership, schemas.DeleteGroupMembershipRequest, schemas.DeleteGroupMembershipResponse), output: &DeleteGroupMembershipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteGroupMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGroupMembership"); err != nil {

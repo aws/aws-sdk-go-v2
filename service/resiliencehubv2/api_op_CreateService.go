@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,46 +71,6 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateServiceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedSystemList(s, schemas.CreateServiceRequest_associatedSystems, v.AssociatedSystems)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateServiceRequest_clientToken, *v.ClientToken)
-	}
-	if v.DependencyDiscovery != "" {
-		s.WriteString(schemas.CreateServiceRequest_dependencyDiscovery, string(v.DependencyDiscovery))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateServiceRequest_description, *v.Description)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.CreateServiceRequest_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateServiceRequest_name, *v.Name)
-	}
-	if v.PermissionModel != nil {
-		s.WriteStruct(schemas.CreateServiceRequest_permissionModel)
-		v.PermissionModel.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PolicyArn != nil {
-		s.WriteString(schemas.CreateServiceRequest_policyArn, *v.PolicyArn)
-	}
-	serializeRegionList(s, schemas.CreateServiceRequest_regions, v.Regions)
-	if v.ReportConfiguration != nil {
-		s.WriteStruct(schemas.CreateServiceRequest_reportConfiguration)
-		v.ReportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
-}
-
 type CreateServiceOutput struct {
 
 	// The created service.
@@ -126,24 +84,16 @@ type CreateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateServiceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateServiceResponse_service:
-			v.Service = &types.Service{}
-			return v.Service.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse), output: &CreateServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateService"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSignalingChannelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSignalingChannelInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSignalingChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelARN != nil {
-		s.WriteString(schemas.DeleteSignalingChannelInput_ChannelARN, *v.ChannelARN)
-	}
-	if v.CurrentVersion != nil {
-		s.WriteString(schemas.DeleteSignalingChannelInput_CurrentVersion, *v.CurrentVersion)
-	}
-}
-
 type DeleteSignalingChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type DeleteSignalingChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSignalingChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSignalingChannelOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalingChannel, schemas.DeleteSignalingChannelInput, schemas.DeleteSignalingChannelOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSignalingChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalingChannel, schemas.DeleteSignalingChannelInput, schemas.DeleteSignalingChannelOutput), output: &DeleteSignalingChannelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSignalingChannel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSignalingChannel"); err != nil {

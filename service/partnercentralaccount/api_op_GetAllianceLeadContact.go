@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type GetAllianceLeadContactInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAllianceLeadContactInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAllianceLeadContactRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAllianceLeadContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.GetAllianceLeadContactRequest_Catalog, *v.Catalog)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetAllianceLeadContactRequest_Identifier, *v.Identifier)
-	}
-}
-
 type GetAllianceLeadContactOutput struct {
 
 	// The alliance lead contact information including name, email, and business title.
@@ -87,33 +70,16 @@ type GetAllianceLeadContactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAllianceLeadContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAllianceLeadContactResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAllianceLeadContactResponse_AllianceLeadContact:
-			v.AllianceLeadContact = &types.AllianceLeadContact{}
-			return v.AllianceLeadContact.Deserialize(d)
-		case schemas.GetAllianceLeadContactResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetAllianceLeadContactResponse_Arn, v.Arn)
-		case schemas.GetAllianceLeadContactResponse_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.GetAllianceLeadContactResponse_Catalog, v.Catalog)
-		case schemas.GetAllianceLeadContactResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAllianceLeadContactResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAllianceLeadContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAllianceLeadContact, schemas.GetAllianceLeadContactRequest, schemas.GetAllianceLeadContactResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAllianceLeadContact{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAllianceLeadContact, schemas.GetAllianceLeadContactRequest, schemas.GetAllianceLeadContactResponse), output: &GetAllianceLeadContactOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAllianceLeadContact{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAllianceLeadContact"); err != nil {

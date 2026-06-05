@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -100,26 +98,6 @@ type PollForTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PollForTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PollForTaskInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PollForTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hostname != nil {
-		s.WriteString(schemas.PollForTaskInput_hostname, *v.Hostname)
-	}
-	if v.InstanceIdentity != nil {
-		s.WriteStruct(schemas.PollForTaskInput_instanceIdentity)
-		v.InstanceIdentity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WorkerGroup != nil {
-		s.WriteString(schemas.PollForTaskInput_workerGroup, *v.WorkerGroup)
-	}
-}
-
 // Contains the output of PollForTask.
 type PollForTaskOutput struct {
 
@@ -135,24 +113,16 @@ type PollForTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PollForTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PollForTaskOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PollForTaskOutput_taskObject:
-			v.TaskObject = &types.TaskObject{}
-			return v.TaskObject.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPollForTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForTask, schemas.PollForTaskInput, schemas.PollForTaskOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForTask, schemas.PollForTaskInput, schemas.PollForTaskOutput), output: &PollForTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PollForTask"); err != nil {

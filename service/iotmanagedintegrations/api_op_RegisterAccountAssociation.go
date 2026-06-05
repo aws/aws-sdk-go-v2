@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type RegisterAccountAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterAccountAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterAccountAssociationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterAccountAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountAssociationId != nil {
-		s.WriteString(schemas.RegisterAccountAssociationRequest_AccountAssociationId, *v.AccountAssociationId)
-	}
-	if v.DeviceDiscoveryId != nil {
-		s.WriteString(schemas.RegisterAccountAssociationRequest_DeviceDiscoveryId, *v.DeviceDiscoveryId)
-	}
-	if v.ManagedThingId != nil {
-		s.WriteString(schemas.RegisterAccountAssociationRequest_ManagedThingId, *v.ManagedThingId)
-	}
-}
-
 type RegisterAccountAssociationOutput struct {
 
 	// The identifier of the account association that was registered.
@@ -85,30 +65,16 @@ type RegisterAccountAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterAccountAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterAccountAssociationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterAccountAssociationResponse_AccountAssociationId:
-			v.AccountAssociationId = new(string)
-			return d.ReadString(schemas.RegisterAccountAssociationResponse_AccountAssociationId, v.AccountAssociationId)
-		case schemas.RegisterAccountAssociationResponse_DeviceDiscoveryId:
-			v.DeviceDiscoveryId = new(string)
-			return d.ReadString(schemas.RegisterAccountAssociationResponse_DeviceDiscoveryId, v.DeviceDiscoveryId)
-		case schemas.RegisterAccountAssociationResponse_ManagedThingId:
-			v.ManagedThingId = new(string)
-			return d.ReadString(schemas.RegisterAccountAssociationResponse_ManagedThingId, v.ManagedThingId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterAccountAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccountAssociation, schemas.RegisterAccountAssociationRequest, schemas.RegisterAccountAssociationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccountAssociation, schemas.RegisterAccountAssociationRequest, schemas.RegisterAccountAssociationResponse), output: &RegisterAccountAssociationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterAccountAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterAccountAssociation"); err != nil {

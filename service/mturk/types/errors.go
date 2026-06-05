@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,19 +34,6 @@ func (e *RequestError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RequestError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RequestError_Message, v.Message)
-		case schemas.RequestError_TurkErrorCode:
-			v.TurkErrorCode = new(string)
-			return d.ReadString(schemas.RequestError_TurkErrorCode, v.TurkErrorCode)
-		}
-		return nil
-	})
-}
 
 // Amazon Mechanical Turk is temporarily unable to process your request. Try your
 // call again.
@@ -77,16 +63,3 @@ func (e *ServiceFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceFault) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceFault, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceFault_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceFault_Message, v.Message)
-		case schemas.ServiceFault_TurkErrorCode:
-			v.TurkErrorCode = new(string)
-			return d.ReadString(schemas.ServiceFault_TurkErrorCode, v.TurkErrorCode)
-		}
-		return nil
-	})
-}

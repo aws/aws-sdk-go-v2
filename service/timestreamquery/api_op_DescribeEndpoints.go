@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,15 +49,6 @@ type DescribeEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEndpointsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DescribeEndpointsOutput struct {
 
 	// An Endpoints object is returned when a DescribeEndpoints request is made.
@@ -73,23 +62,16 @@ type DescribeEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEndpointsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEndpointsResponse_Endpoints:
-			return deserializeEndpoints(d, schemas.DescribeEndpointsResponse_Endpoints, &v.Endpoints)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoints, schemas.DescribeEndpointsRequest, schemas.DescribeEndpointsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoints, schemas.DescribeEndpointsRequest, schemas.DescribeEndpointsResponse), output: &DescribeEndpointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEndpoints"); err != nil {

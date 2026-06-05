@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type ListAnalyzableServersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAnalyzableServersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAnalyzableServersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAnalyzableServersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAnalyzableServersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAnalyzableServersRequest_nextToken, *v.NextToken)
-	}
-	if v.Sort != "" {
-		s.WriteString(schemas.ListAnalyzableServersRequest_sort, string(v.Sort))
-	}
-}
-
 // Represents output for ListAnalyzableServers operation.
 type ListAnalyzableServersOutput struct {
 
@@ -83,26 +63,16 @@ type ListAnalyzableServersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAnalyzableServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAnalyzableServersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAnalyzableServersResponse_analyzableServers:
-			return deserializeAnalyzableServerSummaryList(d, schemas.ListAnalyzableServersResponse_analyzableServers, &v.AnalyzableServers)
-		case schemas.ListAnalyzableServersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAnalyzableServersResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAnalyzableServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzableServers, schemas.ListAnalyzableServersRequest, schemas.ListAnalyzableServersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyzableServers{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzableServers, schemas.ListAnalyzableServersRequest, schemas.ListAnalyzableServersResponse), output: &ListAnalyzableServersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalyzableServers{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnalyzableServers"); err != nil {

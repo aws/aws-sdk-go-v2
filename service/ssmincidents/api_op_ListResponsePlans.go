@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,34 +39,6 @@ type ListResponsePlansInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResponsePlansInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResponsePlansInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResponsePlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListResponsePlansInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResponsePlansInput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListResponsePlansInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResponsePlansInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResponsePlansInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListResponsePlansInput_maxResults, v.MaxResults)
-		case schemas.ListResponsePlansInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResponsePlansInput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListResponsePlansOutput struct {
 
 	// Details of each response plan.
@@ -86,38 +56,16 @@ type ListResponsePlansOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResponsePlansOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResponsePlansOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResponsePlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResponsePlansOutput_nextToken, *v.NextToken)
-	}
-	serializeResponsePlanSummaryList(s, schemas.ListResponsePlansOutput_responsePlanSummaries, v.ResponsePlanSummaries)
-}
-func (v *ListResponsePlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResponsePlansOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResponsePlansOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResponsePlansOutput_nextToken, v.NextToken)
-		case schemas.ListResponsePlansOutput_responsePlanSummaries:
-			return deserializeResponsePlanSummaryList(d, schemas.ListResponsePlansOutput_responsePlanSummaries, &v.ResponsePlanSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponsePlans, schemas.ListResponsePlansInput, schemas.ListResponsePlansOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResponsePlans{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponsePlans, schemas.ListResponsePlansInput, schemas.ListResponsePlansOutput), output: &ListResponsePlansOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResponsePlans{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResponsePlans"); err != nil {

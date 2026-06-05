@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type DescribeHostedConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeHostedConnectionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeHostedConnectionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeHostedConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionId != nil {
-		s.WriteString(schemas.DescribeHostedConnectionsRequest_connectionId, *v.ConnectionId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeHostedConnectionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeHostedConnectionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type DescribeHostedConnectionsOutput struct {
 
 	// The connections.
@@ -84,38 +64,16 @@ type DescribeHostedConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeHostedConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Connections)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeHostedConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
-	if v.NextToken != nil {
-		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
-	}
-}
-func (v *DescribeHostedConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Connections, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Connections_connections:
-			return deserializeConnectionList(d, schemas.Connections_connections, &v.Connections)
-		case schemas.Connections_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.Connections_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostedConnections, schemas.DescribeHostedConnectionsRequest, schemas.Connections)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHostedConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostedConnections, schemas.DescribeHostedConnectionsRequest, schemas.Connections), output: &DescribeHostedConnectionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHostedConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHostedConnections"); err != nil {

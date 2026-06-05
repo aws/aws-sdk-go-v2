@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A service resource associated with the request could not be found. The resource
 // might not be specified correctly, or it may have a state of DELETED .
@@ -73,22 +62,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		case schemas.ResourceNotFoundException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_resourceId, v.ResourceId)
-		case schemas.ResourceNotFoundException_resourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_resourceType, v.ResourceType)
-		}
-		return nil
-	})
-}
 
 // The number of one or more Amazon EVS resources exceeds the maximum allowed. For
 // a list of Amazon EVS quotas, see [Amazon EVS endpoints and quotas]in the Amazon EVS User Guide. Delete some
@@ -121,16 +94,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // TagPolicyException is deprecated. See [ValidationException]ValidationException instead.
 //
@@ -162,16 +125,6 @@ func (e *TagPolicyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TagPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagPolicyException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagPolicyException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TagPolicyException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The operation could not be performed because the service is throttling
 // requests. This exception is thrown when the service endpoint receives too many
@@ -202,19 +155,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		case schemas.ThrottlingException_retryAfterSeconds:
-			v.RetryAfterSeconds = new(int32)
-			return d.ReadInt32(schemas.ThrottlingException_retryAfterSeconds, v.RetryAfterSeconds)
-		}
-		return nil
-	})
-}
 
 // TooManyTagsException is deprecated. See [ServiceQuotaExceededException]ServiceQuotaExceededException instead.
 //
@@ -245,16 +185,6 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyTagsException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The input fails to satisfy the specified constraints. You will see this
 // exception if invalid inputs are provided for any of the Amazon EVS environment
@@ -287,22 +217,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_fieldList:
-			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fieldList, &v.FieldList)
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		case schemas.ValidationException_reason:
-			var ev string
-			if err := d.ReadString(schemas.ValidationException_reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ValidationExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}

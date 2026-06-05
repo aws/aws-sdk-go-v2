@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type ListEnvironmentVlansInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVlansInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEnvironmentVlansRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEnvironmentVlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ListEnvironmentVlansRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEnvironmentVlansRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEnvironmentVlansRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListEnvironmentVlansOutput struct {
 
 	// A list of VLANs that are associated with the specified environment.
@@ -83,26 +63,16 @@ type ListEnvironmentVlansOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEnvironmentVlansResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEnvironmentVlansResponse_environmentVlans:
-			return deserializeVlanList(d, schemas.ListEnvironmentVlansResponse_environmentVlans, &v.EnvironmentVlans)
-		case schemas.ListEnvironmentVlansResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEnvironmentVlansResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEnvironmentVlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVlans, schemas.ListEnvironmentVlansRequest, schemas.ListEnvironmentVlansResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentVlans{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVlans, schemas.ListEnvironmentVlansRequest, schemas.ListEnvironmentVlansResponse), output: &ListEnvironmentVlansOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentVlans{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentVlans"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -117,21 +115,6 @@ type PutPipelineDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPipelineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPipelineDefinitionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPipelineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterObjectList(s, schemas.PutPipelineDefinitionInput_parameterObjects, v.ParameterObjects)
-	serializeParameterValueList(s, schemas.PutPipelineDefinitionInput_parameterValues, v.ParameterValues)
-	if v.PipelineId != nil {
-		s.WriteString(schemas.PutPipelineDefinitionInput_pipelineId, *v.PipelineId)
-	}
-	serializePipelineObjectList(s, schemas.PutPipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
-}
-
 // Contains the output of PutPipelineDefinition.
 type PutPipelineDefinitionOutput struct {
 
@@ -156,27 +139,16 @@ type PutPipelineDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutPipelineDefinitionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutPipelineDefinitionOutput_errored:
-			return d.ReadBool(schemas.PutPipelineDefinitionOutput_errored, &v.Errored)
-		case schemas.PutPipelineDefinitionOutput_validationErrors:
-			return deserializeValidationErrors(d, schemas.PutPipelineDefinitionOutput_validationErrors, &v.ValidationErrors)
-		case schemas.PutPipelineDefinitionOutput_validationWarnings:
-			return deserializeValidationWarnings(d, schemas.PutPipelineDefinitionOutput_validationWarnings, &v.ValidationWarnings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPipelineDefinition, schemas.PutPipelineDefinitionInput, schemas.PutPipelineDefinitionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPipelineDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPipelineDefinition, schemas.PutPipelineDefinitionInput, schemas.PutPipelineDefinitionOutput), output: &PutPipelineDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutPipelineDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPipelineDefinition"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,21 +64,6 @@ type DeleteGeoMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGeoMatchSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteGeoMatchSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteGeoMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeToken != nil {
-		s.WriteString(schemas.DeleteGeoMatchSetRequest_ChangeToken, *v.ChangeToken)
-	}
-	if v.GeoMatchSetId != nil {
-		s.WriteString(schemas.DeleteGeoMatchSetRequest_GeoMatchSetId, *v.GeoMatchSetId)
-	}
-}
-
 type DeleteGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You can
@@ -94,24 +77,16 @@ type DeleteGeoMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGeoMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGeoMatchSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGeoMatchSetResponse_ChangeToken:
-			v.ChangeToken = new(string)
-			return d.ReadString(schemas.DeleteGeoMatchSetResponse_ChangeToken, v.ChangeToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeoMatchSet, schemas.DeleteGeoMatchSetRequest, schemas.DeleteGeoMatchSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGeoMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGeoMatchSet, schemas.DeleteGeoMatchSetRequest, schemas.DeleteGeoMatchSetResponse), output: &DeleteGeoMatchSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteGeoMatchSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGeoMatchSet"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,29 +79,6 @@ type UpdateLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateLoggingConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnableMonitoringDashboard != nil {
-		s.WriteBool(schemas.UpdateLoggingConfigurationRequest_EnableMonitoringDashboard, *v.EnableMonitoringDashboard)
-	}
-	if v.FirewallArn != nil {
-		s.WriteString(schemas.UpdateLoggingConfigurationRequest_FirewallArn, *v.FirewallArn)
-	}
-	if v.FirewallName != nil {
-		s.WriteString(schemas.UpdateLoggingConfigurationRequest_FirewallName, *v.FirewallName)
-	}
-	if v.LoggingConfiguration != nil {
-		s.WriteStruct(schemas.UpdateLoggingConfigurationRequest_LoggingConfiguration)
-		v.LoggingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateLoggingConfigurationOutput struct {
 
 	// A boolean that reflects whether or not the firewall monitoring dashboard is
@@ -130,33 +105,16 @@ type UpdateLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateLoggingConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateLoggingConfigurationResponse_EnableMonitoringDashboard:
-			v.EnableMonitoringDashboard = new(bool)
-			return d.ReadBool(schemas.UpdateLoggingConfigurationResponse_EnableMonitoringDashboard, v.EnableMonitoringDashboard)
-		case schemas.UpdateLoggingConfigurationResponse_FirewallArn:
-			v.FirewallArn = new(string)
-			return d.ReadString(schemas.UpdateLoggingConfigurationResponse_FirewallArn, v.FirewallArn)
-		case schemas.UpdateLoggingConfigurationResponse_FirewallName:
-			v.FirewallName = new(string)
-			return d.ReadString(schemas.UpdateLoggingConfigurationResponse_FirewallName, v.FirewallName)
-		case schemas.UpdateLoggingConfigurationResponse_LoggingConfiguration:
-			v.LoggingConfiguration = &types.LoggingConfiguration{}
-			return v.LoggingConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoggingConfiguration, schemas.UpdateLoggingConfigurationRequest, schemas.UpdateLoggingConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateLoggingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoggingConfiguration, schemas.UpdateLoggingConfigurationRequest, schemas.UpdateLoggingConfigurationResponse), output: &UpdateLoggingConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateLoggingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLoggingConfiguration"); err != nil {

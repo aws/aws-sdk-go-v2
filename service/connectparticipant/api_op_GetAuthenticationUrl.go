@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,24 +63,6 @@ type GetAuthenticationUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAuthenticationUrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAuthenticationUrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAuthenticationUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionToken != nil {
-		s.WriteString(schemas.GetAuthenticationUrlRequest_ConnectionToken, *v.ConnectionToken)
-	}
-	if v.RedirectUri != nil {
-		s.WriteString(schemas.GetAuthenticationUrlRequest_RedirectUri, *v.RedirectUri)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.GetAuthenticationUrlRequest_SessionId, *v.SessionId)
-	}
-}
-
 type GetAuthenticationUrlOutput struct {
 
 	// The URL where the customer will sign in to the identity provider. This URL
@@ -96,24 +76,16 @@ type GetAuthenticationUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAuthenticationUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAuthenticationUrlResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAuthenticationUrlResponse_AuthenticationUrl:
-			v.AuthenticationUrl = new(string)
-			return d.ReadString(schemas.GetAuthenticationUrlResponse_AuthenticationUrl, v.AuthenticationUrl)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAuthenticationUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthenticationUrl, schemas.GetAuthenticationUrlRequest, schemas.GetAuthenticationUrlResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAuthenticationUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthenticationUrl, schemas.GetAuthenticationUrlRequest, schemas.GetAuthenticationUrlResponse), output: &GetAuthenticationUrlOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAuthenticationUrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAuthenticationUrl"); err != nil {

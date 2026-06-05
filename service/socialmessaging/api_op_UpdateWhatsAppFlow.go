@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,25 +51,6 @@ type UpdateWhatsAppFlowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateWhatsAppFlowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowCategoryList(s, schemas.UpdateWhatsAppFlowInput_categories, v.Categories)
-	if v.FlowId != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_flowId, *v.FlowId)
-	}
-	if v.FlowName != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_flowName, *v.FlowName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateWhatsAppFlowInput_id, *v.Id)
-	}
-}
-
 type UpdateWhatsAppFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +58,16 @@ type UpdateWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateWhatsAppFlowOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppFlow, schemas.UpdateWhatsAppFlowInput, schemas.UpdateWhatsAppFlowOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWhatsAppFlow, schemas.UpdateWhatsAppFlowInput, schemas.UpdateWhatsAppFlowOutput), output: &UpdateWhatsAppFlowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWhatsAppFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWhatsAppFlow"); err != nil {

@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,21 +64,6 @@ type UpdateDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDatabaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDatabaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.UpdateDatabaseRequest_DatabaseName, *v.DatabaseName)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.UpdateDatabaseRequest_KmsKeyId, *v.KmsKeyId)
-	}
-}
-
 type UpdateDatabaseOutput struct {
 
 	// A top-level container for a table. Databases and tables are the fundamental
@@ -94,24 +77,16 @@ type UpdateDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDatabaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDatabaseResponse_Database:
-			v.Database = &types.Database{}
-			return v.Database.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatabase, schemas.UpdateDatabaseRequest, schemas.UpdateDatabaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatabase, schemas.UpdateDatabaseRequest, schemas.UpdateDatabaseResponse), output: &UpdateDatabaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateDatabase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDatabase"); err != nil {

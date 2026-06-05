@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -85,32 +83,6 @@ type CreateEvaluatorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEvaluatorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEvaluatorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEvaluatorRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateEvaluatorRequest_description, *v.Description)
-	}
-	serializeEvaluatorConfig(s, schemas.CreateEvaluatorRequest_evaluatorConfig, v.EvaluatorConfig)
-	if v.EvaluatorName != nil {
-		s.WriteString(schemas.CreateEvaluatorRequest_evaluatorName, *v.EvaluatorName)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateEvaluatorRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Level != "" {
-		s.WriteString(schemas.CreateEvaluatorRequest_level, string(v.Level))
-	}
-	serializeTagsMap(s, schemas.CreateEvaluatorRequest_tags, v.Tags)
-}
-
 type CreateEvaluatorOutput struct {
 
 	//  The timestamp when the evaluator was created.
@@ -139,37 +111,16 @@ type CreateEvaluatorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEvaluatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEvaluatorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEvaluatorResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateEvaluatorResponse_createdAt, v.CreatedAt)
-		case schemas.CreateEvaluatorResponse_evaluatorArn:
-			v.EvaluatorArn = new(string)
-			return d.ReadString(schemas.CreateEvaluatorResponse_evaluatorArn, v.EvaluatorArn)
-		case schemas.CreateEvaluatorResponse_evaluatorId:
-			v.EvaluatorId = new(string)
-			return d.ReadString(schemas.CreateEvaluatorResponse_evaluatorId, v.EvaluatorId)
-		case schemas.CreateEvaluatorResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateEvaluatorResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EvaluatorStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEvaluatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluator, schemas.CreateEvaluatorRequest, schemas.CreateEvaluatorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEvaluator{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluator, schemas.CreateEvaluatorRequest, schemas.CreateEvaluatorResponse), output: &CreateEvaluatorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEvaluator{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEvaluator"); err != nil {

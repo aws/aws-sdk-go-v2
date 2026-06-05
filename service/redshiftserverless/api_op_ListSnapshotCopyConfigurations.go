@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListSnapshotCopyConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSnapshotCopyConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSnapshotCopyConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSnapshotCopyConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSnapshotCopyConfigurationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.ListSnapshotCopyConfigurationsRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSnapshotCopyConfigurationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListSnapshotCopyConfigurationsOutput struct {
 
 	// All of the returned snapshot copy configurations.
@@ -82,26 +62,16 @@ type ListSnapshotCopyConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSnapshotCopyConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSnapshotCopyConfigurationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSnapshotCopyConfigurationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSnapshotCopyConfigurationsResponse_nextToken, v.NextToken)
-		case schemas.ListSnapshotCopyConfigurationsResponse_snapshotCopyConfigurations:
-			return deserializeSnapshotCopyConfigurations(d, schemas.ListSnapshotCopyConfigurationsResponse_snapshotCopyConfigurations, &v.SnapshotCopyConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSnapshotCopyConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshotCopyConfigurations, schemas.ListSnapshotCopyConfigurationsRequest, schemas.ListSnapshotCopyConfigurationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSnapshotCopyConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSnapshotCopyConfigurations, schemas.ListSnapshotCopyConfigurationsRequest, schemas.ListSnapshotCopyConfigurationsResponse), output: &ListSnapshotCopyConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSnapshotCopyConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSnapshotCopyConfigurations"); err != nil {

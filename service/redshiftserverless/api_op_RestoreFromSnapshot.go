@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,36 +67,6 @@ type RestoreFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RestoreFromSnapshotRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RestoreFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdminPasswordSecretKmsKeyId != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_adminPasswordSecretKmsKeyId, *v.AdminPasswordSecretKmsKeyId)
-	}
-	if v.ManageAdminPassword != nil {
-		s.WriteBool(schemas.RestoreFromSnapshotRequest_manageAdminPassword, *v.ManageAdminPassword)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_ownerAccount, *v.OwnerAccount)
-	}
-	if v.SnapshotArn != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_snapshotArn, *v.SnapshotArn)
-	}
-	if v.SnapshotName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_snapshotName, *v.SnapshotName)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.RestoreFromSnapshotRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type RestoreFromSnapshotOutput struct {
 
 	// A collection of database objects and users.
@@ -116,30 +84,16 @@ type RestoreFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestoreFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestoreFromSnapshotResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestoreFromSnapshotResponse_namespace:
-			v.Namespace = &types.Namespace{}
-			return v.Namespace.Deserialize(d)
-		case schemas.RestoreFromSnapshotResponse_ownerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.RestoreFromSnapshotResponse_ownerAccount, v.OwnerAccount)
-		case schemas.RestoreFromSnapshotResponse_snapshotName:
-			v.SnapshotName = new(string)
-			return d.ReadString(schemas.RestoreFromSnapshotResponse_snapshotName, v.SnapshotName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromSnapshot, schemas.RestoreFromSnapshotRequest, schemas.RestoreFromSnapshotResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreFromSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromSnapshot, schemas.RestoreFromSnapshotRequest, schemas.RestoreFromSnapshotResponse), output: &RestoreFromSnapshotOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreFromSnapshot{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreFromSnapshot"); err != nil {

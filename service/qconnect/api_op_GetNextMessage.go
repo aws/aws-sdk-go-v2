@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type GetNextMessageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNextMessageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetNextMessageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetNextMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssistantId != nil {
-		s.WriteString(schemas.GetNextMessageRequest_assistantId, *v.AssistantId)
-	}
-	if v.NextMessageToken != nil {
-		s.WriteString(schemas.GetNextMessageRequest_nextMessageToken, *v.NextMessageToken)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.GetNextMessageRequest_sessionId, *v.SessionId)
-	}
-}
-
 type GetNextMessageOutput struct {
 
 	// The state of current conversation.
@@ -105,45 +85,16 @@ type GetNextMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetNextMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetNextMessageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetNextMessageResponse_chunkedResponseTerminated:
-			v.ChunkedResponseTerminated = new(bool)
-			return d.ReadBool(schemas.GetNextMessageResponse_chunkedResponseTerminated, v.ChunkedResponseTerminated)
-		case schemas.GetNextMessageResponse_conversationSessionData:
-			return deserializeRuntimeSessionDataList(d, schemas.GetNextMessageResponse_conversationSessionData, &v.ConversationSessionData)
-		case schemas.GetNextMessageResponse_conversationState:
-			v.ConversationState = &types.ConversationState{}
-			return v.ConversationState.Deserialize(d)
-		case schemas.GetNextMessageResponse_nextMessageToken:
-			v.NextMessageToken = new(string)
-			return d.ReadString(schemas.GetNextMessageResponse_nextMessageToken, v.NextMessageToken)
-		case schemas.GetNextMessageResponse_requestMessageId:
-			v.RequestMessageId = new(string)
-			return d.ReadString(schemas.GetNextMessageResponse_requestMessageId, v.RequestMessageId)
-		case schemas.GetNextMessageResponse_response:
-			v.Response = &types.MessageOutput{}
-			return v.Response.Deserialize(d)
-		case schemas.GetNextMessageResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetNextMessageResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.MessageType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetNextMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNextMessage, schemas.GetNextMessageRequest, schemas.GetNextMessageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNextMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNextMessage, schemas.GetNextMessageRequest, schemas.GetNextMessageResponse), output: &GetNextMessageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNextMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNextMessage"); err != nil {

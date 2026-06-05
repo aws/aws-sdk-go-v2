@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListProjectAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProjectAssetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProjectAssetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProjectAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProjectAssetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProjectAssetsRequest_nextToken, *v.NextToken)
-	}
-	if v.ProjectId != nil {
-		s.WriteString(schemas.ListProjectAssetsRequest_projectId, *v.ProjectId)
-	}
-}
-
 type ListProjectAssetsOutput struct {
 
 	// A list that contains the IDs of each asset associated with the project.
@@ -82,26 +62,16 @@ type ListProjectAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProjectAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProjectAssetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProjectAssetsResponse_assetIds:
-			return deserializeAssetIDs(d, schemas.ListProjectAssetsResponse_assetIds, &v.AssetIds)
-		case schemas.ListProjectAssetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProjectAssetsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectAssets, schemas.ListProjectAssetsRequest, schemas.ListProjectAssetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProjectAssets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjectAssets, schemas.ListProjectAssetsRequest, schemas.ListProjectAssetsResponse), output: &ListProjectAssetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProjectAssets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProjectAssets"); err != nil {

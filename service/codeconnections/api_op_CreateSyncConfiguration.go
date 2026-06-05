@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,42 +82,6 @@ type CreateSyncConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSyncConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSyncConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSyncConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Branch != nil {
-		s.WriteString(schemas.CreateSyncConfigurationInput_Branch, *v.Branch)
-	}
-	if v.ConfigFile != nil {
-		s.WriteString(schemas.CreateSyncConfigurationInput_ConfigFile, *v.ConfigFile)
-	}
-	if v.PublishDeploymentStatus != "" {
-		s.WriteString(schemas.CreateSyncConfigurationInput_PublishDeploymentStatus, string(v.PublishDeploymentStatus))
-	}
-	if v.PullRequestComment != "" {
-		s.WriteString(schemas.CreateSyncConfigurationInput_PullRequestComment, string(v.PullRequestComment))
-	}
-	if v.RepositoryLinkId != nil {
-		s.WriteString(schemas.CreateSyncConfigurationInput_RepositoryLinkId, *v.RepositoryLinkId)
-	}
-	if v.ResourceName != nil {
-		s.WriteString(schemas.CreateSyncConfigurationInput_ResourceName, *v.ResourceName)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateSyncConfigurationInput_RoleArn, *v.RoleArn)
-	}
-	if v.SyncType != "" {
-		s.WriteString(schemas.CreateSyncConfigurationInput_SyncType, string(v.SyncType))
-	}
-	if v.TriggerResourceUpdateOn != "" {
-		s.WriteString(schemas.CreateSyncConfigurationInput_TriggerResourceUpdateOn, string(v.TriggerResourceUpdateOn))
-	}
-}
-
 type CreateSyncConfigurationOutput struct {
 
 	// The created sync configuration for the connection. A sync configuration allows
@@ -135,24 +97,16 @@ type CreateSyncConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSyncConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSyncConfigurationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSyncConfigurationOutput_SyncConfiguration:
-			v.SyncConfiguration = &types.SyncConfiguration{}
-			return v.SyncConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSyncConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput), output: &CreateSyncConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSyncConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSyncConfiguration"); err != nil {

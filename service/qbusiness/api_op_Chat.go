@@ -6,9 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -58,31 +57,6 @@ type ChatInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChatInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChatInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChatInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ChatInput_applicationId, *v.ApplicationId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ChatInput_clientToken, *v.ClientToken)
-	}
-	if v.ConversationId != nil {
-		s.WriteString(schemas.ChatInput_conversationId, *v.ConversationId)
-	}
-	if v.ParentMessageId != nil {
-		s.WriteString(schemas.ChatInput_parentMessageId, *v.ParentMessageId)
-	}
-	serializeUserGroups(s, schemas.ChatInput_userGroups, v.UserGroups)
-	if v.UserId != nil {
-		s.WriteString(schemas.ChatInput_userId, *v.UserId)
-	}
-}
-
 type ChatOutput struct {
 	eventStream *ChatEventStream
 
@@ -90,14 +64,6 @@ type ChatOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChatOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChatOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -109,16 +75,12 @@ func (c *Client) addOperationChatMiddlewares(stack *middleware.Stack, options Op
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Chat, schemas.ChatInput, schemas.ChatOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpChat{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Chat, schemas.ChatInput, schemas.ChatOutput), output: &ChatOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamChat{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpChat{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Chat"); err != nil {
@@ -126,6 +88,12 @@ func (c *Client) addOperationChatMiddlewares(stack *middleware.Stack, options Op
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamChatMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -156,6 +124,9 @@ func (c *Client) addOperationChatMiddlewares(stack *middleware.Stack, options Op
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
+		return err
+	}
+	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {

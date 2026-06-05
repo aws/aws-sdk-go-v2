@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type DescribeInstanceTypeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceTypeLimitsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInstanceTypeLimitsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInstanceTypeLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.DescribeInstanceTypeLimitsRequest_DomainName, *v.DomainName)
-	}
-	if v.EngineVersion != nil {
-		s.WriteString(schemas.DescribeInstanceTypeLimitsRequest_EngineVersion, *v.EngineVersion)
-	}
-	if v.InstanceType != "" {
-		s.WriteString(schemas.DescribeInstanceTypeLimitsRequest_InstanceType, string(v.InstanceType))
-	}
-}
-
 // Container for the parameters received from the DescribeInstanceTypeLimits
 // operation.
 type DescribeInstanceTypeLimitsOutput struct {
@@ -83,23 +63,16 @@ type DescribeInstanceTypeLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInstanceTypeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeInstanceTypeLimitsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeInstanceTypeLimitsResponse_LimitsByRole:
-			return deserializeLimitsByRole(d, schemas.DescribeInstanceTypeLimitsResponse_LimitsByRole, &v.LimitsByRole)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceTypeLimits, schemas.DescribeInstanceTypeLimitsRequest, schemas.DescribeInstanceTypeLimitsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstanceTypeLimits{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceTypeLimits, schemas.DescribeInstanceTypeLimitsRequest, schemas.DescribeInstanceTypeLimitsResponse), output: &DescribeInstanceTypeLimitsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInstanceTypeLimits{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInstanceTypeLimits"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,26 +49,6 @@ type ListNotifyCountriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNotifyCountriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListNotifyCountriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListNotifyCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyEnabledChannelsList(s, schemas.ListNotifyCountriesRequest_Channels, v.Channels)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListNotifyCountriesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListNotifyCountriesRequest_NextToken, *v.NextToken)
-	}
-	if v.Tier != "" {
-		s.WriteString(schemas.ListNotifyCountriesRequest_Tier, string(v.Tier))
-	}
-	serializeNotifyUseCaseList(s, schemas.ListNotifyCountriesRequest_UseCases, v.UseCases)
-}
-
 type ListNotifyCountriesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -86,26 +64,16 @@ type ListNotifyCountriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNotifyCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListNotifyCountriesResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListNotifyCountriesResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListNotifyCountriesResult_NextToken, v.NextToken)
-		case schemas.ListNotifyCountriesResult_NotifyCountries:
-			return deserializeNotifyCountryInformationList(d, schemas.ListNotifyCountriesResult_NotifyCountries, &v.NotifyCountries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListNotifyCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifyCountries, schemas.ListNotifyCountriesRequest, schemas.ListNotifyCountriesResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListNotifyCountries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifyCountries, schemas.ListNotifyCountriesRequest, schemas.ListNotifyCountriesResult), output: &ListNotifyCountriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListNotifyCountries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNotifyCountries"); err != nil {

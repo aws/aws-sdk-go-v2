@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,31 +40,6 @@ type GetQuantumTaskInput struct {
 	AdditionalAttributeNames []types.QuantumTaskAdditionalAttributeName
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetQuantumTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQuantumTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuantumTaskAdditionalAttributeNamesList(s, schemas.GetQuantumTaskRequest_additionalAttributeNames, v.AdditionalAttributeNames)
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.GetQuantumTaskRequest_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *GetQuantumTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQuantumTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQuantumTaskRequest_additionalAttributeNames:
-			return deserializeQuantumTaskAdditionalAttributeNamesList(d, schemas.GetQuantumTaskRequest_additionalAttributeNames, &v.AdditionalAttributeNames)
-		case schemas.GetQuantumTaskRequest_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.GetQuantumTaskRequest_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
 }
 
 type GetQuantumTaskOutput struct {
@@ -150,130 +123,16 @@ type GetQuantumTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQuantumTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQuantumTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionMetadata != nil {
-		s.WriteStruct(schemas.GetQuantumTaskResponse_actionMetadata)
-		v.ActionMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAssociations(s, schemas.GetQuantumTaskResponse_associations, v.Associations)
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.GetQuantumTaskResponse_createdAt, *v.CreatedAt)
-	}
-	if v.DeviceArn != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_deviceArn, *v.DeviceArn)
-	}
-	if v.DeviceParameters != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_deviceParameters, *v.DeviceParameters)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.GetQuantumTaskResponse_endedAt, *v.EndedAt)
-	}
-	serializeExperimentalCapabilities(s, schemas.GetQuantumTaskResponse_experimentalCapabilities, v.ExperimentalCapabilities)
-	if v.FailureReason != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_failureReason, *v.FailureReason)
-	}
-	if v.JobArn != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_jobArn, *v.JobArn)
-	}
-	if v.NumSuccessfulShots != nil {
-		s.WriteInt64(schemas.GetQuantumTaskResponse_numSuccessfulShots, *v.NumSuccessfulShots)
-	}
-	if v.OutputS3Bucket != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_outputS3Bucket, *v.OutputS3Bucket)
-	}
-	if v.OutputS3Directory != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_outputS3Directory, *v.OutputS3Directory)
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.GetQuantumTaskResponse_quantumTaskArn, *v.QuantumTaskArn)
-	}
-	if v.QueueInfo != nil {
-		s.WriteStruct(schemas.GetQuantumTaskResponse_queueInfo)
-		v.QueueInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Shots != nil {
-		s.WriteInt64(schemas.GetQuantumTaskResponse_shots, *v.Shots)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.GetQuantumTaskResponse_status, string(v.Status))
-	}
-	serializeTagsMap(s, schemas.GetQuantumTaskResponse_tags, v.Tags)
-}
-func (v *GetQuantumTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQuantumTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQuantumTaskResponse_actionMetadata:
-			v.ActionMetadata = &types.ActionMetadata{}
-			return v.ActionMetadata.Deserialize(d)
-		case schemas.GetQuantumTaskResponse_associations:
-			return deserializeAssociations(d, schemas.GetQuantumTaskResponse_associations, &v.Associations)
-		case schemas.GetQuantumTaskResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetQuantumTaskResponse_createdAt, v.CreatedAt)
-		case schemas.GetQuantumTaskResponse_deviceArn:
-			v.DeviceArn = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_deviceArn, v.DeviceArn)
-		case schemas.GetQuantumTaskResponse_deviceParameters:
-			v.DeviceParameters = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_deviceParameters, v.DeviceParameters)
-		case schemas.GetQuantumTaskResponse_endedAt:
-			v.EndedAt = new(time.Time)
-			return d.ReadTime(schemas.GetQuantumTaskResponse_endedAt, v.EndedAt)
-		case schemas.GetQuantumTaskResponse_experimentalCapabilities:
-			return deserializeExperimentalCapabilities(d, schemas.GetQuantumTaskResponse_experimentalCapabilities, &v.ExperimentalCapabilities)
-		case schemas.GetQuantumTaskResponse_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_failureReason, v.FailureReason)
-		case schemas.GetQuantumTaskResponse_jobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_jobArn, v.JobArn)
-		case schemas.GetQuantumTaskResponse_numSuccessfulShots:
-			v.NumSuccessfulShots = new(int64)
-			return d.ReadInt64(schemas.GetQuantumTaskResponse_numSuccessfulShots, v.NumSuccessfulShots)
-		case schemas.GetQuantumTaskResponse_outputS3Bucket:
-			v.OutputS3Bucket = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_outputS3Bucket, v.OutputS3Bucket)
-		case schemas.GetQuantumTaskResponse_outputS3Directory:
-			v.OutputS3Directory = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_outputS3Directory, v.OutputS3Directory)
-		case schemas.GetQuantumTaskResponse_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.GetQuantumTaskResponse_quantumTaskArn, v.QuantumTaskArn)
-		case schemas.GetQuantumTaskResponse_queueInfo:
-			v.QueueInfo = &types.QuantumTaskQueueInfo{}
-			return v.QueueInfo.Deserialize(d)
-		case schemas.GetQuantumTaskResponse_shots:
-			v.Shots = new(int64)
-			return d.ReadInt64(schemas.GetQuantumTaskResponse_shots, v.Shots)
-		case schemas.GetQuantumTaskResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetQuantumTaskResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.QuantumTaskStatus(ev)
-			return nil
-		case schemas.GetQuantumTaskResponse_tags:
-			return deserializeTagsMap(d, schemas.GetQuantumTaskResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuantumTask, schemas.GetQuantumTaskRequest, schemas.GetQuantumTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuantumTask, schemas.GetQuantumTaskRequest, schemas.GetQuantumTaskResponse), output: &GetQuantumTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQuantumTask"); err != nil {

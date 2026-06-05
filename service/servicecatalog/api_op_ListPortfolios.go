@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListPortfoliosInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortfoliosInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPortfoliosInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPortfoliosInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ListPortfoliosInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListPortfoliosInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListPortfoliosInput_PageToken, *v.PageToken)
-	}
-}
-
 type ListPortfoliosOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -81,26 +61,16 @@ type ListPortfoliosOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPortfoliosOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPortfoliosOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPortfoliosOutput_NextPageToken:
-			v.NextPageToken = new(string)
-			return d.ReadString(schemas.ListPortfoliosOutput_NextPageToken, v.NextPageToken)
-		case schemas.ListPortfoliosOutput_PortfolioDetails:
-			return deserializePortfolioDetails(d, schemas.ListPortfoliosOutput_PortfolioDetails, &v.PortfolioDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPortfoliosMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfolios, schemas.ListPortfoliosInput, schemas.ListPortfoliosOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPortfolios{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPortfolios, schemas.ListPortfoliosInput, schemas.ListPortfoliosOutput), output: &ListPortfoliosOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPortfolios{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPortfolios"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,22 +56,6 @@ type AssociatePersonasToEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePersonasToEntitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatePersonasToEntitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatePersonasToEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.AssociatePersonasToEntitiesRequest_Id, *v.Id)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.AssociatePersonasToEntitiesRequest_IndexId, *v.IndexId)
-	}
-	serializeEntityPersonaConfigurationList(s, schemas.AssociatePersonasToEntitiesRequest_Personas, v.Personas)
-}
-
 type AssociatePersonasToEntitiesOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that
@@ -86,23 +68,16 @@ type AssociatePersonasToEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePersonasToEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatePersonasToEntitiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatePersonasToEntitiesResponse_FailedEntityList:
-			return deserializeFailedEntityList(d, schemas.AssociatePersonasToEntitiesResponse_FailedEntityList, &v.FailedEntityList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociatePersonasToEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePersonasToEntities, schemas.AssociatePersonasToEntitiesRequest, schemas.AssociatePersonasToEntitiesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociatePersonasToEntities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePersonasToEntities, schemas.AssociatePersonasToEntitiesRequest, schemas.AssociatePersonasToEntitiesResponse), output: &AssociatePersonasToEntitiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociatePersonasToEntities{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociatePersonasToEntities"); err != nil {

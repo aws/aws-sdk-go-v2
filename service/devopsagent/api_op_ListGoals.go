@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,30 +50,6 @@ type ListGoalsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGoalsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGoalsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGoalsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.ListGoalsRequest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.GoalType != "" {
-		s.WriteString(schemas.ListGoalsRequest_goalType, string(v.GoalType))
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListGoalsRequest_limit, *v.Limit)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGoalsRequest_nextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListGoalsRequest_status, string(v.Status))
-	}
-}
-
 // Response structure containing the list of goals
 type ListGoalsOutput struct {
 
@@ -93,26 +67,16 @@ type ListGoalsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGoalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGoalsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGoalsResponse_goals:
-			return deserializeGoalList(d, schemas.ListGoalsResponse_goals, &v.Goals)
-		case schemas.ListGoalsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGoalsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGoalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGoals, schemas.ListGoalsRequest, schemas.ListGoalsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGoals{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGoals, schemas.ListGoalsRequest, schemas.ListGoalsResponse), output: &ListGoalsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGoals{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGoals"); err != nil {

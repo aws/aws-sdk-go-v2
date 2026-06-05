@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type RemoveFromGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveFromGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveFromGlobalClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveFromGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DbClusterIdentifier != nil {
-		s.WriteString(schemas.RemoveFromGlobalClusterMessage_DbClusterIdentifier, *v.DbClusterIdentifier)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.RemoveFromGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-}
-
 type RemoveFromGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -76,24 +59,16 @@ type RemoveFromGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveFromGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveFromGlobalClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoveFromGlobalClusterResult_GlobalCluster:
-			v.GlobalCluster = &types.GlobalCluster{}
-			return v.GlobalCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFromGlobalCluster, schemas.RemoveFromGlobalClusterMessage, schemas.RemoveFromGlobalClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveFromGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFromGlobalCluster, schemas.RemoveFromGlobalClusterMessage, schemas.RemoveFromGlobalClusterResult), output: &RemoveFromGlobalClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveFromGlobalCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveFromGlobalCluster"); err != nil {

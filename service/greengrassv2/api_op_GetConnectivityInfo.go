@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,18 +46,6 @@ type GetConnectivityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConnectivityInfoInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetConnectivityInfoRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetConnectivityInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ThingName != nil {
-		s.WriteString(schemas.GetConnectivityInfoRequest_thingName, *v.ThingName)
-	}
-}
-
 type GetConnectivityInfoOutput struct {
 
 	// The connectivity information for the core device.
@@ -74,26 +60,16 @@ type GetConnectivityInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConnectivityInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetConnectivityInfoResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetConnectivityInfoResponse_connectivityInfo:
-			return deserializeconnectivityInfoList(d, schemas.GetConnectivityInfoResponse_connectivityInfo, &v.ConnectivityInfo)
-		case schemas.GetConnectivityInfoResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.GetConnectivityInfoResponse_message, v.Message)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectivityInfo, schemas.GetConnectivityInfoRequest, schemas.GetConnectivityInfoResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectivityInfo{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectivityInfo, schemas.GetConnectivityInfoRequest, schemas.GetConnectivityInfoResponse), output: &GetConnectivityInfoOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectivityInfo{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConnectivityInfo"); err != nil {

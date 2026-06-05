@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,18 +59,6 @@ type DeploySystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeploySystemInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploySystemInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploySystemInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DeploySystemInstanceRequest_id, *v.Id)
-	}
-}
-
 type DeploySystemInstanceOutput struct {
 
 	// An object that contains summary information about a system instance that was
@@ -90,27 +76,16 @@ type DeploySystemInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeploySystemInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploySystemInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploySystemInstanceResponse_greengrassDeploymentId:
-			v.GreengrassDeploymentId = new(string)
-			return d.ReadString(schemas.DeploySystemInstanceResponse_greengrassDeploymentId, v.GreengrassDeploymentId)
-		case schemas.DeploySystemInstanceResponse_summary:
-			v.Summary = &types.SystemInstanceSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeploySystemInstance, schemas.DeploySystemInstanceRequest, schemas.DeploySystemInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeploySystemInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeploySystemInstance, schemas.DeploySystemInstanceRequest, schemas.DeploySystemInstanceResponse), output: &DeploySystemInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeploySystemInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeploySystemInstance"); err != nil {

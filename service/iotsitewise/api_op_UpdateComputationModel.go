@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,33 +62,6 @@ type UpdateComputationModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateComputationModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateComputationModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateComputationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateComputationModelRequest_clientToken, *v.ClientToken)
-	}
-	if v.ComputationModelConfiguration != nil {
-		s.WriteStruct(schemas.UpdateComputationModelRequest_computationModelConfiguration)
-		v.ComputationModelConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeComputationModelDataBinding(s, schemas.UpdateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
-	if v.ComputationModelDescription != nil {
-		s.WriteString(schemas.UpdateComputationModelRequest_computationModelDescription, *v.ComputationModelDescription)
-	}
-	if v.ComputationModelId != nil {
-		s.WriteString(schemas.UpdateComputationModelRequest_computationModelId, *v.ComputationModelId)
-	}
-	if v.ComputationModelName != nil {
-		s.WriteString(schemas.UpdateComputationModelRequest_computationModelName, *v.ComputationModelName)
-	}
-}
-
 type UpdateComputationModelOutput struct {
 
 	// The status of the computation model. It contains a state (UPDATING after
@@ -105,24 +76,16 @@ type UpdateComputationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateComputationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateComputationModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateComputationModelResponse_computationModelStatus:
-			v.ComputationModelStatus = &types.ComputationModelStatus{}
-			return v.ComputationModelStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateComputationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputationModel, schemas.UpdateComputationModelRequest, schemas.UpdateComputationModelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateComputationModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputationModel, schemas.UpdateComputationModelRequest, schemas.UpdateComputationModelResponse), output: &UpdateComputationModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateComputationModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateComputationModel"); err != nil {

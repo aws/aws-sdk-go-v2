@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type DeleteMessagingStreamingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMessagingStreamingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMessagingStreamingConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMessagingStreamingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.DeleteMessagingStreamingConfigurationsRequest_AppInstanceArn, *v.AppInstanceArn)
-	}
-}
-
 type DeleteMessagingStreamingConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,29 +46,16 @@ type DeleteMessagingStreamingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMessagingStreamingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMessagingStreamingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteMessagingStreamingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMessagingStreamingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessagingStreamingConfigurations, schemas.DeleteMessagingStreamingConfigurationsRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMessagingStreamingConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessagingStreamingConfigurations, schemas.DeleteMessagingStreamingConfigurationsRequest, nil), output: &DeleteMessagingStreamingConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMessagingStreamingConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMessagingStreamingConfigurations"); err != nil {

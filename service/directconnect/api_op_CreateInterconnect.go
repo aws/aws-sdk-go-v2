@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -81,34 +79,6 @@ type CreateInterconnectInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateInterconnectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateInterconnectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInterconnectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bandwidth != nil {
-		s.WriteString(schemas.CreateInterconnectRequest_bandwidth, *v.Bandwidth)
-	}
-	if v.InterconnectName != nil {
-		s.WriteString(schemas.CreateInterconnectRequest_interconnectName, *v.InterconnectName)
-	}
-	if v.LagId != nil {
-		s.WriteString(schemas.CreateInterconnectRequest_lagId, *v.LagId)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.CreateInterconnectRequest_location, *v.Location)
-	}
-	if v.ProviderName != nil {
-		s.WriteString(schemas.CreateInterconnectRequest_providerName, *v.ProviderName)
-	}
-	if v.RequestMACSec != nil {
-		s.WriteBool(schemas.CreateInterconnectRequest_requestMACSec, *v.RequestMACSec)
-	}
-	serializeTagList(s, schemas.CreateInterconnectRequest_tags, v.Tags)
 }
 
 // Information about an interconnect.
@@ -202,145 +172,16 @@ type CreateInterconnectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateInterconnectOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Interconnect)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsDevice != nil {
-		s.WriteString(schemas.Interconnect_awsDevice, *v.AwsDevice)
-	}
-	if v.AwsDeviceV2 != nil {
-		s.WriteString(schemas.Interconnect_awsDeviceV2, *v.AwsDeviceV2)
-	}
-	if v.AwsLogicalDeviceId != nil {
-		s.WriteString(schemas.Interconnect_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
-	}
-	if v.Bandwidth != nil {
-		s.WriteString(schemas.Interconnect_bandwidth, *v.Bandwidth)
-	}
-	if v.EncryptionMode != nil {
-		s.WriteString(schemas.Interconnect_encryptionMode, *v.EncryptionMode)
-	}
-	if v.HasLogicalRedundancy != "" {
-		s.WriteString(schemas.Interconnect_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
-	}
-	if v.InterconnectId != nil {
-		s.WriteString(schemas.Interconnect_interconnectId, *v.InterconnectId)
-	}
-	if v.InterconnectName != nil {
-		s.WriteString(schemas.Interconnect_interconnectName, *v.InterconnectName)
-	}
-	if v.InterconnectState != "" {
-		s.WriteString(schemas.Interconnect_interconnectState, string(v.InterconnectState))
-	}
-	if v.JumboFrameCapable != nil {
-		s.WriteBool(schemas.Interconnect_jumboFrameCapable, *v.JumboFrameCapable)
-	}
-	if v.LagId != nil {
-		s.WriteString(schemas.Interconnect_lagId, *v.LagId)
-	}
-	if v.LoaIssueTime != nil {
-		s.WriteTime(schemas.Interconnect_loaIssueTime, *v.LoaIssueTime)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.Interconnect_location, *v.Location)
-	}
-	if v.MacSecCapable != nil {
-		s.WriteBool(schemas.Interconnect_macSecCapable, *v.MacSecCapable)
-	}
-	serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
-	if v.PortEncryptionStatus != nil {
-		s.WriteString(schemas.Interconnect_portEncryptionStatus, *v.PortEncryptionStatus)
-	}
-	if v.ProviderName != nil {
-		s.WriteString(schemas.Interconnect_providerName, *v.ProviderName)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.Interconnect_region, *v.Region)
-	}
-	serializeTagList(s, schemas.Interconnect_tags, v.Tags)
-}
-func (v *CreateInterconnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Interconnect, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Interconnect_awsDevice:
-			v.AwsDevice = new(string)
-			return d.ReadString(schemas.Interconnect_awsDevice, v.AwsDevice)
-		case schemas.Interconnect_awsDeviceV2:
-			v.AwsDeviceV2 = new(string)
-			return d.ReadString(schemas.Interconnect_awsDeviceV2, v.AwsDeviceV2)
-		case schemas.Interconnect_awsLogicalDeviceId:
-			v.AwsLogicalDeviceId = new(string)
-			return d.ReadString(schemas.Interconnect_awsLogicalDeviceId, v.AwsLogicalDeviceId)
-		case schemas.Interconnect_bandwidth:
-			v.Bandwidth = new(string)
-			return d.ReadString(schemas.Interconnect_bandwidth, v.Bandwidth)
-		case schemas.Interconnect_encryptionMode:
-			v.EncryptionMode = new(string)
-			return d.ReadString(schemas.Interconnect_encryptionMode, v.EncryptionMode)
-		case schemas.Interconnect_hasLogicalRedundancy:
-			var ev string
-			if err := d.ReadString(schemas.Interconnect_hasLogicalRedundancy, &ev); err != nil {
-				return err
-			}
-			v.HasLogicalRedundancy = types.HasLogicalRedundancy(ev)
-			return nil
-		case schemas.Interconnect_interconnectId:
-			v.InterconnectId = new(string)
-			return d.ReadString(schemas.Interconnect_interconnectId, v.InterconnectId)
-		case schemas.Interconnect_interconnectName:
-			v.InterconnectName = new(string)
-			return d.ReadString(schemas.Interconnect_interconnectName, v.InterconnectName)
-		case schemas.Interconnect_interconnectState:
-			var ev string
-			if err := d.ReadString(schemas.Interconnect_interconnectState, &ev); err != nil {
-				return err
-			}
-			v.InterconnectState = types.InterconnectState(ev)
-			return nil
-		case schemas.Interconnect_jumboFrameCapable:
-			v.JumboFrameCapable = new(bool)
-			return d.ReadBool(schemas.Interconnect_jumboFrameCapable, v.JumboFrameCapable)
-		case schemas.Interconnect_lagId:
-			v.LagId = new(string)
-			return d.ReadString(schemas.Interconnect_lagId, v.LagId)
-		case schemas.Interconnect_loaIssueTime:
-			v.LoaIssueTime = new(time.Time)
-			return d.ReadTime(schemas.Interconnect_loaIssueTime, v.LoaIssueTime)
-		case schemas.Interconnect_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.Interconnect_location, v.Location)
-		case schemas.Interconnect_macSecCapable:
-			v.MacSecCapable = new(bool)
-			return d.ReadBool(schemas.Interconnect_macSecCapable, v.MacSecCapable)
-		case schemas.Interconnect_macSecKeys:
-			return deserializeMacSecKeyList(d, schemas.Interconnect_macSecKeys, &v.MacSecKeys)
-		case schemas.Interconnect_portEncryptionStatus:
-			v.PortEncryptionStatus = new(string)
-			return d.ReadString(schemas.Interconnect_portEncryptionStatus, v.PortEncryptionStatus)
-		case schemas.Interconnect_providerName:
-			v.ProviderName = new(string)
-			return d.ReadString(schemas.Interconnect_providerName, v.ProviderName)
-		case schemas.Interconnect_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.Interconnect_region, v.Region)
-		case schemas.Interconnect_tags:
-			return deserializeTagList(d, schemas.Interconnect_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInterconnect, schemas.CreateInterconnectRequest, schemas.Interconnect)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInterconnect{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInterconnect, schemas.CreateInterconnectRequest, schemas.Interconnect), output: &CreateInterconnectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInterconnect{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInterconnect"); err != nil {

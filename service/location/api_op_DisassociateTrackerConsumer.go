@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,34 +49,6 @@ type DisassociateTrackerConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateTrackerConsumerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateTrackerConsumerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateTrackerConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsumerArn != nil {
-		s.WriteString(schemas.DisassociateTrackerConsumerRequest_ConsumerArn, *v.ConsumerArn)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.DisassociateTrackerConsumerRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *DisassociateTrackerConsumerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateTrackerConsumerRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociateTrackerConsumerRequest_ConsumerArn:
-			v.ConsumerArn = new(string)
-			return d.ReadString(schemas.DisassociateTrackerConsumerRequest_ConsumerArn, v.ConsumerArn)
-		case schemas.DisassociateTrackerConsumerRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.DisassociateTrackerConsumerRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
-}
-
 type DisassociateTrackerConsumerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,29 +56,16 @@ type DisassociateTrackerConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateTrackerConsumerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateTrackerConsumerResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateTrackerConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DisassociateTrackerConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateTrackerConsumerResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTrackerConsumer, schemas.DisassociateTrackerConsumerRequest, schemas.DisassociateTrackerConsumerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateTrackerConsumer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateTrackerConsumer, schemas.DisassociateTrackerConsumerRequest, schemas.DisassociateTrackerConsumerResponse), output: &DisassociateTrackerConsumerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateTrackerConsumer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateTrackerConsumer"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListComponentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListComponentVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListComponentVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListComponentVersionsRequest_arn, *v.Arn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListComponentVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListComponentVersionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListComponentVersionsOutput struct {
 
 	// A list of versions that exist for the component.
@@ -81,26 +61,16 @@ type ListComponentVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListComponentVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListComponentVersionsResponse_componentVersions:
-			return deserializeComponentVersionList(d, schemas.ListComponentVersionsResponse_componentVersions, &v.ComponentVersions)
-		case schemas.ListComponentVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListComponentVersionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListComponentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentVersions, schemas.ListComponentVersionsRequest, schemas.ListComponentVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponentVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentVersions, schemas.ListComponentVersionsRequest, schemas.ListComponentVersionsResponse), output: &ListComponentVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponentVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponentVersions"); err != nil {

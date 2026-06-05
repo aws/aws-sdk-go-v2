@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,18 +67,6 @@ type ExecuteGremlinExplainQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteGremlinExplainQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteGremlinExplainQueryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteGremlinExplainQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GremlinQuery != nil {
-		s.WriteString(schemas.ExecuteGremlinExplainQueryInput_gremlinQuery, *v.GremlinQuery)
-	}
-}
-
 type ExecuteGremlinExplainQueryOutput struct {
 
 	// A text blob containing the Gremlin explain result, as described in [Tuning Gremlin queries].
@@ -96,23 +82,16 @@ type ExecuteGremlinExplainQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteGremlinExplainQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteGremlinExplainQueryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteGremlinExplainQueryOutput_output:
-			return d.ReadBlob(schemas.ExecuteGremlinExplainQueryOutput_output, &v.Output)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteGremlinExplainQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteGremlinExplainQuery, schemas.ExecuteGremlinExplainQueryInput, schemas.ExecuteGremlinExplainQueryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteGremlinExplainQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteGremlinExplainQuery, schemas.ExecuteGremlinExplainQueryInput, schemas.ExecuteGremlinExplainQueryOutput), output: &ExecuteGremlinExplainQueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteGremlinExplainQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteGremlinExplainQuery"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -99,31 +97,6 @@ type CreateIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIngestionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateIngestionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.App != nil {
-		s.WriteString(schemas.CreateIngestionRequest_app, *v.App)
-	}
-	if v.AppBundleIdentifier != nil {
-		s.WriteString(schemas.CreateIngestionRequest_appBundleIdentifier, *v.AppBundleIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateIngestionRequest_clientToken, *v.ClientToken)
-	}
-	if v.IngestionType != "" {
-		s.WriteString(schemas.CreateIngestionRequest_ingestionType, string(v.IngestionType))
-	}
-	serializeTagList(s, schemas.CreateIngestionRequest_tags, v.Tags)
-	if v.TenantId != nil {
-		s.WriteString(schemas.CreateIngestionRequest_tenantId, *v.TenantId)
-	}
-}
-
 type CreateIngestionOutput struct {
 
 	// Contains information about an ingestion.
@@ -137,24 +110,16 @@ type CreateIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateIngestionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateIngestionResponse_ingestion:
-			v.Ingestion = &types.Ingestion{}
-			return v.Ingestion.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestion, schemas.CreateIngestionRequest, schemas.CreateIngestionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIngestion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestion, schemas.CreateIngestionRequest, schemas.CreateIngestionResponse), output: &CreateIngestionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIngestion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIngestion"); err != nil {

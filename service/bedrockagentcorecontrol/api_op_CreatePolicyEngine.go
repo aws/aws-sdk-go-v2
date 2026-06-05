@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -71,28 +69,6 @@ type CreatePolicyEngineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyEngineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePolicyEngineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePolicyEngineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePolicyEngineRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePolicyEngineRequest_description, *v.Description)
-	}
-	if v.EncryptionKeyArn != nil {
-		s.WriteString(schemas.CreatePolicyEngineRequest_encryptionKeyArn, *v.EncryptionKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreatePolicyEngineRequest_name, *v.Name)
-	}
-	serializeTagsMap(s, schemas.CreatePolicyEngineRequest_tags, v.Tags)
-}
-
 type CreatePolicyEngineOutput struct {
 
 	// The timestamp when the policy engine was created. This is automatically set by
@@ -152,51 +128,16 @@ type CreatePolicyEngineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePolicyEngineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePolicyEngineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePolicyEngineResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyEngineResponse_createdAt, v.CreatedAt)
-		case schemas.CreatePolicyEngineResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreatePolicyEngineResponse_description, v.Description)
-		case schemas.CreatePolicyEngineResponse_encryptionKeyArn:
-			v.EncryptionKeyArn = new(string)
-			return d.ReadString(schemas.CreatePolicyEngineResponse_encryptionKeyArn, v.EncryptionKeyArn)
-		case schemas.CreatePolicyEngineResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreatePolicyEngineResponse_name, v.Name)
-		case schemas.CreatePolicyEngineResponse_policyEngineArn:
-			v.PolicyEngineArn = new(string)
-			return d.ReadString(schemas.CreatePolicyEngineResponse_policyEngineArn, v.PolicyEngineArn)
-		case schemas.CreatePolicyEngineResponse_policyEngineId:
-			v.PolicyEngineId = new(string)
-			return d.ReadString(schemas.CreatePolicyEngineResponse_policyEngineId, v.PolicyEngineId)
-		case schemas.CreatePolicyEngineResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreatePolicyEngineResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PolicyEngineStatus(ev)
-			return nil
-		case schemas.CreatePolicyEngineResponse_statusReasons:
-			return deserializePolicyStatusReasons(d, schemas.CreatePolicyEngineResponse_statusReasons, &v.StatusReasons)
-		case schemas.CreatePolicyEngineResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreatePolicyEngineResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePolicyEngineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicyEngine, schemas.CreatePolicyEngineRequest, schemas.CreatePolicyEngineResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePolicyEngine{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicyEngine, schemas.CreatePolicyEngineRequest, schemas.CreatePolicyEngineResponse), output: &CreatePolicyEngineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePolicyEngine{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicyEngine"); err != nil {

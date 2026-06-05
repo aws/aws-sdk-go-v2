@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DeleteMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMediaCapturePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMediaCapturePipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMediaCapturePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MediaPipelineId != nil {
-		s.WriteString(schemas.DeleteMediaCapturePipelineRequest_MediaPipelineId, *v.MediaPipelineId)
-	}
-}
-
 type DeleteMediaCapturePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,29 +43,16 @@ type DeleteMediaCapturePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMediaCapturePipelineOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMediaCapturePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteMediaCapturePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaCapturePipeline, schemas.DeleteMediaCapturePipelineRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaCapturePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaCapturePipeline, schemas.DeleteMediaCapturePipelineRequest, nil), output: &DeleteMediaCapturePipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaCapturePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMediaCapturePipeline"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,22 +31,6 @@ type GetPortfolioPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPortfolioPreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPortfolioPreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPortfolioPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetPortfolioPreferencesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPortfolioPreferencesRequest, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type GetPortfolioPreferencesOutput struct {
 
 	// The classification for application component types.
@@ -69,63 +51,16 @@ type GetPortfolioPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPortfolioPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPortfolioPreferencesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPortfolioPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationMode != "" {
-		s.WriteString(schemas.GetPortfolioPreferencesResponse_applicationMode, string(v.ApplicationMode))
-	}
-	if v.ApplicationPreferences != nil {
-		s.WriteStruct(schemas.GetPortfolioPreferencesResponse_applicationPreferences)
-		v.ApplicationPreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatabasePreferences != nil {
-		s.WriteStruct(schemas.GetPortfolioPreferencesResponse_databasePreferences)
-		v.DatabasePreferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PrioritizeBusinessGoals != nil {
-		s.WriteStruct(schemas.GetPortfolioPreferencesResponse_prioritizeBusinessGoals)
-		v.PrioritizeBusinessGoals.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetPortfolioPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPortfolioPreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPortfolioPreferencesResponse_applicationMode:
-			var ev string
-			if err := d.ReadString(schemas.GetPortfolioPreferencesResponse_applicationMode, &ev); err != nil {
-				return err
-			}
-			v.ApplicationMode = types.ApplicationMode(ev)
-			return nil
-		case schemas.GetPortfolioPreferencesResponse_applicationPreferences:
-			v.ApplicationPreferences = &types.ApplicationPreferences{}
-			return v.ApplicationPreferences.Deserialize(d)
-		case schemas.GetPortfolioPreferencesResponse_databasePreferences:
-			v.DatabasePreferences = &types.DatabasePreferences{}
-			return v.DatabasePreferences.Deserialize(d)
-		case schemas.GetPortfolioPreferencesResponse_prioritizeBusinessGoals:
-			v.PrioritizeBusinessGoals = &types.PrioritizeBusinessGoals{}
-			return v.PrioritizeBusinessGoals.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPortfolioPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortfolioPreferences, schemas.GetPortfolioPreferencesRequest, schemas.GetPortfolioPreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortfolioPreferences, schemas.GetPortfolioPreferencesRequest, schemas.GetPortfolioPreferencesResponse), output: &GetPortfolioPreferencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortfolioPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPortfolioPreferences"); err != nil {

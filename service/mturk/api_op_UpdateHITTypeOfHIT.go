@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type UpdateHITTypeOfHITInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHITTypeOfHITInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateHITTypeOfHITRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateHITTypeOfHITInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HITId != nil {
-		s.WriteString(schemas.UpdateHITTypeOfHITRequest_HITId, *v.HITId)
-	}
-	if v.HITTypeId != nil {
-		s.WriteString(schemas.UpdateHITTypeOfHITRequest_HITTypeId, *v.HITTypeId)
-	}
-}
-
 type UpdateHITTypeOfHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,21 +52,16 @@ type UpdateHITTypeOfHITOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHITTypeOfHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateHITTypeOfHITResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateHITTypeOfHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHITTypeOfHIT, schemas.UpdateHITTypeOfHITRequest, schemas.UpdateHITTypeOfHITResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHITTypeOfHIT{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHITTypeOfHIT, schemas.UpdateHITTypeOfHITRequest, schemas.UpdateHITTypeOfHITResponse), output: &UpdateHITTypeOfHITOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHITTypeOfHIT{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHITTypeOfHIT"); err != nil {

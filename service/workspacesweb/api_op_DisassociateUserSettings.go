@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DisassociateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateUserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.DisassociateUserSettingsRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type DisassociateUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DisassociateUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateUserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUserSettings, schemas.DisassociateUserSettingsRequest, schemas.DisassociateUserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUserSettings, schemas.DisassociateUserSettingsRequest, schemas.DisassociateUserSettingsResponse), output: &DisassociateUserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateUserSettings"); err != nil {

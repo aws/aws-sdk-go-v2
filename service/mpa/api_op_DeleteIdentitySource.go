@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type DeleteIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteIdentitySourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdentitySourceArn != nil {
-		s.WriteString(schemas.DeleteIdentitySourceRequest_IdentitySourceArn, *v.IdentitySourceArn)
-	}
-}
-
 type DeleteIdentitySourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,29 +46,16 @@ type DeleteIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteIdentitySourceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteIdentitySourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentitySource, schemas.DeleteIdentitySourceRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentitySource, schemas.DeleteIdentitySourceRequest, nil), output: &DeleteIdentitySourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIdentitySource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIdentitySource"); err != nil {

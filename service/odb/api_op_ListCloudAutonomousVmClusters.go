@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,24 +42,6 @@ type ListCloudAutonomousVmClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCloudAutonomousVmClustersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCloudAutonomousVmClustersInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCloudAutonomousVmClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudExadataInfrastructureId != nil {
-		s.WriteString(schemas.ListCloudAutonomousVmClustersInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCloudAutonomousVmClustersInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCloudAutonomousVmClustersInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListCloudAutonomousVmClustersOutput struct {
 
 	// The list of Autonomous VM clusters in the specified Cloud Exadata
@@ -79,26 +59,16 @@ type ListCloudAutonomousVmClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCloudAutonomousVmClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCloudAutonomousVmClustersOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters:
-			return deserializeCloudAutonomousVmClusterList(d, schemas.ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters, &v.CloudAutonomousVmClusters)
-		case schemas.ListCloudAutonomousVmClustersOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCloudAutonomousVmClustersOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCloudAutonomousVmClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudAutonomousVmClusters, schemas.ListCloudAutonomousVmClustersInput, schemas.ListCloudAutonomousVmClustersOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCloudAutonomousVmClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudAutonomousVmClusters, schemas.ListCloudAutonomousVmClustersInput, schemas.ListCloudAutonomousVmClustersOutput), output: &ListCloudAutonomousVmClustersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCloudAutonomousVmClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCloudAutonomousVmClusters"); err != nil {

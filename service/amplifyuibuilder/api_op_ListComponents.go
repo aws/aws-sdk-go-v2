@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,46 +49,6 @@ type ListComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListComponentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.ListComponentsRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.ListComponentsRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListComponentsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListComponentsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListComponentsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListComponentsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListComponentsRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.ListComponentsRequest_appId, v.AppId)
-		case schemas.ListComponentsRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.ListComponentsRequest_environmentName, v.EnvironmentName)
-		case schemas.ListComponentsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListComponentsRequest_maxResults, v.MaxResults)
-		case schemas.ListComponentsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListComponentsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListComponentsOutput struct {
 
 	// The list of components for the Amplify app.
@@ -107,38 +65,16 @@ type ListComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListComponentsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListComponentsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentSummaryList(s, schemas.ListComponentsResponse_entities, v.Entities)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListComponentsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListComponentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListComponentsResponse_entities:
-			return deserializeComponentSummaryList(d, schemas.ListComponentsResponse_entities, &v.Entities)
-		case schemas.ListComponentsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListComponentsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse), output: &ListComponentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponents"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type ListOdbNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOdbNetworksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOdbNetworksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOdbNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOdbNetworksInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOdbNetworksInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListOdbNetworksOutput struct {
 
 	// The list of ODB networks.
@@ -77,26 +60,16 @@ type ListOdbNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOdbNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOdbNetworksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOdbNetworksOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOdbNetworksOutput_nextToken, v.NextToken)
-		case schemas.ListOdbNetworksOutput_odbNetworks:
-			return deserializeOdbNetworkList(d, schemas.ListOdbNetworksOutput_odbNetworks, &v.OdbNetworks)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOdbNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbNetworks, schemas.ListOdbNetworksInput, schemas.ListOdbNetworksOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOdbNetworks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbNetworks, schemas.ListOdbNetworksInput, schemas.ListOdbNetworksOutput), output: &ListOdbNetworksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOdbNetworks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOdbNetworks"); err != nil {

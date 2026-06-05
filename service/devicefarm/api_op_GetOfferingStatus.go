@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type GetOfferingStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOfferingStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOfferingStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOfferingStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetOfferingStatusRequest_nextToken, *v.NextToken)
-	}
-}
-
 // Returns the status result for a device offering.
 type GetOfferingStatusOutput struct {
 
@@ -75,28 +61,16 @@ type GetOfferingStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOfferingStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOfferingStatusResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOfferingStatusResult_current:
-			return deserializeOfferingStatusMap(d, schemas.GetOfferingStatusResult_current, &v.Current)
-		case schemas.GetOfferingStatusResult_nextPeriod:
-			return deserializeOfferingStatusMap(d, schemas.GetOfferingStatusResult_nextPeriod, &v.NextPeriod)
-		case schemas.GetOfferingStatusResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetOfferingStatusResult_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOfferingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferingStatus, schemas.GetOfferingStatusRequest, schemas.GetOfferingStatusResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOfferingStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferingStatus, schemas.GetOfferingStatusRequest, schemas.GetOfferingStatusResult), output: &GetOfferingStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOfferingStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOfferingStatus"); err != nil {

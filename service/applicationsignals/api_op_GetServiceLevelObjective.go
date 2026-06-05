@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +40,6 @@ type GetServiceLevelObjectiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceLevelObjectiveInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceLevelObjectiveInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetServiceLevelObjectiveInput_Id, *v.Id)
-	}
-}
-
 type GetServiceLevelObjectiveOutput struct {
 
 	// A structure containing the information about the SLO.
@@ -67,24 +53,16 @@ type GetServiceLevelObjectiveOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceLevelObjectiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceLevelObjectiveOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceLevelObjectiveOutput_Slo:
-			v.Slo = &types.ServiceLevelObjective{}
-			return v.Slo.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServiceLevelObjectiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLevelObjective, schemas.GetServiceLevelObjectiveInput, schemas.GetServiceLevelObjectiveOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceLevelObjective{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLevelObjective, schemas.GetServiceLevelObjectiveInput, schemas.GetServiceLevelObjectiveOutput), output: &GetServiceLevelObjectiveOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceLevelObjective{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceLevelObjective"); err != nil {

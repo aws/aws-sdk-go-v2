@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,42 +51,6 @@ type CreateStageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateStageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoParticipantRecordingConfiguration != nil {
-		s.WriteStruct(schemas.CreateStageRequest_autoParticipantRecordingConfiguration)
-		v.AutoParticipantRecordingConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateStageRequest_name, *v.Name)
-	}
-	serializeParticipantTokenConfigurations(s, schemas.CreateStageRequest_participantTokenConfigurations, v.ParticipantTokenConfigurations)
-	serializeTags(s, schemas.CreateStageRequest_tags, v.Tags)
-}
-func (v *CreateStageInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateStageRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateStageRequest_autoParticipantRecordingConfiguration:
-			v.AutoParticipantRecordingConfiguration = &types.AutoParticipantRecordingConfiguration{}
-			return v.AutoParticipantRecordingConfiguration.Deserialize(d)
-		case schemas.CreateStageRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateStageRequest_name, v.Name)
-		case schemas.CreateStageRequest_participantTokenConfigurations:
-			return deserializeParticipantTokenConfigurations(d, schemas.CreateStageRequest_participantTokenConfigurations, &v.ParticipantTokenConfigurations)
-		case schemas.CreateStageRequest_tags:
-			return deserializeTags(d, schemas.CreateStageRequest_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateStageOutput struct {
 
 	// Participant tokens attached to the stage. These correspond to the participants
@@ -104,40 +66,16 @@ type CreateStageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStageOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateStageResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantTokenList(s, schemas.CreateStageResponse_participantTokens, v.ParticipantTokens)
-	if v.Stage != nil {
-		s.WriteStruct(schemas.CreateStageResponse_stage)
-		v.Stage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateStageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateStageResponse_participantTokens:
-			return deserializeParticipantTokenList(d, schemas.CreateStageResponse_participantTokens, &v.ParticipantTokens)
-		case schemas.CreateStageResponse_stage:
-			v.Stage = &types.Stage{}
-			return v.Stage.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStage, schemas.CreateStageRequest, schemas.CreateStageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStage, schemas.CreateStageRequest, schemas.CreateStageResponse), output: &CreateStageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStage"); err != nil {

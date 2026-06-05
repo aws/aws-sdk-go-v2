@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type ListNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNetworksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListNetworksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListNetworksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListNetworksRequest_nextToken, *v.NextToken)
-	}
-	if v.SortDirection != "" {
-		s.WriteString(schemas.ListNetworksRequest_sortDirection, string(v.SortDirection))
-	}
-	if v.SortFields != nil {
-		s.WriteString(schemas.ListNetworksRequest_sortFields, *v.SortFields)
-	}
-}
-
 type ListNetworksOutput struct {
 
 	// A list of network objects for the Amazon Web Services account.
@@ -89,26 +66,16 @@ type ListNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListNetworksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListNetworksResponse_networks:
-			return deserializeNetworkList(d, schemas.ListNetworksResponse_networks, &v.Networks)
-		case schemas.ListNetworksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListNetworksResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworks, schemas.ListNetworksRequest, schemas.ListNetworksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworks, schemas.ListNetworksRequest, schemas.ListNetworksResponse), output: &ListNetworksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNetworks"); err != nil {

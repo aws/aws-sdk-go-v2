@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type DeleteNetworkFirewallTransitGatewayAttachmentInput struct {
 	TransitGatewayAttachmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteNetworkFirewallTransitGatewayAttachmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteNetworkFirewallTransitGatewayAttachmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteNetworkFirewallTransitGatewayAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TransitGatewayAttachmentId != nil {
-		s.WriteString(schemas.DeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId, *v.TransitGatewayAttachmentId)
-	}
 }
 
 type DeleteNetworkFirewallTransitGatewayAttachmentOutput struct {
@@ -95,31 +81,16 @@ type DeleteNetworkFirewallTransitGatewayAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteNetworkFirewallTransitGatewayAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId:
-			v.TransitGatewayAttachmentId = new(string)
-			return d.ReadString(schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId, v.TransitGatewayAttachmentId)
-		case schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus:
-			var ev string
-			if err := d.ReadString(schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus, &ev); err != nil {
-				return err
-			}
-			v.TransitGatewayAttachmentStatus = types.TransitGatewayAttachmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteNetworkFirewallTransitGatewayAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkFirewallTransitGatewayAttachment, schemas.DeleteNetworkFirewallTransitGatewayAttachmentRequest, schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNetworkFirewallTransitGatewayAttachment, schemas.DeleteNetworkFirewallTransitGatewayAttachmentRequest, schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse), output: &DeleteNetworkFirewallTransitGatewayAttachmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteNetworkFirewallTransitGatewayAttachment"); err != nil {

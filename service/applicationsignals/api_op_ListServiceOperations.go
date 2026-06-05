@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -85,28 +83,6 @@ type ListServiceOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceOperationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListServiceOperationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListServiceOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListServiceOperationsInput_EndTime, *v.EndTime)
-	}
-	serializeAttributes(s, schemas.ListServiceOperationsInput_KeyAttributes, v.KeyAttributes)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListServiceOperationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListServiceOperationsInput_NextToken, *v.NextToken)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListServiceOperationsInput_StartTime, *v.StartTime)
-	}
-}
-
 type ListServiceOperationsOutput struct {
 
 	// The end of the time period that the returned information applies to. When used
@@ -145,32 +121,16 @@ type ListServiceOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListServiceOperationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListServiceOperationsOutput_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.ListServiceOperationsOutput_EndTime, v.EndTime)
-		case schemas.ListServiceOperationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListServiceOperationsOutput_NextToken, v.NextToken)
-		case schemas.ListServiceOperationsOutput_ServiceOperations:
-			return deserializeServiceOperations(d, schemas.ListServiceOperationsOutput_ServiceOperations, &v.ServiceOperations)
-		case schemas.ListServiceOperationsOutput_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.ListServiceOperationsOutput_StartTime, v.StartTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListServiceOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceOperations, schemas.ListServiceOperationsInput, schemas.ListServiceOperationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceOperations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceOperations, schemas.ListServiceOperationsInput, schemas.ListServiceOperationsOutput), output: &ListServiceOperationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceOperations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceOperations"); err != nil {

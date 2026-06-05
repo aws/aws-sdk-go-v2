@@ -7,11 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/inspectorscan/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/inspectorscan/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/inspectorscan/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspectorscan/types"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,19 +52,6 @@ type ScanSbomInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScanSbomInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScanSbomRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScanSbomInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OutputFormat != "" {
-		s.WriteString(schemas.ScanSbomRequest_outputFormat, string(v.OutputFormat))
-	}
-	s.WriteDocument(schemas.ScanSbomRequest_sbom, &smithydocument.Opaque{Value: v.Sbom})
-}
-
 type ScanSbomOutput struct {
 
 	// The vulnerability report for the scanned SBOM.
@@ -80,30 +63,16 @@ type ScanSbomOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScanSbomOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScanSbomResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScanSbomResponse_sbom:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.ScanSbomResponse_sbom, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.Sbom = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationScanSbomMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanSbom, schemas.ScanSbomRequest, schemas.ScanSbomResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpScanSbom{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ScanSbom, schemas.ScanSbomRequest, schemas.ScanSbomResponse), output: &ScanSbomOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpScanSbom{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ScanSbom"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetCentralizationRuleForOrganizationInput struct {
 	RuleIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetCentralizationRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCentralizationRuleForOrganizationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCentralizationRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RuleIdentifier != nil {
-		s.WriteString(schemas.GetCentralizationRuleForOrganizationInput_RuleIdentifier, *v.RuleIdentifier)
-	}
 }
 
 type GetCentralizationRuleForOrganizationOutput struct {
@@ -91,56 +77,16 @@ type GetCentralizationRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCentralizationRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCentralizationRuleForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCentralizationRuleForOrganizationOutput_CentralizationRule:
-			v.CentralizationRule = &types.CentralizationRule{}
-			return v.CentralizationRule.Deserialize(d)
-		case schemas.GetCentralizationRuleForOrganizationOutput_CreatedRegion:
-			v.CreatedRegion = new(string)
-			return d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_CreatedRegion, v.CreatedRegion)
-		case schemas.GetCentralizationRuleForOrganizationOutput_CreatedTimeStamp:
-			v.CreatedTimeStamp = new(int64)
-			return d.ReadInt64(schemas.GetCentralizationRuleForOrganizationOutput_CreatedTimeStamp, v.CreatedTimeStamp)
-		case schemas.GetCentralizationRuleForOrganizationOutput_CreatorAccountId:
-			v.CreatorAccountId = new(string)
-			return d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_CreatorAccountId, v.CreatorAccountId)
-		case schemas.GetCentralizationRuleForOrganizationOutput_FailureReason:
-			var ev string
-			if err := d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_FailureReason, &ev); err != nil {
-				return err
-			}
-			v.FailureReason = types.CentralizationFailureReason(ev)
-			return nil
-		case schemas.GetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp:
-			v.LastUpdateTimeStamp = new(int64)
-			return d.ReadInt64(schemas.GetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
-		case schemas.GetCentralizationRuleForOrganizationOutput_RuleArn:
-			v.RuleArn = new(string)
-			return d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_RuleArn, v.RuleArn)
-		case schemas.GetCentralizationRuleForOrganizationOutput_RuleHealth:
-			var ev string
-			if err := d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_RuleHealth, &ev); err != nil {
-				return err
-			}
-			v.RuleHealth = types.RuleHealth(ev)
-			return nil
-		case schemas.GetCentralizationRuleForOrganizationOutput_RuleName:
-			v.RuleName = new(string)
-			return d.ReadString(schemas.GetCentralizationRuleForOrganizationOutput_RuleName, v.RuleName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCentralizationRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCentralizationRuleForOrganization, schemas.GetCentralizationRuleForOrganizationInput, schemas.GetCentralizationRuleForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCentralizationRuleForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCentralizationRuleForOrganization, schemas.GetCentralizationRuleForOrganizationInput, schemas.GetCentralizationRuleForOrganizationOutput), output: &GetCentralizationRuleForOrganizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCentralizationRuleForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCentralizationRuleForOrganization"); err != nil {

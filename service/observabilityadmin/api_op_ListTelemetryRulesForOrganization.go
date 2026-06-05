@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,26 +53,6 @@ type ListTelemetryRulesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryRulesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTelemetryRulesForOrganizationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTelemetryRulesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTelemetryRulesForOrganizationInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTelemetryRulesForOrganizationInput_NextToken, *v.NextToken)
-	}
-	if v.RuleNamePrefix != nil {
-		s.WriteString(schemas.ListTelemetryRulesForOrganizationInput_RuleNamePrefix, *v.RuleNamePrefix)
-	}
-	serializeAccountIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceAccountIds, v.SourceAccountIds)
-	serializeOrganizationUnitIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds, v.SourceOrganizationUnitIds)
-}
-
 type ListTelemetryRulesForOrganizationOutput struct {
 
 	//  A token to resume pagination of results.
@@ -89,26 +67,16 @@ type ListTelemetryRulesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTelemetryRulesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTelemetryRulesForOrganizationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTelemetryRulesForOrganizationOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTelemetryRulesForOrganizationOutput_NextToken, v.NextToken)
-		case schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries:
-			return deserializeTelemetryRuleSummaries(d, schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries, &v.TelemetryRuleSummaries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTelemetryRulesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRulesForOrganization, schemas.ListTelemetryRulesForOrganizationInput, schemas.ListTelemetryRulesForOrganizationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTelemetryRulesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRulesForOrganization, schemas.ListTelemetryRulesForOrganizationInput, schemas.ListTelemetryRulesForOrganizationOutput), output: &ListTelemetryRulesForOrganizationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTelemetryRulesForOrganization{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTelemetryRulesForOrganization"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,27 +76,6 @@ type AssociateExternalConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateExternalConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateExternalConnectionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateExternalConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.AssociateExternalConnectionRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.AssociateExternalConnectionRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.ExternalConnection != nil {
-		s.WriteString(schemas.AssociateExternalConnectionRequest_externalConnection, *v.ExternalConnection)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.AssociateExternalConnectionRequest_repository, *v.Repository)
-	}
-}
-
 type AssociateExternalConnectionOutput struct {
 
 	//  Information about the connected repository after processing the request.
@@ -110,24 +87,16 @@ type AssociateExternalConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateExternalConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateExternalConnectionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateExternalConnectionResult_repository:
-			v.Repository = &types.RepositoryDescription{}
-			return v.Repository.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateExternalConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateExternalConnection, schemas.AssociateExternalConnectionRequest, schemas.AssociateExternalConnectionResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateExternalConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateExternalConnection, schemas.AssociateExternalConnectionRequest, schemas.AssociateExternalConnectionResult), output: &AssociateExternalConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateExternalConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateExternalConnection"); err != nil {

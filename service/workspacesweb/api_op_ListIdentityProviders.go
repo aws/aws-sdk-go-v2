@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListIdentityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIdentityProvidersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIdentityProvidersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIdentityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIdentityProvidersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIdentityProvidersRequest_nextToken, *v.NextToken)
-	}
-	if v.PortalArn != nil {
-		s.WriteString(schemas.ListIdentityProvidersRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type ListIdentityProvidersOutput struct {
 
 	// The identity providers.
@@ -79,26 +59,16 @@ type ListIdentityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIdentityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIdentityProvidersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIdentityProvidersResponse_identityProviders:
-			return deserializeIdentityProviderList(d, schemas.ListIdentityProvidersResponse_identityProviders, &v.IdentityProviders)
-		case schemas.ListIdentityProvidersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIdentityProvidersResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviders, schemas.ListIdentityProvidersRequest, schemas.ListIdentityProvidersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityProviders{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviders, schemas.ListIdentityProvidersRequest, schemas.ListIdentityProvidersResponse), output: &ListIdentityProvidersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityProviders{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdentityProviders"); err != nil {

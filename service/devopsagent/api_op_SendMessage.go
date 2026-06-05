@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -63,32 +61,6 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendMessageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendMessageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.SendMessageRequest_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.SendMessageRequest_content, *v.Content)
-	}
-	if v.Context != nil {
-		s.WriteStruct(schemas.SendMessageRequest_context)
-		v.Context.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.SendMessageRequest_executionId, *v.ExecutionId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.SendMessageRequest_userId, *v.UserId)
-	}
-}
-
 // Response structure for sending chat message events
 type SendMessageOutput struct {
 	eventStream *SendMessageEventStream
@@ -98,14 +70,6 @@ type SendMessageOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
-}
-
-func (v *SendMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -129,13 +93,12 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse), output: &SendMessageOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamSendMessage{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendMessage"); err != nil {
@@ -143,6 +106,9 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamSendMessageMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {

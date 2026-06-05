@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type DeleteAppInstanceAdminInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAppInstanceAdminInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAppInstanceAdminRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAppInstanceAdminInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceAdminArn != nil {
-		s.WriteString(schemas.DeleteAppInstanceAdminRequest_AppInstanceAdminArn, *v.AppInstanceAdminArn)
-	}
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.DeleteAppInstanceAdminRequest_AppInstanceArn, *v.AppInstanceArn)
-	}
-}
-
 type DeleteAppInstanceAdminOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,29 +49,16 @@ type DeleteAppInstanceAdminOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAppInstanceAdminOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAppInstanceAdminOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteAppInstanceAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppInstanceAdmin, schemas.DeleteAppInstanceAdminRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppInstanceAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppInstanceAdmin, schemas.DeleteAppInstanceAdminRequest, nil), output: &DeleteAppInstanceAdminOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppInstanceAdmin{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAppInstanceAdmin"); err != nil {

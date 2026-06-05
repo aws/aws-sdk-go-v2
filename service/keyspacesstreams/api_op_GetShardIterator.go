@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspacesstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,27 +70,6 @@ type GetShardIteratorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetShardIteratorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetShardIteratorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetShardIteratorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SequenceNumber != nil {
-		s.WriteString(schemas.GetShardIteratorInput_sequenceNumber, *v.SequenceNumber)
-	}
-	if v.ShardId != nil {
-		s.WriteString(schemas.GetShardIteratorInput_shardId, *v.ShardId)
-	}
-	if v.ShardIteratorType != "" {
-		s.WriteString(schemas.GetShardIteratorInput_shardIteratorType, string(v.ShardIteratorType))
-	}
-	if v.StreamArn != nil {
-		s.WriteString(schemas.GetShardIteratorInput_streamArn, *v.StreamArn)
-	}
-}
-
 type GetShardIteratorOutput struct {
 
 	//  The unique identifier for the shard iterator. This value is used in the
@@ -106,24 +83,16 @@ type GetShardIteratorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetShardIteratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetShardIteratorOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetShardIteratorOutput_shardIterator:
-			v.ShardIterator = new(string)
-			return d.ReadString(schemas.GetShardIteratorOutput_shardIterator, v.ShardIterator)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShardIterator, schemas.GetShardIteratorInput, schemas.GetShardIteratorOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetShardIterator{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetShardIterator, schemas.GetShardIteratorInput, schemas.GetShardIteratorOutput), output: &GetShardIteratorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetShardIterator{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetShardIterator"); err != nil {

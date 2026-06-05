@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -204,88 +202,6 @@ type CalculateRouteMatrixInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CalculateRouteMatrixInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CalculateRouteMatrixRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CalculateRouteMatrixInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CalculatorName != nil {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_CalculatorName, *v.CalculatorName)
-	}
-	if v.CarModeOptions != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_CarModeOptions)
-		v.CarModeOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DepartNow != nil {
-		s.WriteBool(schemas.CalculateRouteMatrixRequest_DepartNow, *v.DepartNow)
-	}
-	serializePositionList(s, schemas.CalculateRouteMatrixRequest_DeparturePositions, v.DeparturePositions)
-	if v.DepartureTime != nil {
-		s.WriteTime(schemas.CalculateRouteMatrixRequest_DepartureTime, *v.DepartureTime)
-	}
-	serializePositionList(s, schemas.CalculateRouteMatrixRequest_DestinationPositions, v.DestinationPositions)
-	if v.DistanceUnit != "" {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_DistanceUnit, string(v.DistanceUnit))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_Key, *v.Key)
-	}
-	if v.TravelMode != "" {
-		s.WriteString(schemas.CalculateRouteMatrixRequest_TravelMode, string(v.TravelMode))
-	}
-	if v.TruckModeOptions != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixRequest_TruckModeOptions)
-		v.TruckModeOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CalculateRouteMatrixInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CalculateRouteMatrixRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CalculateRouteMatrixRequest_CalculatorName:
-			v.CalculatorName = new(string)
-			return d.ReadString(schemas.CalculateRouteMatrixRequest_CalculatorName, v.CalculatorName)
-		case schemas.CalculateRouteMatrixRequest_CarModeOptions:
-			v.CarModeOptions = &types.CalculateRouteCarModeOptions{}
-			return v.CarModeOptions.Deserialize(d)
-		case schemas.CalculateRouteMatrixRequest_DepartNow:
-			v.DepartNow = new(bool)
-			return d.ReadBool(schemas.CalculateRouteMatrixRequest_DepartNow, v.DepartNow)
-		case schemas.CalculateRouteMatrixRequest_DeparturePositions:
-			return deserializePositionList(d, schemas.CalculateRouteMatrixRequest_DeparturePositions, &v.DeparturePositions)
-		case schemas.CalculateRouteMatrixRequest_DepartureTime:
-			v.DepartureTime = new(time.Time)
-			return d.ReadTime(schemas.CalculateRouteMatrixRequest_DepartureTime, v.DepartureTime)
-		case schemas.CalculateRouteMatrixRequest_DestinationPositions:
-			return deserializePositionList(d, schemas.CalculateRouteMatrixRequest_DestinationPositions, &v.DestinationPositions)
-		case schemas.CalculateRouteMatrixRequest_DistanceUnit:
-			var ev string
-			if err := d.ReadString(schemas.CalculateRouteMatrixRequest_DistanceUnit, &ev); err != nil {
-				return err
-			}
-			v.DistanceUnit = types.DistanceUnit(ev)
-			return nil
-		case schemas.CalculateRouteMatrixRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.CalculateRouteMatrixRequest_Key, v.Key)
-		case schemas.CalculateRouteMatrixRequest_TravelMode:
-			var ev string
-			if err := d.ReadString(schemas.CalculateRouteMatrixRequest_TravelMode, &ev); err != nil {
-				return err
-			}
-			v.TravelMode = types.TravelMode(ev)
-			return nil
-		case schemas.CalculateRouteMatrixRequest_TruckModeOptions:
-			v.TruckModeOptions = &types.CalculateRouteTruckModeOptions{}
-			return v.TruckModeOptions.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Returns the result of the route matrix calculation.
 type CalculateRouteMatrixOutput struct {
 
@@ -319,46 +235,16 @@ type CalculateRouteMatrixOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CalculateRouteMatrixOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CalculateRouteMatrixResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CalculateRouteMatrixOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteMatrix(s, schemas.CalculateRouteMatrixResponse_RouteMatrix, v.RouteMatrix)
-	serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDeparturePositions, v.SnappedDeparturePositions)
-	serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDestinationPositions, v.SnappedDestinationPositions)
-	if v.Summary != nil {
-		s.WriteStruct(schemas.CalculateRouteMatrixResponse_Summary)
-		v.Summary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CalculateRouteMatrixOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CalculateRouteMatrixResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CalculateRouteMatrixResponse_RouteMatrix:
-			return deserializeRouteMatrix(d, schemas.CalculateRouteMatrixResponse_RouteMatrix, &v.RouteMatrix)
-		case schemas.CalculateRouteMatrixResponse_SnappedDeparturePositions:
-			return deserializePositionList(d, schemas.CalculateRouteMatrixResponse_SnappedDeparturePositions, &v.SnappedDeparturePositions)
-		case schemas.CalculateRouteMatrixResponse_SnappedDestinationPositions:
-			return deserializePositionList(d, schemas.CalculateRouteMatrixResponse_SnappedDestinationPositions, &v.SnappedDestinationPositions)
-		case schemas.CalculateRouteMatrixResponse_Summary:
-			v.Summary = &types.CalculateRouteMatrixSummary{}
-			return v.Summary.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRouteMatrix, schemas.CalculateRouteMatrixRequest, schemas.CalculateRouteMatrixResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCalculateRouteMatrix{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CalculateRouteMatrix, schemas.CalculateRouteMatrixRequest, schemas.CalculateRouteMatrixResponse), output: &CalculateRouteMatrixOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCalculateRouteMatrix{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CalculateRouteMatrix"); err != nil {

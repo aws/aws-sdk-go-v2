@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DeleteDataAutomationLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataAutomationLibraryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataAutomationLibraryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LibraryArn != nil {
-		s.WriteString(schemas.DeleteDataAutomationLibraryRequest_libraryArn, *v.LibraryArn)
-	}
-}
-
 // Delete DataAutomationLibrary Response
 type DeleteDataAutomationLibraryOutput struct {
 
@@ -67,31 +53,16 @@ type DeleteDataAutomationLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataAutomationLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataAutomationLibraryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDataAutomationLibraryResponse_libraryArn:
-			v.LibraryArn = new(string)
-			return d.ReadString(schemas.DeleteDataAutomationLibraryResponse_libraryArn, v.LibraryArn)
-		case schemas.DeleteDataAutomationLibraryResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDataAutomationLibraryResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DataAutomationLibraryStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataAutomationLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataAutomationLibrary, schemas.DeleteDataAutomationLibraryRequest, schemas.DeleteDataAutomationLibraryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataAutomationLibrary, schemas.DeleteDataAutomationLibraryRequest, schemas.DeleteDataAutomationLibraryResponse), output: &DeleteDataAutomationLibraryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataAutomationLibrary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataAutomationLibrary"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,22 +47,6 @@ type DeleteProjectMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteProjectMembershipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteProjectMembershipInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteProjectMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.DeleteProjectMembershipInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	serializeMember(s, schemas.DeleteProjectMembershipInput_member, v.Member)
-	if v.ProjectIdentifier != nil {
-		s.WriteString(schemas.DeleteProjectMembershipInput_projectIdentifier, *v.ProjectIdentifier)
-	}
-}
-
 type DeleteProjectMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,21 +54,16 @@ type DeleteProjectMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteProjectMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteProjectMembershipOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteProjectMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectMembership, schemas.DeleteProjectMembershipInput, schemas.DeleteProjectMembershipOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProjectMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProjectMembership, schemas.DeleteProjectMembershipInput, schemas.DeleteProjectMembershipOutput), output: &DeleteProjectMembershipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProjectMembership{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProjectMembership"); err != nil {

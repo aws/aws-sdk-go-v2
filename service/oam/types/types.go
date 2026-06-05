@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -24,38 +22,6 @@ type LinkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LinkConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LinkConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LinkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LogGroupConfiguration != nil {
-		s.WriteStruct(schemas.LinkConfiguration_LogGroupConfiguration)
-		v.LogGroupConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MetricConfiguration != nil {
-		s.WriteStruct(schemas.LinkConfiguration_MetricConfiguration)
-		v.MetricConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LinkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LinkConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LinkConfiguration_LogGroupConfiguration:
-			v.LogGroupConfiguration = &LogGroupConfiguration{}
-			return v.LogGroupConfiguration.Deserialize(d)
-		case schemas.LinkConfiguration_MetricConfiguration:
-			v.MetricConfiguration = &MetricConfiguration{}
-			return v.MetricConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about one link attached to this
 // monitoring account sink.
 type ListAttachedLinksItem struct {
@@ -71,37 +37,6 @@ type ListAttachedLinksItem struct {
 	ResourceTypes []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListAttachedLinksItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAttachedLinksItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAttachedLinksItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Label != nil {
-		s.WriteString(schemas.ListAttachedLinksItem_Label, *v.Label)
-	}
-	if v.LinkArn != nil {
-		s.WriteString(schemas.ListAttachedLinksItem_LinkArn, *v.LinkArn)
-	}
-	serializeResourceTypesOutput(s, schemas.ListAttachedLinksItem_ResourceTypes, v.ResourceTypes)
-}
-func (v *ListAttachedLinksItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAttachedLinksItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAttachedLinksItem_Label:
-			v.Label = new(string)
-			return d.ReadString(schemas.ListAttachedLinksItem_Label, v.Label)
-		case schemas.ListAttachedLinksItem_LinkArn:
-			v.LinkArn = new(string)
-			return d.ReadString(schemas.ListAttachedLinksItem_LinkArn, v.LinkArn)
-		case schemas.ListAttachedLinksItem_ResourceTypes:
-			return deserializeResourceTypesOutput(d, schemas.ListAttachedLinksItem_ResourceTypes, &v.ResourceTypes)
-		}
-		return nil
-	})
 }
 
 // A structure that contains information about one of this source account's links
@@ -127,49 +62,6 @@ type ListLinksItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLinksItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLinksItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLinksItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListLinksItem_Arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ListLinksItem_Id, *v.Id)
-	}
-	if v.Label != nil {
-		s.WriteString(schemas.ListLinksItem_Label, *v.Label)
-	}
-	serializeResourceTypesOutput(s, schemas.ListLinksItem_ResourceTypes, v.ResourceTypes)
-	if v.SinkArn != nil {
-		s.WriteString(schemas.ListLinksItem_SinkArn, *v.SinkArn)
-	}
-}
-func (v *ListLinksItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLinksItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLinksItem_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ListLinksItem_Arn, v.Arn)
-		case schemas.ListLinksItem_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ListLinksItem_Id, v.Id)
-		case schemas.ListLinksItem_Label:
-			v.Label = new(string)
-			return d.ReadString(schemas.ListLinksItem_Label, v.Label)
-		case schemas.ListLinksItem_ResourceTypes:
-			return deserializeResourceTypesOutput(d, schemas.ListLinksItem_ResourceTypes, &v.ResourceTypes)
-		case schemas.ListLinksItem_SinkArn:
-			v.SinkArn = new(string)
-			return d.ReadString(schemas.ListLinksItem_SinkArn, v.SinkArn)
-		}
-		return nil
-	})
-}
-
 // A structure that contains information about one of this monitoring account's
 // sinks.
 type ListSinksItem struct {
@@ -184,40 +76,6 @@ type ListSinksItem struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListSinksItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSinksItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSinksItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListSinksItem_Arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ListSinksItem_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListSinksItem_Name, *v.Name)
-	}
-}
-func (v *ListSinksItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSinksItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSinksItem_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ListSinksItem_Arn, v.Arn)
-		case schemas.ListSinksItem_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ListSinksItem_Id, v.Id)
-		case schemas.ListSinksItem_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ListSinksItem_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // This structure contains the Filter parameter which you can use to specify which
@@ -264,28 +122,6 @@ type LogGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LogGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LogGroupConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LogGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteString(schemas.LogGroupConfiguration_Filter, *v.Filter)
-	}
-}
-func (v *LogGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LogGroupConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LogGroupConfiguration_Filter:
-			v.Filter = new(string)
-			return d.ReadString(schemas.LogGroupConfiguration_Filter, v.Filter)
-		}
-		return nil
-	})
-}
-
 // This structure contains the Filter parameter which you can use to specify which
 // metric namespaces are to be shared from this source account to the monitoring
 // account.
@@ -327,28 +163,6 @@ type MetricConfiguration struct {
 	Filter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteString(schemas.MetricConfiguration_Filter, *v.Filter)
-	}
-}
-func (v *MetricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricConfiguration_Filter:
-			v.Filter = new(string)
-			return d.ReadString(schemas.MetricConfiguration_Filter, v.Filter)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

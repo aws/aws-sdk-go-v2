@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,24 +57,6 @@ type DeleteUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteUserRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DirectoryId != nil {
-		s.WriteString(schemas.DeleteUserRequest_DirectoryId, *v.DirectoryId)
-	}
-	if v.SAMAccountName != nil {
-		s.WriteString(schemas.DeleteUserRequest_SAMAccountName, *v.SAMAccountName)
-	}
-}
-
 type DeleteUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,21 +64,16 @@ type DeleteUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteUserResult, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUser, schemas.DeleteUserRequest, schemas.DeleteUserResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUser, schemas.DeleteUserRequest, schemas.DeleteUserResult), output: &DeleteUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteUser"); err != nil {

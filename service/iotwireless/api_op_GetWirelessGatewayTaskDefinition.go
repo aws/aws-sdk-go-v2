@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetWirelessGatewayTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWirelessGatewayTaskDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetWirelessGatewayTaskDefinitionRequest_Id, *v.Id)
-	}
-}
-
 type GetWirelessGatewayTaskDefinitionOutput struct {
 
 	// The Amazon Resource Name of the resource.
@@ -73,32 +59,16 @@ type GetWirelessGatewayTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWirelessGatewayTaskDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWirelessGatewayTaskDefinitionResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetWirelessGatewayTaskDefinitionResponse_Arn, v.Arn)
-		case schemas.GetWirelessGatewayTaskDefinitionResponse_AutoCreateTasks:
-			return d.ReadBool(schemas.GetWirelessGatewayTaskDefinitionResponse_AutoCreateTasks, &v.AutoCreateTasks)
-		case schemas.GetWirelessGatewayTaskDefinitionResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetWirelessGatewayTaskDefinitionResponse_Name, v.Name)
-		case schemas.GetWirelessGatewayTaskDefinitionResponse_Update:
-			v.Update = &types.UpdateWirelessGatewayTaskCreate{}
-			return v.Update.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayTaskDefinition, schemas.GetWirelessGatewayTaskDefinitionRequest, schemas.GetWirelessGatewayTaskDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGatewayTaskDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayTaskDefinition, schemas.GetWirelessGatewayTaskDefinitionRequest, schemas.GetWirelessGatewayTaskDefinitionResponse), output: &GetWirelessGatewayTaskDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessGatewayTaskDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWirelessGatewayTaskDefinition"); err != nil {

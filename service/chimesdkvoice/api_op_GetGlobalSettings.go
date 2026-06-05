@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,22 +32,6 @@ type GetGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlobalSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetGlobalSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetGlobalSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type GetGlobalSettingsOutput struct {
 
 	// The Voice Connector settings.
@@ -61,24 +43,16 @@ type GetGlobalSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetGlobalSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetGlobalSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetGlobalSettingsResponse_VoiceConnector:
-			v.VoiceConnector = &types.VoiceConnectorSettings{}
-			return v.VoiceConnector.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalSettings, nil, schemas.GetGlobalSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlobalSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalSettings, nil, schemas.GetGlobalSettingsResponse), output: &GetGlobalSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlobalSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGlobalSettings"); err != nil {

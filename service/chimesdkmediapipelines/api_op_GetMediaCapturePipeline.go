@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMediaCapturePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMediaCapturePipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMediaCapturePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MediaPipelineId != nil {
-		s.WriteString(schemas.GetMediaCapturePipelineRequest_MediaPipelineId, *v.MediaPipelineId)
-	}
-}
-
 type GetMediaCapturePipelineOutput struct {
 
 	// The media pipeline object.
@@ -62,24 +48,16 @@ type GetMediaCapturePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMediaCapturePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMediaCapturePipelineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMediaCapturePipelineResponse_MediaCapturePipeline:
-			v.MediaCapturePipeline = &types.MediaCapturePipeline{}
-			return v.MediaCapturePipeline.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaCapturePipeline, schemas.GetMediaCapturePipelineRequest, schemas.GetMediaCapturePipelineResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaCapturePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaCapturePipeline, schemas.GetMediaCapturePipelineRequest, schemas.GetMediaCapturePipelineResponse), output: &GetMediaCapturePipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaCapturePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMediaCapturePipeline"); err != nil {

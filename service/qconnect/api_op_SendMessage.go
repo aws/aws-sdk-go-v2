@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -80,52 +78,6 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendMessageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendMessageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiAgentId != nil {
-		s.WriteString(schemas.SendMessageRequest_aiAgentId, *v.AiAgentId)
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.SendMessageRequest_assistantId, *v.AssistantId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.SendMessageRequest_clientToken, *v.ClientToken)
-	}
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.SendMessageRequest_configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConversationContext != nil {
-		s.WriteStruct(schemas.SendMessageRequest_conversationContext)
-		v.ConversationContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Message != nil {
-		s.WriteStruct(schemas.SendMessageRequest_message)
-		v.Message.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeMessageMetadata(s, schemas.SendMessageRequest_metadata, v.Metadata)
-	if v.OrchestratorUseCase != nil {
-		s.WriteString(schemas.SendMessageRequest_orchestratorUseCase, *v.OrchestratorUseCase)
-	}
-	if v.OriginRequestId != nil {
-		s.WriteString(schemas.SendMessageRequest_originRequestId, *v.OriginRequestId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.SendMessageRequest_sessionId, *v.SessionId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.SendMessageRequest_type, string(v.Type))
-	}
-}
-
 type SendMessageOutput struct {
 
 	// The token for the next message, used by GetNextMessage.
@@ -149,30 +101,16 @@ type SendMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendMessageResponse_configuration:
-			v.Configuration = &types.MessageConfiguration{}
-			return v.Configuration.Deserialize(d)
-		case schemas.SendMessageResponse_nextMessageToken:
-			v.NextMessageToken = new(string)
-			return d.ReadString(schemas.SendMessageResponse_nextMessageToken, v.NextMessageToken)
-		case schemas.SendMessageResponse_requestMessageId:
-			v.RequestMessageId = new(string)
-			return d.ReadString(schemas.SendMessageResponse_requestMessageId, v.RequestMessageId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse), output: &SendMessageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendMessage"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +37,6 @@ type GetIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIncidentRecordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIncidentRecordInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIncidentRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetIncidentRecordInput_arn, *v.Arn)
-	}
-}
-func (v *GetIncidentRecordInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIncidentRecordInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIncidentRecordInput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetIncidentRecordInput_arn, v.Arn)
-		}
-		return nil
-	})
-}
-
 type GetIncidentRecordOutput struct {
 
 	// Details the structure of the incident record.
@@ -74,37 +50,16 @@ type GetIncidentRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIncidentRecordOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIncidentRecordOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIncidentRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncidentRecord != nil {
-		s.WriteStruct(schemas.GetIncidentRecordOutput_incidentRecord)
-		v.IncidentRecord.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetIncidentRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIncidentRecordOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIncidentRecordOutput_incidentRecord:
-			v.IncidentRecord = &types.IncidentRecord{}
-			return v.IncidentRecord.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIncidentRecord, schemas.GetIncidentRecordInput, schemas.GetIncidentRecordOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIncidentRecord, schemas.GetIncidentRecordInput, schemas.GetIncidentRecordOutput), output: &GetIncidentRecordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIncidentRecord{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIncidentRecord"); err != nil {

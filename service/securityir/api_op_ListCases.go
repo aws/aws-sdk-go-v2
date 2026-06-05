@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListCasesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCasesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCasesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCasesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCasesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListCasesOutput struct {
 
 	// Response element for ListCases that includes caseARN, caseID, caseStatus,
@@ -77,29 +60,16 @@ type ListCasesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCasesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCasesResponse_items:
-			return deserializeListCasesItems(d, schemas.ListCasesResponse_items, &v.Items)
-		case schemas.ListCasesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCasesResponse_nextToken, v.NextToken)
-		case schemas.ListCasesResponse_total:
-			v.Total = new(int64)
-			return d.ReadInt64(schemas.ListCasesResponse_total, v.Total)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCases, schemas.ListCasesRequest, schemas.ListCasesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCases{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCases, schemas.ListCasesRequest, schemas.ListCasesResponse), output: &ListCasesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCases{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCases"); err != nil {

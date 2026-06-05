@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListPageReceiptsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPageReceiptsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPageReceiptsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPageReceiptsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListPageReceiptsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPageReceiptsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageId != nil {
-		s.WriteString(schemas.ListPageReceiptsRequest_PageId, *v.PageId)
-	}
-}
-
 type ListPageReceiptsOutput struct {
 
 	// The pagination token to continue to the next page of results.
@@ -77,26 +57,16 @@ type ListPageReceiptsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPageReceiptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPageReceiptsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPageReceiptsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPageReceiptsResult_NextToken, v.NextToken)
-		case schemas.ListPageReceiptsResult_Receipts:
-			return deserializeReceiptsList(d, schemas.ListPageReceiptsResult_Receipts, &v.Receipts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPageReceiptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPageReceipts, schemas.ListPageReceiptsRequest, schemas.ListPageReceiptsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPageReceipts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPageReceipts, schemas.ListPageReceiptsRequest, schemas.ListPageReceiptsResult), output: &ListPageReceiptsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPageReceipts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPageReceipts"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,38 +30,6 @@ type ErrorReason struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ErrorReason) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorReason)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorReason) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.ErrorReason_ErrorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.ErrorReason_ErrorMessage, *v.ErrorMessage)
-	}
-}
-func (v *ErrorReason) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorReason, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorReason_ErrorCode:
-			var ev string
-			if err := d.ReadString(schemas.ErrorReason_ErrorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = ErrorCode(ev)
-			return nil
-		case schemas.ErrorReason_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.ErrorReason_ErrorMessage, v.ErrorMessage)
-		}
-		return nil
-	})
-}
-
 // Information about the CloudWatch metric that reflects quota usage.
 type MetricInfo struct {
 
@@ -81,43 +47,6 @@ type MetricInfo struct {
 	MetricStatisticRecommendation *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MetricInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDimensionsMapDefinition(s, schemas.MetricInfo_MetricDimensions, v.MetricDimensions)
-	if v.MetricName != nil {
-		s.WriteString(schemas.MetricInfo_MetricName, *v.MetricName)
-	}
-	if v.MetricNamespace != nil {
-		s.WriteString(schemas.MetricInfo_MetricNamespace, *v.MetricNamespace)
-	}
-	if v.MetricStatisticRecommendation != nil {
-		s.WriteString(schemas.MetricInfo_MetricStatisticRecommendation, *v.MetricStatisticRecommendation)
-	}
-}
-func (v *MetricInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricInfo_MetricDimensions:
-			return deserializeMetricDimensionsMapDefinition(d, schemas.MetricInfo_MetricDimensions, &v.MetricDimensions)
-		case schemas.MetricInfo_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.MetricInfo_MetricName, v.MetricName)
-		case schemas.MetricInfo_MetricNamespace:
-			v.MetricNamespace = new(string)
-			return d.ReadString(schemas.MetricInfo_MetricNamespace, v.MetricNamespace)
-		case schemas.MetricInfo_MetricStatisticRecommendation:
-			v.MetricStatisticRecommendation = new(string)
-			return d.ReadString(schemas.MetricInfo_MetricStatisticRecommendation, v.MetricStatisticRecommendation)
-		}
-		return nil
-	})
 }
 
 // A structure that describes the context for a resource-level quota. For
@@ -151,44 +80,6 @@ type QuotaContextInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QuotaContextInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuotaContextInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuotaContextInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContextId != nil {
-		s.WriteString(schemas.QuotaContextInfo_ContextId, *v.ContextId)
-	}
-	if v.ContextScope != "" {
-		s.WriteString(schemas.QuotaContextInfo_ContextScope, string(v.ContextScope))
-	}
-	if v.ContextScopeType != nil {
-		s.WriteString(schemas.QuotaContextInfo_ContextScopeType, *v.ContextScopeType)
-	}
-}
-func (v *QuotaContextInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuotaContextInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuotaContextInfo_ContextId:
-			v.ContextId = new(string)
-			return d.ReadString(schemas.QuotaContextInfo_ContextId, v.ContextId)
-		case schemas.QuotaContextInfo_ContextScope:
-			var ev string
-			if err := d.ReadString(schemas.QuotaContextInfo_ContextScope, &ev); err != nil {
-				return err
-			}
-			v.ContextScope = QuotaContextScope(ev)
-			return nil
-		case schemas.QuotaContextInfo_ContextScopeType:
-			v.ContextScopeType = new(string)
-			return d.ReadString(schemas.QuotaContextInfo_ContextScopeType, v.ContextScopeType)
-		}
-		return nil
-	})
-}
-
 // Information on your Service Quotas for [Service Quotas Automatic Management]. Automatic Management monitors your
 // Service Quotas utilization and notifies you before you run out of your allocated
 // quotas.
@@ -207,34 +98,6 @@ type QuotaInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QuotaInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuotaInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuotaInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.QuotaInfo_QuotaCode, *v.QuotaCode)
-	}
-	if v.QuotaName != nil {
-		s.WriteString(schemas.QuotaInfo_QuotaName, *v.QuotaName)
-	}
-}
-func (v *QuotaInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuotaInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuotaInfo_QuotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.QuotaInfo_QuotaCode, v.QuotaCode)
-		case schemas.QuotaInfo_QuotaName:
-			v.QuotaName = new(string)
-			return d.ReadString(schemas.QuotaInfo_QuotaName, v.QuotaName)
-		}
-		return nil
-	})
-}
-
 // Information about the quota period.
 type QuotaPeriod struct {
 
@@ -245,38 +108,6 @@ type QuotaPeriod struct {
 	PeriodValue *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *QuotaPeriod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuotaPeriod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuotaPeriod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PeriodUnit != "" {
-		s.WriteString(schemas.QuotaPeriod_PeriodUnit, string(v.PeriodUnit))
-	}
-	if v.PeriodValue != nil {
-		s.WriteInt32(schemas.QuotaPeriod_PeriodValue, *v.PeriodValue)
-	}
-}
-func (v *QuotaPeriod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuotaPeriod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuotaPeriod_PeriodUnit:
-			var ev string
-			if err := d.ReadString(schemas.QuotaPeriod_PeriodUnit, &ev); err != nil {
-				return err
-			}
-			v.PeriodUnit = PeriodUnit(ev)
-			return nil
-		case schemas.QuotaPeriod_PeriodValue:
-			v.PeriodValue = new(int32)
-			return d.ReadInt32(schemas.QuotaPeriod_PeriodValue, v.PeriodValue)
-		}
-		return nil
-	})
 }
 
 // Information about a quota's utilization, including the quota code, service
@@ -314,75 +145,6 @@ type QuotaUtilizationInfo struct {
 	Utilization *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *QuotaUtilizationInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QuotaUtilizationInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QuotaUtilizationInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Adjustable != false {
-		s.WriteBool(schemas.QuotaUtilizationInfo_Adjustable, v.Adjustable)
-	}
-	if v.AppliedValue != nil {
-		s.WriteFloat64(schemas.QuotaUtilizationInfo_AppliedValue, *v.AppliedValue)
-	}
-	if v.DefaultValue != nil {
-		s.WriteFloat64(schemas.QuotaUtilizationInfo_DefaultValue, *v.DefaultValue)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.QuotaUtilizationInfo_Namespace, *v.Namespace)
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.QuotaUtilizationInfo_QuotaCode, *v.QuotaCode)
-	}
-	if v.QuotaName != nil {
-		s.WriteString(schemas.QuotaUtilizationInfo_QuotaName, *v.QuotaName)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.QuotaUtilizationInfo_ServiceCode, *v.ServiceCode)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.QuotaUtilizationInfo_ServiceName, *v.ServiceName)
-	}
-	if v.Utilization != nil {
-		s.WriteFloat64(schemas.QuotaUtilizationInfo_Utilization, *v.Utilization)
-	}
-}
-func (v *QuotaUtilizationInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QuotaUtilizationInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QuotaUtilizationInfo_Adjustable:
-			return d.ReadBool(schemas.QuotaUtilizationInfo_Adjustable, &v.Adjustable)
-		case schemas.QuotaUtilizationInfo_AppliedValue:
-			v.AppliedValue = new(float64)
-			return d.ReadFloat64(schemas.QuotaUtilizationInfo_AppliedValue, v.AppliedValue)
-		case schemas.QuotaUtilizationInfo_DefaultValue:
-			v.DefaultValue = new(float64)
-			return d.ReadFloat64(schemas.QuotaUtilizationInfo_DefaultValue, v.DefaultValue)
-		case schemas.QuotaUtilizationInfo_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.QuotaUtilizationInfo_Namespace, v.Namespace)
-		case schemas.QuotaUtilizationInfo_QuotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.QuotaUtilizationInfo_QuotaCode, v.QuotaCode)
-		case schemas.QuotaUtilizationInfo_QuotaName:
-			v.QuotaName = new(string)
-			return d.ReadString(schemas.QuotaUtilizationInfo_QuotaName, v.QuotaName)
-		case schemas.QuotaUtilizationInfo_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.QuotaUtilizationInfo_ServiceCode, v.ServiceCode)
-		case schemas.QuotaUtilizationInfo_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.QuotaUtilizationInfo_ServiceName, v.ServiceName)
-		case schemas.QuotaUtilizationInfo_Utilization:
-			v.Utilization = new(float64)
-			return d.ReadFloat64(schemas.QuotaUtilizationInfo_Utilization, v.Utilization)
-		}
-		return nil
-	})
 }
 
 // Information about a quota increase request.
@@ -473,137 +235,6 @@ type RequestedServiceQuotaChange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RequestedServiceQuotaChange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RequestedServiceQuotaChange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RequestedServiceQuotaChange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_CaseId, *v.CaseId)
-	}
-	if v.Created != nil {
-		s.WriteTime(schemas.RequestedServiceQuotaChange_Created, *v.Created)
-	}
-	if v.DesiredValue != nil {
-		s.WriteFloat64(schemas.RequestedServiceQuotaChange_DesiredValue, *v.DesiredValue)
-	}
-	if v.GlobalQuota != false {
-		s.WriteBool(schemas.RequestedServiceQuotaChange_GlobalQuota, v.GlobalQuota)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_Id, *v.Id)
-	}
-	if v.LastUpdated != nil {
-		s.WriteTime(schemas.RequestedServiceQuotaChange_LastUpdated, *v.LastUpdated)
-	}
-	if v.QuotaArn != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_QuotaArn, *v.QuotaArn)
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_QuotaCode, *v.QuotaCode)
-	}
-	if v.QuotaContext != nil {
-		s.WriteStruct(schemas.RequestedServiceQuotaChange_QuotaContext)
-		v.QuotaContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QuotaName != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_QuotaName, *v.QuotaName)
-	}
-	if v.QuotaRequestedAtLevel != "" {
-		s.WriteString(schemas.RequestedServiceQuotaChange_QuotaRequestedAtLevel, string(v.QuotaRequestedAtLevel))
-	}
-	if v.RequestType != "" {
-		s.WriteString(schemas.RequestedServiceQuotaChange_RequestType, string(v.RequestType))
-	}
-	if v.Requester != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_Requester, *v.Requester)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_ServiceCode, *v.ServiceCode)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_ServiceName, *v.ServiceName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RequestedServiceQuotaChange_Status, string(v.Status))
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.RequestedServiceQuotaChange_Unit, *v.Unit)
-	}
-}
-func (v *RequestedServiceQuotaChange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestedServiceQuotaChange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestedServiceQuotaChange_CaseId:
-			v.CaseId = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_CaseId, v.CaseId)
-		case schemas.RequestedServiceQuotaChange_Created:
-			v.Created = new(time.Time)
-			return d.ReadTime(schemas.RequestedServiceQuotaChange_Created, v.Created)
-		case schemas.RequestedServiceQuotaChange_DesiredValue:
-			v.DesiredValue = new(float64)
-			return d.ReadFloat64(schemas.RequestedServiceQuotaChange_DesiredValue, v.DesiredValue)
-		case schemas.RequestedServiceQuotaChange_GlobalQuota:
-			return d.ReadBool(schemas.RequestedServiceQuotaChange_GlobalQuota, &v.GlobalQuota)
-		case schemas.RequestedServiceQuotaChange_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_Id, v.Id)
-		case schemas.RequestedServiceQuotaChange_LastUpdated:
-			v.LastUpdated = new(time.Time)
-			return d.ReadTime(schemas.RequestedServiceQuotaChange_LastUpdated, v.LastUpdated)
-		case schemas.RequestedServiceQuotaChange_QuotaArn:
-			v.QuotaArn = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_QuotaArn, v.QuotaArn)
-		case schemas.RequestedServiceQuotaChange_QuotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_QuotaCode, v.QuotaCode)
-		case schemas.RequestedServiceQuotaChange_QuotaContext:
-			v.QuotaContext = &QuotaContextInfo{}
-			return v.QuotaContext.Deserialize(d)
-		case schemas.RequestedServiceQuotaChange_QuotaName:
-			v.QuotaName = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_QuotaName, v.QuotaName)
-		case schemas.RequestedServiceQuotaChange_QuotaRequestedAtLevel:
-			var ev string
-			if err := d.ReadString(schemas.RequestedServiceQuotaChange_QuotaRequestedAtLevel, &ev); err != nil {
-				return err
-			}
-			v.QuotaRequestedAtLevel = AppliedLevelEnum(ev)
-			return nil
-		case schemas.RequestedServiceQuotaChange_RequestType:
-			var ev string
-			if err := d.ReadString(schemas.RequestedServiceQuotaChange_RequestType, &ev); err != nil {
-				return err
-			}
-			v.RequestType = RequestType(ev)
-			return nil
-		case schemas.RequestedServiceQuotaChange_Requester:
-			v.Requester = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_Requester, v.Requester)
-		case schemas.RequestedServiceQuotaChange_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_ServiceCode, v.ServiceCode)
-		case schemas.RequestedServiceQuotaChange_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_ServiceName, v.ServiceName)
-		case schemas.RequestedServiceQuotaChange_Status:
-			var ev string
-			if err := d.ReadString(schemas.RequestedServiceQuotaChange_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = RequestStatus(ev)
-			return nil
-		case schemas.RequestedServiceQuotaChange_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.RequestedServiceQuotaChange_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // Information about an Amazon Web Services service.
 type ServiceInfo struct {
 
@@ -615,34 +246,6 @@ type ServiceInfo struct {
 	ServiceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ServiceInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.ServiceInfo_ServiceCode, *v.ServiceCode)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.ServiceInfo_ServiceName, *v.ServiceName)
-	}
-}
-func (v *ServiceInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceInfo_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.ServiceInfo_ServiceCode, v.ServiceCode)
-		case schemas.ServiceInfo_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.ServiceInfo_ServiceName, v.ServiceName)
-		}
-		return nil
-	})
 }
 
 // Information about a quota.
@@ -700,122 +303,6 @@ type ServiceQuota struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceQuota) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceQuota)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceQuota) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Adjustable != false {
-		s.WriteBool(schemas.ServiceQuota_Adjustable, v.Adjustable)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ServiceQuota_Description, *v.Description)
-	}
-	if v.ErrorReason != nil {
-		s.WriteStruct(schemas.ServiceQuota_ErrorReason)
-		v.ErrorReason.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GlobalQuota != false {
-		s.WriteBool(schemas.ServiceQuota_GlobalQuota, v.GlobalQuota)
-	}
-	if v.Period != nil {
-		s.WriteStruct(schemas.ServiceQuota_Period)
-		v.Period.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QuotaAppliedAtLevel != "" {
-		s.WriteString(schemas.ServiceQuota_QuotaAppliedAtLevel, string(v.QuotaAppliedAtLevel))
-	}
-	if v.QuotaArn != nil {
-		s.WriteString(schemas.ServiceQuota_QuotaArn, *v.QuotaArn)
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.ServiceQuota_QuotaCode, *v.QuotaCode)
-	}
-	if v.QuotaContext != nil {
-		s.WriteStruct(schemas.ServiceQuota_QuotaContext)
-		v.QuotaContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.QuotaName != nil {
-		s.WriteString(schemas.ServiceQuota_QuotaName, *v.QuotaName)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.ServiceQuota_ServiceCode, *v.ServiceCode)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.ServiceQuota_ServiceName, *v.ServiceName)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.ServiceQuota_Unit, *v.Unit)
-	}
-	if v.UsageMetric != nil {
-		s.WriteStruct(schemas.ServiceQuota_UsageMetric)
-		v.UsageMetric.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.ServiceQuota_Value, *v.Value)
-	}
-}
-func (v *ServiceQuota) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuota, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuota_Adjustable:
-			return d.ReadBool(schemas.ServiceQuota_Adjustable, &v.Adjustable)
-		case schemas.ServiceQuota_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ServiceQuota_Description, v.Description)
-		case schemas.ServiceQuota_ErrorReason:
-			v.ErrorReason = &ErrorReason{}
-			return v.ErrorReason.Deserialize(d)
-		case schemas.ServiceQuota_GlobalQuota:
-			return d.ReadBool(schemas.ServiceQuota_GlobalQuota, &v.GlobalQuota)
-		case schemas.ServiceQuota_Period:
-			v.Period = &QuotaPeriod{}
-			return v.Period.Deserialize(d)
-		case schemas.ServiceQuota_QuotaAppliedAtLevel:
-			var ev string
-			if err := d.ReadString(schemas.ServiceQuota_QuotaAppliedAtLevel, &ev); err != nil {
-				return err
-			}
-			v.QuotaAppliedAtLevel = AppliedLevelEnum(ev)
-			return nil
-		case schemas.ServiceQuota_QuotaArn:
-			v.QuotaArn = new(string)
-			return d.ReadString(schemas.ServiceQuota_QuotaArn, v.QuotaArn)
-		case schemas.ServiceQuota_QuotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.ServiceQuota_QuotaCode, v.QuotaCode)
-		case schemas.ServiceQuota_QuotaContext:
-			v.QuotaContext = &QuotaContextInfo{}
-			return v.QuotaContext.Deserialize(d)
-		case schemas.ServiceQuota_QuotaName:
-			v.QuotaName = new(string)
-			return d.ReadString(schemas.ServiceQuota_QuotaName, v.QuotaName)
-		case schemas.ServiceQuota_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.ServiceQuota_ServiceCode, v.ServiceCode)
-		case schemas.ServiceQuota_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.ServiceQuota_ServiceName, v.ServiceName)
-		case schemas.ServiceQuota_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.ServiceQuota_Unit, v.Unit)
-		case schemas.ServiceQuota_UsageMetric:
-			v.UsageMetric = &MetricInfo{}
-			return v.UsageMetric.Deserialize(d)
-		case schemas.ServiceQuota_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.ServiceQuota_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Information about a quota increase request.
 type ServiceQuotaIncreaseRequestInTemplate struct {
 
@@ -849,69 +336,6 @@ type ServiceQuotaIncreaseRequestInTemplate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceQuotaIncreaseRequestInTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceQuotaIncreaseRequestInTemplate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceQuotaIncreaseRequestInTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsRegion != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_AwsRegion, *v.AwsRegion)
-	}
-	if v.DesiredValue != nil {
-		s.WriteFloat64(schemas.ServiceQuotaIncreaseRequestInTemplate_DesiredValue, *v.DesiredValue)
-	}
-	if v.GlobalQuota != false {
-		s.WriteBool(schemas.ServiceQuotaIncreaseRequestInTemplate_GlobalQuota, v.GlobalQuota)
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaCode, *v.QuotaCode)
-	}
-	if v.QuotaName != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaName, *v.QuotaName)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceCode, *v.ServiceCode)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceName, *v.ServiceName)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.ServiceQuotaIncreaseRequestInTemplate_Unit, *v.Unit)
-	}
-}
-func (v *ServiceQuotaIncreaseRequestInTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaIncreaseRequestInTemplate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_AwsRegion:
-			v.AwsRegion = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_AwsRegion, v.AwsRegion)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_DesiredValue:
-			v.DesiredValue = new(float64)
-			return d.ReadFloat64(schemas.ServiceQuotaIncreaseRequestInTemplate_DesiredValue, v.DesiredValue)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_GlobalQuota:
-			return d.ReadBool(schemas.ServiceQuotaIncreaseRequestInTemplate_GlobalQuota, &v.GlobalQuota)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaCode, v.QuotaCode)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaName:
-			v.QuotaName = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_QuotaName, v.QuotaName)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceCode, v.ServiceCode)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_ServiceName, v.ServiceName)
-		case schemas.ServiceQuotaIncreaseRequestInTemplate_Unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.ServiceQuotaIncreaseRequestInTemplate_Unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // A complex data type that contains a tag key and tag value.
 type Tag struct {
 
@@ -930,34 +354,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

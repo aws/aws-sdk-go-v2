@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,24 +50,6 @@ type GetKxConnectionStringInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxConnectionStringInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxConnectionStringRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxConnectionStringInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterName != nil {
-		s.WriteString(schemas.GetKxConnectionStringRequest_clusterName, *v.ClusterName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxConnectionStringRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.UserArn != nil {
-		s.WriteString(schemas.GetKxConnectionStringRequest_userArn, *v.UserArn)
-	}
-}
-
 type GetKxConnectionStringOutput struct {
 
 	// The signed connection string that you can use to connect to clusters.
@@ -81,24 +61,16 @@ type GetKxConnectionStringOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxConnectionStringOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxConnectionStringResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxConnectionStringResponse_signedConnectionString:
-			v.SignedConnectionString = new(string)
-			return d.ReadString(schemas.GetKxConnectionStringResponse_signedConnectionString, v.SignedConnectionString)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxConnectionStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxConnectionString, schemas.GetKxConnectionStringRequest, schemas.GetKxConnectionStringResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxConnectionString{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxConnectionString, schemas.GetKxConnectionStringRequest, schemas.GetKxConnectionStringResponse), output: &GetKxConnectionStringOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxConnectionString{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxConnectionString"); err != nil {

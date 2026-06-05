@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,33 +39,6 @@ type ListPackageImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageImportJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackageImportJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackageImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListPackageImportJobsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackageImportJobsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListPackageImportJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackageImportJobsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackageImportJobsRequest_MaxResults:
-			return d.ReadInt32(schemas.ListPackageImportJobsRequest_MaxResults, &v.MaxResults)
-		case schemas.ListPackageImportJobsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackageImportJobsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListPackageImportJobsOutput struct {
 
 	// A list of package import jobs.
@@ -84,38 +55,16 @@ type ListPackageImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListPackageImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListPackageImportJobsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListPackageImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListPackageImportJobsResponse_NextToken, *v.NextToken)
-	}
-	serializePackageImportJobList(s, schemas.ListPackageImportJobsResponse_PackageImportJobs, v.PackageImportJobs)
-}
-func (v *ListPackageImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListPackageImportJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListPackageImportJobsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListPackageImportJobsResponse_NextToken, v.NextToken)
-		case schemas.ListPackageImportJobsResponse_PackageImportJobs:
-			return deserializePackageImportJobList(d, schemas.ListPackageImportJobsResponse_PackageImportJobs, &v.PackageImportJobs)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListPackageImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageImportJobs, schemas.ListPackageImportJobsRequest, schemas.ListPackageImportJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackageImportJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackageImportJobs, schemas.ListPackageImportJobsRequest, schemas.ListPackageImportJobsResponse), output: &ListPackageImportJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackageImportJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPackageImportJobs"); err != nil {

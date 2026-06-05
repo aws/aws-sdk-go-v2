@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,29 +44,6 @@ type ListEngagementsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEngagementsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEngagementsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEngagementsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncidentId != nil {
-		s.WriteString(schemas.ListEngagementsRequest_IncidentId, *v.IncidentId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEngagementsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEngagementsRequest_NextToken, *v.NextToken)
-	}
-	if v.TimeRangeValue != nil {
-		s.WriteStruct(schemas.ListEngagementsRequest_TimeRangeValue)
-		v.TimeRangeValue.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListEngagementsOutput struct {
 
 	// A list of each engagement that occurred during the specified time range of an
@@ -86,26 +61,16 @@ type ListEngagementsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEngagementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEngagementsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEngagementsResult_Engagements:
-			return deserializeEngagementsList(d, schemas.ListEngagementsResult_Engagements, &v.Engagements)
-		case schemas.ListEngagementsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEngagementsResult_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEngagementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagements, schemas.ListEngagementsRequest, schemas.ListEngagementsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEngagements{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagements, schemas.ListEngagementsRequest, schemas.ListEngagementsResult), output: &ListEngagementsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEngagements{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEngagements"); err != nil {

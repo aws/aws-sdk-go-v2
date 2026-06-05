@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -80,46 +78,6 @@ type UpdateOdbNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOdbNetworkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOdbNetworkInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable, v.CrossRegionS3RestoreSourcesToDisable)
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateOdbNetworkInput_displayName, *v.DisplayName)
-	}
-	if v.KmsAccess != "" {
-		s.WriteString(schemas.UpdateOdbNetworkInput_kmsAccess, string(v.KmsAccess))
-	}
-	if v.KmsPolicyDocument != nil {
-		s.WriteString(schemas.UpdateOdbNetworkInput_kmsPolicyDocument, *v.KmsPolicyDocument)
-	}
-	if v.OdbNetworkId != nil {
-		s.WriteString(schemas.UpdateOdbNetworkInput_odbNetworkId, *v.OdbNetworkId)
-	}
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeAdded, v.PeeredCidrsToBeAdded)
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeRemoved, v.PeeredCidrsToBeRemoved)
-	if v.S3Access != "" {
-		s.WriteString(schemas.UpdateOdbNetworkInput_s3Access, string(v.S3Access))
-	}
-	if v.S3PolicyDocument != nil {
-		s.WriteString(schemas.UpdateOdbNetworkInput_s3PolicyDocument, *v.S3PolicyDocument)
-	}
-	if v.StsAccess != "" {
-		s.WriteString(schemas.UpdateOdbNetworkInput_stsAccess, string(v.StsAccess))
-	}
-	if v.StsPolicyDocument != nil {
-		s.WriteString(schemas.UpdateOdbNetworkInput_stsPolicyDocument, *v.StsPolicyDocument)
-	}
-	if v.ZeroEtlAccess != "" {
-		s.WriteString(schemas.UpdateOdbNetworkInput_zeroEtlAccess, string(v.ZeroEtlAccess))
-	}
-}
-
 type UpdateOdbNetworkOutput struct {
 
 	// The unique identifier of the ODB network.
@@ -142,37 +100,16 @@ type UpdateOdbNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOdbNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOdbNetworkOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOdbNetworkOutput_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.UpdateOdbNetworkOutput_displayName, v.DisplayName)
-		case schemas.UpdateOdbNetworkOutput_odbNetworkId:
-			v.OdbNetworkId = new(string)
-			return d.ReadString(schemas.UpdateOdbNetworkOutput_odbNetworkId, v.OdbNetworkId)
-		case schemas.UpdateOdbNetworkOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOdbNetworkOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ResourceStatus(ev)
-			return nil
-		case schemas.UpdateOdbNetworkOutput_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.UpdateOdbNetworkOutput_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateOdbNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOdbNetwork, schemas.UpdateOdbNetworkInput, schemas.UpdateOdbNetworkOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateOdbNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOdbNetwork, schemas.UpdateOdbNetworkInput, schemas.UpdateOdbNetworkOutput), output: &UpdateOdbNetworkOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateOdbNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOdbNetwork"); err != nil {

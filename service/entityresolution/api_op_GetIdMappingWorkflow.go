@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetIdMappingWorkflowInput struct {
 	WorkflowName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetIdMappingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIdMappingWorkflowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIdMappingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.GetIdMappingWorkflowInput_workflowName, *v.WorkflowName)
-	}
 }
 
 type GetIdMappingWorkflowOutput struct {
@@ -110,51 +96,16 @@ type GetIdMappingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIdMappingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIdMappingWorkflowOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIdMappingWorkflowOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetIdMappingWorkflowOutput_createdAt, v.CreatedAt)
-		case schemas.GetIdMappingWorkflowOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetIdMappingWorkflowOutput_description, v.Description)
-		case schemas.GetIdMappingWorkflowOutput_idMappingTechniques:
-			v.IdMappingTechniques = &types.IdMappingTechniques{}
-			return v.IdMappingTechniques.Deserialize(d)
-		case schemas.GetIdMappingWorkflowOutput_incrementalRunConfig:
-			v.IncrementalRunConfig = &types.IdMappingIncrementalRunConfig{}
-			return v.IncrementalRunConfig.Deserialize(d)
-		case schemas.GetIdMappingWorkflowOutput_inputSourceConfig:
-			return deserializeIdMappingWorkflowInputSourceConfig(d, schemas.GetIdMappingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.GetIdMappingWorkflowOutput_outputSourceConfig:
-			return deserializeIdMappingWorkflowOutputSourceConfig(d, schemas.GetIdMappingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.GetIdMappingWorkflowOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetIdMappingWorkflowOutput_roleArn, v.RoleArn)
-		case schemas.GetIdMappingWorkflowOutput_tags:
-			return deserializeTagMap(d, schemas.GetIdMappingWorkflowOutput_tags, &v.Tags)
-		case schemas.GetIdMappingWorkflowOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetIdMappingWorkflowOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetIdMappingWorkflowOutput_workflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.GetIdMappingWorkflowOutput_workflowArn, v.WorkflowArn)
-		case schemas.GetIdMappingWorkflowOutput_workflowName:
-			v.WorkflowName = new(string)
-			return d.ReadString(schemas.GetIdMappingWorkflowOutput_workflowName, v.WorkflowName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIdMappingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdMappingWorkflow, schemas.GetIdMappingWorkflowInput, schemas.GetIdMappingWorkflowOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdMappingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdMappingWorkflow, schemas.GetIdMappingWorkflowInput, schemas.GetIdMappingWorkflowOutput), output: &GetIdMappingWorkflowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdMappingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIdMappingWorkflow"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,22 +47,6 @@ type CreateLFTagInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLFTagInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLFTagRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLFTagInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.CreateLFTagRequest_CatalogId, *v.CatalogId)
-	}
-	if v.TagKey != nil {
-		s.WriteString(schemas.CreateLFTagRequest_TagKey, *v.TagKey)
-	}
-	serializeTagValueList(s, schemas.CreateLFTagRequest_TagValues, v.TagValues)
-}
-
 type CreateLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,21 +54,16 @@ type CreateLFTagOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLFTagOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLFTagResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLFTag, schemas.CreateLFTagRequest, schemas.CreateLFTagResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLFTag{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLFTag, schemas.CreateLFTagRequest, schemas.CreateLFTagResponse), output: &CreateLFTagOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLFTag{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLFTag"); err != nil {

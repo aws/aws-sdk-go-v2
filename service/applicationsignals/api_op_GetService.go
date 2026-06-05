@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -75,22 +73,6 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetServiceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.GetServiceInput_EndTime, *v.EndTime)
-	}
-	serializeAttributes(s, schemas.GetServiceInput_KeyAttributes, v.KeyAttributes)
-	if v.StartTime != nil {
-		s.WriteTime(schemas.GetServiceInput_StartTime, *v.StartTime)
-	}
-}
-
 type GetServiceOutput struct {
 
 	// The end time of the data included in the response. In a raw HTTP Query API, it
@@ -133,32 +115,16 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetServiceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetServiceOutput_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.GetServiceOutput_EndTime, v.EndTime)
-		case schemas.GetServiceOutput_LogGroupReferences:
-			return deserializeLogGroupReferences(d, schemas.GetServiceOutput_LogGroupReferences, &v.LogGroupReferences)
-		case schemas.GetServiceOutput_Service:
-			v.Service = &types.Service{}
-			return v.Service.Deserialize(d)
-		case schemas.GetServiceOutput_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.GetServiceOutput_StartTime, v.StartTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput), output: &GetServiceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetService{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetService"); err != nil {

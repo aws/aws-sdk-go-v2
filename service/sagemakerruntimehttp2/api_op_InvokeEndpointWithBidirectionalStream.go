@@ -6,9 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/schemas"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -81,27 +80,6 @@ type InvokeEndpointWithBidirectionalStreamInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InvokeEndpointWithBidirectionalStreamInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokeEndpointWithBidirectionalStreamInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokeEndpointWithBidirectionalStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndpointName != nil {
-		s.WriteString(schemas.InvokeEndpointWithBidirectionalStreamInput_EndpointName, *v.EndpointName)
-	}
-	if v.ModelInvocationPath != nil {
-		s.WriteString(schemas.InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath, *v.ModelInvocationPath)
-	}
-	if v.ModelQueryString != nil {
-		s.WriteString(schemas.InvokeEndpointWithBidirectionalStreamInput_ModelQueryString, *v.ModelQueryString)
-	}
-	if v.TargetVariant != nil {
-		s.WriteString(schemas.InvokeEndpointWithBidirectionalStreamInput_TargetVariant, *v.TargetVariant)
-	}
-}
-
 type InvokeEndpointWithBidirectionalStreamOutput struct {
 	eventStream *InvokeEndpointWithBidirectionalStreamEventStream
 
@@ -110,14 +88,6 @@ type InvokeEndpointWithBidirectionalStreamOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokeEndpointWithBidirectionalStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokeEndpointWithBidirectionalStreamOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -143,16 +113,12 @@ func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(st
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithBidirectionalStream, schemas.InvokeEndpointWithBidirectionalStreamInput, schemas.InvokeEndpointWithBidirectionalStreamOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeEndpointWithBidirectionalStream{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeEndpointWithBidirectionalStream, schemas.InvokeEndpointWithBidirectionalStreamInput, schemas.InvokeEndpointWithBidirectionalStreamOutput), output: &InvokeEndpointWithBidirectionalStreamOutput{}}, middleware.After); err != nil {
-		return err
-	}
-	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
-		return err
-	}
-	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeEndpointWithBidirectionalStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeEndpointWithBidirectionalStream{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeEndpointWithBidirectionalStream"); err != nil {
@@ -160,6 +126,12 @@ func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(st
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
+	if err = addEventStreamInvokeEndpointWithBidirectionalStreamMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -193,6 +165,9 @@ func (c *Client) addOperationInvokeEndpointWithBidirectionalStreamMiddlewares(st
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
+		return err
+	}
+	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,18 +47,6 @@ type GetConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetConfigurationSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationSetName != nil {
-		s.WriteString(schemas.GetConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
-	}
-}
-
 // Information about a configuration set.
 type GetConfigurationSetOutput struct {
 
@@ -93,38 +79,16 @@ type GetConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetConfigurationSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetConfigurationSetResponse_ConfigurationSetName:
-			v.ConfigurationSetName = new(string)
-			return d.ReadString(schemas.GetConfigurationSetResponse_ConfigurationSetName, v.ConfigurationSetName)
-		case schemas.GetConfigurationSetResponse_DeliveryOptions:
-			v.DeliveryOptions = &types.DeliveryOptions{}
-			return v.DeliveryOptions.Deserialize(d)
-		case schemas.GetConfigurationSetResponse_ReputationOptions:
-			v.ReputationOptions = &types.ReputationOptions{}
-			return v.ReputationOptions.Deserialize(d)
-		case schemas.GetConfigurationSetResponse_SendingOptions:
-			v.SendingOptions = &types.SendingOptions{}
-			return v.SendingOptions.Deserialize(d)
-		case schemas.GetConfigurationSetResponse_Tags:
-			return deserializeTagList(d, schemas.GetConfigurationSetResponse_Tags, &v.Tags)
-		case schemas.GetConfigurationSetResponse_TrackingOptions:
-			v.TrackingOptions = &types.TrackingOptions{}
-			return v.TrackingOptions.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationSet, schemas.GetConfigurationSetRequest, schemas.GetConfigurationSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationSet, schemas.GetConfigurationSetRequest, schemas.GetConfigurationSetResponse), output: &GetConfigurationSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfigurationSet"); err != nil {

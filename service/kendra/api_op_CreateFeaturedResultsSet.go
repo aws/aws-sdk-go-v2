@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -88,33 +86,6 @@ type CreateFeaturedResultsSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFeaturedResultsSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFeaturedResultsSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateFeaturedResultsSetRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateFeaturedResultsSetRequest_Description, *v.Description)
-	}
-	serializeFeaturedDocumentList(s, schemas.CreateFeaturedResultsSetRequest_FeaturedDocuments, v.FeaturedDocuments)
-	if v.FeaturedResultsSetName != nil {
-		s.WriteString(schemas.CreateFeaturedResultsSetRequest_FeaturedResultsSetName, *v.FeaturedResultsSetName)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.CreateFeaturedResultsSetRequest_IndexId, *v.IndexId)
-	}
-	serializeQueryTextList(s, schemas.CreateFeaturedResultsSetRequest_QueryTexts, v.QueryTexts)
-	if v.Status != "" {
-		s.WriteString(schemas.CreateFeaturedResultsSetRequest_Status, string(v.Status))
-	}
-	serializeTagList(s, schemas.CreateFeaturedResultsSetRequest_Tags, v.Tags)
-}
-
 type CreateFeaturedResultsSetOutput struct {
 
 	// Information on the set of featured results. This includes the identifier of the
@@ -128,24 +99,16 @@ type CreateFeaturedResultsSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFeaturedResultsSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFeaturedResultsSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFeaturedResultsSetResponse_FeaturedResultsSet:
-			v.FeaturedResultsSet = &types.FeaturedResultsSet{}
-			return v.FeaturedResultsSet.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFeaturedResultsSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeaturedResultsSet, schemas.CreateFeaturedResultsSetRequest, schemas.CreateFeaturedResultsSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFeaturedResultsSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFeaturedResultsSet, schemas.CreateFeaturedResultsSetRequest, schemas.CreateFeaturedResultsSetResponse), output: &CreateFeaturedResultsSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFeaturedResultsSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFeaturedResultsSet"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,26 +47,6 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateProjectRequest_Name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateProjectRequest_RoleArn, *v.RoleArn)
-	}
-	if v.Sample != nil {
-		s.WriteStruct(schemas.UpdateProjectRequest_Sample)
-		v.Sample.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateProjectOutput struct {
 
 	// The name of the project that you updated.
@@ -85,27 +63,16 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProjectResponse_LastModifiedDate:
-			v.LastModifiedDate = new(time.Time)
-			return d.ReadTime(schemas.UpdateProjectResponse_LastModifiedDate, v.LastModifiedDate)
-		case schemas.UpdateProjectResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateProjectResponse_Name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResponse), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProject"); err != nil {

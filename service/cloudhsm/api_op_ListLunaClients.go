@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,18 +54,6 @@ type ListLunaClientsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLunaClientsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLunaClientsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLunaClientsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLunaClientsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListLunaClientsOutput struct {
 
 	// The list of clients.
@@ -85,26 +71,16 @@ type ListLunaClientsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLunaClientsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLunaClientsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLunaClientsResponse_ClientList:
-			return deserializeClientList(d, schemas.ListLunaClientsResponse_ClientList, &v.ClientList)
-		case schemas.ListLunaClientsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLunaClientsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLunaClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLunaClients, schemas.ListLunaClientsRequest, schemas.ListLunaClientsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLunaClients{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLunaClients, schemas.ListLunaClientsRequest, schemas.ListLunaClientsResponse), output: &ListLunaClientsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLunaClients{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLunaClients"); err != nil {

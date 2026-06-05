@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListDeviceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeviceProfilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDeviceProfilesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDeviceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeviceProfileType != "" {
-		s.WriteString(schemas.ListDeviceProfilesRequest_DeviceProfileType, string(v.DeviceProfileType))
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListDeviceProfilesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDeviceProfilesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDeviceProfilesOutput struct {
 
 	// The list of device profiles.
@@ -78,26 +58,16 @@ type ListDeviceProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDeviceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDeviceProfilesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDeviceProfilesResponse_DeviceProfileList:
-			return deserializeDeviceProfileList(d, schemas.ListDeviceProfilesResponse_DeviceProfileList, &v.DeviceProfileList)
-		case schemas.ListDeviceProfilesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDeviceProfilesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDeviceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceProfiles, schemas.ListDeviceProfilesRequest, schemas.ListDeviceProfilesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeviceProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceProfiles, schemas.ListDeviceProfilesRequest, schemas.ListDeviceProfilesResponse), output: &ListDeviceProfilesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeviceProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeviceProfiles"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,28 +15,6 @@ type AccessDetails struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccessDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccessDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.AccessDetails_Description, *v.Description)
-	}
-}
-func (v *AccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDetails_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AccessDetails_Description, v.Description)
-		}
-		return nil
-	})
 }
 
 // Represents a specific change to be made to a benefit application field.
@@ -58,34 +34,6 @@ type Amendment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Amendment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Amendment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Amendment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FieldPath != nil {
-		s.WriteString(schemas.Amendment_FieldPath, *v.FieldPath)
-	}
-	if v.NewValue != nil {
-		s.WriteString(schemas.Amendment_NewValue, *v.NewValue)
-	}
-}
-func (v *Amendment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Amendment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Amendment_FieldPath:
-			v.FieldPath = new(string)
-			return d.ReadString(schemas.Amendment_FieldPath, v.FieldPath)
-		case schemas.Amendment_NewValue:
-			v.NewValue = new(string)
-			return d.ReadString(schemas.Amendment_NewValue, v.NewValue)
-		}
-		return nil
-	})
-}
-
 // Represents an AWS resource that is associated with a benefit application for
 // tracking and management.
 type AssociatedResource struct {
@@ -102,44 +50,6 @@ type AssociatedResource struct {
 	ResourceType ResourceType
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociatedResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatedResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatedResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.AssociatedResource_ResourceArn, *v.ResourceArn)
-	}
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.AssociatedResource_ResourceIdentifier, *v.ResourceIdentifier)
-	}
-	if v.ResourceType != "" {
-		s.WriteString(schemas.AssociatedResource_ResourceType, string(v.ResourceType))
-	}
-}
-func (v *AssociatedResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatedResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatedResource_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.AssociatedResource_ResourceArn, v.ResourceArn)
-		case schemas.AssociatedResource_ResourceIdentifier:
-			v.ResourceIdentifier = new(string)
-			return d.ReadString(schemas.AssociatedResource_ResourceIdentifier, v.ResourceIdentifier)
-		case schemas.AssociatedResource_ResourceType:
-			var ev string
-			if err := d.ReadString(schemas.AssociatedResource_ResourceType, &ev); err != nil {
-				return err
-			}
-			v.ResourceType = ResourceType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A summary view of a benefit allocation containing key information for list
@@ -183,92 +93,6 @@ type BenefitAllocationSummary struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BenefitAllocationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BenefitAllocationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BenefitAllocationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitIds(s, schemas.BenefitAllocationSummary_ApplicableBenefitIds, v.ApplicableBenefitIds)
-	if v.Arn != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_Arn, *v.Arn)
-	}
-	if v.BenefitApplicationId != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_BenefitApplicationId, *v.BenefitApplicationId)
-	}
-	if v.BenefitId != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_BenefitId, *v.BenefitId)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_Catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.BenefitAllocationSummary_CreatedAt, *v.CreatedAt)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.BenefitAllocationSummary_ExpiresAt, *v.ExpiresAt)
-	}
-	serializeFulfillmentTypes(s, schemas.BenefitAllocationSummary_FulfillmentTypes, v.FulfillmentTypes)
-	if v.Id != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_Name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BenefitAllocationSummary_Status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.BenefitAllocationSummary_StatusReason, *v.StatusReason)
-	}
-}
-func (v *BenefitAllocationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BenefitAllocationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BenefitAllocationSummary_ApplicableBenefitIds:
-			return deserializeBenefitIds(d, schemas.BenefitAllocationSummary_ApplicableBenefitIds, &v.ApplicableBenefitIds)
-		case schemas.BenefitAllocationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_Arn, v.Arn)
-		case schemas.BenefitAllocationSummary_BenefitApplicationId:
-			v.BenefitApplicationId = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_BenefitApplicationId, v.BenefitApplicationId)
-		case schemas.BenefitAllocationSummary_BenefitId:
-			v.BenefitId = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_BenefitId, v.BenefitId)
-		case schemas.BenefitAllocationSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_Catalog, v.Catalog)
-		case schemas.BenefitAllocationSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BenefitAllocationSummary_CreatedAt, v.CreatedAt)
-		case schemas.BenefitAllocationSummary_ExpiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.BenefitAllocationSummary_ExpiresAt, v.ExpiresAt)
-		case schemas.BenefitAllocationSummary_FulfillmentTypes:
-			return deserializeFulfillmentTypes(d, schemas.BenefitAllocationSummary_FulfillmentTypes, &v.FulfillmentTypes)
-		case schemas.BenefitAllocationSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_Id, v.Id)
-		case schemas.BenefitAllocationSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_Name, v.Name)
-		case schemas.BenefitAllocationSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.BenefitAllocationSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = BenefitAllocationStatus(ev)
-			return nil
-		case schemas.BenefitAllocationSummary_StatusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.BenefitAllocationSummary_StatusReason, v.StatusReason)
-		}
-		return nil
-	})
 }
 
 // A summary view of a benefit application containing key information for list
@@ -317,92 +141,6 @@ type BenefitApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BenefitApplicationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BenefitApplicationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BenefitApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_Arn, *v.Arn)
-	}
-	serializeArns(s, schemas.BenefitApplicationSummary_AssociatedResources, v.AssociatedResources)
-	serializeAttributes(s, schemas.BenefitApplicationSummary_BenefitApplicationDetails, v.BenefitApplicationDetails)
-	if v.BenefitId != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_BenefitId, *v.BenefitId)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_Catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.BenefitApplicationSummary_CreatedAt, *v.CreatedAt)
-	}
-	serializeFulfillmentTypes(s, schemas.BenefitApplicationSummary_FulfillmentTypes, v.FulfillmentTypes)
-	if v.Id != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_Name, *v.Name)
-	}
-	serializePrograms(s, schemas.BenefitApplicationSummary_Programs, v.Programs)
-	if v.Stage != nil {
-		s.WriteString(schemas.BenefitApplicationSummary_Stage, *v.Stage)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BenefitApplicationSummary_Status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.BenefitApplicationSummary_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *BenefitApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BenefitApplicationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BenefitApplicationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_Arn, v.Arn)
-		case schemas.BenefitApplicationSummary_AssociatedResources:
-			return deserializeArns(d, schemas.BenefitApplicationSummary_AssociatedResources, &v.AssociatedResources)
-		case schemas.BenefitApplicationSummary_BenefitApplicationDetails:
-			return deserializeAttributes(d, schemas.BenefitApplicationSummary_BenefitApplicationDetails, &v.BenefitApplicationDetails)
-		case schemas.BenefitApplicationSummary_BenefitId:
-			v.BenefitId = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_BenefitId, v.BenefitId)
-		case schemas.BenefitApplicationSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_Catalog, v.Catalog)
-		case schemas.BenefitApplicationSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BenefitApplicationSummary_CreatedAt, v.CreatedAt)
-		case schemas.BenefitApplicationSummary_FulfillmentTypes:
-			return deserializeFulfillmentTypes(d, schemas.BenefitApplicationSummary_FulfillmentTypes, &v.FulfillmentTypes)
-		case schemas.BenefitApplicationSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_Id, v.Id)
-		case schemas.BenefitApplicationSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_Name, v.Name)
-		case schemas.BenefitApplicationSummary_Programs:
-			return deserializePrograms(d, schemas.BenefitApplicationSummary_Programs, &v.Programs)
-		case schemas.BenefitApplicationSummary_Stage:
-			v.Stage = new(string)
-			return d.ReadString(schemas.BenefitApplicationSummary_Stage, v.Stage)
-		case schemas.BenefitApplicationSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.BenefitApplicationSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = BenefitApplicationStatus(ev)
-			return nil
-		case schemas.BenefitApplicationSummary_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.BenefitApplicationSummary_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // A summary view of a benefit containing key information for list operations.
 type BenefitSummary struct {
 
@@ -433,68 +171,6 @@ type BenefitSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BenefitSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BenefitSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BenefitSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.BenefitSummary_Arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.BenefitSummary_Catalog, *v.Catalog)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BenefitSummary_Description, *v.Description)
-	}
-	serializeFulfillmentTypes(s, schemas.BenefitSummary_FulfillmentTypes, v.FulfillmentTypes)
-	if v.Id != nil {
-		s.WriteString(schemas.BenefitSummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BenefitSummary_Name, *v.Name)
-	}
-	serializePrograms(s, schemas.BenefitSummary_Programs, v.Programs)
-	if v.Status != "" {
-		s.WriteString(schemas.BenefitSummary_Status, string(v.Status))
-	}
-}
-func (v *BenefitSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BenefitSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BenefitSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.BenefitSummary_Arn, v.Arn)
-		case schemas.BenefitSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.BenefitSummary_Catalog, v.Catalog)
-		case schemas.BenefitSummary_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BenefitSummary_Description, v.Description)
-		case schemas.BenefitSummary_FulfillmentTypes:
-			return deserializeFulfillmentTypes(d, schemas.BenefitSummary_FulfillmentTypes, &v.FulfillmentTypes)
-		case schemas.BenefitSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BenefitSummary_Id, v.Id)
-		case schemas.BenefitSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BenefitSummary_Name, v.Name)
-		case schemas.BenefitSummary_Programs:
-			return deserializePrograms(d, schemas.BenefitSummary_Programs, &v.Programs)
-		case schemas.BenefitSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.BenefitSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = BenefitStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about consumable benefit fulfillment, such as usage quotas
 // or service limits.
 type ConsumableDetails struct {
@@ -513,54 +189,6 @@ type ConsumableDetails struct {
 	UtilizedAmount *MonetaryValue
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConsumableDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConsumableDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConsumableDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllocatedAmount != nil {
-		s.WriteStruct(schemas.ConsumableDetails_AllocatedAmount)
-		v.AllocatedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IssuanceDetails != nil {
-		s.WriteStruct(schemas.ConsumableDetails_IssuanceDetails)
-		v.IssuanceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RemainingAmount != nil {
-		s.WriteStruct(schemas.ConsumableDetails_RemainingAmount)
-		v.RemainingAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UtilizedAmount != nil {
-		s.WriteStruct(schemas.ConsumableDetails_UtilizedAmount)
-		v.UtilizedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ConsumableDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConsumableDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConsumableDetails_AllocatedAmount:
-			v.AllocatedAmount = &MonetaryValue{}
-			return v.AllocatedAmount.Deserialize(d)
-		case schemas.ConsumableDetails_IssuanceDetails:
-			v.IssuanceDetails = &IssuanceDetail{}
-			return v.IssuanceDetails.Deserialize(d)
-		case schemas.ConsumableDetails_RemainingAmount:
-			v.RemainingAmount = &MonetaryValue{}
-			return v.RemainingAmount.Deserialize(d)
-		case schemas.ConsumableDetails_UtilizedAmount:
-			v.UtilizedAmount = &MonetaryValue{}
-			return v.UtilizedAmount.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents contact information for a partner representative.
@@ -582,52 +210,6 @@ type Contact struct {
 	Phone *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Contact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Contact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BusinessTitle != nil {
-		s.WriteString(schemas.Contact_BusinessTitle, *v.BusinessTitle)
-	}
-	if v.Email != nil {
-		s.WriteString(schemas.Contact_Email, *v.Email)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.Contact_FirstName, *v.FirstName)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.Contact_LastName, *v.LastName)
-	}
-	if v.Phone != nil {
-		s.WriteString(schemas.Contact_Phone, *v.Phone)
-	}
-}
-func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Contact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Contact_BusinessTitle:
-			v.BusinessTitle = new(string)
-			return d.ReadString(schemas.Contact_BusinessTitle, v.BusinessTitle)
-		case schemas.Contact_Email:
-			v.Email = new(string)
-			return d.ReadString(schemas.Contact_Email, v.Email)
-		case schemas.Contact_FirstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.Contact_FirstName, v.FirstName)
-		case schemas.Contact_LastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.Contact_LastName, v.LastName)
-		case schemas.Contact_Phone:
-			v.Phone = new(string)
-			return d.ReadString(schemas.Contact_Phone, v.Phone)
-		}
-		return nil
-	})
 }
 
 // Represents an AWS credit code that can be applied to an AWS account for billing
@@ -667,64 +249,6 @@ type CreditCode struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreditCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreditCode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreditCode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.CreditCode_AwsAccountId, *v.AwsAccountId)
-	}
-	if v.AwsCreditCode != nil {
-		s.WriteString(schemas.CreditCode_AwsCreditCode, *v.AwsCreditCode)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.CreditCode_ExpiresAt, *v.ExpiresAt)
-	}
-	if v.IssuedAt != nil {
-		s.WriteTime(schemas.CreditCode_IssuedAt, *v.IssuedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CreditCode_Status, string(v.Status))
-	}
-	if v.Value != nil {
-		s.WriteStruct(schemas.CreditCode_Value)
-		v.Value.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreditCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreditCode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreditCode_AwsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.CreditCode_AwsAccountId, v.AwsAccountId)
-		case schemas.CreditCode_AwsCreditCode:
-			v.AwsCreditCode = new(string)
-			return d.ReadString(schemas.CreditCode_AwsCreditCode, v.AwsCreditCode)
-		case schemas.CreditCode_ExpiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.CreditCode_ExpiresAt, v.ExpiresAt)
-		case schemas.CreditCode_IssuedAt:
-			v.IssuedAt = new(time.Time)
-			return d.ReadTime(schemas.CreditCode_IssuedAt, v.IssuedAt)
-		case schemas.CreditCode_Status:
-			var ev string
-			if err := d.ReadString(schemas.CreditCode_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = BenefitAllocationStatus(ev)
-			return nil
-		case schemas.CreditCode_Value:
-			v.Value = &MonetaryValue{}
-			return v.Value.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains information about credit-based benefit fulfillment, including AWS
 // promotional credits.
 type CreditDetails struct {
@@ -747,41 +271,6 @@ type CreditDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreditDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreditDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreditDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllocatedAmount != nil {
-		s.WriteStruct(schemas.CreditDetails_AllocatedAmount)
-		v.AllocatedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeCreditCodes(s, schemas.CreditDetails_Codes, v.Codes)
-	if v.IssuedAmount != nil {
-		s.WriteStruct(schemas.CreditDetails_IssuedAmount)
-		v.IssuedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreditDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreditDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreditDetails_AllocatedAmount:
-			v.AllocatedAmount = &MonetaryValue{}
-			return v.AllocatedAmount.Deserialize(d)
-		case schemas.CreditDetails_Codes:
-			return deserializeCreditCodes(d, schemas.CreditDetails_Codes, &v.Codes)
-		case schemas.CreditDetails_IssuedAmount:
-			v.IssuedAmount = &MonetaryValue{}
-			return v.IssuedAmount.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Contains information about disbursement-based benefit fulfillment, such as
 // direct payments or reimbursements.
 type DisbursementDetails struct {
@@ -793,38 +282,6 @@ type DisbursementDetails struct {
 	IssuanceDetails *IssuanceDetail
 
 	noSmithyDocumentSerde
-}
-
-func (v *DisbursementDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisbursementDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisbursementDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisbursedAmount != nil {
-		s.WriteStruct(schemas.DisbursementDetails_DisbursedAmount)
-		v.DisbursedAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IssuanceDetails != nil {
-		s.WriteStruct(schemas.DisbursementDetails_IssuanceDetails)
-		v.IssuanceDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DisbursementDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisbursementDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisbursementDetails_DisbursedAmount:
-			v.DisbursedAmount = &MonetaryValue{}
-			return v.DisbursedAmount.Deserialize(d)
-		case schemas.DisbursementDetails_IssuanceDetails:
-			v.IssuanceDetails = &IssuanceDetail{}
-			return v.IssuanceDetails.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents detailed information about a file attached to a benefit application.
@@ -861,74 +318,6 @@ type FileDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FileDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FileDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FileDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BusinessUseCase != nil {
-		s.WriteString(schemas.FileDetail_BusinessUseCase, *v.BusinessUseCase)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.FileDetail_CreatedAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.FileDetail_CreatedBy, *v.CreatedBy)
-	}
-	if v.FileName != nil {
-		s.WriteString(schemas.FileDetail_FileName, *v.FileName)
-	}
-	if v.FileStatus != nil {
-		s.WriteString(schemas.FileDetail_FileStatus, *v.FileStatus)
-	}
-	if v.FileStatusReason != nil {
-		s.WriteString(schemas.FileDetail_FileStatusReason, *v.FileStatusReason)
-	}
-	if v.FileType != "" {
-		s.WriteString(schemas.FileDetail_FileType, string(v.FileType))
-	}
-	if v.FileURI != nil {
-		s.WriteString(schemas.FileDetail_FileURI, *v.FileURI)
-	}
-}
-func (v *FileDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FileDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FileDetail_BusinessUseCase:
-			v.BusinessUseCase = new(string)
-			return d.ReadString(schemas.FileDetail_BusinessUseCase, v.BusinessUseCase)
-		case schemas.FileDetail_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.FileDetail_CreatedAt, v.CreatedAt)
-		case schemas.FileDetail_CreatedBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.FileDetail_CreatedBy, v.CreatedBy)
-		case schemas.FileDetail_FileName:
-			v.FileName = new(string)
-			return d.ReadString(schemas.FileDetail_FileName, v.FileName)
-		case schemas.FileDetail_FileStatus:
-			v.FileStatus = new(string)
-			return d.ReadString(schemas.FileDetail_FileStatus, v.FileStatus)
-		case schemas.FileDetail_FileStatusReason:
-			v.FileStatusReason = new(string)
-			return d.ReadString(schemas.FileDetail_FileStatusReason, v.FileStatusReason)
-		case schemas.FileDetail_FileType:
-			var ev string
-			if err := d.ReadString(schemas.FileDetail_FileType, &ev); err != nil {
-				return err
-			}
-			v.FileType = FileType(ev)
-			return nil
-		case schemas.FileDetail_FileURI:
-			v.FileURI = new(string)
-			return d.ReadString(schemas.FileDetail_FileURI, v.FileURI)
-		}
-		return nil
-	})
-}
-
 // Represents input information for uploading a file to a benefit application.
 type FileInput struct {
 
@@ -942,34 +331,6 @@ type FileInput struct {
 	BusinessUseCase *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FileInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BusinessUseCase != nil {
-		s.WriteString(schemas.FileInput_BusinessUseCase, *v.BusinessUseCase)
-	}
-	if v.FileURI != nil {
-		s.WriteString(schemas.FileInput_FileURI, *v.FileURI)
-	}
-}
-func (v *FileInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FileInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FileInput_BusinessUseCase:
-			v.BusinessUseCase = new(string)
-			return d.ReadString(schemas.FileInput_BusinessUseCase, v.BusinessUseCase)
-		case schemas.FileInput_FileURI:
-			v.FileURI = new(string)
-			return d.ReadString(schemas.FileInput_FileURI, v.FileURI)
-		}
-		return nil
-	})
 }
 
 // Contains comprehensive information about how a benefit allocation is fulfilled
@@ -994,14 +355,6 @@ type FulfillmentDetailsMemberAccessDetails struct {
 }
 
 func (*FulfillmentDetailsMemberAccessDetails) isFulfillmentDetails() {}
-func (v *FulfillmentDetailsMemberAccessDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FulfillmentDetails_AccessDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *FulfillmentDetailsMemberAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details about consumable-based fulfillment, if applicable to this benefit
 // allocation.
@@ -1012,14 +365,6 @@ type FulfillmentDetailsMemberConsumableDetails struct {
 }
 
 func (*FulfillmentDetailsMemberConsumableDetails) isFulfillmentDetails() {}
-func (v *FulfillmentDetailsMemberConsumableDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FulfillmentDetails_ConsumableDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *FulfillmentDetailsMemberConsumableDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details about credit-based fulfillment, if applicable to this benefit
 // allocation.
@@ -1030,14 +375,6 @@ type FulfillmentDetailsMemberCreditDetails struct {
 }
 
 func (*FulfillmentDetailsMemberCreditDetails) isFulfillmentDetails() {}
-func (v *FulfillmentDetailsMemberCreditDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FulfillmentDetails_CreditDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *FulfillmentDetailsMemberCreditDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details about disbursement-based fulfillment, if applicable to this benefit
 // allocation.
@@ -1048,14 +385,6 @@ type FulfillmentDetailsMemberDisbursementDetails struct {
 }
 
 func (*FulfillmentDetailsMemberDisbursementDetails) isFulfillmentDetails() {}
-func (v *FulfillmentDetailsMemberDisbursementDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FulfillmentDetails_DisbursementDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *FulfillmentDetailsMemberDisbursementDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Represents detailed information about a specific issuance of benefit value.
 type IssuanceDetail struct {
@@ -1070,42 +399,6 @@ type IssuanceDetail struct {
 	IssuedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *IssuanceDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IssuanceDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IssuanceDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IssuanceAmount != nil {
-		s.WriteStruct(schemas.IssuanceDetail_IssuanceAmount)
-		v.IssuanceAmount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IssuanceId != nil {
-		s.WriteString(schemas.IssuanceDetail_IssuanceId, *v.IssuanceId)
-	}
-	if v.IssuedAt != nil {
-		s.WriteTime(schemas.IssuanceDetail_IssuedAt, *v.IssuedAt)
-	}
-}
-func (v *IssuanceDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IssuanceDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IssuanceDetail_IssuanceAmount:
-			v.IssuanceAmount = &MonetaryValue{}
-			return v.IssuanceAmount.Deserialize(d)
-		case schemas.IssuanceDetail_IssuanceId:
-			v.IssuanceId = new(string)
-			return d.ReadString(schemas.IssuanceDetail_IssuanceId, v.IssuanceId)
-		case schemas.IssuanceDetail_IssuedAt:
-			v.IssuedAt = new(time.Time)
-			return d.ReadTime(schemas.IssuanceDetail_IssuedAt, v.IssuedAt)
-		}
-		return nil
-	})
 }
 
 // Represents a monetary amount with its associated currency.
@@ -1124,38 +417,6 @@ type MonetaryValue struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MonetaryValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonetaryValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonetaryValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteString(schemas.MonetaryValue_Amount, *v.Amount)
-	}
-	if v.CurrencyCode != "" {
-		s.WriteString(schemas.MonetaryValue_CurrencyCode, string(v.CurrencyCode))
-	}
-}
-func (v *MonetaryValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonetaryValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonetaryValue_Amount:
-			v.Amount = new(string)
-			return d.ReadString(schemas.MonetaryValue_Amount, v.Amount)
-		case schemas.MonetaryValue_CurrencyCode:
-			var ev string
-			if err := d.ReadString(schemas.MonetaryValue_CurrencyCode, &ev); err != nil {
-				return err
-			}
-			v.CurrencyCode = CurrencyCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a key-value pair used for categorizing and organizing AWS resources.
 type Tag struct {
 
@@ -1170,34 +431,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Represents a field-specific validation error with detailed information.
@@ -1217,44 +450,6 @@ type ValidationExceptionField struct {
 	Code ValidationExceptionErrorCode
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.ValidationExceptionField_Code, string(v.Code))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_Code:
-			var ev string
-			if err := d.ReadString(schemas.ValidationExceptionField_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = ValidationExceptionErrorCode(ev)
-			return nil
-		case schemas.ValidationExceptionField_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
-		case schemas.ValidationExceptionField_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

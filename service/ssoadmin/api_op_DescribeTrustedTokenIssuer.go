@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type DescribeTrustedTokenIssuerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedTokenIssuerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTrustedTokenIssuerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTrustedTokenIssuerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrustedTokenIssuerArn != nil {
-		s.WriteString(schemas.DescribeTrustedTokenIssuerRequest_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
-	}
-}
-
 type DescribeTrustedTokenIssuerOutput struct {
 
 	// The name of the trusted token issuer configuration.
@@ -75,36 +61,16 @@ type DescribeTrustedTokenIssuerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrustedTokenIssuerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTrustedTokenIssuerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTrustedTokenIssuerResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_Name, v.Name)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerArn:
-			v.TrustedTokenIssuerArn = new(string)
-			return d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerArn, v.TrustedTokenIssuerArn)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration:
-			return deserializeTrustedTokenIssuerConfiguration(d, schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration, &v.TrustedTokenIssuerConfiguration)
-		case schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerType, &ev); err != nil {
-				return err
-			}
-			v.TrustedTokenIssuerType = types.TrustedTokenIssuerType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTrustedTokenIssuerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedTokenIssuer, schemas.DescribeTrustedTokenIssuerRequest, schemas.DescribeTrustedTokenIssuerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrustedTokenIssuer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustedTokenIssuer, schemas.DescribeTrustedTokenIssuerRequest, schemas.DescribeTrustedTokenIssuerResponse), output: &DescribeTrustedTokenIssuerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrustedTokenIssuer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTrustedTokenIssuer"); err != nil {

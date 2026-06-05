@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type GetKxUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxUserRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.GetKxUserRequest_userName, *v.UserName)
-	}
-}
-
 type GetKxUserOutput struct {
 
 	// A unique identifier for the kdb environment.
@@ -81,33 +64,16 @@ type GetKxUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxUserResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxUserResponse_iamRole:
-			v.IamRole = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_iamRole, v.IamRole)
-		case schemas.GetKxUserResponse_userArn:
-			v.UserArn = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_userArn, v.UserArn)
-		case schemas.GetKxUserResponse_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.GetKxUserResponse_userName, v.UserName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxUser, schemas.GetKxUserRequest, schemas.GetKxUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxUser, schemas.GetKxUserRequest, schemas.GetKxUserResponse), output: &GetKxUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxUser"); err != nil {

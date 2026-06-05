@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,46 +84,6 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_clientToken, *v.ClientToken)
-	}
-	if v.DesiredSoftwareSetId != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
-	}
-	if v.DesktopArn != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_desktopArn, *v.DesktopArn)
-	}
-	if v.DesktopEndpoint != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_desktopEndpoint, *v.DesktopEndpoint)
-	}
-	serializeDeviceCreationTagsMap(s, schemas.CreateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.MaintenanceWindow != nil {
-		s.WriteStruct(schemas.CreateEnvironmentRequest_maintenanceWindow)
-		v.MaintenanceWindow.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateEnvironmentRequest_name, *v.Name)
-	}
-	if v.SoftwareSetUpdateMode != "" {
-		s.WriteString(schemas.CreateEnvironmentRequest_softwareSetUpdateMode, string(v.SoftwareSetUpdateMode))
-	}
-	if v.SoftwareSetUpdateSchedule != "" {
-		s.WriteString(schemas.CreateEnvironmentRequest_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
-	}
-	serializeTagsMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
-}
-
 type CreateEnvironmentOutput struct {
 
 	// Describes an environment.
@@ -137,24 +95,16 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentResponse_environment:
-			v.Environment = &types.EnvironmentSummary{}
-			return v.Environment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironment"); err != nil {

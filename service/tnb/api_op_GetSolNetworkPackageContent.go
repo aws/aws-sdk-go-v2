@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type GetSolNetworkPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSolNetworkPackageContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSolNetworkPackageContentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSolNetworkPackageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Accept != "" {
-		s.WriteString(schemas.GetSolNetworkPackageContentInput_accept, string(v.Accept))
-	}
-	if v.NsdInfoId != nil {
-		s.WriteString(schemas.GetSolNetworkPackageContentInput_nsdInfoId, *v.NsdInfoId)
-	}
-}
-
 type GetSolNetworkPackageContentOutput struct {
 
 	// Indicates the media type of the resource.
@@ -77,30 +60,16 @@ type GetSolNetworkPackageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSolNetworkPackageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSolNetworkPackageContentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSolNetworkPackageContentOutput_contentType:
-			var ev string
-			if err := d.ReadString(schemas.GetSolNetworkPackageContentOutput_contentType, &ev); err != nil {
-				return err
-			}
-			v.ContentType = types.PackageContentType(ev)
-			return nil
-		case schemas.GetSolNetworkPackageContentOutput_nsdContent:
-			return d.ReadBlob(schemas.GetSolNetworkPackageContentOutput_nsdContent, &v.NsdContent)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSolNetworkPackageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolNetworkPackageContent, schemas.GetSolNetworkPackageContentInput, schemas.GetSolNetworkPackageContentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSolNetworkPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolNetworkPackageContent, schemas.GetSolNetworkPackageContentInput, schemas.GetSolNetworkPackageContentOutput), output: &GetSolNetworkPackageContentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSolNetworkPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSolNetworkPackageContent"); err != nil {

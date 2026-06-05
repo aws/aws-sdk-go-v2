@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -105,44 +103,6 @@ type UpdateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActualIncidentStartDate != nil {
-		s.WriteTime(schemas.UpdateCaseRequest_actualIncidentStartDate, *v.ActualIncidentStartDate)
-	}
-	if v.CaseId != nil {
-		s.WriteString(schemas.UpdateCaseRequest_caseId, *v.CaseId)
-	}
-	serializeCaseMetadata(s, schemas.UpdateCaseRequest_caseMetadata, v.CaseMetadata)
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateCaseRequest_description, *v.Description)
-	}
-	if v.EngagementType != "" {
-		s.WriteString(schemas.UpdateCaseRequest_engagementType, string(v.EngagementType))
-	}
-	serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToAdd, v.ImpactedAccountsToAdd)
-	serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToDelete, v.ImpactedAccountsToDelete)
-	serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToAdd, v.ImpactedAwsRegionsToAdd)
-	serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToDelete, v.ImpactedAwsRegionsToDelete)
-	serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToAdd, v.ImpactedServicesToAdd)
-	serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToDelete, v.ImpactedServicesToDelete)
-	if v.ReportedIncidentStartDate != nil {
-		s.WriteTime(schemas.UpdateCaseRequest_reportedIncidentStartDate, *v.ReportedIncidentStartDate)
-	}
-	serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToAdd, v.ThreatActorIpAddressesToAdd)
-	serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToDelete, v.ThreatActorIpAddressesToDelete)
-	if v.Title != nil {
-		s.WriteString(schemas.UpdateCaseRequest_title, *v.Title)
-	}
-	serializeWatchers(s, schemas.UpdateCaseRequest_watchersToAdd, v.WatchersToAdd)
-	serializeWatchers(s, schemas.UpdateCaseRequest_watchersToDelete, v.WatchersToDelete)
-}
-
 type UpdateCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -150,21 +110,16 @@ type UpdateCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCase, schemas.UpdateCaseRequest, schemas.UpdateCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCase, schemas.UpdateCaseRequest, schemas.UpdateCaseResponse), output: &UpdateCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCase"); err != nil {

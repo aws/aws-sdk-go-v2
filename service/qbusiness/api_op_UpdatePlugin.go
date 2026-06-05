@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,36 +57,6 @@ type UpdatePluginInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePluginInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePluginRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePluginInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdatePluginRequest_applicationId, *v.ApplicationId)
-	}
-	serializePluginAuthConfiguration(s, schemas.UpdatePluginRequest_authConfiguration, v.AuthConfiguration)
-	if v.CustomPluginConfiguration != nil {
-		s.WriteStruct(schemas.UpdatePluginRequest_customPluginConfiguration)
-		v.CustomPluginConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdatePluginRequest_displayName, *v.DisplayName)
-	}
-	if v.PluginId != nil {
-		s.WriteString(schemas.UpdatePluginRequest_pluginId, *v.PluginId)
-	}
-	if v.ServerUrl != nil {
-		s.WriteString(schemas.UpdatePluginRequest_serverUrl, *v.ServerUrl)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.UpdatePluginRequest_state, string(v.State))
-	}
-}
-
 type UpdatePluginOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,21 +64,16 @@ type UpdatePluginOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePluginResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlugin, schemas.UpdatePluginRequest, schemas.UpdatePluginResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePlugin{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePlugin, schemas.UpdatePluginRequest, schemas.UpdatePluginResponse), output: &UpdatePluginOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePlugin{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePlugin"); err != nil {

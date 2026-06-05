@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,21 +51,6 @@ type DeleteBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBotAliasInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBotAliasRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotName != nil {
-		s.WriteString(schemas.DeleteBotAliasRequest_botName, *v.BotName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteBotAliasRequest_name, *v.Name)
-	}
-}
-
 type DeleteBotAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,29 +58,16 @@ type DeleteBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBotAliasOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAlias, schemas.DeleteBotAliasRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotAlias{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAlias, schemas.DeleteBotAliasRequest, nil), output: &DeleteBotAliasOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotAlias{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBotAlias"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,24 +53,6 @@ type DeleteOriginEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOriginEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteOriginEndpointRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.DeleteOriginEndpointRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.DeleteOriginEndpointRequest_ChannelName, *v.ChannelName)
-	}
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.DeleteOriginEndpointRequest_OriginEndpointName, *v.OriginEndpointName)
-	}
-}
-
 type DeleteOriginEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,21 +60,16 @@ type DeleteOriginEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteOriginEndpointResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOriginEndpoint, schemas.DeleteOriginEndpointRequest, schemas.DeleteOriginEndpointResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOriginEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOriginEndpoint, schemas.DeleteOriginEndpointRequest, schemas.DeleteOriginEndpointResponse), output: &DeleteOriginEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOriginEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOriginEndpoint"); err != nil {

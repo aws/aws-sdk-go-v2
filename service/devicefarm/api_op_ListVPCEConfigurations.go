@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type ListVPCEConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListVPCEConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListVPCEConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListVPCEConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListVPCEConfigurationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListVPCEConfigurationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListVPCEConfigurationsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -74,26 +57,16 @@ type ListVPCEConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListVPCEConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListVPCEConfigurationsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListVPCEConfigurationsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListVPCEConfigurationsResult_nextToken, v.NextToken)
-		case schemas.ListVPCEConfigurationsResult_vpceConfigurations:
-			return deserializeVPCEConfigurations(d, schemas.ListVPCEConfigurationsResult_vpceConfigurations, &v.VpceConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListVPCEConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVPCEConfigurations, schemas.ListVPCEConfigurationsRequest, schemas.ListVPCEConfigurationsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVPCEConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVPCEConfigurations, schemas.ListVPCEConfigurationsRequest, schemas.ListVPCEConfigurationsResult), output: &ListVPCEConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVPCEConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVPCEConfigurations"); err != nil {

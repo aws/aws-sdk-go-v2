@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,24 +60,6 @@ type DeleteDataLakeDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataLakeDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDataLakeDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDataLakeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DeleteDataLakeDatasetRequest_instanceId, *v.InstanceId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteDataLakeDatasetRequest_name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.DeleteDataLakeDatasetRequest_namespace, *v.Namespace)
-	}
-}
-
 // The response parameters of DeleteDataLakeDataset.
 type DeleteDataLakeDatasetOutput struct {
 
@@ -104,30 +84,16 @@ type DeleteDataLakeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDataLakeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDataLakeDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDataLakeDatasetResponse_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DeleteDataLakeDatasetResponse_instanceId, v.InstanceId)
-		case schemas.DeleteDataLakeDatasetResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteDataLakeDatasetResponse_name, v.Name)
-		case schemas.DeleteDataLakeDatasetResponse_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.DeleteDataLakeDatasetResponse_namespace, v.Namespace)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDataLakeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeDataset, schemas.DeleteDataLakeDatasetRequest, schemas.DeleteDataLakeDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLakeDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeDataset, schemas.DeleteDataLakeDatasetRequest, schemas.DeleteDataLakeDatasetResponse), output: &DeleteDataLakeDatasetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLakeDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataLakeDataset"); err != nil {

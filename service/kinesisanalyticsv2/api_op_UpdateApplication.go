@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,41 +79,6 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationConfigurationUpdate != nil {
-		s.WriteStruct(schemas.UpdateApplicationRequest_ApplicationConfigurationUpdate)
-		v.ApplicationConfigurationUpdate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_ApplicationName, *v.ApplicationName)
-	}
-	serializeCloudWatchLoggingOptionUpdates(s, schemas.UpdateApplicationRequest_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
-	if v.ConditionalToken != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_ConditionalToken, *v.ConditionalToken)
-	}
-	if v.CurrentApplicationVersionId != nil {
-		s.WriteInt64(schemas.UpdateApplicationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
-	}
-	if v.RunConfigurationUpdate != nil {
-		s.WriteStruct(schemas.UpdateApplicationRequest_RunConfigurationUpdate)
-		v.RunConfigurationUpdate.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuntimeEnvironmentUpdate != "" {
-		s.WriteString(schemas.UpdateApplicationRequest_RuntimeEnvironmentUpdate, string(v.RuntimeEnvironmentUpdate))
-	}
-	if v.ServiceExecutionRoleUpdate != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_ServiceExecutionRoleUpdate, *v.ServiceExecutionRoleUpdate)
-	}
-}
-
 type UpdateApplicationOutput struct {
 
 	// Describes application updates.
@@ -132,27 +95,16 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateApplicationResponse_ApplicationDetail:
-			v.ApplicationDetail = &types.ApplicationDetail{}
-			return v.ApplicationDetail.Deserialize(d)
-		case schemas.UpdateApplicationResponse_OperationId:
-			v.OperationId = new(string)
-			return d.ReadString(schemas.UpdateApplicationResponse_OperationId, v.OperationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {

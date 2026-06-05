@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,23 +54,6 @@ type DescribeConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeConfigurationSetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationSetNameList(s, schemas.DescribeConfigurationSetsRequest_ConfigurationSetNames, v.ConfigurationSetNames)
-	serializeConfigurationSetFilterList(s, schemas.DescribeConfigurationSetsRequest_Filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeConfigurationSetsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeConfigurationSetsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeConfigurationSetsOutput struct {
 
 	// An array of ConfigurationSets objects.
@@ -88,26 +69,16 @@ type DescribeConfigurationSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConfigurationSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeConfigurationSetsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeConfigurationSetsResult_ConfigurationSets:
-			return deserializeConfigurationSetInformationList(d, schemas.DescribeConfigurationSetsResult_ConfigurationSets, &v.ConfigurationSets)
-		case schemas.DescribeConfigurationSetsResult_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeConfigurationSetsResult_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSets, schemas.DescribeConfigurationSetsRequest, schemas.DescribeConfigurationSetsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeConfigurationSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSets, schemas.DescribeConfigurationSetsRequest, schemas.DescribeConfigurationSetsResult), output: &DescribeConfigurationSetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeConfigurationSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationSets"); err != nil {

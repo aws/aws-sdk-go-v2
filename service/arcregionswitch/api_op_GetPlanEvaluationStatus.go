@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,24 +52,6 @@ type GetPlanEvaluationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlanEvaluationStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlanEvaluationStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlanEvaluationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetPlanEvaluationStatusRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetPlanEvaluationStatusRequest_nextToken, *v.NextToken)
-	}
-	if v.PlanArn != nil {
-		s.WriteString(schemas.GetPlanEvaluationStatusRequest_planArn, *v.PlanArn)
-	}
-}
-
 type GetPlanEvaluationStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the plan.
@@ -106,45 +86,16 @@ type GetPlanEvaluationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlanEvaluationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlanEvaluationStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlanEvaluationStatusResponse_evaluationState:
-			var ev string
-			if err := d.ReadString(schemas.GetPlanEvaluationStatusResponse_evaluationState, &ev); err != nil {
-				return err
-			}
-			v.EvaluationState = types.EvaluationStatus(ev)
-			return nil
-		case schemas.GetPlanEvaluationStatusResponse_lastEvaluatedVersion:
-			v.LastEvaluatedVersion = new(string)
-			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_lastEvaluatedVersion, v.LastEvaluatedVersion)
-		case schemas.GetPlanEvaluationStatusResponse_lastEvaluationTime:
-			v.LastEvaluationTime = new(time.Time)
-			return d.ReadTime(schemas.GetPlanEvaluationStatusResponse_lastEvaluationTime, v.LastEvaluationTime)
-		case schemas.GetPlanEvaluationStatusResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_nextToken, v.NextToken)
-		case schemas.GetPlanEvaluationStatusResponse_planArn:
-			v.PlanArn = new(string)
-			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_planArn, v.PlanArn)
-		case schemas.GetPlanEvaluationStatusResponse_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_region, v.Region)
-		case schemas.GetPlanEvaluationStatusResponse_warnings:
-			return deserializePlanWarnings(d, schemas.GetPlanEvaluationStatusResponse_warnings, &v.Warnings)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPlanEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanEvaluationStatus, schemas.GetPlanEvaluationStatusRequest, schemas.GetPlanEvaluationStatusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlanEvaluationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanEvaluationStatus, schemas.GetPlanEvaluationStatusRequest, schemas.GetPlanEvaluationStatusResponse), output: &GetPlanEvaluationStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlanEvaluationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlanEvaluationStatus"); err != nil {

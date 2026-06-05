@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -159,57 +157,6 @@ type CreateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRuleGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnalyzeRuleGroup != false {
-		s.WriteBool(schemas.CreateRuleGroupRequest_AnalyzeRuleGroup, v.AnalyzeRuleGroup)
-	}
-	if v.Capacity != nil {
-		s.WriteInt32(schemas.CreateRuleGroupRequest_Capacity, *v.Capacity)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateRuleGroupRequest_Description, *v.Description)
-	}
-	if v.DryRun != false {
-		s.WriteBool(schemas.CreateRuleGroupRequest_DryRun, v.DryRun)
-	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.CreateRuleGroupRequest_EncryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuleGroup != nil {
-		s.WriteStruct(schemas.CreateRuleGroupRequest_RuleGroup)
-		v.RuleGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuleGroupName != nil {
-		s.WriteString(schemas.CreateRuleGroupRequest_RuleGroupName, *v.RuleGroupName)
-	}
-	if v.Rules != nil {
-		s.WriteString(schemas.CreateRuleGroupRequest_Rules, *v.Rules)
-	}
-	if v.SourceMetadata != nil {
-		s.WriteStruct(schemas.CreateRuleGroupRequest_SourceMetadata)
-		v.SourceMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SummaryConfiguration != nil {
-		s.WriteStruct(schemas.CreateRuleGroupRequest_SummaryConfiguration)
-		v.SummaryConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.CreateRuleGroupRequest_Type, string(v.Type))
-	}
-}
-
 type CreateRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup, define the
@@ -238,27 +185,16 @@ type CreateRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRuleGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRuleGroupResponse_RuleGroupResponse:
-			v.RuleGroupResponse = &types.RuleGroupResponse{}
-			return v.RuleGroupResponse.Deserialize(d)
-		case schemas.CreateRuleGroupResponse_UpdateToken:
-			v.UpdateToken = new(string)
-			return d.ReadString(schemas.CreateRuleGroupResponse_UpdateToken, v.UpdateToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRuleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse), output: &CreateRuleGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRuleGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRuleGroup"); err != nil {

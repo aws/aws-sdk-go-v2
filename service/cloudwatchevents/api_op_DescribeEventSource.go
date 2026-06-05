@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type DescribeEventSourceInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeEventSourceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEventSourceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeEventSourceRequest_Name, *v.Name)
-	}
 }
 
 type DescribeEventSourceOutput struct {
@@ -84,43 +70,16 @@ type DescribeEventSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEventSourceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEventSourceResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DescribeEventSourceResponse_Arn, v.Arn)
-		case schemas.DescribeEventSourceResponse_CreatedBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.DescribeEventSourceResponse_CreatedBy, v.CreatedBy)
-		case schemas.DescribeEventSourceResponse_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeEventSourceResponse_CreationTime, v.CreationTime)
-		case schemas.DescribeEventSourceResponse_ExpirationTime:
-			v.ExpirationTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeEventSourceResponse_ExpirationTime, v.ExpirationTime)
-		case schemas.DescribeEventSourceResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeEventSourceResponse_Name, v.Name)
-		case schemas.DescribeEventSourceResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.DescribeEventSourceResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.EventSourceState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSource, schemas.DescribeEventSourceRequest, schemas.DescribeEventSourceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventSource, schemas.DescribeEventSourceRequest, schemas.DescribeEventSourceResponse), output: &DescribeEventSourceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventSource{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEventSource"); err != nil {

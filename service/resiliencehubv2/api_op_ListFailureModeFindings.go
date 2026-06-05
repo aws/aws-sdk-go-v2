@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,33 +52,6 @@ type ListFailureModeFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFailureModeFindingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFailureModeFindingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFailureModeFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FailureCategory != "" {
-		s.WriteString(schemas.ListFailureModeFindingsRequest_failureCategory, string(v.FailureCategory))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListFailureModeFindingsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListFailureModeFindingsRequest_nextToken, *v.NextToken)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.ListFailureModeFindingsRequest_serviceArn, *v.ServiceArn)
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.ListFailureModeFindingsRequest_severity, string(v.Severity))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListFailureModeFindingsRequest_status, string(v.Status))
-	}
-}
-
 type ListFailureModeFindingsOutput struct {
 
 	// The list of finding summaries.
@@ -97,26 +68,16 @@ type ListFailureModeFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFailureModeFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFailureModeFindingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFailureModeFindingsResponse_findingsSummary:
-			return deserializeFindingsList(d, schemas.ListFailureModeFindingsResponse_findingsSummary, &v.FindingsSummary)
-		case schemas.ListFailureModeFindingsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListFailureModeFindingsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListFailureModeFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeFindings, schemas.ListFailureModeFindingsRequest, schemas.ListFailureModeFindingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFailureModeFindings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeFindings, schemas.ListFailureModeFindingsRequest, schemas.ListFailureModeFindingsResponse), output: &ListFailureModeFindingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFailureModeFindings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFailureModeFindings"); err != nil {

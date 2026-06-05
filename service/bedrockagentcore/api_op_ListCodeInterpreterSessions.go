@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,27 +71,6 @@ type ListCodeInterpreterSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeInterpreterSessionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCodeInterpreterSessionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCodeInterpreterSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CodeInterpreterIdentifier != nil {
-		s.WriteString(schemas.ListCodeInterpreterSessionsRequest_codeInterpreterIdentifier, *v.CodeInterpreterIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCodeInterpreterSessionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCodeInterpreterSessionsRequest_nextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListCodeInterpreterSessionsRequest_status, string(v.Status))
-	}
-}
-
 type ListCodeInterpreterSessionsOutput struct {
 
 	// The list of code interpreter sessions that match the specified criteria.
@@ -111,26 +88,16 @@ type ListCodeInterpreterSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodeInterpreterSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCodeInterpreterSessionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCodeInterpreterSessionsResponse_items:
-			return deserializeCodeInterpreterSessionSummaries(d, schemas.ListCodeInterpreterSessionsResponse_items, &v.Items)
-		case schemas.ListCodeInterpreterSessionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCodeInterpreterSessionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCodeInterpreterSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeInterpreterSessions, schemas.ListCodeInterpreterSessionsRequest, schemas.ListCodeInterpreterSessionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeInterpreterSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeInterpreterSessions, schemas.ListCodeInterpreterSessionsRequest, schemas.ListCodeInterpreterSessionsResponse), output: &ListCodeInterpreterSessionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeInterpreterSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodeInterpreterSessions"); err != nil {

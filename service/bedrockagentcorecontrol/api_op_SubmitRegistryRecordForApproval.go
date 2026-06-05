@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,21 +47,6 @@ type SubmitRegistryRecordForApprovalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubmitRegistryRecordForApprovalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubmitRegistryRecordForApprovalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubmitRegistryRecordForApprovalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RecordId != nil {
-		s.WriteString(schemas.SubmitRegistryRecordForApprovalRequest_recordId, *v.RecordId)
-	}
-	if v.RegistryId != nil {
-		s.WriteString(schemas.SubmitRegistryRecordForApprovalRequest_registryId, *v.RegistryId)
-	}
-}
-
 type SubmitRegistryRecordForApprovalOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registry record.
@@ -97,40 +80,16 @@ type SubmitRegistryRecordForApprovalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubmitRegistryRecordForApprovalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubmitRegistryRecordForApprovalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubmitRegistryRecordForApprovalResponse_recordArn:
-			v.RecordArn = new(string)
-			return d.ReadString(schemas.SubmitRegistryRecordForApprovalResponse_recordArn, v.RecordArn)
-		case schemas.SubmitRegistryRecordForApprovalResponse_recordId:
-			v.RecordId = new(string)
-			return d.ReadString(schemas.SubmitRegistryRecordForApprovalResponse_recordId, v.RecordId)
-		case schemas.SubmitRegistryRecordForApprovalResponse_registryArn:
-			v.RegistryArn = new(string)
-			return d.ReadString(schemas.SubmitRegistryRecordForApprovalResponse_registryArn, v.RegistryArn)
-		case schemas.SubmitRegistryRecordForApprovalResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.SubmitRegistryRecordForApprovalResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RegistryRecordStatus(ev)
-			return nil
-		case schemas.SubmitRegistryRecordForApprovalResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubmitRegistryRecordForApprovalResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSubmitRegistryRecordForApprovalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitRegistryRecordForApproval, schemas.SubmitRegistryRecordForApprovalRequest, schemas.SubmitRegistryRecordForApprovalResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitRegistryRecordForApproval{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitRegistryRecordForApproval, schemas.SubmitRegistryRecordForApprovalRequest, schemas.SubmitRegistryRecordForApprovalResponse), output: &SubmitRegistryRecordForApprovalOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitRegistryRecordForApproval{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitRegistryRecordForApproval"); err != nil {

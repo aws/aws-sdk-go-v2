@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,24 +51,6 @@ type GetPackageVersionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionHistoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPackageVersionHistoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPackageVersionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.GetPackageVersionHistoryRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetPackageVersionHistoryRequest_NextToken, *v.NextToken)
-	}
-	if v.PackageID != nil {
-		s.WriteString(schemas.GetPackageVersionHistoryRequest_PackageID, *v.PackageID)
-	}
-}
-
 // Container for response returned by GetPackageVersionHistory operation.
 type GetPackageVersionHistoryOutput struct {
 
@@ -91,29 +71,16 @@ type GetPackageVersionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPackageVersionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPackageVersionHistoryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPackageVersionHistoryResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetPackageVersionHistoryResponse_NextToken, v.NextToken)
-		case schemas.GetPackageVersionHistoryResponse_PackageID:
-			v.PackageID = new(string)
-			return d.ReadString(schemas.GetPackageVersionHistoryResponse_PackageID, v.PackageID)
-		case schemas.GetPackageVersionHistoryResponse_PackageVersionHistoryList:
-			return deserializePackageVersionHistoryList(d, schemas.GetPackageVersionHistoryResponse_PackageVersionHistoryList, &v.PackageVersionHistoryList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionHistory, schemas.GetPackageVersionHistoryRequest, schemas.GetPackageVersionHistoryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersionHistory{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersionHistory, schemas.GetPackageVersionHistoryRequest, schemas.GetPackageVersionHistoryResponse), output: &GetPackageVersionHistoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPackageVersionHistory{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPackageVersionHistory"); err != nil {

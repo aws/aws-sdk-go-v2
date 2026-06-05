@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type GetReservationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReservationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetReservationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReservationId != nil {
-		s.WriteString(schemas.GetReservationRequest_reservationId, *v.ReservationId)
-	}
-}
-
 type GetReservationOutput struct {
 
 	// The returned reservation object.
@@ -66,24 +52,16 @@ type GetReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetReservationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetReservationResponse_reservation:
-			v.Reservation = &types.Reservation{}
-			return v.Reservation.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservation, schemas.GetReservationRequest, schemas.GetReservationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservation, schemas.GetReservationRequest, schemas.GetReservationResponse), output: &GetReservationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReservation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReservation"); err != nil {

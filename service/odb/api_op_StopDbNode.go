@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type StopDbNodeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopDbNodeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StopDbNodeInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StopDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CloudVmClusterId != nil {
-		s.WriteString(schemas.StopDbNodeInput_cloudVmClusterId, *v.CloudVmClusterId)
-	}
-	if v.DbNodeId != nil {
-		s.WriteString(schemas.StopDbNodeInput_dbNodeId, *v.DbNodeId)
-	}
-}
-
 type StopDbNodeOutput struct {
 
 	// The unique identifier of the DB node that was stopped.
@@ -78,34 +61,16 @@ type StopDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StopDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StopDbNodeOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StopDbNodeOutput_dbNodeId:
-			v.DbNodeId = new(string)
-			return d.ReadString(schemas.StopDbNodeOutput_dbNodeId, v.DbNodeId)
-		case schemas.StopDbNodeOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.StopDbNodeOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DbNodeResourceStatus(ev)
-			return nil
-		case schemas.StopDbNodeOutput_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.StopDbNodeOutput_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStopDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDbNode, schemas.StopDbNodeInput, schemas.StopDbNodeOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDbNode, schemas.StopDbNodeInput, schemas.StopDbNodeOutput), output: &StopDbNodeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopDbNode{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopDbNode"); err != nil {

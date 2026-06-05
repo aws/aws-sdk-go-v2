@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,46 +102,6 @@ type GetPlaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlaceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexName != nil {
-		s.WriteString(schemas.GetPlaceRequest_IndexName, *v.IndexName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.GetPlaceRequest_Key, *v.Key)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.GetPlaceRequest_Language, *v.Language)
-	}
-	if v.PlaceId != nil {
-		s.WriteString(schemas.GetPlaceRequest_PlaceId, *v.PlaceId)
-	}
-}
-func (v *GetPlaceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlaceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlaceRequest_IndexName:
-			v.IndexName = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_IndexName, v.IndexName)
-		case schemas.GetPlaceRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_Key, v.Key)
-		case schemas.GetPlaceRequest_Language:
-			v.Language = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_Language, v.Language)
-		case schemas.GetPlaceRequest_PlaceId:
-			v.PlaceId = new(string)
-			return d.ReadString(schemas.GetPlaceRequest_PlaceId, v.PlaceId)
-		}
-		return nil
-	})
-}
-
 type GetPlaceOutput struct {
 
 	// Details about the result, such as its address and position.
@@ -157,37 +115,16 @@ type GetPlaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPlaceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPlaceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Place != nil {
-		s.WriteStruct(schemas.GetPlaceResponse_Place)
-		v.Place.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetPlaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPlaceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPlaceResponse_Place:
-			v.Place = &types.Place{}
-			return v.Place.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPlaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlace, schemas.GetPlaceRequest, schemas.GetPlaceResponse), output: &GetPlaceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlace{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlace"); err != nil {

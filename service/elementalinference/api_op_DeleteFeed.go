@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type DeleteFeedInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFeedInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteFeedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DeleteFeedRequest_id, *v.Id)
-	}
-}
-
 type DeleteFeedOutput struct {
 
 	// The ARN of the deleted feed.
@@ -79,34 +65,16 @@ type DeleteFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteFeedResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteFeedResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeleteFeedResponse_arn, v.Arn)
-		case schemas.DeleteFeedResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteFeedResponse_id, v.Id)
-		case schemas.DeleteFeedResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteFeedResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FeedStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFeed, schemas.DeleteFeedRequest, schemas.DeleteFeedResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFeed, schemas.DeleteFeedRequest, schemas.DeleteFeedResponse), output: &DeleteFeedOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFeed{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFeed"); err != nil {

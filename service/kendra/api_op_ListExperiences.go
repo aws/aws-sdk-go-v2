@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,24 +49,6 @@ type ListExperiencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListExperiencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListExperiencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListExperiencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexId != nil {
-		s.WriteString(schemas.ListExperiencesRequest_IndexId, *v.IndexId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListExperiencesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListExperiencesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListExperiencesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can
@@ -84,26 +64,16 @@ type ListExperiencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListExperiencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListExperiencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListExperiencesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListExperiencesResponse_NextToken, v.NextToken)
-		case schemas.ListExperiencesResponse_SummaryItems:
-			return deserializeExperiencesSummaryList(d, schemas.ListExperiencesResponse_SummaryItems, &v.SummaryItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListExperiencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiences, schemas.ListExperiencesRequest, schemas.ListExperiencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExperiences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiences, schemas.ListExperiencesRequest, schemas.ListExperiencesResponse), output: &ListExperiencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListExperiences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExperiences"); err != nil {

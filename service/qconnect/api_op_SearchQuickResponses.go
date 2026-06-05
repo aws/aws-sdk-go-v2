@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,30 +56,6 @@ type SearchQuickResponsesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchQuickResponsesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchQuickResponsesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchQuickResponsesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactAttributes(s, schemas.SearchQuickResponsesRequest_attributes, v.Attributes)
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.SearchQuickResponsesRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchQuickResponsesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchQuickResponsesRequest_nextToken, *v.NextToken)
-	}
-	if v.SearchExpression != nil {
-		s.WriteStruct(schemas.SearchQuickResponsesRequest_searchExpression)
-		v.SearchExpression.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SearchQuickResponsesOutput struct {
 
 	// The results of the quick response search.
@@ -99,26 +73,16 @@ type SearchQuickResponsesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchQuickResponsesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchQuickResponsesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchQuickResponsesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchQuickResponsesResponse_nextToken, v.NextToken)
-		case schemas.SearchQuickResponsesResponse_results:
-			return deserializeQuickResponseSearchResultsList(d, schemas.SearchQuickResponsesResponse_results, &v.Results)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchQuickResponsesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuickResponses, schemas.SearchQuickResponsesRequest, schemas.SearchQuickResponsesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchQuickResponses{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuickResponses, schemas.SearchQuickResponsesRequest, schemas.SearchQuickResponsesResponse), output: &SearchQuickResponsesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchQuickResponses{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchQuickResponses"); err != nil {

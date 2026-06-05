@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,29 +64,6 @@ type DescribeEventTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventTypesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeEventTypesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeEventTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.DescribeEventTypesRequest_filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.DescribeEventTypesRequest_locale, *v.Locale)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeEventTypesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeEventTypesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type DescribeEventTypesOutput struct {
 
 	// A list of event types that match the filter criteria. Event types have a
@@ -110,26 +85,16 @@ type DescribeEventTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeEventTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeEventTypesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeEventTypesResponse_eventTypes:
-			return deserializeEventTypeList(d, schemas.DescribeEventTypesResponse_eventTypes, &v.EventTypes)
-		case schemas.DescribeEventTypesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeEventTypesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeEventTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTypes, schemas.DescribeEventTypesRequest, schemas.DescribeEventTypesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventTypes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTypes, schemas.DescribeEventTypesRequest, schemas.DescribeEventTypesResponse), output: &DescribeEventTypesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventTypes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEventTypes"); err != nil {

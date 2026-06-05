@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListConfiguredModelAlgorithmAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConfiguredModelAlgorithmAssociationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConfiguredModelAlgorithmAssociationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConfiguredModelAlgorithmAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConfiguredModelAlgorithmAssociationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.ListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConfiguredModelAlgorithmAssociationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListConfiguredModelAlgorithmAssociationsOutput struct {
 
 	// The list of configured model algorithm associations.
@@ -81,26 +61,16 @@ type ListConfiguredModelAlgorithmAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConfiguredModelAlgorithmAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConfiguredModelAlgorithmAssociationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations:
-			return deserializeConfiguredModelAlgorithmAssociationList(d, schemas.ListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations, &v.ConfiguredModelAlgorithmAssociations)
-		case schemas.ListConfiguredModelAlgorithmAssociationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConfiguredModelAlgorithmAssociationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConfiguredModelAlgorithmAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredModelAlgorithmAssociations, schemas.ListConfiguredModelAlgorithmAssociationsRequest, schemas.ListConfiguredModelAlgorithmAssociationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredModelAlgorithmAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredModelAlgorithmAssociations, schemas.ListConfiguredModelAlgorithmAssociationsRequest, schemas.ListConfiguredModelAlgorithmAssociationsResponse), output: &ListConfiguredModelAlgorithmAssociationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredModelAlgorithmAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfiguredModelAlgorithmAssociations"); err != nil {

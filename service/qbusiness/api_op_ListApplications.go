@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListApplicationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListApplicationsOutput struct {
 
 	// An array of summary information on the configuration of one or more Amazon Q
@@ -79,26 +62,16 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationsResponse_applications:
-			return deserializeApplications(d, schemas.ListApplicationsResponse_applications, &v.Applications)
-		case schemas.ListApplicationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplications"); err != nil {

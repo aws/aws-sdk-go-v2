@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,40 +47,6 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetComponentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.GetComponentRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.GetComponentRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.GetComponentRequest_id, *v.Id)
-	}
-}
-func (v *GetComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetComponentRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetComponentRequest_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.GetComponentRequest_appId, v.AppId)
-		case schemas.GetComponentRequest_environmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.GetComponentRequest_environmentName, v.EnvironmentName)
-		case schemas.GetComponentRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetComponentRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 type GetComponentOutput struct {
 
 	// Represents the configuration settings for the component.
@@ -94,37 +58,16 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetComponentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetComponentResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Component != nil {
-		s.WriteStruct(schemas.GetComponentResponse_component)
-		v.Component.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetComponentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetComponentResponse_component:
-			v.Component = &types.Component{}
-			return v.Component.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentRequest, schemas.GetComponentResponse), output: &GetComponentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComponent"); err != nil {

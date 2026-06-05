@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +37,6 @@ type DeleteAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssistantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAssistantRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssistantId != nil {
-		s.WriteString(schemas.DeleteAssistantRequest_assistantId, *v.AssistantId)
-	}
-}
-func (v *DeleteAssistantInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAssistantRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteAssistantRequest_assistantId:
-			v.AssistantId = new(string)
-			return d.ReadString(schemas.DeleteAssistantRequest_assistantId, v.AssistantId)
-		}
-		return nil
-	})
-}
-
 type DeleteAssistantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,29 +44,16 @@ type DeleteAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAssistantOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAssistantResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAssistantResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssistant, schemas.DeleteAssistantRequest, schemas.DeleteAssistantResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssistant, schemas.DeleteAssistantRequest, schemas.DeleteAssistantResponse), output: &DeleteAssistantOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssistant{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAssistant"); err != nil {

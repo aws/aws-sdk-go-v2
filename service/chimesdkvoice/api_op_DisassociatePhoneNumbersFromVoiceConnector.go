@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,19 +43,6 @@ type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociatePhoneNumbersFromVoiceConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociatePhoneNumbersFromVoiceConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociatePhoneNumbersFromVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeE164PhoneNumberList(s, schemas.DisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers, v.E164PhoneNumbers)
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
@@ -70,23 +55,16 @@ type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociatePhoneNumbersFromVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociatePhoneNumbersFromVoiceConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors:
-			return deserializePhoneNumberErrorList(d, schemas.DisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors, &v.PhoneNumberErrors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociatePhoneNumbersFromVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePhoneNumbersFromVoiceConnector, schemas.DisassociatePhoneNumbersFromVoiceConnectorRequest, schemas.DisassociatePhoneNumbersFromVoiceConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePhoneNumbersFromVoiceConnector, schemas.DisassociatePhoneNumbersFromVoiceConnectorRequest, schemas.DisassociatePhoneNumbersFromVoiceConnectorResponse), output: &DisassociatePhoneNumbersFromVoiceConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociatePhoneNumbersFromVoiceConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociatePhoneNumbersFromVoiceConnector"); err != nil {

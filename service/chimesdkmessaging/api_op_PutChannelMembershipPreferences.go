@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,29 +61,6 @@ type PutChannelMembershipPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutChannelMembershipPreferencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutChannelMembershipPreferencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutChannelMembershipPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.PutChannelMembershipPreferencesRequest_ChannelArn, *v.ChannelArn)
-	}
-	if v.ChimeBearer != nil {
-		s.WriteString(schemas.PutChannelMembershipPreferencesRequest_ChimeBearer, *v.ChimeBearer)
-	}
-	if v.MemberArn != nil {
-		s.WriteString(schemas.PutChannelMembershipPreferencesRequest_MemberArn, *v.MemberArn)
-	}
-	if v.Preferences != nil {
-		s.WriteStruct(schemas.PutChannelMembershipPreferencesRequest_Preferences)
-		v.Preferences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type PutChannelMembershipPreferencesOutput struct {
 
 	// The ARN of the channel.
@@ -103,30 +78,16 @@ type PutChannelMembershipPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutChannelMembershipPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutChannelMembershipPreferencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutChannelMembershipPreferencesResponse_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.PutChannelMembershipPreferencesResponse_ChannelArn, v.ChannelArn)
-		case schemas.PutChannelMembershipPreferencesResponse_Member:
-			v.Member = &types.Identity{}
-			return v.Member.Deserialize(d)
-		case schemas.PutChannelMembershipPreferencesResponse_Preferences:
-			v.Preferences = &types.ChannelMembershipPreferences{}
-			return v.Preferences.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutChannelMembershipPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelMembershipPreferences, schemas.PutChannelMembershipPreferencesRequest, schemas.PutChannelMembershipPreferencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutChannelMembershipPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelMembershipPreferences, schemas.PutChannelMembershipPreferencesRequest, schemas.PutChannelMembershipPreferencesResponse), output: &PutChannelMembershipPreferencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutChannelMembershipPreferences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutChannelMembershipPreferences"); err != nil {

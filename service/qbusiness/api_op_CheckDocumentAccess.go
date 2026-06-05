@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,30 +64,6 @@ type CheckDocumentAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CheckDocumentAccessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CheckDocumentAccessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CheckDocumentAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.CheckDocumentAccessRequest_applicationId, *v.ApplicationId)
-	}
-	if v.DataSourceId != nil {
-		s.WriteString(schemas.CheckDocumentAccessRequest_dataSourceId, *v.DataSourceId)
-	}
-	if v.DocumentId != nil {
-		s.WriteString(schemas.CheckDocumentAccessRequest_documentId, *v.DocumentId)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.CheckDocumentAccessRequest_indexId, *v.IndexId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.CheckDocumentAccessRequest_userId, *v.UserId)
-	}
-}
-
 type CheckDocumentAccessOutput struct {
 
 	// The Access Control List (ACL) associated with the document. Includes allowlist
@@ -115,31 +89,16 @@ type CheckDocumentAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CheckDocumentAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CheckDocumentAccessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CheckDocumentAccessResponse_documentAcl:
-			v.DocumentAcl = &types.DocumentAcl{}
-			return v.DocumentAcl.Deserialize(d)
-		case schemas.CheckDocumentAccessResponse_hasAccess:
-			v.HasAccess = new(bool)
-			return d.ReadBool(schemas.CheckDocumentAccessResponse_hasAccess, v.HasAccess)
-		case schemas.CheckDocumentAccessResponse_userAliases:
-			return deserializeAssociatedUsers(d, schemas.CheckDocumentAccessResponse_userAliases, &v.UserAliases)
-		case schemas.CheckDocumentAccessResponse_userGroups:
-			return deserializeAssociatedGroups(d, schemas.CheckDocumentAccessResponse_userGroups, &v.UserGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCheckDocumentAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDocumentAccess, schemas.CheckDocumentAccessRequest, schemas.CheckDocumentAccessResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCheckDocumentAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDocumentAccess, schemas.CheckDocumentAccessRequest, schemas.CheckDocumentAccessResponse), output: &CheckDocumentAccessOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCheckDocumentAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CheckDocumentAccess"); err != nil {

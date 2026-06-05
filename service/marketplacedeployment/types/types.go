@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -29,34 +27,6 @@ type DeploymentParameterInput struct {
 	SecretString *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeploymentParameterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeploymentParameterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeploymentParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DeploymentParameterInput_name, *v.Name)
-	}
-	if v.SecretString != nil {
-		s.WriteString(schemas.DeploymentParameterInput_secretString, *v.SecretString)
-	}
-}
-func (v *DeploymentParameterInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeploymentParameterInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeploymentParameterInput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeploymentParameterInput_name, v.Name)
-		case schemas.DeploymentParameterInput_secretString:
-			v.SecretString = new(string)
-			return d.ReadString(schemas.DeploymentParameterInput_secretString, v.SecretString)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

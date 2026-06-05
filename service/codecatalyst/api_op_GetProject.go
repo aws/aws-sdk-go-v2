@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type GetProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.GetProjectRequest_name, *v.Name)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.GetProjectRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type GetProjectOutput struct {
 
 	// The name of the project in the space.
@@ -80,33 +63,16 @@ type GetProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetProjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetProjectResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetProjectResponse_description, v.Description)
-		case schemas.GetProjectResponse_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.GetProjectResponse_displayName, v.DisplayName)
-		case schemas.GetProjectResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetProjectResponse_name, v.Name)
-		case schemas.GetProjectResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.GetProjectResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProject, schemas.GetProjectRequest, schemas.GetProjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProject, schemas.GetProjectRequest, schemas.GetProjectResponse), output: &GetProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProject"); err != nil {

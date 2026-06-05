@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,29 +59,6 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateRepositoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateRepositoryRequest_description, *v.Description)
-	}
-	if v.Domain != nil {
-		s.WriteString(schemas.CreateRepositoryRequest_domain, *v.Domain)
-	}
-	if v.DomainOwner != nil {
-		s.WriteString(schemas.CreateRepositoryRequest_domainOwner, *v.DomainOwner)
-	}
-	if v.Repository != nil {
-		s.WriteString(schemas.CreateRepositoryRequest_repository, *v.Repository)
-	}
-	serializeTagList(s, schemas.CreateRepositoryRequest_tags, v.Tags)
-	serializeUpstreamRepositoryList(s, schemas.CreateRepositoryRequest_upstreams, v.Upstreams)
-}
-
 type CreateRepositoryOutput struct {
 
 	//  Information about the created repository after processing the request.
@@ -95,24 +70,16 @@ type CreateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateRepositoryResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateRepositoryResult_repository:
-			v.Repository = &types.RepositoryDescription{}
-			return v.Repository.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryRequest, schemas.CreateRepositoryResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRepository{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryRequest, schemas.CreateRepositoryResult), output: &CreateRepositoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRepository{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRepository"); err != nil {

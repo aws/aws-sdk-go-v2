@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -33,58 +31,6 @@ type KubernetesMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KubernetesMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KubernetesMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KubernetesMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LocalPodName != nil {
-		s.WriteString(schemas.KubernetesMetadata_localPodName, *v.LocalPodName)
-	}
-	if v.LocalPodNamespace != nil {
-		s.WriteString(schemas.KubernetesMetadata_localPodNamespace, *v.LocalPodNamespace)
-	}
-	if v.LocalServiceName != nil {
-		s.WriteString(schemas.KubernetesMetadata_localServiceName, *v.LocalServiceName)
-	}
-	if v.RemotePodName != nil {
-		s.WriteString(schemas.KubernetesMetadata_remotePodName, *v.RemotePodName)
-	}
-	if v.RemotePodNamespace != nil {
-		s.WriteString(schemas.KubernetesMetadata_remotePodNamespace, *v.RemotePodNamespace)
-	}
-	if v.RemoteServiceName != nil {
-		s.WriteString(schemas.KubernetesMetadata_remoteServiceName, *v.RemoteServiceName)
-	}
-}
-func (v *KubernetesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KubernetesMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KubernetesMetadata_localPodName:
-			v.LocalPodName = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_localPodName, v.LocalPodName)
-		case schemas.KubernetesMetadata_localPodNamespace:
-			v.LocalPodNamespace = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_localPodNamespace, v.LocalPodNamespace)
-		case schemas.KubernetesMetadata_localServiceName:
-			v.LocalServiceName = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_localServiceName, v.LocalServiceName)
-		case schemas.KubernetesMetadata_remotePodName:
-			v.RemotePodName = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_remotePodName, v.RemotePodName)
-		case schemas.KubernetesMetadata_remotePodNamespace:
-			v.RemotePodNamespace = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_remotePodNamespace, v.RemotePodNamespace)
-		case schemas.KubernetesMetadata_remoteServiceName:
-			v.RemoteServiceName = new(string)
-			return d.ReadString(schemas.KubernetesMetadata_remoteServiceName, v.RemoteServiceName)
-		}
-		return nil
-	})
-}
-
 // A local resource is the host where the agent is installed. Local resources can
 // be a a subnet, a VPC, an Availability Zone, an EKS cluster or an Amazon Web
 // Services Region.
@@ -111,38 +57,6 @@ type MonitorLocalResource struct {
 	Type MonitorLocalResourceType
 
 	noSmithyDocumentSerde
-}
-
-func (v *MonitorLocalResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitorLocalResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitorLocalResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.MonitorLocalResource_identifier, *v.Identifier)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.MonitorLocalResource_type, string(v.Type))
-	}
-}
-func (v *MonitorLocalResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitorLocalResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitorLocalResource_identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.MonitorLocalResource_identifier, v.Identifier)
-		case schemas.MonitorLocalResource_type:
-			var ev string
-			if err := d.ReadString(schemas.MonitorLocalResource_type, &ev); err != nil {
-				return err
-			}
-			v.Type = MonitorLocalResourceType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A remote resource is the other endpoint in a network flow. That is, one
@@ -182,38 +96,6 @@ type MonitorRemoteResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MonitorRemoteResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitorRemoteResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitorRemoteResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.MonitorRemoteResource_identifier, *v.Identifier)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.MonitorRemoteResource_type, string(v.Type))
-	}
-}
-func (v *MonitorRemoteResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitorRemoteResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitorRemoteResource_identifier:
-			v.Identifier = new(string)
-			return d.ReadString(schemas.MonitorRemoteResource_identifier, v.Identifier)
-		case schemas.MonitorRemoteResource_type:
-			var ev string
-			if err := d.ReadString(schemas.MonitorRemoteResource_type, &ev); err != nil {
-				return err
-			}
-			v.Type = MonitorRemoteResourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A summary of information about a monitor, including the ARN, the name, and the
 // status.
 type MonitorSummary struct {
@@ -244,44 +126,6 @@ type MonitorSummary struct {
 	MonitorStatus MonitorStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *MonitorSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitorSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MonitorArn != nil {
-		s.WriteString(schemas.MonitorSummary_monitorArn, *v.MonitorArn)
-	}
-	if v.MonitorName != nil {
-		s.WriteString(schemas.MonitorSummary_monitorName, *v.MonitorName)
-	}
-	if v.MonitorStatus != "" {
-		s.WriteString(schemas.MonitorSummary_monitorStatus, string(v.MonitorStatus))
-	}
-}
-func (v *MonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitorSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitorSummary_monitorArn:
-			v.MonitorArn = new(string)
-			return d.ReadString(schemas.MonitorSummary_monitorArn, v.MonitorArn)
-		case schemas.MonitorSummary_monitorName:
-			v.MonitorName = new(string)
-			return d.ReadString(schemas.MonitorSummary_monitorName, v.MonitorName)
-		case schemas.MonitorSummary_monitorStatus:
-			var ev string
-			if err := d.ReadString(schemas.MonitorSummary_monitorStatus, &ev); err != nil {
-				return err
-			}
-			v.MonitorStatus = MonitorStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A set of information for a top contributor network flow in a monitor. In a
@@ -391,175 +235,6 @@ type MonitorTopContributorsRow struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MonitorTopContributorsRow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonitorTopContributorsRow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonitorTopContributorsRow) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationCategory != "" {
-		s.WriteString(schemas.MonitorTopContributorsRow_destinationCategory, string(v.DestinationCategory))
-	}
-	if v.DnatIp != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_dnatIp, *v.DnatIp)
-	}
-	if v.KubernetesMetadata != nil {
-		s.WriteStruct(schemas.MonitorTopContributorsRow_kubernetesMetadata)
-		v.KubernetesMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LocalAz != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localAz, *v.LocalAz)
-	}
-	if v.LocalInstanceArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localInstanceArn, *v.LocalInstanceArn)
-	}
-	if v.LocalInstanceId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localInstanceId, *v.LocalInstanceId)
-	}
-	if v.LocalIp != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localIp, *v.LocalIp)
-	}
-	if v.LocalRegion != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localRegion, *v.LocalRegion)
-	}
-	if v.LocalSubnetArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localSubnetArn, *v.LocalSubnetArn)
-	}
-	if v.LocalSubnetId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localSubnetId, *v.LocalSubnetId)
-	}
-	if v.LocalVpcArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localVpcArn, *v.LocalVpcArn)
-	}
-	if v.LocalVpcId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_localVpcId, *v.LocalVpcId)
-	}
-	if v.RemoteAz != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteAz, *v.RemoteAz)
-	}
-	if v.RemoteInstanceArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteInstanceArn, *v.RemoteInstanceArn)
-	}
-	if v.RemoteInstanceId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteInstanceId, *v.RemoteInstanceId)
-	}
-	if v.RemoteIp != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteIp, *v.RemoteIp)
-	}
-	if v.RemoteRegion != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteRegion, *v.RemoteRegion)
-	}
-	if v.RemoteSubnetArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteSubnetArn, *v.RemoteSubnetArn)
-	}
-	if v.RemoteSubnetId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteSubnetId, *v.RemoteSubnetId)
-	}
-	if v.RemoteVpcArn != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteVpcArn, *v.RemoteVpcArn)
-	}
-	if v.RemoteVpcId != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_remoteVpcId, *v.RemoteVpcId)
-	}
-	if v.SnatIp != nil {
-		s.WriteString(schemas.MonitorTopContributorsRow_snatIp, *v.SnatIp)
-	}
-	if v.TargetPort != nil {
-		s.WriteInt32(schemas.MonitorTopContributorsRow_targetPort, *v.TargetPort)
-	}
-	serializeTraversedConstructsList(s, schemas.MonitorTopContributorsRow_traversedConstructs, v.TraversedConstructs)
-	if v.Value != nil {
-		s.WriteInt64(schemas.MonitorTopContributorsRow_value, *v.Value)
-	}
-}
-func (v *MonitorTopContributorsRow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonitorTopContributorsRow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonitorTopContributorsRow_destinationCategory:
-			var ev string
-			if err := d.ReadString(schemas.MonitorTopContributorsRow_destinationCategory, &ev); err != nil {
-				return err
-			}
-			v.DestinationCategory = DestinationCategory(ev)
-			return nil
-		case schemas.MonitorTopContributorsRow_dnatIp:
-			v.DnatIp = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_dnatIp, v.DnatIp)
-		case schemas.MonitorTopContributorsRow_kubernetesMetadata:
-			v.KubernetesMetadata = &KubernetesMetadata{}
-			return v.KubernetesMetadata.Deserialize(d)
-		case schemas.MonitorTopContributorsRow_localAz:
-			v.LocalAz = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localAz, v.LocalAz)
-		case schemas.MonitorTopContributorsRow_localInstanceArn:
-			v.LocalInstanceArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localInstanceArn, v.LocalInstanceArn)
-		case schemas.MonitorTopContributorsRow_localInstanceId:
-			v.LocalInstanceId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localInstanceId, v.LocalInstanceId)
-		case schemas.MonitorTopContributorsRow_localIp:
-			v.LocalIp = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localIp, v.LocalIp)
-		case schemas.MonitorTopContributorsRow_localRegion:
-			v.LocalRegion = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localRegion, v.LocalRegion)
-		case schemas.MonitorTopContributorsRow_localSubnetArn:
-			v.LocalSubnetArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localSubnetArn, v.LocalSubnetArn)
-		case schemas.MonitorTopContributorsRow_localSubnetId:
-			v.LocalSubnetId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localSubnetId, v.LocalSubnetId)
-		case schemas.MonitorTopContributorsRow_localVpcArn:
-			v.LocalVpcArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localVpcArn, v.LocalVpcArn)
-		case schemas.MonitorTopContributorsRow_localVpcId:
-			v.LocalVpcId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_localVpcId, v.LocalVpcId)
-		case schemas.MonitorTopContributorsRow_remoteAz:
-			v.RemoteAz = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteAz, v.RemoteAz)
-		case schemas.MonitorTopContributorsRow_remoteInstanceArn:
-			v.RemoteInstanceArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteInstanceArn, v.RemoteInstanceArn)
-		case schemas.MonitorTopContributorsRow_remoteInstanceId:
-			v.RemoteInstanceId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteInstanceId, v.RemoteInstanceId)
-		case schemas.MonitorTopContributorsRow_remoteIp:
-			v.RemoteIp = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteIp, v.RemoteIp)
-		case schemas.MonitorTopContributorsRow_remoteRegion:
-			v.RemoteRegion = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteRegion, v.RemoteRegion)
-		case schemas.MonitorTopContributorsRow_remoteSubnetArn:
-			v.RemoteSubnetArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteSubnetArn, v.RemoteSubnetArn)
-		case schemas.MonitorTopContributorsRow_remoteSubnetId:
-			v.RemoteSubnetId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteSubnetId, v.RemoteSubnetId)
-		case schemas.MonitorTopContributorsRow_remoteVpcArn:
-			v.RemoteVpcArn = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteVpcArn, v.RemoteVpcArn)
-		case schemas.MonitorTopContributorsRow_remoteVpcId:
-			v.RemoteVpcId = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_remoteVpcId, v.RemoteVpcId)
-		case schemas.MonitorTopContributorsRow_snatIp:
-			v.SnatIp = new(string)
-			return d.ReadString(schemas.MonitorTopContributorsRow_snatIp, v.SnatIp)
-		case schemas.MonitorTopContributorsRow_targetPort:
-			v.TargetPort = new(int32)
-			return d.ReadInt32(schemas.MonitorTopContributorsRow_targetPort, v.TargetPort)
-		case schemas.MonitorTopContributorsRow_traversedConstructs:
-			return deserializeTraversedConstructsList(d, schemas.MonitorTopContributorsRow_traversedConstructs, &v.TraversedConstructs)
-		case schemas.MonitorTopContributorsRow_value:
-			v.Value = new(int64)
-			return d.ReadInt64(schemas.MonitorTopContributorsRow_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // A summary of information about a scope, including the ARN, target ID, and
 // Amazon Web Services Region.
 type ScopeSummary struct {
@@ -589,44 +264,6 @@ type ScopeSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScopeSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScopeSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScopeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ScopeArn != nil {
-		s.WriteString(schemas.ScopeSummary_scopeArn, *v.ScopeArn)
-	}
-	if v.ScopeId != nil {
-		s.WriteString(schemas.ScopeSummary_scopeId, *v.ScopeId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ScopeSummary_status, string(v.Status))
-	}
-}
-func (v *ScopeSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScopeSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScopeSummary_scopeArn:
-			v.ScopeArn = new(string)
-			return d.ReadString(schemas.ScopeSummary_scopeArn, v.ScopeArn)
-		case schemas.ScopeSummary_scopeId:
-			v.ScopeId = new(string)
-			return d.ReadString(schemas.ScopeSummary_scopeId, v.ScopeId)
-		case schemas.ScopeSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.ScopeSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ScopeStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A target ID is an internally-generated identifier for a target. A target allows
 // you to identify all the resources in a Network Flow Monitor scope. Currently, a
 // target is always an Amazon Web Services account.
@@ -646,12 +283,6 @@ type TargetIdMemberAccountId struct {
 }
 
 func (*TargetIdMemberAccountId) isTargetId() {}
-func (v *TargetIdMemberAccountId) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.TargetId_accountId, v.Value)
-}
-func (v *TargetIdMemberAccountId) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.TargetId_accountId, &v.Value)
-}
 
 // A target identifier is a pair of identifying information for a scope that is
 // included in a target. A target identifier is made up of a target ID and a target
@@ -670,35 +301,6 @@ type TargetIdentifier struct {
 	TargetType TargetType
 
 	noSmithyDocumentSerde
-}
-
-func (v *TargetIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TargetIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TargetIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetId(s, schemas.TargetIdentifier_targetId, v.TargetId)
-	if v.TargetType != "" {
-		s.WriteString(schemas.TargetIdentifier_targetType, string(v.TargetType))
-	}
-}
-func (v *TargetIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TargetIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TargetIdentifier_targetId:
-			return deserializeTargetId(d, schemas.TargetIdentifier_targetId, &v.TargetId)
-		case schemas.TargetIdentifier_targetType:
-			var ev string
-			if err := d.ReadString(schemas.TargetIdentifier_targetType, &ev); err != nil {
-				return err
-			}
-			v.TargetType = TargetType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A target resource in a scope. The resource is identified by a Region and an
@@ -722,36 +324,6 @@ type TargetResource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TargetResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TargetResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TargetResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Region != nil {
-		s.WriteString(schemas.TargetResource_region, *v.Region)
-	}
-	if v.TargetIdentifier != nil {
-		s.WriteStruct(schemas.TargetResource_targetIdentifier)
-		v.TargetIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *TargetResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TargetResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TargetResource_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.TargetResource_region, v.Region)
-		case schemas.TargetResource_targetIdentifier:
-			v.TargetIdentifier = &TargetIdentifier{}
-			return v.TargetIdentifier.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // A section of the network that a network flow has traveled through.
 type TraversedComponent struct {
 
@@ -768,46 +340,6 @@ type TraversedComponent struct {
 	ServiceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TraversedComponent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TraversedComponent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TraversedComponent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComponentArn != nil {
-		s.WriteString(schemas.TraversedComponent_componentArn, *v.ComponentArn)
-	}
-	if v.ComponentId != nil {
-		s.WriteString(schemas.TraversedComponent_componentId, *v.ComponentId)
-	}
-	if v.ComponentType != nil {
-		s.WriteString(schemas.TraversedComponent_componentType, *v.ComponentType)
-	}
-	if v.ServiceName != nil {
-		s.WriteString(schemas.TraversedComponent_serviceName, *v.ServiceName)
-	}
-}
-func (v *TraversedComponent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TraversedComponent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TraversedComponent_componentArn:
-			v.ComponentArn = new(string)
-			return d.ReadString(schemas.TraversedComponent_componentArn, v.ComponentArn)
-		case schemas.TraversedComponent_componentId:
-			v.ComponentId = new(string)
-			return d.ReadString(schemas.TraversedComponent_componentId, v.ComponentId)
-		case schemas.TraversedComponent_componentType:
-			v.ComponentType = new(string)
-			return d.ReadString(schemas.TraversedComponent_componentType, v.ComponentType)
-		case schemas.TraversedComponent_serviceName:
-			v.ServiceName = new(string)
-			return d.ReadString(schemas.TraversedComponent_serviceName, v.ServiceName)
-		}
-		return nil
-	})
 }
 
 // A data point for a top contributor network flow in a scope. Network Flow
@@ -831,34 +363,6 @@ type WorkloadInsightsTopContributorsDataPoint struct {
 	Values []float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkloadInsightsTopContributorsDataPoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkloadInsightsTopContributorsDataPoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkloadInsightsTopContributorsDataPoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Label != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsDataPoint_label, *v.Label)
-	}
-	serializeWorkloadInsightsTopContributorsTimestampsList(s, schemas.WorkloadInsightsTopContributorsDataPoint_timestamps, v.Timestamps)
-	serializeWorkloadInsightsTopContributorsValuesList(s, schemas.WorkloadInsightsTopContributorsDataPoint_values, v.Values)
-}
-func (v *WorkloadInsightsTopContributorsDataPoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkloadInsightsTopContributorsDataPoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkloadInsightsTopContributorsDataPoint_label:
-			v.Label = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsDataPoint_label, v.Label)
-		case schemas.WorkloadInsightsTopContributorsDataPoint_timestamps:
-			return deserializeWorkloadInsightsTopContributorsTimestampsList(d, schemas.WorkloadInsightsTopContributorsDataPoint_timestamps, &v.Timestamps)
-		case schemas.WorkloadInsightsTopContributorsDataPoint_values:
-			return deserializeWorkloadInsightsTopContributorsValuesList(d, schemas.WorkloadInsightsTopContributorsDataPoint_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // A row for a top contributor for a scope.
@@ -895,76 +399,6 @@ type WorkloadInsightsTopContributorsRow struct {
 	Value *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkloadInsightsTopContributorsRow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkloadInsightsTopContributorsRow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkloadInsightsTopContributorsRow) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_accountId, *v.AccountId)
-	}
-	if v.LocalAz != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localAz, *v.LocalAz)
-	}
-	if v.LocalRegion != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localRegion, *v.LocalRegion)
-	}
-	if v.LocalSubnetArn != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localSubnetArn, *v.LocalSubnetArn)
-	}
-	if v.LocalSubnetId != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localSubnetId, *v.LocalSubnetId)
-	}
-	if v.LocalVpcArn != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localVpcArn, *v.LocalVpcArn)
-	}
-	if v.LocalVpcId != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_localVpcId, *v.LocalVpcId)
-	}
-	if v.RemoteIdentifier != nil {
-		s.WriteString(schemas.WorkloadInsightsTopContributorsRow_remoteIdentifier, *v.RemoteIdentifier)
-	}
-	if v.Value != nil {
-		s.WriteInt64(schemas.WorkloadInsightsTopContributorsRow_value, *v.Value)
-	}
-}
-func (v *WorkloadInsightsTopContributorsRow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkloadInsightsTopContributorsRow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkloadInsightsTopContributorsRow_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_accountId, v.AccountId)
-		case schemas.WorkloadInsightsTopContributorsRow_localAz:
-			v.LocalAz = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localAz, v.LocalAz)
-		case schemas.WorkloadInsightsTopContributorsRow_localRegion:
-			v.LocalRegion = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localRegion, v.LocalRegion)
-		case schemas.WorkloadInsightsTopContributorsRow_localSubnetArn:
-			v.LocalSubnetArn = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localSubnetArn, v.LocalSubnetArn)
-		case schemas.WorkloadInsightsTopContributorsRow_localSubnetId:
-			v.LocalSubnetId = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localSubnetId, v.LocalSubnetId)
-		case schemas.WorkloadInsightsTopContributorsRow_localVpcArn:
-			v.LocalVpcArn = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localVpcArn, v.LocalVpcArn)
-		case schemas.WorkloadInsightsTopContributorsRow_localVpcId:
-			v.LocalVpcId = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_localVpcId, v.LocalVpcId)
-		case schemas.WorkloadInsightsTopContributorsRow_remoteIdentifier:
-			v.RemoteIdentifier = new(string)
-			return d.ReadString(schemas.WorkloadInsightsTopContributorsRow_remoteIdentifier, v.RemoteIdentifier)
-		case schemas.WorkloadInsightsTopContributorsRow_value:
-			v.Value = new(int64)
-			return d.ReadInt64(schemas.WorkloadInsightsTopContributorsRow_value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

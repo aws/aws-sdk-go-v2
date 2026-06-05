@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,27 +54,6 @@ type DeleteKxDataviewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKxDataviewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteKxDataviewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteKxDataviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteKxDataviewRequest_clientToken, *v.ClientToken)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.DeleteKxDataviewRequest_databaseName, *v.DatabaseName)
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.DeleteKxDataviewRequest_dataviewName, *v.DataviewName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.DeleteKxDataviewRequest_environmentId, *v.EnvironmentId)
-	}
-}
-
 type DeleteKxDataviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,21 +61,16 @@ type DeleteKxDataviewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKxDataviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteKxDataviewResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteKxDataviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxDataview, schemas.DeleteKxDataviewRequest, schemas.DeleteKxDataviewResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxDataview{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxDataview, schemas.DeleteKxDataviewRequest, schemas.DeleteKxDataviewResponse), output: &DeleteKxDataviewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxDataview{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxDataview"); err != nil {

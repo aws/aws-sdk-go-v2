@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetCaseInput struct {
 	CaseId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.GetCaseRequest_caseId, *v.CaseId)
-	}
 }
 
 type GetCaseOutput struct {
@@ -128,94 +114,16 @@ type GetCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCaseResponse_actualIncidentStartDate:
-			v.ActualIncidentStartDate = new(time.Time)
-			return d.ReadTime(schemas.GetCaseResponse_actualIncidentStartDate, v.ActualIncidentStartDate)
-		case schemas.GetCaseResponse_caseArn:
-			v.CaseArn = new(string)
-			return d.ReadString(schemas.GetCaseResponse_caseArn, v.CaseArn)
-		case schemas.GetCaseResponse_caseAttachments:
-			return deserializeCaseAttachmentsList(d, schemas.GetCaseResponse_caseAttachments, &v.CaseAttachments)
-		case schemas.GetCaseResponse_caseMetadata:
-			return deserializeCaseMetadata(d, schemas.GetCaseResponse_caseMetadata, &v.CaseMetadata)
-		case schemas.GetCaseResponse_caseStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetCaseResponse_caseStatus, &ev); err != nil {
-				return err
-			}
-			v.CaseStatus = types.CaseStatus(ev)
-			return nil
-		case schemas.GetCaseResponse_closedDate:
-			v.ClosedDate = new(time.Time)
-			return d.ReadTime(schemas.GetCaseResponse_closedDate, v.ClosedDate)
-		case schemas.GetCaseResponse_closureCode:
-			var ev string
-			if err := d.ReadString(schemas.GetCaseResponse_closureCode, &ev); err != nil {
-				return err
-			}
-			v.ClosureCode = types.ClosureCode(ev)
-			return nil
-		case schemas.GetCaseResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetCaseResponse_createdDate, v.CreatedDate)
-		case schemas.GetCaseResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetCaseResponse_description, v.Description)
-		case schemas.GetCaseResponse_engagementType:
-			var ev string
-			if err := d.ReadString(schemas.GetCaseResponse_engagementType, &ev); err != nil {
-				return err
-			}
-			v.EngagementType = types.EngagementType(ev)
-			return nil
-		case schemas.GetCaseResponse_impactedAccounts:
-			return deserializeImpactedAccounts(d, schemas.GetCaseResponse_impactedAccounts, &v.ImpactedAccounts)
-		case schemas.GetCaseResponse_impactedAwsRegions:
-			return deserializeImpactedAwsRegionList(d, schemas.GetCaseResponse_impactedAwsRegions, &v.ImpactedAwsRegions)
-		case schemas.GetCaseResponse_impactedServices:
-			return deserializeImpactedServicesList(d, schemas.GetCaseResponse_impactedServices, &v.ImpactedServices)
-		case schemas.GetCaseResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.GetCaseResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.GetCaseResponse_pendingAction:
-			var ev string
-			if err := d.ReadString(schemas.GetCaseResponse_pendingAction, &ev); err != nil {
-				return err
-			}
-			v.PendingAction = types.PendingAction(ev)
-			return nil
-		case schemas.GetCaseResponse_reportedIncidentStartDate:
-			v.ReportedIncidentStartDate = new(time.Time)
-			return d.ReadTime(schemas.GetCaseResponse_reportedIncidentStartDate, v.ReportedIncidentStartDate)
-		case schemas.GetCaseResponse_resolverType:
-			var ev string
-			if err := d.ReadString(schemas.GetCaseResponse_resolverType, &ev); err != nil {
-				return err
-			}
-			v.ResolverType = types.ResolverType(ev)
-			return nil
-		case schemas.GetCaseResponse_threatActorIpAddresses:
-			return deserializeThreatActorIpList(d, schemas.GetCaseResponse_threatActorIpAddresses, &v.ThreatActorIpAddresses)
-		case schemas.GetCaseResponse_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.GetCaseResponse_title, v.Title)
-		case schemas.GetCaseResponse_watchers:
-			return deserializeWatchers(d, schemas.GetCaseResponse_watchers, &v.Watchers)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCase, schemas.GetCaseRequest, schemas.GetCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCase, schemas.GetCaseRequest, schemas.GetCaseResponse), output: &GetCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCase"); err != nil {

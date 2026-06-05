@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteAIAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAIAgentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAIAgentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiAgentId != nil {
-		s.WriteString(schemas.DeleteAIAgentRequest_aiAgentId, *v.AiAgentId)
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.DeleteAIAgentRequest_assistantId, *v.AssistantId)
-	}
-}
-
 type DeleteAIAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type DeleteAIAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAIAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAIAgentResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAIAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIAgent, schemas.DeleteAIAgentRequest, schemas.DeleteAIAgentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAIAgent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIAgent, schemas.DeleteAIAgentRequest, schemas.DeleteAIAgentResponse), output: &DeleteAIAgentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAIAgent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAIAgent"); err != nil {

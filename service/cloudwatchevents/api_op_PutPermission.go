@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -100,35 +98,6 @@ type PutPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPermissionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutPermissionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteString(schemas.PutPermissionRequest_Action, *v.Action)
-	}
-	if v.Condition != nil {
-		s.WriteStruct(schemas.PutPermissionRequest_Condition)
-		v.Condition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EventBusName != nil {
-		s.WriteString(schemas.PutPermissionRequest_EventBusName, *v.EventBusName)
-	}
-	if v.Policy != nil {
-		s.WriteString(schemas.PutPermissionRequest_Policy, *v.Policy)
-	}
-	if v.Principal != nil {
-		s.WriteString(schemas.PutPermissionRequest_Principal, *v.Principal)
-	}
-	if v.StatementId != nil {
-		s.WriteString(schemas.PutPermissionRequest_StatementId, *v.StatementId)
-	}
-}
-
 type PutPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -136,29 +105,16 @@ type PutPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutPermissionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPermission, schemas.PutPermissionRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPermission, schemas.PutPermissionRequest, nil), output: &PutPermissionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutPermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutPermission"); err != nil {

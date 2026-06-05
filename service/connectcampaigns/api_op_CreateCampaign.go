@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaigns/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,48 +57,6 @@ type CreateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCampaignInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCampaignRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.CreateCampaignRequest_connectInstanceId, *v.ConnectInstanceId)
-	}
-	serializeDialerConfig(s, schemas.CreateCampaignRequest_dialerConfig, v.DialerConfig)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateCampaignRequest_name, *v.Name)
-	}
-	if v.OutboundCallConfig != nil {
-		s.WriteStruct(schemas.CreateCampaignRequest_outboundCallConfig)
-		v.OutboundCallConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagMap(s, schemas.CreateCampaignRequest_tags, v.Tags)
-}
-func (v *CreateCampaignInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCampaignRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCampaignRequest_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.CreateCampaignRequest_connectInstanceId, v.ConnectInstanceId)
-		case schemas.CreateCampaignRequest_dialerConfig:
-			return deserializeDialerConfig(d, schemas.CreateCampaignRequest_dialerConfig, &v.DialerConfig)
-		case schemas.CreateCampaignRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateCampaignRequest_name, v.Name)
-		case schemas.CreateCampaignRequest_outboundCallConfig:
-			v.OutboundCallConfig = &types.OutboundCallConfig{}
-			return v.OutboundCallConfig.Deserialize(d)
-		case schemas.CreateCampaignRequest_tags:
-			return deserializeTagMap(d, schemas.CreateCampaignRequest_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // The response for Create Campaign API
 type CreateCampaignOutput struct {
 
@@ -119,44 +75,16 @@ type CreateCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCampaignOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCampaignResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CreateCampaignResponse_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CreateCampaignResponse_id, *v.Id)
-	}
-	serializeTagMap(s, schemas.CreateCampaignResponse_tags, v.Tags)
-}
-func (v *CreateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCampaignResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCampaignResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateCampaignResponse_arn, v.Arn)
-		case schemas.CreateCampaignResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateCampaignResponse_id, v.Id)
-		case schemas.CreateCampaignResponse_tags:
-			return deserializeTagMap(d, schemas.CreateCampaignResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCampaign, schemas.CreateCampaignRequest, schemas.CreateCampaignResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCampaign{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCampaign, schemas.CreateCampaignRequest, schemas.CreateCampaignResponse), output: &CreateCampaignOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCampaign{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCampaign"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,33 +60,6 @@ type UpdateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIndexInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIndexRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdateIndexRequest_applicationId, *v.ApplicationId)
-	}
-	if v.CapacityConfiguration != nil {
-		s.WriteStruct(schemas.UpdateIndexRequest_capacityConfiguration)
-		v.CapacityConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateIndexRequest_description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateIndexRequest_displayName, *v.DisplayName)
-	}
-	serializeDocumentAttributeConfigurations(s, schemas.UpdateIndexRequest_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
-	if v.IndexId != nil {
-		s.WriteString(schemas.UpdateIndexRequest_indexId, *v.IndexId)
-	}
-}
-
 type UpdateIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,21 +67,16 @@ type UpdateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateIndexResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndex, schemas.UpdateIndexRequest, schemas.UpdateIndexResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndex, schemas.UpdateIndexRequest, schemas.UpdateIndexResponse), output: &UpdateIndexOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIndex"); err != nil {

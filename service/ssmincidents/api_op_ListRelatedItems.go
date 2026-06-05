@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,40 +45,6 @@ type ListRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRelatedItemsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncidentRecordArn != nil {
-		s.WriteString(schemas.ListRelatedItemsInput_incidentRecordArn, *v.IncidentRecordArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRelatedItemsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRelatedItemsInput_nextToken, *v.NextToken)
-	}
-}
-func (v *ListRelatedItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRelatedItemsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRelatedItemsInput_incidentRecordArn:
-			v.IncidentRecordArn = new(string)
-			return d.ReadString(schemas.ListRelatedItemsInput_incidentRecordArn, v.IncidentRecordArn)
-		case schemas.ListRelatedItemsInput_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListRelatedItemsInput_maxResults, v.MaxResults)
-		case schemas.ListRelatedItemsInput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRelatedItemsInput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListRelatedItemsOutput struct {
 
 	// Details about each related item.
@@ -98,38 +62,16 @@ type ListRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRelatedItemsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRelatedItemsOutput_nextToken, *v.NextToken)
-	}
-	serializeRelatedItemList(s, schemas.ListRelatedItemsOutput_relatedItems, v.RelatedItems)
-}
-func (v *ListRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRelatedItemsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRelatedItemsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRelatedItemsOutput_nextToken, v.NextToken)
-		case schemas.ListRelatedItemsOutput_relatedItems:
-			return deserializeRelatedItemList(d, schemas.ListRelatedItemsOutput_relatedItems, &v.RelatedItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedItems, schemas.ListRelatedItemsInput, schemas.ListRelatedItemsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRelatedItems{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedItems, schemas.ListRelatedItemsInput, schemas.ListRelatedItemsOutput), output: &ListRelatedItemsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRelatedItems{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRelatedItems"); err != nil {

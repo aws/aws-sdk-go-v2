@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,39 +87,6 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationProviderArn != nil {
-		s.WriteString(schemas.CreateApplicationRequest_ApplicationProviderArn, *v.ApplicationProviderArn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateApplicationRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateApplicationRequest_Description, *v.Description)
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.CreateApplicationRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
-	}
-	if v.PortalOptions != nil {
-		s.WriteStruct(schemas.CreateApplicationRequest_PortalOptions)
-		v.PortalOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CreateApplicationRequest_Status, string(v.Status))
-	}
-	serializeTagList(s, schemas.CreateApplicationRequest_Tags, v.Tags)
-}
-
 type CreateApplicationOutput struct {
 
 	// Specifies the ARN of the application.
@@ -142,30 +107,16 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateApplicationResponse_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_ApplicationArn, v.ApplicationArn)
-		case schemas.CreateApplicationResponse_IdentityStoreArn:
-			v.IdentityStoreArn = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_IdentityStoreArn, v.IdentityStoreArn)
-		case schemas.CreateApplicationResponse_InstanceArn:
-			v.InstanceArn = new(string)
-			return d.ReadString(schemas.CreateApplicationResponse_InstanceArn, v.InstanceArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {

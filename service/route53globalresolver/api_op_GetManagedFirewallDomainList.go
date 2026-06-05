@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,18 +44,6 @@ type GetManagedFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedFirewallDomainListInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedFirewallDomainListInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedFirewallDomainListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManagedFirewallDomainListId != nil {
-		s.WriteString(schemas.GetManagedFirewallDomainListInput_managedFirewallDomainListId, *v.ManagedFirewallDomainListId)
-	}
-}
-
 type GetManagedFirewallDomainListOutput struct {
 
 	// ID of the Managed Domain List.
@@ -84,33 +70,16 @@ type GetManagedFirewallDomainListOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedFirewallDomainListOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedFirewallDomainListOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetManagedFirewallDomainListOutput_description, v.Description)
-		case schemas.GetManagedFirewallDomainListOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetManagedFirewallDomainListOutput_id, v.Id)
-		case schemas.GetManagedFirewallDomainListOutput_managedListType:
-			v.ManagedListType = new(string)
-			return d.ReadString(schemas.GetManagedFirewallDomainListOutput_managedListType, v.ManagedListType)
-		case schemas.GetManagedFirewallDomainListOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetManagedFirewallDomainListOutput_name, v.Name)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedFirewallDomainList, schemas.GetManagedFirewallDomainListInput, schemas.GetManagedFirewallDomainListOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedFirewallDomainList{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedFirewallDomainList, schemas.GetManagedFirewallDomainListInput, schemas.GetManagedFirewallDomainListOutput), output: &GetManagedFirewallDomainListOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedFirewallDomainList{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedFirewallDomainList"); err != nil {

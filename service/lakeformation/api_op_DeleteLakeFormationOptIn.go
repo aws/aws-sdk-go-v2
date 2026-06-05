@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,30 +47,6 @@ type DeleteLakeFormationOptInInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLakeFormationOptInInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteLakeFormationOptInRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLakeFormationOptInInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Condition != nil {
-		s.WriteStruct(schemas.DeleteLakeFormationOptInRequest_Condition)
-		v.Condition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Principal != nil {
-		s.WriteStruct(schemas.DeleteLakeFormationOptInRequest_Principal)
-		v.Principal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.DeleteLakeFormationOptInRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type DeleteLakeFormationOptInOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,21 +54,16 @@ type DeleteLakeFormationOptInOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLakeFormationOptInOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteLakeFormationOptInResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteLakeFormationOptInMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLakeFormationOptIn, schemas.DeleteLakeFormationOptInRequest, schemas.DeleteLakeFormationOptInResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLakeFormationOptIn{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLakeFormationOptIn, schemas.DeleteLakeFormationOptInRequest, schemas.DeleteLakeFormationOptInResponse), output: &DeleteLakeFormationOptInOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLakeFormationOptIn{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLakeFormationOptIn"); err != nil {

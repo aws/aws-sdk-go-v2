@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -18,25 +16,6 @@ type AddressIdentifierFilter struct {
 	TransactionEventToAddress []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AddressIdentifierFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddressIdentifierFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddressIdentifierFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChainAddresses(s, schemas.AddressIdentifierFilter_transactionEventToAddress, v.TransactionEventToAddress)
-}
-func (v *AddressIdentifierFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddressIdentifierFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddressIdentifierFilter_transactionEventToAddress:
-			return deserializeChainAddresses(d, schemas.AddressIdentifierFilter_transactionEventToAddress, &v.TransactionEventToAddress)
-		}
-		return nil
-	})
 }
 
 // This container contains information about an contract.
@@ -59,46 +38,6 @@ type AssetContract struct {
 	TokenStandard QueryTokenStandard
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssetContract) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssetContract)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssetContract) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContractIdentifier != nil {
-		s.WriteStruct(schemas.AssetContract_contractIdentifier)
-		v.ContractIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeployerAddress != nil {
-		s.WriteString(schemas.AssetContract_deployerAddress, *v.DeployerAddress)
-	}
-	if v.TokenStandard != "" {
-		s.WriteString(schemas.AssetContract_tokenStandard, string(v.TokenStandard))
-	}
-}
-func (v *AssetContract) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssetContract, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssetContract_contractIdentifier:
-			v.ContractIdentifier = &ContractIdentifier{}
-			return v.ContractIdentifier.Deserialize(d)
-		case schemas.AssetContract_deployerAddress:
-			v.DeployerAddress = new(string)
-			return d.ReadString(schemas.AssetContract_deployerAddress, v.DeployerAddress)
-		case schemas.AssetContract_tokenStandard:
-			var ev string
-			if err := d.ReadString(schemas.AssetContract_tokenStandard, &ev); err != nil {
-				return err
-			}
-			v.TokenStandard = QueryTokenStandard(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Error generated from a failed BatchGetTokenBalance request.
@@ -135,68 +74,6 @@ type BatchGetTokenBalanceErrorItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTokenBalanceErrorItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetTokenBalanceErrorItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetTokenBalanceErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AtBlockchainInstant != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceErrorItem_atBlockchainInstant)
-		v.AtBlockchainInstant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ErrorCode != nil {
-		s.WriteString(schemas.BatchGetTokenBalanceErrorItem_errorCode, *v.ErrorCode)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchGetTokenBalanceErrorItem_errorMessage, *v.ErrorMessage)
-	}
-	if v.ErrorType != "" {
-		s.WriteString(schemas.BatchGetTokenBalanceErrorItem_errorType, string(v.ErrorType))
-	}
-	if v.OwnerIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceErrorItem_ownerIdentifier)
-		v.OwnerIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TokenIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceErrorItem_tokenIdentifier)
-		v.TokenIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BatchGetTokenBalanceErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceErrorItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetTokenBalanceErrorItem_atBlockchainInstant:
-			v.AtBlockchainInstant = &BlockchainInstant{}
-			return v.AtBlockchainInstant.Deserialize(d)
-		case schemas.BatchGetTokenBalanceErrorItem_errorCode:
-			v.ErrorCode = new(string)
-			return d.ReadString(schemas.BatchGetTokenBalanceErrorItem_errorCode, v.ErrorCode)
-		case schemas.BatchGetTokenBalanceErrorItem_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchGetTokenBalanceErrorItem_errorMessage, v.ErrorMessage)
-		case schemas.BatchGetTokenBalanceErrorItem_errorType:
-			var ev string
-			if err := d.ReadString(schemas.BatchGetTokenBalanceErrorItem_errorType, &ev); err != nil {
-				return err
-			}
-			v.ErrorType = ErrorType(ev)
-			return nil
-		case schemas.BatchGetTokenBalanceErrorItem_ownerIdentifier:
-			v.OwnerIdentifier = &OwnerIdentifier{}
-			return v.OwnerIdentifier.Deserialize(d)
-		case schemas.BatchGetTokenBalanceErrorItem_tokenIdentifier:
-			v.TokenIdentifier = &TokenIdentifier{}
-			return v.TokenIdentifier.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The container for the input for getting a token balance.
 type BatchGetTokenBalanceInputItem struct {
 
@@ -218,46 +95,6 @@ type BatchGetTokenBalanceInputItem struct {
 	AtBlockchainInstant *BlockchainInstant
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchGetTokenBalanceInputItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetTokenBalanceInputItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetTokenBalanceInputItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AtBlockchainInstant != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceInputItem_atBlockchainInstant)
-		v.AtBlockchainInstant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OwnerIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceInputItem_ownerIdentifier)
-		v.OwnerIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TokenIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceInputItem_tokenIdentifier)
-		v.TokenIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BatchGetTokenBalanceInputItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceInputItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetTokenBalanceInputItem_atBlockchainInstant:
-			v.AtBlockchainInstant = &BlockchainInstant{}
-			return v.AtBlockchainInstant.Deserialize(d)
-		case schemas.BatchGetTokenBalanceInputItem_ownerIdentifier:
-			v.OwnerIdentifier = &OwnerIdentifier{}
-			return v.OwnerIdentifier.Deserialize(d)
-		case schemas.BatchGetTokenBalanceInputItem_tokenIdentifier:
-			v.TokenIdentifier = &TokenIdentifier{}
-			return v.TokenIdentifier.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The container for the properties of a token balance output.
@@ -289,60 +126,6 @@ type BatchGetTokenBalanceOutputItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetTokenBalanceOutputItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetTokenBalanceOutputItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetTokenBalanceOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AtBlockchainInstant != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceOutputItem_atBlockchainInstant)
-		v.AtBlockchainInstant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Balance != nil {
-		s.WriteString(schemas.BatchGetTokenBalanceOutputItem_balance, *v.Balance)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceOutputItem_lastUpdatedTime)
-		v.LastUpdatedTime.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OwnerIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceOutputItem_ownerIdentifier)
-		v.OwnerIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TokenIdentifier != nil {
-		s.WriteStruct(schemas.BatchGetTokenBalanceOutputItem_tokenIdentifier)
-		v.TokenIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BatchGetTokenBalanceOutputItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceOutputItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetTokenBalanceOutputItem_atBlockchainInstant:
-			v.AtBlockchainInstant = &BlockchainInstant{}
-			return v.AtBlockchainInstant.Deserialize(d)
-		case schemas.BatchGetTokenBalanceOutputItem_balance:
-			v.Balance = new(string)
-			return d.ReadString(schemas.BatchGetTokenBalanceOutputItem_balance, v.Balance)
-		case schemas.BatchGetTokenBalanceOutputItem_lastUpdatedTime:
-			v.LastUpdatedTime = &BlockchainInstant{}
-			return v.LastUpdatedTime.Deserialize(d)
-		case schemas.BatchGetTokenBalanceOutputItem_ownerIdentifier:
-			v.OwnerIdentifier = &OwnerIdentifier{}
-			return v.OwnerIdentifier.Deserialize(d)
-		case schemas.BatchGetTokenBalanceOutputItem_tokenIdentifier:
-			v.TokenIdentifier = &TokenIdentifier{}
-			return v.TokenIdentifier.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The container for time.
 type BlockchainInstant struct {
 
@@ -352,28 +135,6 @@ type BlockchainInstant struct {
 	Time *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *BlockchainInstant) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BlockchainInstant)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BlockchainInstant) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Time != nil {
-		s.WriteTime(schemas.BlockchainInstant_time, *v.Time)
-	}
-}
-func (v *BlockchainInstant) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BlockchainInstant, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BlockchainInstant_time:
-			v.Time = new(time.Time)
-			return d.ReadTime(schemas.BlockchainInstant_time, v.Time)
-		}
-		return nil
-	})
 }
 
 // The container for the ConfirmationStatusFilter that filters for the [finality] of the
@@ -391,25 +152,6 @@ type ConfirmationStatusFilter struct {
 	Include []ConfirmationStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConfirmationStatusFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConfirmationStatusFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConfirmationStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfirmationStatusIncludeList(s, schemas.ConfirmationStatusFilter_include, v.Include)
-}
-func (v *ConfirmationStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConfirmationStatusFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConfirmationStatusFilter_include:
-			return deserializeConfirmationStatusIncludeList(d, schemas.ConfirmationStatusFilter_include, &v.Include)
-		}
-		return nil
-	})
 }
 
 // The contract or wallet address by which to filter the request.
@@ -433,48 +175,6 @@ type ContractFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ContractFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContractFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContractFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeployerAddress != nil {
-		s.WriteString(schemas.ContractFilter_deployerAddress, *v.DeployerAddress)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.ContractFilter_network, string(v.Network))
-	}
-	if v.TokenStandard != "" {
-		s.WriteString(schemas.ContractFilter_tokenStandard, string(v.TokenStandard))
-	}
-}
-func (v *ContractFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContractFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContractFilter_deployerAddress:
-			v.DeployerAddress = new(string)
-			return d.ReadString(schemas.ContractFilter_deployerAddress, v.DeployerAddress)
-		case schemas.ContractFilter_network:
-			var ev string
-			if err := d.ReadString(schemas.ContractFilter_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.ContractFilter_tokenStandard:
-			var ev string
-			if err := d.ReadString(schemas.ContractFilter_tokenStandard, &ev); err != nil {
-				return err
-			}
-			v.TokenStandard = QueryTokenStandard(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Container for the blockchain address and network information about a contract.
 type ContractIdentifier struct {
 
@@ -491,38 +191,6 @@ type ContractIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ContractIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContractIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContractIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContractAddress != nil {
-		s.WriteString(schemas.ContractIdentifier_contractAddress, *v.ContractAddress)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.ContractIdentifier_network, string(v.Network))
-	}
-}
-func (v *ContractIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContractIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContractIdentifier_contractAddress:
-			v.ContractAddress = new(string)
-			return d.ReadString(schemas.ContractIdentifier_contractAddress, v.ContractAddress)
-		case schemas.ContractIdentifier_network:
-			var ev string
-			if err := d.ReadString(schemas.ContractIdentifier_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The metadata of the contract.
 type ContractMetadata struct {
 
@@ -536,40 +204,6 @@ type ContractMetadata struct {
 	Symbol *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ContractMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ContractMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ContractMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Decimals != nil {
-		s.WriteInt32(schemas.ContractMetadata_decimals, *v.Decimals)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ContractMetadata_name, *v.Name)
-	}
-	if v.Symbol != nil {
-		s.WriteString(schemas.ContractMetadata_symbol, *v.Symbol)
-	}
-}
-func (v *ContractMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ContractMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ContractMetadata_decimals:
-			v.Decimals = new(int32)
-			return d.ReadInt32(schemas.ContractMetadata_decimals, v.Decimals)
-		case schemas.ContractMetadata_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ContractMetadata_name, v.Name)
-		case schemas.ContractMetadata_symbol:
-			v.Symbol = new(string)
-			return d.ReadString(schemas.ContractMetadata_symbol, v.Symbol)
-		}
-		return nil
-	})
 }
 
 // Lists all the transaction events for an address on the blockchain.
@@ -588,42 +222,6 @@ type ListFilteredTransactionEventsSort struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListFilteredTransactionEventsSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListFilteredTransactionEventsSort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListFilteredTransactionEventsSort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListFilteredTransactionEventsSort_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListFilteredTransactionEventsSort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ListFilteredTransactionEventsSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListFilteredTransactionEventsSort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListFilteredTransactionEventsSort_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ListFilteredTransactionEventsSort_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = ListFilteredTransactionEventsSortBy(ev)
-			return nil
-		case schemas.ListFilteredTransactionEventsSort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ListFilteredTransactionEventsSort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The container for determining how the list transaction result will be sorted.
 type ListTransactionsSort struct {
 
@@ -638,42 +236,6 @@ type ListTransactionsSort struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTransactionsSort) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTransactionsSort)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTransactionsSort) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListTransactionsSort_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListTransactionsSort_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *ListTransactionsSort) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTransactionsSort, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTransactionsSort_sortBy:
-			var ev string
-			if err := d.ReadString(schemas.ListTransactionsSort_sortBy, &ev); err != nil {
-				return err
-			}
-			v.SortBy = ListTransactionsSortBy(ev)
-			return nil
-		case schemas.ListTransactionsSort_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.ListTransactionsSort_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = SortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The container for the owner information to filter by.
 type OwnerFilter struct {
 
@@ -683,28 +245,6 @@ type OwnerFilter struct {
 	Address *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OwnerFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OwnerFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OwnerFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Address != nil {
-		s.WriteString(schemas.OwnerFilter_address, *v.Address)
-	}
-}
-func (v *OwnerFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OwnerFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OwnerFilter_address:
-			v.Address = new(string)
-			return d.ReadString(schemas.OwnerFilter_address, v.Address)
-		}
-		return nil
-	})
 }
 
 // The container for the owner identifier.
@@ -718,28 +258,6 @@ type OwnerIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OwnerIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OwnerIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OwnerIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Address != nil {
-		s.WriteString(schemas.OwnerIdentifier_address, *v.Address)
-	}
-}
-func (v *OwnerIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OwnerIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OwnerIdentifier_address:
-			v.Address = new(string)
-			return d.ReadString(schemas.OwnerIdentifier_address, v.Address)
-		}
-		return nil
-	})
-}
-
 // This container is used to specify a time frame.
 type TimeFilter struct {
 
@@ -750,38 +268,6 @@ type TimeFilter struct {
 	To *BlockchainInstant
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimeFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.From != nil {
-		s.WriteStruct(schemas.TimeFilter_from)
-		v.From.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.To != nil {
-		s.WriteStruct(schemas.TimeFilter_to)
-		v.To.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *TimeFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeFilter_from:
-			v.From = &BlockchainInstant{}
-			return v.From.Deserialize(d)
-		case schemas.TimeFilter_to:
-			v.To = &BlockchainInstant{}
-			return v.To.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The balance of the token.
@@ -814,60 +300,6 @@ type TokenBalance struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TokenBalance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TokenBalance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TokenBalance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AtBlockchainInstant != nil {
-		s.WriteStruct(schemas.TokenBalance_atBlockchainInstant)
-		v.AtBlockchainInstant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Balance != nil {
-		s.WriteString(schemas.TokenBalance_balance, *v.Balance)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteStruct(schemas.TokenBalance_lastUpdatedTime)
-		v.LastUpdatedTime.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OwnerIdentifier != nil {
-		s.WriteStruct(schemas.TokenBalance_ownerIdentifier)
-		v.OwnerIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TokenIdentifier != nil {
-		s.WriteStruct(schemas.TokenBalance_tokenIdentifier)
-		v.TokenIdentifier.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *TokenBalance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TokenBalance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TokenBalance_atBlockchainInstant:
-			v.AtBlockchainInstant = &BlockchainInstant{}
-			return v.AtBlockchainInstant.Deserialize(d)
-		case schemas.TokenBalance_balance:
-			v.Balance = new(string)
-			return d.ReadString(schemas.TokenBalance_balance, v.Balance)
-		case schemas.TokenBalance_lastUpdatedTime:
-			v.LastUpdatedTime = &BlockchainInstant{}
-			return v.LastUpdatedTime.Deserialize(d)
-		case schemas.TokenBalance_ownerIdentifier:
-			v.OwnerIdentifier = &OwnerIdentifier{}
-			return v.OwnerIdentifier.Deserialize(d)
-		case schemas.TokenBalance_tokenIdentifier:
-			v.TokenIdentifier = &TokenIdentifier{}
-			return v.TokenIdentifier.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The container of the token filter like the contract address on a given
 // blockchain network or a unique token identifier on a given blockchain network.
 //
@@ -887,44 +319,6 @@ type TokenFilter struct {
 	TokenId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TokenFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TokenFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TokenFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContractAddress != nil {
-		s.WriteString(schemas.TokenFilter_contractAddress, *v.ContractAddress)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.TokenFilter_network, string(v.Network))
-	}
-	if v.TokenId != nil {
-		s.WriteString(schemas.TokenFilter_tokenId, *v.TokenId)
-	}
-}
-func (v *TokenFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TokenFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TokenFilter_contractAddress:
-			v.ContractAddress = new(string)
-			return d.ReadString(schemas.TokenFilter_contractAddress, v.ContractAddress)
-		case schemas.TokenFilter_network:
-			var ev string
-			if err := d.ReadString(schemas.TokenFilter_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.TokenFilter_tokenId:
-			v.TokenId = new(string)
-			return d.ReadString(schemas.TokenFilter_tokenId, v.TokenId)
-		}
-		return nil
-	})
 }
 
 // The container for the identifier for the token including the unique token ID
@@ -951,44 +345,6 @@ type TokenIdentifier struct {
 	TokenId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TokenIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TokenIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TokenIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContractAddress != nil {
-		s.WriteString(schemas.TokenIdentifier_contractAddress, *v.ContractAddress)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.TokenIdentifier_network, string(v.Network))
-	}
-	if v.TokenId != nil {
-		s.WriteString(schemas.TokenIdentifier_tokenId, *v.TokenId)
-	}
-}
-func (v *TokenIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TokenIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TokenIdentifier_contractAddress:
-			v.ContractAddress = new(string)
-			return d.ReadString(schemas.TokenIdentifier_contractAddress, v.ContractAddress)
-		case schemas.TokenIdentifier_network:
-			var ev string
-			if err := d.ReadString(schemas.TokenIdentifier_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.TokenIdentifier_tokenId:
-			v.TokenId = new(string)
-			return d.ReadString(schemas.TokenIdentifier_tokenId, v.TokenId)
-		}
-		return nil
-	})
 }
 
 // There are two possible types of transactions used for this data type:
@@ -1081,154 +437,6 @@ type Transaction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Transaction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Transaction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Transaction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlockHash != nil {
-		s.WriteString(schemas.Transaction_blockHash, *v.BlockHash)
-	}
-	if v.BlockNumber != nil {
-		s.WriteString(schemas.Transaction_blockNumber, *v.BlockNumber)
-	}
-	if v.ConfirmationStatus != "" {
-		s.WriteString(schemas.Transaction_confirmationStatus, string(v.ConfirmationStatus))
-	}
-	if v.ContractAddress != nil {
-		s.WriteString(schemas.Transaction_contractAddress, *v.ContractAddress)
-	}
-	if v.CumulativeGasUsed != nil {
-		s.WriteString(schemas.Transaction_cumulativeGasUsed, *v.CumulativeGasUsed)
-	}
-	if v.EffectiveGasPrice != nil {
-		s.WriteString(schemas.Transaction_effectiveGasPrice, *v.EffectiveGasPrice)
-	}
-	if v.ExecutionStatus != "" {
-		s.WriteString(schemas.Transaction_executionStatus, string(v.ExecutionStatus))
-	}
-	if v.From != nil {
-		s.WriteString(schemas.Transaction_from, *v.From)
-	}
-	if v.GasUsed != nil {
-		s.WriteString(schemas.Transaction_gasUsed, *v.GasUsed)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.Transaction_network, string(v.Network))
-	}
-	if v.NumberOfTransactions != nil {
-		s.WriteInt64(schemas.Transaction_numberOfTransactions, *v.NumberOfTransactions)
-	}
-	if v.SignatureR != nil {
-		s.WriteString(schemas.Transaction_signatureR, *v.SignatureR)
-	}
-	if v.SignatureS != nil {
-		s.WriteString(schemas.Transaction_signatureS, *v.SignatureS)
-	}
-	if v.SignatureV != nil {
-		s.WriteInt32(schemas.Transaction_signatureV, *v.SignatureV)
-	}
-	if v.To != nil {
-		s.WriteString(schemas.Transaction_to, *v.To)
-	}
-	if v.TransactionFee != nil {
-		s.WriteString(schemas.Transaction_transactionFee, *v.TransactionFee)
-	}
-	if v.TransactionHash != nil {
-		s.WriteString(schemas.Transaction_transactionHash, *v.TransactionHash)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.Transaction_transactionId, *v.TransactionId)
-	}
-	if v.TransactionIndex != nil {
-		s.WriteInt64(schemas.Transaction_transactionIndex, *v.TransactionIndex)
-	}
-	if v.TransactionTimestamp != nil {
-		s.WriteTime(schemas.Transaction_transactionTimestamp, *v.TransactionTimestamp)
-	}
-}
-func (v *Transaction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Transaction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Transaction_blockHash:
-			v.BlockHash = new(string)
-			return d.ReadString(schemas.Transaction_blockHash, v.BlockHash)
-		case schemas.Transaction_blockNumber:
-			v.BlockNumber = new(string)
-			return d.ReadString(schemas.Transaction_blockNumber, v.BlockNumber)
-		case schemas.Transaction_confirmationStatus:
-			var ev string
-			if err := d.ReadString(schemas.Transaction_confirmationStatus, &ev); err != nil {
-				return err
-			}
-			v.ConfirmationStatus = ConfirmationStatus(ev)
-			return nil
-		case schemas.Transaction_contractAddress:
-			v.ContractAddress = new(string)
-			return d.ReadString(schemas.Transaction_contractAddress, v.ContractAddress)
-		case schemas.Transaction_cumulativeGasUsed:
-			v.CumulativeGasUsed = new(string)
-			return d.ReadString(schemas.Transaction_cumulativeGasUsed, v.CumulativeGasUsed)
-		case schemas.Transaction_effectiveGasPrice:
-			v.EffectiveGasPrice = new(string)
-			return d.ReadString(schemas.Transaction_effectiveGasPrice, v.EffectiveGasPrice)
-		case schemas.Transaction_executionStatus:
-			var ev string
-			if err := d.ReadString(schemas.Transaction_executionStatus, &ev); err != nil {
-				return err
-			}
-			v.ExecutionStatus = ExecutionStatus(ev)
-			return nil
-		case schemas.Transaction_from:
-			v.From = new(string)
-			return d.ReadString(schemas.Transaction_from, v.From)
-		case schemas.Transaction_gasUsed:
-			v.GasUsed = new(string)
-			return d.ReadString(schemas.Transaction_gasUsed, v.GasUsed)
-		case schemas.Transaction_network:
-			var ev string
-			if err := d.ReadString(schemas.Transaction_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.Transaction_numberOfTransactions:
-			v.NumberOfTransactions = new(int64)
-			return d.ReadInt64(schemas.Transaction_numberOfTransactions, v.NumberOfTransactions)
-		case schemas.Transaction_signatureR:
-			v.SignatureR = new(string)
-			return d.ReadString(schemas.Transaction_signatureR, v.SignatureR)
-		case schemas.Transaction_signatureS:
-			v.SignatureS = new(string)
-			return d.ReadString(schemas.Transaction_signatureS, v.SignatureS)
-		case schemas.Transaction_signatureV:
-			v.SignatureV = new(int32)
-			return d.ReadInt32(schemas.Transaction_signatureV, v.SignatureV)
-		case schemas.Transaction_to:
-			v.To = new(string)
-			return d.ReadString(schemas.Transaction_to, v.To)
-		case schemas.Transaction_transactionFee:
-			v.TransactionFee = new(string)
-			return d.ReadString(schemas.Transaction_transactionFee, v.TransactionFee)
-		case schemas.Transaction_transactionHash:
-			v.TransactionHash = new(string)
-			return d.ReadString(schemas.Transaction_transactionHash, v.TransactionHash)
-		case schemas.Transaction_transactionId:
-			v.TransactionId = new(string)
-			return d.ReadString(schemas.Transaction_transactionId, v.TransactionId)
-		case schemas.Transaction_transactionIndex:
-			v.TransactionIndex = new(int64)
-			return d.ReadInt64(schemas.Transaction_transactionIndex, v.TransactionIndex)
-		case schemas.Transaction_transactionTimestamp:
-			v.TransactionTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Transaction_transactionTimestamp, v.TransactionTimestamp)
-		}
-		return nil
-	})
-}
-
 // The container for the properties of a transaction event.
 type TransactionEvent struct {
 
@@ -1302,132 +510,6 @@ type TransactionEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TransactionEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TransactionEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TransactionEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlockchainInstant != nil {
-		s.WriteStruct(schemas.TransactionEvent_blockchainInstant)
-		v.BlockchainInstant.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfirmationStatus != "" {
-		s.WriteString(schemas.TransactionEvent_confirmationStatus, string(v.ConfirmationStatus))
-	}
-	if v.ContractAddress != nil {
-		s.WriteString(schemas.TransactionEvent_contractAddress, *v.ContractAddress)
-	}
-	if v.EventType != "" {
-		s.WriteString(schemas.TransactionEvent_eventType, string(v.EventType))
-	}
-	if v.From != nil {
-		s.WriteString(schemas.TransactionEvent_from, *v.From)
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.TransactionEvent_network, string(v.Network))
-	}
-	if v.SpentVoutIndex != nil {
-		s.WriteInt32(schemas.TransactionEvent_spentVoutIndex, *v.SpentVoutIndex)
-	}
-	if v.SpentVoutTransactionHash != nil {
-		s.WriteString(schemas.TransactionEvent_spentVoutTransactionHash, *v.SpentVoutTransactionHash)
-	}
-	if v.SpentVoutTransactionId != nil {
-		s.WriteString(schemas.TransactionEvent_spentVoutTransactionId, *v.SpentVoutTransactionId)
-	}
-	if v.To != nil {
-		s.WriteString(schemas.TransactionEvent_to, *v.To)
-	}
-	if v.TokenId != nil {
-		s.WriteString(schemas.TransactionEvent_tokenId, *v.TokenId)
-	}
-	if v.TransactionHash != nil {
-		s.WriteString(schemas.TransactionEvent_transactionHash, *v.TransactionHash)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.TransactionEvent_transactionId, *v.TransactionId)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.TransactionEvent_value, *v.Value)
-	}
-	if v.VoutIndex != nil {
-		s.WriteInt32(schemas.TransactionEvent_voutIndex, *v.VoutIndex)
-	}
-	if v.VoutSpent != nil {
-		s.WriteBool(schemas.TransactionEvent_voutSpent, *v.VoutSpent)
-	}
-}
-func (v *TransactionEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TransactionEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TransactionEvent_blockchainInstant:
-			v.BlockchainInstant = &BlockchainInstant{}
-			return v.BlockchainInstant.Deserialize(d)
-		case schemas.TransactionEvent_confirmationStatus:
-			var ev string
-			if err := d.ReadString(schemas.TransactionEvent_confirmationStatus, &ev); err != nil {
-				return err
-			}
-			v.ConfirmationStatus = ConfirmationStatus(ev)
-			return nil
-		case schemas.TransactionEvent_contractAddress:
-			v.ContractAddress = new(string)
-			return d.ReadString(schemas.TransactionEvent_contractAddress, v.ContractAddress)
-		case schemas.TransactionEvent_eventType:
-			var ev string
-			if err := d.ReadString(schemas.TransactionEvent_eventType, &ev); err != nil {
-				return err
-			}
-			v.EventType = QueryTransactionEventType(ev)
-			return nil
-		case schemas.TransactionEvent_from:
-			v.From = new(string)
-			return d.ReadString(schemas.TransactionEvent_from, v.From)
-		case schemas.TransactionEvent_network:
-			var ev string
-			if err := d.ReadString(schemas.TransactionEvent_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.TransactionEvent_spentVoutIndex:
-			v.SpentVoutIndex = new(int32)
-			return d.ReadInt32(schemas.TransactionEvent_spentVoutIndex, v.SpentVoutIndex)
-		case schemas.TransactionEvent_spentVoutTransactionHash:
-			v.SpentVoutTransactionHash = new(string)
-			return d.ReadString(schemas.TransactionEvent_spentVoutTransactionHash, v.SpentVoutTransactionHash)
-		case schemas.TransactionEvent_spentVoutTransactionId:
-			v.SpentVoutTransactionId = new(string)
-			return d.ReadString(schemas.TransactionEvent_spentVoutTransactionId, v.SpentVoutTransactionId)
-		case schemas.TransactionEvent_to:
-			v.To = new(string)
-			return d.ReadString(schemas.TransactionEvent_to, v.To)
-		case schemas.TransactionEvent_tokenId:
-			v.TokenId = new(string)
-			return d.ReadString(schemas.TransactionEvent_tokenId, v.TokenId)
-		case schemas.TransactionEvent_transactionHash:
-			v.TransactionHash = new(string)
-			return d.ReadString(schemas.TransactionEvent_transactionHash, v.TransactionHash)
-		case schemas.TransactionEvent_transactionId:
-			v.TransactionId = new(string)
-			return d.ReadString(schemas.TransactionEvent_transactionId, v.TransactionId)
-		case schemas.TransactionEvent_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.TransactionEvent_value, v.Value)
-		case schemas.TransactionEvent_voutIndex:
-			v.VoutIndex = new(int32)
-			return d.ReadInt32(schemas.TransactionEvent_voutIndex, v.VoutIndex)
-		case schemas.TransactionEvent_voutSpent:
-			v.VoutSpent = new(bool)
-			return d.ReadBool(schemas.TransactionEvent_voutSpent, v.VoutSpent)
-		}
-		return nil
-	})
-}
-
 // The container of the transaction output.
 type TransactionOutputItem struct {
 
@@ -1456,60 +538,6 @@ type TransactionOutputItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TransactionOutputItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TransactionOutputItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TransactionOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfirmationStatus != "" {
-		s.WriteString(schemas.TransactionOutputItem_confirmationStatus, string(v.ConfirmationStatus))
-	}
-	if v.Network != "" {
-		s.WriteString(schemas.TransactionOutputItem_network, string(v.Network))
-	}
-	if v.TransactionHash != nil {
-		s.WriteString(schemas.TransactionOutputItem_transactionHash, *v.TransactionHash)
-	}
-	if v.TransactionId != nil {
-		s.WriteString(schemas.TransactionOutputItem_transactionId, *v.TransactionId)
-	}
-	if v.TransactionTimestamp != nil {
-		s.WriteTime(schemas.TransactionOutputItem_transactionTimestamp, *v.TransactionTimestamp)
-	}
-}
-func (v *TransactionOutputItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TransactionOutputItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TransactionOutputItem_confirmationStatus:
-			var ev string
-			if err := d.ReadString(schemas.TransactionOutputItem_confirmationStatus, &ev); err != nil {
-				return err
-			}
-			v.ConfirmationStatus = ConfirmationStatus(ev)
-			return nil
-		case schemas.TransactionOutputItem_network:
-			var ev string
-			if err := d.ReadString(schemas.TransactionOutputItem_network, &ev); err != nil {
-				return err
-			}
-			v.Network = QueryNetwork(ev)
-			return nil
-		case schemas.TransactionOutputItem_transactionHash:
-			v.TransactionHash = new(string)
-			return d.ReadString(schemas.TransactionOutputItem_transactionHash, v.TransactionHash)
-		case schemas.TransactionOutputItem_transactionId:
-			v.TransactionId = new(string)
-			return d.ReadString(schemas.TransactionOutputItem_transactionId, v.TransactionId)
-		case schemas.TransactionOutputItem_transactionTimestamp:
-			v.TransactionTimestamp = new(time.Time)
-			return d.ReadTime(schemas.TransactionOutputItem_transactionTimestamp, v.TransactionTimestamp)
-		}
-		return nil
-	})
-}
-
 // The resource passed is invalid.
 type ValidationExceptionField struct {
 
@@ -1526,34 +554,6 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // This container specifies filtering attributes related to BITCOIN_VOUT event
 // types
 type VoutFilter struct {
@@ -1564,28 +564,6 @@ type VoutFilter struct {
 	VoutSpent *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *VoutFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VoutFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VoutFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VoutSpent != nil {
-		s.WriteBool(schemas.VoutFilter_voutSpent, *v.VoutSpent)
-	}
-}
-func (v *VoutFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VoutFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VoutFilter_voutSpent:
-			v.VoutSpent = new(bool)
-			return d.ReadBool(schemas.VoutFilter_voutSpent, v.VoutSpent)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

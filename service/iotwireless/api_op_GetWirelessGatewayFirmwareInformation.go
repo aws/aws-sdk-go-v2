@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetWirelessGatewayFirmwareInformationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayFirmwareInformationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetWirelessGatewayFirmwareInformationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetWirelessGatewayFirmwareInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetWirelessGatewayFirmwareInformationRequest_Id, *v.Id)
-	}
-}
-
 type GetWirelessGatewayFirmwareInformationOutput struct {
 
 	// Information about the wireless gateway's firmware.
@@ -62,24 +48,16 @@ type GetWirelessGatewayFirmwareInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetWirelessGatewayFirmwareInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetWirelessGatewayFirmwareInformationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetWirelessGatewayFirmwareInformationResponse_LoRaWAN:
-			v.LoRaWAN = &types.LoRaWANGatewayCurrentVersion{}
-			return v.LoRaWAN.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetWirelessGatewayFirmwareInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayFirmwareInformation, schemas.GetWirelessGatewayFirmwareInformationRequest, schemas.GetWirelessGatewayFirmwareInformationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWirelessGatewayFirmwareInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWirelessGatewayFirmwareInformation, schemas.GetWirelessGatewayFirmwareInformationRequest, schemas.GetWirelessGatewayFirmwareInformationResponse), output: &GetWirelessGatewayFirmwareInformationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWirelessGatewayFirmwareInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWirelessGatewayFirmwareInformation"); err != nil {

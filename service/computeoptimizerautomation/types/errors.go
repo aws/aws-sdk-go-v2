@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // You are not authorized to perform this action.
 type ForbiddenException struct {
@@ -69,16 +58,6 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ForbiddenException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ForbiddenException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified client token is already in use.
 type IdempotencyTokenInUseException struct {
@@ -105,16 +84,6 @@ func (e *IdempotencyTokenInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IdempotencyTokenInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *IdempotencyTokenInUseException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdempotencyTokenInUseException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdempotencyTokenInUseException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IdempotencyTokenInUseException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Exception thrown when the same client token is used with different parameters,
 // indicating a mismatch in idempotent request parameters.
@@ -144,16 +113,6 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-func (v *IdempotentParameterMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IdempotentParameterMismatchException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IdempotentParameterMismatchException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.IdempotentParameterMismatchException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An internal error occurred while processing the request.
 type InternalServerException struct {
@@ -180,16 +139,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One or more parameter values are not valid.
 type InvalidParameterValueException struct {
@@ -216,16 +165,6 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidParameterValueException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidParameterValueException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidParameterValueException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The operation can only be performed by a management account.
 type NotManagementAccountException struct {
@@ -252,16 +191,6 @@ func (e *NotManagementAccountException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotManagementAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *NotManagementAccountException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotManagementAccountException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotManagementAccountException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.NotManagementAccountException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 //	The account must be opted in to Compute Optimizer Automation before performing
 //
@@ -290,16 +219,6 @@ func (e *OptInRequiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OptInRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *OptInRequiredException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OptInRequiredException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OptInRequiredException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.OptInRequiredException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
@@ -326,16 +245,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request would exceed service quotas.
 type ServiceQuotaExceededException struct {
@@ -362,16 +271,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
@@ -398,16 +297,6 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceUnavailableException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -434,13 +323,3 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DisassociateDataProtectionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateDataProtectionSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.DisassociateDataProtectionSettingsRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type DisassociateDataProtectionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DisassociateDataProtectionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateDataProtectionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateDataProtectionSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateDataProtectionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateDataProtectionSettings, schemas.DisassociateDataProtectionSettingsRequest, schemas.DisassociateDataProtectionSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateDataProtectionSettings, schemas.DisassociateDataProtectionSettingsRequest, schemas.DisassociateDataProtectionSettingsResponse), output: &DisassociateDataProtectionSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateDataProtectionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateDataProtectionSettings"); err != nil {

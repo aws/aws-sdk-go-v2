@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,32 +54,6 @@ type UpdateInvoiceUnitInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateInvoiceUnitInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateInvoiceUnitRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateInvoiceUnitRequest_ClientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateInvoiceUnitRequest_Description, *v.Description)
-	}
-	if v.InvoiceUnitArn != nil {
-		s.WriteString(schemas.UpdateInvoiceUnitRequest_InvoiceUnitArn, *v.InvoiceUnitArn)
-	}
-	if v.Rule != nil {
-		s.WriteStruct(schemas.UpdateInvoiceUnitRequest_Rule)
-		v.Rule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TaxInheritanceDisabled != nil {
-		s.WriteBool(schemas.UpdateInvoiceUnitRequest_TaxInheritanceDisabled, *v.TaxInheritanceDisabled)
-	}
-}
-
 type UpdateInvoiceUnitOutput struct {
 
 	//  The ARN to identify an invoice unit. This information can't be modified or
@@ -94,24 +66,16 @@ type UpdateInvoiceUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateInvoiceUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateInvoiceUnitResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateInvoiceUnitResponse_InvoiceUnitArn:
-			v.InvoiceUnitArn = new(string)
-			return d.ReadString(schemas.UpdateInvoiceUnitResponse_InvoiceUnitArn, v.InvoiceUnitArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateInvoiceUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvoiceUnit, schemas.UpdateInvoiceUnitRequest, schemas.UpdateInvoiceUnitResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateInvoiceUnit{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvoiceUnit, schemas.UpdateInvoiceUnitRequest, schemas.UpdateInvoiceUnitResponse), output: &UpdateInvoiceUnitOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateInvoiceUnit{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInvoiceUnit"); err != nil {

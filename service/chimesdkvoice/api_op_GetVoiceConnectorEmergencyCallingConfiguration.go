@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetVoiceConnectorEmergencyCallingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetVoiceConnectorEmergencyCallingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 
 	// The details of the emergency calling configuration.
@@ -63,24 +49,16 @@ type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetVoiceConnectorEmergencyCallingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration:
-			v.EmergencyCallingConfiguration = &types.EmergencyCallingConfiguration{}
-			return v.EmergencyCallingConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorEmergencyCallingConfiguration, schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorEmergencyCallingConfiguration, schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse), output: &GetVoiceConnectorEmergencyCallingConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVoiceConnectorEmergencyCallingConfiguration"); err != nil {

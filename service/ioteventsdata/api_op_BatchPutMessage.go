@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,16 +42,6 @@ type BatchPutMessageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutMessageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchPutMessageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchPutMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessages(s, schemas.BatchPutMessageRequest_messages, v.Messages)
-}
-
 type BatchPutMessageOutput struct {
 
 	// A list of any errors encountered when sending the messages.
@@ -65,23 +53,16 @@ type BatchPutMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchPutMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchPutMessageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchPutMessageResponse_BatchPutMessageErrorEntries:
-			return deserializeBatchPutMessageErrorEntries(d, schemas.BatchPutMessageResponse_BatchPutMessageErrorEntries, &v.BatchPutMessageErrorEntries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchPutMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMessage, schemas.BatchPutMessageRequest, schemas.BatchPutMessageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMessage, schemas.BatchPutMessageRequest, schemas.BatchPutMessageResponse), output: &BatchPutMessageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutMessage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutMessage"); err != nil {

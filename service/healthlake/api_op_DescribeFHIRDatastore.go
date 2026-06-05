@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,18 +40,6 @@ type DescribeFHIRDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFHIRDatastoreInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeFHIRDatastoreRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.DescribeFHIRDatastoreRequest_DatastoreId, *v.DatastoreId)
-	}
-}
-
 type DescribeFHIRDatastoreOutput struct {
 
 	// The data store properties.
@@ -67,24 +53,16 @@ type DescribeFHIRDatastoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFHIRDatastoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeFHIRDatastoreResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeFHIRDatastoreResponse_DatastoreProperties:
-			v.DatastoreProperties = &types.DatastoreProperties{}
-			return v.DatastoreProperties.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRDatastore, schemas.DescribeFHIRDatastoreRequest, schemas.DescribeFHIRDatastoreResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFHIRDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRDatastore, schemas.DescribeFHIRDatastoreRequest, schemas.DescribeFHIRDatastoreResponse), output: &DescribeFHIRDatastoreOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFHIRDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFHIRDatastore"); err != nil {

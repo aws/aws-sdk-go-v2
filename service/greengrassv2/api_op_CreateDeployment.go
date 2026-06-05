@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -94,39 +92,6 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDeploymentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDeploymentRequest_clientToken, *v.ClientToken)
-	}
-	serializeComponentDeploymentSpecifications(s, schemas.CreateDeploymentRequest_components, v.Components)
-	if v.DeploymentName != nil {
-		s.WriteString(schemas.CreateDeploymentRequest_deploymentName, *v.DeploymentName)
-	}
-	if v.DeploymentPolicies != nil {
-		s.WriteStruct(schemas.CreateDeploymentRequest_deploymentPolicies)
-		v.DeploymentPolicies.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IotJobConfiguration != nil {
-		s.WriteStruct(schemas.CreateDeploymentRequest_iotJobConfiguration)
-		v.IotJobConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ParentTargetArn != nil {
-		s.WriteString(schemas.CreateDeploymentRequest_parentTargetArn, *v.ParentTargetArn)
-	}
-	serializeTagMap(s, schemas.CreateDeploymentRequest_tags, v.Tags)
-	if v.TargetArn != nil {
-		s.WriteString(schemas.CreateDeploymentRequest_targetArn, *v.TargetArn)
-	}
-}
-
 type CreateDeploymentOutput struct {
 
 	// The ID of the deployment.
@@ -146,30 +111,16 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDeploymentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDeploymentResponse_deploymentId:
-			v.DeploymentId = new(string)
-			return d.ReadString(schemas.CreateDeploymentResponse_deploymentId, v.DeploymentId)
-		case schemas.CreateDeploymentResponse_iotJobArn:
-			v.IotJobArn = new(string)
-			return d.ReadString(schemas.CreateDeploymentResponse_iotJobArn, v.IotJobArn)
-		case schemas.CreateDeploymentResponse_iotJobId:
-			v.IotJobId = new(string)
-			return d.ReadString(schemas.CreateDeploymentResponse_iotJobId, v.IotJobId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeployment"); err != nil {

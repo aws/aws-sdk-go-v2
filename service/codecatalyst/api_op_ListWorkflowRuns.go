@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,31 +57,6 @@ type ListWorkflowRunsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWorkflowRunsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWorkflowRunsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWorkflowRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListWorkflowRunsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWorkflowRunsRequest_nextToken, *v.NextToken)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.ListWorkflowRunsRequest_projectName, *v.ProjectName)
-	}
-	serializeWorkflowRunSortCriteriaList(s, schemas.ListWorkflowRunsRequest_sortBy, v.SortBy)
-	if v.SpaceName != nil {
-		s.WriteString(schemas.ListWorkflowRunsRequest_spaceName, *v.SpaceName)
-	}
-	if v.WorkflowId != nil {
-		s.WriteString(schemas.ListWorkflowRunsRequest_workflowId, *v.WorkflowId)
-	}
-}
-
 type ListWorkflowRunsOutput struct {
 
 	// Information about the runs of a workflow.
@@ -99,26 +72,16 @@ type ListWorkflowRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWorkflowRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWorkflowRunsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWorkflowRunsResponse_items:
-			return deserializeWorkflowRunSummaries(d, schemas.ListWorkflowRunsResponse_items, &v.Items)
-		case schemas.ListWorkflowRunsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWorkflowRunsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWorkflowRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowRuns, schemas.ListWorkflowRunsRequest, schemas.ListWorkflowRunsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowRuns{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowRuns, schemas.ListWorkflowRunsRequest, schemas.ListWorkflowRunsResponse), output: &ListWorkflowRunsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowRuns{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkflowRuns"); err != nil {

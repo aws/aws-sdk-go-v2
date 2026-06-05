@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,21 +54,6 @@ type ListIPSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIPSetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIPSetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIPSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Limit != 0 {
-		s.WriteInt32(schemas.ListIPSetsRequest_Limit, v.Limit)
-	}
-	if v.NextMarker != nil {
-		s.WriteString(schemas.ListIPSetsRequest_NextMarker, *v.NextMarker)
-	}
-}
-
 type ListIPSetsOutput struct {
 
 	// An array of IPSetSummary objects.
@@ -86,26 +69,16 @@ type ListIPSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIPSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIPSetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIPSetsResponse_IPSets:
-			return deserializeIPSetSummaries(d, schemas.ListIPSetsResponse_IPSets, &v.IPSets)
-		case schemas.ListIPSetsResponse_NextMarker:
-			v.NextMarker = new(string)
-			return d.ReadString(schemas.ListIPSetsResponse_NextMarker, v.NextMarker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIPSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIPSets, schemas.ListIPSetsRequest, schemas.ListIPSetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIPSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIPSets, schemas.ListIPSetsRequest, schemas.ListIPSetsResponse), output: &ListIPSetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIPSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIPSets"); err != nil {

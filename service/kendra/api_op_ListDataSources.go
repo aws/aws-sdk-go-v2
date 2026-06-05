@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataSourcesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexId != nil {
-		s.WriteString(schemas.ListDataSourcesRequest_IndexId, *v.IndexId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataSourcesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataSourcesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDataSourcesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
@@ -80,26 +60,16 @@ type ListDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataSourcesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataSourcesResponse_NextToken, v.NextToken)
-		case schemas.ListDataSourcesResponse_SummaryItems:
-			return deserializeDataSourceSummaryList(d, schemas.ListDataSourcesResponse_SummaryItems, &v.SummaryItems)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataSources{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse), output: &ListDataSourcesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataSources{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSources"); err != nil {

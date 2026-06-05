@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,26 +52,6 @@ type CreateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateArchiveInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateArchiveRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArchiveName != nil {
-		s.WriteString(schemas.CreateArchiveRequest_ArchiveName, *v.ArchiveName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateArchiveRequest_ClientToken, *v.ClientToken)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateArchiveRequest_KmsKeyArn, *v.KmsKeyArn)
-	}
-	serializeArchiveRetention(s, schemas.CreateArchiveRequest_Retention, v.Retention)
-	serializeTagList(s, schemas.CreateArchiveRequest_Tags, v.Tags)
-}
-
 // The response from creating a new email archive.
 type CreateArchiveOutput struct {
 
@@ -88,24 +66,16 @@ type CreateArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateArchiveResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateArchiveResponse_ArchiveId:
-			v.ArchiveId = new(string)
-			return d.ReadString(schemas.CreateArchiveResponse_ArchiveId, v.ArchiveId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchive, schemas.CreateArchiveRequest, schemas.CreateArchiveResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateArchive{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchive, schemas.CreateArchiveRequest, schemas.CreateArchiveResponse), output: &CreateArchiveOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateArchive{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateArchive"); err != nil {

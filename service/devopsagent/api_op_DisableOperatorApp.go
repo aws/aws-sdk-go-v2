@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DisableOperatorAppInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableOperatorAppInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisableOperatorAppInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableOperatorAppInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.DisableOperatorAppInput_agentSpaceId, *v.AgentSpaceId)
-	}
-	if v.AuthFlow != "" {
-		s.WriteString(schemas.DisableOperatorAppInput_authFlow, string(v.AuthFlow))
-	}
-}
-
 type DisableOperatorAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,29 +48,16 @@ type DisableOperatorAppOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableOperatorAppOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableOperatorAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DisableOperatorAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableOperatorAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableOperatorApp, schemas.DisableOperatorAppInput, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableOperatorApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableOperatorApp, schemas.DisableOperatorAppInput, nil), output: &DisableOperatorAppOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableOperatorApp{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableOperatorApp"); err != nil {

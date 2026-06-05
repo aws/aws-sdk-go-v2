@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,32 +66,6 @@ type PutOriginEndpointPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutOriginEndpointPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutOriginEndpointPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutOriginEndpointPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CdnAuthConfiguration != nil {
-		s.WriteStruct(schemas.PutOriginEndpointPolicyRequest_CdnAuthConfiguration)
-		v.CdnAuthConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.PutOriginEndpointPolicyRequest_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.PutOriginEndpointPolicyRequest_ChannelName, *v.ChannelName)
-	}
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.PutOriginEndpointPolicyRequest_OriginEndpointName, *v.OriginEndpointName)
-	}
-	if v.Policy != nil {
-		s.WriteString(schemas.PutOriginEndpointPolicyRequest_Policy, *v.Policy)
-	}
-}
-
 type PutOriginEndpointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,21 +73,16 @@ type PutOriginEndpointPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutOriginEndpointPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutOriginEndpointPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutOriginEndpointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOriginEndpointPolicy, schemas.PutOriginEndpointPolicyRequest, schemas.PutOriginEndpointPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutOriginEndpointPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOriginEndpointPolicy, schemas.PutOriginEndpointPolicyRequest, schemas.PutOriginEndpointPolicyResponse), output: &PutOriginEndpointPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutOriginEndpointPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutOriginEndpointPolicy"); err != nil {

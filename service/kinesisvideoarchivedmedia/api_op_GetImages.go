@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -110,49 +108,6 @@ type GetImagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetImagesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTimestamp != nil {
-		s.WriteTime(schemas.GetImagesInput_EndTimestamp, *v.EndTimestamp)
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.GetImagesInput_Format, string(v.Format))
-	}
-	serializeFormatConfig(s, schemas.GetImagesInput_FormatConfig, v.FormatConfig)
-	if v.HeightPixels != nil {
-		s.WriteInt32(schemas.GetImagesInput_HeightPixels, *v.HeightPixels)
-	}
-	if v.ImageSelectorType != "" {
-		s.WriteString(schemas.GetImagesInput_ImageSelectorType, string(v.ImageSelectorType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt64(schemas.GetImagesInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetImagesInput_NextToken, *v.NextToken)
-	}
-	if v.SamplingInterval != nil {
-		s.WriteInt32(schemas.GetImagesInput_SamplingInterval, *v.SamplingInterval)
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.GetImagesInput_StartTimestamp, *v.StartTimestamp)
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.GetImagesInput_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.GetImagesInput_StreamName, *v.StreamName)
-	}
-	if v.WidthPixels != nil {
-		s.WriteInt32(schemas.GetImagesInput_WidthPixels, *v.WidthPixels)
-	}
-}
-
 type GetImagesOutput struct {
 
 	// The list of images generated from the video stream. If there is no media
@@ -170,26 +125,16 @@ type GetImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetImagesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetImagesOutput_Images:
-			return deserializeImages(d, schemas.GetImagesOutput_Images, &v.Images)
-		case schemas.GetImagesOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetImagesOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImages, schemas.GetImagesInput, schemas.GetImagesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImages, schemas.GetImagesInput, schemas.GetImagesOutput), output: &GetImagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImages"); err != nil {

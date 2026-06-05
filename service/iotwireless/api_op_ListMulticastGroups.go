@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListMulticastGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMulticastGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMulticastGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMulticastGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListMulticastGroupsRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMulticastGroupsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListMulticastGroupsOutput struct {
 
 	// List of multicast groups.
@@ -71,26 +54,16 @@ type ListMulticastGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMulticastGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMulticastGroupsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMulticastGroupsResponse_MulticastGroupList:
-			return deserializeMulticastGroupList(d, schemas.ListMulticastGroupsResponse_MulticastGroupList, &v.MulticastGroupList)
-		case schemas.ListMulticastGroupsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMulticastGroupsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMulticastGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMulticastGroups, schemas.ListMulticastGroupsRequest, schemas.ListMulticastGroupsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMulticastGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMulticastGroups, schemas.ListMulticastGroupsRequest, schemas.ListMulticastGroupsResponse), output: &ListMulticastGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMulticastGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMulticastGroups"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListChangesetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChangesetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChangesetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChangesetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetId != nil {
-		s.WriteString(schemas.ListChangesetsRequest_datasetId, *v.DatasetId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChangesetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChangesetsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // Response to ListChangesetsResponse. This returns a list of dataset changesets
 // that match the query criteria.
 type ListChangesetsOutput struct {
@@ -82,26 +62,16 @@ type ListChangesetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChangesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChangesetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChangesetsResponse_changesets:
-			return deserializeChangesetList(d, schemas.ListChangesetsResponse_changesets, &v.Changesets)
-		case schemas.ListChangesetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChangesetsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChangesetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangesets, schemas.ListChangesetsRequest, schemas.ListChangesetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChangesets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangesets, schemas.ListChangesetsRequest, schemas.ListChangesetsResponse), output: &ListChangesetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChangesets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChangesets"); err != nil {

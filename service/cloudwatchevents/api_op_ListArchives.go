@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,30 +49,6 @@ type ListArchivesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListArchivesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListArchivesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListArchivesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventSourceArn != nil {
-		s.WriteString(schemas.ListArchivesRequest_EventSourceArn, *v.EventSourceArn)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.ListArchivesRequest_Limit, *v.Limit)
-	}
-	if v.NamePrefix != nil {
-		s.WriteString(schemas.ListArchivesRequest_NamePrefix, *v.NamePrefix)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListArchivesRequest_NextToken, *v.NextToken)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ListArchivesRequest_State, string(v.State))
-	}
-}
-
 type ListArchivesOutput struct {
 
 	// An array of Archive objects that include details about an archive.
@@ -89,26 +63,16 @@ type ListArchivesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListArchivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListArchivesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListArchivesResponse_Archives:
-			return deserializeArchiveResponseList(d, schemas.ListArchivesResponse_Archives, &v.Archives)
-		case schemas.ListArchivesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListArchivesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchives, schemas.ListArchivesRequest, schemas.ListArchivesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListArchives{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchives, schemas.ListArchivesRequest, schemas.ListArchivesResponse), output: &ListArchivesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListArchives{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListArchives"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,19 +48,6 @@ type PutWhatsAppBusinessAccountEventDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutWhatsAppBusinessAccountEventDestinationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutWhatsAppBusinessAccountEventDestinationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutWhatsAppBusinessAccountEventDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations, v.EventDestinations)
-	if v.Id != nil {
-		s.WriteString(schemas.PutWhatsAppBusinessAccountEventDestinationsInput_id, *v.Id)
-	}
-}
-
 type PutWhatsAppBusinessAccountEventDestinationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,21 +55,16 @@ type PutWhatsAppBusinessAccountEventDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutWhatsAppBusinessAccountEventDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutWhatsAppBusinessAccountEventDestinationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutWhatsAppBusinessAccountEventDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWhatsAppBusinessAccountEventDestinations, schemas.PutWhatsAppBusinessAccountEventDestinationsInput, schemas.PutWhatsAppBusinessAccountEventDestinationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutWhatsAppBusinessAccountEventDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWhatsAppBusinessAccountEventDestinations, schemas.PutWhatsAppBusinessAccountEventDestinationsInput, schemas.PutWhatsAppBusinessAccountEventDestinationsOutput), output: &PutWhatsAppBusinessAccountEventDestinationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutWhatsAppBusinessAccountEventDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutWhatsAppBusinessAccountEventDestinations"); err != nil {

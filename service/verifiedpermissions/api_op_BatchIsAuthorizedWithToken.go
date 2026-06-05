@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,26 +106,6 @@ type BatchIsAuthorizedWithTokenInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchIsAuthorizedWithTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchIsAuthorizedWithTokenInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchIsAuthorizedWithTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessToken != nil {
-		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_accessToken, *v.AccessToken)
-	}
-	serializeEntitiesDefinition(s, schemas.BatchIsAuthorizedWithTokenInput_entities, v.Entities)
-	if v.IdentityToken != nil {
-		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_identityToken, *v.IdentityToken)
-	}
-	if v.PolicyStoreId != nil {
-		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_policyStoreId, *v.PolicyStoreId)
-	}
-	serializeBatchIsAuthorizedWithTokenInputList(s, schemas.BatchIsAuthorizedWithTokenInput_requests, v.Requests)
-}
-
 type BatchIsAuthorizedWithTokenOutput struct {
 
 	// A series of Allow or Deny decisions for each request, and the policies that
@@ -145,26 +123,16 @@ type BatchIsAuthorizedWithTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchIsAuthorizedWithTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedWithTokenOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchIsAuthorizedWithTokenOutput_principal:
-			v.Principal = &types.EntityIdentifier{}
-			return v.Principal.Deserialize(d)
-		case schemas.BatchIsAuthorizedWithTokenOutput_results:
-			return deserializeBatchIsAuthorizedWithTokenOutputList(d, schemas.BatchIsAuthorizedWithTokenOutput_results, &v.Results)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchIsAuthorizedWithTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchIsAuthorizedWithToken, schemas.BatchIsAuthorizedWithTokenInput, schemas.BatchIsAuthorizedWithTokenOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchIsAuthorizedWithToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchIsAuthorizedWithToken, schemas.BatchIsAuthorizedWithTokenInput, schemas.BatchIsAuthorizedWithTokenOutput), output: &BatchIsAuthorizedWithTokenOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchIsAuthorizedWithToken"); err != nil {

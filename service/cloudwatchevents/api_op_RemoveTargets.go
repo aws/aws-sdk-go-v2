@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,25 +62,6 @@ type RemoveTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveTargetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemoveTargetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemoveTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventBusName != nil {
-		s.WriteString(schemas.RemoveTargetsRequest_EventBusName, *v.EventBusName)
-	}
-	if v.Force != false {
-		s.WriteBool(schemas.RemoveTargetsRequest_Force, v.Force)
-	}
-	serializeTargetIdList(s, schemas.RemoveTargetsRequest_Ids, v.Ids)
-	if v.Rule != nil {
-		s.WriteString(schemas.RemoveTargetsRequest_Rule, *v.Rule)
-	}
-}
-
 type RemoveTargetsOutput struct {
 
 	// The failed target entries.
@@ -97,25 +76,16 @@ type RemoveTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemoveTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemoveTargetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RemoveTargetsResponse_FailedEntries:
-			return deserializeRemoveTargetsResultEntryList(d, schemas.RemoveTargetsResponse_FailedEntries, &v.FailedEntries)
-		case schemas.RemoveTargetsResponse_FailedEntryCount:
-			return d.ReadInt32(schemas.RemoveTargetsResponse_FailedEntryCount, &v.FailedEntryCount)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTargets, schemas.RemoveTargetsRequest, schemas.RemoveTargetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTargets, schemas.RemoveTargetsRequest, schemas.RemoveTargetsResponse), output: &RemoveTargetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveTargets"); err != nil {

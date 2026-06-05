@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,31 +23,6 @@ type CdnAuthConfiguration struct {
 	SecretsRoleArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CdnAuthConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CdnAuthConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CdnAuthConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCdnIdentifierSecretArns(s, schemas.CdnAuthConfiguration_CdnIdentifierSecretArns, v.CdnIdentifierSecretArns)
-	if v.SecretsRoleArn != nil {
-		s.WriteString(schemas.CdnAuthConfiguration_SecretsRoleArn, *v.SecretsRoleArn)
-	}
-}
-func (v *CdnAuthConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CdnAuthConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CdnAuthConfiguration_CdnIdentifierSecretArns:
-			return deserializeCdnIdentifierSecretArns(d, schemas.CdnAuthConfiguration_CdnIdentifierSecretArns, &v.CdnIdentifierSecretArns)
-		case schemas.CdnAuthConfiguration_SecretsRoleArn:
-			v.SecretsRoleArn = new(string)
-			return d.ReadString(schemas.CdnAuthConfiguration_SecretsRoleArn, v.SecretsRoleArn)
-		}
-		return nil
-	})
 }
 
 // The configuration of the channel group.
@@ -81,52 +54,6 @@ type ChannelGroupListConfiguration struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelGroupListConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelGroupListConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelGroupListConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ChannelGroupListConfiguration_Arn, *v.Arn)
-	}
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.ChannelGroupListConfiguration_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ChannelGroupListConfiguration_CreatedAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ChannelGroupListConfiguration_Description, *v.Description)
-	}
-	if v.ModifiedAt != nil {
-		s.WriteTime(schemas.ChannelGroupListConfiguration_ModifiedAt, *v.ModifiedAt)
-	}
-}
-func (v *ChannelGroupListConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelGroupListConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelGroupListConfiguration_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ChannelGroupListConfiguration_Arn, v.Arn)
-		case schemas.ChannelGroupListConfiguration_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.ChannelGroupListConfiguration_ChannelGroupName, v.ChannelGroupName)
-		case schemas.ChannelGroupListConfiguration_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelGroupListConfiguration_CreatedAt, v.CreatedAt)
-		case schemas.ChannelGroupListConfiguration_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ChannelGroupListConfiguration_Description, v.Description)
-		case schemas.ChannelGroupListConfiguration_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelGroupListConfiguration_ModifiedAt, v.ModifiedAt)
-		}
-		return nil
-	})
 }
 
 // The configuration of the channel.
@@ -178,68 +105,6 @@ type ChannelListConfiguration struct {
 	InputType InputType
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelListConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelListConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelListConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ChannelListConfiguration_Arn, *v.Arn)
-	}
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.ChannelListConfiguration_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.ChannelListConfiguration_ChannelName, *v.ChannelName)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ChannelListConfiguration_CreatedAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ChannelListConfiguration_Description, *v.Description)
-	}
-	if v.InputType != "" {
-		s.WriteString(schemas.ChannelListConfiguration_InputType, string(v.InputType))
-	}
-	if v.ModifiedAt != nil {
-		s.WriteTime(schemas.ChannelListConfiguration_ModifiedAt, *v.ModifiedAt)
-	}
-}
-func (v *ChannelListConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelListConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelListConfiguration_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ChannelListConfiguration_Arn, v.Arn)
-		case schemas.ChannelListConfiguration_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.ChannelListConfiguration_ChannelGroupName, v.ChannelGroupName)
-		case schemas.ChannelListConfiguration_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.ChannelListConfiguration_ChannelName, v.ChannelName)
-		case schemas.ChannelListConfiguration_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelListConfiguration_CreatedAt, v.CreatedAt)
-		case schemas.ChannelListConfiguration_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ChannelListConfiguration_Description, v.Description)
-		case schemas.ChannelListConfiguration_InputType:
-			var ev string
-			if err := d.ReadString(schemas.ChannelListConfiguration_InputType, &ev); err != nil {
-				return err
-			}
-			v.InputType = InputType(ev)
-			return nil
-		case schemas.ChannelListConfiguration_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.ChannelListConfiguration_ModifiedAt, v.ModifiedAt)
-		}
-		return nil
-	})
 }
 
 // Create a DASH manifest configuration.
@@ -343,152 +208,6 @@ type CreateDashManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDashManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDashManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashAvailabilityStartTimeConfiguration(s, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
-	serializeDashBaseUrls(s, schemas.CreateDashManifestConfiguration_BaseUrls, v.BaseUrls)
-	if v.Compactness != "" {
-		s.WriteString(schemas.CreateDashManifestConfiguration_Compactness, string(v.Compactness))
-	}
-	if v.DrmSignaling != "" {
-		s.WriteString(schemas.CreateDashManifestConfiguration_DrmSignaling, string(v.DrmSignaling))
-	}
-	if v.DvbSettings != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_DvbSettings)
-		v.DvbSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.CreateDashManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.CreateDashManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.MinBufferTimeSeconds != nil {
-		s.WriteInt32(schemas.CreateDashManifestConfiguration_MinBufferTimeSeconds, *v.MinBufferTimeSeconds)
-	}
-	if v.MinUpdatePeriodSeconds != nil {
-		s.WriteInt32(schemas.CreateDashManifestConfiguration_MinUpdatePeriodSeconds, *v.MinUpdatePeriodSeconds)
-	}
-	serializeDashPeriodTriggers(s, schemas.CreateDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
-	serializeDashProfiles(s, schemas.CreateDashManifestConfiguration_Profiles, v.Profiles)
-	if v.ProgramInformation != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_ProgramInformation)
-		v.ProgramInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScteDash != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_ScteDash)
-		v.ScteDash.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SegmentTemplateFormat != "" {
-		s.WriteString(schemas.CreateDashManifestConfiguration_SegmentTemplateFormat, string(v.SegmentTemplateFormat))
-	}
-	if v.SubtitleConfiguration != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_SubtitleConfiguration)
-		v.SubtitleConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SuggestedPresentationDelaySeconds != nil {
-		s.WriteInt32(schemas.CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds, *v.SuggestedPresentationDelaySeconds)
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.CreateDashManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.UtcTiming != nil {
-		s.WriteStruct(schemas.CreateDashManifestConfiguration_UtcTiming)
-		v.UtcTiming.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateDashManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDashManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration:
-			return deserializeDashAvailabilityStartTimeConfiguration(d, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, &v.AvailabilityStartTimeConfiguration)
-		case schemas.CreateDashManifestConfiguration_BaseUrls:
-			return deserializeDashBaseUrls(d, schemas.CreateDashManifestConfiguration_BaseUrls, &v.BaseUrls)
-		case schemas.CreateDashManifestConfiguration_Compactness:
-			var ev string
-			if err := d.ReadString(schemas.CreateDashManifestConfiguration_Compactness, &ev); err != nil {
-				return err
-			}
-			v.Compactness = DashCompactness(ev)
-			return nil
-		case schemas.CreateDashManifestConfiguration_DrmSignaling:
-			var ev string
-			if err := d.ReadString(schemas.CreateDashManifestConfiguration_DrmSignaling, &ev); err != nil {
-				return err
-			}
-			v.DrmSignaling = DashDrmSignaling(ev)
-			return nil
-		case schemas.CreateDashManifestConfiguration_DvbSettings:
-			v.DvbSettings = &DashDvbSettings{}
-			return v.DvbSettings.Deserialize(d)
-		case schemas.CreateDashManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.CreateDashManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.CreateDashManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.CreateDashManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateDashManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.CreateDashManifestConfiguration_MinBufferTimeSeconds:
-			v.MinBufferTimeSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateDashManifestConfiguration_MinBufferTimeSeconds, v.MinBufferTimeSeconds)
-		case schemas.CreateDashManifestConfiguration_MinUpdatePeriodSeconds:
-			v.MinUpdatePeriodSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateDashManifestConfiguration_MinUpdatePeriodSeconds, v.MinUpdatePeriodSeconds)
-		case schemas.CreateDashManifestConfiguration_PeriodTriggers:
-			return deserializeDashPeriodTriggers(d, schemas.CreateDashManifestConfiguration_PeriodTriggers, &v.PeriodTriggers)
-		case schemas.CreateDashManifestConfiguration_Profiles:
-			return deserializeDashProfiles(d, schemas.CreateDashManifestConfiguration_Profiles, &v.Profiles)
-		case schemas.CreateDashManifestConfiguration_ProgramInformation:
-			v.ProgramInformation = &DashProgramInformation{}
-			return v.ProgramInformation.Deserialize(d)
-		case schemas.CreateDashManifestConfiguration_ScteDash:
-			v.ScteDash = &ScteDash{}
-			return v.ScteDash.Deserialize(d)
-		case schemas.CreateDashManifestConfiguration_SegmentTemplateFormat:
-			var ev string
-			if err := d.ReadString(schemas.CreateDashManifestConfiguration_SegmentTemplateFormat, &ev); err != nil {
-				return err
-			}
-			v.SegmentTemplateFormat = DashSegmentTemplateFormat(ev)
-			return nil
-		case schemas.CreateDashManifestConfiguration_SubtitleConfiguration:
-			v.SubtitleConfiguration = &DashSubtitleConfiguration{}
-			return v.SubtitleConfiguration.Deserialize(d)
-		case schemas.CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds:
-			v.SuggestedPresentationDelaySeconds = new(int32)
-			return d.ReadInt32(schemas.CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds, v.SuggestedPresentationDelaySeconds)
-		case schemas.CreateDashManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.CreateDashManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.CreateDashManifestConfiguration_UtcTiming:
-			v.UtcTiming = &DashUtcTiming{}
-			return v.UtcTiming.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Create an HTTP live streaming (HLS) manifest configuration.
 type CreateHlsManifestConfiguration struct {
 
@@ -549,86 +268,6 @@ type CreateHlsManifestConfiguration struct {
 	UrlEncodeChildManifest *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.CreateHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.CreateHlsManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.CreateHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.CreateHlsManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.ProgramDateTimeIntervalSeconds != nil {
-		s.WriteInt32(schemas.CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, *v.ProgramDateTimeIntervalSeconds)
-	}
-	if v.ScteHls != nil {
-		s.WriteStruct(schemas.CreateHlsManifestConfiguration_ScteHls)
-		v.ScteHls.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTag != nil {
-		s.WriteStruct(schemas.CreateHlsManifestConfiguration_StartTag)
-		v.StartTag.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.CreateHlsManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.UrlEncodeChildManifest != nil {
-		s.WriteBool(schemas.CreateHlsManifestConfiguration_UrlEncodeChildManifest, *v.UrlEncodeChildManifest)
-	}
-}
-func (v *CreateHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.CreateHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.CreateHlsManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.CreateHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.CreateHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.CreateHlsManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateHlsManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds:
-			v.ProgramDateTimeIntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, v.ProgramDateTimeIntervalSeconds)
-		case schemas.CreateHlsManifestConfiguration_ScteHls:
-			v.ScteHls = &ScteHls{}
-			return v.ScteHls.Deserialize(d)
-		case schemas.CreateHlsManifestConfiguration_StartTag:
-			v.StartTag = &StartTag{}
-			return v.StartTag.Deserialize(d)
-		case schemas.CreateHlsManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.CreateHlsManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.CreateHlsManifestConfiguration_UrlEncodeChildManifest:
-			v.UrlEncodeChildManifest = new(bool)
-			return d.ReadBool(schemas.CreateHlsManifestConfiguration_UrlEncodeChildManifest, v.UrlEncodeChildManifest)
-		}
-		return nil
-	})
 }
 
 // Create a low-latency HTTP live streaming (HLS) manifest configuration.
@@ -693,86 +332,6 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLowLatencyHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLowLatencyHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLowLatencyHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.CreateLowLatencyHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.CreateLowLatencyHlsManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.CreateLowLatencyHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.ProgramDateTimeIntervalSeconds != nil {
-		s.WriteInt32(schemas.CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, *v.ProgramDateTimeIntervalSeconds)
-	}
-	if v.ScteHls != nil {
-		s.WriteStruct(schemas.CreateLowLatencyHlsManifestConfiguration_ScteHls)
-		v.ScteHls.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTag != nil {
-		s.WriteStruct(schemas.CreateLowLatencyHlsManifestConfiguration_StartTag)
-		v.StartTag.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.CreateLowLatencyHlsManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.UrlEncodeChildManifest != nil {
-		s.WriteBool(schemas.CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, *v.UrlEncodeChildManifest)
-	}
-}
-func (v *CreateLowLatencyHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLowLatencyHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLowLatencyHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.CreateLowLatencyHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.CreateLowLatencyHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds:
-			v.ProgramDateTimeIntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, v.ProgramDateTimeIntervalSeconds)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_ScteHls:
-			v.ScteHls = &ScteHls{}
-			return v.ScteHls.Deserialize(d)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_StartTag:
-			v.StartTag = &StartTag{}
-			return v.StartTag.Deserialize(d)
-		case schemas.CreateLowLatencyHlsManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.CreateLowLatencyHlsManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest:
-			v.UrlEncodeChildManifest = new(bool)
-			return d.ReadBool(schemas.CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, v.UrlEncodeChildManifest)
-		}
-		return nil
-	})
-}
-
 // Configuration parameters for creating a Microsoft Smooth Streaming (MSS)
 // manifest. MSS is a streaming media format developed by Microsoft that delivers
 // adaptive bitrate streaming content to compatible players and devices.
@@ -804,52 +363,6 @@ type CreateMssManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMssManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMssManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMssManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.CreateMssManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestLayout != "" {
-		s.WriteString(schemas.CreateMssManifestConfiguration_ManifestLayout, string(v.ManifestLayout))
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.CreateMssManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.CreateMssManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-}
-func (v *CreateMssManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMssManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMssManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.CreateMssManifestConfiguration_ManifestLayout:
-			var ev string
-			if err := d.ReadString(schemas.CreateMssManifestConfiguration_ManifestLayout, &ev); err != nil {
-				return err
-			}
-			v.ManifestLayout = MssManifestLayout(ev)
-			return nil
-		case schemas.CreateMssManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.CreateMssManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.CreateMssManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateMssManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		}
-		return nil
-	})
-}
-
 // The configuration for the DASH availabilityStartTime attribute of the Media
 // Presentation Description (MPD). Use this configuration to set a custom
 // availability start time for your DASH manifest.
@@ -872,12 +385,6 @@ type DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime stru
 }
 
 func (*DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime) isDashAvailabilityStartTimeConfiguration() {
-}
-func (v *DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime) Serialize(s smithy.ShapeSerializer) {
-	s.WriteTime(schemas.DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime, v.Value)
-}
-func (v *DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadTime(schemas.DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime, &v.Value)
 }
 
 // The base URLs to use for retrieving segments. You can specify multiple
@@ -904,46 +411,6 @@ type DashBaseUrl struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashBaseUrl) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashBaseUrl)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashBaseUrl) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DvbPriority != nil {
-		s.WriteInt32(schemas.DashBaseUrl_DvbPriority, *v.DvbPriority)
-	}
-	if v.DvbWeight != nil {
-		s.WriteInt32(schemas.DashBaseUrl_DvbWeight, *v.DvbWeight)
-	}
-	if v.ServiceLocation != nil {
-		s.WriteString(schemas.DashBaseUrl_ServiceLocation, *v.ServiceLocation)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.DashBaseUrl_Url, *v.Url)
-	}
-}
-func (v *DashBaseUrl) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashBaseUrl, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashBaseUrl_DvbPriority:
-			v.DvbPriority = new(int32)
-			return d.ReadInt32(schemas.DashBaseUrl_DvbPriority, v.DvbPriority)
-		case schemas.DashBaseUrl_DvbWeight:
-			v.DvbWeight = new(int32)
-			return d.ReadInt32(schemas.DashBaseUrl_DvbWeight, v.DvbWeight)
-		case schemas.DashBaseUrl_ServiceLocation:
-			v.ServiceLocation = new(string)
-			return d.ReadString(schemas.DashBaseUrl_ServiceLocation, v.ServiceLocation)
-		case schemas.DashBaseUrl_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.DashBaseUrl_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // For use with DVB-DASH profiles only. The settings for font downloads that you
 // want Elemental MediaPackage to pass through to the manifest.
 type DashDvbFontDownload struct {
@@ -966,40 +433,6 @@ type DashDvbFontDownload struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashDvbFontDownload) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashDvbFontDownload)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashDvbFontDownload) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FontFamily != nil {
-		s.WriteString(schemas.DashDvbFontDownload_FontFamily, *v.FontFamily)
-	}
-	if v.MimeType != nil {
-		s.WriteString(schemas.DashDvbFontDownload_MimeType, *v.MimeType)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.DashDvbFontDownload_Url, *v.Url)
-	}
-}
-func (v *DashDvbFontDownload) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashDvbFontDownload, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashDvbFontDownload_FontFamily:
-			v.FontFamily = new(string)
-			return d.ReadString(schemas.DashDvbFontDownload_FontFamily, v.FontFamily)
-		case schemas.DashDvbFontDownload_MimeType:
-			v.MimeType = new(string)
-			return d.ReadString(schemas.DashDvbFontDownload_MimeType, v.MimeType)
-		case schemas.DashDvbFontDownload_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.DashDvbFontDownload_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // For use with DVB-DASH profiles only. The settings for error reporting from the
 // playback device that you want Elemental MediaPackage to pass through to the
 // manifest.
@@ -1018,34 +451,6 @@ type DashDvbMetricsReporting struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashDvbMetricsReporting) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashDvbMetricsReporting)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashDvbMetricsReporting) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Probability != nil {
-		s.WriteInt32(schemas.DashDvbMetricsReporting_Probability, *v.Probability)
-	}
-	if v.ReportingUrl != nil {
-		s.WriteString(schemas.DashDvbMetricsReporting_ReportingUrl, *v.ReportingUrl)
-	}
-}
-func (v *DashDvbMetricsReporting) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashDvbMetricsReporting, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashDvbMetricsReporting_Probability:
-			v.Probability = new(int32)
-			return d.ReadInt32(schemas.DashDvbMetricsReporting_Probability, v.Probability)
-		case schemas.DashDvbMetricsReporting_ReportingUrl:
-			v.ReportingUrl = new(string)
-			return d.ReadString(schemas.DashDvbMetricsReporting_ReportingUrl, v.ReportingUrl)
-		}
-		return nil
-	})
-}
-
 // For endpoints that use the DVB-DASH profile only. The font download and error
 // reporting information that you want MediaPackage to pass through to the
 // manifest.
@@ -1058,33 +463,6 @@ type DashDvbSettings struct {
 	FontDownload *DashDvbFontDownload
 
 	noSmithyDocumentSerde
-}
-
-func (v *DashDvbSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashDvbSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashDvbSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashDvbErrorMetrics(s, schemas.DashDvbSettings_ErrorMetrics, v.ErrorMetrics)
-	if v.FontDownload != nil {
-		s.WriteStruct(schemas.DashDvbSettings_FontDownload)
-		v.FontDownload.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DashDvbSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashDvbSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashDvbSettings_ErrorMetrics:
-			return deserializeDashDvbErrorMetrics(d, schemas.DashDvbSettings_ErrorMetrics, &v.ErrorMetrics)
-		case schemas.DashDvbSettings_FontDownload:
-			v.FontDownload = &DashDvbFontDownload{}
-			return v.FontDownload.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Details about the content that you want MediaPackage to pass through in the
@@ -1109,52 +487,6 @@ type DashProgramInformation struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashProgramInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashProgramInformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashProgramInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Copyright != nil {
-		s.WriteString(schemas.DashProgramInformation_Copyright, *v.Copyright)
-	}
-	if v.LanguageCode != nil {
-		s.WriteString(schemas.DashProgramInformation_LanguageCode, *v.LanguageCode)
-	}
-	if v.MoreInformationUrl != nil {
-		s.WriteString(schemas.DashProgramInformation_MoreInformationUrl, *v.MoreInformationUrl)
-	}
-	if v.Source != nil {
-		s.WriteString(schemas.DashProgramInformation_Source, *v.Source)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.DashProgramInformation_Title, *v.Title)
-	}
-}
-func (v *DashProgramInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashProgramInformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashProgramInformation_Copyright:
-			v.Copyright = new(string)
-			return d.ReadString(schemas.DashProgramInformation_Copyright, v.Copyright)
-		case schemas.DashProgramInformation_LanguageCode:
-			v.LanguageCode = new(string)
-			return d.ReadString(schemas.DashProgramInformation_LanguageCode, v.LanguageCode)
-		case schemas.DashProgramInformation_MoreInformationUrl:
-			v.MoreInformationUrl = new(string)
-			return d.ReadString(schemas.DashProgramInformation_MoreInformationUrl, v.MoreInformationUrl)
-		case schemas.DashProgramInformation_Source:
-			v.Source = new(string)
-			return d.ReadString(schemas.DashProgramInformation_Source, v.Source)
-		case schemas.DashProgramInformation_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.DashProgramInformation_Title, v.Title)
-		}
-		return nil
-	})
-}
-
 // The configuration for DASH subtitles.
 type DashSubtitleConfiguration struct {
 
@@ -1162,30 +494,6 @@ type DashSubtitleConfiguration struct {
 	TtmlConfiguration *DashTtmlConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *DashSubtitleConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashSubtitleConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashSubtitleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TtmlConfiguration != nil {
-		s.WriteStruct(schemas.DashSubtitleConfiguration_TtmlConfiguration)
-		v.TtmlConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DashSubtitleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashSubtitleConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashSubtitleConfiguration_TtmlConfiguration:
-			v.TtmlConfiguration = &DashTtmlConfiguration{}
-			return v.TtmlConfiguration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The settings for TTML subtitles.
@@ -1204,32 +512,6 @@ type DashTtmlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashTtmlConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashTtmlConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashTtmlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TtmlProfile != "" {
-		s.WriteString(schemas.DashTtmlConfiguration_TtmlProfile, string(v.TtmlProfile))
-	}
-}
-func (v *DashTtmlConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashTtmlConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashTtmlConfiguration_TtmlProfile:
-			var ev string
-			if err := d.ReadString(schemas.DashTtmlConfiguration_TtmlProfile, &ev); err != nil {
-				return err
-			}
-			v.TtmlProfile = DashTtmlProfile(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Determines the type of UTC timing included in the DASH Media Presentation
 // Description (MPD).
 type DashUtcTiming struct {
@@ -1244,38 +526,6 @@ type DashUtcTiming struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DashUtcTiming) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DashUtcTiming)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DashUtcTiming) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TimingMode != "" {
-		s.WriteString(schemas.DashUtcTiming_TimingMode, string(v.TimingMode))
-	}
-	if v.TimingSource != nil {
-		s.WriteString(schemas.DashUtcTiming_TimingSource, *v.TimingSource)
-	}
-}
-func (v *DashUtcTiming) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DashUtcTiming, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DashUtcTiming_TimingMode:
-			var ev string
-			if err := d.ReadString(schemas.DashUtcTiming_TimingMode, &ev); err != nil {
-				return err
-			}
-			v.TimingMode = DashUtcTimingMode(ev)
-			return nil
-		case schemas.DashUtcTiming_TimingSource:
-			v.TimingSource = new(string)
-			return d.ReadString(schemas.DashUtcTiming_TimingSource, v.TimingSource)
-		}
-		return nil
-	})
-}
-
 // The configuration for the destination where the harvested content will be
 // exported.
 type Destination struct {
@@ -1287,30 +537,6 @@ type Destination struct {
 	S3Destination *S3DestinationConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *Destination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Destination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Destination != nil {
-		s.WriteStruct(schemas.Destination_S3Destination)
-		v.S3Destination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Destination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Destination_S3Destination:
-			v.S3Destination = &S3DestinationConfig{}
-			return v.S3Destination.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The parameters for encrypting content.
@@ -1364,56 +590,6 @@ type Encryption struct {
 	KeyRotationIntervalSeconds *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Encryption) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Encryption)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Encryption) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CmafExcludeSegmentDrmMetadata != nil {
-		s.WriteBool(schemas.Encryption_CmafExcludeSegmentDrmMetadata, *v.CmafExcludeSegmentDrmMetadata)
-	}
-	if v.ConstantInitializationVector != nil {
-		s.WriteString(schemas.Encryption_ConstantInitializationVector, *v.ConstantInitializationVector)
-	}
-	if v.EncryptionMethod != nil {
-		s.WriteStruct(schemas.Encryption_EncryptionMethod)
-		v.EncryptionMethod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KeyRotationIntervalSeconds != nil {
-		s.WriteInt32(schemas.Encryption_KeyRotationIntervalSeconds, *v.KeyRotationIntervalSeconds)
-	}
-	if v.SpekeKeyProvider != nil {
-		s.WriteStruct(schemas.Encryption_SpekeKeyProvider)
-		v.SpekeKeyProvider.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Encryption) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Encryption, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Encryption_CmafExcludeSegmentDrmMetadata:
-			v.CmafExcludeSegmentDrmMetadata = new(bool)
-			return d.ReadBool(schemas.Encryption_CmafExcludeSegmentDrmMetadata, v.CmafExcludeSegmentDrmMetadata)
-		case schemas.Encryption_ConstantInitializationVector:
-			v.ConstantInitializationVector = new(string)
-			return d.ReadString(schemas.Encryption_ConstantInitializationVector, v.ConstantInitializationVector)
-		case schemas.Encryption_EncryptionMethod:
-			v.EncryptionMethod = &EncryptionMethod{}
-			return v.EncryptionMethod.Deserialize(d)
-		case schemas.Encryption_KeyRotationIntervalSeconds:
-			v.KeyRotationIntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.Encryption_KeyRotationIntervalSeconds, v.KeyRotationIntervalSeconds)
-		case schemas.Encryption_SpekeKeyProvider:
-			v.SpekeKeyProvider = &SpekeKeyProvider{}
-			return v.SpekeKeyProvider.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Configure one or more content encryption keys for your endpoints that use SPEKE
@@ -1491,42 +667,6 @@ type EncryptionContractConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionContractConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionContractConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionContractConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PresetSpeke20Audio != "" {
-		s.WriteString(schemas.EncryptionContractConfiguration_PresetSpeke20Audio, string(v.PresetSpeke20Audio))
-	}
-	if v.PresetSpeke20Video != "" {
-		s.WriteString(schemas.EncryptionContractConfiguration_PresetSpeke20Video, string(v.PresetSpeke20Video))
-	}
-}
-func (v *EncryptionContractConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionContractConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionContractConfiguration_PresetSpeke20Audio:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionContractConfiguration_PresetSpeke20Audio, &ev); err != nil {
-				return err
-			}
-			v.PresetSpeke20Audio = PresetSpeke20Audio(ev)
-			return nil
-		case schemas.EncryptionContractConfiguration_PresetSpeke20Video:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionContractConfiguration_PresetSpeke20Video, &ev); err != nil {
-				return err
-			}
-			v.PresetSpeke20Video = PresetSpeke20Video(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The encryption type.
 type EncryptionMethod struct {
 
@@ -1542,52 +682,6 @@ type EncryptionMethod struct {
 	TsEncryptionMethod TsEncryptionMethod
 
 	noSmithyDocumentSerde
-}
-
-func (v *EncryptionMethod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionMethod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionMethod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CmafEncryptionMethod != "" {
-		s.WriteString(schemas.EncryptionMethod_CmafEncryptionMethod, string(v.CmafEncryptionMethod))
-	}
-	if v.IsmEncryptionMethod != "" {
-		s.WriteString(schemas.EncryptionMethod_IsmEncryptionMethod, string(v.IsmEncryptionMethod))
-	}
-	if v.TsEncryptionMethod != "" {
-		s.WriteString(schemas.EncryptionMethod_TsEncryptionMethod, string(v.TsEncryptionMethod))
-	}
-}
-func (v *EncryptionMethod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionMethod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionMethod_CmafEncryptionMethod:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionMethod_CmafEncryptionMethod, &ev); err != nil {
-				return err
-			}
-			v.CmafEncryptionMethod = CmafEncryptionMethod(ev)
-			return nil
-		case schemas.EncryptionMethod_IsmEncryptionMethod:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionMethod_IsmEncryptionMethod, &ev); err != nil {
-				return err
-			}
-			v.IsmEncryptionMethod = IsmEncryptionMethod(ev)
-			return nil
-		case schemas.EncryptionMethod_TsEncryptionMethod:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionMethod_TsEncryptionMethod, &ev); err != nil {
-				return err
-			}
-			v.TsEncryptionMethod = TsEncryptionMethod(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Filter configuration includes settings for manifest filtering, start and end
@@ -1629,58 +723,6 @@ type FilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FilterConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FilterConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClipStartTime != nil {
-		s.WriteTime(schemas.FilterConfiguration_ClipStartTime, *v.ClipStartTime)
-	}
-	if v.DrmSettings != nil {
-		s.WriteString(schemas.FilterConfiguration_DrmSettings, *v.DrmSettings)
-	}
-	if v.End != nil {
-		s.WriteTime(schemas.FilterConfiguration_End, *v.End)
-	}
-	if v.ManifestFilter != nil {
-		s.WriteString(schemas.FilterConfiguration_ManifestFilter, *v.ManifestFilter)
-	}
-	if v.Start != nil {
-		s.WriteTime(schemas.FilterConfiguration_Start, *v.Start)
-	}
-	if v.TimeDelaySeconds != nil {
-		s.WriteInt32(schemas.FilterConfiguration_TimeDelaySeconds, *v.TimeDelaySeconds)
-	}
-}
-func (v *FilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FilterConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FilterConfiguration_ClipStartTime:
-			v.ClipStartTime = new(time.Time)
-			return d.ReadTime(schemas.FilterConfiguration_ClipStartTime, v.ClipStartTime)
-		case schemas.FilterConfiguration_DrmSettings:
-			v.DrmSettings = new(string)
-			return d.ReadString(schemas.FilterConfiguration_DrmSettings, v.DrmSettings)
-		case schemas.FilterConfiguration_End:
-			v.End = new(time.Time)
-			return d.ReadTime(schemas.FilterConfiguration_End, v.End)
-		case schemas.FilterConfiguration_ManifestFilter:
-			v.ManifestFilter = new(string)
-			return d.ReadString(schemas.FilterConfiguration_ManifestFilter, v.ManifestFilter)
-		case schemas.FilterConfiguration_Start:
-			v.Start = new(time.Time)
-			return d.ReadTime(schemas.FilterConfiguration_Start, v.Start)
-		case schemas.FilterConfiguration_TimeDelaySeconds:
-			v.TimeDelaySeconds = new(int32)
-			return d.ReadInt32(schemas.FilterConfiguration_TimeDelaySeconds, v.TimeDelaySeconds)
-		}
-		return nil
-	})
-}
-
 // The failover settings for the endpoint.
 type ForceEndpointErrorConfiguration struct {
 
@@ -1698,25 +740,6 @@ type ForceEndpointErrorConfiguration struct {
 	EndpointErrorConditions []EndpointErrorCondition
 
 	noSmithyDocumentSerde
-}
-
-func (v *ForceEndpointErrorConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ForceEndpointErrorConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ForceEndpointErrorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointErrorConditions(s, schemas.ForceEndpointErrorConfiguration_EndpointErrorConditions, v.EndpointErrorConditions)
-}
-func (v *ForceEndpointErrorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ForceEndpointErrorConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ForceEndpointErrorConfiguration_EndpointErrorConditions:
-			return deserializeEndpointErrorConditions(d, schemas.ForceEndpointErrorConfiguration_EndpointErrorConditions, &v.EndpointErrorConditions)
-		}
-		return nil
-	})
 }
 
 // Retrieve the DASH manifest configuration.
@@ -1816,158 +839,6 @@ type GetDashManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashAvailabilityStartTimeConfiguration(s, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
-	serializeDashBaseUrls(s, schemas.GetDashManifestConfiguration_BaseUrls, v.BaseUrls)
-	if v.Compactness != "" {
-		s.WriteString(schemas.GetDashManifestConfiguration_Compactness, string(v.Compactness))
-	}
-	if v.DrmSignaling != "" {
-		s.WriteString(schemas.GetDashManifestConfiguration_DrmSignaling, string(v.DrmSignaling))
-	}
-	if v.DvbSettings != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_DvbSettings)
-		v.DvbSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.GetDashManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.GetDashManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.MinBufferTimeSeconds != nil {
-		s.WriteInt32(schemas.GetDashManifestConfiguration_MinBufferTimeSeconds, *v.MinBufferTimeSeconds)
-	}
-	if v.MinUpdatePeriodSeconds != nil {
-		s.WriteInt32(schemas.GetDashManifestConfiguration_MinUpdatePeriodSeconds, *v.MinUpdatePeriodSeconds)
-	}
-	serializeDashPeriodTriggers(s, schemas.GetDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
-	serializeDashProfiles(s, schemas.GetDashManifestConfiguration_Profiles, v.Profiles)
-	if v.ProgramInformation != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_ProgramInformation)
-		v.ProgramInformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScteDash != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_ScteDash)
-		v.ScteDash.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SegmentTemplateFormat != "" {
-		s.WriteString(schemas.GetDashManifestConfiguration_SegmentTemplateFormat, string(v.SegmentTemplateFormat))
-	}
-	if v.SubtitleConfiguration != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_SubtitleConfiguration)
-		v.SubtitleConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SuggestedPresentationDelaySeconds != nil {
-		s.WriteInt32(schemas.GetDashManifestConfiguration_SuggestedPresentationDelaySeconds, *v.SuggestedPresentationDelaySeconds)
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.GetDashManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetDashManifestConfiguration_Url, *v.Url)
-	}
-	if v.UtcTiming != nil {
-		s.WriteStruct(schemas.GetDashManifestConfiguration_UtcTiming)
-		v.UtcTiming.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetDashManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration:
-			return deserializeDashAvailabilityStartTimeConfiguration(d, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, &v.AvailabilityStartTimeConfiguration)
-		case schemas.GetDashManifestConfiguration_BaseUrls:
-			return deserializeDashBaseUrls(d, schemas.GetDashManifestConfiguration_BaseUrls, &v.BaseUrls)
-		case schemas.GetDashManifestConfiguration_Compactness:
-			var ev string
-			if err := d.ReadString(schemas.GetDashManifestConfiguration_Compactness, &ev); err != nil {
-				return err
-			}
-			v.Compactness = DashCompactness(ev)
-			return nil
-		case schemas.GetDashManifestConfiguration_DrmSignaling:
-			var ev string
-			if err := d.ReadString(schemas.GetDashManifestConfiguration_DrmSignaling, &ev); err != nil {
-				return err
-			}
-			v.DrmSignaling = DashDrmSignaling(ev)
-			return nil
-		case schemas.GetDashManifestConfiguration_DvbSettings:
-			v.DvbSettings = &DashDvbSettings{}
-			return v.DvbSettings.Deserialize(d)
-		case schemas.GetDashManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.GetDashManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.GetDashManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.GetDashManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.GetDashManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.GetDashManifestConfiguration_MinBufferTimeSeconds:
-			v.MinBufferTimeSeconds = new(int32)
-			return d.ReadInt32(schemas.GetDashManifestConfiguration_MinBufferTimeSeconds, v.MinBufferTimeSeconds)
-		case schemas.GetDashManifestConfiguration_MinUpdatePeriodSeconds:
-			v.MinUpdatePeriodSeconds = new(int32)
-			return d.ReadInt32(schemas.GetDashManifestConfiguration_MinUpdatePeriodSeconds, v.MinUpdatePeriodSeconds)
-		case schemas.GetDashManifestConfiguration_PeriodTriggers:
-			return deserializeDashPeriodTriggers(d, schemas.GetDashManifestConfiguration_PeriodTriggers, &v.PeriodTriggers)
-		case schemas.GetDashManifestConfiguration_Profiles:
-			return deserializeDashProfiles(d, schemas.GetDashManifestConfiguration_Profiles, &v.Profiles)
-		case schemas.GetDashManifestConfiguration_ProgramInformation:
-			v.ProgramInformation = &DashProgramInformation{}
-			return v.ProgramInformation.Deserialize(d)
-		case schemas.GetDashManifestConfiguration_ScteDash:
-			v.ScteDash = &ScteDash{}
-			return v.ScteDash.Deserialize(d)
-		case schemas.GetDashManifestConfiguration_SegmentTemplateFormat:
-			var ev string
-			if err := d.ReadString(schemas.GetDashManifestConfiguration_SegmentTemplateFormat, &ev); err != nil {
-				return err
-			}
-			v.SegmentTemplateFormat = DashSegmentTemplateFormat(ev)
-			return nil
-		case schemas.GetDashManifestConfiguration_SubtitleConfiguration:
-			v.SubtitleConfiguration = &DashSubtitleConfiguration{}
-			return v.SubtitleConfiguration.Deserialize(d)
-		case schemas.GetDashManifestConfiguration_SuggestedPresentationDelaySeconds:
-			v.SuggestedPresentationDelaySeconds = new(int32)
-			return d.ReadInt32(schemas.GetDashManifestConfiguration_SuggestedPresentationDelaySeconds, v.SuggestedPresentationDelaySeconds)
-		case schemas.GetDashManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.GetDashManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.GetDashManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetDashManifestConfiguration_Url, v.Url)
-		case schemas.GetDashManifestConfiguration_UtcTiming:
-			v.UtcTiming = &DashUtcTiming{}
-			return v.UtcTiming.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Retrieve the HTTP live streaming (HLS) manifest configuration.
 type GetHlsManifestConfiguration struct {
 
@@ -2031,92 +902,6 @@ type GetHlsManifestConfiguration struct {
 	UrlEncodeChildManifest *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.GetHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.GetHlsManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.GetHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.GetHlsManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.ProgramDateTimeIntervalSeconds != nil {
-		s.WriteInt32(schemas.GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, *v.ProgramDateTimeIntervalSeconds)
-	}
-	if v.ScteHls != nil {
-		s.WriteStruct(schemas.GetHlsManifestConfiguration_ScteHls)
-		v.ScteHls.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTag != nil {
-		s.WriteStruct(schemas.GetHlsManifestConfiguration_StartTag)
-		v.StartTag.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.GetHlsManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetHlsManifestConfiguration_Url, *v.Url)
-	}
-	if v.UrlEncodeChildManifest != nil {
-		s.WriteBool(schemas.GetHlsManifestConfiguration_UrlEncodeChildManifest, *v.UrlEncodeChildManifest)
-	}
-}
-func (v *GetHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.GetHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.GetHlsManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.GetHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.GetHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.GetHlsManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.GetHlsManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds:
-			v.ProgramDateTimeIntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, v.ProgramDateTimeIntervalSeconds)
-		case schemas.GetHlsManifestConfiguration_ScteHls:
-			v.ScteHls = &ScteHls{}
-			return v.ScteHls.Deserialize(d)
-		case schemas.GetHlsManifestConfiguration_StartTag:
-			v.StartTag = &StartTag{}
-			return v.StartTag.Deserialize(d)
-		case schemas.GetHlsManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.GetHlsManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.GetHlsManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetHlsManifestConfiguration_Url, v.Url)
-		case schemas.GetHlsManifestConfiguration_UrlEncodeChildManifest:
-			v.UrlEncodeChildManifest = new(bool)
-			return d.ReadBool(schemas.GetHlsManifestConfiguration_UrlEncodeChildManifest, v.UrlEncodeChildManifest)
-		}
-		return nil
-	})
 }
 
 // Retrieve the low-latency HTTP live streaming (HLS) manifest configuration.
@@ -2184,92 +969,6 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetLowLatencyHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetLowLatencyHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetLowLatencyHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.GetLowLatencyHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.GetLowLatencyHlsManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.GetLowLatencyHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.ProgramDateTimeIntervalSeconds != nil {
-		s.WriteInt32(schemas.GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, *v.ProgramDateTimeIntervalSeconds)
-	}
-	if v.ScteHls != nil {
-		s.WriteStruct(schemas.GetLowLatencyHlsManifestConfiguration_ScteHls)
-		v.ScteHls.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTag != nil {
-		s.WriteStruct(schemas.GetLowLatencyHlsManifestConfiguration_StartTag)
-		v.StartTag.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UriPathType != "" {
-		s.WriteString(schemas.GetLowLatencyHlsManifestConfiguration_UriPathType, string(v.UriPathType))
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetLowLatencyHlsManifestConfiguration_Url, *v.Url)
-	}
-	if v.UrlEncodeChildManifest != nil {
-		s.WriteBool(schemas.GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, *v.UrlEncodeChildManifest)
-	}
-}
-func (v *GetLowLatencyHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetLowLatencyHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetLowLatencyHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.GetLowLatencyHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.GetLowLatencyHlsManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.GetLowLatencyHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.GetLowLatencyHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds:
-			v.ProgramDateTimeIntervalSeconds = new(int32)
-			return d.ReadInt32(schemas.GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, v.ProgramDateTimeIntervalSeconds)
-		case schemas.GetLowLatencyHlsManifestConfiguration_ScteHls:
-			v.ScteHls = &ScteHls{}
-			return v.ScteHls.Deserialize(d)
-		case schemas.GetLowLatencyHlsManifestConfiguration_StartTag:
-			v.StartTag = &StartTag{}
-			return v.StartTag.Deserialize(d)
-		case schemas.GetLowLatencyHlsManifestConfiguration_UriPathType:
-			var ev string
-			if err := d.ReadString(schemas.GetLowLatencyHlsManifestConfiguration_UriPathType, &ev); err != nil {
-				return err
-			}
-			v.UriPathType = UriPathType(ev)
-			return nil
-		case schemas.GetLowLatencyHlsManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetLowLatencyHlsManifestConfiguration_Url, v.Url)
-		case schemas.GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest:
-			v.UrlEncodeChildManifest = new(bool)
-			return d.ReadBool(schemas.GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, v.UrlEncodeChildManifest)
-		}
-		return nil
-	})
-}
-
 // Configuration details for a Microsoft Smooth Streaming (MSS) manifest
 // associated with an origin endpoint. This includes all the settings and
 // properties that define how the MSS content is packaged and delivered.
@@ -2304,58 +1003,6 @@ type GetMssManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMssManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMssManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMssManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilterConfiguration != nil {
-		s.WriteStruct(schemas.GetMssManifestConfiguration_FilterConfiguration)
-		v.FilterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ManifestLayout != "" {
-		s.WriteString(schemas.GetMssManifestConfiguration_ManifestLayout, string(v.ManifestLayout))
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.GetMssManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.ManifestWindowSeconds != nil {
-		s.WriteInt32(schemas.GetMssManifestConfiguration_ManifestWindowSeconds, *v.ManifestWindowSeconds)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.GetMssManifestConfiguration_Url, *v.Url)
-	}
-}
-func (v *GetMssManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMssManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMssManifestConfiguration_FilterConfiguration:
-			v.FilterConfiguration = &FilterConfiguration{}
-			return v.FilterConfiguration.Deserialize(d)
-		case schemas.GetMssManifestConfiguration_ManifestLayout:
-			var ev string
-			if err := d.ReadString(schemas.GetMssManifestConfiguration_ManifestLayout, &ev); err != nil {
-				return err
-			}
-			v.ManifestLayout = MssManifestLayout(ev)
-			return nil
-		case schemas.GetMssManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.GetMssManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.GetMssManifestConfiguration_ManifestWindowSeconds:
-			v.ManifestWindowSeconds = new(int32)
-			return d.ReadInt32(schemas.GetMssManifestConfiguration_ManifestWindowSeconds, v.ManifestWindowSeconds)
-		case schemas.GetMssManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.GetMssManifestConfiguration_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Information about a harvested DASH manifest.
 type HarvestedDashManifest struct {
 
@@ -2365,28 +1012,6 @@ type HarvestedDashManifest struct {
 	ManifestName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *HarvestedDashManifest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvestedDashManifest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvestedDashManifest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManifestName != nil {
-		s.WriteString(schemas.HarvestedDashManifest_ManifestName, *v.ManifestName)
-	}
-}
-func (v *HarvestedDashManifest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvestedDashManifest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvestedDashManifest_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.HarvestedDashManifest_ManifestName, v.ManifestName)
-		}
-		return nil
-	})
 }
 
 // Information about a harvested HLS manifest.
@@ -2400,28 +1025,6 @@ type HarvestedHlsManifest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HarvestedHlsManifest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvestedHlsManifest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvestedHlsManifest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManifestName != nil {
-		s.WriteString(schemas.HarvestedHlsManifest_ManifestName, *v.ManifestName)
-	}
-}
-func (v *HarvestedHlsManifest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvestedHlsManifest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvestedHlsManifest_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.HarvestedHlsManifest_ManifestName, v.ManifestName)
-		}
-		return nil
-	})
-}
-
 // Information about a harvested Low-Latency HLS manifest.
 type HarvestedLowLatencyHlsManifest struct {
 
@@ -2431,28 +1034,6 @@ type HarvestedLowLatencyHlsManifest struct {
 	ManifestName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *HarvestedLowLatencyHlsManifest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvestedLowLatencyHlsManifest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvestedLowLatencyHlsManifest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManifestName != nil {
-		s.WriteString(schemas.HarvestedLowLatencyHlsManifest_ManifestName, *v.ManifestName)
-	}
-}
-func (v *HarvestedLowLatencyHlsManifest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvestedLowLatencyHlsManifest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvestedLowLatencyHlsManifest_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.HarvestedLowLatencyHlsManifest_ManifestName, v.ManifestName)
-		}
-		return nil
-	})
 }
 
 // A collection of harvested manifests of different types.
@@ -2470,31 +1051,6 @@ type HarvestedManifests struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HarvestedManifests) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvestedManifests)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvestedManifests) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarvestedDashManifestsList(s, schemas.HarvestedManifests_DashManifests, v.DashManifests)
-	serializeHarvestedHlsManifestsList(s, schemas.HarvestedManifests_HlsManifests, v.HlsManifests)
-	serializeHarvestedLowLatencyHlsManifestsList(s, schemas.HarvestedManifests_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
-}
-func (v *HarvestedManifests) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvestedManifests, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvestedManifests_DashManifests:
-			return deserializeHarvestedDashManifestsList(d, schemas.HarvestedManifests_DashManifests, &v.DashManifests)
-		case schemas.HarvestedManifests_HlsManifests:
-			return deserializeHarvestedHlsManifestsList(d, schemas.HarvestedManifests_HlsManifests, &v.HlsManifests)
-		case schemas.HarvestedManifests_LowLatencyHlsManifests:
-			return deserializeHarvestedLowLatencyHlsManifestsList(d, schemas.HarvestedManifests_LowLatencyHlsManifests, &v.LowLatencyHlsManifests)
-		}
-		return nil
-	})
-}
-
 // Defines the schedule configuration for a harvest job.
 type HarvesterScheduleConfiguration struct {
 
@@ -2509,34 +1065,6 @@ type HarvesterScheduleConfiguration struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *HarvesterScheduleConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvesterScheduleConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvesterScheduleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.HarvesterScheduleConfiguration_EndTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.HarvesterScheduleConfiguration_StartTime, *v.StartTime)
-	}
-}
-func (v *HarvesterScheduleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvesterScheduleConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvesterScheduleConfiguration_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.HarvesterScheduleConfiguration_EndTime, v.EndTime)
-		case schemas.HarvesterScheduleConfiguration_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.HarvesterScheduleConfiguration_StartTime, v.StartTime)
-		}
-		return nil
-	})
 }
 
 // Represents a harvest job resource in MediaPackage v2, which is used to export
@@ -2612,116 +1140,6 @@ type HarvestJob struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HarvestJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HarvestJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HarvestJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.HarvestJob_Arn, *v.Arn)
-	}
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.HarvestJob_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.HarvestJob_ChannelName, *v.ChannelName)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.HarvestJob_CreatedAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.HarvestJob_Description, *v.Description)
-	}
-	if v.Destination != nil {
-		s.WriteStruct(schemas.HarvestJob_Destination)
-		v.Destination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ETag != nil {
-		s.WriteString(schemas.HarvestJob_ETag, *v.ETag)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.HarvestJob_ErrorMessage, *v.ErrorMessage)
-	}
-	if v.HarvestJobName != nil {
-		s.WriteString(schemas.HarvestJob_HarvestJobName, *v.HarvestJobName)
-	}
-	if v.HarvestedManifests != nil {
-		s.WriteStruct(schemas.HarvestJob_HarvestedManifests)
-		v.HarvestedManifests.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ModifiedAt != nil {
-		s.WriteTime(schemas.HarvestJob_ModifiedAt, *v.ModifiedAt)
-	}
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.HarvestJob_OriginEndpointName, *v.OriginEndpointName)
-	}
-	if v.ScheduleConfiguration != nil {
-		s.WriteStruct(schemas.HarvestJob_ScheduleConfiguration)
-		v.ScheduleConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.HarvestJob_Status, string(v.Status))
-	}
-}
-func (v *HarvestJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HarvestJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HarvestJob_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.HarvestJob_Arn, v.Arn)
-		case schemas.HarvestJob_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.HarvestJob_ChannelGroupName, v.ChannelGroupName)
-		case schemas.HarvestJob_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.HarvestJob_ChannelName, v.ChannelName)
-		case schemas.HarvestJob_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.HarvestJob_CreatedAt, v.CreatedAt)
-		case schemas.HarvestJob_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.HarvestJob_Description, v.Description)
-		case schemas.HarvestJob_Destination:
-			v.Destination = &Destination{}
-			return v.Destination.Deserialize(d)
-		case schemas.HarvestJob_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.HarvestJob_ETag, v.ETag)
-		case schemas.HarvestJob_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.HarvestJob_ErrorMessage, v.ErrorMessage)
-		case schemas.HarvestJob_HarvestJobName:
-			v.HarvestJobName = new(string)
-			return d.ReadString(schemas.HarvestJob_HarvestJobName, v.HarvestJobName)
-		case schemas.HarvestJob_HarvestedManifests:
-			v.HarvestedManifests = &HarvestedManifests{}
-			return v.HarvestedManifests.Deserialize(d)
-		case schemas.HarvestJob_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.HarvestJob_ModifiedAt, v.ModifiedAt)
-		case schemas.HarvestJob_OriginEndpointName:
-			v.OriginEndpointName = new(string)
-			return d.ReadString(schemas.HarvestJob_OriginEndpointName, v.OriginEndpointName)
-		case schemas.HarvestJob_ScheduleConfiguration:
-			v.ScheduleConfiguration = &HarvesterScheduleConfiguration{}
-			return v.ScheduleConfiguration.Deserialize(d)
-		case schemas.HarvestJob_Status:
-			var ev string
-			if err := d.ReadString(schemas.HarvestJob_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = HarvestJobStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The ingest domain URL where the source stream should be sent.
 type IngestEndpoint struct {
 
@@ -2732,34 +1150,6 @@ type IngestEndpoint struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IngestEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IngestEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IngestEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.IngestEndpoint_Id, *v.Id)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.IngestEndpoint_Url, *v.Url)
-	}
-}
-func (v *IngestEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IngestEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IngestEndpoint_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.IngestEndpoint_Id, v.Id)
-		case schemas.IngestEndpoint_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.IngestEndpoint_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The configuration for input switching based on the media quality confidence
@@ -2779,34 +1169,6 @@ type InputSwitchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InputSwitchConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InputSwitchConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InputSwitchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MQCSInputSwitching != nil {
-		s.WriteBool(schemas.InputSwitchConfiguration_MQCSInputSwitching, *v.MQCSInputSwitching)
-	}
-	if v.PreferredInput != nil {
-		s.WriteInt32(schemas.InputSwitchConfiguration_PreferredInput, *v.PreferredInput)
-	}
-}
-func (v *InputSwitchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputSwitchConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputSwitchConfiguration_MQCSInputSwitching:
-			v.MQCSInputSwitching = new(bool)
-			return d.ReadBool(schemas.InputSwitchConfiguration_MQCSInputSwitching, v.MQCSInputSwitching)
-		case schemas.InputSwitchConfiguration_PreferredInput:
-			v.PreferredInput = new(int32)
-			return d.ReadInt32(schemas.InputSwitchConfiguration_PreferredInput, v.PreferredInput)
-		}
-		return nil
-	})
-}
-
 // List the DASH manifest configuration.
 type ListDashManifestConfiguration struct {
 
@@ -2821,34 +1183,6 @@ type ListDashManifestConfiguration struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListDashManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDashManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManifestName != nil {
-		s.WriteString(schemas.ListDashManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.ListDashManifestConfiguration_Url, *v.Url)
-	}
-}
-func (v *ListDashManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDashManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDashManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.ListDashManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.ListDashManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.ListDashManifestConfiguration_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // List the HTTP live streaming (HLS) manifest configuration.
@@ -2877,40 +1211,6 @@ type ListHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.ListHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.ListHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.ListHlsManifestConfiguration_Url, *v.Url)
-	}
-}
-func (v *ListHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.ListHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.ListHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.ListHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.ListHlsManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.ListHlsManifestConfiguration_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // List the low-latency HTTP live streaming (HLS) manifest configuration.
 type ListLowLatencyHlsManifestConfiguration struct {
 
@@ -2937,40 +1237,6 @@ type ListLowLatencyHlsManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLowLatencyHlsManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLowLatencyHlsManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLowLatencyHlsManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChildManifestName != nil {
-		s.WriteString(schemas.ListLowLatencyHlsManifestConfiguration_ChildManifestName, *v.ChildManifestName)
-	}
-	if v.ManifestName != nil {
-		s.WriteString(schemas.ListLowLatencyHlsManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.ListLowLatencyHlsManifestConfiguration_Url, *v.Url)
-	}
-}
-func (v *ListLowLatencyHlsManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLowLatencyHlsManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLowLatencyHlsManifestConfiguration_ChildManifestName:
-			v.ChildManifestName = new(string)
-			return d.ReadString(schemas.ListLowLatencyHlsManifestConfiguration_ChildManifestName, v.ChildManifestName)
-		case schemas.ListLowLatencyHlsManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.ListLowLatencyHlsManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.ListLowLatencyHlsManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.ListLowLatencyHlsManifestConfiguration_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // Summary information about a Microsoft Smooth Streaming (MSS) manifest
 // configuration. This provides key details about the MSS manifest without
 // including all configuration parameters.
@@ -2985,34 +1251,6 @@ type ListMssManifestConfiguration struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListMssManifestConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMssManifestConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMssManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManifestName != nil {
-		s.WriteString(schemas.ListMssManifestConfiguration_ManifestName, *v.ManifestName)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.ListMssManifestConfiguration_Url, *v.Url)
-	}
-}
-func (v *ListMssManifestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMssManifestConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMssManifestConfiguration_ManifestName:
-			v.ManifestName = new(string)
-			return d.ReadString(schemas.ListMssManifestConfiguration_ManifestName, v.ManifestName)
-		case schemas.ListMssManifestConfiguration_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.ListMssManifestConfiguration_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The configuration of the origin endpoint.
@@ -3083,104 +1321,6 @@ type OriginEndpointListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OriginEndpointListConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OriginEndpointListConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OriginEndpointListConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.OriginEndpointListConfiguration_Arn, *v.Arn)
-	}
-	if v.ChannelGroupName != nil {
-		s.WriteString(schemas.OriginEndpointListConfiguration_ChannelGroupName, *v.ChannelGroupName)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.OriginEndpointListConfiguration_ChannelName, *v.ChannelName)
-	}
-	if v.ContainerType != "" {
-		s.WriteString(schemas.OriginEndpointListConfiguration_ContainerType, string(v.ContainerType))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.OriginEndpointListConfiguration_CreatedAt, *v.CreatedAt)
-	}
-	serializeListDashManifests(s, schemas.OriginEndpointListConfiguration_DashManifests, v.DashManifests)
-	if v.Description != nil {
-		s.WriteString(schemas.OriginEndpointListConfiguration_Description, *v.Description)
-	}
-	if v.ForceEndpointErrorConfiguration != nil {
-		s.WriteStruct(schemas.OriginEndpointListConfiguration_ForceEndpointErrorConfiguration)
-		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeListHlsManifests(s, schemas.OriginEndpointListConfiguration_HlsManifests, v.HlsManifests)
-	serializeListLowLatencyHlsManifests(s, schemas.OriginEndpointListConfiguration_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
-	if v.ModifiedAt != nil {
-		s.WriteTime(schemas.OriginEndpointListConfiguration_ModifiedAt, *v.ModifiedAt)
-	}
-	serializeListMssManifests(s, schemas.OriginEndpointListConfiguration_MssManifests, v.MssManifests)
-	if v.OriginEndpointName != nil {
-		s.WriteString(schemas.OriginEndpointListConfiguration_OriginEndpointName, *v.OriginEndpointName)
-	}
-	if v.UriSeparator != "" {
-		s.WriteString(schemas.OriginEndpointListConfiguration_UriSeparator, string(v.UriSeparator))
-	}
-}
-func (v *OriginEndpointListConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OriginEndpointListConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OriginEndpointListConfiguration_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.OriginEndpointListConfiguration_Arn, v.Arn)
-		case schemas.OriginEndpointListConfiguration_ChannelGroupName:
-			v.ChannelGroupName = new(string)
-			return d.ReadString(schemas.OriginEndpointListConfiguration_ChannelGroupName, v.ChannelGroupName)
-		case schemas.OriginEndpointListConfiguration_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.OriginEndpointListConfiguration_ChannelName, v.ChannelName)
-		case schemas.OriginEndpointListConfiguration_ContainerType:
-			var ev string
-			if err := d.ReadString(schemas.OriginEndpointListConfiguration_ContainerType, &ev); err != nil {
-				return err
-			}
-			v.ContainerType = ContainerType(ev)
-			return nil
-		case schemas.OriginEndpointListConfiguration_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.OriginEndpointListConfiguration_CreatedAt, v.CreatedAt)
-		case schemas.OriginEndpointListConfiguration_DashManifests:
-			return deserializeListDashManifests(d, schemas.OriginEndpointListConfiguration_DashManifests, &v.DashManifests)
-		case schemas.OriginEndpointListConfiguration_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.OriginEndpointListConfiguration_Description, v.Description)
-		case schemas.OriginEndpointListConfiguration_ForceEndpointErrorConfiguration:
-			v.ForceEndpointErrorConfiguration = &ForceEndpointErrorConfiguration{}
-			return v.ForceEndpointErrorConfiguration.Deserialize(d)
-		case schemas.OriginEndpointListConfiguration_HlsManifests:
-			return deserializeListHlsManifests(d, schemas.OriginEndpointListConfiguration_HlsManifests, &v.HlsManifests)
-		case schemas.OriginEndpointListConfiguration_LowLatencyHlsManifests:
-			return deserializeListLowLatencyHlsManifests(d, schemas.OriginEndpointListConfiguration_LowLatencyHlsManifests, &v.LowLatencyHlsManifests)
-		case schemas.OriginEndpointListConfiguration_ModifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.OriginEndpointListConfiguration_ModifiedAt, v.ModifiedAt)
-		case schemas.OriginEndpointListConfiguration_MssManifests:
-			return deserializeListMssManifests(d, schemas.OriginEndpointListConfiguration_MssManifests, &v.MssManifests)
-		case schemas.OriginEndpointListConfiguration_OriginEndpointName:
-			v.OriginEndpointName = new(string)
-			return d.ReadString(schemas.OriginEndpointListConfiguration_OriginEndpointName, v.OriginEndpointName)
-		case schemas.OriginEndpointListConfiguration_UriSeparator:
-			var ev string
-			if err := d.ReadString(schemas.OriginEndpointListConfiguration_UriSeparator, &ev); err != nil {
-				return err
-			}
-			v.UriSeparator = UriSeparator(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The settings for what common media server data (CMSD) headers AWS Elemental
 // MediaPackage includes in responses to the CDN.
 type OutputHeaderConfiguration struct {
@@ -3190,28 +1330,6 @@ type OutputHeaderConfiguration struct {
 	PublishMQCS *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *OutputHeaderConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputHeaderConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutputHeaderConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PublishMQCS != nil {
-		s.WriteBool(schemas.OutputHeaderConfiguration_PublishMQCS, *v.PublishMQCS)
-	}
-}
-func (v *OutputHeaderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutputHeaderConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutputHeaderConfiguration_PublishMQCS:
-			v.PublishMQCS = new(bool)
-			return d.ReadBool(schemas.OutputHeaderConfiguration_PublishMQCS, v.PublishMQCS)
-		}
-		return nil
-	})
 }
 
 // Configuration parameters for where in an S3 bucket to place the harvested
@@ -3230,34 +1348,6 @@ type S3DestinationConfig struct {
 	DestinationPath *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3DestinationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3DestinationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3DestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3DestinationConfig_BucketName, *v.BucketName)
-	}
-	if v.DestinationPath != nil {
-		s.WriteString(schemas.S3DestinationConfig_DestinationPath, *v.DestinationPath)
-	}
-}
-func (v *S3DestinationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3DestinationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3DestinationConfig_BucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3DestinationConfig_BucketName, v.BucketName)
-		case schemas.S3DestinationConfig_DestinationPath:
-			v.DestinationPath = new(string)
-			return d.ReadString(schemas.S3DestinationConfig_DestinationPath, v.DestinationPath)
-		}
-		return nil
-	})
 }
 
 // The SCTE configuration.
@@ -3295,38 +1385,6 @@ type Scte struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Scte) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Scte)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Scte) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomAdTypeList(s, schemas.Scte_CustomAdTypes, v.CustomAdTypes)
-	serializeScteFilterList(s, schemas.Scte_ScteFilter, v.ScteFilter)
-	if v.ScteInSegments != "" {
-		s.WriteString(schemas.Scte_ScteInSegments, string(v.ScteInSegments))
-	}
-}
-func (v *Scte) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Scte, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Scte_CustomAdTypes:
-			return deserializeCustomAdTypeList(d, schemas.Scte_CustomAdTypes, &v.CustomAdTypes)
-		case schemas.Scte_ScteFilter:
-			return deserializeScteFilterList(d, schemas.Scte_ScteFilter, &v.ScteFilter)
-		case schemas.Scte_ScteInSegments:
-			var ev string
-			if err := d.ReadString(schemas.Scte_ScteInSegments, &ev); err != nil {
-				return err
-			}
-			v.ScteInSegments = ScteInSegments(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The SCTE configuration.
 type ScteDash struct {
 
@@ -3350,42 +1408,6 @@ type ScteDash struct {
 	ScteInManifests ScteInManifests
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScteDash) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScteDash)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScteDash) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdMarkerDash != "" {
-		s.WriteString(schemas.ScteDash_AdMarkerDash, string(v.AdMarkerDash))
-	}
-	if v.ScteInManifests != "" {
-		s.WriteString(schemas.ScteDash_ScteInManifests, string(v.ScteInManifests))
-	}
-}
-func (v *ScteDash) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScteDash, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScteDash_AdMarkerDash:
-			var ev string
-			if err := d.ReadString(schemas.ScteDash_AdMarkerDash, &ev); err != nil {
-				return err
-			}
-			v.AdMarkerDash = AdMarkerDash(ev)
-			return nil
-		case schemas.ScteDash_ScteInManifests:
-			var ev string
-			if err := d.ReadString(schemas.ScteDash_ScteInManifests, &ev); err != nil {
-				return err
-			}
-			v.ScteInManifests = ScteInManifests(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The SCTE configuration.
@@ -3417,42 +1439,6 @@ type ScteHls struct {
 	ScteInManifests ScteInManifests
 
 	noSmithyDocumentSerde
-}
-
-func (v *ScteHls) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScteHls)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScteHls) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdMarkerHls != "" {
-		s.WriteString(schemas.ScteHls_AdMarkerHls, string(v.AdMarkerHls))
-	}
-	if v.ScteInManifests != "" {
-		s.WriteString(schemas.ScteHls_ScteInManifests, string(v.ScteInManifests))
-	}
-}
-func (v *ScteHls) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScteHls, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScteHls_AdMarkerHls:
-			var ev string
-			if err := d.ReadString(schemas.ScteHls_AdMarkerHls, &ev); err != nil {
-				return err
-			}
-			v.AdMarkerHls = AdMarkerHls(ev)
-			return nil
-		case schemas.ScteHls_ScteInManifests:
-			var ev string
-			if err := d.ReadString(schemas.ScteHls_ScteInManifests, &ev); err != nil {
-				return err
-			}
-			v.ScteInManifests = ScteInManifests(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The segment configuration, including the segment name, duration, and other
@@ -3494,68 +1480,6 @@ type Segment struct {
 	TsUseAudioRenditionGroup *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *Segment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Segment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Segment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Encryption != nil {
-		s.WriteStruct(schemas.Segment_Encryption)
-		v.Encryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IncludeIframeOnlyStreams != nil {
-		s.WriteBool(schemas.Segment_IncludeIframeOnlyStreams, *v.IncludeIframeOnlyStreams)
-	}
-	if v.Scte != nil {
-		s.WriteStruct(schemas.Segment_Scte)
-		v.Scte.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SegmentDurationSeconds != nil {
-		s.WriteInt32(schemas.Segment_SegmentDurationSeconds, *v.SegmentDurationSeconds)
-	}
-	if v.SegmentName != nil {
-		s.WriteString(schemas.Segment_SegmentName, *v.SegmentName)
-	}
-	if v.TsIncludeDvbSubtitles != nil {
-		s.WriteBool(schemas.Segment_TsIncludeDvbSubtitles, *v.TsIncludeDvbSubtitles)
-	}
-	if v.TsUseAudioRenditionGroup != nil {
-		s.WriteBool(schemas.Segment_TsUseAudioRenditionGroup, *v.TsUseAudioRenditionGroup)
-	}
-}
-func (v *Segment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Segment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Segment_Encryption:
-			v.Encryption = &Encryption{}
-			return v.Encryption.Deserialize(d)
-		case schemas.Segment_IncludeIframeOnlyStreams:
-			v.IncludeIframeOnlyStreams = new(bool)
-			return d.ReadBool(schemas.Segment_IncludeIframeOnlyStreams, v.IncludeIframeOnlyStreams)
-		case schemas.Segment_Scte:
-			v.Scte = &Scte{}
-			return v.Scte.Deserialize(d)
-		case schemas.Segment_SegmentDurationSeconds:
-			v.SegmentDurationSeconds = new(int32)
-			return d.ReadInt32(schemas.Segment_SegmentDurationSeconds, v.SegmentDurationSeconds)
-		case schemas.Segment_SegmentName:
-			v.SegmentName = new(string)
-			return d.ReadString(schemas.Segment_SegmentName, v.SegmentName)
-		case schemas.Segment_TsIncludeDvbSubtitles:
-			v.TsIncludeDvbSubtitles = new(bool)
-			return d.ReadBool(schemas.Segment_TsIncludeDvbSubtitles, v.TsIncludeDvbSubtitles)
-		case schemas.Segment_TsUseAudioRenditionGroup:
-			v.TsUseAudioRenditionGroup = new(bool)
-			return d.ReadBool(schemas.Segment_TsUseAudioRenditionGroup, v.TsUseAudioRenditionGroup)
-		}
-		return nil
-	})
 }
 
 // The parameters for the SPEKE key provider.
@@ -3616,57 +1540,6 @@ type SpekeKeyProvider struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SpekeKeyProvider) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SpekeKeyProvider)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CertificateArn != nil {
-		s.WriteString(schemas.SpekeKeyProvider_CertificateArn, *v.CertificateArn)
-	}
-	serializeDrmSystems(s, schemas.SpekeKeyProvider_DrmSystems, v.DrmSystems)
-	if v.EncryptionContractConfiguration != nil {
-		s.WriteStruct(schemas.SpekeKeyProvider_EncryptionContractConfiguration)
-		v.EncryptionContractConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ResourceId != nil {
-		s.WriteString(schemas.SpekeKeyProvider_ResourceId, *v.ResourceId)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.SpekeKeyProvider_RoleArn, *v.RoleArn)
-	}
-	if v.Url != nil {
-		s.WriteString(schemas.SpekeKeyProvider_Url, *v.Url)
-	}
-}
-func (v *SpekeKeyProvider) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SpekeKeyProvider, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SpekeKeyProvider_CertificateArn:
-			v.CertificateArn = new(string)
-			return d.ReadString(schemas.SpekeKeyProvider_CertificateArn, v.CertificateArn)
-		case schemas.SpekeKeyProvider_DrmSystems:
-			return deserializeDrmSystems(d, schemas.SpekeKeyProvider_DrmSystems, &v.DrmSystems)
-		case schemas.SpekeKeyProvider_EncryptionContractConfiguration:
-			v.EncryptionContractConfiguration = &EncryptionContractConfiguration{}
-			return v.EncryptionContractConfiguration.Deserialize(d)
-		case schemas.SpekeKeyProvider_ResourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.SpekeKeyProvider_ResourceId, v.ResourceId)
-		case schemas.SpekeKeyProvider_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.SpekeKeyProvider_RoleArn, v.RoleArn)
-		case schemas.SpekeKeyProvider_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.SpekeKeyProvider_Url, v.Url)
-		}
-		return nil
-	})
-}
-
 // To insert an EXT-X-START tag in your HLS playlist, specify a StartTag
 // configuration object with a valid TimeOffset. When you do, you can also
 // optionally specify whether to include a PRECISE value in the EXT-X-START tag.
@@ -3687,34 +1560,6 @@ type StartTag struct {
 	Precise *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartTag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartTag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartTag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Precise != nil {
-		s.WriteBool(schemas.StartTag_Precise, *v.Precise)
-	}
-	if v.TimeOffset != nil {
-		s.WriteFloat32(schemas.StartTag_TimeOffset, *v.TimeOffset)
-	}
-}
-func (v *StartTag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartTag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartTag_Precise:
-			v.Precise = new(bool)
-			return d.ReadBool(schemas.StartTag_Precise, v.Precise)
-		case schemas.StartTag_TimeOffset:
-			v.TimeOffset = new(float32)
-			return d.ReadFloat32(schemas.StartTag_TimeOffset, v.TimeOffset)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

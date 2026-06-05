@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,41 +62,6 @@ type UpdateMemoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMemoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateMemoryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexedKeysList(s, schemas.UpdateMemoryInput_addIndexedKeys, v.AddIndexedKeys)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateMemoryInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateMemoryInput_description, *v.Description)
-	}
-	if v.EventExpiryDuration != nil {
-		s.WriteInt32(schemas.UpdateMemoryInput_eventExpiryDuration, *v.EventExpiryDuration)
-	}
-	if v.MemoryExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateMemoryInput_memoryExecutionRoleArn, *v.MemoryExecutionRoleArn)
-	}
-	if v.MemoryId != nil {
-		s.WriteString(schemas.UpdateMemoryInput_memoryId, *v.MemoryId)
-	}
-	if v.MemoryStrategies != nil {
-		s.WriteStruct(schemas.UpdateMemoryInput_memoryStrategies)
-		v.MemoryStrategies.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StreamDeliveryResources != nil {
-		s.WriteStruct(schemas.UpdateMemoryInput_streamDeliveryResources)
-		v.StreamDeliveryResources.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateMemoryOutput struct {
 
 	// The updated AgentCore Memory resource details.
@@ -110,24 +73,16 @@ type UpdateMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateMemoryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateMemoryOutput_memory:
-			v.Memory = &types.Memory{}
-			return v.Memory.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemory, schemas.UpdateMemoryInput, schemas.UpdateMemoryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMemory{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMemory, schemas.UpdateMemoryInput, schemas.UpdateMemoryOutput), output: &UpdateMemoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMemory{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMemory"); err != nil {

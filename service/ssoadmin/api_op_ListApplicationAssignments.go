@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type ListApplicationAssignmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationAssignmentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListApplicationAssignmentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListApplicationAssignmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.ListApplicationAssignmentsRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListApplicationAssignmentsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListApplicationAssignmentsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListApplicationAssignmentsOutput struct {
 
 	// The list of users assigned to an application.
@@ -90,26 +70,16 @@ type ListApplicationAssignmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListApplicationAssignmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListApplicationAssignmentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListApplicationAssignmentsResponse_ApplicationAssignments:
-			return deserializeApplicationAssignmentsList(d, schemas.ListApplicationAssignmentsResponse_ApplicationAssignments, &v.ApplicationAssignments)
-		case schemas.ListApplicationAssignmentsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListApplicationAssignmentsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListApplicationAssignmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAssignments, schemas.ListApplicationAssignmentsRequest, schemas.ListApplicationAssignmentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationAssignments{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAssignments, schemas.ListApplicationAssignmentsRequest, schemas.ListApplicationAssignmentsResponse), output: &ListApplicationAssignmentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationAssignments{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationAssignments"); err != nil {

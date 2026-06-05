@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type GetApplicationAccessScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationAccessScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationAccessScopeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationAccessScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.GetApplicationAccessScopeRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	if v.Scope != nil {
-		s.WriteString(schemas.GetApplicationAccessScopeRequest_Scope, *v.Scope)
-	}
-}
-
 type GetApplicationAccessScopeOutput struct {
 
 	// The name of the access scope that can be used with the authorized targets.
@@ -77,26 +60,16 @@ type GetApplicationAccessScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationAccessScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationAccessScopeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationAccessScopeResponse_AuthorizedTargets:
-			return deserializeScopeTargets(d, schemas.GetApplicationAccessScopeResponse_AuthorizedTargets, &v.AuthorizedTargets)
-		case schemas.GetApplicationAccessScopeResponse_Scope:
-			v.Scope = new(string)
-			return d.ReadString(schemas.GetApplicationAccessScopeResponse_Scope, v.Scope)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationAccessScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAccessScope, schemas.GetApplicationAccessScopeRequest, schemas.GetApplicationAccessScopeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApplicationAccessScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationAccessScope, schemas.GetApplicationAccessScopeRequest, schemas.GetApplicationAccessScopeResponse), output: &GetApplicationAccessScopeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApplicationAccessScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplicationAccessScope"); err != nil {

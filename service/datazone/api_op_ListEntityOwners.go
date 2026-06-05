@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,30 +60,6 @@ type ListEntityOwnersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEntityOwnersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEntityOwnersInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEntityOwnersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListEntityOwnersInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.ListEntityOwnersInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.ListEntityOwnersInput_entityType, string(v.EntityType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEntityOwnersInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEntityOwnersInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListEntityOwnersOutput struct {
 
 	// The owners of the entity.
@@ -106,26 +80,16 @@ type ListEntityOwnersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEntityOwnersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEntityOwnersOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEntityOwnersOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEntityOwnersOutput_nextToken, v.NextToken)
-		case schemas.ListEntityOwnersOutput_owners:
-			return deserializeEntityOwners(d, schemas.ListEntityOwnersOutput_owners, &v.Owners)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEntityOwnersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityOwners, schemas.ListEntityOwnersInput, schemas.ListEntityOwnersOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntityOwners{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityOwners, schemas.ListEntityOwnersInput, schemas.ListEntityOwnersOutput), output: &ListEntityOwnersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntityOwners{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntityOwners"); err != nil {

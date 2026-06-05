@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type ValidatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidatePipelineRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PipelineConfigurationBody != nil {
-		s.WriteString(schemas.ValidatePipelineRequest_PipelineConfigurationBody, *v.PipelineConfigurationBody)
-	}
-}
-
 type ValidatePipelineOutput struct {
 
 	// A list of errors if the configuration is invalid.
@@ -70,26 +56,16 @@ type ValidatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidatePipelineResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidatePipelineResponse_Errors:
-			return deserializeValidationMessageList(d, schemas.ValidatePipelineResponse_Errors, &v.Errors)
-		case schemas.ValidatePipelineResponse_isValid:
-			v.IsValid = new(bool)
-			return d.ReadBool(schemas.ValidatePipelineResponse_isValid, v.IsValid)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationValidatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipeline, schemas.ValidatePipelineRequest, schemas.ValidatePipelineResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidatePipeline, schemas.ValidatePipelineRequest, schemas.ValidatePipelineResponse), output: &ValidatePipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidatePipeline"); err != nil {

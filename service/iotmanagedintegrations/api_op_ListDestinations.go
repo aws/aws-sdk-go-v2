@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDestinationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDestinationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDestinationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDestinationsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListDestinationsOutput struct {
 
 	// The list of destinations.
@@ -69,26 +52,16 @@ type ListDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDestinationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDestinationsResponse_DestinationList:
-			return deserializeDestinationListDefinition(d, schemas.ListDestinationsResponse_DestinationList, &v.DestinationList)
-		case schemas.ListDestinationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDestinationsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDestinations, schemas.ListDestinationsRequest, schemas.ListDestinationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDestinations, schemas.ListDestinationsRequest, schemas.ListDestinationsResponse), output: &ListDestinationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDestinations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDestinations"); err != nil {

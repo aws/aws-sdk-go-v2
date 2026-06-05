@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,27 +54,6 @@ type CreateAIGuardrailVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIGuardrailVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAIGuardrailVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAIGuardrailVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiGuardrailId != nil {
-		s.WriteString(schemas.CreateAIGuardrailVersionRequest_aiGuardrailId, *v.AiGuardrailId)
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.CreateAIGuardrailVersionRequest_assistantId, *v.AssistantId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAIGuardrailVersionRequest_clientToken, *v.ClientToken)
-	}
-	if v.ModifiedTime != nil {
-		s.WriteTime(schemas.CreateAIGuardrailVersionRequest_modifiedTime, *v.ModifiedTime)
-	}
-}
-
 type CreateAIGuardrailVersionOutput struct {
 
 	// The data of the AI Guardrail version.
@@ -91,27 +68,16 @@ type CreateAIGuardrailVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAIGuardrailVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAIGuardrailVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAIGuardrailVersionResponse_aiGuardrail:
-			v.AiGuardrail = &types.AIGuardrailData{}
-			return v.AiGuardrail.Deserialize(d)
-		case schemas.CreateAIGuardrailVersionResponse_versionNumber:
-			v.VersionNumber = new(int64)
-			return d.ReadInt64(schemas.CreateAIGuardrailVersionResponse_versionNumber, v.VersionNumber)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAIGuardrailVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIGuardrailVersion, schemas.CreateAIGuardrailVersionRequest, schemas.CreateAIGuardrailVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAIGuardrailVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIGuardrailVersion, schemas.CreateAIGuardrailVersionRequest, schemas.CreateAIGuardrailVersionResponse), output: &CreateAIGuardrailVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAIGuardrailVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAIGuardrailVersion"); err != nil {

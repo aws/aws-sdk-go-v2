@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,40 +45,6 @@ type ListAssistantAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssistantAssociationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssistantAssociationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssistantAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssistantId != nil {
-		s.WriteString(schemas.ListAssistantAssociationsRequest_assistantId, *v.AssistantId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAssistantAssociationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssistantAssociationsRequest_nextToken, *v.NextToken)
-	}
-}
-func (v *ListAssistantAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssistantAssociationsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssistantAssociationsRequest_assistantId:
-			v.AssistantId = new(string)
-			return d.ReadString(schemas.ListAssistantAssociationsRequest_assistantId, v.AssistantId)
-		case schemas.ListAssistantAssociationsRequest_maxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListAssistantAssociationsRequest_maxResults, v.MaxResults)
-		case schemas.ListAssistantAssociationsRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssistantAssociationsRequest_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListAssistantAssociationsOutput struct {
 
 	// Summary information about assistant associations.
@@ -97,38 +61,16 @@ type ListAssistantAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssistantAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssistantAssociationsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssistantAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssistantAssociationSummaryList(s, schemas.ListAssistantAssociationsResponse_assistantAssociationSummaries, v.AssistantAssociationSummaries)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssistantAssociationsResponse_nextToken, *v.NextToken)
-	}
-}
-func (v *ListAssistantAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssistantAssociationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssistantAssociationsResponse_assistantAssociationSummaries:
-			return deserializeAssistantAssociationSummaryList(d, schemas.ListAssistantAssociationsResponse_assistantAssociationSummaries, &v.AssistantAssociationSummaries)
-		case schemas.ListAssistantAssociationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssistantAssociationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAssistantAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssistantAssociations, schemas.ListAssistantAssociationsRequest, schemas.ListAssistantAssociationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssistantAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssistantAssociations, schemas.ListAssistantAssociationsRequest, schemas.ListAssistantAssociationsResponse), output: &ListAssistantAssociationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssistantAssociations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssistantAssociations"); err != nil {

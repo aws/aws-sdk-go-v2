@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type RestorePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestorePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RestorePhoneNumberRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RestorePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PhoneNumberId != nil {
-		s.WriteString(schemas.RestorePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
-	}
-}
-
 type RestorePhoneNumberOutput struct {
 
 	// The restored phone number.
@@ -62,24 +48,16 @@ type RestorePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestorePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestorePhoneNumberResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestorePhoneNumberResponse_PhoneNumber:
-			v.PhoneNumber = &types.PhoneNumber{}
-			return v.PhoneNumber.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRestorePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestorePhoneNumber, schemas.RestorePhoneNumberRequest, schemas.RestorePhoneNumberResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestorePhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestorePhoneNumber, schemas.RestorePhoneNumberRequest, schemas.RestorePhoneNumberResponse), output: &RestorePhoneNumberOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestorePhoneNumber{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestorePhoneNumber"); err != nil {

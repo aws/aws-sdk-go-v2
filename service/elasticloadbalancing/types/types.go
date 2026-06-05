@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,43 +32,6 @@ type AccessLog struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccessLog) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccessLog)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccessLog) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EmitInterval != nil {
-		s.WriteInt32(schemas.AccessLog_EmitInterval, *v.EmitInterval)
-	}
-	s.WriteBool(schemas.AccessLog_Enabled, v.Enabled)
-	if v.S3BucketName != nil {
-		s.WriteString(schemas.AccessLog_S3BucketName, *v.S3BucketName)
-	}
-	if v.S3BucketPrefix != nil {
-		s.WriteString(schemas.AccessLog_S3BucketPrefix, *v.S3BucketPrefix)
-	}
-}
-func (v *AccessLog) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessLog, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessLog_EmitInterval:
-			v.EmitInterval = new(int32)
-			return d.ReadInt32(schemas.AccessLog_EmitInterval, v.EmitInterval)
-		case schemas.AccessLog_Enabled:
-			return d.ReadBool(schemas.AccessLog_Enabled, &v.Enabled)
-		case schemas.AccessLog_S3BucketName:
-			v.S3BucketName = new(string)
-			return d.ReadString(schemas.AccessLog_S3BucketName, v.S3BucketName)
-		case schemas.AccessLog_S3BucketPrefix:
-			v.S3BucketPrefix = new(string)
-			return d.ReadString(schemas.AccessLog_S3BucketPrefix, v.S3BucketPrefix)
-		}
-		return nil
-	})
-}
-
 // Information about additional load balancer attributes.
 type AdditionalAttribute struct {
 
@@ -89,34 +50,6 @@ type AdditionalAttribute struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AdditionalAttribute) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AdditionalAttribute)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AdditionalAttribute) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.AdditionalAttribute_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.AdditionalAttribute_Value, *v.Value)
-	}
-}
-func (v *AdditionalAttribute) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AdditionalAttribute, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AdditionalAttribute_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.AdditionalAttribute_Key, v.Key)
-		case schemas.AdditionalAttribute_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.AdditionalAttribute_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Information about a policy for application-controlled session stickiness.
 type AppCookieStickinessPolicy struct {
 
@@ -130,34 +63,6 @@ type AppCookieStickinessPolicy struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppCookieStickinessPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppCookieStickinessPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppCookieStickinessPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CookieName != nil {
-		s.WriteString(schemas.AppCookieStickinessPolicy_CookieName, *v.CookieName)
-	}
-	if v.PolicyName != nil {
-		s.WriteString(schemas.AppCookieStickinessPolicy_PolicyName, *v.PolicyName)
-	}
-}
-func (v *AppCookieStickinessPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppCookieStickinessPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppCookieStickinessPolicy_CookieName:
-			v.CookieName = new(string)
-			return d.ReadString(schemas.AppCookieStickinessPolicy_CookieName, v.CookieName)
-		case schemas.AppCookieStickinessPolicy_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.AppCookieStickinessPolicy_PolicyName, v.PolicyName)
-		}
-		return nil
-	})
-}
-
 // Information about the configuration of an EC2 instance.
 type BackendServerDescription struct {
 
@@ -168,31 +73,6 @@ type BackendServerDescription struct {
 	PolicyNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BackendServerDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BackendServerDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BackendServerDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstancePort != nil {
-		s.WriteInt32(schemas.BackendServerDescription_InstancePort, *v.InstancePort)
-	}
-	serializePolicyNames(s, schemas.BackendServerDescription_PolicyNames, v.PolicyNames)
-}
-func (v *BackendServerDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BackendServerDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BackendServerDescription_InstancePort:
-			v.InstancePort = new(int32)
-			return d.ReadInt32(schemas.BackendServerDescription_InstancePort, v.InstancePort)
-		case schemas.BackendServerDescription_PolicyNames:
-			return deserializePolicyNames(d, schemas.BackendServerDescription_PolicyNames, &v.PolicyNames)
-		}
-		return nil
-	})
 }
 
 // Information about the ConnectionDraining attribute.
@@ -210,31 +90,6 @@ type ConnectionDraining struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectionDraining) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionDraining)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionDraining) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.ConnectionDraining_Enabled, v.Enabled)
-	if v.Timeout != nil {
-		s.WriteInt32(schemas.ConnectionDraining_Timeout, *v.Timeout)
-	}
-}
-func (v *ConnectionDraining) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionDraining, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionDraining_Enabled:
-			return d.ReadBool(schemas.ConnectionDraining_Enabled, &v.Enabled)
-		case schemas.ConnectionDraining_Timeout:
-			v.Timeout = new(int32)
-			return d.ReadInt32(schemas.ConnectionDraining_Timeout, v.Timeout)
-		}
-		return nil
-	})
-}
-
 // Information about the ConnectionSettings attribute.
 type ConnectionSettings struct {
 
@@ -247,28 +102,6 @@ type ConnectionSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectionSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdleTimeout != nil {
-		s.WriteInt32(schemas.ConnectionSettings_IdleTimeout, *v.IdleTimeout)
-	}
-}
-func (v *ConnectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionSettings_IdleTimeout:
-			v.IdleTimeout = new(int32)
-			return d.ReadInt32(schemas.ConnectionSettings_IdleTimeout, v.IdleTimeout)
-		}
-		return nil
-	})
-}
-
 // Information about the CrossZoneLoadBalancing attribute.
 type CrossZoneLoadBalancing struct {
 
@@ -278,25 +111,6 @@ type CrossZoneLoadBalancing struct {
 	Enabled bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *CrossZoneLoadBalancing) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CrossZoneLoadBalancing)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CrossZoneLoadBalancing) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.CrossZoneLoadBalancing_Enabled, v.Enabled)
-}
-func (v *CrossZoneLoadBalancing) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CrossZoneLoadBalancing, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CrossZoneLoadBalancing_Enabled:
-			return d.ReadBool(schemas.CrossZoneLoadBalancing_Enabled, &v.Enabled)
-		}
-		return nil
-	})
 }
 
 // Information about a health check.
@@ -353,52 +167,6 @@ type HealthCheck struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HealthCheck) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HealthCheck)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HealthCheck) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthyThreshold != nil {
-		s.WriteInt32(schemas.HealthCheck_HealthyThreshold, *v.HealthyThreshold)
-	}
-	if v.Interval != nil {
-		s.WriteInt32(schemas.HealthCheck_Interval, *v.Interval)
-	}
-	if v.Target != nil {
-		s.WriteString(schemas.HealthCheck_Target, *v.Target)
-	}
-	if v.Timeout != nil {
-		s.WriteInt32(schemas.HealthCheck_Timeout, *v.Timeout)
-	}
-	if v.UnhealthyThreshold != nil {
-		s.WriteInt32(schemas.HealthCheck_UnhealthyThreshold, *v.UnhealthyThreshold)
-	}
-}
-func (v *HealthCheck) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HealthCheck, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HealthCheck_HealthyThreshold:
-			v.HealthyThreshold = new(int32)
-			return d.ReadInt32(schemas.HealthCheck_HealthyThreshold, v.HealthyThreshold)
-		case schemas.HealthCheck_Interval:
-			v.Interval = new(int32)
-			return d.ReadInt32(schemas.HealthCheck_Interval, v.Interval)
-		case schemas.HealthCheck_Target:
-			v.Target = new(string)
-			return d.ReadString(schemas.HealthCheck_Target, v.Target)
-		case schemas.HealthCheck_Timeout:
-			v.Timeout = new(int32)
-			return d.ReadInt32(schemas.HealthCheck_Timeout, v.Timeout)
-		case schemas.HealthCheck_UnhealthyThreshold:
-			v.UnhealthyThreshold = new(int32)
-			return d.ReadInt32(schemas.HealthCheck_UnhealthyThreshold, v.UnhealthyThreshold)
-		}
-		return nil
-	})
-}
-
 // The ID of an EC2 instance.
 type Instance struct {
 
@@ -406,28 +174,6 @@ type Instance struct {
 	InstanceId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Instance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Instance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.Instance_InstanceId, *v.InstanceId)
-	}
-}
-func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Instance_InstanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.Instance_InstanceId, v.InstanceId)
-		}
-		return nil
-	})
 }
 
 // Information about the state of an EC2 instance.
@@ -481,46 +227,6 @@ type InstanceState struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstanceState) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceState)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceState) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.InstanceState_Description, *v.Description)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.InstanceState_InstanceId, *v.InstanceId)
-	}
-	if v.ReasonCode != nil {
-		s.WriteString(schemas.InstanceState_ReasonCode, *v.ReasonCode)
-	}
-	if v.State != nil {
-		s.WriteString(schemas.InstanceState_State, *v.State)
-	}
-}
-func (v *InstanceState) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceState, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceState_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.InstanceState_Description, v.Description)
-		case schemas.InstanceState_InstanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.InstanceState_InstanceId, v.InstanceId)
-		case schemas.InstanceState_ReasonCode:
-			v.ReasonCode = new(string)
-			return d.ReadString(schemas.InstanceState_ReasonCode, v.ReasonCode)
-		case schemas.InstanceState_State:
-			v.State = new(string)
-			return d.ReadString(schemas.InstanceState_State, v.State)
-		}
-		return nil
-	})
-}
-
 // Information about a policy for duration-based session stickiness.
 type LBCookieStickinessPolicy struct {
 
@@ -534,34 +240,6 @@ type LBCookieStickinessPolicy struct {
 	PolicyName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LBCookieStickinessPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LBCookieStickinessPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LBCookieStickinessPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CookieExpirationPeriod != nil {
-		s.WriteInt64(schemas.LBCookieStickinessPolicy_CookieExpirationPeriod, *v.CookieExpirationPeriod)
-	}
-	if v.PolicyName != nil {
-		s.WriteString(schemas.LBCookieStickinessPolicy_PolicyName, *v.PolicyName)
-	}
-}
-func (v *LBCookieStickinessPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LBCookieStickinessPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LBCookieStickinessPolicy_CookieExpirationPeriod:
-			v.CookieExpirationPeriod = new(int64)
-			return d.ReadInt64(schemas.LBCookieStickinessPolicy_CookieExpirationPeriod, v.CookieExpirationPeriod)
-		case schemas.LBCookieStickinessPolicy_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.LBCookieStickinessPolicy_PolicyName, v.PolicyName)
-		}
-		return nil
-	})
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
@@ -580,34 +258,6 @@ type Limit struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Limit) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Limit)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Limit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Max != nil {
-		s.WriteString(schemas.Limit_Max, *v.Max)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Limit_Name, *v.Name)
-	}
-}
-func (v *Limit) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Limit, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Limit_Max:
-			v.Max = new(string)
-			return d.ReadString(schemas.Limit_Max, v.Max)
-		case schemas.Limit_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Limit_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Information about a listener.
@@ -655,49 +305,6 @@ type Listener struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Listener) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Listener)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Listener) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstancePort != nil {
-		s.WriteInt32(schemas.Listener_InstancePort, *v.InstancePort)
-	}
-	if v.InstanceProtocol != nil {
-		s.WriteString(schemas.Listener_InstanceProtocol, *v.InstanceProtocol)
-	}
-	s.WriteInt32(schemas.Listener_LoadBalancerPort, v.LoadBalancerPort)
-	if v.Protocol != nil {
-		s.WriteString(schemas.Listener_Protocol, *v.Protocol)
-	}
-	if v.SSLCertificateId != nil {
-		s.WriteString(schemas.Listener_SSLCertificateId, *v.SSLCertificateId)
-	}
-}
-func (v *Listener) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Listener, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Listener_InstancePort:
-			v.InstancePort = new(int32)
-			return d.ReadInt32(schemas.Listener_InstancePort, v.InstancePort)
-		case schemas.Listener_InstanceProtocol:
-			v.InstanceProtocol = new(string)
-			return d.ReadString(schemas.Listener_InstanceProtocol, v.InstanceProtocol)
-		case schemas.Listener_LoadBalancerPort:
-			return d.ReadInt32(schemas.Listener_LoadBalancerPort, &v.LoadBalancerPort)
-		case schemas.Listener_Protocol:
-			v.Protocol = new(string)
-			return d.ReadString(schemas.Listener_Protocol, v.Protocol)
-		case schemas.Listener_SSLCertificateId:
-			v.SSLCertificateId = new(string)
-			return d.ReadString(schemas.Listener_SSLCertificateId, v.SSLCertificateId)
-		}
-		return nil
-	})
-}
-
 // The policies enabled for a listener.
 type ListenerDescription struct {
 
@@ -708,33 +315,6 @@ type ListenerDescription struct {
 	PolicyNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListenerDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListenerDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListenerDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Listener != nil {
-		s.WriteStruct(schemas.ListenerDescription_Listener)
-		v.Listener.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializePolicyNames(s, schemas.ListenerDescription_PolicyNames, v.PolicyNames)
-}
-func (v *ListenerDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListenerDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListenerDescription_Listener:
-			v.Listener = &Listener{}
-			return v.Listener.Deserialize(d)
-		case schemas.ListenerDescription_PolicyNames:
-			return deserializePolicyNames(d, schemas.ListenerDescription_PolicyNames, &v.PolicyNames)
-		}
-		return nil
-	})
 }
 
 // The attributes for a load balancer.
@@ -778,57 +358,6 @@ type LoadBalancerAttributes struct {
 	CrossZoneLoadBalancing *CrossZoneLoadBalancing
 
 	noSmithyDocumentSerde
-}
-
-func (v *LoadBalancerAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoadBalancerAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoadBalancerAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessLog != nil {
-		s.WriteStruct(schemas.LoadBalancerAttributes_AccessLog)
-		v.AccessLog.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAdditionalAttributes(s, schemas.LoadBalancerAttributes_AdditionalAttributes, v.AdditionalAttributes)
-	if v.ConnectionDraining != nil {
-		s.WriteStruct(schemas.LoadBalancerAttributes_ConnectionDraining)
-		v.ConnectionDraining.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConnectionSettings != nil {
-		s.WriteStruct(schemas.LoadBalancerAttributes_ConnectionSettings)
-		v.ConnectionSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CrossZoneLoadBalancing != nil {
-		s.WriteStruct(schemas.LoadBalancerAttributes_CrossZoneLoadBalancing)
-		v.CrossZoneLoadBalancing.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LoadBalancerAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoadBalancerAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoadBalancerAttributes_AccessLog:
-			v.AccessLog = &AccessLog{}
-			return v.AccessLog.Deserialize(d)
-		case schemas.LoadBalancerAttributes_AdditionalAttributes:
-			return deserializeAdditionalAttributes(d, schemas.LoadBalancerAttributes_AdditionalAttributes, &v.AdditionalAttributes)
-		case schemas.LoadBalancerAttributes_ConnectionDraining:
-			v.ConnectionDraining = &ConnectionDraining{}
-			return v.ConnectionDraining.Deserialize(d)
-		case schemas.LoadBalancerAttributes_ConnectionSettings:
-			v.ConnectionSettings = &ConnectionSettings{}
-			return v.ConnectionSettings.Deserialize(d)
-		case schemas.LoadBalancerAttributes_CrossZoneLoadBalancing:
-			v.CrossZoneLoadBalancing = &CrossZoneLoadBalancing{}
-			return v.CrossZoneLoadBalancing.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Information about a load balancer.
@@ -899,106 +428,6 @@ type LoadBalancerDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LoadBalancerDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LoadBalancerDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LoadBalancerDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.LoadBalancerDescription_AvailabilityZones, v.AvailabilityZones)
-	serializeBackendServerDescriptions(s, schemas.LoadBalancerDescription_BackendServerDescriptions, v.BackendServerDescriptions)
-	if v.CanonicalHostedZoneName != nil {
-		s.WriteString(schemas.LoadBalancerDescription_CanonicalHostedZoneName, *v.CanonicalHostedZoneName)
-	}
-	if v.CanonicalHostedZoneNameID != nil {
-		s.WriteString(schemas.LoadBalancerDescription_CanonicalHostedZoneNameID, *v.CanonicalHostedZoneNameID)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.LoadBalancerDescription_CreatedTime, *v.CreatedTime)
-	}
-	if v.DNSName != nil {
-		s.WriteString(schemas.LoadBalancerDescription_DNSName, *v.DNSName)
-	}
-	if v.HealthCheck != nil {
-		s.WriteStruct(schemas.LoadBalancerDescription_HealthCheck)
-		v.HealthCheck.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInstances(s, schemas.LoadBalancerDescription_Instances, v.Instances)
-	serializeListenerDescriptions(s, schemas.LoadBalancerDescription_ListenerDescriptions, v.ListenerDescriptions)
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.LoadBalancerDescription_LoadBalancerName, *v.LoadBalancerName)
-	}
-	if v.Policies != nil {
-		s.WriteStruct(schemas.LoadBalancerDescription_Policies)
-		v.Policies.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Scheme != nil {
-		s.WriteString(schemas.LoadBalancerDescription_Scheme, *v.Scheme)
-	}
-	serializeSecurityGroups(s, schemas.LoadBalancerDescription_SecurityGroups, v.SecurityGroups)
-	if v.SourceSecurityGroup != nil {
-		s.WriteStruct(schemas.LoadBalancerDescription_SourceSecurityGroup)
-		v.SourceSecurityGroup.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSubnets(s, schemas.LoadBalancerDescription_Subnets, v.Subnets)
-	if v.VPCId != nil {
-		s.WriteString(schemas.LoadBalancerDescription_VPCId, *v.VPCId)
-	}
-}
-func (v *LoadBalancerDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoadBalancerDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoadBalancerDescription_AvailabilityZones:
-			return deserializeAvailabilityZones(d, schemas.LoadBalancerDescription_AvailabilityZones, &v.AvailabilityZones)
-		case schemas.LoadBalancerDescription_BackendServerDescriptions:
-			return deserializeBackendServerDescriptions(d, schemas.LoadBalancerDescription_BackendServerDescriptions, &v.BackendServerDescriptions)
-		case schemas.LoadBalancerDescription_CanonicalHostedZoneName:
-			v.CanonicalHostedZoneName = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_CanonicalHostedZoneName, v.CanonicalHostedZoneName)
-		case schemas.LoadBalancerDescription_CanonicalHostedZoneNameID:
-			v.CanonicalHostedZoneNameID = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_CanonicalHostedZoneNameID, v.CanonicalHostedZoneNameID)
-		case schemas.LoadBalancerDescription_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.LoadBalancerDescription_CreatedTime, v.CreatedTime)
-		case schemas.LoadBalancerDescription_DNSName:
-			v.DNSName = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_DNSName, v.DNSName)
-		case schemas.LoadBalancerDescription_HealthCheck:
-			v.HealthCheck = &HealthCheck{}
-			return v.HealthCheck.Deserialize(d)
-		case schemas.LoadBalancerDescription_Instances:
-			return deserializeInstances(d, schemas.LoadBalancerDescription_Instances, &v.Instances)
-		case schemas.LoadBalancerDescription_ListenerDescriptions:
-			return deserializeListenerDescriptions(d, schemas.LoadBalancerDescription_ListenerDescriptions, &v.ListenerDescriptions)
-		case schemas.LoadBalancerDescription_LoadBalancerName:
-			v.LoadBalancerName = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_LoadBalancerName, v.LoadBalancerName)
-		case schemas.LoadBalancerDescription_Policies:
-			v.Policies = &Policies{}
-			return v.Policies.Deserialize(d)
-		case schemas.LoadBalancerDescription_Scheme:
-			v.Scheme = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_Scheme, v.Scheme)
-		case schemas.LoadBalancerDescription_SecurityGroups:
-			return deserializeSecurityGroups(d, schemas.LoadBalancerDescription_SecurityGroups, &v.SecurityGroups)
-		case schemas.LoadBalancerDescription_SourceSecurityGroup:
-			v.SourceSecurityGroup = &SourceSecurityGroup{}
-			return v.SourceSecurityGroup.Deserialize(d)
-		case schemas.LoadBalancerDescription_Subnets:
-			return deserializeSubnets(d, schemas.LoadBalancerDescription_Subnets, &v.Subnets)
-		case schemas.LoadBalancerDescription_VPCId:
-			v.VPCId = new(string)
-			return d.ReadString(schemas.LoadBalancerDescription_VPCId, v.VPCId)
-		}
-		return nil
-	})
-}
-
 // The policies for a load balancer.
 type Policies struct {
 
@@ -1014,31 +443,6 @@ type Policies struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Policies) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Policies)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Policies) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppCookieStickinessPolicies(s, schemas.Policies_AppCookieStickinessPolicies, v.AppCookieStickinessPolicies)
-	serializeLBCookieStickinessPolicies(s, schemas.Policies_LBCookieStickinessPolicies, v.LBCookieStickinessPolicies)
-	serializePolicyNames(s, schemas.Policies_OtherPolicies, v.OtherPolicies)
-}
-func (v *Policies) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Policies, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Policies_AppCookieStickinessPolicies:
-			return deserializeAppCookieStickinessPolicies(d, schemas.Policies_AppCookieStickinessPolicies, &v.AppCookieStickinessPolicies)
-		case schemas.Policies_LBCookieStickinessPolicies:
-			return deserializeLBCookieStickinessPolicies(d, schemas.Policies_LBCookieStickinessPolicies, &v.LBCookieStickinessPolicies)
-		case schemas.Policies_OtherPolicies:
-			return deserializePolicyNames(d, schemas.Policies_OtherPolicies, &v.OtherPolicies)
-		}
-		return nil
-	})
-}
-
 // Information about a policy attribute.
 type PolicyAttribute struct {
 
@@ -1051,34 +455,6 @@ type PolicyAttribute struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PolicyAttribute) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyAttribute)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyAttribute) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.PolicyAttribute_AttributeName, *v.AttributeName)
-	}
-	if v.AttributeValue != nil {
-		s.WriteString(schemas.PolicyAttribute_AttributeValue, *v.AttributeValue)
-	}
-}
-func (v *PolicyAttribute) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyAttribute, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyAttribute_AttributeName:
-			v.AttributeName = new(string)
-			return d.ReadString(schemas.PolicyAttribute_AttributeName, v.AttributeName)
-		case schemas.PolicyAttribute_AttributeValue:
-			v.AttributeValue = new(string)
-			return d.ReadString(schemas.PolicyAttribute_AttributeValue, v.AttributeValue)
-		}
-		return nil
-	})
-}
-
 // Information about a policy attribute.
 type PolicyAttributeDescription struct {
 
@@ -1089,34 +465,6 @@ type PolicyAttributeDescription struct {
 	AttributeValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyAttributeDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyAttributeDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyAttributeDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.PolicyAttributeDescription_AttributeName, *v.AttributeName)
-	}
-	if v.AttributeValue != nil {
-		s.WriteString(schemas.PolicyAttributeDescription_AttributeValue, *v.AttributeValue)
-	}
-}
-func (v *PolicyAttributeDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyAttributeDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyAttributeDescription_AttributeName:
-			v.AttributeName = new(string)
-			return d.ReadString(schemas.PolicyAttributeDescription_AttributeName, v.AttributeName)
-		case schemas.PolicyAttributeDescription_AttributeValue:
-			v.AttributeValue = new(string)
-			return d.ReadString(schemas.PolicyAttributeDescription_AttributeValue, v.AttributeValue)
-		}
-		return nil
-	})
 }
 
 // Information about a policy attribute type.
@@ -1150,52 +498,6 @@ type PolicyAttributeTypeDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PolicyAttributeTypeDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyAttributeTypeDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyAttributeTypeDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.PolicyAttributeTypeDescription_AttributeName, *v.AttributeName)
-	}
-	if v.AttributeType != nil {
-		s.WriteString(schemas.PolicyAttributeTypeDescription_AttributeType, *v.AttributeType)
-	}
-	if v.Cardinality != nil {
-		s.WriteString(schemas.PolicyAttributeTypeDescription_Cardinality, *v.Cardinality)
-	}
-	if v.DefaultValue != nil {
-		s.WriteString(schemas.PolicyAttributeTypeDescription_DefaultValue, *v.DefaultValue)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.PolicyAttributeTypeDescription_Description, *v.Description)
-	}
-}
-func (v *PolicyAttributeTypeDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyAttributeTypeDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyAttributeTypeDescription_AttributeName:
-			v.AttributeName = new(string)
-			return d.ReadString(schemas.PolicyAttributeTypeDescription_AttributeName, v.AttributeName)
-		case schemas.PolicyAttributeTypeDescription_AttributeType:
-			v.AttributeType = new(string)
-			return d.ReadString(schemas.PolicyAttributeTypeDescription_AttributeType, v.AttributeType)
-		case schemas.PolicyAttributeTypeDescription_Cardinality:
-			v.Cardinality = new(string)
-			return d.ReadString(schemas.PolicyAttributeTypeDescription_Cardinality, v.Cardinality)
-		case schemas.PolicyAttributeTypeDescription_DefaultValue:
-			v.DefaultValue = new(string)
-			return d.ReadString(schemas.PolicyAttributeTypeDescription_DefaultValue, v.DefaultValue)
-		case schemas.PolicyAttributeTypeDescription_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PolicyAttributeTypeDescription_Description, v.Description)
-		}
-		return nil
-	})
-}
-
 // Information about a policy.
 type PolicyDescription struct {
 
@@ -1209,37 +511,6 @@ type PolicyDescription struct {
 	PolicyTypeName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyAttributeDescriptions(s, schemas.PolicyDescription_PolicyAttributeDescriptions, v.PolicyAttributeDescriptions)
-	if v.PolicyName != nil {
-		s.WriteString(schemas.PolicyDescription_PolicyName, *v.PolicyName)
-	}
-	if v.PolicyTypeName != nil {
-		s.WriteString(schemas.PolicyDescription_PolicyTypeName, *v.PolicyTypeName)
-	}
-}
-func (v *PolicyDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyDescription_PolicyAttributeDescriptions:
-			return deserializePolicyAttributeDescriptions(d, schemas.PolicyDescription_PolicyAttributeDescriptions, &v.PolicyAttributeDescriptions)
-		case schemas.PolicyDescription_PolicyName:
-			v.PolicyName = new(string)
-			return d.ReadString(schemas.PolicyDescription_PolicyName, v.PolicyName)
-		case schemas.PolicyDescription_PolicyTypeName:
-			v.PolicyTypeName = new(string)
-			return d.ReadString(schemas.PolicyDescription_PolicyTypeName, v.PolicyTypeName)
-		}
-		return nil
-	})
 }
 
 // Information about a policy type.
@@ -1258,37 +529,6 @@ type PolicyTypeDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PolicyTypeDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyTypeDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyTypeDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.PolicyTypeDescription_Description, *v.Description)
-	}
-	serializePolicyAttributeTypeDescriptions(s, schemas.PolicyTypeDescription_PolicyAttributeTypeDescriptions, v.PolicyAttributeTypeDescriptions)
-	if v.PolicyTypeName != nil {
-		s.WriteString(schemas.PolicyTypeDescription_PolicyTypeName, *v.PolicyTypeName)
-	}
-}
-func (v *PolicyTypeDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyTypeDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyTypeDescription_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PolicyTypeDescription_Description, v.Description)
-		case schemas.PolicyTypeDescription_PolicyAttributeTypeDescriptions:
-			return deserializePolicyAttributeTypeDescriptions(d, schemas.PolicyTypeDescription_PolicyAttributeTypeDescriptions, &v.PolicyAttributeTypeDescriptions)
-		case schemas.PolicyTypeDescription_PolicyTypeName:
-			v.PolicyTypeName = new(string)
-			return d.ReadString(schemas.PolicyTypeDescription_PolicyTypeName, v.PolicyTypeName)
-		}
-		return nil
-	})
-}
-
 // Information about a source security group.
 type SourceSecurityGroup struct {
 
@@ -1299,34 +539,6 @@ type SourceSecurityGroup struct {
 	OwnerAlias *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SourceSecurityGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SourceSecurityGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SourceSecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupName != nil {
-		s.WriteString(schemas.SourceSecurityGroup_GroupName, *v.GroupName)
-	}
-	if v.OwnerAlias != nil {
-		s.WriteString(schemas.SourceSecurityGroup_OwnerAlias, *v.OwnerAlias)
-	}
-}
-func (v *SourceSecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SourceSecurityGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SourceSecurityGroup_GroupName:
-			v.GroupName = new(string)
-			return d.ReadString(schemas.SourceSecurityGroup_GroupName, v.GroupName)
-		case schemas.SourceSecurityGroup_OwnerAlias:
-			v.OwnerAlias = new(string)
-			return d.ReadString(schemas.SourceSecurityGroup_OwnerAlias, v.OwnerAlias)
-		}
-		return nil
-	})
 }
 
 // Information about a tag.
@@ -1343,34 +555,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // The tags associated with a load balancer.
 type TagDescription struct {
 
@@ -1383,31 +567,6 @@ type TagDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.TagDescription_LoadBalancerName, *v.LoadBalancerName)
-	}
-	serializeTagList(s, schemas.TagDescription_Tags, v.Tags)
-}
-func (v *TagDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagDescription_LoadBalancerName:
-			v.LoadBalancerName = new(string)
-			return d.ReadString(schemas.TagDescription_LoadBalancerName, v.LoadBalancerName)
-		case schemas.TagDescription_Tags:
-			return deserializeTagList(d, schemas.TagDescription_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // The key of a tag.
 type TagKeyOnly struct {
 
@@ -1415,28 +574,6 @@ type TagKeyOnly struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagKeyOnly) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagKeyOnly)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagKeyOnly) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.TagKeyOnly_Key, *v.Key)
-	}
-}
-func (v *TagKeyOnly) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagKeyOnly, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagKeyOnly_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagKeyOnly_Key, v.Key)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

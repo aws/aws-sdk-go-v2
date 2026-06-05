@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,50 +93,6 @@ type UpdatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePortalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdatePortalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alarms != nil {
-		s.WriteStruct(schemas.UpdatePortalRequest_alarms)
-		v.Alarms.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdatePortalRequest_clientToken, *v.ClientToken)
-	}
-	if v.NotificationSenderEmail != nil {
-		s.WriteString(schemas.UpdatePortalRequest_notificationSenderEmail, *v.NotificationSenderEmail)
-	}
-	if v.PortalContactEmail != nil {
-		s.WriteString(schemas.UpdatePortalRequest_portalContactEmail, *v.PortalContactEmail)
-	}
-	if v.PortalDescription != nil {
-		s.WriteString(schemas.UpdatePortalRequest_portalDescription, *v.PortalDescription)
-	}
-	if v.PortalId != nil {
-		s.WriteString(schemas.UpdatePortalRequest_portalId, *v.PortalId)
-	}
-	if v.PortalLogoImage != nil {
-		s.WriteStruct(schemas.UpdatePortalRequest_portalLogoImage)
-		v.PortalLogoImage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PortalName != nil {
-		s.WriteString(schemas.UpdatePortalRequest_portalName, *v.PortalName)
-	}
-	if v.PortalType != "" {
-		s.WriteString(schemas.UpdatePortalRequest_portalType, string(v.PortalType))
-	}
-	serializePortalTypeConfiguration(s, schemas.UpdatePortalRequest_portalTypeConfiguration, v.PortalTypeConfiguration)
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdatePortalRequest_roleArn, *v.RoleArn)
-	}
-}
-
 type UpdatePortalOutput struct {
 
 	// The status of the portal, which contains a state ( UPDATING after successfully
@@ -153,24 +107,16 @@ type UpdatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdatePortalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdatePortalResponse_portalStatus:
-			v.PortalStatus = &types.PortalStatus{}
-			return v.PortalStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortal, schemas.UpdatePortalRequest, schemas.UpdatePortalResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePortal{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortal, schemas.UpdatePortalRequest, schemas.UpdatePortalResponse), output: &UpdatePortalOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePortal{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePortal"); err != nil {

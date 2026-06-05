@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -18,28 +16,6 @@ type AccountSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.AccountSummary_Name, *v.Name)
-	}
-}
-func (v *AccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AccountSummary_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Contains contact information for the primary alliance lead responsible for
@@ -69,46 +45,6 @@ type AllianceLeadContact struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AllianceLeadContact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AllianceLeadContact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AllianceLeadContact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BusinessTitle != nil {
-		s.WriteString(schemas.AllianceLeadContact_BusinessTitle, *v.BusinessTitle)
-	}
-	if v.Email != nil {
-		s.WriteString(schemas.AllianceLeadContact_Email, *v.Email)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.AllianceLeadContact_FirstName, *v.FirstName)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.AllianceLeadContact_LastName, *v.LastName)
-	}
-}
-func (v *AllianceLeadContact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AllianceLeadContact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AllianceLeadContact_BusinessTitle:
-			v.BusinessTitle = new(string)
-			return d.ReadString(schemas.AllianceLeadContact_BusinessTitle, v.BusinessTitle)
-		case schemas.AllianceLeadContact_Email:
-			v.Email = new(string)
-			return d.ReadString(schemas.AllianceLeadContact_Email, v.Email)
-		case schemas.AllianceLeadContact_FirstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.AllianceLeadContact_FirstName, v.FirstName)
-		case schemas.AllianceLeadContact_LastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.AllianceLeadContact_LastName, v.LastName)
-		}
-		return nil
-	})
-}
-
 // Contains information about a business rule validation error that occurred
 // during an operation.
 type BusinessValidationError struct {
@@ -124,38 +60,6 @@ type BusinessValidationError struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BusinessValidationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BusinessValidationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BusinessValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.BusinessValidationError_Code, string(v.Code))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.BusinessValidationError_Message, *v.Message)
-	}
-}
-func (v *BusinessValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BusinessValidationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BusinessValidationError_Code:
-			var ev string
-			if err := d.ReadString(schemas.BusinessValidationError_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = BusinessValidationCode(ev)
-			return nil
-		case schemas.BusinessValidationError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BusinessValidationError_Message, v.Message)
-		}
-		return nil
-	})
 }
 
 // Contains the business information required for verifying a company's legal
@@ -188,46 +92,6 @@ type BusinessVerificationDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BusinessVerificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BusinessVerificationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BusinessVerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CountryCode != nil {
-		s.WriteString(schemas.BusinessVerificationDetails_CountryCode, *v.CountryCode)
-	}
-	if v.JurisdictionOfIncorporation != nil {
-		s.WriteString(schemas.BusinessVerificationDetails_JurisdictionOfIncorporation, *v.JurisdictionOfIncorporation)
-	}
-	if v.LegalName != nil {
-		s.WriteString(schemas.BusinessVerificationDetails_LegalName, *v.LegalName)
-	}
-	if v.RegistrationId != nil {
-		s.WriteString(schemas.BusinessVerificationDetails_RegistrationId, *v.RegistrationId)
-	}
-}
-func (v *BusinessVerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BusinessVerificationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BusinessVerificationDetails_CountryCode:
-			v.CountryCode = new(string)
-			return d.ReadString(schemas.BusinessVerificationDetails_CountryCode, v.CountryCode)
-		case schemas.BusinessVerificationDetails_JurisdictionOfIncorporation:
-			v.JurisdictionOfIncorporation = new(string)
-			return d.ReadString(schemas.BusinessVerificationDetails_JurisdictionOfIncorporation, v.JurisdictionOfIncorporation)
-		case schemas.BusinessVerificationDetails_LegalName:
-			v.LegalName = new(string)
-			return d.ReadString(schemas.BusinessVerificationDetails_LegalName, v.LegalName)
-		case schemas.BusinessVerificationDetails_RegistrationId:
-			v.RegistrationId = new(string)
-			return d.ReadString(schemas.BusinessVerificationDetails_RegistrationId, v.RegistrationId)
-		}
-		return nil
-	})
-}
-
 // Contains the response information and results from a business verification
 // process, including any verification-specific data returned by the verification
 // service.
@@ -249,42 +113,6 @@ type BusinessVerificationResponse struct {
 	CompletionUrlExpiresAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *BusinessVerificationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BusinessVerificationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BusinessVerificationResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BusinessVerificationDetails != nil {
-		s.WriteStruct(schemas.BusinessVerificationResponse_BusinessVerificationDetails)
-		v.BusinessVerificationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CompletionUrl != nil {
-		s.WriteString(schemas.BusinessVerificationResponse_CompletionUrl, *v.CompletionUrl)
-	}
-	if v.CompletionUrlExpiresAt != nil {
-		s.WriteTime(schemas.BusinessVerificationResponse_CompletionUrlExpiresAt, *v.CompletionUrlExpiresAt)
-	}
-}
-func (v *BusinessVerificationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BusinessVerificationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BusinessVerificationResponse_BusinessVerificationDetails:
-			v.BusinessVerificationDetails = &BusinessVerificationDetails{}
-			return v.BusinessVerificationDetails.Deserialize(d)
-		case schemas.BusinessVerificationResponse_CompletionUrl:
-			v.CompletionUrl = new(string)
-			return d.ReadString(schemas.BusinessVerificationResponse_CompletionUrl, v.CompletionUrl)
-		case schemas.BusinessVerificationResponse_CompletionUrlExpiresAt:
-			v.CompletionUrlExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.BusinessVerificationResponse_CompletionUrlExpiresAt, v.CompletionUrlExpiresAt)
-		}
-		return nil
-	})
 }
 
 // Base structure containing common connection properties.
@@ -321,55 +149,6 @@ type Connection struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *Connection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Connection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Connection_Arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.Connection_Catalog, *v.Catalog)
-	}
-	serializeConnectionTypeDetailMap(s, schemas.Connection_ConnectionTypes, v.ConnectionTypes)
-	if v.Id != nil {
-		s.WriteString(schemas.Connection_Id, *v.Id)
-	}
-	if v.OtherParticipantAccountId != nil {
-		s.WriteString(schemas.Connection_OtherParticipantAccountId, *v.OtherParticipantAccountId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Connection_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Connection_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Connection_Arn, v.Arn)
-		case schemas.Connection_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.Connection_Catalog, v.Catalog)
-		case schemas.Connection_ConnectionTypes:
-			return deserializeConnectionTypeDetailMap(d, schemas.Connection_ConnectionTypes, &v.ConnectionTypes)
-		case schemas.Connection_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Connection_Id, v.Id)
-		case schemas.Connection_OtherParticipantAccountId:
-			v.OtherParticipantAccountId = new(string)
-			return d.ReadString(schemas.Connection_OtherParticipantAccountId, v.OtherParticipantAccountId)
-		case schemas.Connection_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Connection_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // A summary view of a connection invitation containing key information without
@@ -430,100 +209,6 @@ type ConnectionInvitationSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectionInvitationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionInvitationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionInvitationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ConnectionInvitationSummary_Arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.ConnectionInvitationSummary_Catalog, *v.Catalog)
-	}
-	if v.ConnectionId != nil {
-		s.WriteString(schemas.ConnectionInvitationSummary_ConnectionId, *v.ConnectionId)
-	}
-	if v.ConnectionType != "" {
-		s.WriteString(schemas.ConnectionInvitationSummary_ConnectionType, string(v.ConnectionType))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ConnectionInvitationSummary_CreatedAt, *v.CreatedAt)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.ConnectionInvitationSummary_ExpiresAt, *v.ExpiresAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ConnectionInvitationSummary_Id, *v.Id)
-	}
-	if v.OtherParticipantIdentifier != nil {
-		s.WriteString(schemas.ConnectionInvitationSummary_OtherParticipantIdentifier, *v.OtherParticipantIdentifier)
-	}
-	if v.ParticipantType != "" {
-		s.WriteString(schemas.ConnectionInvitationSummary_ParticipantType, string(v.ParticipantType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ConnectionInvitationSummary_Status, string(v.Status))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ConnectionInvitationSummary_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ConnectionInvitationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionInvitationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionInvitationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ConnectionInvitationSummary_Arn, v.Arn)
-		case schemas.ConnectionInvitationSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.ConnectionInvitationSummary_Catalog, v.Catalog)
-		case schemas.ConnectionInvitationSummary_ConnectionId:
-			v.ConnectionId = new(string)
-			return d.ReadString(schemas.ConnectionInvitationSummary_ConnectionId, v.ConnectionId)
-		case schemas.ConnectionInvitationSummary_ConnectionType:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionInvitationSummary_ConnectionType, &ev); err != nil {
-				return err
-			}
-			v.ConnectionType = ConnectionType(ev)
-			return nil
-		case schemas.ConnectionInvitationSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionInvitationSummary_CreatedAt, v.CreatedAt)
-		case schemas.ConnectionInvitationSummary_ExpiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionInvitationSummary_ExpiresAt, v.ExpiresAt)
-		case schemas.ConnectionInvitationSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ConnectionInvitationSummary_Id, v.Id)
-		case schemas.ConnectionInvitationSummary_OtherParticipantIdentifier:
-			v.OtherParticipantIdentifier = new(string)
-			return d.ReadString(schemas.ConnectionInvitationSummary_OtherParticipantIdentifier, v.OtherParticipantIdentifier)
-		case schemas.ConnectionInvitationSummary_ParticipantType:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionInvitationSummary_ParticipantType, &ev); err != nil {
-				return err
-			}
-			v.ParticipantType = ParticipantType(ev)
-			return nil
-		case schemas.ConnectionInvitationSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionInvitationSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = InvitationStatus(ev)
-			return nil
-		case schemas.ConnectionInvitationSummary_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionInvitationSummary_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // A summary view of an active connection between partners containing key
 // information.
 type ConnectionSummary struct {
@@ -559,55 +244,6 @@ type ConnectionSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConnectionSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ConnectionSummary_Arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.ConnectionSummary_Catalog, *v.Catalog)
-	}
-	serializeConnectionTypeSummaryMap(s, schemas.ConnectionSummary_ConnectionTypes, v.ConnectionTypes)
-	if v.Id != nil {
-		s.WriteString(schemas.ConnectionSummary_Id, *v.Id)
-	}
-	if v.OtherParticipantAccountId != nil {
-		s.WriteString(schemas.ConnectionSummary_OtherParticipantAccountId, *v.OtherParticipantAccountId)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.ConnectionSummary_UpdatedAt, *v.UpdatedAt)
-	}
-}
-func (v *ConnectionSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ConnectionSummary_Arn, v.Arn)
-		case schemas.ConnectionSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.ConnectionSummary_Catalog, v.Catalog)
-		case schemas.ConnectionSummary_ConnectionTypes:
-			return deserializeConnectionTypeSummaryMap(d, schemas.ConnectionSummary_ConnectionTypes, &v.ConnectionTypes)
-		case schemas.ConnectionSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ConnectionSummary_Id, v.Id)
-		case schemas.ConnectionSummary_OtherParticipantAccountId:
-			v.OtherParticipantAccountId = new(string)
-			return d.ReadString(schemas.ConnectionSummary_OtherParticipantAccountId, v.OtherParticipantAccountId)
-		case schemas.ConnectionSummary_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionSummary_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
 }
 
 // Detailed information about a specific connection type within a connection.
@@ -647,65 +283,6 @@ type ConnectionTypeDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ConnectionTypeDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionTypeDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionTypeDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CanceledAt != nil {
-		s.WriteTime(schemas.ConnectionTypeDetail_CanceledAt, *v.CanceledAt)
-	}
-	if v.CanceledBy != nil {
-		s.WriteString(schemas.ConnectionTypeDetail_CanceledBy, *v.CanceledBy)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ConnectionTypeDetail_CreatedAt, *v.CreatedAt)
-	}
-	if v.InviterEmail != nil {
-		s.WriteString(schemas.ConnectionTypeDetail_InviterEmail, *v.InviterEmail)
-	}
-	if v.InviterName != nil {
-		s.WriteString(schemas.ConnectionTypeDetail_InviterName, *v.InviterName)
-	}
-	serializeParticipant(s, schemas.ConnectionTypeDetail_OtherParticipant, v.OtherParticipant)
-	if v.Status != "" {
-		s.WriteString(schemas.ConnectionTypeDetail_Status, string(v.Status))
-	}
-}
-func (v *ConnectionTypeDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionTypeDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionTypeDetail_CanceledAt:
-			v.CanceledAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionTypeDetail_CanceledAt, v.CanceledAt)
-		case schemas.ConnectionTypeDetail_CanceledBy:
-			v.CanceledBy = new(string)
-			return d.ReadString(schemas.ConnectionTypeDetail_CanceledBy, v.CanceledBy)
-		case schemas.ConnectionTypeDetail_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ConnectionTypeDetail_CreatedAt, v.CreatedAt)
-		case schemas.ConnectionTypeDetail_InviterEmail:
-			v.InviterEmail = new(string)
-			return d.ReadString(schemas.ConnectionTypeDetail_InviterEmail, v.InviterEmail)
-		case schemas.ConnectionTypeDetail_InviterName:
-			v.InviterName = new(string)
-			return d.ReadString(schemas.ConnectionTypeDetail_InviterName, v.InviterName)
-		case schemas.ConnectionTypeDetail_OtherParticipant:
-			return deserializeParticipant(d, schemas.ConnectionTypeDetail_OtherParticipant, &v.OtherParticipant)
-		case schemas.ConnectionTypeDetail_Status:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionTypeDetail_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConnectionTypeStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary information about a specific connection type between partners.
 type ConnectionTypeSummary struct {
 
@@ -720,35 +297,6 @@ type ConnectionTypeSummary struct {
 	Status ConnectionTypeStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ConnectionTypeSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ConnectionTypeSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ConnectionTypeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipant(s, schemas.ConnectionTypeSummary_OtherParticipant, v.OtherParticipant)
-	if v.Status != "" {
-		s.WriteString(schemas.ConnectionTypeSummary_Status, string(v.Status))
-	}
-}
-func (v *ConnectionTypeSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConnectionTypeSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConnectionTypeSummary_OtherParticipant:
-			return deserializeParticipant(d, schemas.ConnectionTypeSummary_OtherParticipant, &v.OtherParticipant)
-		case schemas.ConnectionTypeSummary_Status:
-			var ev string
-			if err := d.ReadString(schemas.ConnectionTypeSummary_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConnectionTypeStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Contains detailed information about an error that occurred during an operation.
@@ -772,44 +320,6 @@ type ErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Locale != nil {
-		s.WriteString(schemas.ErrorDetail_Locale, *v.Locale)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.ErrorDetail_Message, *v.Message)
-	}
-	if v.Reason != "" {
-		s.WriteString(schemas.ErrorDetail_Reason, string(v.Reason))
-	}
-}
-func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorDetail_Locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.ErrorDetail_Locale, v.Locale)
-		case schemas.ErrorDetail_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ErrorDetail_Message, v.Message)
-		case schemas.ErrorDetail_Reason:
-			var ev string
-			if err := d.ReadString(schemas.ErrorDetail_Reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ProfileValidationErrorReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about a field-level validation error that occurred during
 // an operation.
 type FieldValidationError struct {
@@ -830,44 +340,6 @@ type FieldValidationError struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *FieldValidationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FieldValidationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FieldValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.FieldValidationError_Code, string(v.Code))
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.FieldValidationError_Message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FieldValidationError_Name, *v.Name)
-	}
-}
-func (v *FieldValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FieldValidationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FieldValidationError_Code:
-			var ev string
-			if err := d.ReadString(schemas.FieldValidationError_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = FieldValidationCode(ev)
-			return nil
-		case schemas.FieldValidationError_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.FieldValidationError_Message, v.Message)
-		case schemas.FieldValidationError_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FieldValidationError_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Contains localized content for a partner profile in a specific language or
@@ -902,52 +374,6 @@ type LocalizedContent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LocalizedContent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LocalizedContent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LocalizedContent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.LocalizedContent_Description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.LocalizedContent_DisplayName, *v.DisplayName)
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.LocalizedContent_Locale, *v.Locale)
-	}
-	if v.LogoUrl != nil {
-		s.WriteString(schemas.LocalizedContent_LogoUrl, *v.LogoUrl)
-	}
-	if v.WebsiteUrl != nil {
-		s.WriteString(schemas.LocalizedContent_WebsiteUrl, *v.WebsiteUrl)
-	}
-}
-func (v *LocalizedContent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LocalizedContent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LocalizedContent_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.LocalizedContent_Description, v.Description)
-		case schemas.LocalizedContent_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.LocalizedContent_DisplayName, v.DisplayName)
-		case schemas.LocalizedContent_Locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.LocalizedContent_Locale, v.Locale)
-		case schemas.LocalizedContent_LogoUrl:
-			v.LogoUrl = new(string)
-			return d.ReadString(schemas.LocalizedContent_LogoUrl, v.LogoUrl)
-		case schemas.LocalizedContent_WebsiteUrl:
-			v.WebsiteUrl = new(string)
-			return d.ReadString(schemas.LocalizedContent_WebsiteUrl, v.WebsiteUrl)
-		}
-		return nil
-	})
-}
-
 // Represents a participant in a partner connection, containing their profile and
 // account information.
 //
@@ -968,14 +394,6 @@ type ParticipantMemberAccount struct {
 }
 
 func (*ParticipantMemberAccount) isParticipant() {}
-func (v *ParticipantMemberAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Participant_Account)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ParticipantMemberAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The partner profile information for the participant.
 type ParticipantMemberPartnerProfile struct {
@@ -985,14 +403,6 @@ type ParticipantMemberPartnerProfile struct {
 }
 
 func (*ParticipantMemberPartnerProfile) isParticipant() {}
-func (v *ParticipantMemberPartnerProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Participant_PartnerProfile)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ParticipantMemberPartnerProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The seller profile information for the participant.
 type ParticipantMemberSellerProfile struct {
@@ -1002,14 +412,6 @@ type ParticipantMemberSellerProfile struct {
 }
 
 func (*ParticipantMemberSellerProfile) isParticipant() {}
-func (v *ParticipantMemberSellerProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Participant_SellerProfile)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ParticipantMemberSellerProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Represents a verified domain associated with a partner account.
 type PartnerDomain struct {
@@ -1026,34 +428,6 @@ type PartnerDomain struct {
 	RegisteredAt *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *PartnerDomain) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartnerDomain)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartnerDomain) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.PartnerDomain_DomainName, *v.DomainName)
-	}
-	if v.RegisteredAt != nil {
-		s.WriteTime(schemas.PartnerDomain_RegisteredAt, *v.RegisteredAt)
-	}
-}
-func (v *PartnerDomain) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartnerDomain, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartnerDomain_DomainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.PartnerDomain_DomainName, v.DomainName)
-		case schemas.PartnerDomain_RegisteredAt:
-			v.RegisteredAt = new(time.Time)
-			return d.ReadTime(schemas.PartnerDomain_RegisteredAt, v.RegisteredAt)
-		}
-		return nil
-	})
 }
 
 // Contains comprehensive profile information for a partner including
@@ -1104,74 +478,6 @@ type PartnerProfile struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PartnerProfile) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartnerProfile)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartnerProfile) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.PartnerProfile_Description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.PartnerProfile_DisplayName, *v.DisplayName)
-	}
-	serializeIndustrySegmentList(s, schemas.PartnerProfile_IndustrySegments, v.IndustrySegments)
-	serializeLocalizedContentList(s, schemas.PartnerProfile_LocalizedContents, v.LocalizedContents)
-	if v.LogoUrl != nil {
-		s.WriteString(schemas.PartnerProfile_LogoUrl, *v.LogoUrl)
-	}
-	if v.PrimarySolutionType != "" {
-		s.WriteString(schemas.PartnerProfile_PrimarySolutionType, string(v.PrimarySolutionType))
-	}
-	if v.ProfileId != nil {
-		s.WriteString(schemas.PartnerProfile_ProfileId, *v.ProfileId)
-	}
-	if v.TranslationSourceLocale != nil {
-		s.WriteString(schemas.PartnerProfile_TranslationSourceLocale, *v.TranslationSourceLocale)
-	}
-	if v.WebsiteUrl != nil {
-		s.WriteString(schemas.PartnerProfile_WebsiteUrl, *v.WebsiteUrl)
-	}
-}
-func (v *PartnerProfile) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartnerProfile, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartnerProfile_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PartnerProfile_Description, v.Description)
-		case schemas.PartnerProfile_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.PartnerProfile_DisplayName, v.DisplayName)
-		case schemas.PartnerProfile_IndustrySegments:
-			return deserializeIndustrySegmentList(d, schemas.PartnerProfile_IndustrySegments, &v.IndustrySegments)
-		case schemas.PartnerProfile_LocalizedContents:
-			return deserializeLocalizedContentList(d, schemas.PartnerProfile_LocalizedContents, &v.LocalizedContents)
-		case schemas.PartnerProfile_LogoUrl:
-			v.LogoUrl = new(string)
-			return d.ReadString(schemas.PartnerProfile_LogoUrl, v.LogoUrl)
-		case schemas.PartnerProfile_PrimarySolutionType:
-			var ev string
-			if err := d.ReadString(schemas.PartnerProfile_PrimarySolutionType, &ev); err != nil {
-				return err
-			}
-			v.PrimarySolutionType = PrimarySolutionType(ev)
-			return nil
-		case schemas.PartnerProfile_ProfileId:
-			v.ProfileId = new(string)
-			return d.ReadString(schemas.PartnerProfile_ProfileId, v.ProfileId)
-		case schemas.PartnerProfile_TranslationSourceLocale:
-			v.TranslationSourceLocale = new(string)
-			return d.ReadString(schemas.PartnerProfile_TranslationSourceLocale, v.TranslationSourceLocale)
-		case schemas.PartnerProfile_WebsiteUrl:
-			v.WebsiteUrl = new(string)
-			return d.ReadString(schemas.PartnerProfile_WebsiteUrl, v.WebsiteUrl)
-		}
-		return nil
-	})
-}
-
 // A summary view of a partner profile containing basic identifying information.
 type PartnerProfileSummary struct {
 
@@ -1186,34 +492,6 @@ type PartnerProfileSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PartnerProfileSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartnerProfileSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartnerProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.PartnerProfileSummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PartnerProfileSummary_Name, *v.Name)
-	}
-}
-func (v *PartnerProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartnerProfileSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartnerProfileSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PartnerProfileSummary_Id, v.Id)
-		case schemas.PartnerProfileSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PartnerProfileSummary_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // A summary view of a partner account containing basic information for listing
@@ -1248,72 +526,10 @@ type PartnerSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PartnerSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PartnerSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PartnerSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.PartnerSummary_Arn, *v.Arn)
-	}
-	if v.Catalog != nil {
-		s.WriteString(schemas.PartnerSummary_Catalog, *v.Catalog)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.PartnerSummary_CreatedAt, *v.CreatedAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.PartnerSummary_Id, *v.Id)
-	}
-	if v.LegalName != nil {
-		s.WriteString(schemas.PartnerSummary_LegalName, *v.LegalName)
-	}
-}
-func (v *PartnerSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PartnerSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PartnerSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.PartnerSummary_Arn, v.Arn)
-		case schemas.PartnerSummary_Catalog:
-			v.Catalog = new(string)
-			return d.ReadString(schemas.PartnerSummary_Catalog, v.Catalog)
-		case schemas.PartnerSummary_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.PartnerSummary_CreatedAt, v.CreatedAt)
-		case schemas.PartnerSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PartnerSummary_Id, v.Id)
-		case schemas.PartnerSummary_LegalName:
-			v.LegalName = new(string)
-			return d.ReadString(schemas.PartnerSummary_LegalName, v.LegalName)
-		}
-		return nil
-	})
-}
-
 // Contains the personal information required for verifying an individual's
 // identity as part of the partner registration process in AWS Partner Central.
 type RegistrantVerificationDetails struct {
 	noSmithyDocumentSerde
-}
-
-func (v *RegistrantVerificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegistrantVerificationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegistrantVerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *RegistrantVerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegistrantVerificationDetails, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // Contains the response information from a registrant verification process,
@@ -1337,34 +553,6 @@ type RegistrantVerificationResponse struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegistrantVerificationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegistrantVerificationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegistrantVerificationResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CompletionUrl != nil {
-		s.WriteString(schemas.RegistrantVerificationResponse_CompletionUrl, *v.CompletionUrl)
-	}
-	if v.CompletionUrlExpiresAt != nil {
-		s.WriteTime(schemas.RegistrantVerificationResponse_CompletionUrlExpiresAt, *v.CompletionUrlExpiresAt)
-	}
-}
-func (v *RegistrantVerificationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegistrantVerificationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegistrantVerificationResponse_CompletionUrl:
-			v.CompletionUrl = new(string)
-			return d.ReadString(schemas.RegistrantVerificationResponse_CompletionUrl, v.CompletionUrl)
-		case schemas.RegistrantVerificationResponse_CompletionUrlExpiresAt:
-			v.CompletionUrlExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.RegistrantVerificationResponse_CompletionUrlExpiresAt, v.CompletionUrlExpiresAt)
-		}
-		return nil
-	})
-}
-
 // A summary view of a seller profile containing basic identifying information.
 type SellerProfileSummary struct {
 
@@ -1379,34 +567,6 @@ type SellerProfileSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SellerProfileSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SellerProfileSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SellerProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.SellerProfileSummary_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SellerProfileSummary_Name, *v.Name)
-	}
-}
-func (v *SellerProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SellerProfileSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SellerProfileSummary_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SellerProfileSummary_Id, v.Id)
-		case schemas.SellerProfileSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SellerProfileSummary_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // A key-value pair used to associate metadata with AWS Partner Central Account
@@ -1424,34 +584,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Contains detailed information about a profile update task including the changes
@@ -1499,68 +631,6 @@ type TaskDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TaskDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TaskDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.TaskDetails_Description, *v.Description)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.TaskDetails_DisplayName, *v.DisplayName)
-	}
-	serializeIndustrySegmentList(s, schemas.TaskDetails_IndustrySegments, v.IndustrySegments)
-	serializeLocalizedContentList(s, schemas.TaskDetails_LocalizedContents, v.LocalizedContents)
-	if v.LogoUrl != nil {
-		s.WriteString(schemas.TaskDetails_LogoUrl, *v.LogoUrl)
-	}
-	if v.PrimarySolutionType != "" {
-		s.WriteString(schemas.TaskDetails_PrimarySolutionType, string(v.PrimarySolutionType))
-	}
-	if v.TranslationSourceLocale != nil {
-		s.WriteString(schemas.TaskDetails_TranslationSourceLocale, *v.TranslationSourceLocale)
-	}
-	if v.WebsiteUrl != nil {
-		s.WriteString(schemas.TaskDetails_WebsiteUrl, *v.WebsiteUrl)
-	}
-}
-func (v *TaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TaskDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TaskDetails_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.TaskDetails_Description, v.Description)
-		case schemas.TaskDetails_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.TaskDetails_DisplayName, v.DisplayName)
-		case schemas.TaskDetails_IndustrySegments:
-			return deserializeIndustrySegmentList(d, schemas.TaskDetails_IndustrySegments, &v.IndustrySegments)
-		case schemas.TaskDetails_LocalizedContents:
-			return deserializeLocalizedContentList(d, schemas.TaskDetails_LocalizedContents, &v.LocalizedContents)
-		case schemas.TaskDetails_LogoUrl:
-			v.LogoUrl = new(string)
-			return d.ReadString(schemas.TaskDetails_LogoUrl, v.LogoUrl)
-		case schemas.TaskDetails_PrimarySolutionType:
-			var ev string
-			if err := d.ReadString(schemas.TaskDetails_PrimarySolutionType, &ev); err != nil {
-				return err
-			}
-			v.PrimarySolutionType = PrimarySolutionType(ev)
-			return nil
-		case schemas.TaskDetails_TranslationSourceLocale:
-			v.TranslationSourceLocale = new(string)
-			return d.ReadString(schemas.TaskDetails_TranslationSourceLocale, v.TranslationSourceLocale)
-		case schemas.TaskDetails_WebsiteUrl:
-			v.WebsiteUrl = new(string)
-			return d.ReadString(schemas.TaskDetails_WebsiteUrl, v.WebsiteUrl)
-		}
-		return nil
-	})
-}
-
 // Contains information about a validation error, which can be either a
 // field-level or business rule validation error.
 //
@@ -1580,14 +650,6 @@ type ValidationErrorMemberBusinessValidationError struct {
 }
 
 func (*ValidationErrorMemberBusinessValidationError) isValidationError() {}
-func (v *ValidationErrorMemberBusinessValidationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationError_BusinessValidationError)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ValidationErrorMemberBusinessValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Details about a field-level validation error, if applicable.
 type ValidationErrorMemberFieldValidationError struct {
@@ -1597,14 +659,6 @@ type ValidationErrorMemberFieldValidationError struct {
 }
 
 func (*ValidationErrorMemberFieldValidationError) isValidationError() {}
-func (v *ValidationErrorMemberFieldValidationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationError_FieldValidationError)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ValidationErrorMemberFieldValidationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A union structure containing the specific details required for different types
 // of verification processes supported by AWS Partner Central.
@@ -1626,14 +680,6 @@ type VerificationDetailsMemberBusinessVerificationDetails struct {
 }
 
 func (*VerificationDetailsMemberBusinessVerificationDetails) isVerificationDetails() {}
-func (v *VerificationDetailsMemberBusinessVerificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationDetails_BusinessVerificationDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *VerificationDetailsMemberBusinessVerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The registrant verification details to be used when starting an individual
 // identity verification process.
@@ -1644,14 +690,6 @@ type VerificationDetailsMemberRegistrantVerificationDetails struct {
 }
 
 func (*VerificationDetailsMemberRegistrantVerificationDetails) isVerificationDetails() {}
-func (v *VerificationDetailsMemberRegistrantVerificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationDetails_RegistrantVerificationDetails)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *VerificationDetailsMemberRegistrantVerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A union structure containing the response details specific to different types
 // of verification processes, providing type-specific information and results.
@@ -1674,14 +712,6 @@ type VerificationResponseDetailsMemberBusinessVerificationResponse struct {
 
 func (*VerificationResponseDetailsMemberBusinessVerificationResponse) isVerificationResponseDetails() {
 }
-func (v *VerificationResponseDetailsMemberBusinessVerificationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationResponseDetails_BusinessVerificationResponse)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *VerificationResponseDetailsMemberBusinessVerificationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The response details from a registrant verification process, including
 // verification results and any additional steps required for identity
@@ -1693,14 +723,6 @@ type VerificationResponseDetailsMemberRegistrantVerificationResponse struct {
 }
 
 func (*VerificationResponseDetailsMemberRegistrantVerificationResponse) isVerificationResponseDetails() {
-}
-func (v *VerificationResponseDetailsMemberRegistrantVerificationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VerificationResponseDetails_RegistrantVerificationResponse)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *VerificationResponseDetailsMemberRegistrantVerificationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

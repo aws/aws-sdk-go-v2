@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,18 +38,6 @@ type GetDashboardInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDashboardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetDashboardRequest_arn, *v.Arn)
-	}
 }
 
 type GetDashboardOutput struct {
@@ -95,45 +81,16 @@ type GetDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDashboardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDashboardResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetDashboardResponse_arn, v.Arn)
-		case schemas.GetDashboardResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDashboardResponse_createdAt, v.CreatedAt)
-		case schemas.GetDashboardResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetDashboardResponse_description, v.Description)
-		case schemas.GetDashboardResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetDashboardResponse_name, v.Name)
-		case schemas.GetDashboardResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.GetDashboardResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.DashboardType(ev)
-			return nil
-		case schemas.GetDashboardResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetDashboardResponse_updatedAt, v.UpdatedAt)
-		case schemas.GetDashboardResponse_widgets:
-			return deserializeWidgetList(d, schemas.GetDashboardResponse_widgets, &v.Widgets)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardRequest, schemas.GetDashboardResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardRequest, schemas.GetDashboardResponse), output: &GetDashboardOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboard"); err != nil {

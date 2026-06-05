@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,25 +52,6 @@ type BatchRemoveChannelRoleFromAccessorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchRemoveChannelRoleFromAccessorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchRemoveChannelRoleFromAccessorsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchRemoveChannelRoleFromAccessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessorIdList(s, schemas.BatchRemoveChannelRoleFromAccessorsInput_accessorIds, v.AccessorIds)
-	if v.ChannelId != nil {
-		s.WriteString(schemas.BatchRemoveChannelRoleFromAccessorsInput_channelId, *v.ChannelId)
-	}
-	if v.ChannelRole != "" {
-		s.WriteString(schemas.BatchRemoveChannelRoleFromAccessorsInput_channelRole, string(v.ChannelRole))
-	}
-	if v.SpaceId != nil {
-		s.WriteString(schemas.BatchRemoveChannelRoleFromAccessorsInput_spaceId, *v.SpaceId)
-	}
-}
-
 type BatchRemoveChannelRoleFromAccessorsOutput struct {
 
 	// An array of errors that occurred when roles were removed.
@@ -91,25 +70,16 @@ type BatchRemoveChannelRoleFromAccessorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchRemoveChannelRoleFromAccessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchRemoveChannelRoleFromAccessorsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchRemoveChannelRoleFromAccessorsOutput_errors:
-			return deserializeBatchErrorList(d, schemas.BatchRemoveChannelRoleFromAccessorsOutput_errors, &v.Errors)
-		case schemas.BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds:
-			return deserializeAccessorIdList(d, schemas.BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds, &v.RemovedAccessorIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchRemoveChannelRoleFromAccessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRemoveChannelRoleFromAccessors, schemas.BatchRemoveChannelRoleFromAccessorsInput, schemas.BatchRemoveChannelRoleFromAccessorsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchRemoveChannelRoleFromAccessors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRemoveChannelRoleFromAccessors, schemas.BatchRemoveChannelRoleFromAccessorsInput, schemas.BatchRemoveChannelRoleFromAccessorsOutput), output: &BatchRemoveChannelRoleFromAccessorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchRemoveChannelRoleFromAccessors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchRemoveChannelRoleFromAccessors"); err != nil {

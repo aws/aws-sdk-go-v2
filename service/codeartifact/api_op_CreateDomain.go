@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,22 +68,6 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDomainRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Domain != nil {
-		s.WriteString(schemas.CreateDomainRequest_domain, *v.Domain)
-	}
-	if v.EncryptionKey != nil {
-		s.WriteString(schemas.CreateDomainRequest_encryptionKey, *v.EncryptionKey)
-	}
-	serializeTagList(s, schemas.CreateDomainRequest_tags, v.Tags)
-}
-
 type CreateDomainOutput struct {
 
 	//  Contains information about the created domain after processing the request.
@@ -97,24 +79,16 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDomainResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDomainResult_domain:
-			v.Domain = &types.DomainDescription{}
-			return v.Domain.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResult), output: &CreateDomainOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {

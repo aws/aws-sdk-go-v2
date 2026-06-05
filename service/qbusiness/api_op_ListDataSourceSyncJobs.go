@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -71,39 +69,6 @@ type ListDataSourceSyncJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourceSyncJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataSourceSyncJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataSourceSyncJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ListDataSourceSyncJobsRequest_applicationId, *v.ApplicationId)
-	}
-	if v.DataSourceId != nil {
-		s.WriteString(schemas.ListDataSourceSyncJobsRequest_dataSourceId, *v.DataSourceId)
-	}
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListDataSourceSyncJobsRequest_endTime, *v.EndTime)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.ListDataSourceSyncJobsRequest_indexId, *v.IndexId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataSourceSyncJobsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataSourceSyncJobsRequest_nextToken, *v.NextToken)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListDataSourceSyncJobsRequest_startTime, *v.StartTime)
-	}
-	if v.StatusFilter != "" {
-		s.WriteString(schemas.ListDataSourceSyncJobsRequest_statusFilter, string(v.StatusFilter))
-	}
-}
-
 type ListDataSourceSyncJobsOutput struct {
 
 	// A history of synchronization jobs for the data source connector.
@@ -119,26 +84,16 @@ type ListDataSourceSyncJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataSourceSyncJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataSourceSyncJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataSourceSyncJobsResponse_history:
-			return deserializeDataSourceSyncJobs(d, schemas.ListDataSourceSyncJobsResponse_history, &v.History)
-		case schemas.ListDataSourceSyncJobsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataSourceSyncJobsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceSyncJobs, schemas.ListDataSourceSyncJobsRequest, schemas.ListDataSourceSyncJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSourceSyncJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSourceSyncJobs, schemas.ListDataSourceSyncJobsRequest, schemas.ListDataSourceSyncJobsResponse), output: &ListDataSourceSyncJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSourceSyncJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSourceSyncJobs"); err != nil {

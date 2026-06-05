@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,29 +57,6 @@ type TestParsingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestParsingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TestParsingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TestParsingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdvancedOptions != nil {
-		s.WriteStruct(schemas.TestParsingRequest_advancedOptions)
-		v.AdvancedOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEdiType(s, schemas.TestParsingRequest_ediType, v.EdiType)
-	if v.FileFormat != "" {
-		s.WriteString(schemas.TestParsingRequest_fileFormat, string(v.FileFormat))
-	}
-	if v.InputFile != nil {
-		s.WriteStruct(schemas.TestParsingRequest_inputFile)
-		v.InputFile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type TestParsingOutput struct {
 
 	// Returns the contents of the input file being tested, parsed according to the
@@ -108,28 +83,16 @@ type TestParsingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TestParsingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TestParsingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TestParsingResponse_parsedFileContent:
-			v.ParsedFileContent = new(string)
-			return d.ReadString(schemas.TestParsingResponse_parsedFileContent, v.ParsedFileContent)
-		case schemas.TestParsingResponse_parsedSplitFileContents:
-			return deserializeParsedSplitFileContentsList(d, schemas.TestParsingResponse_parsedSplitFileContents, &v.ParsedSplitFileContents)
-		case schemas.TestParsingResponse_validationMessages:
-			return deserializeValidationMessages(d, schemas.TestParsingResponse_validationMessages, &v.ValidationMessages)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationTestParsingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestParsing, schemas.TestParsingRequest, schemas.TestParsingResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestParsing{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestParsing, schemas.TestParsingRequest, schemas.TestParsingResponse), output: &TestParsingOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestParsing{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestParsing"); err != nil {

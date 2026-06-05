@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListWirelessGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWirelessGatewaysInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWirelessGatewaysRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWirelessGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListWirelessGatewaysRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWirelessGatewaysRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListWirelessGatewaysOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -71,26 +54,16 @@ type ListWirelessGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWirelessGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWirelessGatewaysResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWirelessGatewaysResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWirelessGatewaysResponse_NextToken, v.NextToken)
-		case schemas.ListWirelessGatewaysResponse_WirelessGatewayList:
-			return deserializeWirelessGatewayStatisticsList(d, schemas.ListWirelessGatewaysResponse_WirelessGatewayList, &v.WirelessGatewayList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWirelessGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessGateways, schemas.ListWirelessGatewaysRequest, schemas.ListWirelessGatewaysResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWirelessGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWirelessGateways, schemas.ListWirelessGatewaysRequest, schemas.ListWirelessGatewaysResponse), output: &ListWirelessGatewaysOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWirelessGateways{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWirelessGateways"); err != nil {

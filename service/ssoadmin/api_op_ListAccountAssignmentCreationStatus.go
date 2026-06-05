@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,29 +50,6 @@ type ListAccountAssignmentCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountAssignmentCreationStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountAssignmentCreationStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountAssignmentCreationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListAccountAssignmentCreationStatusRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.ListAccountAssignmentCreationStatusRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccountAssignmentCreationStatusRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccountAssignmentCreationStatusRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListAccountAssignmentCreationStatusOutput struct {
 
 	// The status object for the account assignment creation operation.
@@ -90,26 +65,16 @@ type ListAccountAssignmentCreationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountAssignmentCreationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountAssignmentCreationStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountAssignmentCreationStatusResponse_AccountAssignmentsCreationStatus:
-			return deserializeAccountAssignmentOperationStatusList(d, schemas.ListAccountAssignmentCreationStatusResponse_AccountAssignmentsCreationStatus, &v.AccountAssignmentsCreationStatus)
-		case schemas.ListAccountAssignmentCreationStatusResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccountAssignmentCreationStatusResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccountAssignmentCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignmentCreationStatus, schemas.ListAccountAssignmentCreationStatusRequest, schemas.ListAccountAssignmentCreationStatusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountAssignmentCreationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssignmentCreationStatus, schemas.ListAccountAssignmentCreationStatusRequest, schemas.ListAccountAssignmentCreationStatusResponse), output: &ListAccountAssignmentCreationStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountAssignmentCreationStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountAssignmentCreationStatus"); err != nil {

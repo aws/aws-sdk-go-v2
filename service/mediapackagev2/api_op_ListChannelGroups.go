@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListChannelGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChannelGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChannelGroupsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChannelGroupsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListChannelGroupsOutput struct {
 
 	// The objects being returned.
@@ -71,26 +54,16 @@ type ListChannelGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChannelGroupsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChannelGroupsResponse_Items:
-			return deserializeChannelGroupsList(d, schemas.ListChannelGroupsResponse_Items, &v.Items)
-		case schemas.ListChannelGroupsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChannelGroupsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChannelGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelGroups, schemas.ListChannelGroupsRequest, schemas.ListChannelGroupsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelGroups, schemas.ListChannelGroupsRequest, schemas.ListChannelGroupsResponse), output: &ListChannelGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChannelGroups"); err != nil {

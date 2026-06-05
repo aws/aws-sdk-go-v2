@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type DeleteMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMonitorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteMonitorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MonitorName != nil {
-		s.WriteString(schemas.DeleteMonitorInput_monitorName, *v.MonitorName)
-	}
-}
-
 type DeleteMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,21 +46,16 @@ type DeleteMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteMonitorOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMonitor, schemas.DeleteMonitorInput, schemas.DeleteMonitorOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMonitor, schemas.DeleteMonitorInput, schemas.DeleteMonitorOutput), output: &DeleteMonitorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMonitor{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMonitor"); err != nil {

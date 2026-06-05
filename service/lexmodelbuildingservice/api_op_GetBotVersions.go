@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,24 +58,6 @@ type GetBotVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBotVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBotVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetBotVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetBotVersionsRequest_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetBotVersionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type GetBotVersionsOutput struct {
 
 	// An array of BotMetadata objects, one for each numbered version of the bot plus
@@ -96,26 +76,16 @@ type GetBotVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBotVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBotVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBotVersionsResponse_bots:
-			return deserializeBotMetadataList(d, schemas.GetBotVersionsResponse_bots, &v.Bots)
-		case schemas.GetBotVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetBotVersionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotVersions, schemas.GetBotVersionsRequest, schemas.GetBotVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotVersions, schemas.GetBotVersionsRequest, schemas.GetBotVersionsResponse), output: &GetBotVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBotVersions"); err != nil {

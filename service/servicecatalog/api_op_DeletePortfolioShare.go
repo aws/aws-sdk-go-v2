@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,29 +55,6 @@ type DeletePortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePortfolioShareInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePortfolioShareInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePortfolioShareInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DeletePortfolioShareInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.DeletePortfolioShareInput_AccountId, *v.AccountId)
-	}
-	if v.OrganizationNode != nil {
-		s.WriteStruct(schemas.DeletePortfolioShareInput_OrganizationNode)
-		v.OrganizationNode.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PortfolioId != nil {
-		s.WriteString(schemas.DeletePortfolioShareInput_PortfolioId, *v.PortfolioId)
-	}
-}
-
 type DeletePortfolioShareOutput struct {
 
 	// The portfolio share unique identifier. This will only be returned if delete is
@@ -92,24 +67,16 @@ type DeletePortfolioShareOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePortfolioShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletePortfolioShareOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletePortfolioShareOutput_PortfolioShareToken:
-			v.PortfolioShareToken = new(string)
-			return d.ReadString(schemas.DeletePortfolioShareOutput_PortfolioShareToken, v.PortfolioShareToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortfolioShare, schemas.DeletePortfolioShareInput, schemas.DeletePortfolioShareOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePortfolioShare{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePortfolioShare, schemas.DeletePortfolioShareInput, schemas.DeletePortfolioShareOutput), output: &DeletePortfolioShareOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePortfolioShare{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePortfolioShare"); err != nil {

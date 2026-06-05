@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,25 +81,6 @@ type UpdateProvisionedProductPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProvisionedProductPropertiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateProvisionedProductPropertiesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateProvisionedProductPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.UpdateProvisionedProductPropertiesInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.UpdateProvisionedProductPropertiesInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.ProvisionedProductId != nil {
-		s.WriteString(schemas.UpdateProvisionedProductPropertiesInput_ProvisionedProductId, *v.ProvisionedProductId)
-	}
-	serializeProvisionedProductProperties(s, schemas.UpdateProvisionedProductPropertiesInput_ProvisionedProductProperties, v.ProvisionedProductProperties)
-}
-
 type UpdateProvisionedProductPropertiesOutput struct {
 
 	// The provisioned product identifier.
@@ -122,36 +101,16 @@ type UpdateProvisionedProductPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateProvisionedProductPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateProvisionedProductPropertiesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductId:
-			v.ProvisionedProductId = new(string)
-			return d.ReadString(schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductId, v.ProvisionedProductId)
-		case schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductProperties:
-			return deserializeProvisionedProductProperties(d, schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductProperties, &v.ProvisionedProductProperties)
-		case schemas.UpdateProvisionedProductPropertiesOutput_RecordId:
-			v.RecordId = new(string)
-			return d.ReadString(schemas.UpdateProvisionedProductPropertiesOutput_RecordId, v.RecordId)
-		case schemas.UpdateProvisionedProductPropertiesOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateProvisionedProductPropertiesOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RecordStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedProductProperties, schemas.UpdateProvisionedProductPropertiesInput, schemas.UpdateProvisionedProductPropertiesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProvisionedProductProperties{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisionedProductProperties, schemas.UpdateProvisionedProductPropertiesInput, schemas.UpdateProvisionedProductPropertiesOutput), output: &UpdateProvisionedProductPropertiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProvisionedProductProperties{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProvisionedProductProperties"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDeviceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetDeviceRequest_id, *v.Id)
-	}
-}
-
 type GetDeviceOutput struct {
 
 	// Describes an device.
@@ -62,24 +48,16 @@ type GetDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDeviceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDeviceResponse_device:
-			v.Device = &types.Device{}
-			return v.Device.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevice, schemas.GetDeviceRequest, schemas.GetDeviceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevice, schemas.GetDeviceRequest, schemas.GetDeviceResponse), output: &GetDeviceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevice"); err != nil {

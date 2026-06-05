@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type GetProgrammaticAccessCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProgrammaticAccessCredentialsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetProgrammaticAccessCredentialsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetProgrammaticAccessCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationInMinutes != nil {
-		s.WriteInt64(schemas.GetProgrammaticAccessCredentialsRequest_durationInMinutes, *v.DurationInMinutes)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetProgrammaticAccessCredentialsRequest_environmentId, *v.EnvironmentId)
-	}
-}
-
 // Response for GetProgrammaticAccessCredentials operation
 type GetProgrammaticAccessCredentialsOutput struct {
 
@@ -78,27 +61,16 @@ type GetProgrammaticAccessCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetProgrammaticAccessCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetProgrammaticAccessCredentialsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetProgrammaticAccessCredentialsResponse_credentials:
-			v.Credentials = &types.Credentials{}
-			return v.Credentials.Deserialize(d)
-		case schemas.GetProgrammaticAccessCredentialsResponse_durationInMinutes:
-			v.DurationInMinutes = new(int64)
-			return d.ReadInt64(schemas.GetProgrammaticAccessCredentialsResponse_durationInMinutes, v.DurationInMinutes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetProgrammaticAccessCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProgrammaticAccessCredentials, schemas.GetProgrammaticAccessCredentialsRequest, schemas.GetProgrammaticAccessCredentialsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProgrammaticAccessCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProgrammaticAccessCredentials, schemas.GetProgrammaticAccessCredentialsRequest, schemas.GetProgrammaticAccessCredentialsResponse), output: &GetProgrammaticAccessCredentialsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProgrammaticAccessCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProgrammaticAccessCredentials"); err != nil {

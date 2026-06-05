@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type ListRemoteAccessSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRemoteAccessSessionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRemoteAccessSessionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRemoteAccessSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListRemoteAccessSessionsRequest_arn, *v.Arn)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRemoteAccessSessionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // Represents the response from the server after AWS Device Farm makes a request
 // to return information about the remote access session.
 type ListRemoteAccessSessionsOutput struct {
@@ -78,26 +61,16 @@ type ListRemoteAccessSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRemoteAccessSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRemoteAccessSessionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRemoteAccessSessionsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRemoteAccessSessionsResult_nextToken, v.NextToken)
-		case schemas.ListRemoteAccessSessionsResult_remoteAccessSessions:
-			return deserializeRemoteAccessSessions(d, schemas.ListRemoteAccessSessionsResult_remoteAccessSessions, &v.RemoteAccessSessions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRemoteAccessSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRemoteAccessSessions, schemas.ListRemoteAccessSessionsRequest, schemas.ListRemoteAccessSessionsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRemoteAccessSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRemoteAccessSessions, schemas.ListRemoteAccessSessionsRequest, schemas.ListRemoteAccessSessionsResult), output: &ListRemoteAccessSessionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRemoteAccessSessions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRemoteAccessSessions"); err != nil {

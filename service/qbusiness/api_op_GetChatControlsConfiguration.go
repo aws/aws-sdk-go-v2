@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type GetChatControlsConfigurationInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetChatControlsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetChatControlsConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetChatControlsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.GetChatControlsConfigurationRequest_applicationId, *v.ApplicationId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetChatControlsConfigurationRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetChatControlsConfigurationRequest_nextToken, *v.NextToken)
-	}
 }
 
 type GetChatControlsConfigurationOutput struct {
@@ -108,45 +88,16 @@ type GetChatControlsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetChatControlsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetChatControlsConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetChatControlsConfigurationResponse_blockedPhrases:
-			v.BlockedPhrases = &types.BlockedPhrasesConfiguration{}
-			return v.BlockedPhrases.Deserialize(d)
-		case schemas.GetChatControlsConfigurationResponse_creatorModeConfiguration:
-			v.CreatorModeConfiguration = &types.AppliedCreatorModeConfiguration{}
-			return v.CreatorModeConfiguration.Deserialize(d)
-		case schemas.GetChatControlsConfigurationResponse_hallucinationReductionConfiguration:
-			v.HallucinationReductionConfiguration = &types.HallucinationReductionConfiguration{}
-			return v.HallucinationReductionConfiguration.Deserialize(d)
-		case schemas.GetChatControlsConfigurationResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetChatControlsConfigurationResponse_nextToken, v.NextToken)
-		case schemas.GetChatControlsConfigurationResponse_orchestrationConfiguration:
-			v.OrchestrationConfiguration = &types.AppliedOrchestrationConfiguration{}
-			return v.OrchestrationConfiguration.Deserialize(d)
-		case schemas.GetChatControlsConfigurationResponse_responseScope:
-			var ev string
-			if err := d.ReadString(schemas.GetChatControlsConfigurationResponse_responseScope, &ev); err != nil {
-				return err
-			}
-			v.ResponseScope = types.ResponseScope(ev)
-			return nil
-		case schemas.GetChatControlsConfigurationResponse_topicConfigurations:
-			return deserializeTopicConfigurations(d, schemas.GetChatControlsConfigurationResponse_topicConfigurations, &v.TopicConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetChatControlsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChatControlsConfiguration, schemas.GetChatControlsConfigurationRequest, schemas.GetChatControlsConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChatControlsConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChatControlsConfiguration, schemas.GetChatControlsConfigurationRequest, schemas.GetChatControlsConfigurationResponse), output: &GetChatControlsConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChatControlsConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChatControlsConfiguration"); err != nil {

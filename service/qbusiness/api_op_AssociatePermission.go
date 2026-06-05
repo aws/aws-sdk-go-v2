@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,26 +61,6 @@ type AssociatePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePermissionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatePermissionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQIamActions(s, schemas.AssociatePermissionRequest_actions, v.Actions)
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.AssociatePermissionRequest_applicationId, *v.ApplicationId)
-	}
-	serializePermissionConditions(s, schemas.AssociatePermissionRequest_conditions, v.Conditions)
-	if v.Principal != nil {
-		s.WriteString(schemas.AssociatePermissionRequest_principal, *v.Principal)
-	}
-	if v.StatementId != nil {
-		s.WriteString(schemas.AssociatePermissionRequest_statementId, *v.StatementId)
-	}
-}
-
 type AssociatePermissionOutput struct {
 
 	// The JSON representation of the added permission statement.
@@ -94,24 +72,16 @@ type AssociatePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatePermissionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatePermissionResponse_statement:
-			v.Statement = new(string)
-			return d.ReadString(schemas.AssociatePermissionResponse_statement, v.Statement)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociatePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePermission, schemas.AssociatePermissionRequest, schemas.AssociatePermissionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePermission, schemas.AssociatePermissionRequest, schemas.AssociatePermissionResponse), output: &AssociatePermissionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePermission{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociatePermission"); err != nil {

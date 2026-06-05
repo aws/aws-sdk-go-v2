@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -100,25 +98,6 @@ type UpdateStreamGroupInput struct {
 	LocationConfigurations []types.LocationConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateStreamGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateStreamGroupInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateStreamGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultApplicationIdentifier != nil {
-		s.WriteString(schemas.UpdateStreamGroupInput_DefaultApplicationIdentifier, *v.DefaultApplicationIdentifier)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateStreamGroupInput_Description, *v.Description)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.UpdateStreamGroupInput_Identifier, *v.Identifier)
-	}
-	serializeLocationConfigurations(s, schemas.UpdateStreamGroupInput_LocationConfigurations, v.LocationConfigurations)
 }
 
 type UpdateStreamGroupOutput struct {
@@ -437,67 +416,16 @@ type UpdateStreamGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateStreamGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateStreamGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateStreamGroupOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UpdateStreamGroupOutput_Arn, v.Arn)
-		case schemas.UpdateStreamGroupOutput_AssociatedApplications:
-			return deserializeArnList(d, schemas.UpdateStreamGroupOutput_AssociatedApplications, &v.AssociatedApplications)
-		case schemas.UpdateStreamGroupOutput_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateStreamGroupOutput_CreatedAt, v.CreatedAt)
-		case schemas.UpdateStreamGroupOutput_DefaultApplication:
-			v.DefaultApplication = &types.DefaultApplication{}
-			return v.DefaultApplication.Deserialize(d)
-		case schemas.UpdateStreamGroupOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateStreamGroupOutput_Description, v.Description)
-		case schemas.UpdateStreamGroupOutput_ExpiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateStreamGroupOutput_ExpiresAt, v.ExpiresAt)
-		case schemas.UpdateStreamGroupOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateStreamGroupOutput_Id, v.Id)
-		case schemas.UpdateStreamGroupOutput_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateStreamGroupOutput_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.UpdateStreamGroupOutput_LocationStates:
-			return deserializeLocationStates(d, schemas.UpdateStreamGroupOutput_LocationStates, &v.LocationStates)
-		case schemas.UpdateStreamGroupOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateStreamGroupOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.StreamGroupStatus(ev)
-			return nil
-		case schemas.UpdateStreamGroupOutput_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.UpdateStreamGroupOutput_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = types.StreamGroupStatusReason(ev)
-			return nil
-		case schemas.UpdateStreamGroupOutput_StreamClass:
-			var ev string
-			if err := d.ReadString(schemas.UpdateStreamGroupOutput_StreamClass, &ev); err != nil {
-				return err
-			}
-			v.StreamClass = types.StreamClass(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateStreamGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamGroup, schemas.UpdateStreamGroupInput, schemas.UpdateStreamGroupOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStreamGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamGroup, schemas.UpdateStreamGroupInput, schemas.UpdateStreamGroupOutput), output: &UpdateStreamGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStreamGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStreamGroup"); err != nil {

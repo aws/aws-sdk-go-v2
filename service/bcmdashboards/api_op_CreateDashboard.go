@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,23 +51,6 @@ type CreateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDashboardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDashboardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDashboardRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDashboardRequest_name, *v.Name)
-	}
-	serializeResourceTagList(s, schemas.CreateDashboardRequest_resourceTags, v.ResourceTags)
-	serializeWidgetList(s, schemas.CreateDashboardRequest_widgets, v.Widgets)
-}
-
 type CreateDashboardOutput struct {
 
 	// The ARN of the newly created dashboard.
@@ -83,24 +64,16 @@ type CreateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDashboardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDashboardResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateDashboardResponse_arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse), output: &CreateDashboardOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDashboard{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDashboard"); err != nil {

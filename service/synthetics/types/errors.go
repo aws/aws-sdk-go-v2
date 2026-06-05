@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was not valid.
 type BadRequestException struct {
@@ -69,16 +58,6 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BadRequestException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BadRequestException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A conflicting operation is already in progress.
 type ConflictException struct {
@@ -105,16 +84,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An internal failure occurred. Try the operation again.
 type InternalFailureException struct {
@@ -141,16 +110,6 @@ func (e *InternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalFailureException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalFailureException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalFailureException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // An unknown internal error occurred.
 type InternalServerException struct {
@@ -177,16 +136,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The specified resource was not found.
 type NotFoundException struct {
@@ -213,16 +162,6 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.NotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One of the input resources is larger than is allowed.
 type RequestEntityTooLargeException struct {
@@ -249,16 +188,6 @@ func (e *RequestEntityTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RequestEntityTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RequestEntityTooLargeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RequestEntityTooLargeException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RequestEntityTooLargeException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // One of the specified resources was not found.
 type ResourceNotFoundException struct {
@@ -285,16 +214,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request exceeded a service quota value.
 type ServiceQuotaExceededException struct {
@@ -321,16 +240,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // There were too many simultaneous requests. Try the operation again.
 type TooManyRequestsException struct {
@@ -357,16 +266,6 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyRequestsException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A parameter could not be validated.
 type ValidationException struct {
@@ -393,13 +292,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		}
-		return nil
-	})
-}

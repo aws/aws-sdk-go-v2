@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,18 +44,6 @@ type DescribeReplayInput struct {
 	ReplayName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeReplayInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeReplayRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeReplayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReplayName != nil {
-		s.WriteString(schemas.DescribeReplayRequest_ReplayName, *v.ReplayName)
-	}
 }
 
 type DescribeReplayOutput struct {
@@ -104,61 +90,16 @@ type DescribeReplayOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeReplayOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeReplayResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeReplayResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeReplayResponse_Description, v.Description)
-		case schemas.DescribeReplayResponse_Destination:
-			v.Destination = &types.ReplayDestination{}
-			return v.Destination.Deserialize(d)
-		case schemas.DescribeReplayResponse_EventEndTime:
-			v.EventEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeReplayResponse_EventEndTime, v.EventEndTime)
-		case schemas.DescribeReplayResponse_EventLastReplayedTime:
-			v.EventLastReplayedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeReplayResponse_EventLastReplayedTime, v.EventLastReplayedTime)
-		case schemas.DescribeReplayResponse_EventSourceArn:
-			v.EventSourceArn = new(string)
-			return d.ReadString(schemas.DescribeReplayResponse_EventSourceArn, v.EventSourceArn)
-		case schemas.DescribeReplayResponse_EventStartTime:
-			v.EventStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeReplayResponse_EventStartTime, v.EventStartTime)
-		case schemas.DescribeReplayResponse_ReplayArn:
-			v.ReplayArn = new(string)
-			return d.ReadString(schemas.DescribeReplayResponse_ReplayArn, v.ReplayArn)
-		case schemas.DescribeReplayResponse_ReplayEndTime:
-			v.ReplayEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeReplayResponse_ReplayEndTime, v.ReplayEndTime)
-		case schemas.DescribeReplayResponse_ReplayName:
-			v.ReplayName = new(string)
-			return d.ReadString(schemas.DescribeReplayResponse_ReplayName, v.ReplayName)
-		case schemas.DescribeReplayResponse_ReplayStartTime:
-			v.ReplayStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeReplayResponse_ReplayStartTime, v.ReplayStartTime)
-		case schemas.DescribeReplayResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.DescribeReplayResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ReplayState(ev)
-			return nil
-		case schemas.DescribeReplayResponse_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.DescribeReplayResponse_StateReason, v.StateReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplay, schemas.DescribeReplayRequest, schemas.DescribeReplayResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplay{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplay, schemas.DescribeReplayRequest, schemas.DescribeReplayResponse), output: &DescribeReplayOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplay{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReplay"); err != nil {

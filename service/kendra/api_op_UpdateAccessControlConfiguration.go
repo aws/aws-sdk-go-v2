@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,29 +87,6 @@ type UpdateAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccessControlConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateAccessControlConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateAccessControlConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_AccessControlList, v.AccessControlList)
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_Description, *v.Description)
-	}
-	serializeHierarchicalPrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_Id, *v.Id)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_IndexId, *v.IndexId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_Name, *v.Name)
-	}
-}
-
 type UpdateAccessControlConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -119,21 +94,16 @@ type UpdateAccessControlConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateAccessControlConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateAccessControlConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateAccessControlConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessControlConfiguration, schemas.UpdateAccessControlConfigurationRequest, schemas.UpdateAccessControlConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccessControlConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessControlConfiguration, schemas.UpdateAccessControlConfigurationRequest, schemas.UpdateAccessControlConfigurationResponse), output: &UpdateAccessControlConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAccessControlConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccessControlConfiguration"); err != nil {

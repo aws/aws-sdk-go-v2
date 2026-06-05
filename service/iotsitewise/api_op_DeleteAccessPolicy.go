@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAccessPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessPolicyId != nil {
-		s.WriteString(schemas.DeleteAccessPolicyRequest_accessPolicyId, *v.AccessPolicyId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteAccessPolicyRequest_clientToken, *v.ClientToken)
-	}
-}
-
 type DeleteAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,21 +50,16 @@ type DeleteAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAccessPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessPolicy, schemas.DeleteAccessPolicyRequest, schemas.DeleteAccessPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessPolicy, schemas.DeleteAccessPolicyRequest, schemas.DeleteAccessPolicyResponse), output: &DeleteAccessPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAccessPolicy"); err != nil {

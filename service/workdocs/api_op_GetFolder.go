@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type GetFolderInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFolderInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFolderRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.GetFolderRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.FolderId != nil {
-		s.WriteString(schemas.GetFolderRequest_FolderId, *v.FolderId)
-	}
-	if v.IncludeCustomMetadata != false {
-		s.WriteBool(schemas.GetFolderRequest_IncludeCustomMetadata, v.IncludeCustomMetadata)
-	}
-}
-
 type GetFolderOutput struct {
 
 	// The custom metadata on the folder.
@@ -78,26 +58,16 @@ type GetFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFolderResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFolderResponse_CustomMetadata:
-			return deserializeCustomMetadataMap(d, schemas.GetFolderResponse_CustomMetadata, &v.CustomMetadata)
-		case schemas.GetFolderResponse_Metadata:
-			v.Metadata = &types.FolderMetadata{}
-			return v.Metadata.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFolder, schemas.GetFolderRequest, schemas.GetFolderResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFolder{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFolder, schemas.GetFolderRequest, schemas.GetFolderResponse), output: &GetFolderOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFolder{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFolder"); err != nil {

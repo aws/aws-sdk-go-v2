@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,22 +34,6 @@ type GetTelemetryEnrichmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTelemetryEnrichmentStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTelemetryEnrichmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *GetTelemetryEnrichmentStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
-
 type GetTelemetryEnrichmentStatusOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the Resource Explorer managed view used for
@@ -68,31 +50,16 @@ type GetTelemetryEnrichmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTelemetryEnrichmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTelemetryEnrichmentStatusOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn:
-			v.AwsResourceExplorerManagedViewArn = new(string)
-			return d.ReadString(schemas.GetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn, v.AwsResourceExplorerManagedViewArn)
-		case schemas.GetTelemetryEnrichmentStatusOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetTelemetryEnrichmentStatusOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TelemetryEnrichmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTelemetryEnrichmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEnrichmentStatus, nil, schemas.GetTelemetryEnrichmentStatusOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryEnrichmentStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEnrichmentStatus, nil, schemas.GetTelemetryEnrichmentStatusOutput), output: &GetTelemetryEnrichmentStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryEnrichmentStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTelemetryEnrichmentStatus"); err != nil {

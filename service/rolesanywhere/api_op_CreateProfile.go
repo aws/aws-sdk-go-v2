@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,67 +74,6 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptRoleSessionName != nil {
-		s.WriteBool(schemas.CreateProfileRequest_acceptRoleSessionName, *v.AcceptRoleSessionName)
-	}
-	if v.DurationSeconds != nil {
-		s.WriteInt32(schemas.CreateProfileRequest_durationSeconds, *v.DurationSeconds)
-	}
-	if v.Enabled != nil {
-		s.WriteBool(schemas.CreateProfileRequest_enabled, *v.Enabled)
-	}
-	serializeManagedPolicyList(s, schemas.CreateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProfileRequest_name, *v.Name)
-	}
-	if v.RequireInstanceProperties != nil {
-		s.WriteBool(schemas.CreateProfileRequest_requireInstanceProperties, *v.RequireInstanceProperties)
-	}
-	serializeRoleArnList(s, schemas.CreateProfileRequest_roleArns, v.RoleArns)
-	if v.SessionPolicy != nil {
-		s.WriteString(schemas.CreateProfileRequest_sessionPolicy, *v.SessionPolicy)
-	}
-	serializeTagList(s, schemas.CreateProfileRequest_tags, v.Tags)
-}
-func (v *CreateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProfileRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProfileRequest_acceptRoleSessionName:
-			v.AcceptRoleSessionName = new(bool)
-			return d.ReadBool(schemas.CreateProfileRequest_acceptRoleSessionName, v.AcceptRoleSessionName)
-		case schemas.CreateProfileRequest_durationSeconds:
-			v.DurationSeconds = new(int32)
-			return d.ReadInt32(schemas.CreateProfileRequest_durationSeconds, v.DurationSeconds)
-		case schemas.CreateProfileRequest_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.CreateProfileRequest_enabled, v.Enabled)
-		case schemas.CreateProfileRequest_managedPolicyArns:
-			return deserializeManagedPolicyList(d, schemas.CreateProfileRequest_managedPolicyArns, &v.ManagedPolicyArns)
-		case schemas.CreateProfileRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateProfileRequest_name, v.Name)
-		case schemas.CreateProfileRequest_requireInstanceProperties:
-			v.RequireInstanceProperties = new(bool)
-			return d.ReadBool(schemas.CreateProfileRequest_requireInstanceProperties, v.RequireInstanceProperties)
-		case schemas.CreateProfileRequest_roleArns:
-			return deserializeRoleArnList(d, schemas.CreateProfileRequest_roleArns, &v.RoleArns)
-		case schemas.CreateProfileRequest_sessionPolicy:
-			v.SessionPolicy = new(string)
-			return d.ReadString(schemas.CreateProfileRequest_sessionPolicy, v.SessionPolicy)
-		case schemas.CreateProfileRequest_tags:
-			return deserializeTagList(d, schemas.CreateProfileRequest_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateProfileOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -148,37 +85,16 @@ type CreateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProfileOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProfileDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Profile != nil {
-		s.WriteStruct(schemas.ProfileDetailResponse_profile)
-		v.Profile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CreateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProfileDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProfileDetailResponse_profile:
-			v.Profile = &types.ProfileDetail{}
-			return v.Profile.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.ProfileDetailResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.ProfileDetailResponse), output: &CreateProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProfile"); err != nil {

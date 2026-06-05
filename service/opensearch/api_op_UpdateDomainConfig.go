@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -153,112 +151,6 @@ type UpdateDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDomainConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateDomainConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AIMLOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_AIMLOptions)
-		v.AIMLOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AccessPolicies != nil {
-		s.WriteString(schemas.UpdateDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
-	}
-	serializeAdvancedOptions(s, schemas.UpdateDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
-	if v.AdvancedSecurityOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_AdvancedSecurityOptions)
-		v.AdvancedSecurityOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AutoTuneOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_AutoTuneOptions)
-		v.AutoTuneOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AutomatedSnapshotPauseOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_AutomatedSnapshotPauseOptions)
-		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClusterConfig != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_ClusterConfig)
-		v.ClusterConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CognitoOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_CognitoOptions)
-		v.CognitoOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeploymentStrategyOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_DeploymentStrategyOptions)
-		v.DeploymentStrategyOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DomainEndpointOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_DomainEndpointOptions)
-		v.DomainEndpointOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DomainName != nil {
-		s.WriteString(schemas.UpdateDomainConfigRequest_DomainName, *v.DomainName)
-	}
-	if v.DryRun != nil {
-		s.WriteBool(schemas.UpdateDomainConfigRequest_DryRun, *v.DryRun)
-	}
-	if v.DryRunMode != "" {
-		s.WriteString(schemas.UpdateDomainConfigRequest_DryRunMode, string(v.DryRunMode))
-	}
-	if v.EBSOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_EBSOptions)
-		v.EBSOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EncryptionAtRestOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_EncryptionAtRestOptions)
-		v.EncryptionAtRestOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IPAddressType != "" {
-		s.WriteString(schemas.UpdateDomainConfigRequest_IPAddressType, string(v.IPAddressType))
-	}
-	if v.IdentityCenterOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_IdentityCenterOptions)
-		v.IdentityCenterOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeLogPublishingOptions(s, schemas.UpdateDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
-	if v.NodeToNodeEncryptionOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_NodeToNodeEncryptionOptions)
-		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OffPeakWindowOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_OffPeakWindowOptions)
-		v.OffPeakWindowOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SnapshotOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_SnapshotOptions)
-		v.SnapshotOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SoftwareUpdateOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_SoftwareUpdateOptions)
-		v.SoftwareUpdateOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VPCOptions != nil {
-		s.WriteStruct(schemas.UpdateDomainConfigRequest_VPCOptions)
-		v.VPCOptions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 // The results of an UpdateDomain request. Contains the status of the domain being
 // updated.
 type UpdateDomainConfigOutput struct {
@@ -280,30 +172,16 @@ type UpdateDomainConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateDomainConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateDomainConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateDomainConfigResponse_DomainConfig:
-			v.DomainConfig = &types.DomainConfig{}
-			return v.DomainConfig.Deserialize(d)
-		case schemas.UpdateDomainConfigResponse_DryRunProgressStatus:
-			v.DryRunProgressStatus = &types.DryRunProgressStatus{}
-			return v.DryRunProgressStatus.Deserialize(d)
-		case schemas.UpdateDomainConfigResponse_DryRunResults:
-			v.DryRunResults = &types.DryRunResults{}
-			return v.DryRunResults.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateDomainConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfig, schemas.UpdateDomainConfigRequest, schemas.UpdateDomainConfigResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfig, schemas.UpdateDomainConfigRequest, schemas.UpdateDomainConfigResponse), output: &UpdateDomainConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomainConfig"); err != nil {

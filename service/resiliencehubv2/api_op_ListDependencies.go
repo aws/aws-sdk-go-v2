@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,33 +51,6 @@ type ListDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDependenciesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDependenciesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDependenciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDependenciesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDependenciesRequest_nextToken, *v.NextToken)
-	}
-	if v.QueryRangeEndTime != nil {
-		s.WriteTime(schemas.ListDependenciesRequest_queryRangeEndTime, *v.QueryRangeEndTime)
-	}
-	if v.QueryRangeGranularity != "" {
-		s.WriteString(schemas.ListDependenciesRequest_queryRangeGranularity, string(v.QueryRangeGranularity))
-	}
-	if v.QueryRangeStartTime != nil {
-		s.WriteTime(schemas.ListDependenciesRequest_queryRangeStartTime, *v.QueryRangeStartTime)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.ListDependenciesRequest_serviceArn, *v.ServiceArn)
-	}
-}
-
 type ListDependenciesOutput struct {
 
 	// The list of dependency summaries.
@@ -96,26 +67,16 @@ type ListDependenciesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDependenciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDependenciesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDependenciesResponse_dependencySummaries:
-			return deserializeDependencySummaryList(d, schemas.ListDependenciesResponse_dependencySummaries, &v.DependencySummaries)
-		case schemas.ListDependenciesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDependenciesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDependencies, schemas.ListDependenciesRequest, schemas.ListDependenciesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDependencies{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDependencies, schemas.ListDependenciesRequest, schemas.ListDependenciesResponse), output: &ListDependenciesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDependencies{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDependencies"); err != nil {

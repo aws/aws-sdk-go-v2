@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type DescribeInterconnectsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInterconnectsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeInterconnectsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInterconnectsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InterconnectId != nil {
-		s.WriteString(schemas.DescribeInterconnectsRequest_interconnectId, *v.InterconnectId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeInterconnectsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeInterconnectsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type DescribeInterconnectsOutput struct {
 
 	// The interconnects.
@@ -80,38 +60,16 @@ type DescribeInterconnectsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeInterconnectsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Interconnects)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeInterconnectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterconnectList(s, schemas.Interconnects_interconnects, v.Interconnects)
-	if v.NextToken != nil {
-		s.WriteString(schemas.Interconnects_nextToken, *v.NextToken)
-	}
-}
-func (v *DescribeInterconnectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Interconnects, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Interconnects_interconnects:
-			return deserializeInterconnectList(d, schemas.Interconnects_interconnects, &v.Interconnects)
-		case schemas.Interconnects_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.Interconnects_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeInterconnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInterconnects, schemas.DescribeInterconnectsRequest, schemas.Interconnects)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInterconnects{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInterconnects, schemas.DescribeInterconnectsRequest, schemas.Interconnects), output: &DescribeInterconnectsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInterconnects{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInterconnects"); err != nil {

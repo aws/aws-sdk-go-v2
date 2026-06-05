@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,24 +60,6 @@ type DescribeTimeSeriesInput struct {
 	PropertyId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTimeSeriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Alias != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_alias, *v.Alias)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_assetId, *v.AssetId)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.DescribeTimeSeriesRequest_propertyId, *v.PropertyId)
-	}
 }
 
 type DescribeTimeSeriesOutput struct {
@@ -139,52 +119,16 @@ type DescribeTimeSeriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTimeSeriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTimeSeriesResponse_alias:
-			v.Alias = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_alias, v.Alias)
-		case schemas.DescribeTimeSeriesResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_assetId, v.AssetId)
-		case schemas.DescribeTimeSeriesResponse_dataType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTimeSeriesResponse_dataType, &ev); err != nil {
-				return err
-			}
-			v.DataType = types.PropertyDataType(ev)
-			return nil
-		case schemas.DescribeTimeSeriesResponse_dataTypeSpec:
-			v.DataTypeSpec = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_dataTypeSpec, v.DataTypeSpec)
-		case schemas.DescribeTimeSeriesResponse_propertyId:
-			v.PropertyId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_propertyId, v.PropertyId)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesArn:
-			v.TimeSeriesArn = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_timeSeriesArn, v.TimeSeriesArn)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesCreationDate:
-			v.TimeSeriesCreationDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeTimeSeriesResponse_timeSeriesCreationDate, v.TimeSeriesCreationDate)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesId:
-			v.TimeSeriesId = new(string)
-			return d.ReadString(schemas.DescribeTimeSeriesResponse_timeSeriesId, v.TimeSeriesId)
-		case schemas.DescribeTimeSeriesResponse_timeSeriesLastUpdateDate:
-			v.TimeSeriesLastUpdateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeTimeSeriesResponse_timeSeriesLastUpdateDate, v.TimeSeriesLastUpdateDate)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTimeSeries, schemas.DescribeTimeSeriesRequest, schemas.DescribeTimeSeriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTimeSeries, schemas.DescribeTimeSeriesRequest, schemas.DescribeTimeSeriesResponse), output: &DescribeTimeSeriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTimeSeries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTimeSeries"); err != nil {

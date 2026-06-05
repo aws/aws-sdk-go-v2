@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,44 +22,6 @@ type ArtifactDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ArtifactDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ArtifactDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ArtifactDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FailureReason != nil {
-		s.WriteString(schemas.ArtifactDetails_failureReason, *v.FailureReason)
-	}
-	if v.OutputLocation != nil {
-		s.WriteString(schemas.ArtifactDetails_outputLocation, *v.OutputLocation)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ArtifactDetails_status, string(v.Status))
-	}
-}
-func (v *ArtifactDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ArtifactDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ArtifactDetails_failureReason:
-			v.FailureReason = new(string)
-			return d.ReadString(schemas.ArtifactDetails_failureReason, v.FailureReason)
-		case schemas.ArtifactDetails_outputLocation:
-			v.OutputLocation = new(string)
-			return d.ReadString(schemas.ArtifactDetails_outputLocation, v.OutputLocation)
-		case schemas.ArtifactDetails_status:
-			var ev string
-			if err := d.ReadString(schemas.ArtifactDetails_status, &ev); err != nil {
-				return err
-			}
-			v.Status = PostStreamArtifactGenerationStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Results of clinical note generation including note, transcript, and summary
 type ClinicalNoteGenerationResult struct {
 
@@ -77,46 +37,6 @@ type ClinicalNoteGenerationResult struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ClinicalNoteGenerationResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClinicalNoteGenerationResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClinicalNoteGenerationResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AfterVisitSummaryResult != nil {
-		s.WriteStruct(schemas.ClinicalNoteGenerationResult_afterVisitSummaryResult)
-		v.AfterVisitSummaryResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NoteResult != nil {
-		s.WriteStruct(schemas.ClinicalNoteGenerationResult_noteResult)
-		v.NoteResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TranscriptResult != nil {
-		s.WriteStruct(schemas.ClinicalNoteGenerationResult_transcriptResult)
-		v.TranscriptResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ClinicalNoteGenerationResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClinicalNoteGenerationResult_afterVisitSummaryResult:
-			v.AfterVisitSummaryResult = &ArtifactDetails{}
-			return v.AfterVisitSummaryResult.Deserialize(d)
-		case schemas.ClinicalNoteGenerationResult_noteResult:
-			v.NoteResult = &ArtifactDetails{}
-			return v.NoteResult.Deserialize(d)
-		case schemas.ClinicalNoteGenerationResult_transcriptResult:
-			v.TranscriptResult = &ArtifactDetails{}
-			return v.TranscriptResult.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Settings for generating clinical notes from the audio stream
 type ClinicalNoteGenerationSettings struct {
 
@@ -128,25 +48,6 @@ type ClinicalNoteGenerationSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ClinicalNoteGenerationSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClinicalNoteGenerationSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClinicalNoteGenerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNoteTemplateSettings(s, schemas.ClinicalNoteGenerationSettings_noteTemplateSettings, v.NoteTemplateSettings)
-}
-func (v *ClinicalNoteGenerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClinicalNoteGenerationSettings_noteTemplateSettings:
-			return deserializeNoteTemplateSettings(d, schemas.ClinicalNoteGenerationSettings_noteTemplateSettings, &v.NoteTemplateSettings)
-		}
-		return nil
-	})
-}
-
 // Response containing settings for clinical note generation
 type ClinicalNoteGenerationSettingsResponse struct {
 
@@ -154,25 +55,6 @@ type ClinicalNoteGenerationSettingsResponse struct {
 	NoteTemplateSettings NoteTemplateSettingsResponse
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClinicalNoteGenerationSettingsResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClinicalNoteGenerationSettingsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClinicalNoteGenerationSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNoteTemplateSettingsResponse(s, schemas.ClinicalNoteGenerationSettingsResponse_noteTemplateSettings, v.NoteTemplateSettings)
-}
-func (v *ClinicalNoteGenerationSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClinicalNoteGenerationSettingsResponse_noteTemplateSettings:
-			return deserializeNoteTemplateSettingsResponse(d, schemas.ClinicalNoteGenerationSettingsResponse_noteTemplateSettings, &v.NoteTemplateSettings)
-		}
-		return nil
-	})
 }
 
 // Input configuration for creating a web application. Used only in CreateDomain
@@ -197,40 +79,6 @@ type CreateWebAppConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWebAppConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWebAppConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWebAppConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EhrRole != nil {
-		s.WriteString(schemas.CreateWebAppConfiguration_ehrRole, *v.EhrRole)
-	}
-	if v.IdcInstanceId != nil {
-		s.WriteString(schemas.CreateWebAppConfiguration_idcInstanceId, *v.IdcInstanceId)
-	}
-	if v.IdcRegion != nil {
-		s.WriteString(schemas.CreateWebAppConfiguration_idcRegion, *v.IdcRegion)
-	}
-}
-func (v *CreateWebAppConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWebAppConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWebAppConfiguration_ehrRole:
-			v.EhrRole = new(string)
-			return d.ReadString(schemas.CreateWebAppConfiguration_ehrRole, v.EhrRole)
-		case schemas.CreateWebAppConfiguration_idcInstanceId:
-			v.IdcInstanceId = new(string)
-			return d.ReadString(schemas.CreateWebAppConfiguration_idcInstanceId, v.IdcInstanceId)
-		case schemas.CreateWebAppConfiguration_idcRegion:
-			v.IdcRegion = new(string)
-			return d.ReadString(schemas.CreateWebAppConfiguration_idcRegion, v.IdcRegion)
-		}
-		return nil
-	})
-}
-
 // Configuration for using a custom note template with specific instructions
 type CustomTemplate struct {
 
@@ -247,35 +95,6 @@ type CustomTemplate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomTemplate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTemplateInstructions(s, schemas.CustomTemplate_templateInstructions, v.TemplateInstructions)
-	if v.TemplateType != "" {
-		s.WriteString(schemas.CustomTemplate_templateType, string(v.TemplateType))
-	}
-}
-func (v *CustomTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomTemplate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomTemplate_templateInstructions:
-			return deserializeTemplateInstructions(d, schemas.CustomTemplate_templateInstructions, &v.TemplateInstructions)
-		case schemas.CustomTemplate_templateType:
-			var ev string
-			if err := d.ReadString(schemas.CustomTemplate_templateType, &ev); err != nil {
-				return err
-			}
-			v.TemplateType = CustomTemplateBase(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Response containing custom template information
 type CustomTemplateResponse struct {
 
@@ -283,32 +102,6 @@ type CustomTemplateResponse struct {
 	TemplateType CustomTemplateBase
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomTemplateResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomTemplateResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TemplateType != "" {
-		s.WriteString(schemas.CustomTemplateResponse_templateType, string(v.TemplateType))
-	}
-}
-func (v *CustomTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomTemplateResponse_templateType:
-			var ev string
-			if err := d.ReadString(schemas.CustomTemplateResponse_templateType, &ev); err != nil {
-				return err
-			}
-			v.TemplateType = CustomTemplateBase(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary information about a Domain.
@@ -342,56 +135,6 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DomainSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DomainSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DomainSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.DomainSummary_createdAt, *v.CreatedAt)
-	}
-	if v.DomainId != nil {
-		s.WriteString(schemas.DomainSummary_domainId, *v.DomainId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DomainSummary_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DomainSummary_status, string(v.Status))
-	}
-}
-func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DomainSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DomainSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DomainSummary_arn, v.Arn)
-		case schemas.DomainSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DomainSummary_createdAt, v.CreatedAt)
-		case schemas.DomainSummary_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.DomainSummary_domainId, v.DomainId)
-		case schemas.DomainSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DomainSummary_name, v.Name)
-		case schemas.DomainSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.DomainSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = DomainStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Context information about the clinical encounter
 type EncounterContext struct {
 
@@ -399,28 +142,6 @@ type EncounterContext struct {
 	UnstructuredContext *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EncounterContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncounterContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncounterContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.UnstructuredContext != nil {
-		s.WriteString(schemas.EncounterContext_unstructuredContext, *v.UnstructuredContext)
-	}
-}
-func (v *EncounterContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncounterContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncounterContext_unstructuredContext:
-			v.UnstructuredContext = new(string)
-			return d.ReadString(schemas.EncounterContext_unstructuredContext, v.UnstructuredContext)
-		}
-		return nil
-	})
 }
 
 // Encryption context for a Domain.
@@ -438,38 +159,6 @@ type EncryptionContext struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionType != "" {
-		s.WriteString(schemas.EncryptionContext_encryptionType, string(v.EncryptionType))
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.EncryptionContext_kmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *EncryptionContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionContext_encryptionType:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionContext_encryptionType, &ev); err != nil {
-				return err
-			}
-			v.EncryptionType = EncryptionType(ev)
-			return nil
-		case schemas.EncryptionContext_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.EncryptionContext_kmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
-}
-
 // FHIR server configuration for input data source
 type FHIRServer struct {
 
@@ -484,34 +173,6 @@ type FHIRServer struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FHIRServer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FHIRServer)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FHIRServer) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FhirEndpoint != nil {
-		s.WriteString(schemas.FHIRServer_fhirEndpoint, *v.FhirEndpoint)
-	}
-	if v.OauthToken != nil {
-		s.WriteString(schemas.FHIRServer_oauthToken, *v.OauthToken)
-	}
-}
-func (v *FHIRServer) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FHIRServer, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FHIRServer_fhirEndpoint:
-			v.FhirEndpoint = new(string)
-			return d.ReadString(schemas.FHIRServer_fhirEndpoint, v.FhirEndpoint)
-		case schemas.FHIRServer_oauthToken:
-			v.OauthToken = new(string)
-			return d.ReadString(schemas.FHIRServer_oauthToken, v.OauthToken)
-		}
-		return nil
-	})
-}
-
 // Configuration details for input patient data
 type InputDataConfig struct {
 
@@ -522,33 +183,6 @@ type InputDataConfig struct {
 	S3Sources []S3Source
 
 	noSmithyDocumentSerde
-}
-
-func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InputDataConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FhirServer != nil {
-		s.WriteStruct(schemas.InputDataConfig_fhirServer)
-		v.FhirServer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeS3Sources(s, schemas.InputDataConfig_s3Sources, v.S3Sources)
-}
-func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InputDataConfig_fhirServer:
-			v.FhirServer = &FHIRServer{}
-			return v.FhirServer.Deserialize(d)
-		case schemas.InputDataConfig_s3Sources:
-			return deserializeS3Sources(d, schemas.InputDataConfig_s3Sources, &v.S3Sources)
-		}
-		return nil
-	})
 }
 
 // Details for insights that user wants to generate
@@ -562,32 +196,6 @@ type InsightsContext struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InsightsContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InsightsContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InsightsContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InsightsType != "" {
-		s.WriteString(schemas.InsightsContext_insightsType, string(v.InsightsType))
-	}
-}
-func (v *InsightsContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InsightsContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InsightsContext_insightsType:
-			var ev string
-			if err := d.ReadString(schemas.InsightsContext_insightsType, &ev); err != nil {
-				return err
-			}
-			v.InsightsType = InsightsType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Output of patient insights job
 type InsightsOutput struct {
 
@@ -597,28 +205,6 @@ type InsightsOutput struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InsightsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InsightsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uri != nil {
-		s.WriteString(schemas.InsightsOutput_uri, *v.Uri)
-	}
-}
-func (v *InsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InsightsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InsightsOutput_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.InsightsOutput_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Configuration for using a managed note template
@@ -632,32 +218,6 @@ type ManagedTemplate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ManagedTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedTemplate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ManagedTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TemplateType != "" {
-		s.WriteString(schemas.ManagedTemplate_templateType, string(v.TemplateType))
-	}
-}
-func (v *ManagedTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ManagedTemplate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ManagedTemplate_templateType:
-			var ev string
-			if err := d.ReadString(schemas.ManagedTemplate_templateType, &ev); err != nil {
-				return err
-			}
-			v.TemplateType = ManagedNoteTemplate(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Response containing managed template information
 type ManagedTemplateResponse struct {
 
@@ -665,32 +225,6 @@ type ManagedTemplateResponse struct {
 	TemplateType ManagedNoteTemplate
 
 	noSmithyDocumentSerde
-}
-
-func (v *ManagedTemplateResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedTemplateResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ManagedTemplateResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TemplateType != "" {
-		s.WriteString(schemas.ManagedTemplateResponse_templateType, string(v.TemplateType))
-	}
-}
-func (v *ManagedTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ManagedTemplateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ManagedTemplateResponse_templateType:
-			var ev string
-			if err := d.ReadString(schemas.ManagedTemplateResponse_templateType, &ev); err != nil {
-				return err
-			}
-			v.TemplateType = ManagedNoteTemplate(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // An event containing audio data for the Medical Scribe stream
@@ -702,27 +236,6 @@ type MedicalScribeAudioEvent struct {
 	AudioChunk []byte
 
 	noSmithyDocumentSerde
-}
-
-func (v *MedicalScribeAudioEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeAudioEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeAudioEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AudioChunk != nil {
-		s.WriteBlob(schemas.MedicalScribeAudioEvent_audioChunk, v.AudioChunk)
-	}
-}
-func (v *MedicalScribeAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeAudioEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeAudioEvent_audioChunk:
-			return d.ReadBlob(schemas.MedicalScribeAudioEvent_audioChunk, &v.AudioChunk)
-		}
-		return nil
-	})
 }
 
 // Defines a channel in the audio stream
@@ -741,38 +254,6 @@ type MedicalScribeChannelDefinition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MedicalScribeChannelDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeChannelDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != nil {
-		s.WriteInt32(schemas.MedicalScribeChannelDefinition_channelId, *v.ChannelId)
-	}
-	if v.ParticipantRole != "" {
-		s.WriteString(schemas.MedicalScribeChannelDefinition_participantRole, string(v.ParticipantRole))
-	}
-}
-func (v *MedicalScribeChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeChannelDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeChannelDefinition_channelId:
-			v.ChannelId = new(int32)
-			return d.ReadInt32(schemas.MedicalScribeChannelDefinition_channelId, v.ChannelId)
-		case schemas.MedicalScribeChannelDefinition_participantRole:
-			var ev string
-			if err := d.ReadString(schemas.MedicalScribeChannelDefinition_participantRole, &ev); err != nil {
-				return err
-			}
-			v.ParticipantRole = MedicalScribeParticipantRole(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // An event containing configuration for the Medical Scribe session
 type MedicalScribeConfigurationEvent struct {
 
@@ -788,41 +269,6 @@ type MedicalScribeConfigurationEvent struct {
 	EncounterContext *EncounterContext
 
 	noSmithyDocumentSerde
-}
-
-func (v *MedicalScribeConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeConfigurationEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_channelDefinitions, v.ChannelDefinitions)
-	if v.EncounterContext != nil {
-		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_encounterContext)
-		v.EncounterContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PostStreamActionSettings != nil {
-		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_postStreamActionSettings)
-		v.PostStreamActionSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MedicalScribeConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeConfigurationEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeConfigurationEvent_channelDefinitions:
-			return deserializeMedicalScribeChannelDefinitions(d, schemas.MedicalScribeConfigurationEvent_channelDefinitions, &v.ChannelDefinitions)
-		case schemas.MedicalScribeConfigurationEvent_encounterContext:
-			v.EncounterContext = &EncounterContext{}
-			return v.EncounterContext.Deserialize(d)
-		case schemas.MedicalScribeConfigurationEvent_postStreamActionSettings:
-			v.PostStreamActionSettings = &MedicalScribePostStreamActionSettings{}
-			return v.PostStreamActionSettings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Input stream for Medical Scribe containing audio and configuration events
@@ -843,14 +289,6 @@ type MedicalScribeInputStreamMemberAudioEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberAudioEvent) isMedicalScribeInputStream() {}
-func (v *MedicalScribeInputStreamMemberAudioEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeInputStream_audioEvent)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MedicalScribeInputStreamMemberAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type MedicalScribeInputStreamMemberConfigurationEvent struct {
 	Value MedicalScribeConfigurationEvent
@@ -859,14 +297,6 @@ type MedicalScribeInputStreamMemberConfigurationEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberConfigurationEvent) isMedicalScribeInputStream() {}
-func (v *MedicalScribeInputStreamMemberConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeInputStream_configurationEvent)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MedicalScribeInputStreamMemberConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type MedicalScribeInputStreamMemberSessionControlEvent struct {
 	Value MedicalScribeSessionControlEvent
@@ -875,14 +305,6 @@ type MedicalScribeInputStreamMemberSessionControlEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberSessionControlEvent) isMedicalScribeInputStream() {}
-func (v *MedicalScribeInputStreamMemberSessionControlEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeInputStream_sessionControlEvent)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MedicalScribeInputStreamMemberSessionControlEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Detailed information about a Medical Scribe listening session
 type MedicalScribeListeningSessionDetails struct {
@@ -929,113 +351,6 @@ type MedicalScribeListeningSessionDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MedicalScribeListeningSessionDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeListeningSessionDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeListeningSessionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeListeningSessionDetails_channelDefinitions, v.ChannelDefinitions)
-	if v.DomainId != nil {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_domainId, *v.DomainId)
-	}
-	if v.EncounterContextProvided != nil {
-		s.WriteBool(schemas.MedicalScribeListeningSessionDetails_encounterContextProvided, *v.EncounterContextProvided)
-	}
-	if v.LanguageCode != "" {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_languageCode, string(v.LanguageCode))
-	}
-	if v.MediaEncoding != "" {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_mediaEncoding, string(v.MediaEncoding))
-	}
-	if v.MediaSampleRateHertz != nil {
-		s.WriteInt32(schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz, *v.MediaSampleRateHertz)
-	}
-	if v.PostStreamActionResult != nil {
-		s.WriteStruct(schemas.MedicalScribeListeningSessionDetails_postStreamActionResult)
-		v.PostStreamActionResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PostStreamActionSettings != nil {
-		s.WriteStruct(schemas.MedicalScribeListeningSessionDetails_postStreamActionSettings)
-		v.PostStreamActionSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_sessionId, *v.SessionId)
-	}
-	if v.StreamCreationTime != nil {
-		s.WriteTime(schemas.MedicalScribeListeningSessionDetails_streamCreationTime, *v.StreamCreationTime)
-	}
-	if v.StreamEndTime != nil {
-		s.WriteTime(schemas.MedicalScribeListeningSessionDetails_streamEndTime, *v.StreamEndTime)
-	}
-	if v.StreamStatus != "" {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_streamStatus, string(v.StreamStatus))
-	}
-	if v.SubscriptionId != nil {
-		s.WriteString(schemas.MedicalScribeListeningSessionDetails_subscriptionId, *v.SubscriptionId)
-	}
-}
-func (v *MedicalScribeListeningSessionDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeListeningSessionDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeListeningSessionDetails_channelDefinitions:
-			return deserializeMedicalScribeChannelDefinitions(d, schemas.MedicalScribeListeningSessionDetails_channelDefinitions, &v.ChannelDefinitions)
-		case schemas.MedicalScribeListeningSessionDetails_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.MedicalScribeListeningSessionDetails_domainId, v.DomainId)
-		case schemas.MedicalScribeListeningSessionDetails_encounterContextProvided:
-			v.EncounterContextProvided = new(bool)
-			return d.ReadBool(schemas.MedicalScribeListeningSessionDetails_encounterContextProvided, v.EncounterContextProvided)
-		case schemas.MedicalScribeListeningSessionDetails_languageCode:
-			var ev string
-			if err := d.ReadString(schemas.MedicalScribeListeningSessionDetails_languageCode, &ev); err != nil {
-				return err
-			}
-			v.LanguageCode = MedicalScribeLanguageCode(ev)
-			return nil
-		case schemas.MedicalScribeListeningSessionDetails_mediaEncoding:
-			var ev string
-			if err := d.ReadString(schemas.MedicalScribeListeningSessionDetails_mediaEncoding, &ev); err != nil {
-				return err
-			}
-			v.MediaEncoding = MedicalScribeMediaEncoding(ev)
-			return nil
-		case schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz:
-			v.MediaSampleRateHertz = new(int32)
-			return d.ReadInt32(schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz, v.MediaSampleRateHertz)
-		case schemas.MedicalScribeListeningSessionDetails_postStreamActionResult:
-			v.PostStreamActionResult = &MedicalScribePostStreamActionsResult{}
-			return v.PostStreamActionResult.Deserialize(d)
-		case schemas.MedicalScribeListeningSessionDetails_postStreamActionSettings:
-			v.PostStreamActionSettings = &MedicalScribePostStreamActionSettingsResponse{}
-			return v.PostStreamActionSettings.Deserialize(d)
-		case schemas.MedicalScribeListeningSessionDetails_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.MedicalScribeListeningSessionDetails_sessionId, v.SessionId)
-		case schemas.MedicalScribeListeningSessionDetails_streamCreationTime:
-			v.StreamCreationTime = new(time.Time)
-			return d.ReadTime(schemas.MedicalScribeListeningSessionDetails_streamCreationTime, v.StreamCreationTime)
-		case schemas.MedicalScribeListeningSessionDetails_streamEndTime:
-			v.StreamEndTime = new(time.Time)
-			return d.ReadTime(schemas.MedicalScribeListeningSessionDetails_streamEndTime, v.StreamEndTime)
-		case schemas.MedicalScribeListeningSessionDetails_streamStatus:
-			var ev string
-			if err := d.ReadString(schemas.MedicalScribeListeningSessionDetails_streamStatus, &ev); err != nil {
-				return err
-			}
-			v.StreamStatus = MedicalScribeStreamStatus(ev)
-			return nil
-		case schemas.MedicalScribeListeningSessionDetails_subscriptionId:
-			v.SubscriptionId = new(string)
-			return d.ReadString(schemas.MedicalScribeListeningSessionDetails_subscriptionId, v.SubscriptionId)
-		}
-		return nil
-	})
-}
-
 // Output stream from Medical Scribe containing transcript events and errors
 //
 // The following types satisfy this interface:
@@ -1052,14 +367,6 @@ type MedicalScribeOutputStreamMemberTranscriptEvent struct {
 }
 
 func (*MedicalScribeOutputStreamMemberTranscriptEvent) isMedicalScribeOutputStream() {}
-func (v *MedicalScribeOutputStreamMemberTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeOutputStream_transcriptEvent)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MedicalScribeOutputStreamMemberTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Settings for actions to perform after the audio stream ends
 type MedicalScribePostStreamActionSettings struct {
@@ -1075,36 +382,6 @@ type MedicalScribePostStreamActionSettings struct {
 	OutputS3Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MedicalScribePostStreamActionSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribePostStreamActionSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribePostStreamActionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClinicalNoteGenerationSettings != nil {
-		s.WriteStruct(schemas.MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings)
-		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutputS3Uri != nil {
-		s.WriteString(schemas.MedicalScribePostStreamActionSettings_outputS3Uri, *v.OutputS3Uri)
-	}
-}
-func (v *MedicalScribePostStreamActionSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamActionSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings:
-			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettings{}
-			return v.ClinicalNoteGenerationSettings.Deserialize(d)
-		case schemas.MedicalScribePostStreamActionSettings_outputS3Uri:
-			v.OutputS3Uri = new(string)
-			return d.ReadString(schemas.MedicalScribePostStreamActionSettings_outputS3Uri, v.OutputS3Uri)
-		}
-		return nil
-	})
 }
 
 // Response containing settings for post-stream actions
@@ -1123,36 +400,6 @@ type MedicalScribePostStreamActionSettingsResponse struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MedicalScribePostStreamActionSettingsResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribePostStreamActionSettingsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribePostStreamActionSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClinicalNoteGenerationSettings != nil {
-		s.WriteStruct(schemas.MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings)
-		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OutputS3Uri != nil {
-		s.WriteString(schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri, *v.OutputS3Uri)
-	}
-}
-func (v *MedicalScribePostStreamActionSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamActionSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings:
-			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettingsResponse{}
-			return v.ClinicalNoteGenerationSettings.Deserialize(d)
-		case schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri:
-			v.OutputS3Uri = new(string)
-			return d.ReadString(schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri, v.OutputS3Uri)
-		}
-		return nil
-	})
-}
-
 // Results of post-stream actions performed after the audio stream ended
 type MedicalScribePostStreamActionsResult struct {
 
@@ -1160,30 +407,6 @@ type MedicalScribePostStreamActionsResult struct {
 	ClinicalNoteGenerationResult *ClinicalNoteGenerationResult
 
 	noSmithyDocumentSerde
-}
-
-func (v *MedicalScribePostStreamActionsResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribePostStreamActionsResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribePostStreamActionsResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClinicalNoteGenerationResult != nil {
-		s.WriteStruct(schemas.MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult)
-		v.ClinicalNoteGenerationResult.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MedicalScribePostStreamActionsResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamActionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult:
-			v.ClinicalNoteGenerationResult = &ClinicalNoteGenerationResult{}
-			return v.ClinicalNoteGenerationResult.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // An event for controlling the Medical Scribe session
@@ -1195,32 +418,6 @@ type MedicalScribeSessionControlEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MedicalScribeSessionControlEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeSessionControlEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeSessionControlEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != "" {
-		s.WriteString(schemas.MedicalScribeSessionControlEvent_type, string(v.Type))
-	}
-}
-func (v *MedicalScribeSessionControlEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeSessionControlEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeSessionControlEvent_type:
-			var ev string
-			if err := d.ReadString(schemas.MedicalScribeSessionControlEvent_type, &ev); err != nil {
-				return err
-			}
-			v.Type = MedicalScribeSessionControlEventType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // An event containing transcript data from the Medical Scribe stream
 type MedicalScribeTranscriptEvent struct {
 
@@ -1228,30 +425,6 @@ type MedicalScribeTranscriptEvent struct {
 	TranscriptSegment *MedicalScribeTranscriptSegment
 
 	noSmithyDocumentSerde
-}
-
-func (v *MedicalScribeTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeTranscriptEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeTranscriptEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TranscriptSegment != nil {
-		s.WriteStruct(schemas.MedicalScribeTranscriptEvent_transcriptSegment)
-		v.TranscriptSegment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MedicalScribeTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeTranscriptEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeTranscriptEvent_transcriptSegment:
-			v.TranscriptSegment = &MedicalScribeTranscriptSegment{}
-			return v.TranscriptSegment.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A segment of transcript text with timing and channel information
@@ -1278,58 +451,6 @@ type MedicalScribeTranscriptSegment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MedicalScribeTranscriptSegment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MedicalScribeTranscriptSegment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MedicalScribeTranscriptSegment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AudioBeginOffset != nil {
-		s.WriteFloat64(schemas.MedicalScribeTranscriptSegment_audioBeginOffset, *v.AudioBeginOffset)
-	}
-	if v.AudioEndOffset != nil {
-		s.WriteFloat64(schemas.MedicalScribeTranscriptSegment_audioEndOffset, *v.AudioEndOffset)
-	}
-	if v.ChannelId != nil {
-		s.WriteString(schemas.MedicalScribeTranscriptSegment_channelId, *v.ChannelId)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.MedicalScribeTranscriptSegment_content, *v.Content)
-	}
-	if v.IsPartial != nil {
-		s.WriteBool(schemas.MedicalScribeTranscriptSegment_isPartial, *v.IsPartial)
-	}
-	if v.SegmentId != nil {
-		s.WriteString(schemas.MedicalScribeTranscriptSegment_segmentId, *v.SegmentId)
-	}
-}
-func (v *MedicalScribeTranscriptSegment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MedicalScribeTranscriptSegment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MedicalScribeTranscriptSegment_audioBeginOffset:
-			v.AudioBeginOffset = new(float64)
-			return d.ReadFloat64(schemas.MedicalScribeTranscriptSegment_audioBeginOffset, v.AudioBeginOffset)
-		case schemas.MedicalScribeTranscriptSegment_audioEndOffset:
-			v.AudioEndOffset = new(float64)
-			return d.ReadFloat64(schemas.MedicalScribeTranscriptSegment_audioEndOffset, v.AudioEndOffset)
-		case schemas.MedicalScribeTranscriptSegment_channelId:
-			v.ChannelId = new(string)
-			return d.ReadString(schemas.MedicalScribeTranscriptSegment_channelId, v.ChannelId)
-		case schemas.MedicalScribeTranscriptSegment_content:
-			v.Content = new(string)
-			return d.ReadString(schemas.MedicalScribeTranscriptSegment_content, v.Content)
-		case schemas.MedicalScribeTranscriptSegment_isPartial:
-			v.IsPartial = new(bool)
-			return d.ReadBool(schemas.MedicalScribeTranscriptSegment_isPartial, v.IsPartial)
-		case schemas.MedicalScribeTranscriptSegment_segmentId:
-			v.SegmentId = new(string)
-			return d.ReadString(schemas.MedicalScribeTranscriptSegment_segmentId, v.SegmentId)
-		}
-		return nil
-	})
-}
-
 // Settings for the note template to use for clinical note generation
 //
 // The following types satisfy this interface:
@@ -1347,14 +468,6 @@ type NoteTemplateSettingsMemberCustomTemplate struct {
 }
 
 func (*NoteTemplateSettingsMemberCustomTemplate) isNoteTemplateSettings() {}
-func (v *NoteTemplateSettingsMemberCustomTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoteTemplateSettings_customTemplate)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *NoteTemplateSettingsMemberCustomTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type NoteTemplateSettingsMemberManagedTemplate struct {
 	Value ManagedTemplate
@@ -1363,14 +476,6 @@ type NoteTemplateSettingsMemberManagedTemplate struct {
 }
 
 func (*NoteTemplateSettingsMemberManagedTemplate) isNoteTemplateSettings() {}
-func (v *NoteTemplateSettingsMemberManagedTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoteTemplateSettings_managedTemplate)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *NoteTemplateSettingsMemberManagedTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Response containing note template settings
 //
@@ -1389,14 +494,6 @@ type NoteTemplateSettingsResponseMemberCustomTemplate struct {
 }
 
 func (*NoteTemplateSettingsResponseMemberCustomTemplate) isNoteTemplateSettingsResponse() {}
-func (v *NoteTemplateSettingsResponseMemberCustomTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoteTemplateSettingsResponse_customTemplate)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *NoteTemplateSettingsResponseMemberCustomTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type NoteTemplateSettingsResponseMemberManagedTemplate struct {
 	Value ManagedTemplateResponse
@@ -1405,14 +502,6 @@ type NoteTemplateSettingsResponseMemberManagedTemplate struct {
 }
 
 func (*NoteTemplateSettingsResponseMemberManagedTemplate) isNoteTemplateSettingsResponse() {}
-func (v *NoteTemplateSettingsResponseMemberManagedTemplate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NoteTemplateSettingsResponse_managedTemplate)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *NoteTemplateSettingsResponseMemberManagedTemplate) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration details for insights output.
 type OutputDataConfig struct {
@@ -1425,28 +514,6 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutputDataConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3OutputPath != nil {
-		s.WriteString(schemas.OutputDataConfig_s3OutputPath, *v.S3OutputPath)
-	}
-}
-func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutputDataConfig_s3OutputPath:
-			v.S3OutputPath = new(string)
-			return d.ReadString(schemas.OutputDataConfig_s3OutputPath, v.S3OutputPath)
-		}
-		return nil
-	})
-}
-
 // Details for an encounter
 type PatientInsightsEncounterContext struct {
 
@@ -1456,28 +523,6 @@ type PatientInsightsEncounterContext struct {
 	EncounterReason *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PatientInsightsEncounterContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PatientInsightsEncounterContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PatientInsightsEncounterContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncounterReason != nil {
-		s.WriteString(schemas.PatientInsightsEncounterContext_encounterReason, *v.EncounterReason)
-	}
-}
-func (v *PatientInsightsEncounterContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PatientInsightsEncounterContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PatientInsightsEncounterContext_encounterReason:
-			v.EncounterReason = new(string)
-			return d.ReadString(schemas.PatientInsightsEncounterContext_encounterReason, v.EncounterReason)
-		}
-		return nil
-	})
 }
 
 // Details for a patient
@@ -1497,44 +542,6 @@ type PatientInsightsPatientContext struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PatientInsightsPatientContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PatientInsightsPatientContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PatientInsightsPatientContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DateOfBirth != nil {
-		s.WriteString(schemas.PatientInsightsPatientContext_dateOfBirth, *v.DateOfBirth)
-	}
-	if v.PatientId != nil {
-		s.WriteString(schemas.PatientInsightsPatientContext_patientId, *v.PatientId)
-	}
-	if v.Pronouns != "" {
-		s.WriteString(schemas.PatientInsightsPatientContext_pronouns, string(v.Pronouns))
-	}
-}
-func (v *PatientInsightsPatientContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PatientInsightsPatientContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PatientInsightsPatientContext_dateOfBirth:
-			v.DateOfBirth = new(string)
-			return d.ReadString(schemas.PatientInsightsPatientContext_dateOfBirth, v.DateOfBirth)
-		case schemas.PatientInsightsPatientContext_patientId:
-			v.PatientId = new(string)
-			return d.ReadString(schemas.PatientInsightsPatientContext_patientId, v.PatientId)
-		case schemas.PatientInsightsPatientContext_pronouns:
-			var ev string
-			if err := d.ReadString(schemas.PatientInsightsPatientContext_pronouns, &ev); err != nil {
-				return err
-			}
-			v.Pronouns = Pronouns(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // S3 uri for input data source
 type S3Source struct {
 
@@ -1544,28 +551,6 @@ type S3Source struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3Source) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Source)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Source) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uri != nil {
-		s.WriteString(schemas.S3Source_uri, *v.Uri)
-	}
-}
-func (v *S3Source) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Source, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Source_uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.S3Source_uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // Complete subscription resource data.
@@ -1610,74 +595,6 @@ type SubscriptionDescription struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SubscriptionDescription) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubscriptionDescription)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubscriptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivatedAt != nil {
-		s.WriteTime(schemas.SubscriptionDescription_activatedAt, *v.ActivatedAt)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.SubscriptionDescription_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.SubscriptionDescription_createdAt, *v.CreatedAt)
-	}
-	if v.DeactivatedAt != nil {
-		s.WriteTime(schemas.SubscriptionDescription_deactivatedAt, *v.DeactivatedAt)
-	}
-	if v.DomainId != nil {
-		s.WriteString(schemas.SubscriptionDescription_domainId, *v.DomainId)
-	}
-	if v.LastUpdatedAt != nil {
-		s.WriteTime(schemas.SubscriptionDescription_lastUpdatedAt, *v.LastUpdatedAt)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.SubscriptionDescription_status, string(v.Status))
-	}
-	if v.SubscriptionId != nil {
-		s.WriteString(schemas.SubscriptionDescription_subscriptionId, *v.SubscriptionId)
-	}
-}
-func (v *SubscriptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubscriptionDescription, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubscriptionDescription_activatedAt:
-			v.ActivatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubscriptionDescription_activatedAt, v.ActivatedAt)
-		case schemas.SubscriptionDescription_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SubscriptionDescription_arn, v.Arn)
-		case schemas.SubscriptionDescription_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubscriptionDescription_createdAt, v.CreatedAt)
-		case schemas.SubscriptionDescription_deactivatedAt:
-			v.DeactivatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubscriptionDescription_deactivatedAt, v.DeactivatedAt)
-		case schemas.SubscriptionDescription_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.SubscriptionDescription_domainId, v.DomainId)
-		case schemas.SubscriptionDescription_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.SubscriptionDescription_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.SubscriptionDescription_status:
-			var ev string
-			if err := d.ReadString(schemas.SubscriptionDescription_status, &ev); err != nil {
-				return err
-			}
-			v.Status = SubscriptionStatus(ev)
-			return nil
-		case schemas.SubscriptionDescription_subscriptionId:
-			v.SubscriptionId = new(string)
-			return d.ReadString(schemas.SubscriptionDescription_subscriptionId, v.SubscriptionId)
-		}
-		return nil
-	})
-}
-
 // Instructions for generating a specific section of a clinical note
 type TemplateSectionInstruction struct {
 
@@ -1692,34 +609,6 @@ type TemplateSectionInstruction struct {
 	SectionInstruction *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TemplateSectionInstruction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TemplateSectionInstruction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TemplateSectionInstruction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SectionHeader != nil {
-		s.WriteString(schemas.TemplateSectionInstruction_sectionHeader, *v.SectionHeader)
-	}
-	if v.SectionInstruction != nil {
-		s.WriteString(schemas.TemplateSectionInstruction_sectionInstruction, *v.SectionInstruction)
-	}
-}
-func (v *TemplateSectionInstruction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TemplateSectionInstruction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TemplateSectionInstruction_sectionHeader:
-			v.SectionHeader = new(string)
-			return d.ReadString(schemas.TemplateSectionInstruction_sectionHeader, v.SectionHeader)
-		case schemas.TemplateSectionInstruction_sectionInstruction:
-			v.SectionInstruction = new(string)
-			return d.ReadString(schemas.TemplateSectionInstruction_sectionInstruction, v.SectionInstruction)
-		}
-		return nil
-	})
 }
 
 // Details for user initiating insights job
@@ -1739,48 +628,6 @@ type UserContext struct {
 	Specialty Specialty
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Role != "" {
-		s.WriteString(schemas.UserContext_role, string(v.Role))
-	}
-	if v.Specialty != "" {
-		s.WriteString(schemas.UserContext_specialty, string(v.Specialty))
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.UserContext_userId, *v.UserId)
-	}
-}
-func (v *UserContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserContext_role:
-			var ev string
-			if err := d.ReadString(schemas.UserContext_role, &ev); err != nil {
-				return err
-			}
-			v.Role = ProviderRole(ev)
-			return nil
-		case schemas.UserContext_specialty:
-			var ev string
-			if err := d.ReadString(schemas.UserContext_specialty, &ev); err != nil {
-				return err
-			}
-			v.Specialty = Specialty(ev)
-			return nil
-		case schemas.UserContext_userId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.UserContext_userId, v.UserId)
-		}
-		return nil
-	})
 }
 
 // Configuration for the Domain web application, including Identity Center
@@ -1803,40 +650,6 @@ type WebAppConfiguration struct {
 	IdcRegion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WebAppConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WebAppConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WebAppConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EhrRole != nil {
-		s.WriteString(schemas.WebAppConfiguration_ehrRole, *v.EhrRole)
-	}
-	if v.IdcApplicationId != nil {
-		s.WriteString(schemas.WebAppConfiguration_idcApplicationId, *v.IdcApplicationId)
-	}
-	if v.IdcRegion != nil {
-		s.WriteString(schemas.WebAppConfiguration_idcRegion, *v.IdcRegion)
-	}
-}
-func (v *WebAppConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WebAppConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WebAppConfiguration_ehrRole:
-			v.EhrRole = new(string)
-			return d.ReadString(schemas.WebAppConfiguration_ehrRole, v.EhrRole)
-		case schemas.WebAppConfiguration_idcApplicationId:
-			v.IdcApplicationId = new(string)
-			return d.ReadString(schemas.WebAppConfiguration_idcApplicationId, v.IdcApplicationId)
-		case schemas.WebAppConfiguration_idcRegion:
-			v.IdcRegion = new(string)
-			return d.ReadString(schemas.WebAppConfiguration_idcRegion, v.IdcRegion)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,27 +75,6 @@ type ListKxClustersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxClustersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListKxClustersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListKxClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterType != "" {
-		s.WriteString(schemas.ListKxClustersRequest_clusterType, string(v.ClusterType))
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ListKxClustersRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListKxClustersRequest_maxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListKxClustersRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListKxClustersOutput struct {
 
 	// Lists the cluster details.
@@ -112,26 +89,16 @@ type ListKxClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListKxClustersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListKxClustersResponse_kxClusterSummaries:
-			return deserializeKxClusters(d, schemas.ListKxClustersResponse_kxClusterSummaries, &v.KxClusterSummaries)
-		case schemas.ListKxClustersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListKxClustersResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListKxClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxClusters, schemas.ListKxClustersRequest, schemas.ListKxClustersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxClusters, schemas.ListKxClustersRequest, schemas.ListKxClustersResponse), output: &ListKxClustersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxClusters{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxClusters"); err != nil {

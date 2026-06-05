@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,28 +40,6 @@ type DisableProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScalarProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ProfileId != nil {
-		s.WriteString(schemas.ScalarProfileRequest_profileId, *v.ProfileId)
-	}
-}
-func (v *DisableProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScalarProfileRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScalarProfileRequest_profileId:
-			v.ProfileId = new(string)
-			return d.ReadString(schemas.ScalarProfileRequest_profileId, v.ProfileId)
-		}
-		return nil
-	})
-}
-
 type DisableProfileOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -75,37 +51,16 @@ type DisableProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableProfileOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProfileDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Profile != nil {
-		s.WriteStruct(schemas.ProfileDetailResponse_profile)
-		v.Profile.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DisableProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProfileDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProfileDetailResponse_profile:
-			v.Profile = &types.ProfileDetail{}
-			return v.Profile.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableProfile, schemas.ScalarProfileRequest, schemas.ProfileDetailResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableProfile, schemas.ScalarProfileRequest, schemas.ProfileDetailResponse), output: &DisableProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableProfile"); err != nil {

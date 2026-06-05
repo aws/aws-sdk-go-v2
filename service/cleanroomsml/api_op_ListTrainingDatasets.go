@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,21 +39,6 @@ type ListTrainingDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainingDatasetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrainingDatasetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrainingDatasetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTrainingDatasetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrainingDatasetsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListTrainingDatasetsOutput struct {
 
 	// The training datasets that match the request.
@@ -72,26 +55,16 @@ type ListTrainingDatasetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainingDatasetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrainingDatasetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrainingDatasetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrainingDatasetsResponse_nextToken, v.NextToken)
-		case schemas.ListTrainingDatasetsResponse_trainingDatasets:
-			return deserializeTrainingDatasetList(d, schemas.ListTrainingDatasetsResponse_trainingDatasets, &v.TrainingDatasets)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrainingDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingDatasets, schemas.ListTrainingDatasetsRequest, schemas.ListTrainingDatasetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrainingDatasets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingDatasets, schemas.ListTrainingDatasetsRequest, schemas.ListTrainingDatasetsResponse), output: &ListTrainingDatasetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrainingDatasets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrainingDatasets"); err != nil {

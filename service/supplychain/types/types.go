@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -37,56 +35,6 @@ type BillOfMaterialsImportJob struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillOfMaterialsImportJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillOfMaterialsImportJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillOfMaterialsImportJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.BillOfMaterialsImportJob_instanceId, *v.InstanceId)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.BillOfMaterialsImportJob_jobId, *v.JobId)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.BillOfMaterialsImportJob_message, *v.Message)
-	}
-	if v.S3uri != nil {
-		s.WriteString(schemas.BillOfMaterialsImportJob_s3uri, *v.S3uri)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BillOfMaterialsImportJob_status, string(v.Status))
-	}
-}
-func (v *BillOfMaterialsImportJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillOfMaterialsImportJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillOfMaterialsImportJob_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.BillOfMaterialsImportJob_instanceId, v.InstanceId)
-		case schemas.BillOfMaterialsImportJob_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.BillOfMaterialsImportJob_jobId, v.JobId)
-		case schemas.BillOfMaterialsImportJob_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BillOfMaterialsImportJob_message, v.Message)
-		case schemas.BillOfMaterialsImportJob_s3uri:
-			v.S3uri = new(string)
-			return d.ReadString(schemas.BillOfMaterialsImportJob_s3uri, v.S3uri)
-		case schemas.BillOfMaterialsImportJob_status:
-			var ev string
-			if err := d.ReadString(schemas.BillOfMaterialsImportJob_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConfigurationJobStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The data integration event details.
@@ -124,64 +72,6 @@ type DataIntegrationEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetTargetDetails != nil {
-		s.WriteStruct(schemas.DataIntegrationEvent_datasetTargetDetails)
-		v.DatasetTargetDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EventGroupId != nil {
-		s.WriteString(schemas.DataIntegrationEvent_eventGroupId, *v.EventGroupId)
-	}
-	if v.EventId != nil {
-		s.WriteString(schemas.DataIntegrationEvent_eventId, *v.EventId)
-	}
-	if v.EventTimestamp != nil {
-		s.WriteTime(schemas.DataIntegrationEvent_eventTimestamp, *v.EventTimestamp)
-	}
-	if v.EventType != "" {
-		s.WriteString(schemas.DataIntegrationEvent_eventType, string(v.EventType))
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DataIntegrationEvent_instanceId, *v.InstanceId)
-	}
-}
-func (v *DataIntegrationEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationEvent_datasetTargetDetails:
-			v.DatasetTargetDetails = &DataIntegrationEventDatasetTargetDetails{}
-			return v.DatasetTargetDetails.Deserialize(d)
-		case schemas.DataIntegrationEvent_eventGroupId:
-			v.EventGroupId = new(string)
-			return d.ReadString(schemas.DataIntegrationEvent_eventGroupId, v.EventGroupId)
-		case schemas.DataIntegrationEvent_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.DataIntegrationEvent_eventId, v.EventId)
-		case schemas.DataIntegrationEvent_eventTimestamp:
-			v.EventTimestamp = new(time.Time)
-			return d.ReadTime(schemas.DataIntegrationEvent_eventTimestamp, v.EventTimestamp)
-		case schemas.DataIntegrationEvent_eventType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationEvent_eventType, &ev); err != nil {
-				return err
-			}
-			v.EventType = DataIntegrationEventType(ev)
-			return nil
-		case schemas.DataIntegrationEvent_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DataIntegrationEvent_instanceId, v.InstanceId)
-		}
-		return nil
-	})
-}
-
 // The target dataset load execution details.
 type DataIntegrationEventDatasetLoadExecutionDetails struct {
 
@@ -194,38 +84,6 @@ type DataIntegrationEventDatasetLoadExecutionDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationEventDatasetLoadExecutionDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationEventDatasetLoadExecutionDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationEventDatasetLoadExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.DataIntegrationEventDatasetLoadExecutionDetails_message, *v.Message)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DataIntegrationEventDatasetLoadExecutionDetails_status, string(v.Status))
-	}
-}
-func (v *DataIntegrationEventDatasetLoadExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationEventDatasetLoadExecutionDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationEventDatasetLoadExecutionDetails_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DataIntegrationEventDatasetLoadExecutionDetails_message, v.Message)
-		case schemas.DataIntegrationEventDatasetLoadExecutionDetails_status:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationEventDatasetLoadExecutionDetails_status, &ev); err != nil {
-				return err
-			}
-			v.Status = DataIntegrationEventDatasetLoadStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The target dataset configuration for a DATASET event type.
@@ -242,38 +100,6 @@ type DataIntegrationEventDatasetTargetConfiguration struct {
 	OperationType DataIntegrationEventDatasetOperationType
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationEventDatasetTargetConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationEventDatasetTargetConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationEventDatasetTargetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetIdentifier != nil {
-		s.WriteString(schemas.DataIntegrationEventDatasetTargetConfiguration_datasetIdentifier, *v.DatasetIdentifier)
-	}
-	if v.OperationType != "" {
-		s.WriteString(schemas.DataIntegrationEventDatasetTargetConfiguration_operationType, string(v.OperationType))
-	}
-}
-func (v *DataIntegrationEventDatasetTargetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationEventDatasetTargetConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationEventDatasetTargetConfiguration_datasetIdentifier:
-			v.DatasetIdentifier = new(string)
-			return d.ReadString(schemas.DataIntegrationEventDatasetTargetConfiguration_datasetIdentifier, v.DatasetIdentifier)
-		case schemas.DataIntegrationEventDatasetTargetConfiguration_operationType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationEventDatasetTargetConfiguration_operationType, &ev); err != nil {
-				return err
-			}
-			v.OperationType = DataIntegrationEventDatasetOperationType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The target dataset details for a DATASET event type.
@@ -317,46 +143,6 @@ type DataIntegrationEventDatasetTargetDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationEventDatasetTargetDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationEventDatasetTargetDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationEventDatasetTargetDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetIdentifier != nil {
-		s.WriteString(schemas.DataIntegrationEventDatasetTargetDetails_datasetIdentifier, *v.DatasetIdentifier)
-	}
-	if v.DatasetLoadExecution != nil {
-		s.WriteStruct(schemas.DataIntegrationEventDatasetTargetDetails_datasetLoadExecution)
-		v.DatasetLoadExecution.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OperationType != "" {
-		s.WriteString(schemas.DataIntegrationEventDatasetTargetDetails_operationType, string(v.OperationType))
-	}
-}
-func (v *DataIntegrationEventDatasetTargetDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationEventDatasetTargetDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationEventDatasetTargetDetails_datasetIdentifier:
-			v.DatasetIdentifier = new(string)
-			return d.ReadString(schemas.DataIntegrationEventDatasetTargetDetails_datasetIdentifier, v.DatasetIdentifier)
-		case schemas.DataIntegrationEventDatasetTargetDetails_datasetLoadExecution:
-			v.DatasetLoadExecution = &DataIntegrationEventDatasetLoadExecutionDetails{}
-			return v.DatasetLoadExecution.Deserialize(d)
-		case schemas.DataIntegrationEventDatasetTargetDetails_operationType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationEventDatasetTargetDetails_operationType, &ev); err != nil {
-				return err
-			}
-			v.OperationType = DataIntegrationEventDatasetOperationType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The DataIntegrationFlow details.
 type DataIntegrationFlow struct {
 
@@ -398,65 +184,6 @@ type DataIntegrationFlow struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlow) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DataIntegrationFlow_createdTime, *v.CreatedTime)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DataIntegrationFlow_instanceId, *v.InstanceId)
-	}
-	if v.LastModifiedTime != nil {
-		s.WriteTime(schemas.DataIntegrationFlow_lastModifiedTime, *v.LastModifiedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DataIntegrationFlow_name, *v.Name)
-	}
-	serializeDataIntegrationFlowSourceList(s, schemas.DataIntegrationFlow_sources, v.Sources)
-	if v.Target != nil {
-		s.WriteStruct(schemas.DataIntegrationFlow_target)
-		v.Target.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Transformation != nil {
-		s.WriteStruct(schemas.DataIntegrationFlow_transformation)
-		v.Transformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataIntegrationFlow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlow_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DataIntegrationFlow_createdTime, v.CreatedTime)
-		case schemas.DataIntegrationFlow_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DataIntegrationFlow_instanceId, v.InstanceId)
-		case schemas.DataIntegrationFlow_lastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.DataIntegrationFlow_lastModifiedTime, v.LastModifiedTime)
-		case schemas.DataIntegrationFlow_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataIntegrationFlow_name, v.Name)
-		case schemas.DataIntegrationFlow_sources:
-			return deserializeDataIntegrationFlowSourceList(d, schemas.DataIntegrationFlow_sources, &v.Sources)
-		case schemas.DataIntegrationFlow_target:
-			v.Target = &DataIntegrationFlowTarget{}
-			return v.Target.Deserialize(d)
-		case schemas.DataIntegrationFlow_transformation:
-			v.Transformation = &DataIntegrationFlowTransformation{}
-			return v.Transformation.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The dataset options used in dataset source and target configurations.
 type DataIntegrationFlowDatasetOptions struct {
 
@@ -493,46 +220,6 @@ type DataIntegrationFlowDatasetOptions struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowDatasetOptions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowDatasetOptions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowDatasetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DedupeRecords != nil {
-		s.WriteBool(schemas.DataIntegrationFlowDatasetOptions_dedupeRecords, *v.DedupeRecords)
-	}
-	if v.DedupeStrategy != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowDatasetOptions_dedupeStrategy)
-		v.DedupeStrategy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LoadType != "" {
-		s.WriteString(schemas.DataIntegrationFlowDatasetOptions_loadType, string(v.LoadType))
-	}
-}
-func (v *DataIntegrationFlowDatasetOptions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowDatasetOptions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowDatasetOptions_dedupeRecords:
-			v.DedupeRecords = new(bool)
-			return d.ReadBool(schemas.DataIntegrationFlowDatasetOptions_dedupeRecords, v.DedupeRecords)
-		case schemas.DataIntegrationFlowDatasetOptions_dedupeStrategy:
-			v.DedupeStrategy = &DataIntegrationFlowDedupeStrategy{}
-			return v.DedupeStrategy.Deserialize(d)
-		case schemas.DataIntegrationFlowDatasetOptions_loadType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowDatasetOptions_loadType, &ev); err != nil {
-				return err
-			}
-			v.LoadType = DataIntegrationFlowLoadType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The details of a flow execution with dataset source.
 type DataIntegrationFlowDatasetSource struct {
 
@@ -542,28 +229,6 @@ type DataIntegrationFlowDatasetSource struct {
 	DatasetIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowDatasetSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowDatasetSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowDatasetSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetIdentifier != nil {
-		s.WriteString(schemas.DataIntegrationFlowDatasetSource_datasetIdentifier, *v.DatasetIdentifier)
-	}
-}
-func (v *DataIntegrationFlowDatasetSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowDatasetSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowDatasetSource_datasetIdentifier:
-			v.DatasetIdentifier = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowDatasetSource_datasetIdentifier, v.DatasetIdentifier)
-		}
-		return nil
-	})
 }
 
 // The dataset DataIntegrationFlow source configuration parameters.
@@ -580,36 +245,6 @@ type DataIntegrationFlowDatasetSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowDatasetSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowDatasetSourceConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowDatasetSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetIdentifier != nil {
-		s.WriteString(schemas.DataIntegrationFlowDatasetSourceConfiguration_datasetIdentifier, *v.DatasetIdentifier)
-	}
-	if v.Options != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowDatasetSourceConfiguration_options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataIntegrationFlowDatasetSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowDatasetSourceConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowDatasetSourceConfiguration_datasetIdentifier:
-			v.DatasetIdentifier = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowDatasetSourceConfiguration_datasetIdentifier, v.DatasetIdentifier)
-		case schemas.DataIntegrationFlowDatasetSourceConfiguration_options:
-			v.Options = &DataIntegrationFlowDatasetOptions{}
-			return v.Options.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The dataset DataIntegrationFlow target configuration parameters.
 type DataIntegrationFlowDatasetTargetConfiguration struct {
 
@@ -622,36 +257,6 @@ type DataIntegrationFlowDatasetTargetConfiguration struct {
 	Options *DataIntegrationFlowDatasetOptions
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowDatasetTargetConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowDatasetTargetConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowDatasetTargetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetIdentifier != nil {
-		s.WriteString(schemas.DataIntegrationFlowDatasetTargetConfiguration_datasetIdentifier, *v.DatasetIdentifier)
-	}
-	if v.Options != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowDatasetTargetConfiguration_options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataIntegrationFlowDatasetTargetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowDatasetTargetConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowDatasetTargetConfiguration_datasetIdentifier:
-			v.DatasetIdentifier = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowDatasetTargetConfiguration_datasetIdentifier, v.DatasetIdentifier)
-		case schemas.DataIntegrationFlowDatasetTargetConfiguration_options:
-			v.Options = &DataIntegrationFlowDatasetOptions{}
-			return v.Options.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The deduplication strategy details.
@@ -672,40 +277,6 @@ type DataIntegrationFlowDedupeStrategy struct {
 	FieldPriority *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowDedupeStrategy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowDedupeStrategy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowDedupeStrategy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FieldPriority != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowDedupeStrategy_fieldPriority)
-		v.FieldPriority.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DataIntegrationFlowDedupeStrategy_type, string(v.Type))
-	}
-}
-func (v *DataIntegrationFlowDedupeStrategy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowDedupeStrategy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowDedupeStrategy_fieldPriority:
-			v.FieldPriority = &DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{}
-			return v.FieldPriority.Deserialize(d)
-		case schemas.DataIntegrationFlowDedupeStrategy_type:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowDedupeStrategy_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DataIntegrationFlowDedupeStrategyType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The flow execution details.
@@ -747,84 +318,6 @@ type DataIntegrationFlowExecution struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowExecution) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowExecution)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowExecution) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.DataIntegrationFlowExecution_endTime, *v.EndTime)
-	}
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.DataIntegrationFlowExecution_executionId, *v.ExecutionId)
-	}
-	if v.FlowName != nil {
-		s.WriteString(schemas.DataIntegrationFlowExecution_flowName, *v.FlowName)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DataIntegrationFlowExecution_instanceId, *v.InstanceId)
-	}
-	if v.Message != nil {
-		s.WriteString(schemas.DataIntegrationFlowExecution_message, *v.Message)
-	}
-	if v.OutputMetadata != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowExecution_outputMetadata)
-		v.OutputMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceInfo != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowExecution_sourceInfo)
-		v.SourceInfo.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.DataIntegrationFlowExecution_startTime, *v.StartTime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.DataIntegrationFlowExecution_status, string(v.Status))
-	}
-}
-func (v *DataIntegrationFlowExecution) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowExecution, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowExecution_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.DataIntegrationFlowExecution_endTime, v.EndTime)
-		case schemas.DataIntegrationFlowExecution_executionId:
-			v.ExecutionId = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowExecution_executionId, v.ExecutionId)
-		case schemas.DataIntegrationFlowExecution_flowName:
-			v.FlowName = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowExecution_flowName, v.FlowName)
-		case schemas.DataIntegrationFlowExecution_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowExecution_instanceId, v.InstanceId)
-		case schemas.DataIntegrationFlowExecution_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowExecution_message, v.Message)
-		case schemas.DataIntegrationFlowExecution_outputMetadata:
-			v.OutputMetadata = &DataIntegrationFlowExecutionOutputMetadata{}
-			return v.OutputMetadata.Deserialize(d)
-		case schemas.DataIntegrationFlowExecution_sourceInfo:
-			v.SourceInfo = &DataIntegrationFlowExecutionSourceInfo{}
-			return v.SourceInfo.Deserialize(d)
-		case schemas.DataIntegrationFlowExecution_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.DataIntegrationFlowExecution_startTime, v.StartTime)
-		case schemas.DataIntegrationFlowExecution_status:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowExecution_status, &ev); err != nil {
-				return err
-			}
-			v.Status = DataIntegrationFlowExecutionStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The output metadata of the flow execution.
 type DataIntegrationFlowExecutionOutputMetadata struct {
 
@@ -833,28 +326,6 @@ type DataIntegrationFlowExecutionOutputMetadata struct {
 	DiagnosticReportsRootS3URI *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowExecutionOutputMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowExecutionOutputMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowExecutionOutputMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DiagnosticReportsRootS3URI != nil {
-		s.WriteString(schemas.DataIntegrationFlowExecutionOutputMetadata_diagnosticReportsRootS3URI, *v.DiagnosticReportsRootS3URI)
-	}
-}
-func (v *DataIntegrationFlowExecutionOutputMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowExecutionOutputMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowExecutionOutputMetadata_diagnosticReportsRootS3URI:
-			v.DiagnosticReportsRootS3URI = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowExecutionOutputMetadata_diagnosticReportsRootS3URI, v.DiagnosticReportsRootS3URI)
-		}
-		return nil
-	})
 }
 
 // The source information of a flow execution.
@@ -874,48 +345,6 @@ type DataIntegrationFlowExecutionSourceInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowExecutionSourceInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowExecutionSourceInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowExecutionSourceInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetSource != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowExecutionSourceInfo_datasetSource)
-		v.DatasetSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3Source != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowExecutionSourceInfo_s3Source)
-		v.S3Source.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceType != "" {
-		s.WriteString(schemas.DataIntegrationFlowExecutionSourceInfo_sourceType, string(v.SourceType))
-	}
-}
-func (v *DataIntegrationFlowExecutionSourceInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowExecutionSourceInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowExecutionSourceInfo_datasetSource:
-			v.DatasetSource = &DataIntegrationFlowDatasetSource{}
-			return v.DatasetSource.Deserialize(d)
-		case schemas.DataIntegrationFlowExecutionSourceInfo_s3Source:
-			v.S3Source = &DataIntegrationFlowS3Source{}
-			return v.S3Source.Deserialize(d)
-		case schemas.DataIntegrationFlowExecutionSourceInfo_sourceType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowExecutionSourceInfo_sourceType, &ev); err != nil {
-				return err
-			}
-			v.SourceType = DataIntegrationFlowSourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The field used in the field priority deduplication strategy.
 type DataIntegrationFlowFieldPriorityDedupeField struct {
 
@@ -933,38 +362,6 @@ type DataIntegrationFlowFieldPriorityDedupeField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowFieldPriorityDedupeField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowFieldPriorityDedupeField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowFieldPriorityDedupeField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DataIntegrationFlowFieldPriorityDedupeField_name, *v.Name)
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.DataIntegrationFlowFieldPriorityDedupeField_sortOrder, string(v.SortOrder))
-	}
-}
-func (v *DataIntegrationFlowFieldPriorityDedupeField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowFieldPriorityDedupeField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowFieldPriorityDedupeField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowFieldPriorityDedupeField_name, v.Name)
-		case schemas.DataIntegrationFlowFieldPriorityDedupeField_sortOrder:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowFieldPriorityDedupeField_sortOrder, &ev); err != nil {
-				return err
-			}
-			v.SortOrder = DataIntegrationFlowFieldPriorityDedupeSortOrder(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The field priority deduplication strategy details.
 type DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration struct {
 
@@ -977,25 +374,6 @@ type DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataIntegrationFlowFieldPriorityDedupeFieldList(s, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration_fields, v.Fields)
-}
-func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration_fields:
-			return deserializeDataIntegrationFlowFieldPriorityDedupeFieldList(d, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration_fields, &v.Fields)
-		}
-		return nil
-	})
-}
-
 // The Amazon S3 options used in S3 source and target configurations.
 type DataIntegrationFlowS3Options struct {
 
@@ -1003,32 +381,6 @@ type DataIntegrationFlowS3Options struct {
 	FileType DataIntegrationFlowFileType
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowS3Options) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowS3Options)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowS3Options) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FileType != "" {
-		s.WriteString(schemas.DataIntegrationFlowS3Options_fileType, string(v.FileType))
-	}
-}
-func (v *DataIntegrationFlowS3Options) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowS3Options, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowS3Options_fileType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowS3Options_fileType, &ev); err != nil {
-				return err
-			}
-			v.FileType = DataIntegrationFlowFileType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The details of a flow execution with S3 source.
@@ -1045,34 +397,6 @@ type DataIntegrationFlowS3Source struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowS3Source) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowS3Source)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowS3Source) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3Source_bucketName, *v.BucketName)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3Source_key, *v.Key)
-	}
-}
-func (v *DataIntegrationFlowS3Source) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowS3Source, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowS3Source_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3Source_bucketName, v.BucketName)
-		case schemas.DataIntegrationFlowS3Source_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3Source_key, v.Key)
-		}
-		return nil
-	})
 }
 
 // The S3 DataIntegrationFlow source configuration parameters.
@@ -1095,42 +419,6 @@ type DataIntegrationFlowS3SourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowS3SourceConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowS3SourceConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowS3SourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3SourceConfiguration_bucketName, *v.BucketName)
-	}
-	if v.Options != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowS3SourceConfiguration_options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3SourceConfiguration_prefix, *v.Prefix)
-	}
-}
-func (v *DataIntegrationFlowS3SourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowS3SourceConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowS3SourceConfiguration_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3SourceConfiguration_bucketName, v.BucketName)
-		case schemas.DataIntegrationFlowS3SourceConfiguration_options:
-			v.Options = &DataIntegrationFlowS3Options{}
-			return v.Options.Deserialize(d)
-		case schemas.DataIntegrationFlowS3SourceConfiguration_prefix:
-			v.Prefix = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3SourceConfiguration_prefix, v.Prefix)
-		}
-		return nil
-	})
-}
-
 // The S3 DataIntegrationFlow target configuration parameters.
 type DataIntegrationFlowS3TargetConfiguration struct {
 
@@ -1148,42 +436,6 @@ type DataIntegrationFlowS3TargetConfiguration struct {
 	Options *DataIntegrationFlowS3Options
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowS3TargetConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowS3TargetConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowS3TargetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3TargetConfiguration_bucketName, *v.BucketName)
-	}
-	if v.Options != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowS3TargetConfiguration_options)
-		v.Options.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.DataIntegrationFlowS3TargetConfiguration_prefix, *v.Prefix)
-	}
-}
-func (v *DataIntegrationFlowS3TargetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowS3TargetConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowS3TargetConfiguration_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3TargetConfiguration_bucketName, v.BucketName)
-		case schemas.DataIntegrationFlowS3TargetConfiguration_options:
-			v.Options = &DataIntegrationFlowS3Options{}
-			return v.Options.Deserialize(d)
-		case schemas.DataIntegrationFlowS3TargetConfiguration_prefix:
-			v.Prefix = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowS3TargetConfiguration_prefix, v.Prefix)
-		}
-		return nil
-	})
 }
 
 // The DataIntegrationFlow source parameters.
@@ -1209,54 +461,6 @@ type DataIntegrationFlowSource struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowSource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowSource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowSource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetSource != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowSource_datasetSource)
-		v.DatasetSource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3Source != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowSource_s3Source)
-		v.S3Source.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SourceName != nil {
-		s.WriteString(schemas.DataIntegrationFlowSource_sourceName, *v.SourceName)
-	}
-	if v.SourceType != "" {
-		s.WriteString(schemas.DataIntegrationFlowSource_sourceType, string(v.SourceType))
-	}
-}
-func (v *DataIntegrationFlowSource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowSource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowSource_datasetSource:
-			v.DatasetSource = &DataIntegrationFlowDatasetSourceConfiguration{}
-			return v.DatasetSource.Deserialize(d)
-		case schemas.DataIntegrationFlowSource_s3Source:
-			v.S3Source = &DataIntegrationFlowS3SourceConfiguration{}
-			return v.S3Source.Deserialize(d)
-		case schemas.DataIntegrationFlowSource_sourceName:
-			v.SourceName = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowSource_sourceName, v.SourceName)
-		case schemas.DataIntegrationFlowSource_sourceType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowSource_sourceType, &ev); err != nil {
-				return err
-			}
-			v.SourceType = DataIntegrationFlowSourceType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The SQL DataIntegrationFlow transformation configuration parameters.
 type DataIntegrationFlowSQLTransformationConfiguration struct {
 
@@ -1266,28 +470,6 @@ type DataIntegrationFlowSQLTransformationConfiguration struct {
 	Query *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowSQLTransformationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowSQLTransformationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowSQLTransformationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Query != nil {
-		s.WriteString(schemas.DataIntegrationFlowSQLTransformationConfiguration_query, *v.Query)
-	}
-}
-func (v *DataIntegrationFlowSQLTransformationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowSQLTransformationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowSQLTransformationConfiguration_query:
-			v.Query = new(string)
-			return d.ReadString(schemas.DataIntegrationFlowSQLTransformationConfiguration_query, v.Query)
-		}
-		return nil
-	})
 }
 
 // The DataIntegrationFlow target parameters.
@@ -1309,48 +491,6 @@ type DataIntegrationFlowTarget struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataIntegrationFlowTarget) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowTarget)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetTarget != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowTarget_datasetTarget)
-		v.DatasetTarget.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3Target != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowTarget_s3Target)
-		v.S3Target.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TargetType != "" {
-		s.WriteString(schemas.DataIntegrationFlowTarget_targetType, string(v.TargetType))
-	}
-}
-func (v *DataIntegrationFlowTarget) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowTarget, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowTarget_datasetTarget:
-			v.DatasetTarget = &DataIntegrationFlowDatasetTargetConfiguration{}
-			return v.DatasetTarget.Deserialize(d)
-		case schemas.DataIntegrationFlowTarget_s3Target:
-			v.S3Target = &DataIntegrationFlowS3TargetConfiguration{}
-			return v.S3Target.Deserialize(d)
-		case schemas.DataIntegrationFlowTarget_targetType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowTarget_targetType, &ev); err != nil {
-				return err
-			}
-			v.TargetType = DataIntegrationFlowTargetType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The DataIntegrationFlow transformation parameters.
 type DataIntegrationFlowTransformation struct {
 
@@ -1363,40 +503,6 @@ type DataIntegrationFlowTransformation struct {
 	SqlTransformation *DataIntegrationFlowSQLTransformationConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataIntegrationFlowTransformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataIntegrationFlowTransformation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataIntegrationFlowTransformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SqlTransformation != nil {
-		s.WriteStruct(schemas.DataIntegrationFlowTransformation_sqlTransformation)
-		v.SqlTransformation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TransformationType != "" {
-		s.WriteString(schemas.DataIntegrationFlowTransformation_transformationType, string(v.TransformationType))
-	}
-}
-func (v *DataIntegrationFlowTransformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataIntegrationFlowTransformation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataIntegrationFlowTransformation_sqlTransformation:
-			v.SqlTransformation = &DataIntegrationFlowSQLTransformationConfiguration{}
-			return v.SqlTransformation.Deserialize(d)
-		case schemas.DataIntegrationFlowTransformation_transformationType:
-			var ev string
-			if err := d.ReadString(schemas.DataIntegrationFlowTransformation_transformationType, &ev); err != nil {
-				return err
-			}
-			v.TransformationType = DataIntegrationFlowTransformationType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The data lake dataset details.
@@ -1457,80 +563,6 @@ type DataLakeDataset struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataLakeDataset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDataset)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDataset) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DataLakeDataset_arn, *v.Arn)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DataLakeDataset_createdTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DataLakeDataset_description, *v.Description)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DataLakeDataset_instanceId, *v.InstanceId)
-	}
-	if v.LastModifiedTime != nil {
-		s.WriteTime(schemas.DataLakeDataset_lastModifiedTime, *v.LastModifiedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeDataset_name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.DataLakeDataset_namespace, *v.Namespace)
-	}
-	if v.PartitionSpec != nil {
-		s.WriteStruct(schemas.DataLakeDataset_partitionSpec)
-		v.PartitionSpec.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Schema != nil {
-		s.WriteStruct(schemas.DataLakeDataset_schema)
-		v.Schema.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataLakeDataset) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDataset, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDataset_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DataLakeDataset_arn, v.Arn)
-		case schemas.DataLakeDataset_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DataLakeDataset_createdTime, v.CreatedTime)
-		case schemas.DataLakeDataset_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DataLakeDataset_description, v.Description)
-		case schemas.DataLakeDataset_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DataLakeDataset_instanceId, v.InstanceId)
-		case schemas.DataLakeDataset_lastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.DataLakeDataset_lastModifiedTime, v.LastModifiedTime)
-		case schemas.DataLakeDataset_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeDataset_name, v.Name)
-		case schemas.DataLakeDataset_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.DataLakeDataset_namespace, v.Namespace)
-		case schemas.DataLakeDataset_partitionSpec:
-			v.PartitionSpec = &DataLakeDatasetPartitionSpec{}
-			return v.PartitionSpec.Deserialize(d)
-		case schemas.DataLakeDataset_schema:
-			v.Schema = &DataLakeDatasetSchema{}
-			return v.Schema.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The detail of the partition field.
 type DataLakeDatasetPartitionField struct {
 
@@ -1550,36 +582,6 @@ type DataLakeDatasetPartitionField struct {
 	Transform *DataLakeDatasetPartitionFieldTransform
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataLakeDatasetPartitionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetPartitionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetPartitionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeDatasetPartitionField_name, *v.Name)
-	}
-	if v.Transform != nil {
-		s.WriteStruct(schemas.DataLakeDatasetPartitionField_transform)
-		v.Transform.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DataLakeDatasetPartitionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetPartitionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetPartitionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeDatasetPartitionField_name, v.Name)
-		case schemas.DataLakeDatasetPartitionField_transform:
-			v.Transform = &DataLakeDatasetPartitionFieldTransform{}
-			return v.Transform.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The detail of the partition field transformation.
@@ -1604,32 +606,6 @@ type DataLakeDatasetPartitionFieldTransform struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataLakeDatasetPartitionFieldTransform) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetPartitionFieldTransform)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetPartitionFieldTransform) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Type != "" {
-		s.WriteString(schemas.DataLakeDatasetPartitionFieldTransform_type, string(v.Type))
-	}
-}
-func (v *DataLakeDatasetPartitionFieldTransform) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetPartitionFieldTransform, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetPartitionFieldTransform_type:
-			var ev string
-			if err := d.ReadString(schemas.DataLakeDatasetPartitionFieldTransform_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DataLakeDatasetPartitionTransformType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The partition specification for a dataset.
 type DataLakeDatasetPartitionSpec struct {
 
@@ -1642,25 +618,6 @@ type DataLakeDatasetPartitionSpec struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataLakeDatasetPartitionSpec) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetPartitionSpec)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeDatasetPartitionFieldList(s, schemas.DataLakeDatasetPartitionSpec_fields, v.Fields)
-}
-func (v *DataLakeDatasetPartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetPartitionSpec, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetPartitionSpec_fields:
-			return deserializeDataLakeDatasetPartitionFieldList(d, schemas.DataLakeDatasetPartitionSpec_fields, &v.Fields)
-		}
-		return nil
-	})
-}
-
 // The detail of the primary key field.
 type DataLakeDatasetPrimaryKeyField struct {
 
@@ -1670,28 +627,6 @@ type DataLakeDatasetPrimaryKeyField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataLakeDatasetPrimaryKeyField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetPrimaryKeyField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetPrimaryKeyField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeDatasetPrimaryKeyField_name, *v.Name)
-	}
-}
-func (v *DataLakeDatasetPrimaryKeyField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetPrimaryKeyField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetPrimaryKeyField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeDatasetPrimaryKeyField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // The schema details of the dataset. Note that for AWS Supply Chain dataset under
@@ -1725,34 +660,6 @@ type DataLakeDatasetSchema struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DataLakeDatasetSchema) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetSchema)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeDatasetSchemaFieldList(s, schemas.DataLakeDatasetSchema_fields, v.Fields)
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeDatasetSchema_name, *v.Name)
-	}
-	serializeDataLakeDatasetPrimaryKeyFieldList(s, schemas.DataLakeDatasetSchema_primaryKeys, v.PrimaryKeys)
-}
-func (v *DataLakeDatasetSchema) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetSchema, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetSchema_fields:
-			return deserializeDataLakeDatasetSchemaFieldList(d, schemas.DataLakeDatasetSchema_fields, &v.Fields)
-		case schemas.DataLakeDatasetSchema_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeDatasetSchema_name, v.Name)
-		case schemas.DataLakeDatasetSchema_primaryKeys:
-			return deserializeDataLakeDatasetPrimaryKeyFieldList(d, schemas.DataLakeDatasetSchema_primaryKeys, &v.PrimaryKeys)
-		}
-		return nil
-	})
-}
-
 // The dataset field details.
 type DataLakeDatasetSchemaField struct {
 
@@ -1772,44 +679,6 @@ type DataLakeDatasetSchemaField struct {
 	Type DataLakeDatasetSchemaFieldType
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataLakeDatasetSchemaField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeDatasetSchemaField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeDatasetSchemaField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsRequired != nil {
-		s.WriteBool(schemas.DataLakeDatasetSchemaField_isRequired, *v.IsRequired)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeDatasetSchemaField_name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DataLakeDatasetSchemaField_type, string(v.Type))
-	}
-}
-func (v *DataLakeDatasetSchemaField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeDatasetSchemaField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeDatasetSchemaField_isRequired:
-			v.IsRequired = new(bool)
-			return d.ReadBool(schemas.DataLakeDatasetSchemaField_isRequired, v.IsRequired)
-		case schemas.DataLakeDatasetSchemaField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeDatasetSchemaField_name, v.Name)
-		case schemas.DataLakeDatasetSchemaField_type:
-			var ev string
-			if err := d.ReadString(schemas.DataLakeDatasetSchemaField_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DataLakeDatasetSchemaFieldType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The data lake namespace details.
@@ -1844,58 +713,6 @@ type DataLakeNamespace struct {
 	Description *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DataLakeNamespace) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DataLakeNamespace)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DataLakeNamespace) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.DataLakeNamespace_arn, *v.Arn)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.DataLakeNamespace_createdTime, *v.CreatedTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DataLakeNamespace_description, *v.Description)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.DataLakeNamespace_instanceId, *v.InstanceId)
-	}
-	if v.LastModifiedTime != nil {
-		s.WriteTime(schemas.DataLakeNamespace_lastModifiedTime, *v.LastModifiedTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DataLakeNamespace_name, *v.Name)
-	}
-}
-func (v *DataLakeNamespace) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DataLakeNamespace, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DataLakeNamespace_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DataLakeNamespace_arn, v.Arn)
-		case schemas.DataLakeNamespace_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.DataLakeNamespace_createdTime, v.CreatedTime)
-		case schemas.DataLakeNamespace_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DataLakeNamespace_description, v.Description)
-		case schemas.DataLakeNamespace_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.DataLakeNamespace_instanceId, v.InstanceId)
-		case schemas.DataLakeNamespace_lastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.DataLakeNamespace_lastModifiedTime, v.LastModifiedTime)
-		case schemas.DataLakeNamespace_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DataLakeNamespace_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // The details of the instance.
@@ -1946,92 +763,6 @@ type Instance struct {
 	WebAppDnsDomain *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Instance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Instance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.Instance_awsAccountId, *v.AwsAccountId)
-	}
-	if v.CreatedTime != nil {
-		s.WriteTime(schemas.Instance_createdTime, *v.CreatedTime)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.Instance_errorMessage, *v.ErrorMessage)
-	}
-	if v.InstanceDescription != nil {
-		s.WriteString(schemas.Instance_instanceDescription, *v.InstanceDescription)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.Instance_instanceId, *v.InstanceId)
-	}
-	if v.InstanceName != nil {
-		s.WriteString(schemas.Instance_instanceName, *v.InstanceName)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.Instance_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.LastModifiedTime != nil {
-		s.WriteTime(schemas.Instance_lastModifiedTime, *v.LastModifiedTime)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.Instance_state, string(v.State))
-	}
-	if v.VersionNumber != nil {
-		s.WriteFloat64(schemas.Instance_versionNumber, *v.VersionNumber)
-	}
-	if v.WebAppDnsDomain != nil {
-		s.WriteString(schemas.Instance_webAppDnsDomain, *v.WebAppDnsDomain)
-	}
-}
-func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Instance_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.Instance_awsAccountId, v.AwsAccountId)
-		case schemas.Instance_createdTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.Instance_createdTime, v.CreatedTime)
-		case schemas.Instance_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.Instance_errorMessage, v.ErrorMessage)
-		case schemas.Instance_instanceDescription:
-			v.InstanceDescription = new(string)
-			return d.ReadString(schemas.Instance_instanceDescription, v.InstanceDescription)
-		case schemas.Instance_instanceId:
-			v.InstanceId = new(string)
-			return d.ReadString(schemas.Instance_instanceId, v.InstanceId)
-		case schemas.Instance_instanceName:
-			v.InstanceName = new(string)
-			return d.ReadString(schemas.Instance_instanceName, v.InstanceName)
-		case schemas.Instance_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.Instance_kmsKeyArn, v.KmsKeyArn)
-		case schemas.Instance_lastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.Instance_lastModifiedTime, v.LastModifiedTime)
-		case schemas.Instance_state:
-			var ev string
-			if err := d.ReadString(schemas.Instance_state, &ev); err != nil {
-				return err
-			}
-			v.State = InstanceState(ev)
-			return nil
-		case schemas.Instance_versionNumber:
-			v.VersionNumber = new(float64)
-			return d.ReadFloat64(schemas.Instance_versionNumber, v.VersionNumber)
-		case schemas.Instance_webAppDnsDomain:
-			v.WebAppDnsDomain = new(string)
-			return d.ReadString(schemas.Instance_webAppDnsDomain, v.WebAppDnsDomain)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

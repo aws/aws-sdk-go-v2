@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,61 +60,6 @@ type CreateApplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateApplicationInstanceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateApplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationInstanceIdToReplace != nil {
-		s.WriteString(schemas.CreateApplicationInstanceRequest_ApplicationInstanceIdToReplace, *v.ApplicationInstanceIdToReplace)
-	}
-	if v.DefaultRuntimeContextDevice != nil {
-		s.WriteString(schemas.CreateApplicationInstanceRequest_DefaultRuntimeContextDevice, *v.DefaultRuntimeContextDevice)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateApplicationInstanceRequest_Description, *v.Description)
-	}
-	serializeManifestOverridesPayload(s, schemas.CreateApplicationInstanceRequest_ManifestOverridesPayload, v.ManifestOverridesPayload)
-	serializeManifestPayload(s, schemas.CreateApplicationInstanceRequest_ManifestPayload, v.ManifestPayload)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateApplicationInstanceRequest_Name, *v.Name)
-	}
-	if v.RuntimeRoleArn != nil {
-		s.WriteString(schemas.CreateApplicationInstanceRequest_RuntimeRoleArn, *v.RuntimeRoleArn)
-	}
-	serializeTagMap(s, schemas.CreateApplicationInstanceRequest_Tags, v.Tags)
-}
-func (v *CreateApplicationInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateApplicationInstanceRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateApplicationInstanceRequest_ApplicationInstanceIdToReplace:
-			v.ApplicationInstanceIdToReplace = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceRequest_ApplicationInstanceIdToReplace, v.ApplicationInstanceIdToReplace)
-		case schemas.CreateApplicationInstanceRequest_DefaultRuntimeContextDevice:
-			v.DefaultRuntimeContextDevice = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceRequest_DefaultRuntimeContextDevice, v.DefaultRuntimeContextDevice)
-		case schemas.CreateApplicationInstanceRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceRequest_Description, v.Description)
-		case schemas.CreateApplicationInstanceRequest_ManifestOverridesPayload:
-			return deserializeManifestOverridesPayload(d, schemas.CreateApplicationInstanceRequest_ManifestOverridesPayload, &v.ManifestOverridesPayload)
-		case schemas.CreateApplicationInstanceRequest_ManifestPayload:
-			return deserializeManifestPayload(d, schemas.CreateApplicationInstanceRequest_ManifestPayload, &v.ManifestPayload)
-		case schemas.CreateApplicationInstanceRequest_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceRequest_Name, v.Name)
-		case schemas.CreateApplicationInstanceRequest_RuntimeRoleArn:
-			v.RuntimeRoleArn = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceRequest_RuntimeRoleArn, v.RuntimeRoleArn)
-		case schemas.CreateApplicationInstanceRequest_Tags:
-			return deserializeTagMap(d, schemas.CreateApplicationInstanceRequest_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 type CreateApplicationInstanceOutput struct {
 
 	// The application instance's ID.
@@ -130,35 +73,16 @@ type CreateApplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateApplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateApplicationInstanceResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateApplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationInstanceId != nil {
-		s.WriteString(schemas.CreateApplicationInstanceResponse_ApplicationInstanceId, *v.ApplicationInstanceId)
-	}
-}
-func (v *CreateApplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateApplicationInstanceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateApplicationInstanceResponse_ApplicationInstanceId:
-			v.ApplicationInstanceId = new(string)
-			return d.ReadString(schemas.CreateApplicationInstanceResponse_ApplicationInstanceId, v.ApplicationInstanceId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateApplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationInstance, schemas.CreateApplicationInstanceRequest, schemas.CreateApplicationInstanceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplicationInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationInstance, schemas.CreateApplicationInstanceRequest, schemas.CreateApplicationInstanceResponse), output: &CreateApplicationInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplicationInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplicationInstance"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +40,6 @@ type DeleteSuiteDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSuiteDefinitionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSuiteDefinitionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSuiteDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SuiteDefinitionId != nil {
-		s.WriteString(schemas.DeleteSuiteDefinitionRequest_suiteDefinitionId, *v.SuiteDefinitionId)
-	}
-}
-
 type DeleteSuiteDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,21 +47,16 @@ type DeleteSuiteDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSuiteDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSuiteDefinitionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuiteDefinition, schemas.DeleteSuiteDefinitionRequest, schemas.DeleteSuiteDefinitionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSuiteDefinition, schemas.DeleteSuiteDefinitionRequest, schemas.DeleteSuiteDefinitionResponse), output: &DeleteSuiteDefinitionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSuiteDefinition{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSuiteDefinition"); err != nil {

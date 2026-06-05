@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,18 +46,6 @@ type DeleteLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAccessPointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.DeleteAccessPointInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-}
-
 // Contains the output of DeleteLoadBalancer.
 type DeleteLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -68,21 +54,16 @@ type DeleteLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAccessPointOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancer, schemas.DeleteAccessPointInput, schemas.DeleteAccessPointOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancer, schemas.DeleteAccessPointInput, schemas.DeleteAccessPointOutput), output: &DeleteLoadBalancerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLoadBalancer"); err != nil {

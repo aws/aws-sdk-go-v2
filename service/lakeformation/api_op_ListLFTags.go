@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type ListLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLFTagsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListLFTagsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.ListLFTagsRequest_CatalogId, *v.CatalogId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListLFTagsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListLFTagsRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceShareType != "" {
-		s.WriteString(schemas.ListLFTagsRequest_ResourceShareType, string(v.ResourceShareType))
-	}
-}
-
 type ListLFTagsOutput struct {
 
 	// A list of LF-tags that the requested has permission to view.
@@ -88,26 +65,16 @@ type ListLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListLFTagsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListLFTagsResponse_LFTags:
-			return deserializeLFTagsList(d, schemas.ListLFTagsResponse_LFTags, &v.LFTags)
-		case schemas.ListLFTagsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListLFTagsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLFTags, schemas.ListLFTagsRequest, schemas.ListLFTagsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLFTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLFTags, schemas.ListLFTagsRequest, schemas.ListLFTagsResponse), output: &ListLFTagsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLFTags{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLFTags"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type ExecuteProvisionedProductPlanInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteProvisionedProductPlanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteProvisionedProductPlanInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteProvisionedProductPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.ExecuteProvisionedProductPlanInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.IdempotencyToken != nil {
-		s.WriteString(schemas.ExecuteProvisionedProductPlanInput_IdempotencyToken, *v.IdempotencyToken)
-	}
-	if v.PlanId != nil {
-		s.WriteString(schemas.ExecuteProvisionedProductPlanInput_PlanId, *v.PlanId)
-	}
-}
-
 type ExecuteProvisionedProductPlanOutput struct {
 
 	// Information about the result of provisioning the product.
@@ -83,24 +63,16 @@ type ExecuteProvisionedProductPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteProvisionedProductPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteProvisionedProductPlanOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteProvisionedProductPlanOutput_RecordDetail:
-			v.RecordDetail = &types.RecordDetail{}
-			return v.RecordDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteProvisionedProductPlan, schemas.ExecuteProvisionedProductPlanInput, schemas.ExecuteProvisionedProductPlanOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteProvisionedProductPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteProvisionedProductPlan, schemas.ExecuteProvisionedProductPlanInput, schemas.ExecuteProvisionedProductPlanOutput), output: &ExecuteProvisionedProductPlanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExecuteProvisionedProductPlan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteProvisionedProductPlan"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type ListGatewayTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGatewayTargetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListGatewayTargetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListGatewayTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayIdentifier != nil {
-		s.WriteString(schemas.ListGatewayTargetsRequest_gatewayIdentifier, *v.GatewayIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListGatewayTargetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListGatewayTargetsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListGatewayTargetsOutput struct {
 
 	// The list of gateway target summaries.
@@ -86,26 +66,16 @@ type ListGatewayTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListGatewayTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListGatewayTargetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListGatewayTargetsResponse_items:
-			return deserializeTargetSummaries(d, schemas.ListGatewayTargetsResponse_items, &v.Items)
-		case schemas.ListGatewayTargetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListGatewayTargetsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListGatewayTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayTargets, schemas.ListGatewayTargetsRequest, schemas.ListGatewayTargetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGatewayTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayTargets, schemas.ListGatewayTargetsRequest, schemas.ListGatewayTargetsResponse), output: &ListGatewayTargetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGatewayTargets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGatewayTargets"); err != nil {

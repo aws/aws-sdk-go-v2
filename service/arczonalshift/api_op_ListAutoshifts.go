@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListAutoshiftsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutoshiftsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAutoshiftsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAutoshiftsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAutoshiftsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAutoshiftsRequest_nextToken, *v.NextToken)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListAutoshiftsRequest_status, string(v.Status))
-	}
-}
-
 type ListAutoshiftsOutput struct {
 
 	// The items in the response list.
@@ -83,26 +63,16 @@ type ListAutoshiftsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAutoshiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAutoshiftsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAutoshiftsResponse_items:
-			return deserializeAutoshiftSummaries(d, schemas.ListAutoshiftsResponse_items, &v.Items)
-		case schemas.ListAutoshiftsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAutoshiftsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAutoshiftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoshifts, schemas.ListAutoshiftsRequest, schemas.ListAutoshiftsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutoshifts{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoshifts, schemas.ListAutoshiftsRequest, schemas.ListAutoshiftsResponse), output: &ListAutoshiftsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutoshifts{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutoshifts"); err != nil {

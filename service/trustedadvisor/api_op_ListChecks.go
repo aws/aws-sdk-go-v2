@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,33 +52,6 @@ type ListChecksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChecksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChecksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsService != nil {
-		s.WriteString(schemas.ListChecksRequest_awsService, *v.AwsService)
-	}
-	if v.Language != "" {
-		s.WriteString(schemas.ListChecksRequest_language, string(v.Language))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChecksRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChecksRequest_nextToken, *v.NextToken)
-	}
-	if v.Pillar != "" {
-		s.WriteString(schemas.ListChecksRequest_pillar, string(v.Pillar))
-	}
-	if v.Source != "" {
-		s.WriteString(schemas.ListChecksRequest_source, string(v.Source))
-	}
-}
-
 type ListChecksOutput struct {
 
 	// The list of Checks
@@ -98,26 +69,16 @@ type ListChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChecksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChecksResponse_checkSummaries:
-			return deserializeCheckSummaryList(d, schemas.ListChecksResponse_checkSummaries, &v.CheckSummaries)
-		case schemas.ListChecksResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChecksResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChecks, schemas.ListChecksRequest, schemas.ListChecksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChecks, schemas.ListChecksRequest, schemas.ListChecksResponse), output: &ListChecksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChecks"); err != nil {

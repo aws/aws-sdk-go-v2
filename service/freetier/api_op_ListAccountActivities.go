@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,25 +50,6 @@ type ListAccountActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountActivitiesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAccountActivitiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAccountActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterActivityStatuses(s, schemas.ListAccountActivitiesRequest_filterActivityStatuses, v.FilterActivityStatuses)
-	if v.LanguageCode != "" {
-		s.WriteString(schemas.ListAccountActivitiesRequest_languageCode, string(v.LanguageCode))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAccountActivitiesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAccountActivitiesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListAccountActivitiesOutput struct {
 
 	//  A brief information about the activities.
@@ -88,26 +67,16 @@ type ListAccountActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAccountActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAccountActivitiesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAccountActivitiesResponse_activities:
-			return deserializeActivities(d, schemas.ListAccountActivitiesResponse_activities, &v.Activities)
-		case schemas.ListAccountActivitiesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAccountActivitiesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAccountActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountActivities, schemas.ListAccountActivitiesRequest, schemas.ListAccountActivitiesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAccountActivities{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountActivities, schemas.ListAccountActivitiesRequest, schemas.ListAccountActivitiesResponse), output: &ListAccountActivitiesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAccountActivities{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountActivities"); err != nil {

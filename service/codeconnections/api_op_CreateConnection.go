@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,25 +51,6 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectionName != nil {
-		s.WriteString(schemas.CreateConnectionInput_ConnectionName, *v.ConnectionName)
-	}
-	if v.HostArn != nil {
-		s.WriteString(schemas.CreateConnectionInput_HostArn, *v.HostArn)
-	}
-	if v.ProviderType != "" {
-		s.WriteString(schemas.CreateConnectionInput_ProviderType, string(v.ProviderType))
-	}
-	serializeTagList(s, schemas.CreateConnectionInput_Tags, v.Tags)
-}
-
 type CreateConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is used
@@ -92,26 +71,16 @@ type CreateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateConnectionOutput_ConnectionArn:
-			v.ConnectionArn = new(string)
-			return d.ReadString(schemas.CreateConnectionOutput_ConnectionArn, v.ConnectionArn)
-		case schemas.CreateConnectionOutput_Tags:
-			return deserializeTagList(d, schemas.CreateConnectionOutput_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionInput, schemas.CreateConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionInput, schemas.CreateConnectionOutput), output: &CreateConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnection"); err != nil {

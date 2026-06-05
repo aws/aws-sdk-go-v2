@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type DeleteLakeFormationIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLakeFormationIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteLakeFormationIdentityCenterConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.DeleteLakeFormationIdentityCenterConfigurationRequest_CatalogId, *v.CatalogId)
-	}
-}
-
 type DeleteLakeFormationIdentityCenterConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,21 +44,16 @@ type DeleteLakeFormationIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLakeFormationIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteLakeFormationIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteLakeFormationIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLakeFormationIdentityCenterConfiguration, schemas.DeleteLakeFormationIdentityCenterConfigurationRequest, schemas.DeleteLakeFormationIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLakeFormationIdentityCenterConfiguration, schemas.DeleteLakeFormationIdentityCenterConfigurationRequest, schemas.DeleteLakeFormationIdentityCenterConfigurationResponse), output: &DeleteLakeFormationIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLakeFormationIdentityCenterConfiguration"); err != nil {

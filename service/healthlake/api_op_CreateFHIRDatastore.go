@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,40 +58,6 @@ type CreateFHIRDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFHIRDatastoreInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateFHIRDatastoreRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateFHIRDatastoreRequest_ClientToken, *v.ClientToken)
-	}
-	if v.DatastoreName != nil {
-		s.WriteString(schemas.CreateFHIRDatastoreRequest_DatastoreName, *v.DatastoreName)
-	}
-	if v.DatastoreTypeVersion != "" {
-		s.WriteString(schemas.CreateFHIRDatastoreRequest_DatastoreTypeVersion, string(v.DatastoreTypeVersion))
-	}
-	if v.IdentityProviderConfiguration != nil {
-		s.WriteStruct(schemas.CreateFHIRDatastoreRequest_IdentityProviderConfiguration)
-		v.IdentityProviderConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PreloadDataConfig != nil {
-		s.WriteStruct(schemas.CreateFHIRDatastoreRequest_PreloadDataConfig)
-		v.PreloadDataConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SseConfiguration != nil {
-		s.WriteStruct(schemas.CreateFHIRDatastoreRequest_SseConfiguration)
-		v.SseConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateFHIRDatastoreRequest_Tags, v.Tags)
-}
-
 type CreateFHIRDatastoreOutput struct {
 
 	// The Amazon Resource Name (ARN) for the data store.
@@ -122,37 +86,16 @@ type CreateFHIRDatastoreOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateFHIRDatastoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateFHIRDatastoreResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateFHIRDatastoreResponse_DatastoreArn:
-			v.DatastoreArn = new(string)
-			return d.ReadString(schemas.CreateFHIRDatastoreResponse_DatastoreArn, v.DatastoreArn)
-		case schemas.CreateFHIRDatastoreResponse_DatastoreEndpoint:
-			v.DatastoreEndpoint = new(string)
-			return d.ReadString(schemas.CreateFHIRDatastoreResponse_DatastoreEndpoint, v.DatastoreEndpoint)
-		case schemas.CreateFHIRDatastoreResponse_DatastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.CreateFHIRDatastoreResponse_DatastoreId, v.DatastoreId)
-		case schemas.CreateFHIRDatastoreResponse_DatastoreStatus:
-			var ev string
-			if err := d.ReadString(schemas.CreateFHIRDatastoreResponse_DatastoreStatus, &ev); err != nil {
-				return err
-			}
-			v.DatastoreStatus = types.DatastoreStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFHIRDatastore, schemas.CreateFHIRDatastoreRequest, schemas.CreateFHIRDatastoreResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFHIRDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFHIRDatastore, schemas.CreateFHIRDatastoreRequest, schemas.CreateFHIRDatastoreResponse), output: &CreateFHIRDatastoreOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateFHIRDatastore{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFHIRDatastore"); err != nil {

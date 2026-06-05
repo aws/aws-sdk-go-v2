@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,24 +46,6 @@ type GetTrainedModelInput struct {
 	VersionIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetTrainedModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTrainedModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTrainedModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.GetTrainedModelRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.TrainedModelArn != nil {
-		s.WriteString(schemas.GetTrainedModelRequest_trainedModelArn, *v.TrainedModelArn)
-	}
-	if v.VersionIdentifier != nil {
-		s.WriteString(schemas.GetTrainedModelRequest_versionIdentifier, *v.VersionIdentifier)
-	}
 }
 
 type GetTrainedModelOutput struct {
@@ -207,110 +187,16 @@ type GetTrainedModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTrainedModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTrainedModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTrainedModelResponse_collaborationIdentifier:
-			v.CollaborationIdentifier = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_collaborationIdentifier, v.CollaborationIdentifier)
-		case schemas.GetTrainedModelResponse_configuredModelAlgorithmAssociationArn:
-			v.ConfiguredModelAlgorithmAssociationArn = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
-		case schemas.GetTrainedModelResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.GetTrainedModelResponse_createTime, v.CreateTime)
-		case schemas.GetTrainedModelResponse_dataChannels:
-			return deserializeModelTrainingDataChannels(d, schemas.GetTrainedModelResponse_dataChannels, &v.DataChannels)
-		case schemas.GetTrainedModelResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_description, v.Description)
-		case schemas.GetTrainedModelResponse_environment:
-			return deserializeEnvironment(d, schemas.GetTrainedModelResponse_environment, &v.Environment)
-		case schemas.GetTrainedModelResponse_hyperparameters:
-			return deserializeHyperParameters(d, schemas.GetTrainedModelResponse_hyperparameters, &v.Hyperparameters)
-		case schemas.GetTrainedModelResponse_incrementalTrainingDataChannels:
-			return deserializeIncrementalTrainingDataChannelsOutput(d, schemas.GetTrainedModelResponse_incrementalTrainingDataChannels, &v.IncrementalTrainingDataChannels)
-		case schemas.GetTrainedModelResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.GetTrainedModelResponse_logsStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetTrainedModelResponse_logsStatus, &ev); err != nil {
-				return err
-			}
-			v.LogsStatus = types.LogsStatus(ev)
-			return nil
-		case schemas.GetTrainedModelResponse_logsStatusDetails:
-			v.LogsStatusDetails = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_logsStatusDetails, v.LogsStatusDetails)
-		case schemas.GetTrainedModelResponse_membershipIdentifier:
-			v.MembershipIdentifier = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_membershipIdentifier, v.MembershipIdentifier)
-		case schemas.GetTrainedModelResponse_metricsStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetTrainedModelResponse_metricsStatus, &ev); err != nil {
-				return err
-			}
-			v.MetricsStatus = types.MetricsStatus(ev)
-			return nil
-		case schemas.GetTrainedModelResponse_metricsStatusDetails:
-			v.MetricsStatusDetails = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_metricsStatusDetails, v.MetricsStatusDetails)
-		case schemas.GetTrainedModelResponse_mlModelTrainingPayerAccountId:
-			v.MlModelTrainingPayerAccountId = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_mlModelTrainingPayerAccountId, v.MlModelTrainingPayerAccountId)
-		case schemas.GetTrainedModelResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_name, v.Name)
-		case schemas.GetTrainedModelResponse_resourceConfig:
-			v.ResourceConfig = &types.ResourceConfig{}
-			return v.ResourceConfig.Deserialize(d)
-		case schemas.GetTrainedModelResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetTrainedModelResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TrainedModelStatus(ev)
-			return nil
-		case schemas.GetTrainedModelResponse_statusDetails:
-			v.StatusDetails = &types.StatusDetails{}
-			return v.StatusDetails.Deserialize(d)
-		case schemas.GetTrainedModelResponse_stoppingCondition:
-			v.StoppingCondition = &types.StoppingCondition{}
-			return v.StoppingCondition.Deserialize(d)
-		case schemas.GetTrainedModelResponse_tags:
-			return deserializeTagMap(d, schemas.GetTrainedModelResponse_tags, &v.Tags)
-		case schemas.GetTrainedModelResponse_trainedModelArn:
-			v.TrainedModelArn = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_trainedModelArn, v.TrainedModelArn)
-		case schemas.GetTrainedModelResponse_trainingContainerImageDigest:
-			v.TrainingContainerImageDigest = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_trainingContainerImageDigest, v.TrainingContainerImageDigest)
-		case schemas.GetTrainedModelResponse_trainingInputMode:
-			var ev string
-			if err := d.ReadString(schemas.GetTrainedModelResponse_trainingInputMode, &ev); err != nil {
-				return err
-			}
-			v.TrainingInputMode = types.TrainingInputMode(ev)
-			return nil
-		case schemas.GetTrainedModelResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.GetTrainedModelResponse_updateTime, v.UpdateTime)
-		case schemas.GetTrainedModelResponse_versionIdentifier:
-			v.VersionIdentifier = new(string)
-			return d.ReadString(schemas.GetTrainedModelResponse_versionIdentifier, v.VersionIdentifier)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTrainedModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainedModel, schemas.GetTrainedModelRequest, schemas.GetTrainedModelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrainedModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainedModel, schemas.GetTrainedModelRequest, schemas.GetTrainedModelResponse), output: &GetTrainedModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrainedModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrainedModel"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,18 +46,6 @@ type BatchUpdateExclusionWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateExclusionWindowsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateExclusionWindowsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateExclusionWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_AddExclusionWindows, v.AddExclusionWindows)
-	serializeExclusionWindows(s, schemas.BatchUpdateExclusionWindowsInput_RemoveExclusionWindows, v.RemoveExclusionWindows)
-	serializeServiceLevelObjectiveIds(s, schemas.BatchUpdateExclusionWindowsInput_SloIds, v.SloIds)
-}
-
 type BatchUpdateExclusionWindowsOutput struct {
 
 	// A list of errors that occurred while processing the request.
@@ -78,25 +64,16 @@ type BatchUpdateExclusionWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateExclusionWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateExclusionWindowsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateExclusionWindowsOutput_Errors:
-			return deserializeBatchUpdateExclusionWindowsErrors(d, schemas.BatchUpdateExclusionWindowsOutput_Errors, &v.Errors)
-		case schemas.BatchUpdateExclusionWindowsOutput_SloIds:
-			return deserializeServiceLevelObjectiveIds(d, schemas.BatchUpdateExclusionWindowsOutput_SloIds, &v.SloIds)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateExclusionWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateExclusionWindows, schemas.BatchUpdateExclusionWindowsInput, schemas.BatchUpdateExclusionWindowsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateExclusionWindows{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateExclusionWindows, schemas.BatchUpdateExclusionWindowsInput, schemas.BatchUpdateExclusionWindowsOutput), output: &BatchUpdateExclusionWindowsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateExclusionWindows{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateExclusionWindows"); err != nil {

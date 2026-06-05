@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,18 +42,6 @@ type DeleteDNSViewInput struct {
 	DnsViewId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DeleteDNSViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDNSViewInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDNSViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DnsViewId != nil {
-		s.WriteString(schemas.DeleteDNSViewInput_dnsViewId, *v.DnsViewId)
-	}
 }
 
 type DeleteDNSViewOutput struct {
@@ -124,73 +110,16 @@ type DeleteDNSViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDNSViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDNSViewOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDNSViewOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_arn, v.Arn)
-		case schemas.DeleteDNSViewOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_clientToken, v.ClientToken)
-		case schemas.DeleteDNSViewOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDNSViewOutput_createdAt, v.CreatedAt)
-		case schemas.DeleteDNSViewOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_description, v.Description)
-		case schemas.DeleteDNSViewOutput_dnssecValidation:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDNSViewOutput_dnssecValidation, &ev); err != nil {
-				return err
-			}
-			v.DnssecValidation = types.DnsSecValidationType(ev)
-			return nil
-		case schemas.DeleteDNSViewOutput_ednsClientSubnet:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDNSViewOutput_ednsClientSubnet, &ev); err != nil {
-				return err
-			}
-			v.EdnsClientSubnet = types.EdnsClientSubnetType(ev)
-			return nil
-		case schemas.DeleteDNSViewOutput_firewallRulesFailOpen:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDNSViewOutput_firewallRulesFailOpen, &ev); err != nil {
-				return err
-			}
-			v.FirewallRulesFailOpen = types.FirewallRulesFailOpenType(ev)
-			return nil
-		case schemas.DeleteDNSViewOutput_globalResolverId:
-			v.GlobalResolverId = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_globalResolverId, v.GlobalResolverId)
-		case schemas.DeleteDNSViewOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_id, v.Id)
-		case schemas.DeleteDNSViewOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteDNSViewOutput_name, v.Name)
-		case schemas.DeleteDNSViewOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDNSViewOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ProfileResourceStatus(ev)
-			return nil
-		case schemas.DeleteDNSViewOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDNSViewOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDNSViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDNSView, schemas.DeleteDNSViewInput, schemas.DeleteDNSViewOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDNSView, schemas.DeleteDNSViewInput, schemas.DeleteDNSViewOutput), output: &DeleteDNSViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDNSView"); err != nil {

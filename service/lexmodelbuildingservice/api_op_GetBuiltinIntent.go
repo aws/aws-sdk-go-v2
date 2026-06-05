@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,18 +44,6 @@ type GetBuiltinIntentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBuiltinIntentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetBuiltinIntentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetBuiltinIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Signature != nil {
-		s.WriteString(schemas.GetBuiltinIntentRequest_signature, *v.Signature)
-	}
-}
-
 type GetBuiltinIntentOutput struct {
 
 	// The unique identifier for a built-in intent.
@@ -76,28 +62,16 @@ type GetBuiltinIntentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetBuiltinIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetBuiltinIntentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetBuiltinIntentResponse_signature:
-			v.Signature = new(string)
-			return d.ReadString(schemas.GetBuiltinIntentResponse_signature, v.Signature)
-		case schemas.GetBuiltinIntentResponse_slots:
-			return deserializeBuiltinIntentSlotList(d, schemas.GetBuiltinIntentResponse_slots, &v.Slots)
-		case schemas.GetBuiltinIntentResponse_supportedLocales:
-			return deserializeLocaleList(d, schemas.GetBuiltinIntentResponse_supportedLocales, &v.SupportedLocales)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetBuiltinIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuiltinIntent, schemas.GetBuiltinIntentRequest, schemas.GetBuiltinIntentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBuiltinIntent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuiltinIntent, schemas.GetBuiltinIntentRequest, schemas.GetBuiltinIntentResponse), output: &GetBuiltinIntentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBuiltinIntent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBuiltinIntent"); err != nil {

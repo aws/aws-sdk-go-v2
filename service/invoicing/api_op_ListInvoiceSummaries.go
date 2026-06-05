@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,31 +49,6 @@ type ListInvoiceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInvoiceSummariesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInvoiceSummariesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInvoiceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.ListInvoiceSummariesRequest_Filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListInvoiceSummariesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListInvoiceSummariesRequest_NextToken, *v.NextToken)
-	}
-	if v.Selector != nil {
-		s.WriteStruct(schemas.ListInvoiceSummariesRequest_Selector)
-		v.Selector.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type ListInvoiceSummariesOutput struct {
 
 	// List of key (summary level) invoice details without line item details.
@@ -93,26 +66,16 @@ type ListInvoiceSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInvoiceSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInvoiceSummariesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInvoiceSummariesResponse_InvoiceSummaries:
-			return deserializeInvoiceSummaries(d, schemas.ListInvoiceSummariesResponse_InvoiceSummaries, &v.InvoiceSummaries)
-		case schemas.ListInvoiceSummariesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListInvoiceSummariesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListInvoiceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceSummaries, schemas.ListInvoiceSummariesRequest, schemas.ListInvoiceSummariesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInvoiceSummaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceSummaries, schemas.ListInvoiceSummariesRequest, schemas.ListInvoiceSummariesResponse), output: &ListInvoiceSummariesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInvoiceSummaries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInvoiceSummaries"); err != nil {

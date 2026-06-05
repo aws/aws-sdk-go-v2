@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,19 +50,6 @@ type BatchUpdateWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateWorkloadEstimateUsageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateWorkloadEstimateUsageEntries(s, schemas.BatchUpdateWorkloadEstimateUsageRequest_usage, v.Usage)
-	if v.WorkloadEstimateId != nil {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
-	}
-}
-
 type BatchUpdateWorkloadEstimateUsageOutput struct {
 
 	//  Returns the list of error reasons and usage line item IDs that could not be
@@ -81,25 +66,16 @@ type BatchUpdateWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateWorkloadEstimateUsageResponse_errors:
-			return deserializeBatchUpdateWorkloadEstimateUsageErrors(d, schemas.BatchUpdateWorkloadEstimateUsageResponse_errors, &v.Errors)
-		case schemas.BatchUpdateWorkloadEstimateUsageResponse_items:
-			return deserializeWorkloadEstimateUsageItems(d, schemas.BatchUpdateWorkloadEstimateUsageResponse_items, &v.Items)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchUpdateWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateWorkloadEstimateUsage, schemas.BatchUpdateWorkloadEstimateUsageRequest, schemas.BatchUpdateWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateWorkloadEstimateUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateWorkloadEstimateUsage, schemas.BatchUpdateWorkloadEstimateUsageRequest, schemas.BatchUpdateWorkloadEstimateUsageResponse), output: &BatchUpdateWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateWorkloadEstimateUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateWorkloadEstimateUsage"); err != nil {

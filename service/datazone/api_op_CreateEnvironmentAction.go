@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,28 +57,6 @@ type CreateEnvironmentActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentActionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateEnvironmentActionInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateEnvironmentActionInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.CreateEnvironmentActionInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateEnvironmentActionInput_name, *v.Name)
-	}
-	serializeActionParameters(s, schemas.CreateEnvironmentActionInput_parameters, v.Parameters)
-}
-
 type CreateEnvironmentActionOutput struct {
 
 	// The ID of the domain in which the environment action is created.
@@ -117,38 +93,16 @@ type CreateEnvironmentActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentActionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentActionOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateEnvironmentActionOutput_description, v.Description)
-		case schemas.CreateEnvironmentActionOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateEnvironmentActionOutput_domainId, v.DomainId)
-		case schemas.CreateEnvironmentActionOutput_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.CreateEnvironmentActionOutput_environmentId, v.EnvironmentId)
-		case schemas.CreateEnvironmentActionOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateEnvironmentActionOutput_id, v.Id)
-		case schemas.CreateEnvironmentActionOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateEnvironmentActionOutput_name, v.Name)
-		case schemas.CreateEnvironmentActionOutput_parameters:
-			return deserializeActionParameters(d, schemas.CreateEnvironmentActionOutput_parameters, &v.Parameters)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEnvironmentActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentAction, schemas.CreateEnvironmentActionInput, schemas.CreateEnvironmentActionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironmentAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentAction, schemas.CreateEnvironmentActionInput, schemas.CreateEnvironmentActionOutput), output: &CreateEnvironmentActionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironmentAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironmentAction"); err != nil {

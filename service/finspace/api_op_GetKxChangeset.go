@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,24 +46,6 @@ type GetKxChangesetInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetKxChangesetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetKxChangesetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetKxChangesetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_changesetId, *v.ChangesetId)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_databaseName, *v.DatabaseName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.GetKxChangesetRequest_environmentId, *v.EnvironmentId)
-	}
 }
 
 type GetKxChangesetOutput struct {
@@ -118,51 +98,16 @@ type GetKxChangesetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetKxChangesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetKxChangesetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetKxChangesetResponse_activeFromTimestamp:
-			v.ActiveFromTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_activeFromTimestamp, v.ActiveFromTimestamp)
-		case schemas.GetKxChangesetResponse_changeRequests:
-			return deserializeChangeRequests(d, schemas.GetKxChangesetResponse_changeRequests, &v.ChangeRequests)
-		case schemas.GetKxChangesetResponse_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_changesetId, v.ChangesetId)
-		case schemas.GetKxChangesetResponse_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_createdTimestamp, v.CreatedTimestamp)
-		case schemas.GetKxChangesetResponse_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_databaseName, v.DatabaseName)
-		case schemas.GetKxChangesetResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.GetKxChangesetResponse_environmentId, v.EnvironmentId)
-		case schemas.GetKxChangesetResponse_errorInfo:
-			v.ErrorInfo = &types.ErrorInfo{}
-			return v.ErrorInfo.Deserialize(d)
-		case schemas.GetKxChangesetResponse_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetKxChangesetResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.GetKxChangesetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetKxChangesetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ChangesetStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetKxChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxChangeset, schemas.GetKxChangesetRequest, schemas.GetKxChangesetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKxChangeset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKxChangeset, schemas.GetKxChangesetRequest, schemas.GetKxChangesetResponse), output: &GetKxChangesetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKxChangeset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKxChangeset"); err != nil {

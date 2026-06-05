@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,31 +51,6 @@ type PublishMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishMetricsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishMetricsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.PublishMetricsInput_EnvironmentName, *v.EnvironmentName)
-	}
-	serializeMetricData(s, schemas.PublishMetricsInput_MetricData, v.MetricData)
-}
-func (v *PublishMetricsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishMetricsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PublishMetricsInput_EnvironmentName:
-			v.EnvironmentName = new(string)
-			return d.ReadString(schemas.PublishMetricsInput_EnvironmentName, v.EnvironmentName)
-		case schemas.PublishMetricsInput_MetricData:
-			return deserializeMetricData(d, schemas.PublishMetricsInput_MetricData, &v.MetricData)
-		}
-		return nil
-	})
-}
-
 type PublishMetricsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,29 +58,16 @@ type PublishMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PublishMetricsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PublishMetricsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PublishMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PublishMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PublishMetricsOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishMetrics, schemas.PublishMetricsInput, schemas.PublishMetricsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPublishMetrics{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishMetrics, schemas.PublishMetricsInput, schemas.PublishMetricsOutput), output: &PublishMetricsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPublishMetrics{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishMetrics"); err != nil {

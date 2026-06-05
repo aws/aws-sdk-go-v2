@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListSourceViewsForBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSourceViewsForBillingViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSourceViewsForBillingViewRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSourceViewsForBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ListSourceViewsForBillingViewRequest_arn, *v.Arn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSourceViewsForBillingViewRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSourceViewsForBillingViewRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListSourceViewsForBillingViewOutput struct {
 
 	// A list of billing views used as the data source for the custom billing view.
@@ -80,26 +60,16 @@ type ListSourceViewsForBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSourceViewsForBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSourceViewsForBillingViewResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSourceViewsForBillingViewResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSourceViewsForBillingViewResponse_nextToken, v.NextToken)
-		case schemas.ListSourceViewsForBillingViewResponse_sourceViews:
-			return deserializeBillingViewSourceViewsList(d, schemas.ListSourceViewsForBillingViewResponse_sourceViews, &v.SourceViews)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSourceViewsForBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceViewsForBillingView, schemas.ListSourceViewsForBillingViewRequest, schemas.ListSourceViewsForBillingViewResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSourceViewsForBillingView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceViewsForBillingView, schemas.ListSourceViewsForBillingViewRequest, schemas.ListSourceViewsForBillingViewResponse), output: &ListSourceViewsForBillingViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSourceViewsForBillingView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSourceViewsForBillingView"); err != nil {

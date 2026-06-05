@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,27 +71,6 @@ type AssociateOriginationIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateOriginationIdentityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateOriginationIdentityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateOriginationIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.AssociateOriginationIdentityRequest_ClientToken, *v.ClientToken)
-	}
-	if v.IsoCountryCode != nil {
-		s.WriteString(schemas.AssociateOriginationIdentityRequest_IsoCountryCode, *v.IsoCountryCode)
-	}
-	if v.OriginationIdentity != nil {
-		s.WriteString(schemas.AssociateOriginationIdentityRequest_OriginationIdentity, *v.OriginationIdentity)
-	}
-	if v.PoolId != nil {
-		s.WriteString(schemas.AssociateOriginationIdentityRequest_PoolId, *v.PoolId)
-	}
-}
-
 type AssociateOriginationIdentityOutput struct {
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
@@ -119,36 +96,16 @@ type AssociateOriginationIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateOriginationIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateOriginationIdentityResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateOriginationIdentityResult_IsoCountryCode:
-			v.IsoCountryCode = new(string)
-			return d.ReadString(schemas.AssociateOriginationIdentityResult_IsoCountryCode, v.IsoCountryCode)
-		case schemas.AssociateOriginationIdentityResult_OriginationIdentity:
-			v.OriginationIdentity = new(string)
-			return d.ReadString(schemas.AssociateOriginationIdentityResult_OriginationIdentity, v.OriginationIdentity)
-		case schemas.AssociateOriginationIdentityResult_OriginationIdentityArn:
-			v.OriginationIdentityArn = new(string)
-			return d.ReadString(schemas.AssociateOriginationIdentityResult_OriginationIdentityArn, v.OriginationIdentityArn)
-		case schemas.AssociateOriginationIdentityResult_PoolArn:
-			v.PoolArn = new(string)
-			return d.ReadString(schemas.AssociateOriginationIdentityResult_PoolArn, v.PoolArn)
-		case schemas.AssociateOriginationIdentityResult_PoolId:
-			v.PoolId = new(string)
-			return d.ReadString(schemas.AssociateOriginationIdentityResult_PoolId, v.PoolId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateOriginationIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOriginationIdentity, schemas.AssociateOriginationIdentityRequest, schemas.AssociateOriginationIdentityResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateOriginationIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOriginationIdentity, schemas.AssociateOriginationIdentityRequest, schemas.AssociateOriginationIdentityResult), output: &AssociateOriginationIdentityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateOriginationIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateOriginationIdentity"); err != nil {

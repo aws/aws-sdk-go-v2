@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -72,34 +70,6 @@ type ListServiceStatesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceStatesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListServiceStatesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListServiceStatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeFilters(s, schemas.ListServiceStatesInput_AttributeFilters, v.AttributeFilters)
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.ListServiceStatesInput_AwsAccountId, *v.AwsAccountId)
-	}
-	if v.EndTime != nil {
-		s.WriteTime(schemas.ListServiceStatesInput_EndTime, *v.EndTime)
-	}
-	if v.IncludeLinkedAccounts != false {
-		s.WriteBool(schemas.ListServiceStatesInput_IncludeLinkedAccounts, v.IncludeLinkedAccounts)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListServiceStatesInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListServiceStatesInput_NextToken, *v.NextToken)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.ListServiceStatesInput_StartTime, *v.StartTime)
-	}
-}
-
 type ListServiceStatesOutput struct {
 
 	// The end of the time period that the returned information applies to. When used
@@ -132,32 +102,16 @@ type ListServiceStatesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceStatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListServiceStatesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListServiceStatesOutput_EndTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.ListServiceStatesOutput_EndTime, v.EndTime)
-		case schemas.ListServiceStatesOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListServiceStatesOutput_NextToken, v.NextToken)
-		case schemas.ListServiceStatesOutput_ServiceStates:
-			return deserializeServiceStates(d, schemas.ListServiceStatesOutput_ServiceStates, &v.ServiceStates)
-		case schemas.ListServiceStatesOutput_StartTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.ListServiceStatesOutput_StartTime, v.StartTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListServiceStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceStates, schemas.ListServiceStatesInput, schemas.ListServiceStatesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceStates{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceStates, schemas.ListServiceStatesInput, schemas.ListServiceStatesOutput), output: &ListServiceStatesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceStates{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceStates"); err != nil {

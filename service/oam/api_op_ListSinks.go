@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,21 +40,6 @@ type ListSinksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSinksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSinksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSinksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSinksInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSinksInput_NextToken, *v.NextToken)
-	}
-}
-
 type ListSinksOutput struct {
 
 	// An array of structures that contain the information about the returned sinks.
@@ -73,26 +56,16 @@ type ListSinksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSinksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSinksOutput_Items:
-			return deserializeListSinksItems(d, schemas.ListSinksOutput_Items, &v.Items)
-		case schemas.ListSinksOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSinksOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSinks, schemas.ListSinksInput, schemas.ListSinksOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSinks, schemas.ListSinksInput, schemas.ListSinksOutput), output: &ListSinksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSinks"); err != nil {

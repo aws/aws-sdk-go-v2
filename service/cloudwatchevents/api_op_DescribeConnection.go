@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type DescribeConnectionInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeConnectionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeConnectionRequest_Name, *v.Name)
-	}
 }
 
 type DescribeConnectionOutput struct {
@@ -94,62 +80,16 @@ type DescribeConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeConnectionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeConnectionResponse_AuthParameters:
-			v.AuthParameters = &types.ConnectionAuthResponseParameters{}
-			return v.AuthParameters.Deserialize(d)
-		case schemas.DescribeConnectionResponse_AuthorizationType:
-			var ev string
-			if err := d.ReadString(schemas.DescribeConnectionResponse_AuthorizationType, &ev); err != nil {
-				return err
-			}
-			v.AuthorizationType = types.ConnectionAuthorizationType(ev)
-			return nil
-		case schemas.DescribeConnectionResponse_ConnectionArn:
-			v.ConnectionArn = new(string)
-			return d.ReadString(schemas.DescribeConnectionResponse_ConnectionArn, v.ConnectionArn)
-		case schemas.DescribeConnectionResponse_ConnectionState:
-			var ev string
-			if err := d.ReadString(schemas.DescribeConnectionResponse_ConnectionState, &ev); err != nil {
-				return err
-			}
-			v.ConnectionState = types.ConnectionState(ev)
-			return nil
-		case schemas.DescribeConnectionResponse_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeConnectionResponse_CreationTime, v.CreationTime)
-		case schemas.DescribeConnectionResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeConnectionResponse_Description, v.Description)
-		case schemas.DescribeConnectionResponse_LastAuthorizedTime:
-			v.LastAuthorizedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
-		case schemas.DescribeConnectionResponse_LastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeConnectionResponse_LastModifiedTime, v.LastModifiedTime)
-		case schemas.DescribeConnectionResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeConnectionResponse_Name, v.Name)
-		case schemas.DescribeConnectionResponse_SecretArn:
-			v.SecretArn = new(string)
-			return d.ReadString(schemas.DescribeConnectionResponse_SecretArn, v.SecretArn)
-		case schemas.DescribeConnectionResponse_StateReason:
-			v.StateReason = new(string)
-			return d.ReadString(schemas.DescribeConnectionResponse_StateReason, v.StateReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnection, schemas.DescribeConnectionRequest, schemas.DescribeConnectionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnection, schemas.DescribeConnectionRequest, schemas.DescribeConnectionResponse), output: &DescribeConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnection"); err != nil {

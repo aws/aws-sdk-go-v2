@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,18 +42,6 @@ type ManageSparqlStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ManageSparqlStatisticsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManageSparqlStatisticsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ManageSparqlStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Mode != "" {
-		s.WriteString(schemas.ManageSparqlStatisticsInput_mode, string(v.Mode))
-	}
-}
-
 type ManageSparqlStatisticsOutput struct {
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.
@@ -72,27 +58,16 @@ type ManageSparqlStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ManageSparqlStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ManageSparqlStatisticsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ManageSparqlStatisticsOutput_payload:
-			v.Payload = &types.RefreshStatisticsIdMap{}
-			return v.Payload.Deserialize(d)
-		case schemas.ManageSparqlStatisticsOutput_status:
-			v.Status = new(string)
-			return d.ReadString(schemas.ManageSparqlStatisticsOutput_status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationManageSparqlStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ManageSparqlStatistics, schemas.ManageSparqlStatisticsInput, schemas.ManageSparqlStatisticsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpManageSparqlStatistics{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ManageSparqlStatistics, schemas.ManageSparqlStatisticsInput, schemas.ManageSparqlStatisticsOutput), output: &ManageSparqlStatisticsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpManageSparqlStatistics{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ManageSparqlStatistics"); err != nil {

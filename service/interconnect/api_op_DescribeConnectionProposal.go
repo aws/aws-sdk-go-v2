@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DescribeConnectionProposalInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConnectionProposalInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeConnectionProposalRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeConnectionProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivationKey != nil {
-		s.WriteString(schemas.DescribeConnectionProposalRequest_activationKey, *v.ActivationKey)
-	}
-}
-
 type DescribeConnectionProposalOutput struct {
 
 	// The bandwidth of the proposed Connection.
@@ -81,32 +67,16 @@ type DescribeConnectionProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeConnectionProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeConnectionProposalResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeConnectionProposalResponse_bandwidth:
-			v.Bandwidth = new(string)
-			return d.ReadString(schemas.DescribeConnectionProposalResponse_bandwidth, v.Bandwidth)
-		case schemas.DescribeConnectionProposalResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.DescribeConnectionProposalResponse_environmentId, v.EnvironmentId)
-		case schemas.DescribeConnectionProposalResponse_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.DescribeConnectionProposalResponse_location, v.Location)
-		case schemas.DescribeConnectionProposalResponse_provider:
-			return deserializeProvider(d, schemas.DescribeConnectionProposalResponse_provider, &v.Provider)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeConnectionProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionProposal, schemas.DescribeConnectionProposalRequest, schemas.DescribeConnectionProposalResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeConnectionProposal{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionProposal, schemas.DescribeConnectionProposalRequest, schemas.DescribeConnectionProposalResponse), output: &DescribeConnectionProposalOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeConnectionProposal{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectionProposal"); err != nil {

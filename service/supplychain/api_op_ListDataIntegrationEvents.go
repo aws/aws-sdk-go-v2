@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type ListDataIntegrationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDataIntegrationEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDataIntegrationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventType != "" {
-		s.WriteString(schemas.ListDataIntegrationEventsRequest_eventType, string(v.EventType))
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.ListDataIntegrationEventsRequest_instanceId, *v.InstanceId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListDataIntegrationEventsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDataIntegrationEventsRequest_nextToken, *v.NextToken)
-	}
-}
-
 // The response parameters for ListDataIntegrationEvents.
 type ListDataIntegrationEventsOutput struct {
 
@@ -89,26 +66,16 @@ type ListDataIntegrationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDataIntegrationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDataIntegrationEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDataIntegrationEventsResponse_events:
-			return deserializeDataIntegrationEventList(d, schemas.ListDataIntegrationEventsResponse_events, &v.Events)
-		case schemas.ListDataIntegrationEventsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDataIntegrationEventsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDataIntegrationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationEvents, schemas.ListDataIntegrationEventsRequest, schemas.ListDataIntegrationEventsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrationEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationEvents, schemas.ListDataIntegrationEventsRequest, schemas.ListDataIntegrationEventsResponse), output: &ListDataIntegrationEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrationEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataIntegrationEvents"); err != nil {

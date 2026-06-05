@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetCompatibleVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCompatibleVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCompatibleVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCompatibleVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.GetCompatibleVersionsRequest_DomainName, *v.DomainName)
-	}
-}
-
 // Container for the response returned by the GetCompatibleVersions operation.
 type GetCompatibleVersionsOutput struct {
 
@@ -65,23 +51,16 @@ type GetCompatibleVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCompatibleVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCompatibleVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCompatibleVersionsResponse_CompatibleVersions:
-			return deserializeCompatibleVersionsList(d, schemas.GetCompatibleVersionsResponse_CompatibleVersions, &v.CompatibleVersions)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCompatibleVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleVersions, schemas.GetCompatibleVersionsRequest, schemas.GetCompatibleVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCompatibleVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleVersions, schemas.GetCompatibleVersionsRequest, schemas.GetCompatibleVersionsResponse), output: &GetCompatibleVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCompatibleVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCompatibleVersions"); err != nil {

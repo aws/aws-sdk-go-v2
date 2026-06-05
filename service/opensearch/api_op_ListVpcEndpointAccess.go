@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type ListVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListVpcEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListVpcEndpointAccessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListVpcEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.ListVpcEndpointAccessRequest_DomainName, *v.DomainName)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListVpcEndpointAccessRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListVpcEndpointAccessOutput struct {
 
 	// A list of [IAM principals] that can currently access the domain.
@@ -83,26 +66,16 @@ type ListVpcEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListVpcEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListVpcEndpointAccessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList:
-			return deserializeAuthorizedPrincipalList(d, schemas.ListVpcEndpointAccessResponse_AuthorizedPrincipalList, &v.AuthorizedPrincipalList)
-		case schemas.ListVpcEndpointAccessResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListVpcEndpointAccessResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListVpcEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAccess, schemas.ListVpcEndpointAccessRequest, schemas.ListVpcEndpointAccessResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVpcEndpointAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAccess, schemas.ListVpcEndpointAccessRequest, schemas.ListVpcEndpointAccessResponse), output: &ListVpcEndpointAccessOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVpcEndpointAccess{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVpcEndpointAccess"); err != nil {

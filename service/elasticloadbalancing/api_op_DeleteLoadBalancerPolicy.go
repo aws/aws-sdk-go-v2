@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type DeleteLoadBalancerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLoadBalancerPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteLoadBalancerPolicyInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteLoadBalancerPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.DeleteLoadBalancerPolicyInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-	if v.PolicyName != nil {
-		s.WriteString(schemas.DeleteLoadBalancerPolicyInput_PolicyName, *v.PolicyName)
-	}
-}
-
 // Contains the output of DeleteLoadBalancerPolicy.
 type DeleteLoadBalancerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -68,21 +51,16 @@ type DeleteLoadBalancerPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteLoadBalancerPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteLoadBalancerPolicyOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancerPolicy, schemas.DeleteLoadBalancerPolicyInput, schemas.DeleteLoadBalancerPolicyOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLoadBalancerPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancerPolicy, schemas.DeleteLoadBalancerPolicyInput, schemas.DeleteLoadBalancerPolicyOutput), output: &DeleteLoadBalancerPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteLoadBalancerPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLoadBalancerPolicy"); err != nil {

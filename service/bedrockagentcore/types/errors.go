@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,16 +34,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the request conflicts with the current state of
 // the resource. This can happen when trying to modify a resource that is currently
@@ -74,16 +63,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 //	An exception thrown when attempting to create a resource with an identifier
 //
@@ -112,16 +91,6 @@ func (e *DuplicateIdException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *DuplicateIdException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DuplicateIdException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DuplicateIdException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.DuplicateIdException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the service encounters an unexpected internal
 // error. This is a temporary condition that will resolve itself with retries. We
@@ -150,16 +119,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The input fails to satisfy the constraints specified by AgentCore. Check your
 // input values and try again.
@@ -187,16 +146,6 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidInputException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InvalidInputException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the specified resource does not exist. This can
 // happen when using an invalid identifier or when trying to access a resource that
@@ -225,16 +174,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when there is a retryable conflict performing an
 // operation. This is a temporary condition that may resolve itself with retries.
@@ -263,16 +202,6 @@ func (e *RetryableConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RetryableConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RetryableConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RetryableConflictException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RetryableConflictException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when there is an error in the runtime client. This
 // can happen due to network issues, invalid configuration, or other client-side
@@ -301,16 +230,6 @@ func (e *RuntimeClientError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RuntimeClientError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *RuntimeClientError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RuntimeClientError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RuntimeClientError_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.RuntimeClientError_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The service encountered an internal error. Try your request again later.
 type ServiceException struct {
@@ -337,16 +256,6 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the request would cause a service quota to be
 // exceeded. Review your service quotas and either reduce your request rate or
@@ -375,16 +284,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to request throttling. Reduce the frequency of
 // requests and try again.
@@ -412,16 +311,6 @@ func (e *ThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottledException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottledException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottledException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the request was denied due to request
 // throttling. This happens when you exceed the allowed request rate for an
@@ -451,16 +340,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This exception is thrown when the JWT bearer token is invalid or not found for
 // OAuth bearer token based access
@@ -488,16 +367,6 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnauthorizedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UnauthorizedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // The exception that occurs when the input fails to satisfy the constraints
 // specified by the service. Check the error message for details about which input
@@ -529,22 +398,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_fieldList:
-			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fieldList, &v.FieldList)
-		case schemas.ValidationException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_message, v.Message)
-		case schemas.ValidationException_reason:
-			var ev string
-			if err := d.ReadString(schemas.ValidationException_reason, &ev); err != nil {
-				return err
-			}
-			v.Reason = ValidationExceptionReason(ev)
-			return nil
-		}
-		return nil
-	})
-}

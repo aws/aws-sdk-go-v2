@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type GetPortalServiceProviderMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPortalServiceProviderMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPortalServiceProviderMetadataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPortalServiceProviderMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.GetPortalServiceProviderMetadataRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type GetPortalServiceProviderMetadataOutput struct {
 
 	// The ARN of the web portal.
@@ -66,27 +52,16 @@ type GetPortalServiceProviderMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPortalServiceProviderMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPortalServiceProviderMetadataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPortalServiceProviderMetadataResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.GetPortalServiceProviderMetadataResponse_portalArn, v.PortalArn)
-		case schemas.GetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata:
-			v.ServiceProviderSamlMetadata = new(string)
-			return d.ReadString(schemas.GetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata, v.ServiceProviderSamlMetadata)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPortalServiceProviderMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalServiceProviderMetadata, schemas.GetPortalServiceProviderMetadataRequest, schemas.GetPortalServiceProviderMetadataResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortalServiceProviderMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalServiceProviderMetadata, schemas.GetPortalServiceProviderMetadataRequest, schemas.GetPortalServiceProviderMetadataResponse), output: &GetPortalServiceProviderMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortalServiceProviderMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPortalServiceProviderMetadata"); err != nil {

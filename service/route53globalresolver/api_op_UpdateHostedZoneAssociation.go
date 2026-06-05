@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,21 +45,6 @@ type UpdateHostedZoneAssociationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateHostedZoneAssociationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateHostedZoneAssociationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateHostedZoneAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HostedZoneAssociationId != nil {
-		s.WriteString(schemas.UpdateHostedZoneAssociationInput_hostedZoneAssociationId, *v.HostedZoneAssociationId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateHostedZoneAssociationInput_name, *v.Name)
-	}
 }
 
 type UpdateHostedZoneAssociationOutput struct {
@@ -112,49 +95,16 @@ type UpdateHostedZoneAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHostedZoneAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateHostedZoneAssociationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateHostedZoneAssociationOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateHostedZoneAssociationOutput_createdAt, v.CreatedAt)
-		case schemas.UpdateHostedZoneAssociationOutput_hostedZoneId:
-			v.HostedZoneId = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_hostedZoneId, v.HostedZoneId)
-		case schemas.UpdateHostedZoneAssociationOutput_hostedZoneName:
-			v.HostedZoneName = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_hostedZoneName, v.HostedZoneName)
-		case schemas.UpdateHostedZoneAssociationOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_id, v.Id)
-		case schemas.UpdateHostedZoneAssociationOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_name, v.Name)
-		case schemas.UpdateHostedZoneAssociationOutput_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.UpdateHostedZoneAssociationOutput_resourceArn, v.ResourceArn)
-		case schemas.UpdateHostedZoneAssociationOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateHostedZoneAssociationOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.HostedZoneAssociationStatus(ev)
-			return nil
-		case schemas.UpdateHostedZoneAssociationOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateHostedZoneAssociationOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateHostedZoneAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostedZoneAssociation, schemas.UpdateHostedZoneAssociationInput, schemas.UpdateHostedZoneAssociationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateHostedZoneAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostedZoneAssociation, schemas.UpdateHostedZoneAssociationInput, schemas.UpdateHostedZoneAssociationOutput), output: &UpdateHostedZoneAssociationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateHostedZoneAssociation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHostedZoneAssociation"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,36 +67,6 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.StartSessionRequest_applicationId, *v.ApplicationId)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.StartSessionRequest_clientToken, *v.ClientToken)
-	}
-	if v.ConfigurationOverrides != nil {
-		s.WriteStruct(schemas.StartSessionRequest_configurationOverrides)
-		v.ConfigurationOverrides.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.StartSessionRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.IdleTimeoutMinutes != nil {
-		s.WriteInt64(schemas.StartSessionRequest_idleTimeoutMinutes, *v.IdleTimeoutMinutes)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StartSessionRequest_name, *v.Name)
-	}
-	serializeTagMap(s, schemas.StartSessionRequest_tags, v.Tags)
-}
-
 type StartSessionOutput struct {
 
 	// The output contains the application ID on which the session was started.
@@ -122,30 +90,16 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartSessionResponse_applicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.StartSessionResponse_applicationId, v.ApplicationId)
-		case schemas.StartSessionResponse_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.StartSessionResponse_arn, v.Arn)
-		case schemas.StartSessionResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.StartSessionResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse), output: &StartSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSession"); err != nil {

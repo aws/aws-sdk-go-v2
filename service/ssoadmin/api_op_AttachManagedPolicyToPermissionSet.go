@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,24 +52,6 @@ type AttachManagedPolicyToPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachManagedPolicyToPermissionSetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AttachManagedPolicyToPermissionSetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AttachManagedPolicyToPermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.AttachManagedPolicyToPermissionSetRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.ManagedPolicyArn != nil {
-		s.WriteString(schemas.AttachManagedPolicyToPermissionSetRequest_ManagedPolicyArn, *v.ManagedPolicyArn)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.AttachManagedPolicyToPermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
-	}
-}
-
 type AttachManagedPolicyToPermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,21 +59,16 @@ type AttachManagedPolicyToPermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AttachManagedPolicyToPermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AttachManagedPolicyToPermissionSetResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAttachManagedPolicyToPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachManagedPolicyToPermissionSet, schemas.AttachManagedPolicyToPermissionSetRequest, schemas.AttachManagedPolicyToPermissionSetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachManagedPolicyToPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachManagedPolicyToPermissionSet, schemas.AttachManagedPolicyToPermissionSetRequest, schemas.AttachManagedPolicyToPermissionSetResponse), output: &AttachManagedPolicyToPermissionSetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachManagedPolicyToPermissionSet{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachManagedPolicyToPermissionSet"); err != nil {

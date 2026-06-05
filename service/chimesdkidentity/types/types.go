@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -31,52 +29,6 @@ type AppInstance struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstance) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstance)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstance) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.AppInstance_AppInstanceArn, *v.AppInstanceArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstance_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstance_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstance_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstance_Name, *v.Name)
-	}
-}
-func (v *AppInstance) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstance, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstance_AppInstanceArn:
-			v.AppInstanceArn = new(string)
-			return d.ReadString(schemas.AppInstance_AppInstanceArn, v.AppInstanceArn)
-		case schemas.AppInstance_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstance_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.AppInstance_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstance_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.AppInstance_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstance_Metadata, v.Metadata)
-		case schemas.AppInstance_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstance_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // The name and ARN of the admin for the AppInstance .
 type AppInstanceAdmin struct {
 
@@ -92,42 +44,6 @@ type AppInstanceAdmin struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceAdmin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceAdmin)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceAdmin) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Admin != nil {
-		s.WriteStruct(schemas.AppInstanceAdmin_Admin)
-		v.Admin.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.AppInstanceAdmin_AppInstanceArn, *v.AppInstanceArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceAdmin_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-}
-func (v *AppInstanceAdmin) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceAdmin, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceAdmin_Admin:
-			v.Admin = &Identity{}
-			return v.Admin.Deserialize(d)
-		case schemas.AppInstanceAdmin_AppInstanceArn:
-			v.AppInstanceArn = new(string)
-			return d.ReadString(schemas.AppInstanceAdmin_AppInstanceArn, v.AppInstanceArn)
-		case schemas.AppInstanceAdmin_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceAdmin_CreatedTimestamp, v.CreatedTimestamp)
-		}
-		return nil
-	})
-}
-
 // Summary of the details of an AppInstanceAdmin .
 type AppInstanceAdminSummary struct {
 
@@ -135,30 +51,6 @@ type AppInstanceAdminSummary struct {
 	Admin *Identity
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppInstanceAdminSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceAdminSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceAdminSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Admin != nil {
-		s.WriteStruct(schemas.AppInstanceAdminSummary_Admin)
-		v.Admin.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AppInstanceAdminSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceAdminSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceAdminSummary_Admin:
-			v.Admin = &Identity{}
-			return v.Admin.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // An Amazon Lex V2 chat bot created under an AppInstance .
@@ -185,60 +77,6 @@ type AppInstanceBot struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceBot) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceBot)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceBot) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceBotArn != nil {
-		s.WriteString(schemas.AppInstanceBot_AppInstanceBotArn, *v.AppInstanceBotArn)
-	}
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.AppInstanceBot_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceBot_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceBot_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstanceBot_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceBot_Name, *v.Name)
-	}
-}
-func (v *AppInstanceBot) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceBot, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceBot_AppInstanceBotArn:
-			v.AppInstanceBotArn = new(string)
-			return d.ReadString(schemas.AppInstanceBot_AppInstanceBotArn, v.AppInstanceBotArn)
-		case schemas.AppInstanceBot_Configuration:
-			v.Configuration = &Configuration{}
-			return v.Configuration.Deserialize(d)
-		case schemas.AppInstanceBot_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceBot_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.AppInstanceBot_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceBot_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.AppInstanceBot_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstanceBot_Metadata, v.Metadata)
-		case schemas.AppInstanceBot_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceBot_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // High-level information about an AppInstanceBot.
 type AppInstanceBotSummary struct {
 
@@ -254,40 +92,6 @@ type AppInstanceBotSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceBotSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceBotSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceBotSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceBotArn != nil {
-		s.WriteString(schemas.AppInstanceBotSummary_AppInstanceBotArn, *v.AppInstanceBotArn)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstanceBotSummary_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceBotSummary_Name, *v.Name)
-	}
-}
-func (v *AppInstanceBotSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceBotSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceBotSummary_AppInstanceBotArn:
-			v.AppInstanceBotArn = new(string)
-			return d.ReadString(schemas.AppInstanceBotSummary_AppInstanceBotArn, v.AppInstanceBotArn)
-		case schemas.AppInstanceBotSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstanceBotSummary_Metadata, v.Metadata)
-		case schemas.AppInstanceBotSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceBotSummary_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // The details of the data-retention settings for an AppInstance .
 type AppInstanceRetentionSettings struct {
 
@@ -295,30 +99,6 @@ type AppInstanceRetentionSettings struct {
 	ChannelRetentionSettings *ChannelRetentionSettings
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppInstanceRetentionSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceRetentionSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceRetentionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelRetentionSettings != nil {
-		s.WriteStruct(schemas.AppInstanceRetentionSettings_ChannelRetentionSettings)
-		v.ChannelRetentionSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AppInstanceRetentionSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceRetentionSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceRetentionSettings_ChannelRetentionSettings:
-			v.ChannelRetentionSettings = &ChannelRetentionSettings{}
-			return v.ChannelRetentionSettings.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Summary of the data for an AppInstance .
@@ -334,40 +114,6 @@ type AppInstanceSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppInstanceSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.AppInstanceSummary_AppInstanceArn, *v.AppInstanceArn)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstanceSummary_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceSummary_Name, *v.Name)
-	}
-}
-func (v *AppInstanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceSummary_AppInstanceArn:
-			v.AppInstanceArn = new(string)
-			return d.ReadString(schemas.AppInstanceSummary_AppInstanceArn, v.AppInstanceArn)
-		case schemas.AppInstanceSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstanceSummary_Metadata, v.Metadata)
-		case schemas.AppInstanceSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceSummary_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // The details of an AppInstanceUser .
@@ -392,60 +138,6 @@ type AppInstanceUser struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppInstanceUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceUserArn != nil {
-		s.WriteString(schemas.AppInstanceUser_AppInstanceUserArn, *v.AppInstanceUserArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceUser_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.ExpirationSettings != nil {
-		s.WriteStruct(schemas.AppInstanceUser_ExpirationSettings)
-		v.ExpirationSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceUser_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstanceUser_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceUser_Name, *v.Name)
-	}
-}
-func (v *AppInstanceUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceUser_AppInstanceUserArn:
-			v.AppInstanceUserArn = new(string)
-			return d.ReadString(schemas.AppInstanceUser_AppInstanceUserArn, v.AppInstanceUserArn)
-		case schemas.AppInstanceUser_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceUser_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.AppInstanceUser_ExpirationSettings:
-			v.ExpirationSettings = &ExpirationSettings{}
-			return v.ExpirationSettings.Deserialize(d)
-		case schemas.AppInstanceUser_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceUser_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.AppInstanceUser_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstanceUser_Metadata, v.Metadata)
-		case schemas.AppInstanceUser_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceUser_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // An endpoint under an Amazon Chime AppInstanceUser that receives messages for a
@@ -502,94 +194,6 @@ type AppInstanceUserEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceUserEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceUserEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceUserEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowMessages != "" {
-		s.WriteString(schemas.AppInstanceUserEndpoint_AllowMessages, string(v.AllowMessages))
-	}
-	if v.AppInstanceUserArn != nil {
-		s.WriteString(schemas.AppInstanceUserEndpoint_AppInstanceUserArn, *v.AppInstanceUserArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceUserEndpoint_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.EndpointAttributes != nil {
-		s.WriteStruct(schemas.AppInstanceUserEndpoint_EndpointAttributes)
-		v.EndpointAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EndpointId != nil {
-		s.WriteString(schemas.AppInstanceUserEndpoint_EndpointId, *v.EndpointId)
-	}
-	if v.EndpointState != nil {
-		s.WriteStruct(schemas.AppInstanceUserEndpoint_EndpointState)
-		v.EndpointState.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceUserEndpoint_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceUserEndpoint_Name, *v.Name)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.AppInstanceUserEndpoint_ResourceArn, *v.ResourceArn)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.AppInstanceUserEndpoint_Type, string(v.Type))
-	}
-}
-func (v *AppInstanceUserEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceUserEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceUserEndpoint_AllowMessages:
-			var ev string
-			if err := d.ReadString(schemas.AppInstanceUserEndpoint_AllowMessages, &ev); err != nil {
-				return err
-			}
-			v.AllowMessages = AllowMessages(ev)
-			return nil
-		case schemas.AppInstanceUserEndpoint_AppInstanceUserArn:
-			v.AppInstanceUserArn = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpoint_AppInstanceUserArn, v.AppInstanceUserArn)
-		case schemas.AppInstanceUserEndpoint_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceUserEndpoint_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.AppInstanceUserEndpoint_EndpointAttributes:
-			v.EndpointAttributes = &EndpointAttributes{}
-			return v.EndpointAttributes.Deserialize(d)
-		case schemas.AppInstanceUserEndpoint_EndpointId:
-			v.EndpointId = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpoint_EndpointId, v.EndpointId)
-		case schemas.AppInstanceUserEndpoint_EndpointState:
-			v.EndpointState = &EndpointState{}
-			return v.EndpointState.Deserialize(d)
-		case schemas.AppInstanceUserEndpoint_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceUserEndpoint_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.AppInstanceUserEndpoint_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpoint_Name, v.Name)
-		case schemas.AppInstanceUserEndpoint_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpoint_ResourceArn, v.ResourceArn)
-		case schemas.AppInstanceUserEndpoint_Type:
-			var ev string
-			if err := d.ReadString(schemas.AppInstanceUserEndpoint_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = AppInstanceUserEndpointType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary of the details of an AppInstanceUserEndpoint .
 type AppInstanceUserEndpointSummary struct {
 
@@ -616,68 +220,6 @@ type AppInstanceUserEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceUserEndpointSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceUserEndpointSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceUserEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowMessages != "" {
-		s.WriteString(schemas.AppInstanceUserEndpointSummary_AllowMessages, string(v.AllowMessages))
-	}
-	if v.AppInstanceUserArn != nil {
-		s.WriteString(schemas.AppInstanceUserEndpointSummary_AppInstanceUserArn, *v.AppInstanceUserArn)
-	}
-	if v.EndpointId != nil {
-		s.WriteString(schemas.AppInstanceUserEndpointSummary_EndpointId, *v.EndpointId)
-	}
-	if v.EndpointState != nil {
-		s.WriteStruct(schemas.AppInstanceUserEndpointSummary_EndpointState)
-		v.EndpointState.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceUserEndpointSummary_Name, *v.Name)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.AppInstanceUserEndpointSummary_Type, string(v.Type))
-	}
-}
-func (v *AppInstanceUserEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceUserEndpointSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceUserEndpointSummary_AllowMessages:
-			var ev string
-			if err := d.ReadString(schemas.AppInstanceUserEndpointSummary_AllowMessages, &ev); err != nil {
-				return err
-			}
-			v.AllowMessages = AllowMessages(ev)
-			return nil
-		case schemas.AppInstanceUserEndpointSummary_AppInstanceUserArn:
-			v.AppInstanceUserArn = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpointSummary_AppInstanceUserArn, v.AppInstanceUserArn)
-		case schemas.AppInstanceUserEndpointSummary_EndpointId:
-			v.EndpointId = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpointSummary_EndpointId, v.EndpointId)
-		case schemas.AppInstanceUserEndpointSummary_EndpointState:
-			v.EndpointState = &EndpointState{}
-			return v.EndpointState.Deserialize(d)
-		case schemas.AppInstanceUserEndpointSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceUserEndpointSummary_Name, v.Name)
-		case schemas.AppInstanceUserEndpointSummary_Type:
-			var ev string
-			if err := d.ReadString(schemas.AppInstanceUserEndpointSummary_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = AppInstanceUserEndpointType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary of the details of an AppInstanceUser .
 type AppInstanceUserSummary struct {
 
@@ -693,40 +235,6 @@ type AppInstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AppInstanceUserSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceUserSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceUserSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceUserArn != nil {
-		s.WriteString(schemas.AppInstanceUserSummary_AppInstanceUserArn, *v.AppInstanceUserArn)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.AppInstanceUserSummary_Metadata, *v.Metadata)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AppInstanceUserSummary_Name, *v.Name)
-	}
-}
-func (v *AppInstanceUserSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceUserSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceUserSummary_AppInstanceUserArn:
-			v.AppInstanceUserArn = new(string)
-			return d.ReadString(schemas.AppInstanceUserSummary_AppInstanceUserArn, v.AppInstanceUserArn)
-		case schemas.AppInstanceUserSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.AppInstanceUserSummary_Metadata, v.Metadata)
-		case schemas.AppInstanceUserSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AppInstanceUserSummary_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // The details of the retention settings for a channel.
 type ChannelRetentionSettings struct {
 
@@ -734,28 +242,6 @@ type ChannelRetentionSettings struct {
 	RetentionDays *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelRetentionSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelRetentionSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelRetentionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RetentionDays != nil {
-		s.WriteInt32(schemas.ChannelRetentionSettings_RetentionDays, *v.RetentionDays)
-	}
-}
-func (v *ChannelRetentionSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelRetentionSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelRetentionSettings_RetentionDays:
-			v.RetentionDays = new(int32)
-			return d.ReadInt32(schemas.ChannelRetentionSettings_RetentionDays, v.RetentionDays)
-		}
-		return nil
-	})
 }
 
 // A structure that contains configuration data.
@@ -767,30 +253,6 @@ type Configuration struct {
 	Lex *LexConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Lex != nil {
-		s.WriteStruct(schemas.Configuration_Lex)
-		v.Lex.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Configuration_Lex:
-			v.Lex = &LexConfiguration{}
-			return v.Lex.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The attributes of an Endpoint .
@@ -805,34 +267,6 @@ type EndpointAttributes struct {
 	VoipDeviceToken *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EndpointAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EndpointAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EndpointAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeviceToken != nil {
-		s.WriteString(schemas.EndpointAttributes_DeviceToken, *v.DeviceToken)
-	}
-	if v.VoipDeviceToken != nil {
-		s.WriteString(schemas.EndpointAttributes_VoipDeviceToken, *v.VoipDeviceToken)
-	}
-}
-func (v *EndpointAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EndpointAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EndpointAttributes_DeviceToken:
-			v.DeviceToken = new(string)
-			return d.ReadString(schemas.EndpointAttributes_DeviceToken, v.DeviceToken)
-		case schemas.EndpointAttributes_VoipDeviceToken:
-			v.VoipDeviceToken = new(string)
-			return d.ReadString(schemas.EndpointAttributes_VoipDeviceToken, v.VoipDeviceToken)
-		}
-		return nil
-	})
 }
 
 // A read-only field that represents the state of an AppInstanceUserEndpoint .
@@ -863,42 +297,6 @@ type EndpointState struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EndpointState) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EndpointState)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EndpointState) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.EndpointState_Status, string(v.Status))
-	}
-	if v.StatusReason != "" {
-		s.WriteString(schemas.EndpointState_StatusReason, string(v.StatusReason))
-	}
-}
-func (v *EndpointState) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EndpointState, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EndpointState_Status:
-			var ev string
-			if err := d.ReadString(schemas.EndpointState_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = EndpointStatus(ev)
-			return nil
-		case schemas.EndpointState_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.EndpointState_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = EndpointStatusReason(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Determines the interval after which an AppInstanceUser is automatically deleted.
 type ExpirationSettings struct {
 
@@ -915,38 +313,6 @@ type ExpirationSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExpirationSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExpirationSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExpirationSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExpirationCriterion != "" {
-		s.WriteString(schemas.ExpirationSettings_ExpirationCriterion, string(v.ExpirationCriterion))
-	}
-	if v.ExpirationDays != nil {
-		s.WriteInt32(schemas.ExpirationSettings_ExpirationDays, *v.ExpirationDays)
-	}
-}
-func (v *ExpirationSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExpirationSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExpirationSettings_ExpirationCriterion:
-			var ev string
-			if err := d.ReadString(schemas.ExpirationSettings_ExpirationCriterion, &ev); err != nil {
-				return err
-			}
-			v.ExpirationCriterion = ExpirationCriterion(ev)
-			return nil
-		case schemas.ExpirationSettings_ExpirationDays:
-			v.ExpirationDays = new(int32)
-			return d.ReadInt32(schemas.ExpirationSettings_ExpirationDays, v.ExpirationDays)
-		}
-		return nil
-	})
-}
-
 // The details of a user or bot.
 type Identity struct {
 
@@ -957,34 +323,6 @@ type Identity struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Identity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Identity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Identity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Identity_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Identity_Name, *v.Name)
-	}
-}
-func (v *Identity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Identity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Identity_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Identity_Arn, v.Arn)
-		case schemas.Identity_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Identity_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Specifies the type of message that triggers a bot.
@@ -1017,42 +355,6 @@ type InvokedBy struct {
 	TargetedMessages TargetedMessages
 
 	noSmithyDocumentSerde
-}
-
-func (v *InvokedBy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InvokedBy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InvokedBy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.StandardMessages != "" {
-		s.WriteString(schemas.InvokedBy_StandardMessages, string(v.StandardMessages))
-	}
-	if v.TargetedMessages != "" {
-		s.WriteString(schemas.InvokedBy_TargetedMessages, string(v.TargetedMessages))
-	}
-}
-func (v *InvokedBy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvokedBy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvokedBy_StandardMessages:
-			var ev string
-			if err := d.ReadString(schemas.InvokedBy_StandardMessages, &ev); err != nil {
-				return err
-			}
-			v.StandardMessages = StandardMessages(ev)
-			return nil
-		case schemas.InvokedBy_TargetedMessages:
-			var ev string
-			if err := d.ReadString(schemas.InvokedBy_TargetedMessages, &ev); err != nil {
-				return err
-			}
-			v.TargetedMessages = TargetedMessages(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The configuration for an Amazon Lex V2 bot.
@@ -1089,58 +391,6 @@ type LexConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LexConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LexConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LexConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InvokedBy != nil {
-		s.WriteStruct(schemas.LexConfiguration_InvokedBy)
-		v.InvokedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LexBotAliasArn != nil {
-		s.WriteString(schemas.LexConfiguration_LexBotAliasArn, *v.LexBotAliasArn)
-	}
-	if v.LocaleId != nil {
-		s.WriteString(schemas.LexConfiguration_LocaleId, *v.LocaleId)
-	}
-	if v.RespondsTo != "" {
-		s.WriteString(schemas.LexConfiguration_RespondsTo, string(v.RespondsTo))
-	}
-	if v.WelcomeIntent != nil {
-		s.WriteString(schemas.LexConfiguration_WelcomeIntent, *v.WelcomeIntent)
-	}
-}
-func (v *LexConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LexConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LexConfiguration_InvokedBy:
-			v.InvokedBy = &InvokedBy{}
-			return v.InvokedBy.Deserialize(d)
-		case schemas.LexConfiguration_LexBotAliasArn:
-			v.LexBotAliasArn = new(string)
-			return d.ReadString(schemas.LexConfiguration_LexBotAliasArn, v.LexBotAliasArn)
-		case schemas.LexConfiguration_LocaleId:
-			v.LocaleId = new(string)
-			return d.ReadString(schemas.LexConfiguration_LocaleId, v.LocaleId)
-		case schemas.LexConfiguration_RespondsTo:
-			var ev string
-			if err := d.ReadString(schemas.LexConfiguration_RespondsTo, &ev); err != nil {
-				return err
-			}
-			v.RespondsTo = RespondsTo(ev)
-			return nil
-		case schemas.LexConfiguration_WelcomeIntent:
-			v.WelcomeIntent = new(string)
-			return d.ReadString(schemas.LexConfiguration_WelcomeIntent, v.WelcomeIntent)
-		}
-		return nil
-	})
-}
-
 // A tag object containing a key-value pair.
 type Tag struct {
 
@@ -1155,34 +405,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type DeleteGatewayTargetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGatewayTargetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteGatewayTargetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteGatewayTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayIdentifier != nil {
-		s.WriteString(schemas.DeleteGatewayTargetRequest_gatewayIdentifier, *v.GatewayIdentifier)
-	}
-	if v.TargetId != nil {
-		s.WriteString(schemas.DeleteGatewayTargetRequest_targetId, *v.TargetId)
-	}
-}
-
 type DeleteGatewayTargetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway.
@@ -89,36 +72,16 @@ type DeleteGatewayTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteGatewayTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteGatewayTargetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteGatewayTargetResponse_gatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.DeleteGatewayTargetResponse_gatewayArn, v.GatewayArn)
-		case schemas.DeleteGatewayTargetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteGatewayTargetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TargetStatus(ev)
-			return nil
-		case schemas.DeleteGatewayTargetResponse_statusReasons:
-			return deserializeStatusReasons(d, schemas.DeleteGatewayTargetResponse_statusReasons, &v.StatusReasons)
-		case schemas.DeleteGatewayTargetResponse_targetId:
-			v.TargetId = new(string)
-			return d.ReadString(schemas.DeleteGatewayTargetResponse_targetId, v.TargetId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteGatewayTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayTarget, schemas.DeleteGatewayTargetRequest, schemas.DeleteGatewayTargetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGatewayTarget{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayTarget, schemas.DeleteGatewayTargetRequest, schemas.DeleteGatewayTargetResponse), output: &DeleteGatewayTargetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGatewayTarget{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGatewayTarget"); err != nil {

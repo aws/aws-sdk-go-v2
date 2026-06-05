@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetArchiveSearchResultsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetArchiveSearchResultsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetArchiveSearchResultsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetArchiveSearchResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SearchId != nil {
-		s.WriteString(schemas.GetArchiveSearchResultsRequest_SearchId, *v.SearchId)
-	}
-}
-
 // The response containing search results from a completed archive search.
 type GetArchiveSearchResultsOutput struct {
 
@@ -64,23 +50,16 @@ type GetArchiveSearchResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetArchiveSearchResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetArchiveSearchResultsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetArchiveSearchResultsResponse_Rows:
-			return deserializeRowsList(d, schemas.GetArchiveSearchResultsResponse_Rows, &v.Rows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetArchiveSearchResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveSearchResults, schemas.GetArchiveSearchResultsRequest, schemas.GetArchiveSearchResultsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetArchiveSearchResults{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveSearchResults, schemas.GetArchiveSearchResultsRequest, schemas.GetArchiveSearchResultsResponse), output: &GetArchiveSearchResultsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetArchiveSearchResults{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchiveSearchResults"); err != nil {

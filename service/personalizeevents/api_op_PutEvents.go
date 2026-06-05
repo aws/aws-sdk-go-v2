@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,25 +59,6 @@ type PutEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.PutEventsRequest_eventList, v.EventList)
-	if v.SessionId != nil {
-		s.WriteString(schemas.PutEventsRequest_sessionId, *v.SessionId)
-	}
-	if v.TrackingId != nil {
-		s.WriteString(schemas.PutEventsRequest_trackingId, *v.TrackingId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.PutEventsRequest_userId, *v.UserId)
-	}
-}
-
 type PutEventsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,29 +66,16 @@ type PutEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutEventsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEvents, schemas.PutEventsRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEvents, schemas.PutEventsRequest, nil), output: &PutEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEvents"); err != nil {

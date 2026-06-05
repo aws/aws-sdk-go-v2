@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,22 +49,6 @@ type UpdateQAppSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQAppSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateQAppSessionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateQAppSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceId != nil {
-		s.WriteString(schemas.UpdateQAppSessionInput_instanceId, *v.InstanceId)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.UpdateQAppSessionInput_sessionId, *v.SessionId)
-	}
-	serializeCardValueList(s, schemas.UpdateQAppSessionInput_values, v.Values)
-}
-
 type UpdateQAppSessionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated Q App session.
@@ -85,27 +67,16 @@ type UpdateQAppSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQAppSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateQAppSessionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateQAppSessionOutput_sessionArn:
-			v.SessionArn = new(string)
-			return d.ReadString(schemas.UpdateQAppSessionOutput_sessionArn, v.SessionArn)
-		case schemas.UpdateQAppSessionOutput_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.UpdateQAppSessionOutput_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateQAppSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppSession, schemas.UpdateQAppSessionInput, schemas.UpdateQAppSessionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQAppSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppSession, schemas.UpdateQAppSessionInput, schemas.UpdateQAppSessionOutput), output: &UpdateQAppSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQAppSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQAppSession"); err != nil {

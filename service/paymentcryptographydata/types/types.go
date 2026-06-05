@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -48,64 +46,6 @@ type AmexAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AmexAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AmexAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AmexAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.AmexAttributes_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.AuthorizationRequestKeyIdentifier != nil {
-		s.WriteString(schemas.AmexAttributes_AuthorizationRequestKeyIdentifier, *v.AuthorizationRequestKeyIdentifier)
-	}
-	if v.CurrentPinAttributes != nil {
-		s.WriteStruct(schemas.AmexAttributes_CurrentPinAttributes)
-		v.CurrentPinAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.AmexAttributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.AmexAttributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.AmexAttributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *AmexAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AmexAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AmexAttributes_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.AmexAttributes_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.AmexAttributes_AuthorizationRequestKeyIdentifier:
-			v.AuthorizationRequestKeyIdentifier = new(string)
-			return d.ReadString(schemas.AmexAttributes_AuthorizationRequestKeyIdentifier, v.AuthorizationRequestKeyIdentifier)
-		case schemas.AmexAttributes_CurrentPinAttributes:
-			v.CurrentPinAttributes = &CurrentPinAttributes{}
-			return v.CurrentPinAttributes.Deserialize(d)
-		case schemas.AmexAttributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.AmexAttributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.AmexAttributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.AmexAttributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.AmexAttributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.AmexAttributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Card data parameters that are required to generate a Card Security Code (CSC2)
 // for an AMEX payment card.
 type AmexCardSecurityCodeVersion1 struct {
@@ -116,28 +56,6 @@ type AmexCardSecurityCodeVersion1 struct {
 	CardExpiryDate *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AmexCardSecurityCodeVersion1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AmexCardSecurityCodeVersion1)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AmexCardSecurityCodeVersion1) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.AmexCardSecurityCodeVersion1_CardExpiryDate, *v.CardExpiryDate)
-	}
-}
-func (v *AmexCardSecurityCodeVersion1) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AmexCardSecurityCodeVersion1, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AmexCardSecurityCodeVersion1_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.AmexCardSecurityCodeVersion1_CardExpiryDate, v.CardExpiryDate)
-		}
-		return nil
-	})
 }
 
 // Card data parameters that are required to generate a Card Security Code (CSC2)
@@ -156,34 +74,6 @@ type AmexCardSecurityCodeVersion2 struct {
 	ServiceCode *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AmexCardSecurityCodeVersion2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AmexCardSecurityCodeVersion2)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AmexCardSecurityCodeVersion2) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.AmexCardSecurityCodeVersion2_CardExpiryDate, *v.CardExpiryDate)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.AmexCardSecurityCodeVersion2_ServiceCode, *v.ServiceCode)
-	}
-}
-func (v *AmexCardSecurityCodeVersion2) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AmexCardSecurityCodeVersion2, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AmexCardSecurityCodeVersion2_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.AmexCardSecurityCodeVersion2_CardExpiryDate, v.CardExpiryDate)
-		case schemas.AmexCardSecurityCodeVersion2_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.AmexCardSecurityCodeVersion2_ServiceCode, v.ServiceCode)
-		}
-		return nil
-	})
 }
 
 // Parameter information for generating a random key for KEK validation to perform
@@ -206,14 +96,6 @@ type As2805KekValidationTypeMemberKekValidationRequest struct {
 }
 
 func (*As2805KekValidationTypeMemberKekValidationRequest) isAs2805KekValidationType() {}
-func (v *As2805KekValidationTypeMemberKekValidationRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.As2805KekValidationType_KekValidationRequest)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *As2805KekValidationTypeMemberKekValidationRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameter information for generating a KEK validation response during
 // node-to-node initialization.
@@ -224,14 +106,6 @@ type As2805KekValidationTypeMemberKekValidationResponse struct {
 }
 
 func (*As2805KekValidationTypeMemberKekValidationResponse) isAs2805KekValidationType() {}
-func (v *As2805KekValidationTypeMemberKekValidationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.As2805KekValidationType_KekValidationResponse)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *As2805KekValidationTypeMemberKekValidationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameter information to use a PEK derived using AS2805.
 type As2805PekDerivationAttributes struct {
@@ -249,34 +123,6 @@ type As2805PekDerivationAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *As2805PekDerivationAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.As2805PekDerivationAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *As2805PekDerivationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SystemTraceAuditNumber != nil {
-		s.WriteString(schemas.As2805PekDerivationAttributes_SystemTraceAuditNumber, *v.SystemTraceAuditNumber)
-	}
-	if v.TransactionAmount != nil {
-		s.WriteString(schemas.As2805PekDerivationAttributes_TransactionAmount, *v.TransactionAmount)
-	}
-}
-func (v *As2805PekDerivationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.As2805PekDerivationAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.As2805PekDerivationAttributes_SystemTraceAuditNumber:
-			v.SystemTraceAuditNumber = new(string)
-			return d.ReadString(schemas.As2805PekDerivationAttributes_SystemTraceAuditNumber, v.SystemTraceAuditNumber)
-		case schemas.As2805PekDerivationAttributes_TransactionAmount:
-			v.TransactionAmount = new(string)
-			return d.ReadString(schemas.As2805PekDerivationAttributes_TransactionAmount, v.TransactionAmount)
-		}
-		return nil
-	})
-}
-
 // Parameters for plaintext encryption using asymmetric keys.
 type AsymmetricEncryptionAttributes struct {
 
@@ -284,32 +130,6 @@ type AsymmetricEncryptionAttributes struct {
 	PaddingType PaddingType
 
 	noSmithyDocumentSerde
-}
-
-func (v *AsymmetricEncryptionAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AsymmetricEncryptionAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AsymmetricEncryptionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PaddingType != "" {
-		s.WriteString(schemas.AsymmetricEncryptionAttributes_PaddingType, string(v.PaddingType))
-	}
-}
-func (v *AsymmetricEncryptionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AsymmetricEncryptionAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AsymmetricEncryptionAttributes_PaddingType:
-			var ev string
-			if err := d.ReadString(schemas.AsymmetricEncryptionAttributes_PaddingType, &ev); err != nil {
-				return err
-			}
-			v.PaddingType = PaddingType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Card data parameters that are required to generate Card Verification Values
@@ -338,14 +158,6 @@ type CardGenerationAttributesMemberAmexCardSecurityCodeVersion1 struct {
 }
 
 func (*CardGenerationAttributesMemberAmexCardSecurityCodeVersion1) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberAmexCardSecurityCodeVersion1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_AmexCardSecurityCodeVersion1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberAmexCardSecurityCodeVersion1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate a Card Security Code (CSC2)
 // for an AMEX payment card.
@@ -356,14 +168,6 @@ type CardGenerationAttributesMemberAmexCardSecurityCodeVersion2 struct {
 }
 
 func (*CardGenerationAttributesMemberAmexCardSecurityCodeVersion2) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberAmexCardSecurityCodeVersion2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_AmexCardSecurityCodeVersion2)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberAmexCardSecurityCodeVersion2) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate a cardholder verification
 // value for the payment card.
@@ -374,14 +178,6 @@ type CardGenerationAttributesMemberCardHolderVerificationValue struct {
 }
 
 func (*CardGenerationAttributesMemberCardHolderVerificationValue) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberCardHolderVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_CardHolderVerificationValue)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberCardHolderVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate Card Verification Value
 // (CVV) for the payment card.
@@ -392,14 +188,6 @@ type CardGenerationAttributesMemberCardVerificationValue1 struct {
 }
 
 func (*CardGenerationAttributesMemberCardVerificationValue1) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberCardVerificationValue1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_CardVerificationValue1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberCardVerificationValue1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate Card Verification Value
 // (CVV2) for the payment card.
@@ -410,14 +198,6 @@ type CardGenerationAttributesMemberCardVerificationValue2 struct {
 }
 
 func (*CardGenerationAttributesMemberCardVerificationValue2) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberCardVerificationValue2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_CardVerificationValue2)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberCardVerificationValue2) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate CDynamic Card Verification
 // Code (dCVC) for the payment card.
@@ -428,14 +208,6 @@ type CardGenerationAttributesMemberDynamicCardVerificationCode struct {
 }
 
 func (*CardGenerationAttributesMemberDynamicCardVerificationCode) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberDynamicCardVerificationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_DynamicCardVerificationCode)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberDynamicCardVerificationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate CDynamic Card Verification
 // Value (dCVV) for the payment card.
@@ -446,14 +218,6 @@ type CardGenerationAttributesMemberDynamicCardVerificationValue struct {
 }
 
 func (*CardGenerationAttributesMemberDynamicCardVerificationValue) isCardGenerationAttributes() {}
-func (v *CardGenerationAttributesMemberDynamicCardVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardGenerationAttributes_DynamicCardVerificationValue)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardGenerationAttributesMemberDynamicCardVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to generate a cardholder verification
 // value for the payment card.
@@ -476,40 +240,6 @@ type CardHolderVerificationValue struct {
 	UnpredictableNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CardHolderVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardHolderVerificationValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CardHolderVerificationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.CardHolderVerificationValue_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.CardHolderVerificationValue_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.UnpredictableNumber != nil {
-		s.WriteString(schemas.CardHolderVerificationValue_UnpredictableNumber, *v.UnpredictableNumber)
-	}
-}
-func (v *CardHolderVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CardHolderVerificationValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CardHolderVerificationValue_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.CardHolderVerificationValue_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.CardHolderVerificationValue_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.CardHolderVerificationValue_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.CardHolderVerificationValue_UnpredictableNumber:
-			v.UnpredictableNumber = new(string)
-			return d.ReadString(schemas.CardHolderVerificationValue_UnpredictableNumber, v.UnpredictableNumber)
-		}
-		return nil
-	})
 }
 
 // Card data parameters that are requried to verify Card Verification Values
@@ -539,14 +269,6 @@ type CardVerificationAttributesMemberAmexCardSecurityCodeVersion1 struct {
 }
 
 func (*CardVerificationAttributesMemberAmexCardSecurityCodeVersion1) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberAmexCardSecurityCodeVersion1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_AmexCardSecurityCodeVersion1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberAmexCardSecurityCodeVersion1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify a Card Security Code (CSC2)
 // for an AMEX payment card.
@@ -557,14 +279,6 @@ type CardVerificationAttributesMemberAmexCardSecurityCodeVersion2 struct {
 }
 
 func (*CardVerificationAttributesMemberAmexCardSecurityCodeVersion2) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberAmexCardSecurityCodeVersion2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_AmexCardSecurityCodeVersion2)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberAmexCardSecurityCodeVersion2) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify a cardholder verification
 // value for the payment card.
@@ -575,14 +289,6 @@ type CardVerificationAttributesMemberCardHolderVerificationValue struct {
 }
 
 func (*CardVerificationAttributesMemberCardHolderVerificationValue) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberCardHolderVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_CardHolderVerificationValue)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberCardHolderVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify Card Verification Value (CVV)
 // for the payment card.
@@ -593,14 +299,6 @@ type CardVerificationAttributesMemberCardVerificationValue1 struct {
 }
 
 func (*CardVerificationAttributesMemberCardVerificationValue1) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberCardVerificationValue1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_CardVerificationValue1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberCardVerificationValue1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify Card Verification Value (CVV2)
 // for the payment card.
@@ -611,14 +309,6 @@ type CardVerificationAttributesMemberCardVerificationValue2 struct {
 }
 
 func (*CardVerificationAttributesMemberCardVerificationValue2) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberCardVerificationValue2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_CardVerificationValue2)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberCardVerificationValue2) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify CDynamic Card Verification
 // Code (dCVC) for the payment card.
@@ -630,14 +320,6 @@ type CardVerificationAttributesMemberDiscoverDynamicCardVerificationCode struct 
 
 func (*CardVerificationAttributesMemberDiscoverDynamicCardVerificationCode) isCardVerificationAttributes() {
 }
-func (v *CardVerificationAttributesMemberDiscoverDynamicCardVerificationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_DiscoverDynamicCardVerificationCode)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberDiscoverDynamicCardVerificationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify CDynamic Card Verification
 // Code (dCVC) for the payment card.
@@ -648,14 +330,6 @@ type CardVerificationAttributesMemberDynamicCardVerificationCode struct {
 }
 
 func (*CardVerificationAttributesMemberDynamicCardVerificationCode) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberDynamicCardVerificationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_DynamicCardVerificationCode)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberDynamicCardVerificationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify CDynamic Card Verification
 // Value (dCVV) for the payment card.
@@ -666,14 +340,6 @@ type CardVerificationAttributesMemberDynamicCardVerificationValue struct {
 }
 
 func (*CardVerificationAttributesMemberDynamicCardVerificationValue) isCardVerificationAttributes() {}
-func (v *CardVerificationAttributesMemberDynamicCardVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationAttributes_DynamicCardVerificationValue)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CardVerificationAttributesMemberDynamicCardVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Card data parameters that are required to verify CVV (Card Verification Value)
 // for the payment card.
@@ -693,34 +359,6 @@ type CardVerificationValue1 struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CardVerificationValue1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationValue1)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CardVerificationValue1) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.CardVerificationValue1_CardExpiryDate, *v.CardExpiryDate)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.CardVerificationValue1_ServiceCode, *v.ServiceCode)
-	}
-}
-func (v *CardVerificationValue1) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CardVerificationValue1, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CardVerificationValue1_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.CardVerificationValue1_CardExpiryDate, v.CardExpiryDate)
-		case schemas.CardVerificationValue1_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.CardVerificationValue1_ServiceCode, v.ServiceCode)
-		}
-		return nil
-	})
-}
-
 // Card data parameters that are required to verify Card Verification Value (CVV2)
 // for the payment card.
 type CardVerificationValue2 struct {
@@ -731,28 +369,6 @@ type CardVerificationValue2 struct {
 	CardExpiryDate *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CardVerificationValue2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CardVerificationValue2)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CardVerificationValue2) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.CardVerificationValue2_CardExpiryDate, *v.CardExpiryDate)
-	}
-}
-func (v *CardVerificationValue2) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CardVerificationValue2, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CardVerificationValue2_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.CardVerificationValue2_CardExpiryDate, v.CardExpiryDate)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required for Authorization Response Cryptogram (ARPC)
@@ -776,14 +392,6 @@ type CryptogramAuthResponseMemberArpcMethod1 struct {
 }
 
 func (*CryptogramAuthResponseMemberArpcMethod1) isCryptogramAuthResponse() {}
-func (v *CryptogramAuthResponseMemberArpcMethod1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CryptogramAuthResponse_ArpcMethod1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CryptogramAuthResponseMemberArpcMethod1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ARPC response generation using method2 after
 // ARQC verification is successful.
@@ -794,14 +402,6 @@ type CryptogramAuthResponseMemberArpcMethod2 struct {
 }
 
 func (*CryptogramAuthResponseMemberArpcMethod2) isCryptogramAuthResponse() {}
-func (v *CryptogramAuthResponseMemberArpcMethod2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CryptogramAuthResponse_ArpcMethod2)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *CryptogramAuthResponseMemberArpcMethod2) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ARPC response generation using method1 after
 // ARQC verification is successful.
@@ -815,28 +415,6 @@ type CryptogramVerificationArpcMethod1 struct {
 	AuthResponseCode *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CryptogramVerificationArpcMethod1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CryptogramVerificationArpcMethod1)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CryptogramVerificationArpcMethod1) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthResponseCode != nil {
-		s.WriteString(schemas.CryptogramVerificationArpcMethod1_AuthResponseCode, *v.AuthResponseCode)
-	}
-}
-func (v *CryptogramVerificationArpcMethod1) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CryptogramVerificationArpcMethod1, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CryptogramVerificationArpcMethod1_AuthResponseCode:
-			v.AuthResponseCode = new(string)
-			return d.ReadString(schemas.CryptogramVerificationArpcMethod1_AuthResponseCode, v.AuthResponseCode)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required for ARPC response generation using method2 after
@@ -856,34 +434,6 @@ type CryptogramVerificationArpcMethod2 struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CryptogramVerificationArpcMethod2) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CryptogramVerificationArpcMethod2)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CryptogramVerificationArpcMethod2) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CardStatusUpdate != nil {
-		s.WriteString(schemas.CryptogramVerificationArpcMethod2_CardStatusUpdate, *v.CardStatusUpdate)
-	}
-	if v.ProprietaryAuthenticationData != nil {
-		s.WriteString(schemas.CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData, *v.ProprietaryAuthenticationData)
-	}
-}
-func (v *CryptogramVerificationArpcMethod2) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CryptogramVerificationArpcMethod2, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CryptogramVerificationArpcMethod2_CardStatusUpdate:
-			v.CardStatusUpdate = new(string)
-			return d.ReadString(schemas.CryptogramVerificationArpcMethod2_CardStatusUpdate, v.CardStatusUpdate)
-		case schemas.CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData:
-			v.ProprietaryAuthenticationData = new(string)
-			return d.ReadString(schemas.CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData, v.ProprietaryAuthenticationData)
-		}
-		return nil
-	})
-}
-
 // The parameter values of the current PIN to be changed on the EMV chip card.
 type CurrentPinAttributes struct {
 
@@ -898,34 +448,6 @@ type CurrentPinAttributes struct {
 	CurrentPinPekIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CurrentPinAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CurrentPinAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CurrentPinAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CurrentEncryptedPinBlock != nil {
-		s.WriteString(schemas.CurrentPinAttributes_CurrentEncryptedPinBlock, *v.CurrentEncryptedPinBlock)
-	}
-	if v.CurrentPinPekIdentifier != nil {
-		s.WriteString(schemas.CurrentPinAttributes_CurrentPinPekIdentifier, *v.CurrentPinPekIdentifier)
-	}
-}
-func (v *CurrentPinAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CurrentPinAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CurrentPinAttributes_CurrentEncryptedPinBlock:
-			v.CurrentEncryptedPinBlock = new(string)
-			return d.ReadString(schemas.CurrentPinAttributes_CurrentEncryptedPinBlock, v.CurrentEncryptedPinBlock)
-		case schemas.CurrentPinAttributes_CurrentPinPekIdentifier:
-			v.CurrentPinPekIdentifier = new(string)
-			return d.ReadString(schemas.CurrentPinAttributes_CurrentPinPekIdentifier, v.CurrentPinPekIdentifier)
-		}
-		return nil
-	})
 }
 
 // Parameters to derive the payment card specific confidentiality and integrity
@@ -951,14 +473,6 @@ type DerivationMethodAttributesMemberAmex struct {
 }
 
 func (*DerivationMethodAttributesMemberAmex) isDerivationMethodAttributes() {}
-func (v *DerivationMethodAttributesMemberAmex) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DerivationMethodAttributes_Amex)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DerivationMethodAttributesMemberAmex) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive the confidentiality and integrity keys for a payment card
 // using Emv2000 derivation method.
@@ -969,14 +483,6 @@ type DerivationMethodAttributesMemberEmv2000 struct {
 }
 
 func (*DerivationMethodAttributesMemberEmv2000) isDerivationMethodAttributes() {}
-func (v *DerivationMethodAttributesMemberEmv2000) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DerivationMethodAttributes_Emv2000)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DerivationMethodAttributesMemberEmv2000) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive the confidentiality and integrity keys for a payment card
 // using Emv common derivation method.
@@ -987,14 +493,6 @@ type DerivationMethodAttributesMemberEmvCommon struct {
 }
 
 func (*DerivationMethodAttributesMemberEmvCommon) isDerivationMethodAttributes() {}
-func (v *DerivationMethodAttributesMemberEmvCommon) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DerivationMethodAttributes_EmvCommon)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DerivationMethodAttributesMemberEmvCommon) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive the confidentiality and integrity keys for a payment card
 // using Mastercard derivation method.
@@ -1005,14 +503,6 @@ type DerivationMethodAttributesMemberMastercard struct {
 }
 
 func (*DerivationMethodAttributesMemberMastercard) isDerivationMethodAttributes() {}
-func (v *DerivationMethodAttributesMemberMastercard) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DerivationMethodAttributes_Mastercard)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DerivationMethodAttributesMemberMastercard) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive the confidentiality and integrity keys for a a payment
 // card using Visa derivation method.
@@ -1023,14 +513,6 @@ type DerivationMethodAttributesMemberVisa struct {
 }
 
 func (*DerivationMethodAttributesMemberVisa) isDerivationMethodAttributes() {}
-func (v *DerivationMethodAttributesMemberVisa) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DerivationMethodAttributes_Visa)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *DerivationMethodAttributesMemberVisa) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The shared information used when deriving a key using ECDH.
 //
@@ -1056,12 +538,6 @@ type DiffieHellmanDerivationDataMemberSharedInformation struct {
 }
 
 func (*DiffieHellmanDerivationDataMemberSharedInformation) isDiffieHellmanDerivationData() {}
-func (v *DiffieHellmanDerivationDataMemberSharedInformation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.DiffieHellmanDerivationData_SharedInformation, v.Value)
-}
-func (v *DiffieHellmanDerivationDataMemberSharedInformation) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.DiffieHellmanDerivationData_SharedInformation, &v.Value)
-}
 
 // Parameters that are required to generate or verify dCVC (Dynamic Card
 // Verification Code).
@@ -1083,40 +559,6 @@ type DiscoverDynamicCardVerificationCode struct {
 	UnpredictableNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DiscoverDynamicCardVerificationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DiscoverDynamicCardVerificationCode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DiscoverDynamicCardVerificationCode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.DiscoverDynamicCardVerificationCode_CardExpiryDate, *v.CardExpiryDate)
-	}
-	if v.UnpredictableNumber != nil {
-		s.WriteString(schemas.DiscoverDynamicCardVerificationCode_UnpredictableNumber, *v.UnpredictableNumber)
-	}
-}
-func (v *DiscoverDynamicCardVerificationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DiscoverDynamicCardVerificationCode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.DiscoverDynamicCardVerificationCode_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.DiscoverDynamicCardVerificationCode_CardExpiryDate, v.CardExpiryDate)
-		case schemas.DiscoverDynamicCardVerificationCode_UnpredictableNumber:
-			v.UnpredictableNumber = new(string)
-			return d.ReadString(schemas.DiscoverDynamicCardVerificationCode_UnpredictableNumber, v.UnpredictableNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters that are used for Derived Unique Key Per Transaction (DUKPT)
@@ -1141,38 +583,6 @@ type DukptAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DukptAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DukptAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DukptAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DukptDerivationType != "" {
-		s.WriteString(schemas.DukptAttributes_DukptDerivationType, string(v.DukptDerivationType))
-	}
-	if v.KeySerialNumber != nil {
-		s.WriteString(schemas.DukptAttributes_KeySerialNumber, *v.KeySerialNumber)
-	}
-}
-func (v *DukptAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DukptAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DukptAttributes_DukptDerivationType:
-			var ev string
-			if err := d.ReadString(schemas.DukptAttributes_DukptDerivationType, &ev); err != nil {
-				return err
-			}
-			v.DukptDerivationType = DukptDerivationType(ev)
-			return nil
-		case schemas.DukptAttributes_KeySerialNumber:
-			v.KeySerialNumber = new(string)
-			return d.ReadString(schemas.DukptAttributes_KeySerialNumber, v.KeySerialNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters required for encryption or decryption of data using DUKPT.
 type DukptDerivationAttributes struct {
 
@@ -1194,48 +604,6 @@ type DukptDerivationAttributes struct {
 	DukptKeyVariant DukptKeyVariant
 
 	noSmithyDocumentSerde
-}
-
-func (v *DukptDerivationAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DukptDerivationAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DukptDerivationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DukptKeyDerivationType != "" {
-		s.WriteString(schemas.DukptDerivationAttributes_DukptKeyDerivationType, string(v.DukptKeyDerivationType))
-	}
-	if v.DukptKeyVariant != "" {
-		s.WriteString(schemas.DukptDerivationAttributes_DukptKeyVariant, string(v.DukptKeyVariant))
-	}
-	if v.KeySerialNumber != nil {
-		s.WriteString(schemas.DukptDerivationAttributes_KeySerialNumber, *v.KeySerialNumber)
-	}
-}
-func (v *DukptDerivationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DukptDerivationAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DukptDerivationAttributes_DukptKeyDerivationType:
-			var ev string
-			if err := d.ReadString(schemas.DukptDerivationAttributes_DukptKeyDerivationType, &ev); err != nil {
-				return err
-			}
-			v.DukptKeyDerivationType = DukptDerivationType(ev)
-			return nil
-		case schemas.DukptDerivationAttributes_DukptKeyVariant:
-			var ev string
-			if err := d.ReadString(schemas.DukptDerivationAttributes_DukptKeyVariant, &ev); err != nil {
-				return err
-			}
-			v.DukptKeyVariant = DukptKeyVariant(ev)
-			return nil
-		case schemas.DukptDerivationAttributes_KeySerialNumber:
-			v.KeySerialNumber = new(string)
-			return d.ReadString(schemas.DukptDerivationAttributes_KeySerialNumber, v.KeySerialNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required to encrypt plaintext data using DUKPT.
@@ -1270,64 +638,6 @@ type DukptEncryptionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DukptEncryptionAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DukptEncryptionAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DukptEncryptionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DukptKeyDerivationType != "" {
-		s.WriteString(schemas.DukptEncryptionAttributes_DukptKeyDerivationType, string(v.DukptKeyDerivationType))
-	}
-	if v.DukptKeyVariant != "" {
-		s.WriteString(schemas.DukptEncryptionAttributes_DukptKeyVariant, string(v.DukptKeyVariant))
-	}
-	if v.InitializationVector != nil {
-		s.WriteString(schemas.DukptEncryptionAttributes_InitializationVector, *v.InitializationVector)
-	}
-	if v.KeySerialNumber != nil {
-		s.WriteString(schemas.DukptEncryptionAttributes_KeySerialNumber, *v.KeySerialNumber)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.DukptEncryptionAttributes_Mode, string(v.Mode))
-	}
-}
-func (v *DukptEncryptionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DukptEncryptionAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DukptEncryptionAttributes_DukptKeyDerivationType:
-			var ev string
-			if err := d.ReadString(schemas.DukptEncryptionAttributes_DukptKeyDerivationType, &ev); err != nil {
-				return err
-			}
-			v.DukptKeyDerivationType = DukptDerivationType(ev)
-			return nil
-		case schemas.DukptEncryptionAttributes_DukptKeyVariant:
-			var ev string
-			if err := d.ReadString(schemas.DukptEncryptionAttributes_DukptKeyVariant, &ev); err != nil {
-				return err
-			}
-			v.DukptKeyVariant = DukptKeyVariant(ev)
-			return nil
-		case schemas.DukptEncryptionAttributes_InitializationVector:
-			v.InitializationVector = new(string)
-			return d.ReadString(schemas.DukptEncryptionAttributes_InitializationVector, v.InitializationVector)
-		case schemas.DukptEncryptionAttributes_KeySerialNumber:
-			v.KeySerialNumber = new(string)
-			return d.ReadString(schemas.DukptEncryptionAttributes_KeySerialNumber, v.KeySerialNumber)
-		case schemas.DukptEncryptionAttributes_Mode:
-			var ev string
-			if err := d.ReadString(schemas.DukptEncryptionAttributes_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = DukptEncryptionMode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Dynamic Card Verification
 // Value (dCVV).
 type DynamicCardVerificationCode struct {
@@ -1358,46 +668,6 @@ type DynamicCardVerificationCode struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DynamicCardVerificationCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DynamicCardVerificationCode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DynamicCardVerificationCode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.DynamicCardVerificationCode_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.DynamicCardVerificationCode_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.TrackData != nil {
-		s.WriteString(schemas.DynamicCardVerificationCode_TrackData, *v.TrackData)
-	}
-	if v.UnpredictableNumber != nil {
-		s.WriteString(schemas.DynamicCardVerificationCode_UnpredictableNumber, *v.UnpredictableNumber)
-	}
-}
-func (v *DynamicCardVerificationCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DynamicCardVerificationCode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DynamicCardVerificationCode_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationCode_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.DynamicCardVerificationCode_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationCode_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.DynamicCardVerificationCode_TrackData:
-			v.TrackData = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationCode_TrackData, v.TrackData)
-		case schemas.DynamicCardVerificationCode_UnpredictableNumber:
-			v.UnpredictableNumber = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationCode_UnpredictableNumber, v.UnpredictableNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Dynamic Card Verification
 // Value (dCVV).
 type DynamicCardVerificationValue struct {
@@ -1425,46 +695,6 @@ type DynamicCardVerificationValue struct {
 	ServiceCode *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DynamicCardVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DynamicCardVerificationValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DynamicCardVerificationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.DynamicCardVerificationValue_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.CardExpiryDate != nil {
-		s.WriteString(schemas.DynamicCardVerificationValue_CardExpiryDate, *v.CardExpiryDate)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.DynamicCardVerificationValue_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.DynamicCardVerificationValue_ServiceCode, *v.ServiceCode)
-	}
-}
-func (v *DynamicCardVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DynamicCardVerificationValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DynamicCardVerificationValue_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationValue_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.DynamicCardVerificationValue_CardExpiryDate:
-			v.CardExpiryDate = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationValue_CardExpiryDate, v.CardExpiryDate)
-		case schemas.DynamicCardVerificationValue_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationValue_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.DynamicCardVerificationValue_ServiceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.DynamicCardVerificationValue_ServiceCode, v.ServiceCode)
-		}
-		return nil
-	})
 }
 
 // Parameters required to establish ECDH based key exchange.
@@ -1510,70 +740,6 @@ type EcdhDerivationAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EcdhDerivationAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EcdhDerivationAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EcdhDerivationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CertificateAuthorityPublicKeyIdentifier != nil {
-		s.WriteString(schemas.EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
-	}
-	if v.KeyAlgorithm != "" {
-		s.WriteString(schemas.EcdhDerivationAttributes_KeyAlgorithm, string(v.KeyAlgorithm))
-	}
-	if v.KeyDerivationFunction != "" {
-		s.WriteString(schemas.EcdhDerivationAttributes_KeyDerivationFunction, string(v.KeyDerivationFunction))
-	}
-	if v.KeyDerivationHashAlgorithm != "" {
-		s.WriteString(schemas.EcdhDerivationAttributes_KeyDerivationHashAlgorithm, string(v.KeyDerivationHashAlgorithm))
-	}
-	if v.PublicKeyCertificate != nil {
-		s.WriteString(schemas.EcdhDerivationAttributes_PublicKeyCertificate, *v.PublicKeyCertificate)
-	}
-	if v.SharedInformation != nil {
-		s.WriteString(schemas.EcdhDerivationAttributes_SharedInformation, *v.SharedInformation)
-	}
-}
-func (v *EcdhDerivationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EcdhDerivationAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier:
-			v.CertificateAuthorityPublicKeyIdentifier = new(string)
-			return d.ReadString(schemas.EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
-		case schemas.EcdhDerivationAttributes_KeyAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.EcdhDerivationAttributes_KeyAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.KeyAlgorithm = SymmetricKeyAlgorithm(ev)
-			return nil
-		case schemas.EcdhDerivationAttributes_KeyDerivationFunction:
-			var ev string
-			if err := d.ReadString(schemas.EcdhDerivationAttributes_KeyDerivationFunction, &ev); err != nil {
-				return err
-			}
-			v.KeyDerivationFunction = KeyDerivationFunction(ev)
-			return nil
-		case schemas.EcdhDerivationAttributes_KeyDerivationHashAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.EcdhDerivationAttributes_KeyDerivationHashAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.KeyDerivationHashAlgorithm = KeyDerivationHashAlgorithm(ev)
-			return nil
-		case schemas.EcdhDerivationAttributes_PublicKeyCertificate:
-			v.PublicKeyCertificate = new(string)
-			return d.ReadString(schemas.EcdhDerivationAttributes_PublicKeyCertificate, v.PublicKeyCertificate)
-		case schemas.EcdhDerivationAttributes_SharedInformation:
-			v.SharedInformation = new(string)
-			return d.ReadString(schemas.EcdhDerivationAttributes_SharedInformation, v.SharedInformation)
-		}
-		return nil
-	})
-}
-
 // Parameters to derive the confidentiality and integrity keys for a payment card
 // using EMV2000 deruv.
 type Emv2000Attributes struct {
@@ -1602,50 +768,6 @@ type Emv2000Attributes struct {
 	PrimaryAccountNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Emv2000Attributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Emv2000Attributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Emv2000Attributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.Emv2000Attributes_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.Emv2000Attributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.Emv2000Attributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.Emv2000Attributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *Emv2000Attributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Emv2000Attributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Emv2000Attributes_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.Emv2000Attributes_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.Emv2000Attributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.Emv2000Attributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.Emv2000Attributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.Emv2000Attributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.Emv2000Attributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.Emv2000Attributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters to derive the confidentiality and integrity keys for an Emv common
@@ -1700,80 +822,6 @@ type EmvCommonAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EmvCommonAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmvCommonAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmvCommonAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationCryptogram != nil {
-		s.WriteString(schemas.EmvCommonAttributes_ApplicationCryptogram, *v.ApplicationCryptogram)
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.EmvCommonAttributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.EmvCommonAttributes_Mode, string(v.Mode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.EmvCommonAttributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PinBlockLengthPosition != "" {
-		s.WriteString(schemas.EmvCommonAttributes_PinBlockLengthPosition, string(v.PinBlockLengthPosition))
-	}
-	if v.PinBlockPaddingType != "" {
-		s.WriteString(schemas.EmvCommonAttributes_PinBlockPaddingType, string(v.PinBlockPaddingType))
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.EmvCommonAttributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *EmvCommonAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmvCommonAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmvCommonAttributes_ApplicationCryptogram:
-			v.ApplicationCryptogram = new(string)
-			return d.ReadString(schemas.EmvCommonAttributes_ApplicationCryptogram, v.ApplicationCryptogram)
-		case schemas.EmvCommonAttributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.EmvCommonAttributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.EmvCommonAttributes_Mode:
-			var ev string
-			if err := d.ReadString(schemas.EmvCommonAttributes_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = EmvEncryptionMode(ev)
-			return nil
-		case schemas.EmvCommonAttributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.EmvCommonAttributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.EmvCommonAttributes_PinBlockLengthPosition:
-			var ev string
-			if err := d.ReadString(schemas.EmvCommonAttributes_PinBlockLengthPosition, &ev); err != nil {
-				return err
-			}
-			v.PinBlockLengthPosition = PinBlockLengthPosition(ev)
-			return nil
-		case schemas.EmvCommonAttributes_PinBlockPaddingType:
-			var ev string
-			if err := d.ReadString(schemas.EmvCommonAttributes_PinBlockPaddingType, &ev); err != nil {
-				return err
-			}
-			v.PinBlockPaddingType = PinBlockPaddingType(ev)
-			return nil
-		case schemas.EmvCommonAttributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.EmvCommonAttributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters for plaintext encryption using EMV keys.
 type EmvEncryptionAttributes struct {
 
@@ -1813,66 +861,6 @@ type EmvEncryptionAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EmvEncryptionAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmvEncryptionAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmvEncryptionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InitializationVector != nil {
-		s.WriteString(schemas.EmvEncryptionAttributes_InitializationVector, *v.InitializationVector)
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.EmvEncryptionAttributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.EmvEncryptionAttributes_Mode, string(v.Mode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.EmvEncryptionAttributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.EmvEncryptionAttributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-	if v.SessionDerivationData != nil {
-		s.WriteString(schemas.EmvEncryptionAttributes_SessionDerivationData, *v.SessionDerivationData)
-	}
-}
-func (v *EmvEncryptionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmvEncryptionAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmvEncryptionAttributes_InitializationVector:
-			v.InitializationVector = new(string)
-			return d.ReadString(schemas.EmvEncryptionAttributes_InitializationVector, v.InitializationVector)
-		case schemas.EmvEncryptionAttributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.EmvEncryptionAttributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = EmvMajorKeyDerivationMode(ev)
-			return nil
-		case schemas.EmvEncryptionAttributes_Mode:
-			var ev string
-			if err := d.ReadString(schemas.EmvEncryptionAttributes_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = EmvEncryptionMode(ev)
-			return nil
-		case schemas.EmvEncryptionAttributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.EmvEncryptionAttributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.EmvEncryptionAttributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.EmvEncryptionAttributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		case schemas.EmvEncryptionAttributes_SessionDerivationData:
-			v.SessionDerivationData = new(string)
-			return d.ReadString(schemas.EmvEncryptionAttributes_SessionDerivationData, v.SessionDerivationData)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to perform encryption and decryption operations.
 //
 // The following types satisfy this interface:
@@ -1893,14 +881,6 @@ type EncryptionDecryptionAttributesMemberAsymmetric struct {
 }
 
 func (*EncryptionDecryptionAttributesMemberAsymmetric) isEncryptionDecryptionAttributes() {}
-func (v *EncryptionDecryptionAttributesMemberAsymmetric) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionDecryptionAttributes_Asymmetric)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *EncryptionDecryptionAttributesMemberAsymmetric) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to encrypt plaintext data using DUKPT.
 type EncryptionDecryptionAttributesMemberDukpt struct {
@@ -1910,14 +890,6 @@ type EncryptionDecryptionAttributesMemberDukpt struct {
 }
 
 func (*EncryptionDecryptionAttributesMemberDukpt) isEncryptionDecryptionAttributes() {}
-func (v *EncryptionDecryptionAttributesMemberDukpt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionDecryptionAttributes_Dukpt)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *EncryptionDecryptionAttributesMemberDukpt) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters for plaintext encryption using EMV keys.
 type EncryptionDecryptionAttributesMemberEmv struct {
@@ -1927,14 +899,6 @@ type EncryptionDecryptionAttributesMemberEmv struct {
 }
 
 func (*EncryptionDecryptionAttributesMemberEmv) isEncryptionDecryptionAttributes() {}
-func (v *EncryptionDecryptionAttributesMemberEmv) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionDecryptionAttributes_Emv)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *EncryptionDecryptionAttributesMemberEmv) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to perform encryption and decryption using
 // symmetric keys.
@@ -1945,14 +909,6 @@ type EncryptionDecryptionAttributesMemberSymmetric struct {
 }
 
 func (*EncryptionDecryptionAttributesMemberSymmetric) isEncryptionDecryptionAttributes() {}
-func (v *EncryptionDecryptionAttributesMemberSymmetric) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionDecryptionAttributes_Symmetric)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *EncryptionDecryptionAttributesMemberSymmetric) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Ibm3624 natural PIN.
 type Ibm3624NaturalPin struct {
@@ -1975,40 +931,6 @@ type Ibm3624NaturalPin struct {
 	PinValidationDataPadCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Ibm3624NaturalPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ibm3624NaturalPin)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ibm3624NaturalPin) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DecimalizationTable != nil {
-		s.WriteString(schemas.Ibm3624NaturalPin_DecimalizationTable, *v.DecimalizationTable)
-	}
-	if v.PinValidationData != nil {
-		s.WriteString(schemas.Ibm3624NaturalPin_PinValidationData, *v.PinValidationData)
-	}
-	if v.PinValidationDataPadCharacter != nil {
-		s.WriteString(schemas.Ibm3624NaturalPin_PinValidationDataPadCharacter, *v.PinValidationDataPadCharacter)
-	}
-}
-func (v *Ibm3624NaturalPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ibm3624NaturalPin, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ibm3624NaturalPin_DecimalizationTable:
-			v.DecimalizationTable = new(string)
-			return d.ReadString(schemas.Ibm3624NaturalPin_DecimalizationTable, v.DecimalizationTable)
-		case schemas.Ibm3624NaturalPin_PinValidationData:
-			v.PinValidationData = new(string)
-			return d.ReadString(schemas.Ibm3624NaturalPin_PinValidationData, v.PinValidationData)
-		case schemas.Ibm3624NaturalPin_PinValidationDataPadCharacter:
-			v.PinValidationDataPadCharacter = new(string)
-			return d.ReadString(schemas.Ibm3624NaturalPin_PinValidationDataPadCharacter, v.PinValidationDataPadCharacter)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required to generate or verify Ibm3624 PIN from offset PIN.
@@ -2037,46 +959,6 @@ type Ibm3624PinFromOffset struct {
 	PinValidationDataPadCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Ibm3624PinFromOffset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ibm3624PinFromOffset)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ibm3624PinFromOffset) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DecimalizationTable != nil {
-		s.WriteString(schemas.Ibm3624PinFromOffset_DecimalizationTable, *v.DecimalizationTable)
-	}
-	if v.PinOffset != nil {
-		s.WriteString(schemas.Ibm3624PinFromOffset_PinOffset, *v.PinOffset)
-	}
-	if v.PinValidationData != nil {
-		s.WriteString(schemas.Ibm3624PinFromOffset_PinValidationData, *v.PinValidationData)
-	}
-	if v.PinValidationDataPadCharacter != nil {
-		s.WriteString(schemas.Ibm3624PinFromOffset_PinValidationDataPadCharacter, *v.PinValidationDataPadCharacter)
-	}
-}
-func (v *Ibm3624PinFromOffset) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ibm3624PinFromOffset, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ibm3624PinFromOffset_DecimalizationTable:
-			v.DecimalizationTable = new(string)
-			return d.ReadString(schemas.Ibm3624PinFromOffset_DecimalizationTable, v.DecimalizationTable)
-		case schemas.Ibm3624PinFromOffset_PinOffset:
-			v.PinOffset = new(string)
-			return d.ReadString(schemas.Ibm3624PinFromOffset_PinOffset, v.PinOffset)
-		case schemas.Ibm3624PinFromOffset_PinValidationData:
-			v.PinValidationData = new(string)
-			return d.ReadString(schemas.Ibm3624PinFromOffset_PinValidationData, v.PinValidationData)
-		case schemas.Ibm3624PinFromOffset_PinValidationDataPadCharacter:
-			v.PinValidationDataPadCharacter = new(string)
-			return d.ReadString(schemas.Ibm3624PinFromOffset_PinValidationDataPadCharacter, v.PinValidationDataPadCharacter)
-		}
-		return nil
-	})
 }
 
 // Pparameters that are required to generate or verify Ibm3624 PIN offset PIN.
@@ -2109,46 +991,6 @@ type Ibm3624PinOffset struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Ibm3624PinOffset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ibm3624PinOffset)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ibm3624PinOffset) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DecimalizationTable != nil {
-		s.WriteString(schemas.Ibm3624PinOffset_DecimalizationTable, *v.DecimalizationTable)
-	}
-	if v.EncryptedPinBlock != nil {
-		s.WriteString(schemas.Ibm3624PinOffset_EncryptedPinBlock, *v.EncryptedPinBlock)
-	}
-	if v.PinValidationData != nil {
-		s.WriteString(schemas.Ibm3624PinOffset_PinValidationData, *v.PinValidationData)
-	}
-	if v.PinValidationDataPadCharacter != nil {
-		s.WriteString(schemas.Ibm3624PinOffset_PinValidationDataPadCharacter, *v.PinValidationDataPadCharacter)
-	}
-}
-func (v *Ibm3624PinOffset) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ibm3624PinOffset, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ibm3624PinOffset_DecimalizationTable:
-			v.DecimalizationTable = new(string)
-			return d.ReadString(schemas.Ibm3624PinOffset_DecimalizationTable, v.DecimalizationTable)
-		case schemas.Ibm3624PinOffset_EncryptedPinBlock:
-			v.EncryptedPinBlock = new(string)
-			return d.ReadString(schemas.Ibm3624PinOffset_EncryptedPinBlock, v.EncryptedPinBlock)
-		case schemas.Ibm3624PinOffset_PinValidationData:
-			v.PinValidationData = new(string)
-			return d.ReadString(schemas.Ibm3624PinOffset_PinValidationData, v.PinValidationData)
-		case schemas.Ibm3624PinOffset_PinValidationDataPadCharacter:
-			v.PinValidationDataPadCharacter = new(string)
-			return d.ReadString(schemas.Ibm3624PinOffset_PinValidationDataPadCharacter, v.PinValidationDataPadCharacter)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Ibm3624 PIN verification PIN.
 type Ibm3624PinVerification struct {
 
@@ -2177,46 +1019,6 @@ type Ibm3624PinVerification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Ibm3624PinVerification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ibm3624PinVerification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ibm3624PinVerification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DecimalizationTable != nil {
-		s.WriteString(schemas.Ibm3624PinVerification_DecimalizationTable, *v.DecimalizationTable)
-	}
-	if v.PinOffset != nil {
-		s.WriteString(schemas.Ibm3624PinVerification_PinOffset, *v.PinOffset)
-	}
-	if v.PinValidationData != nil {
-		s.WriteString(schemas.Ibm3624PinVerification_PinValidationData, *v.PinValidationData)
-	}
-	if v.PinValidationDataPadCharacter != nil {
-		s.WriteString(schemas.Ibm3624PinVerification_PinValidationDataPadCharacter, *v.PinValidationDataPadCharacter)
-	}
-}
-func (v *Ibm3624PinVerification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ibm3624PinVerification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ibm3624PinVerification_DecimalizationTable:
-			v.DecimalizationTable = new(string)
-			return d.ReadString(schemas.Ibm3624PinVerification_DecimalizationTable, v.DecimalizationTable)
-		case schemas.Ibm3624PinVerification_PinOffset:
-			v.PinOffset = new(string)
-			return d.ReadString(schemas.Ibm3624PinVerification_PinOffset, v.PinOffset)
-		case schemas.Ibm3624PinVerification_PinValidationData:
-			v.PinValidationData = new(string)
-			return d.ReadString(schemas.Ibm3624PinVerification_PinValidationData, v.PinValidationData)
-		case schemas.Ibm3624PinVerification_PinValidationDataPadCharacter:
-			v.PinValidationDataPadCharacter = new(string)
-			return d.ReadString(schemas.Ibm3624PinVerification_PinValidationDataPadCharacter, v.PinValidationDataPadCharacter)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Ibm3624 random PIN.
 type Ibm3624RandomPin struct {
 
@@ -2238,40 +1040,6 @@ type Ibm3624RandomPin struct {
 	PinValidationDataPadCharacter *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Ibm3624RandomPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ibm3624RandomPin)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ibm3624RandomPin) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DecimalizationTable != nil {
-		s.WriteString(schemas.Ibm3624RandomPin_DecimalizationTable, *v.DecimalizationTable)
-	}
-	if v.PinValidationData != nil {
-		s.WriteString(schemas.Ibm3624RandomPin_PinValidationData, *v.PinValidationData)
-	}
-	if v.PinValidationDataPadCharacter != nil {
-		s.WriteString(schemas.Ibm3624RandomPin_PinValidationDataPadCharacter, *v.PinValidationDataPadCharacter)
-	}
-}
-func (v *Ibm3624RandomPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ibm3624RandomPin, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ibm3624RandomPin_DecimalizationTable:
-			v.DecimalizationTable = new(string)
-			return d.ReadString(schemas.Ibm3624RandomPin_DecimalizationTable, v.DecimalizationTable)
-		case schemas.Ibm3624RandomPin_PinValidationData:
-			v.PinValidationData = new(string)
-			return d.ReadString(schemas.Ibm3624RandomPin_PinValidationData, v.PinValidationData)
-		case schemas.Ibm3624RandomPin_PinValidationDataPadCharacter:
-			v.PinValidationDataPadCharacter = new(string)
-			return d.ReadString(schemas.Ibm3624RandomPin_PinValidationDataPadCharacter, v.PinValidationDataPadCharacter)
-		}
-		return nil
-	})
 }
 
 // Parameter information of a TR31KeyBlock wrapped using an ECDH derived key.
@@ -2322,79 +1090,6 @@ type IncomingDiffieHellmanTr31KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IncomingDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IncomingDiffieHellmanTr31KeyBlock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IncomingDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CertificateAuthorityPublicKeyIdentifier != nil {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
-	}
-	serializeDiffieHellmanDerivationData(s, schemas.IncomingDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
-	if v.DeriveKeyAlgorithm != "" {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
-	}
-	if v.KeyDerivationFunction != "" {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction, string(v.KeyDerivationFunction))
-	}
-	if v.KeyDerivationHashAlgorithm != "" {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, string(v.KeyDerivationHashAlgorithm))
-	}
-	if v.PrivateKeyIdentifier != nil {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, *v.PrivateKeyIdentifier)
-	}
-	if v.PublicKeyCertificate != nil {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate, *v.PublicKeyCertificate)
-	}
-	if v.WrappedKeyBlock != nil {
-		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock, *v.WrappedKeyBlock)
-	}
-}
-func (v *IncomingDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IncomingDiffieHellmanTr31KeyBlock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier:
-			v.CertificateAuthorityPublicKeyIdentifier = new(string)
-			return d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_DerivationData:
-			return deserializeDiffieHellmanDerivationData(d, schemas.IncomingDiffieHellmanTr31KeyBlock_DerivationData, &v.DerivationData)
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.DeriveKeyAlgorithm = SymmetricKeyAlgorithm(ev)
-			return nil
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction:
-			var ev string
-			if err := d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction, &ev); err != nil {
-				return err
-			}
-			v.KeyDerivationFunction = KeyDerivationFunction(ev)
-			return nil
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.KeyDerivationHashAlgorithm = KeyDerivationHashAlgorithm(ev)
-			return nil
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier:
-			v.PrivateKeyIdentifier = new(string)
-			return d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, v.PrivateKeyIdentifier)
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate:
-			v.PublicKeyCertificate = new(string)
-			return d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate, v.PublicKeyCertificate)
-		case schemas.IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock:
-			v.WrappedKeyBlock = new(string)
-			return d.ReadString(schemas.IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock, v.WrappedKeyBlock)
-		}
-		return nil
-	})
-}
-
 // Parameter information of the incoming WrappedKeyBlock containing the
 // transaction key.
 //
@@ -2414,14 +1109,6 @@ type IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 }
 
 func (*IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock) isIncomingKeyMaterial() {}
-func (v *IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IncomingKeyMaterial_DiffieHellmanTr31KeyBlock)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameter information for generating a KEK validation request during
 // node-to-node initialization.
@@ -2438,42 +1125,6 @@ type KekValidationRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KekValidationRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KekValidationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KekValidationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeriveKeyAlgorithm != "" {
-		s.WriteString(schemas.KekValidationRequest_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
-	}
-	if v.RandomKeyMaxLength != "" {
-		s.WriteString(schemas.KekValidationRequest_RandomKeyMaxLength, string(v.RandomKeyMaxLength))
-	}
-}
-func (v *KekValidationRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KekValidationRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KekValidationRequest_DeriveKeyAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.KekValidationRequest_DeriveKeyAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.DeriveKeyAlgorithm = SymmetricKeyAlgorithm(ev)
-			return nil
-		case schemas.KekValidationRequest_RandomKeyMaxLength:
-			var ev string
-			if err := d.ReadString(schemas.KekValidationRequest_RandomKeyMaxLength, &ev); err != nil {
-				return err
-			}
-			v.RandomKeyMaxLength = RandomKeyMaxLength(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Parameter information for generating a KEK validation response during
 // node-to-node initialization.
 type KekValidationResponse struct {
@@ -2485,28 +1136,6 @@ type KekValidationResponse struct {
 	RandomKeySend *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KekValidationResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KekValidationResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KekValidationResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RandomKeySend != nil {
-		s.WriteString(schemas.KekValidationResponse_RandomKeySend, *v.RandomKeySend)
-	}
-}
-func (v *KekValidationResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KekValidationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KekValidationResponse_RandomKeySend:
-			v.RandomKeySend = new(string)
-			return d.ReadString(schemas.KekValidationResponse_RandomKeySend, v.RandomKeySend)
-		}
-		return nil
-	})
 }
 
 // Parameters required for DUKPT MAC generation and verification.
@@ -2532,48 +1161,6 @@ type MacAlgorithmDukpt struct {
 	DukptDerivationType DukptDerivationType
 
 	noSmithyDocumentSerde
-}
-
-func (v *MacAlgorithmDukpt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAlgorithmDukpt)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MacAlgorithmDukpt) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DukptDerivationType != "" {
-		s.WriteString(schemas.MacAlgorithmDukpt_DukptDerivationType, string(v.DukptDerivationType))
-	}
-	if v.DukptKeyVariant != "" {
-		s.WriteString(schemas.MacAlgorithmDukpt_DukptKeyVariant, string(v.DukptKeyVariant))
-	}
-	if v.KeySerialNumber != nil {
-		s.WriteString(schemas.MacAlgorithmDukpt_KeySerialNumber, *v.KeySerialNumber)
-	}
-}
-func (v *MacAlgorithmDukpt) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MacAlgorithmDukpt, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MacAlgorithmDukpt_DukptDerivationType:
-			var ev string
-			if err := d.ReadString(schemas.MacAlgorithmDukpt_DukptDerivationType, &ev); err != nil {
-				return err
-			}
-			v.DukptDerivationType = DukptDerivationType(ev)
-			return nil
-		case schemas.MacAlgorithmDukpt_DukptKeyVariant:
-			var ev string
-			if err := d.ReadString(schemas.MacAlgorithmDukpt_DukptKeyVariant, &ev); err != nil {
-				return err
-			}
-			v.DukptKeyVariant = DukptKeyVariant(ev)
-			return nil
-		case schemas.MacAlgorithmDukpt_KeySerialNumber:
-			v.KeySerialNumber = new(string)
-			return d.ReadString(schemas.MacAlgorithmDukpt_KeySerialNumber, v.KeySerialNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required for EMV MAC generation and verification.
@@ -2611,57 +1198,6 @@ type MacAlgorithmEmv struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MacAlgorithmEmv) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAlgorithmEmv)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MacAlgorithmEmv) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.MacAlgorithmEmv_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.MacAlgorithmEmv_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.MacAlgorithmEmv_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-	if v.SessionKeyDerivationMode != "" {
-		s.WriteString(schemas.MacAlgorithmEmv_SessionKeyDerivationMode, string(v.SessionKeyDerivationMode))
-	}
-	serializeSessionKeyDerivationValue(s, schemas.MacAlgorithmEmv_SessionKeyDerivationValue, v.SessionKeyDerivationValue)
-}
-func (v *MacAlgorithmEmv) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MacAlgorithmEmv, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MacAlgorithmEmv_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.MacAlgorithmEmv_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.MacAlgorithmEmv_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.MacAlgorithmEmv_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.MacAlgorithmEmv_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.MacAlgorithmEmv_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		case schemas.MacAlgorithmEmv_SessionKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.MacAlgorithmEmv_SessionKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.SessionKeyDerivationMode = SessionKeyDerivationMode(ev)
-			return nil
-		case schemas.MacAlgorithmEmv_SessionKeyDerivationValue:
-			return deserializeSessionKeyDerivationValue(d, schemas.MacAlgorithmEmv_SessionKeyDerivationValue, &v.SessionKeyDerivationValue)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required for DUKPT, HMAC, or EMV MAC generation or
 // verification.
 //
@@ -2684,17 +1220,6 @@ type MacAttributesMemberAlgorithm struct {
 }
 
 func (*MacAttributesMemberAlgorithm) isMacAttributes() {}
-func (v *MacAttributesMemberAlgorithm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.MacAttributes_Algorithm, string(v.Value))
-}
-func (v *MacAttributesMemberAlgorithm) Deserialize(d smithy.ShapeDeserializer) error {
-	var s string
-	if err := d.ReadString(schemas.MacAttributes_Algorithm, &s); err != nil {
-		return err
-	}
-	v.Value = MacAlgorithm(s)
-	return nil
-}
 
 // Parameters that are required for MAC generation or verification using DUKPT
 // CMAC algorithm.
@@ -2705,14 +1230,6 @@ type MacAttributesMemberDukptCmac struct {
 }
 
 func (*MacAttributesMemberDukptCmac) isMacAttributes() {}
-func (v *MacAttributesMemberDukptCmac) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAttributes_DukptCmac)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MacAttributesMemberDukptCmac) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for MAC generation or verification using DUKPT ISO
 // 9797 algorithm1.
@@ -2723,14 +1240,6 @@ type MacAttributesMemberDukptIso9797Algorithm1 struct {
 }
 
 func (*MacAttributesMemberDukptIso9797Algorithm1) isMacAttributes() {}
-func (v *MacAttributesMemberDukptIso9797Algorithm1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAttributes_DukptIso9797Algorithm1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MacAttributesMemberDukptIso9797Algorithm1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for MAC generation or verification using DUKPT ISO
 // 9797 algorithm3.
@@ -2741,14 +1250,6 @@ type MacAttributesMemberDukptIso9797Algorithm3 struct {
 }
 
 func (*MacAttributesMemberDukptIso9797Algorithm3) isMacAttributes() {}
-func (v *MacAttributesMemberDukptIso9797Algorithm3) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAttributes_DukptIso9797Algorithm3)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MacAttributesMemberDukptIso9797Algorithm3) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for MAC generation or verification using EMV MAC
 // algorithm.
@@ -2759,14 +1260,6 @@ type MacAttributesMemberEmvMac struct {
 }
 
 func (*MacAttributesMemberEmvMac) isMacAttributes() {}
-func (v *MacAttributesMemberEmvMac) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MacAttributes_EmvMac)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *MacAttributesMemberEmvMac) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive the confidentiality and integrity keys for a Mastercard
 // payment card.
@@ -2798,50 +1291,6 @@ type MasterCardAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MasterCardAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MasterCardAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MasterCardAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationCryptogram != nil {
-		s.WriteString(schemas.MasterCardAttributes_ApplicationCryptogram, *v.ApplicationCryptogram)
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.MasterCardAttributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.MasterCardAttributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.MasterCardAttributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *MasterCardAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MasterCardAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MasterCardAttributes_ApplicationCryptogram:
-			v.ApplicationCryptogram = new(string)
-			return d.ReadString(schemas.MasterCardAttributes_ApplicationCryptogram, v.ApplicationCryptogram)
-		case schemas.MasterCardAttributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.MasterCardAttributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.MasterCardAttributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.MasterCardAttributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.MasterCardAttributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.MasterCardAttributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameter information of the outgoing TR31WrappedKeyBlock containing the
 // transaction key.
 //
@@ -2861,14 +1310,6 @@ type OutgoingKeyMaterialMemberTr31KeyBlock struct {
 }
 
 func (*OutgoingKeyMaterialMemberTr31KeyBlock) isOutgoingKeyMaterial() {}
-func (v *OutgoingKeyMaterialMemberTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutgoingKeyMaterial_Tr31KeyBlock)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *OutgoingKeyMaterialMemberTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameter information of the TR31WrappedKeyBlock containing the transaction key
 // wrapped using a KEK.
@@ -2880,28 +1321,6 @@ type OutgoingTr31KeyBlock struct {
 	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *OutgoingTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutgoingTr31KeyBlock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutgoingTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WrappingKeyIdentifier != nil {
-		s.WriteString(schemas.OutgoingTr31KeyBlock_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
-	}
-}
-func (v *OutgoingTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutgoingTr31KeyBlock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutgoingTr31KeyBlock_WrappingKeyIdentifier:
-			v.WrappingKeyIdentifier = new(string)
-			return d.ReadString(schemas.OutgoingTr31KeyBlock_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required to generate, translate, or verify PIN data.
@@ -2922,12 +1341,6 @@ type PinDataMemberPinOffset struct {
 }
 
 func (*PinDataMemberPinOffset) isPinData() {}
-func (v *PinDataMemberPinOffset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.PinData_PinOffset, v.Value)
-}
-func (v *PinDataMemberPinOffset) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.PinData_PinOffset, &v.Value)
-}
 
 // The unique data to identify a cardholder. In most cases, this is the same as
 // cardholder's Primary Account Number (PAN). If a value is not provided, it
@@ -2939,12 +1352,6 @@ type PinDataMemberVerificationValue struct {
 }
 
 func (*PinDataMemberVerificationValue) isPinData() {}
-func (v *PinDataMemberVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.PinData_VerificationValue, v.Value)
-}
-func (v *PinDataMemberVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.PinData_VerificationValue, &v.Value)
-}
 
 // Parameters that are required for PIN data generation.
 //
@@ -2968,14 +1375,6 @@ type PinGenerationAttributesMemberIbm3624NaturalPin struct {
 }
 
 func (*PinGenerationAttributesMemberIbm3624NaturalPin) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberIbm3624NaturalPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_Ibm3624NaturalPin)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberIbm3624NaturalPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Ibm3624 PIN from offset PIN.
 type PinGenerationAttributesMemberIbm3624PinFromOffset struct {
@@ -2985,14 +1384,6 @@ type PinGenerationAttributesMemberIbm3624PinFromOffset struct {
 }
 
 func (*PinGenerationAttributesMemberIbm3624PinFromOffset) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberIbm3624PinFromOffset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_Ibm3624PinFromOffset)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberIbm3624PinFromOffset) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Ibm3624 PIN offset PIN.
 type PinGenerationAttributesMemberIbm3624PinOffset struct {
@@ -3002,14 +1393,6 @@ type PinGenerationAttributesMemberIbm3624PinOffset struct {
 }
 
 func (*PinGenerationAttributesMemberIbm3624PinOffset) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberIbm3624PinOffset) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_Ibm3624PinOffset)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberIbm3624PinOffset) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Ibm3624 random PIN.
 type PinGenerationAttributesMemberIbm3624RandomPin struct {
@@ -3019,14 +1402,6 @@ type PinGenerationAttributesMemberIbm3624RandomPin struct {
 }
 
 func (*PinGenerationAttributesMemberIbm3624RandomPin) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberIbm3624RandomPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_Ibm3624RandomPin)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberIbm3624RandomPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Visa PIN.
 type PinGenerationAttributesMemberVisaPin struct {
@@ -3036,14 +1411,6 @@ type PinGenerationAttributesMemberVisaPin struct {
 }
 
 func (*PinGenerationAttributesMemberVisaPin) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberVisaPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_VisaPin)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberVisaPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Visa PIN Verification Value
 // (PVV).
@@ -3054,14 +1421,6 @@ type PinGenerationAttributesMemberVisaPinVerificationValue struct {
 }
 
 func (*PinGenerationAttributesMemberVisaPinVerificationValue) isPinGenerationAttributes() {}
-func (v *PinGenerationAttributesMemberVisaPinVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinGenerationAttributes_VisaPinVerificationValue)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinGenerationAttributesMemberVisaPinVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for PIN data verification.
 //
@@ -3081,14 +1440,6 @@ type PinVerificationAttributesMemberIbm3624Pin struct {
 }
 
 func (*PinVerificationAttributesMemberIbm3624Pin) isPinVerificationAttributes() {}
-func (v *PinVerificationAttributesMemberIbm3624Pin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinVerificationAttributes_Ibm3624Pin)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinVerificationAttributesMemberIbm3624Pin) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to generate or verify Visa PIN.
 type PinVerificationAttributesMemberVisaPin struct {
@@ -3098,14 +1449,6 @@ type PinVerificationAttributesMemberVisaPin struct {
 }
 
 func (*PinVerificationAttributesMemberVisaPin) isPinVerificationAttributes() {}
-func (v *PinVerificationAttributesMemberVisaPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PinVerificationAttributes_VisaPin)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *PinVerificationAttributesMemberVisaPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to perform reencryption operation.
 //
@@ -3125,14 +1468,6 @@ type ReEncryptionAttributesMemberDukpt struct {
 }
 
 func (*ReEncryptionAttributesMemberDukpt) isReEncryptionAttributes() {}
-func (v *ReEncryptionAttributesMemberDukpt) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReEncryptionAttributes_Dukpt)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ReEncryptionAttributesMemberDukpt) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required to encrypt data using symmetric keys.
 type ReEncryptionAttributesMemberSymmetric struct {
@@ -3142,14 +1477,6 @@ type ReEncryptionAttributesMemberSymmetric struct {
 }
 
 func (*ReEncryptionAttributesMemberSymmetric) isReEncryptionAttributes() {}
-func (v *ReEncryptionAttributesMemberSymmetric) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReEncryptionAttributes_Symmetric)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ReEncryptionAttributesMemberSymmetric) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key for an Amex payment card.
 type SessionKeyAmex struct {
@@ -3168,34 +1495,6 @@ type SessionKeyAmex struct {
 	PrimaryAccountNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SessionKeyAmex) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyAmex)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionKeyAmex) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.SessionKeyAmex_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.SessionKeyAmex_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *SessionKeyAmex) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionKeyAmex, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionKeyAmex_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.SessionKeyAmex_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.SessionKeyAmex_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.SessionKeyAmex_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters to derive a session key for Authorization Response Cryptogram (ARQC)
@@ -3220,14 +1519,6 @@ type SessionKeyDerivationMemberAmex struct {
 }
 
 func (*SessionKeyDerivationMemberAmex) isSessionKeyDerivation() {}
-func (v *SessionKeyDerivationMemberAmex) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyDerivation_Amex)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SessionKeyDerivationMemberAmex) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key for an Emv2000 payment card for ARQC
 // verification.
@@ -3238,14 +1529,6 @@ type SessionKeyDerivationMemberEmv2000 struct {
 }
 
 func (*SessionKeyDerivationMemberEmv2000) isSessionKeyDerivation() {}
-func (v *SessionKeyDerivationMemberEmv2000) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyDerivation_Emv2000)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SessionKeyDerivationMemberEmv2000) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key for an Emv common payment card for ARQC
 // verification.
@@ -3256,14 +1539,6 @@ type SessionKeyDerivationMemberEmvCommon struct {
 }
 
 func (*SessionKeyDerivationMemberEmvCommon) isSessionKeyDerivation() {}
-func (v *SessionKeyDerivationMemberEmvCommon) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyDerivation_EmvCommon)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SessionKeyDerivationMemberEmvCommon) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key for a Mastercard payment card for ARQC
 // verification.
@@ -3274,14 +1549,6 @@ type SessionKeyDerivationMemberMastercard struct {
 }
 
 func (*SessionKeyDerivationMemberMastercard) isSessionKeyDerivation() {}
-func (v *SessionKeyDerivationMemberMastercard) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyDerivation_Mastercard)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SessionKeyDerivationMemberMastercard) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key for a Visa payment cardfor ARQC verification.
 type SessionKeyDerivationMemberVisa struct {
@@ -3291,14 +1558,6 @@ type SessionKeyDerivationMemberVisa struct {
 }
 
 func (*SessionKeyDerivationMemberVisa) isSessionKeyDerivation() {}
-func (v *SessionKeyDerivationMemberVisa) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyDerivation_Visa)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SessionKeyDerivationMemberVisa) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters to derive session key value using a MAC EMV algorithm.
 //
@@ -3318,12 +1577,6 @@ type SessionKeyDerivationValueMemberApplicationCryptogram struct {
 }
 
 func (*SessionKeyDerivationValueMemberApplicationCryptogram) isSessionKeyDerivationValue() {}
-func (v *SessionKeyDerivationValueMemberApplicationCryptogram) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SessionKeyDerivationValue_ApplicationCryptogram, v.Value)
-}
-func (v *SessionKeyDerivationValueMemberApplicationCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SessionKeyDerivationValue_ApplicationCryptogram, &v.Value)
-}
 
 // The transaction counter that is provided by the terminal during transaction
 // processing.
@@ -3334,12 +1587,6 @@ type SessionKeyDerivationValueMemberApplicationTransactionCounter struct {
 }
 
 func (*SessionKeyDerivationValueMemberApplicationTransactionCounter) isSessionKeyDerivationValue() {}
-func (v *SessionKeyDerivationValueMemberApplicationTransactionCounter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.SessionKeyDerivationValue_ApplicationTransactionCounter, v.Value)
-}
-func (v *SessionKeyDerivationValueMemberApplicationTransactionCounter) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.SessionKeyDerivationValue_ApplicationTransactionCounter, &v.Value)
-}
 
 // Parameters to derive session key for an Emv2000 payment card for ARQC
 // verification.
@@ -3367,40 +1614,6 @@ type SessionKeyEmv2000 struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionKeyEmv2000) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyEmv2000)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionKeyEmv2000) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.SessionKeyEmv2000_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.SessionKeyEmv2000_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.SessionKeyEmv2000_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *SessionKeyEmv2000) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionKeyEmv2000, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionKeyEmv2000_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.SessionKeyEmv2000_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.SessionKeyEmv2000_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.SessionKeyEmv2000_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.SessionKeyEmv2000_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.SessionKeyEmv2000_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters to derive session key for an Emv common payment card for ARQC
 // verification.
 type SessionKeyEmvCommon struct {
@@ -3425,40 +1638,6 @@ type SessionKeyEmvCommon struct {
 	PrimaryAccountNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SessionKeyEmvCommon) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyEmvCommon)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionKeyEmvCommon) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.SessionKeyEmvCommon_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.SessionKeyEmvCommon_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.SessionKeyEmvCommon_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *SessionKeyEmvCommon) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionKeyEmvCommon, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionKeyEmvCommon_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.SessionKeyEmvCommon_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.SessionKeyEmvCommon_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.SessionKeyEmvCommon_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.SessionKeyEmvCommon_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.SessionKeyEmvCommon_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters to derive session key for Mastercard payment card for ARQC
@@ -3492,46 +1671,6 @@ type SessionKeyMastercard struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionKeyMastercard) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyMastercard)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionKeyMastercard) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.SessionKeyMastercard_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.SessionKeyMastercard_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.SessionKeyMastercard_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-	if v.UnpredictableNumber != nil {
-		s.WriteString(schemas.SessionKeyMastercard_UnpredictableNumber, *v.UnpredictableNumber)
-	}
-}
-func (v *SessionKeyMastercard) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionKeyMastercard, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionKeyMastercard_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.SessionKeyMastercard_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.SessionKeyMastercard_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.SessionKeyMastercard_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.SessionKeyMastercard_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.SessionKeyMastercard_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		case schemas.SessionKeyMastercard_UnpredictableNumber:
-			v.UnpredictableNumber = new(string)
-			return d.ReadString(schemas.SessionKeyMastercard_UnpredictableNumber, v.UnpredictableNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters to derive session key for Visa payment card for ARQC verification.
 type SessionKeyVisa struct {
 
@@ -3551,34 +1690,6 @@ type SessionKeyVisa struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionKeyVisa) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionKeyVisa)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionKeyVisa) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.SessionKeyVisa_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.SessionKeyVisa_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *SessionKeyVisa) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionKeyVisa, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionKeyVisa_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.SessionKeyVisa_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.SessionKeyVisa_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.SessionKeyVisa_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters requried to encrypt plaintext data using symmetric keys.
 type SymmetricEncryptionAttributes struct {
 
@@ -3595,48 +1706,6 @@ type SymmetricEncryptionAttributes struct {
 	PaddingType PaddingType
 
 	noSmithyDocumentSerde
-}
-
-func (v *SymmetricEncryptionAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SymmetricEncryptionAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SymmetricEncryptionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InitializationVector != nil {
-		s.WriteString(schemas.SymmetricEncryptionAttributes_InitializationVector, *v.InitializationVector)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.SymmetricEncryptionAttributes_Mode, string(v.Mode))
-	}
-	if v.PaddingType != "" {
-		s.WriteString(schemas.SymmetricEncryptionAttributes_PaddingType, string(v.PaddingType))
-	}
-}
-func (v *SymmetricEncryptionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SymmetricEncryptionAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SymmetricEncryptionAttributes_InitializationVector:
-			v.InitializationVector = new(string)
-			return d.ReadString(schemas.SymmetricEncryptionAttributes_InitializationVector, v.InitializationVector)
-		case schemas.SymmetricEncryptionAttributes_Mode:
-			var ev string
-			if err := d.ReadString(schemas.SymmetricEncryptionAttributes_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = EncryptionMode(ev)
-			return nil
-		case schemas.SymmetricEncryptionAttributes_PaddingType:
-			var ev string
-			if err := d.ReadString(schemas.SymmetricEncryptionAttributes_PaddingType, &ev); err != nil {
-				return err
-			}
-			v.PaddingType = PaddingType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Parameters that are required for translation between ISO9564 PIN block formats
@@ -3661,14 +1730,6 @@ type TranslationIsoFormatsMemberAs2805Format0 struct {
 }
 
 func (*TranslationIsoFormatsMemberAs2805Format0) isTranslationIsoFormats() {}
-func (v *TranslationIsoFormatsMemberAs2805Format0) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationIsoFormats_As2805Format0)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TranslationIsoFormatsMemberAs2805Format0) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ISO9564 PIN format 0 translation.
 type TranslationIsoFormatsMemberIsoFormat0 struct {
@@ -3678,14 +1739,6 @@ type TranslationIsoFormatsMemberIsoFormat0 struct {
 }
 
 func (*TranslationIsoFormatsMemberIsoFormat0) isTranslationIsoFormats() {}
-func (v *TranslationIsoFormatsMemberIsoFormat0) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationIsoFormats_IsoFormat0)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TranslationIsoFormatsMemberIsoFormat0) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ISO9564 PIN format 1 translation.
 type TranslationIsoFormatsMemberIsoFormat1 struct {
@@ -3695,14 +1748,6 @@ type TranslationIsoFormatsMemberIsoFormat1 struct {
 }
 
 func (*TranslationIsoFormatsMemberIsoFormat1) isTranslationIsoFormats() {}
-func (v *TranslationIsoFormatsMemberIsoFormat1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationIsoFormats_IsoFormat1)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TranslationIsoFormatsMemberIsoFormat1) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ISO9564 PIN format 3 translation.
 type TranslationIsoFormatsMemberIsoFormat3 struct {
@@ -3712,14 +1757,6 @@ type TranslationIsoFormatsMemberIsoFormat3 struct {
 }
 
 func (*TranslationIsoFormatsMemberIsoFormat3) isTranslationIsoFormats() {}
-func (v *TranslationIsoFormatsMemberIsoFormat3) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationIsoFormats_IsoFormat3)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TranslationIsoFormatsMemberIsoFormat3) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for ISO9564 PIN format 4 translation.
 type TranslationIsoFormatsMemberIsoFormat4 struct {
@@ -3729,14 +1766,6 @@ type TranslationIsoFormatsMemberIsoFormat4 struct {
 }
 
 func (*TranslationIsoFormatsMemberIsoFormat4) isTranslationIsoFormats() {}
-func (v *TranslationIsoFormatsMemberIsoFormat4) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationIsoFormats_IsoFormat4)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TranslationIsoFormatsMemberIsoFormat4) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters that are required for translation between AS2805 PIN format 0
 // translation.
@@ -3750,28 +1779,6 @@ type TranslationPinDataAs2805Format0 struct {
 	PrimaryAccountNumber *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TranslationPinDataAs2805Format0) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationPinDataAs2805Format0)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TranslationPinDataAs2805Format0) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.TranslationPinDataAs2805Format0_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *TranslationPinDataAs2805Format0) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TranslationPinDataAs2805Format0, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TranslationPinDataAs2805Format0_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.TranslationPinDataAs2805Format0_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required for translation between ISO9564 PIN format 0,3,4
@@ -3788,47 +1795,9 @@ type TranslationPinDataIsoFormat034 struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TranslationPinDataIsoFormat034) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationPinDataIsoFormat034)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TranslationPinDataIsoFormat034) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.TranslationPinDataIsoFormat034_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *TranslationPinDataIsoFormat034) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TranslationPinDataIsoFormat034, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TranslationPinDataIsoFormat034_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.TranslationPinDataIsoFormat034_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required for ISO9564 PIN format 1 translation.
 type TranslationPinDataIsoFormat1 struct {
 	noSmithyDocumentSerde
-}
-
-func (v *TranslationPinDataIsoFormat1) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TranslationPinDataIsoFormat1)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TranslationPinDataIsoFormat1) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *TranslationPinDataIsoFormat1) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TranslationPinDataIsoFormat1, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // The request was denied due to an invalid request error.
@@ -3845,34 +1814,6 @@ type ValidationExceptionField struct {
 	Path *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
-		}
-		return nil
-	})
 }
 
 // The attributes values used for Amex and Visa derivation methods.
@@ -3897,46 +1838,6 @@ type VisaAmexDerivationOutputs struct {
 	CurrentPinPekKeyCheckValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VisaAmexDerivationOutputs) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VisaAmexDerivationOutputs)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VisaAmexDerivationOutputs) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthorizationRequestKeyArn != nil {
-		s.WriteString(schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyArn, *v.AuthorizationRequestKeyArn)
-	}
-	if v.AuthorizationRequestKeyCheckValue != nil {
-		s.WriteString(schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue, *v.AuthorizationRequestKeyCheckValue)
-	}
-	if v.CurrentPinPekArn != nil {
-		s.WriteString(schemas.VisaAmexDerivationOutputs_CurrentPinPekArn, *v.CurrentPinPekArn)
-	}
-	if v.CurrentPinPekKeyCheckValue != nil {
-		s.WriteString(schemas.VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue, *v.CurrentPinPekKeyCheckValue)
-	}
-}
-func (v *VisaAmexDerivationOutputs) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VisaAmexDerivationOutputs, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyArn:
-			v.AuthorizationRequestKeyArn = new(string)
-			return d.ReadString(schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyArn, v.AuthorizationRequestKeyArn)
-		case schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue:
-			v.AuthorizationRequestKeyCheckValue = new(string)
-			return d.ReadString(schemas.VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue, v.AuthorizationRequestKeyCheckValue)
-		case schemas.VisaAmexDerivationOutputs_CurrentPinPekArn:
-			v.CurrentPinPekArn = new(string)
-			return d.ReadString(schemas.VisaAmexDerivationOutputs_CurrentPinPekArn, v.CurrentPinPekArn)
-		case schemas.VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue:
-			v.CurrentPinPekKeyCheckValue = new(string)
-			return d.ReadString(schemas.VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue, v.CurrentPinPekKeyCheckValue)
-		}
-		return nil
-	})
 }
 
 // Parameters to derive the confidentiality and integrity keys for a Visa payment
@@ -3978,64 +1879,6 @@ type VisaAttributes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VisaAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VisaAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VisaAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationTransactionCounter != nil {
-		s.WriteString(schemas.VisaAttributes_ApplicationTransactionCounter, *v.ApplicationTransactionCounter)
-	}
-	if v.AuthorizationRequestKeyIdentifier != nil {
-		s.WriteString(schemas.VisaAttributes_AuthorizationRequestKeyIdentifier, *v.AuthorizationRequestKeyIdentifier)
-	}
-	if v.CurrentPinAttributes != nil {
-		s.WriteStruct(schemas.VisaAttributes_CurrentPinAttributes)
-		v.CurrentPinAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MajorKeyDerivationMode != "" {
-		s.WriteString(schemas.VisaAttributes_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
-	}
-	if v.PanSequenceNumber != nil {
-		s.WriteString(schemas.VisaAttributes_PanSequenceNumber, *v.PanSequenceNumber)
-	}
-	if v.PrimaryAccountNumber != nil {
-		s.WriteString(schemas.VisaAttributes_PrimaryAccountNumber, *v.PrimaryAccountNumber)
-	}
-}
-func (v *VisaAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VisaAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VisaAttributes_ApplicationTransactionCounter:
-			v.ApplicationTransactionCounter = new(string)
-			return d.ReadString(schemas.VisaAttributes_ApplicationTransactionCounter, v.ApplicationTransactionCounter)
-		case schemas.VisaAttributes_AuthorizationRequestKeyIdentifier:
-			v.AuthorizationRequestKeyIdentifier = new(string)
-			return d.ReadString(schemas.VisaAttributes_AuthorizationRequestKeyIdentifier, v.AuthorizationRequestKeyIdentifier)
-		case schemas.VisaAttributes_CurrentPinAttributes:
-			v.CurrentPinAttributes = &CurrentPinAttributes{}
-			return v.CurrentPinAttributes.Deserialize(d)
-		case schemas.VisaAttributes_MajorKeyDerivationMode:
-			var ev string
-			if err := d.ReadString(schemas.VisaAttributes_MajorKeyDerivationMode, &ev); err != nil {
-				return err
-			}
-			v.MajorKeyDerivationMode = MajorKeyDerivationMode(ev)
-			return nil
-		case schemas.VisaAttributes_PanSequenceNumber:
-			v.PanSequenceNumber = new(string)
-			return d.ReadString(schemas.VisaAttributes_PanSequenceNumber, v.PanSequenceNumber)
-		case schemas.VisaAttributes_PrimaryAccountNumber:
-			v.PrimaryAccountNumber = new(string)
-			return d.ReadString(schemas.VisaAttributes_PrimaryAccountNumber, v.PrimaryAccountNumber)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Visa PIN.
 type VisaPin struct {
 
@@ -4046,28 +1889,6 @@ type VisaPin struct {
 	PinVerificationKeyIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *VisaPin) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VisaPin)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VisaPin) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PinVerificationKeyIndex != nil {
-		s.WriteInt32(schemas.VisaPin_PinVerificationKeyIndex, *v.PinVerificationKeyIndex)
-	}
-}
-func (v *VisaPin) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VisaPin, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VisaPin_PinVerificationKeyIndex:
-			v.PinVerificationKeyIndex = new(int32)
-			return d.ReadInt32(schemas.VisaPin_PinVerificationKeyIndex, v.PinVerificationKeyIndex)
-		}
-		return nil
-	})
 }
 
 // Parameters that are required to generate or verify Visa PIN.
@@ -4088,34 +1909,6 @@ type VisaPinVerification struct {
 	noSmithyDocumentSerde
 }
 
-func (v *VisaPinVerification) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VisaPinVerification)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VisaPinVerification) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PinVerificationKeyIndex != nil {
-		s.WriteInt32(schemas.VisaPinVerification_PinVerificationKeyIndex, *v.PinVerificationKeyIndex)
-	}
-	if v.VerificationValue != nil {
-		s.WriteString(schemas.VisaPinVerification_VerificationValue, *v.VerificationValue)
-	}
-}
-func (v *VisaPinVerification) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VisaPinVerification, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VisaPinVerification_PinVerificationKeyIndex:
-			v.PinVerificationKeyIndex = new(int32)
-			return d.ReadInt32(schemas.VisaPinVerification_PinVerificationKeyIndex, v.PinVerificationKeyIndex)
-		case schemas.VisaPinVerification_VerificationValue:
-			v.VerificationValue = new(string)
-			return d.ReadString(schemas.VisaPinVerification_VerificationValue, v.VerificationValue)
-		}
-		return nil
-	})
-}
-
 // Parameters that are required to generate or verify Visa PVV (PIN Verification
 // Value).
 type VisaPinVerificationValue struct {
@@ -4132,34 +1925,6 @@ type VisaPinVerificationValue struct {
 	PinVerificationKeyIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *VisaPinVerificationValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VisaPinVerificationValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VisaPinVerificationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptedPinBlock != nil {
-		s.WriteString(schemas.VisaPinVerificationValue_EncryptedPinBlock, *v.EncryptedPinBlock)
-	}
-	if v.PinVerificationKeyIndex != nil {
-		s.WriteInt32(schemas.VisaPinVerificationValue_PinVerificationKeyIndex, *v.PinVerificationKeyIndex)
-	}
-}
-func (v *VisaPinVerificationValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VisaPinVerificationValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VisaPinVerificationValue_EncryptedPinBlock:
-			v.EncryptedPinBlock = new(string)
-			return d.ReadString(schemas.VisaPinVerificationValue_EncryptedPinBlock, v.EncryptedPinBlock)
-		case schemas.VisaPinVerificationValue_PinVerificationKeyIndex:
-			v.PinVerificationKeyIndex = new(int32)
-			return d.ReadInt32(schemas.VisaPinVerificationValue_PinVerificationKeyIndex, v.PinVerificationKeyIndex)
-		}
-		return nil
-	})
 }
 
 // Parameter information of a WrappedKeyBlock for encryption key exchange.
@@ -4183,35 +1948,6 @@ type WrappedKey struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WrappedKey) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WrappedKey)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WrappedKey) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyCheckValueAlgorithm != "" {
-		s.WriteString(schemas.WrappedKey_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
-	}
-	serializeWrappedKeyMaterial(s, schemas.WrappedKey_WrappedKeyMaterial, v.WrappedKeyMaterial)
-}
-func (v *WrappedKey) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WrappedKey, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WrappedKey_KeyCheckValueAlgorithm:
-			var ev string
-			if err := d.ReadString(schemas.WrappedKey_KeyCheckValueAlgorithm, &ev); err != nil {
-				return err
-			}
-			v.KeyCheckValueAlgorithm = KeyCheckValueAlgorithm(ev)
-			return nil
-		case schemas.WrappedKey_WrappedKeyMaterial:
-			return deserializeWrappedKeyMaterial(d, schemas.WrappedKey_WrappedKeyMaterial, &v.WrappedKeyMaterial)
-		}
-		return nil
-	})
-}
-
 // Parameter information of a WrappedKeyBlock for encryption key exchange.
 //
 // The following types satisfy this interface:
@@ -4230,14 +1966,6 @@ type WrappedKeyMaterialMemberDiffieHellmanSymmetricKey struct {
 }
 
 func (*WrappedKeyMaterialMemberDiffieHellmanSymmetricKey) isWrappedKeyMaterial() {}
-func (v *WrappedKeyMaterialMemberDiffieHellmanSymmetricKey) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WrappedKeyMaterial_DiffieHellmanSymmetricKey)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *WrappedKeyMaterialMemberDiffieHellmanSymmetricKey) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The TR-31 wrapped key block.
 type WrappedKeyMaterialMemberTr31KeyBlock struct {
@@ -4247,12 +1975,6 @@ type WrappedKeyMaterialMemberTr31KeyBlock struct {
 }
 
 func (*WrappedKeyMaterialMemberTr31KeyBlock) isWrappedKeyMaterial() {}
-func (v *WrappedKeyMaterialMemberTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.WrappedKeyMaterial_Tr31KeyBlock, v.Value)
-}
-func (v *WrappedKeyMaterialMemberTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.WrappedKeyMaterial_Tr31KeyBlock, &v.Value)
-}
 
 // The parameter information of the outgoing wrapped key block.
 type WrappedWorkingKey struct {
@@ -4280,44 +2002,6 @@ type WrappedWorkingKey struct {
 	WrappedKeyMaterialFormat WrappedKeyMaterialFormat
 
 	noSmithyDocumentSerde
-}
-
-func (v *WrappedWorkingKey) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WrappedWorkingKey)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WrappedWorkingKey) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KeyCheckValue != nil {
-		s.WriteString(schemas.WrappedWorkingKey_KeyCheckValue, *v.KeyCheckValue)
-	}
-	if v.WrappedKeyMaterial != nil {
-		s.WriteString(schemas.WrappedWorkingKey_WrappedKeyMaterial, *v.WrappedKeyMaterial)
-	}
-	if v.WrappedKeyMaterialFormat != "" {
-		s.WriteString(schemas.WrappedWorkingKey_WrappedKeyMaterialFormat, string(v.WrappedKeyMaterialFormat))
-	}
-}
-func (v *WrappedWorkingKey) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WrappedWorkingKey, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WrappedWorkingKey_KeyCheckValue:
-			v.KeyCheckValue = new(string)
-			return d.ReadString(schemas.WrappedWorkingKey_KeyCheckValue, v.KeyCheckValue)
-		case schemas.WrappedWorkingKey_WrappedKeyMaterial:
-			v.WrappedKeyMaterial = new(string)
-			return d.ReadString(schemas.WrappedWorkingKey_WrappedKeyMaterial, v.WrappedKeyMaterial)
-		case schemas.WrappedWorkingKey_WrappedKeyMaterialFormat:
-			var ev string
-			if err := d.ReadString(schemas.WrappedWorkingKey_WrappedKeyMaterialFormat, &ev); err != nil {
-				return err
-			}
-			v.WrappedKeyMaterialFormat = WrappedKeyMaterialFormat(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type AssociateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateUserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.AssociateUserSettingsRequest_portalArn, *v.PortalArn)
-	}
-	if v.UserSettingsArn != nil {
-		s.WriteString(schemas.AssociateUserSettingsRequest_userSettingsArn, *v.UserSettingsArn)
-	}
-}
-
 type AssociateUserSettingsOutput struct {
 
 	// The ARN of the web portal.
@@ -76,27 +59,16 @@ type AssociateUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateUserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateUserSettingsResponse_portalArn:
-			v.PortalArn = new(string)
-			return d.ReadString(schemas.AssociateUserSettingsResponse_portalArn, v.PortalArn)
-		case schemas.AssociateUserSettingsResponse_userSettingsArn:
-			v.UserSettingsArn = new(string)
-			return d.ReadString(schemas.AssociateUserSettingsResponse_userSettingsArn, v.UserSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserSettings, schemas.AssociateUserSettingsRequest, schemas.AssociateUserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserSettings, schemas.AssociateUserSettingsRequest, schemas.AssociateUserSettingsResponse), output: &AssociateUserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateUserSettings"); err != nil {

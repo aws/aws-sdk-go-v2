@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListProvisioningProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProvisioningProfilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListProvisioningProfilesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListProvisioningProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListProvisioningProfilesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListProvisioningProfilesRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListProvisioningProfilesOutput struct {
 
 	// The list of provisioning profiles.
@@ -69,26 +52,16 @@ type ListProvisioningProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListProvisioningProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListProvisioningProfilesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListProvisioningProfilesResponse_Items:
-			return deserializeProvisioningProfileListDefinition(d, schemas.ListProvisioningProfilesResponse_Items, &v.Items)
-		case schemas.ListProvisioningProfilesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListProvisioningProfilesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListProvisioningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningProfiles, schemas.ListProvisioningProfilesRequest, schemas.ListProvisioningProfilesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisioningProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningProfiles, schemas.ListProvisioningProfilesRequest, schemas.ListProvisioningProfilesResponse), output: &ListProvisioningProfilesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisioningProfiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProvisioningProfiles"); err != nil {

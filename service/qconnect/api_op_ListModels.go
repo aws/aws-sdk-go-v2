@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,30 +56,6 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListModelsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListModelsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiPromptType != "" {
-		s.WriteString(schemas.ListModelsRequest_aiPromptType, string(v.AiPromptType))
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.ListModelsRequest_assistantId, *v.AssistantId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListModelsRequest_maxResults, *v.MaxResults)
-	}
-	if v.ModelLifecycle != "" {
-		s.WriteString(schemas.ListModelsRequest_modelLifecycle, string(v.ModelLifecycle))
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListModelsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListModelsOutput struct {
 
 	// The summaries of the models available to the assistant.
@@ -98,26 +72,16 @@ type ListModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListModelsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListModelsResponse_modelSummaries:
-			return deserializeModelSummaryList(d, schemas.ListModelsResponse_modelSummaries, &v.ModelSummaries)
-		case schemas.ListModelsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListModelsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModels{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse), output: &ListModelsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModels{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListModels"); err != nil {

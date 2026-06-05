@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type StartRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartRetrainingSchedulerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ModelName != nil {
-		s.WriteString(schemas.StartRetrainingSchedulerRequest_ModelName, *v.ModelName)
-	}
-}
-
 type StartRetrainingSchedulerOutput struct {
 
 	// The ARN of the model whose retraining scheduler is being started.
@@ -68,34 +54,16 @@ type StartRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartRetrainingSchedulerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartRetrainingSchedulerResponse_ModelArn:
-			v.ModelArn = new(string)
-			return d.ReadString(schemas.StartRetrainingSchedulerResponse_ModelArn, v.ModelArn)
-		case schemas.StartRetrainingSchedulerResponse_ModelName:
-			v.ModelName = new(string)
-			return d.ReadString(schemas.StartRetrainingSchedulerResponse_ModelName, v.ModelName)
-		case schemas.StartRetrainingSchedulerResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.StartRetrainingSchedulerResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RetrainingSchedulerStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRetrainingScheduler, schemas.StartRetrainingSchedulerRequest, schemas.StartRetrainingSchedulerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartRetrainingScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRetrainingScheduler, schemas.StartRetrainingSchedulerRequest, schemas.StartRetrainingSchedulerResponse), output: &StartRetrainingSchedulerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartRetrainingScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRetrainingScheduler"); err != nil {

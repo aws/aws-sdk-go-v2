@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -32,15 +30,6 @@ func (c *Client) GetMacieSession(ctx context.Context, params *GetMacieSessionInp
 
 type GetMacieSessionInput struct {
 	noSmithyDocumentSerde
-}
-
-func (v *GetMacieSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMacieSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMacieSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetMacieSessionOutput struct {
@@ -75,44 +64,16 @@ type GetMacieSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMacieSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMacieSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMacieSessionResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMacieSessionResponse_createdAt, v.CreatedAt)
-		case schemas.GetMacieSessionResponse_findingPublishingFrequency:
-			var ev string
-			if err := d.ReadString(schemas.GetMacieSessionResponse_findingPublishingFrequency, &ev); err != nil {
-				return err
-			}
-			v.FindingPublishingFrequency = types.FindingPublishingFrequency(ev)
-			return nil
-		case schemas.GetMacieSessionResponse_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.GetMacieSessionResponse_serviceRole, v.ServiceRole)
-		case schemas.GetMacieSessionResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetMacieSessionResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.MacieStatus(ev)
-			return nil
-		case schemas.GetMacieSessionResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMacieSessionResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMacieSession, schemas.GetMacieSessionRequest, schemas.GetMacieSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMacieSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMacieSession, schemas.GetMacieSessionRequest, schemas.GetMacieSessionResponse), output: &GetMacieSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMacieSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMacieSession"); err != nil {

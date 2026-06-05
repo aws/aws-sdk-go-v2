@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -75,21 +73,6 @@ type DeleteDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatasetId != nil {
-		s.WriteString(schemas.DeleteDatasetRequest_datasetId, *v.DatasetId)
-	}
-	if v.DatasetVersion != nil {
-		s.WriteString(schemas.DeleteDatasetRequest_datasetVersion, *v.DatasetVersion)
-	}
-}
-
 type DeleteDatasetOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the dataset.
@@ -123,40 +106,16 @@ type DeleteDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteDatasetResponse_datasetArn:
-			v.DatasetArn = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetArn, v.DatasetArn)
-		case schemas.DeleteDatasetResponse_datasetId:
-			v.DatasetId = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetId, v.DatasetId)
-		case schemas.DeleteDatasetResponse_datasetVersion:
-			v.DatasetVersion = new(string)
-			return d.ReadString(schemas.DeleteDatasetResponse_datasetVersion, v.DatasetVersion)
-		case schemas.DeleteDatasetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.DeleteDatasetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DatasetStatus(ev)
-			return nil
-		case schemas.DeleteDatasetResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DeleteDatasetResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse), output: &DeleteDatasetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataset"); err != nil {

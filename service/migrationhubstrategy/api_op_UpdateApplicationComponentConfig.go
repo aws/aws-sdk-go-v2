@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,71 +61,6 @@ type UpdateApplicationComponentConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationComponentConfigInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationComponentConfigRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationComponentConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppType != "" {
-		s.WriteString(schemas.UpdateApplicationComponentConfigRequest_appType, string(v.AppType))
-	}
-	if v.ApplicationComponentId != nil {
-		s.WriteString(schemas.UpdateApplicationComponentConfigRequest_applicationComponentId, *v.ApplicationComponentId)
-	}
-	if v.ConfigureOnly != nil {
-		s.WriteBool(schemas.UpdateApplicationComponentConfigRequest_configureOnly, *v.ConfigureOnly)
-	}
-	if v.InclusionStatus != "" {
-		s.WriteString(schemas.UpdateApplicationComponentConfigRequest_inclusionStatus, string(v.InclusionStatus))
-	}
-	if v.SecretsManagerKey != nil {
-		s.WriteString(schemas.UpdateApplicationComponentConfigRequest_secretsManagerKey, *v.SecretsManagerKey)
-	}
-	serializeSourceCodeList(s, schemas.UpdateApplicationComponentConfigRequest_sourceCodeList, v.SourceCodeList)
-	if v.StrategyOption != nil {
-		s.WriteStruct(schemas.UpdateApplicationComponentConfigRequest_strategyOption)
-		v.StrategyOption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UpdateApplicationComponentConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationComponentConfigRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateApplicationComponentConfigRequest_appType:
-			var ev string
-			if err := d.ReadString(schemas.UpdateApplicationComponentConfigRequest_appType, &ev); err != nil {
-				return err
-			}
-			v.AppType = types.AppType(ev)
-			return nil
-		case schemas.UpdateApplicationComponentConfigRequest_applicationComponentId:
-			v.ApplicationComponentId = new(string)
-			return d.ReadString(schemas.UpdateApplicationComponentConfigRequest_applicationComponentId, v.ApplicationComponentId)
-		case schemas.UpdateApplicationComponentConfigRequest_configureOnly:
-			v.ConfigureOnly = new(bool)
-			return d.ReadBool(schemas.UpdateApplicationComponentConfigRequest_configureOnly, v.ConfigureOnly)
-		case schemas.UpdateApplicationComponentConfigRequest_inclusionStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateApplicationComponentConfigRequest_inclusionStatus, &ev); err != nil {
-				return err
-			}
-			v.InclusionStatus = types.InclusionStatus(ev)
-			return nil
-		case schemas.UpdateApplicationComponentConfigRequest_secretsManagerKey:
-			v.SecretsManagerKey = new(string)
-			return d.ReadString(schemas.UpdateApplicationComponentConfigRequest_secretsManagerKey, v.SecretsManagerKey)
-		case schemas.UpdateApplicationComponentConfigRequest_sourceCodeList:
-			return deserializeSourceCodeList(d, schemas.UpdateApplicationComponentConfigRequest_sourceCodeList, &v.SourceCodeList)
-		case schemas.UpdateApplicationComponentConfigRequest_strategyOption:
-			v.StrategyOption = &types.StrategyOption{}
-			return v.StrategyOption.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 type UpdateApplicationComponentConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -135,29 +68,16 @@ type UpdateApplicationComponentConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationComponentConfigOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationComponentConfigResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationComponentConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateApplicationComponentConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationComponentConfigResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateApplicationComponentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationComponentConfig, schemas.UpdateApplicationComponentConfigRequest, schemas.UpdateApplicationComponentConfigResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplicationComponentConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationComponentConfig, schemas.UpdateApplicationComponentConfigRequest, schemas.UpdateApplicationComponentConfigResponse), output: &UpdateApplicationComponentConfigOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplicationComponentConfig{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplicationComponentConfig"); err != nil {

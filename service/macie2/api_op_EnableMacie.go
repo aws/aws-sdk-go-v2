@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type EnableMacieInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnableMacieInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EnableMacieRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EnableMacieInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.EnableMacieRequest_clientToken, *v.ClientToken)
-	}
-	if v.FindingPublishingFrequency != "" {
-		s.WriteString(schemas.EnableMacieRequest_findingPublishingFrequency, string(v.FindingPublishingFrequency))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.EnableMacieRequest_status, string(v.Status))
-	}
-}
-
 type EnableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,21 +53,16 @@ type EnableMacieOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EnableMacieOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EnableMacieResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationEnableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableMacie, schemas.EnableMacieRequest, schemas.EnableMacieResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableMacie{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableMacie, schemas.EnableMacieRequest, schemas.EnableMacieResponse), output: &EnableMacieOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableMacie{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableMacie"); err != nil {

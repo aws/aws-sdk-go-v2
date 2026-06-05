@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,27 +106,6 @@ type CreateStreamSessionConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStreamSessionConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateStreamSessionConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateStreamSessionConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateStreamSessionConnectionInput_ClientToken, *v.ClientToken)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.CreateStreamSessionConnectionInput_Identifier, *v.Identifier)
-	}
-	if v.SignalRequest != nil {
-		s.WriteString(schemas.CreateStreamSessionConnectionInput_SignalRequest, *v.SignalRequest)
-	}
-	if v.StreamSessionIdentifier != nil {
-		s.WriteString(schemas.CreateStreamSessionConnectionInput_StreamSessionIdentifier, *v.StreamSessionIdentifier)
-	}
-}
-
 type CreateStreamSessionConnectionOutput struct {
 
 	// The WebRTC answer string that the stream server generates in response to the
@@ -141,24 +118,16 @@ type CreateStreamSessionConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateStreamSessionConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateStreamSessionConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateStreamSessionConnectionOutput_SignalResponse:
-			v.SignalResponse = new(string)
-			return d.ReadString(schemas.CreateStreamSessionConnectionOutput_SignalResponse, v.SignalResponse)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateStreamSessionConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamSessionConnection, schemas.CreateStreamSessionConnectionInput, schemas.CreateStreamSessionConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamSessionConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamSessionConnection, schemas.CreateStreamSessionConnectionInput, schemas.CreateStreamSessionConnectionOutput), output: &CreateStreamSessionConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamSessionConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStreamSessionConnection"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,42 +65,6 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDomainInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDomainInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDomainInput_description, *v.Description)
-	}
-	if v.DomainExecutionRole != nil {
-		s.WriteString(schemas.CreateDomainInput_domainExecutionRole, *v.DomainExecutionRole)
-	}
-	if v.DomainVersion != "" {
-		s.WriteString(schemas.CreateDomainInput_domainVersion, string(v.DomainVersion))
-	}
-	if v.KmsKeyIdentifier != nil {
-		s.WriteString(schemas.CreateDomainInput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDomainInput_name, *v.Name)
-	}
-	if v.ServiceRole != nil {
-		s.WriteString(schemas.CreateDomainInput_serviceRole, *v.ServiceRole)
-	}
-	if v.SingleSignOn != nil {
-		s.WriteStruct(schemas.CreateDomainInput_singleSignOn)
-		v.SingleSignOn.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTags(s, schemas.CreateDomainInput_tags, v.Tags)
-}
-
 type CreateDomainOutput struct {
 
 	// The identifier of the Amazon DataZone domain.
@@ -155,67 +117,16 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDomainOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDomainOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_arn, v.Arn)
-		case schemas.CreateDomainOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_description, v.Description)
-		case schemas.CreateDomainOutput_domainExecutionRole:
-			v.DomainExecutionRole = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_domainExecutionRole, v.DomainExecutionRole)
-		case schemas.CreateDomainOutput_domainVersion:
-			var ev string
-			if err := d.ReadString(schemas.CreateDomainOutput_domainVersion, &ev); err != nil {
-				return err
-			}
-			v.DomainVersion = types.DomainVersion(ev)
-			return nil
-		case schemas.CreateDomainOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_id, v.Id)
-		case schemas.CreateDomainOutput_kmsKeyIdentifier:
-			v.KmsKeyIdentifier = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
-		case schemas.CreateDomainOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_name, v.Name)
-		case schemas.CreateDomainOutput_portalUrl:
-			v.PortalUrl = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_portalUrl, v.PortalUrl)
-		case schemas.CreateDomainOutput_rootDomainUnitId:
-			v.RootDomainUnitId = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_rootDomainUnitId, v.RootDomainUnitId)
-		case schemas.CreateDomainOutput_serviceRole:
-			v.ServiceRole = new(string)
-			return d.ReadString(schemas.CreateDomainOutput_serviceRole, v.ServiceRole)
-		case schemas.CreateDomainOutput_singleSignOn:
-			v.SingleSignOn = &types.SingleSignOn{}
-			return v.SingleSignOn.Deserialize(d)
-		case schemas.CreateDomainOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDomainOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.DomainStatus(ev)
-			return nil
-		case schemas.CreateDomainOutput_tags:
-			return deserializeTags(d, schemas.CreateDomainOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainInput, schemas.CreateDomainOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainInput, schemas.CreateDomainOutput), output: &CreateDomainOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomain{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {

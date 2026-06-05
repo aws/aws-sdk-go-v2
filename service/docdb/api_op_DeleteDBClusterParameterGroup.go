@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,18 +46,6 @@ type DeleteDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteDBClusterParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterParameterGroupName != nil {
-		s.WriteString(schemas.DeleteDBClusterParameterGroupMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
-	}
-}
-
 type DeleteDBClusterParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,29 +53,16 @@ type DeleteDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteDBClusterParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteDBClusterParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DeleteDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterParameterGroup, schemas.DeleteDBClusterParameterGroupMessage, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterParameterGroup, schemas.DeleteDBClusterParameterGroupMessage, nil), output: &DeleteDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDBClusterParameterGroup"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,21 +47,6 @@ type DeactivatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeactivatePipelineInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeactivatePipelineInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeactivatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CancelActive != nil {
-		s.WriteBool(schemas.DeactivatePipelineInput_cancelActive, *v.CancelActive)
-	}
-	if v.PipelineId != nil {
-		s.WriteString(schemas.DeactivatePipelineInput_pipelineId, *v.PipelineId)
-	}
-}
-
 // Contains the output of DeactivatePipeline.
 type DeactivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,21 +55,16 @@ type DeactivatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeactivatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeactivatePipelineOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeactivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivatePipeline, schemas.DeactivatePipelineInput, schemas.DeactivatePipelineOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivatePipeline, schemas.DeactivatePipelineInput, schemas.DeactivatePipelineOutput), output: &DeactivatePipelineOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeactivatePipeline{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeactivatePipeline"); err != nil {

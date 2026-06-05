@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -105,39 +103,6 @@ type CreateCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateCaseRequest_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateCaseRequest_description, *v.Description)
-	}
-	if v.EngagementType != "" {
-		s.WriteString(schemas.CreateCaseRequest_engagementType, string(v.EngagementType))
-	}
-	serializeImpactedAccounts(s, schemas.CreateCaseRequest_impactedAccounts, v.ImpactedAccounts)
-	serializeImpactedAwsRegionList(s, schemas.CreateCaseRequest_impactedAwsRegions, v.ImpactedAwsRegions)
-	serializeImpactedServicesList(s, schemas.CreateCaseRequest_impactedServices, v.ImpactedServices)
-	if v.ReportedIncidentStartDate != nil {
-		s.WriteTime(schemas.CreateCaseRequest_reportedIncidentStartDate, *v.ReportedIncidentStartDate)
-	}
-	if v.ResolverType != "" {
-		s.WriteString(schemas.CreateCaseRequest_resolverType, string(v.ResolverType))
-	}
-	serializeTagMap(s, schemas.CreateCaseRequest_tags, v.Tags)
-	serializeThreatActorIpList(s, schemas.CreateCaseRequest_threatActorIpAddresses, v.ThreatActorIpAddresses)
-	if v.Title != nil {
-		s.WriteString(schemas.CreateCaseRequest_title, *v.Title)
-	}
-	serializeWatchers(s, schemas.CreateCaseRequest_watchers, v.Watchers)
-}
-
 type CreateCaseOutput struct {
 
 	// A response element providing responses for requests to CreateCase. This element
@@ -152,24 +117,16 @@ type CreateCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCaseResponse_caseId:
-			v.CaseId = new(string)
-			return d.ReadString(schemas.CreateCaseResponse_caseId, v.CaseId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCase, schemas.CreateCaseRequest, schemas.CreateCaseResponse), output: &CreateCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCase"); err != nil {

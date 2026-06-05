@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,30 +54,6 @@ type ListTrainedModelInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainedModelInferenceJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrainedModelInferenceJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrainedModelInferenceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTrainedModelInferenceJobsRequest_maxResults, *v.MaxResults)
-	}
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.ListTrainedModelInferenceJobsRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrainedModelInferenceJobsRequest_nextToken, *v.NextToken)
-	}
-	if v.TrainedModelArn != nil {
-		s.WriteString(schemas.ListTrainedModelInferenceJobsRequest_trainedModelArn, *v.TrainedModelArn)
-	}
-	if v.TrainedModelVersionIdentifier != nil {
-		s.WriteString(schemas.ListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier, *v.TrainedModelVersionIdentifier)
-	}
-}
-
 type ListTrainedModelInferenceJobsOutput struct {
 
 	// Returns the requested trained model inference jobs.
@@ -96,26 +70,16 @@ type ListTrainedModelInferenceJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrainedModelInferenceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrainedModelInferenceJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrainedModelInferenceJobsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrainedModelInferenceJobsResponse_nextToken, v.NextToken)
-		case schemas.ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs:
-			return deserializeTrainedModelInferenceJobList(d, schemas.ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs, &v.TrainedModelInferenceJobs)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrainedModelInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelInferenceJobs, schemas.ListTrainedModelInferenceJobsRequest, schemas.ListTrainedModelInferenceJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrainedModelInferenceJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainedModelInferenceJobs, schemas.ListTrainedModelInferenceJobsRequest, schemas.ListTrainedModelInferenceJobsResponse), output: &ListTrainedModelInferenceJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrainedModelInferenceJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrainedModelInferenceJobs"); err != nil {

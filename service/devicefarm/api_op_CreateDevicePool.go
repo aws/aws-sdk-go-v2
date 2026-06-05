@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,28 +60,6 @@ type CreateDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDevicePoolInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDevicePoolRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDevicePoolRequest_description, *v.Description)
-	}
-	if v.MaxDevices != nil {
-		s.WriteInt32(schemas.CreateDevicePoolRequest_maxDevices, *v.MaxDevices)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDevicePoolRequest_name, *v.Name)
-	}
-	if v.ProjectArn != nil {
-		s.WriteString(schemas.CreateDevicePoolRequest_projectArn, *v.ProjectArn)
-	}
-	serializeRules(s, schemas.CreateDevicePoolRequest_rules, v.Rules)
-}
-
 // Represents the result of a create device pool request.
 type CreateDevicePoolOutput struct {
 
@@ -96,24 +72,16 @@ type CreateDevicePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDevicePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDevicePoolResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDevicePoolResult_devicePool:
-			v.DevicePool = &types.DevicePool{}
-			return v.DevicePool.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevicePool, schemas.CreateDevicePoolRequest, schemas.CreateDevicePoolResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDevicePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevicePool, schemas.CreateDevicePoolRequest, schemas.CreateDevicePoolResult), output: &CreateDevicePoolOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDevicePool{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDevicePool"); err != nil {

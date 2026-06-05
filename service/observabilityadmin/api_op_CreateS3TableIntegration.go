@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,24 +50,6 @@ type CreateS3TableIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateS3TableIntegrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateS3TableIntegrationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Encryption != nil {
-		s.WriteStruct(schemas.CreateS3TableIntegrationInput_Encryption)
-		v.Encryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateS3TableIntegrationInput_RoleArn, *v.RoleArn)
-	}
-	serializeTagMapInput(s, schemas.CreateS3TableIntegrationInput_Tags, v.Tags)
-}
-
 type CreateS3TableIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created S3 Table integration.
@@ -81,24 +61,16 @@ type CreateS3TableIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateS3TableIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateS3TableIntegrationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateS3TableIntegrationOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateS3TableIntegrationOutput_Arn, v.Arn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateS3TableIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateS3TableIntegration, schemas.CreateS3TableIntegrationInput, schemas.CreateS3TableIntegrationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateS3TableIntegration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateS3TableIntegration, schemas.CreateS3TableIntegrationInput, schemas.CreateS3TableIntegrationOutput), output: &CreateS3TableIntegrationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateS3TableIntegration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateS3TableIntegration"); err != nil {

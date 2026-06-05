@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type ListUsersByPermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListUsersByPermissionGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListUsersByPermissionGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListUsersByPermissionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListUsersByPermissionGroupRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListUsersByPermissionGroupRequest_nextToken, *v.NextToken)
-	}
-	if v.PermissionGroupId != nil {
-		s.WriteString(schemas.ListUsersByPermissionGroupRequest_permissionGroupId, *v.PermissionGroupId)
-	}
-}
-
 type ListUsersByPermissionGroupOutput struct {
 
 	// A token that indicates where a results page should begin.
@@ -81,26 +61,16 @@ type ListUsersByPermissionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListUsersByPermissionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListUsersByPermissionGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListUsersByPermissionGroupResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListUsersByPermissionGroupResponse_nextToken, v.NextToken)
-		case schemas.ListUsersByPermissionGroupResponse_users:
-			return deserializeUserByPermissionGroupList(d, schemas.ListUsersByPermissionGroupResponse_users, &v.Users)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListUsersByPermissionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersByPermissionGroup, schemas.ListUsersByPermissionGroupRequest, schemas.ListUsersByPermissionGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUsersByPermissionGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersByPermissionGroup, schemas.ListUsersByPermissionGroupRequest, schemas.ListUsersByPermissionGroupResponse), output: &ListUsersByPermissionGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUsersByPermissionGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsersByPermissionGroup"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,19 +49,6 @@ type ApplySecurityGroupsToLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplySecurityGroupsToLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApplySecurityGroupsToLoadBalancerInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApplySecurityGroupsToLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.ApplySecurityGroupsToLoadBalancerInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-	serializeSecurityGroups(s, schemas.ApplySecurityGroupsToLoadBalancerInput_SecurityGroups, v.SecurityGroups)
-}
-
 // Contains the output of ApplySecurityGroupsToLoadBalancer.
 type ApplySecurityGroupsToLoadBalancerOutput struct {
 
@@ -76,23 +61,16 @@ type ApplySecurityGroupsToLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ApplySecurityGroupsToLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApplySecurityGroupsToLoadBalancerOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApplySecurityGroupsToLoadBalancerOutput_SecurityGroups:
-			return deserializeSecurityGroups(d, schemas.ApplySecurityGroupsToLoadBalancerOutput_SecurityGroups, &v.SecurityGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationApplySecurityGroupsToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplySecurityGroupsToLoadBalancer, schemas.ApplySecurityGroupsToLoadBalancerInput, schemas.ApplySecurityGroupsToLoadBalancerOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplySecurityGroupsToLoadBalancer, schemas.ApplySecurityGroupsToLoadBalancerInput, schemas.ApplySecurityGroupsToLoadBalancerOutput), output: &ApplySecurityGroupsToLoadBalancerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpApplySecurityGroupsToLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ApplySecurityGroupsToLoadBalancer"); err != nil {

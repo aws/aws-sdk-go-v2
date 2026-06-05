@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,37 +76,6 @@ type CreateDNSViewInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDNSViewInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDNSViewInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDNSViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateDNSViewInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateDNSViewInput_description, *v.Description)
-	}
-	if v.DnssecValidation != "" {
-		s.WriteString(schemas.CreateDNSViewInput_dnssecValidation, string(v.DnssecValidation))
-	}
-	if v.EdnsClientSubnet != "" {
-		s.WriteString(schemas.CreateDNSViewInput_ednsClientSubnet, string(v.EdnsClientSubnet))
-	}
-	if v.FirewallRulesFailOpen != "" {
-		s.WriteString(schemas.CreateDNSViewInput_firewallRulesFailOpen, string(v.FirewallRulesFailOpen))
-	}
-	if v.GlobalResolverId != nil {
-		s.WriteString(schemas.CreateDNSViewInput_globalResolverId, *v.GlobalResolverId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateDNSViewInput_name, *v.Name)
-	}
-	serializeTags(s, schemas.CreateDNSViewInput_tags, v.Tags)
-}
-
 type CreateDNSViewOutput struct {
 
 	// The Amazon Resource Name (ARN) of the DNS view.
@@ -175,73 +142,16 @@ type CreateDNSViewOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDNSViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDNSViewOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDNSViewOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_arn, v.Arn)
-		case schemas.CreateDNSViewOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_clientToken, v.ClientToken)
-		case schemas.CreateDNSViewOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateDNSViewOutput_createdAt, v.CreatedAt)
-		case schemas.CreateDNSViewOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_description, v.Description)
-		case schemas.CreateDNSViewOutput_dnssecValidation:
-			var ev string
-			if err := d.ReadString(schemas.CreateDNSViewOutput_dnssecValidation, &ev); err != nil {
-				return err
-			}
-			v.DnssecValidation = types.DnsSecValidationType(ev)
-			return nil
-		case schemas.CreateDNSViewOutput_ednsClientSubnet:
-			var ev string
-			if err := d.ReadString(schemas.CreateDNSViewOutput_ednsClientSubnet, &ev); err != nil {
-				return err
-			}
-			v.EdnsClientSubnet = types.EdnsClientSubnetType(ev)
-			return nil
-		case schemas.CreateDNSViewOutput_firewallRulesFailOpen:
-			var ev string
-			if err := d.ReadString(schemas.CreateDNSViewOutput_firewallRulesFailOpen, &ev); err != nil {
-				return err
-			}
-			v.FirewallRulesFailOpen = types.FirewallRulesFailOpenType(ev)
-			return nil
-		case schemas.CreateDNSViewOutput_globalResolverId:
-			v.GlobalResolverId = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_globalResolverId, v.GlobalResolverId)
-		case schemas.CreateDNSViewOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_id, v.Id)
-		case schemas.CreateDNSViewOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateDNSViewOutput_name, v.Name)
-		case schemas.CreateDNSViewOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateDNSViewOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ProfileResourceStatus(ev)
-			return nil
-		case schemas.CreateDNSViewOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateDNSViewOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDNSViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDNSView, schemas.CreateDNSViewInput, schemas.CreateDNSViewOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDNSView, schemas.CreateDNSViewInput, schemas.CreateDNSViewOutput), output: &CreateDNSViewOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDNSView{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDNSView"); err != nil {

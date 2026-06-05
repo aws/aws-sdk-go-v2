@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,26 +44,6 @@ type GetFreeTierUsageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFreeTierUsageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetFreeTierUsageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetFreeTierUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Filter != nil {
-		s.WriteStruct(schemas.GetFreeTierUsageRequest_filter)
-		v.Filter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetFreeTierUsageRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetFreeTierUsageRequest_nextToken, *v.NextToken)
-	}
-}
-
 type GetFreeTierUsageOutput struct {
 
 	// The list of Free Tier usage objects that meet your filter expression.
@@ -82,26 +60,16 @@ type GetFreeTierUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetFreeTierUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetFreeTierUsageResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetFreeTierUsageResponse_freeTierUsages:
-			return deserializeFreeTierUsages(d, schemas.GetFreeTierUsageResponse_freeTierUsages, &v.FreeTierUsages)
-		case schemas.GetFreeTierUsageResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetFreeTierUsageResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetFreeTierUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFreeTierUsage, schemas.GetFreeTierUsageRequest, schemas.GetFreeTierUsageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetFreeTierUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFreeTierUsage, schemas.GetFreeTierUsageRequest, schemas.GetFreeTierUsageResponse), output: &GetFreeTierUsageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetFreeTierUsage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFreeTierUsage"); err != nil {

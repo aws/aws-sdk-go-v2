@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,21 +42,6 @@ type CancelDomainConfigChangeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelDomainConfigChangeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelDomainConfigChangeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelDomainConfigChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.CancelDomainConfigChangeRequest_DomainName, *v.DomainName)
-	}
-	if v.DryRun != nil {
-		s.WriteBool(schemas.CancelDomainConfigChangeRequest_DryRun, *v.DryRun)
-	}
-}
-
 type CancelDomainConfigChangeOutput struct {
 
 	// The unique identifiers of the changes that were cancelled.
@@ -77,28 +60,16 @@ type CancelDomainConfigChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelDomainConfigChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelDomainConfigChangeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelDomainConfigChangeResponse_CancelledChangeIds:
-			return deserializeGUIDList(d, schemas.CancelDomainConfigChangeResponse_CancelledChangeIds, &v.CancelledChangeIds)
-		case schemas.CancelDomainConfigChangeResponse_CancelledChangeProperties:
-			return deserializeCancelledChangePropertyList(d, schemas.CancelDomainConfigChangeResponse_CancelledChangeProperties, &v.CancelledChangeProperties)
-		case schemas.CancelDomainConfigChangeResponse_DryRun:
-			v.DryRun = new(bool)
-			return d.ReadBool(schemas.CancelDomainConfigChangeResponse_DryRun, v.DryRun)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelDomainConfigChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDomainConfigChange, schemas.CancelDomainConfigChangeRequest, schemas.CancelDomainConfigChangeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelDomainConfigChange{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDomainConfigChange, schemas.CancelDomainConfigChangeRequest, schemas.CancelDomainConfigChangeResponse), output: &CancelDomainConfigChangeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelDomainConfigChange{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelDomainConfigChange"); err != nil {

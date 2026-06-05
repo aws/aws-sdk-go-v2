@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,26 +47,6 @@ type SendDataToMulticastGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataToMulticastGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SendDataToMulticastGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SendDataToMulticastGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.SendDataToMulticastGroupRequest_Id, *v.Id)
-	}
-	if v.PayloadData != nil {
-		s.WriteString(schemas.SendDataToMulticastGroupRequest_PayloadData, *v.PayloadData)
-	}
-	if v.WirelessMetadata != nil {
-		s.WriteStruct(schemas.SendDataToMulticastGroupRequest_WirelessMetadata)
-		v.WirelessMetadata.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SendDataToMulticastGroupOutput struct {
 
 	// ID of a multicast group message.
@@ -80,24 +58,16 @@ type SendDataToMulticastGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SendDataToMulticastGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SendDataToMulticastGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SendDataToMulticastGroupResponse_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.SendDataToMulticastGroupResponse_MessageId, v.MessageId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSendDataToMulticastGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataToMulticastGroup, schemas.SendDataToMulticastGroupRequest, schemas.SendDataToMulticastGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDataToMulticastGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataToMulticastGroup, schemas.SendDataToMulticastGroupRequest, schemas.SendDataToMulticastGroupResponse), output: &SendDataToMulticastGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDataToMulticastGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendDataToMulticastGroup"); err != nil {

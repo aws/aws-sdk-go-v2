@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetApplicationInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetApplicationRequest_Arn, *v.Arn)
-	}
 }
 
 type GetApplicationOutput struct {
@@ -119,71 +105,16 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetApplicationResponse_ApplicationConfig:
-			v.ApplicationConfig = &types.ApplicationConfig{}
-			return v.ApplicationConfig.Deserialize(d)
-		case schemas.GetApplicationResponse_ApplicationSourceConfig:
-			v.ApplicationSourceConfig = &types.ApplicationSourceConfig{}
-			return v.ApplicationSourceConfig.Deserialize(d)
-		case schemas.GetApplicationResponse_ApplicationType:
-			var ev string
-			if err := d.ReadString(schemas.GetApplicationResponse_ApplicationType, &ev); err != nil {
-				return err
-			}
-			v.ApplicationType = types.ApplicationType(ev)
-			return nil
-		case schemas.GetApplicationResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Arn, v.Arn)
-		case schemas.GetApplicationResponse_CreatedTime:
-			v.CreatedTime = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_CreatedTime, v.CreatedTime)
-		case schemas.GetApplicationResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Description, v.Description)
-		case schemas.GetApplicationResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Id, v.Id)
-		case schemas.GetApplicationResponse_IframeConfig:
-			v.IframeConfig = &types.IframeConfig{}
-			return v.IframeConfig.Deserialize(d)
-		case schemas.GetApplicationResponse_InitializationTimeout:
-			v.InitializationTimeout = new(int32)
-			return d.ReadInt32(schemas.GetApplicationResponse_InitializationTimeout, v.InitializationTimeout)
-		case schemas.GetApplicationResponse_IsService:
-			return d.ReadBool(schemas.GetApplicationResponse_IsService, &v.IsService)
-		case schemas.GetApplicationResponse_LastModifiedTime:
-			v.LastModifiedTime = new(time.Time)
-			return d.ReadTime(schemas.GetApplicationResponse_LastModifiedTime, v.LastModifiedTime)
-		case schemas.GetApplicationResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Name, v.Name)
-		case schemas.GetApplicationResponse_Namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.GetApplicationResponse_Namespace, v.Namespace)
-		case schemas.GetApplicationResponse_Permissions:
-			return deserializePermissionList(d, schemas.GetApplicationResponse_Permissions, &v.Permissions)
-		case schemas.GetApplicationResponse_Publications:
-			return deserializePublicationList(d, schemas.GetApplicationResponse_Publications, &v.Publications)
-		case schemas.GetApplicationResponse_Subscriptions:
-			return deserializeSubscriptionList(d, schemas.GetApplicationResponse_Subscriptions, &v.Subscriptions)
-		case schemas.GetApplicationResponse_Tags:
-			return deserializeTagMap(d, schemas.GetApplicationResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplication"); err != nil {

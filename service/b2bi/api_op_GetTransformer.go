@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,18 +39,6 @@ type GetTransformerInput struct {
 	TransformerId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetTransformerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTransformerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTransformerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TransformerId != nil {
-		s.WriteString(schemas.GetTransformerRequest_transformerId, *v.TransformerId)
-	}
 }
 
 type GetTransformerOutput struct {
@@ -139,70 +125,16 @@ type GetTransformerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTransformerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTransformerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTransformerResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetTransformerResponse_createdAt, v.CreatedAt)
-		case schemas.GetTransformerResponse_ediType:
-			return deserializeEdiType(d, schemas.GetTransformerResponse_ediType, &v.EdiType)
-		case schemas.GetTransformerResponse_fileFormat:
-			var ev string
-			if err := d.ReadString(schemas.GetTransformerResponse_fileFormat, &ev); err != nil {
-				return err
-			}
-			v.FileFormat = types.FileFormat(ev)
-			return nil
-		case schemas.GetTransformerResponse_inputConversion:
-			v.InputConversion = &types.InputConversion{}
-			return v.InputConversion.Deserialize(d)
-		case schemas.GetTransformerResponse_mapping:
-			v.Mapping = &types.Mapping{}
-			return v.Mapping.Deserialize(d)
-		case schemas.GetTransformerResponse_mappingTemplate:
-			v.MappingTemplate = new(string)
-			return d.ReadString(schemas.GetTransformerResponse_mappingTemplate, v.MappingTemplate)
-		case schemas.GetTransformerResponse_modifiedAt:
-			v.ModifiedAt = new(time.Time)
-			return d.ReadTime(schemas.GetTransformerResponse_modifiedAt, v.ModifiedAt)
-		case schemas.GetTransformerResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetTransformerResponse_name, v.Name)
-		case schemas.GetTransformerResponse_outputConversion:
-			v.OutputConversion = &types.OutputConversion{}
-			return v.OutputConversion.Deserialize(d)
-		case schemas.GetTransformerResponse_sampleDocument:
-			v.SampleDocument = new(string)
-			return d.ReadString(schemas.GetTransformerResponse_sampleDocument, v.SampleDocument)
-		case schemas.GetTransformerResponse_sampleDocuments:
-			v.SampleDocuments = &types.SampleDocuments{}
-			return v.SampleDocuments.Deserialize(d)
-		case schemas.GetTransformerResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetTransformerResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TransformerStatus(ev)
-			return nil
-		case schemas.GetTransformerResponse_transformerArn:
-			v.TransformerArn = new(string)
-			return d.ReadString(schemas.GetTransformerResponse_transformerArn, v.TransformerArn)
-		case schemas.GetTransformerResponse_transformerId:
-			v.TransformerId = new(string)
-			return d.ReadString(schemas.GetTransformerResponse_transformerId, v.TransformerId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTransformerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformer, schemas.GetTransformerRequest, schemas.GetTransformerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTransformer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransformer, schemas.GetTransformerRequest, schemas.GetTransformerResponse), output: &GetTransformerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTransformer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTransformer"); err != nil {

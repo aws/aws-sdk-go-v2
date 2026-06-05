@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,24 +53,6 @@ type ListAttachedLinksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAttachedLinksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAttachedLinksInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAttachedLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAttachedLinksInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAttachedLinksInput_NextToken, *v.NextToken)
-	}
-	if v.SinkIdentifier != nil {
-		s.WriteString(schemas.ListAttachedLinksInput_SinkIdentifier, *v.SinkIdentifier)
-	}
-}
-
 type ListAttachedLinksOutput struct {
 
 	// An array of structures that contain the information about the attached links.
@@ -89,26 +69,16 @@ type ListAttachedLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAttachedLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAttachedLinksOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAttachedLinksOutput_Items:
-			return deserializeListAttachedLinksItems(d, schemas.ListAttachedLinksOutput_Items, &v.Items)
-		case schemas.ListAttachedLinksOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAttachedLinksOutput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAttachedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedLinks, schemas.ListAttachedLinksInput, schemas.ListAttachedLinksOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachedLinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedLinks, schemas.ListAttachedLinksInput, schemas.ListAttachedLinksOutput), output: &ListAttachedLinksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttachedLinks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAttachedLinks"); err != nil {

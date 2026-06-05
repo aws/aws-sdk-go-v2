@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type GetRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRelationshipInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRelationshipRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Catalog != nil {
-		s.WriteString(schemas.GetRelationshipRequest_catalog, *v.Catalog)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetRelationshipRequest_identifier, *v.Identifier)
-	}
-	if v.ProgramManagementAccountIdentifier != nil {
-		s.WriteString(schemas.GetRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
-	}
-}
-
 type GetRelationshipOutput struct {
 
 	// Details of the requested relationship.
@@ -79,24 +59,16 @@ type GetRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRelationshipResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRelationshipResponse_relationshipDetail:
-			v.RelationshipDetail = &types.RelationshipDetail{}
-			return v.RelationshipDetail.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationship, schemas.GetRelationshipRequest, schemas.GetRelationshipResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationship, schemas.GetRelationshipRequest, schemas.GetRelationshipResponse), output: &GetRelationshipOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRelationship{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRelationship"); err != nil {

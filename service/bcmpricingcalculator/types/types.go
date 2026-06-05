@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,34 +21,6 @@ type AddReservedInstanceAction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddReservedInstanceAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddReservedInstanceAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddReservedInstanceAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceCount != nil {
-		s.WriteInt32(schemas.AddReservedInstanceAction_instanceCount, *v.InstanceCount)
-	}
-	if v.ReservedInstancesOfferingId != nil {
-		s.WriteString(schemas.AddReservedInstanceAction_reservedInstancesOfferingId, *v.ReservedInstancesOfferingId)
-	}
-}
-func (v *AddReservedInstanceAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddReservedInstanceAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddReservedInstanceAction_instanceCount:
-			v.InstanceCount = new(int32)
-			return d.ReadInt32(schemas.AddReservedInstanceAction_instanceCount, v.InstanceCount)
-		case schemas.AddReservedInstanceAction_reservedInstancesOfferingId:
-			v.ReservedInstancesOfferingId = new(string)
-			return d.ReadString(schemas.AddReservedInstanceAction_reservedInstancesOfferingId, v.ReservedInstancesOfferingId)
-		}
-		return nil
-	})
-}
-
 // Represents an action to add a Savings Plan to a bill scenario.
 type AddSavingsPlanAction struct {
 
@@ -65,34 +35,6 @@ type AddSavingsPlanAction struct {
 	SavingsPlanOfferingId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AddSavingsPlanAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddSavingsPlanAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddSavingsPlanAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Commitment != nil {
-		s.WriteFloat64(schemas.AddSavingsPlanAction_commitment, *v.Commitment)
-	}
-	if v.SavingsPlanOfferingId != nil {
-		s.WriteString(schemas.AddSavingsPlanAction_savingsPlanOfferingId, *v.SavingsPlanOfferingId)
-	}
-}
-func (v *AddSavingsPlanAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddSavingsPlanAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddSavingsPlanAction_commitment:
-			v.Commitment = new(float64)
-			return d.ReadFloat64(schemas.AddSavingsPlanAction_commitment, v.Commitment)
-		case schemas.AddSavingsPlanAction_savingsPlanOfferingId:
-			v.SavingsPlanOfferingId = new(string)
-			return d.ReadString(schemas.AddSavingsPlanAction_savingsPlanOfferingId, v.SavingsPlanOfferingId)
-		}
-		return nil
-	})
 }
 
 //	Represents an entry object in the batch operation to create bill scenario
@@ -125,43 +67,6 @@ type BatchCreateBillScenarioCommitmentModificationEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateBillScenarioCommitmentModificationEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioCommitmentModificationEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioCommitmentModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationEntry_commitmentAction, v.CommitmentAction)
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_group, *v.Group)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_key, *v.Key)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_usageAccountId, *v.UsageAccountId)
-	}
-}
-func (v *BatchCreateBillScenarioCommitmentModificationEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioCommitmentModificationEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioCommitmentModificationEntry_commitmentAction:
-			return deserializeBillScenarioCommitmentModificationAction(d, schemas.BatchCreateBillScenarioCommitmentModificationEntry_commitmentAction, &v.CommitmentAction)
-		case schemas.BatchCreateBillScenarioCommitmentModificationEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_group, v.Group)
-		case schemas.BatchCreateBillScenarioCommitmentModificationEntry_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_key, v.Key)
-		case schemas.BatchCreateBillScenarioCommitmentModificationEntry_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_usageAccountId, v.UsageAccountId)
-		}
-		return nil
-	})
-}
-
 //	Represents an error that occurred during a batch create operation for bill
 //
 // scenario commitment modifications.
@@ -177,44 +82,6 @@ type BatchCreateBillScenarioCommitmentModificationError struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateBillScenarioCommitmentModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioCommitmentModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioCommitmentModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationError_key, *v.Key)
-	}
-}
-func (v *BatchCreateBillScenarioCommitmentModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioCommitmentModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioCommitmentModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchCreateBillScenarioCommitmentModificationErrorCode(ev)
-			return nil
-		case schemas.BatchCreateBillScenarioCommitmentModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchCreateBillScenarioCommitmentModificationError_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationError_key, v.Key)
-		}
-		return nil
-	})
 }
 
 //	Represents a successfully created item in a batch operation for bill scenario
@@ -241,49 +108,6 @@ type BatchCreateBillScenarioCommitmentModificationItem struct {
 	UsageAccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateBillScenarioCommitmentModificationItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioCommitmentModificationItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioCommitmentModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationItem_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationItem_id, *v.Id)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationItem_key, *v.Key)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationItem_usageAccountId, *v.UsageAccountId)
-	}
-}
-func (v *BatchCreateBillScenarioCommitmentModificationItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioCommitmentModificationItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioCommitmentModificationItem_commitmentAction:
-			return deserializeBillScenarioCommitmentModificationAction(d, schemas.BatchCreateBillScenarioCommitmentModificationItem_commitmentAction, &v.CommitmentAction)
-		case schemas.BatchCreateBillScenarioCommitmentModificationItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationItem_group, v.Group)
-		case schemas.BatchCreateBillScenarioCommitmentModificationItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationItem_id, v.Id)
-		case schemas.BatchCreateBillScenarioCommitmentModificationItem_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationItem_key, v.Key)
-		case schemas.BatchCreateBillScenarioCommitmentModificationItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioCommitmentModificationItem_usageAccountId, v.UsageAccountId)
-		}
-		return nil
-	})
 }
 
 //	Represents an entry in a batch operation to create bill scenario usage
@@ -337,75 +161,6 @@ type BatchCreateBillScenarioUsageModificationEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateBillScenarioUsageModificationEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioUsageModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageAmounts(s, schemas.BatchCreateBillScenarioUsageModificationEntry_amounts, v.Amounts)
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationEntry_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_key, *v.Key)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_operation, *v.Operation)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_usageType, *v.UsageType)
-	}
-}
-func (v *BatchCreateBillScenarioUsageModificationEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioUsageModificationEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_amounts:
-			return deserializeUsageAmounts(d, schemas.BatchCreateBillScenarioUsageModificationEntry_amounts, &v.Amounts)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_availabilityZone, v.AvailabilityZone)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_group, v.Group)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_key, v.Key)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_operation, v.Operation)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_serviceCode, v.ServiceCode)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_usageAccountId, v.UsageAccountId)
-		case schemas.BatchCreateBillScenarioUsageModificationEntry_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationEntry_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 //	Represents an error that occurred during a batch create operation for bill
 //
 // scenario usage modifications.
@@ -421,44 +176,6 @@ type BatchCreateBillScenarioUsageModificationError struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateBillScenarioUsageModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioUsageModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationError_key, *v.Key)
-	}
-}
-func (v *BatchCreateBillScenarioUsageModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioUsageModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioUsageModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateBillScenarioUsageModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchCreateBillScenarioUsageModificationErrorCode(ev)
-			return nil
-		case schemas.BatchCreateBillScenarioUsageModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchCreateBillScenarioUsageModificationError_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationError_key, v.Key)
-		}
-		return nil
-	})
 }
 
 //	Represents a successfully created item in a batch operation for bill scenario
@@ -509,87 +226,6 @@ type BatchCreateBillScenarioUsageModificationItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateBillScenarioUsageModificationItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateBillScenarioUsageModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BatchCreateBillScenarioUsageModificationItem_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_id, *v.Id)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_key, *v.Key)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_operation, *v.Operation)
-	}
-	serializeUsageQuantities(s, schemas.BatchCreateBillScenarioUsageModificationItem_quantities, v.Quantities)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_usageType, *v.UsageType)
-	}
-}
-func (v *BatchCreateBillScenarioUsageModificationItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioUsageModificationItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateBillScenarioUsageModificationItem_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_availabilityZone, v.AvailabilityZone)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_group, v.Group)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_id, v.Id)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_key, v.Key)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_location, v.Location)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_operation, v.Operation)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_quantities:
-			return deserializeUsageQuantities(d, schemas.BatchCreateBillScenarioUsageModificationItem_quantities, &v.Quantities)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_serviceCode, v.ServiceCode)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_usageAccountId, v.UsageAccountId)
-		case schemas.BatchCreateBillScenarioUsageModificationItem_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BatchCreateBillScenarioUsageModificationItem_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Represents an entry in a batch operation to create workload estimate usage.
 type BatchCreateWorkloadEstimateUsageEntry struct {
 
@@ -632,72 +268,6 @@ type BatchCreateWorkloadEstimateUsageEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateWorkloadEstimateUsageEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateWorkloadEstimateUsageEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.BatchCreateWorkloadEstimateUsageEntry_amount, *v.Amount)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageEntry_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_key, *v.Key)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_operation, *v.Operation)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageEntry_usageType, *v.UsageType)
-	}
-}
-func (v *BatchCreateWorkloadEstimateUsageEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateWorkloadEstimateUsageEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.BatchCreateWorkloadEstimateUsageEntry_amount, v.Amount)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_group, v.Group)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_key, v.Key)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_operation, v.Operation)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_serviceCode, v.ServiceCode)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_usageAccountId, v.UsageAccountId)
-		case schemas.BatchCreateWorkloadEstimateUsageEntry_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageEntry_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 //	Represents an error that occurred during a batch create operation for workload
 //
 // estimate usage.
@@ -713,44 +283,6 @@ type BatchCreateWorkloadEstimateUsageError struct {
 	Key *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateWorkloadEstimateUsageError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateWorkloadEstimateUsageError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageError_key, *v.Key)
-	}
-}
-func (v *BatchCreateWorkloadEstimateUsageError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateWorkloadEstimateUsageError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateWorkloadEstimateUsageError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateWorkloadEstimateUsageError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchCreateWorkloadEstimateUsageCode(ev)
-			return nil
-		case schemas.BatchCreateWorkloadEstimateUsageError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageError_errorMessage, v.ErrorMessage)
-		case schemas.BatchCreateWorkloadEstimateUsageError_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageError_key, v.Key)
-		}
-		return nil
-	})
 }
 
 //	Represents a successfully created item in a batch operation for workload
@@ -806,112 +338,6 @@ type BatchCreateWorkloadEstimateUsageItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateWorkloadEstimateUsageItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateWorkloadEstimateUsageItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cost != nil {
-		s.WriteFloat64(schemas.BatchCreateWorkloadEstimateUsageItem_cost, *v.Cost)
-	}
-	if v.Currency != "" {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_currency, string(v.Currency))
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageItem_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_id, *v.Id)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_key, *v.Key)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_operation, *v.Operation)
-	}
-	if v.Quantity != nil {
-		s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageItem_quantity)
-		v.Quantity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_serviceCode, *v.ServiceCode)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_status, string(v.Status))
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageItem_usageType, *v.UsageType)
-	}
-}
-func (v *BatchCreateWorkloadEstimateUsageItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateWorkloadEstimateUsageItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateWorkloadEstimateUsageItem_cost:
-			v.Cost = new(float64)
-			return d.ReadFloat64(schemas.BatchCreateWorkloadEstimateUsageItem_cost, v.Cost)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_currency:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.BatchCreateWorkloadEstimateUsageItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_group, v.Group)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_id, v.Id)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_key, v.Key)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_location, v.Location)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_operation, v.Operation)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_quantity:
-			v.Quantity = &WorkloadEstimateUsageQuantity{}
-			return v.Quantity.Deserialize(d)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_serviceCode, v.ServiceCode)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_status:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_status, &ev); err != nil {
-				return err
-			}
-			v.Status = WorkloadEstimateCostStatus(ev)
-			return nil
-		case schemas.BatchCreateWorkloadEstimateUsageItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_usageAccountId, v.UsageAccountId)
-		case schemas.BatchCreateWorkloadEstimateUsageItem_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BatchCreateWorkloadEstimateUsageItem_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 //	Represents an error that occurred when deleting a commitment in a Bill
 //
 // Scenario.
@@ -929,44 +355,6 @@ type BatchDeleteBillScenarioCommitmentModificationError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteBillScenarioCommitmentModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteBillScenarioCommitmentModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteBillScenarioCommitmentModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchDeleteBillScenarioCommitmentModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchDeleteBillScenarioCommitmentModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchDeleteBillScenarioCommitmentModificationError_id, *v.Id)
-	}
-}
-func (v *BatchDeleteBillScenarioCommitmentModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteBillScenarioCommitmentModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteBillScenarioCommitmentModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchDeleteBillScenarioCommitmentModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchDeleteBillScenarioCommitmentModificationErrorCode(ev)
-			return nil
-		case schemas.BatchDeleteBillScenarioCommitmentModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchDeleteBillScenarioCommitmentModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchDeleteBillScenarioCommitmentModificationError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchDeleteBillScenarioCommitmentModificationError_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Represents an error that occurred when deleting usage in a Bill Scenario.
 type BatchDeleteBillScenarioUsageModificationError struct {
 
@@ -982,44 +370,6 @@ type BatchDeleteBillScenarioUsageModificationError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDeleteBillScenarioUsageModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteBillScenarioUsageModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteBillScenarioUsageModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchDeleteBillScenarioUsageModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchDeleteBillScenarioUsageModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchDeleteBillScenarioUsageModificationError_id, *v.Id)
-	}
-}
-func (v *BatchDeleteBillScenarioUsageModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteBillScenarioUsageModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteBillScenarioUsageModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchDeleteBillScenarioUsageModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchDeleteBillScenarioUsageModificationErrorCode(ev)
-			return nil
-		case schemas.BatchDeleteBillScenarioUsageModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchDeleteBillScenarioUsageModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchDeleteBillScenarioUsageModificationError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchDeleteBillScenarioUsageModificationError_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Represents an error that occurred when deleting usage in a workload estimate.
 type BatchDeleteWorkloadEstimateUsageError struct {
 
@@ -1033,44 +383,6 @@ type BatchDeleteWorkloadEstimateUsageError struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchDeleteWorkloadEstimateUsageError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDeleteWorkloadEstimateUsageError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDeleteWorkloadEstimateUsageError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchDeleteWorkloadEstimateUsageError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchDeleteWorkloadEstimateUsageError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchDeleteWorkloadEstimateUsageError_id, *v.Id)
-	}
-}
-func (v *BatchDeleteWorkloadEstimateUsageError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDeleteWorkloadEstimateUsageError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDeleteWorkloadEstimateUsageError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchDeleteWorkloadEstimateUsageError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = WorkloadEstimateUpdateUsageErrorCode(ev)
-			return nil
-		case schemas.BatchDeleteWorkloadEstimateUsageError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchDeleteWorkloadEstimateUsageError_errorMessage, v.ErrorMessage)
-		case schemas.BatchDeleteWorkloadEstimateUsageError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchDeleteWorkloadEstimateUsageError_id, v.Id)
-		}
-		return nil
-	})
 }
 
 //	Represents an entry in a batch operation to update bill scenario commitment
@@ -1089,34 +401,6 @@ type BatchUpdateBillScenarioCommitmentModificationEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateBillScenarioCommitmentModificationEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateBillScenarioCommitmentModificationEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateBillScenarioCommitmentModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Group != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationEntry_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationEntry_id, *v.Id)
-	}
-}
-func (v *BatchUpdateBillScenarioCommitmentModificationEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioCommitmentModificationEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateBillScenarioCommitmentModificationEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioCommitmentModificationEntry_group, v.Group)
-		case schemas.BatchUpdateBillScenarioCommitmentModificationEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioCommitmentModificationEntry_id, v.Id)
-		}
-		return nil
-	})
-}
-
 //	Represents an error that occurred when updating a commitment in a Bill
 //
 // Scenario.
@@ -1132,44 +416,6 @@ type BatchUpdateBillScenarioCommitmentModificationError struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUpdateBillScenarioCommitmentModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateBillScenarioCommitmentModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateBillScenarioCommitmentModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioCommitmentModificationError_id, *v.Id)
-	}
-}
-func (v *BatchUpdateBillScenarioCommitmentModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioCommitmentModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateBillScenarioCommitmentModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchUpdateBillScenarioCommitmentModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchUpdateBillScenarioCommitmentModificationErrorCode(ev)
-			return nil
-		case schemas.BatchUpdateBillScenarioCommitmentModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioCommitmentModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchUpdateBillScenarioCommitmentModificationError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioCommitmentModificationError_id, v.Id)
-		}
-		return nil
-	})
 }
 
 //	Represents an entry in a batch operation to update bill scenario usage
@@ -1191,37 +437,6 @@ type BatchUpdateBillScenarioUsageModificationEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateBillScenarioUsageModificationEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateBillScenarioUsageModificationEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateBillScenarioUsageModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageAmounts(s, schemas.BatchUpdateBillScenarioUsageModificationEntry_amounts, v.Amounts)
-	if v.Group != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationEntry_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationEntry_id, *v.Id)
-	}
-}
-func (v *BatchUpdateBillScenarioUsageModificationEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioUsageModificationEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateBillScenarioUsageModificationEntry_amounts:
-			return deserializeUsageAmounts(d, schemas.BatchUpdateBillScenarioUsageModificationEntry_amounts, &v.Amounts)
-		case schemas.BatchUpdateBillScenarioUsageModificationEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioUsageModificationEntry_group, v.Group)
-		case schemas.BatchUpdateBillScenarioUsageModificationEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioUsageModificationEntry_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Represents an error that occurred when updating usage in a Bill Scenario.
 type BatchUpdateBillScenarioUsageModificationError struct {
 
@@ -1235,44 +450,6 @@ type BatchUpdateBillScenarioUsageModificationError struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUpdateBillScenarioUsageModificationError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateBillScenarioUsageModificationError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateBillScenarioUsageModificationError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationError_id, *v.Id)
-	}
-}
-func (v *BatchUpdateBillScenarioUsageModificationError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioUsageModificationError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateBillScenarioUsageModificationError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchUpdateBillScenarioUsageModificationError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BatchUpdateBillScenarioUsageModificationErrorCode(ev)
-			return nil
-		case schemas.BatchUpdateBillScenarioUsageModificationError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioUsageModificationError_errorMessage, v.ErrorMessage)
-		case schemas.BatchUpdateBillScenarioUsageModificationError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateBillScenarioUsageModificationError_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Represents an entry in a batch operation to update workload estimate usage.
@@ -1292,40 +469,6 @@ type BatchUpdateWorkloadEstimateUsageEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchUpdateWorkloadEstimateUsageEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateWorkloadEstimateUsageEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateWorkloadEstimateUsageEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.BatchUpdateWorkloadEstimateUsageEntry_amount, *v.Amount)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageEntry_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageEntry_id, *v.Id)
-	}
-}
-func (v *BatchUpdateWorkloadEstimateUsageEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateWorkloadEstimateUsageEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateWorkloadEstimateUsageEntry_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.BatchUpdateWorkloadEstimateUsageEntry_amount, v.Amount)
-		case schemas.BatchUpdateWorkloadEstimateUsageEntry_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BatchUpdateWorkloadEstimateUsageEntry_group, v.Group)
-		case schemas.BatchUpdateWorkloadEstimateUsageEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateWorkloadEstimateUsageEntry_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Represents an error that occurred when updating usage in a workload estimate.
 type BatchUpdateWorkloadEstimateUsageError struct {
 
@@ -1339,44 +482,6 @@ type BatchUpdateWorkloadEstimateUsageError struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchUpdateWorkloadEstimateUsageError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchUpdateWorkloadEstimateUsageError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchUpdateWorkloadEstimateUsageError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageError_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageError_errorMessage, *v.ErrorMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageError_id, *v.Id)
-	}
-}
-func (v *BatchUpdateWorkloadEstimateUsageError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchUpdateWorkloadEstimateUsageError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchUpdateWorkloadEstimateUsageError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchUpdateWorkloadEstimateUsageError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = WorkloadEstimateUpdateUsageErrorCode(ev)
-			return nil
-		case schemas.BatchUpdateWorkloadEstimateUsageError_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchUpdateWorkloadEstimateUsageError_errorMessage, v.ErrorMessage)
-		case schemas.BatchUpdateWorkloadEstimateUsageError_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchUpdateWorkloadEstimateUsageError_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Provides a summary of commitment-related information for a bill estimate.
@@ -1413,84 +518,6 @@ type BillEstimateCommitmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BillEstimateCommitmentSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateCommitmentSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateCommitmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_id, *v.Id)
-	}
-	if v.MonthlyPayment != nil {
-		s.WriteStruct(schemas.BillEstimateCommitmentSummary_monthlyPayment)
-		v.MonthlyPayment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OfferingId != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_offeringId, *v.OfferingId)
-	}
-	if v.PaymentOption != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_paymentOption, *v.PaymentOption)
-	}
-	if v.PurchaseAgreementType != "" {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_purchaseAgreementType, string(v.PurchaseAgreementType))
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_region, *v.Region)
-	}
-	if v.TermLength != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_termLength, *v.TermLength)
-	}
-	if v.UpfrontPayment != nil {
-		s.WriteStruct(schemas.BillEstimateCommitmentSummary_upfrontPayment)
-		v.UpfrontPayment.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillEstimateCommitmentSummary_usageAccountId, *v.UsageAccountId)
-	}
-}
-func (v *BillEstimateCommitmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateCommitmentSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateCommitmentSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_id, v.Id)
-		case schemas.BillEstimateCommitmentSummary_monthlyPayment:
-			v.MonthlyPayment = &CostAmount{}
-			return v.MonthlyPayment.Deserialize(d)
-		case schemas.BillEstimateCommitmentSummary_offeringId:
-			v.OfferingId = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_offeringId, v.OfferingId)
-		case schemas.BillEstimateCommitmentSummary_paymentOption:
-			v.PaymentOption = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_paymentOption, v.PaymentOption)
-		case schemas.BillEstimateCommitmentSummary_purchaseAgreementType:
-			var ev string
-			if err := d.ReadString(schemas.BillEstimateCommitmentSummary_purchaseAgreementType, &ev); err != nil {
-				return err
-			}
-			v.PurchaseAgreementType = PurchaseAgreementType(ev)
-			return nil
-		case schemas.BillEstimateCommitmentSummary_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_region, v.Region)
-		case schemas.BillEstimateCommitmentSummary_termLength:
-			v.TermLength = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_termLength, v.TermLength)
-		case schemas.BillEstimateCommitmentSummary_upfrontPayment:
-			v.UpfrontPayment = &CostAmount{}
-			return v.UpfrontPayment.Deserialize(d)
-		case schemas.BillEstimateCommitmentSummary_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillEstimateCommitmentSummary_usageAccountId, v.UsageAccountId)
-		}
-		return nil
-	})
-}
-
 // Provides a summary of cost-related information for a bill estimate.
 type BillEstimateCostSummary struct {
 
@@ -1501,33 +528,6 @@ type BillEstimateCostSummary struct {
 	TotalCostDifference *CostDifference
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillEstimateCostSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateCostSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateCostSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceCostDifferenceMap(s, schemas.BillEstimateCostSummary_serviceCostDifferences, v.ServiceCostDifferences)
-	if v.TotalCostDifference != nil {
-		s.WriteStruct(schemas.BillEstimateCostSummary_totalCostDifference)
-		v.TotalCostDifference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BillEstimateCostSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateCostSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateCostSummary_serviceCostDifferences:
-			return deserializeServiceCostDifferenceMap(d, schemas.BillEstimateCostSummary_serviceCostDifferences, &v.ServiceCostDifferences)
-		case schemas.BillEstimateCostSummary_totalCostDifference:
-			v.TotalCostDifference = &CostDifference{}
-			return v.TotalCostDifference.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Summarizes an input commitment modification for a bill estimate.
@@ -1547,43 +547,6 @@ type BillEstimateInputCommitmentModificationSummary struct {
 	UsageAccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillEstimateInputCommitmentModificationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateInputCommitmentModificationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateInputCommitmentModificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BillEstimateInputCommitmentModificationSummary_commitmentAction, v.CommitmentAction)
-	if v.Group != nil {
-		s.WriteString(schemas.BillEstimateInputCommitmentModificationSummary_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillEstimateInputCommitmentModificationSummary_id, *v.Id)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillEstimateInputCommitmentModificationSummary_usageAccountId, *v.UsageAccountId)
-	}
-}
-func (v *BillEstimateInputCommitmentModificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateInputCommitmentModificationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateInputCommitmentModificationSummary_commitmentAction:
-			return deserializeBillScenarioCommitmentModificationAction(d, schemas.BillEstimateInputCommitmentModificationSummary_commitmentAction, &v.CommitmentAction)
-		case schemas.BillEstimateInputCommitmentModificationSummary_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BillEstimateInputCommitmentModificationSummary_group, v.Group)
-		case schemas.BillEstimateInputCommitmentModificationSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillEstimateInputCommitmentModificationSummary_id, v.Id)
-		case schemas.BillEstimateInputCommitmentModificationSummary_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillEstimateInputCommitmentModificationSummary_usageAccountId, v.UsageAccountId)
-		}
-		return nil
-	})
 }
 
 // Summarizes an input usage modification for a bill estimate.
@@ -1626,81 +589,6 @@ type BillEstimateInputUsageModificationSummary struct {
 	UsageAccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillEstimateInputUsageModificationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateInputUsageModificationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateInputUsageModificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BillEstimateInputUsageModificationSummary_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_id, *v.Id)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_operation, *v.Operation)
-	}
-	serializeUsageQuantities(s, schemas.BillEstimateInputUsageModificationSummary_quantities, v.Quantities)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_usageType, *v.UsageType)
-	}
-}
-func (v *BillEstimateInputUsageModificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateInputUsageModificationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateInputUsageModificationSummary_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_availabilityZone, v.AvailabilityZone)
-		case schemas.BillEstimateInputUsageModificationSummary_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_group, v.Group)
-		case schemas.BillEstimateInputUsageModificationSummary_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BillEstimateInputUsageModificationSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_id, v.Id)
-		case schemas.BillEstimateInputUsageModificationSummary_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_location, v.Location)
-		case schemas.BillEstimateInputUsageModificationSummary_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_operation, v.Operation)
-		case schemas.BillEstimateInputUsageModificationSummary_quantities:
-			return deserializeUsageQuantities(d, schemas.BillEstimateInputUsageModificationSummary_quantities, &v.Quantities)
-		case schemas.BillEstimateInputUsageModificationSummary_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_serviceCode, v.ServiceCode)
-		case schemas.BillEstimateInputUsageModificationSummary_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_usageAccountId, v.UsageAccountId)
-		case schemas.BillEstimateInputUsageModificationSummary_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BillEstimateInputUsageModificationSummary_usageType, v.UsageType)
-		}
-		return nil
-	})
 }
 
 // Provides a summary of a line item in a bill estimate.
@@ -1762,117 +650,6 @@ type BillEstimateLineItemSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BillEstimateLineItemSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateLineItemSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateLineItemSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.EstimatedCost != nil {
-		s.WriteStruct(schemas.BillEstimateLineItemSummary_estimatedCost)
-		v.EstimatedCost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.EstimatedUsageQuantity != nil {
-		s.WriteStruct(schemas.BillEstimateLineItemSummary_estimatedUsageQuantity)
-		v.EstimatedUsageQuantity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HistoricalCost != nil {
-		s.WriteStruct(schemas.BillEstimateLineItemSummary_historicalCost)
-		v.HistoricalCost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HistoricalUsageQuantity != nil {
-		s.WriteStruct(schemas.BillEstimateLineItemSummary_historicalUsageQuantity)
-		v.HistoricalUsageQuantity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_id, *v.Id)
-	}
-	if v.LineItemId != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_lineItemId, *v.LineItemId)
-	}
-	if v.LineItemType != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_lineItemType, *v.LineItemType)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_operation, *v.Operation)
-	}
-	if v.PayerAccountId != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_payerAccountId, *v.PayerAccountId)
-	}
-	serializeSavingsPlanArns(s, schemas.BillEstimateLineItemSummary_savingsPlanArns, v.SavingsPlanArns)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BillEstimateLineItemSummary_usageType, *v.UsageType)
-	}
-}
-func (v *BillEstimateLineItemSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateLineItemSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateLineItemSummary_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_availabilityZone, v.AvailabilityZone)
-		case schemas.BillEstimateLineItemSummary_estimatedCost:
-			v.EstimatedCost = &CostAmount{}
-			return v.EstimatedCost.Deserialize(d)
-		case schemas.BillEstimateLineItemSummary_estimatedUsageQuantity:
-			v.EstimatedUsageQuantity = &UsageQuantityResult{}
-			return v.EstimatedUsageQuantity.Deserialize(d)
-		case schemas.BillEstimateLineItemSummary_historicalCost:
-			v.HistoricalCost = &CostAmount{}
-			return v.HistoricalCost.Deserialize(d)
-		case schemas.BillEstimateLineItemSummary_historicalUsageQuantity:
-			v.HistoricalUsageQuantity = &UsageQuantityResult{}
-			return v.HistoricalUsageQuantity.Deserialize(d)
-		case schemas.BillEstimateLineItemSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_id, v.Id)
-		case schemas.BillEstimateLineItemSummary_lineItemId:
-			v.LineItemId = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_lineItemId, v.LineItemId)
-		case schemas.BillEstimateLineItemSummary_lineItemType:
-			v.LineItemType = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_lineItemType, v.LineItemType)
-		case schemas.BillEstimateLineItemSummary_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_location, v.Location)
-		case schemas.BillEstimateLineItemSummary_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_operation, v.Operation)
-		case schemas.BillEstimateLineItemSummary_payerAccountId:
-			v.PayerAccountId = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_payerAccountId, v.PayerAccountId)
-		case schemas.BillEstimateLineItemSummary_savingsPlanArns:
-			return deserializeSavingsPlanArns(d, schemas.BillEstimateLineItemSummary_savingsPlanArns, &v.SavingsPlanArns)
-		case schemas.BillEstimateLineItemSummary_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_serviceCode, v.ServiceCode)
-		case schemas.BillEstimateLineItemSummary_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_usageAccountId, v.UsageAccountId)
-		case schemas.BillEstimateLineItemSummary_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BillEstimateLineItemSummary_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Provides a summary of a bill estimate.
 type BillEstimateSummary struct {
 
@@ -1899,64 +676,6 @@ type BillEstimateSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BillEstimateSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillEstimateSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillEstimateSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillInterval != nil {
-		s.WriteStruct(schemas.BillEstimateSummary_billInterval)
-		v.BillInterval.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.BillEstimateSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.BillEstimateSummary_expiresAt, *v.ExpiresAt)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillEstimateSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BillEstimateSummary_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BillEstimateSummary_status, string(v.Status))
-	}
-}
-func (v *BillEstimateSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillEstimateSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillEstimateSummary_billInterval:
-			v.BillInterval = &BillInterval{}
-			return v.BillInterval.Deserialize(d)
-		case schemas.BillEstimateSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BillEstimateSummary_createdAt, v.CreatedAt)
-		case schemas.BillEstimateSummary_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.BillEstimateSummary_expiresAt, v.ExpiresAt)
-		case schemas.BillEstimateSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillEstimateSummary_id, v.Id)
-		case schemas.BillEstimateSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BillEstimateSummary_name, v.Name)
-		case schemas.BillEstimateSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.BillEstimateSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = BillEstimateStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents a time interval for a bill or estimate.
 type BillInterval struct {
 
@@ -1967,34 +686,6 @@ type BillInterval struct {
 	Start *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillInterval) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillInterval)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillInterval) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.End != nil {
-		s.WriteTime(schemas.BillInterval_end, *v.End)
-	}
-	if v.Start != nil {
-		s.WriteTime(schemas.BillInterval_start, *v.Start)
-	}
-}
-func (v *BillInterval) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillInterval, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillInterval_end:
-			v.End = new(time.Time)
-			return d.ReadTime(schemas.BillInterval_end, v.End)
-		case schemas.BillInterval_start:
-			v.Start = new(time.Time)
-			return d.ReadTime(schemas.BillInterval_start, v.Start)
-		}
-		return nil
-	})
 }
 
 //	Represents an action to modify commitments in a bill scenario.
@@ -2018,14 +709,6 @@ type BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction str
 
 func (*BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction) isBillScenarioCommitmentModificationAction() {
 }
-func (v *BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioCommitmentModificationAction_addReservedInstanceAction)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *BillScenarioCommitmentModificationActionMemberAddReservedInstanceAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Action to add a Savings Plan to the scenario.
 type BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction struct {
@@ -2035,14 +718,6 @@ type BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction struct {
 }
 
 func (*BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction) isBillScenarioCommitmentModificationAction() {
-}
-func (v *BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioCommitmentModificationAction_addSavingsPlanAction)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *BillScenarioCommitmentModificationActionMemberAddSavingsPlanAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // Action to remove a Reserved Instance from the scenario.
@@ -2054,14 +729,6 @@ type BillScenarioCommitmentModificationActionMemberNegateReservedInstanceAction 
 
 func (*BillScenarioCommitmentModificationActionMemberNegateReservedInstanceAction) isBillScenarioCommitmentModificationAction() {
 }
-func (v *BillScenarioCommitmentModificationActionMemberNegateReservedInstanceAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioCommitmentModificationAction_negateReservedInstanceAction)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *BillScenarioCommitmentModificationActionMemberNegateReservedInstanceAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Action to remove a Savings Plan from the scenario.
 type BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction struct {
@@ -2071,14 +738,6 @@ type BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction struc
 }
 
 func (*BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction) isBillScenarioCommitmentModificationAction() {
-}
-func (v *BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioCommitmentModificationAction_negateSavingsPlanAction)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *BillScenarioCommitmentModificationActionMemberNegateSavingsPlanAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // Represents a commitment modification item in a bill scenario.
@@ -2098,43 +757,6 @@ type BillScenarioCommitmentModificationItem struct {
 	UsageAccountId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillScenarioCommitmentModificationItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioCommitmentModificationItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillScenarioCommitmentModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
-	if v.Group != nil {
-		s.WriteString(schemas.BillScenarioCommitmentModificationItem_group, *v.Group)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillScenarioCommitmentModificationItem_id, *v.Id)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillScenarioCommitmentModificationItem_usageAccountId, *v.UsageAccountId)
-	}
-}
-func (v *BillScenarioCommitmentModificationItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillScenarioCommitmentModificationItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillScenarioCommitmentModificationItem_commitmentAction:
-			return deserializeBillScenarioCommitmentModificationAction(d, schemas.BillScenarioCommitmentModificationItem_commitmentAction, &v.CommitmentAction)
-		case schemas.BillScenarioCommitmentModificationItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BillScenarioCommitmentModificationItem_group, v.Group)
-		case schemas.BillScenarioCommitmentModificationItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillScenarioCommitmentModificationItem_id, v.Id)
-		case schemas.BillScenarioCommitmentModificationItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillScenarioCommitmentModificationItem_usageAccountId, v.UsageAccountId)
-		}
-		return nil
-	})
 }
 
 // Provides a summary of a bill scenario.
@@ -2171,86 +793,6 @@ type BillScenarioSummary struct {
 	Status BillScenarioStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *BillScenarioSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillScenarioSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillInterval != nil {
-		s.WriteStruct(schemas.BillScenarioSummary_billInterval)
-		v.BillInterval.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CostCategoryGroupSharingPreferenceArn != nil {
-		s.WriteString(schemas.BillScenarioSummary_costCategoryGroupSharingPreferenceArn, *v.CostCategoryGroupSharingPreferenceArn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.BillScenarioSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.BillScenarioSummary_expiresAt, *v.ExpiresAt)
-	}
-	if v.FailureMessage != nil {
-		s.WriteString(schemas.BillScenarioSummary_failureMessage, *v.FailureMessage)
-	}
-	if v.GroupSharingPreference != "" {
-		s.WriteString(schemas.BillScenarioSummary_groupSharingPreference, string(v.GroupSharingPreference))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillScenarioSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BillScenarioSummary_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.BillScenarioSummary_status, string(v.Status))
-	}
-}
-func (v *BillScenarioSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillScenarioSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillScenarioSummary_billInterval:
-			v.BillInterval = &BillInterval{}
-			return v.BillInterval.Deserialize(d)
-		case schemas.BillScenarioSummary_costCategoryGroupSharingPreferenceArn:
-			v.CostCategoryGroupSharingPreferenceArn = new(string)
-			return d.ReadString(schemas.BillScenarioSummary_costCategoryGroupSharingPreferenceArn, v.CostCategoryGroupSharingPreferenceArn)
-		case schemas.BillScenarioSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BillScenarioSummary_createdAt, v.CreatedAt)
-		case schemas.BillScenarioSummary_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.BillScenarioSummary_expiresAt, v.ExpiresAt)
-		case schemas.BillScenarioSummary_failureMessage:
-			v.FailureMessage = new(string)
-			return d.ReadString(schemas.BillScenarioSummary_failureMessage, v.FailureMessage)
-		case schemas.BillScenarioSummary_groupSharingPreference:
-			var ev string
-			if err := d.ReadString(schemas.BillScenarioSummary_groupSharingPreference, &ev); err != nil {
-				return err
-			}
-			v.GroupSharingPreference = GroupSharingPreferenceEnum(ev)
-			return nil
-		case schemas.BillScenarioSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillScenarioSummary_id, v.Id)
-		case schemas.BillScenarioSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BillScenarioSummary_name, v.Name)
-		case schemas.BillScenarioSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.BillScenarioSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = BillScenarioStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents a usage modification item in a bill scenario.
@@ -2295,81 +837,6 @@ type BillScenarioUsageModificationItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BillScenarioUsageModificationItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BillScenarioUsageModificationItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BillScenarioUsageModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZone != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_availabilityZone, *v.AvailabilityZone)
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.BillScenarioUsageModificationItem_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_id, *v.Id)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_operation, *v.Operation)
-	}
-	serializeUsageQuantities(s, schemas.BillScenarioUsageModificationItem_quantities, v.Quantities)
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.BillScenarioUsageModificationItem_usageType, *v.UsageType)
-	}
-}
-func (v *BillScenarioUsageModificationItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BillScenarioUsageModificationItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BillScenarioUsageModificationItem_availabilityZone:
-			v.AvailabilityZone = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_availabilityZone, v.AvailabilityZone)
-		case schemas.BillScenarioUsageModificationItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_group, v.Group)
-		case schemas.BillScenarioUsageModificationItem_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.BillScenarioUsageModificationItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_id, v.Id)
-		case schemas.BillScenarioUsageModificationItem_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_location, v.Location)
-		case schemas.BillScenarioUsageModificationItem_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_operation, v.Operation)
-		case schemas.BillScenarioUsageModificationItem_quantities:
-			return deserializeUsageQuantities(d, schemas.BillScenarioUsageModificationItem_quantities, &v.Quantities)
-		case schemas.BillScenarioUsageModificationItem_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_serviceCode, v.ServiceCode)
-		case schemas.BillScenarioUsageModificationItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_usageAccountId, v.UsageAccountId)
-		case schemas.BillScenarioUsageModificationItem_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.BillScenarioUsageModificationItem_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Represents a monetary amount with associated currency.
 type CostAmount struct {
 
@@ -2382,38 +849,6 @@ type CostAmount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CostAmount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostAmount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostAmount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.CostAmount_amount, *v.Amount)
-	}
-	if v.Currency != "" {
-		s.WriteString(schemas.CostAmount_currency, string(v.Currency))
-	}
-}
-func (v *CostAmount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostAmount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostAmount_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.CostAmount_amount, v.Amount)
-		case schemas.CostAmount_currency:
-			var ev string
-			if err := d.ReadString(schemas.CostAmount_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Represents the difference between historical and estimated costs.
 type CostDifference struct {
 
@@ -2424,38 +859,6 @@ type CostDifference struct {
 	HistoricalCost *CostAmount
 
 	noSmithyDocumentSerde
-}
-
-func (v *CostDifference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CostDifference)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CostDifference) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EstimatedCost != nil {
-		s.WriteStruct(schemas.CostDifference_estimatedCost)
-		v.EstimatedCost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HistoricalCost != nil {
-		s.WriteStruct(schemas.CostDifference_historicalCost)
-		v.HistoricalCost.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CostDifference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CostDifference, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CostDifference_estimatedCost:
-			v.EstimatedCost = &CostAmount{}
-			return v.EstimatedCost.Deserialize(d)
-		case schemas.CostDifference_historicalCost:
-			v.HistoricalCost = &CostAmount{}
-			return v.HistoricalCost.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Represents a complex filtering expression for cost and usage data.
@@ -2482,60 +885,6 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Expression) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Expression)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressionList(s, schemas.Expression_and, v.And)
-	if v.CostCategories != nil {
-		s.WriteStruct(schemas.Expression_costCategories)
-		v.CostCategories.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Dimensions != nil {
-		s.WriteStruct(schemas.Expression_dimensions)
-		v.Dimensions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Not != nil {
-		s.WriteStruct(schemas.Expression_not)
-		v.Not.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeExpressionList(s, schemas.Expression_or, v.Or)
-	if v.Tags != nil {
-		s.WriteStruct(schemas.Expression_tags)
-		v.Tags.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Expression_and:
-			return deserializeExpressionList(d, schemas.Expression_and, &v.And)
-		case schemas.Expression_costCategories:
-			v.CostCategories = &ExpressionFilter{}
-			return v.CostCategories.Deserialize(d)
-		case schemas.Expression_dimensions:
-			v.Dimensions = &ExpressionFilter{}
-			return v.Dimensions.Deserialize(d)
-		case schemas.Expression_not:
-			v.Not = &Expression{}
-			return v.Not.Deserialize(d)
-		case schemas.Expression_or:
-			return deserializeExpressionList(d, schemas.Expression_or, &v.Or)
-		case schemas.Expression_tags:
-			v.Tags = &ExpressionFilter{}
-			return v.Tags.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Represents a filter used within an expression.
 type ExpressionFilter struct {
 
@@ -2551,34 +900,6 @@ type ExpressionFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExpressionFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExpressionFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExpressionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.ExpressionFilter_key, *v.Key)
-	}
-	serializeStringList(s, schemas.ExpressionFilter_matchOptions, v.MatchOptions)
-	serializeStringList(s, schemas.ExpressionFilter_values, v.Values)
-}
-func (v *ExpressionFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExpressionFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExpressionFilter_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.ExpressionFilter_key, v.Key)
-		case schemas.ExpressionFilter_matchOptions:
-			return deserializeStringList(d, schemas.ExpressionFilter_matchOptions, &v.MatchOptions)
-		case schemas.ExpressionFilter_values:
-			return deserializeStringList(d, schemas.ExpressionFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Represents a time-based filter.
 type FilterTimestamp struct {
 
@@ -2589,34 +910,6 @@ type FilterTimestamp struct {
 	BeforeTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *FilterTimestamp) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FilterTimestamp)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FilterTimestamp) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AfterTimestamp != nil {
-		s.WriteTime(schemas.FilterTimestamp_afterTimestamp, *v.AfterTimestamp)
-	}
-	if v.BeforeTimestamp != nil {
-		s.WriteTime(schemas.FilterTimestamp_beforeTimestamp, *v.BeforeTimestamp)
-	}
-}
-func (v *FilterTimestamp) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FilterTimestamp, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FilterTimestamp_afterTimestamp:
-			v.AfterTimestamp = new(time.Time)
-			return d.ReadTime(schemas.FilterTimestamp_afterTimestamp, v.AfterTimestamp)
-		case schemas.FilterTimestamp_beforeTimestamp:
-			v.BeforeTimestamp = new(time.Time)
-			return d.ReadTime(schemas.FilterTimestamp_beforeTimestamp, v.BeforeTimestamp)
-		}
-		return nil
-	})
 }
 
 // Represents historical usage data for a specific entity.
@@ -2658,68 +951,6 @@ type HistoricalUsageEntity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *HistoricalUsageEntity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.HistoricalUsageEntity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *HistoricalUsageEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BillInterval != nil {
-		s.WriteStruct(schemas.HistoricalUsageEntity_billInterval)
-		v.BillInterval.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FilterExpression != nil {
-		s.WriteStruct(schemas.HistoricalUsageEntity_filterExpression)
-		v.FilterExpression.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.HistoricalUsageEntity_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.HistoricalUsageEntity_operation, *v.Operation)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.HistoricalUsageEntity_serviceCode, *v.ServiceCode)
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.HistoricalUsageEntity_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.HistoricalUsageEntity_usageType, *v.UsageType)
-	}
-}
-func (v *HistoricalUsageEntity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.HistoricalUsageEntity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.HistoricalUsageEntity_billInterval:
-			v.BillInterval = &BillInterval{}
-			return v.BillInterval.Deserialize(d)
-		case schemas.HistoricalUsageEntity_filterExpression:
-			v.FilterExpression = &Expression{}
-			return v.FilterExpression.Deserialize(d)
-		case schemas.HistoricalUsageEntity_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.HistoricalUsageEntity_location, v.Location)
-		case schemas.HistoricalUsageEntity_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.HistoricalUsageEntity_operation, v.Operation)
-		case schemas.HistoricalUsageEntity_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.HistoricalUsageEntity_serviceCode, v.ServiceCode)
-		case schemas.HistoricalUsageEntity_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.HistoricalUsageEntity_usageAccountId, v.UsageAccountId)
-		case schemas.HistoricalUsageEntity_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.HistoricalUsageEntity_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Represents a filter for listing bill estimate line items.
 type ListBillEstimateLineItemsFilter struct {
 
@@ -2737,45 +968,6 @@ type ListBillEstimateLineItemsFilter struct {
 	MatchOption MatchOption
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListBillEstimateLineItemsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBillEstimateLineItemsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBillEstimateLineItemsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchOption != "" {
-		s.WriteString(schemas.ListBillEstimateLineItemsFilter_matchOption, string(v.MatchOption))
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.ListBillEstimateLineItemsFilter_name, string(v.Name))
-	}
-	serializeListBillEstimateLineItemsFilterValues(s, schemas.ListBillEstimateLineItemsFilter_values, v.Values)
-}
-func (v *ListBillEstimateLineItemsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBillEstimateLineItemsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBillEstimateLineItemsFilter_matchOption:
-			var ev string
-			if err := d.ReadString(schemas.ListBillEstimateLineItemsFilter_matchOption, &ev); err != nil {
-				return err
-			}
-			v.MatchOption = MatchOption(ev)
-			return nil
-		case schemas.ListBillEstimateLineItemsFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.ListBillEstimateLineItemsFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = ListBillEstimateLineItemsFilterName(ev)
-			return nil
-		case schemas.ListBillEstimateLineItemsFilter_values:
-			return deserializeListBillEstimateLineItemsFilterValues(d, schemas.ListBillEstimateLineItemsFilter_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Represents a filter for listing bill estimates.
@@ -2797,45 +989,6 @@ type ListBillEstimatesFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListBillEstimatesFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBillEstimatesFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBillEstimatesFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchOption != "" {
-		s.WriteString(schemas.ListBillEstimatesFilter_matchOption, string(v.MatchOption))
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.ListBillEstimatesFilter_name, string(v.Name))
-	}
-	serializeListBillEstimatesFilterValues(s, schemas.ListBillEstimatesFilter_values, v.Values)
-}
-func (v *ListBillEstimatesFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBillEstimatesFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBillEstimatesFilter_matchOption:
-			var ev string
-			if err := d.ReadString(schemas.ListBillEstimatesFilter_matchOption, &ev); err != nil {
-				return err
-			}
-			v.MatchOption = MatchOption(ev)
-			return nil
-		case schemas.ListBillEstimatesFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.ListBillEstimatesFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = ListBillEstimatesFilterName(ev)
-			return nil
-		case schemas.ListBillEstimatesFilter_values:
-			return deserializeListBillEstimatesFilterValues(d, schemas.ListBillEstimatesFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Represents a filter for listing bill scenarios.
 type ListBillScenariosFilter struct {
 
@@ -2853,45 +1006,6 @@ type ListBillScenariosFilter struct {
 	MatchOption MatchOption
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListBillScenariosFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListBillScenariosFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListBillScenariosFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchOption != "" {
-		s.WriteString(schemas.ListBillScenariosFilter_matchOption, string(v.MatchOption))
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.ListBillScenariosFilter_name, string(v.Name))
-	}
-	serializeListBillScenariosFilterValues(s, schemas.ListBillScenariosFilter_values, v.Values)
-}
-func (v *ListBillScenariosFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListBillScenariosFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListBillScenariosFilter_matchOption:
-			var ev string
-			if err := d.ReadString(schemas.ListBillScenariosFilter_matchOption, &ev); err != nil {
-				return err
-			}
-			v.MatchOption = MatchOption(ev)
-			return nil
-		case schemas.ListBillScenariosFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.ListBillScenariosFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = ListBillScenariosFilterName(ev)
-			return nil
-		case schemas.ListBillScenariosFilter_values:
-			return deserializeListBillScenariosFilterValues(d, schemas.ListBillScenariosFilter_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Represents a filter for listing usage data.
@@ -2913,45 +1027,6 @@ type ListUsageFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListUsageFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListUsageFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListUsageFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchOption != "" {
-		s.WriteString(schemas.ListUsageFilter_matchOption, string(v.MatchOption))
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.ListUsageFilter_name, string(v.Name))
-	}
-	serializeListUsageFilterValues(s, schemas.ListUsageFilter_values, v.Values)
-}
-func (v *ListUsageFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListUsageFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListUsageFilter_matchOption:
-			var ev string
-			if err := d.ReadString(schemas.ListUsageFilter_matchOption, &ev); err != nil {
-				return err
-			}
-			v.MatchOption = MatchOption(ev)
-			return nil
-		case schemas.ListUsageFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.ListUsageFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = ListUsageFilterName(ev)
-			return nil
-		case schemas.ListUsageFilter_values:
-			return deserializeListUsageFilterValues(d, schemas.ListUsageFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Represents a filter for listing workload estimates.
 type ListWorkloadEstimatesFilter struct {
 
@@ -2971,45 +1046,6 @@ type ListWorkloadEstimatesFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWorkloadEstimatesFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWorkloadEstimatesFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWorkloadEstimatesFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchOption != "" {
-		s.WriteString(schemas.ListWorkloadEstimatesFilter_matchOption, string(v.MatchOption))
-	}
-	if v.Name != "" {
-		s.WriteString(schemas.ListWorkloadEstimatesFilter_name, string(v.Name))
-	}
-	serializeListWorkloadEstimatesFilterValues(s, schemas.ListWorkloadEstimatesFilter_values, v.Values)
-}
-func (v *ListWorkloadEstimatesFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWorkloadEstimatesFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWorkloadEstimatesFilter_matchOption:
-			var ev string
-			if err := d.ReadString(schemas.ListWorkloadEstimatesFilter_matchOption, &ev); err != nil {
-				return err
-			}
-			v.MatchOption = MatchOption(ev)
-			return nil
-		case schemas.ListWorkloadEstimatesFilter_name:
-			var ev string
-			if err := d.ReadString(schemas.ListWorkloadEstimatesFilter_name, &ev); err != nil {
-				return err
-			}
-			v.Name = ListWorkloadEstimatesFilterName(ev)
-			return nil
-		case schemas.ListWorkloadEstimatesFilter_values:
-			return deserializeListWorkloadEstimatesFilterValues(d, schemas.ListWorkloadEstimatesFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 //	Represents an action to remove a Reserved Instance from a bill scenario.
 //
 // This is the ID of an existing Reserved Instance in your account.
@@ -3021,28 +1057,6 @@ type NegateReservedInstanceAction struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NegateReservedInstanceAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NegateReservedInstanceAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NegateReservedInstanceAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReservedInstancesId != nil {
-		s.WriteString(schemas.NegateReservedInstanceAction_reservedInstancesId, *v.ReservedInstancesId)
-	}
-}
-func (v *NegateReservedInstanceAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NegateReservedInstanceAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NegateReservedInstanceAction_reservedInstancesId:
-			v.ReservedInstancesId = new(string)
-			return d.ReadString(schemas.NegateReservedInstanceAction_reservedInstancesId, v.ReservedInstancesId)
-		}
-		return nil
-	})
-}
-
 //	Represents an action to remove a Savings Plan from a bill scenario.
 //
 // This is the ID of an existing Savings Plan in your account.
@@ -3052,28 +1066,6 @@ type NegateSavingsPlanAction struct {
 	SavingsPlanId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NegateSavingsPlanAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NegateSavingsPlanAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NegateSavingsPlanAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SavingsPlanId != nil {
-		s.WriteString(schemas.NegateSavingsPlanAction_savingsPlanId, *v.SavingsPlanId)
-	}
-}
-func (v *NegateSavingsPlanAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NegateSavingsPlanAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NegateSavingsPlanAction_savingsPlanId:
-			v.SavingsPlanId = new(string)
-			return d.ReadString(schemas.NegateSavingsPlanAction_savingsPlanId, v.SavingsPlanId)
-		}
-		return nil
-	})
 }
 
 // Represents a usage amount for a specific time period.
@@ -3092,34 +1084,6 @@ type UsageAmount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UsageAmount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageAmount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageAmount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.UsageAmount_amount, *v.Amount)
-	}
-	if v.StartHour != nil {
-		s.WriteTime(schemas.UsageAmount_startHour, *v.StartHour)
-	}
-}
-func (v *UsageAmount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageAmount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageAmount_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.UsageAmount_amount, v.Amount)
-		case schemas.UsageAmount_startHour:
-			v.StartHour = new(time.Time)
-			return d.ReadTime(schemas.UsageAmount_startHour, v.StartHour)
-		}
-		return nil
-	})
-}
-
 // Represents a usage quantity with associated unit and time period.
 type UsageQuantity struct {
 
@@ -3135,40 +1099,6 @@ type UsageQuantity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UsageQuantity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageQuantity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageQuantity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.UsageQuantity_amount, *v.Amount)
-	}
-	if v.StartHour != nil {
-		s.WriteTime(schemas.UsageQuantity_startHour, *v.StartHour)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.UsageQuantity_unit, *v.Unit)
-	}
-}
-func (v *UsageQuantity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageQuantity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageQuantity_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.UsageQuantity_amount, v.Amount)
-		case schemas.UsageQuantity_startHour:
-			v.StartHour = new(time.Time)
-			return d.ReadTime(schemas.UsageQuantity_startHour, v.StartHour)
-		case schemas.UsageQuantity_unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.UsageQuantity_unit, v.Unit)
-		}
-		return nil
-	})
-}
-
 // Represents the result of a usage quantity calculation.
 type UsageQuantityResult struct {
 
@@ -3179,34 +1109,6 @@ type UsageQuantityResult struct {
 	Unit *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UsageQuantityResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageQuantityResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageQuantityResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.UsageQuantityResult_amount, *v.Amount)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.UsageQuantityResult_unit, *v.Unit)
-	}
-}
-func (v *UsageQuantityResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageQuantityResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageQuantityResult_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.UsageQuantityResult_amount, v.Amount)
-		case schemas.UsageQuantityResult_unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.UsageQuantityResult_unit, v.Unit)
-		}
-		return nil
-	})
 }
 
 // Represents a field that failed validation in a request.
@@ -3223,34 +1125,6 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidationExceptionField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
-	}
-}
-func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationExceptionField_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
-		case schemas.ValidationExceptionField_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Provides a summary of a workload estimate.
@@ -3289,94 +1163,6 @@ type WorkloadEstimateSummary struct {
 	TotalCost *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkloadEstimateSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkloadEstimateSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkloadEstimateSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CostCurrency != "" {
-		s.WriteString(schemas.WorkloadEstimateSummary_costCurrency, string(v.CostCurrency))
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.WorkloadEstimateSummary_createdAt, *v.CreatedAt)
-	}
-	if v.ExpiresAt != nil {
-		s.WriteTime(schemas.WorkloadEstimateSummary_expiresAt, *v.ExpiresAt)
-	}
-	if v.FailureMessage != nil {
-		s.WriteString(schemas.WorkloadEstimateSummary_failureMessage, *v.FailureMessage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.WorkloadEstimateSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.WorkloadEstimateSummary_name, *v.Name)
-	}
-	if v.RateTimestamp != nil {
-		s.WriteTime(schemas.WorkloadEstimateSummary_rateTimestamp, *v.RateTimestamp)
-	}
-	if v.RateType != "" {
-		s.WriteString(schemas.WorkloadEstimateSummary_rateType, string(v.RateType))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.WorkloadEstimateSummary_status, string(v.Status))
-	}
-	if v.TotalCost != nil {
-		s.WriteFloat64(schemas.WorkloadEstimateSummary_totalCost, *v.TotalCost)
-	}
-}
-func (v *WorkloadEstimateSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkloadEstimateSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkloadEstimateSummary_costCurrency:
-			var ev string
-			if err := d.ReadString(schemas.WorkloadEstimateSummary_costCurrency, &ev); err != nil {
-				return err
-			}
-			v.CostCurrency = CurrencyCode(ev)
-			return nil
-		case schemas.WorkloadEstimateSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.WorkloadEstimateSummary_createdAt, v.CreatedAt)
-		case schemas.WorkloadEstimateSummary_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.WorkloadEstimateSummary_expiresAt, v.ExpiresAt)
-		case schemas.WorkloadEstimateSummary_failureMessage:
-			v.FailureMessage = new(string)
-			return d.ReadString(schemas.WorkloadEstimateSummary_failureMessage, v.FailureMessage)
-		case schemas.WorkloadEstimateSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WorkloadEstimateSummary_id, v.Id)
-		case schemas.WorkloadEstimateSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.WorkloadEstimateSummary_name, v.Name)
-		case schemas.WorkloadEstimateSummary_rateTimestamp:
-			v.RateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.WorkloadEstimateSummary_rateTimestamp, v.RateTimestamp)
-		case schemas.WorkloadEstimateSummary_rateType:
-			var ev string
-			if err := d.ReadString(schemas.WorkloadEstimateSummary_rateType, &ev); err != nil {
-				return err
-			}
-			v.RateType = WorkloadEstimateRateType(ev)
-			return nil
-		case schemas.WorkloadEstimateSummary_status:
-			var ev string
-			if err := d.ReadString(schemas.WorkloadEstimateSummary_status, &ev); err != nil {
-				return err
-			}
-			v.Status = WorkloadEstimateStatus(ev)
-			return nil
-		case schemas.WorkloadEstimateSummary_totalCost:
-			v.TotalCost = new(float64)
-			return d.ReadFloat64(schemas.WorkloadEstimateSummary_totalCost, v.TotalCost)
-		}
-		return nil
-	})
 }
 
 // Represents a usage item in a workload estimate.
@@ -3427,106 +1213,6 @@ type WorkloadEstimateUsageItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WorkloadEstimateUsageItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkloadEstimateUsageItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkloadEstimateUsageItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cost != nil {
-		s.WriteFloat64(schemas.WorkloadEstimateUsageItem_cost, *v.Cost)
-	}
-	if v.Currency != "" {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_currency, string(v.Currency))
-	}
-	if v.Group != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_group, *v.Group)
-	}
-	if v.HistoricalUsage != nil {
-		s.WriteStruct(schemas.WorkloadEstimateUsageItem_historicalUsage)
-		v.HistoricalUsage.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_id, *v.Id)
-	}
-	if v.Location != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_location, *v.Location)
-	}
-	if v.Operation != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_operation, *v.Operation)
-	}
-	if v.Quantity != nil {
-		s.WriteStruct(schemas.WorkloadEstimateUsageItem_quantity)
-		v.Quantity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_serviceCode, *v.ServiceCode)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_status, string(v.Status))
-	}
-	if v.UsageAccountId != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_usageAccountId, *v.UsageAccountId)
-	}
-	if v.UsageType != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageItem_usageType, *v.UsageType)
-	}
-}
-func (v *WorkloadEstimateUsageItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkloadEstimateUsageItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkloadEstimateUsageItem_cost:
-			v.Cost = new(float64)
-			return d.ReadFloat64(schemas.WorkloadEstimateUsageItem_cost, v.Cost)
-		case schemas.WorkloadEstimateUsageItem_currency:
-			var ev string
-			if err := d.ReadString(schemas.WorkloadEstimateUsageItem_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = CurrencyCode(ev)
-			return nil
-		case schemas.WorkloadEstimateUsageItem_group:
-			v.Group = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_group, v.Group)
-		case schemas.WorkloadEstimateUsageItem_historicalUsage:
-			v.HistoricalUsage = &HistoricalUsageEntity{}
-			return v.HistoricalUsage.Deserialize(d)
-		case schemas.WorkloadEstimateUsageItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_id, v.Id)
-		case schemas.WorkloadEstimateUsageItem_location:
-			v.Location = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_location, v.Location)
-		case schemas.WorkloadEstimateUsageItem_operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_operation, v.Operation)
-		case schemas.WorkloadEstimateUsageItem_quantity:
-			v.Quantity = &WorkloadEstimateUsageQuantity{}
-			return v.Quantity.Deserialize(d)
-		case schemas.WorkloadEstimateUsageItem_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_serviceCode, v.ServiceCode)
-		case schemas.WorkloadEstimateUsageItem_status:
-			var ev string
-			if err := d.ReadString(schemas.WorkloadEstimateUsageItem_status, &ev); err != nil {
-				return err
-			}
-			v.Status = WorkloadEstimateCostStatus(ev)
-			return nil
-		case schemas.WorkloadEstimateUsageItem_usageAccountId:
-			v.UsageAccountId = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_usageAccountId, v.UsageAccountId)
-		case schemas.WorkloadEstimateUsageItem_usageType:
-			v.UsageType = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageItem_usageType, v.UsageType)
-		}
-		return nil
-	})
-}
-
 // Represents a usage quantity for a workload estimate.
 type WorkloadEstimateUsageQuantity struct {
 
@@ -3537,34 +1223,6 @@ type WorkloadEstimateUsageQuantity struct {
 	Unit *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WorkloadEstimateUsageQuantity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WorkloadEstimateUsageQuantity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WorkloadEstimateUsageQuantity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != nil {
-		s.WriteFloat64(schemas.WorkloadEstimateUsageQuantity_amount, *v.Amount)
-	}
-	if v.Unit != nil {
-		s.WriteString(schemas.WorkloadEstimateUsageQuantity_unit, *v.Unit)
-	}
-}
-func (v *WorkloadEstimateUsageQuantity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WorkloadEstimateUsageQuantity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WorkloadEstimateUsageQuantity_amount:
-			v.Amount = new(float64)
-			return d.ReadFloat64(schemas.WorkloadEstimateUsageQuantity_amount, v.Amount)
-		case schemas.WorkloadEstimateUsageQuantity_unit:
-			v.Unit = new(string)
-			return d.ReadString(schemas.WorkloadEstimateUsageQuantity_unit, v.Unit)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

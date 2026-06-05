@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -36,74 +34,6 @@ type ChannelInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelARN != nil {
-		s.WriteString(schemas.ChannelInfo_ChannelARN, *v.ChannelARN)
-	}
-	if v.ChannelName != nil {
-		s.WriteString(schemas.ChannelInfo_ChannelName, *v.ChannelName)
-	}
-	if v.ChannelStatus != "" {
-		s.WriteString(schemas.ChannelInfo_ChannelStatus, string(v.ChannelStatus))
-	}
-	if v.ChannelType != "" {
-		s.WriteString(schemas.ChannelInfo_ChannelType, string(v.ChannelType))
-	}
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ChannelInfo_CreationTime, *v.CreationTime)
-	}
-	if v.SingleMasterConfiguration != nil {
-		s.WriteStruct(schemas.ChannelInfo_SingleMasterConfiguration)
-		v.SingleMasterConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.ChannelInfo_Version, *v.Version)
-	}
-}
-func (v *ChannelInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelInfo_ChannelARN:
-			v.ChannelARN = new(string)
-			return d.ReadString(schemas.ChannelInfo_ChannelARN, v.ChannelARN)
-		case schemas.ChannelInfo_ChannelName:
-			v.ChannelName = new(string)
-			return d.ReadString(schemas.ChannelInfo_ChannelName, v.ChannelName)
-		case schemas.ChannelInfo_ChannelStatus:
-			var ev string
-			if err := d.ReadString(schemas.ChannelInfo_ChannelStatus, &ev); err != nil {
-				return err
-			}
-			v.ChannelStatus = Status(ev)
-			return nil
-		case schemas.ChannelInfo_ChannelType:
-			var ev string
-			if err := d.ReadString(schemas.ChannelInfo_ChannelType, &ev); err != nil {
-				return err
-			}
-			v.ChannelType = ChannelType(ev)
-			return nil
-		case schemas.ChannelInfo_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ChannelInfo_CreationTime, v.CreationTime)
-		case schemas.ChannelInfo_SingleMasterConfiguration:
-			v.SingleMasterConfiguration = &SingleMasterConfiguration{}
-			return v.SingleMasterConfiguration.Deserialize(d)
-		case schemas.ChannelInfo_Version:
-			v.Version = new(string)
-			return d.ReadString(schemas.ChannelInfo_Version, v.Version)
-		}
-		return nil
-	})
-}
-
 // An optional input parameter for the ListSignalingChannels API. When this
 // parameter is specified while invoking ListSignalingChannels , the API returns
 // only the channels that satisfy a condition specified in ChannelNameCondition .
@@ -117,38 +47,6 @@ type ChannelNameCondition struct {
 	ComparisonValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelNameCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelNameCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelNameCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComparisonOperator != "" {
-		s.WriteString(schemas.ChannelNameCondition_ComparisonOperator, string(v.ComparisonOperator))
-	}
-	if v.ComparisonValue != nil {
-		s.WriteString(schemas.ChannelNameCondition_ComparisonValue, *v.ComparisonValue)
-	}
-}
-func (v *ChannelNameCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelNameCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelNameCondition_ComparisonOperator:
-			var ev string
-			if err := d.ReadString(schemas.ChannelNameCondition_ComparisonOperator, &ev); err != nil {
-				return err
-			}
-			v.ComparisonOperator = ComparisonOperator(ev)
-			return nil
-		case schemas.ChannelNameCondition_ComparisonValue:
-			v.ComparisonValue = new(string)
-			return d.ReadString(schemas.ChannelNameCondition_ComparisonValue, v.ComparisonValue)
-		}
-		return nil
-	})
 }
 
 // The configuration details required to delete the connection of the stream from
@@ -177,42 +75,6 @@ type DeletionConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletionConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletionConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeleteAfterUpload != nil {
-		s.WriteBool(schemas.DeletionConfig_DeleteAfterUpload, *v.DeleteAfterUpload)
-	}
-	if v.EdgeRetentionInHours != nil {
-		s.WriteInt32(schemas.DeletionConfig_EdgeRetentionInHours, *v.EdgeRetentionInHours)
-	}
-	if v.LocalSizeConfig != nil {
-		s.WriteStruct(schemas.DeletionConfig_LocalSizeConfig)
-		v.LocalSizeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DeletionConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletionConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletionConfig_DeleteAfterUpload:
-			v.DeleteAfterUpload = new(bool)
-			return d.ReadBool(schemas.DeletionConfig_DeleteAfterUpload, v.DeleteAfterUpload)
-		case schemas.DeletionConfig_EdgeRetentionInHours:
-			v.EdgeRetentionInHours = new(int32)
-			return d.ReadInt32(schemas.DeletionConfig_EdgeRetentionInHours, v.EdgeRetentionInHours)
-		case schemas.DeletionConfig_LocalSizeConfig:
-			v.LocalSizeConfig = &LocalSizeConfig{}
-			return v.LocalSizeConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // An object that contains the latest status details for an edge agent's recorder
 // and uploader jobs. Use this information to determine the current health of an
 // edge agent.
@@ -225,38 +87,6 @@ type EdgeAgentStatus struct {
 	LastUploaderStatus *LastUploaderStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *EdgeAgentStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EdgeAgentStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EdgeAgentStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastRecorderStatus != nil {
-		s.WriteStruct(schemas.EdgeAgentStatus_LastRecorderStatus)
-		v.LastRecorderStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUploaderStatus != nil {
-		s.WriteStruct(schemas.EdgeAgentStatus_LastUploaderStatus)
-		v.LastUploaderStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *EdgeAgentStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EdgeAgentStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EdgeAgentStatus_LastRecorderStatus:
-			v.LastRecorderStatus = &LastRecorderStatus{}
-			return v.LastRecorderStatus.Deserialize(d)
-		case schemas.EdgeAgentStatus_LastUploaderStatus:
-			v.LastUploaderStatus = &LastUploaderStatus{}
-			return v.LastUploaderStatus.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // A description of the stream's edge configuration that will be used to sync with
@@ -287,52 +117,6 @@ type EdgeConfig struct {
 	UploaderConfig *UploaderConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *EdgeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EdgeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EdgeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeletionConfig != nil {
-		s.WriteStruct(schemas.EdgeConfig_DeletionConfig)
-		v.DeletionConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.HubDeviceArn != nil {
-		s.WriteString(schemas.EdgeConfig_HubDeviceArn, *v.HubDeviceArn)
-	}
-	if v.RecorderConfig != nil {
-		s.WriteStruct(schemas.EdgeConfig_RecorderConfig)
-		v.RecorderConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UploaderConfig != nil {
-		s.WriteStruct(schemas.EdgeConfig_UploaderConfig)
-		v.UploaderConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *EdgeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EdgeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EdgeConfig_DeletionConfig:
-			v.DeletionConfig = &DeletionConfig{}
-			return v.DeletionConfig.Deserialize(d)
-		case schemas.EdgeConfig_HubDeviceArn:
-			v.HubDeviceArn = new(string)
-			return d.ReadString(schemas.EdgeConfig_HubDeviceArn, v.HubDeviceArn)
-		case schemas.EdgeConfig_RecorderConfig:
-			v.RecorderConfig = &RecorderConfig{}
-			return v.RecorderConfig.Deserialize(d)
-		case schemas.EdgeConfig_UploaderConfig:
-			v.UploaderConfig = &UploaderConfig{}
-			return v.UploaderConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The structure that contains the information required for the KVS images
@@ -397,81 +181,6 @@ type ImageGenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImageGenerationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageGenerationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageGenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationConfig != nil {
-		s.WriteStruct(schemas.ImageGenerationConfiguration_DestinationConfig)
-		v.DestinationConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.ImageGenerationConfiguration_Format, string(v.Format))
-	}
-	serializeFormatConfig(s, schemas.ImageGenerationConfiguration_FormatConfig, v.FormatConfig)
-	if v.HeightPixels != nil {
-		s.WriteInt32(schemas.ImageGenerationConfiguration_HeightPixels, *v.HeightPixels)
-	}
-	if v.ImageSelectorType != "" {
-		s.WriteString(schemas.ImageGenerationConfiguration_ImageSelectorType, string(v.ImageSelectorType))
-	}
-	if v.SamplingInterval != nil {
-		s.WriteInt32(schemas.ImageGenerationConfiguration_SamplingInterval, *v.SamplingInterval)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.ImageGenerationConfiguration_Status, string(v.Status))
-	}
-	if v.WidthPixels != nil {
-		s.WriteInt32(schemas.ImageGenerationConfiguration_WidthPixels, *v.WidthPixels)
-	}
-}
-func (v *ImageGenerationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageGenerationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageGenerationConfiguration_DestinationConfig:
-			v.DestinationConfig = &ImageGenerationDestinationConfig{}
-			return v.DestinationConfig.Deserialize(d)
-		case schemas.ImageGenerationConfiguration_Format:
-			var ev string
-			if err := d.ReadString(schemas.ImageGenerationConfiguration_Format, &ev); err != nil {
-				return err
-			}
-			v.Format = Format(ev)
-			return nil
-		case schemas.ImageGenerationConfiguration_FormatConfig:
-			return deserializeFormatConfig(d, schemas.ImageGenerationConfiguration_FormatConfig, &v.FormatConfig)
-		case schemas.ImageGenerationConfiguration_HeightPixels:
-			v.HeightPixels = new(int32)
-			return d.ReadInt32(schemas.ImageGenerationConfiguration_HeightPixels, v.HeightPixels)
-		case schemas.ImageGenerationConfiguration_ImageSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.ImageGenerationConfiguration_ImageSelectorType, &ev); err != nil {
-				return err
-			}
-			v.ImageSelectorType = ImageSelectorType(ev)
-			return nil
-		case schemas.ImageGenerationConfiguration_SamplingInterval:
-			v.SamplingInterval = new(int32)
-			return d.ReadInt32(schemas.ImageGenerationConfiguration_SamplingInterval, v.SamplingInterval)
-		case schemas.ImageGenerationConfiguration_Status:
-			var ev string
-			if err := d.ReadString(schemas.ImageGenerationConfiguration_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConfigurationStatus(ev)
-			return nil
-		case schemas.ImageGenerationConfiguration_WidthPixels:
-			v.WidthPixels = new(int32)
-			return d.ReadInt32(schemas.ImageGenerationConfiguration_WidthPixels, v.WidthPixels)
-		}
-		return nil
-	})
-}
-
 // The structure that contains the information required to deliver images to a
 // customer.
 type ImageGenerationDestinationConfig struct {
@@ -489,34 +198,6 @@ type ImageGenerationDestinationConfig struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ImageGenerationDestinationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImageGenerationDestinationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImageGenerationDestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationRegion != nil {
-		s.WriteString(schemas.ImageGenerationDestinationConfig_DestinationRegion, *v.DestinationRegion)
-	}
-	if v.Uri != nil {
-		s.WriteString(schemas.ImageGenerationDestinationConfig_Uri, *v.Uri)
-	}
-}
-func (v *ImageGenerationDestinationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImageGenerationDestinationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImageGenerationDestinationConfig_DestinationRegion:
-			v.DestinationRegion = new(string)
-			return d.ReadString(schemas.ImageGenerationDestinationConfig_DestinationRegion, v.DestinationRegion)
-		case schemas.ImageGenerationDestinationConfig_Uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.ImageGenerationDestinationConfig_Uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // The latest status of a stream's edge recording job.
@@ -538,50 +219,6 @@ type LastRecorderStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LastRecorderStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LastRecorderStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LastRecorderStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobStatusDetails != nil {
-		s.WriteString(schemas.LastRecorderStatus_JobStatusDetails, *v.JobStatusDetails)
-	}
-	if v.LastCollectedTime != nil {
-		s.WriteTime(schemas.LastRecorderStatus_LastCollectedTime, *v.LastCollectedTime)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.LastRecorderStatus_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.RecorderStatus != "" {
-		s.WriteString(schemas.LastRecorderStatus_RecorderStatus, string(v.RecorderStatus))
-	}
-}
-func (v *LastRecorderStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LastRecorderStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LastRecorderStatus_JobStatusDetails:
-			v.JobStatusDetails = new(string)
-			return d.ReadString(schemas.LastRecorderStatus_JobStatusDetails, v.JobStatusDetails)
-		case schemas.LastRecorderStatus_LastCollectedTime:
-			v.LastCollectedTime = new(time.Time)
-			return d.ReadTime(schemas.LastRecorderStatus_LastCollectedTime, v.LastCollectedTime)
-		case schemas.LastRecorderStatus_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.LastRecorderStatus_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.LastRecorderStatus_RecorderStatus:
-			var ev string
-			if err := d.ReadString(schemas.LastRecorderStatus_RecorderStatus, &ev); err != nil {
-				return err
-			}
-			v.RecorderStatus = RecorderStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The latest status of a stream’s edge to cloud uploader job.
 type LastUploaderStatus struct {
 
@@ -599,50 +236,6 @@ type LastUploaderStatus struct {
 	UploaderStatus UploaderStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *LastUploaderStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LastUploaderStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LastUploaderStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobStatusDetails != nil {
-		s.WriteString(schemas.LastUploaderStatus_JobStatusDetails, *v.JobStatusDetails)
-	}
-	if v.LastCollectedTime != nil {
-		s.WriteTime(schemas.LastUploaderStatus_LastCollectedTime, *v.LastCollectedTime)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.LastUploaderStatus_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.UploaderStatus != "" {
-		s.WriteString(schemas.LastUploaderStatus_UploaderStatus, string(v.UploaderStatus))
-	}
-}
-func (v *LastUploaderStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LastUploaderStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LastUploaderStatus_JobStatusDetails:
-			v.JobStatusDetails = new(string)
-			return d.ReadString(schemas.LastUploaderStatus_JobStatusDetails, v.JobStatusDetails)
-		case schemas.LastUploaderStatus_LastCollectedTime:
-			v.LastCollectedTime = new(time.Time)
-			return d.ReadTime(schemas.LastUploaderStatus_LastCollectedTime, v.LastCollectedTime)
-		case schemas.LastUploaderStatus_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.LastUploaderStatus_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.LastUploaderStatus_UploaderStatus:
-			var ev string
-			if err := d.ReadString(schemas.LastUploaderStatus_UploaderStatus, &ev); err != nil {
-				return err
-			}
-			v.UploaderStatus = UploaderStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A description of a single stream's edge configuration.
@@ -674,70 +267,6 @@ type ListEdgeAgentConfigurationsEdgeConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEdgeAgentConfigurationsEdgeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEdgeAgentConfigurationsEdgeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEdgeAgentConfigurationsEdgeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.ListEdgeAgentConfigurationsEdgeConfig_CreationTime, *v.CreationTime)
-	}
-	if v.EdgeConfig != nil {
-		s.WriteStruct(schemas.ListEdgeAgentConfigurationsEdgeConfig_EdgeConfig)
-		v.EdgeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FailedStatusDetails != nil {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails, *v.FailedStatusDetails)
-	}
-	if v.LastUpdatedTime != nil {
-		s.WriteTime(schemas.ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime, *v.LastUpdatedTime)
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamName, *v.StreamName)
-	}
-	if v.SyncStatus != "" {
-		s.WriteString(schemas.ListEdgeAgentConfigurationsEdgeConfig_SyncStatus, string(v.SyncStatus))
-	}
-}
-func (v *ListEdgeAgentConfigurationsEdgeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEdgeAgentConfigurationsEdgeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.ListEdgeAgentConfigurationsEdgeConfig_CreationTime, v.CreationTime)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_EdgeConfig:
-			v.EdgeConfig = &EdgeConfig{}
-			return v.EdgeConfig.Deserialize(d)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails:
-			v.FailedStatusDetails = new(string)
-			return d.ReadString(schemas.ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails, v.FailedStatusDetails)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime:
-			v.LastUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime, v.LastUpdatedTime)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamARN:
-			v.StreamARN = new(string)
-			return d.ReadString(schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamARN, v.StreamARN)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamName:
-			v.StreamName = new(string)
-			return d.ReadString(schemas.ListEdgeAgentConfigurationsEdgeConfig_StreamName, v.StreamName)
-		case schemas.ListEdgeAgentConfigurationsEdgeConfig_SyncStatus:
-			var ev string
-			if err := d.ReadString(schemas.ListEdgeAgentConfigurationsEdgeConfig_SyncStatus, &ev); err != nil {
-				return err
-			}
-			v.SyncStatus = SyncStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The configuration details that include the maximum size of the media (
 // MaxLocalMediaSizeInMB ) that you want to store for a stream on the Edge Agent,
 // as well as the strategy that should be used ( StrategyOnFullSize ) when a
@@ -754,38 +283,6 @@ type LocalSizeConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LocalSizeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LocalSizeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LocalSizeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxLocalMediaSizeInMB != nil {
-		s.WriteInt32(schemas.LocalSizeConfig_MaxLocalMediaSizeInMB, *v.MaxLocalMediaSizeInMB)
-	}
-	if v.StrategyOnFullSize != "" {
-		s.WriteString(schemas.LocalSizeConfig_StrategyOnFullSize, string(v.StrategyOnFullSize))
-	}
-}
-func (v *LocalSizeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LocalSizeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LocalSizeConfig_MaxLocalMediaSizeInMB:
-			v.MaxLocalMediaSizeInMB = new(int32)
-			return d.ReadInt32(schemas.LocalSizeConfig_MaxLocalMediaSizeInMB, v.MaxLocalMediaSizeInMB)
-		case schemas.LocalSizeConfig_StrategyOnFullSize:
-			var ev string
-			if err := d.ReadString(schemas.LocalSizeConfig_StrategyOnFullSize, &ev); err != nil {
-				return err
-			}
-			v.StrategyOnFullSize = StrategyOnFullSize(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that encapsulates, or contains, the media storage configuration
 // properties.
 type MappedResourceConfigurationListItem struct {
@@ -798,34 +295,6 @@ type MappedResourceConfigurationListItem struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MappedResourceConfigurationListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MappedResourceConfigurationListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MappedResourceConfigurationListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ARN != nil {
-		s.WriteString(schemas.MappedResourceConfigurationListItem_ARN, *v.ARN)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.MappedResourceConfigurationListItem_Type, *v.Type)
-	}
-}
-func (v *MappedResourceConfigurationListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MappedResourceConfigurationListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MappedResourceConfigurationListItem_ARN:
-			v.ARN = new(string)
-			return d.ReadString(schemas.MappedResourceConfigurationListItem_ARN, v.ARN)
-		case schemas.MappedResourceConfigurationListItem_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.MappedResourceConfigurationListItem_Type, v.Type)
-		}
-		return nil
-	})
 }
 
 // The configuration details that consist of the credentials required (
@@ -850,38 +319,6 @@ type MediaSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MediaSourceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MediaSourceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MediaSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MediaUriSecretArn != nil {
-		s.WriteString(schemas.MediaSourceConfig_MediaUriSecretArn, *v.MediaUriSecretArn)
-	}
-	if v.MediaUriType != "" {
-		s.WriteString(schemas.MediaSourceConfig_MediaUriType, string(v.MediaUriType))
-	}
-}
-func (v *MediaSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MediaSourceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MediaSourceConfig_MediaUriSecretArn:
-			v.MediaUriSecretArn = new(string)
-			return d.ReadString(schemas.MediaSourceConfig_MediaUriSecretArn, v.MediaUriSecretArn)
-		case schemas.MediaSourceConfig_MediaUriType:
-			var ev string
-			if err := d.ReadString(schemas.MediaSourceConfig_MediaUriType, &ev); err != nil {
-				return err
-			}
-			v.MediaUriType = MediaUriType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that encapsulates, or contains, the media storage configuration
 // properties.
 //
@@ -902,38 +339,6 @@ type MediaStorageConfiguration struct {
 	StreamARN *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MediaStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MediaStorageConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MediaStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Status != "" {
-		s.WriteString(schemas.MediaStorageConfiguration_Status, string(v.Status))
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.MediaStorageConfiguration_StreamARN, *v.StreamARN)
-	}
-}
-func (v *MediaStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MediaStorageConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MediaStorageConfiguration_Status:
-			var ev string
-			if err := d.ReadString(schemas.MediaStorageConfiguration_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = MediaStorageConfigurationStatus(ev)
-			return nil
-		case schemas.MediaStorageConfiguration_StreamARN:
-			v.StreamARN = new(string)
-			return d.ReadString(schemas.MediaStorageConfiguration_StreamARN, v.StreamARN)
-		}
-		return nil
-	})
 }
 
 // Use this API to configure Amazon Simple Notification Service (Amazon SNS)
@@ -958,40 +363,6 @@ type NotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DestinationConfig != nil {
-		s.WriteStruct(schemas.NotificationConfiguration_DestinationConfig)
-		v.DestinationConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.NotificationConfiguration_Status, string(v.Status))
-	}
-}
-func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationConfiguration_DestinationConfig:
-			v.DestinationConfig = &NotificationDestinationConfig{}
-			return v.DestinationConfig.Deserialize(d)
-		case schemas.NotificationConfiguration_Status:
-			var ev string
-			if err := d.ReadString(schemas.NotificationConfiguration_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = ConfigurationStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The structure that contains the information required to deliver a notification
 // to a customer.
 type NotificationDestinationConfig struct {
@@ -1003,28 +374,6 @@ type NotificationDestinationConfig struct {
 	Uri *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *NotificationDestinationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NotificationDestinationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NotificationDestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Uri != nil {
-		s.WriteString(schemas.NotificationDestinationConfig_Uri, *v.Uri)
-	}
-}
-func (v *NotificationDestinationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NotificationDestinationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NotificationDestinationConfig_Uri:
-			v.Uri = new(string)
-			return d.ReadString(schemas.NotificationDestinationConfig_Uri, v.Uri)
-		}
-		return nil
-	})
 }
 
 // The recorder configuration consists of the local MediaSourceConfig details that
@@ -1047,38 +396,6 @@ type RecorderConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RecorderConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RecorderConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RecorderConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MediaSourceConfig != nil {
-		s.WriteStruct(schemas.RecorderConfig_MediaSourceConfig)
-		v.MediaSourceConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ScheduleConfig != nil {
-		s.WriteStruct(schemas.RecorderConfig_ScheduleConfig)
-		v.ScheduleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *RecorderConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RecorderConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RecorderConfig_MediaSourceConfig:
-			v.MediaSourceConfig = &MediaSourceConfig{}
-			return v.MediaSourceConfig.Deserialize(d)
-		case schemas.RecorderConfig_ScheduleConfig:
-			v.ScheduleConfig = &ScheduleConfig{}
-			return v.ScheduleConfig.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // An object that describes the endpoint of the signaling channel returned by the
 // GetSignalingChannelEndpoint API.
 //
@@ -1094,38 +411,6 @@ type ResourceEndpointListItem struct {
 	ResourceEndpoint *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResourceEndpointListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceEndpointListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceEndpointListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Protocol != "" {
-		s.WriteString(schemas.ResourceEndpointListItem_Protocol, string(v.Protocol))
-	}
-	if v.ResourceEndpoint != nil {
-		s.WriteString(schemas.ResourceEndpointListItem_ResourceEndpoint, *v.ResourceEndpoint)
-	}
-}
-func (v *ResourceEndpointListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceEndpointListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceEndpointListItem_Protocol:
-			var ev string
-			if err := d.ReadString(schemas.ResourceEndpointListItem_Protocol, &ev); err != nil {
-				return err
-			}
-			v.Protocol = ChannelProtocol(ev)
-			return nil
-		case schemas.ResourceEndpointListItem_ResourceEndpoint:
-			v.ResourceEndpoint = new(string)
-			return d.ReadString(schemas.ResourceEndpointListItem_ResourceEndpoint, v.ResourceEndpoint)
-		}
-		return nil
-	})
 }
 
 // This API enables you to specify the duration that the camera, or local media
@@ -1161,34 +446,6 @@ type ScheduleConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ScheduleConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ScheduleConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ScheduleConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationInSeconds != nil {
-		s.WriteInt32(schemas.ScheduleConfig_DurationInSeconds, *v.DurationInSeconds)
-	}
-	if v.ScheduleExpression != nil {
-		s.WriteString(schemas.ScheduleConfig_ScheduleExpression, *v.ScheduleExpression)
-	}
-}
-func (v *ScheduleConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ScheduleConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ScheduleConfig_DurationInSeconds:
-			v.DurationInSeconds = new(int32)
-			return d.ReadInt32(schemas.ScheduleConfig_DurationInSeconds, v.DurationInSeconds)
-		case schemas.ScheduleConfig_ScheduleExpression:
-			v.ScheduleExpression = new(string)
-			return d.ReadString(schemas.ScheduleConfig_ScheduleExpression, v.ScheduleExpression)
-		}
-		return nil
-	})
-}
-
 // An object that contains the endpoint configuration for the SINGLE_MASTER
 // channel type.
 type SingleMasterChannelEndpointConfiguration struct {
@@ -1209,35 +466,6 @@ type SingleMasterChannelEndpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SingleMasterChannelEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SingleMasterChannelEndpointConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SingleMasterChannelEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfProtocols(s, schemas.SingleMasterChannelEndpointConfiguration_Protocols, v.Protocols)
-	if v.Role != "" {
-		s.WriteString(schemas.SingleMasterChannelEndpointConfiguration_Role, string(v.Role))
-	}
-}
-func (v *SingleMasterChannelEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SingleMasterChannelEndpointConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SingleMasterChannelEndpointConfiguration_Protocols:
-			return deserializeListOfProtocols(d, schemas.SingleMasterChannelEndpointConfiguration_Protocols, &v.Protocols)
-		case schemas.SingleMasterChannelEndpointConfiguration_Role:
-			var ev string
-			if err := d.ReadString(schemas.SingleMasterChannelEndpointConfiguration_Role, &ev); err != nil {
-				return err
-			}
-			v.Role = ChannelRole(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A structure that contains the configuration for the SINGLE_MASTER channel type.
 type SingleMasterConfiguration struct {
 
@@ -1246,28 +474,6 @@ type SingleMasterConfiguration struct {
 	MessageTtlSeconds *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *SingleMasterConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SingleMasterConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SingleMasterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageTtlSeconds != nil {
-		s.WriteInt32(schemas.SingleMasterConfiguration_MessageTtlSeconds, *v.MessageTtlSeconds)
-	}
-}
-func (v *SingleMasterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SingleMasterConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SingleMasterConfiguration_MessageTtlSeconds:
-			v.MessageTtlSeconds = new(int32)
-			return d.ReadInt32(schemas.SingleMasterConfiguration_MessageTtlSeconds, v.MessageTtlSeconds)
-		}
-		return nil
-	})
 }
 
 // An object describing a Kinesis video stream.
@@ -1304,80 +510,6 @@ type StreamInfo struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StreamInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StreamInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StreamInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationTime != nil {
-		s.WriteTime(schemas.StreamInfo_CreationTime, *v.CreationTime)
-	}
-	if v.DataRetentionInHours != nil {
-		s.WriteInt32(schemas.StreamInfo_DataRetentionInHours, *v.DataRetentionInHours)
-	}
-	if v.DeviceName != nil {
-		s.WriteString(schemas.StreamInfo_DeviceName, *v.DeviceName)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.StreamInfo_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.MediaType != nil {
-		s.WriteString(schemas.StreamInfo_MediaType, *v.MediaType)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.StreamInfo_Status, string(v.Status))
-	}
-	if v.StreamARN != nil {
-		s.WriteString(schemas.StreamInfo_StreamARN, *v.StreamARN)
-	}
-	if v.StreamName != nil {
-		s.WriteString(schemas.StreamInfo_StreamName, *v.StreamName)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.StreamInfo_Version, *v.Version)
-	}
-}
-func (v *StreamInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StreamInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StreamInfo_CreationTime:
-			v.CreationTime = new(time.Time)
-			return d.ReadTime(schemas.StreamInfo_CreationTime, v.CreationTime)
-		case schemas.StreamInfo_DataRetentionInHours:
-			v.DataRetentionInHours = new(int32)
-			return d.ReadInt32(schemas.StreamInfo_DataRetentionInHours, v.DataRetentionInHours)
-		case schemas.StreamInfo_DeviceName:
-			v.DeviceName = new(string)
-			return d.ReadString(schemas.StreamInfo_DeviceName, v.DeviceName)
-		case schemas.StreamInfo_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.StreamInfo_KmsKeyId, v.KmsKeyId)
-		case schemas.StreamInfo_MediaType:
-			v.MediaType = new(string)
-			return d.ReadString(schemas.StreamInfo_MediaType, v.MediaType)
-		case schemas.StreamInfo_Status:
-			var ev string
-			if err := d.ReadString(schemas.StreamInfo_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = Status(ev)
-			return nil
-		case schemas.StreamInfo_StreamARN:
-			v.StreamARN = new(string)
-			return d.ReadString(schemas.StreamInfo_StreamARN, v.StreamARN)
-		case schemas.StreamInfo_StreamName:
-			v.StreamName = new(string)
-			return d.ReadString(schemas.StreamInfo_StreamName, v.StreamName)
-		case schemas.StreamInfo_Version:
-			v.Version = new(string)
-			return d.ReadString(schemas.StreamInfo_Version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Specifies the condition that streams must satisfy to be returned when you list
 // streams (see the ListStreams API). A condition has a comparison operation and a
 // value. Currently, you can specify only the BEGINS_WITH operator, which finds
@@ -1392,38 +524,6 @@ type StreamNameCondition struct {
 	ComparisonValue *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *StreamNameCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StreamNameCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StreamNameCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ComparisonOperator != "" {
-		s.WriteString(schemas.StreamNameCondition_ComparisonOperator, string(v.ComparisonOperator))
-	}
-	if v.ComparisonValue != nil {
-		s.WriteString(schemas.StreamNameCondition_ComparisonValue, *v.ComparisonValue)
-	}
-}
-func (v *StreamNameCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StreamNameCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StreamNameCondition_ComparisonOperator:
-			var ev string
-			if err := d.ReadString(schemas.StreamNameCondition_ComparisonOperator, &ev); err != nil {
-				return err
-			}
-			v.ComparisonOperator = ComparisonOperator(ev)
-			return nil
-		case schemas.StreamNameCondition_ComparisonValue:
-			v.ComparisonValue = new(string)
-			return d.ReadString(schemas.StreamNameCondition_ComparisonValue, v.ComparisonValue)
-		}
-		return nil
-	})
 }
 
 // The configuration for stream storage, including the default storage tier for
@@ -1450,32 +550,6 @@ type StreamStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StreamStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StreamStorageConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StreamStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultStorageTier != "" {
-		s.WriteString(schemas.StreamStorageConfiguration_DefaultStorageTier, string(v.DefaultStorageTier))
-	}
-}
-func (v *StreamStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StreamStorageConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StreamStorageConfiguration_DefaultStorageTier:
-			var ev string
-			if err := d.ReadString(schemas.StreamStorageConfiguration_DefaultStorageTier, &ev); err != nil {
-				return err
-			}
-			v.DefaultStorageTier = DefaultStorageTier(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A key and value pair that is associated with the specified signaling channel.
 type Tag struct {
 
@@ -1490,34 +564,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The configuration that consists of the ScheduleExpression and the
@@ -1537,30 +583,6 @@ type UploaderConfig struct {
 	ScheduleConfig *ScheduleConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *UploaderConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UploaderConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UploaderConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ScheduleConfig != nil {
-		s.WriteStruct(schemas.UploaderConfig_ScheduleConfig)
-		v.ScheduleConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *UploaderConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UploaderConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UploaderConfig_ScheduleConfig:
-			v.ScheduleConfig = &ScheduleConfig{}
-			return v.ScheduleConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

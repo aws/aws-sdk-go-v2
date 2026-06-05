@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type ListResourcePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourcePoliciesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResourcePoliciesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResourcePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListResourcePoliciesRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResourcePoliciesRequest_NextToken, *v.NextToken)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.ListResourcePoliciesRequest_ResourceArn, *v.ResourceArn)
-	}
-}
-
 type ListResourcePoliciesOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -86,26 +66,16 @@ type ListResourcePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourcePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResourcePoliciesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResourcePoliciesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResourcePoliciesResponse_NextToken, v.NextToken)
-		case schemas.ListResourcePoliciesResponse_ResourcePolicies:
-			return deserializeListResourcePoliciesResponseResourcePolicies(d, schemas.ListResourcePoliciesResponse_ResourcePolicies, &v.ResourcePolicies)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcePolicies, schemas.ListResourcePoliciesRequest, schemas.ListResourcePoliciesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourcePolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcePolicies, schemas.ListResourcePoliciesRequest, schemas.ListResourcePoliciesResponse), output: &ListResourcePoliciesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourcePolicies{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourcePolicies"); err != nil {

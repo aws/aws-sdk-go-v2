@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appconfigdata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,46 +55,6 @@ type StartConfigurationSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartConfigurationSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartConfigurationSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartConfigurationSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationIdentifier != nil {
-		s.WriteString(schemas.StartConfigurationSessionRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
-	}
-	if v.ConfigurationProfileIdentifier != nil {
-		s.WriteString(schemas.StartConfigurationSessionRequest_ConfigurationProfileIdentifier, *v.ConfigurationProfileIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.StartConfigurationSessionRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.RequiredMinimumPollIntervalInSeconds != nil {
-		s.WriteInt32(schemas.StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds, *v.RequiredMinimumPollIntervalInSeconds)
-	}
-}
-func (v *StartConfigurationSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartConfigurationSessionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartConfigurationSessionRequest_ApplicationIdentifier:
-			v.ApplicationIdentifier = new(string)
-			return d.ReadString(schemas.StartConfigurationSessionRequest_ApplicationIdentifier, v.ApplicationIdentifier)
-		case schemas.StartConfigurationSessionRequest_ConfigurationProfileIdentifier:
-			v.ConfigurationProfileIdentifier = new(string)
-			return d.ReadString(schemas.StartConfigurationSessionRequest_ConfigurationProfileIdentifier, v.ConfigurationProfileIdentifier)
-		case schemas.StartConfigurationSessionRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.StartConfigurationSessionRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds:
-			v.RequiredMinimumPollIntervalInSeconds = new(int32)
-			return d.ReadInt32(schemas.StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds, v.RequiredMinimumPollIntervalInSeconds)
-		}
-		return nil
-	})
-}
-
 type StartConfigurationSessionOutput struct {
 
 	// Token encapsulating state about the configuration session. Provide this token
@@ -118,35 +76,16 @@ type StartConfigurationSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartConfigurationSessionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartConfigurationSessionResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartConfigurationSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InitialConfigurationToken != nil {
-		s.WriteString(schemas.StartConfigurationSessionResponse_InitialConfigurationToken, *v.InitialConfigurationToken)
-	}
-}
-func (v *StartConfigurationSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartConfigurationSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartConfigurationSessionResponse_InitialConfigurationToken:
-			v.InitialConfigurationToken = new(string)
-			return d.ReadString(schemas.StartConfigurationSessionResponse_InitialConfigurationToken, v.InitialConfigurationToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartConfigurationSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationSession, schemas.StartConfigurationSessionRequest, schemas.StartConfigurationSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConfigurationSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationSession, schemas.StartConfigurationSessionRequest, schemas.StartConfigurationSessionResponse), output: &StartConfigurationSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConfigurationSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartConfigurationSession"); err != nil {

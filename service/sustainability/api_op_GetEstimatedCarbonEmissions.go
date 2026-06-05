@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sustainability/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sustainability/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,41 +63,6 @@ type GetEstimatedCarbonEmissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEstimatedCarbonEmissionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetEstimatedCarbonEmissionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetEstimatedCarbonEmissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmissionsTypeList(s, schemas.GetEstimatedCarbonEmissionsRequest_EmissionsTypes, v.EmissionsTypes)
-	if v.FilterBy != nil {
-		s.WriteStruct(schemas.GetEstimatedCarbonEmissionsRequest_FilterBy)
-		v.FilterBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Granularity != "" {
-		s.WriteString(schemas.GetEstimatedCarbonEmissionsRequest_Granularity, string(v.Granularity))
-	}
-	if v.GranularityConfiguration != nil {
-		s.WriteStruct(schemas.GetEstimatedCarbonEmissionsRequest_GranularityConfiguration)
-		v.GranularityConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeDimensionList(s, schemas.GetEstimatedCarbonEmissionsRequest_GroupBy, v.GroupBy)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetEstimatedCarbonEmissionsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetEstimatedCarbonEmissionsRequest_NextToken, *v.NextToken)
-	}
-	if v.TimePeriod != nil {
-		s.WriteStruct(schemas.GetEstimatedCarbonEmissionsRequest_TimePeriod)
-		v.TimePeriod.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type GetEstimatedCarbonEmissionsOutput struct {
 
 	// The result of the requested inputs.
@@ -117,26 +80,16 @@ type GetEstimatedCarbonEmissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetEstimatedCarbonEmissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetEstimatedCarbonEmissionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetEstimatedCarbonEmissionsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetEstimatedCarbonEmissionsResponse_NextToken, v.NextToken)
-		case schemas.GetEstimatedCarbonEmissionsResponse_Results:
-			return deserializeEstimatedCarbonEmissionsList(d, schemas.GetEstimatedCarbonEmissionsResponse_Results, &v.Results)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEstimatedCarbonEmissions, schemas.GetEstimatedCarbonEmissionsRequest, schemas.GetEstimatedCarbonEmissionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedCarbonEmissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEstimatedCarbonEmissions, schemas.GetEstimatedCarbonEmissionsRequest, schemas.GetEstimatedCarbonEmissionsResponse), output: &GetEstimatedCarbonEmissionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedCarbonEmissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEstimatedCarbonEmissions"); err != nil {

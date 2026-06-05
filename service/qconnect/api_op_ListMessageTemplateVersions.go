@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,27 +52,6 @@ type ListMessageTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMessageTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMessageTemplateVersionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMessageTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.ListMessageTemplateVersionsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListMessageTemplateVersionsRequest_maxResults, *v.MaxResults)
-	}
-	if v.MessageTemplateId != nil {
-		s.WriteString(schemas.ListMessageTemplateVersionsRequest_messageTemplateId, *v.MessageTemplateId)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListMessageTemplateVersionsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListMessageTemplateVersionsOutput struct {
 
 	// Summary information about the versions of a message template.
@@ -91,26 +68,16 @@ type ListMessageTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMessageTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMessageTemplateVersionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMessageTemplateVersionsResponse_messageTemplateVersionSummaries:
-			return deserializeMessageTemplateVersionSummaryList(d, schemas.ListMessageTemplateVersionsResponse_messageTemplateVersionSummaries, &v.MessageTemplateVersionSummaries)
-		case schemas.ListMessageTemplateVersionsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListMessageTemplateVersionsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMessageTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMessageTemplateVersions, schemas.ListMessageTemplateVersionsRequest, schemas.ListMessageTemplateVersionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMessageTemplateVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMessageTemplateVersions, schemas.ListMessageTemplateVersionsRequest, schemas.ListMessageTemplateVersionsResponse), output: &ListMessageTemplateVersionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMessageTemplateVersions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMessageTemplateVersions"); err != nil {

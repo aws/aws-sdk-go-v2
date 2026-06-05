@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type GetDeviceRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceRegistrationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetDeviceRegistrationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetDeviceRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeviceFleetName != nil {
-		s.WriteString(schemas.GetDeviceRegistrationRequest_DeviceFleetName, *v.DeviceFleetName)
-	}
-	if v.DeviceName != nil {
-		s.WriteString(schemas.GetDeviceRegistrationRequest_DeviceName, *v.DeviceName)
-	}
-}
-
 type GetDeviceRegistrationOutput struct {
 
 	// The amount of time, in seconds, that the registration status is stored on the
@@ -73,27 +56,16 @@ type GetDeviceRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetDeviceRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetDeviceRegistrationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetDeviceRegistrationResult_CacheTTL:
-			v.CacheTTL = new(string)
-			return d.ReadString(schemas.GetDeviceRegistrationResult_CacheTTL, v.CacheTTL)
-		case schemas.GetDeviceRegistrationResult_DeviceRegistration:
-			v.DeviceRegistration = new(string)
-			return d.ReadString(schemas.GetDeviceRegistrationResult_DeviceRegistration, v.DeviceRegistration)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetDeviceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceRegistration, schemas.GetDeviceRegistrationRequest, schemas.GetDeviceRegistrationResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceRegistration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceRegistration, schemas.GetDeviceRegistrationRequest, schemas.GetDeviceRegistrationResult), output: &GetDeviceRegistrationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceRegistration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeviceRegistration"); err != nil {

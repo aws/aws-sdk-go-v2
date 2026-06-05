@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -12,22 +10,6 @@ import (
 // Agentless config
 type AgentlessConfig struct {
 	noSmithyDocumentSerde
-}
-
-func (v *AgentlessConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AgentlessConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AgentlessConfig) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *AgentlessConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AgentlessConfig, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // Answering Machine Detection config
@@ -42,34 +24,6 @@ type AnswerMachineDetectionConfig struct {
 	AwaitAnswerMachinePrompt *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *AnswerMachineDetectionConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AnswerMachineDetectionConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AnswerMachineDetectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwaitAnswerMachinePrompt != nil {
-		s.WriteBool(schemas.AnswerMachineDetectionConfig_awaitAnswerMachinePrompt, *v.AwaitAnswerMachinePrompt)
-	}
-	if v.EnableAnswerMachineDetection != nil {
-		s.WriteBool(schemas.AnswerMachineDetectionConfig_enableAnswerMachineDetection, *v.EnableAnswerMachineDetection)
-	}
-}
-func (v *AnswerMachineDetectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AnswerMachineDetectionConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AnswerMachineDetectionConfig_awaitAnswerMachinePrompt:
-			v.AwaitAnswerMachinePrompt = new(bool)
-			return d.ReadBool(schemas.AnswerMachineDetectionConfig_awaitAnswerMachinePrompt, v.AwaitAnswerMachinePrompt)
-		case schemas.AnswerMachineDetectionConfig_enableAnswerMachineDetection:
-			v.EnableAnswerMachineDetection = new(bool)
-			return d.ReadBool(schemas.AnswerMachineDetectionConfig_enableAnswerMachineDetection, v.EnableAnswerMachineDetection)
-		}
-		return nil
-	})
 }
 
 // An Amazon Connect campaign.
@@ -125,108 +79,6 @@ type Campaign struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Campaign) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Campaign)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Campaign) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Campaign_arn, *v.Arn)
-	}
-	if v.ChannelSubtypeConfig != nil {
-		s.WriteStruct(schemas.Campaign_channelSubtypeConfig)
-		v.ChannelSubtypeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CommunicationLimitsOverride != nil {
-		s.WriteStruct(schemas.Campaign_communicationLimitsOverride)
-		v.CommunicationLimitsOverride.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CommunicationTimeConfig != nil {
-		s.WriteStruct(schemas.Campaign_communicationTimeConfig)
-		v.CommunicationTimeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConnectCampaignFlowArn != nil {
-		s.WriteString(schemas.Campaign_connectCampaignFlowArn, *v.ConnectCampaignFlowArn)
-	}
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.Campaign_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.EntryLimitsConfig != nil {
-		s.WriteStruct(schemas.Campaign_entryLimitsConfig)
-		v.EntryLimitsConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Campaign_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Campaign_name, *v.Name)
-	}
-	if v.Schedule != nil {
-		s.WriteStruct(schemas.Campaign_schedule)
-		v.Schedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSource(s, schemas.Campaign_source, v.Source)
-	serializeTagMap(s, schemas.Campaign_tags, v.Tags)
-	if v.Type != "" {
-		s.WriteString(schemas.Campaign_type, string(v.Type))
-	}
-}
-func (v *Campaign) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Campaign, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Campaign_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Campaign_arn, v.Arn)
-		case schemas.Campaign_channelSubtypeConfig:
-			v.ChannelSubtypeConfig = &ChannelSubtypeConfig{}
-			return v.ChannelSubtypeConfig.Deserialize(d)
-		case schemas.Campaign_communicationLimitsOverride:
-			v.CommunicationLimitsOverride = &CommunicationLimitsConfig{}
-			return v.CommunicationLimitsOverride.Deserialize(d)
-		case schemas.Campaign_communicationTimeConfig:
-			v.CommunicationTimeConfig = &CommunicationTimeConfig{}
-			return v.CommunicationTimeConfig.Deserialize(d)
-		case schemas.Campaign_connectCampaignFlowArn:
-			v.ConnectCampaignFlowArn = new(string)
-			return d.ReadString(schemas.Campaign_connectCampaignFlowArn, v.ConnectCampaignFlowArn)
-		case schemas.Campaign_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.Campaign_connectInstanceId, v.ConnectInstanceId)
-		case schemas.Campaign_entryLimitsConfig:
-			v.EntryLimitsConfig = &EntryLimitsConfig{}
-			return v.EntryLimitsConfig.Deserialize(d)
-		case schemas.Campaign_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Campaign_id, v.Id)
-		case schemas.Campaign_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Campaign_name, v.Name)
-		case schemas.Campaign_schedule:
-			v.Schedule = &Schedule{}
-			return v.Schedule.Deserialize(d)
-		case schemas.Campaign_source:
-			return deserializeSource(d, schemas.Campaign_source, &v.Source)
-		case schemas.Campaign_tags:
-			return deserializeTagMap(d, schemas.Campaign_tags, &v.Tags)
-		case schemas.Campaign_type:
-			var ev string
-			if err := d.ReadString(schemas.Campaign_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ExternalCampaignType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Filter model by type
 type CampaignFilters struct {
 
@@ -234,30 +86,6 @@ type CampaignFilters struct {
 	InstanceIdFilter *InstanceIdFilter
 
 	noSmithyDocumentSerde
-}
-
-func (v *CampaignFilters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CampaignFilters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CampaignFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceIdFilter != nil {
-		s.WriteStruct(schemas.CampaignFilters_instanceIdFilter)
-		v.InstanceIdFilter.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CampaignFilters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CampaignFilters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CampaignFilters_instanceIdFilter:
-			v.InstanceIdFilter = &InstanceIdFilter{}
-			return v.InstanceIdFilter.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // An Amazon Connect campaign summary.
@@ -303,81 +131,6 @@ type CampaignSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CampaignSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CampaignSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CampaignSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CampaignSummary_arn, *v.Arn)
-	}
-	serializeChannelSubtypeList(s, schemas.CampaignSummary_channelSubtypes, v.ChannelSubtypes)
-	if v.ConnectCampaignFlowArn != nil {
-		s.WriteString(schemas.CampaignSummary_connectCampaignFlowArn, *v.ConnectCampaignFlowArn)
-	}
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.CampaignSummary_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.EntryLimitsConfig != nil {
-		s.WriteStruct(schemas.CampaignSummary_entryLimitsConfig)
-		v.EntryLimitsConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CampaignSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CampaignSummary_name, *v.Name)
-	}
-	if v.Schedule != nil {
-		s.WriteStruct(schemas.CampaignSummary_schedule)
-		v.Schedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.CampaignSummary_type, string(v.Type))
-	}
-}
-func (v *CampaignSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CampaignSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CampaignSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CampaignSummary_arn, v.Arn)
-		case schemas.CampaignSummary_channelSubtypes:
-			return deserializeChannelSubtypeList(d, schemas.CampaignSummary_channelSubtypes, &v.ChannelSubtypes)
-		case schemas.CampaignSummary_connectCampaignFlowArn:
-			v.ConnectCampaignFlowArn = new(string)
-			return d.ReadString(schemas.CampaignSummary_connectCampaignFlowArn, v.ConnectCampaignFlowArn)
-		case schemas.CampaignSummary_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.CampaignSummary_connectInstanceId, v.ConnectInstanceId)
-		case schemas.CampaignSummary_entryLimitsConfig:
-			v.EntryLimitsConfig = &EntryLimitsConfig{}
-			return v.EntryLimitsConfig.Deserialize(d)
-		case schemas.CampaignSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CampaignSummary_id, v.Id)
-		case schemas.CampaignSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CampaignSummary_name, v.Name)
-		case schemas.CampaignSummary_schedule:
-			v.Schedule = &Schedule{}
-			return v.Schedule.Deserialize(d)
-		case schemas.CampaignSummary_type:
-			var ev string
-			if err := d.ReadString(schemas.CampaignSummary_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ExternalCampaignType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Campaign Channel Subtype config
 type ChannelSubtypeConfig struct {
 
@@ -394,54 +147,6 @@ type ChannelSubtypeConfig struct {
 	WhatsApp *WhatsAppChannelSubtypeConfig
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelSubtypeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSubtypeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Email != nil {
-		s.WriteStruct(schemas.ChannelSubtypeConfig_email)
-		v.Email.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Sms != nil {
-		s.WriteStruct(schemas.ChannelSubtypeConfig_sms)
-		v.Sms.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Telephony != nil {
-		s.WriteStruct(schemas.ChannelSubtypeConfig_telephony)
-		v.Telephony.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WhatsApp != nil {
-		s.WriteStruct(schemas.ChannelSubtypeConfig_whatsApp)
-		v.WhatsApp.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelSubtypeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelSubtypeConfig_email:
-			v.Email = &EmailChannelSubtypeConfig{}
-			return v.Email.Deserialize(d)
-		case schemas.ChannelSubtypeConfig_sms:
-			v.Sms = &SmsChannelSubtypeConfig{}
-			return v.Sms.Deserialize(d)
-		case schemas.ChannelSubtypeConfig_telephony:
-			v.Telephony = &TelephonyChannelSubtypeConfig{}
-			return v.Telephony.Deserialize(d)
-		case schemas.ChannelSubtypeConfig_whatsApp:
-			v.WhatsApp = &WhatsAppChannelSubtypeConfig{}
-			return v.WhatsApp.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // ChannelSubtypeParameters for an outbound request
@@ -464,14 +169,6 @@ type ChannelSubtypeParametersMemberEmail struct {
 }
 
 func (*ChannelSubtypeParametersMemberEmail) isChannelSubtypeParameters() {}
-func (v *ChannelSubtypeParametersMemberEmail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSubtypeParameters_email)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelSubtypeParametersMemberEmail) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters for the SMS Channel Subtype
 type ChannelSubtypeParametersMemberSms struct {
@@ -481,14 +178,6 @@ type ChannelSubtypeParametersMemberSms struct {
 }
 
 func (*ChannelSubtypeParametersMemberSms) isChannelSubtypeParameters() {}
-func (v *ChannelSubtypeParametersMemberSms) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSubtypeParameters_sms)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelSubtypeParametersMemberSms) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters for the Telephony Channel Subtype
 type ChannelSubtypeParametersMemberTelephony struct {
@@ -498,14 +187,6 @@ type ChannelSubtypeParametersMemberTelephony struct {
 }
 
 func (*ChannelSubtypeParametersMemberTelephony) isChannelSubtypeParameters() {}
-func (v *ChannelSubtypeParametersMemberTelephony) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSubtypeParameters_telephony)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelSubtypeParametersMemberTelephony) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Parameters for the WhatsApp Channel Subtype
 type ChannelSubtypeParametersMemberWhatsApp struct {
@@ -515,14 +196,6 @@ type ChannelSubtypeParametersMemberWhatsApp struct {
 }
 
 func (*ChannelSubtypeParametersMemberWhatsApp) isChannelSubtypeParameters() {}
-func (v *ChannelSubtypeParametersMemberWhatsApp) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSubtypeParameters_whatsApp)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ChannelSubtypeParametersMemberWhatsApp) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Communication Limit
 type CommunicationLimit struct {
@@ -546,44 +219,6 @@ type CommunicationLimit struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CommunicationLimit) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommunicationLimit)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommunicationLimit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Frequency != nil {
-		s.WriteInt32(schemas.CommunicationLimit_frequency, *v.Frequency)
-	}
-	if v.MaxCountPerRecipient != nil {
-		s.WriteInt32(schemas.CommunicationLimit_maxCountPerRecipient, *v.MaxCountPerRecipient)
-	}
-	if v.Unit != "" {
-		s.WriteString(schemas.CommunicationLimit_unit, string(v.Unit))
-	}
-}
-func (v *CommunicationLimit) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommunicationLimit, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommunicationLimit_frequency:
-			v.Frequency = new(int32)
-			return d.ReadInt32(schemas.CommunicationLimit_frequency, v.Frequency)
-		case schemas.CommunicationLimit_maxCountPerRecipient:
-			v.MaxCountPerRecipient = new(int32)
-			return d.ReadInt32(schemas.CommunicationLimit_maxCountPerRecipient, v.MaxCountPerRecipient)
-		case schemas.CommunicationLimit_unit:
-			var ev string
-			if err := d.ReadString(schemas.CommunicationLimit_unit, &ev); err != nil {
-				return err
-			}
-			v.Unit = CommunicationLimitTimeUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Communication limits
 //
 // The following types satisfy this interface:
@@ -601,12 +236,6 @@ type CommunicationLimitsMemberCommunicationLimitsList struct {
 }
 
 func (*CommunicationLimitsMemberCommunicationLimitsList) isCommunicationLimits() {}
-func (v *CommunicationLimitsMemberCommunicationLimitsList) Serialize(s smithy.ShapeSerializer) {
-	serializeCommunicationLimitList(s, schemas.CommunicationLimits_communicationLimitsList, v.Value)
-}
-func (v *CommunicationLimitsMemberCommunicationLimitsList) Deserialize(d smithy.ShapeDeserializer) error {
-	return deserializeCommunicationLimitList(d, schemas.CommunicationLimits_communicationLimitsList, &v.Value)
-}
 
 // Communication limits config
 type CommunicationLimitsConfig struct {
@@ -618,35 +247,6 @@ type CommunicationLimitsConfig struct {
 	InstanceLimitsHandling InstanceLimitsHandling
 
 	noSmithyDocumentSerde
-}
-
-func (v *CommunicationLimitsConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommunicationLimitsConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommunicationLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationLimits(s, schemas.CommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
-	if v.InstanceLimitsHandling != "" {
-		s.WriteString(schemas.CommunicationLimitsConfig_instanceLimitsHandling, string(v.InstanceLimitsHandling))
-	}
-}
-func (v *CommunicationLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommunicationLimitsConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommunicationLimitsConfig_allChannelSubtypes:
-			return deserializeCommunicationLimits(d, schemas.CommunicationLimitsConfig_allChannelSubtypes, &v.AllChannelSubtypes)
-		case schemas.CommunicationLimitsConfig_instanceLimitsHandling:
-			var ev string
-			if err := d.ReadString(schemas.CommunicationLimitsConfig_instanceLimitsHandling, &ev); err != nil {
-				return err
-			}
-			v.InstanceLimitsHandling = InstanceLimitsHandling(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Campaign communication time config
@@ -672,62 +272,6 @@ type CommunicationTimeConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CommunicationTimeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CommunicationTimeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CommunicationTimeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Email != nil {
-		s.WriteStruct(schemas.CommunicationTimeConfig_email)
-		v.Email.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LocalTimeZoneConfig != nil {
-		s.WriteStruct(schemas.CommunicationTimeConfig_localTimeZoneConfig)
-		v.LocalTimeZoneConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Sms != nil {
-		s.WriteStruct(schemas.CommunicationTimeConfig_sms)
-		v.Sms.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Telephony != nil {
-		s.WriteStruct(schemas.CommunicationTimeConfig_telephony)
-		v.Telephony.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WhatsApp != nil {
-		s.WriteStruct(schemas.CommunicationTimeConfig_whatsApp)
-		v.WhatsApp.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CommunicationTimeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CommunicationTimeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CommunicationTimeConfig_email:
-			v.Email = &TimeWindow{}
-			return v.Email.Deserialize(d)
-		case schemas.CommunicationTimeConfig_localTimeZoneConfig:
-			v.LocalTimeZoneConfig = &LocalTimeZoneConfig{}
-			return v.LocalTimeZoneConfig.Deserialize(d)
-		case schemas.CommunicationTimeConfig_sms:
-			v.Sms = &TimeWindow{}
-			return v.Sms.Deserialize(d)
-		case schemas.CommunicationTimeConfig_telephony:
-			v.Telephony = &TimeWindow{}
-			return v.Telephony.Deserialize(d)
-		case schemas.CommunicationTimeConfig_whatsApp:
-			v.WhatsApp = &TimeWindow{}
-			return v.WhatsApp.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Customer Profiles integration config
 type CustomerProfilesIntegrationConfig struct {
 
@@ -744,31 +288,6 @@ type CustomerProfilesIntegrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomerProfilesIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomerProfilesIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomerProfilesIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainArn != nil {
-		s.WriteString(schemas.CustomerProfilesIntegrationConfig_domainArn, *v.DomainArn)
-	}
-	serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationConfig_objectTypeNames, v.ObjectTypeNames)
-}
-func (v *CustomerProfilesIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomerProfilesIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomerProfilesIntegrationConfig_domainArn:
-			v.DomainArn = new(string)
-			return d.ReadString(schemas.CustomerProfilesIntegrationConfig_domainArn, v.DomainArn)
-		case schemas.CustomerProfilesIntegrationConfig_objectTypeNames:
-			return deserializeObjectTypeNamesMap(d, schemas.CustomerProfilesIntegrationConfig_objectTypeNames, &v.ObjectTypeNames)
-		}
-		return nil
-	})
-}
-
 // Customer Profiles integration identifier
 type CustomerProfilesIntegrationIdentifier struct {
 
@@ -778,28 +297,6 @@ type CustomerProfilesIntegrationIdentifier struct {
 	DomainArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomerProfilesIntegrationIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomerProfilesIntegrationIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomerProfilesIntegrationIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainArn != nil {
-		s.WriteString(schemas.CustomerProfilesIntegrationIdentifier_domainArn, *v.DomainArn)
-	}
-}
-func (v *CustomerProfilesIntegrationIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomerProfilesIntegrationIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomerProfilesIntegrationIdentifier_domainArn:
-			v.DomainArn = new(string)
-			return d.ReadString(schemas.CustomerProfilesIntegrationIdentifier_domainArn, v.DomainArn)
-		}
-		return nil
-	})
 }
 
 // Customer Profiles integration summary
@@ -816,31 +313,6 @@ type CustomerProfilesIntegrationSummary struct {
 	ObjectTypeNames map[string]string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomerProfilesIntegrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomerProfilesIntegrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomerProfilesIntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainArn != nil {
-		s.WriteString(schemas.CustomerProfilesIntegrationSummary_domainArn, *v.DomainArn)
-	}
-	serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationSummary_objectTypeNames, v.ObjectTypeNames)
-}
-func (v *CustomerProfilesIntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomerProfilesIntegrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomerProfilesIntegrationSummary_domainArn:
-			v.DomainArn = new(string)
-			return d.ReadString(schemas.CustomerProfilesIntegrationSummary_domainArn, v.DomainArn)
-		case schemas.CustomerProfilesIntegrationSummary_objectTypeNames:
-			return deserializeObjectTypeNamesMap(d, schemas.CustomerProfilesIntegrationSummary_objectTypeNames, &v.ObjectTypeNames)
-		}
-		return nil
-	})
 }
 
 // Email Channel Subtype config
@@ -861,39 +333,6 @@ type EmailChannelSubtypeConfig struct {
 	Capacity *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *EmailChannelSubtypeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmailChannelSubtypeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmailChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != nil {
-		s.WriteFloat64(schemas.EmailChannelSubtypeConfig_capacity, *v.Capacity)
-	}
-	if v.DefaultOutboundConfig != nil {
-		s.WriteStruct(schemas.EmailChannelSubtypeConfig_defaultOutboundConfig)
-		v.DefaultOutboundConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEmailOutboundMode(s, schemas.EmailChannelSubtypeConfig_outboundMode, v.OutboundMode)
-}
-func (v *EmailChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmailChannelSubtypeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmailChannelSubtypeConfig_capacity:
-			v.Capacity = new(float64)
-			return d.ReadFloat64(schemas.EmailChannelSubtypeConfig_capacity, v.Capacity)
-		case schemas.EmailChannelSubtypeConfig_defaultOutboundConfig:
-			v.DefaultOutboundConfig = &EmailOutboundConfig{}
-			return v.DefaultOutboundConfig.Deserialize(d)
-		case schemas.EmailChannelSubtypeConfig_outboundMode:
-			return deserializeEmailOutboundMode(d, schemas.EmailChannelSubtypeConfig_outboundMode, &v.OutboundMode)
-		}
-		return nil
-	})
 }
 
 // Parameters for the Email Channel Subtype
@@ -920,43 +359,6 @@ type EmailChannelSubtypeParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EmailChannelSubtypeParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmailChannelSubtypeParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmailChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourceEmailAddress != nil {
-		s.WriteString(schemas.EmailChannelSubtypeParameters_connectSourceEmailAddress, *v.ConnectSourceEmailAddress)
-	}
-	if v.DestinationEmailAddress != nil {
-		s.WriteString(schemas.EmailChannelSubtypeParameters_destinationEmailAddress, *v.DestinationEmailAddress)
-	}
-	if v.TemplateArn != nil {
-		s.WriteString(schemas.EmailChannelSubtypeParameters_templateArn, *v.TemplateArn)
-	}
-	serializeAttributes(s, schemas.EmailChannelSubtypeParameters_templateParameters, v.TemplateParameters)
-}
-func (v *EmailChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmailChannelSubtypeParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmailChannelSubtypeParameters_connectSourceEmailAddress:
-			v.ConnectSourceEmailAddress = new(string)
-			return d.ReadString(schemas.EmailChannelSubtypeParameters_connectSourceEmailAddress, v.ConnectSourceEmailAddress)
-		case schemas.EmailChannelSubtypeParameters_destinationEmailAddress:
-			v.DestinationEmailAddress = new(string)
-			return d.ReadString(schemas.EmailChannelSubtypeParameters_destinationEmailAddress, v.DestinationEmailAddress)
-		case schemas.EmailChannelSubtypeParameters_templateArn:
-			v.TemplateArn = new(string)
-			return d.ReadString(schemas.EmailChannelSubtypeParameters_templateArn, v.TemplateArn)
-		case schemas.EmailChannelSubtypeParameters_templateParameters:
-			return deserializeAttributes(d, schemas.EmailChannelSubtypeParameters_templateParameters, &v.TemplateParameters)
-		}
-		return nil
-	})
-}
-
 // Default Email Outbound config
 type EmailOutboundConfig struct {
 
@@ -976,40 +378,6 @@ type EmailOutboundConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EmailOutboundConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmailOutboundConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EmailOutboundConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourceEmailAddress != nil {
-		s.WriteString(schemas.EmailOutboundConfig_connectSourceEmailAddress, *v.ConnectSourceEmailAddress)
-	}
-	if v.SourceEmailAddressDisplayName != nil {
-		s.WriteString(schemas.EmailOutboundConfig_sourceEmailAddressDisplayName, *v.SourceEmailAddressDisplayName)
-	}
-	if v.WisdomTemplateArn != nil {
-		s.WriteString(schemas.EmailOutboundConfig_wisdomTemplateArn, *v.WisdomTemplateArn)
-	}
-}
-func (v *EmailOutboundConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EmailOutboundConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EmailOutboundConfig_connectSourceEmailAddress:
-			v.ConnectSourceEmailAddress = new(string)
-			return d.ReadString(schemas.EmailOutboundConfig_connectSourceEmailAddress, v.ConnectSourceEmailAddress)
-		case schemas.EmailOutboundConfig_sourceEmailAddressDisplayName:
-			v.SourceEmailAddressDisplayName = new(string)
-			return d.ReadString(schemas.EmailOutboundConfig_sourceEmailAddressDisplayName, v.SourceEmailAddressDisplayName)
-		case schemas.EmailOutboundConfig_wisdomTemplateArn:
-			v.WisdomTemplateArn = new(string)
-			return d.ReadString(schemas.EmailOutboundConfig_wisdomTemplateArn, v.WisdomTemplateArn)
-		}
-		return nil
-	})
-}
-
 // Email Outbound Mode
 //
 // The following types satisfy this interface:
@@ -1027,14 +395,6 @@ type EmailOutboundModeMemberAgentless struct {
 }
 
 func (*EmailOutboundModeMemberAgentless) isEmailOutboundMode() {}
-func (v *EmailOutboundModeMemberAgentless) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EmailOutboundMode_agentless)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *EmailOutboundModeMemberAgentless) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Encryption config for Connect Instance. Note that sensitive data will always be
 // encrypted. If disabled, service will perform encryption with its own key. If
@@ -1056,41 +416,6 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EncryptionConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteBool(schemas.EncryptionConfig_enabled, v.Enabled)
-	if v.EncryptionType != "" {
-		s.WriteString(schemas.EncryptionConfig_encryptionType, string(v.EncryptionType))
-	}
-	if v.KeyArn != nil {
-		s.WriteString(schemas.EncryptionConfig_keyArn, *v.KeyArn)
-	}
-}
-func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EncryptionConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EncryptionConfig_enabled:
-			return d.ReadBool(schemas.EncryptionConfig_enabled, &v.Enabled)
-		case schemas.EncryptionConfig_encryptionType:
-			var ev string
-			if err := d.ReadString(schemas.EncryptionConfig_encryptionType, &ev); err != nil {
-				return err
-			}
-			v.EncryptionType = EncryptionType(ev)
-			return nil
-		case schemas.EncryptionConfig_keyArn:
-			v.KeyArn = new(string)
-			return d.ReadString(schemas.EncryptionConfig_keyArn, v.KeyArn)
-		}
-		return nil
-	})
-}
-
 // Campaign entry limits config
 type EntryLimitsConfig struct {
 
@@ -1110,34 +435,6 @@ type EntryLimitsConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EntryLimitsConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EntryLimitsConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EntryLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxEntryCount != nil {
-		s.WriteInt32(schemas.EntryLimitsConfig_maxEntryCount, *v.MaxEntryCount)
-	}
-	if v.MinEntryInterval != nil {
-		s.WriteString(schemas.EntryLimitsConfig_minEntryInterval, *v.MinEntryInterval)
-	}
-}
-func (v *EntryLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EntryLimitsConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EntryLimitsConfig_maxEntryCount:
-			v.MaxEntryCount = new(int32)
-			return d.ReadInt32(schemas.EntryLimitsConfig_maxEntryCount, v.MaxEntryCount)
-		case schemas.EntryLimitsConfig_minEntryInterval:
-			v.MinEntryInterval = new(string)
-			return d.ReadString(schemas.EntryLimitsConfig_minEntryInterval, v.MinEntryInterval)
-		}
-		return nil
-	})
-}
-
 // Event trigger of the campaign
 type EventTrigger struct {
 
@@ -1145,28 +442,6 @@ type EventTrigger struct {
 	CustomerProfilesDomainArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EventTrigger) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventTrigger)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventTrigger) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomerProfilesDomainArn != nil {
-		s.WriteString(schemas.EventTrigger_customerProfilesDomainArn, *v.CustomerProfilesDomainArn)
-	}
-}
-func (v *EventTrigger) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventTrigger, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventTrigger_customerProfilesDomainArn:
-			v.CustomerProfilesDomainArn = new(string)
-			return d.ReadString(schemas.EventTrigger_customerProfilesDomainArn, v.CustomerProfilesDomainArn)
-		}
-		return nil
-	})
 }
 
 // Failed response of campaign state
@@ -1180,38 +455,6 @@ type FailedCampaignStateResponse struct {
 	FailureCode GetCampaignStateBatchFailureCode
 
 	noSmithyDocumentSerde
-}
-
-func (v *FailedCampaignStateResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailedCampaignStateResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailedCampaignStateResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CampaignId != nil {
-		s.WriteString(schemas.FailedCampaignStateResponse_campaignId, *v.CampaignId)
-	}
-	if v.FailureCode != "" {
-		s.WriteString(schemas.FailedCampaignStateResponse_failureCode, string(v.FailureCode))
-	}
-}
-func (v *FailedCampaignStateResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailedCampaignStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailedCampaignStateResponse_campaignId:
-			v.CampaignId = new(string)
-			return d.ReadString(schemas.FailedCampaignStateResponse_campaignId, v.CampaignId)
-		case schemas.FailedCampaignStateResponse_failureCode:
-			var ev string
-			if err := d.ReadString(schemas.FailedCampaignStateResponse_failureCode, &ev); err != nil {
-				return err
-			}
-			v.FailureCode = GetCampaignStateBatchFailureCode(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Failure details for a profile outbound request
@@ -1230,44 +473,6 @@ type FailedProfileOutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailedProfileOutboundRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailedProfileOutboundRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailedProfileOutboundRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.FailedProfileOutboundRequest_clientToken, *v.ClientToken)
-	}
-	if v.FailureCode != "" {
-		s.WriteString(schemas.FailedProfileOutboundRequest_failureCode, string(v.FailureCode))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.FailedProfileOutboundRequest_id, *v.Id)
-	}
-}
-func (v *FailedProfileOutboundRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailedProfileOutboundRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailedProfileOutboundRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.FailedProfileOutboundRequest_clientToken, v.ClientToken)
-		case schemas.FailedProfileOutboundRequest_failureCode:
-			var ev string
-			if err := d.ReadString(schemas.FailedProfileOutboundRequest_failureCode, &ev); err != nil {
-				return err
-			}
-			v.FailureCode = ProfileOutboundRequestFailureCode(ev)
-			return nil
-		case schemas.FailedProfileOutboundRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.FailedProfileOutboundRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // A failed request identified by the unique client token.
 type FailedRequest struct {
 
@@ -1284,44 +489,6 @@ type FailedRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailedRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailedRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailedRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.FailedRequest_clientToken, *v.ClientToken)
-	}
-	if v.FailureCode != "" {
-		s.WriteString(schemas.FailedRequest_failureCode, string(v.FailureCode))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.FailedRequest_id, *v.Id)
-	}
-}
-func (v *FailedRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailedRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailedRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.FailedRequest_clientToken, v.ClientToken)
-		case schemas.FailedRequest_failureCode:
-			var ev string
-			if err := d.ReadString(schemas.FailedRequest_failureCode, &ev); err != nil {
-				return err
-			}
-			v.FailureCode = FailureCode(ev)
-			return nil
-		case schemas.FailedRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.FailedRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // Instance Communication limits config
 type InstanceCommunicationLimitsConfig struct {
 
@@ -1329,25 +496,6 @@ type InstanceCommunicationLimitsConfig struct {
 	AllChannelSubtypes CommunicationLimits
 
 	noSmithyDocumentSerde
-}
-
-func (v *InstanceCommunicationLimitsConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceCommunicationLimitsConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceCommunicationLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationLimits(s, schemas.InstanceCommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
-}
-func (v *InstanceCommunicationLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceCommunicationLimitsConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceCommunicationLimitsConfig_allChannelSubtypes:
-			return deserializeCommunicationLimits(d, schemas.InstanceCommunicationLimitsConfig_allChannelSubtypes, &v.AllChannelSubtypes)
-		}
-		return nil
-	})
 }
 
 // Instance config object
@@ -1374,42 +522,6 @@ type InstanceConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstanceConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.InstanceConfig_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.EncryptionConfig != nil {
-		s.WriteStruct(schemas.InstanceConfig_encryptionConfig)
-		v.EncryptionConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ServiceLinkedRoleArn != nil {
-		s.WriteString(schemas.InstanceConfig_serviceLinkedRoleArn, *v.ServiceLinkedRoleArn)
-	}
-}
-func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceConfig_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.InstanceConfig_connectInstanceId, v.ConnectInstanceId)
-		case schemas.InstanceConfig_encryptionConfig:
-			v.EncryptionConfig = &EncryptionConfig{}
-			return v.EncryptionConfig.Deserialize(d)
-		case schemas.InstanceConfig_serviceLinkedRoleArn:
-			v.ServiceLinkedRoleArn = new(string)
-			return d.ReadString(schemas.InstanceConfig_serviceLinkedRoleArn, v.ServiceLinkedRoleArn)
-		}
-		return nil
-	})
-}
-
 // Connect instance identifier filter
 type InstanceIdFilter struct {
 
@@ -1424,38 +536,6 @@ type InstanceIdFilter struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *InstanceIdFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceIdFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Operator != "" {
-		s.WriteString(schemas.InstanceIdFilter_operator, string(v.Operator))
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.InstanceIdFilter_value, *v.Value)
-	}
-}
-func (v *InstanceIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceIdFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceIdFilter_operator:
-			var ev string
-			if err := d.ReadString(schemas.InstanceIdFilter_operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = InstanceIdFilterOperator(ev)
-			return nil
-		case schemas.InstanceIdFilter_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.InstanceIdFilter_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Instance onboarding job status object
@@ -1477,48 +557,6 @@ type InstanceOnboardingJobStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *InstanceOnboardingJobStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.InstanceOnboardingJobStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *InstanceOnboardingJobStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectInstanceId != nil {
-		s.WriteString(schemas.InstanceOnboardingJobStatus_connectInstanceId, *v.ConnectInstanceId)
-	}
-	if v.FailureCode != "" {
-		s.WriteString(schemas.InstanceOnboardingJobStatus_failureCode, string(v.FailureCode))
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.InstanceOnboardingJobStatus_status, string(v.Status))
-	}
-}
-func (v *InstanceOnboardingJobStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InstanceOnboardingJobStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InstanceOnboardingJobStatus_connectInstanceId:
-			v.ConnectInstanceId = new(string)
-			return d.ReadString(schemas.InstanceOnboardingJobStatus_connectInstanceId, v.ConnectInstanceId)
-		case schemas.InstanceOnboardingJobStatus_failureCode:
-			var ev string
-			if err := d.ReadString(schemas.InstanceOnboardingJobStatus_failureCode, &ev); err != nil {
-				return err
-			}
-			v.FailureCode = InstanceOnboardingJobFailureCode(ev)
-			return nil
-		case schemas.InstanceOnboardingJobStatus_status:
-			var ev string
-			if err := d.ReadString(schemas.InstanceOnboardingJobStatus_status, &ev); err != nil {
-				return err
-			}
-			v.Status = InstanceOnboardingJobStatusCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Integration config for Connect Instance
 //
 // The following types satisfy this interface:
@@ -1538,14 +576,6 @@ type IntegrationConfigMemberCustomerProfiles struct {
 }
 
 func (*IntegrationConfigMemberCustomerProfiles) isIntegrationConfig() {}
-func (v *IntegrationConfigMemberCustomerProfiles) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationConfig_customerProfiles)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationConfigMemberCustomerProfiles) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Lambda integration config
 type IntegrationConfigMemberLambda struct {
@@ -1555,14 +585,6 @@ type IntegrationConfigMemberLambda struct {
 }
 
 func (*IntegrationConfigMemberLambda) isIntegrationConfig() {}
-func (v *IntegrationConfigMemberLambda) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationConfig_lambda)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationConfigMemberLambda) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Q Connect integration config
 type IntegrationConfigMemberQConnect struct {
@@ -1572,14 +594,6 @@ type IntegrationConfigMemberQConnect struct {
 }
 
 func (*IntegrationConfigMemberQConnect) isIntegrationConfig() {}
-func (v *IntegrationConfigMemberQConnect) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationConfig_qConnect)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationConfigMemberQConnect) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Integration identifier for Connect instance
 //
@@ -1600,14 +614,6 @@ type IntegrationIdentifierMemberCustomerProfiles struct {
 }
 
 func (*IntegrationIdentifierMemberCustomerProfiles) isIntegrationIdentifier() {}
-func (v *IntegrationIdentifierMemberCustomerProfiles) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationIdentifier_customerProfiles)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationIdentifierMemberCustomerProfiles) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Lambda integration identifier
 type IntegrationIdentifierMemberLambda struct {
@@ -1617,14 +623,6 @@ type IntegrationIdentifierMemberLambda struct {
 }
 
 func (*IntegrationIdentifierMemberLambda) isIntegrationIdentifier() {}
-func (v *IntegrationIdentifierMemberLambda) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationIdentifier_lambda)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationIdentifierMemberLambda) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Q Connect integration identifier
 type IntegrationIdentifierMemberQConnect struct {
@@ -1634,14 +632,6 @@ type IntegrationIdentifierMemberQConnect struct {
 }
 
 func (*IntegrationIdentifierMemberQConnect) isIntegrationIdentifier() {}
-func (v *IntegrationIdentifierMemberQConnect) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationIdentifier_qConnect)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationIdentifierMemberQConnect) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Integration summary for Connect instance.
 //
@@ -1662,14 +652,6 @@ type IntegrationSummaryMemberCustomerProfiles struct {
 }
 
 func (*IntegrationSummaryMemberCustomerProfiles) isIntegrationSummary() {}
-func (v *IntegrationSummaryMemberCustomerProfiles) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationSummary_customerProfiles)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationSummaryMemberCustomerProfiles) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Lambda integration summary
 type IntegrationSummaryMemberLambda struct {
@@ -1679,14 +661,6 @@ type IntegrationSummaryMemberLambda struct {
 }
 
 func (*IntegrationSummaryMemberLambda) isIntegrationSummary() {}
-func (v *IntegrationSummaryMemberLambda) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationSummary_lambda)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationSummaryMemberLambda) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Q Connect integration summary
 type IntegrationSummaryMemberQConnect struct {
@@ -1696,14 +670,6 @@ type IntegrationSummaryMemberQConnect struct {
 }
 
 func (*IntegrationSummaryMemberQConnect) isIntegrationSummary() {}
-func (v *IntegrationSummaryMemberQConnect) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IntegrationSummary_qConnect)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *IntegrationSummaryMemberQConnect) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Lambda integration config
 type LambdaIntegrationConfig struct {
@@ -1714,28 +680,6 @@ type LambdaIntegrationConfig struct {
 	FunctionArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FunctionArn != nil {
-		s.WriteString(schemas.LambdaIntegrationConfig_functionArn, *v.FunctionArn)
-	}
-}
-func (v *LambdaIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaIntegrationConfig_functionArn:
-			v.FunctionArn = new(string)
-			return d.ReadString(schemas.LambdaIntegrationConfig_functionArn, v.FunctionArn)
-		}
-		return nil
-	})
 }
 
 // Lambda integration identifier
@@ -1749,28 +693,6 @@ type LambdaIntegrationIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaIntegrationIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaIntegrationIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaIntegrationIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FunctionArn != nil {
-		s.WriteString(schemas.LambdaIntegrationIdentifier_functionArn, *v.FunctionArn)
-	}
-}
-func (v *LambdaIntegrationIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaIntegrationIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaIntegrationIdentifier_functionArn:
-			v.FunctionArn = new(string)
-			return d.ReadString(schemas.LambdaIntegrationIdentifier_functionArn, v.FunctionArn)
-		}
-		return nil
-	})
-}
-
 // Lambda integration summary
 type LambdaIntegrationSummary struct {
 
@@ -1780,28 +702,6 @@ type LambdaIntegrationSummary struct {
 	FunctionArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaIntegrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaIntegrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaIntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FunctionArn != nil {
-		s.WriteString(schemas.LambdaIntegrationSummary_functionArn, *v.FunctionArn)
-	}
-}
-func (v *LambdaIntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaIntegrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaIntegrationSummary_functionArn:
-			v.FunctionArn = new(string)
-			return d.ReadString(schemas.LambdaIntegrationSummary_functionArn, v.FunctionArn)
-		}
-		return nil
-	})
 }
 
 // Local time zone config
@@ -1817,41 +717,6 @@ type LocalTimeZoneConfig struct {
 	LocalTimeZoneDetectionScope LocalTimeZoneDetectionScope
 
 	noSmithyDocumentSerde
-}
-
-func (v *LocalTimeZoneConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LocalTimeZoneConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LocalTimeZoneConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultTimeZone != nil {
-		s.WriteString(schemas.LocalTimeZoneConfig_defaultTimeZone, *v.DefaultTimeZone)
-	}
-	serializeLocalTimeZoneDetection(s, schemas.LocalTimeZoneConfig_localTimeZoneDetection, v.LocalTimeZoneDetection)
-	if v.LocalTimeZoneDetectionScope != "" {
-		s.WriteString(schemas.LocalTimeZoneConfig_localTimeZoneDetectionScope, string(v.LocalTimeZoneDetectionScope))
-	}
-}
-func (v *LocalTimeZoneConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LocalTimeZoneConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LocalTimeZoneConfig_defaultTimeZone:
-			v.DefaultTimeZone = new(string)
-			return d.ReadString(schemas.LocalTimeZoneConfig_defaultTimeZone, v.DefaultTimeZone)
-		case schemas.LocalTimeZoneConfig_localTimeZoneDetection:
-			return deserializeLocalTimeZoneDetection(d, schemas.LocalTimeZoneConfig_localTimeZoneDetection, &v.LocalTimeZoneDetection)
-		case schemas.LocalTimeZoneConfig_localTimeZoneDetectionScope:
-			var ev string
-			if err := d.ReadString(schemas.LocalTimeZoneConfig_localTimeZoneDetectionScope, &ev); err != nil {
-				return err
-			}
-			v.LocalTimeZoneDetectionScope = LocalTimeZoneDetectionScope(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Open Hours config
@@ -1871,12 +736,6 @@ type OpenHoursMemberDailyHours struct {
 }
 
 func (*OpenHoursMemberDailyHours) isOpenHours() {}
-func (v *OpenHoursMemberDailyHours) Serialize(s smithy.ShapeSerializer) {
-	serializeDailyHours(s, schemas.OpenHours_dailyHours, v.Value)
-}
-func (v *OpenHoursMemberDailyHours) Deserialize(d smithy.ShapeDeserializer) error {
-	return deserializeDailyHours(d, schemas.OpenHours_dailyHours, &v.Value)
-}
 
 // An outbound request for a campaign.
 type OutboundRequest struct {
@@ -1900,37 +759,6 @@ type OutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *OutboundRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.OutboundRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *OutboundRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelSubtypeParameters(s, schemas.OutboundRequest_channelSubtypeParameters, v.ChannelSubtypeParameters)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.OutboundRequest_clientToken, *v.ClientToken)
-	}
-	if v.ExpirationTime != nil {
-		s.WriteTime(schemas.OutboundRequest_expirationTime, *v.ExpirationTime)
-	}
-}
-func (v *OutboundRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.OutboundRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.OutboundRequest_channelSubtypeParameters:
-			return deserializeChannelSubtypeParameters(d, schemas.OutboundRequest_channelSubtypeParameters, &v.ChannelSubtypeParameters)
-		case schemas.OutboundRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.OutboundRequest_clientToken, v.ClientToken)
-		case schemas.OutboundRequest_expirationTime:
-			v.ExpirationTime = new(time.Time)
-			return d.ReadTime(schemas.OutboundRequest_expirationTime, v.ExpirationTime)
-		}
-		return nil
-	})
-}
-
 // Predictive config
 type PredictiveConfig struct {
 
@@ -1940,28 +768,6 @@ type PredictiveConfig struct {
 	BandwidthAllocation *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *PredictiveConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PredictiveConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PredictiveConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BandwidthAllocation != nil {
-		s.WriteFloat64(schemas.PredictiveConfig_bandwidthAllocation, *v.BandwidthAllocation)
-	}
-}
-func (v *PredictiveConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PredictiveConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PredictiveConfig_bandwidthAllocation:
-			v.BandwidthAllocation = new(float64)
-			return d.ReadFloat64(schemas.PredictiveConfig_bandwidthAllocation, v.BandwidthAllocation)
-		}
-		return nil
-	})
 }
 
 // Preview config
@@ -1981,39 +787,6 @@ type PreviewConfig struct {
 	AgentActions []AgentAction
 
 	noSmithyDocumentSerde
-}
-
-func (v *PreviewConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PreviewConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PreviewConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentActions(s, schemas.PreviewConfig_agentActions, v.AgentActions)
-	if v.BandwidthAllocation != nil {
-		s.WriteFloat64(schemas.PreviewConfig_bandwidthAllocation, *v.BandwidthAllocation)
-	}
-	if v.TimeoutConfig != nil {
-		s.WriteStruct(schemas.PreviewConfig_timeoutConfig)
-		v.TimeoutConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PreviewConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PreviewConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PreviewConfig_agentActions:
-			return deserializeAgentActions(d, schemas.PreviewConfig_agentActions, &v.AgentActions)
-		case schemas.PreviewConfig_bandwidthAllocation:
-			v.BandwidthAllocation = new(float64)
-			return d.ReadFloat64(schemas.PreviewConfig_bandwidthAllocation, v.BandwidthAllocation)
-		case schemas.PreviewConfig_timeoutConfig:
-			v.TimeoutConfig = &TimeoutConfig{}
-			return v.TimeoutConfig.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Information about a profile outbound request
@@ -2036,40 +809,6 @@ type ProfileOutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ProfileOutboundRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProfileOutboundRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProfileOutboundRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ProfileOutboundRequest_clientToken, *v.ClientToken)
-	}
-	if v.ExpirationTime != nil {
-		s.WriteTime(schemas.ProfileOutboundRequest_expirationTime, *v.ExpirationTime)
-	}
-	if v.ProfileId != nil {
-		s.WriteString(schemas.ProfileOutboundRequest_profileId, *v.ProfileId)
-	}
-}
-func (v *ProfileOutboundRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProfileOutboundRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProfileOutboundRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.ProfileOutboundRequest_clientToken, v.ClientToken)
-		case schemas.ProfileOutboundRequest_expirationTime:
-			v.ExpirationTime = new(time.Time)
-			return d.ReadTime(schemas.ProfileOutboundRequest_expirationTime, v.ExpirationTime)
-		case schemas.ProfileOutboundRequest_profileId:
-			v.ProfileId = new(string)
-			return d.ReadString(schemas.ProfileOutboundRequest_profileId, v.ProfileId)
-		}
-		return nil
-	})
-}
-
 // Progressive config
 type ProgressiveConfig struct {
 
@@ -2079,28 +818,6 @@ type ProgressiveConfig struct {
 	BandwidthAllocation *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProgressiveConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProgressiveConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProgressiveConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BandwidthAllocation != nil {
-		s.WriteFloat64(schemas.ProgressiveConfig_bandwidthAllocation, *v.BandwidthAllocation)
-	}
-}
-func (v *ProgressiveConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProgressiveConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProgressiveConfig_bandwidthAllocation:
-			v.BandwidthAllocation = new(float64)
-			return d.ReadFloat64(schemas.ProgressiveConfig_bandwidthAllocation, v.BandwidthAllocation)
-		}
-		return nil
-	})
 }
 
 // Q Connect integration config
@@ -2114,28 +831,6 @@ type QConnectIntegrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QConnectIntegrationConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QConnectIntegrationConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QConnectIntegrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KnowledgeBaseArn != nil {
-		s.WriteString(schemas.QConnectIntegrationConfig_knowledgeBaseArn, *v.KnowledgeBaseArn)
-	}
-}
-func (v *QConnectIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QConnectIntegrationConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QConnectIntegrationConfig_knowledgeBaseArn:
-			v.KnowledgeBaseArn = new(string)
-			return d.ReadString(schemas.QConnectIntegrationConfig_knowledgeBaseArn, v.KnowledgeBaseArn)
-		}
-		return nil
-	})
-}
-
 // Q Connect integration identifier
 type QConnectIntegrationIdentifier struct {
 
@@ -2147,28 +842,6 @@ type QConnectIntegrationIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *QConnectIntegrationIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QConnectIntegrationIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QConnectIntegrationIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KnowledgeBaseArn != nil {
-		s.WriteString(schemas.QConnectIntegrationIdentifier_knowledgeBaseArn, *v.KnowledgeBaseArn)
-	}
-}
-func (v *QConnectIntegrationIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QConnectIntegrationIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QConnectIntegrationIdentifier_knowledgeBaseArn:
-			v.KnowledgeBaseArn = new(string)
-			return d.ReadString(schemas.QConnectIntegrationIdentifier_knowledgeBaseArn, v.KnowledgeBaseArn)
-		}
-		return nil
-	})
-}
-
 // Q Connect integration summary
 type QConnectIntegrationSummary struct {
 
@@ -2178,28 +851,6 @@ type QConnectIntegrationSummary struct {
 	KnowledgeBaseArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *QConnectIntegrationSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.QConnectIntegrationSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *QConnectIntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KnowledgeBaseArn != nil {
-		s.WriteString(schemas.QConnectIntegrationSummary_knowledgeBaseArn, *v.KnowledgeBaseArn)
-	}
-}
-func (v *QConnectIntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QConnectIntegrationSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QConnectIntegrationSummary_knowledgeBaseArn:
-			v.KnowledgeBaseArn = new(string)
-			return d.ReadString(schemas.QConnectIntegrationSummary_knowledgeBaseArn, v.KnowledgeBaseArn)
-		}
-		return nil
-	})
 }
 
 // Restricted period
@@ -2221,40 +872,6 @@ type RestrictedPeriod struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RestrictedPeriod) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RestrictedPeriod)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RestrictedPeriod) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteString(schemas.RestrictedPeriod_endDate, *v.EndDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.RestrictedPeriod_name, *v.Name)
-	}
-	if v.StartDate != nil {
-		s.WriteString(schemas.RestrictedPeriod_startDate, *v.StartDate)
-	}
-}
-func (v *RestrictedPeriod) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RestrictedPeriod, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RestrictedPeriod_endDate:
-			v.EndDate = new(string)
-			return d.ReadString(schemas.RestrictedPeriod_endDate, v.EndDate)
-		case schemas.RestrictedPeriod_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RestrictedPeriod_name, v.Name)
-		case schemas.RestrictedPeriod_startDate:
-			v.StartDate = new(string)
-			return d.ReadString(schemas.RestrictedPeriod_startDate, v.StartDate)
-		}
-		return nil
-	})
-}
-
 // Restricted period config
 //
 // The following types satisfy this interface:
@@ -2272,12 +889,6 @@ type RestrictedPeriodsMemberRestrictedPeriodList struct {
 }
 
 func (*RestrictedPeriodsMemberRestrictedPeriodList) isRestrictedPeriods() {}
-func (v *RestrictedPeriodsMemberRestrictedPeriodList) Serialize(s smithy.ShapeSerializer) {
-	serializeRestrictedPeriodList(s, schemas.RestrictedPeriods_restrictedPeriodList, v.Value)
-}
-func (v *RestrictedPeriodsMemberRestrictedPeriodList) Deserialize(d smithy.ShapeDeserializer) error {
-	return deserializeRestrictedPeriodList(d, schemas.RestrictedPeriods_restrictedPeriodList, &v.Value)
-}
 
 // Campaign schedule
 type Schedule struct {
@@ -2298,40 +909,6 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Schedule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Schedule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.Schedule_endTime, *v.EndTime)
-	}
-	if v.RefreshFrequency != nil {
-		s.WriteString(schemas.Schedule_refreshFrequency, *v.RefreshFrequency)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.Schedule_startTime, *v.StartTime)
-	}
-}
-func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Schedule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Schedule_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.Schedule_endTime, v.EndTime)
-		case schemas.Schedule_refreshFrequency:
-			v.RefreshFrequency = new(string)
-			return d.ReadString(schemas.Schedule_refreshFrequency, v.RefreshFrequency)
-		case schemas.Schedule_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.Schedule_startTime, v.StartTime)
-		}
-		return nil
-	})
-}
-
 // SMS Channel Subtype config
 type SmsChannelSubtypeConfig struct {
 
@@ -2350,39 +927,6 @@ type SmsChannelSubtypeConfig struct {
 	Capacity *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *SmsChannelSubtypeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SmsChannelSubtypeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SmsChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != nil {
-		s.WriteFloat64(schemas.SmsChannelSubtypeConfig_capacity, *v.Capacity)
-	}
-	if v.DefaultOutboundConfig != nil {
-		s.WriteStruct(schemas.SmsChannelSubtypeConfig_defaultOutboundConfig)
-		v.DefaultOutboundConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeSmsOutboundMode(s, schemas.SmsChannelSubtypeConfig_outboundMode, v.OutboundMode)
-}
-func (v *SmsChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SmsChannelSubtypeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SmsChannelSubtypeConfig_capacity:
-			v.Capacity = new(float64)
-			return d.ReadFloat64(schemas.SmsChannelSubtypeConfig_capacity, v.Capacity)
-		case schemas.SmsChannelSubtypeConfig_defaultOutboundConfig:
-			v.DefaultOutboundConfig = &SmsOutboundConfig{}
-			return v.DefaultOutboundConfig.Deserialize(d)
-		case schemas.SmsChannelSubtypeConfig_outboundMode:
-			return deserializeSmsOutboundMode(d, schemas.SmsChannelSubtypeConfig_outboundMode, &v.OutboundMode)
-		}
-		return nil
-	})
 }
 
 // Parameters for the SMS Channel Subtype
@@ -2409,43 +953,6 @@ type SmsChannelSubtypeParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SmsChannelSubtypeParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SmsChannelSubtypeParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SmsChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourcePhoneNumberArn != nil {
-		s.WriteString(schemas.SmsChannelSubtypeParameters_connectSourcePhoneNumberArn, *v.ConnectSourcePhoneNumberArn)
-	}
-	if v.DestinationPhoneNumber != nil {
-		s.WriteString(schemas.SmsChannelSubtypeParameters_destinationPhoneNumber, *v.DestinationPhoneNumber)
-	}
-	if v.TemplateArn != nil {
-		s.WriteString(schemas.SmsChannelSubtypeParameters_templateArn, *v.TemplateArn)
-	}
-	serializeAttributes(s, schemas.SmsChannelSubtypeParameters_templateParameters, v.TemplateParameters)
-}
-func (v *SmsChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SmsChannelSubtypeParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SmsChannelSubtypeParameters_connectSourcePhoneNumberArn:
-			v.ConnectSourcePhoneNumberArn = new(string)
-			return d.ReadString(schemas.SmsChannelSubtypeParameters_connectSourcePhoneNumberArn, v.ConnectSourcePhoneNumberArn)
-		case schemas.SmsChannelSubtypeParameters_destinationPhoneNumber:
-			v.DestinationPhoneNumber = new(string)
-			return d.ReadString(schemas.SmsChannelSubtypeParameters_destinationPhoneNumber, v.DestinationPhoneNumber)
-		case schemas.SmsChannelSubtypeParameters_templateArn:
-			v.TemplateArn = new(string)
-			return d.ReadString(schemas.SmsChannelSubtypeParameters_templateArn, v.TemplateArn)
-		case schemas.SmsChannelSubtypeParameters_templateParameters:
-			return deserializeAttributes(d, schemas.SmsChannelSubtypeParameters_templateParameters, &v.TemplateParameters)
-		}
-		return nil
-	})
-}
-
 // Default SMS Outbound config
 type SmsOutboundConfig struct {
 
@@ -2460,34 +967,6 @@ type SmsOutboundConfig struct {
 	WisdomTemplateArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SmsOutboundConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SmsOutboundConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SmsOutboundConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourcePhoneNumberArn != nil {
-		s.WriteString(schemas.SmsOutboundConfig_connectSourcePhoneNumberArn, *v.ConnectSourcePhoneNumberArn)
-	}
-	if v.WisdomTemplateArn != nil {
-		s.WriteString(schemas.SmsOutboundConfig_wisdomTemplateArn, *v.WisdomTemplateArn)
-	}
-}
-func (v *SmsOutboundConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SmsOutboundConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SmsOutboundConfig_connectSourcePhoneNumberArn:
-			v.ConnectSourcePhoneNumberArn = new(string)
-			return d.ReadString(schemas.SmsOutboundConfig_connectSourcePhoneNumberArn, v.ConnectSourcePhoneNumberArn)
-		case schemas.SmsOutboundConfig_wisdomTemplateArn:
-			v.WisdomTemplateArn = new(string)
-			return d.ReadString(schemas.SmsOutboundConfig_wisdomTemplateArn, v.WisdomTemplateArn)
-		}
-		return nil
-	})
 }
 
 // SMS Outbound Mode
@@ -2507,14 +986,6 @@ type SmsOutboundModeMemberAgentless struct {
 }
 
 func (*SmsOutboundModeMemberAgentless) isSmsOutboundMode() {}
-func (v *SmsOutboundModeMemberAgentless) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SmsOutboundMode_agentless)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SmsOutboundModeMemberAgentless) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Source of the campaign
 //
@@ -2534,12 +1005,6 @@ type SourceMemberCustomerProfilesSegmentArn struct {
 }
 
 func (*SourceMemberCustomerProfilesSegmentArn) isSource() {}
-func (v *SourceMemberCustomerProfilesSegmentArn) Serialize(s smithy.ShapeSerializer) {
-	s.WriteString(schemas.Source_customerProfilesSegmentArn, v.Value)
-}
-func (v *SourceMemberCustomerProfilesSegmentArn) Deserialize(d smithy.ShapeDeserializer) error {
-	return d.ReadString(schemas.Source_customerProfilesSegmentArn, &v.Value)
-}
 
 // Event trigger of the campaign
 type SourceMemberEventTrigger struct {
@@ -2549,14 +1014,6 @@ type SourceMemberEventTrigger struct {
 }
 
 func (*SourceMemberEventTrigger) isSource() {}
-func (v *SourceMemberEventTrigger) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Source_eventTrigger)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *SourceMemberEventTrigger) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Successful response of campaign state
 type SuccessfulCampaignStateResponse struct {
@@ -2568,38 +1025,6 @@ type SuccessfulCampaignStateResponse struct {
 	State CampaignState
 
 	noSmithyDocumentSerde
-}
-
-func (v *SuccessfulCampaignStateResponse) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuccessfulCampaignStateResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuccessfulCampaignStateResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CampaignId != nil {
-		s.WriteString(schemas.SuccessfulCampaignStateResponse_campaignId, *v.CampaignId)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.SuccessfulCampaignStateResponse_state, string(v.State))
-	}
-}
-func (v *SuccessfulCampaignStateResponse) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuccessfulCampaignStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuccessfulCampaignStateResponse_campaignId:
-			v.CampaignId = new(string)
-			return d.ReadString(schemas.SuccessfulCampaignStateResponse_campaignId, v.CampaignId)
-		case schemas.SuccessfulCampaignStateResponse_state:
-			var ev string
-			if err := d.ReadString(schemas.SuccessfulCampaignStateResponse_state, &ev); err != nil {
-				return err
-			}
-			v.State = CampaignState(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Success details for a profile outbound request
@@ -2615,34 +1040,6 @@ type SuccessfulProfileOutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuccessfulProfileOutboundRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuccessfulProfileOutboundRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuccessfulProfileOutboundRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.SuccessfulProfileOutboundRequest_clientToken, *v.ClientToken)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SuccessfulProfileOutboundRequest_id, *v.Id)
-	}
-}
-func (v *SuccessfulProfileOutboundRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuccessfulProfileOutboundRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuccessfulProfileOutboundRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.SuccessfulProfileOutboundRequest_clientToken, v.ClientToken)
-		case schemas.SuccessfulProfileOutboundRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SuccessfulProfileOutboundRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 // A successful request identified by the unique client token.
 type SuccessfulRequest struct {
 
@@ -2654,34 +1051,6 @@ type SuccessfulRequest struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SuccessfulRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuccessfulRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuccessfulRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.SuccessfulRequest_clientToken, *v.ClientToken)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.SuccessfulRequest_id, *v.Id)
-	}
-}
-func (v *SuccessfulRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuccessfulRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuccessfulRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.SuccessfulRequest_clientToken, v.ClientToken)
-		case schemas.SuccessfulRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SuccessfulRequest_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Telephony Channel Subtype config
@@ -2708,45 +1077,6 @@ type TelephonyChannelSubtypeConfig struct {
 	ConnectQueueId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelephonyChannelSubtypeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyChannelSubtypeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelephonyChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != nil {
-		s.WriteFloat64(schemas.TelephonyChannelSubtypeConfig_capacity, *v.Capacity)
-	}
-	if v.ConnectQueueId != nil {
-		s.WriteString(schemas.TelephonyChannelSubtypeConfig_connectQueueId, *v.ConnectQueueId)
-	}
-	if v.DefaultOutboundConfig != nil {
-		s.WriteStruct(schemas.TelephonyChannelSubtypeConfig_defaultOutboundConfig)
-		v.DefaultOutboundConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTelephonyOutboundMode(s, schemas.TelephonyChannelSubtypeConfig_outboundMode, v.OutboundMode)
-}
-func (v *TelephonyChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelephonyChannelSubtypeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelephonyChannelSubtypeConfig_capacity:
-			v.Capacity = new(float64)
-			return d.ReadFloat64(schemas.TelephonyChannelSubtypeConfig_capacity, v.Capacity)
-		case schemas.TelephonyChannelSubtypeConfig_connectQueueId:
-			v.ConnectQueueId = new(string)
-			return d.ReadString(schemas.TelephonyChannelSubtypeConfig_connectQueueId, v.ConnectQueueId)
-		case schemas.TelephonyChannelSubtypeConfig_defaultOutboundConfig:
-			v.DefaultOutboundConfig = &TelephonyOutboundConfig{}
-			return v.DefaultOutboundConfig.Deserialize(d)
-		case schemas.TelephonyChannelSubtypeConfig_outboundMode:
-			return deserializeTelephonyOutboundMode(d, schemas.TelephonyChannelSubtypeConfig_outboundMode, &v.OutboundMode)
-		}
-		return nil
-	})
 }
 
 // Parameters for the Telephony Channel Subtype
@@ -2777,51 +1107,6 @@ type TelephonyChannelSubtypeParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TelephonyChannelSubtypeParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyChannelSubtypeParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelephonyChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnswerMachineDetectionConfig != nil {
-		s.WriteStruct(schemas.TelephonyChannelSubtypeParameters_answerMachineDetectionConfig)
-		v.AnswerMachineDetectionConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeAttributes(s, schemas.TelephonyChannelSubtypeParameters_attributes, v.Attributes)
-	if v.ConnectSourcePhoneNumber != nil {
-		s.WriteString(schemas.TelephonyChannelSubtypeParameters_connectSourcePhoneNumber, *v.ConnectSourcePhoneNumber)
-	}
-	if v.DestinationPhoneNumber != nil {
-		s.WriteString(schemas.TelephonyChannelSubtypeParameters_destinationPhoneNumber, *v.DestinationPhoneNumber)
-	}
-	if v.RingTimeout != nil {
-		s.WriteInt32(schemas.TelephonyChannelSubtypeParameters_ringTimeout, *v.RingTimeout)
-	}
-}
-func (v *TelephonyChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelephonyChannelSubtypeParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelephonyChannelSubtypeParameters_answerMachineDetectionConfig:
-			v.AnswerMachineDetectionConfig = &AnswerMachineDetectionConfig{}
-			return v.AnswerMachineDetectionConfig.Deserialize(d)
-		case schemas.TelephonyChannelSubtypeParameters_attributes:
-			return deserializeAttributes(d, schemas.TelephonyChannelSubtypeParameters_attributes, &v.Attributes)
-		case schemas.TelephonyChannelSubtypeParameters_connectSourcePhoneNumber:
-			v.ConnectSourcePhoneNumber = new(string)
-			return d.ReadString(schemas.TelephonyChannelSubtypeParameters_connectSourcePhoneNumber, v.ConnectSourcePhoneNumber)
-		case schemas.TelephonyChannelSubtypeParameters_destinationPhoneNumber:
-			v.DestinationPhoneNumber = new(string)
-			return d.ReadString(schemas.TelephonyChannelSubtypeParameters_destinationPhoneNumber, v.DestinationPhoneNumber)
-		case schemas.TelephonyChannelSubtypeParameters_ringTimeout:
-			v.RingTimeout = new(int32)
-			return d.ReadInt32(schemas.TelephonyChannelSubtypeParameters_ringTimeout, v.RingTimeout)
-		}
-		return nil
-	})
-}
-
 // Default Telephony Outbound config
 type TelephonyOutboundConfig struct {
 
@@ -2841,48 +1126,6 @@ type TelephonyOutboundConfig struct {
 	RingTimeout *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *TelephonyOutboundConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyOutboundConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TelephonyOutboundConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnswerMachineDetectionConfig != nil {
-		s.WriteStruct(schemas.TelephonyOutboundConfig_answerMachineDetectionConfig)
-		v.AnswerMachineDetectionConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConnectContactFlowId != nil {
-		s.WriteString(schemas.TelephonyOutboundConfig_connectContactFlowId, *v.ConnectContactFlowId)
-	}
-	if v.ConnectSourcePhoneNumber != nil {
-		s.WriteString(schemas.TelephonyOutboundConfig_connectSourcePhoneNumber, *v.ConnectSourcePhoneNumber)
-	}
-	if v.RingTimeout != nil {
-		s.WriteInt32(schemas.TelephonyOutboundConfig_ringTimeout, *v.RingTimeout)
-	}
-}
-func (v *TelephonyOutboundConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TelephonyOutboundConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TelephonyOutboundConfig_answerMachineDetectionConfig:
-			v.AnswerMachineDetectionConfig = &AnswerMachineDetectionConfig{}
-			return v.AnswerMachineDetectionConfig.Deserialize(d)
-		case schemas.TelephonyOutboundConfig_connectContactFlowId:
-			v.ConnectContactFlowId = new(string)
-			return d.ReadString(schemas.TelephonyOutboundConfig_connectContactFlowId, v.ConnectContactFlowId)
-		case schemas.TelephonyOutboundConfig_connectSourcePhoneNumber:
-			v.ConnectSourcePhoneNumber = new(string)
-			return d.ReadString(schemas.TelephonyOutboundConfig_connectSourcePhoneNumber, v.ConnectSourcePhoneNumber)
-		case schemas.TelephonyOutboundConfig_ringTimeout:
-			v.RingTimeout = new(int32)
-			return d.ReadInt32(schemas.TelephonyOutboundConfig_ringTimeout, v.RingTimeout)
-		}
-		return nil
-	})
 }
 
 // Telephony Outbound Mode
@@ -2905,14 +1148,6 @@ type TelephonyOutboundModeMemberAgentless struct {
 }
 
 func (*TelephonyOutboundModeMemberAgentless) isTelephonyOutboundMode() {}
-func (v *TelephonyOutboundModeMemberAgentless) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyOutboundMode_agentless)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TelephonyOutboundModeMemberAgentless) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Predictive config
 type TelephonyOutboundModeMemberPredictive struct {
@@ -2922,14 +1157,6 @@ type TelephonyOutboundModeMemberPredictive struct {
 }
 
 func (*TelephonyOutboundModeMemberPredictive) isTelephonyOutboundMode() {}
-func (v *TelephonyOutboundModeMemberPredictive) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyOutboundMode_predictive)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TelephonyOutboundModeMemberPredictive) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Preview config
 type TelephonyOutboundModeMemberPreview struct {
@@ -2939,14 +1166,6 @@ type TelephonyOutboundModeMemberPreview struct {
 }
 
 func (*TelephonyOutboundModeMemberPreview) isTelephonyOutboundMode() {}
-func (v *TelephonyOutboundModeMemberPreview) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyOutboundMode_preview)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TelephonyOutboundModeMemberPreview) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Progressive config
 type TelephonyOutboundModeMemberProgressive struct {
@@ -2956,14 +1175,6 @@ type TelephonyOutboundModeMemberProgressive struct {
 }
 
 func (*TelephonyOutboundModeMemberProgressive) isTelephonyOutboundMode() {}
-func (v *TelephonyOutboundModeMemberProgressive) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TelephonyOutboundMode_progressive)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *TelephonyOutboundModeMemberProgressive) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Timeout Config for preview contacts.
 type TimeoutConfig struct {
@@ -2974,28 +1185,6 @@ type TimeoutConfig struct {
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimeoutConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeoutConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeoutConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DurationInSeconds != nil {
-		s.WriteInt32(schemas.TimeoutConfig_durationInSeconds, *v.DurationInSeconds)
-	}
-}
-func (v *TimeoutConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeoutConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeoutConfig_durationInSeconds:
-			v.DurationInSeconds = new(int32)
-			return d.ReadInt32(schemas.TimeoutConfig_durationInSeconds, v.DurationInSeconds)
-		}
-		return nil
-	})
 }
 
 // Time range in 24 hour format
@@ -3014,34 +1203,6 @@ type TimeRange struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteString(schemas.TimeRange_endTime, *v.EndTime)
-	}
-	if v.StartTime != nil {
-		s.WriteString(schemas.TimeRange_startTime, *v.StartTime)
-	}
-}
-func (v *TimeRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeRange_endTime:
-			v.EndTime = new(string)
-			return d.ReadString(schemas.TimeRange_endTime, v.EndTime)
-		case schemas.TimeRange_startTime:
-			v.StartTime = new(string)
-			return d.ReadString(schemas.TimeRange_startTime, v.StartTime)
-		}
-		return nil
-	})
-}
-
 // Time window config
 type TimeWindow struct {
 
@@ -3054,28 +1215,6 @@ type TimeWindow struct {
 	RestrictedPeriods RestrictedPeriods
 
 	noSmithyDocumentSerde
-}
-
-func (v *TimeWindow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TimeWindow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpenHours(s, schemas.TimeWindow_openHours, v.OpenHours)
-	serializeRestrictedPeriods(s, schemas.TimeWindow_restrictedPeriods, v.RestrictedPeriods)
-}
-func (v *TimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeWindow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeWindow_openHours:
-			return deserializeOpenHours(d, schemas.TimeWindow_openHours, &v.OpenHours)
-		case schemas.TimeWindow_restrictedPeriods:
-			return deserializeRestrictedPeriods(d, schemas.TimeWindow_restrictedPeriods, &v.RestrictedPeriods)
-		}
-		return nil
-	})
 }
 
 // WhatsApp Channel Subtype config
@@ -3096,39 +1235,6 @@ type WhatsAppChannelSubtypeConfig struct {
 	Capacity *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *WhatsAppChannelSubtypeConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WhatsAppChannelSubtypeConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WhatsAppChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != nil {
-		s.WriteFloat64(schemas.WhatsAppChannelSubtypeConfig_capacity, *v.Capacity)
-	}
-	if v.DefaultOutboundConfig != nil {
-		s.WriteStruct(schemas.WhatsAppChannelSubtypeConfig_defaultOutboundConfig)
-		v.DefaultOutboundConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeWhatsAppOutboundMode(s, schemas.WhatsAppChannelSubtypeConfig_outboundMode, v.OutboundMode)
-}
-func (v *WhatsAppChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WhatsAppChannelSubtypeConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WhatsAppChannelSubtypeConfig_capacity:
-			v.Capacity = new(float64)
-			return d.ReadFloat64(schemas.WhatsAppChannelSubtypeConfig_capacity, v.Capacity)
-		case schemas.WhatsAppChannelSubtypeConfig_defaultOutboundConfig:
-			v.DefaultOutboundConfig = &WhatsAppOutboundConfig{}
-			return v.DefaultOutboundConfig.Deserialize(d)
-		case schemas.WhatsAppChannelSubtypeConfig_outboundMode:
-			return deserializeWhatsAppOutboundMode(d, schemas.WhatsAppChannelSubtypeConfig_outboundMode, &v.OutboundMode)
-		}
-		return nil
-	})
 }
 
 // Parameters for the WhatsApp Channel Subtype
@@ -3155,43 +1261,6 @@ type WhatsAppChannelSubtypeParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WhatsAppChannelSubtypeParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WhatsAppChannelSubtypeParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WhatsAppChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourcePhoneNumberArn != nil {
-		s.WriteString(schemas.WhatsAppChannelSubtypeParameters_connectSourcePhoneNumberArn, *v.ConnectSourcePhoneNumberArn)
-	}
-	if v.DestinationPhoneNumber != nil {
-		s.WriteString(schemas.WhatsAppChannelSubtypeParameters_destinationPhoneNumber, *v.DestinationPhoneNumber)
-	}
-	if v.TemplateArn != nil {
-		s.WriteString(schemas.WhatsAppChannelSubtypeParameters_templateArn, *v.TemplateArn)
-	}
-	serializeAttributes(s, schemas.WhatsAppChannelSubtypeParameters_templateParameters, v.TemplateParameters)
-}
-func (v *WhatsAppChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WhatsAppChannelSubtypeParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WhatsAppChannelSubtypeParameters_connectSourcePhoneNumberArn:
-			v.ConnectSourcePhoneNumberArn = new(string)
-			return d.ReadString(schemas.WhatsAppChannelSubtypeParameters_connectSourcePhoneNumberArn, v.ConnectSourcePhoneNumberArn)
-		case schemas.WhatsAppChannelSubtypeParameters_destinationPhoneNumber:
-			v.DestinationPhoneNumber = new(string)
-			return d.ReadString(schemas.WhatsAppChannelSubtypeParameters_destinationPhoneNumber, v.DestinationPhoneNumber)
-		case schemas.WhatsAppChannelSubtypeParameters_templateArn:
-			v.TemplateArn = new(string)
-			return d.ReadString(schemas.WhatsAppChannelSubtypeParameters_templateArn, v.TemplateArn)
-		case schemas.WhatsAppChannelSubtypeParameters_templateParameters:
-			return deserializeAttributes(d, schemas.WhatsAppChannelSubtypeParameters_templateParameters, &v.TemplateParameters)
-		}
-		return nil
-	})
-}
-
 // Default WhatsApp Outbound config
 type WhatsAppOutboundConfig struct {
 
@@ -3206,34 +1275,6 @@ type WhatsAppOutboundConfig struct {
 	WisdomTemplateArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *WhatsAppOutboundConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WhatsAppOutboundConfig)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WhatsAppOutboundConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConnectSourcePhoneNumberArn != nil {
-		s.WriteString(schemas.WhatsAppOutboundConfig_connectSourcePhoneNumberArn, *v.ConnectSourcePhoneNumberArn)
-	}
-	if v.WisdomTemplateArn != nil {
-		s.WriteString(schemas.WhatsAppOutboundConfig_wisdomTemplateArn, *v.WisdomTemplateArn)
-	}
-}
-func (v *WhatsAppOutboundConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WhatsAppOutboundConfig, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WhatsAppOutboundConfig_connectSourcePhoneNumberArn:
-			v.ConnectSourcePhoneNumberArn = new(string)
-			return d.ReadString(schemas.WhatsAppOutboundConfig_connectSourcePhoneNumberArn, v.ConnectSourcePhoneNumberArn)
-		case schemas.WhatsAppOutboundConfig_wisdomTemplateArn:
-			v.WisdomTemplateArn = new(string)
-			return d.ReadString(schemas.WhatsAppOutboundConfig_wisdomTemplateArn, v.WisdomTemplateArn)
-		}
-		return nil
-	})
 }
 
 // WhatsApp Outbound Mode
@@ -3253,14 +1294,6 @@ type WhatsAppOutboundModeMemberAgentless struct {
 }
 
 func (*WhatsAppOutboundModeMemberAgentless) isWhatsAppOutboundMode() {}
-func (v *WhatsAppOutboundModeMemberAgentless) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WhatsAppOutboundMode_agentless)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *WhatsAppOutboundModeMemberAgentless) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,21 +41,6 @@ type DeletePermissionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePermissionGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeletePermissionGroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeletePermissionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeletePermissionGroupRequest_clientToken, *v.ClientToken)
-	}
-	if v.PermissionGroupId != nil {
-		s.WriteString(schemas.DeletePermissionGroupRequest_permissionGroupId, *v.PermissionGroupId)
-	}
-}
-
 type DeletePermissionGroupOutput struct {
 
 	// The unique identifier for the deleted permission group.
@@ -69,24 +52,16 @@ type DeletePermissionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeletePermissionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeletePermissionGroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeletePermissionGroupResponse_permissionGroupId:
-			v.PermissionGroupId = new(string)
-			return d.ReadString(schemas.DeletePermissionGroupResponse_permissionGroupId, v.PermissionGroupId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeletePermissionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionGroup, schemas.DeletePermissionGroupRequest, schemas.DeletePermissionGroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePermissionGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionGroup, schemas.DeletePermissionGroupRequest, schemas.DeletePermissionGroupResponse), output: &DeletePermissionGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePermissionGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePermissionGroup"); err != nil {

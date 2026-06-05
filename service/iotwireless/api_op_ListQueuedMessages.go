@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,27 +48,6 @@ type ListQueuedMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQueuedMessagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListQueuedMessagesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListQueuedMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.ListQueuedMessagesRequest_Id, *v.Id)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListQueuedMessagesRequest_MaxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListQueuedMessagesRequest_NextToken, *v.NextToken)
-	}
-	if v.WirelessDeviceType != "" {
-		s.WriteString(schemas.ListQueuedMessagesRequest_WirelessDeviceType, string(v.WirelessDeviceType))
-	}
-}
-
 type ListQueuedMessagesOutput struct {
 
 	// The messages in the downlink queue.
@@ -86,26 +63,16 @@ type ListQueuedMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQueuedMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListQueuedMessagesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListQueuedMessagesResponse_DownlinkQueueMessagesList:
-			return deserializeDownlinkQueueMessagesList(d, schemas.ListQueuedMessagesResponse_DownlinkQueueMessagesList, &v.DownlinkQueueMessagesList)
-		case schemas.ListQueuedMessagesResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListQueuedMessagesResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListQueuedMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueuedMessages, schemas.ListQueuedMessagesRequest, schemas.ListQueuedMessagesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueuedMessages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueuedMessages, schemas.ListQueuedMessagesRequest, schemas.ListQueuedMessagesResponse), output: &ListQueuedMessagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueuedMessages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQueuedMessages"); err != nil {

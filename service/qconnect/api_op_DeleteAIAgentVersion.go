@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type DeleteAIAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAIAgentVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAIAgentVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAIAgentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AiAgentId != nil {
-		s.WriteString(schemas.DeleteAIAgentVersionRequest_aiAgentId, *v.AiAgentId)
-	}
-	if v.AssistantId != nil {
-		s.WriteString(schemas.DeleteAIAgentVersionRequest_assistantId, *v.AssistantId)
-	}
-	if v.VersionNumber != nil {
-		s.WriteInt64(schemas.DeleteAIAgentVersionRequest_versionNumber, *v.VersionNumber)
-	}
-}
-
 type DeleteAIAgentVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,21 +55,16 @@ type DeleteAIAgentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAIAgentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAIAgentVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAIAgentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIAgentVersion, schemas.DeleteAIAgentVersionRequest, schemas.DeleteAIAgentVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAIAgentVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIAgentVersion, schemas.DeleteAIAgentVersionRequest, schemas.DeleteAIAgentVersionResponse), output: &DeleteAIAgentVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAIAgentVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAIAgentVersion"); err != nil {

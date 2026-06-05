@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,18 +35,6 @@ type DescribeScheduleInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeScheduleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeScheduleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeScheduleRequest_Name, *v.Name)
-	}
 }
 
 type DescribeScheduleOutput struct {
@@ -91,46 +77,16 @@ type DescribeScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeScheduleResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeScheduleResponse_CreateDate:
-			v.CreateDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeScheduleResponse_CreateDate, v.CreateDate)
-		case schemas.DescribeScheduleResponse_CreatedBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.DescribeScheduleResponse_CreatedBy, v.CreatedBy)
-		case schemas.DescribeScheduleResponse_CronExpression:
-			v.CronExpression = new(string)
-			return d.ReadString(schemas.DescribeScheduleResponse_CronExpression, v.CronExpression)
-		case schemas.DescribeScheduleResponse_JobNames:
-			return deserializeJobNameList(d, schemas.DescribeScheduleResponse_JobNames, &v.JobNames)
-		case schemas.DescribeScheduleResponse_LastModifiedBy:
-			v.LastModifiedBy = new(string)
-			return d.ReadString(schemas.DescribeScheduleResponse_LastModifiedBy, v.LastModifiedBy)
-		case schemas.DescribeScheduleResponse_LastModifiedDate:
-			v.LastModifiedDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeScheduleResponse_LastModifiedDate, v.LastModifiedDate)
-		case schemas.DescribeScheduleResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeScheduleResponse_Name, v.Name)
-		case schemas.DescribeScheduleResponse_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.DescribeScheduleResponse_ResourceArn, v.ResourceArn)
-		case schemas.DescribeScheduleResponse_Tags:
-			return deserializeTagMap(d, schemas.DescribeScheduleResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedule, schemas.DescribeScheduleRequest, schemas.DescribeScheduleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSchedule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedule, schemas.DescribeScheduleRequest, schemas.DescribeScheduleResponse), output: &DescribeScheduleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSchedule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSchedule"); err != nil {

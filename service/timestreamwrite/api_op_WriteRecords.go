@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -101,27 +99,6 @@ type WriteRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WriteRecordsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WriteRecordsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WriteRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CommonAttributes != nil {
-		s.WriteStruct(schemas.WriteRecordsRequest_CommonAttributes)
-		v.CommonAttributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.WriteRecordsRequest_DatabaseName, *v.DatabaseName)
-	}
-	serializeRecords(s, schemas.WriteRecordsRequest_Records, v.Records)
-	if v.TableName != nil {
-		s.WriteString(schemas.WriteRecordsRequest_TableName, *v.TableName)
-	}
-}
-
 type WriteRecordsOutput struct {
 
 	// Information on the records ingested by this request.
@@ -133,24 +110,16 @@ type WriteRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *WriteRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WriteRecordsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WriteRecordsResponse_RecordsIngested:
-			v.RecordsIngested = &types.RecordsIngested{}
-			return v.RecordsIngested.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationWriteRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.WriteRecords, schemas.WriteRecordsRequest, schemas.WriteRecordsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpWriteRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.WriteRecords, schemas.WriteRecordsRequest, schemas.WriteRecordsResponse), output: &WriteRecordsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpWriteRecords{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "WriteRecords"); err != nil {

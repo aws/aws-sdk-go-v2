@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetManagedThingInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetManagedThingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetManagedThingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetManagedThingRequest_Identifier, *v.Identifier)
-	}
 }
 
 type GetManagedThingOutput struct {
@@ -160,112 +146,16 @@ type GetManagedThingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetManagedThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetManagedThingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetManagedThingResponse_ActivatedAt:
-			v.ActivatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetManagedThingResponse_ActivatedAt, v.ActivatedAt)
-		case schemas.GetManagedThingResponse_AdvertisedProductId:
-			v.AdvertisedProductId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_AdvertisedProductId, v.AdvertisedProductId)
-		case schemas.GetManagedThingResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Arn, v.Arn)
-		case schemas.GetManagedThingResponse_Brand:
-			v.Brand = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Brand, v.Brand)
-		case schemas.GetManagedThingResponse_Classification:
-			v.Classification = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Classification, v.Classification)
-		case schemas.GetManagedThingResponse_ConnectorDestinationId:
-			v.ConnectorDestinationId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_ConnectorDestinationId, v.ConnectorDestinationId)
-		case schemas.GetManagedThingResponse_ConnectorDeviceId:
-			v.ConnectorDeviceId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_ConnectorDeviceId, v.ConnectorDeviceId)
-		case schemas.GetManagedThingResponse_ConnectorPolicyId:
-			v.ConnectorPolicyId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_ConnectorPolicyId, v.ConnectorPolicyId)
-		case schemas.GetManagedThingResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetManagedThingResponse_CreatedAt, v.CreatedAt)
-		case schemas.GetManagedThingResponse_CredentialLockerId:
-			v.CredentialLockerId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_CredentialLockerId, v.CredentialLockerId)
-		case schemas.GetManagedThingResponse_DeviceSpecificKey:
-			v.DeviceSpecificKey = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_DeviceSpecificKey, v.DeviceSpecificKey)
-		case schemas.GetManagedThingResponse_HubNetworkMode:
-			var ev string
-			if err := d.ReadString(schemas.GetManagedThingResponse_HubNetworkMode, &ev); err != nil {
-				return err
-			}
-			v.HubNetworkMode = types.HubNetworkMode(ev)
-			return nil
-		case schemas.GetManagedThingResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Id, v.Id)
-		case schemas.GetManagedThingResponse_InternationalArticleNumber:
-			v.InternationalArticleNumber = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_InternationalArticleNumber, v.InternationalArticleNumber)
-		case schemas.GetManagedThingResponse_MacAddress:
-			v.MacAddress = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_MacAddress, v.MacAddress)
-		case schemas.GetManagedThingResponse_MetaData:
-			return deserializeMetaData(d, schemas.GetManagedThingResponse_MetaData, &v.MetaData)
-		case schemas.GetManagedThingResponse_Model:
-			v.Model = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Model, v.Model)
-		case schemas.GetManagedThingResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Name, v.Name)
-		case schemas.GetManagedThingResponse_Owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_Owner, v.Owner)
-		case schemas.GetManagedThingResponse_ParentControllerId:
-			v.ParentControllerId = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_ParentControllerId, v.ParentControllerId)
-		case schemas.GetManagedThingResponse_ProvisioningStatus:
-			var ev string
-			if err := d.ReadString(schemas.GetManagedThingResponse_ProvisioningStatus, &ev); err != nil {
-				return err
-			}
-			v.ProvisioningStatus = types.ProvisioningStatus(ev)
-			return nil
-		case schemas.GetManagedThingResponse_Role:
-			var ev string
-			if err := d.ReadString(schemas.GetManagedThingResponse_Role, &ev); err != nil {
-				return err
-			}
-			v.Role = types.Role(ev)
-			return nil
-		case schemas.GetManagedThingResponse_SerialNumber:
-			v.SerialNumber = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_SerialNumber, v.SerialNumber)
-		case schemas.GetManagedThingResponse_Tags:
-			return deserializeTagsMap(d, schemas.GetManagedThingResponse_Tags, &v.Tags)
-		case schemas.GetManagedThingResponse_UniversalProductCode:
-			v.UniversalProductCode = new(string)
-			return d.ReadString(schemas.GetManagedThingResponse_UniversalProductCode, v.UniversalProductCode)
-		case schemas.GetManagedThingResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetManagedThingResponse_UpdatedAt, v.UpdatedAt)
-		case schemas.GetManagedThingResponse_WiFiSimpleSetupConfiguration:
-			v.WiFiSimpleSetupConfiguration = &types.WiFiSimpleSetupConfiguration{}
-			return v.WiFiSimpleSetupConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetManagedThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThing, schemas.GetManagedThingRequest, schemas.GetManagedThingResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedThing{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedThing, schemas.GetManagedThingRequest, schemas.GetManagedThingResponse), output: &GetManagedThingOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedThing{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedThing"); err != nil {

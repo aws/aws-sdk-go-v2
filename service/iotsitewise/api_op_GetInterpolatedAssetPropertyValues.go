@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -152,54 +150,6 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInterpolatedAssetPropertyValuesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetInterpolatedAssetPropertyValuesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetInterpolatedAssetPropertyValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetId != nil {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_assetId, *v.AssetId)
-	}
-	if v.EndTimeInSeconds != nil {
-		s.WriteInt64(schemas.GetInterpolatedAssetPropertyValuesRequest_endTimeInSeconds, *v.EndTimeInSeconds)
-	}
-	if v.EndTimeOffsetInNanos != nil {
-		s.WriteInt32(schemas.GetInterpolatedAssetPropertyValuesRequest_endTimeOffsetInNanos, *v.EndTimeOffsetInNanos)
-	}
-	if v.IntervalInSeconds != nil {
-		s.WriteInt64(schemas.GetInterpolatedAssetPropertyValuesRequest_intervalInSeconds, *v.IntervalInSeconds)
-	}
-	if v.IntervalWindowInSeconds != nil {
-		s.WriteInt64(schemas.GetInterpolatedAssetPropertyValuesRequest_intervalWindowInSeconds, *v.IntervalWindowInSeconds)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetInterpolatedAssetPropertyValuesRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_nextToken, *v.NextToken)
-	}
-	if v.PropertyAlias != nil {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_propertyAlias, *v.PropertyAlias)
-	}
-	if v.PropertyId != nil {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_propertyId, *v.PropertyId)
-	}
-	if v.Quality != "" {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_quality, string(v.Quality))
-	}
-	if v.StartTimeInSeconds != nil {
-		s.WriteInt64(schemas.GetInterpolatedAssetPropertyValuesRequest_startTimeInSeconds, *v.StartTimeInSeconds)
-	}
-	if v.StartTimeOffsetInNanos != nil {
-		s.WriteInt32(schemas.GetInterpolatedAssetPropertyValuesRequest_startTimeOffsetInNanos, *v.StartTimeOffsetInNanos)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesRequest_type, *v.Type)
-	}
-}
-
 type GetInterpolatedAssetPropertyValuesOutput struct {
 
 	// The requested interpolated values.
@@ -217,26 +167,16 @@ type GetInterpolatedAssetPropertyValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetInterpolatedAssetPropertyValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetInterpolatedAssetPropertyValuesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetInterpolatedAssetPropertyValuesResponse_interpolatedAssetPropertyValues:
-			return deserializeInterpolatedAssetPropertyValues(d, schemas.GetInterpolatedAssetPropertyValuesResponse_interpolatedAssetPropertyValues, &v.InterpolatedAssetPropertyValues)
-		case schemas.GetInterpolatedAssetPropertyValuesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetInterpolatedAssetPropertyValuesResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetInterpolatedAssetPropertyValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInterpolatedAssetPropertyValues, schemas.GetInterpolatedAssetPropertyValuesRequest, schemas.GetInterpolatedAssetPropertyValuesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInterpolatedAssetPropertyValues{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInterpolatedAssetPropertyValues, schemas.GetInterpolatedAssetPropertyValuesRequest, schemas.GetInterpolatedAssetPropertyValuesResponse), output: &GetInterpolatedAssetPropertyValuesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInterpolatedAssetPropertyValues{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInterpolatedAssetPropertyValues"); err != nil {

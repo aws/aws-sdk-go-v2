@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,26 +45,6 @@ type GetObjectInformationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetObjectInformationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetObjectInformationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetObjectInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConsistencyLevel != "" {
-		s.WriteString(schemas.GetObjectInformationRequest_ConsistencyLevel, string(v.ConsistencyLevel))
-	}
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.GetObjectInformationRequest_DirectoryArn, *v.DirectoryArn)
-	}
-	if v.ObjectReference != nil {
-		s.WriteStruct(schemas.GetObjectInformationRequest_ObjectReference)
-		v.ObjectReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type GetObjectInformationOutput struct {
 
 	// The ObjectIdentifier of the specified object.
@@ -83,26 +61,16 @@ type GetObjectInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetObjectInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetObjectInformationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetObjectInformationResponse_ObjectIdentifier:
-			v.ObjectIdentifier = new(string)
-			return d.ReadString(schemas.GetObjectInformationResponse_ObjectIdentifier, v.ObjectIdentifier)
-		case schemas.GetObjectInformationResponse_SchemaFacets:
-			return deserializeSchemaFacetList(d, schemas.GetObjectInformationResponse_SchemaFacets, &v.SchemaFacets)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetObjectInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectInformation, schemas.GetObjectInformationRequest, schemas.GetObjectInformationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetObjectInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObjectInformation, schemas.GetObjectInformationRequest, schemas.GetObjectInformationResponse), output: &GetObjectInformationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetObjectInformation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetObjectInformation"); err != nil {

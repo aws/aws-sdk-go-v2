@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,51 +52,6 @@ type RegisterPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterPackageVersionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MarkLatest != false {
-		s.WriteBool(schemas.RegisterPackageVersionRequest_MarkLatest, v.MarkLatest)
-	}
-	if v.OwnerAccount != nil {
-		s.WriteString(schemas.RegisterPackageVersionRequest_OwnerAccount, *v.OwnerAccount)
-	}
-	if v.PackageId != nil {
-		s.WriteString(schemas.RegisterPackageVersionRequest_PackageId, *v.PackageId)
-	}
-	if v.PackageVersion != nil {
-		s.WriteString(schemas.RegisterPackageVersionRequest_PackageVersion, *v.PackageVersion)
-	}
-	if v.PatchVersion != nil {
-		s.WriteString(schemas.RegisterPackageVersionRequest_PatchVersion, *v.PatchVersion)
-	}
-}
-func (v *RegisterPackageVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterPackageVersionRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegisterPackageVersionRequest_MarkLatest:
-			return d.ReadBool(schemas.RegisterPackageVersionRequest_MarkLatest, &v.MarkLatest)
-		case schemas.RegisterPackageVersionRequest_OwnerAccount:
-			v.OwnerAccount = new(string)
-			return d.ReadString(schemas.RegisterPackageVersionRequest_OwnerAccount, v.OwnerAccount)
-		case schemas.RegisterPackageVersionRequest_PackageId:
-			v.PackageId = new(string)
-			return d.ReadString(schemas.RegisterPackageVersionRequest_PackageId, v.PackageId)
-		case schemas.RegisterPackageVersionRequest_PackageVersion:
-			v.PackageVersion = new(string)
-			return d.ReadString(schemas.RegisterPackageVersionRequest_PackageVersion, v.PackageVersion)
-		case schemas.RegisterPackageVersionRequest_PatchVersion:
-			v.PatchVersion = new(string)
-			return d.ReadString(schemas.RegisterPackageVersionRequest_PatchVersion, v.PatchVersion)
-		}
-		return nil
-	})
-}
-
 type RegisterPackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -106,29 +59,16 @@ type RegisterPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegisterPackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegisterPackageVersionResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegisterPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *RegisterPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegisterPackageVersionResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRegisterPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPackageVersion, schemas.RegisterPackageVersionRequest, schemas.RegisterPackageVersionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterPackageVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPackageVersion, schemas.RegisterPackageVersionRequest, schemas.RegisterPackageVersionResponse), output: &RegisterPackageVersionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterPackageVersion{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterPackageVersion"); err != nil {

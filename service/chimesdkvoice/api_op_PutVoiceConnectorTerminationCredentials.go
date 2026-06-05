@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,19 +40,6 @@ type PutVoiceConnectorTerminationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorTerminationCredentialsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutVoiceConnectorTerminationCredentialsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutVoiceConnectorTerminationCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCredentialList(s, schemas.PutVoiceConnectorTerminationCredentialsRequest_Credentials, v.Credentials)
-	if v.VoiceConnectorId != nil {
-		s.WriteString(schemas.PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId, *v.VoiceConnectorId)
-	}
-}
-
 type PutVoiceConnectorTerminationCredentialsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,29 +47,16 @@ type PutVoiceConnectorTerminationCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutVoiceConnectorTerminationCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutVoiceConnectorTerminationCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutVoiceConnectorTerminationCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutVoiceConnectorTerminationCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorTerminationCredentials, schemas.PutVoiceConnectorTerminationCredentialsRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorTerminationCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorTerminationCredentials, schemas.PutVoiceConnectorTerminationCredentialsRequest, nil), output: &PutVoiceConnectorTerminationCredentialsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorTerminationCredentials{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorTerminationCredentials"); err != nil {

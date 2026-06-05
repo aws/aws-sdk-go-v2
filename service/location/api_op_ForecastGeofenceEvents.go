@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -97,38 +95,6 @@ type ForecastGeofenceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ForecastGeofenceEventsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ForecastGeofenceEventsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ForecastGeofenceEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.ForecastGeofenceEventsRequest_CollectionName, *v.CollectionName)
-	}
-	if v.DeviceState != nil {
-		s.WriteStruct(schemas.ForecastGeofenceEventsRequest_DeviceState)
-		v.DeviceState.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DistanceUnit != "" {
-		s.WriteString(schemas.ForecastGeofenceEventsRequest_DistanceUnit, string(v.DistanceUnit))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ForecastGeofenceEventsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ForecastGeofenceEventsRequest_NextToken, *v.NextToken)
-	}
-	if v.SpeedUnit != "" {
-		s.WriteString(schemas.ForecastGeofenceEventsRequest_SpeedUnit, string(v.SpeedUnit))
-	}
-	if v.TimeHorizonMinutes != nil {
-		s.WriteFloat64(schemas.ForecastGeofenceEventsRequest_TimeHorizonMinutes, *v.TimeHorizonMinutes)
-	}
-}
-
 type ForecastGeofenceEventsOutput struct {
 
 	// The distance unit for the forecasted events.
@@ -156,40 +122,16 @@ type ForecastGeofenceEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ForecastGeofenceEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ForecastGeofenceEventsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ForecastGeofenceEventsResponse_DistanceUnit:
-			var ev string
-			if err := d.ReadString(schemas.ForecastGeofenceEventsResponse_DistanceUnit, &ev); err != nil {
-				return err
-			}
-			v.DistanceUnit = types.DistanceUnit(ev)
-			return nil
-		case schemas.ForecastGeofenceEventsResponse_ForecastedEvents:
-			return deserializeForecastedEventsList(d, schemas.ForecastGeofenceEventsResponse_ForecastedEvents, &v.ForecastedEvents)
-		case schemas.ForecastGeofenceEventsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ForecastGeofenceEventsResponse_NextToken, v.NextToken)
-		case schemas.ForecastGeofenceEventsResponse_SpeedUnit:
-			var ev string
-			if err := d.ReadString(schemas.ForecastGeofenceEventsResponse_SpeedUnit, &ev); err != nil {
-				return err
-			}
-			v.SpeedUnit = types.SpeedUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationForecastGeofenceEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForecastGeofenceEvents, schemas.ForecastGeofenceEventsRequest, schemas.ForecastGeofenceEventsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpForecastGeofenceEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForecastGeofenceEvents, schemas.ForecastGeofenceEventsRequest, schemas.ForecastGeofenceEventsResponse), output: &ForecastGeofenceEventsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpForecastGeofenceEvents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ForecastGeofenceEvents"); err != nil {

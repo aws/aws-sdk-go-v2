@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,28 +64,6 @@ type CreateLakeFormationIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLakeFormationIdentityCenterConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CatalogId != nil {
-		s.WriteString(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_CatalogId, *v.CatalogId)
-	}
-	if v.ExternalFiltering != nil {
-		s.WriteStruct(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ExternalFiltering)
-		v.ExternalFiltering.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_InstanceArn, *v.InstanceArn)
-	}
-	serializeServiceIntegrationList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
-	serializeDataLakePrincipalList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
-}
-
 type CreateLakeFormationIdentityCenterConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Lake Formation application integrated
@@ -100,24 +76,16 @@ type CreateLakeFormationIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLakeFormationIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLakeFormationIdentityCenterConfigurationResponse_ApplicationArn:
-			v.ApplicationArn = new(string)
-			return d.ReadString(schemas.CreateLakeFormationIdentityCenterConfigurationResponse_ApplicationArn, v.ApplicationArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationIdentityCenterConfiguration, schemas.CreateLakeFormationIdentityCenterConfigurationRequest, schemas.CreateLakeFormationIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationIdentityCenterConfiguration, schemas.CreateLakeFormationIdentityCenterConfigurationRequest, schemas.CreateLakeFormationIdentityCenterConfigurationResponse), output: &CreateLakeFormationIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLakeFormationIdentityCenterConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLakeFormationIdentityCenterConfiguration"); err != nil {

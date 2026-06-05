@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -83,39 +81,6 @@ type CreateLabelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLabelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLabelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateLabelRequest_ClientToken, *v.ClientToken)
-	}
-	if v.EndTime != nil {
-		s.WriteTime(schemas.CreateLabelRequest_EndTime, *v.EndTime)
-	}
-	if v.Equipment != nil {
-		s.WriteString(schemas.CreateLabelRequest_Equipment, *v.Equipment)
-	}
-	if v.FaultCode != nil {
-		s.WriteString(schemas.CreateLabelRequest_FaultCode, *v.FaultCode)
-	}
-	if v.LabelGroupName != nil {
-		s.WriteString(schemas.CreateLabelRequest_LabelGroupName, *v.LabelGroupName)
-	}
-	if v.Notes != nil {
-		s.WriteString(schemas.CreateLabelRequest_Notes, *v.Notes)
-	}
-	if v.Rating != "" {
-		s.WriteString(schemas.CreateLabelRequest_Rating, string(v.Rating))
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.CreateLabelRequest_StartTime, *v.StartTime)
-	}
-}
-
 type CreateLabelOutput struct {
 
 	//  The ID of the label that you have created.
@@ -127,24 +92,16 @@ type CreateLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLabelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateLabelResponse_LabelId:
-			v.LabelId = new(string)
-			return d.ReadString(schemas.CreateLabelResponse_LabelId, v.LabelId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLabel, schemas.CreateLabelRequest, schemas.CreateLabelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateLabel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLabel, schemas.CreateLabelRequest, schemas.CreateLabelResponse), output: &CreateLabelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateLabel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLabel"); err != nil {

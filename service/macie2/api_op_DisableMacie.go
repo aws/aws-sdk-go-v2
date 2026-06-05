@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,15 +31,6 @@ type DisableMacieInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableMacieInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisableMacieRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableMacieInput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-
 type DisableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,21 +38,16 @@ type DisableMacieOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableMacieOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisableMacieResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMacie, schemas.DisableMacieRequest, schemas.DisableMacieResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableMacie{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableMacie, schemas.DisableMacieRequest, schemas.DisableMacieResponse), output: &DisableMacieOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableMacie{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableMacie"); err != nil {

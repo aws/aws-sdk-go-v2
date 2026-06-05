@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,18 +41,6 @@ type GetRecommendationInput struct {
 	RecommendationId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetRecommendationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetRecommendationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RecommendationId != nil {
-		s.WriteString(schemas.GetRecommendationRequest_recommendationId, *v.RecommendationId)
-	}
 }
 
 type GetRecommendationOutput struct {
@@ -138,107 +124,16 @@ type GetRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetRecommendationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetRecommendationResponse_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_accountId, v.AccountId)
-		case schemas.GetRecommendationResponse_actionType:
-			var ev string
-			if err := d.ReadString(schemas.GetRecommendationResponse_actionType, &ev); err != nil {
-				return err
-			}
-			v.ActionType = types.ActionType(ev)
-			return nil
-		case schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays:
-			v.CostCalculationLookbackPeriodInDays = new(int32)
-			return d.ReadInt32(schemas.GetRecommendationResponse_costCalculationLookbackPeriodInDays, v.CostCalculationLookbackPeriodInDays)
-		case schemas.GetRecommendationResponse_currencyCode:
-			v.CurrencyCode = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_currencyCode, v.CurrencyCode)
-		case schemas.GetRecommendationResponse_currentResourceDetails:
-			return deserializeResourceDetails(d, schemas.GetRecommendationResponse_currentResourceDetails, &v.CurrentResourceDetails)
-		case schemas.GetRecommendationResponse_currentResourceType:
-			var ev string
-			if err := d.ReadString(schemas.GetRecommendationResponse_currentResourceType, &ev); err != nil {
-				return err
-			}
-			v.CurrentResourceType = types.ResourceType(ev)
-			return nil
-		case schemas.GetRecommendationResponse_estimatedMonthlyCost:
-			v.EstimatedMonthlyCost = new(float64)
-			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedMonthlyCost, v.EstimatedMonthlyCost)
-		case schemas.GetRecommendationResponse_estimatedMonthlySavings:
-			v.EstimatedMonthlySavings = new(float64)
-			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedMonthlySavings, v.EstimatedMonthlySavings)
-		case schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod:
-			v.EstimatedSavingsOverCostCalculationLookbackPeriod = new(float64)
-			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod, v.EstimatedSavingsOverCostCalculationLookbackPeriod)
-		case schemas.GetRecommendationResponse_estimatedSavingsPercentage:
-			v.EstimatedSavingsPercentage = new(float64)
-			return d.ReadFloat64(schemas.GetRecommendationResponse_estimatedSavingsPercentage, v.EstimatedSavingsPercentage)
-		case schemas.GetRecommendationResponse_implementationEffort:
-			var ev string
-			if err := d.ReadString(schemas.GetRecommendationResponse_implementationEffort, &ev); err != nil {
-				return err
-			}
-			v.ImplementationEffort = types.ImplementationEffort(ev)
-			return nil
-		case schemas.GetRecommendationResponse_lastRefreshTimestamp:
-			v.LastRefreshTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetRecommendationResponse_lastRefreshTimestamp, v.LastRefreshTimestamp)
-		case schemas.GetRecommendationResponse_recommendationId:
-			v.RecommendationId = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_recommendationId, v.RecommendationId)
-		case schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays:
-			v.RecommendationLookbackPeriodInDays = new(int32)
-			return d.ReadInt32(schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays, v.RecommendationLookbackPeriodInDays)
-		case schemas.GetRecommendationResponse_recommendedResourceDetails:
-			return deserializeResourceDetails(d, schemas.GetRecommendationResponse_recommendedResourceDetails, &v.RecommendedResourceDetails)
-		case schemas.GetRecommendationResponse_recommendedResourceType:
-			var ev string
-			if err := d.ReadString(schemas.GetRecommendationResponse_recommendedResourceType, &ev); err != nil {
-				return err
-			}
-			v.RecommendedResourceType = types.ResourceType(ev)
-			return nil
-		case schemas.GetRecommendationResponse_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_region, v.Region)
-		case schemas.GetRecommendationResponse_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_resourceArn, v.ResourceArn)
-		case schemas.GetRecommendationResponse_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.GetRecommendationResponse_resourceId, v.ResourceId)
-		case schemas.GetRecommendationResponse_restartNeeded:
-			v.RestartNeeded = new(bool)
-			return d.ReadBool(schemas.GetRecommendationResponse_restartNeeded, v.RestartNeeded)
-		case schemas.GetRecommendationResponse_rollbackPossible:
-			v.RollbackPossible = new(bool)
-			return d.ReadBool(schemas.GetRecommendationResponse_rollbackPossible, v.RollbackPossible)
-		case schemas.GetRecommendationResponse_source:
-			var ev string
-			if err := d.ReadString(schemas.GetRecommendationResponse_source, &ev); err != nil {
-				return err
-			}
-			v.Source = types.Source(ev)
-			return nil
-		case schemas.GetRecommendationResponse_tags:
-			return deserializeTagList(d, schemas.GetRecommendationResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecommendation{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse), output: &GetRecommendationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecommendation{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecommendation"); err != nil {

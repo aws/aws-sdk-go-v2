@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -71,30 +69,6 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainDeliverabilityCampaignsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListDomainDeliverabilityCampaignsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListDomainDeliverabilityCampaignsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndDate != nil {
-		s.WriteTime(schemas.ListDomainDeliverabilityCampaignsRequest_EndDate, *v.EndDate)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListDomainDeliverabilityCampaignsRequest_NextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListDomainDeliverabilityCampaignsRequest_PageSize, *v.PageSize)
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.ListDomainDeliverabilityCampaignsRequest_StartDate, *v.StartDate)
-	}
-	if v.SubscribedDomain != nil {
-		s.WriteString(schemas.ListDomainDeliverabilityCampaignsRequest_SubscribedDomain, *v.SubscribedDomain)
-	}
-}
-
 // An array of objects that provide deliverability data for all the campaigns that
 // used a specific domain to send email during a specified time range. This data is
 // available for a domain only if you enabled the Deliverability dashboard (
@@ -118,26 +92,16 @@ type ListDomainDeliverabilityCampaignsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListDomainDeliverabilityCampaignsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListDomainDeliverabilityCampaignsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns:
-			return deserializeDomainDeliverabilityCampaignList(d, schemas.ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns, &v.DomainDeliverabilityCampaigns)
-		case schemas.ListDomainDeliverabilityCampaignsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListDomainDeliverabilityCampaignsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainDeliverabilityCampaigns, schemas.ListDomainDeliverabilityCampaignsRequest, schemas.ListDomainDeliverabilityCampaignsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainDeliverabilityCampaigns{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainDeliverabilityCampaigns, schemas.ListDomainDeliverabilityCampaignsRequest, schemas.ListDomainDeliverabilityCampaignsResponse), output: &ListDomainDeliverabilityCampaignsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainDeliverabilityCampaigns{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomainDeliverabilityCampaigns"); err != nil {

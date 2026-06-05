@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,34 +76,6 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetDescription != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetDescription, *v.AssetDescription)
-	}
-	if v.AssetExternalId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetExternalId, *v.AssetExternalId)
-	}
-	if v.AssetId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetId, *v.AssetId)
-	}
-	if v.AssetModelId != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetModelId, *v.AssetModelId)
-	}
-	if v.AssetName != nil {
-		s.WriteString(schemas.CreateAssetRequest_assetName, *v.AssetName)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAssetRequest_clientToken, *v.ClientToken)
-	}
-	serializeTagMap(s, schemas.CreateAssetRequest_tags, v.Tags)
-}
-
 type CreateAssetOutput struct {
 
 	// The [ARN] of the asset, which has the following format.
@@ -135,30 +105,16 @@ type CreateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssetResponse_assetArn:
-			v.AssetArn = new(string)
-			return d.ReadString(schemas.CreateAssetResponse_assetArn, v.AssetArn)
-		case schemas.CreateAssetResponse_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.CreateAssetResponse_assetId, v.AssetId)
-		case schemas.CreateAssetResponse_assetStatus:
-			v.AssetStatus = &types.AssetStatus{}
-			return v.AssetStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse), output: &CreateAssetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAsset"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,16 +43,6 @@ type PutGroupingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGroupingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutGroupingConfigurationInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutGroupingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupingAttributeDefinitions(s, schemas.PutGroupingConfigurationInput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
-}
-
 type PutGroupingConfigurationOutput struct {
 
 	// A structure containing the updated grouping configuration, including all
@@ -69,24 +57,16 @@ type PutGroupingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutGroupingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutGroupingConfigurationOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutGroupingConfigurationOutput_GroupingConfiguration:
-			v.GroupingConfiguration = &types.GroupingConfiguration{}
-			return v.GroupingConfiguration.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutGroupingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroupingConfiguration, schemas.PutGroupingConfigurationInput, schemas.PutGroupingConfigurationOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGroupingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroupingConfiguration, schemas.PutGroupingConfigurationInput, schemas.PutGroupingConfigurationOutput), output: &PutGroupingConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGroupingConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGroupingConfiguration"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type DescribeRetrainingSchedulerInput struct {
 	ModelName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeRetrainingSchedulerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ModelName != nil {
-		s.WriteString(schemas.DescribeRetrainingSchedulerRequest_ModelName, *v.ModelName)
-	}
 }
 
 type DescribeRetrainingSchedulerOutput struct {
@@ -96,56 +82,16 @@ type DescribeRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeRetrainingSchedulerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeRetrainingSchedulerResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeRetrainingSchedulerResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeRetrainingSchedulerResponse_LookbackWindow:
-			v.LookbackWindow = new(string)
-			return d.ReadString(schemas.DescribeRetrainingSchedulerResponse_LookbackWindow, v.LookbackWindow)
-		case schemas.DescribeRetrainingSchedulerResponse_ModelArn:
-			v.ModelArn = new(string)
-			return d.ReadString(schemas.DescribeRetrainingSchedulerResponse_ModelArn, v.ModelArn)
-		case schemas.DescribeRetrainingSchedulerResponse_ModelName:
-			v.ModelName = new(string)
-			return d.ReadString(schemas.DescribeRetrainingSchedulerResponse_ModelName, v.ModelName)
-		case schemas.DescribeRetrainingSchedulerResponse_PromoteMode:
-			var ev string
-			if err := d.ReadString(schemas.DescribeRetrainingSchedulerResponse_PromoteMode, &ev); err != nil {
-				return err
-			}
-			v.PromoteMode = types.ModelPromoteMode(ev)
-			return nil
-		case schemas.DescribeRetrainingSchedulerResponse_RetrainingFrequency:
-			v.RetrainingFrequency = new(string)
-			return d.ReadString(schemas.DescribeRetrainingSchedulerResponse_RetrainingFrequency, v.RetrainingFrequency)
-		case schemas.DescribeRetrainingSchedulerResponse_RetrainingStartDate:
-			v.RetrainingStartDate = new(time.Time)
-			return d.ReadTime(schemas.DescribeRetrainingSchedulerResponse_RetrainingStartDate, v.RetrainingStartDate)
-		case schemas.DescribeRetrainingSchedulerResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeRetrainingSchedulerResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.RetrainingSchedulerStatus(ev)
-			return nil
-		case schemas.DescribeRetrainingSchedulerResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeRetrainingSchedulerResponse_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRetrainingScheduler, schemas.DescribeRetrainingSchedulerRequest, schemas.DescribeRetrainingSchedulerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRetrainingScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRetrainingScheduler, schemas.DescribeRetrainingSchedulerRequest, schemas.DescribeRetrainingSchedulerResponse), output: &DescribeRetrainingSchedulerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRetrainingScheduler{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRetrainingScheduler"); err != nil {

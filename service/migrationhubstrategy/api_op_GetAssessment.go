@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,28 +37,6 @@ type GetAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssessmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssessmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetAssessmentRequest_id, *v.Id)
-	}
-}
-func (v *GetAssessmentInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssessmentRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssessmentRequest_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAssessmentRequest_id, v.Id)
-		}
-		return nil
-	})
-}
-
 type GetAssessmentOutput struct {
 
 	// List of criteria for assessment.
@@ -78,46 +54,16 @@ type GetAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssessmentResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentTargets(s, schemas.GetAssessmentResponse_assessmentTargets, v.AssessmentTargets)
-	if v.DataCollectionDetails != nil {
-		s.WriteStruct(schemas.GetAssessmentResponse_dataCollectionDetails)
-		v.DataCollectionDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.GetAssessmentResponse_id, *v.Id)
-	}
-}
-func (v *GetAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssessmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssessmentResponse_assessmentTargets:
-			return deserializeAssessmentTargets(d, schemas.GetAssessmentResponse_assessmentTargets, &v.AssessmentTargets)
-		case schemas.GetAssessmentResponse_dataCollectionDetails:
-			v.DataCollectionDetails = &types.DataCollectionDetails{}
-			return v.DataCollectionDetails.Deserialize(d)
-		case schemas.GetAssessmentResponse_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAssessmentResponse_id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessment, schemas.GetAssessmentRequest, schemas.GetAssessmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssessment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessment, schemas.GetAssessmentRequest, schemas.GetAssessmentResponse), output: &GetAssessmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssessment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssessment"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,40 +45,6 @@ type ListEnvironmentVpcsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVpcsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEnvironmentVpcsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEnvironmentVpcsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListEnvironmentVpcsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsRequest_NextToken, *v.NextToken)
-	}
-}
-func (v *ListEnvironmentVpcsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEnvironmentVpcsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier:
-			v.EnvironmentIdentifier = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsRequest_EnvironmentIdentifier, v.EnvironmentIdentifier)
-		case schemas.ListEnvironmentVpcsRequest_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListEnvironmentVpcsRequest_MaxResults, v.MaxResults)
-		case schemas.ListEnvironmentVpcsRequest_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsRequest_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListEnvironmentVpcsOutput struct {
 
 	// The list of EnvironmentVpc objects.
@@ -95,38 +59,16 @@ type ListEnvironmentVpcsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListEnvironmentVpcsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListEnvironmentVpcsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListEnvironmentVpcsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVpcs(s, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, v.EnvironmentVpcList)
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListEnvironmentVpcsResponse_NextToken, *v.NextToken)
-	}
-}
-func (v *ListEnvironmentVpcsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListEnvironmentVpcsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList:
-			return deserializeEnvironmentVpcs(d, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, &v.EnvironmentVpcList)
-		case schemas.ListEnvironmentVpcsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListEnvironmentVpcsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListEnvironmentVpcsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVpcs, schemas.ListEnvironmentVpcsRequest, schemas.ListEnvironmentVpcsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnvironmentVpcs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVpcs, schemas.ListEnvironmentVpcsRequest, schemas.ListEnvironmentVpcsResponse), output: &ListEnvironmentVpcsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnvironmentVpcs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentVpcs"); err != nil {

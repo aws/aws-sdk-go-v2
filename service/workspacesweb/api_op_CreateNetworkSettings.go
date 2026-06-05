@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,24 +65,6 @@ type CreateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNetworkSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateNetworkSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateNetworkSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateNetworkSettingsRequest_clientToken, *v.ClientToken)
-	}
-	serializeSecurityGroupIdList(s, schemas.CreateNetworkSettingsRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateNetworkSettingsRequest_subnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateNetworkSettingsRequest_tags, v.Tags)
-	if v.VpcId != nil {
-		s.WriteString(schemas.CreateNetworkSettingsRequest_vpcId, *v.VpcId)
-	}
-}
-
 type CreateNetworkSettingsOutput struct {
 
 	// The ARN of the network settings.
@@ -98,24 +78,16 @@ type CreateNetworkSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateNetworkSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateNetworkSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateNetworkSettingsResponse_networkSettingsArn:
-			v.NetworkSettingsArn = new(string)
-			return d.ReadString(schemas.CreateNetworkSettingsResponse_networkSettingsArn, v.NetworkSettingsArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateNetworkSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkSettings, schemas.CreateNetworkSettingsRequest, schemas.CreateNetworkSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetworkSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetworkSettings, schemas.CreateNetworkSettingsRequest, schemas.CreateNetworkSettingsResponse), output: &CreateNetworkSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetworkSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNetworkSettings"); err != nil {

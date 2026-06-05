@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -87,52 +85,6 @@ type GetMapTileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapTileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapTileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapTileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.GetMapTileRequest_Key, *v.Key)
-	}
-	if v.MapName != nil {
-		s.WriteString(schemas.GetMapTileRequest_MapName, *v.MapName)
-	}
-	if v.X != nil {
-		s.WriteString(schemas.GetMapTileRequest_X, *v.X)
-	}
-	if v.Y != nil {
-		s.WriteString(schemas.GetMapTileRequest_Y, *v.Y)
-	}
-	if v.Z != nil {
-		s.WriteString(schemas.GetMapTileRequest_Z, *v.Z)
-	}
-}
-func (v *GetMapTileInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapTileRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapTileRequest_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.GetMapTileRequest_Key, v.Key)
-		case schemas.GetMapTileRequest_MapName:
-			v.MapName = new(string)
-			return d.ReadString(schemas.GetMapTileRequest_MapName, v.MapName)
-		case schemas.GetMapTileRequest_X:
-			v.X = new(string)
-			return d.ReadString(schemas.GetMapTileRequest_X, v.X)
-		case schemas.GetMapTileRequest_Y:
-			v.Y = new(string)
-			return d.ReadString(schemas.GetMapTileRequest_Y, v.Y)
-		case schemas.GetMapTileRequest_Z:
-			v.Z = new(string)
-			return d.ReadString(schemas.GetMapTileRequest_Z, v.Z)
-		}
-		return nil
-	})
-}
-
 type GetMapTileOutput struct {
 
 	// Contains Mapbox Vector Tile (MVT) data.
@@ -150,46 +102,16 @@ type GetMapTileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMapTileOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMapTileResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMapTileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Blob != nil {
-		s.WriteBlob(schemas.GetMapTileResponse_Blob, v.Blob)
-	}
-	if v.CacheControl != nil {
-		s.WriteString(schemas.GetMapTileResponse_CacheControl, *v.CacheControl)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.GetMapTileResponse_ContentType, *v.ContentType)
-	}
-}
-func (v *GetMapTileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMapTileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMapTileResponse_Blob:
-			return d.ReadBlob(schemas.GetMapTileResponse_Blob, &v.Blob)
-		case schemas.GetMapTileResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.GetMapTileResponse_CacheControl, v.CacheControl)
-		case schemas.GetMapTileResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.GetMapTileResponse_ContentType, v.ContentType)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapTile, schemas.GetMapTileRequest, schemas.GetMapTileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMapTile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMapTile, schemas.GetMapTileRequest, schemas.GetMapTileResponse), output: &GetMapTileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMapTile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMapTile"); err != nil {

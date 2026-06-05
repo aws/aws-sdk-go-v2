@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type DeleteKxClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKxClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteKxClusterRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteKxClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteKxClusterRequest_clientToken, *v.ClientToken)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.DeleteKxClusterRequest_clusterName, *v.ClusterName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.DeleteKxClusterRequest_environmentId, *v.EnvironmentId)
-	}
-}
-
 type DeleteKxClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,21 +51,16 @@ type DeleteKxClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKxClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteKxClusterResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteKxClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxCluster, schemas.DeleteKxClusterRequest, schemas.DeleteKxClusterResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKxCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKxCluster, schemas.DeleteKxClusterRequest, schemas.DeleteKxClusterResponse), output: &DeleteKxClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKxCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKxCluster"); err != nil {

@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +47,6 @@ type DeleteBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBackendAuthInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteBackendAuthRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteBackendAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.DeleteBackendAuthRequest_AppId, *v.AppId)
-	}
-	if v.BackendEnvironmentName != nil {
-		s.WriteString(schemas.DeleteBackendAuthRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
-	}
-	if v.ResourceName != nil {
-		s.WriteString(schemas.DeleteBackendAuthRequest_ResourceName, *v.ResourceName)
-	}
-}
-
 type DeleteBackendAuthOutput struct {
 
 	// The app ID.
@@ -93,39 +73,16 @@ type DeleteBackendAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteBackendAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteBackendAuthResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteBackendAuthResponse_AppId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_AppId, v.AppId)
-		case schemas.DeleteBackendAuthResponse_BackendEnvironmentName:
-			v.BackendEnvironmentName = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_BackendEnvironmentName, v.BackendEnvironmentName)
-		case schemas.DeleteBackendAuthResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_Error, v.Error)
-		case schemas.DeleteBackendAuthResponse_JobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_JobId, v.JobId)
-		case schemas.DeleteBackendAuthResponse_Operation:
-			v.Operation = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_Operation, v.Operation)
-		case schemas.DeleteBackendAuthResponse_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.DeleteBackendAuthResponse_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackendAuth, schemas.DeleteBackendAuthRequest, schemas.DeleteBackendAuthResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackendAuth{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackendAuth, schemas.DeleteBackendAuthRequest, schemas.DeleteBackendAuthResponse), output: &DeleteBackendAuthOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBackendAuth{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBackendAuth"); err != nil {

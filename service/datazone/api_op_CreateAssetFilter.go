@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -83,31 +81,6 @@ type CreateAssetFilterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetFilterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAssetFilterInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAssetFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetIdentifier != nil {
-		s.WriteString(schemas.CreateAssetFilterInput_assetIdentifier, *v.AssetIdentifier)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAssetFilterInput_clientToken, *v.ClientToken)
-	}
-	serializeAssetFilterConfiguration(s, schemas.CreateAssetFilterInput_configuration, v.Configuration)
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAssetFilterInput_description, *v.Description)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.CreateAssetFilterInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAssetFilterInput_name, *v.Name)
-	}
-}
-
 type CreateAssetFilterOutput struct {
 
 	// The ID of the asset.
@@ -160,56 +133,16 @@ type CreateAssetFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAssetFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAssetFilterOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAssetFilterOutput_assetId:
-			v.AssetId = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_assetId, v.AssetId)
-		case schemas.CreateAssetFilterOutput_configuration:
-			return deserializeAssetFilterConfiguration(d, schemas.CreateAssetFilterOutput_configuration, &v.Configuration)
-		case schemas.CreateAssetFilterOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreateAssetFilterOutput_createdAt, v.CreatedAt)
-		case schemas.CreateAssetFilterOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_description, v.Description)
-		case schemas.CreateAssetFilterOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_domainId, v.DomainId)
-		case schemas.CreateAssetFilterOutput_effectiveColumnNames:
-			return deserializeColumnNameList(d, schemas.CreateAssetFilterOutput_effectiveColumnNames, &v.EffectiveColumnNames)
-		case schemas.CreateAssetFilterOutput_effectiveRowFilter:
-			v.EffectiveRowFilter = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_effectiveRowFilter, v.EffectiveRowFilter)
-		case schemas.CreateAssetFilterOutput_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_errorMessage, v.ErrorMessage)
-		case schemas.CreateAssetFilterOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_id, v.Id)
-		case schemas.CreateAssetFilterOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateAssetFilterOutput_name, v.Name)
-		case schemas.CreateAssetFilterOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateAssetFilterOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FilterStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAssetFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetFilter, schemas.CreateAssetFilterInput, schemas.CreateAssetFilterOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetFilter, schemas.CreateAssetFilterInput, schemas.CreateAssetFilterOutput), output: &CreateAssetFilterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssetFilter{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAssetFilter"); err != nil {

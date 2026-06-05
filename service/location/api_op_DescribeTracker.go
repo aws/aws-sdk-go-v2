@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,28 +36,6 @@ type DescribeTrackerInput struct {
 	TrackerName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeTrackerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTrackerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrackerName != nil {
-		s.WriteString(schemas.DescribeTrackerRequest_TrackerName, *v.TrackerName)
-	}
-}
-func (v *DescribeTrackerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTrackerRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTrackerRequest_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.DescribeTrackerRequest_TrackerName, v.TrackerName)
-		}
-		return nil
-	})
 }
 
 type DescribeTrackerOutput struct {
@@ -146,106 +122,16 @@ type DescribeTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeTrackerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeTrackerResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.DescribeTrackerResponse_CreateTime, *v.CreateTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.DescribeTrackerResponse_Description, *v.Description)
-	}
-	if v.EventBridgeEnabled != nil {
-		s.WriteBool(schemas.DescribeTrackerResponse_EventBridgeEnabled, *v.EventBridgeEnabled)
-	}
-	if v.KmsKeyEnableGeospatialQueries != nil {
-		s.WriteBool(schemas.DescribeTrackerResponse_KmsKeyEnableGeospatialQueries, *v.KmsKeyEnableGeospatialQueries)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.DescribeTrackerResponse_KmsKeyId, *v.KmsKeyId)
-	}
-	if v.PositionFiltering != "" {
-		s.WriteString(schemas.DescribeTrackerResponse_PositionFiltering, string(v.PositionFiltering))
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.DescribeTrackerResponse_PricingPlan, string(v.PricingPlan))
-	}
-	if v.PricingPlanDataSource != nil {
-		s.WriteString(schemas.DescribeTrackerResponse_PricingPlanDataSource, *v.PricingPlanDataSource)
-	}
-	serializeTagMap(s, schemas.DescribeTrackerResponse_Tags, v.Tags)
-	if v.TrackerArn != nil {
-		s.WriteString(schemas.DescribeTrackerResponse_TrackerArn, *v.TrackerArn)
-	}
-	if v.TrackerName != nil {
-		s.WriteString(schemas.DescribeTrackerResponse_TrackerName, *v.TrackerName)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.DescribeTrackerResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *DescribeTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeTrackerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeTrackerResponse_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeTrackerResponse_CreateTime, v.CreateTime)
-		case schemas.DescribeTrackerResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeTrackerResponse_Description, v.Description)
-		case schemas.DescribeTrackerResponse_EventBridgeEnabled:
-			v.EventBridgeEnabled = new(bool)
-			return d.ReadBool(schemas.DescribeTrackerResponse_EventBridgeEnabled, v.EventBridgeEnabled)
-		case schemas.DescribeTrackerResponse_KmsKeyEnableGeospatialQueries:
-			v.KmsKeyEnableGeospatialQueries = new(bool)
-			return d.ReadBool(schemas.DescribeTrackerResponse_KmsKeyEnableGeospatialQueries, v.KmsKeyEnableGeospatialQueries)
-		case schemas.DescribeTrackerResponse_KmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.DescribeTrackerResponse_KmsKeyId, v.KmsKeyId)
-		case schemas.DescribeTrackerResponse_PositionFiltering:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTrackerResponse_PositionFiltering, &ev); err != nil {
-				return err
-			}
-			v.PositionFiltering = types.PositionFiltering(ev)
-			return nil
-		case schemas.DescribeTrackerResponse_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.DescribeTrackerResponse_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		case schemas.DescribeTrackerResponse_PricingPlanDataSource:
-			v.PricingPlanDataSource = new(string)
-			return d.ReadString(schemas.DescribeTrackerResponse_PricingPlanDataSource, v.PricingPlanDataSource)
-		case schemas.DescribeTrackerResponse_Tags:
-			return deserializeTagMap(d, schemas.DescribeTrackerResponse_Tags, &v.Tags)
-		case schemas.DescribeTrackerResponse_TrackerArn:
-			v.TrackerArn = new(string)
-			return d.ReadString(schemas.DescribeTrackerResponse_TrackerArn, v.TrackerArn)
-		case schemas.DescribeTrackerResponse_TrackerName:
-			v.TrackerName = new(string)
-			return d.ReadString(schemas.DescribeTrackerResponse_TrackerName, v.TrackerName)
-		case schemas.DescribeTrackerResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeTrackerResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTracker, schemas.DescribeTrackerRequest, schemas.DescribeTrackerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTracker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTracker, schemas.DescribeTrackerRequest, schemas.DescribeTrackerResponse), output: &DescribeTrackerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTracker{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTracker"); err != nil {

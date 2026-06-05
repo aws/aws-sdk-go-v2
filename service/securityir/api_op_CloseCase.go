@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,18 +39,6 @@ type CloseCaseInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloseCaseInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CloseCaseRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CloseCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CaseId != nil {
-		s.WriteString(schemas.CloseCaseRequest_caseId, *v.CaseId)
-	}
-}
-
 type CloseCaseOutput struct {
 
 	// A response element providing responses for requests to CloseCase. This element
@@ -70,31 +56,16 @@ type CloseCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CloseCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CloseCaseResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CloseCaseResponse_caseStatus:
-			var ev string
-			if err := d.ReadString(schemas.CloseCaseResponse_caseStatus, &ev); err != nil {
-				return err
-			}
-			v.CaseStatus = types.CaseStatus(ev)
-			return nil
-		case schemas.CloseCaseResponse_closedDate:
-			v.ClosedDate = new(time.Time)
-			return d.ReadTime(schemas.CloseCaseResponse_closedDate, v.ClosedDate)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCloseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseCase, schemas.CloseCaseRequest, schemas.CloseCaseResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCloseCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseCase, schemas.CloseCaseRequest, schemas.CloseCaseResponse), output: &CloseCaseOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCloseCase{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CloseCase"); err != nil {

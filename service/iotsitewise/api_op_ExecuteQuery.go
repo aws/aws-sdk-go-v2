@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type ExecuteQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecuteQueryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecuteQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_clientToken, *v.ClientToken)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ExecuteQueryRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_nextToken, *v.NextToken)
-	}
-	if v.QueryStatement != nil {
-		s.WriteString(schemas.ExecuteQueryRequest_queryStatement, *v.QueryStatement)
-	}
-}
-
 type ExecuteQueryOutput struct {
 
 	// Represents a single column in the query results.
@@ -95,28 +72,16 @@ type ExecuteQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecuteQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecuteQueryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecuteQueryResponse_columns:
-			return deserializeColumnsList(d, schemas.ExecuteQueryResponse_columns, &v.Columns)
-		case schemas.ExecuteQueryResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ExecuteQueryResponse_nextToken, v.NextToken)
-		case schemas.ExecuteQueryResponse_rows:
-			return deserializeRows(d, schemas.ExecuteQueryResponse_rows, &v.Rows)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse), output: &ExecuteQueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteQuery"); err != nil {

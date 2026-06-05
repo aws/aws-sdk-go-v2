@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,18 +41,6 @@ type GetMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMeetingInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMeetingRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMeetingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MeetingId != nil {
-		s.WriteString(schemas.GetMeetingRequest_MeetingId, *v.MeetingId)
-	}
-}
-
 type GetMeetingOutput struct {
 
 	// The Amazon Chime SDK meeting information.
@@ -66,24 +52,16 @@ type GetMeetingOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMeetingOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMeetingResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMeetingResponse_Meeting:
-			v.Meeting = &types.Meeting{}
-			return v.Meeting.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMeeting, schemas.GetMeetingRequest, schemas.GetMeetingResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMeeting{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMeeting, schemas.GetMeetingRequest, schemas.GetMeetingResponse), output: &GetMeetingOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMeeting{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMeeting"); err != nil {

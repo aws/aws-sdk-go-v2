@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,24 +65,6 @@ type GetAssetInput struct {
 	Revision *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAssetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAssetInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetAssetInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetAssetInput_identifier, *v.Identifier)
-	}
-	if v.Revision != nil {
-		s.WriteString(schemas.GetAssetInput_revision, *v.Revision)
-	}
 }
 
 type GetAssetOutput struct {
@@ -169,73 +149,16 @@ type GetAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAssetOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAssetOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAssetOutput_createdAt, v.CreatedAt)
-		case schemas.GetAssetOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetAssetOutput_createdBy, v.CreatedBy)
-		case schemas.GetAssetOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAssetOutput_description, v.Description)
-		case schemas.GetAssetOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetAssetOutput_domainId, v.DomainId)
-		case schemas.GetAssetOutput_externalIdentifier:
-			v.ExternalIdentifier = new(string)
-			return d.ReadString(schemas.GetAssetOutput_externalIdentifier, v.ExternalIdentifier)
-		case schemas.GetAssetOutput_firstRevisionCreatedAt:
-			v.FirstRevisionCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAssetOutput_firstRevisionCreatedAt, v.FirstRevisionCreatedAt)
-		case schemas.GetAssetOutput_firstRevisionCreatedBy:
-			v.FirstRevisionCreatedBy = new(string)
-			return d.ReadString(schemas.GetAssetOutput_firstRevisionCreatedBy, v.FirstRevisionCreatedBy)
-		case schemas.GetAssetOutput_formsOutput:
-			return deserializeFormOutputList(d, schemas.GetAssetOutput_formsOutput, &v.FormsOutput)
-		case schemas.GetAssetOutput_glossaryTerms:
-			return deserializeGlossaryTerms(d, schemas.GetAssetOutput_glossaryTerms, &v.GlossaryTerms)
-		case schemas.GetAssetOutput_governedGlossaryTerms:
-			return deserializeGovernedGlossaryTerms(d, schemas.GetAssetOutput_governedGlossaryTerms, &v.GovernedGlossaryTerms)
-		case schemas.GetAssetOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAssetOutput_id, v.Id)
-		case schemas.GetAssetOutput_latestTimeSeriesDataPointFormsOutput:
-			return deserializeTimeSeriesDataPointSummaryFormOutputList(d, schemas.GetAssetOutput_latestTimeSeriesDataPointFormsOutput, &v.LatestTimeSeriesDataPointFormsOutput)
-		case schemas.GetAssetOutput_listing:
-			v.Listing = &types.AssetListingDetails{}
-			return v.Listing.Deserialize(d)
-		case schemas.GetAssetOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAssetOutput_name, v.Name)
-		case schemas.GetAssetOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetAssetOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetAssetOutput_readOnlyFormsOutput:
-			return deserializeFormOutputList(d, schemas.GetAssetOutput_readOnlyFormsOutput, &v.ReadOnlyFormsOutput)
-		case schemas.GetAssetOutput_revision:
-			v.Revision = new(string)
-			return d.ReadString(schemas.GetAssetOutput_revision, v.Revision)
-		case schemas.GetAssetOutput_typeIdentifier:
-			v.TypeIdentifier = new(string)
-			return d.ReadString(schemas.GetAssetOutput_typeIdentifier, v.TypeIdentifier)
-		case schemas.GetAssetOutput_typeRevision:
-			v.TypeRevision = new(string)
-			return d.ReadString(schemas.GetAssetOutput_typeRevision, v.TypeRevision)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetInput, schemas.GetAssetOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetInput, schemas.GetAssetOutput), output: &GetAssetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAsset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAsset"); err != nil {

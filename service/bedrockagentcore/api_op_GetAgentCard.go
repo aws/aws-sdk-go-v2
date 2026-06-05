@@ -7,10 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/document"
-	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/internal/document"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
-	smithy "github.com/aws/smithy-go"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,24 +45,6 @@ type GetAgentCardInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAgentCardInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAgentCardRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAgentCardInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentRuntimeArn != nil {
-		s.WriteString(schemas.GetAgentCardRequest_agentRuntimeArn, *v.AgentRuntimeArn)
-	}
-	if v.Qualifier != nil {
-		s.WriteString(schemas.GetAgentCardRequest_qualifier, *v.Qualifier)
-	}
-	if v.RuntimeSessionId != nil {
-		s.WriteString(schemas.GetAgentCardRequest_runtimeSessionId, *v.RuntimeSessionId)
-	}
-}
-
 type GetAgentCardOutput struct {
 
 	// An agent card document that contains metadata and capabilities for an AgentCore
@@ -87,36 +65,16 @@ type GetAgentCardOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAgentCardOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAgentCardResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAgentCardResponse_agentCard:
-			var dv smithydocument.Value
-			if err := d.ReadDocument(schemas.GetAgentCardResponse_agentCard, &dv); err != nil {
-				return err
-			}
-			if ov, ok := dv.(smithydocument.Opaque); ok {
-				v.AgentCard = internaldocument.NewDocumentUnmarshaler(ov.Value)
-			}
-			return nil
-		case schemas.GetAgentCardResponse_runtimeSessionId:
-			v.RuntimeSessionId = new(string)
-			return d.ReadString(schemas.GetAgentCardResponse_runtimeSessionId, v.RuntimeSessionId)
-		case schemas.GetAgentCardResponse_statusCode:
-			v.StatusCode = new(int32)
-			return d.ReadInt32(schemas.GetAgentCardResponse_statusCode, v.StatusCode)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAgentCardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCard, schemas.GetAgentCardRequest, schemas.GetAgentCardResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentCard{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentCard, schemas.GetAgentCardRequest, schemas.GetAgentCardResponse), output: &GetAgentCardOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentCard{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgentCard"); err != nil {

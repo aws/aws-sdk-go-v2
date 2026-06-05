@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,23 +53,6 @@ type UpdateOdbPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOdbPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateOdbPeeringConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisplayName != nil {
-		s.WriteString(schemas.UpdateOdbPeeringConnectionInput_displayName, *v.DisplayName)
-	}
-	if v.OdbPeeringConnectionId != nil {
-		s.WriteString(schemas.UpdateOdbPeeringConnectionInput_odbPeeringConnectionId, *v.OdbPeeringConnectionId)
-	}
-	serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
-	serializePeeredCidrList(s, schemas.UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved, v.PeerNetworkCidrsToBeRemoved)
-}
-
 type UpdateOdbPeeringConnectionOutput struct {
 
 	// The identifier of the Oracle Database@Amazon Web Services peering connection
@@ -96,37 +77,16 @@ type UpdateOdbPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateOdbPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateOdbPeeringConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateOdbPeeringConnectionOutput_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.UpdateOdbPeeringConnectionOutput_displayName, v.DisplayName)
-		case schemas.UpdateOdbPeeringConnectionOutput_odbPeeringConnectionId:
-			v.OdbPeeringConnectionId = new(string)
-			return d.ReadString(schemas.UpdateOdbPeeringConnectionOutput_odbPeeringConnectionId, v.OdbPeeringConnectionId)
-		case schemas.UpdateOdbPeeringConnectionOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateOdbPeeringConnectionOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ResourceStatus(ev)
-			return nil
-		case schemas.UpdateOdbPeeringConnectionOutput_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.UpdateOdbPeeringConnectionOutput_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateOdbPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOdbPeeringConnection, schemas.UpdateOdbPeeringConnectionInput, schemas.UpdateOdbPeeringConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOdbPeeringConnection, schemas.UpdateOdbPeeringConnectionInput, schemas.UpdateOdbPeeringConnectionOutput), output: &UpdateOdbPeeringConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOdbPeeringConnection"); err != nil {

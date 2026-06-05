@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,19 +44,6 @@ type AssociatePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePackagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatePackagesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.AssociatePackagesRequest_DomainName, *v.DomainName)
-	}
-	serializePackageDetailsForAssociationList(s, schemas.AssociatePackagesRequest_PackageList, v.PackageList)
-}
-
 type AssociatePackagesOutput struct {
 
 	// List of information about packages that are associated with a domain.
@@ -70,23 +55,16 @@ type AssociatePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociatePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatePackagesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatePackagesResponse_DomainPackageDetailsList:
-			return deserializeDomainPackageDetailsList(d, schemas.AssociatePackagesResponse_DomainPackageDetailsList, &v.DomainPackageDetailsList)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociatePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackages, schemas.AssociatePackagesRequest, schemas.AssociatePackagesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackages, schemas.AssociatePackagesRequest, schemas.AssociatePackagesResponse), output: &AssociatePackagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociatePackages"); err != nil {

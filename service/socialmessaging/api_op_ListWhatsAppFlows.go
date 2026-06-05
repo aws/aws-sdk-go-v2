@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type ListWhatsAppFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWhatsAppFlowsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListWhatsAppFlowsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListWhatsAppFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.ListWhatsAppFlowsInput_id, *v.Id)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListWhatsAppFlowsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListWhatsAppFlowsInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListWhatsAppFlowsOutput struct {
 
 	// A list of Flow summaries.
@@ -80,26 +60,16 @@ type ListWhatsAppFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListWhatsAppFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListWhatsAppFlowsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListWhatsAppFlowsOutput_flows:
-			return deserializeMetaFlowSummaryList(d, schemas.ListWhatsAppFlowsOutput_flows, &v.Flows)
-		case schemas.ListWhatsAppFlowsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListWhatsAppFlowsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListWhatsAppFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppFlows, schemas.ListWhatsAppFlowsInput, schemas.ListWhatsAppFlowsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWhatsAppFlows{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppFlows, schemas.ListWhatsAppFlowsInput, schemas.ListWhatsAppFlowsOutput), output: &ListWhatsAppFlowsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWhatsAppFlows{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWhatsAppFlows"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,28 +76,6 @@ type GetActionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetActionRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetActionRecommendationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetActionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CampaignArn != nil {
-		s.WriteString(schemas.GetActionRecommendationsRequest_campaignArn, *v.CampaignArn)
-	}
-	if v.FilterArn != nil {
-		s.WriteString(schemas.GetActionRecommendationsRequest_filterArn, *v.FilterArn)
-	}
-	serializeFilterValues(s, schemas.GetActionRecommendationsRequest_filterValues, v.FilterValues)
-	if v.NumResults != 0 {
-		s.WriteInt32(schemas.GetActionRecommendationsRequest_numResults, v.NumResults)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.GetActionRecommendationsRequest_userId, *v.UserId)
-	}
-}
-
 type GetActionRecommendationsOutput struct {
 
 	// A list of action recommendations sorted in descending order by prediction
@@ -118,26 +94,16 @@ type GetActionRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetActionRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetActionRecommendationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetActionRecommendationsResponse_actionList:
-			return deserializeActionList(d, schemas.GetActionRecommendationsResponse_actionList, &v.ActionList)
-		case schemas.GetActionRecommendationsResponse_recommendationId:
-			v.RecommendationId = new(string)
-			return d.ReadString(schemas.GetActionRecommendationsResponse_recommendationId, v.RecommendationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetActionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActionRecommendations, schemas.GetActionRecommendationsRequest, schemas.GetActionRecommendationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetActionRecommendations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActionRecommendations, schemas.GetActionRecommendationsRequest, schemas.GetActionRecommendationsResponse), output: &GetActionRecommendationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetActionRecommendations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetActionRecommendations"); err != nil {

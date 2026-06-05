@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,25 +56,6 @@ type SearchChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchChannelsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchChannelsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChimeBearer != nil {
-		s.WriteString(schemas.SearchChannelsRequest_ChimeBearer, *v.ChimeBearer)
-	}
-	serializeSearchFields(s, schemas.SearchChannelsRequest_Fields, v.Fields)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchChannelsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchChannelsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type SearchChannelsOutput struct {
 
 	// A list of the channels in the request.
@@ -92,26 +71,16 @@ type SearchChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchChannelsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchChannelsResponse_Channels:
-			return deserializeChannelSummaryList(d, schemas.SearchChannelsResponse_Channels, &v.Channels)
-		case schemas.SearchChannelsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchChannelsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchChannels, schemas.SearchChannelsRequest, schemas.SearchChannelsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchChannels{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchChannels, schemas.SearchChannelsRequest, schemas.SearchChannelsResponse), output: &SearchChannelsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchChannels{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchChannels"); err != nil {

@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -61,50 +59,6 @@ type StartSelector struct {
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *StartSelector) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartSelector)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AfterFragmentNumber != nil {
-		s.WriteString(schemas.StartSelector_AfterFragmentNumber, *v.AfterFragmentNumber)
-	}
-	if v.ContinuationToken != nil {
-		s.WriteString(schemas.StartSelector_ContinuationToken, *v.ContinuationToken)
-	}
-	if v.StartSelectorType != "" {
-		s.WriteString(schemas.StartSelector_StartSelectorType, string(v.StartSelectorType))
-	}
-	if v.StartTimestamp != nil {
-		s.WriteTime(schemas.StartSelector_StartTimestamp, *v.StartTimestamp)
-	}
-}
-func (v *StartSelector) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartSelector, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartSelector_AfterFragmentNumber:
-			v.AfterFragmentNumber = new(string)
-			return d.ReadString(schemas.StartSelector_AfterFragmentNumber, v.AfterFragmentNumber)
-		case schemas.StartSelector_ContinuationToken:
-			v.ContinuationToken = new(string)
-			return d.ReadString(schemas.StartSelector_ContinuationToken, v.ContinuationToken)
-		case schemas.StartSelector_StartSelectorType:
-			var ev string
-			if err := d.ReadString(schemas.StartSelector_StartSelectorType, &ev); err != nil {
-				return err
-			}
-			v.StartSelectorType = StartSelectorType(ev)
-			return nil
-		case schemas.StartSelector_StartTimestamp:
-			v.StartTimestamp = new(time.Time)
-			return d.ReadTime(schemas.StartSelector_StartTimestamp, v.StartTimestamp)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

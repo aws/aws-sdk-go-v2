@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -41,62 +39,6 @@ type AutoScalingConfiguration struct {
 	ScaleOutCooldownSeconds *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutoScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutoScalingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutoScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoScalingMetric != "" {
-		s.WriteString(schemas.AutoScalingConfiguration_autoScalingMetric, string(v.AutoScalingMetric))
-	}
-	if v.MaxNodeCount != nil {
-		s.WriteInt32(schemas.AutoScalingConfiguration_maxNodeCount, *v.MaxNodeCount)
-	}
-	if v.MetricTarget != nil {
-		s.WriteFloat64(schemas.AutoScalingConfiguration_metricTarget, *v.MetricTarget)
-	}
-	if v.MinNodeCount != nil {
-		s.WriteInt32(schemas.AutoScalingConfiguration_minNodeCount, *v.MinNodeCount)
-	}
-	if v.ScaleInCooldownSeconds != nil {
-		s.WriteFloat64(schemas.AutoScalingConfiguration_scaleInCooldownSeconds, *v.ScaleInCooldownSeconds)
-	}
-	if v.ScaleOutCooldownSeconds != nil {
-		s.WriteFloat64(schemas.AutoScalingConfiguration_scaleOutCooldownSeconds, *v.ScaleOutCooldownSeconds)
-	}
-}
-func (v *AutoScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutoScalingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutoScalingConfiguration_autoScalingMetric:
-			var ev string
-			if err := d.ReadString(schemas.AutoScalingConfiguration_autoScalingMetric, &ev); err != nil {
-				return err
-			}
-			v.AutoScalingMetric = AutoScalingMetric(ev)
-			return nil
-		case schemas.AutoScalingConfiguration_maxNodeCount:
-			v.MaxNodeCount = new(int32)
-			return d.ReadInt32(schemas.AutoScalingConfiguration_maxNodeCount, v.MaxNodeCount)
-		case schemas.AutoScalingConfiguration_metricTarget:
-			v.MetricTarget = new(float64)
-			return d.ReadFloat64(schemas.AutoScalingConfiguration_metricTarget, v.MetricTarget)
-		case schemas.AutoScalingConfiguration_minNodeCount:
-			v.MinNodeCount = new(int32)
-			return d.ReadInt32(schemas.AutoScalingConfiguration_minNodeCount, v.MinNodeCount)
-		case schemas.AutoScalingConfiguration_scaleInCooldownSeconds:
-			v.ScaleInCooldownSeconds = new(float64)
-			return d.ReadFloat64(schemas.AutoScalingConfiguration_scaleInCooldownSeconds, v.ScaleInCooldownSeconds)
-		case schemas.AutoScalingConfiguration_scaleOutCooldownSeconds:
-			v.ScaleOutCooldownSeconds = new(float64)
-			return d.ReadFloat64(schemas.AutoScalingConfiguration_scaleOutCooldownSeconds, v.ScaleOutCooldownSeconds)
-		}
-		return nil
-	})
 }
 
 // A structure for the metadata of a cluster. It includes information like the
@@ -137,34 +79,6 @@ type CapacityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CapacityConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CapacityConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CapacityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NodeCount != nil {
-		s.WriteInt32(schemas.CapacityConfiguration_nodeCount, *v.NodeCount)
-	}
-	if v.NodeType != nil {
-		s.WriteString(schemas.CapacityConfiguration_nodeType, *v.NodeType)
-	}
-}
-func (v *CapacityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CapacityConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CapacityConfiguration_nodeCount:
-			v.NodeCount = new(int32)
-			return d.ReadInt32(schemas.CapacityConfiguration_nodeCount, v.NodeCount)
-		case schemas.CapacityConfiguration_nodeType:
-			v.NodeType = new(string)
-			return d.ReadString(schemas.CapacityConfiguration_nodeType, v.NodeType)
-		}
-		return nil
-	})
-}
-
 // A list of change request objects.
 type ChangeRequest struct {
 
@@ -189,44 +103,6 @@ type ChangeRequest struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChangeRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChangeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChangeRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangeType != "" {
-		s.WriteString(schemas.ChangeRequest_changeType, string(v.ChangeType))
-	}
-	if v.DbPath != nil {
-		s.WriteString(schemas.ChangeRequest_dbPath, *v.DbPath)
-	}
-	if v.S3Path != nil {
-		s.WriteString(schemas.ChangeRequest_s3Path, *v.S3Path)
-	}
-}
-func (v *ChangeRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChangeRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChangeRequest_changeType:
-			var ev string
-			if err := d.ReadString(schemas.ChangeRequest_changeType, &ev); err != nil {
-				return err
-			}
-			v.ChangeType = ChangeType(ev)
-			return nil
-		case schemas.ChangeRequest_dbPath:
-			v.DbPath = new(string)
-			return d.ReadString(schemas.ChangeRequest_dbPath, v.DbPath)
-		case schemas.ChangeRequest_s3Path:
-			v.S3Path = new(string)
-			return d.ReadString(schemas.ChangeRequest_s3Path, v.S3Path)
-		}
-		return nil
-	})
-}
-
 // The structure of the customer code available within the running cluster.
 type CodeConfiguration struct {
 
@@ -241,40 +117,6 @@ type CodeConfiguration struct {
 	S3ObjectVersion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CodeConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CodeConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CodeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Bucket != nil {
-		s.WriteString(schemas.CodeConfiguration_s3Bucket, *v.S3Bucket)
-	}
-	if v.S3Key != nil {
-		s.WriteString(schemas.CodeConfiguration_s3Key, *v.S3Key)
-	}
-	if v.S3ObjectVersion != nil {
-		s.WriteString(schemas.CodeConfiguration_s3ObjectVersion, *v.S3ObjectVersion)
-	}
-}
-func (v *CodeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CodeConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CodeConfiguration_s3Bucket:
-			v.S3Bucket = new(string)
-			return d.ReadString(schemas.CodeConfiguration_s3Bucket, v.S3Bucket)
-		case schemas.CodeConfiguration_s3Key:
-			v.S3Key = new(string)
-			return d.ReadString(schemas.CodeConfiguration_s3Key, v.S3Key)
-		case schemas.CodeConfiguration_s3ObjectVersion:
-			v.S3ObjectVersion = new(string)
-			return d.ReadString(schemas.CodeConfiguration_s3ObjectVersion, v.S3ObjectVersion)
-		}
-		return nil
-	})
 }
 
 // A list of DNS server name and server IP. This is used to set up Route-53
@@ -292,34 +134,6 @@ type CustomDNSServer struct {
 	CustomDNSServerName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomDNSServer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomDNSServer)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomDNSServer) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomDNSServerIP != nil {
-		s.WriteString(schemas.CustomDNSServer_customDNSServerIP, *v.CustomDNSServerIP)
-	}
-	if v.CustomDNSServerName != nil {
-		s.WriteString(schemas.CustomDNSServer_customDNSServerName, *v.CustomDNSServerName)
-	}
-}
-func (v *CustomDNSServer) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomDNSServer, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomDNSServer_customDNSServerIP:
-			v.CustomDNSServerIP = new(string)
-			return d.ReadString(schemas.CustomDNSServer_customDNSServerIP, v.CustomDNSServerIP)
-		case schemas.CustomDNSServer_customDNSServerName:
-			v.CustomDNSServerName = new(string)
-			return d.ReadString(schemas.CustomDNSServer_customDNSServerName, v.CustomDNSServerName)
-		}
-		return nil
-	})
 }
 
 // Represents an FinSpace environment.
@@ -365,104 +179,6 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Environment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Environment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.Environment_awsAccountId, *v.AwsAccountId)
-	}
-	if v.DedicatedServiceAccountId != nil {
-		s.WriteString(schemas.Environment_dedicatedServiceAccountId, *v.DedicatedServiceAccountId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Environment_description, *v.Description)
-	}
-	if v.EnvironmentArn != nil {
-		s.WriteString(schemas.Environment_environmentArn, *v.EnvironmentArn)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.Environment_environmentId, *v.EnvironmentId)
-	}
-	if v.EnvironmentUrl != nil {
-		s.WriteString(schemas.Environment_environmentUrl, *v.EnvironmentUrl)
-	}
-	if v.FederationMode != "" {
-		s.WriteString(schemas.Environment_federationMode, string(v.FederationMode))
-	}
-	if v.FederationParameters != nil {
-		s.WriteStruct(schemas.Environment_federationParameters)
-		v.FederationParameters.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.Environment_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Environment_name, *v.Name)
-	}
-	if v.SageMakerStudioDomainUrl != nil {
-		s.WriteString(schemas.Environment_sageMakerStudioDomainUrl, *v.SageMakerStudioDomainUrl)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Environment_status, string(v.Status))
-	}
-}
-func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Environment_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.Environment_awsAccountId, v.AwsAccountId)
-		case schemas.Environment_dedicatedServiceAccountId:
-			v.DedicatedServiceAccountId = new(string)
-			return d.ReadString(schemas.Environment_dedicatedServiceAccountId, v.DedicatedServiceAccountId)
-		case schemas.Environment_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Environment_description, v.Description)
-		case schemas.Environment_environmentArn:
-			v.EnvironmentArn = new(string)
-			return d.ReadString(schemas.Environment_environmentArn, v.EnvironmentArn)
-		case schemas.Environment_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.Environment_environmentId, v.EnvironmentId)
-		case schemas.Environment_environmentUrl:
-			v.EnvironmentUrl = new(string)
-			return d.ReadString(schemas.Environment_environmentUrl, v.EnvironmentUrl)
-		case schemas.Environment_federationMode:
-			var ev string
-			if err := d.ReadString(schemas.Environment_federationMode, &ev); err != nil {
-				return err
-			}
-			v.FederationMode = FederationMode(ev)
-			return nil
-		case schemas.Environment_federationParameters:
-			v.FederationParameters = &FederationParameters{}
-			return v.FederationParameters.Deserialize(d)
-		case schemas.Environment_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.Environment_kmsKeyId, v.KmsKeyId)
-		case schemas.Environment_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Environment_name, v.Name)
-		case schemas.Environment_sageMakerStudioDomainUrl:
-			v.SageMakerStudioDomainUrl = new(string)
-			return d.ReadString(schemas.Environment_sageMakerStudioDomainUrl, v.SageMakerStudioDomainUrl)
-		case schemas.Environment_status:
-			var ev string
-			if err := d.ReadString(schemas.Environment_status, &ev); err != nil {
-				return err
-			}
-			v.Status = EnvironmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides details in the event of a failed flow, including the error type and
 // the related error message.
 type ErrorInfo struct {
@@ -474,38 +190,6 @@ type ErrorInfo struct {
 	ErrorType ErrorDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *ErrorInfo) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ErrorInfo)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.ErrorInfo_errorMessage, *v.ErrorMessage)
-	}
-	if v.ErrorType != "" {
-		s.WriteString(schemas.ErrorInfo_errorType, string(v.ErrorType))
-	}
-}
-func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ErrorInfo, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ErrorInfo_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.ErrorInfo_errorMessage, v.ErrorMessage)
-		case schemas.ErrorInfo_errorType:
-			var ev string
-			if err := d.ReadString(schemas.ErrorInfo_errorType, &ev); err != nil {
-				return err
-			}
-			v.ErrorType = ErrorDetails(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration information when authentication mode is FEDERATED.
@@ -538,55 +222,6 @@ type FederationParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FederationParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FederationParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FederationParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationCallBackURL != nil {
-		s.WriteString(schemas.FederationParameters_applicationCallBackURL, *v.ApplicationCallBackURL)
-	}
-	serializeAttributeMap(s, schemas.FederationParameters_attributeMap, v.AttributeMap)
-	if v.FederationProviderName != nil {
-		s.WriteString(schemas.FederationParameters_federationProviderName, *v.FederationProviderName)
-	}
-	if v.FederationURN != nil {
-		s.WriteString(schemas.FederationParameters_federationURN, *v.FederationURN)
-	}
-	if v.SamlMetadataDocument != nil {
-		s.WriteString(schemas.FederationParameters_samlMetadataDocument, *v.SamlMetadataDocument)
-	}
-	if v.SamlMetadataURL != nil {
-		s.WriteString(schemas.FederationParameters_samlMetadataURL, *v.SamlMetadataURL)
-	}
-}
-func (v *FederationParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FederationParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FederationParameters_applicationCallBackURL:
-			v.ApplicationCallBackURL = new(string)
-			return d.ReadString(schemas.FederationParameters_applicationCallBackURL, v.ApplicationCallBackURL)
-		case schemas.FederationParameters_attributeMap:
-			return deserializeAttributeMap(d, schemas.FederationParameters_attributeMap, &v.AttributeMap)
-		case schemas.FederationParameters_federationProviderName:
-			v.FederationProviderName = new(string)
-			return d.ReadString(schemas.FederationParameters_federationProviderName, v.FederationProviderName)
-		case schemas.FederationParameters_federationURN:
-			v.FederationURN = new(string)
-			return d.ReadString(schemas.FederationParameters_federationURN, v.FederationURN)
-		case schemas.FederationParameters_samlMetadataDocument:
-			v.SamlMetadataDocument = new(string)
-			return d.ReadString(schemas.FederationParameters_samlMetadataDocument, v.SamlMetadataDocument)
-		case schemas.FederationParameters_samlMetadataURL:
-			v.SamlMetadataURL = new(string)
-			return d.ReadString(schemas.FederationParameters_samlMetadataURL, v.SamlMetadataURL)
-		}
-		return nil
-	})
-}
-
 // Defines the ICMP protocol that consists of the ICMP type and code.
 type IcmpTypeCode struct {
 
@@ -601,28 +236,6 @@ type IcmpTypeCode struct {
 	Type int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *IcmpTypeCode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IcmpTypeCode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IcmpTypeCode) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt32(schemas.IcmpTypeCode_code, v.Code)
-	s.WriteInt32(schemas.IcmpTypeCode_type, v.Type)
-}
-func (v *IcmpTypeCode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IcmpTypeCode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IcmpTypeCode_code:
-			return d.ReadInt32(schemas.IcmpTypeCode_code, &v.Code)
-		case schemas.IcmpTypeCode_type:
-			return d.ReadInt32(schemas.IcmpTypeCode_type, &v.Type)
-		}
-		return nil
-	})
 }
 
 // The structure containing the metadata of the attached clusters.
@@ -657,48 +270,6 @@ type KxAttachedCluster struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxAttachedCluster) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxAttachedCluster)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxAttachedCluster) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterName != nil {
-		s.WriteString(schemas.KxAttachedCluster_clusterName, *v.ClusterName)
-	}
-	if v.ClusterStatus != "" {
-		s.WriteString(schemas.KxAttachedCluster_clusterStatus, string(v.ClusterStatus))
-	}
-	if v.ClusterType != "" {
-		s.WriteString(schemas.KxAttachedCluster_clusterType, string(v.ClusterType))
-	}
-}
-func (v *KxAttachedCluster) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxAttachedCluster, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxAttachedCluster_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.KxAttachedCluster_clusterName, v.ClusterName)
-		case schemas.KxAttachedCluster_clusterStatus:
-			var ev string
-			if err := d.ReadString(schemas.KxAttachedCluster_clusterStatus, &ev); err != nil {
-				return err
-			}
-			v.ClusterStatus = KxClusterStatus(ev)
-			return nil
-		case schemas.KxAttachedCluster_clusterType:
-			var ev string
-			if err := d.ReadString(schemas.KxAttachedCluster_clusterType, &ev); err != nil {
-				return err
-			}
-			v.ClusterType = KxClusterType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The configuration for read only disk cache associated with a cluster.
 type KxCacheStorageConfiguration struct {
 
@@ -723,34 +294,6 @@ type KxCacheStorageConfiguration struct {
 	Type *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxCacheStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxCacheStorageConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxCacheStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Size != nil {
-		s.WriteInt32(schemas.KxCacheStorageConfiguration_size, *v.Size)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.KxCacheStorageConfiguration_type, *v.Type)
-	}
-}
-func (v *KxCacheStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxCacheStorageConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxCacheStorageConfiguration_size:
-			v.Size = new(int32)
-			return d.ReadInt32(schemas.KxCacheStorageConfiguration_size, v.Size)
-		case schemas.KxCacheStorageConfiguration_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.KxCacheStorageConfiguration_type, v.Type)
-		}
-		return nil
-	})
 }
 
 // Details of changeset.
@@ -786,56 +329,6 @@ type KxChangesetListEntry struct {
 	Status ChangesetStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxChangesetListEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxChangesetListEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxChangesetListEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActiveFromTimestamp != nil {
-		s.WriteTime(schemas.KxChangesetListEntry_activeFromTimestamp, *v.ActiveFromTimestamp)
-	}
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.KxChangesetListEntry_changesetId, *v.ChangesetId)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxChangesetListEntry_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxChangesetListEntry_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxChangesetListEntry_status, string(v.Status))
-	}
-}
-func (v *KxChangesetListEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxChangesetListEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxChangesetListEntry_activeFromTimestamp:
-			v.ActiveFromTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxChangesetListEntry_activeFromTimestamp, v.ActiveFromTimestamp)
-		case schemas.KxChangesetListEntry_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.KxChangesetListEntry_changesetId, v.ChangesetId)
-		case schemas.KxChangesetListEntry_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxChangesetListEntry_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxChangesetListEntry_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxChangesetListEntry_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.KxChangesetListEntry_status:
-			var ev string
-			if err := d.ReadString(schemas.KxChangesetListEntry_status, &ev); err != nil {
-				return err
-			}
-			v.Status = ChangesetStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The details of a kdb cluster.
@@ -940,109 +433,6 @@ type KxCluster struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxCluster) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxCluster)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxCluster) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.KxCluster_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.AzMode != "" {
-		s.WriteString(schemas.KxCluster_azMode, string(v.AzMode))
-	}
-	if v.ClusterDescription != nil {
-		s.WriteString(schemas.KxCluster_clusterDescription, *v.ClusterDescription)
-	}
-	if v.ClusterName != nil {
-		s.WriteString(schemas.KxCluster_clusterName, *v.ClusterName)
-	}
-	if v.ClusterType != "" {
-		s.WriteString(schemas.KxCluster_clusterType, string(v.ClusterType))
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxCluster_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.KxCluster_executionRole, *v.ExecutionRole)
-	}
-	if v.InitializationScript != nil {
-		s.WriteString(schemas.KxCluster_initializationScript, *v.InitializationScript)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxCluster_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-	if v.ReleaseLabel != nil {
-		s.WriteString(schemas.KxCluster_releaseLabel, *v.ReleaseLabel)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxCluster_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.KxCluster_statusReason, *v.StatusReason)
-	}
-	serializeVolumes(s, schemas.KxCluster_volumes, v.Volumes)
-}
-func (v *KxCluster) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxCluster, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxCluster_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.KxCluster_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.KxCluster_azMode:
-			var ev string
-			if err := d.ReadString(schemas.KxCluster_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = KxAzMode(ev)
-			return nil
-		case schemas.KxCluster_clusterDescription:
-			v.ClusterDescription = new(string)
-			return d.ReadString(schemas.KxCluster_clusterDescription, v.ClusterDescription)
-		case schemas.KxCluster_clusterName:
-			v.ClusterName = new(string)
-			return d.ReadString(schemas.KxCluster_clusterName, v.ClusterName)
-		case schemas.KxCluster_clusterType:
-			var ev string
-			if err := d.ReadString(schemas.KxCluster_clusterType, &ev); err != nil {
-				return err
-			}
-			v.ClusterType = KxClusterType(ev)
-			return nil
-		case schemas.KxCluster_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxCluster_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxCluster_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.KxCluster_executionRole, v.ExecutionRole)
-		case schemas.KxCluster_initializationScript:
-			v.InitializationScript = new(string)
-			return d.ReadString(schemas.KxCluster_initializationScript, v.InitializationScript)
-		case schemas.KxCluster_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxCluster_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.KxCluster_releaseLabel:
-			v.ReleaseLabel = new(string)
-			return d.ReadString(schemas.KxCluster_releaseLabel, v.ReleaseLabel)
-		case schemas.KxCluster_status:
-			var ev string
-			if err := d.ReadString(schemas.KxCluster_status, &ev); err != nil {
-				return err
-			}
-			v.Status = KxClusterStatus(ev)
-			return nil
-		case schemas.KxCluster_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.KxCluster_statusReason, v.StatusReason)
-		case schemas.KxCluster_volumes:
-			return deserializeVolumes(d, schemas.KxCluster_volumes, &v.Volumes)
-		}
-		return nil
-	})
-}
-
 //	The configuration that allows you to choose how you want to update code on a
 //
 // cluster. Depending on the option you choose, you can reduce the time it takes to
@@ -1070,32 +460,6 @@ type KxClusterCodeDeploymentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxClusterCodeDeploymentConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxClusterCodeDeploymentConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxClusterCodeDeploymentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeploymentStrategy != "" {
-		s.WriteString(schemas.KxClusterCodeDeploymentConfiguration_deploymentStrategy, string(v.DeploymentStrategy))
-	}
-}
-func (v *KxClusterCodeDeploymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxClusterCodeDeploymentConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxClusterCodeDeploymentConfiguration_deploymentStrategy:
-			var ev string
-			if err := d.ReadString(schemas.KxClusterCodeDeploymentConfiguration_deploymentStrategy, &ev); err != nil {
-				return err
-			}
-			v.DeploymentStrategy = KxClusterCodeDeploymentStrategy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Defines the key-value pairs to make them available inside the cluster.
 type KxCommandLineArgument struct {
 
@@ -1106,34 +470,6 @@ type KxCommandLineArgument struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxCommandLineArgument) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxCommandLineArgument)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxCommandLineArgument) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.KxCommandLineArgument_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.KxCommandLineArgument_value, *v.Value)
-	}
-}
-func (v *KxCommandLineArgument) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxCommandLineArgument, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxCommandLineArgument_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.KxCommandLineArgument_key, v.Key)
-		case schemas.KxCommandLineArgument_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.KxCommandLineArgument_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // The structure of database cache configuration that is used for mapping database
@@ -1158,37 +494,6 @@ type KxDatabaseCacheConfiguration struct {
 	DataviewName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxDatabaseCacheConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDatabaseCacheConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDatabaseCacheConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CacheType != nil {
-		s.WriteString(schemas.KxDatabaseCacheConfiguration_cacheType, *v.CacheType)
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.KxDatabaseCacheConfiguration_dataviewName, *v.DataviewName)
-	}
-	serializeDbPaths(s, schemas.KxDatabaseCacheConfiguration_dbPaths, v.DbPaths)
-}
-func (v *KxDatabaseCacheConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDatabaseCacheConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDatabaseCacheConfiguration_cacheType:
-			v.CacheType = new(string)
-			return d.ReadString(schemas.KxDatabaseCacheConfiguration_cacheType, v.CacheType)
-		case schemas.KxDatabaseCacheConfiguration_dataviewName:
-			v.DataviewName = new(string)
-			return d.ReadString(schemas.KxDatabaseCacheConfiguration_dataviewName, v.DataviewName)
-		case schemas.KxDatabaseCacheConfiguration_dbPaths:
-			return deserializeDbPaths(d, schemas.KxDatabaseCacheConfiguration_dbPaths, &v.DbPaths)
-		}
-		return nil
-	})
 }
 
 // The configuration of data that is available for querying from this database.
@@ -1216,51 +521,6 @@ type KxDatabaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxDatabaseConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDatabaseConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDatabaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKxDatabaseCacheConfigurations(s, schemas.KxDatabaseConfiguration_cacheConfigurations, v.CacheConfigurations)
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.KxDatabaseConfiguration_changesetId, *v.ChangesetId)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.KxDatabaseConfiguration_databaseName, *v.DatabaseName)
-	}
-	if v.DataviewConfiguration != nil {
-		s.WriteStruct(schemas.KxDatabaseConfiguration_dataviewConfiguration)
-		v.DataviewConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.KxDatabaseConfiguration_dataviewName, *v.DataviewName)
-	}
-}
-func (v *KxDatabaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDatabaseConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDatabaseConfiguration_cacheConfigurations:
-			return deserializeKxDatabaseCacheConfigurations(d, schemas.KxDatabaseConfiguration_cacheConfigurations, &v.CacheConfigurations)
-		case schemas.KxDatabaseConfiguration_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.KxDatabaseConfiguration_changesetId, v.ChangesetId)
-		case schemas.KxDatabaseConfiguration_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.KxDatabaseConfiguration_databaseName, v.DatabaseName)
-		case schemas.KxDatabaseConfiguration_dataviewConfiguration:
-			v.DataviewConfiguration = &KxDataviewConfiguration{}
-			return v.DataviewConfiguration.Deserialize(d)
-		case schemas.KxDatabaseConfiguration_dataviewName:
-			v.DataviewName = new(string)
-			return d.ReadString(schemas.KxDatabaseConfiguration_dataviewName, v.DataviewName)
-		}
-		return nil
-	})
-}
-
 // Details about a FinSpace managed kdb database
 type KxDatabaseListEntry struct {
 
@@ -1278,40 +538,6 @@ type KxDatabaseListEntry struct {
 	LastModifiedTimestamp *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxDatabaseListEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDatabaseListEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDatabaseListEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxDatabaseListEntry_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.KxDatabaseListEntry_databaseName, *v.DatabaseName)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxDatabaseListEntry_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-}
-func (v *KxDatabaseListEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDatabaseListEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDatabaseListEntry_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxDatabaseListEntry_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxDatabaseListEntry_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.KxDatabaseListEntry_databaseName, v.DatabaseName)
-		case schemas.KxDatabaseListEntry_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxDatabaseListEntry_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		}
-		return nil
-	})
 }
 
 // The active version of the dataview that is currently in use by this cluster.
@@ -1341,46 +567,6 @@ type KxDataviewActiveVersion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxDataviewActiveVersion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDataviewActiveVersion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDataviewActiveVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachedClusterList(s, schemas.KxDataviewActiveVersion_attachedClusters, v.AttachedClusters)
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.KxDataviewActiveVersion_changesetId, *v.ChangesetId)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxDataviewActiveVersion_createdTimestamp, *v.CreatedTimestamp)
-	}
-	serializeKxDataviewSegmentConfigurationList(s, schemas.KxDataviewActiveVersion_segmentConfigurations, v.SegmentConfigurations)
-	if v.VersionId != nil {
-		s.WriteString(schemas.KxDataviewActiveVersion_versionId, *v.VersionId)
-	}
-}
-func (v *KxDataviewActiveVersion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDataviewActiveVersion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDataviewActiveVersion_attachedClusters:
-			return deserializeAttachedClusterList(d, schemas.KxDataviewActiveVersion_attachedClusters, &v.AttachedClusters)
-		case schemas.KxDataviewActiveVersion_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.KxDataviewActiveVersion_changesetId, v.ChangesetId)
-		case schemas.KxDataviewActiveVersion_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxDataviewActiveVersion_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxDataviewActiveVersion_segmentConfigurations:
-			return deserializeKxDataviewSegmentConfigurationList(d, schemas.KxDataviewActiveVersion_segmentConfigurations, &v.SegmentConfigurations)
-		case schemas.KxDataviewActiveVersion_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.KxDataviewActiveVersion_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // The structure that stores the configuration details of a dataview.
 type KxDataviewConfiguration struct {
 
@@ -1397,43 +583,6 @@ type KxDataviewConfiguration struct {
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxDataviewConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDataviewConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDataviewConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.KxDataviewConfiguration_changesetId, *v.ChangesetId)
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.KxDataviewConfiguration_dataviewName, *v.DataviewName)
-	}
-	if v.DataviewVersionId != nil {
-		s.WriteString(schemas.KxDataviewConfiguration_dataviewVersionId, *v.DataviewVersionId)
-	}
-	serializeKxDataviewSegmentConfigurationList(s, schemas.KxDataviewConfiguration_segmentConfigurations, v.SegmentConfigurations)
-}
-func (v *KxDataviewConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDataviewConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDataviewConfiguration_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.KxDataviewConfiguration_changesetId, v.ChangesetId)
-		case schemas.KxDataviewConfiguration_dataviewName:
-			v.DataviewName = new(string)
-			return d.ReadString(schemas.KxDataviewConfiguration_dataviewName, v.DataviewName)
-		case schemas.KxDataviewConfiguration_dataviewVersionId:
-			v.DataviewVersionId = new(string)
-			return d.ReadString(schemas.KxDataviewConfiguration_dataviewVersionId, v.DataviewVersionId)
-		case schemas.KxDataviewConfiguration_segmentConfigurations:
-			return deserializeKxDataviewSegmentConfigurationList(d, schemas.KxDataviewConfiguration_segmentConfigurations, &v.SegmentConfigurations)
-		}
-		return nil
-	})
 }
 
 // A collection of kdb dataview entries.
@@ -1498,112 +647,6 @@ type KxDataviewListEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxDataviewListEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDataviewListEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDataviewListEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKxDataviewActiveVersionList(s, schemas.KxDataviewListEntry_activeVersions, v.ActiveVersions)
-	if v.AutoUpdate != false {
-		s.WriteBool(schemas.KxDataviewListEntry_autoUpdate, v.AutoUpdate)
-	}
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.KxDataviewListEntry_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.AzMode != "" {
-		s.WriteString(schemas.KxDataviewListEntry_azMode, string(v.AzMode))
-	}
-	if v.ChangesetId != nil {
-		s.WriteString(schemas.KxDataviewListEntry_changesetId, *v.ChangesetId)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxDataviewListEntry_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.DatabaseName != nil {
-		s.WriteString(schemas.KxDataviewListEntry_databaseName, *v.DatabaseName)
-	}
-	if v.DataviewName != nil {
-		s.WriteString(schemas.KxDataviewListEntry_dataviewName, *v.DataviewName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.KxDataviewListEntry_description, *v.Description)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.KxDataviewListEntry_environmentId, *v.EnvironmentId)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxDataviewListEntry_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-	if v.ReadWrite != false {
-		s.WriteBool(schemas.KxDataviewListEntry_readWrite, v.ReadWrite)
-	}
-	serializeKxDataviewSegmentConfigurationList(s, schemas.KxDataviewListEntry_segmentConfigurations, v.SegmentConfigurations)
-	if v.Status != "" {
-		s.WriteString(schemas.KxDataviewListEntry_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.KxDataviewListEntry_statusReason, *v.StatusReason)
-	}
-}
-func (v *KxDataviewListEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDataviewListEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDataviewListEntry_activeVersions:
-			return deserializeKxDataviewActiveVersionList(d, schemas.KxDataviewListEntry_activeVersions, &v.ActiveVersions)
-		case schemas.KxDataviewListEntry_autoUpdate:
-			return d.ReadBool(schemas.KxDataviewListEntry_autoUpdate, &v.AutoUpdate)
-		case schemas.KxDataviewListEntry_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.KxDataviewListEntry_azMode:
-			var ev string
-			if err := d.ReadString(schemas.KxDataviewListEntry_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = KxAzMode(ev)
-			return nil
-		case schemas.KxDataviewListEntry_changesetId:
-			v.ChangesetId = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_changesetId, v.ChangesetId)
-		case schemas.KxDataviewListEntry_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxDataviewListEntry_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxDataviewListEntry_databaseName:
-			v.DatabaseName = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_databaseName, v.DatabaseName)
-		case schemas.KxDataviewListEntry_dataviewName:
-			v.DataviewName = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_dataviewName, v.DataviewName)
-		case schemas.KxDataviewListEntry_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_description, v.Description)
-		case schemas.KxDataviewListEntry_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_environmentId, v.EnvironmentId)
-		case schemas.KxDataviewListEntry_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxDataviewListEntry_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.KxDataviewListEntry_readWrite:
-			return d.ReadBool(schemas.KxDataviewListEntry_readWrite, &v.ReadWrite)
-		case schemas.KxDataviewListEntry_segmentConfigurations:
-			return deserializeKxDataviewSegmentConfigurationList(d, schemas.KxDataviewListEntry_segmentConfigurations, &v.SegmentConfigurations)
-		case schemas.KxDataviewListEntry_status:
-			var ev string
-			if err := d.ReadString(schemas.KxDataviewListEntry_status, &ev); err != nil {
-				return err
-			}
-			v.Status = KxDataviewStatus(ev)
-			return nil
-		case schemas.KxDataviewListEntry_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.KxDataviewListEntry_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
-
 //	The configuration that contains the database path of the data that you want to
 //
 // place on each selected volume. Each segment must have a unique database path for
@@ -1632,36 +675,6 @@ type KxDataviewSegmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxDataviewSegmentConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDataviewSegmentConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDataviewSegmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSegmentConfigurationDbPathList(s, schemas.KxDataviewSegmentConfiguration_dbPaths, v.DbPaths)
-	if v.OnDemand != false {
-		s.WriteBool(schemas.KxDataviewSegmentConfiguration_onDemand, v.OnDemand)
-	}
-	if v.VolumeName != nil {
-		s.WriteString(schemas.KxDataviewSegmentConfiguration_volumeName, *v.VolumeName)
-	}
-}
-func (v *KxDataviewSegmentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDataviewSegmentConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDataviewSegmentConfiguration_dbPaths:
-			return deserializeSegmentConfigurationDbPathList(d, schemas.KxDataviewSegmentConfiguration_dbPaths, &v.DbPaths)
-		case schemas.KxDataviewSegmentConfiguration_onDemand:
-			return d.ReadBool(schemas.KxDataviewSegmentConfiguration_onDemand, &v.OnDemand)
-		case schemas.KxDataviewSegmentConfiguration_volumeName:
-			v.VolumeName = new(string)
-			return d.ReadString(schemas.KxDataviewSegmentConfiguration_volumeName, v.VolumeName)
-		}
-		return nil
-	})
-}
-
 //	The configuration that allows you to choose how you want to update the
 //
 // databases on a cluster. Depending on the option you choose, you can reduce the
@@ -1684,32 +697,6 @@ type KxDeploymentConfiguration struct {
 	DeploymentStrategy KxDeploymentStrategy
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxDeploymentConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxDeploymentConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxDeploymentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeploymentStrategy != "" {
-		s.WriteString(schemas.KxDeploymentConfiguration_deploymentStrategy, string(v.DeploymentStrategy))
-	}
-}
-func (v *KxDeploymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxDeploymentConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxDeploymentConfiguration_deploymentStrategy:
-			var ev string
-			if err := d.ReadString(schemas.KxDeploymentConfiguration_deploymentStrategy, &ev); err != nil {
-				return err
-			}
-			v.DeploymentStrategy = KxDeploymentStrategy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The details of a kdb environment.
@@ -1796,132 +783,6 @@ type KxEnvironment struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxEnvironment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxEnvironment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxEnvironment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneIds(s, schemas.KxEnvironment_availabilityZoneIds, v.AvailabilityZoneIds)
-	if v.AwsAccountId != nil {
-		s.WriteString(schemas.KxEnvironment_awsAccountId, *v.AwsAccountId)
-	}
-	if v.CertificateAuthorityArn != nil {
-		s.WriteString(schemas.KxEnvironment_certificateAuthorityArn, *v.CertificateAuthorityArn)
-	}
-	if v.CreationTimestamp != nil {
-		s.WriteTime(schemas.KxEnvironment_creationTimestamp, *v.CreationTimestamp)
-	}
-	serializeCustomDNSConfiguration(s, schemas.KxEnvironment_customDNSConfiguration, v.CustomDNSConfiguration)
-	if v.DedicatedServiceAccountId != nil {
-		s.WriteString(schemas.KxEnvironment_dedicatedServiceAccountId, *v.DedicatedServiceAccountId)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.KxEnvironment_description, *v.Description)
-	}
-	if v.DnsStatus != "" {
-		s.WriteString(schemas.KxEnvironment_dnsStatus, string(v.DnsStatus))
-	}
-	if v.EnvironmentArn != nil {
-		s.WriteString(schemas.KxEnvironment_environmentArn, *v.EnvironmentArn)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.KxEnvironment_environmentId, *v.EnvironmentId)
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.KxEnvironment_errorMessage, *v.ErrorMessage)
-	}
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.KxEnvironment_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.KxEnvironment_name, *v.Name)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxEnvironment_status, string(v.Status))
-	}
-	if v.TgwStatus != "" {
-		s.WriteString(schemas.KxEnvironment_tgwStatus, string(v.TgwStatus))
-	}
-	if v.TransitGatewayConfiguration != nil {
-		s.WriteStruct(schemas.KxEnvironment_transitGatewayConfiguration)
-		v.TransitGatewayConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdateTimestamp != nil {
-		s.WriteTime(schemas.KxEnvironment_updateTimestamp, *v.UpdateTimestamp)
-	}
-}
-func (v *KxEnvironment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxEnvironment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxEnvironment_availabilityZoneIds:
-			return deserializeAvailabilityZoneIds(d, schemas.KxEnvironment_availabilityZoneIds, &v.AvailabilityZoneIds)
-		case schemas.KxEnvironment_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.KxEnvironment_awsAccountId, v.AwsAccountId)
-		case schemas.KxEnvironment_certificateAuthorityArn:
-			v.CertificateAuthorityArn = new(string)
-			return d.ReadString(schemas.KxEnvironment_certificateAuthorityArn, v.CertificateAuthorityArn)
-		case schemas.KxEnvironment_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxEnvironment_creationTimestamp, v.CreationTimestamp)
-		case schemas.KxEnvironment_customDNSConfiguration:
-			return deserializeCustomDNSConfiguration(d, schemas.KxEnvironment_customDNSConfiguration, &v.CustomDNSConfiguration)
-		case schemas.KxEnvironment_dedicatedServiceAccountId:
-			v.DedicatedServiceAccountId = new(string)
-			return d.ReadString(schemas.KxEnvironment_dedicatedServiceAccountId, v.DedicatedServiceAccountId)
-		case schemas.KxEnvironment_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.KxEnvironment_description, v.Description)
-		case schemas.KxEnvironment_dnsStatus:
-			var ev string
-			if err := d.ReadString(schemas.KxEnvironment_dnsStatus, &ev); err != nil {
-				return err
-			}
-			v.DnsStatus = DnsStatus(ev)
-			return nil
-		case schemas.KxEnvironment_environmentArn:
-			v.EnvironmentArn = new(string)
-			return d.ReadString(schemas.KxEnvironment_environmentArn, v.EnvironmentArn)
-		case schemas.KxEnvironment_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.KxEnvironment_environmentId, v.EnvironmentId)
-		case schemas.KxEnvironment_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.KxEnvironment_errorMessage, v.ErrorMessage)
-		case schemas.KxEnvironment_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.KxEnvironment_kmsKeyId, v.KmsKeyId)
-		case schemas.KxEnvironment_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.KxEnvironment_name, v.Name)
-		case schemas.KxEnvironment_status:
-			var ev string
-			if err := d.ReadString(schemas.KxEnvironment_status, &ev); err != nil {
-				return err
-			}
-			v.Status = EnvironmentStatus(ev)
-			return nil
-		case schemas.KxEnvironment_tgwStatus:
-			var ev string
-			if err := d.ReadString(schemas.KxEnvironment_tgwStatus, &ev); err != nil {
-				return err
-			}
-			v.TgwStatus = TgwStatus(ev)
-			return nil
-		case schemas.KxEnvironment_transitGatewayConfiguration:
-			v.TransitGatewayConfiguration = &TransitGatewayConfiguration{}
-			return v.TransitGatewayConfiguration.Deserialize(d)
-		case schemas.KxEnvironment_updateTimestamp:
-			v.UpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxEnvironment_updateTimestamp, v.UpdateTimestamp)
-		}
-		return nil
-	})
-}
-
 //	The structure containing the size and type of the network attached storage
 //
 // (NAS_1) file system volume.
@@ -1936,38 +797,6 @@ type KxNAS1Configuration struct {
 	Type KxNAS1Type
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxNAS1Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxNAS1Configuration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxNAS1Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Size != nil {
-		s.WriteInt32(schemas.KxNAS1Configuration_size, *v.Size)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.KxNAS1Configuration_type, string(v.Type))
-	}
-}
-func (v *KxNAS1Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxNAS1Configuration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxNAS1Configuration_size:
-			v.Size = new(int32)
-			return d.ReadInt32(schemas.KxNAS1Configuration_size, v.Size)
-		case schemas.KxNAS1Configuration_type:
-			var ev string
-			if err := d.ReadString(schemas.KxNAS1Configuration_type, &ev); err != nil {
-				return err
-			}
-			v.Type = KxNAS1Type(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A structure that stores metadata for a kdb node.
@@ -1995,50 +824,6 @@ type KxNode struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxNode) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxNode)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxNode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.KxNode_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	if v.LaunchTime != nil {
-		s.WriteTime(schemas.KxNode_launchTime, *v.LaunchTime)
-	}
-	if v.NodeId != nil {
-		s.WriteString(schemas.KxNode_nodeId, *v.NodeId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxNode_status, string(v.Status))
-	}
-}
-func (v *KxNode) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxNode, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxNode_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.KxNode_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.KxNode_launchTime:
-			v.LaunchTime = new(time.Time)
-			return d.ReadTime(schemas.KxNode_launchTime, v.LaunchTime)
-		case schemas.KxNode_nodeId:
-			v.NodeId = new(string)
-			return d.ReadString(schemas.KxNode_nodeId, v.NodeId)
-		case schemas.KxNode_status:
-			var ev string
-			if err := d.ReadString(schemas.KxNode_status, &ev); err != nil {
-				return err
-			}
-			v.Status = KxNodeStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The size and type of temporary storage that is used to hold data during the
 // savedown process. All the data written to this storage space is lost when the
 // cluster node is restarted.
@@ -2058,44 +843,6 @@ type KxSavedownStorageConfiguration struct {
 	VolumeName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxSavedownStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxSavedownStorageConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxSavedownStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Size != nil {
-		s.WriteInt32(schemas.KxSavedownStorageConfiguration_size, *v.Size)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.KxSavedownStorageConfiguration_type, string(v.Type))
-	}
-	if v.VolumeName != nil {
-		s.WriteString(schemas.KxSavedownStorageConfiguration_volumeName, *v.VolumeName)
-	}
-}
-func (v *KxSavedownStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxSavedownStorageConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxSavedownStorageConfiguration_size:
-			v.Size = new(int32)
-			return d.ReadInt32(schemas.KxSavedownStorageConfiguration_size, v.Size)
-		case schemas.KxSavedownStorageConfiguration_type:
-			var ev string
-			if err := d.ReadString(schemas.KxSavedownStorageConfiguration_type, &ev); err != nil {
-				return err
-			}
-			v.Type = KxSavedownStorageType(ev)
-			return nil
-		case schemas.KxSavedownStorageConfiguration_volumeName:
-			v.VolumeName = new(string)
-			return d.ReadString(schemas.KxSavedownStorageConfiguration_volumeName, v.VolumeName)
-		}
-		return nil
-	})
 }
 
 // A structure for storing metadata of scaling group.
@@ -2162,71 +909,6 @@ type KxScalingGroup struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxScalingGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxScalingGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxScalingGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZoneId != nil {
-		s.WriteString(schemas.KxScalingGroup_availabilityZoneId, *v.AvailabilityZoneId)
-	}
-	serializeKxClusterNameList(s, schemas.KxScalingGroup_clusters, v.Clusters)
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxScalingGroup_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.HostType != nil {
-		s.WriteString(schemas.KxScalingGroup_hostType, *v.HostType)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxScalingGroup_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-	if v.ScalingGroupName != nil {
-		s.WriteString(schemas.KxScalingGroup_scalingGroupName, *v.ScalingGroupName)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxScalingGroup_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.KxScalingGroup_statusReason, *v.StatusReason)
-	}
-}
-func (v *KxScalingGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxScalingGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxScalingGroup_availabilityZoneId:
-			v.AvailabilityZoneId = new(string)
-			return d.ReadString(schemas.KxScalingGroup_availabilityZoneId, v.AvailabilityZoneId)
-		case schemas.KxScalingGroup_clusters:
-			return deserializeKxClusterNameList(d, schemas.KxScalingGroup_clusters, &v.Clusters)
-		case schemas.KxScalingGroup_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxScalingGroup_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxScalingGroup_hostType:
-			v.HostType = new(string)
-			return d.ReadString(schemas.KxScalingGroup_hostType, v.HostType)
-		case schemas.KxScalingGroup_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxScalingGroup_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.KxScalingGroup_scalingGroupName:
-			v.ScalingGroupName = new(string)
-			return d.ReadString(schemas.KxScalingGroup_scalingGroupName, v.ScalingGroupName)
-		case schemas.KxScalingGroup_status:
-			var ev string
-			if err := d.ReadString(schemas.KxScalingGroup_status, &ev); err != nil {
-				return err
-			}
-			v.Status = KxScalingGroupStatus(ev)
-			return nil
-		case schemas.KxScalingGroup_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.KxScalingGroup_statusReason, v.StatusReason)
-		}
-		return nil
-	})
-}
-
 // The structure that stores the capacity configuration details of a scaling group.
 type KxScalingGroupConfiguration struct {
 
@@ -2256,52 +938,6 @@ type KxScalingGroupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxScalingGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxScalingGroupConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxScalingGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Cpu != nil {
-		s.WriteFloat64(schemas.KxScalingGroupConfiguration_cpu, *v.Cpu)
-	}
-	if v.MemoryLimit != nil {
-		s.WriteInt32(schemas.KxScalingGroupConfiguration_memoryLimit, *v.MemoryLimit)
-	}
-	if v.MemoryReservation != nil {
-		s.WriteInt32(schemas.KxScalingGroupConfiguration_memoryReservation, *v.MemoryReservation)
-	}
-	if v.NodeCount != nil {
-		s.WriteInt32(schemas.KxScalingGroupConfiguration_nodeCount, *v.NodeCount)
-	}
-	if v.ScalingGroupName != nil {
-		s.WriteString(schemas.KxScalingGroupConfiguration_scalingGroupName, *v.ScalingGroupName)
-	}
-}
-func (v *KxScalingGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxScalingGroupConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxScalingGroupConfiguration_cpu:
-			v.Cpu = new(float64)
-			return d.ReadFloat64(schemas.KxScalingGroupConfiguration_cpu, v.Cpu)
-		case schemas.KxScalingGroupConfiguration_memoryLimit:
-			v.MemoryLimit = new(int32)
-			return d.ReadInt32(schemas.KxScalingGroupConfiguration_memoryLimit, v.MemoryLimit)
-		case schemas.KxScalingGroupConfiguration_memoryReservation:
-			v.MemoryReservation = new(int32)
-			return d.ReadInt32(schemas.KxScalingGroupConfiguration_memoryReservation, v.MemoryReservation)
-		case schemas.KxScalingGroupConfiguration_nodeCount:
-			v.NodeCount = new(int32)
-			return d.ReadInt32(schemas.KxScalingGroupConfiguration_nodeCount, v.NodeCount)
-		case schemas.KxScalingGroupConfiguration_scalingGroupName:
-			v.ScalingGroupName = new(string)
-			return d.ReadString(schemas.KxScalingGroupConfiguration_scalingGroupName, v.ScalingGroupName)
-		}
-		return nil
-	})
-}
-
 // A structure that stores metadata for a kdb user.
 type KxUser struct {
 
@@ -2324,52 +960,6 @@ type KxUser struct {
 	UserName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KxUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTimestamp != nil {
-		s.WriteTime(schemas.KxUser_createTimestamp, *v.CreateTimestamp)
-	}
-	if v.IamRole != nil {
-		s.WriteString(schemas.KxUser_iamRole, *v.IamRole)
-	}
-	if v.UpdateTimestamp != nil {
-		s.WriteTime(schemas.KxUser_updateTimestamp, *v.UpdateTimestamp)
-	}
-	if v.UserArn != nil {
-		s.WriteString(schemas.KxUser_userArn, *v.UserArn)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.KxUser_userName, *v.UserName)
-	}
-}
-func (v *KxUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxUser_createTimestamp:
-			v.CreateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxUser_createTimestamp, v.CreateTimestamp)
-		case schemas.KxUser_iamRole:
-			v.IamRole = new(string)
-			return d.ReadString(schemas.KxUser_iamRole, v.IamRole)
-		case schemas.KxUser_updateTimestamp:
-			v.UpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxUser_updateTimestamp, v.UpdateTimestamp)
-		case schemas.KxUser_userArn:
-			v.UserArn = new(string)
-			return d.ReadString(schemas.KxUser_userArn, v.UserArn)
-		case schemas.KxUser_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.KxUser_userName, v.UserName)
-		}
-		return nil
-	})
 }
 
 // The structure that contains the metadata of the volume.
@@ -2429,85 +1019,6 @@ type KxVolume struct {
 	noSmithyDocumentSerde
 }
 
-func (v *KxVolume) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KxVolume)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KxVolume) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneIds(s, schemas.KxVolume_availabilityZoneIds, v.AvailabilityZoneIds)
-	if v.AzMode != "" {
-		s.WriteString(schemas.KxVolume_azMode, string(v.AzMode))
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.KxVolume_createdTimestamp, *v.CreatedTimestamp)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.KxVolume_description, *v.Description)
-	}
-	if v.LastModifiedTimestamp != nil {
-		s.WriteTime(schemas.KxVolume_lastModifiedTimestamp, *v.LastModifiedTimestamp)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.KxVolume_status, string(v.Status))
-	}
-	if v.StatusReason != nil {
-		s.WriteString(schemas.KxVolume_statusReason, *v.StatusReason)
-	}
-	if v.VolumeName != nil {
-		s.WriteString(schemas.KxVolume_volumeName, *v.VolumeName)
-	}
-	if v.VolumeType != "" {
-		s.WriteString(schemas.KxVolume_volumeType, string(v.VolumeType))
-	}
-}
-func (v *KxVolume) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KxVolume, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KxVolume_availabilityZoneIds:
-			return deserializeAvailabilityZoneIds(d, schemas.KxVolume_availabilityZoneIds, &v.AvailabilityZoneIds)
-		case schemas.KxVolume_azMode:
-			var ev string
-			if err := d.ReadString(schemas.KxVolume_azMode, &ev); err != nil {
-				return err
-			}
-			v.AzMode = KxAzMode(ev)
-			return nil
-		case schemas.KxVolume_createdTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxVolume_createdTimestamp, v.CreatedTimestamp)
-		case schemas.KxVolume_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.KxVolume_description, v.Description)
-		case schemas.KxVolume_lastModifiedTimestamp:
-			v.LastModifiedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.KxVolume_lastModifiedTimestamp, v.LastModifiedTimestamp)
-		case schemas.KxVolume_status:
-			var ev string
-			if err := d.ReadString(schemas.KxVolume_status, &ev); err != nil {
-				return err
-			}
-			v.Status = KxVolumeStatus(ev)
-			return nil
-		case schemas.KxVolume_statusReason:
-			v.StatusReason = new(string)
-			return d.ReadString(schemas.KxVolume_statusReason, v.StatusReason)
-		case schemas.KxVolume_volumeName:
-			v.VolumeName = new(string)
-			return d.ReadString(schemas.KxVolume_volumeName, v.VolumeName)
-		case schemas.KxVolume_volumeType:
-			var ev string
-			if err := d.ReadString(schemas.KxVolume_volumeType, &ev); err != nil {
-				return err
-			}
-			v.VolumeType = KxVolumeType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 //	The network access control list (ACL) is an optional layer of security for
 //
 // your VPC that acts as a firewall for controlling traffic in and out of one or
@@ -2549,66 +1060,6 @@ type NetworkACLEntry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NetworkACLEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NetworkACLEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NetworkACLEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CidrBlock != nil {
-		s.WriteString(schemas.NetworkACLEntry_cidrBlock, *v.CidrBlock)
-	}
-	if v.IcmpTypeCode != nil {
-		s.WriteStruct(schemas.NetworkACLEntry_icmpTypeCode)
-		v.IcmpTypeCode.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PortRange != nil {
-		s.WriteStruct(schemas.NetworkACLEntry_portRange)
-		v.PortRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Protocol != nil {
-		s.WriteString(schemas.NetworkACLEntry_protocol, *v.Protocol)
-	}
-	if v.RuleAction != "" {
-		s.WriteString(schemas.NetworkACLEntry_ruleAction, string(v.RuleAction))
-	}
-	if v.RuleNumber != nil {
-		s.WriteInt32(schemas.NetworkACLEntry_ruleNumber, *v.RuleNumber)
-	}
-}
-func (v *NetworkACLEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NetworkACLEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NetworkACLEntry_cidrBlock:
-			v.CidrBlock = new(string)
-			return d.ReadString(schemas.NetworkACLEntry_cidrBlock, v.CidrBlock)
-		case schemas.NetworkACLEntry_icmpTypeCode:
-			v.IcmpTypeCode = &IcmpTypeCode{}
-			return v.IcmpTypeCode.Deserialize(d)
-		case schemas.NetworkACLEntry_portRange:
-			v.PortRange = &PortRange{}
-			return v.PortRange.Deserialize(d)
-		case schemas.NetworkACLEntry_protocol:
-			v.Protocol = new(string)
-			return d.ReadString(schemas.NetworkACLEntry_protocol, v.Protocol)
-		case schemas.NetworkACLEntry_ruleAction:
-			var ev string
-			if err := d.ReadString(schemas.NetworkACLEntry_ruleAction, &ev); err != nil {
-				return err
-			}
-			v.RuleAction = RuleAction(ev)
-			return nil
-		case schemas.NetworkACLEntry_ruleNumber:
-			v.RuleNumber = new(int32)
-			return d.ReadInt32(schemas.NetworkACLEntry_ruleNumber, v.RuleNumber)
-		}
-		return nil
-	})
-}
-
 // The range of ports the rule applies to.
 type PortRange struct {
 
@@ -2623,28 +1074,6 @@ type PortRange struct {
 	To int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PortRange)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteInt32(schemas.PortRange_from, v.From)
-	s.WriteInt32(schemas.PortRange_to, v.To)
-}
-func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PortRange_from:
-			return d.ReadInt32(schemas.PortRange_from, &v.From)
-		case schemas.PortRange_to:
-			return d.ReadInt32(schemas.PortRange_to, &v.To)
-		}
-		return nil
-	})
 }
 
 // Configuration information for the superuser.
@@ -2668,40 +1097,6 @@ type SuperuserParameters struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuperuserParameters) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuperuserParameters)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuperuserParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EmailAddress != nil {
-		s.WriteString(schemas.SuperuserParameters_emailAddress, *v.EmailAddress)
-	}
-	if v.FirstName != nil {
-		s.WriteString(schemas.SuperuserParameters_firstName, *v.FirstName)
-	}
-	if v.LastName != nil {
-		s.WriteString(schemas.SuperuserParameters_lastName, *v.LastName)
-	}
-}
-func (v *SuperuserParameters) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuperuserParameters, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuperuserParameters_emailAddress:
-			v.EmailAddress = new(string)
-			return d.ReadString(schemas.SuperuserParameters_emailAddress, v.EmailAddress)
-		case schemas.SuperuserParameters_firstName:
-			v.FirstName = new(string)
-			return d.ReadString(schemas.SuperuserParameters_firstName, v.FirstName)
-		case schemas.SuperuserParameters_lastName:
-			v.LastName = new(string)
-			return d.ReadString(schemas.SuperuserParameters_lastName, v.LastName)
-		}
-		return nil
-	})
-}
-
 //	A configuration to store the Tickerplant logs. It consists of a list of
 //
 // volumes that will be mounted to your cluster. For the cluster type Tickerplant ,
@@ -2713,25 +1108,6 @@ type TickerplantLogConfiguration struct {
 	TickerplantLogVolumes []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TickerplantLogConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TickerplantLogConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TickerplantLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTickerplantLogVolumes(s, schemas.TickerplantLogConfiguration_tickerplantLogVolumes, v.TickerplantLogVolumes)
-}
-func (v *TickerplantLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TickerplantLogConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TickerplantLogConfiguration_tickerplantLogVolumes:
-			return deserializeTickerplantLogVolumes(d, schemas.TickerplantLogConfiguration_tickerplantLogVolumes, &v.TickerplantLogVolumes)
-		}
-		return nil
-	})
 }
 
 // The structure of the transit gateway and network configuration that is used to
@@ -2759,37 +1135,6 @@ type TransitGatewayConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TransitGatewayConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TransitGatewayConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TransitGatewayConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkACLConfiguration(s, schemas.TransitGatewayConfiguration_attachmentNetworkAclConfiguration, v.AttachmentNetworkAclConfiguration)
-	if v.RoutableCIDRSpace != nil {
-		s.WriteString(schemas.TransitGatewayConfiguration_routableCIDRSpace, *v.RoutableCIDRSpace)
-	}
-	if v.TransitGatewayID != nil {
-		s.WriteString(schemas.TransitGatewayConfiguration_transitGatewayID, *v.TransitGatewayID)
-	}
-}
-func (v *TransitGatewayConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TransitGatewayConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TransitGatewayConfiguration_attachmentNetworkAclConfiguration:
-			return deserializeNetworkACLConfiguration(d, schemas.TransitGatewayConfiguration_attachmentNetworkAclConfiguration, &v.AttachmentNetworkAclConfiguration)
-		case schemas.TransitGatewayConfiguration_routableCIDRSpace:
-			v.RoutableCIDRSpace = new(string)
-			return d.ReadString(schemas.TransitGatewayConfiguration_routableCIDRSpace, v.RoutableCIDRSpace)
-		case schemas.TransitGatewayConfiguration_transitGatewayID:
-			v.TransitGatewayID = new(string)
-			return d.ReadString(schemas.TransitGatewayConfiguration_transitGatewayID, v.TransitGatewayID)
-		}
-		return nil
-	})
-}
-
 // The structure that consists of name and type of volume.
 type Volume struct {
 
@@ -2801,38 +1146,6 @@ type Volume struct {
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
-}
-
-func (v *Volume) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Volume)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Volume) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.VolumeName != nil {
-		s.WriteString(schemas.Volume_volumeName, *v.VolumeName)
-	}
-	if v.VolumeType != "" {
-		s.WriteString(schemas.Volume_volumeType, string(v.VolumeType))
-	}
-}
-func (v *Volume) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Volume, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Volume_volumeName:
-			v.VolumeName = new(string)
-			return d.ReadString(schemas.Volume_volumeName, v.VolumeName)
-		case schemas.Volume_volumeType:
-			var ev string
-			if err := d.ReadString(schemas.Volume_volumeType, &ev); err != nil {
-				return err
-			}
-			v.VolumeType = VolumeType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration details about the network where the Privatelink endpoint of the
@@ -2857,44 +1170,6 @@ type VpcConfiguration struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.VpcConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IpAddressType != "" {
-		s.WriteString(schemas.VpcConfiguration_ipAddressType, string(v.IpAddressType))
-	}
-	serializeSecurityGroupIdList(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
-	if v.VpcId != nil {
-		s.WriteString(schemas.VpcConfiguration_vpcId, *v.VpcId)
-	}
-}
-func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.VpcConfiguration_ipAddressType:
-			var ev string
-			if err := d.ReadString(schemas.VpcConfiguration_ipAddressType, &ev); err != nil {
-				return err
-			}
-			v.IpAddressType = IPAddressType(ev)
-			return nil
-		case schemas.VpcConfiguration_securityGroupIds:
-			return deserializeSecurityGroupIdList(d, schemas.VpcConfiguration_securityGroupIds, &v.SecurityGroupIds)
-		case schemas.VpcConfiguration_subnetIds:
-			return deserializeSubnetIdList(d, schemas.VpcConfiguration_subnetIds, &v.SubnetIds)
-		case schemas.VpcConfiguration_vpcId:
-			v.VpcId = new(string)
-			return d.ReadString(schemas.VpcConfiguration_vpcId, v.VpcId)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

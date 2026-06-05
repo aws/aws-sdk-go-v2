@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListOauth2CredentialProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOauth2CredentialProvidersInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOauth2CredentialProvidersRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOauth2CredentialProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOauth2CredentialProvidersRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOauth2CredentialProvidersRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListOauth2CredentialProvidersOutput struct {
 
 	// The list of OAuth2 credential providers.
@@ -71,26 +54,16 @@ type ListOauth2CredentialProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOauth2CredentialProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOauth2CredentialProvidersResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOauth2CredentialProvidersResponse_credentialProviders:
-			return deserializeOauth2CredentialProviders(d, schemas.ListOauth2CredentialProvidersResponse_credentialProviders, &v.CredentialProviders)
-		case schemas.ListOauth2CredentialProvidersResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOauth2CredentialProvidersResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOauth2CredentialProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOauth2CredentialProviders, schemas.ListOauth2CredentialProvidersRequest, schemas.ListOauth2CredentialProvidersResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOauth2CredentialProviders{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOauth2CredentialProviders, schemas.ListOauth2CredentialProvidersRequest, schemas.ListOauth2CredentialProvidersResponse), output: &ListOauth2CredentialProvidersOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOauth2CredentialProviders{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOauth2CredentialProviders"); err != nil {

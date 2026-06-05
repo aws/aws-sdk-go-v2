@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,22 +47,6 @@ type BatchDisassociateProjectAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDisassociateProjectAssetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchDisassociateProjectAssetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchDisassociateProjectAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIDs(s, schemas.BatchDisassociateProjectAssetsRequest_assetIds, v.AssetIds)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchDisassociateProjectAssetsRequest_clientToken, *v.ClientToken)
-	}
-	if v.ProjectId != nil {
-		s.WriteString(schemas.BatchDisassociateProjectAssetsRequest_projectId, *v.ProjectId)
-	}
-}
-
 type BatchDisassociateProjectAssetsOutput struct {
 
 	// A list of associated error information, if any.
@@ -76,23 +58,16 @@ type BatchDisassociateProjectAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchDisassociateProjectAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchDisassociateProjectAssetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchDisassociateProjectAssetsResponse_errors:
-			return deserializeBatchDisassociateProjectAssetsErrors(d, schemas.BatchDisassociateProjectAssetsResponse_errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchDisassociateProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateProjectAssets, schemas.BatchDisassociateProjectAssetsRequest, schemas.BatchDisassociateProjectAssetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateProjectAssets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateProjectAssets, schemas.BatchDisassociateProjectAssetsRequest, schemas.BatchDisassociateProjectAssetsResponse), output: &BatchDisassociateProjectAssetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateProjectAssets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDisassociateProjectAssets"); err != nil {

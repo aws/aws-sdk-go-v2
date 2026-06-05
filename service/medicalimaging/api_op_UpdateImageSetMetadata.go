@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -68,31 +66,6 @@ type UpdateImageSetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateImageSetMetadataInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateImageSetMetadataRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateImageSetMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.UpdateImageSetMetadataRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.Force != nil {
-		s.WriteBool(schemas.UpdateImageSetMetadataRequest_force, *v.Force)
-	}
-	if v.ImageSetId != nil {
-		s.WriteString(schemas.UpdateImageSetMetadataRequest_imageSetId, *v.ImageSetId)
-	}
-	if v.IncludeStudyImageSets != nil {
-		s.WriteBool(schemas.UpdateImageSetMetadataRequest_includeStudyImageSets, *v.IncludeStudyImageSets)
-	}
-	if v.LatestVersionId != nil {
-		s.WriteString(schemas.UpdateImageSetMetadataRequest_latestVersionId, *v.LatestVersionId)
-	}
-	serializeMetadataUpdates(s, schemas.UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates, v.UpdateImageSetMetadataUpdates)
-}
-
 type UpdateImageSetMetadataOutput struct {
 
 	// The data store identifier.
@@ -133,53 +106,16 @@ type UpdateImageSetMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateImageSetMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateImageSetMetadataResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateImageSetMetadataResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateImageSetMetadataResponse_createdAt, v.CreatedAt)
-		case schemas.UpdateImageSetMetadataResponse_datastoreId:
-			v.DatastoreId = new(string)
-			return d.ReadString(schemas.UpdateImageSetMetadataResponse_datastoreId, v.DatastoreId)
-		case schemas.UpdateImageSetMetadataResponse_imageSetId:
-			v.ImageSetId = new(string)
-			return d.ReadString(schemas.UpdateImageSetMetadataResponse_imageSetId, v.ImageSetId)
-		case schemas.UpdateImageSetMetadataResponse_imageSetState:
-			var ev string
-			if err := d.ReadString(schemas.UpdateImageSetMetadataResponse_imageSetState, &ev); err != nil {
-				return err
-			}
-			v.ImageSetState = types.ImageSetState(ev)
-			return nil
-		case schemas.UpdateImageSetMetadataResponse_imageSetWorkflowStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateImageSetMetadataResponse_imageSetWorkflowStatus, &ev); err != nil {
-				return err
-			}
-			v.ImageSetWorkflowStatus = types.ImageSetWorkflowStatus(ev)
-			return nil
-		case schemas.UpdateImageSetMetadataResponse_latestVersionId:
-			v.LatestVersionId = new(string)
-			return d.ReadString(schemas.UpdateImageSetMetadataResponse_latestVersionId, v.LatestVersionId)
-		case schemas.UpdateImageSetMetadataResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.UpdateImageSetMetadataResponse_message, v.Message)
-		case schemas.UpdateImageSetMetadataResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.UpdateImageSetMetadataResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateImageSetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageSetMetadata, schemas.UpdateImageSetMetadataRequest, schemas.UpdateImageSetMetadataResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateImageSetMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageSetMetadata, schemas.UpdateImageSetMetadataRequest, schemas.UpdateImageSetMetadataResponse), output: &UpdateImageSetMetadataOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateImageSetMetadata{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateImageSetMetadata"); err != nil {

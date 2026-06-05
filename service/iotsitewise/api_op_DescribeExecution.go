@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type DescribeExecutionInput struct {
 	ExecutionId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeExecutionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeExecutionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.DescribeExecutionRequest_executionId, *v.ExecutionId)
-	}
 }
 
 type DescribeExecutionOutput struct {
@@ -116,52 +102,16 @@ type DescribeExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeExecutionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeExecutionResponse_actionType:
-			v.ActionType = new(string)
-			return d.ReadString(schemas.DescribeExecutionResponse_actionType, v.ActionType)
-		case schemas.DescribeExecutionResponse_executionDetails:
-			return deserializeExecutionDetails(d, schemas.DescribeExecutionResponse_executionDetails, &v.ExecutionDetails)
-		case schemas.DescribeExecutionResponse_executionEndTime:
-			v.ExecutionEndTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeExecutionResponse_executionEndTime, v.ExecutionEndTime)
-		case schemas.DescribeExecutionResponse_executionEntityVersion:
-			v.ExecutionEntityVersion = new(string)
-			return d.ReadString(schemas.DescribeExecutionResponse_executionEntityVersion, v.ExecutionEntityVersion)
-		case schemas.DescribeExecutionResponse_executionId:
-			v.ExecutionId = new(string)
-			return d.ReadString(schemas.DescribeExecutionResponse_executionId, v.ExecutionId)
-		case schemas.DescribeExecutionResponse_executionResult:
-			return deserializeExecutionResult(d, schemas.DescribeExecutionResponse_executionResult, &v.ExecutionResult)
-		case schemas.DescribeExecutionResponse_executionStartTime:
-			v.ExecutionStartTime = new(time.Time)
-			return d.ReadTime(schemas.DescribeExecutionResponse_executionStartTime, v.ExecutionStartTime)
-		case schemas.DescribeExecutionResponse_executionStatus:
-			v.ExecutionStatus = &types.ExecutionStatus{}
-			return v.ExecutionStatus.Deserialize(d)
-		case schemas.DescribeExecutionResponse_resolveTo:
-			v.ResolveTo = &types.ResolveTo{}
-			return v.ResolveTo.Deserialize(d)
-		case schemas.DescribeExecutionResponse_targetResource:
-			v.TargetResource = &types.TargetResource{}
-			return v.TargetResource.Deserialize(d)
-		case schemas.DescribeExecutionResponse_targetResourceVersion:
-			v.TargetResourceVersion = new(string)
-			return d.ReadString(schemas.DescribeExecutionResponse_targetResourceVersion, v.TargetResourceVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionRequest, schemas.DescribeExecutionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeExecution{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionRequest, schemas.DescribeExecutionResponse), output: &DescribeExecutionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeExecution{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeExecution"); err != nil {

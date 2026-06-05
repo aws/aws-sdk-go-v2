@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,33 +73,6 @@ type CreateMessageTemplateAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMessageTemplateAttachmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMessageTemplateAttachmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMessageTemplateAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Body != nil {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_body, *v.Body)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_clientToken, *v.ClientToken)
-	}
-	if v.ContentDisposition != "" {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_contentDisposition, string(v.ContentDisposition))
-	}
-	if v.KnowledgeBaseId != nil {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
-	}
-	if v.MessageTemplateId != nil {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_messageTemplateId, *v.MessageTemplateId)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateMessageTemplateAttachmentRequest_name, *v.Name)
-	}
-}
-
 type CreateMessageTemplateAttachmentOutput struct {
 
 	// The message template attachment.
@@ -113,24 +84,16 @@ type CreateMessageTemplateAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMessageTemplateAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMessageTemplateAttachmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMessageTemplateAttachmentResponse_attachment:
-			v.Attachment = &types.MessageTemplateAttachment{}
-			return v.Attachment.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMessageTemplateAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMessageTemplateAttachment, schemas.CreateMessageTemplateAttachmentRequest, schemas.CreateMessageTemplateAttachmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMessageTemplateAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMessageTemplateAttachment, schemas.CreateMessageTemplateAttachmentRequest, schemas.CreateMessageTemplateAttachmentResponse), output: &CreateMessageTemplateAttachmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMessageTemplateAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMessageTemplateAttachment"); err != nil {

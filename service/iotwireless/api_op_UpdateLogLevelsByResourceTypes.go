@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type UpdateLogLevelsByResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLogLevelsByResourceTypesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateLogLevelsByResourceTypesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateLogLevelsByResourceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultLogLevel != "" {
-		s.WriteString(schemas.UpdateLogLevelsByResourceTypesRequest_DefaultLogLevel, string(v.DefaultLogLevel))
-	}
-	serializeFuotaTaskLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_FuotaTaskLogOptions, v.FuotaTaskLogOptions)
-	serializeWirelessDeviceLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessDeviceLogOptions, v.WirelessDeviceLogOptions)
-	serializeWirelessGatewayLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessGatewayLogOptions, v.WirelessGatewayLogOptions)
-}
-
 type UpdateLogLevelsByResourceTypesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,21 +55,16 @@ type UpdateLogLevelsByResourceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateLogLevelsByResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateLogLevelsByResourceTypesResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateLogLevelsByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLogLevelsByResourceTypes, schemas.UpdateLogLevelsByResourceTypesRequest, schemas.UpdateLogLevelsByResourceTypesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLogLevelsByResourceTypes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLogLevelsByResourceTypes, schemas.UpdateLogLevelsByResourceTypesRequest, schemas.UpdateLogLevelsByResourceTypesResponse), output: &UpdateLogLevelsByResourceTypesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLogLevelsByResourceTypes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLogLevelsByResourceTypes"); err != nil {

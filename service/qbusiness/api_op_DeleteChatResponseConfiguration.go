@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type DeleteChatResponseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteChatResponseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteChatResponseConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteChatResponseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.DeleteChatResponseConfigurationRequest_applicationId, *v.ApplicationId)
-	}
-	if v.ChatResponseConfigurationId != nil {
-		s.WriteString(schemas.DeleteChatResponseConfigurationRequest_chatResponseConfigurationId, *v.ChatResponseConfigurationId)
-	}
-}
-
 type DeleteChatResponseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,21 +51,16 @@ type DeleteChatResponseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteChatResponseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteChatResponseConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteChatResponseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChatResponseConfiguration, schemas.DeleteChatResponseConfigurationRequest, schemas.DeleteChatResponseConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChatResponseConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChatResponseConfiguration, schemas.DeleteChatResponseConfigurationRequest, schemas.DeleteChatResponseConfigurationResponse), output: &DeleteChatResponseConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChatResponseConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteChatResponseConfiguration"); err != nil {

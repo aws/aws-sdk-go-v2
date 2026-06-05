@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,18 +38,6 @@ type GetPolicyStoreAliasInput struct {
 	AliasName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetPolicyStoreAliasInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetPolicyStoreAliasInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetPolicyStoreAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AliasName != nil {
-		s.WriteString(schemas.GetPolicyStoreAliasInput_aliasName, *v.AliasName)
-	}
 }
 
 type GetPolicyStoreAliasOutput struct {
@@ -90,40 +76,16 @@ type GetPolicyStoreAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetPolicyStoreAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetPolicyStoreAliasOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetPolicyStoreAliasOutput_aliasArn:
-			v.AliasArn = new(string)
-			return d.ReadString(schemas.GetPolicyStoreAliasOutput_aliasArn, v.AliasArn)
-		case schemas.GetPolicyStoreAliasOutput_aliasName:
-			v.AliasName = new(string)
-			return d.ReadString(schemas.GetPolicyStoreAliasOutput_aliasName, v.AliasName)
-		case schemas.GetPolicyStoreAliasOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetPolicyStoreAliasOutput_createdAt, v.CreatedAt)
-		case schemas.GetPolicyStoreAliasOutput_policyStoreId:
-			v.PolicyStoreId = new(string)
-			return d.ReadString(schemas.GetPolicyStoreAliasOutput_policyStoreId, v.PolicyStoreId)
-		case schemas.GetPolicyStoreAliasOutput_state:
-			var ev string
-			if err := d.ReadString(schemas.GetPolicyStoreAliasOutput_state, &ev); err != nil {
-				return err
-			}
-			v.State = types.AliasState(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetPolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStoreAlias, schemas.GetPolicyStoreAliasInput, schemas.GetPolicyStoreAliasOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicyStoreAlias{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyStoreAlias, schemas.GetPolicyStoreAliasInput, schemas.GetPolicyStoreAliasOutput), output: &GetPolicyStoreAliasOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicyStoreAlias{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyStoreAlias"); err != nil {

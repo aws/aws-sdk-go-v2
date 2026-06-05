@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,34 +64,6 @@ type RemovePolicyGrantInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemovePolicyGrantInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RemovePolicyGrantInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RemovePolicyGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.RemovePolicyGrantInput_clientToken, *v.ClientToken)
-	}
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.RemovePolicyGrantInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.RemovePolicyGrantInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.RemovePolicyGrantInput_entityType, string(v.EntityType))
-	}
-	if v.GrantIdentifier != nil {
-		s.WriteString(schemas.RemovePolicyGrantInput_grantIdentifier, *v.GrantIdentifier)
-	}
-	if v.PolicyType != "" {
-		s.WriteString(schemas.RemovePolicyGrantInput_policyType, string(v.PolicyType))
-	}
-	serializePolicyGrantPrincipal(s, schemas.RemovePolicyGrantInput_principal, v.Principal)
-}
-
 type RemovePolicyGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,21 +71,16 @@ type RemovePolicyGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RemovePolicyGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RemovePolicyGrantOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRemovePolicyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemovePolicyGrant, schemas.RemovePolicyGrantInput, schemas.RemovePolicyGrantOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemovePolicyGrant{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemovePolicyGrant, schemas.RemovePolicyGrantInput, schemas.RemovePolicyGrantOutput), output: &RemovePolicyGrantOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemovePolicyGrant{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemovePolicyGrant"); err != nil {

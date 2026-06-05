@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,24 +53,6 @@ type GetMetadataGenerationRunInput struct {
 	Type types.MetadataGenerationRunType
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetMetadataGenerationRunInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMetadataGenerationRunInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMetadataGenerationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.GetMetadataGenerationRunInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetMetadataGenerationRunInput_identifier, *v.Identifier)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.GetMetadataGenerationRunInput_type, string(v.Type))
-	}
 }
 
 type GetMetadataGenerationRunOutput struct {
@@ -124,57 +104,16 @@ type GetMetadataGenerationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMetadataGenerationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMetadataGenerationRunOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMetadataGenerationRunOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetMetadataGenerationRunOutput_createdAt, v.CreatedAt)
-		case schemas.GetMetadataGenerationRunOutput_createdBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.GetMetadataGenerationRunOutput_createdBy, v.CreatedBy)
-		case schemas.GetMetadataGenerationRunOutput_domainId:
-			v.DomainId = new(string)
-			return d.ReadString(schemas.GetMetadataGenerationRunOutput_domainId, v.DomainId)
-		case schemas.GetMetadataGenerationRunOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetMetadataGenerationRunOutput_id, v.Id)
-		case schemas.GetMetadataGenerationRunOutput_owningProjectId:
-			v.OwningProjectId = new(string)
-			return d.ReadString(schemas.GetMetadataGenerationRunOutput_owningProjectId, v.OwningProjectId)
-		case schemas.GetMetadataGenerationRunOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetMetadataGenerationRunOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.MetadataGenerationRunStatus(ev)
-			return nil
-		case schemas.GetMetadataGenerationRunOutput_target:
-			v.Target = &types.MetadataGenerationRunTarget{}
-			return v.Target.Deserialize(d)
-		case schemas.GetMetadataGenerationRunOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.GetMetadataGenerationRunOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.MetadataGenerationRunType(ev)
-			return nil
-		case schemas.GetMetadataGenerationRunOutput_typeStats:
-			return deserializeMetadataGenerationRunTypeStats(d, schemas.GetMetadataGenerationRunOutput_typeStats, &v.TypeStats)
-		case schemas.GetMetadataGenerationRunOutput_types:
-			return deserializeMetadataGenerationRunTypes(d, schemas.GetMetadataGenerationRunOutput_types, &v.Types)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMetadataGenerationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataGenerationRun, schemas.GetMetadataGenerationRunInput, schemas.GetMetadataGenerationRunOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetadataGenerationRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataGenerationRun, schemas.GetMetadataGenerationRunInput, schemas.GetMetadataGenerationRunOutput), output: &GetMetadataGenerationRunOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetadataGenerationRun{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMetadataGenerationRun"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type GetScanInput struct {
 	RunId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetScanInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetScanRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetScanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RunId != nil {
-		s.WriteString(schemas.GetScanRequest_runId, *v.RunId)
-	}
-	if v.ScanName != nil {
-		s.WriteString(schemas.GetScanRequest_scanName, *v.ScanName)
-	}
 }
 
 type GetScanOutput struct {
@@ -108,56 +91,16 @@ type GetScanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetScanResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetScanResponse_analysisType:
-			var ev string
-			if err := d.ReadString(schemas.GetScanResponse_analysisType, &ev); err != nil {
-				return err
-			}
-			v.AnalysisType = types.AnalysisType(ev)
-			return nil
-		case schemas.GetScanResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetScanResponse_createdAt, v.CreatedAt)
-		case schemas.GetScanResponse_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.GetScanResponse_errorMessage, v.ErrorMessage)
-		case schemas.GetScanResponse_numberOfRevisions:
-			v.NumberOfRevisions = new(int64)
-			return d.ReadInt64(schemas.GetScanResponse_numberOfRevisions, v.NumberOfRevisions)
-		case schemas.GetScanResponse_runId:
-			v.RunId = new(string)
-			return d.ReadString(schemas.GetScanResponse_runId, v.RunId)
-		case schemas.GetScanResponse_scanName:
-			v.ScanName = new(string)
-			return d.ReadString(schemas.GetScanResponse_scanName, v.ScanName)
-		case schemas.GetScanResponse_scanNameArn:
-			v.ScanNameArn = new(string)
-			return d.ReadString(schemas.GetScanResponse_scanNameArn, v.ScanNameArn)
-		case schemas.GetScanResponse_scanState:
-			var ev string
-			if err := d.ReadString(schemas.GetScanResponse_scanState, &ev); err != nil {
-				return err
-			}
-			v.ScanState = types.ScanState(ev)
-			return nil
-		case schemas.GetScanResponse_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetScanResponse_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScan, schemas.GetScanRequest, schemas.GetScanResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetScan{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScan, schemas.GetScanRequest, schemas.GetScanResponse), output: &GetScanOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetScan{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetScan"); err != nil {

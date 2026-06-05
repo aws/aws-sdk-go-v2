@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,44 +20,6 @@ type AppInstanceUserMembershipSummary struct {
 	Type ChannelMembershipType
 
 	noSmithyDocumentSerde
-}
-
-func (v *AppInstanceUserMembershipSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AppInstanceUserMembershipSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AppInstanceUserMembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReadMarkerTimestamp != nil {
-		s.WriteTime(schemas.AppInstanceUserMembershipSummary_ReadMarkerTimestamp, *v.ReadMarkerTimestamp)
-	}
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.AppInstanceUserMembershipSummary_SubChannelId, *v.SubChannelId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.AppInstanceUserMembershipSummary_Type, string(v.Type))
-	}
-}
-func (v *AppInstanceUserMembershipSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AppInstanceUserMembershipSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AppInstanceUserMembershipSummary_ReadMarkerTimestamp:
-			v.ReadMarkerTimestamp = new(time.Time)
-			return d.ReadTime(schemas.AppInstanceUserMembershipSummary_ReadMarkerTimestamp, v.ReadMarkerTimestamp)
-		case schemas.AppInstanceUserMembershipSummary_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.AppInstanceUserMembershipSummary_SubChannelId, v.SubChannelId)
-		case schemas.AppInstanceUserMembershipSummary_Type:
-			var ev string
-			if err := d.ReadString(schemas.AppInstanceUserMembershipSummary_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelMembershipType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The membership information, including member ARNs, the channel ARN, and
@@ -84,55 +44,6 @@ type BatchChannelMemberships struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchChannelMemberships) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchChannelMemberships)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchChannelMemberships) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.BatchChannelMemberships_ChannelArn, *v.ChannelArn)
-	}
-	if v.InvitedBy != nil {
-		s.WriteStruct(schemas.BatchChannelMemberships_InvitedBy)
-		v.InvitedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeMembers(s, schemas.BatchChannelMemberships_Members, v.Members)
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.BatchChannelMemberships_SubChannelId, *v.SubChannelId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.BatchChannelMemberships_Type, string(v.Type))
-	}
-}
-func (v *BatchChannelMemberships) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchChannelMemberships, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchChannelMemberships_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.BatchChannelMemberships_ChannelArn, v.ChannelArn)
-		case schemas.BatchChannelMemberships_InvitedBy:
-			v.InvitedBy = &Identity{}
-			return v.InvitedBy.Deserialize(d)
-		case schemas.BatchChannelMemberships_Members:
-			return deserializeMembers(d, schemas.BatchChannelMemberships_Members, &v.Members)
-		case schemas.BatchChannelMemberships_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.BatchChannelMemberships_SubChannelId, v.SubChannelId)
-		case schemas.BatchChannelMemberships_Type:
-			var ev string
-			if err := d.ReadString(schemas.BatchChannelMemberships_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelMembershipType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A list of failed member ARNs, error codes, and error messages.
 type BatchCreateChannelMembershipError struct {
 
@@ -146,44 +57,6 @@ type BatchCreateChannelMembershipError struct {
 	MemberArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchCreateChannelMembershipError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateChannelMembershipError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateChannelMembershipError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BatchCreateChannelMembershipError_ErrorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BatchCreateChannelMembershipError_ErrorMessage, *v.ErrorMessage)
-	}
-	if v.MemberArn != nil {
-		s.WriteString(schemas.BatchCreateChannelMembershipError_MemberArn, *v.MemberArn)
-	}
-}
-func (v *BatchCreateChannelMembershipError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateChannelMembershipError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateChannelMembershipError_ErrorCode:
-			var ev string
-			if err := d.ReadString(schemas.BatchCreateChannelMembershipError_ErrorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = ErrorCode(ev)
-			return nil
-		case schemas.BatchCreateChannelMembershipError_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BatchCreateChannelMembershipError_ErrorMessage, v.ErrorMessage)
-		case schemas.BatchCreateChannelMembershipError_MemberArn:
-			v.MemberArn = new(string)
-			return d.ReadString(schemas.BatchCreateChannelMembershipError_MemberArn, v.MemberArn)
-		}
-		return nil
-	})
 }
 
 // The details of a channel.
@@ -229,108 +102,6 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Channel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Channel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.Channel_ChannelArn, *v.ChannelArn)
-	}
-	if v.ChannelFlowArn != nil {
-		s.WriteString(schemas.Channel_ChannelFlowArn, *v.ChannelFlowArn)
-	}
-	if v.CreatedBy != nil {
-		s.WriteStruct(schemas.Channel_CreatedBy)
-		v.CreatedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.Channel_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.ElasticChannelConfiguration != nil {
-		s.WriteStruct(schemas.Channel_ElasticChannelConfiguration)
-		v.ElasticChannelConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExpirationSettings != nil {
-		s.WriteStruct(schemas.Channel_ExpirationSettings)
-		v.ExpirationSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastMessageTimestamp != nil {
-		s.WriteTime(schemas.Channel_LastMessageTimestamp, *v.LastMessageTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.Channel_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.Channel_Metadata, *v.Metadata)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.Channel_Mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Channel_Name, *v.Name)
-	}
-	if v.Privacy != "" {
-		s.WriteString(schemas.Channel_Privacy, string(v.Privacy))
-	}
-}
-func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Channel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Channel_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.Channel_ChannelArn, v.ChannelArn)
-		case schemas.Channel_ChannelFlowArn:
-			v.ChannelFlowArn = new(string)
-			return d.ReadString(schemas.Channel_ChannelFlowArn, v.ChannelFlowArn)
-		case schemas.Channel_CreatedBy:
-			v.CreatedBy = &Identity{}
-			return v.CreatedBy.Deserialize(d)
-		case schemas.Channel_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Channel_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.Channel_ElasticChannelConfiguration:
-			v.ElasticChannelConfiguration = &ElasticChannelConfiguration{}
-			return v.ElasticChannelConfiguration.Deserialize(d)
-		case schemas.Channel_ExpirationSettings:
-			v.ExpirationSettings = &ExpirationSettings{}
-			return v.ExpirationSettings.Deserialize(d)
-		case schemas.Channel_LastMessageTimestamp:
-			v.LastMessageTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Channel_LastMessageTimestamp, v.LastMessageTimestamp)
-		case schemas.Channel_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.Channel_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.Channel_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.Channel_Metadata, v.Metadata)
-		case schemas.Channel_Mode:
-			var ev string
-			if err := d.ReadString(schemas.Channel_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = ChannelMode(ev)
-			return nil
-		case schemas.Channel_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Channel_Name, v.Name)
-		case schemas.Channel_Privacy:
-			var ev string
-			if err := d.ReadString(schemas.Channel_Privacy, &ev); err != nil {
-				return err
-			}
-			v.Privacy = ChannelPrivacy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary of details of a channel associated with channel flow.
 type ChannelAssociatedWithFlowSummary struct {
 
@@ -352,60 +123,6 @@ type ChannelAssociatedWithFlowSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelAssociatedWithFlowSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelAssociatedWithFlowSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelAssociatedWithFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelAssociatedWithFlowSummary_ChannelArn, *v.ChannelArn)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ChannelAssociatedWithFlowSummary_Metadata, *v.Metadata)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.ChannelAssociatedWithFlowSummary_Mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ChannelAssociatedWithFlowSummary_Name, *v.Name)
-	}
-	if v.Privacy != "" {
-		s.WriteString(schemas.ChannelAssociatedWithFlowSummary_Privacy, string(v.Privacy))
-	}
-}
-func (v *ChannelAssociatedWithFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelAssociatedWithFlowSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelAssociatedWithFlowSummary_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelAssociatedWithFlowSummary_ChannelArn, v.ChannelArn)
-		case schemas.ChannelAssociatedWithFlowSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ChannelAssociatedWithFlowSummary_Metadata, v.Metadata)
-		case schemas.ChannelAssociatedWithFlowSummary_Mode:
-			var ev string
-			if err := d.ReadString(schemas.ChannelAssociatedWithFlowSummary_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = ChannelMode(ev)
-			return nil
-		case schemas.ChannelAssociatedWithFlowSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ChannelAssociatedWithFlowSummary_Name, v.Name)
-		case schemas.ChannelAssociatedWithFlowSummary_Privacy:
-			var ev string
-			if err := d.ReadString(schemas.ChannelAssociatedWithFlowSummary_Privacy, &ev); err != nil {
-				return err
-			}
-			v.Privacy = ChannelPrivacy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The details of a channel ban.
 type ChannelBan struct {
 
@@ -424,50 +141,6 @@ type ChannelBan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelBan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelBan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelBan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelBan_ChannelArn, *v.ChannelArn)
-	}
-	if v.CreatedBy != nil {
-		s.WriteStruct(schemas.ChannelBan_CreatedBy)
-		v.CreatedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelBan_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.Member != nil {
-		s.WriteStruct(schemas.ChannelBan_Member)
-		v.Member.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelBan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelBan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelBan_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelBan_ChannelArn, v.ChannelArn)
-		case schemas.ChannelBan_CreatedBy:
-			v.CreatedBy = &Identity{}
-			return v.CreatedBy.Deserialize(d)
-		case schemas.ChannelBan_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelBan_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelBan_Member:
-			v.Member = &Identity{}
-			return v.Member.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summary of the details of a ChannelBan .
 type ChannelBanSummary struct {
 
@@ -475,30 +148,6 @@ type ChannelBanSummary struct {
 	Member *Identity
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelBanSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelBanSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelBanSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Member != nil {
-		s.WriteStruct(schemas.ChannelBanSummary_Member)
-		v.Member.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelBanSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelBanSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelBanSummary_Member:
-			v.Member = &Identity{}
-			return v.Member.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The details of a channel flow.
@@ -522,49 +171,6 @@ type ChannelFlow struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelFlow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelFlow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelFlow) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelFlowArn != nil {
-		s.WriteString(schemas.ChannelFlow_ChannelFlowArn, *v.ChannelFlowArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelFlow_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelFlow_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ChannelFlow_Name, *v.Name)
-	}
-	serializeProcessorList(s, schemas.ChannelFlow_Processors, v.Processors)
-}
-func (v *ChannelFlow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelFlow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelFlow_ChannelFlowArn:
-			v.ChannelFlowArn = new(string)
-			return d.ReadString(schemas.ChannelFlow_ChannelFlowArn, v.ChannelFlowArn)
-		case schemas.ChannelFlow_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelFlow_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelFlow_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelFlow_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.ChannelFlow_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ChannelFlow_Name, v.Name)
-		case schemas.ChannelFlow_Processors:
-			return deserializeProcessorList(d, schemas.ChannelFlow_Processors, &v.Processors)
-		}
-		return nil
-	})
-}
-
 // Summary of details of a channel flow.
 type ChannelFlowSummary struct {
 
@@ -578,37 +184,6 @@ type ChannelFlowSummary struct {
 	Processors []Processor
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelFlowSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelFlowSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelFlowArn != nil {
-		s.WriteString(schemas.ChannelFlowSummary_ChannelFlowArn, *v.ChannelFlowArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ChannelFlowSummary_Name, *v.Name)
-	}
-	serializeProcessorList(s, schemas.ChannelFlowSummary_Processors, v.Processors)
-}
-func (v *ChannelFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelFlowSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelFlowSummary_ChannelFlowArn:
-			v.ChannelFlowArn = new(string)
-			return d.ReadString(schemas.ChannelFlowSummary_ChannelFlowArn, v.ChannelFlowArn)
-		case schemas.ChannelFlowSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ChannelFlowSummary_Name, v.Name)
-		case schemas.ChannelFlowSummary_Processors:
-			return deserializeProcessorList(d, schemas.ChannelFlowSummary_Processors, &v.Processors)
-		}
-		return nil
-	})
 }
 
 // The details of a channel member.
@@ -638,72 +213,6 @@ type ChannelMembership struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMembership) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMembership)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMembership) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelMembership_ChannelArn, *v.ChannelArn)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMembership_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.InvitedBy != nil {
-		s.WriteStruct(schemas.ChannelMembership_InvitedBy)
-		v.InvitedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMembership_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	if v.Member != nil {
-		s.WriteStruct(schemas.ChannelMembership_Member)
-		v.Member.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.ChannelMembership_SubChannelId, *v.SubChannelId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ChannelMembership_Type, string(v.Type))
-	}
-}
-func (v *ChannelMembership) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMembership, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMembership_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelMembership_ChannelArn, v.ChannelArn)
-		case schemas.ChannelMembership_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMembership_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelMembership_InvitedBy:
-			v.InvitedBy = &Identity{}
-			return v.InvitedBy.Deserialize(d)
-		case schemas.ChannelMembership_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMembership_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.ChannelMembership_Member:
-			v.Member = &Identity{}
-			return v.Member.Deserialize(d)
-		case schemas.ChannelMembership_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.ChannelMembership_SubChannelId, v.SubChannelId)
-		case schemas.ChannelMembership_Type:
-			var ev string
-			if err := d.ReadString(schemas.ChannelMembership_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelMembershipType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary of the channel membership details of an AppInstanceUser .
 type ChannelMembershipForAppInstanceUserSummary struct {
 
@@ -716,38 +225,6 @@ type ChannelMembershipForAppInstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMembershipForAppInstanceUserSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMembershipForAppInstanceUserSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMembershipForAppInstanceUserSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceUserMembershipSummary != nil {
-		s.WriteStruct(schemas.ChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary)
-		v.AppInstanceUserMembershipSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ChannelSummary != nil {
-		s.WriteStruct(schemas.ChannelMembershipForAppInstanceUserSummary_ChannelSummary)
-		v.ChannelSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelMembershipForAppInstanceUserSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMembershipForAppInstanceUserSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMembershipForAppInstanceUserSummary_AppInstanceUserMembershipSummary:
-			v.AppInstanceUserMembershipSummary = &AppInstanceUserMembershipSummary{}
-			return v.AppInstanceUserMembershipSummary.Deserialize(d)
-		case schemas.ChannelMembershipForAppInstanceUserSummary_ChannelSummary:
-			v.ChannelSummary = &ChannelSummary{}
-			return v.ChannelSummary.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The channel membership preferences for an AppInstanceUser .
 type ChannelMembershipPreferences struct {
 
@@ -757,30 +234,6 @@ type ChannelMembershipPreferences struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMembershipPreferences) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMembershipPreferences)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMembershipPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PushNotifications != nil {
-		s.WriteStruct(schemas.ChannelMembershipPreferences_PushNotifications)
-		v.PushNotifications.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelMembershipPreferences) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMembershipPreferences, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMembershipPreferences_PushNotifications:
-			v.PushNotifications = &PushNotificationPreferences{}
-			return v.PushNotifications.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summary of the details of a ChannelMembership .
 type ChannelMembershipSummary struct {
 
@@ -788,30 +241,6 @@ type ChannelMembershipSummary struct {
 	Member *Identity
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelMembershipSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMembershipSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Member != nil {
-		s.WriteStruct(schemas.ChannelMembershipSummary_Member)
-		v.Member.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelMembershipSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMembershipSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMembershipSummary_Member:
-			v.Member = &Identity{}
-			return v.Member.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The details of a message in a channel.
@@ -884,123 +313,6 @@ type ChannelMessage struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMessage) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelMessage_ChannelArn, *v.ChannelArn)
-	}
-	if v.Content != nil {
-		s.WriteString(schemas.ChannelMessage_Content, *v.Content)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.ChannelMessage_ContentType, *v.ContentType)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessage_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastEditedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessage_LastEditedTimestamp, *v.LastEditedTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessage_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessage_MessageAttributes, v.MessageAttributes)
-	if v.MessageId != nil {
-		s.WriteString(schemas.ChannelMessage_MessageId, *v.MessageId)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ChannelMessage_Metadata, *v.Metadata)
-	}
-	if v.Persistence != "" {
-		s.WriteString(schemas.ChannelMessage_Persistence, string(v.Persistence))
-	}
-	if v.Redacted != false {
-		s.WriteBool(schemas.ChannelMessage_Redacted, v.Redacted)
-	}
-	if v.Sender != nil {
-		s.WriteStruct(schemas.ChannelMessage_Sender)
-		v.Sender.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != nil {
-		s.WriteStruct(schemas.ChannelMessage_Status)
-		v.Status.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.ChannelMessage_SubChannelId, *v.SubChannelId)
-	}
-	serializeTargetList(s, schemas.ChannelMessage_Target, v.Target)
-	if v.Type != "" {
-		s.WriteString(schemas.ChannelMessage_Type, string(v.Type))
-	}
-}
-func (v *ChannelMessage) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMessage, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMessage_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelMessage_ChannelArn, v.ChannelArn)
-		case schemas.ChannelMessage_Content:
-			v.Content = new(string)
-			return d.ReadString(schemas.ChannelMessage_Content, v.Content)
-		case schemas.ChannelMessage_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.ChannelMessage_ContentType, v.ContentType)
-		case schemas.ChannelMessage_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessage_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelMessage_LastEditedTimestamp:
-			v.LastEditedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessage_LastEditedTimestamp, v.LastEditedTimestamp)
-		case schemas.ChannelMessage_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessage_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.ChannelMessage_MessageAttributes:
-			return deserializeMessageAttributeMap(d, schemas.ChannelMessage_MessageAttributes, &v.MessageAttributes)
-		case schemas.ChannelMessage_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.ChannelMessage_MessageId, v.MessageId)
-		case schemas.ChannelMessage_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ChannelMessage_Metadata, v.Metadata)
-		case schemas.ChannelMessage_Persistence:
-			var ev string
-			if err := d.ReadString(schemas.ChannelMessage_Persistence, &ev); err != nil {
-				return err
-			}
-			v.Persistence = ChannelMessagePersistenceType(ev)
-			return nil
-		case schemas.ChannelMessage_Redacted:
-			return d.ReadBool(schemas.ChannelMessage_Redacted, &v.Redacted)
-		case schemas.ChannelMessage_Sender:
-			v.Sender = &Identity{}
-			return v.Sender.Deserialize(d)
-		case schemas.ChannelMessage_Status:
-			v.Status = &ChannelMessageStatusStructure{}
-			return v.Status.Deserialize(d)
-		case schemas.ChannelMessage_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.ChannelMessage_SubChannelId, v.SubChannelId)
-		case schemas.ChannelMessage_Target:
-			return deserializeTargetList(d, schemas.ChannelMessage_Target, &v.Target)
-		case schemas.ChannelMessage_Type:
-			var ev string
-			if err := d.ReadString(schemas.ChannelMessage_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelMessageType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Stores information about a callback.
 type ChannelMessageCallback struct {
 
@@ -1043,63 +355,6 @@ type ChannelMessageCallback struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMessageCallback) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMessageCallback)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMessageCallback) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Content != nil {
-		s.WriteString(schemas.ChannelMessageCallback_Content, *v.Content)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.ChannelMessageCallback_ContentType, *v.ContentType)
-	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessageCallback_MessageAttributes, v.MessageAttributes)
-	if v.MessageId != nil {
-		s.WriteString(schemas.ChannelMessageCallback_MessageId, *v.MessageId)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ChannelMessageCallback_Metadata, *v.Metadata)
-	}
-	if v.PushNotification != nil {
-		s.WriteStruct(schemas.ChannelMessageCallback_PushNotification)
-		v.PushNotification.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.ChannelMessageCallback_SubChannelId, *v.SubChannelId)
-	}
-}
-func (v *ChannelMessageCallback) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMessageCallback, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMessageCallback_Content:
-			v.Content = new(string)
-			return d.ReadString(schemas.ChannelMessageCallback_Content, v.Content)
-		case schemas.ChannelMessageCallback_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.ChannelMessageCallback_ContentType, v.ContentType)
-		case schemas.ChannelMessageCallback_MessageAttributes:
-			return deserializeMessageAttributeMap(d, schemas.ChannelMessageCallback_MessageAttributes, &v.MessageAttributes)
-		case schemas.ChannelMessageCallback_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.ChannelMessageCallback_MessageId, v.MessageId)
-		case schemas.ChannelMessageCallback_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ChannelMessageCallback_Metadata, v.Metadata)
-		case schemas.ChannelMessageCallback_PushNotification:
-			v.PushNotification = &PushNotificationConfiguration{}
-			return v.PushNotification.Deserialize(d)
-		case schemas.ChannelMessageCallback_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.ChannelMessageCallback_SubChannelId, v.SubChannelId)
-		}
-		return nil
-	})
-}
-
 // Stores information about a message status.
 type ChannelMessageStatusStructure struct {
 
@@ -1110,38 +365,6 @@ type ChannelMessageStatusStructure struct {
 	Value ChannelMessageStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelMessageStatusStructure) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMessageStatusStructure)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMessageStatusStructure) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Detail != nil {
-		s.WriteString(schemas.ChannelMessageStatusStructure_Detail, *v.Detail)
-	}
-	if v.Value != "" {
-		s.WriteString(schemas.ChannelMessageStatusStructure_Value, string(v.Value))
-	}
-}
-func (v *ChannelMessageStatusStructure) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMessageStatusStructure, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMessageStatusStructure_Detail:
-			v.Detail = new(string)
-			return d.ReadString(schemas.ChannelMessageStatusStructure_Detail, v.Detail)
-		case schemas.ChannelMessageStatusStructure_Value:
-			var ev string
-			if err := d.ReadString(schemas.ChannelMessageStatusStructure_Value, &ev); err != nil {
-				return err
-			}
-			v.Value = ChannelMessageStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Summary of the messages in a Channel .
@@ -1208,101 +431,6 @@ type ChannelMessageSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelMessageSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelMessageSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelMessageSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Content != nil {
-		s.WriteString(schemas.ChannelMessageSummary_Content, *v.Content)
-	}
-	if v.ContentType != nil {
-		s.WriteString(schemas.ChannelMessageSummary_ContentType, *v.ContentType)
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessageSummary_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.LastEditedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessageSummary_LastEditedTimestamp, *v.LastEditedTimestamp)
-	}
-	if v.LastUpdatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelMessageSummary_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
-	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessageSummary_MessageAttributes, v.MessageAttributes)
-	if v.MessageId != nil {
-		s.WriteString(schemas.ChannelMessageSummary_MessageId, *v.MessageId)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ChannelMessageSummary_Metadata, *v.Metadata)
-	}
-	if v.Redacted != false {
-		s.WriteBool(schemas.ChannelMessageSummary_Redacted, v.Redacted)
-	}
-	if v.Sender != nil {
-		s.WriteStruct(schemas.ChannelMessageSummary_Sender)
-		v.Sender.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Status != nil {
-		s.WriteStruct(schemas.ChannelMessageSummary_Status)
-		v.Status.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTargetList(s, schemas.ChannelMessageSummary_Target, v.Target)
-	if v.Type != "" {
-		s.WriteString(schemas.ChannelMessageSummary_Type, string(v.Type))
-	}
-}
-func (v *ChannelMessageSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelMessageSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelMessageSummary_Content:
-			v.Content = new(string)
-			return d.ReadString(schemas.ChannelMessageSummary_Content, v.Content)
-		case schemas.ChannelMessageSummary_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.ChannelMessageSummary_ContentType, v.ContentType)
-		case schemas.ChannelMessageSummary_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessageSummary_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelMessageSummary_LastEditedTimestamp:
-			v.LastEditedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessageSummary_LastEditedTimestamp, v.LastEditedTimestamp)
-		case schemas.ChannelMessageSummary_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelMessageSummary_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.ChannelMessageSummary_MessageAttributes:
-			return deserializeMessageAttributeMap(d, schemas.ChannelMessageSummary_MessageAttributes, &v.MessageAttributes)
-		case schemas.ChannelMessageSummary_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.ChannelMessageSummary_MessageId, v.MessageId)
-		case schemas.ChannelMessageSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ChannelMessageSummary_Metadata, v.Metadata)
-		case schemas.ChannelMessageSummary_Redacted:
-			return d.ReadBool(schemas.ChannelMessageSummary_Redacted, &v.Redacted)
-		case schemas.ChannelMessageSummary_Sender:
-			v.Sender = &Identity{}
-			return v.Sender.Deserialize(d)
-		case schemas.ChannelMessageSummary_Status:
-			v.Status = &ChannelMessageStatusStructure{}
-			return v.Status.Deserialize(d)
-		case schemas.ChannelMessageSummary_Target:
-			return deserializeTargetList(d, schemas.ChannelMessageSummary_Target, &v.Target)
-		case schemas.ChannelMessageSummary_Type:
-			var ev string
-			if err := d.ReadString(schemas.ChannelMessageSummary_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ChannelMessageType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Summary of the details of a moderated channel.
 type ChannelModeratedByAppInstanceUserSummary struct {
 
@@ -1310,30 +438,6 @@ type ChannelModeratedByAppInstanceUserSummary struct {
 	ChannelSummary *ChannelSummary
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelModeratedByAppInstanceUserSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelModeratedByAppInstanceUserSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelModeratedByAppInstanceUserSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelSummary != nil {
-		s.WriteStruct(schemas.ChannelModeratedByAppInstanceUserSummary_ChannelSummary)
-		v.ChannelSummary.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelModeratedByAppInstanceUserSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelModeratedByAppInstanceUserSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelModeratedByAppInstanceUserSummary_ChannelSummary:
-			v.ChannelSummary = &ChannelSummary{}
-			return v.ChannelSummary.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The details of a channel moderator.
@@ -1354,50 +458,6 @@ type ChannelModerator struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelModerator) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelModerator)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelModerator) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelModerator_ChannelArn, *v.ChannelArn)
-	}
-	if v.CreatedBy != nil {
-		s.WriteStruct(schemas.ChannelModerator_CreatedBy)
-		v.CreatedBy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreatedTimestamp != nil {
-		s.WriteTime(schemas.ChannelModerator_CreatedTimestamp, *v.CreatedTimestamp)
-	}
-	if v.Moderator != nil {
-		s.WriteStruct(schemas.ChannelModerator_Moderator)
-		v.Moderator.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelModerator) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelModerator, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelModerator_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelModerator_ChannelArn, v.ChannelArn)
-		case schemas.ChannelModerator_CreatedBy:
-			v.CreatedBy = &Identity{}
-			return v.CreatedBy.Deserialize(d)
-		case schemas.ChannelModerator_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelModerator_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.ChannelModerator_Moderator:
-			v.Moderator = &Identity{}
-			return v.Moderator.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Summary of the details of a ChannelModerator .
 type ChannelModeratorSummary struct {
 
@@ -1405,30 +465,6 @@ type ChannelModeratorSummary struct {
 	Moderator *Identity
 
 	noSmithyDocumentSerde
-}
-
-func (v *ChannelModeratorSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelModeratorSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelModeratorSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Moderator != nil {
-		s.WriteStruct(schemas.ChannelModeratorSummary_Moderator)
-		v.Moderator.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ChannelModeratorSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelModeratorSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelModeratorSummary_Moderator:
-			v.Moderator = &Identity{}
-			return v.Moderator.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Summary of the details of a Channel .
@@ -1456,66 +492,6 @@ type ChannelSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ChannelSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ChannelSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.ChannelSummary_ChannelArn, *v.ChannelArn)
-	}
-	if v.LastMessageTimestamp != nil {
-		s.WriteTime(schemas.ChannelSummary_LastMessageTimestamp, *v.LastMessageTimestamp)
-	}
-	if v.Metadata != nil {
-		s.WriteString(schemas.ChannelSummary_Metadata, *v.Metadata)
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.ChannelSummary_Mode, string(v.Mode))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ChannelSummary_Name, *v.Name)
-	}
-	if v.Privacy != "" {
-		s.WriteString(schemas.ChannelSummary_Privacy, string(v.Privacy))
-	}
-}
-func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ChannelSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ChannelSummary_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.ChannelSummary_ChannelArn, v.ChannelArn)
-		case schemas.ChannelSummary_LastMessageTimestamp:
-			v.LastMessageTimestamp = new(time.Time)
-			return d.ReadTime(schemas.ChannelSummary_LastMessageTimestamp, v.LastMessageTimestamp)
-		case schemas.ChannelSummary_Metadata:
-			v.Metadata = new(string)
-			return d.ReadString(schemas.ChannelSummary_Metadata, v.Metadata)
-		case schemas.ChannelSummary_Mode:
-			var ev string
-			if err := d.ReadString(schemas.ChannelSummary_Mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = ChannelMode(ev)
-			return nil
-		case schemas.ChannelSummary_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ChannelSummary_Name, v.Name)
-		case schemas.ChannelSummary_Privacy:
-			var ev string
-			if err := d.ReadString(schemas.ChannelSummary_Privacy, &ev); err != nil {
-				return err
-			}
-			v.Privacy = ChannelPrivacy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The attributes required to configure and create an elastic channel. An elastic
 // channel can support a maximum of 1-million members.
 type ElasticChannelConfiguration struct {
@@ -1540,40 +516,6 @@ type ElasticChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ElasticChannelConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ElasticChannelConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ElasticChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaximumSubChannels != nil {
-		s.WriteInt32(schemas.ElasticChannelConfiguration_MaximumSubChannels, *v.MaximumSubChannels)
-	}
-	if v.MinimumMembershipPercentage != nil {
-		s.WriteInt32(schemas.ElasticChannelConfiguration_MinimumMembershipPercentage, *v.MinimumMembershipPercentage)
-	}
-	if v.TargetMembershipsPerSubChannel != nil {
-		s.WriteInt32(schemas.ElasticChannelConfiguration_TargetMembershipsPerSubChannel, *v.TargetMembershipsPerSubChannel)
-	}
-}
-func (v *ElasticChannelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ElasticChannelConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ElasticChannelConfiguration_MaximumSubChannels:
-			v.MaximumSubChannels = new(int32)
-			return d.ReadInt32(schemas.ElasticChannelConfiguration_MaximumSubChannels, v.MaximumSubChannels)
-		case schemas.ElasticChannelConfiguration_MinimumMembershipPercentage:
-			v.MinimumMembershipPercentage = new(int32)
-			return d.ReadInt32(schemas.ElasticChannelConfiguration_MinimumMembershipPercentage, v.MinimumMembershipPercentage)
-		case schemas.ElasticChannelConfiguration_TargetMembershipsPerSubChannel:
-			v.TargetMembershipsPerSubChannel = new(int32)
-			return d.ReadInt32(schemas.ElasticChannelConfiguration_TargetMembershipsPerSubChannel, v.TargetMembershipsPerSubChannel)
-		}
-		return nil
-	})
-}
-
 // Settings that control the interval after which a channel is deleted.
 type ExpirationSettings struct {
 
@@ -1590,38 +532,6 @@ type ExpirationSettings struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExpirationSettings) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExpirationSettings)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExpirationSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExpirationCriterion != "" {
-		s.WriteString(schemas.ExpirationSettings_ExpirationCriterion, string(v.ExpirationCriterion))
-	}
-	if v.ExpirationDays != nil {
-		s.WriteInt32(schemas.ExpirationSettings_ExpirationDays, *v.ExpirationDays)
-	}
-}
-func (v *ExpirationSettings) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExpirationSettings, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExpirationSettings_ExpirationCriterion:
-			var ev string
-			if err := d.ReadString(schemas.ExpirationSettings_ExpirationCriterion, &ev); err != nil {
-				return err
-			}
-			v.ExpirationCriterion = ExpirationCriterion(ev)
-			return nil
-		case schemas.ExpirationSettings_ExpirationDays:
-			v.ExpirationDays = new(int32)
-			return d.ReadInt32(schemas.ExpirationSettings_ExpirationDays, v.ExpirationDays)
-		}
-		return nil
-	})
-}
-
 // The details of a user or bot.
 type Identity struct {
 
@@ -1632,34 +542,6 @@ type Identity struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Identity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Identity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Identity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Identity_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Identity_Name, *v.Name)
-	}
-}
-func (v *Identity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Identity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Identity_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Identity_Arn, v.Arn)
-		case schemas.Identity_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Identity_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Stores metadata about a Lambda processor.
@@ -1678,38 +560,6 @@ type LambdaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InvocationType != "" {
-		s.WriteString(schemas.LambdaConfiguration_InvocationType, string(v.InvocationType))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.LambdaConfiguration_ResourceArn, *v.ResourceArn)
-	}
-}
-func (v *LambdaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaConfiguration_InvocationType:
-			var ev string
-			if err := d.ReadString(schemas.LambdaConfiguration_InvocationType, &ev); err != nil {
-				return err
-			}
-			v.InvocationType = InvocationType(ev)
-			return nil
-		case schemas.LambdaConfiguration_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.LambdaConfiguration_ResourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
-
 // A list of message attribute values.
 type MessageAttributeValue struct {
 
@@ -1719,25 +569,6 @@ type MessageAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MessageAttributeValue) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MessageAttributeValue)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MessageAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageAttributeStringValues(s, schemas.MessageAttributeValue_StringValues, v.StringValues)
-}
-func (v *MessageAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MessageAttributeValue, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MessageAttributeValue_StringValues:
-			return deserializeMessageAttributeStringValues(d, schemas.MessageAttributeValue_StringValues, &v.StringValues)
-		}
-		return nil
-	})
-}
-
 // The websocket endpoint used to connect to Amazon Chime SDK messaging.
 type MessagingSessionEndpoint struct {
 
@@ -1745,28 +576,6 @@ type MessagingSessionEndpoint struct {
 	Url *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MessagingSessionEndpoint) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MessagingSessionEndpoint)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MessagingSessionEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Url != nil {
-		s.WriteString(schemas.MessagingSessionEndpoint_Url, *v.Url)
-	}
-}
-func (v *MessagingSessionEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MessagingSessionEndpoint, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MessagingSessionEndpoint_Url:
-			v.Url = new(string)
-			return d.ReadString(schemas.MessagingSessionEndpoint_Url, v.Url)
-		}
-		return nil
-	})
 }
 
 // The information about a processor in a channel flow.
@@ -1804,52 +613,6 @@ type Processor struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Processor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Processor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Processor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Configuration != nil {
-		s.WriteStruct(schemas.Processor_Configuration)
-		v.Configuration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ExecutionOrder != nil {
-		s.WriteInt32(schemas.Processor_ExecutionOrder, *v.ExecutionOrder)
-	}
-	if v.FallbackAction != "" {
-		s.WriteString(schemas.Processor_FallbackAction, string(v.FallbackAction))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Processor_Name, *v.Name)
-	}
-}
-func (v *Processor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Processor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Processor_Configuration:
-			v.Configuration = &ProcessorConfiguration{}
-			return v.Configuration.Deserialize(d)
-		case schemas.Processor_ExecutionOrder:
-			v.ExecutionOrder = new(int32)
-			return d.ReadInt32(schemas.Processor_ExecutionOrder, v.ExecutionOrder)
-		case schemas.Processor_FallbackAction:
-			var ev string
-			if err := d.ReadString(schemas.Processor_FallbackAction, &ev); err != nil {
-				return err
-			}
-			v.FallbackAction = FallbackAction(ev)
-			return nil
-		case schemas.Processor_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Processor_Name, v.Name)
-		}
-		return nil
-	})
-}
-
 // A processor's metadata.
 type ProcessorConfiguration struct {
 
@@ -1859,30 +622,6 @@ type ProcessorConfiguration struct {
 	Lambda *LambdaConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *ProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProcessorConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Lambda != nil {
-		s.WriteStruct(schemas.ProcessorConfiguration_Lambda)
-		v.Lambda.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProcessorConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProcessorConfiguration_Lambda:
-			v.Lambda = &LambdaConfiguration{}
-			return v.Lambda.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // The push notification configuration of the message.
@@ -1901,44 +640,6 @@ type PushNotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PushNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PushNotificationConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PushNotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Body != nil {
-		s.WriteString(schemas.PushNotificationConfiguration_Body, *v.Body)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.PushNotificationConfiguration_Title, *v.Title)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.PushNotificationConfiguration_Type, string(v.Type))
-	}
-}
-func (v *PushNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PushNotificationConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PushNotificationConfiguration_Body:
-			v.Body = new(string)
-			return d.ReadString(schemas.PushNotificationConfiguration_Body, v.Body)
-		case schemas.PushNotificationConfiguration_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.PushNotificationConfiguration_Title, v.Title)
-		case schemas.PushNotificationConfiguration_Type:
-			var ev string
-			if err := d.ReadString(schemas.PushNotificationConfiguration_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = PushNotificationType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The channel membership preferences for push notification.
 type PushNotificationPreferences struct {
 
@@ -1954,38 +655,6 @@ type PushNotificationPreferences struct {
 	FilterRule *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *PushNotificationPreferences) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PushNotificationPreferences)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PushNotificationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowNotifications != "" {
-		s.WriteString(schemas.PushNotificationPreferences_AllowNotifications, string(v.AllowNotifications))
-	}
-	if v.FilterRule != nil {
-		s.WriteString(schemas.PushNotificationPreferences_FilterRule, *v.FilterRule)
-	}
-}
-func (v *PushNotificationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PushNotificationPreferences, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PushNotificationPreferences_AllowNotifications:
-			var ev string
-			if err := d.ReadString(schemas.PushNotificationPreferences_AllowNotifications, &ev); err != nil {
-				return err
-			}
-			v.AllowNotifications = AllowNotifications(ev)
-			return nil
-		case schemas.PushNotificationPreferences_FilterRule:
-			v.FilterRule = new(string)
-			return d.ReadString(schemas.PushNotificationPreferences_FilterRule, v.FilterRule)
-		}
-		return nil
-	})
 }
 
 // A Field of the channel that you want to search.
@@ -2023,45 +692,6 @@ type SearchField struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchField) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchField)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchField) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != "" {
-		s.WriteString(schemas.SearchField_Key, string(v.Key))
-	}
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchField_Operator, string(v.Operator))
-	}
-	serializeSearchFieldValues(s, schemas.SearchField_Values, v.Values)
-}
-func (v *SearchField) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchField, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchField_Key:
-			var ev string
-			if err := d.ReadString(schemas.SearchField_Key, &ev); err != nil {
-				return err
-			}
-			v.Key = SearchFieldKey(ev)
-			return nil
-		case schemas.SearchField_Operator:
-			var ev string
-			if err := d.ReadString(schemas.SearchField_Operator, &ev); err != nil {
-				return err
-			}
-			v.Operator = SearchFieldOperator(ev)
-			return nil
-		case schemas.SearchField_Values:
-			return deserializeSearchFieldValues(d, schemas.SearchField_Values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // The configuration for connecting a messaging stream to Amazon Kinesis.
 type StreamingConfiguration struct {
 
@@ -2078,38 +708,6 @@ type StreamingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StreamingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StreamingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StreamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DataType != "" {
-		s.WriteString(schemas.StreamingConfiguration_DataType, string(v.DataType))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.StreamingConfiguration_ResourceArn, *v.ResourceArn)
-	}
-}
-func (v *StreamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StreamingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StreamingConfiguration_DataType:
-			var ev string
-			if err := d.ReadString(schemas.StreamingConfiguration_DataType, &ev); err != nil {
-				return err
-			}
-			v.DataType = MessagingDataType(ev)
-			return nil
-		case schemas.StreamingConfiguration_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.StreamingConfiguration_ResourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
-
 // Summary of the sub-channels associated with the elastic channel.
 type SubChannelSummary struct {
 
@@ -2120,34 +718,6 @@ type SubChannelSummary struct {
 	SubChannelId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SubChannelSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SubChannelSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SubChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipCount != nil {
-		s.WriteInt32(schemas.SubChannelSummary_MembershipCount, *v.MembershipCount)
-	}
-	if v.SubChannelId != nil {
-		s.WriteString(schemas.SubChannelSummary_SubChannelId, *v.SubChannelId)
-	}
-}
-func (v *SubChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SubChannelSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SubChannelSummary_MembershipCount:
-			v.MembershipCount = new(int32)
-			return d.ReadInt32(schemas.SubChannelSummary_MembershipCount, v.MembershipCount)
-		case schemas.SubChannelSummary_SubChannelId:
-			v.SubChannelId = new(string)
-			return d.ReadString(schemas.SubChannelSummary_SubChannelId, v.SubChannelId)
-		}
-		return nil
-	})
 }
 
 // A tag object containing a key-value pair.
@@ -2166,34 +736,6 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
-}
-
 // The target of a message, a sender, a user, or a bot. Only the target and the
 // sender can view targeted messages. Only users who can see targeted messages can
 // take actions on them. However, administrators can delete targeted messages that
@@ -2204,28 +746,6 @@ type Target struct {
 	MemberArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Target) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Target)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MemberArn != nil {
-		s.WriteString(schemas.Target_MemberArn, *v.MemberArn)
-	}
-}
-func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Target_MemberArn:
-			v.MemberArn = new(string)
-			return d.ReadString(schemas.Target_MemberArn, v.MemberArn)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

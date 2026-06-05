@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,20 +44,6 @@ type CreateCellInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCellInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateCellRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateCellInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellName != nil {
-		s.WriteString(schemas.CreateCellRequest_CellName, *v.CellName)
-	}
-	serialize__listOf__string(s, schemas.CreateCellRequest_Cells, v.Cells)
-	serializeTags(s, schemas.CreateCellRequest_Tags, v.Tags)
-}
-
 type CreateCellOutput struct {
 
 	// The Amazon Resource Name (ARN) for the cell.
@@ -85,33 +69,16 @@ type CreateCellOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateCellResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateCellResponse_CellArn:
-			v.CellArn = new(string)
-			return d.ReadString(schemas.CreateCellResponse_CellArn, v.CellArn)
-		case schemas.CreateCellResponse_CellName:
-			v.CellName = new(string)
-			return d.ReadString(schemas.CreateCellResponse_CellName, v.CellName)
-		case schemas.CreateCellResponse_Cells:
-			return deserialize__listOf__string(d, schemas.CreateCellResponse_Cells, &v.Cells)
-		case schemas.CreateCellResponse_ParentReadinessScopes:
-			return deserialize__listOf__string(d, schemas.CreateCellResponse_ParentReadinessScopes, &v.ParentReadinessScopes)
-		case schemas.CreateCellResponse_Tags:
-			return deserializeTags(d, schemas.CreateCellResponse_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateCellMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCell, schemas.CreateCellRequest, schemas.CreateCellResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCell{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCell, schemas.CreateCellRequest, schemas.CreateCellResponse), output: &CreateCellOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCell{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCell"); err != nil {

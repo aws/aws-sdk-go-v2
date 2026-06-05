@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -76,112 +74,6 @@ type AbbreviatedExecution struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AbbreviatedExecution) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AbbreviatedExecution)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AbbreviatedExecution) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActualRecoveryTime != nil {
-		s.WriteString(schemas.AbbreviatedExecution_actualRecoveryTime, *v.ActualRecoveryTime)
-	}
-	if v.Comment != nil {
-		s.WriteString(schemas.AbbreviatedExecution_comment, *v.Comment)
-	}
-	if v.EndTime != nil {
-		s.WriteTime(schemas.AbbreviatedExecution_endTime, *v.EndTime)
-	}
-	if v.ExecutionAction != "" {
-		s.WriteString(schemas.AbbreviatedExecution_executionAction, string(v.ExecutionAction))
-	}
-	if v.ExecutionId != nil {
-		s.WriteString(schemas.AbbreviatedExecution_executionId, *v.ExecutionId)
-	}
-	if v.ExecutionRegion != nil {
-		s.WriteString(schemas.AbbreviatedExecution_executionRegion, *v.ExecutionRegion)
-	}
-	if v.ExecutionState != "" {
-		s.WriteString(schemas.AbbreviatedExecution_executionState, string(v.ExecutionState))
-	}
-	if v.Mode != "" {
-		s.WriteString(schemas.AbbreviatedExecution_mode, string(v.Mode))
-	}
-	if v.PlanArn != nil {
-		s.WriteString(schemas.AbbreviatedExecution_planArn, *v.PlanArn)
-	}
-	if v.RecoveryExecutionId != nil {
-		s.WriteString(schemas.AbbreviatedExecution_recoveryExecutionId, *v.RecoveryExecutionId)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.AbbreviatedExecution_startTime, *v.StartTime)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AbbreviatedExecution_updatedAt, *v.UpdatedAt)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.AbbreviatedExecution_version, *v.Version)
-	}
-}
-func (v *AbbreviatedExecution) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AbbreviatedExecution, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AbbreviatedExecution_actualRecoveryTime:
-			v.ActualRecoveryTime = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_actualRecoveryTime, v.ActualRecoveryTime)
-		case schemas.AbbreviatedExecution_comment:
-			v.Comment = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_comment, v.Comment)
-		case schemas.AbbreviatedExecution_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.AbbreviatedExecution_endTime, v.EndTime)
-		case schemas.AbbreviatedExecution_executionAction:
-			var ev string
-			if err := d.ReadString(schemas.AbbreviatedExecution_executionAction, &ev); err != nil {
-				return err
-			}
-			v.ExecutionAction = ExecutionAction(ev)
-			return nil
-		case schemas.AbbreviatedExecution_executionId:
-			v.ExecutionId = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_executionId, v.ExecutionId)
-		case schemas.AbbreviatedExecution_executionRegion:
-			v.ExecutionRegion = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_executionRegion, v.ExecutionRegion)
-		case schemas.AbbreviatedExecution_executionState:
-			var ev string
-			if err := d.ReadString(schemas.AbbreviatedExecution_executionState, &ev); err != nil {
-				return err
-			}
-			v.ExecutionState = ExecutionState(ev)
-			return nil
-		case schemas.AbbreviatedExecution_mode:
-			var ev string
-			if err := d.ReadString(schemas.AbbreviatedExecution_mode, &ev); err != nil {
-				return err
-			}
-			v.Mode = ExecutionMode(ev)
-			return nil
-		case schemas.AbbreviatedExecution_planArn:
-			v.PlanArn = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_planArn, v.PlanArn)
-		case schemas.AbbreviatedExecution_recoveryExecutionId:
-			v.RecoveryExecutionId = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_recoveryExecutionId, v.RecoveryExecutionId)
-		case schemas.AbbreviatedExecution_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.AbbreviatedExecution_startTime, v.StartTime)
-		case schemas.AbbreviatedExecution_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AbbreviatedExecution_updatedAt, v.UpdatedAt)
-		case schemas.AbbreviatedExecution_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.AbbreviatedExecution_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // A summarized representation of a Region switch plan. This structure contains
 // key information about a plan without all the detailed workflow and step data.
 type AbbreviatedPlan struct {
@@ -236,95 +128,6 @@ type AbbreviatedPlan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AbbreviatedPlan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AbbreviatedPlan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AbbreviatedPlan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActivePlanExecution != nil {
-		s.WriteString(schemas.AbbreviatedPlan_activePlanExecution, *v.ActivePlanExecution)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.AbbreviatedPlan_arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.AbbreviatedPlan_description, *v.Description)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.AbbreviatedPlan_executionRole, *v.ExecutionRole)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AbbreviatedPlan_name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.AbbreviatedPlan_owner, *v.Owner)
-	}
-	if v.PrimaryRegion != nil {
-		s.WriteString(schemas.AbbreviatedPlan_primaryRegion, *v.PrimaryRegion)
-	}
-	if v.RecoveryApproach != "" {
-		s.WriteString(schemas.AbbreviatedPlan_recoveryApproach, string(v.RecoveryApproach))
-	}
-	if v.RecoveryTimeObjectiveMinutes != nil {
-		s.WriteInt32(schemas.AbbreviatedPlan_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
-	}
-	serializeRegionList(s, schemas.AbbreviatedPlan_regions, v.Regions)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AbbreviatedPlan_updatedAt, *v.UpdatedAt)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.AbbreviatedPlan_version, *v.Version)
-	}
-}
-func (v *AbbreviatedPlan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AbbreviatedPlan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AbbreviatedPlan_activePlanExecution:
-			v.ActivePlanExecution = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_activePlanExecution, v.ActivePlanExecution)
-		case schemas.AbbreviatedPlan_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_arn, v.Arn)
-		case schemas.AbbreviatedPlan_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_description, v.Description)
-		case schemas.AbbreviatedPlan_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_executionRole, v.ExecutionRole)
-		case schemas.AbbreviatedPlan_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_name, v.Name)
-		case schemas.AbbreviatedPlan_owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_owner, v.Owner)
-		case schemas.AbbreviatedPlan_primaryRegion:
-			v.PrimaryRegion = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_primaryRegion, v.PrimaryRegion)
-		case schemas.AbbreviatedPlan_recoveryApproach:
-			var ev string
-			if err := d.ReadString(schemas.AbbreviatedPlan_recoveryApproach, &ev); err != nil {
-				return err
-			}
-			v.RecoveryApproach = RecoveryApproach(ev)
-			return nil
-		case schemas.AbbreviatedPlan_recoveryTimeObjectiveMinutes:
-			v.RecoveryTimeObjectiveMinutes = new(int32)
-			return d.ReadInt32(schemas.AbbreviatedPlan_recoveryTimeObjectiveMinutes, v.RecoveryTimeObjectiveMinutes)
-		case schemas.AbbreviatedPlan_regions:
-			return deserializeRegionList(d, schemas.AbbreviatedPlan_regions, &v.Regions)
-		case schemas.AbbreviatedPlan_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AbbreviatedPlan_updatedAt, v.UpdatedAt)
-		case schemas.AbbreviatedPlan_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.AbbreviatedPlan_version, v.Version)
-		}
-		return nil
-	})
-}
-
 // Configuration for ARC routing controls used in a Region switch plan. Routing
 // controls are simple on/off switches that you can use to shift traffic away from
 // an impaired Region.
@@ -347,43 +150,6 @@ type ArcRoutingControlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ArcRoutingControlConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ArcRoutingControlConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ArcRoutingControlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.ArcRoutingControlConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.ArcRoutingControlConfiguration_externalId, *v.ExternalId)
-	}
-	serializeRegionAndRoutingControls(s, schemas.ArcRoutingControlConfiguration_regionAndRoutingControls, v.RegionAndRoutingControls)
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.ArcRoutingControlConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *ArcRoutingControlConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ArcRoutingControlConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ArcRoutingControlConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.ArcRoutingControlConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.ArcRoutingControlConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.ArcRoutingControlConfiguration_externalId, v.ExternalId)
-		case schemas.ArcRoutingControlConfiguration_regionAndRoutingControls:
-			return deserializeRegionAndRoutingControls(d, schemas.ArcRoutingControlConfiguration_regionAndRoutingControls, &v.RegionAndRoutingControls)
-		case schemas.ArcRoutingControlConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.ArcRoutingControlConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
-}
-
 // Represents the state of an ARC routing control.
 type ArcRoutingControlState struct {
 
@@ -400,38 +166,6 @@ type ArcRoutingControlState struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ArcRoutingControlState) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ArcRoutingControlState)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ArcRoutingControlState) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RoutingControlArn != nil {
-		s.WriteString(schemas.ArcRoutingControlState_routingControlArn, *v.RoutingControlArn)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.ArcRoutingControlState_state, string(v.State))
-	}
-}
-func (v *ArcRoutingControlState) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ArcRoutingControlState, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ArcRoutingControlState_routingControlArn:
-			v.RoutingControlArn = new(string)
-			return d.ReadString(schemas.ArcRoutingControlState_routingControlArn, v.RoutingControlArn)
-		case schemas.ArcRoutingControlState_state:
-			var ev string
-			if err := d.ReadString(schemas.ArcRoutingControlState_state, &ev); err != nil {
-				return err
-			}
-			v.State = RoutingControlStateChange(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Configuration for an Amazon EC2 Auto Scaling group used in a Region switch plan.
 type Asg struct {
 
@@ -445,40 +179,6 @@ type Asg struct {
 	ExternalId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Asg) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Asg)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Asg) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Asg_arn, *v.Arn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.Asg_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.Asg_externalId, *v.ExternalId)
-	}
-}
-func (v *Asg) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Asg, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Asg_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Asg_arn, v.Arn)
-		case schemas.Asg_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.Asg_crossAccountRole, v.CrossAccountRole)
-		case schemas.Asg_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.Asg_externalId, v.ExternalId)
-		}
-		return nil
-	})
 }
 
 // An Amazon CloudWatch alarm associated with a Region switch plan. These alarms
@@ -503,50 +203,6 @@ type AssociatedAlarm struct {
 	ExternalId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AssociatedAlarm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociatedAlarm)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociatedAlarm) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AlarmType != "" {
-		s.WriteString(schemas.AssociatedAlarm_alarmType, string(v.AlarmType))
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.AssociatedAlarm_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.AssociatedAlarm_externalId, *v.ExternalId)
-	}
-	if v.ResourceIdentifier != nil {
-		s.WriteString(schemas.AssociatedAlarm_resourceIdentifier, *v.ResourceIdentifier)
-	}
-}
-func (v *AssociatedAlarm) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociatedAlarm, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociatedAlarm_alarmType:
-			var ev string
-			if err := d.ReadString(schemas.AssociatedAlarm_alarmType, &ev); err != nil {
-				return err
-			}
-			v.AlarmType = AlarmType(ev)
-			return nil
-		case schemas.AssociatedAlarm_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.AssociatedAlarm_crossAccountRole, v.CrossAccountRole)
-		case schemas.AssociatedAlarm_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.AssociatedAlarm_externalId, v.ExternalId)
-		case schemas.AssociatedAlarm_resourceIdentifier:
-			v.ResourceIdentifier = new(string)
-			return d.ReadString(schemas.AssociatedAlarm_resourceIdentifier, v.ResourceIdentifier)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Aurora provisioned cluster scaling used in a Region
@@ -582,52 +238,6 @@ type AuroraProvisionedScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AuroraProvisionedScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuroraProvisionedScalingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuroraProvisionedScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_externalId, *v.ExternalId)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	serializeRegionAuroraInstanceArnMap(s, schemas.AuroraProvisionedScalingConfiguration_instanceArns, v.InstanceArns)
-	serializeRegionAuroraClusterMap(s, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *AuroraProvisionedScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuroraProvisionedScalingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuroraProvisionedScalingConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.AuroraProvisionedScalingConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_externalId, v.ExternalId)
-		case schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier:
-			v.GlobalClusterIdentifier = new(string)
-			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
-		case schemas.AuroraProvisionedScalingConfiguration_instanceArns:
-			return deserializeRegionAuroraInstanceArnMap(d, schemas.AuroraProvisionedScalingConfiguration_instanceArns, &v.InstanceArns)
-		case schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns:
-			return deserializeRegionAuroraClusterMap(d, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
-		case schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
-}
-
 // Configuration for Amazon Aurora Serverless scaling used in a Region switch plan.
 type AuroraServerlessScalingConfiguration struct {
 
@@ -655,55 +265,6 @@ type AuroraServerlessScalingConfiguration struct {
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *AuroraServerlessScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AuroraServerlessScalingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AuroraServerlessScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.AuroraServerlessScalingConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.AuroraServerlessScalingConfiguration_externalId, *v.ExternalId)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	serializeRegionAuroraClusterMap(s, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
-	if v.TargetPercent != nil {
-		s.WriteInt32(schemas.AuroraServerlessScalingConfiguration_targetPercent, *v.TargetPercent)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.AuroraServerlessScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *AuroraServerlessScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AuroraServerlessScalingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AuroraServerlessScalingConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.AuroraServerlessScalingConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_externalId, v.ExternalId)
-		case schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier:
-			v.GlobalClusterIdentifier = new(string)
-			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
-		case schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns:
-			return deserializeRegionAuroraClusterMap(d, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
-		case schemas.AuroraServerlessScalingConfiguration_targetPercent:
-			v.TargetPercent = new(int32)
-			return d.ReadInt32(schemas.AuroraServerlessScalingConfiguration_targetPercent, v.TargetPercent)
-		case schemas.AuroraServerlessScalingConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.AuroraServerlessScalingConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Web Services Lambda functions that perform custom
@@ -735,55 +296,6 @@ type CustomActionLambdaConfiguration struct {
 	Ungraceful *LambdaUngraceful
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomActionLambdaConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomActionLambdaConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomActionLambdaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaList(s, schemas.CustomActionLambdaConfiguration_lambdas, v.Lambdas)
-	if v.RegionToRun != "" {
-		s.WriteString(schemas.CustomActionLambdaConfiguration_regionToRun, string(v.RegionToRun))
-	}
-	if v.RetryIntervalMinutes != nil {
-		s.WriteFloat32(schemas.CustomActionLambdaConfiguration_retryIntervalMinutes, *v.RetryIntervalMinutes)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.CustomActionLambdaConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.CustomActionLambdaConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CustomActionLambdaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomActionLambdaConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomActionLambdaConfiguration_lambdas:
-			return deserializeLambdaList(d, schemas.CustomActionLambdaConfiguration_lambdas, &v.Lambdas)
-		case schemas.CustomActionLambdaConfiguration_regionToRun:
-			var ev string
-			if err := d.ReadString(schemas.CustomActionLambdaConfiguration_regionToRun, &ev); err != nil {
-				return err
-			}
-			v.RegionToRun = RegionToRunIn(ev)
-			return nil
-		case schemas.CustomActionLambdaConfiguration_retryIntervalMinutes:
-			v.RetryIntervalMinutes = new(float32)
-			return d.ReadFloat32(schemas.CustomActionLambdaConfiguration_retryIntervalMinutes, v.RetryIntervalMinutes)
-		case schemas.CustomActionLambdaConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.CustomActionLambdaConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.CustomActionLambdaConfiguration_ungraceful:
-			v.Ungraceful = &LambdaUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon DocumentDB global clusters used in a Region switch
@@ -822,67 +334,6 @@ type DocumentDbConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DocumentDbConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DocumentDbConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DocumentDbConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.DocumentDbConfiguration_behavior, string(v.Behavior))
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.DocumentDbConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	serializeDocumentDbClusterArns(s, schemas.DocumentDbConfiguration_databaseClusterArns, v.DatabaseClusterArns)
-	if v.ExternalId != nil {
-		s.WriteString(schemas.DocumentDbConfiguration_externalId, *v.ExternalId)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.DocumentDbConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.DocumentDbConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.DocumentDbConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *DocumentDbConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DocumentDbConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DocumentDbConfiguration_behavior:
-			var ev string
-			if err := d.ReadString(schemas.DocumentDbConfiguration_behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = DocumentDbDefaultBehavior(ev)
-			return nil
-		case schemas.DocumentDbConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.DocumentDbConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.DocumentDbConfiguration_databaseClusterArns:
-			return deserializeDocumentDbClusterArns(d, schemas.DocumentDbConfiguration_databaseClusterArns, &v.DatabaseClusterArns)
-		case schemas.DocumentDbConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.DocumentDbConfiguration_externalId, v.ExternalId)
-		case schemas.DocumentDbConfiguration_globalClusterIdentifier:
-			v.GlobalClusterIdentifier = new(string)
-			return d.ReadString(schemas.DocumentDbConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
-		case schemas.DocumentDbConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.DocumentDbConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.DocumentDbConfiguration_ungraceful:
-			v.Ungraceful = &DocumentDbUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configuration for handling failures when performing operations on DocumentDB
 // global clusters.
 type DocumentDbUngraceful struct {
@@ -891,32 +342,6 @@ type DocumentDbUngraceful struct {
 	Ungraceful DocumentDbUngracefulBehavior
 
 	noSmithyDocumentSerde
-}
-
-func (v *DocumentDbUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DocumentDbUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DocumentDbUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Ungraceful != "" {
-		s.WriteString(schemas.DocumentDbUngraceful_ungraceful, string(v.Ungraceful))
-	}
-}
-func (v *DocumentDbUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DocumentDbUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DocumentDbUngraceful_ungraceful:
-			var ev string
-			if err := d.ReadString(schemas.DocumentDbUngraceful_ungraceful, &ev); err != nil {
-				return err
-			}
-			v.Ungraceful = DocumentDbUngracefulBehavior(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration for increasing the capacity of Amazon EC2 Auto Scaling groups
@@ -945,55 +370,6 @@ type Ec2AsgCapacityIncreaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Ec2AsgCapacityIncreaseConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ec2AsgCapacityIncreaseConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ec2AsgCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAsgList(s, schemas.Ec2AsgCapacityIncreaseConfiguration_asgs, v.Asgs)
-	if v.CapacityMonitoringApproach != "" {
-		s.WriteString(schemas.Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
-	}
-	if v.TargetPercent != nil {
-		s.WriteInt32(schemas.Ec2AsgCapacityIncreaseConfiguration_targetPercent, *v.TargetPercent)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.Ec2AsgCapacityIncreaseConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.Ec2AsgCapacityIncreaseConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Ec2AsgCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ec2AsgCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ec2AsgCapacityIncreaseConfiguration_asgs:
-			return deserializeAsgList(d, schemas.Ec2AsgCapacityIncreaseConfiguration_asgs, &v.Asgs)
-		case schemas.Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach:
-			var ev string
-			if err := d.ReadString(schemas.Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach, &ev); err != nil {
-				return err
-			}
-			v.CapacityMonitoringApproach = Ec2AsgCapacityMonitoringApproach(ev)
-			return nil
-		case schemas.Ec2AsgCapacityIncreaseConfiguration_targetPercent:
-			v.TargetPercent = new(int32)
-			return d.ReadInt32(schemas.Ec2AsgCapacityIncreaseConfiguration_targetPercent, v.TargetPercent)
-		case schemas.Ec2AsgCapacityIncreaseConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.Ec2AsgCapacityIncreaseConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.Ec2AsgCapacityIncreaseConfiguration_ungraceful:
-			v.Ungraceful = &Ec2Ungraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configuration for handling failures when performing operations on EC2 resources.
 type Ec2Ungraceful struct {
 
@@ -1003,28 +379,6 @@ type Ec2Ungraceful struct {
 	MinimumSuccessPercentage *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *Ec2Ungraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Ec2Ungraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Ec2Ungraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MinimumSuccessPercentage != nil {
-		s.WriteInt32(schemas.Ec2Ungraceful_minimumSuccessPercentage, *v.MinimumSuccessPercentage)
-	}
-}
-func (v *Ec2Ungraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Ec2Ungraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Ec2Ungraceful_minimumSuccessPercentage:
-			v.MinimumSuccessPercentage = new(int32)
-			return d.ReadInt32(schemas.Ec2Ungraceful_minimumSuccessPercentage, v.MinimumSuccessPercentage)
-		}
-		return nil
-	})
 }
 
 // The configuration for an Amazon Web Services ECS capacity increase.
@@ -1051,55 +405,6 @@ type EcsCapacityIncreaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EcsCapacityIncreaseConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EcsCapacityIncreaseConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EcsCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CapacityMonitoringApproach != "" {
-		s.WriteString(schemas.EcsCapacityIncreaseConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
-	}
-	serializeServiceList(s, schemas.EcsCapacityIncreaseConfiguration_services, v.Services)
-	if v.TargetPercent != nil {
-		s.WriteInt32(schemas.EcsCapacityIncreaseConfiguration_targetPercent, *v.TargetPercent)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.EcsCapacityIncreaseConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.EcsCapacityIncreaseConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *EcsCapacityIncreaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EcsCapacityIncreaseConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EcsCapacityIncreaseConfiguration_capacityMonitoringApproach:
-			var ev string
-			if err := d.ReadString(schemas.EcsCapacityIncreaseConfiguration_capacityMonitoringApproach, &ev); err != nil {
-				return err
-			}
-			v.CapacityMonitoringApproach = EcsCapacityMonitoringApproach(ev)
-			return nil
-		case schemas.EcsCapacityIncreaseConfiguration_services:
-			return deserializeServiceList(d, schemas.EcsCapacityIncreaseConfiguration_services, &v.Services)
-		case schemas.EcsCapacityIncreaseConfiguration_targetPercent:
-			v.TargetPercent = new(int32)
-			return d.ReadInt32(schemas.EcsCapacityIncreaseConfiguration_targetPercent, v.TargetPercent)
-		case schemas.EcsCapacityIncreaseConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.EcsCapacityIncreaseConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.EcsCapacityIncreaseConfiguration_ungraceful:
-			v.Ungraceful = &EcsUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The settings for ungraceful execution.
 type EcsUngraceful struct {
 
@@ -1109,28 +414,6 @@ type EcsUngraceful struct {
 	MinimumSuccessPercentage *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *EcsUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EcsUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EcsUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MinimumSuccessPercentage != nil {
-		s.WriteInt32(schemas.EcsUngraceful_minimumSuccessPercentage, *v.MinimumSuccessPercentage)
-	}
-}
-func (v *EcsUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EcsUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EcsUngraceful_minimumSuccessPercentage:
-			v.MinimumSuccessPercentage = new(int32)
-			return d.ReadInt32(schemas.EcsUngraceful_minimumSuccessPercentage, v.MinimumSuccessPercentage)
-		}
-		return nil
-	})
 }
 
 // The Amazon Web Services EKS cluster execution block configuration.
@@ -1148,40 +431,6 @@ type EksCluster struct {
 	ExternalId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *EksCluster) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EksCluster)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EksCluster) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.EksCluster_clusterArn, *v.ClusterArn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.EksCluster_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.EksCluster_externalId, *v.ExternalId)
-	}
-}
-func (v *EksCluster) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EksCluster, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EksCluster_clusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.EksCluster_clusterArn, v.ClusterArn)
-		case schemas.EksCluster_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.EksCluster_crossAccountRole, v.CrossAccountRole)
-		case schemas.EksCluster_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.EksCluster_externalId, v.ExternalId)
-		}
-		return nil
-	})
 }
 
 // The Amazon Web Services EKS resource scaling configuration.
@@ -1214,66 +463,6 @@ type EksResourceScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EksResourceScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EksResourceScalingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EksResourceScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CapacityMonitoringApproach != "" {
-		s.WriteString(schemas.EksResourceScalingConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
-	}
-	serializeEksClusters(s, schemas.EksResourceScalingConfiguration_eksClusters, v.EksClusters)
-	if v.KubernetesResourceType != nil {
-		s.WriteStruct(schemas.EksResourceScalingConfiguration_kubernetesResourceType)
-		v.KubernetesResourceType.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeKubernetesScalingApps(s, schemas.EksResourceScalingConfiguration_scalingResources, v.ScalingResources)
-	if v.TargetPercent != nil {
-		s.WriteInt32(schemas.EksResourceScalingConfiguration_targetPercent, *v.TargetPercent)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.EksResourceScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.EksResourceScalingConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *EksResourceScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EksResourceScalingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EksResourceScalingConfiguration_capacityMonitoringApproach:
-			var ev string
-			if err := d.ReadString(schemas.EksResourceScalingConfiguration_capacityMonitoringApproach, &ev); err != nil {
-				return err
-			}
-			v.CapacityMonitoringApproach = EksCapacityMonitoringApproach(ev)
-			return nil
-		case schemas.EksResourceScalingConfiguration_eksClusters:
-			return deserializeEksClusters(d, schemas.EksResourceScalingConfiguration_eksClusters, &v.EksClusters)
-		case schemas.EksResourceScalingConfiguration_kubernetesResourceType:
-			v.KubernetesResourceType = &KubernetesResourceType{}
-			return v.KubernetesResourceType.Deserialize(d)
-		case schemas.EksResourceScalingConfiguration_scalingResources:
-			return deserializeKubernetesScalingApps(d, schemas.EksResourceScalingConfiguration_scalingResources, &v.ScalingResources)
-		case schemas.EksResourceScalingConfiguration_targetPercent:
-			v.TargetPercent = new(int32)
-			return d.ReadInt32(schemas.EksResourceScalingConfiguration_targetPercent, v.TargetPercent)
-		case schemas.EksResourceScalingConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.EksResourceScalingConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.EksResourceScalingConfiguration_ungraceful:
-			v.Ungraceful = &EksResourceScalingUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The ungraceful settings for Amazon Web Services EKS resource scaling.
 type EksResourceScalingUngraceful struct {
 
@@ -1283,28 +472,6 @@ type EksResourceScalingUngraceful struct {
 	MinimumSuccessPercentage *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *EksResourceScalingUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EksResourceScalingUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EksResourceScalingUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MinimumSuccessPercentage != nil {
-		s.WriteInt32(schemas.EksResourceScalingUngraceful_minimumSuccessPercentage, *v.MinimumSuccessPercentage)
-	}
-}
-func (v *EksResourceScalingUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EksResourceScalingUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EksResourceScalingUngraceful_minimumSuccessPercentage:
-			v.MinimumSuccessPercentage = new(int32)
-			return d.ReadInt32(schemas.EksResourceScalingUngraceful_minimumSuccessPercentage, v.MinimumSuccessPercentage)
-		}
-		return nil
-	})
 }
 
 // The Amazon Web Services Lambda event source mapping configuration, containing
@@ -1325,40 +492,6 @@ type EventSourceMapping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *EventSourceMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.EventSourceMapping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *EventSourceMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.EventSourceMapping_arn, *v.Arn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.EventSourceMapping_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.EventSourceMapping_externalId, *v.ExternalId)
-	}
-}
-func (v *EventSourceMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.EventSourceMapping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.EventSourceMapping_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.EventSourceMapping_arn, v.Arn)
-		case schemas.EventSourceMapping_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.EventSourceMapping_crossAccountRole, v.CrossAccountRole)
-		case schemas.EventSourceMapping_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.EventSourceMapping_externalId, v.ExternalId)
-		}
-		return nil
-	})
-}
-
 // Configuration for approval steps in a Region switch plan execution. Approval
 // steps require manual intervention before the execution can proceed.
 type ExecutionApprovalConfiguration struct {
@@ -1372,34 +505,6 @@ type ExecutionApprovalConfiguration struct {
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *ExecutionApprovalConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionApprovalConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecutionApprovalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApprovalRole != nil {
-		s.WriteString(schemas.ExecutionApprovalConfiguration_approvalRole, *v.ApprovalRole)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.ExecutionApprovalConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecutionApprovalConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecutionApprovalConfiguration_approvalRole:
-			v.ApprovalRole = new(string)
-			return d.ReadString(schemas.ExecutionApprovalConfiguration_approvalRole, v.ApprovalRole)
-		case schemas.ExecutionApprovalConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.ExecutionApprovalConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
 }
 
 // Execution block configurations for a workflow in a Region switch plan. An
@@ -1437,14 +542,6 @@ type ExecutionBlockConfigurationMemberArcRoutingControlConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberArcRoutingControlConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberArcRoutingControlConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_arcRoutingControlConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberArcRoutingControlConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Aurora provisioned cluster scaling execution block.
 type ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig struct {
@@ -1454,14 +551,6 @@ type ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) isExecutionBlockConfiguration() {
-}
-func (v *ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraProvisionedScalingConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // An Aurora Serverless scaling execution block.
@@ -1473,14 +562,6 @@ type ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig struct {
 
 func (*ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) isExecutionBlockConfiguration() {
 }
-func (v *ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraServerlessScalingConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Amazon Web Services Lambda execution block.
 type ExecutionBlockConfigurationMemberCustomActionLambdaConfig struct {
@@ -1490,14 +571,6 @@ type ExecutionBlockConfigurationMemberCustomActionLambdaConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberCustomActionLambdaConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberCustomActionLambdaConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_customActionLambdaConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberCustomActionLambdaConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration for Amazon DocumentDB global clusters used in a Region switch
 // plan.
@@ -1508,14 +581,6 @@ type ExecutionBlockConfigurationMemberDocumentDbConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberDocumentDbConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberDocumentDbConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_documentDbConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberDocumentDbConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An EC2 Auto Scaling group execution block.
 type ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig struct {
@@ -1526,14 +591,6 @@ type ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig struct {
 
 func (*ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig) isExecutionBlockConfiguration() {
 }
-func (v *ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The capacity increase specified for the configuration.
 type ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig struct {
@@ -1543,14 +600,6 @@ type ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_ecsCapacityIncreaseConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberEcsCapacityIncreaseConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Amazon Web Services EKS resource scaling execution block.
 type ExecutionBlockConfigurationMemberEksResourceScalingConfig struct {
@@ -1560,14 +609,6 @@ type ExecutionBlockConfigurationMemberEksResourceScalingConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberEksResourceScalingConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberEksResourceScalingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_eksResourceScalingConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberEksResourceScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A manual approval execution block.
 type ExecutionBlockConfigurationMemberExecutionApprovalConfig struct {
@@ -1577,14 +618,6 @@ type ExecutionBlockConfigurationMemberExecutionApprovalConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberExecutionApprovalConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberExecutionApprovalConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_executionApprovalConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberExecutionApprovalConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Aurora Global Database execution block.
 type ExecutionBlockConfigurationMemberGlobalAuroraConfig struct {
@@ -1594,14 +627,6 @@ type ExecutionBlockConfigurationMemberGlobalAuroraConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberGlobalAuroraConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberGlobalAuroraConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_globalAuroraConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberGlobalAuroraConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A Lambda event source mapping execution block.
 type ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig struct {
@@ -1611,14 +636,6 @@ type ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) isExecutionBlockConfiguration() {
-}
-func (v *ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_lambdaEventSourceMappingConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // A Neptune global database execution block.
@@ -1630,14 +647,6 @@ type ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig struct {
 
 func (*ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) isExecutionBlockConfiguration() {
 }
-func (v *ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A parallel configuration execution block.
 type ExecutionBlockConfigurationMemberParallelConfig struct {
@@ -1647,14 +656,6 @@ type ExecutionBlockConfigurationMemberParallelConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberParallelConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberParallelConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_parallelConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberParallelConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // An Amazon RDS create cross-Region replica execution block.
 type ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig struct {
@@ -1664,14 +665,6 @@ type ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig stru
 }
 
 func (*ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig) isExecutionBlockConfiguration() {
-}
-func (v *ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_rdsCreateCrossRegionReadReplicaConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
 }
 
 // An Amazon RDS promote read replica execution block.
@@ -1683,14 +676,6 @@ type ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig struct {
 
 func (*ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) isExecutionBlockConfiguration() {
 }
-func (v *ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_rdsPromoteReadReplicaConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // A Region switch plan execution block.
 type ExecutionBlockConfigurationMemberRegionSwitchPlanConfig struct {
@@ -1700,14 +685,6 @@ type ExecutionBlockConfigurationMemberRegionSwitchPlanConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberRegionSwitchPlanConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberRegionSwitchPlanConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_regionSwitchPlanConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberRegionSwitchPlanConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // The Amazon Route 53 health check configuration.
 type ExecutionBlockConfigurationMemberRoute53HealthCheckConfig struct {
@@ -1717,14 +694,6 @@ type ExecutionBlockConfigurationMemberRoute53HealthCheckConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) isExecutionBlockConfiguration() {}
-func (v *ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionBlockConfiguration_route53HealthCheckConfig)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ExecutionBlockConfigurationMemberRoute53HealthCheckConfig) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Represents an event that occurred during a plan execution. These events provide
 // a detailed timeline of the execution process.
@@ -1762,81 +731,6 @@ type ExecutionEvent struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExecutionEvent) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExecutionEvent)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExecutionEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.ExecutionEvent_description, *v.Description)
-	}
-	if v.Error != nil {
-		s.WriteString(schemas.ExecutionEvent_error, *v.Error)
-	}
-	if v.EventId != nil {
-		s.WriteString(schemas.ExecutionEvent_eventId, *v.EventId)
-	}
-	if v.ExecutionBlockType != "" {
-		s.WriteString(schemas.ExecutionEvent_executionBlockType, string(v.ExecutionBlockType))
-	}
-	if v.PreviousEventId != nil {
-		s.WriteString(schemas.ExecutionEvent_previousEventId, *v.PreviousEventId)
-	}
-	serializeResources(s, schemas.ExecutionEvent_resources, v.Resources)
-	if v.StepName != nil {
-		s.WriteString(schemas.ExecutionEvent_stepName, *v.StepName)
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.ExecutionEvent_timestamp, *v.Timestamp)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ExecutionEvent_type, string(v.Type))
-	}
-}
-func (v *ExecutionEvent) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExecutionEvent, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExecutionEvent_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ExecutionEvent_description, v.Description)
-		case schemas.ExecutionEvent_error:
-			v.Error = new(string)
-			return d.ReadString(schemas.ExecutionEvent_error, v.Error)
-		case schemas.ExecutionEvent_eventId:
-			v.EventId = new(string)
-			return d.ReadString(schemas.ExecutionEvent_eventId, v.EventId)
-		case schemas.ExecutionEvent_executionBlockType:
-			var ev string
-			if err := d.ReadString(schemas.ExecutionEvent_executionBlockType, &ev); err != nil {
-				return err
-			}
-			v.ExecutionBlockType = ExecutionBlockType(ev)
-			return nil
-		case schemas.ExecutionEvent_previousEventId:
-			v.PreviousEventId = new(string)
-			return d.ReadString(schemas.ExecutionEvent_previousEventId, v.PreviousEventId)
-		case schemas.ExecutionEvent_resources:
-			return deserializeResources(d, schemas.ExecutionEvent_resources, &v.Resources)
-		case schemas.ExecutionEvent_stepName:
-			v.StepName = new(string)
-			return d.ReadString(schemas.ExecutionEvent_stepName, v.StepName)
-		case schemas.ExecutionEvent_timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.ExecutionEvent_timestamp, v.Timestamp)
-		case schemas.ExecutionEvent_type:
-			var ev string
-			if err := d.ReadString(schemas.ExecutionEvent_type, &ev); err != nil {
-				return err
-			}
-			v.Type = ExecutionEventType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Information about a report generation that failed.
 type FailedReportOutput struct {
 
@@ -1849,38 +743,6 @@ type FailedReportOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FailedReportOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FailedReportOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FailedReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.FailedReportOutput_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.FailedReportOutput_errorMessage, *v.ErrorMessage)
-	}
-}
-func (v *FailedReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailedReportOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailedReportOutput_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.FailedReportOutput_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = FailedReportErrorCode(ev)
-			return nil
-		case schemas.FailedReportOutput_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.FailedReportOutput_errorMessage, v.ErrorMessage)
-		}
-		return nil
-	})
-}
-
 // Information about a generated execution report.
 type GeneratedReport struct {
 
@@ -1891,31 +753,6 @@ type GeneratedReport struct {
 	ReportOutput ReportOutput
 
 	noSmithyDocumentSerde
-}
-
-func (v *GeneratedReport) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GeneratedReport)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GeneratedReport) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ReportGenerationTime != nil {
-		s.WriteTime(schemas.GeneratedReport_reportGenerationTime, *v.ReportGenerationTime)
-	}
-	serializeReportOutput(s, schemas.GeneratedReport_reportOutput, v.ReportOutput)
-}
-func (v *GeneratedReport) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GeneratedReport, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GeneratedReport_reportGenerationTime:
-			v.ReportGenerationTime = new(time.Time)
-			return d.ReadTime(schemas.GeneratedReport_reportGenerationTime, v.ReportGenerationTime)
-		case schemas.GeneratedReport_reportOutput:
-			return deserializeReportOutput(d, schemas.GeneratedReport_reportOutput, &v.ReportOutput)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Aurora global databases used in a Region switch plan.
@@ -1952,67 +789,6 @@ type GlobalAuroraConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GlobalAuroraConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GlobalAuroraConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GlobalAuroraConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.GlobalAuroraConfiguration_behavior, string(v.Behavior))
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.GlobalAuroraConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	serializeAuroraClusterArns(s, schemas.GlobalAuroraConfiguration_databaseClusterArns, v.DatabaseClusterArns)
-	if v.ExternalId != nil {
-		s.WriteString(schemas.GlobalAuroraConfiguration_externalId, *v.ExternalId)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.GlobalAuroraConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.GlobalAuroraConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.GlobalAuroraConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GlobalAuroraConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GlobalAuroraConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GlobalAuroraConfiguration_behavior:
-			var ev string
-			if err := d.ReadString(schemas.GlobalAuroraConfiguration_behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = GlobalAuroraDefaultBehavior(ev)
-			return nil
-		case schemas.GlobalAuroraConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.GlobalAuroraConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.GlobalAuroraConfiguration_databaseClusterArns:
-			return deserializeAuroraClusterArns(d, schemas.GlobalAuroraConfiguration_databaseClusterArns, &v.DatabaseClusterArns)
-		case schemas.GlobalAuroraConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.GlobalAuroraConfiguration_externalId, v.ExternalId)
-		case schemas.GlobalAuroraConfiguration_globalClusterIdentifier:
-			v.GlobalClusterIdentifier = new(string)
-			return d.ReadString(schemas.GlobalAuroraConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
-		case schemas.GlobalAuroraConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.GlobalAuroraConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.GlobalAuroraConfiguration_ungraceful:
-			v.Ungraceful = &GlobalAuroraUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configuration for handling failures when performing operations on Aurora global
 // databases.
 type GlobalAuroraUngraceful struct {
@@ -2021,32 +797,6 @@ type GlobalAuroraUngraceful struct {
 	Ungraceful GlobalAuroraUngracefulBehavior
 
 	noSmithyDocumentSerde
-}
-
-func (v *GlobalAuroraUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GlobalAuroraUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GlobalAuroraUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Ungraceful != "" {
-		s.WriteString(schemas.GlobalAuroraUngraceful_ungraceful, string(v.Ungraceful))
-	}
-}
-func (v *GlobalAuroraUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GlobalAuroraUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GlobalAuroraUngraceful_ungraceful:
-			var ev string
-			if err := d.ReadString(schemas.GlobalAuroraUngraceful_ungraceful, &ev); err != nil {
-				return err
-			}
-			v.Ungraceful = GlobalAuroraUngracefulBehavior(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Defines the type of Kubernetes resource to scale in an Amazon EKS cluster.
@@ -2063,34 +813,6 @@ type KubernetesResourceType struct {
 	Kind *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KubernetesResourceType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KubernetesResourceType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KubernetesResourceType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApiVersion != nil {
-		s.WriteString(schemas.KubernetesResourceType_apiVersion, *v.ApiVersion)
-	}
-	if v.Kind != nil {
-		s.WriteString(schemas.KubernetesResourceType_kind, *v.Kind)
-	}
-}
-func (v *KubernetesResourceType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KubernetesResourceType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KubernetesResourceType_apiVersion:
-			v.ApiVersion = new(string)
-			return d.ReadString(schemas.KubernetesResourceType_apiVersion, v.ApiVersion)
-		case schemas.KubernetesResourceType_kind:
-			v.Kind = new(string)
-			return d.ReadString(schemas.KubernetesResourceType_kind, v.Kind)
-		}
-		return nil
-	})
 }
 
 // Defines a Kubernetes resource to scale in an Amazon EKS cluster.
@@ -2110,40 +832,6 @@ type KubernetesScalingResource struct {
 	HpaName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KubernetesScalingResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KubernetesScalingResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KubernetesScalingResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HpaName != nil {
-		s.WriteString(schemas.KubernetesScalingResource_hpaName, *v.HpaName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.KubernetesScalingResource_name, *v.Name)
-	}
-	if v.Namespace != nil {
-		s.WriteString(schemas.KubernetesScalingResource_namespace, *v.Namespace)
-	}
-}
-func (v *KubernetesScalingResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KubernetesScalingResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KubernetesScalingResource_hpaName:
-			v.HpaName = new(string)
-			return d.ReadString(schemas.KubernetesScalingResource_hpaName, v.HpaName)
-		case schemas.KubernetesScalingResource_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.KubernetesScalingResource_name, v.Name)
-		case schemas.KubernetesScalingResource_namespace:
-			v.Namespace = new(string)
-			return d.ReadString(schemas.KubernetesScalingResource_namespace, v.Namespace)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Web Services Lambda event source mappings used in a
@@ -2170,49 +858,6 @@ type LambdaEventSourceMappingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LambdaEventSourceMappingConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEventSourceMappingConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.LambdaEventSourceMappingConfiguration_action, string(v.Action))
-	}
-	serializeRegionEventSourceMappingMap(s, schemas.LambdaEventSourceMappingConfiguration_regionEventSourceMappings, v.RegionEventSourceMappings)
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.LambdaEventSourceMappingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.LambdaEventSourceMappingConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *LambdaEventSourceMappingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEventSourceMappingConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEventSourceMappingConfiguration_action:
-			var ev string
-			if err := d.ReadString(schemas.LambdaEventSourceMappingConfiguration_action, &ev); err != nil {
-				return err
-			}
-			v.Action = EventSourceMappingAction(ev)
-			return nil
-		case schemas.LambdaEventSourceMappingConfiguration_regionEventSourceMappings:
-			return deserializeRegionEventSourceMappingMap(d, schemas.LambdaEventSourceMappingConfiguration_regionEventSourceMappings, &v.RegionEventSourceMappings)
-		case schemas.LambdaEventSourceMappingConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.LambdaEventSourceMappingConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.LambdaEventSourceMappingConfiguration_ungraceful:
-			v.Ungraceful = &LambdaEventSourceMappingUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies whether to skip enabling or disabling an event source mapping during
 // an ungraceful execution.
 type LambdaEventSourceMappingUngraceful struct {
@@ -2222,32 +867,6 @@ type LambdaEventSourceMappingUngraceful struct {
 	Behavior LambdaEventSourceMappingUngracefulBehavior
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaEventSourceMappingUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaEventSourceMappingUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaEventSourceMappingUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.LambdaEventSourceMappingUngraceful_behavior, string(v.Behavior))
-	}
-}
-func (v *LambdaEventSourceMappingUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaEventSourceMappingUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaEventSourceMappingUngraceful_behavior:
-			var ev string
-			if err := d.ReadString(schemas.LambdaEventSourceMappingUngraceful_behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = LambdaEventSourceMappingUngracefulBehavior(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Web Services Lambda functions used in a Region switch
@@ -2266,40 +885,6 @@ type Lambdas struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Lambdas) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Lambdas)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Lambdas) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Lambdas_arn, *v.Arn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.Lambdas_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.Lambdas_externalId, *v.ExternalId)
-	}
-}
-func (v *Lambdas) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Lambdas, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Lambdas_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Lambdas_arn, v.Arn)
-		case schemas.Lambdas_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.Lambdas_crossAccountRole, v.CrossAccountRole)
-		case schemas.Lambdas_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.Lambdas_externalId, v.ExternalId)
-		}
-		return nil
-	})
-}
-
 // Configuration for handling failures when invoking Lambda functions.
 type LambdaUngraceful struct {
 
@@ -2307,32 +892,6 @@ type LambdaUngraceful struct {
 	Behavior LambdaUngracefulBehavior
 
 	noSmithyDocumentSerde
-}
-
-func (v *LambdaUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LambdaUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LambdaUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.LambdaUngraceful_behavior, string(v.Behavior))
-	}
-}
-func (v *LambdaUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LambdaUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LambdaUngraceful_behavior:
-			var ev string
-			if err := d.ReadString(schemas.LambdaUngraceful_behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = LambdaUngracefulBehavior(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // A simplified representation of a workflow in a Region switch plan.
@@ -2345,38 +904,6 @@ type MinimalWorkflow struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *MinimalWorkflow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MinimalWorkflow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MinimalWorkflow) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.MinimalWorkflow_action, string(v.Action))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.MinimalWorkflow_name, *v.Name)
-	}
-}
-func (v *MinimalWorkflow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MinimalWorkflow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MinimalWorkflow_action:
-			var ev string
-			if err := d.ReadString(schemas.MinimalWorkflow_action, &ev); err != nil {
-				return err
-			}
-			v.Action = ExecutionAction(ev)
-			return nil
-		case schemas.MinimalWorkflow_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.MinimalWorkflow_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Configuration for Amazon Neptune global databases used in a Region switch plan.
@@ -2413,67 +940,6 @@ type NeptuneGlobalDatabaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *NeptuneGlobalDatabaseConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NeptuneGlobalDatabaseConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NeptuneGlobalDatabaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Behavior != "" {
-		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_behavior, string(v.Behavior))
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_externalId, *v.ExternalId)
-	}
-	if v.GlobalClusterIdentifier != nil {
-		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
-	}
-	serializeRegionNeptuneClusterArnMap(s, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-	if v.Ungraceful != nil {
-		s.WriteStruct(schemas.NeptuneGlobalDatabaseConfiguration_ungraceful)
-		v.Ungraceful.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *NeptuneGlobalDatabaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NeptuneGlobalDatabaseConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NeptuneGlobalDatabaseConfiguration_behavior:
-			var ev string
-			if err := d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_behavior, &ev); err != nil {
-				return err
-			}
-			v.Behavior = NeptuneDefaultBehavior(ev)
-			return nil
-		case schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.NeptuneGlobalDatabaseConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_externalId, v.ExternalId)
-		case schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier:
-			v.GlobalClusterIdentifier = new(string)
-			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
-		case schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns:
-			return deserializeRegionNeptuneClusterArnMap(d, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
-		case schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		case schemas.NeptuneGlobalDatabaseConfiguration_ungraceful:
-			v.Ungraceful = &NeptuneUngraceful{}
-			return v.Ungraceful.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Configuration for handling failures when performing operations on Neptune
 // global databases.
 type NeptuneUngraceful struct {
@@ -2482,32 +948,6 @@ type NeptuneUngraceful struct {
 	Ungraceful NeptuneUngracefulBehavior
 
 	noSmithyDocumentSerde
-}
-
-func (v *NeptuneUngraceful) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NeptuneUngraceful)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *NeptuneUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Ungraceful != "" {
-		s.WriteString(schemas.NeptuneUngraceful_ungraceful, string(v.Ungraceful))
-	}
-}
-func (v *NeptuneUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NeptuneUngraceful, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.NeptuneUngraceful_ungraceful:
-			var ev string
-			if err := d.ReadString(schemas.NeptuneUngraceful_ungraceful, &ev); err != nil {
-				return err
-			}
-			v.Ungraceful = NeptuneUngracefulBehavior(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Configuration for steps that should be executed in parallel during a Region
@@ -2520,25 +960,6 @@ type ParallelExecutionBlockConfiguration struct {
 	Steps []Step
 
 	noSmithyDocumentSerde
-}
-
-func (v *ParallelExecutionBlockConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ParallelExecutionBlockConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ParallelExecutionBlockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSteps(s, schemas.ParallelExecutionBlockConfiguration_steps, v.Steps)
-}
-func (v *ParallelExecutionBlockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ParallelExecutionBlockConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ParallelExecutionBlockConfiguration_steps:
-			return deserializeSteps(d, schemas.ParallelExecutionBlockConfiguration_steps, &v.Steps)
-		}
-		return nil
-	})
 }
 
 // Represents a Region switch plan. A plan defines the steps required to shift
@@ -2608,106 +1029,6 @@ type Plan struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Plan) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Plan)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Plan_arn, *v.Arn)
-	}
-	serializeAssociatedAlarmMap(s, schemas.Plan_associatedAlarms, v.AssociatedAlarms)
-	if v.Description != nil {
-		s.WriteString(schemas.Plan_description, *v.Description)
-	}
-	if v.ExecutionRole != nil {
-		s.WriteString(schemas.Plan_executionRole, *v.ExecutionRole)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Plan_name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteString(schemas.Plan_owner, *v.Owner)
-	}
-	if v.PrimaryRegion != nil {
-		s.WriteString(schemas.Plan_primaryRegion, *v.PrimaryRegion)
-	}
-	if v.RecoveryApproach != "" {
-		s.WriteString(schemas.Plan_recoveryApproach, string(v.RecoveryApproach))
-	}
-	if v.RecoveryTimeObjectiveMinutes != nil {
-		s.WriteInt32(schemas.Plan_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
-	}
-	serializeRegionList(s, schemas.Plan_regions, v.Regions)
-	if v.ReportConfiguration != nil {
-		s.WriteStruct(schemas.Plan_reportConfiguration)
-		v.ReportConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTriggerList(s, schemas.Plan_triggers, v.Triggers)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Plan_updatedAt, *v.UpdatedAt)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.Plan_version, *v.Version)
-	}
-	serializeWorkflowList(s, schemas.Plan_workflows, v.Workflows)
-}
-func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Plan, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Plan_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Plan_arn, v.Arn)
-		case schemas.Plan_associatedAlarms:
-			return deserializeAssociatedAlarmMap(d, schemas.Plan_associatedAlarms, &v.AssociatedAlarms)
-		case schemas.Plan_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Plan_description, v.Description)
-		case schemas.Plan_executionRole:
-			v.ExecutionRole = new(string)
-			return d.ReadString(schemas.Plan_executionRole, v.ExecutionRole)
-		case schemas.Plan_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Plan_name, v.Name)
-		case schemas.Plan_owner:
-			v.Owner = new(string)
-			return d.ReadString(schemas.Plan_owner, v.Owner)
-		case schemas.Plan_primaryRegion:
-			v.PrimaryRegion = new(string)
-			return d.ReadString(schemas.Plan_primaryRegion, v.PrimaryRegion)
-		case schemas.Plan_recoveryApproach:
-			var ev string
-			if err := d.ReadString(schemas.Plan_recoveryApproach, &ev); err != nil {
-				return err
-			}
-			v.RecoveryApproach = RecoveryApproach(ev)
-			return nil
-		case schemas.Plan_recoveryTimeObjectiveMinutes:
-			v.RecoveryTimeObjectiveMinutes = new(int32)
-			return d.ReadInt32(schemas.Plan_recoveryTimeObjectiveMinutes, v.RecoveryTimeObjectiveMinutes)
-		case schemas.Plan_regions:
-			return deserializeRegionList(d, schemas.Plan_regions, &v.Regions)
-		case schemas.Plan_reportConfiguration:
-			v.ReportConfiguration = &ReportConfiguration{}
-			return v.ReportConfiguration.Deserialize(d)
-		case schemas.Plan_triggers:
-			return deserializeTriggerList(d, schemas.Plan_triggers, &v.Triggers)
-		case schemas.Plan_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Plan_updatedAt, v.UpdatedAt)
-		case schemas.Plan_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.Plan_version, v.Version)
-		case schemas.Plan_workflows:
-			return deserializeWorkflowList(d, schemas.Plan_workflows, &v.Workflows)
-		}
-		return nil
-	})
-}
-
 // Configuration for creating an Amazon RDS cross-Region read replica during
 // post-recovery in a Region switch.
 type RdsCreateCrossRegionReplicaConfiguration struct {
@@ -2727,43 +1048,6 @@ type RdsCreateCrossRegionReplicaConfiguration struct {
 	TimeoutMinutes *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RdsCreateCrossRegionReplicaConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RdsCreateCrossRegionReplicaConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RdsCreateCrossRegionReplicaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.RdsCreateCrossRegionReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	serializeRdsDbInstanceArnMap(s, schemas.RdsCreateCrossRegionReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
-	if v.ExternalId != nil {
-		s.WriteString(schemas.RdsCreateCrossRegionReplicaConfiguration_externalId, *v.ExternalId)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.RdsCreateCrossRegionReplicaConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *RdsCreateCrossRegionReplicaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RdsCreateCrossRegionReplicaConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RdsCreateCrossRegionReplicaConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.RdsCreateCrossRegionReplicaConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.RdsCreateCrossRegionReplicaConfiguration_dbInstanceArnMap:
-			return deserializeRdsDbInstanceArnMap(d, schemas.RdsCreateCrossRegionReplicaConfiguration_dbInstanceArnMap, &v.DbInstanceArnMap)
-		case schemas.RdsCreateCrossRegionReplicaConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.RdsCreateCrossRegionReplicaConfiguration_externalId, v.ExternalId)
-		case schemas.RdsCreateCrossRegionReplicaConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.RdsCreateCrossRegionReplicaConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
 }
 
 // Configuration for promoting an Amazon RDS read replica to a standalone database
@@ -2787,43 +1071,6 @@ type RdsPromoteReadReplicaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RdsPromoteReadReplicaConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RdsPromoteReadReplicaConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RdsPromoteReadReplicaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.RdsPromoteReadReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	serializeRdsDbInstanceArnMap(s, schemas.RdsPromoteReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
-	if v.ExternalId != nil {
-		s.WriteString(schemas.RdsPromoteReadReplicaConfiguration_externalId, *v.ExternalId)
-	}
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.RdsPromoteReadReplicaConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *RdsPromoteReadReplicaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RdsPromoteReadReplicaConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RdsPromoteReadReplicaConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.RdsPromoteReadReplicaConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.RdsPromoteReadReplicaConfiguration_dbInstanceArnMap:
-			return deserializeRdsDbInstanceArnMap(d, schemas.RdsPromoteReadReplicaConfiguration_dbInstanceArnMap, &v.DbInstanceArnMap)
-		case schemas.RdsPromoteReadReplicaConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.RdsPromoteReadReplicaConfiguration_externalId, v.ExternalId)
-		case schemas.RdsPromoteReadReplicaConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.RdsPromoteReadReplicaConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
-}
-
 // Configuration for nested Region switch plans. This allows one Region switch
 // plan to trigger another plan as part of its execution.
 type RegionSwitchPlanConfiguration struct {
@@ -2842,40 +1089,6 @@ type RegionSwitchPlanConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RegionSwitchPlanConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RegionSwitchPlanConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RegionSwitchPlanConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.RegionSwitchPlanConfiguration_arn, *v.Arn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.RegionSwitchPlanConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.RegionSwitchPlanConfiguration_externalId, *v.ExternalId)
-	}
-}
-func (v *RegionSwitchPlanConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RegionSwitchPlanConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RegionSwitchPlanConfiguration_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.RegionSwitchPlanConfiguration_arn, v.Arn)
-		case schemas.RegionSwitchPlanConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.RegionSwitchPlanConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.RegionSwitchPlanConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.RegionSwitchPlanConfiguration_externalId, v.ExternalId)
-		}
-		return nil
-	})
-}
-
 // Configuration for automatic report generation for plan executions. When
 // configured, Region switch automatically generates a report after each plan
 // execution that includes execution events, plan configuration, and CloudWatch
@@ -2886,25 +1099,6 @@ type ReportConfiguration struct {
 	ReportOutput []ReportOutputConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReportConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReportOutputList(s, schemas.ReportConfiguration_reportOutput, v.ReportOutput)
-}
-func (v *ReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportConfiguration_reportOutput:
-			return deserializeReportOutputList(d, schemas.ReportConfiguration_reportOutput, &v.ReportOutput)
-		}
-		return nil
-	})
 }
 
 // The output location or cause of a failure in report generation.
@@ -2925,14 +1119,6 @@ type ReportOutputMemberFailedReportOutput struct {
 }
 
 func (*ReportOutputMemberFailedReportOutput) isReportOutput() {}
-func (v *ReportOutputMemberFailedReportOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportOutput_failedReportOutput)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ReportOutputMemberFailedReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Information about a report delivered to Amazon S3.
 type ReportOutputMemberS3ReportOutput struct {
@@ -2942,14 +1128,6 @@ type ReportOutputMemberS3ReportOutput struct {
 }
 
 func (*ReportOutputMemberS3ReportOutput) isReportOutput() {}
-func (v *ReportOutputMemberS3ReportOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportOutput_s3ReportOutput)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ReportOutputMemberS3ReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Configuration for report output destinations used in a Region switch plan.
 //
@@ -2968,14 +1146,6 @@ type ReportOutputConfigurationMemberS3Configuration struct {
 }
 
 func (*ReportOutputConfigurationMemberS3Configuration) isReportOutputConfiguration() {}
-func (v *ReportOutputConfigurationMemberS3Configuration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportOutputConfiguration_s3Configuration)
-	v.Value.SerializeMembers(s)
-	s.CloseStruct()
-}
-func (v *ReportOutputConfigurationMemberS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
-	return v.Value.Deserialize(d)
-}
 
 // Represents a warning about a resource in a Region switch plan.
 type ResourceWarning struct {
@@ -3012,70 +1182,6 @@ type ResourceWarning struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceWarning) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceWarning)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceWarning) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.ResourceWarning_resourceArn, *v.ResourceArn)
-	}
-	if v.StepName != nil {
-		s.WriteString(schemas.ResourceWarning_stepName, *v.StepName)
-	}
-	if v.Version != nil {
-		s.WriteString(schemas.ResourceWarning_version, *v.Version)
-	}
-	if v.WarningMessage != nil {
-		s.WriteString(schemas.ResourceWarning_warningMessage, *v.WarningMessage)
-	}
-	if v.WarningStatus != "" {
-		s.WriteString(schemas.ResourceWarning_warningStatus, string(v.WarningStatus))
-	}
-	if v.WarningUpdatedTime != nil {
-		s.WriteTime(schemas.ResourceWarning_warningUpdatedTime, *v.WarningUpdatedTime)
-	}
-	if v.Workflow != nil {
-		s.WriteStruct(schemas.ResourceWarning_workflow)
-		v.Workflow.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ResourceWarning) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceWarning, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceWarning_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.ResourceWarning_resourceArn, v.ResourceArn)
-		case schemas.ResourceWarning_stepName:
-			v.StepName = new(string)
-			return d.ReadString(schemas.ResourceWarning_stepName, v.StepName)
-		case schemas.ResourceWarning_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.ResourceWarning_version, v.Version)
-		case schemas.ResourceWarning_warningMessage:
-			v.WarningMessage = new(string)
-			return d.ReadString(schemas.ResourceWarning_warningMessage, v.WarningMessage)
-		case schemas.ResourceWarning_warningStatus:
-			var ev string
-			if err := d.ReadString(schemas.ResourceWarning_warningStatus, &ev); err != nil {
-				return err
-			}
-			v.WarningStatus = ResourceWarningStatus(ev)
-			return nil
-		case schemas.ResourceWarning_warningUpdatedTime:
-			v.WarningUpdatedTime = new(time.Time)
-			return d.ReadTime(schemas.ResourceWarning_warningUpdatedTime, v.WarningUpdatedTime)
-		case schemas.ResourceWarning_workflow:
-			v.Workflow = &MinimalWorkflow{}
-			return v.Workflow.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // The Amazon Route 53 health check.
 type Route53HealthCheck struct {
 
@@ -3101,56 +1207,6 @@ type Route53HealthCheck struct {
 	Status Route53HealthCheckStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *Route53HealthCheck) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Route53HealthCheck)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Route53HealthCheck) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HealthCheckId != nil {
-		s.WriteString(schemas.Route53HealthCheck_healthCheckId, *v.HealthCheckId)
-	}
-	if v.HostedZoneId != nil {
-		s.WriteString(schemas.Route53HealthCheck_hostedZoneId, *v.HostedZoneId)
-	}
-	if v.RecordName != nil {
-		s.WriteString(schemas.Route53HealthCheck_recordName, *v.RecordName)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.Route53HealthCheck_region, *v.Region)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.Route53HealthCheck_status, string(v.Status))
-	}
-}
-func (v *Route53HealthCheck) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Route53HealthCheck, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Route53HealthCheck_healthCheckId:
-			v.HealthCheckId = new(string)
-			return d.ReadString(schemas.Route53HealthCheck_healthCheckId, v.HealthCheckId)
-		case schemas.Route53HealthCheck_hostedZoneId:
-			v.HostedZoneId = new(string)
-			return d.ReadString(schemas.Route53HealthCheck_hostedZoneId, v.HostedZoneId)
-		case schemas.Route53HealthCheck_recordName:
-			v.RecordName = new(string)
-			return d.ReadString(schemas.Route53HealthCheck_recordName, v.RecordName)
-		case schemas.Route53HealthCheck_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.Route53HealthCheck_region, v.Region)
-		case schemas.Route53HealthCheck_status:
-			var ev string
-			if err := d.ReadString(schemas.Route53HealthCheck_status, &ev); err != nil {
-				return err
-			}
-			v.Status = Route53HealthCheckStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // The Amazon Route 53 health check configuration.
@@ -3181,55 +1237,6 @@ type Route53HealthCheckConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Route53HealthCheckConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Route53HealthCheckConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Route53HealthCheckConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.Route53HealthCheckConfiguration_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.Route53HealthCheckConfiguration_externalId, *v.ExternalId)
-	}
-	if v.HostedZoneId != nil {
-		s.WriteString(schemas.Route53HealthCheckConfiguration_hostedZoneId, *v.HostedZoneId)
-	}
-	if v.RecordName != nil {
-		s.WriteString(schemas.Route53HealthCheckConfiguration_recordName, *v.RecordName)
-	}
-	serializeRoute53ResourceRecordSetList(s, schemas.Route53HealthCheckConfiguration_recordSets, v.RecordSets)
-	if v.TimeoutMinutes != nil {
-		s.WriteInt32(schemas.Route53HealthCheckConfiguration_timeoutMinutes, *v.TimeoutMinutes)
-	}
-}
-func (v *Route53HealthCheckConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Route53HealthCheckConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Route53HealthCheckConfiguration_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.Route53HealthCheckConfiguration_crossAccountRole, v.CrossAccountRole)
-		case schemas.Route53HealthCheckConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.Route53HealthCheckConfiguration_externalId, v.ExternalId)
-		case schemas.Route53HealthCheckConfiguration_hostedZoneId:
-			v.HostedZoneId = new(string)
-			return d.ReadString(schemas.Route53HealthCheckConfiguration_hostedZoneId, v.HostedZoneId)
-		case schemas.Route53HealthCheckConfiguration_recordName:
-			v.RecordName = new(string)
-			return d.ReadString(schemas.Route53HealthCheckConfiguration_recordName, v.RecordName)
-		case schemas.Route53HealthCheckConfiguration_recordSets:
-			return deserializeRoute53ResourceRecordSetList(d, schemas.Route53HealthCheckConfiguration_recordSets, &v.RecordSets)
-		case schemas.Route53HealthCheckConfiguration_timeoutMinutes:
-			v.TimeoutMinutes = new(int32)
-			return d.ReadInt32(schemas.Route53HealthCheckConfiguration_timeoutMinutes, v.TimeoutMinutes)
-		}
-		return nil
-	})
-}
-
 // The Amazon Route 53 record set.
 type Route53ResourceRecordSet struct {
 
@@ -3242,34 +1249,6 @@ type Route53ResourceRecordSet struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Route53ResourceRecordSet) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Route53ResourceRecordSet)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Route53ResourceRecordSet) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RecordSetIdentifier != nil {
-		s.WriteString(schemas.Route53ResourceRecordSet_recordSetIdentifier, *v.RecordSetIdentifier)
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.Route53ResourceRecordSet_region, *v.Region)
-	}
-}
-func (v *Route53ResourceRecordSet) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Route53ResourceRecordSet, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Route53ResourceRecordSet_recordSetIdentifier:
-			v.RecordSetIdentifier = new(string)
-			return d.ReadString(schemas.Route53ResourceRecordSet_recordSetIdentifier, v.RecordSetIdentifier)
-		case schemas.Route53ResourceRecordSet_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.Route53ResourceRecordSet_region, v.Region)
-		}
-		return nil
-	})
-}
-
 // Information about a report delivered to Amazon S3.
 type S3ReportOutput struct {
 
@@ -3277,28 +1256,6 @@ type S3ReportOutput struct {
 	S3ObjectKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3ReportOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ReportOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3ObjectKey != nil {
-		s.WriteString(schemas.S3ReportOutput_s3ObjectKey, *v.S3ObjectKey)
-	}
-}
-func (v *S3ReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ReportOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ReportOutput_s3ObjectKey:
-			v.S3ObjectKey = new(string)
-			return d.ReadString(schemas.S3ReportOutput_s3ObjectKey, v.S3ObjectKey)
-		}
-		return nil
-	})
 }
 
 // Configuration for delivering generated reports to an Amazon S3 bucket.
@@ -3313,34 +1270,6 @@ type S3ReportOutputConfiguration struct {
 	BucketPath *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3ReportOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ReportOutputConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ReportOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketOwner != nil {
-		s.WriteString(schemas.S3ReportOutputConfiguration_bucketOwner, *v.BucketOwner)
-	}
-	if v.BucketPath != nil {
-		s.WriteString(schemas.S3ReportOutputConfiguration_bucketPath, *v.BucketPath)
-	}
-}
-func (v *S3ReportOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ReportOutputConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ReportOutputConfiguration_bucketOwner:
-			v.BucketOwner = new(string)
-			return d.ReadString(schemas.S3ReportOutputConfiguration_bucketOwner, v.BucketOwner)
-		case schemas.S3ReportOutputConfiguration_bucketPath:
-			v.BucketPath = new(string)
-			return d.ReadString(schemas.S3ReportOutputConfiguration_bucketPath, v.BucketPath)
-		}
-		return nil
-	})
 }
 
 // The service for a cross account role.
@@ -3359,46 +1288,6 @@ type Service struct {
 	ServiceArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Service) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Service)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterArn != nil {
-		s.WriteString(schemas.Service_clusterArn, *v.ClusterArn)
-	}
-	if v.CrossAccountRole != nil {
-		s.WriteString(schemas.Service_crossAccountRole, *v.CrossAccountRole)
-	}
-	if v.ExternalId != nil {
-		s.WriteString(schemas.Service_externalId, *v.ExternalId)
-	}
-	if v.ServiceArn != nil {
-		s.WriteString(schemas.Service_serviceArn, *v.ServiceArn)
-	}
-}
-func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Service_clusterArn:
-			v.ClusterArn = new(string)
-			return d.ReadString(schemas.Service_clusterArn, v.ClusterArn)
-		case schemas.Service_crossAccountRole:
-			v.CrossAccountRole = new(string)
-			return d.ReadString(schemas.Service_crossAccountRole, v.CrossAccountRole)
-		case schemas.Service_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.Service_externalId, v.ExternalId)
-		case schemas.Service_serviceArn:
-			v.ServiceArn = new(string)
-			return d.ReadString(schemas.Service_serviceArn, v.ServiceArn)
-		}
-		return nil
-	})
 }
 
 // Represents a step in a Region switch plan workflow. Each step performs a
@@ -3426,47 +1315,6 @@ type Step struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Step) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Step)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.Step_description, *v.Description)
-	}
-	serializeExecutionBlockConfiguration(s, schemas.Step_executionBlockConfiguration, v.ExecutionBlockConfiguration)
-	if v.ExecutionBlockType != "" {
-		s.WriteString(schemas.Step_executionBlockType, string(v.ExecutionBlockType))
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Step_name, *v.Name)
-	}
-}
-func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Step_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Step_description, v.Description)
-		case schemas.Step_executionBlockConfiguration:
-			return deserializeExecutionBlockConfiguration(d, schemas.Step_executionBlockConfiguration, &v.ExecutionBlockConfiguration)
-		case schemas.Step_executionBlockType:
-			var ev string
-			if err := d.ReadString(schemas.Step_executionBlockType, &ev); err != nil {
-				return err
-			}
-			v.ExecutionBlockType = ExecutionBlockType(ev)
-			return nil
-		case schemas.Step_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Step_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Represents the state of a step in a plan execution.
 type StepState struct {
 
@@ -3487,60 +1335,6 @@ type StepState struct {
 	StepMode ExecutionMode
 
 	noSmithyDocumentSerde
-}
-
-func (v *StepState) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StepState)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StepState) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndTime != nil {
-		s.WriteTime(schemas.StepState_endTime, *v.EndTime)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.StepState_name, *v.Name)
-	}
-	if v.StartTime != nil {
-		s.WriteTime(schemas.StepState_startTime, *v.StartTime)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.StepState_status, string(v.Status))
-	}
-	if v.StepMode != "" {
-		s.WriteString(schemas.StepState_stepMode, string(v.StepMode))
-	}
-}
-func (v *StepState) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StepState, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StepState_endTime:
-			v.EndTime = new(time.Time)
-			return d.ReadTime(schemas.StepState_endTime, v.EndTime)
-		case schemas.StepState_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.StepState_name, v.Name)
-		case schemas.StepState_startTime:
-			v.StartTime = new(time.Time)
-			return d.ReadTime(schemas.StepState_startTime, v.StartTime)
-		case schemas.StepState_status:
-			var ev string
-			if err := d.ReadString(schemas.StepState_status, &ev); err != nil {
-				return err
-			}
-			v.Status = StepStatus(ev)
-			return nil
-		case schemas.StepState_stepMode:
-			var ev string
-			if err := d.ReadString(schemas.StepState_stepMode, &ev); err != nil {
-				return err
-			}
-			v.StepMode = ExecutionMode(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Defines a condition that can automatically trigger the execution of a Region
@@ -3575,53 +1369,6 @@ type Trigger struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Trigger) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Trigger)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Trigger) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.Trigger_action, string(v.Action))
-	}
-	serializeTriggerConditionList(s, schemas.Trigger_conditions, v.Conditions)
-	if v.Description != nil {
-		s.WriteString(schemas.Trigger_description, *v.Description)
-	}
-	if v.MinDelayMinutesBetweenExecutions != nil {
-		s.WriteInt32(schemas.Trigger_minDelayMinutesBetweenExecutions, *v.MinDelayMinutesBetweenExecutions)
-	}
-	if v.TargetRegion != nil {
-		s.WriteString(schemas.Trigger_targetRegion, *v.TargetRegion)
-	}
-}
-func (v *Trigger) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Trigger, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Trigger_action:
-			var ev string
-			if err := d.ReadString(schemas.Trigger_action, &ev); err != nil {
-				return err
-			}
-			v.Action = WorkflowTargetAction(ev)
-			return nil
-		case schemas.Trigger_conditions:
-			return deserializeTriggerConditionList(d, schemas.Trigger_conditions, &v.Conditions)
-		case schemas.Trigger_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Trigger_description, v.Description)
-		case schemas.Trigger_minDelayMinutesBetweenExecutions:
-			v.MinDelayMinutesBetweenExecutions = new(int32)
-			return d.ReadInt32(schemas.Trigger_minDelayMinutesBetweenExecutions, v.MinDelayMinutesBetweenExecutions)
-		case schemas.Trigger_targetRegion:
-			v.TargetRegion = new(string)
-			return d.ReadString(schemas.Trigger_targetRegion, v.TargetRegion)
-		}
-		return nil
-	})
-}
-
 // Defines a condition that must be met for a trigger to fire.
 type TriggerCondition struct {
 
@@ -3636,38 +1383,6 @@ type TriggerCondition struct {
 	Condition AlarmCondition
 
 	noSmithyDocumentSerde
-}
-
-func (v *TriggerCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TriggerCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TriggerCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssociatedAlarmName != nil {
-		s.WriteString(schemas.TriggerCondition_associatedAlarmName, *v.AssociatedAlarmName)
-	}
-	if v.Condition != "" {
-		s.WriteString(schemas.TriggerCondition_condition, string(v.Condition))
-	}
-}
-func (v *TriggerCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TriggerCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TriggerCondition_associatedAlarmName:
-			v.AssociatedAlarmName = new(string)
-			return d.ReadString(schemas.TriggerCondition_associatedAlarmName, v.AssociatedAlarmName)
-		case schemas.TriggerCondition_condition:
-			var ev string
-			if err := d.ReadString(schemas.TriggerCondition_condition, &ev); err != nil {
-				return err
-			}
-			v.Condition = AlarmCondition(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Represents a workflow in a Region switch plan. A workflow defines a sequence of
@@ -3690,47 +1405,6 @@ type Workflow struct {
 	WorkflowTargetRegion *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Workflow) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Workflow)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Workflow) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSteps(s, schemas.Workflow_steps, v.Steps)
-	if v.WorkflowDescription != nil {
-		s.WriteString(schemas.Workflow_workflowDescription, *v.WorkflowDescription)
-	}
-	if v.WorkflowTargetAction != "" {
-		s.WriteString(schemas.Workflow_workflowTargetAction, string(v.WorkflowTargetAction))
-	}
-	if v.WorkflowTargetRegion != nil {
-		s.WriteString(schemas.Workflow_workflowTargetRegion, *v.WorkflowTargetRegion)
-	}
-}
-func (v *Workflow) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Workflow, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Workflow_steps:
-			return deserializeSteps(d, schemas.Workflow_steps, &v.Steps)
-		case schemas.Workflow_workflowDescription:
-			v.WorkflowDescription = new(string)
-			return d.ReadString(schemas.Workflow_workflowDescription, v.WorkflowDescription)
-		case schemas.Workflow_workflowTargetAction:
-			var ev string
-			if err := d.ReadString(schemas.Workflow_workflowTargetAction, &ev); err != nil {
-				return err
-			}
-			v.WorkflowTargetAction = WorkflowTargetAction(ev)
-			return nil
-		case schemas.Workflow_workflowTargetRegion:
-			v.WorkflowTargetRegion = new(string)
-			return d.ReadString(schemas.Workflow_workflowTargetRegion, v.WorkflowTargetRegion)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

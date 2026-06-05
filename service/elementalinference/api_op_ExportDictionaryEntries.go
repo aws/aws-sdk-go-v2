@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type ExportDictionaryEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportDictionaryEntriesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportDictionaryEntriesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportDictionaryEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.ExportDictionaryEntriesRequest_id, *v.Id)
-	}
-}
-
 type ExportDictionaryEntriesOutput struct {
 
 	// The dictionary entries payload.
@@ -61,24 +47,16 @@ type ExportDictionaryEntriesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportDictionaryEntriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportDictionaryEntriesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExportDictionaryEntriesResponse_entries:
-			v.Entries = new(string)
-			return d.ReadString(schemas.ExportDictionaryEntriesResponse_entries, v.Entries)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExportDictionaryEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportDictionaryEntries, schemas.ExportDictionaryEntriesRequest, schemas.ExportDictionaryEntriesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportDictionaryEntries{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportDictionaryEntries, schemas.ExportDictionaryEntriesRequest, schemas.ExportDictionaryEntriesResponse), output: &ExportDictionaryEntriesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportDictionaryEntries{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportDictionaryEntries"); err != nil {

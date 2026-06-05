@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,24 +59,6 @@ type CreateBillOfMaterialsImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBillOfMaterialsImportJobInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBillOfMaterialsImportJobRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBillOfMaterialsImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateBillOfMaterialsImportJobRequest_clientToken, *v.ClientToken)
-	}
-	if v.InstanceId != nil {
-		s.WriteString(schemas.CreateBillOfMaterialsImportJobRequest_instanceId, *v.InstanceId)
-	}
-	if v.S3uri != nil {
-		s.WriteString(schemas.CreateBillOfMaterialsImportJobRequest_s3uri, *v.S3uri)
-	}
-}
-
 // The response parameters of CreateBillOfMaterialsImportJob.
 type CreateBillOfMaterialsImportJobOutput struct {
 
@@ -93,24 +73,16 @@ type CreateBillOfMaterialsImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBillOfMaterialsImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBillOfMaterialsImportJobResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBillOfMaterialsImportJobResponse_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.CreateBillOfMaterialsImportJobResponse_jobId, v.JobId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBillOfMaterialsImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillOfMaterialsImportJob, schemas.CreateBillOfMaterialsImportJobRequest, schemas.CreateBillOfMaterialsImportJobResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBillOfMaterialsImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillOfMaterialsImportJob, schemas.CreateBillOfMaterialsImportJobRequest, schemas.CreateBillOfMaterialsImportJobResponse), output: &CreateBillOfMaterialsImportJobOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBillOfMaterialsImportJob{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBillOfMaterialsImportJob"); err != nil {

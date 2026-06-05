@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,18 +50,6 @@ type DescribeSeverityLevelsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSeverityLevelsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeSeverityLevelsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeSeverityLevelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Language != nil {
-		s.WriteString(schemas.DescribeSeverityLevelsRequest_language, *v.Language)
-	}
-}
-
 // The list of severity levels returned by the DescribeSeverityLevels operation.
 type DescribeSeverityLevelsOutput struct {
 
@@ -77,23 +63,16 @@ type DescribeSeverityLevelsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeSeverityLevelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeSeverityLevelsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeSeverityLevelsResponse_severityLevels:
-			return deserializeSeverityLevelsList(d, schemas.DescribeSeverityLevelsResponse_severityLevels, &v.SeverityLevels)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeSeverityLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSeverityLevels, schemas.DescribeSeverityLevelsRequest, schemas.DescribeSeverityLevelsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSeverityLevels{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSeverityLevels, schemas.DescribeSeverityLevelsRequest, schemas.DescribeSeverityLevelsResponse), output: &DescribeSeverityLevelsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSeverityLevels{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSeverityLevels"); err != nil {

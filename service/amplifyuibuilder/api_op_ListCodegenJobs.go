@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,27 +49,6 @@ type ListCodegenJobsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodegenJobsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListCodegenJobsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListCodegenJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.ListCodegenJobsRequest_appId, *v.AppId)
-	}
-	if v.EnvironmentName != nil {
-		s.WriteString(schemas.ListCodegenJobsRequest_environmentName, *v.EnvironmentName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListCodegenJobsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListCodegenJobsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListCodegenJobsOutput struct {
 
 	// The list of code generation jobs for the Amplify app.
@@ -88,26 +65,16 @@ type ListCodegenJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListCodegenJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListCodegenJobsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListCodegenJobsResponse_entities:
-			return deserializeCodegenJobSummaryList(d, schemas.ListCodegenJobsResponse_entities, &v.Entities)
-		case schemas.ListCodegenJobsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListCodegenJobsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListCodegenJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodegenJobs, schemas.ListCodegenJobsRequest, schemas.ListCodegenJobsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodegenJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodegenJobs, schemas.ListCodegenJobsRequest, schemas.ListCodegenJobsResponse), output: &ListCodegenJobsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodegenJobs{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodegenJobs"); err != nil {

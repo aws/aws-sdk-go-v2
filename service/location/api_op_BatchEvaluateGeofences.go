@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,31 +65,6 @@ type BatchEvaluateGeofencesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchEvaluateGeofencesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchEvaluateGeofencesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchEvaluateGeofencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CollectionName != nil {
-		s.WriteString(schemas.BatchEvaluateGeofencesRequest_CollectionName, *v.CollectionName)
-	}
-	serializeDevicePositionUpdateList(s, schemas.BatchEvaluateGeofencesRequest_DevicePositionUpdates, v.DevicePositionUpdates)
-}
-func (v *BatchEvaluateGeofencesInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchEvaluateGeofencesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchEvaluateGeofencesRequest_CollectionName:
-			v.CollectionName = new(string)
-			return d.ReadString(schemas.BatchEvaluateGeofencesRequest_CollectionName, v.CollectionName)
-		case schemas.BatchEvaluateGeofencesRequest_DevicePositionUpdates:
-			return deserializeDevicePositionUpdateList(d, schemas.BatchEvaluateGeofencesRequest_DevicePositionUpdates, &v.DevicePositionUpdates)
-		}
-		return nil
-	})
-}
-
 type BatchEvaluateGeofencesOutput struct {
 
 	// Contains error details for each device that failed to evaluate its position
@@ -106,32 +79,16 @@ type BatchEvaluateGeofencesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchEvaluateGeofencesOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchEvaluateGeofencesResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchEvaluateGeofencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchEvaluateGeofencesErrorList(s, schemas.BatchEvaluateGeofencesResponse_Errors, v.Errors)
-}
-func (v *BatchEvaluateGeofencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchEvaluateGeofencesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchEvaluateGeofencesResponse_Errors:
-			return deserializeBatchEvaluateGeofencesErrorList(d, schemas.BatchEvaluateGeofencesResponse_Errors, &v.Errors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchEvaluateGeofences, schemas.BatchEvaluateGeofencesRequest, schemas.BatchEvaluateGeofencesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchEvaluateGeofences{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchEvaluateGeofences, schemas.BatchEvaluateGeofencesRequest, schemas.BatchEvaluateGeofencesResponse), output: &BatchEvaluateGeofencesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchEvaluateGeofences{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchEvaluateGeofences"); err != nil {

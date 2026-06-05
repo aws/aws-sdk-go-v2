@@ -7,9 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
-	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,37 +55,6 @@ type DescribeUserInput struct {
 	Extensions []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtensionNames(s, schemas.DescribeUserRequest_Extensions, v.Extensions)
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.DescribeUserRequest_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.DescribeUserRequest_UserId, *v.UserId)
-	}
-}
-func (v *DescribeUserInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeUserRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeUserRequest_Extensions:
-			return deserializeExtensionNames(d, schemas.DescribeUserRequest_Extensions, &v.Extensions)
-		case schemas.DescribeUserRequest_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeUserRequest_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeUserRequest_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.DescribeUserRequest_UserId, v.UserId)
-		}
-		return nil
-	})
 }
 
 type DescribeUserOutput struct {
@@ -188,170 +155,16 @@ type DescribeUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeUserOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeUserResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddresses(s, schemas.DescribeUserResponse_Addresses, v.Addresses)
-	if v.Birthdate != nil {
-		s.WriteString(schemas.DescribeUserResponse_Birthdate, *v.Birthdate)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.DescribeUserResponse_CreatedAt, *v.CreatedAt)
-	}
-	if v.CreatedBy != nil {
-		s.WriteString(schemas.DescribeUserResponse_CreatedBy, *v.CreatedBy)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.DescribeUserResponse_DisplayName, *v.DisplayName)
-	}
-	serializeEmails(s, schemas.DescribeUserResponse_Emails, v.Emails)
-	serializeExtensions(s, schemas.DescribeUserResponse_Extensions, v.Extensions)
-	serializeExternalIds(s, schemas.DescribeUserResponse_ExternalIds, v.ExternalIds)
-	if v.IdentityStoreId != nil {
-		s.WriteString(schemas.DescribeUserResponse_IdentityStoreId, *v.IdentityStoreId)
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.DescribeUserResponse_Locale, *v.Locale)
-	}
-	if v.Name != nil {
-		s.WriteStruct(schemas.DescribeUserResponse_Name)
-		v.Name.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NickName != nil {
-		s.WriteString(schemas.DescribeUserResponse_NickName, *v.NickName)
-	}
-	serializePhoneNumbers(s, schemas.DescribeUserResponse_PhoneNumbers, v.PhoneNumbers)
-	serializePhotos(s, schemas.DescribeUserResponse_Photos, v.Photos)
-	if v.PreferredLanguage != nil {
-		s.WriteString(schemas.DescribeUserResponse_PreferredLanguage, *v.PreferredLanguage)
-	}
-	if v.ProfileUrl != nil {
-		s.WriteString(schemas.DescribeUserResponse_ProfileUrl, *v.ProfileUrl)
-	}
-	serializeRoles(s, schemas.DescribeUserResponse_Roles, v.Roles)
-	if v.Timezone != nil {
-		s.WriteString(schemas.DescribeUserResponse_Timezone, *v.Timezone)
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.DescribeUserResponse_Title, *v.Title)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.DescribeUserResponse_UpdatedAt, *v.UpdatedAt)
-	}
-	if v.UpdatedBy != nil {
-		s.WriteString(schemas.DescribeUserResponse_UpdatedBy, *v.UpdatedBy)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.DescribeUserResponse_UserId, *v.UserId)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.DescribeUserResponse_UserName, *v.UserName)
-	}
-	if v.UserStatus != "" {
-		s.WriteString(schemas.DescribeUserResponse_UserStatus, string(v.UserStatus))
-	}
-	if v.UserType != nil {
-		s.WriteString(schemas.DescribeUserResponse_UserType, *v.UserType)
-	}
-	if v.Website != nil {
-		s.WriteString(schemas.DescribeUserResponse_Website, *v.Website)
-	}
-}
-func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeUserResponse_Addresses:
-			return deserializeAddresses(d, schemas.DescribeUserResponse_Addresses, &v.Addresses)
-		case schemas.DescribeUserResponse_Birthdate:
-			v.Birthdate = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_Birthdate, v.Birthdate)
-		case schemas.DescribeUserResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeUserResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeUserResponse_CreatedBy:
-			v.CreatedBy = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_CreatedBy, v.CreatedBy)
-		case schemas.DescribeUserResponse_DisplayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_DisplayName, v.DisplayName)
-		case schemas.DescribeUserResponse_Emails:
-			return deserializeEmails(d, schemas.DescribeUserResponse_Emails, &v.Emails)
-		case schemas.DescribeUserResponse_Extensions:
-			return deserializeExtensions(d, schemas.DescribeUserResponse_Extensions, &v.Extensions)
-		case schemas.DescribeUserResponse_ExternalIds:
-			return deserializeExternalIds(d, schemas.DescribeUserResponse_ExternalIds, &v.ExternalIds)
-		case schemas.DescribeUserResponse_IdentityStoreId:
-			v.IdentityStoreId = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_IdentityStoreId, v.IdentityStoreId)
-		case schemas.DescribeUserResponse_Locale:
-			v.Locale = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_Locale, v.Locale)
-		case schemas.DescribeUserResponse_Name:
-			v.Name = &types.Name{}
-			return v.Name.Deserialize(d)
-		case schemas.DescribeUserResponse_NickName:
-			v.NickName = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_NickName, v.NickName)
-		case schemas.DescribeUserResponse_PhoneNumbers:
-			return deserializePhoneNumbers(d, schemas.DescribeUserResponse_PhoneNumbers, &v.PhoneNumbers)
-		case schemas.DescribeUserResponse_Photos:
-			return deserializePhotos(d, schemas.DescribeUserResponse_Photos, &v.Photos)
-		case schemas.DescribeUserResponse_PreferredLanguage:
-			v.PreferredLanguage = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_PreferredLanguage, v.PreferredLanguage)
-		case schemas.DescribeUserResponse_ProfileUrl:
-			v.ProfileUrl = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_ProfileUrl, v.ProfileUrl)
-		case schemas.DescribeUserResponse_Roles:
-			return deserializeRoles(d, schemas.DescribeUserResponse_Roles, &v.Roles)
-		case schemas.DescribeUserResponse_Timezone:
-			v.Timezone = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_Timezone, v.Timezone)
-		case schemas.DescribeUserResponse_Title:
-			v.Title = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_Title, v.Title)
-		case schemas.DescribeUserResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeUserResponse_UpdatedAt, v.UpdatedAt)
-		case schemas.DescribeUserResponse_UpdatedBy:
-			v.UpdatedBy = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_UpdatedBy, v.UpdatedBy)
-		case schemas.DescribeUserResponse_UserId:
-			v.UserId = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_UserId, v.UserId)
-		case schemas.DescribeUserResponse_UserName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_UserName, v.UserName)
-		case schemas.DescribeUserResponse_UserStatus:
-			var ev string
-			if err := d.ReadString(schemas.DescribeUserResponse_UserStatus, &ev); err != nil {
-				return err
-			}
-			v.UserStatus = types.UserStatus(ev)
-			return nil
-		case schemas.DescribeUserResponse_UserType:
-			v.UserType = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_UserType, v.UserType)
-		case schemas.DescribeUserResponse_Website:
-			v.Website = new(string)
-			return d.ReadString(schemas.DescribeUserResponse_Website, v.Website)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse), output: &DescribeUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUser"); err != nil {

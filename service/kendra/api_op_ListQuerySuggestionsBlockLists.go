@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,24 +58,6 @@ type ListQuerySuggestionsBlockListsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQuerySuggestionsBlockListsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListQuerySuggestionsBlockListsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListQuerySuggestionsBlockListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexId != nil {
-		s.WriteString(schemas.ListQuerySuggestionsBlockListsRequest_IndexId, *v.IndexId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListQuerySuggestionsBlockListsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListQuerySuggestionsBlockListsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListQuerySuggestionsBlockListsOutput struct {
 
 	// Summary items for a block list.
@@ -101,26 +81,16 @@ type ListQuerySuggestionsBlockListsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListQuerySuggestionsBlockListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListQuerySuggestionsBlockListsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListQuerySuggestionsBlockListsResponse_BlockListSummaryItems:
-			return deserializeQuerySuggestionsBlockListSummaryItems(d, schemas.ListQuerySuggestionsBlockListsResponse_BlockListSummaryItems, &v.BlockListSummaryItems)
-		case schemas.ListQuerySuggestionsBlockListsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListQuerySuggestionsBlockListsResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuerySuggestionsBlockLists, schemas.ListQuerySuggestionsBlockListsRequest, schemas.ListQuerySuggestionsBlockListsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQuerySuggestionsBlockLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuerySuggestionsBlockLists, schemas.ListQuerySuggestionsBlockListsRequest, schemas.ListQuerySuggestionsBlockListsResponse), output: &ListQuerySuggestionsBlockListsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQuerySuggestionsBlockLists{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQuerySuggestionsBlockLists"); err != nil {

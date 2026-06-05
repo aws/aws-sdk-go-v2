@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,18 +37,6 @@ type GetMulticastGroupSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMulticastGroupSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMulticastGroupSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMulticastGroupSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.GetMulticastGroupSessionRequest_Id, *v.Id)
-	}
-}
-
 type GetMulticastGroupSessionOutput struct {
 
 	// The LoRaWAN information used with the multicast session.
@@ -62,24 +48,16 @@ type GetMulticastGroupSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMulticastGroupSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMulticastGroupSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMulticastGroupSessionResponse_LoRaWAN:
-			v.LoRaWAN = &types.LoRaWANMulticastSession{}
-			return v.LoRaWAN.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMulticastGroupSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMulticastGroupSession, schemas.GetMulticastGroupSessionRequest, schemas.GetMulticastGroupSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMulticastGroupSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMulticastGroupSession, schemas.GetMulticastGroupSessionRequest, schemas.GetMulticastGroupSessionResponse), output: &GetMulticastGroupSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMulticastGroupSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMulticastGroupSession"); err != nil {

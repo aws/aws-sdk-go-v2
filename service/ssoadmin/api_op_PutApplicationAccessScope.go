@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,22 +48,6 @@ type PutApplicationAccessScopeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutApplicationAccessScopeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutApplicationAccessScopeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutApplicationAccessScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationArn != nil {
-		s.WriteString(schemas.PutApplicationAccessScopeRequest_ApplicationArn, *v.ApplicationArn)
-	}
-	serializeScopeTargets(s, schemas.PutApplicationAccessScopeRequest_AuthorizedTargets, v.AuthorizedTargets)
-	if v.Scope != nil {
-		s.WriteString(schemas.PutApplicationAccessScopeRequest_Scope, *v.Scope)
-	}
-}
-
 type PutApplicationAccessScopeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,29 +55,16 @@ type PutApplicationAccessScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutApplicationAccessScopeOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutApplicationAccessScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *PutApplicationAccessScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutApplicationAccessScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAccessScope, schemas.PutApplicationAccessScopeRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApplicationAccessScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAccessScope, schemas.PutApplicationAccessScopeRequest, nil), output: &PutApplicationAccessScopeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApplicationAccessScope{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutApplicationAccessScope"); err != nil {

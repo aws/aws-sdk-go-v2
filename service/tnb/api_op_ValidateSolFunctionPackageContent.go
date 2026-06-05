@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,24 +53,6 @@ type ValidateSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidateSolFunctionPackageContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ValidateSolFunctionPackageContentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ValidateSolFunctionPackageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContentType != "" {
-		s.WriteString(schemas.ValidateSolFunctionPackageContentInput_contentType, string(v.ContentType))
-	}
-	if v.File != nil {
-		s.WriteBlob(schemas.ValidateSolFunctionPackageContentInput_file, v.File)
-	}
-	if v.VnfPkgId != nil {
-		s.WriteString(schemas.ValidateSolFunctionPackageContentInput_vnfPkgId, *v.VnfPkgId)
-	}
-}
-
 type ValidateSolFunctionPackageContentOutput struct {
 
 	// Function package ID.
@@ -111,39 +91,16 @@ type ValidateSolFunctionPackageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ValidateSolFunctionPackageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidateSolFunctionPackageContentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidateSolFunctionPackageContentOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ValidateSolFunctionPackageContentOutput_id, v.Id)
-		case schemas.ValidateSolFunctionPackageContentOutput_metadata:
-			v.Metadata = &types.ValidateSolFunctionPackageContentMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.ValidateSolFunctionPackageContentOutput_vnfProductName:
-			v.VnfProductName = new(string)
-			return d.ReadString(schemas.ValidateSolFunctionPackageContentOutput_vnfProductName, v.VnfProductName)
-		case schemas.ValidateSolFunctionPackageContentOutput_vnfProvider:
-			v.VnfProvider = new(string)
-			return d.ReadString(schemas.ValidateSolFunctionPackageContentOutput_vnfProvider, v.VnfProvider)
-		case schemas.ValidateSolFunctionPackageContentOutput_vnfdId:
-			v.VnfdId = new(string)
-			return d.ReadString(schemas.ValidateSolFunctionPackageContentOutput_vnfdId, v.VnfdId)
-		case schemas.ValidateSolFunctionPackageContentOutput_vnfdVersion:
-			v.VnfdVersion = new(string)
-			return d.ReadString(schemas.ValidateSolFunctionPackageContentOutput_vnfdVersion, v.VnfdVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationValidateSolFunctionPackageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSolFunctionPackageContent, schemas.ValidateSolFunctionPackageContentInput, schemas.ValidateSolFunctionPackageContentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSolFunctionPackageContent, schemas.ValidateSolFunctionPackageContentInput, schemas.ValidateSolFunctionPackageContentOutput), output: &ValidateSolFunctionPackageContentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ValidateSolFunctionPackageContent"); err != nil {

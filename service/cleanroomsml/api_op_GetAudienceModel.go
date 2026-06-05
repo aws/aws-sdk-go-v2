@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetAudienceModelInput struct {
 	AudienceModelArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAudienceModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAudienceModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAudienceModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AudienceModelArn != nil {
-		s.WriteString(schemas.GetAudienceModelRequest_audienceModelArn, *v.AudienceModelArn)
-	}
 }
 
 type GetAudienceModelOutput struct {
@@ -109,60 +95,16 @@ type GetAudienceModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAudienceModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAudienceModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAudienceModelResponse_audienceModelArn:
-			v.AudienceModelArn = new(string)
-			return d.ReadString(schemas.GetAudienceModelResponse_audienceModelArn, v.AudienceModelArn)
-		case schemas.GetAudienceModelResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.GetAudienceModelResponse_createTime, v.CreateTime)
-		case schemas.GetAudienceModelResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetAudienceModelResponse_description, v.Description)
-		case schemas.GetAudienceModelResponse_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetAudienceModelResponse_kmsKeyArn, v.KmsKeyArn)
-		case schemas.GetAudienceModelResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAudienceModelResponse_name, v.Name)
-		case schemas.GetAudienceModelResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetAudienceModelResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.AudienceModelStatus(ev)
-			return nil
-		case schemas.GetAudienceModelResponse_statusDetails:
-			v.StatusDetails = &types.StatusDetails{}
-			return v.StatusDetails.Deserialize(d)
-		case schemas.GetAudienceModelResponse_tags:
-			return deserializeTagMap(d, schemas.GetAudienceModelResponse_tags, &v.Tags)
-		case schemas.GetAudienceModelResponse_trainingDataEndTime:
-			v.TrainingDataEndTime = new(time.Time)
-			return d.ReadTime(schemas.GetAudienceModelResponse_trainingDataEndTime, v.TrainingDataEndTime)
-		case schemas.GetAudienceModelResponse_trainingDataStartTime:
-			v.TrainingDataStartTime = new(time.Time)
-			return d.ReadTime(schemas.GetAudienceModelResponse_trainingDataStartTime, v.TrainingDataStartTime)
-		case schemas.GetAudienceModelResponse_trainingDatasetArn:
-			v.TrainingDatasetArn = new(string)
-			return d.ReadString(schemas.GetAudienceModelResponse_trainingDatasetArn, v.TrainingDatasetArn)
-		case schemas.GetAudienceModelResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.GetAudienceModelResponse_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAudienceModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAudienceModel, schemas.GetAudienceModelRequest, schemas.GetAudienceModelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAudienceModel, schemas.GetAudienceModelRequest, schemas.GetAudienceModelResponse), output: &GetAudienceModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAudienceModel"); err != nil {

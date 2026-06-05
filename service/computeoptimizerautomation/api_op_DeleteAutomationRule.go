@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,24 +44,6 @@ type DeleteAutomationRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAutomationRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAutomationRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAutomationRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.DeleteAutomationRuleRequest_clientToken, *v.ClientToken)
-	}
-	if v.RuleArn != nil {
-		s.WriteString(schemas.DeleteAutomationRuleRequest_ruleArn, *v.RuleArn)
-	}
-	if v.RuleRevision != nil {
-		s.WriteInt64(schemas.DeleteAutomationRuleRequest_ruleRevision, *v.RuleRevision)
-	}
-}
-
 type DeleteAutomationRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,21 +51,16 @@ type DeleteAutomationRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAutomationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAutomationRuleResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAutomationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomationRule, schemas.DeleteAutomationRuleRequest, schemas.DeleteAutomationRuleResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteAutomationRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomationRule, schemas.DeleteAutomationRuleRequest, schemas.DeleteAutomationRuleResponse), output: &DeleteAutomationRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteAutomationRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAutomationRule"); err != nil {

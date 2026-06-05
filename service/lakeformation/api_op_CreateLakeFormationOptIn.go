@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,30 +47,6 @@ type CreateLakeFormationOptInInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationOptInInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateLakeFormationOptInRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLakeFormationOptInInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Condition != nil {
-		s.WriteStruct(schemas.CreateLakeFormationOptInRequest_Condition)
-		v.Condition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Principal != nil {
-		s.WriteStruct(schemas.CreateLakeFormationOptInRequest_Principal)
-		v.Principal.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Resource != nil {
-		s.WriteStruct(schemas.CreateLakeFormationOptInRequest_Resource)
-		v.Resource.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateLakeFormationOptInOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,21 +54,16 @@ type CreateLakeFormationOptInOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLakeFormationOptInOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateLakeFormationOptInResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLakeFormationOptInMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationOptIn, schemas.CreateLakeFormationOptInRequest, schemas.CreateLakeFormationOptInResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLakeFormationOptIn{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLakeFormationOptIn, schemas.CreateLakeFormationOptInRequest, schemas.CreateLakeFormationOptInResponse), output: &CreateLakeFormationOptInOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLakeFormationOptIn{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLakeFormationOptIn"); err != nil {

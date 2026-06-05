@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,63 +103,6 @@ type UpdateUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateUserSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BrandingConfigurationInput != nil {
-		s.WriteStruct(schemas.UpdateUserSettingsRequest_brandingConfigurationInput)
-		v.BrandingConfigurationInput.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateUserSettingsRequest_clientToken, *v.ClientToken)
-	}
-	if v.CookieSynchronizationConfiguration != nil {
-		s.WriteStruct(schemas.UpdateUserSettingsRequest_cookieSynchronizationConfiguration)
-		v.CookieSynchronizationConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CopyAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_copyAllowed, string(v.CopyAllowed))
-	}
-	if v.DeepLinkAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_deepLinkAllowed, string(v.DeepLinkAllowed))
-	}
-	if v.DisconnectTimeoutInMinutes != nil {
-		s.WriteInt32(schemas.UpdateUserSettingsRequest_disconnectTimeoutInMinutes, *v.DisconnectTimeoutInMinutes)
-	}
-	if v.DownloadAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_downloadAllowed, string(v.DownloadAllowed))
-	}
-	if v.IdleDisconnectTimeoutInMinutes != nil {
-		s.WriteInt32(schemas.UpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes, *v.IdleDisconnectTimeoutInMinutes)
-	}
-	if v.PasteAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_pasteAllowed, string(v.PasteAllowed))
-	}
-	if v.PrintAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_printAllowed, string(v.PrintAllowed))
-	}
-	if v.ToolbarConfiguration != nil {
-		s.WriteStruct(schemas.UpdateUserSettingsRequest_toolbarConfiguration)
-		v.ToolbarConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UploadAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_uploadAllowed, string(v.UploadAllowed))
-	}
-	if v.UserSettingsArn != nil {
-		s.WriteString(schemas.UpdateUserSettingsRequest_userSettingsArn, *v.UserSettingsArn)
-	}
-	if v.WebAuthnAllowed != "" {
-		s.WriteString(schemas.UpdateUserSettingsRequest_webAuthnAllowed, string(v.WebAuthnAllowed))
-	}
-}
-
 type UpdateUserSettingsOutput struct {
 
 	// The user settings.
@@ -175,24 +116,16 @@ type UpdateUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserSettingsResponse_userSettings:
-			v.UserSettings = &types.UserSettings{}
-			return v.UserSettings.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserSettings, schemas.UpdateUserSettingsRequest, schemas.UpdateUserSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserSettings, schemas.UpdateUserSettingsRequest, schemas.UpdateUserSettingsResponse), output: &UpdateUserSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUserSettings"); err != nil {

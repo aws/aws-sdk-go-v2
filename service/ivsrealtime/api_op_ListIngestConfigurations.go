@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,27 +48,6 @@ type ListIngestConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListIngestConfigurationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListIngestConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FilterByStageArn != nil {
-		s.WriteString(schemas.ListIngestConfigurationsRequest_filterByStageArn, *v.FilterByStageArn)
-	}
-	if v.FilterByState != "" {
-		s.WriteString(schemas.ListIngestConfigurationsRequest_filterByState, string(v.FilterByState))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListIngestConfigurationsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListIngestConfigurationsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListIngestConfigurationsOutput struct {
 
 	// List of the matching ingest configurations (summary information only).
@@ -88,26 +65,16 @@ type ListIngestConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListIngestConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListIngestConfigurationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListIngestConfigurationsResponse_ingestConfigurations:
-			return deserializeIngestConfigurationList(d, schemas.ListIngestConfigurationsResponse_ingestConfigurations, &v.IngestConfigurations)
-		case schemas.ListIngestConfigurationsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListIngestConfigurationsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListIngestConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestConfigurations, schemas.ListIngestConfigurationsRequest, schemas.ListIngestConfigurationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestConfigurations, schemas.ListIngestConfigurationsRequest, schemas.ListIngestConfigurationsResponse), output: &ListIngestConfigurationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestConfigurations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIngestConfigurations"); err != nil {

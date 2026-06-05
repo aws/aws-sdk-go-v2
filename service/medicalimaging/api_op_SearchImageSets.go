@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,29 +56,6 @@ type SearchImageSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchImageSetsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchImageSetsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchImageSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DatastoreId != nil {
-		s.WriteString(schemas.SearchImageSetsRequest_datastoreId, *v.DatastoreId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.SearchImageSetsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.SearchImageSetsRequest_nextToken, *v.NextToken)
-	}
-	if v.SearchCriteria != nil {
-		s.WriteStruct(schemas.SearchImageSetsRequest_searchCriteria)
-		v.SearchCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type SearchImageSetsOutput struct {
 
 	// The model containing the image set results.
@@ -100,29 +75,16 @@ type SearchImageSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchImageSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchImageSetsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchImageSetsResponse_imageSetsMetadataSummaries:
-			return deserializeImageSetsMetadataSummaries(d, schemas.SearchImageSetsResponse_imageSetsMetadataSummaries, &v.ImageSetsMetadataSummaries)
-		case schemas.SearchImageSetsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.SearchImageSetsResponse_nextToken, v.NextToken)
-		case schemas.SearchImageSetsResponse_sort:
-			v.Sort = &types.Sort{}
-			return v.Sort.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationSearchImageSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchImageSets, schemas.SearchImageSetsRequest, schemas.SearchImageSetsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchImageSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchImageSets, schemas.SearchImageSetsRequest, schemas.SearchImageSetsResponse), output: &SearchImageSetsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchImageSets{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchImageSets"); err != nil {

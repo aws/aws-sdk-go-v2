@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -81,116 +79,6 @@ type ReportDefinition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReportDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalArtifactList(s, schemas.ReportDefinition_AdditionalArtifacts, v.AdditionalArtifacts)
-	serializeSchemaElementList(s, schemas.ReportDefinition_AdditionalSchemaElements, v.AdditionalSchemaElements)
-	if v.BillingViewArn != nil {
-		s.WriteString(schemas.ReportDefinition_BillingViewArn, *v.BillingViewArn)
-	}
-	if v.Compression != "" {
-		s.WriteString(schemas.ReportDefinition_Compression, string(v.Compression))
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.ReportDefinition_Format, string(v.Format))
-	}
-	if v.RefreshClosedReports != nil {
-		s.WriteBool(schemas.ReportDefinition_RefreshClosedReports, *v.RefreshClosedReports)
-	}
-	if v.ReportName != nil {
-		s.WriteString(schemas.ReportDefinition_ReportName, *v.ReportName)
-	}
-	if v.ReportStatus != nil {
-		s.WriteStruct(schemas.ReportDefinition_ReportStatus)
-		v.ReportStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ReportVersioning != "" {
-		s.WriteString(schemas.ReportDefinition_ReportVersioning, string(v.ReportVersioning))
-	}
-	if v.S3Bucket != nil {
-		s.WriteString(schemas.ReportDefinition_S3Bucket, *v.S3Bucket)
-	}
-	if v.S3Prefix != nil {
-		s.WriteString(schemas.ReportDefinition_S3Prefix, *v.S3Prefix)
-	}
-	if v.S3Region != "" {
-		s.WriteString(schemas.ReportDefinition_S3Region, string(v.S3Region))
-	}
-	if v.TimeUnit != "" {
-		s.WriteString(schemas.ReportDefinition_TimeUnit, string(v.TimeUnit))
-	}
-}
-func (v *ReportDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportDefinition_AdditionalArtifacts:
-			return deserializeAdditionalArtifactList(d, schemas.ReportDefinition_AdditionalArtifacts, &v.AdditionalArtifacts)
-		case schemas.ReportDefinition_AdditionalSchemaElements:
-			return deserializeSchemaElementList(d, schemas.ReportDefinition_AdditionalSchemaElements, &v.AdditionalSchemaElements)
-		case schemas.ReportDefinition_BillingViewArn:
-			v.BillingViewArn = new(string)
-			return d.ReadString(schemas.ReportDefinition_BillingViewArn, v.BillingViewArn)
-		case schemas.ReportDefinition_Compression:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_Compression, &ev); err != nil {
-				return err
-			}
-			v.Compression = CompressionFormat(ev)
-			return nil
-		case schemas.ReportDefinition_Format:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_Format, &ev); err != nil {
-				return err
-			}
-			v.Format = ReportFormat(ev)
-			return nil
-		case schemas.ReportDefinition_RefreshClosedReports:
-			v.RefreshClosedReports = new(bool)
-			return d.ReadBool(schemas.ReportDefinition_RefreshClosedReports, v.RefreshClosedReports)
-		case schemas.ReportDefinition_ReportName:
-			v.ReportName = new(string)
-			return d.ReadString(schemas.ReportDefinition_ReportName, v.ReportName)
-		case schemas.ReportDefinition_ReportStatus:
-			v.ReportStatus = &ReportStatus{}
-			return v.ReportStatus.Deserialize(d)
-		case schemas.ReportDefinition_ReportVersioning:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_ReportVersioning, &ev); err != nil {
-				return err
-			}
-			v.ReportVersioning = ReportVersioning(ev)
-			return nil
-		case schemas.ReportDefinition_S3Bucket:
-			v.S3Bucket = new(string)
-			return d.ReadString(schemas.ReportDefinition_S3Bucket, v.S3Bucket)
-		case schemas.ReportDefinition_S3Prefix:
-			v.S3Prefix = new(string)
-			return d.ReadString(schemas.ReportDefinition_S3Prefix, v.S3Prefix)
-		case schemas.ReportDefinition_S3Region:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_S3Region, &ev); err != nil {
-				return err
-			}
-			v.S3Region = AWSRegion(ev)
-			return nil
-		case schemas.ReportDefinition_TimeUnit:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_TimeUnit, &ev); err != nil {
-				return err
-			}
-			v.TimeUnit = TimeUnit(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // A two element dictionary with a lastDelivery and lastStatus key whose values
 // describe the date and status of the last delivered report for a particular
 // report definition.
@@ -203,38 +91,6 @@ type ReportStatus struct {
 	LastStatus LastStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReportStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LastDelivery != nil {
-		s.WriteString(schemas.ReportStatus_lastDelivery, *v.LastDelivery)
-	}
-	if v.LastStatus != "" {
-		s.WriteString(schemas.ReportStatus_lastStatus, string(v.LastStatus))
-	}
-}
-func (v *ReportStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportStatus_lastDelivery:
-			v.LastDelivery = new(string)
-			return d.ReadString(schemas.ReportStatus_lastDelivery, v.LastDelivery)
-		case schemas.ReportStatus_lastStatus:
-			var ev string
-			if err := d.ReadString(schemas.ReportStatus_lastStatus, &ev); err != nil {
-				return err
-			}
-			v.LastStatus = LastStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a
@@ -255,34 +111,6 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *Tag) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Tag)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.Tag_Key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.Tag_Value, *v.Value)
-	}
-}
-func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Tag_Key:
-			v.Key = new(string)
-			return d.ReadString(schemas.Tag_Key, v.Key)
-		case schemas.Tag_Value:
-			v.Value = new(string)
-			return d.ReadString(schemas.Tag_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

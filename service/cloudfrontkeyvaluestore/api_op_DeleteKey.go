@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,23 +47,6 @@ type DeleteKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKeyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteKeyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IfMatch != nil {
-		s.WriteString(schemas.DeleteKeyRequest_IfMatch, *v.IfMatch)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.DeleteKeyRequest_Key, *v.Key)
-	}
-	if v.KvsARN != nil {
-		s.WriteString(schemas.DeleteKeyRequest_KvsARN, *v.KvsARN)
-	}
-}
 func (in *DeleteKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -97,30 +78,16 @@ type DeleteKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteKeyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteKeyResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.DeleteKeyResponse_ETag, v.ETag)
-		case schemas.DeleteKeyResponse_ItemCount:
-			v.ItemCount = new(int32)
-			return d.ReadInt32(schemas.DeleteKeyResponse_ItemCount, v.ItemCount)
-		case schemas.DeleteKeyResponse_TotalSizeInBytes:
-			v.TotalSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.DeleteKeyResponse_TotalSizeInBytes, v.TotalSizeInBytes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKey, schemas.DeleteKeyRequest, schemas.DeleteKeyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKey, schemas.DeleteKeyRequest, schemas.DeleteKeyResponse), output: &DeleteKeyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteKey{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKey"); err != nil {

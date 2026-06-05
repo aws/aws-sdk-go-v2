@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListAssociatedRoute53HealthChecksInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociatedRoute53HealthChecksInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListAssociatedRoute53HealthChecksRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListAssociatedRoute53HealthChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListAssociatedRoute53HealthChecksRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListAssociatedRoute53HealthChecksRequest_NextToken, *v.NextToken)
-	}
-	if v.RoutingControlArn != nil {
-		s.WriteString(schemas.ListAssociatedRoute53HealthChecksRequest_RoutingControlArn, *v.RoutingControlArn)
-	}
-}
-
 type ListAssociatedRoute53HealthChecksOutput struct {
 
 	// Identifiers for the health checks.
@@ -77,26 +57,16 @@ type ListAssociatedRoute53HealthChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListAssociatedRoute53HealthChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListAssociatedRoute53HealthChecksResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListAssociatedRoute53HealthChecksResponse_HealthCheckIds:
-			return deserialize__listOf__stringMax36PatternS(d, schemas.ListAssociatedRoute53HealthChecksResponse_HealthCheckIds, &v.HealthCheckIds)
-		case schemas.ListAssociatedRoute53HealthChecksResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListAssociatedRoute53HealthChecksResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListAssociatedRoute53HealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedRoute53HealthChecks, schemas.ListAssociatedRoute53HealthChecksRequest, schemas.ListAssociatedRoute53HealthChecksResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedRoute53HealthChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedRoute53HealthChecks, schemas.ListAssociatedRoute53HealthChecksRequest, schemas.ListAssociatedRoute53HealthChecksResponse), output: &ListAssociatedRoute53HealthChecksOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedRoute53HealthChecks{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssociatedRoute53HealthChecks"); err != nil {

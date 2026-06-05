@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type ListResourcesForTagOptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourcesForTagOptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResourcesForTagOptionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResourcesForTagOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PageSize != 0 {
-		s.WriteInt32(schemas.ListResourcesForTagOptionInput_PageSize, v.PageSize)
-	}
-	if v.PageToken != nil {
-		s.WriteString(schemas.ListResourcesForTagOptionInput_PageToken, *v.PageToken)
-	}
-	if v.ResourceType != nil {
-		s.WriteString(schemas.ListResourcesForTagOptionInput_ResourceType, *v.ResourceType)
-	}
-	if v.TagOptionId != nil {
-		s.WriteString(schemas.ListResourcesForTagOptionInput_TagOptionId, *v.TagOptionId)
-	}
-}
-
 type ListResourcesForTagOptionOutput struct {
 
 	// The page token for the next set of results. To retrieve the first set of
@@ -89,26 +66,16 @@ type ListResourcesForTagOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourcesForTagOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResourcesForTagOptionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResourcesForTagOptionOutput_PageToken:
-			v.PageToken = new(string)
-			return d.ReadString(schemas.ListResourcesForTagOptionOutput_PageToken, v.PageToken)
-		case schemas.ListResourcesForTagOptionOutput_ResourceDetails:
-			return deserializeResourceDetails(d, schemas.ListResourcesForTagOptionOutput_ResourceDetails, &v.ResourceDetails)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesForTagOption, schemas.ListResourcesForTagOptionInput, schemas.ListResourcesForTagOptionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourcesForTagOption{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesForTagOption, schemas.ListResourcesForTagOptionInput, schemas.ListResourcesForTagOptionOutput), output: &ListResourcesForTagOptionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourcesForTagOption{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourcesForTagOption"); err != nil {

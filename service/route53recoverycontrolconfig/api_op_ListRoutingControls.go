@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListRoutingControlsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoutingControlsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRoutingControlsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRoutingControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ControlPanelArn != nil {
-		s.WriteString(schemas.ListRoutingControlsRequest_ControlPanelArn, *v.ControlPanelArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRoutingControlsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRoutingControlsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListRoutingControlsOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -80,26 +60,16 @@ type ListRoutingControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRoutingControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRoutingControlsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRoutingControlsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRoutingControlsResponse_NextToken, v.NextToken)
-		case schemas.ListRoutingControlsResponse_RoutingControls:
-			return deserialize__listOfRoutingControl(d, schemas.ListRoutingControlsResponse_RoutingControls, &v.RoutingControls)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingControls, schemas.ListRoutingControlsRequest, schemas.ListRoutingControlsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingControls{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingControls, schemas.ListRoutingControlsRequest, schemas.ListRoutingControlsResponse), output: &ListRoutingControlsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutingControls{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoutingControls"); err != nil {

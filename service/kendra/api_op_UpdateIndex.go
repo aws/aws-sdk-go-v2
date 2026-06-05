@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -88,42 +86,6 @@ type UpdateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIndexInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateIndexRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CapacityUnits != nil {
-		s.WriteStruct(schemas.UpdateIndexRequest_CapacityUnits)
-		v.CapacityUnits.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateIndexRequest_Description, *v.Description)
-	}
-	serializeDocumentMetadataConfigurationList(s, schemas.UpdateIndexRequest_DocumentMetadataConfigurationUpdates, v.DocumentMetadataConfigurationUpdates)
-	if v.Id != nil {
-		s.WriteString(schemas.UpdateIndexRequest_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateIndexRequest_Name, *v.Name)
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.UpdateIndexRequest_RoleArn, *v.RoleArn)
-	}
-	if v.UserContextPolicy != "" {
-		s.WriteString(schemas.UpdateIndexRequest_UserContextPolicy, string(v.UserContextPolicy))
-	}
-	if v.UserGroupResolutionConfiguration != nil {
-		s.WriteStruct(schemas.UpdateIndexRequest_UserGroupResolutionConfiguration)
-		v.UserGroupResolutionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeUserTokenConfigurationList(s, schemas.UpdateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
-}
-
 type UpdateIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -131,29 +93,16 @@ type UpdateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateIndexOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *UpdateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndex, schemas.UpdateIndexRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndex, schemas.UpdateIndexRequest, nil), output: &UpdateIndexOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateIndex{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIndex"); err != nil {

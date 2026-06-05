@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -194,71 +192,6 @@ type UpdateCanaryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCanaryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCanaryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ArtifactConfig != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_ArtifactConfig)
-		v.ArtifactConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ArtifactS3Location != nil {
-		s.WriteString(schemas.UpdateCanaryRequest_ArtifactS3Location, *v.ArtifactS3Location)
-	}
-	serializeBrowserConfigs(s, schemas.UpdateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
-	if v.Code != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_Code)
-		v.Code.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DryRunId != nil {
-		s.WriteString(schemas.UpdateCanaryRequest_DryRunId, *v.DryRunId)
-	}
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateCanaryRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.FailureRetentionPeriodInDays != nil {
-		s.WriteInt32(schemas.UpdateCanaryRequest_FailureRetentionPeriodInDays, *v.FailureRetentionPeriodInDays)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateCanaryRequest_Name, *v.Name)
-	}
-	if v.ProvisionedResourceCleanup != "" {
-		s.WriteString(schemas.UpdateCanaryRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
-	}
-	if v.RunConfig != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_RunConfig)
-		v.RunConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RuntimeVersion != nil {
-		s.WriteString(schemas.UpdateCanaryRequest_RuntimeVersion, *v.RuntimeVersion)
-	}
-	if v.Schedule != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_Schedule)
-		v.Schedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SuccessRetentionPeriodInDays != nil {
-		s.WriteInt32(schemas.UpdateCanaryRequest_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
-	}
-	if v.VisualReference != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_VisualReference)
-		v.VisualReference.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeVisualReferences(s, schemas.UpdateCanaryRequest_VisualReferences, v.VisualReferences)
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.UpdateCanaryRequest_VpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateCanaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -266,21 +199,16 @@ type UpdateCanaryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCanaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCanaryResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCanary, schemas.UpdateCanaryRequest, schemas.UpdateCanaryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCanary{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCanary, schemas.UpdateCanaryRequest, schemas.UpdateCanaryResponse), output: &UpdateCanaryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCanary{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCanary"); err != nil {

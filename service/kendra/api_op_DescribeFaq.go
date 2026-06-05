@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,21 +41,6 @@ type DescribeFaqInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DescribeFaqInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeFaqRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeFaqInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeFaqRequest_Id, *v.Id)
-	}
-	if v.IndexId != nil {
-		s.WriteString(schemas.DescribeFaqRequest_IndexId, *v.IndexId)
-	}
 }
 
 type DescribeFaqOutput struct {
@@ -110,65 +93,16 @@ type DescribeFaqOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFaqOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeFaqResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeFaqResponse_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeFaqResponse_CreatedAt, v.CreatedAt)
-		case schemas.DescribeFaqResponse_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_Description, v.Description)
-		case schemas.DescribeFaqResponse_ErrorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_ErrorMessage, v.ErrorMessage)
-		case schemas.DescribeFaqResponse_FileFormat:
-			var ev string
-			if err := d.ReadString(schemas.DescribeFaqResponse_FileFormat, &ev); err != nil {
-				return err
-			}
-			v.FileFormat = types.FaqFileFormat(ev)
-			return nil
-		case schemas.DescribeFaqResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_Id, v.Id)
-		case schemas.DescribeFaqResponse_IndexId:
-			v.IndexId = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_IndexId, v.IndexId)
-		case schemas.DescribeFaqResponse_LanguageCode:
-			v.LanguageCode = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_LanguageCode, v.LanguageCode)
-		case schemas.DescribeFaqResponse_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_Name, v.Name)
-		case schemas.DescribeFaqResponse_RoleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.DescribeFaqResponse_RoleArn, v.RoleArn)
-		case schemas.DescribeFaqResponse_S3Path:
-			v.S3Path = &types.S3Path{}
-			return v.S3Path.Deserialize(d)
-		case schemas.DescribeFaqResponse_Status:
-			var ev string
-			if err := d.ReadString(schemas.DescribeFaqResponse_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.FaqStatus(ev)
-			return nil
-		case schemas.DescribeFaqResponse_UpdatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.DescribeFaqResponse_UpdatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFaq, schemas.DescribeFaqRequest, schemas.DescribeFaqResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFaq{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFaq, schemas.DescribeFaqRequest, schemas.DescribeFaqResponse), output: &DescribeFaqOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFaq{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFaq"); err != nil {

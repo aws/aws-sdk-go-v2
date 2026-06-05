@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -76,39 +74,6 @@ type ListTimeSeriesDataPointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimeSeriesDataPointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTimeSeriesDataPointsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTimeSeriesDataPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListTimeSeriesDataPointsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EndedAt != nil {
-		s.WriteTime(schemas.ListTimeSeriesDataPointsInput_endedAt, *v.EndedAt)
-	}
-	if v.EntityIdentifier != nil {
-		s.WriteString(schemas.ListTimeSeriesDataPointsInput_entityIdentifier, *v.EntityIdentifier)
-	}
-	if v.EntityType != "" {
-		s.WriteString(schemas.ListTimeSeriesDataPointsInput_entityType, string(v.EntityType))
-	}
-	if v.FormName != nil {
-		s.WriteString(schemas.ListTimeSeriesDataPointsInput_formName, *v.FormName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListTimeSeriesDataPointsInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTimeSeriesDataPointsInput_nextToken, *v.NextToken)
-	}
-	if v.StartedAt != nil {
-		s.WriteTime(schemas.ListTimeSeriesDataPointsInput_startedAt, *v.StartedAt)
-	}
-}
-
 type ListTimeSeriesDataPointsOutput struct {
 
 	// The results of the ListTimeSeriesDataPoints action.
@@ -127,26 +92,16 @@ type ListTimeSeriesDataPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTimeSeriesDataPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTimeSeriesDataPointsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTimeSeriesDataPointsOutput_items:
-			return deserializeTimeSeriesDataPointSummaryFormOutputList(d, schemas.ListTimeSeriesDataPointsOutput_items, &v.Items)
-		case schemas.ListTimeSeriesDataPointsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTimeSeriesDataPointsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTimeSeriesDataPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimeSeriesDataPoints, schemas.ListTimeSeriesDataPointsInput, schemas.ListTimeSeriesDataPointsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTimeSeriesDataPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTimeSeriesDataPoints, schemas.ListTimeSeriesDataPointsInput, schemas.ListTimeSeriesDataPointsOutput), output: &ListTimeSeriesDataPointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTimeSeriesDataPoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTimeSeriesDataPoints"); err != nil {

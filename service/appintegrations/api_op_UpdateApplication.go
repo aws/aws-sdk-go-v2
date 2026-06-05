@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,51 +77,6 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateApplicationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationConfig != nil {
-		s.WriteStruct(schemas.UpdateApplicationRequest_ApplicationConfig)
-		v.ApplicationConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApplicationSourceConfig != nil {
-		s.WriteStruct(schemas.UpdateApplicationRequest_ApplicationSourceConfig)
-		v.ApplicationSourceConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ApplicationType != "" {
-		s.WriteString(schemas.UpdateApplicationRequest_ApplicationType, string(v.ApplicationType))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_Arn, *v.Arn)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_Description, *v.Description)
-	}
-	if v.IframeConfig != nil {
-		s.WriteStruct(schemas.UpdateApplicationRequest_IframeConfig)
-		v.IframeConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.InitializationTimeout != nil {
-		s.WriteInt32(schemas.UpdateApplicationRequest_InitializationTimeout, *v.InitializationTimeout)
-	}
-	if v.IsService != nil {
-		s.WriteBool(schemas.UpdateApplicationRequest_IsService, *v.IsService)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.UpdateApplicationRequest_Name, *v.Name)
-	}
-	serializePermissionList(s, schemas.UpdateApplicationRequest_Permissions, v.Permissions)
-	serializePublicationList(s, schemas.UpdateApplicationRequest_Publications, v.Publications)
-	serializeSubscriptionList(s, schemas.UpdateApplicationRequest_Subscriptions, v.Subscriptions)
-}
-
 type UpdateApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -131,21 +84,16 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {

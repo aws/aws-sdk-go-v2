@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,34 +46,6 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutResourcePolicyInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Policy != nil {
-		s.WriteString(schemas.PutResourcePolicyInput_policy, *v.Policy)
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.PutResourcePolicyInput_resourceArn, *v.ResourceArn)
-	}
-}
-func (v *PutResourcePolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutResourcePolicyInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutResourcePolicyInput_policy:
-			v.Policy = new(string)
-			return d.ReadString(schemas.PutResourcePolicyInput_policy, v.Policy)
-		case schemas.PutResourcePolicyInput_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.PutResourcePolicyInput_resourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
-
 type PutResourcePolicyOutput struct {
 
 	// The ID of the resource policy.
@@ -89,35 +59,16 @@ type PutResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutResourcePolicyOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PolicyId != nil {
-		s.WriteString(schemas.PutResourcePolicyOutput_policyId, *v.PolicyId)
-	}
-}
-func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutResourcePolicyOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutResourcePolicyOutput_policyId:
-			v.PolicyId = new(string)
-			return d.ReadString(schemas.PutResourcePolicyOutput_policyId, v.PolicyId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyInput, schemas.PutResourcePolicyOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutResourcePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyInput, schemas.PutResourcePolicyOutput), output: &PutResourcePolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutResourcePolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutResourcePolicy"); err != nil {

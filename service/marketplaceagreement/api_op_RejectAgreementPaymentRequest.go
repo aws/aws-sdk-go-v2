@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,24 +53,6 @@ type RejectAgreementPaymentRequestInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectAgreementPaymentRequestInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RejectAgreementPaymentRequestInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RejectAgreementPaymentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgreementId != nil {
-		s.WriteString(schemas.RejectAgreementPaymentRequestInput_agreementId, *v.AgreementId)
-	}
-	if v.PaymentRequestId != nil {
-		s.WriteString(schemas.RejectAgreementPaymentRequestInput_paymentRequestId, *v.PaymentRequestId)
-	}
-	if v.RejectionReason != nil {
-		s.WriteString(schemas.RejectAgreementPaymentRequestInput_rejectionReason, *v.RejectionReason)
-	}
-}
-
 type RejectAgreementPaymentRequestOutput struct {
 
 	// The unique identifier of the agreement associated with this payment request.
@@ -111,55 +91,16 @@ type RejectAgreementPaymentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *RejectAgreementPaymentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RejectAgreementPaymentRequestOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RejectAgreementPaymentRequestOutput_agreementId:
-			v.AgreementId = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_agreementId, v.AgreementId)
-		case schemas.RejectAgreementPaymentRequestOutput_chargeAmount:
-			v.ChargeAmount = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_chargeAmount, v.ChargeAmount)
-		case schemas.RejectAgreementPaymentRequestOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.RejectAgreementPaymentRequestOutput_createdAt, v.CreatedAt)
-		case schemas.RejectAgreementPaymentRequestOutput_currencyCode:
-			v.CurrencyCode = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_currencyCode, v.CurrencyCode)
-		case schemas.RejectAgreementPaymentRequestOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_description, v.Description)
-		case schemas.RejectAgreementPaymentRequestOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_name, v.Name)
-		case schemas.RejectAgreementPaymentRequestOutput_paymentRequestId:
-			v.PaymentRequestId = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_paymentRequestId, v.PaymentRequestId)
-		case schemas.RejectAgreementPaymentRequestOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.RejectAgreementPaymentRequestOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PaymentRequestStatus(ev)
-			return nil
-		case schemas.RejectAgreementPaymentRequestOutput_statusMessage:
-			v.StatusMessage = new(string)
-			return d.ReadString(schemas.RejectAgreementPaymentRequestOutput_statusMessage, v.StatusMessage)
-		case schemas.RejectAgreementPaymentRequestOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.RejectAgreementPaymentRequestOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationRejectAgreementPaymentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAgreementPaymentRequest, schemas.RejectAgreementPaymentRequestInput, schemas.RejectAgreementPaymentRequestOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRejectAgreementPaymentRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAgreementPaymentRequest, schemas.RejectAgreementPaymentRequestInput, schemas.RejectAgreementPaymentRequestOutput), output: &RejectAgreementPaymentRequestOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRejectAgreementPaymentRequest{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectAgreementPaymentRequest"); err != nil {

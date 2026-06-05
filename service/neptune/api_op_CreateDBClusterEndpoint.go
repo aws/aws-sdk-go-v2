@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,27 +59,6 @@ type CreateDBClusterEndpointInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
-}
-
-func (v *CreateDBClusterEndpointInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateDBClusterEndpointMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateDBClusterEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterEndpointIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterEndpointMessage_DBClusterEndpointIdentifier, *v.DBClusterEndpointIdentifier)
-	}
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.CreateDBClusterEndpointMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-	if v.EndpointType != nil {
-		s.WriteString(schemas.CreateDBClusterEndpointMessage_EndpointType, *v.EndpointType)
-	}
-	serializeStringList(s, schemas.CreateDBClusterEndpointMessage_ExcludedMembers, v.ExcludedMembers)
-	serializeStringList(s, schemas.CreateDBClusterEndpointMessage_StaticMembers, v.StaticMembers)
-	serializeTagList(s, schemas.CreateDBClusterEndpointMessage_Tags, v.Tags)
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -144,49 +121,16 @@ type CreateDBClusterEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateDBClusterEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateDBClusterEndpointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateDBClusterEndpointOutput_CustomEndpointType:
-			v.CustomEndpointType = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_CustomEndpointType, v.CustomEndpointType)
-		case schemas.CreateDBClusterEndpointOutput_DBClusterEndpointArn:
-			v.DBClusterEndpointArn = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_DBClusterEndpointArn, v.DBClusterEndpointArn)
-		case schemas.CreateDBClusterEndpointOutput_DBClusterEndpointIdentifier:
-			v.DBClusterEndpointIdentifier = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_DBClusterEndpointIdentifier, v.DBClusterEndpointIdentifier)
-		case schemas.CreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier:
-			v.DBClusterEndpointResourceIdentifier = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_DBClusterEndpointResourceIdentifier, v.DBClusterEndpointResourceIdentifier)
-		case schemas.CreateDBClusterEndpointOutput_DBClusterIdentifier:
-			v.DBClusterIdentifier = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_DBClusterIdentifier, v.DBClusterIdentifier)
-		case schemas.CreateDBClusterEndpointOutput_Endpoint:
-			v.Endpoint = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_Endpoint, v.Endpoint)
-		case schemas.CreateDBClusterEndpointOutput_EndpointType:
-			v.EndpointType = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_EndpointType, v.EndpointType)
-		case schemas.CreateDBClusterEndpointOutput_ExcludedMembers:
-			return deserializeStringList(d, schemas.CreateDBClusterEndpointOutput_ExcludedMembers, &v.ExcludedMembers)
-		case schemas.CreateDBClusterEndpointOutput_StaticMembers:
-			return deserializeStringList(d, schemas.CreateDBClusterEndpointOutput_StaticMembers, &v.StaticMembers)
-		case schemas.CreateDBClusterEndpointOutput_Status:
-			v.Status = new(string)
-			return d.ReadString(schemas.CreateDBClusterEndpointOutput_Status, v.Status)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterEndpoint, schemas.CreateDBClusterEndpointMessage, schemas.CreateDBClusterEndpointOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBClusterEndpoint, schemas.CreateDBClusterEndpointMessage, schemas.CreateDBClusterEndpointOutput), output: &CreateDBClusterEndpointOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBClusterEndpoint{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDBClusterEndpoint"); err != nil {

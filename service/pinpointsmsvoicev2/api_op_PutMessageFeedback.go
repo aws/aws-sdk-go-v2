@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,21 +48,6 @@ type PutMessageFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutMessageFeedbackInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutMessageFeedbackRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutMessageFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MessageFeedbackStatus != "" {
-		s.WriteString(schemas.PutMessageFeedbackRequest_MessageFeedbackStatus, string(v.MessageFeedbackStatus))
-	}
-	if v.MessageId != nil {
-		s.WriteString(schemas.PutMessageFeedbackRequest_MessageId, *v.MessageId)
-	}
-}
-
 type PutMessageFeedbackOutput struct {
 
 	// The current status of the message.
@@ -83,31 +66,16 @@ type PutMessageFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutMessageFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutMessageFeedbackResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutMessageFeedbackResult_MessageFeedbackStatus:
-			var ev string
-			if err := d.ReadString(schemas.PutMessageFeedbackResult_MessageFeedbackStatus, &ev); err != nil {
-				return err
-			}
-			v.MessageFeedbackStatus = types.MessageFeedbackStatus(ev)
-			return nil
-		case schemas.PutMessageFeedbackResult_MessageId:
-			v.MessageId = new(string)
-			return d.ReadString(schemas.PutMessageFeedbackResult_MessageId, v.MessageId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutMessageFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMessageFeedback, schemas.PutMessageFeedbackRequest, schemas.PutMessageFeedbackResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutMessageFeedback{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMessageFeedback, schemas.PutMessageFeedbackRequest, schemas.PutMessageFeedbackResult), output: &PutMessageFeedbackOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutMessageFeedback{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMessageFeedback"); err != nil {

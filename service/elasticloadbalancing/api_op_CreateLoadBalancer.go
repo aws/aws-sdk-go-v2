@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -100,26 +98,6 @@ type CreateLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAccessPointInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZones(s, schemas.CreateAccessPointInput_AvailabilityZones, v.AvailabilityZones)
-	serializeListeners(s, schemas.CreateAccessPointInput_Listeners, v.Listeners)
-	if v.LoadBalancerName != nil {
-		s.WriteString(schemas.CreateAccessPointInput_LoadBalancerName, *v.LoadBalancerName)
-	}
-	if v.Scheme != nil {
-		s.WriteString(schemas.CreateAccessPointInput_Scheme, *v.Scheme)
-	}
-	serializeSecurityGroups(s, schemas.CreateAccessPointInput_SecurityGroups, v.SecurityGroups)
-	serializeSubnets(s, schemas.CreateAccessPointInput_Subnets, v.Subnets)
-	serializeTagList(s, schemas.CreateAccessPointInput_Tags, v.Tags)
-}
-
 // Contains the output for CreateLoadBalancer.
 type CreateLoadBalancerOutput struct {
 
@@ -132,24 +110,16 @@ type CreateLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAccessPointOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAccessPointOutput_DNSName:
-			v.DNSName = new(string)
-			return d.ReadString(schemas.CreateAccessPointOutput_DNSName, v.DNSName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancer, schemas.CreateAccessPointInput, schemas.CreateAccessPointOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancer, schemas.CreateAccessPointInput, schemas.CreateAccessPointOutput), output: &CreateLoadBalancerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateLoadBalancer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLoadBalancer"); err != nil {

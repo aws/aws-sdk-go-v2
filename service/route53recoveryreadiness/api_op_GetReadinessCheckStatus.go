@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type GetReadinessCheckStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReadinessCheckStatusInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetReadinessCheckStatusRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetReadinessCheckStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.GetReadinessCheckStatusRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.GetReadinessCheckStatusRequest_NextToken, *v.NextToken)
-	}
-	if v.ReadinessCheckName != nil {
-		s.WriteString(schemas.GetReadinessCheckStatusRequest_ReadinessCheckName, *v.ReadinessCheckName)
-	}
-}
-
 type GetReadinessCheckStatusOutput struct {
 
 	// Top level messages for readiness check status
@@ -86,35 +66,16 @@ type GetReadinessCheckStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetReadinessCheckStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetReadinessCheckStatusResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetReadinessCheckStatusResponse_Messages:
-			return deserialize__listOfMessage(d, schemas.GetReadinessCheckStatusResponse_Messages, &v.Messages)
-		case schemas.GetReadinessCheckStatusResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.GetReadinessCheckStatusResponse_NextToken, v.NextToken)
-		case schemas.GetReadinessCheckStatusResponse_Readiness:
-			var ev string
-			if err := d.ReadString(schemas.GetReadinessCheckStatusResponse_Readiness, &ev); err != nil {
-				return err
-			}
-			v.Readiness = types.Readiness(ev)
-			return nil
-		case schemas.GetReadinessCheckStatusResponse_Resources:
-			return deserialize__listOfResourceResult(d, schemas.GetReadinessCheckStatusResponse_Resources, &v.Resources)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetReadinessCheckStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadinessCheckStatus, schemas.GetReadinessCheckStatusRequest, schemas.GetReadinessCheckStatusResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReadinessCheckStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadinessCheckStatus, schemas.GetReadinessCheckStatusRequest, schemas.GetReadinessCheckStatusResponse), output: &GetReadinessCheckStatusOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReadinessCheckStatus{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReadinessCheckStatus"); err != nil {

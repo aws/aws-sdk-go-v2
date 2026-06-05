@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,32 +62,6 @@ type CreateSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateSessionLoggerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateSessionLoggerRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateSessionLoggerRequest_clientToken, *v.ClientToken)
-	}
-	if v.CustomerManagedKey != nil {
-		s.WriteString(schemas.CreateSessionLoggerRequest_customerManagedKey, *v.CustomerManagedKey)
-	}
-	if v.DisplayName != nil {
-		s.WriteString(schemas.CreateSessionLoggerRequest_displayName, *v.DisplayName)
-	}
-	serializeEventFilter(s, schemas.CreateSessionLoggerRequest_eventFilter, v.EventFilter)
-	if v.LogConfiguration != nil {
-		s.WriteStruct(schemas.CreateSessionLoggerRequest_logConfiguration)
-		v.LogConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeTagList(s, schemas.CreateSessionLoggerRequest_tags, v.Tags)
-}
-
 type CreateSessionLoggerOutput struct {
 
 	// The ARN of the session logger.
@@ -103,24 +75,16 @@ type CreateSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateSessionLoggerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateSessionLoggerResponse_sessionLoggerArn:
-			v.SessionLoggerArn = new(string)
-			return d.ReadString(schemas.CreateSessionLoggerResponse_sessionLoggerArn, v.SessionLoggerArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSessionLogger, schemas.CreateSessionLoggerRequest, schemas.CreateSessionLoggerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSessionLogger, schemas.CreateSessionLoggerRequest, schemas.CreateSessionLoggerResponse), output: &CreateSessionLoggerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSessionLogger"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type DescribeBudgetActionsForBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionsForBudgetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeBudgetActionsForBudgetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeBudgetActionsForBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.DescribeBudgetActionsForBudgetRequest_AccountId, *v.AccountId)
-	}
-	if v.BudgetName != nil {
-		s.WriteString(schemas.DescribeBudgetActionsForBudgetRequest_BudgetName, *v.BudgetName)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.DescribeBudgetActionsForBudgetRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.DescribeBudgetActionsForBudgetRequest_NextToken, *v.NextToken)
-	}
-}
-
 type DescribeBudgetActionsForBudgetOutput struct {
 
 	//  A list of the budget action resources information.
@@ -92,26 +69,16 @@ type DescribeBudgetActionsForBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeBudgetActionsForBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeBudgetActionsForBudgetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeBudgetActionsForBudgetResponse_Actions:
-			return deserializeActions(d, schemas.DescribeBudgetActionsForBudgetResponse_Actions, &v.Actions)
-		case schemas.DescribeBudgetActionsForBudgetResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.DescribeBudgetActionsForBudgetResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeBudgetActionsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionsForBudget, schemas.DescribeBudgetActionsForBudgetRequest, schemas.DescribeBudgetActionsForBudgetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetActionsForBudget{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetActionsForBudget, schemas.DescribeBudgetActionsForBudgetRequest, schemas.DescribeBudgetActionsForBudgetResponse), output: &DescribeBudgetActionsForBudgetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgetActionsForBudget{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetActionsForBudget"); err != nil {

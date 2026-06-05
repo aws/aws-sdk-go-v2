@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetTrafficPolicyInput struct {
 	TrafficPolicyId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetTrafficPolicyInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTrafficPolicyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTrafficPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrafficPolicyId != nil {
-		s.WriteString(schemas.GetTrafficPolicyRequest_TrafficPolicyId, *v.TrafficPolicyId)
-	}
 }
 
 type GetTrafficPolicyOutput struct {
@@ -89,48 +75,16 @@ type GetTrafficPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTrafficPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTrafficPolicyResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTrafficPolicyResponse_CreatedTimestamp:
-			v.CreatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetTrafficPolicyResponse_CreatedTimestamp, v.CreatedTimestamp)
-		case schemas.GetTrafficPolicyResponse_DefaultAction:
-			var ev string
-			if err := d.ReadString(schemas.GetTrafficPolicyResponse_DefaultAction, &ev); err != nil {
-				return err
-			}
-			v.DefaultAction = types.AcceptAction(ev)
-			return nil
-		case schemas.GetTrafficPolicyResponse_LastUpdatedTimestamp:
-			v.LastUpdatedTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetTrafficPolicyResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
-		case schemas.GetTrafficPolicyResponse_MaxMessageSizeBytes:
-			v.MaxMessageSizeBytes = new(int32)
-			return d.ReadInt32(schemas.GetTrafficPolicyResponse_MaxMessageSizeBytes, v.MaxMessageSizeBytes)
-		case schemas.GetTrafficPolicyResponse_PolicyStatements:
-			return deserializePolicyStatementList(d, schemas.GetTrafficPolicyResponse_PolicyStatements, &v.PolicyStatements)
-		case schemas.GetTrafficPolicyResponse_TrafficPolicyArn:
-			v.TrafficPolicyArn = new(string)
-			return d.ReadString(schemas.GetTrafficPolicyResponse_TrafficPolicyArn, v.TrafficPolicyArn)
-		case schemas.GetTrafficPolicyResponse_TrafficPolicyId:
-			v.TrafficPolicyId = new(string)
-			return d.ReadString(schemas.GetTrafficPolicyResponse_TrafficPolicyId, v.TrafficPolicyId)
-		case schemas.GetTrafficPolicyResponse_TrafficPolicyName:
-			v.TrafficPolicyName = new(string)
-			return d.ReadString(schemas.GetTrafficPolicyResponse_TrafficPolicyName, v.TrafficPolicyName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficPolicy, schemas.GetTrafficPolicyRequest, schemas.GetTrafficPolicyResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTrafficPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficPolicy, schemas.GetTrafficPolicyRequest, schemas.GetTrafficPolicyResponse), output: &GetTrafficPolicyOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTrafficPolicy{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrafficPolicy"); err != nil {

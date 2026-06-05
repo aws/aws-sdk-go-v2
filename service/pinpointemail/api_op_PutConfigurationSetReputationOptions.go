@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type PutConfigurationSetReputationOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutConfigurationSetReputationOptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutConfigurationSetReputationOptionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutConfigurationSetReputationOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConfigurationSetName != nil {
-		s.WriteString(schemas.PutConfigurationSetReputationOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
-	}
-	if v.ReputationMetricsEnabled != false {
-		s.WriteBool(schemas.PutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled, v.ReputationMetricsEnabled)
-	}
-}
-
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetReputationOptionsOutput struct {
@@ -70,21 +53,16 @@ type PutConfigurationSetReputationOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutConfigurationSetReputationOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutConfigurationSetReputationOptionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutConfigurationSetReputationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetReputationOptions, schemas.PutConfigurationSetReputationOptionsRequest, schemas.PutConfigurationSetReputationOptionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetReputationOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetReputationOptions, schemas.PutConfigurationSetReputationOptionsRequest, schemas.PutConfigurationSetReputationOptionsResponse), output: &PutConfigurationSetReputationOptionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfigurationSetReputationOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutConfigurationSetReputationOptions"); err != nil {

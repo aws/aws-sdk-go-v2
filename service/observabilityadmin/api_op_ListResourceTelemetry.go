@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,27 +63,6 @@ type ListResourceTelemetryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourceTelemetryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListResourceTelemetryInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListResourceTelemetryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListResourceTelemetryInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListResourceTelemetryInput_NextToken, *v.NextToken)
-	}
-	if v.ResourceIdentifierPrefix != nil {
-		s.WriteString(schemas.ListResourceTelemetryInput_ResourceIdentifierPrefix, *v.ResourceIdentifierPrefix)
-	}
-	serializeTagMapInput(s, schemas.ListResourceTelemetryInput_ResourceTags, v.ResourceTags)
-	serializeResourceTypes(s, schemas.ListResourceTelemetryInput_ResourceTypes, v.ResourceTypes)
-	serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
-}
-
 type ListResourceTelemetryOutput struct {
 
 	//  The token for the next set of items to return. A previous call generates this
@@ -102,26 +79,16 @@ type ListResourceTelemetryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListResourceTelemetryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListResourceTelemetryOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListResourceTelemetryOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListResourceTelemetryOutput_NextToken, v.NextToken)
-		case schemas.ListResourceTelemetryOutput_TelemetryConfigurations:
-			return deserializeTelemetryConfigurations(d, schemas.ListResourceTelemetryOutput_TelemetryConfigurations, &v.TelemetryConfigurations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListResourceTelemetryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTelemetry, schemas.ListResourceTelemetryInput, schemas.ListResourceTelemetryOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceTelemetry{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceTelemetry, schemas.ListResourceTelemetryInput, schemas.ListResourceTelemetryOutput), output: &ListResourceTelemetryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceTelemetry{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceTelemetry"); err != nil {

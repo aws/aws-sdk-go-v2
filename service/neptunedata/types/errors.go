@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,22 +36,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.AccessDeniedException_code, v.Code)
-		case schemas.AccessDeniedException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.AccessDeniedException_detailedMessage, v.DetailedMessage)
-		case schemas.AccessDeniedException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.AccessDeniedException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request is submitted that cannot be processed.
 type BadRequestException struct {
@@ -83,22 +66,6 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BadRequestException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.BadRequestException_code, v.Code)
-		case schemas.BadRequestException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.BadRequestException_detailedMessage, v.DetailedMessage)
-		case schemas.BadRequestException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.BadRequestException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a specified bulk-load job ID cannot be found.
 type BulkLoadIdNotFoundException struct {
@@ -129,22 +96,6 @@ func (e *BulkLoadIdNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BulkLoadIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *BulkLoadIdNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BulkLoadIdNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BulkLoadIdNotFoundException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.BulkLoadIdNotFoundException_code, v.Code)
-		case schemas.BulkLoadIdNotFoundException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.BulkLoadIdNotFoundException_detailedMessage, v.DetailedMessage)
-		case schemas.BulkLoadIdNotFoundException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.BulkLoadIdNotFoundException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a user cancelled a request.
 type CancelledByUserException struct {
@@ -175,22 +126,6 @@ func (e *CancelledByUserException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CancelledByUserException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *CancelledByUserException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelledByUserException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelledByUserException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.CancelledByUserException_code, v.Code)
-		case schemas.CancelledByUserException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.CancelledByUserException_detailedMessage, v.DetailedMessage)
-		case schemas.CancelledByUserException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.CancelledByUserException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request timed out in the client.
 type ClientTimeoutException struct {
@@ -221,22 +156,6 @@ func (e *ClientTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ClientTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClientTimeoutException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClientTimeoutException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ClientTimeoutException_code, v.Code)
-		case schemas.ClientTimeoutException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ClientTimeoutException_detailedMessage, v.DetailedMessage)
-		case schemas.ClientTimeoutException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ClientTimeoutException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request attempts to modify data that is concurrently being
 // modified by another process.
@@ -268,22 +187,6 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConcurrentModificationException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ConcurrentModificationException_code, v.Code)
-		case schemas.ConcurrentModificationException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ConcurrentModificationException_detailedMessage, v.DetailedMessage)
-		case schemas.ConcurrentModificationException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ConcurrentModificationException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a value in a request field did not satisfy required constraints.
 type ConstraintViolationException struct {
@@ -314,22 +217,6 @@ func (e *ConstraintViolationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConstraintViolationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConstraintViolationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConstraintViolationException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ConstraintViolationException_code, v.Code)
-		case schemas.ConstraintViolationException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ConstraintViolationException_detailedMessage, v.DetailedMessage)
-		case schemas.ConstraintViolationException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ConstraintViolationException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request attempts to access an stream that has expired.
 type ExpiredStreamException struct {
@@ -360,22 +247,6 @@ func (e *ExpiredStreamException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExpiredStreamException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ExpiredStreamException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExpiredStreamException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ExpiredStreamException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ExpiredStreamException_code, v.Code)
-		case schemas.ExpiredStreamException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ExpiredStreamException_detailedMessage, v.DetailedMessage)
-		case schemas.ExpiredStreamException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ExpiredStreamException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request fails.
 type FailureByQueryException struct {
@@ -406,22 +277,6 @@ func (e *FailureByQueryException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FailureByQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *FailureByQueryException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FailureByQueryException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FailureByQueryException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.FailureByQueryException_code, v.Code)
-		case schemas.FailureByQueryException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.FailureByQueryException_detailedMessage, v.DetailedMessage)
-		case schemas.FailureByQueryException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.FailureByQueryException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when an argument in a request is not supported.
 type IllegalArgumentException struct {
@@ -452,22 +307,6 @@ func (e *IllegalArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *IllegalArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IllegalArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IllegalArgumentException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.IllegalArgumentException_code, v.Code)
-		case schemas.IllegalArgumentException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.IllegalArgumentException_detailedMessage, v.DetailedMessage)
-		case schemas.IllegalArgumentException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.IllegalArgumentException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the processing of the request failed unexpectedly.
 type InternalFailureException struct {
@@ -498,22 +337,6 @@ func (e *InternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalFailureException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalFailureException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.InternalFailureException_code, v.Code)
-		case schemas.InternalFailureException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.InternalFailureException_detailedMessage, v.DetailedMessage)
-		case schemas.InternalFailureException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.InternalFailureException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when an argument in a request has an invalid value.
 type InvalidArgumentException struct {
@@ -544,22 +367,6 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidArgumentException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_code, v.Code)
-		case schemas.InvalidArgumentException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_detailedMessage, v.DetailedMessage)
-		case schemas.InvalidArgumentException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.InvalidArgumentException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when invalid numerical data is encountered when servicing a request.
 type InvalidNumericDataException struct {
@@ -590,22 +397,6 @@ func (e *InvalidNumericDataException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNumericDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidNumericDataException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidNumericDataException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidNumericDataException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.InvalidNumericDataException_code, v.Code)
-		case schemas.InvalidNumericDataException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.InvalidNumericDataException_detailedMessage, v.DetailedMessage)
-		case schemas.InvalidNumericDataException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.InvalidNumericDataException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a parameter value is not valid.
 type InvalidParameterException struct {
@@ -636,22 +427,6 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InvalidParameterException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.InvalidParameterException_code, v.Code)
-		case schemas.InvalidParameterException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.InvalidParameterException_detailedMessage, v.DetailedMessage)
-		case schemas.InvalidParameterException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.InvalidParameterException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when access is denied to a specified load URL.
 type LoadUrlAccessDeniedException struct {
@@ -682,22 +457,6 @@ func (e *LoadUrlAccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LoadUrlAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *LoadUrlAccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LoadUrlAccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LoadUrlAccessDeniedException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.LoadUrlAccessDeniedException_code, v.Code)
-		case schemas.LoadUrlAccessDeniedException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.LoadUrlAccessDeniedException_detailedMessage, v.DetailedMessage)
-		case schemas.LoadUrlAccessDeniedException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.LoadUrlAccessDeniedException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a query is submitted that is syntactically incorrect or does not
 // pass additional validation.
@@ -729,22 +488,6 @@ func (e *MalformedQueryException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MalformedQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *MalformedQueryException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MalformedQueryException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MalformedQueryException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.MalformedQueryException_code, v.Code)
-		case schemas.MalformedQueryException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.MalformedQueryException_detailedMessage, v.DetailedMessage)
-		case schemas.MalformedQueryException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.MalformedQueryException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request fails because of insufficient memory resources. The
 // request can be retried.
@@ -776,22 +519,6 @@ func (e *MemoryLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MemoryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *MemoryLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MemoryLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MemoryLimitExceededException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.MemoryLimitExceededException_code, v.Code)
-		case schemas.MemoryLimitExceededException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.MemoryLimitExceededException_detailedMessage, v.DetailedMessage)
-		case schemas.MemoryLimitExceededException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.MemoryLimitExceededException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the HTTP method used by a request is not supported by the endpoint
 // being used.
@@ -823,22 +550,6 @@ func (e *MethodNotAllowedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *MethodNotAllowedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MethodNotAllowedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MethodNotAllowedException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.MethodNotAllowedException_code, v.Code)
-		case schemas.MethodNotAllowedException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.MethodNotAllowedException_detailedMessage, v.DetailedMessage)
-		case schemas.MethodNotAllowedException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.MethodNotAllowedException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a required parameter is missing.
 type MissingParameterException struct {
@@ -869,22 +580,6 @@ func (e *MissingParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *MissingParameterException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MissingParameterException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MissingParameterException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.MissingParameterException_code, v.Code)
-		case schemas.MissingParameterException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.MissingParameterException_detailedMessage, v.DetailedMessage)
-		case schemas.MissingParameterException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.MissingParameterException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a specified machine-learning resource could not be found.
 type MLResourceNotFoundException struct {
@@ -915,22 +610,6 @@ func (e *MLResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MLResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *MLResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MLResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MLResourceNotFoundException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.MLResourceNotFoundException_code, v.Code)
-		case schemas.MLResourceNotFoundException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.MLResourceNotFoundException_detailedMessage, v.DetailedMessage)
-		case schemas.MLResourceNotFoundException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.MLResourceNotFoundException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a parsing issue is encountered.
 type ParsingException struct {
@@ -961,22 +640,6 @@ func (e *ParsingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ParsingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ParsingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ParsingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ParsingException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ParsingException_code, v.Code)
-		case schemas.ParsingException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ParsingException_detailedMessage, v.DetailedMessage)
-		case schemas.ParsingException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ParsingException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a precondition for processing a request is not satisfied.
 type PreconditionsFailedException struct {
@@ -1007,22 +670,6 @@ func (e *PreconditionsFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PreconditionsFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *PreconditionsFailedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PreconditionsFailedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PreconditionsFailedException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.PreconditionsFailedException_code, v.Code)
-		case schemas.PreconditionsFailedException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.PreconditionsFailedException_detailedMessage, v.DetailedMessage)
-		case schemas.PreconditionsFailedException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.PreconditionsFailedException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the number of active queries exceeds what the server can process.
 // The query in question can be retried when the system is less busy.
@@ -1054,22 +701,6 @@ func (e *QueryLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *QueryLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryLimitExceededException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.QueryLimitExceededException_code, v.Code)
-		case schemas.QueryLimitExceededException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.QueryLimitExceededException_detailedMessage, v.DetailedMessage)
-		case schemas.QueryLimitExceededException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.QueryLimitExceededException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the size of a query exceeds the system limit.
 type QueryLimitException struct {
@@ -1100,22 +731,6 @@ func (e *QueryLimitException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryLimitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *QueryLimitException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryLimitException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryLimitException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.QueryLimitException_code, v.Code)
-		case schemas.QueryLimitException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.QueryLimitException_detailedMessage, v.DetailedMessage)
-		case schemas.QueryLimitException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.QueryLimitException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the body of a query is too large.
 type QueryTooLargeException struct {
@@ -1146,22 +761,6 @@ func (e *QueryTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *QueryTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *QueryTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.QueryTooLargeException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.QueryTooLargeException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.QueryTooLargeException_code, v.Code)
-		case schemas.QueryTooLargeException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.QueryTooLargeException_detailedMessage, v.DetailedMessage)
-		case schemas.QueryTooLargeException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.QueryTooLargeException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request attempts to write to a read-only resource.
 type ReadOnlyViolationException struct {
@@ -1192,22 +791,6 @@ func (e *ReadOnlyViolationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReadOnlyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ReadOnlyViolationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReadOnlyViolationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReadOnlyViolationException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ReadOnlyViolationException_code, v.Code)
-		case schemas.ReadOnlyViolationException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ReadOnlyViolationException_detailedMessage, v.DetailedMessage)
-		case schemas.ReadOnlyViolationException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ReadOnlyViolationException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when there is a problem accessing Amazon S3.
 type S3Exception struct {
@@ -1238,22 +821,6 @@ func (e *S3Exception) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *S3Exception) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Exception, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Exception_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.S3Exception_code, v.Code)
-		case schemas.S3Exception_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.S3Exception_detailedMessage, v.DetailedMessage)
-		case schemas.S3Exception_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.S3Exception_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the server shuts down while processing a request.
 type ServerShutdownException struct {
@@ -1284,22 +851,6 @@ func (e *ServerShutdownException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerShutdownException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ServerShutdownException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServerShutdownException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServerShutdownException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ServerShutdownException_code, v.Code)
-		case schemas.ServerShutdownException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ServerShutdownException_detailedMessage, v.DetailedMessage)
-		case schemas.ServerShutdownException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ServerShutdownException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when statistics needed to satisfy a request are not available.
 type StatisticsNotAvailableException struct {
@@ -1330,22 +881,6 @@ func (e *StatisticsNotAvailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StatisticsNotAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *StatisticsNotAvailableException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StatisticsNotAvailableException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StatisticsNotAvailableException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.StatisticsNotAvailableException_code, v.Code)
-		case schemas.StatisticsNotAvailableException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.StatisticsNotAvailableException_detailedMessage, v.DetailedMessage)
-		case schemas.StatisticsNotAvailableException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.StatisticsNotAvailableException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when stream records requested by a query cannot be found.
 type StreamRecordsNotFoundException struct {
@@ -1376,22 +911,6 @@ func (e *StreamRecordsNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StreamRecordsNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *StreamRecordsNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StreamRecordsNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StreamRecordsNotFoundException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.StreamRecordsNotFoundException_code, v.Code)
-		case schemas.StreamRecordsNotFoundException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.StreamRecordsNotFoundException_detailedMessage, v.DetailedMessage)
-		case schemas.StreamRecordsNotFoundException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.StreamRecordsNotFoundException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the rate of requests exceeds the maximum throughput. Requests can
 // be retried after encountering this exception.
@@ -1423,22 +942,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ThrottlingException_code, v.Code)
-		case schemas.ThrottlingException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.ThrottlingException_detailedMessage, v.DetailedMessage)
-		case schemas.ThrottlingException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.ThrottlingException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the an operation exceeds the time limit allowed for it.
 type TimeLimitExceededException struct {
@@ -1469,22 +972,6 @@ func (e *TimeLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TimeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *TimeLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TimeLimitExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TimeLimitExceededException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.TimeLimitExceededException_code, v.Code)
-		case schemas.TimeLimitExceededException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.TimeLimitExceededException_detailedMessage, v.DetailedMessage)
-		case schemas.TimeLimitExceededException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.TimeLimitExceededException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when the number of requests being processed exceeds the limit.
 type TooManyRequestsException struct {
@@ -1515,22 +1002,6 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TooManyRequestsException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.TooManyRequestsException_code, v.Code)
-		case schemas.TooManyRequestsException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.TooManyRequestsException_detailedMessage, v.DetailedMessage)
-		case schemas.TooManyRequestsException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.TooManyRequestsException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}
 
 // Raised when a request attempts to initiate an operation that is not supported.
 type UnsupportedOperationException struct {
@@ -1561,19 +1032,3 @@ func (e *UnsupportedOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *UnsupportedOperationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnsupportedOperationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnsupportedOperationException_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.UnsupportedOperationException_code, v.Code)
-		case schemas.UnsupportedOperationException_detailedMessage:
-			v.DetailedMessage = new(string)
-			return d.ReadString(schemas.UnsupportedOperationException_detailedMessage, v.DetailedMessage)
-		case schemas.UnsupportedOperationException_requestId:
-			v.RequestId = new(string)
-			return d.ReadString(schemas.UnsupportedOperationException_requestId, v.RequestId)
-		}
-		return nil
-	})
-}

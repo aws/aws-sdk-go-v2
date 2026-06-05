@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,30 +69,6 @@ type ListServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceQuotasInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListServiceQuotasRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListServiceQuotasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListServiceQuotasRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListServiceQuotasRequest_NextToken, *v.NextToken)
-	}
-	if v.QuotaAppliedAtLevel != "" {
-		s.WriteString(schemas.ListServiceQuotasRequest_QuotaAppliedAtLevel, string(v.QuotaAppliedAtLevel))
-	}
-	if v.QuotaCode != nil {
-		s.WriteString(schemas.ListServiceQuotasRequest_QuotaCode, *v.QuotaCode)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.ListServiceQuotasRequest_ServiceCode, *v.ServiceCode)
-	}
-}
-
 type ListServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -112,26 +86,16 @@ type ListServiceQuotasOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListServiceQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListServiceQuotasResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListServiceQuotasResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListServiceQuotasResponse_NextToken, v.NextToken)
-		case schemas.ListServiceQuotasResponse_Quotas:
-			return deserializeServiceQuotaListDefinition(d, schemas.ListServiceQuotasResponse_Quotas, &v.Quotas)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotas, schemas.ListServiceQuotasRequest, schemas.ListServiceQuotasResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServiceQuotas{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotas, schemas.ListServiceQuotasRequest, schemas.ListServiceQuotasResponse), output: &ListServiceQuotasOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServiceQuotas{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceQuotas"); err != nil {

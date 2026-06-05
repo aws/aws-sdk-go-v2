@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,25 +76,6 @@ type CopyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyDBClusterParameterGroupMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceDBClusterParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CopyDBClusterParameterGroupMessage_SourceDBClusterParameterGroupIdentifier, *v.SourceDBClusterParameterGroupIdentifier)
-	}
-	serializeTagList(s, schemas.CopyDBClusterParameterGroupMessage_Tags, v.Tags)
-	if v.TargetDBClusterParameterGroupDescription != nil {
-		s.WriteString(schemas.CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupDescription, *v.TargetDBClusterParameterGroupDescription)
-	}
-	if v.TargetDBClusterParameterGroupIdentifier != nil {
-		s.WriteString(schemas.CopyDBClusterParameterGroupMessage_TargetDBClusterParameterGroupIdentifier, *v.TargetDBClusterParameterGroupIdentifier)
-	}
-}
-
 type CopyDBClusterParameterGroupOutput struct {
 
 	// Detailed information about a cluster parameter group.
@@ -108,24 +87,16 @@ type CopyDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyDBClusterParameterGroupResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CopyDBClusterParameterGroupResult_DBClusterParameterGroup:
-			v.DBClusterParameterGroup = &types.DBClusterParameterGroup{}
-			return v.DBClusterParameterGroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBClusterParameterGroup, schemas.CopyDBClusterParameterGroupMessage, schemas.CopyDBClusterParameterGroupResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBClusterParameterGroup, schemas.CopyDBClusterParameterGroupMessage, schemas.CopyDBClusterParameterGroupResult), output: &CopyDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyDBClusterParameterGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyDBClusterParameterGroup"); err != nil {

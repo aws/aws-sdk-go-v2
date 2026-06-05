@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,30 +68,6 @@ type CreateEnvironmentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateEnvironmentConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateEnvironmentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplianceFqdn != nil {
-		s.WriteString(schemas.CreateEnvironmentConnectorRequest_applianceFqdn, *v.ApplianceFqdn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateEnvironmentConnectorRequest_clientToken, *v.ClientToken)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.CreateEnvironmentConnectorRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.SecretIdentifier != nil {
-		s.WriteString(schemas.CreateEnvironmentConnectorRequest_secretIdentifier, *v.SecretIdentifier)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.CreateEnvironmentConnectorRequest_type, string(v.Type))
-	}
-}
-
 type CreateEnvironmentConnectorOutput struct {
 
 	// A description of the created connector.
@@ -105,24 +79,16 @@ type CreateEnvironmentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateEnvironmentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateEnvironmentConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateEnvironmentConnectorResponse_connector:
-			v.Connector = &types.Connector{}
-			return v.Connector.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateEnvironmentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentConnector, schemas.CreateEnvironmentConnectorRequest, schemas.CreateEnvironmentConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentConnector, schemas.CreateEnvironmentConnectorRequest, schemas.CreateEnvironmentConnectorResponse), output: &CreateEnvironmentConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironmentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironmentConnector"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,21 +56,6 @@ type AddSourceIdentifierToSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddSourceIdentifierToSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddSourceIdentifierToSubscriptionMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddSourceIdentifierToSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SourceIdentifier != nil {
-		s.WriteString(schemas.AddSourceIdentifierToSubscriptionMessage_SourceIdentifier, *v.SourceIdentifier)
-	}
-	if v.SubscriptionName != nil {
-		s.WriteString(schemas.AddSourceIdentifierToSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
-	}
-}
-
 type AddSourceIdentifierToSubscriptionOutput struct {
 
 	// Contains the results of a successful invocation of the DescribeEventSubscriptions action.
@@ -84,24 +67,16 @@ type AddSourceIdentifierToSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddSourceIdentifierToSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddSourceIdentifierToSubscriptionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddSourceIdentifierToSubscriptionResult_EventSubscription:
-			v.EventSubscription = &types.EventSubscription{}
-			return v.EventSubscription.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddSourceIdentifierToSubscription, schemas.AddSourceIdentifierToSubscriptionMessage, schemas.AddSourceIdentifierToSubscriptionResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAddSourceIdentifierToSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddSourceIdentifierToSubscription, schemas.AddSourceIdentifierToSubscriptionMessage, schemas.AddSourceIdentifierToSubscriptionResult), output: &AddSourceIdentifierToSubscriptionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAddSourceIdentifierToSubscription{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddSourceIdentifierToSubscription"); err != nil {

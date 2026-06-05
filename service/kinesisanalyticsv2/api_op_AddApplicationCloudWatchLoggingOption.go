@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,29 +56,6 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddApplicationCloudWatchLoggingOptionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AddApplicationCloudWatchLoggingOptionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AddApplicationCloudWatchLoggingOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationName != nil {
-		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionRequest_ApplicationName, *v.ApplicationName)
-	}
-	if v.CloudWatchLoggingOption != nil {
-		s.WriteStruct(schemas.AddApplicationCloudWatchLoggingOptionRequest_CloudWatchLoggingOption)
-		v.CloudWatchLoggingOption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConditionalToken != nil {
-		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionRequest_ConditionalToken, *v.ConditionalToken)
-	}
-	if v.CurrentApplicationVersionId != nil {
-		s.WriteInt64(schemas.AddApplicationCloudWatchLoggingOptionRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
-	}
-}
-
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The application's ARN.
@@ -104,32 +79,16 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AddApplicationCloudWatchLoggingOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AddApplicationCloudWatchLoggingOptionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationARN:
-			v.ApplicationARN = new(string)
-			return d.ReadString(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationARN, v.ApplicationARN)
-		case schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId:
-			v.ApplicationVersionId = new(int64)
-			return d.ReadInt64(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, v.ApplicationVersionId)
-		case schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions:
-			return deserializeCloudWatchLoggingOptionDescriptions(d, schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, &v.CloudWatchLoggingOptionDescriptions)
-		case schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId:
-			v.OperationId = new(string)
-			return d.ReadString(schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId, v.OperationId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationCloudWatchLoggingOption, schemas.AddApplicationCloudWatchLoggingOptionRequest, schemas.AddApplicationCloudWatchLoggingOptionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationCloudWatchLoggingOption, schemas.AddApplicationCloudWatchLoggingOptionRequest, schemas.AddApplicationCloudWatchLoggingOptionResponse), output: &AddApplicationCloudWatchLoggingOptionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddApplicationCloudWatchLoggingOption"); err != nil {

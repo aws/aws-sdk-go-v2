@@ -4,7 +4,6 @@ package types
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,16 +32,6 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessDeniedException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // A conflict exception is thrown when you attempt to delete a resource (such as a
 // profile or a capability) that is being used by other resources.
@@ -70,16 +59,6 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ConflictException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ConflictException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // This exception is thrown when an error occurs in the Amazon Web Services B2B
 // Data Interchange service.
@@ -109,19 +88,6 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.InternalServerException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.InternalServerException_message, v.Message)
-		case schemas.InternalServerException_retryAfterSeconds:
-			v.RetryAfterSeconds = new(int32)
-			return d.ReadInt32(schemas.InternalServerException_retryAfterSeconds, v.RetryAfterSeconds)
-		}
-		return nil
-	})
-}
 
 // Occurs when the requested resource does not exist, or cannot be found. In some
 // cases, the resource exists in a region other than the region specified in the
@@ -150,16 +116,6 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceNotFoundException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
-		}
-		return nil
-	})
-}
 
 // Occurs when the calling command attempts to exceed one of the service quotas,
 // for example trying to create a capability when you already have the maximum
@@ -193,28 +149,6 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceQuotaExceededException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
-		case schemas.ServiceQuotaExceededException_quotaCode:
-			v.QuotaCode = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_quotaCode, v.QuotaCode)
-		case schemas.ServiceQuotaExceededException_resourceId:
-			v.ResourceId = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_resourceId, v.ResourceId)
-		case schemas.ServiceQuotaExceededException_resourceType:
-			v.ResourceType = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_resourceType, v.ResourceType)
-		case schemas.ServiceQuotaExceededException_serviceCode:
-			v.ServiceCode = new(string)
-			return d.ReadString(schemas.ServiceQuotaExceededException_serviceCode, v.ServiceCode)
-		}
-		return nil
-	})
-}
 
 // The request was denied due to throttling: the data speed and rendering may be
 // limited depending on various parameters and conditions.
@@ -244,19 +178,6 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ThrottlingException_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ThrottlingException_message, v.Message)
-		case schemas.ThrottlingException_retryAfterSeconds:
-			v.RetryAfterSeconds = new(int32)
-			return d.ReadInt32(schemas.ThrottlingException_retryAfterSeconds, v.RetryAfterSeconds)
-		}
-		return nil
-	})
-}
 
 // Occurs when a B2BI object cannot be validated against a request from another
 // object. This exception can be thrown during standard EDI validation or when
@@ -287,13 +208,3 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ValidationException_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.ValidationException_Message, v.Message)
-		}
-		return nil
-	})
-}

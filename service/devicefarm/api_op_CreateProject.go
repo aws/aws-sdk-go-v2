@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,30 +59,6 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DefaultJobTimeoutMinutes != nil {
-		s.WriteInt32(schemas.CreateProjectRequest_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
-	}
-	serializeEnvironmentVariables(s, schemas.CreateProjectRequest_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.CreateProjectRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateProjectRequest_name, *v.Name)
-	}
-	if v.VpcConfig != nil {
-		s.WriteStruct(schemas.CreateProjectRequest_vpcConfig)
-		v.VpcConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 // Represents the result of a create project request.
 type CreateProjectOutput struct {
 
@@ -97,24 +71,16 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProjectResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProjectResult_project:
-			v.Project = &types.Project{}
-			return v.Project.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResult), output: &CreateProjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProject"); err != nil {

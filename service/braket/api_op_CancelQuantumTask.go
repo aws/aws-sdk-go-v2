@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,34 +42,6 @@ type CancelQuantumTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQuantumTaskInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelQuantumTaskRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CancelQuantumTaskRequest_clientToken, *v.ClientToken)
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.CancelQuantumTaskRequest_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *CancelQuantumTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelQuantumTaskRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelQuantumTaskRequest_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskRequest_clientToken, v.ClientToken)
-		case schemas.CancelQuantumTaskRequest_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskRequest_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
-}
-
 type CancelQuantumTaskOutput struct {
 
 	// The status of the quantum task.
@@ -90,45 +60,16 @@ type CancelQuantumTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQuantumTaskOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelQuantumTaskResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CancellationStatus != "" {
-		s.WriteString(schemas.CancelQuantumTaskResponse_cancellationStatus, string(v.CancellationStatus))
-	}
-	if v.QuantumTaskArn != nil {
-		s.WriteString(schemas.CancelQuantumTaskResponse_quantumTaskArn, *v.QuantumTaskArn)
-	}
-}
-func (v *CancelQuantumTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelQuantumTaskResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelQuantumTaskResponse_cancellationStatus:
-			var ev string
-			if err := d.ReadString(schemas.CancelQuantumTaskResponse_cancellationStatus, &ev); err != nil {
-				return err
-			}
-			v.CancellationStatus = types.CancellationStatus(ev)
-			return nil
-		case schemas.CancelQuantumTaskResponse_quantumTaskArn:
-			v.QuantumTaskArn = new(string)
-			return d.ReadString(schemas.CancelQuantumTaskResponse_quantumTaskArn, v.QuantumTaskArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelQuantumTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuantumTask, schemas.CancelQuantumTaskRequest, schemas.CancelQuantumTaskResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuantumTask, schemas.CancelQuantumTaskRequest, schemas.CancelQuantumTaskResponse), output: &CancelQuantumTaskOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelQuantumTask{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelQuantumTask"); err != nil {

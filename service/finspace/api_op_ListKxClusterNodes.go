@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,27 +48,6 @@ type ListKxClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListKxClusterNodesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListKxClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClusterName != nil {
-		s.WriteString(schemas.ListKxClusterNodesRequest_clusterName, *v.ClusterName)
-	}
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.ListKxClusterNodesRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.MaxResults != 0 {
-		s.WriteInt32(schemas.ListKxClusterNodesRequest_maxResults, v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListKxClusterNodesRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListKxClusterNodesOutput struct {
 
 	// A token that indicates where a results page should begin.
@@ -85,26 +62,16 @@ type ListKxClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListKxClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListKxClusterNodesResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListKxClusterNodesResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListKxClusterNodesResponse_nextToken, v.NextToken)
-		case schemas.ListKxClusterNodesResponse_nodes:
-			return deserializeKxNodeSummaries(d, schemas.ListKxClusterNodesResponse_nodes, &v.Nodes)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListKxClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxClusterNodes, schemas.ListKxClusterNodesRequest, schemas.ListKxClusterNodesResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxClusterNodes{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxClusterNodes, schemas.ListKxClusterNodesRequest, schemas.ListKxClusterNodesResponse), output: &ListKxClusterNodesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxClusterNodes{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxClusterNodes"); err != nil {

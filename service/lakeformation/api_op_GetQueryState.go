@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,18 +40,6 @@ type GetQueryStateInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryStateInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetQueryStateRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetQueryStateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryId != nil {
-		s.WriteString(schemas.GetQueryStateRequest_QueryId, *v.QueryId)
-	}
-}
-
 // A structure for the output.
 type GetQueryStateOutput struct {
 
@@ -81,31 +67,16 @@ type GetQueryStateOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetQueryStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetQueryStateResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetQueryStateResponse_Error:
-			v.Error = new(string)
-			return d.ReadString(schemas.GetQueryStateResponse_Error, v.Error)
-		case schemas.GetQueryStateResponse_State:
-			var ev string
-			if err := d.ReadString(schemas.GetQueryStateResponse_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.QueryStateString(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetQueryStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryState, schemas.GetQueryStateRequest, schemas.GetQueryStateResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryState{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryState, schemas.GetQueryStateRequest, schemas.GetQueryStateResponse), output: &GetQueryStateOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryState{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryState"); err != nil {

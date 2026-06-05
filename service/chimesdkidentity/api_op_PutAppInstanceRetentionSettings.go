@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,23 +43,6 @@ type PutAppInstanceRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAppInstanceRetentionSettingsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutAppInstanceRetentionSettingsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutAppInstanceRetentionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppInstanceArn != nil {
-		s.WriteString(schemas.PutAppInstanceRetentionSettingsRequest_AppInstanceArn, *v.AppInstanceArn)
-	}
-	if v.AppInstanceRetentionSettings != nil {
-		s.WriteStruct(schemas.PutAppInstanceRetentionSettingsRequest_AppInstanceRetentionSettings)
-		v.AppInstanceRetentionSettings.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type PutAppInstanceRetentionSettingsOutput struct {
 
 	// The time in days to retain data. Data type: number.
@@ -76,27 +57,16 @@ type PutAppInstanceRetentionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutAppInstanceRetentionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutAppInstanceRetentionSettingsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutAppInstanceRetentionSettingsResponse_AppInstanceRetentionSettings:
-			v.AppInstanceRetentionSettings = &types.AppInstanceRetentionSettings{}
-			return v.AppInstanceRetentionSettings.Deserialize(d)
-		case schemas.PutAppInstanceRetentionSettingsResponse_InitiateDeletionTimestamp:
-			v.InitiateDeletionTimestamp = new(time.Time)
-			return d.ReadTime(schemas.PutAppInstanceRetentionSettingsResponse_InitiateDeletionTimestamp, v.InitiateDeletionTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppInstanceRetentionSettings, schemas.PutAppInstanceRetentionSettingsRequest, schemas.PutAppInstanceRetentionSettingsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAppInstanceRetentionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppInstanceRetentionSettings, schemas.PutAppInstanceRetentionSettingsRequest, schemas.PutAppInstanceRetentionSettingsResponse), output: &PutAppInstanceRetentionSettingsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAppInstanceRetentionSettings{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAppInstanceRetentionSettings"); err != nil {

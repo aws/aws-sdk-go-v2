@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,27 +71,6 @@ type DescribeCreateCaseOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCreateCaseOptionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeCreateCaseOptionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeCreateCaseOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CategoryCode != nil {
-		s.WriteString(schemas.DescribeCreateCaseOptionsRequest_categoryCode, *v.CategoryCode)
-	}
-	if v.IssueType != nil {
-		s.WriteString(schemas.DescribeCreateCaseOptionsRequest_issueType, *v.IssueType)
-	}
-	if v.Language != nil {
-		s.WriteString(schemas.DescribeCreateCaseOptionsRequest_language, *v.Language)
-	}
-	if v.ServiceCode != nil {
-		s.WriteString(schemas.DescribeCreateCaseOptionsRequest_serviceCode, *v.ServiceCode)
-	}
-}
-
 type DescribeCreateCaseOptionsOutput struct {
 
 	//  A JSON-formatted array that contains the available communication type options,
@@ -115,26 +92,16 @@ type DescribeCreateCaseOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeCreateCaseOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeCreateCaseOptionsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeCreateCaseOptionsResponse_communicationTypes:
-			return deserializeCommunicationTypeOptionsList(d, schemas.DescribeCreateCaseOptionsResponse_communicationTypes, &v.CommunicationTypes)
-		case schemas.DescribeCreateCaseOptionsResponse_languageAvailability:
-			v.LanguageAvailability = new(string)
-			return d.ReadString(schemas.DescribeCreateCaseOptionsResponse_languageAvailability, v.LanguageAvailability)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCreateCaseOptions, schemas.DescribeCreateCaseOptionsRequest, schemas.DescribeCreateCaseOptionsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCreateCaseOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCreateCaseOptions, schemas.DescribeCreateCaseOptionsRequest, schemas.DescribeCreateCaseOptionsResponse), output: &DescribeCreateCaseOptionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCreateCaseOptions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCreateCaseOptions"); err != nil {

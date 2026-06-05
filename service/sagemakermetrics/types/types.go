@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,38 +27,6 @@ type BatchPutMetricsError struct {
 	MetricIndex *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *BatchPutMetricsError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchPutMetricsError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchPutMetricsError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.BatchPutMetricsError_Code, string(v.Code))
-	}
-	if v.MetricIndex != nil {
-		s.WriteInt32(schemas.BatchPutMetricsError_MetricIndex, *v.MetricIndex)
-	}
-}
-func (v *BatchPutMetricsError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchPutMetricsError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchPutMetricsError_Code:
-			var ev string
-			if err := d.ReadString(schemas.BatchPutMetricsError_Code, &ev); err != nil {
-				return err
-			}
-			v.Code = PutMetricsErrorCode(ev)
-			return nil
-		case schemas.BatchPutMetricsError_MetricIndex:
-			v.MetricIndex = new(int32)
-			return d.ReadInt32(schemas.BatchPutMetricsError_MetricIndex, v.MetricIndex)
-		}
-		return nil
-	})
 }
 
 // Specifies a query to retrieve training metrics from SageMaker.
@@ -100,76 +66,6 @@ type MetricQuery struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MetricQuery) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricQuery)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.End != nil {
-		s.WriteInt64(schemas.MetricQuery_End, *v.End)
-	}
-	if v.MetricName != nil {
-		s.WriteString(schemas.MetricQuery_MetricName, *v.MetricName)
-	}
-	if v.MetricStat != "" {
-		s.WriteString(schemas.MetricQuery_MetricStat, string(v.MetricStat))
-	}
-	if v.Period != "" {
-		s.WriteString(schemas.MetricQuery_Period, string(v.Period))
-	}
-	if v.ResourceArn != nil {
-		s.WriteString(schemas.MetricQuery_ResourceArn, *v.ResourceArn)
-	}
-	if v.Start != nil {
-		s.WriteInt64(schemas.MetricQuery_Start, *v.Start)
-	}
-	if v.XAxisType != "" {
-		s.WriteString(schemas.MetricQuery_XAxisType, string(v.XAxisType))
-	}
-}
-func (v *MetricQuery) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricQuery, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricQuery_End:
-			v.End = new(int64)
-			return d.ReadInt64(schemas.MetricQuery_End, v.End)
-		case schemas.MetricQuery_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.MetricQuery_MetricName, v.MetricName)
-		case schemas.MetricQuery_MetricStat:
-			var ev string
-			if err := d.ReadString(schemas.MetricQuery_MetricStat, &ev); err != nil {
-				return err
-			}
-			v.MetricStat = MetricStatistic(ev)
-			return nil
-		case schemas.MetricQuery_Period:
-			var ev string
-			if err := d.ReadString(schemas.MetricQuery_Period, &ev); err != nil {
-				return err
-			}
-			v.Period = Period(ev)
-			return nil
-		case schemas.MetricQuery_ResourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.MetricQuery_ResourceArn, v.ResourceArn)
-		case schemas.MetricQuery_Start:
-			v.Start = new(int64)
-			return d.ReadInt64(schemas.MetricQuery_Start, v.Start)
-		case schemas.MetricQuery_XAxisType:
-			var ev string
-			if err := d.ReadString(schemas.MetricQuery_XAxisType, &ev); err != nil {
-				return err
-			}
-			v.XAxisType = XAxisType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // The result of a query to retrieve training metrics from SageMaker.
 type MetricQueryResult struct {
 
@@ -194,44 +90,6 @@ type MetricQueryResult struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MetricQueryResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MetricQueryResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MetricQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Message != nil {
-		s.WriteString(schemas.MetricQueryResult_Message, *v.Message)
-	}
-	serializeMetricValues(s, schemas.MetricQueryResult_MetricValues, v.MetricValues)
-	if v.Status != "" {
-		s.WriteString(schemas.MetricQueryResult_Status, string(v.Status))
-	}
-	serializeXAxisValues(s, schemas.MetricQueryResult_XAxisValues, v.XAxisValues)
-}
-func (v *MetricQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MetricQueryResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MetricQueryResult_Message:
-			v.Message = new(string)
-			return d.ReadString(schemas.MetricQueryResult_Message, v.Message)
-		case schemas.MetricQueryResult_MetricValues:
-			return deserializeMetricValues(d, schemas.MetricQueryResult_MetricValues, &v.MetricValues)
-		case schemas.MetricQueryResult_Status:
-			var ev string
-			if err := d.ReadString(schemas.MetricQueryResult_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = MetricQueryResultStatus(ev)
-			return nil
-		case schemas.MetricQueryResult_XAxisValues:
-			return deserializeXAxisValues(d, schemas.MetricQueryResult_XAxisValues, &v.XAxisValues)
-		}
-		return nil
-	})
-}
-
 // The raw metric data to associate with the resource.
 type RawMetricData struct {
 
@@ -254,46 +112,6 @@ type RawMetricData struct {
 	Step *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *RawMetricData) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RawMetricData)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RawMetricData) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MetricName != nil {
-		s.WriteString(schemas.RawMetricData_MetricName, *v.MetricName)
-	}
-	if v.Step != nil {
-		s.WriteInt32(schemas.RawMetricData_Step, *v.Step)
-	}
-	if v.Timestamp != nil {
-		s.WriteTime(schemas.RawMetricData_Timestamp, *v.Timestamp)
-	}
-	if v.Value != nil {
-		s.WriteFloat64(schemas.RawMetricData_Value, *v.Value)
-	}
-}
-func (v *RawMetricData) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RawMetricData, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RawMetricData_MetricName:
-			v.MetricName = new(string)
-			return d.ReadString(schemas.RawMetricData_MetricName, v.MetricName)
-		case schemas.RawMetricData_Step:
-			v.Step = new(int32)
-			return d.ReadInt32(schemas.RawMetricData_Step, v.Step)
-		case schemas.RawMetricData_Timestamp:
-			v.Timestamp = new(time.Time)
-			return d.ReadTime(schemas.RawMetricData_Timestamp, v.Timestamp)
-		case schemas.RawMetricData_Value:
-			v.Value = new(float64)
-			return d.ReadFloat64(schemas.RawMetricData_Value, v.Value)
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

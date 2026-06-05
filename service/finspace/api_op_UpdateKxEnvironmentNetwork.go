@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,27 +54,6 @@ type UpdateKxEnvironmentNetworkInput struct {
 	TransitGatewayConfiguration *types.TransitGatewayConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *UpdateKxEnvironmentNetworkInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateKxEnvironmentNetworkRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateKxEnvironmentNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateKxEnvironmentNetworkRequest_clientToken, *v.ClientToken)
-	}
-	serializeCustomDNSConfiguration(s, schemas.UpdateKxEnvironmentNetworkRequest_customDNSConfiguration, v.CustomDNSConfiguration)
-	if v.EnvironmentId != nil {
-		s.WriteString(schemas.UpdateKxEnvironmentNetworkRequest_environmentId, *v.EnvironmentId)
-	}
-	if v.TransitGatewayConfiguration != nil {
-		s.WriteStruct(schemas.UpdateKxEnvironmentNetworkRequest_transitGatewayConfiguration)
-		v.TransitGatewayConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
 }
 
 type UpdateKxEnvironmentNetworkOutput struct {
@@ -139,79 +116,16 @@ type UpdateKxEnvironmentNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateKxEnvironmentNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateKxEnvironmentNetworkResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateKxEnvironmentNetworkResponse_availabilityZoneIds:
-			return deserializeAvailabilityZoneIds(d, schemas.UpdateKxEnvironmentNetworkResponse_availabilityZoneIds, &v.AvailabilityZoneIds)
-		case schemas.UpdateKxEnvironmentNetworkResponse_awsAccountId:
-			v.AwsAccountId = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_awsAccountId, v.AwsAccountId)
-		case schemas.UpdateKxEnvironmentNetworkResponse_creationTimestamp:
-			v.CreationTimestamp = new(time.Time)
-			return d.ReadTime(schemas.UpdateKxEnvironmentNetworkResponse_creationTimestamp, v.CreationTimestamp)
-		case schemas.UpdateKxEnvironmentNetworkResponse_customDNSConfiguration:
-			return deserializeCustomDNSConfiguration(d, schemas.UpdateKxEnvironmentNetworkResponse_customDNSConfiguration, &v.CustomDNSConfiguration)
-		case schemas.UpdateKxEnvironmentNetworkResponse_dedicatedServiceAccountId:
-			v.DedicatedServiceAccountId = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_dedicatedServiceAccountId, v.DedicatedServiceAccountId)
-		case schemas.UpdateKxEnvironmentNetworkResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_description, v.Description)
-		case schemas.UpdateKxEnvironmentNetworkResponse_dnsStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_dnsStatus, &ev); err != nil {
-				return err
-			}
-			v.DnsStatus = types.DnsStatus(ev)
-			return nil
-		case schemas.UpdateKxEnvironmentNetworkResponse_environmentArn:
-			v.EnvironmentArn = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_environmentArn, v.EnvironmentArn)
-		case schemas.UpdateKxEnvironmentNetworkResponse_environmentId:
-			v.EnvironmentId = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_environmentId, v.EnvironmentId)
-		case schemas.UpdateKxEnvironmentNetworkResponse_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_errorMessage, v.ErrorMessage)
-		case schemas.UpdateKxEnvironmentNetworkResponse_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_kmsKeyId, v.KmsKeyId)
-		case schemas.UpdateKxEnvironmentNetworkResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_name, v.Name)
-		case schemas.UpdateKxEnvironmentNetworkResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.EnvironmentStatus(ev)
-			return nil
-		case schemas.UpdateKxEnvironmentNetworkResponse_tgwStatus:
-			var ev string
-			if err := d.ReadString(schemas.UpdateKxEnvironmentNetworkResponse_tgwStatus, &ev); err != nil {
-				return err
-			}
-			v.TgwStatus = types.TgwStatus(ev)
-			return nil
-		case schemas.UpdateKxEnvironmentNetworkResponse_transitGatewayConfiguration:
-			v.TransitGatewayConfiguration = &types.TransitGatewayConfiguration{}
-			return v.TransitGatewayConfiguration.Deserialize(d)
-		case schemas.UpdateKxEnvironmentNetworkResponse_updateTimestamp:
-			v.UpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.UpdateKxEnvironmentNetworkResponse_updateTimestamp, v.UpdateTimestamp)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateKxEnvironmentNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxEnvironmentNetwork, schemas.UpdateKxEnvironmentNetworkRequest, schemas.UpdateKxEnvironmentNetworkResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKxEnvironmentNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKxEnvironmentNetwork, schemas.UpdateKxEnvironmentNetworkRequest, schemas.UpdateKxEnvironmentNetworkResponse), output: &UpdateKxEnvironmentNetworkOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKxEnvironmentNetwork{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateKxEnvironmentNetwork"); err != nil {

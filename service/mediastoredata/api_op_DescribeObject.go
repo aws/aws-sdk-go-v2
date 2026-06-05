@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,18 +38,6 @@ type DescribeObjectInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeObjectInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeObjectRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Path != nil {
-		s.WriteString(schemas.DescribeObjectRequest_Path, *v.Path)
-	}
-}
-
 type DescribeObjectOutput struct {
 
 	// An optional CacheControl header that allows the caller to control the object's
@@ -80,36 +66,16 @@ type DescribeObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeObjectResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeObjectResponse_CacheControl:
-			v.CacheControl = new(string)
-			return d.ReadString(schemas.DescribeObjectResponse_CacheControl, v.CacheControl)
-		case schemas.DescribeObjectResponse_ContentLength:
-			v.ContentLength = new(int64)
-			return d.ReadInt64(schemas.DescribeObjectResponse_ContentLength, v.ContentLength)
-		case schemas.DescribeObjectResponse_ContentType:
-			v.ContentType = new(string)
-			return d.ReadString(schemas.DescribeObjectResponse_ContentType, v.ContentType)
-		case schemas.DescribeObjectResponse_ETag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.DescribeObjectResponse_ETag, v.ETag)
-		case schemas.DescribeObjectResponse_LastModified:
-			v.LastModified = new(time.Time)
-			return d.ReadTime(schemas.DescribeObjectResponse_LastModified, v.LastModified)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObject, schemas.DescribeObjectRequest, schemas.DescribeObjectResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeObject{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObject, schemas.DescribeObjectRequest, schemas.DescribeObjectResponse), output: &DescribeObjectOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeObject{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeObject"); err != nil {

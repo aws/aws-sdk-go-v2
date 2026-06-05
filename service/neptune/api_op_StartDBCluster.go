@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,18 +39,6 @@ type StartDBClusterInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDBClusterInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.StartDBClusterMessage)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *StartDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DBClusterIdentifier != nil {
-		s.WriteString(schemas.StartDBClusterMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
-	}
-}
-
 type StartDBClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune DB cluster.
@@ -66,24 +52,16 @@ type StartDBClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *StartDBClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.StartDBClusterResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.StartDBClusterResult_DBCluster:
-			v.DBCluster = &types.DBCluster{}
-			return v.DBCluster.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationStartDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBCluster, schemas.StartDBClusterMessage, schemas.StartDBClusterResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDBCluster, schemas.StartDBClusterMessage, schemas.StartDBClusterResult), output: &StartDBClusterOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartDBCluster{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDBCluster"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,24 +45,6 @@ type ListInterfaceRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInterfaceRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListInterfaceRelationshipsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListInterfaceRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InterfaceAssetModelId != nil {
-		s.WriteString(schemas.ListInterfaceRelationshipsRequest_interfaceAssetModelId, *v.InterfaceAssetModelId)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListInterfaceRelationshipsRequest_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListInterfaceRelationshipsRequest_nextToken, *v.NextToken)
-	}
-}
-
 type ListInterfaceRelationshipsOutput struct {
 
 	// A list that summarizes each interface relationship.
@@ -82,26 +62,16 @@ type ListInterfaceRelationshipsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListInterfaceRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListInterfaceRelationshipsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListInterfaceRelationshipsResponse_interfaceRelationshipSummaries:
-			return deserializeInterfaceRelationshipSummaries(d, schemas.ListInterfaceRelationshipsResponse_interfaceRelationshipSummaries, &v.InterfaceRelationshipSummaries)
-		case schemas.ListInterfaceRelationshipsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListInterfaceRelationshipsResponse_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListInterfaceRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInterfaceRelationships, schemas.ListInterfaceRelationshipsRequest, schemas.ListInterfaceRelationshipsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInterfaceRelationships{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInterfaceRelationships, schemas.ListInterfaceRelationshipsRequest, schemas.ListInterfaceRelationshipsResponse), output: &ListInterfaceRelationshipsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInterfaceRelationships{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInterfaceRelationships"); err != nil {

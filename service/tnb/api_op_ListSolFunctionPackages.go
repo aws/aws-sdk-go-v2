@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,21 +43,6 @@ type ListSolFunctionPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSolFunctionPackagesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSolFunctionPackagesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSolFunctionPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSolFunctionPackagesInput_maxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSolFunctionPackagesInput_nextToken, *v.NextToken)
-	}
-}
-
 type ListSolFunctionPackagesOutput struct {
 
 	// Function packages. A function package is a .zip file in CSAR (Cloud Service
@@ -80,26 +63,16 @@ type ListSolFunctionPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSolFunctionPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSolFunctionPackagesOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSolFunctionPackagesOutput_functionPackages:
-			return deserializeListSolFunctionPackageResources(d, schemas.ListSolFunctionPackagesOutput_functionPackages, &v.FunctionPackages)
-		case schemas.ListSolFunctionPackagesOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSolFunctionPackagesOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSolFunctionPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolFunctionPackages, schemas.ListSolFunctionPackagesInput, schemas.ListSolFunctionPackagesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSolFunctionPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolFunctionPackages, schemas.ListSolFunctionPackagesInput, schemas.ListSolFunctionPackagesOutput), output: &ListSolFunctionPackagesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSolFunctionPackages{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSolFunctionPackages"); err != nil {

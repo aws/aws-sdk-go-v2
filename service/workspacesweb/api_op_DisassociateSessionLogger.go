@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,18 +36,6 @@ type DisassociateSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisassociateSessionLoggerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisassociateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PortalArn != nil {
-		s.WriteString(schemas.DisassociateSessionLoggerRequest_portalArn, *v.PortalArn)
-	}
-}
-
 type DisassociateSessionLoggerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,21 +43,16 @@ type DisassociateSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisassociateSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisassociateSessionLoggerResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisassociateSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSessionLogger, schemas.DisassociateSessionLoggerRequest, schemas.DisassociateSessionLoggerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSessionLogger, schemas.DisassociateSessionLoggerRequest, schemas.DisassociateSessionLoggerResponse), output: &DisassociateSessionLoggerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateSessionLogger{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateSessionLogger"); err != nil {

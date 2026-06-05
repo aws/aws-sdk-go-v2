@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DeleteAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAgentSpaceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AgentSpaceId != nil {
-		s.WriteString(schemas.DeleteAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
-	}
-}
-
 // Empty output for successful AgentSpace deletion.
 type DeleteAgentSpaceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -60,21 +46,16 @@ type DeleteAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAgentSpaceOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentSpace, schemas.DeleteAgentSpaceInput, schemas.DeleteAgentSpaceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentSpace, schemas.DeleteAgentSpaceInput, schemas.DeleteAgentSpaceOutput), output: &DeleteAgentSpaceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAgentSpace"); err != nil {

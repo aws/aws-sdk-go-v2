@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,23 +48,6 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.UpdateUserRequest_applicationId, *v.ApplicationId)
-	}
-	serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToDelete, v.UserAliasesToDelete)
-	serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToUpdate, v.UserAliasesToUpdate)
-	if v.UserId != nil {
-		s.WriteString(schemas.UpdateUserRequest_userId, *v.UserId)
-	}
-}
-
 type UpdateUserOutput struct {
 
 	// The user aliases that have been to be added to a user id.
@@ -84,27 +65,16 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateUserResponse_userAliasesAdded:
-			return deserializeUserAliases(d, schemas.UpdateUserResponse_userAliasesAdded, &v.UserAliasesAdded)
-		case schemas.UpdateUserResponse_userAliasesDeleted:
-			return deserializeUserAliases(d, schemas.UpdateUserResponse_userAliasesDeleted, &v.UserAliasesDeleted)
-		case schemas.UpdateUserResponse_userAliasesUpdated:
-			return deserializeUserAliases(d, schemas.UpdateUserResponse_userAliasesUpdated, &v.UserAliasesUpdated)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse), output: &UpdateUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUser"); err != nil {

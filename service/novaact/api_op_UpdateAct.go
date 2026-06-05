@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,35 +60,6 @@ type UpdateActInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateActInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateActRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateActInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActId != nil {
-		s.WriteString(schemas.UpdateActRequest_actId, *v.ActId)
-	}
-	if v.Error != nil {
-		s.WriteStruct(schemas.UpdateActRequest_error)
-		v.Error.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.UpdateActRequest_sessionId, *v.SessionId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.UpdateActRequest_status, string(v.Status))
-	}
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.UpdateActRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.UpdateActRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type UpdateActOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -98,21 +67,16 @@ type UpdateActOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateActOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateActResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateActMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAct, schemas.UpdateActRequest, schemas.UpdateActResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAct, schemas.UpdateActRequest, schemas.UpdateActResponse), output: &UpdateActOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAct{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAct"); err != nil {

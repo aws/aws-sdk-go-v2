@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,34 +41,6 @@ type GetScheduleInput struct {
 	GroupName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetScheduleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetScheduleInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GroupName != nil {
-		s.WriteString(schemas.GetScheduleInput_GroupName, *v.GroupName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetScheduleInput_Name, *v.Name)
-	}
-}
-func (v *GetScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetScheduleInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetScheduleInput_GroupName:
-			v.GroupName = new(string)
-			return d.ReadString(schemas.GetScheduleInput_GroupName, v.GroupName)
-		case schemas.GetScheduleInput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetScheduleInput_Name, v.Name)
-		}
-		return nil
-	})
 }
 
 type GetScheduleOutput struct {
@@ -161,131 +131,16 @@ type GetScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetScheduleOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetScheduleOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionAfterCompletion != "" {
-		s.WriteString(schemas.GetScheduleOutput_ActionAfterCompletion, string(v.ActionAfterCompletion))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.GetScheduleOutput_Arn, *v.Arn)
-	}
-	if v.CreationDate != nil {
-		s.WriteTime(schemas.GetScheduleOutput_CreationDate, *v.CreationDate)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.GetScheduleOutput_Description, *v.Description)
-	}
-	if v.EndDate != nil {
-		s.WriteTime(schemas.GetScheduleOutput_EndDate, *v.EndDate)
-	}
-	if v.FlexibleTimeWindow != nil {
-		s.WriteStruct(schemas.GetScheduleOutput_FlexibleTimeWindow)
-		v.FlexibleTimeWindow.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.GroupName != nil {
-		s.WriteString(schemas.GetScheduleOutput_GroupName, *v.GroupName)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.GetScheduleOutput_KmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.LastModificationDate != nil {
-		s.WriteTime(schemas.GetScheduleOutput_LastModificationDate, *v.LastModificationDate)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.GetScheduleOutput_Name, *v.Name)
-	}
-	if v.ScheduleExpression != nil {
-		s.WriteString(schemas.GetScheduleOutput_ScheduleExpression, *v.ScheduleExpression)
-	}
-	if v.ScheduleExpressionTimezone != nil {
-		s.WriteString(schemas.GetScheduleOutput_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
-	}
-	if v.StartDate != nil {
-		s.WriteTime(schemas.GetScheduleOutput_StartDate, *v.StartDate)
-	}
-	if v.State != "" {
-		s.WriteString(schemas.GetScheduleOutput_State, string(v.State))
-	}
-	if v.Target != nil {
-		s.WriteStruct(schemas.GetScheduleOutput_Target)
-		v.Target.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *GetScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetScheduleOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetScheduleOutput_ActionAfterCompletion:
-			var ev string
-			if err := d.ReadString(schemas.GetScheduleOutput_ActionAfterCompletion, &ev); err != nil {
-				return err
-			}
-			v.ActionAfterCompletion = types.ActionAfterCompletion(ev)
-			return nil
-		case schemas.GetScheduleOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_Arn, v.Arn)
-		case schemas.GetScheduleOutput_CreationDate:
-			v.CreationDate = new(time.Time)
-			return d.ReadTime(schemas.GetScheduleOutput_CreationDate, v.CreationDate)
-		case schemas.GetScheduleOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_Description, v.Description)
-		case schemas.GetScheduleOutput_EndDate:
-			v.EndDate = new(time.Time)
-			return d.ReadTime(schemas.GetScheduleOutput_EndDate, v.EndDate)
-		case schemas.GetScheduleOutput_FlexibleTimeWindow:
-			v.FlexibleTimeWindow = &types.FlexibleTimeWindow{}
-			return v.FlexibleTimeWindow.Deserialize(d)
-		case schemas.GetScheduleOutput_GroupName:
-			v.GroupName = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_GroupName, v.GroupName)
-		case schemas.GetScheduleOutput_KmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_KmsKeyArn, v.KmsKeyArn)
-		case schemas.GetScheduleOutput_LastModificationDate:
-			v.LastModificationDate = new(time.Time)
-			return d.ReadTime(schemas.GetScheduleOutput_LastModificationDate, v.LastModificationDate)
-		case schemas.GetScheduleOutput_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_Name, v.Name)
-		case schemas.GetScheduleOutput_ScheduleExpression:
-			v.ScheduleExpression = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_ScheduleExpression, v.ScheduleExpression)
-		case schemas.GetScheduleOutput_ScheduleExpressionTimezone:
-			v.ScheduleExpressionTimezone = new(string)
-			return d.ReadString(schemas.GetScheduleOutput_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
-		case schemas.GetScheduleOutput_StartDate:
-			v.StartDate = new(time.Time)
-			return d.ReadTime(schemas.GetScheduleOutput_StartDate, v.StartDate)
-		case schemas.GetScheduleOutput_State:
-			var ev string
-			if err := d.ReadString(schemas.GetScheduleOutput_State, &ev); err != nil {
-				return err
-			}
-			v.State = types.ScheduleState(ev)
-			return nil
-		case schemas.GetScheduleOutput_Target:
-			v.Target = &types.Target{}
-			return v.Target.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchedule, schemas.GetScheduleInput, schemas.GetScheduleOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchedule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchedule, schemas.GetScheduleInput, schemas.GetScheduleOutput), output: &GetScheduleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSchedule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchedule"); err != nil {

@@ -7,8 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
-	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,18 +45,6 @@ type CancelQueryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQueryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CancelQueryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CancelQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.QueryId != nil {
-		s.WriteString(schemas.CancelQueryRequest_QueryId, *v.QueryId)
-	}
-}
-
 type CancelQueryOutput struct {
 
 	//  A CancellationMessage is returned when a CancelQuery request for the query
@@ -71,24 +57,16 @@ type CancelQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CancelQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CancelQueryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CancelQueryResponse_CancellationMessage:
-			v.CancellationMessage = new(string)
-			return d.ReadString(schemas.CancelQueryResponse_CancellationMessage, v.CancellationMessage)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCancelQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryRequest, schemas.CancelQueryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryRequest, schemas.CancelQueryResponse), output: &CancelQueryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelQuery{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelQuery"); err != nil {

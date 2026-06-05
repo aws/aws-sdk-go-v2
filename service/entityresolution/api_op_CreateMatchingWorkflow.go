@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,37 +79,6 @@ type CreateMatchingWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMatchingWorkflowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateMatchingWorkflowInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateMatchingWorkflowInput_description, *v.Description)
-	}
-	if v.IncrementalRunConfig != nil {
-		s.WriteStruct(schemas.CreateMatchingWorkflowInput_incrementalRunConfig)
-		v.IncrementalRunConfig.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInputSourceConfig(s, schemas.CreateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.CreateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
-	if v.ResolutionTechniques != nil {
-		s.WriteStruct(schemas.CreateMatchingWorkflowInput_resolutionTechniques)
-		v.ResolutionTechniques.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.RoleArn != nil {
-		s.WriteString(schemas.CreateMatchingWorkflowInput_roleArn, *v.RoleArn)
-	}
-	serializeTagMap(s, schemas.CreateMatchingWorkflowInput_tags, v.Tags)
-	if v.WorkflowName != nil {
-		s.WriteString(schemas.CreateMatchingWorkflowInput_workflowName, *v.WorkflowName)
-	}
-}
-
 type CreateMatchingWorkflowOutput struct {
 
 	// A list of InputSource objects, which have the fields InputSourceARN and
@@ -161,43 +128,16 @@ type CreateMatchingWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateMatchingWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateMatchingWorkflowOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateMatchingWorkflowOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateMatchingWorkflowOutput_description, v.Description)
-		case schemas.CreateMatchingWorkflowOutput_incrementalRunConfig:
-			v.IncrementalRunConfig = &types.IncrementalRunConfig{}
-			return v.IncrementalRunConfig.Deserialize(d)
-		case schemas.CreateMatchingWorkflowOutput_inputSourceConfig:
-			return deserializeInputSourceConfig(d, schemas.CreateMatchingWorkflowOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.CreateMatchingWorkflowOutput_outputSourceConfig:
-			return deserializeOutputSourceConfig(d, schemas.CreateMatchingWorkflowOutput_outputSourceConfig, &v.OutputSourceConfig)
-		case schemas.CreateMatchingWorkflowOutput_resolutionTechniques:
-			v.ResolutionTechniques = &types.ResolutionTechniques{}
-			return v.ResolutionTechniques.Deserialize(d)
-		case schemas.CreateMatchingWorkflowOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.CreateMatchingWorkflowOutput_roleArn, v.RoleArn)
-		case schemas.CreateMatchingWorkflowOutput_workflowArn:
-			v.WorkflowArn = new(string)
-			return d.ReadString(schemas.CreateMatchingWorkflowOutput_workflowArn, v.WorkflowArn)
-		case schemas.CreateMatchingWorkflowOutput_workflowName:
-			v.WorkflowName = new(string)
-			return d.ReadString(schemas.CreateMatchingWorkflowOutput_workflowName, v.WorkflowName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateMatchingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchingWorkflow, schemas.CreateMatchingWorkflowInput, schemas.CreateMatchingWorkflowOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchingWorkflow, schemas.CreateMatchingWorkflowInput, schemas.CreateMatchingWorkflowOutput), output: &CreateMatchingWorkflowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMatchingWorkflow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMatchingWorkflow"); err != nil {

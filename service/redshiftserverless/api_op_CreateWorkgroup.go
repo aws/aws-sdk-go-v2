@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -123,54 +121,6 @@ type CreateWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkgroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkgroupRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BaseCapacity != nil {
-		s.WriteInt32(schemas.CreateWorkgroupRequest_baseCapacity, *v.BaseCapacity)
-	}
-	serializeConfigParameterList(s, schemas.CreateWorkgroupRequest_configParameters, v.ConfigParameters)
-	if v.EnhancedVpcRouting != nil {
-		s.WriteBool(schemas.CreateWorkgroupRequest_enhancedVpcRouting, *v.EnhancedVpcRouting)
-	}
-	if v.ExtraComputeForAutomaticOptimization != nil {
-		s.WriteBool(schemas.CreateWorkgroupRequest_extraComputeForAutomaticOptimization, *v.ExtraComputeForAutomaticOptimization)
-	}
-	if v.IpAddressType != nil {
-		s.WriteString(schemas.CreateWorkgroupRequest_ipAddressType, *v.IpAddressType)
-	}
-	if v.MaxCapacity != nil {
-		s.WriteInt32(schemas.CreateWorkgroupRequest_maxCapacity, *v.MaxCapacity)
-	}
-	if v.NamespaceName != nil {
-		s.WriteString(schemas.CreateWorkgroupRequest_namespaceName, *v.NamespaceName)
-	}
-	if v.Port != nil {
-		s.WriteInt32(schemas.CreateWorkgroupRequest_port, *v.Port)
-	}
-	if v.PricePerformanceTarget != nil {
-		s.WriteStruct(schemas.CreateWorkgroupRequest_pricePerformanceTarget)
-		v.PricePerformanceTarget.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PubliclyAccessible != nil {
-		s.WriteBool(schemas.CreateWorkgroupRequest_publiclyAccessible, *v.PubliclyAccessible)
-	}
-	serializeSecurityGroupIdList(s, schemas.CreateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateWorkgroupRequest_subnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateWorkgroupRequest_tags, v.Tags)
-	if v.TrackName != nil {
-		s.WriteString(schemas.CreateWorkgroupRequest_trackName, *v.TrackName)
-	}
-	if v.WorkgroupName != nil {
-		s.WriteString(schemas.CreateWorkgroupRequest_workgroupName, *v.WorkgroupName)
-	}
-}
-
 type CreateWorkgroupOutput struct {
 
 	// The created workgroup object.
@@ -182,24 +132,16 @@ type CreateWorkgroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkgroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkgroupResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkgroupResponse_workgroup:
-			v.Workgroup = &types.Workgroup{}
-			return v.Workgroup.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkgroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkgroup, schemas.CreateWorkgroupRequest, schemas.CreateWorkgroupResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkgroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkgroup, schemas.CreateWorkgroupRequest, schemas.CreateWorkgroupResponse), output: &CreateWorkgroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkgroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkgroup"); err != nil {

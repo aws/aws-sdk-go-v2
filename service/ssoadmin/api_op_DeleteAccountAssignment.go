@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,33 +71,6 @@ type DeleteAccountAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAccountAssignmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteAccountAssignmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteAccountAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InstanceArn != nil {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_InstanceArn, *v.InstanceArn)
-	}
-	if v.PermissionSetArn != nil {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_PermissionSetArn, *v.PermissionSetArn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_PrincipalId, *v.PrincipalId)
-	}
-	if v.PrincipalType != "" {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_PrincipalType, string(v.PrincipalType))
-	}
-	if v.TargetId != nil {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_TargetId, *v.TargetId)
-	}
-	if v.TargetType != "" {
-		s.WriteString(schemas.DeleteAccountAssignmentRequest_TargetType, string(v.TargetType))
-	}
-}
-
 type DeleteAccountAssignmentOutput struct {
 
 	// The status object for the account assignment deletion operation.
@@ -111,24 +82,16 @@ type DeleteAccountAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteAccountAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteAccountAssignmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteAccountAssignmentResponse_AccountAssignmentDeletionStatus:
-			v.AccountAssignmentDeletionStatus = &types.AccountAssignmentOperationStatus{}
-			return v.AccountAssignmentDeletionStatus.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAssignment, schemas.DeleteAccountAssignmentRequest, schemas.DeleteAccountAssignmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccountAssignment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAssignment, schemas.DeleteAccountAssignmentRequest, schemas.DeleteAccountAssignmentResponse), output: &DeleteAccountAssignmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAccountAssignment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAccountAssignment"); err != nil {

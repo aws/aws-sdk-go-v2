@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,22 +54,6 @@ type BatchCreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateUserInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchCreateUserRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.BatchCreateUserRequest_clientToken, *v.ClientToken)
-	}
-	if v.NetworkId != nil {
-		s.WriteString(schemas.BatchCreateUserRequest_networkId, *v.NetworkId)
-	}
-	serializeBatchCreateUserRequestItems(s, schemas.BatchCreateUserRequest_users, v.Users)
-}
-
 type BatchCreateUserOutput struct {
 
 	// A list of user creation attempts that failed, including error details
@@ -91,28 +73,16 @@ type BatchCreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchCreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchCreateUserResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchCreateUserResponse_failed:
-			return deserializeBatchUserErrorResponseItems(d, schemas.BatchCreateUserResponse_failed, &v.Failed)
-		case schemas.BatchCreateUserResponse_message:
-			v.Message = new(string)
-			return d.ReadString(schemas.BatchCreateUserResponse_message, v.Message)
-		case schemas.BatchCreateUserResponse_successful:
-			return deserializeUsers(d, schemas.BatchCreateUserResponse_successful, &v.Successful)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationBatchCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateUser, schemas.BatchCreateUserRequest, schemas.BatchCreateUserResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateUser, schemas.BatchCreateUserRequest, schemas.BatchCreateUserResponse), output: &BatchCreateUserOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateUser{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateUser"); err != nil {

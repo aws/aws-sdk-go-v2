@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,34 +22,6 @@ type AccessControlList struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccessControlList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccessControlList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccessControlList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowsPublicReadAccess != nil {
-		s.WriteBool(schemas.AccessControlList_allowsPublicReadAccess, *v.AllowsPublicReadAccess)
-	}
-	if v.AllowsPublicWriteAccess != nil {
-		s.WriteBool(schemas.AccessControlList_allowsPublicWriteAccess, *v.AllowsPublicWriteAccess)
-	}
-}
-func (v *AccessControlList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccessControlList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccessControlList_allowsPublicReadAccess:
-			v.AllowsPublicReadAccess = new(bool)
-			return d.ReadBool(schemas.AccessControlList_allowsPublicReadAccess, v.AllowsPublicReadAccess)
-		case schemas.AccessControlList_allowsPublicWriteAccess:
-			v.AllowsPublicWriteAccess = new(bool)
-			return d.ReadBool(schemas.AccessControlList_allowsPublicWriteAccess, v.AllowsPublicWriteAccess)
-		}
-		return nil
-	})
-}
-
 // Specifies the details of an account to associate with an Amazon Macie
 // administrator account.
 type AccountDetail struct {
@@ -69,34 +39,6 @@ type AccountDetail struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AccountDetail) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountDetail)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AccountDetail_accountId, *v.AccountId)
-	}
-	if v.Email != nil {
-		s.WriteString(schemas.AccountDetail_email, *v.Email)
-	}
-}
-func (v *AccountDetail) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountDetail, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountDetail_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AccountDetail_accountId, v.AccountId)
-		case schemas.AccountDetail_email:
-			v.Email = new(string)
-			return d.ReadString(schemas.AccountDetail_email, v.Email)
-		}
-		return nil
-	})
-}
-
 // Provides information about the account-level permissions settings that apply to
 // an S3 bucket.
 type AccountLevelPermissions struct {
@@ -106,30 +48,6 @@ type AccountLevelPermissions struct {
 	BlockPublicAccess *BlockPublicAccess
 
 	noSmithyDocumentSerde
-}
-
-func (v *AccountLevelPermissions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AccountLevelPermissions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AccountLevelPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlockPublicAccess != nil {
-		s.WriteStruct(schemas.AccountLevelPermissions_blockPublicAccess)
-		v.BlockPublicAccess.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AccountLevelPermissions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AccountLevelPermissions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AccountLevelPermissions_blockPublicAccess:
-			v.BlockPublicAccess = &BlockPublicAccess{}
-			return v.BlockPublicAccess.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the delegated Amazon Macie administrator account for
@@ -146,38 +64,6 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AdminAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AdminAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AdminAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AdminAccount_accountId, *v.AccountId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AdminAccount_status, string(v.Status))
-	}
-}
-func (v *AdminAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AdminAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AdminAccount_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AdminAccount_accountId, v.AccountId)
-		case schemas.AdminAccount_status:
-			var ev string
-			if err := d.ReadString(schemas.AdminAccount_status, &ev); err != nil {
-				return err
-			}
-			v.Status = AdminStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies the criteria for an allow list. The criteria must specify a regular
 // expression (regex) or an S3 object (s3WordsList). It can't specify both.
 type AllowListCriteria struct {
@@ -190,36 +76,6 @@ type AllowListCriteria struct {
 	S3WordsList *S3WordsList
 
 	noSmithyDocumentSerde
-}
-
-func (v *AllowListCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AllowListCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AllowListCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Regex != nil {
-		s.WriteString(schemas.AllowListCriteria_regex, *v.Regex)
-	}
-	if v.S3WordsList != nil {
-		s.WriteStruct(schemas.AllowListCriteria_s3WordsList)
-		v.S3WordsList.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AllowListCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AllowListCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AllowListCriteria_regex:
-			v.Regex = new(string)
-			return d.ReadString(schemas.AllowListCriteria_regex, v.Regex)
-		case schemas.AllowListCriteria_s3WordsList:
-			v.S3WordsList = &S3WordsList{}
-			return v.S3WordsList.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the current status of an allow list, which indicates
@@ -279,38 +135,6 @@ type AllowListStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AllowListStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AllowListStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AllowListStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.AllowListStatus_code, string(v.Code))
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.AllowListStatus_description, *v.Description)
-	}
-}
-func (v *AllowListStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AllowListStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AllowListStatus_code:
-			var ev string
-			if err := d.ReadString(schemas.AllowListStatus_code, &ev); err != nil {
-				return err
-			}
-			v.Code = AllowListStatusCode(ev)
-			return nil
-		case schemas.AllowListStatus_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AllowListStatus_description, v.Description)
-		}
-		return nil
-	})
-}
-
 // Provides a subset of information about an allow list.
 type AllowListSummary struct {
 
@@ -337,58 +161,6 @@ type AllowListSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AllowListSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AllowListSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AllowListSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.AllowListSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.AllowListSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.AllowListSummary_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.AllowListSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.AllowListSummary_name, *v.Name)
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.AllowListSummary_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *AllowListSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AllowListSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AllowListSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AllowListSummary_arn, v.Arn)
-		case schemas.AllowListSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.AllowListSummary_createdAt, v.CreatedAt)
-		case schemas.AllowListSummary_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.AllowListSummary_description, v.Description)
-		case schemas.AllowListSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.AllowListSummary_id, v.Id)
-		case schemas.AllowListSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.AllowListSummary_name, v.Name)
-		case schemas.AllowListSummary_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.AllowListSummary_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Provides information about an API operation that an entity invoked for an
 // affected resource.
 type ApiCallDetails struct {
@@ -410,46 +182,6 @@ type ApiCallDetails struct {
 	LastSeen *time.Time
 
 	noSmithyDocumentSerde
-}
-
-func (v *ApiCallDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ApiCallDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ApiCallDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Api != nil {
-		s.WriteString(schemas.ApiCallDetails_api, *v.Api)
-	}
-	if v.ApiServiceName != nil {
-		s.WriteString(schemas.ApiCallDetails_apiServiceName, *v.ApiServiceName)
-	}
-	if v.FirstSeen != nil {
-		s.WriteTime(schemas.ApiCallDetails_firstSeen, *v.FirstSeen)
-	}
-	if v.LastSeen != nil {
-		s.WriteTime(schemas.ApiCallDetails_lastSeen, *v.LastSeen)
-	}
-}
-func (v *ApiCallDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ApiCallDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ApiCallDetails_api:
-			v.Api = new(string)
-			return d.ReadString(schemas.ApiCallDetails_api, v.Api)
-		case schemas.ApiCallDetails_apiServiceName:
-			v.ApiServiceName = new(string)
-			return d.ReadString(schemas.ApiCallDetails_apiServiceName, v.ApiServiceName)
-		case schemas.ApiCallDetails_firstSeen:
-			v.FirstSeen = new(time.Time)
-			return d.ReadTime(schemas.ApiCallDetails_firstSeen, v.FirstSeen)
-		case schemas.ApiCallDetails_lastSeen:
-			v.LastSeen = new(time.Time)
-			return d.ReadTime(schemas.ApiCallDetails_lastSeen, v.LastSeen)
-		}
-		return nil
-	})
 }
 
 // Provides information about an identity that performed an action on an affected
@@ -478,54 +210,6 @@ type AssumedRole struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssumedRole) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssumedRole)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssumedRole) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessKeyId != nil {
-		s.WriteString(schemas.AssumedRole_accessKeyId, *v.AccessKeyId)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.AssumedRole_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.AssumedRole_arn, *v.Arn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.AssumedRole_principalId, *v.PrincipalId)
-	}
-	if v.SessionContext != nil {
-		s.WriteStruct(schemas.AssumedRole_sessionContext)
-		v.SessionContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *AssumedRole) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssumedRole, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssumedRole_accessKeyId:
-			v.AccessKeyId = new(string)
-			return d.ReadString(schemas.AssumedRole_accessKeyId, v.AccessKeyId)
-		case schemas.AssumedRole_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AssumedRole_accountId, v.AccountId)
-		case schemas.AssumedRole_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.AssumedRole_arn, v.Arn)
-		case schemas.AssumedRole_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.AssumedRole_principalId, v.PrincipalId)
-		case schemas.AssumedRole_sessionContext:
-			v.SessionContext = &SessionContext{}
-			return v.SessionContext.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides information about the status of automated sensitive data discovery for
 // an Amazon Macie account.
 type AutomatedDiscoveryAccount struct {
@@ -542,38 +226,6 @@ type AutomatedDiscoveryAccount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AutomatedDiscoveryAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutomatedDiscoveryAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutomatedDiscoveryAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AutomatedDiscoveryAccount_accountId, *v.AccountId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AutomatedDiscoveryAccount_status, string(v.Status))
-	}
-}
-func (v *AutomatedDiscoveryAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutomatedDiscoveryAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutomatedDiscoveryAccount_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AutomatedDiscoveryAccount_accountId, v.AccountId)
-		case schemas.AutomatedDiscoveryAccount_status:
-			var ev string
-			if err := d.ReadString(schemas.AutomatedDiscoveryAccount_status, &ev); err != nil {
-				return err
-			}
-			v.Status = AutomatedDiscoveryAccountStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Changes the status of automated sensitive data discovery for an Amazon Macie
 // account.
 type AutomatedDiscoveryAccountUpdate struct {
@@ -588,38 +240,6 @@ type AutomatedDiscoveryAccountUpdate struct {
 	Status AutomatedDiscoveryAccountStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *AutomatedDiscoveryAccountUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutomatedDiscoveryAccountUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutomatedDiscoveryAccountUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AutomatedDiscoveryAccountUpdate_accountId, *v.AccountId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.AutomatedDiscoveryAccountUpdate_status, string(v.Status))
-	}
-}
-func (v *AutomatedDiscoveryAccountUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutomatedDiscoveryAccountUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutomatedDiscoveryAccountUpdate_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AutomatedDiscoveryAccountUpdate_accountId, v.AccountId)
-		case schemas.AutomatedDiscoveryAccountUpdate_status:
-			var ev string
-			if err := d.ReadString(schemas.AutomatedDiscoveryAccountUpdate_status, &ev); err != nil {
-				return err
-			}
-			v.Status = AutomatedDiscoveryAccountStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about a request that failed to change the status of
@@ -639,38 +259,6 @@ type AutomatedDiscoveryAccountUpdateError struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AutomatedDiscoveryAccountUpdateError) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AutomatedDiscoveryAccountUpdateError)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AutomatedDiscoveryAccountUpdateError) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AutomatedDiscoveryAccountUpdateError_accountId, *v.AccountId)
-	}
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.AutomatedDiscoveryAccountUpdateError_errorCode, string(v.ErrorCode))
-	}
-}
-func (v *AutomatedDiscoveryAccountUpdateError) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AutomatedDiscoveryAccountUpdateError, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AutomatedDiscoveryAccountUpdateError_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AutomatedDiscoveryAccountUpdateError_accountId, v.AccountId)
-		case schemas.AutomatedDiscoveryAccountUpdateError_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.AutomatedDiscoveryAccountUpdateError_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = AutomatedDiscoveryAccountUpdateErrorCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about an Amazon Web Services account and entity that
 // performed an action on an affected resource. The action was performed using the
 // credentials for an Amazon Web Services account other than your own account.
@@ -685,34 +273,6 @@ type AwsAccount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AwsAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AwsAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AwsAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.AwsAccount_accountId, *v.AccountId)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.AwsAccount_principalId, *v.PrincipalId)
-	}
-}
-func (v *AwsAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AwsAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AwsAccount_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.AwsAccount_accountId, v.AccountId)
-		case schemas.AwsAccount_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.AwsAccount_principalId, v.PrincipalId)
-		}
-		return nil
-	})
-}
-
 // Provides information about an Amazon Web Service that performed an action on an
 // affected resource.
 type AwsService struct {
@@ -721,28 +281,6 @@ type AwsService struct {
 	InvokedBy *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *AwsService) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AwsService)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AwsService) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InvokedBy != nil {
-		s.WriteString(schemas.AwsService_invokedBy, *v.InvokedBy)
-	}
-}
-func (v *AwsService) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AwsService, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AwsService_invokedBy:
-			v.InvokedBy = new(string)
-			return d.ReadString(schemas.AwsService_invokedBy, v.InvokedBy)
-		}
-		return nil
-	})
 }
 
 // Provides information about a custom data identifier.
@@ -772,58 +310,6 @@ type BatchGetCustomDataIdentifierSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BatchGetCustomDataIdentifierSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BatchGetCustomDataIdentifierSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BatchGetCustomDataIdentifierSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.BatchGetCustomDataIdentifierSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.BatchGetCustomDataIdentifierSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Deleted != nil {
-		s.WriteBool(schemas.BatchGetCustomDataIdentifierSummary_deleted, *v.Deleted)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.BatchGetCustomDataIdentifierSummary_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.BatchGetCustomDataIdentifierSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.BatchGetCustomDataIdentifierSummary_name, *v.Name)
-	}
-}
-func (v *BatchGetCustomDataIdentifierSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BatchGetCustomDataIdentifierSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BatchGetCustomDataIdentifierSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.BatchGetCustomDataIdentifierSummary_arn, v.Arn)
-		case schemas.BatchGetCustomDataIdentifierSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BatchGetCustomDataIdentifierSummary_createdAt, v.CreatedAt)
-		case schemas.BatchGetCustomDataIdentifierSummary_deleted:
-			v.Deleted = new(bool)
-			return d.ReadBool(schemas.BatchGetCustomDataIdentifierSummary_deleted, v.Deleted)
-		case schemas.BatchGetCustomDataIdentifierSummary_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.BatchGetCustomDataIdentifierSummary_description, v.Description)
-		case schemas.BatchGetCustomDataIdentifierSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.BatchGetCustomDataIdentifierSummary_id, v.Id)
-		case schemas.BatchGetCustomDataIdentifierSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.BatchGetCustomDataIdentifierSummary_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Provides information about the block public access settings for an S3 bucket.
 // These settings can apply to a bucket at the account or bucket level. For
 // detailed information about each setting, see [Blocking public access to your Amazon S3 storage]in the Amazon Simple Storage
@@ -849,46 +335,6 @@ type BlockPublicAccess struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BlockPublicAccess) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BlockPublicAccess)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BlockPublicAccess) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlockPublicAcls != nil {
-		s.WriteBool(schemas.BlockPublicAccess_blockPublicAcls, *v.BlockPublicAcls)
-	}
-	if v.BlockPublicPolicy != nil {
-		s.WriteBool(schemas.BlockPublicAccess_blockPublicPolicy, *v.BlockPublicPolicy)
-	}
-	if v.IgnorePublicAcls != nil {
-		s.WriteBool(schemas.BlockPublicAccess_ignorePublicAcls, *v.IgnorePublicAcls)
-	}
-	if v.RestrictPublicBuckets != nil {
-		s.WriteBool(schemas.BlockPublicAccess_restrictPublicBuckets, *v.RestrictPublicBuckets)
-	}
-}
-func (v *BlockPublicAccess) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BlockPublicAccess, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BlockPublicAccess_blockPublicAcls:
-			v.BlockPublicAcls = new(bool)
-			return d.ReadBool(schemas.BlockPublicAccess_blockPublicAcls, v.BlockPublicAcls)
-		case schemas.BlockPublicAccess_blockPublicPolicy:
-			v.BlockPublicPolicy = new(bool)
-			return d.ReadBool(schemas.BlockPublicAccess_blockPublicPolicy, v.BlockPublicPolicy)
-		case schemas.BlockPublicAccess_ignorePublicAcls:
-			v.IgnorePublicAcls = new(bool)
-			return d.ReadBool(schemas.BlockPublicAccess_ignorePublicAcls, v.IgnorePublicAcls)
-		case schemas.BlockPublicAccess_restrictPublicBuckets:
-			v.RestrictPublicBuckets = new(bool)
-			return d.ReadBool(schemas.BlockPublicAccess_restrictPublicBuckets, v.RestrictPublicBuckets)
-		}
-		return nil
-	})
-}
-
 // Provides information about the number of S3 buckets that are publicly
 // accessible due to a combination of permissions settings for each bucket.
 type BucketCountByEffectivePermission struct {
@@ -912,46 +358,6 @@ type BucketCountByEffectivePermission struct {
 	Unknown *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketCountByEffectivePermission) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketCountByEffectivePermission)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketCountByEffectivePermission) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PubliclyAccessible != nil {
-		s.WriteInt64(schemas.BucketCountByEffectivePermission_publiclyAccessible, *v.PubliclyAccessible)
-	}
-	if v.PubliclyReadable != nil {
-		s.WriteInt64(schemas.BucketCountByEffectivePermission_publiclyReadable, *v.PubliclyReadable)
-	}
-	if v.PubliclyWritable != nil {
-		s.WriteInt64(schemas.BucketCountByEffectivePermission_publiclyWritable, *v.PubliclyWritable)
-	}
-	if v.Unknown != nil {
-		s.WriteInt64(schemas.BucketCountByEffectivePermission_unknown, *v.Unknown)
-	}
-}
-func (v *BucketCountByEffectivePermission) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketCountByEffectivePermission, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketCountByEffectivePermission_publiclyAccessible:
-			v.PubliclyAccessible = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEffectivePermission_publiclyAccessible, v.PubliclyAccessible)
-		case schemas.BucketCountByEffectivePermission_publiclyReadable:
-			v.PubliclyReadable = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEffectivePermission_publiclyReadable, v.PubliclyReadable)
-		case schemas.BucketCountByEffectivePermission_publiclyWritable:
-			v.PubliclyWritable = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEffectivePermission_publiclyWritable, v.PubliclyWritable)
-		case schemas.BucketCountByEffectivePermission_unknown:
-			v.Unknown = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEffectivePermission_unknown, v.Unknown)
-		}
-		return nil
-	})
 }
 
 // Provides information about the number of S3 buckets whose settings do or don't
@@ -984,46 +390,6 @@ type BucketCountByEncryptionType struct {
 	Unknown *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketCountByEncryptionType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketCountByEncryptionType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketCountByEncryptionType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsManaged != nil {
-		s.WriteInt64(schemas.BucketCountByEncryptionType_kmsManaged, *v.KmsManaged)
-	}
-	if v.S3Managed != nil {
-		s.WriteInt64(schemas.BucketCountByEncryptionType_s3Managed, *v.S3Managed)
-	}
-	if v.Unencrypted != nil {
-		s.WriteInt64(schemas.BucketCountByEncryptionType_unencrypted, *v.Unencrypted)
-	}
-	if v.Unknown != nil {
-		s.WriteInt64(schemas.BucketCountByEncryptionType_unknown, *v.Unknown)
-	}
-}
-func (v *BucketCountByEncryptionType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketCountByEncryptionType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketCountByEncryptionType_kmsManaged:
-			v.KmsManaged = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEncryptionType_kmsManaged, v.KmsManaged)
-		case schemas.BucketCountByEncryptionType_s3Managed:
-			v.S3Managed = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEncryptionType_s3Managed, v.S3Managed)
-		case schemas.BucketCountByEncryptionType_unencrypted:
-			v.Unencrypted = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEncryptionType_unencrypted, v.Unencrypted)
-		case schemas.BucketCountByEncryptionType_unknown:
-			v.Unknown = new(int64)
-			return d.ReadInt64(schemas.BucketCountByEncryptionType_unknown, v.Unknown)
-		}
-		return nil
-	})
 }
 
 // Provides information about the number of S3 buckets that are or aren't shared
@@ -1059,46 +425,6 @@ type BucketCountBySharedAccessType struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BucketCountBySharedAccessType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketCountBySharedAccessType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketCountBySharedAccessType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.External != nil {
-		s.WriteInt64(schemas.BucketCountBySharedAccessType_external, *v.External)
-	}
-	if v.Internal != nil {
-		s.WriteInt64(schemas.BucketCountBySharedAccessType_internal, *v.Internal)
-	}
-	if v.NotShared != nil {
-		s.WriteInt64(schemas.BucketCountBySharedAccessType_notShared, *v.NotShared)
-	}
-	if v.Unknown != nil {
-		s.WriteInt64(schemas.BucketCountBySharedAccessType_unknown, *v.Unknown)
-	}
-}
-func (v *BucketCountBySharedAccessType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketCountBySharedAccessType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketCountBySharedAccessType_external:
-			v.External = new(int64)
-			return d.ReadInt64(schemas.BucketCountBySharedAccessType_external, v.External)
-		case schemas.BucketCountBySharedAccessType_internal:
-			v.Internal = new(int64)
-			return d.ReadInt64(schemas.BucketCountBySharedAccessType_internal, v.Internal)
-		case schemas.BucketCountBySharedAccessType_notShared:
-			v.NotShared = new(int64)
-			return d.ReadInt64(schemas.BucketCountBySharedAccessType_notShared, v.NotShared)
-		case schemas.BucketCountBySharedAccessType_unknown:
-			v.Unknown = new(int64)
-			return d.ReadInt64(schemas.BucketCountBySharedAccessType_unknown, v.Unknown)
-		}
-		return nil
-	})
-}
-
 // Provides information about the number of S3 buckets whose bucket policies do or
 // don't require server-side encryption of objects when objects are added to the
 // buckets.
@@ -1127,40 +453,6 @@ type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 	Unknown *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketCountPolicyAllowsUnencryptedObjectUploads) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketCountPolicyAllowsUnencryptedObjectUploads) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowsUnencryptedObjectUploads != nil {
-		s.WriteInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_allowsUnencryptedObjectUploads, *v.AllowsUnencryptedObjectUploads)
-	}
-	if v.DeniesUnencryptedObjectUploads != nil {
-		s.WriteInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_deniesUnencryptedObjectUploads, *v.DeniesUnencryptedObjectUploads)
-	}
-	if v.Unknown != nil {
-		s.WriteInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_unknown, *v.Unknown)
-	}
-}
-func (v *BucketCountPolicyAllowsUnencryptedObjectUploads) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketCountPolicyAllowsUnencryptedObjectUploads, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_allowsUnencryptedObjectUploads:
-			v.AllowsUnencryptedObjectUploads = new(int64)
-			return d.ReadInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_allowsUnencryptedObjectUploads, v.AllowsUnencryptedObjectUploads)
-		case schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_deniesUnencryptedObjectUploads:
-			v.DeniesUnencryptedObjectUploads = new(int64)
-			return d.ReadInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_deniesUnencryptedObjectUploads, v.DeniesUnencryptedObjectUploads)
-		case schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_unknown:
-			v.Unknown = new(int64)
-			return d.ReadInt64(schemas.BucketCountPolicyAllowsUnencryptedObjectUploads_unknown, v.Unknown)
-		}
-		return nil
-	})
 }
 
 // Specifies the operator to use in a property-based condition that filters the
@@ -1193,58 +485,6 @@ type BucketCriteriaAdditionalProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BucketCriteriaAdditionalProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketCriteriaAdditionalProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketCriteriaAdditionalProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_eq, v.Eq)
-	if v.Gt != nil {
-		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_gt, *v.Gt)
-	}
-	if v.Gte != nil {
-		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_gte, *v.Gte)
-	}
-	if v.Lt != nil {
-		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_lt, *v.Lt)
-	}
-	if v.Lte != nil {
-		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_lte, *v.Lte)
-	}
-	serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_neq, v.Neq)
-	if v.Prefix != nil {
-		s.WriteString(schemas.BucketCriteriaAdditionalProperties_prefix, *v.Prefix)
-	}
-}
-func (v *BucketCriteriaAdditionalProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketCriteriaAdditionalProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketCriteriaAdditionalProperties_eq:
-			return deserialize__listOf__string(d, schemas.BucketCriteriaAdditionalProperties_eq, &v.Eq)
-		case schemas.BucketCriteriaAdditionalProperties_gt:
-			v.Gt = new(int64)
-			return d.ReadInt64(schemas.BucketCriteriaAdditionalProperties_gt, v.Gt)
-		case schemas.BucketCriteriaAdditionalProperties_gte:
-			v.Gte = new(int64)
-			return d.ReadInt64(schemas.BucketCriteriaAdditionalProperties_gte, v.Gte)
-		case schemas.BucketCriteriaAdditionalProperties_lt:
-			v.Lt = new(int64)
-			return d.ReadInt64(schemas.BucketCriteriaAdditionalProperties_lt, v.Lt)
-		case schemas.BucketCriteriaAdditionalProperties_lte:
-			v.Lte = new(int64)
-			return d.ReadInt64(schemas.BucketCriteriaAdditionalProperties_lte, v.Lte)
-		case schemas.BucketCriteriaAdditionalProperties_neq:
-			return deserialize__listOf__string(d, schemas.BucketCriteriaAdditionalProperties_neq, &v.Neq)
-		case schemas.BucketCriteriaAdditionalProperties_prefix:
-			v.Prefix = new(string)
-			return d.ReadString(schemas.BucketCriteriaAdditionalProperties_prefix, v.Prefix)
-		}
-		return nil
-	})
-}
-
 // Provides information about the bucket-level permissions settings for an S3
 // bucket.
 type BucketLevelPermissions struct {
@@ -1261,46 +501,6 @@ type BucketLevelPermissions struct {
 	BucketPolicy *BucketPolicy
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketLevelPermissions) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketLevelPermissions)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketLevelPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessControlList != nil {
-		s.WriteStruct(schemas.BucketLevelPermissions_accessControlList)
-		v.AccessControlList.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BlockPublicAccess != nil {
-		s.WriteStruct(schemas.BucketLevelPermissions_blockPublicAccess)
-		v.BlockPublicAccess.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BucketPolicy != nil {
-		s.WriteStruct(schemas.BucketLevelPermissions_bucketPolicy)
-		v.BucketPolicy.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BucketLevelPermissions) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketLevelPermissions, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketLevelPermissions_accessControlList:
-			v.AccessControlList = &AccessControlList{}
-			return v.AccessControlList.Deserialize(d)
-		case schemas.BucketLevelPermissions_blockPublicAccess:
-			v.BlockPublicAccess = &BlockPublicAccess{}
-			return v.BlockPublicAccess.Deserialize(d)
-		case schemas.BucketLevelPermissions_bucketPolicy:
-			v.BucketPolicy = &BucketPolicy{}
-			return v.BucketPolicy.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
@@ -1500,211 +700,6 @@ type BucketMetadata struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BucketMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.BucketMetadata_accountId, *v.AccountId)
-	}
-	if v.AllowsUnencryptedObjectUploads != "" {
-		s.WriteString(schemas.BucketMetadata_allowsUnencryptedObjectUploads, string(v.AllowsUnencryptedObjectUploads))
-	}
-	if v.AutomatedDiscoveryMonitoringStatus != "" {
-		s.WriteString(schemas.BucketMetadata_automatedDiscoveryMonitoringStatus, string(v.AutomatedDiscoveryMonitoringStatus))
-	}
-	if v.BucketArn != nil {
-		s.WriteString(schemas.BucketMetadata_bucketArn, *v.BucketArn)
-	}
-	if v.BucketCreatedAt != nil {
-		s.WriteTime(schemas.BucketMetadata_bucketCreatedAt, *v.BucketCreatedAt)
-	}
-	if v.BucketName != nil {
-		s.WriteString(schemas.BucketMetadata_bucketName, *v.BucketName)
-	}
-	if v.ClassifiableObjectCount != nil {
-		s.WriteInt64(schemas.BucketMetadata_classifiableObjectCount, *v.ClassifiableObjectCount)
-	}
-	if v.ClassifiableSizeInBytes != nil {
-		s.WriteInt64(schemas.BucketMetadata_classifiableSizeInBytes, *v.ClassifiableSizeInBytes)
-	}
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.BucketMetadata_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.BucketMetadata_errorMessage, *v.ErrorMessage)
-	}
-	if v.JobDetails != nil {
-		s.WriteStruct(schemas.BucketMetadata_jobDetails)
-		v.JobDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastAutomatedDiscoveryTime != nil {
-		s.WriteTime(schemas.BucketMetadata_lastAutomatedDiscoveryTime, *v.LastAutomatedDiscoveryTime)
-	}
-	if v.LastUpdated != nil {
-		s.WriteTime(schemas.BucketMetadata_lastUpdated, *v.LastUpdated)
-	}
-	if v.ObjectCount != nil {
-		s.WriteInt64(schemas.BucketMetadata_objectCount, *v.ObjectCount)
-	}
-	if v.ObjectCountByEncryptionType != nil {
-		s.WriteStruct(schemas.BucketMetadata_objectCountByEncryptionType)
-		v.ObjectCountByEncryptionType.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PublicAccess != nil {
-		s.WriteStruct(schemas.BucketMetadata_publicAccess)
-		v.PublicAccess.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.BucketMetadata_region, *v.Region)
-	}
-	if v.ReplicationDetails != nil {
-		s.WriteStruct(schemas.BucketMetadata_replicationDetails)
-		v.ReplicationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SensitivityScore != nil {
-		s.WriteInt32(schemas.BucketMetadata_sensitivityScore, *v.SensitivityScore)
-	}
-	if v.ServerSideEncryption != nil {
-		s.WriteStruct(schemas.BucketMetadata_serverSideEncryption)
-		v.ServerSideEncryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SharedAccess != "" {
-		s.WriteString(schemas.BucketMetadata_sharedAccess, string(v.SharedAccess))
-	}
-	if v.SizeInBytes != nil {
-		s.WriteInt64(schemas.BucketMetadata_sizeInBytes, *v.SizeInBytes)
-	}
-	if v.SizeInBytesCompressed != nil {
-		s.WriteInt64(schemas.BucketMetadata_sizeInBytesCompressed, *v.SizeInBytesCompressed)
-	}
-	serialize__listOfKeyValuePair(s, schemas.BucketMetadata_tags, v.Tags)
-	if v.UnclassifiableObjectCount != nil {
-		s.WriteStruct(schemas.BucketMetadata_unclassifiableObjectCount)
-		v.UnclassifiableObjectCount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UnclassifiableObjectSizeInBytes != nil {
-		s.WriteStruct(schemas.BucketMetadata_unclassifiableObjectSizeInBytes)
-		v.UnclassifiableObjectSizeInBytes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Versioning != nil {
-		s.WriteBool(schemas.BucketMetadata_versioning, *v.Versioning)
-	}
-}
-func (v *BucketMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketMetadata_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.BucketMetadata_accountId, v.AccountId)
-		case schemas.BucketMetadata_allowsUnencryptedObjectUploads:
-			var ev string
-			if err := d.ReadString(schemas.BucketMetadata_allowsUnencryptedObjectUploads, &ev); err != nil {
-				return err
-			}
-			v.AllowsUnencryptedObjectUploads = AllowsUnencryptedObjectUploads(ev)
-			return nil
-		case schemas.BucketMetadata_automatedDiscoveryMonitoringStatus:
-			var ev string
-			if err := d.ReadString(schemas.BucketMetadata_automatedDiscoveryMonitoringStatus, &ev); err != nil {
-				return err
-			}
-			v.AutomatedDiscoveryMonitoringStatus = AutomatedDiscoveryMonitoringStatus(ev)
-			return nil
-		case schemas.BucketMetadata_bucketArn:
-			v.BucketArn = new(string)
-			return d.ReadString(schemas.BucketMetadata_bucketArn, v.BucketArn)
-		case schemas.BucketMetadata_bucketCreatedAt:
-			v.BucketCreatedAt = new(time.Time)
-			return d.ReadTime(schemas.BucketMetadata_bucketCreatedAt, v.BucketCreatedAt)
-		case schemas.BucketMetadata_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.BucketMetadata_bucketName, v.BucketName)
-		case schemas.BucketMetadata_classifiableObjectCount:
-			v.ClassifiableObjectCount = new(int64)
-			return d.ReadInt64(schemas.BucketMetadata_classifiableObjectCount, v.ClassifiableObjectCount)
-		case schemas.BucketMetadata_classifiableSizeInBytes:
-			v.ClassifiableSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.BucketMetadata_classifiableSizeInBytes, v.ClassifiableSizeInBytes)
-		case schemas.BucketMetadata_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.BucketMetadata_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BucketMetadataErrorCode(ev)
-			return nil
-		case schemas.BucketMetadata_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.BucketMetadata_errorMessage, v.ErrorMessage)
-		case schemas.BucketMetadata_jobDetails:
-			v.JobDetails = &JobDetails{}
-			return v.JobDetails.Deserialize(d)
-		case schemas.BucketMetadata_lastAutomatedDiscoveryTime:
-			v.LastAutomatedDiscoveryTime = new(time.Time)
-			return d.ReadTime(schemas.BucketMetadata_lastAutomatedDiscoveryTime, v.LastAutomatedDiscoveryTime)
-		case schemas.BucketMetadata_lastUpdated:
-			v.LastUpdated = new(time.Time)
-			return d.ReadTime(schemas.BucketMetadata_lastUpdated, v.LastUpdated)
-		case schemas.BucketMetadata_objectCount:
-			v.ObjectCount = new(int64)
-			return d.ReadInt64(schemas.BucketMetadata_objectCount, v.ObjectCount)
-		case schemas.BucketMetadata_objectCountByEncryptionType:
-			v.ObjectCountByEncryptionType = &ObjectCountByEncryptionType{}
-			return v.ObjectCountByEncryptionType.Deserialize(d)
-		case schemas.BucketMetadata_publicAccess:
-			v.PublicAccess = &BucketPublicAccess{}
-			return v.PublicAccess.Deserialize(d)
-		case schemas.BucketMetadata_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.BucketMetadata_region, v.Region)
-		case schemas.BucketMetadata_replicationDetails:
-			v.ReplicationDetails = &ReplicationDetails{}
-			return v.ReplicationDetails.Deserialize(d)
-		case schemas.BucketMetadata_sensitivityScore:
-			v.SensitivityScore = new(int32)
-			return d.ReadInt32(schemas.BucketMetadata_sensitivityScore, v.SensitivityScore)
-		case schemas.BucketMetadata_serverSideEncryption:
-			v.ServerSideEncryption = &BucketServerSideEncryption{}
-			return v.ServerSideEncryption.Deserialize(d)
-		case schemas.BucketMetadata_sharedAccess:
-			var ev string
-			if err := d.ReadString(schemas.BucketMetadata_sharedAccess, &ev); err != nil {
-				return err
-			}
-			v.SharedAccess = SharedAccess(ev)
-			return nil
-		case schemas.BucketMetadata_sizeInBytes:
-			v.SizeInBytes = new(int64)
-			return d.ReadInt64(schemas.BucketMetadata_sizeInBytes, v.SizeInBytes)
-		case schemas.BucketMetadata_sizeInBytesCompressed:
-			v.SizeInBytesCompressed = new(int64)
-			return d.ReadInt64(schemas.BucketMetadata_sizeInBytesCompressed, v.SizeInBytesCompressed)
-		case schemas.BucketMetadata_tags:
-			return deserialize__listOfKeyValuePair(d, schemas.BucketMetadata_tags, &v.Tags)
-		case schemas.BucketMetadata_unclassifiableObjectCount:
-			v.UnclassifiableObjectCount = &ObjectLevelStatistics{}
-			return v.UnclassifiableObjectCount.Deserialize(d)
-		case schemas.BucketMetadata_unclassifiableObjectSizeInBytes:
-			v.UnclassifiableObjectSizeInBytes = &ObjectLevelStatistics{}
-			return v.UnclassifiableObjectSizeInBytes.Deserialize(d)
-		case schemas.BucketMetadata_versioning:
-			v.Versioning = new(bool)
-			return d.ReadBool(schemas.BucketMetadata_versioning, v.Versioning)
-		}
-		return nil
-	})
-}
-
 // Provides information about the account-level and bucket-level permissions
 // settings for an S3 bucket.
 type BucketPermissionConfiguration struct {
@@ -1716,38 +711,6 @@ type BucketPermissionConfiguration struct {
 	BucketLevelPermissions *BucketLevelPermissions
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketPermissionConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketPermissionConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketPermissionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountLevelPermissions != nil {
-		s.WriteStruct(schemas.BucketPermissionConfiguration_accountLevelPermissions)
-		v.AccountLevelPermissions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.BucketLevelPermissions != nil {
-		s.WriteStruct(schemas.BucketPermissionConfiguration_bucketLevelPermissions)
-		v.BucketLevelPermissions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BucketPermissionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketPermissionConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketPermissionConfiguration_accountLevelPermissions:
-			v.AccountLevelPermissions = &AccountLevelPermissions{}
-			return v.AccountLevelPermissions.Deserialize(d)
-		case schemas.BucketPermissionConfiguration_bucketLevelPermissions:
-			v.BucketLevelPermissions = &BucketLevelPermissions{}
-			return v.BucketLevelPermissions.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the permissions settings of the bucket policy for an
@@ -1763,34 +726,6 @@ type BucketPolicy struct {
 	AllowsPublicWriteAccess *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketPolicy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketPolicy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowsPublicReadAccess != nil {
-		s.WriteBool(schemas.BucketPolicy_allowsPublicReadAccess, *v.AllowsPublicReadAccess)
-	}
-	if v.AllowsPublicWriteAccess != nil {
-		s.WriteBool(schemas.BucketPolicy_allowsPublicWriteAccess, *v.AllowsPublicWriteAccess)
-	}
-}
-func (v *BucketPolicy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketPolicy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketPolicy_allowsPublicReadAccess:
-			v.AllowsPublicReadAccess = new(bool)
-			return d.ReadBool(schemas.BucketPolicy_allowsPublicReadAccess, v.AllowsPublicReadAccess)
-		case schemas.BucketPolicy_allowsPublicWriteAccess:
-			v.AllowsPublicWriteAccess = new(bool)
-			return d.ReadBool(schemas.BucketPolicy_allowsPublicWriteAccess, v.AllowsPublicWriteAccess)
-		}
-		return nil
-	})
 }
 
 // Provides information about the permissions settings that determine whether an
@@ -1812,40 +747,6 @@ type BucketPublicAccess struct {
 	PermissionConfiguration *BucketPermissionConfiguration
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketPublicAccess) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketPublicAccess)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketPublicAccess) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EffectivePermission != "" {
-		s.WriteString(schemas.BucketPublicAccess_effectivePermission, string(v.EffectivePermission))
-	}
-	if v.PermissionConfiguration != nil {
-		s.WriteStruct(schemas.BucketPublicAccess_permissionConfiguration)
-		v.PermissionConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BucketPublicAccess) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketPublicAccess, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketPublicAccess_effectivePermission:
-			var ev string
-			if err := d.ReadString(schemas.BucketPublicAccess_effectivePermission, &ev); err != nil {
-				return err
-			}
-			v.EffectivePermission = EffectivePermission(ev)
-			return nil
-		case schemas.BucketPublicAccess_permissionConfiguration:
-			v.PermissionConfiguration = &BucketPermissionConfiguration{}
-			return v.PermissionConfiguration.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the default server-side encryption settings for an
@@ -1882,38 +783,6 @@ type BucketServerSideEncryption struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BucketServerSideEncryption) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketServerSideEncryption)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketServerSideEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsMasterKeyId != nil {
-		s.WriteString(schemas.BucketServerSideEncryption_kmsMasterKeyId, *v.KmsMasterKeyId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.BucketServerSideEncryption_type, string(v.Type))
-	}
-}
-func (v *BucketServerSideEncryption) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketServerSideEncryption, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketServerSideEncryption_kmsMasterKeyId:
-			v.KmsMasterKeyId = new(string)
-			return d.ReadString(schemas.BucketServerSideEncryption_kmsMasterKeyId, v.KmsMasterKeyId)
-		case schemas.BucketServerSideEncryption_type:
-			var ev string
-			if err := d.ReadString(schemas.BucketServerSideEncryption_type, &ev); err != nil {
-				return err
-			}
-			v.Type = Type(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a query for information about S3
 // buckets.
 type BucketSortCriteria struct {
@@ -1930,38 +799,6 @@ type BucketSortCriteria struct {
 	OrderBy OrderBy
 
 	noSmithyDocumentSerde
-}
-
-func (v *BucketSortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketSortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketSortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.BucketSortCriteria_attributeName, *v.AttributeName)
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.BucketSortCriteria_orderBy, string(v.OrderBy))
-	}
-}
-func (v *BucketSortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketSortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketSortCriteria_attributeName:
-			v.AttributeName = new(string)
-			return d.ReadString(schemas.BucketSortCriteria_attributeName, v.AttributeName)
-		case schemas.BucketSortCriteria_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.BucketSortCriteria_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides aggregated statistical data for sensitive data discovery metrics that
@@ -1989,54 +826,6 @@ type BucketStatisticsBySensitivity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *BucketStatisticsBySensitivity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.BucketStatisticsBySensitivity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *BucketStatisticsBySensitivity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClassificationError != nil {
-		s.WriteStruct(schemas.BucketStatisticsBySensitivity_classificationError)
-		v.ClassificationError.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NotClassified != nil {
-		s.WriteStruct(schemas.BucketStatisticsBySensitivity_notClassified)
-		v.NotClassified.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.NotSensitive != nil {
-		s.WriteStruct(schemas.BucketStatisticsBySensitivity_notSensitive)
-		v.NotSensitive.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Sensitive != nil {
-		s.WriteStruct(schemas.BucketStatisticsBySensitivity_sensitive)
-		v.Sensitive.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *BucketStatisticsBySensitivity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.BucketStatisticsBySensitivity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.BucketStatisticsBySensitivity_classificationError:
-			v.ClassificationError = &SensitivityAggregations{}
-			return v.ClassificationError.Deserialize(d)
-		case schemas.BucketStatisticsBySensitivity_notClassified:
-			v.NotClassified = &SensitivityAggregations{}
-			return v.NotClassified.Deserialize(d)
-		case schemas.BucketStatisticsBySensitivity_notSensitive:
-			v.NotSensitive = &SensitivityAggregations{}
-			return v.NotSensitive.Deserialize(d)
-		case schemas.BucketStatisticsBySensitivity_sensitive:
-			v.Sensitive = &SensitivityAggregations{}
-			return v.Sensitive.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies the location of an occurrence of sensitive data in a Microsoft Excel
 // workbook, CSV file, or TSV file.
 type Cell struct {
@@ -2058,46 +847,6 @@ type Cell struct {
 	Row *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Cell) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Cell)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Cell) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellReference != nil {
-		s.WriteString(schemas.Cell_cellReference, *v.CellReference)
-	}
-	if v.Column != nil {
-		s.WriteInt64(schemas.Cell_column, *v.Column)
-	}
-	if v.ColumnName != nil {
-		s.WriteString(schemas.Cell_columnName, *v.ColumnName)
-	}
-	if v.Row != nil {
-		s.WriteInt64(schemas.Cell_row, *v.Row)
-	}
-}
-func (v *Cell) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Cell, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Cell_cellReference:
-			v.CellReference = new(string)
-			return d.ReadString(schemas.Cell_cellReference, v.CellReference)
-		case schemas.Cell_column:
-			v.Column = new(int64)
-			return d.ReadInt64(schemas.Cell_column, v.Column)
-		case schemas.Cell_columnName:
-			v.ColumnName = new(string)
-			return d.ReadString(schemas.Cell_columnName, v.ColumnName)
-		case schemas.Cell_row:
-			v.Row = new(int64)
-			return d.ReadInt64(schemas.Cell_row, v.Row)
-		}
-		return nil
-	})
 }
 
 // Provides information about a sensitive data finding and the details of the
@@ -2131,58 +880,6 @@ type ClassificationDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ClassificationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClassificationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClassificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DetailedResultsLocation != nil {
-		s.WriteString(schemas.ClassificationDetails_detailedResultsLocation, *v.DetailedResultsLocation)
-	}
-	if v.JobArn != nil {
-		s.WriteString(schemas.ClassificationDetails_jobArn, *v.JobArn)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.ClassificationDetails_jobId, *v.JobId)
-	}
-	if v.OriginType != "" {
-		s.WriteString(schemas.ClassificationDetails_originType, string(v.OriginType))
-	}
-	if v.Result != nil {
-		s.WriteStruct(schemas.ClassificationDetails_result)
-		v.Result.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ClassificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClassificationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClassificationDetails_detailedResultsLocation:
-			v.DetailedResultsLocation = new(string)
-			return d.ReadString(schemas.ClassificationDetails_detailedResultsLocation, v.DetailedResultsLocation)
-		case schemas.ClassificationDetails_jobArn:
-			v.JobArn = new(string)
-			return d.ReadString(schemas.ClassificationDetails_jobArn, v.JobArn)
-		case schemas.ClassificationDetails_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.ClassificationDetails_jobId, v.JobId)
-		case schemas.ClassificationDetails_originType:
-			var ev string
-			if err := d.ReadString(schemas.ClassificationDetails_originType, &ev); err != nil {
-				return err
-			}
-			v.OriginType = OriginType(ev)
-			return nil
-		case schemas.ClassificationDetails_result:
-			v.Result = &ClassificationResult{}
-			return v.Result.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies where to store data classification results, and the encryption
 // settings to use when storing results in that location. The location must be an
 // S3 general purpose bucket.
@@ -2193,30 +890,6 @@ type ClassificationExportConfiguration struct {
 	S3Destination *S3Destination
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClassificationExportConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClassificationExportConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClassificationExportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Destination != nil {
-		s.WriteStruct(schemas.ClassificationExportConfiguration_s3Destination)
-		v.S3Destination.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ClassificationExportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClassificationExportConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClassificationExportConfiguration_s3Destination:
-			v.S3Destination = &S3Destination{}
-			return v.S3Destination.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides the details of a sensitive data finding, including the types, number
@@ -2253,59 +926,6 @@ type ClassificationResult struct {
 	Status *ClassificationResultStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *ClassificationResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClassificationResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClassificationResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AdditionalOccurrences != nil {
-		s.WriteBool(schemas.ClassificationResult_additionalOccurrences, *v.AdditionalOccurrences)
-	}
-	if v.CustomDataIdentifiers != nil {
-		s.WriteStruct(schemas.ClassificationResult_customDataIdentifiers)
-		v.CustomDataIdentifiers.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MimeType != nil {
-		s.WriteString(schemas.ClassificationResult_mimeType, *v.MimeType)
-	}
-	serializeSensitiveData(s, schemas.ClassificationResult_sensitiveData, v.SensitiveData)
-	if v.SizeClassified != nil {
-		s.WriteInt64(schemas.ClassificationResult_sizeClassified, *v.SizeClassified)
-	}
-	if v.Status != nil {
-		s.WriteStruct(schemas.ClassificationResult_status)
-		v.Status.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ClassificationResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClassificationResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClassificationResult_additionalOccurrences:
-			v.AdditionalOccurrences = new(bool)
-			return d.ReadBool(schemas.ClassificationResult_additionalOccurrences, v.AdditionalOccurrences)
-		case schemas.ClassificationResult_customDataIdentifiers:
-			v.CustomDataIdentifiers = &CustomDataIdentifiers{}
-			return v.CustomDataIdentifiers.Deserialize(d)
-		case schemas.ClassificationResult_mimeType:
-			v.MimeType = new(string)
-			return d.ReadString(schemas.ClassificationResult_mimeType, v.MimeType)
-		case schemas.ClassificationResult_sensitiveData:
-			return deserializeSensitiveData(d, schemas.ClassificationResult_sensitiveData, &v.SensitiveData)
-		case schemas.ClassificationResult_sizeClassified:
-			v.SizeClassified = new(int64)
-			return d.ReadInt64(schemas.ClassificationResult_sizeClassified, v.SizeClassified)
-		case schemas.ClassificationResult_status:
-			v.Status = &ClassificationResultStatus{}
-			return v.Status.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the status of a sensitive data finding.
@@ -2416,34 +1036,6 @@ type ClassificationResultStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ClassificationResultStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClassificationResultStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClassificationResultStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.ClassificationResultStatus_code, *v.Code)
-	}
-	if v.Reason != nil {
-		s.WriteString(schemas.ClassificationResultStatus_reason, *v.Reason)
-	}
-}
-func (v *ClassificationResultStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClassificationResultStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClassificationResultStatus_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.ClassificationResultStatus_code, v.Code)
-		case schemas.ClassificationResultStatus_reason:
-			v.Reason = new(string)
-			return d.ReadString(schemas.ClassificationResultStatus_reason, v.Reason)
-		}
-		return nil
-	})
-}
-
 // Provides information about the classification scope for an Amazon Macie
 // account. Macie uses the scope's settings when it performs automated sensitive
 // data discovery for the account.
@@ -2458,34 +1050,6 @@ type ClassificationScopeSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ClassificationScopeSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ClassificationScopeSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ClassificationScopeSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.ClassificationScopeSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ClassificationScopeSummary_name, *v.Name)
-	}
-}
-func (v *ClassificationScopeSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ClassificationScopeSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ClassificationScopeSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ClassificationScopeSummary_id, v.Id)
-		case schemas.ClassificationScopeSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ClassificationScopeSummary_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Specifies one or more property- and tag-based conditions that define criteria
 // for including or excluding S3 buckets from a classification job.
 type CriteriaBlockForJob struct {
@@ -2496,25 +1060,6 @@ type CriteriaBlockForJob struct {
 	And []CriteriaForJob
 
 	noSmithyDocumentSerde
-}
-
-func (v *CriteriaBlockForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CriteriaBlockForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CriteriaBlockForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCriteriaForJob(s, schemas.CriteriaBlockForJob_and, v.And)
-}
-func (v *CriteriaBlockForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CriteriaBlockForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CriteriaBlockForJob_and:
-			return deserialize__listOfCriteriaForJob(d, schemas.CriteriaBlockForJob_and, &v.And)
-		}
-		return nil
-	})
 }
 
 // Specifies a property- or tag-based condition that defines criteria for
@@ -2530,38 +1075,6 @@ type CriteriaForJob struct {
 	TagCriterion *TagCriterionForJob
 
 	noSmithyDocumentSerde
-}
-
-func (v *CriteriaForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CriteriaForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CriteriaForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SimpleCriterion != nil {
-		s.WriteStruct(schemas.CriteriaForJob_simpleCriterion)
-		v.SimpleCriterion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TagCriterion != nil {
-		s.WriteStruct(schemas.CriteriaForJob_tagCriterion)
-		v.TagCriterion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CriteriaForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CriteriaForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CriteriaForJob_simpleCriterion:
-			v.SimpleCriterion = &SimpleCriterionForJob{}
-			return v.SimpleCriterion.Deserialize(d)
-		case schemas.CriteriaForJob_tagCriterion:
-			v.TagCriterion = &TagCriterionForJob{}
-			return v.TagCriterion.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies the operator to use in a property-based condition that filters the
@@ -2605,55 +1118,6 @@ type CriterionAdditionalProperties struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CriterionAdditionalProperties) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CriterionAdditionalProperties)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CriterionAdditionalProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eq, v.Eq)
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eqExactMatch, v.EqExactMatch)
-	if v.Gt != nil {
-		s.WriteInt64(schemas.CriterionAdditionalProperties_gt, *v.Gt)
-	}
-	if v.Gte != nil {
-		s.WriteInt64(schemas.CriterionAdditionalProperties_gte, *v.Gte)
-	}
-	if v.Lt != nil {
-		s.WriteInt64(schemas.CriterionAdditionalProperties_lt, *v.Lt)
-	}
-	if v.Lte != nil {
-		s.WriteInt64(schemas.CriterionAdditionalProperties_lte, *v.Lte)
-	}
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_neq, v.Neq)
-}
-func (v *CriterionAdditionalProperties) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CriterionAdditionalProperties, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CriterionAdditionalProperties_eq:
-			return deserialize__listOf__string(d, schemas.CriterionAdditionalProperties_eq, &v.Eq)
-		case schemas.CriterionAdditionalProperties_eqExactMatch:
-			return deserialize__listOf__string(d, schemas.CriterionAdditionalProperties_eqExactMatch, &v.EqExactMatch)
-		case schemas.CriterionAdditionalProperties_gt:
-			v.Gt = new(int64)
-			return d.ReadInt64(schemas.CriterionAdditionalProperties_gt, v.Gt)
-		case schemas.CriterionAdditionalProperties_gte:
-			v.Gte = new(int64)
-			return d.ReadInt64(schemas.CriterionAdditionalProperties_gte, v.Gte)
-		case schemas.CriterionAdditionalProperties_lt:
-			v.Lt = new(int64)
-			return d.ReadInt64(schemas.CriterionAdditionalProperties_lt, v.Lt)
-		case schemas.CriterionAdditionalProperties_lte:
-			v.Lte = new(int64)
-			return d.ReadInt64(schemas.CriterionAdditionalProperties_lte, v.Lte)
-		case schemas.CriterionAdditionalProperties_neq:
-			return deserialize__listOf__string(d, schemas.CriterionAdditionalProperties_neq, &v.Neq)
-		}
-		return nil
-	})
-}
-
 // Provides information about custom data identifiers that produced a sensitive
 // data finding, and the number of occurrences of the data that they detected for
 // the finding.
@@ -2668,31 +1132,6 @@ type CustomDataIdentifiers struct {
 	TotalCount *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *CustomDataIdentifiers) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomDataIdentifiers)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomDataIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomDetections(s, schemas.CustomDataIdentifiers_detections, v.Detections)
-	if v.TotalCount != nil {
-		s.WriteInt64(schemas.CustomDataIdentifiers_totalCount, *v.TotalCount)
-	}
-}
-func (v *CustomDataIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomDataIdentifiers, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomDataIdentifiers_detections:
-			return deserializeCustomDetections(d, schemas.CustomDataIdentifiers_detections, &v.Detections)
-		case schemas.CustomDataIdentifiers_totalCount:
-			v.TotalCount = new(int64)
-			return d.ReadInt64(schemas.CustomDataIdentifiers_totalCount, v.TotalCount)
-		}
-		return nil
-	})
 }
 
 // Provides information about a custom data identifier.
@@ -2717,52 +1156,6 @@ type CustomDataIdentifierSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomDataIdentifierSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomDataIdentifierSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomDataIdentifierSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CustomDataIdentifierSummary_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.CustomDataIdentifierSummary_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CustomDataIdentifierSummary_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.CustomDataIdentifierSummary_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CustomDataIdentifierSummary_name, *v.Name)
-	}
-}
-func (v *CustomDataIdentifierSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomDataIdentifierSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomDataIdentifierSummary_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CustomDataIdentifierSummary_arn, v.Arn)
-		case schemas.CustomDataIdentifierSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CustomDataIdentifierSummary_createdAt, v.CreatedAt)
-		case schemas.CustomDataIdentifierSummary_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CustomDataIdentifierSummary_description, v.Description)
-		case schemas.CustomDataIdentifierSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CustomDataIdentifierSummary_id, v.Id)
-		case schemas.CustomDataIdentifierSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CustomDataIdentifierSummary_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Provides information about a custom data identifier that produced a sensitive
 // data finding, and the sensitive data that it detected for the finding.
 type CustomDetection struct {
@@ -2785,68 +1178,10 @@ type CustomDetection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CustomDetection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CustomDetection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CustomDetection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.CustomDetection_arn, *v.Arn)
-	}
-	if v.Count != nil {
-		s.WriteInt64(schemas.CustomDetection_count, *v.Count)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CustomDetection_name, *v.Name)
-	}
-	if v.Occurrences != nil {
-		s.WriteStruct(schemas.CustomDetection_occurrences)
-		v.Occurrences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *CustomDetection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CustomDetection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CustomDetection_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CustomDetection_arn, v.Arn)
-		case schemas.CustomDetection_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.CustomDetection_count, v.Count)
-		case schemas.CustomDetection_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CustomDetection_name, v.Name)
-		case schemas.CustomDetection_occurrences:
-			v.Occurrences = &Occurrences{}
-			return v.Occurrences.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies that a classification job runs once a day, every day. This is an
 // empty object.
 type DailySchedule struct {
 	noSmithyDocumentSerde
-}
-
-func (v *DailySchedule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DailySchedule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DailySchedule) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DailySchedule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DailySchedule, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
 }
 
 // Provides information about a type of sensitive data that was detected by a
@@ -2868,42 +1203,6 @@ type DefaultDetection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DefaultDetection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DefaultDetection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DefaultDetection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt64(schemas.DefaultDetection_count, *v.Count)
-	}
-	if v.Occurrences != nil {
-		s.WriteStruct(schemas.DefaultDetection_occurrences)
-		v.Occurrences.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.DefaultDetection_type, *v.Type)
-	}
-}
-func (v *DefaultDetection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DefaultDetection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DefaultDetection_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.DefaultDetection_count, v.Count)
-		case schemas.DefaultDetection_occurrences:
-			v.Occurrences = &Occurrences{}
-			return v.Occurrences.Deserialize(d)
-		case schemas.DefaultDetection_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.DefaultDetection_type, v.Type)
-		}
-		return nil
-	})
-}
-
 // Specifies 1-10 occurrences of a specific type of sensitive data reported by a
 // finding.
 type DetectedDataDetails struct {
@@ -2915,28 +1214,6 @@ type DetectedDataDetails struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DetectedDataDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DetectedDataDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DetectedDataDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Value != nil {
-		s.WriteString(schemas.DetectedDataDetails_value, *v.Value)
-	}
-}
-func (v *DetectedDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DetectedDataDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DetectedDataDetails_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.DetectedDataDetails_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Provides information about a type of sensitive data that Amazon Macie found in
@@ -2979,62 +1256,6 @@ type Detection struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Detection) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Detection)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Detection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.Detection_arn, *v.Arn)
-	}
-	if v.Count != nil {
-		s.WriteInt64(schemas.Detection_count, *v.Count)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Detection_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.Detection_name, *v.Name)
-	}
-	if v.Suppressed != nil {
-		s.WriteBool(schemas.Detection_suppressed, *v.Suppressed)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Detection_type, string(v.Type))
-	}
-}
-func (v *Detection) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Detection, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Detection_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Detection_arn, v.Arn)
-		case schemas.Detection_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.Detection_count, v.Count)
-		case schemas.Detection_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Detection_id, v.Id)
-		case schemas.Detection_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.Detection_name, v.Name)
-		case schemas.Detection_suppressed:
-			v.Suppressed = new(bool)
-			return d.ReadBool(schemas.Detection_suppressed, v.Suppressed)
-		case schemas.Detection_type:
-			var ev string
-			if err := d.ReadString(schemas.Detection_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DataIdentifierType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about the domain name of the device that an entity used to
 // perform an action on an affected resource.
 type DomainDetails struct {
@@ -3043,28 +1264,6 @@ type DomainDetails struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *DomainDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DomainDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DomainDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainName != nil {
-		s.WriteString(schemas.DomainDetails_domainName, *v.DomainName)
-	}
-}
-func (v *DomainDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DomainDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DomainDetails_domainName:
-			v.DomainName = new(string)
-			return d.ReadString(schemas.DomainDetails_domainName, v.DomainName)
-		}
-		return nil
-	})
 }
 
 // Provides information about an identity that performed an action on an affected
@@ -3091,54 +1290,6 @@ type FederatedUser struct {
 	SessionContext *SessionContext
 
 	noSmithyDocumentSerde
-}
-
-func (v *FederatedUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FederatedUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FederatedUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessKeyId != nil {
-		s.WriteString(schemas.FederatedUser_accessKeyId, *v.AccessKeyId)
-	}
-	if v.AccountId != nil {
-		s.WriteString(schemas.FederatedUser_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.FederatedUser_arn, *v.Arn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.FederatedUser_principalId, *v.PrincipalId)
-	}
-	if v.SessionContext != nil {
-		s.WriteStruct(schemas.FederatedUser_sessionContext)
-		v.SessionContext.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *FederatedUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FederatedUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FederatedUser_accessKeyId:
-			v.AccessKeyId = new(string)
-			return d.ReadString(schemas.FederatedUser_accessKeyId, v.AccessKeyId)
-		case schemas.FederatedUser_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.FederatedUser_accountId, v.AccountId)
-		case schemas.FederatedUser_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.FederatedUser_arn, v.Arn)
-		case schemas.FederatedUser_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.FederatedUser_principalId, v.PrincipalId)
-		case schemas.FederatedUser_sessionContext:
-			v.SessionContext = &SessionContext{}
-			return v.SessionContext.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides the details of a finding.
@@ -3213,146 +1364,6 @@ type Finding struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Finding) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Finding)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.Finding_accountId, *v.AccountId)
-	}
-	if v.Archived != nil {
-		s.WriteBool(schemas.Finding_archived, *v.Archived)
-	}
-	if v.Category != "" {
-		s.WriteString(schemas.Finding_category, string(v.Category))
-	}
-	if v.ClassificationDetails != nil {
-		s.WriteStruct(schemas.Finding_classificationDetails)
-		v.ClassificationDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Count != nil {
-		s.WriteInt64(schemas.Finding_count, *v.Count)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.Finding_createdAt, *v.CreatedAt)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.Finding_description, *v.Description)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.Finding_id, *v.Id)
-	}
-	if v.Partition != nil {
-		s.WriteString(schemas.Finding_partition, *v.Partition)
-	}
-	if v.PolicyDetails != nil {
-		s.WriteStruct(schemas.Finding_policyDetails)
-		v.PolicyDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Region != nil {
-		s.WriteString(schemas.Finding_region, *v.Region)
-	}
-	if v.ResourcesAffected != nil {
-		s.WriteStruct(schemas.Finding_resourcesAffected)
-		v.ResourcesAffected.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Sample != nil {
-		s.WriteBool(schemas.Finding_sample, *v.Sample)
-	}
-	if v.SchemaVersion != nil {
-		s.WriteString(schemas.Finding_schemaVersion, *v.SchemaVersion)
-	}
-	if v.Severity != nil {
-		s.WriteStruct(schemas.Finding_severity)
-		v.Severity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Title != nil {
-		s.WriteString(schemas.Finding_title, *v.Title)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.Finding_type, string(v.Type))
-	}
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Finding_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Finding, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Finding_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.Finding_accountId, v.AccountId)
-		case schemas.Finding_archived:
-			v.Archived = new(bool)
-			return d.ReadBool(schemas.Finding_archived, v.Archived)
-		case schemas.Finding_category:
-			var ev string
-			if err := d.ReadString(schemas.Finding_category, &ev); err != nil {
-				return err
-			}
-			v.Category = FindingCategory(ev)
-			return nil
-		case schemas.Finding_classificationDetails:
-			v.ClassificationDetails = &ClassificationDetails{}
-			return v.ClassificationDetails.Deserialize(d)
-		case schemas.Finding_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.Finding_count, v.Count)
-		case schemas.Finding_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_createdAt, v.CreatedAt)
-		case schemas.Finding_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.Finding_description, v.Description)
-		case schemas.Finding_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.Finding_id, v.Id)
-		case schemas.Finding_partition:
-			v.Partition = new(string)
-			return d.ReadString(schemas.Finding_partition, v.Partition)
-		case schemas.Finding_policyDetails:
-			v.PolicyDetails = &PolicyDetails{}
-			return v.PolicyDetails.Deserialize(d)
-		case schemas.Finding_region:
-			v.Region = new(string)
-			return d.ReadString(schemas.Finding_region, v.Region)
-		case schemas.Finding_resourcesAffected:
-			v.ResourcesAffected = &ResourcesAffected{}
-			return v.ResourcesAffected.Deserialize(d)
-		case schemas.Finding_sample:
-			v.Sample = new(bool)
-			return d.ReadBool(schemas.Finding_sample, v.Sample)
-		case schemas.Finding_schemaVersion:
-			v.SchemaVersion = new(string)
-			return d.ReadString(schemas.Finding_schemaVersion, v.SchemaVersion)
-		case schemas.Finding_severity:
-			v.Severity = &Severity{}
-			return v.Severity.Deserialize(d)
-		case schemas.Finding_title:
-			v.Title = new(string)
-			return d.ReadString(schemas.Finding_title, v.Title)
-		case schemas.Finding_type:
-			var ev string
-			if err := d.ReadString(schemas.Finding_type, &ev); err != nil {
-				return err
-			}
-			v.Type = FindingType(ev)
-			return nil
-		case schemas.Finding_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Finding_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Provides information about an action that occurred for a resource and produced
 // a policy finding.
 type FindingAction struct {
@@ -3367,40 +1378,6 @@ type FindingAction struct {
 	ApiCallDetails *ApiCallDetails
 
 	noSmithyDocumentSerde
-}
-
-func (v *FindingAction) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingAction)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingAction) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ActionType != "" {
-		s.WriteString(schemas.FindingAction_actionType, string(v.ActionType))
-	}
-	if v.ApiCallDetails != nil {
-		s.WriteStruct(schemas.FindingAction_apiCallDetails)
-		v.ApiCallDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *FindingAction) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingAction, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingAction_actionType:
-			var ev string
-			if err := d.ReadString(schemas.FindingAction_actionType, &ev); err != nil {
-				return err
-			}
-			v.ActionType = FindingActionType(ev)
-			return nil
-		case schemas.FindingAction_apiCallDetails:
-			v.ApiCallDetails = &ApiCallDetails{}
-			return v.ApiCallDetails.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about an entity that performed an action that produced a
@@ -3424,46 +1401,6 @@ type FindingActor struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FindingActor) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingActor)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingActor) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainDetails != nil {
-		s.WriteStruct(schemas.FindingActor_domainDetails)
-		v.DomainDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IpAddressDetails != nil {
-		s.WriteStruct(schemas.FindingActor_ipAddressDetails)
-		v.IpAddressDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UserIdentity != nil {
-		s.WriteStruct(schemas.FindingActor_userIdentity)
-		v.UserIdentity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *FindingActor) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingActor, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingActor_domainDetails:
-			v.DomainDetails = &DomainDetails{}
-			return v.DomainDetails.Deserialize(d)
-		case schemas.FindingActor_ipAddressDetails:
-			v.IpAddressDetails = &IpAddressDetails{}
-			return v.IpAddressDetails.Deserialize(d)
-		case schemas.FindingActor_userIdentity:
-			v.UserIdentity = &UserIdentity{}
-			return v.UserIdentity.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies, as a map, one or more property-based conditions that filter the
 // results of a query for findings.
 type FindingCriteria struct {
@@ -3473,25 +1410,6 @@ type FindingCriteria struct {
 	Criterion map[string]CriterionAdditionalProperties
 
 	noSmithyDocumentSerde
-}
-
-func (v *FindingCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCriterion(s, schemas.FindingCriteria_criterion, v.Criterion)
-}
-func (v *FindingCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingCriteria_criterion:
-			return deserializeCriterion(d, schemas.FindingCriteria_criterion, &v.Criterion)
-		}
-		return nil
-	})
 }
 
 // Provides information about a findings filter.
@@ -3518,53 +1436,6 @@ type FindingsFilterListItem struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FindingsFilterListItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingsFilterListItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingsFilterListItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.FindingsFilterListItem_action, string(v.Action))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.FindingsFilterListItem_arn, *v.Arn)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.FindingsFilterListItem_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.FindingsFilterListItem_name, *v.Name)
-	}
-	serializeTagMap(s, schemas.FindingsFilterListItem_tags, v.Tags)
-}
-func (v *FindingsFilterListItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingsFilterListItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingsFilterListItem_action:
-			var ev string
-			if err := d.ReadString(schemas.FindingsFilterListItem_action, &ev); err != nil {
-				return err
-			}
-			v.Action = FindingsFilterAction(ev)
-			return nil
-		case schemas.FindingsFilterListItem_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.FindingsFilterListItem_arn, v.Arn)
-		case schemas.FindingsFilterListItem_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.FindingsFilterListItem_id, v.Id)
-		case schemas.FindingsFilterListItem_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.FindingsFilterListItem_name, v.Name)
-		case schemas.FindingsFilterListItem_tags:
-			return deserializeTagMap(d, schemas.FindingsFilterListItem_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a query that retrieves aggregated
 // statistical data about findings.
 type FindingStatisticsSortCriteria struct {
@@ -3582,42 +1453,6 @@ type FindingStatisticsSortCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *FindingStatisticsSortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.FindingStatisticsSortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *FindingStatisticsSortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != "" {
-		s.WriteString(schemas.FindingStatisticsSortCriteria_attributeName, string(v.AttributeName))
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.FindingStatisticsSortCriteria_orderBy, string(v.OrderBy))
-	}
-}
-func (v *FindingStatisticsSortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.FindingStatisticsSortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.FindingStatisticsSortCriteria_attributeName:
-			var ev string
-			if err := d.ReadString(schemas.FindingStatisticsSortCriteria_attributeName, &ev); err != nil {
-				return err
-			}
-			v.AttributeName = FindingStatisticsSortAttributeName(ev)
-			return nil
-		case schemas.FindingStatisticsSortCriteria_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.FindingStatisticsSortCriteria_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides a group of results for a query that retrieved aggregated statistical
 // data about findings.
 type GroupCount struct {
@@ -3630,34 +1465,6 @@ type GroupCount struct {
 	GroupKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GroupCount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GroupCount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GroupCount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Count != nil {
-		s.WriteInt64(schemas.GroupCount_count, *v.Count)
-	}
-	if v.GroupKey != nil {
-		s.WriteString(schemas.GroupCount_groupKey, *v.GroupKey)
-	}
-}
-func (v *GroupCount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GroupCount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GroupCount_count:
-			v.Count = new(int64)
-			return d.ReadInt64(schemas.GroupCount_count, v.Count)
-		case schemas.GroupCount_groupKey:
-			v.GroupKey = new(string)
-			return d.ReadString(schemas.GroupCount_groupKey, v.GroupKey)
-		}
-		return nil
-	})
 }
 
 // Provides information about an Identity and Access Management (IAM) user who
@@ -3681,46 +1488,6 @@ type IamUser struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IamUser) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IamUser)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IamUser) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.IamUser_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.IamUser_arn, *v.Arn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.IamUser_principalId, *v.PrincipalId)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.IamUser_userName, *v.UserName)
-	}
-}
-func (v *IamUser) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IamUser, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IamUser_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.IamUser_accountId, v.AccountId)
-		case schemas.IamUser_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.IamUser_arn, v.Arn)
-		case schemas.IamUser_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.IamUser_principalId, v.PrincipalId)
-		case schemas.IamUser_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.IamUser_userName, v.UserName)
-		}
-		return nil
-	})
-}
-
 // Provides information about an Amazon Macie membership invitation.
 type Invitation struct {
 
@@ -3739,50 +1506,6 @@ type Invitation struct {
 	RelationshipStatus RelationshipStatus
 
 	noSmithyDocumentSerde
-}
-
-func (v *Invitation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Invitation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Invitation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.Invitation_accountId, *v.AccountId)
-	}
-	if v.InvitationId != nil {
-		s.WriteString(schemas.Invitation_invitationId, *v.InvitationId)
-	}
-	if v.InvitedAt != nil {
-		s.WriteTime(schemas.Invitation_invitedAt, *v.InvitedAt)
-	}
-	if v.RelationshipStatus != "" {
-		s.WriteString(schemas.Invitation_relationshipStatus, string(v.RelationshipStatus))
-	}
-}
-func (v *Invitation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Invitation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Invitation_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.Invitation_accountId, v.AccountId)
-		case schemas.Invitation_invitationId:
-			v.InvitationId = new(string)
-			return d.ReadString(schemas.Invitation_invitationId, v.InvitationId)
-		case schemas.Invitation_invitedAt:
-			v.InvitedAt = new(time.Time)
-			return d.ReadTime(schemas.Invitation_invitedAt, v.InvitedAt)
-		case schemas.Invitation_relationshipStatus:
-			var ev string
-			if err := d.ReadString(schemas.Invitation_relationshipStatus, &ev); err != nil {
-				return err
-			}
-			v.RelationshipStatus = RelationshipStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about the IP address of the device that an entity used to
@@ -3807,60 +1530,6 @@ type IpAddressDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IpAddressDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IpAddressDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IpAddressDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IpAddressV4 != nil {
-		s.WriteString(schemas.IpAddressDetails_ipAddressV4, *v.IpAddressV4)
-	}
-	if v.IpCity != nil {
-		s.WriteStruct(schemas.IpAddressDetails_ipCity)
-		v.IpCity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IpCountry != nil {
-		s.WriteStruct(schemas.IpAddressDetails_ipCountry)
-		v.IpCountry.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IpGeoLocation != nil {
-		s.WriteStruct(schemas.IpAddressDetails_ipGeoLocation)
-		v.IpGeoLocation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IpOwner != nil {
-		s.WriteStruct(schemas.IpAddressDetails_ipOwner)
-		v.IpOwner.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *IpAddressDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IpAddressDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IpAddressDetails_ipAddressV4:
-			v.IpAddressV4 = new(string)
-			return d.ReadString(schemas.IpAddressDetails_ipAddressV4, v.IpAddressV4)
-		case schemas.IpAddressDetails_ipCity:
-			v.IpCity = &IpCity{}
-			return v.IpCity.Deserialize(d)
-		case schemas.IpAddressDetails_ipCountry:
-			v.IpCountry = &IpCountry{}
-			return v.IpCountry.Deserialize(d)
-		case schemas.IpAddressDetails_ipGeoLocation:
-			v.IpGeoLocation = &IpGeoLocation{}
-			return v.IpGeoLocation.Deserialize(d)
-		case schemas.IpAddressDetails_ipOwner:
-			v.IpOwner = &IpOwner{}
-			return v.IpOwner.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides information about the city that an IP address originated from.
 type IpCity struct {
 
@@ -3868,28 +1537,6 @@ type IpCity struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IpCity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IpCity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IpCity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.IpCity_name, *v.Name)
-	}
-}
-func (v *IpCity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IpCity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IpCity_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.IpCity_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Provides information about the country that an IP address originated from.
@@ -3905,34 +1552,6 @@ type IpCountry struct {
 	noSmithyDocumentSerde
 }
 
-func (v *IpCountry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IpCountry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IpCountry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != nil {
-		s.WriteString(schemas.IpCountry_code, *v.Code)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.IpCountry_name, *v.Name)
-	}
-}
-func (v *IpCountry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IpCountry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IpCountry_code:
-			v.Code = new(string)
-			return d.ReadString(schemas.IpCountry_code, v.Code)
-		case schemas.IpCountry_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.IpCountry_name, v.Name)
-		}
-		return nil
-	})
-}
-
 // Provides geographic coordinates that indicate where a specified IP address
 // originated from.
 type IpGeoLocation struct {
@@ -3944,34 +1563,6 @@ type IpGeoLocation struct {
 	Lon *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *IpGeoLocation) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IpGeoLocation)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IpGeoLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Lat != nil {
-		s.WriteFloat64(schemas.IpGeoLocation_lat, *v.Lat)
-	}
-	if v.Lon != nil {
-		s.WriteFloat64(schemas.IpGeoLocation_lon, *v.Lon)
-	}
-}
-func (v *IpGeoLocation) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IpGeoLocation, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IpGeoLocation_lat:
-			v.Lat = new(float64)
-			return d.ReadFloat64(schemas.IpGeoLocation_lat, v.Lat)
-		case schemas.IpGeoLocation_lon:
-			v.Lon = new(float64)
-			return d.ReadFloat64(schemas.IpGeoLocation_lon, v.Lon)
-		}
-		return nil
-	})
 }
 
 // Provides information about the registered owner of an IP address.
@@ -3992,46 +1583,6 @@ type IpOwner struct {
 	Org *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *IpOwner) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.IpOwner)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *IpOwner) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Asn != nil {
-		s.WriteString(schemas.IpOwner_asn, *v.Asn)
-	}
-	if v.AsnOrg != nil {
-		s.WriteString(schemas.IpOwner_asnOrg, *v.AsnOrg)
-	}
-	if v.Isp != nil {
-		s.WriteString(schemas.IpOwner_isp, *v.Isp)
-	}
-	if v.Org != nil {
-		s.WriteString(schemas.IpOwner_org, *v.Org)
-	}
-}
-func (v *IpOwner) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.IpOwner, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.IpOwner_asn:
-			v.Asn = new(string)
-			return d.ReadString(schemas.IpOwner_asn, v.Asn)
-		case schemas.IpOwner_asnOrg:
-			v.AsnOrg = new(string)
-			return d.ReadString(schemas.IpOwner_asnOrg, v.AsnOrg)
-		case schemas.IpOwner_isp:
-			v.Isp = new(string)
-			return d.ReadString(schemas.IpOwner_isp, v.Isp)
-		case schemas.IpOwner_org:
-			v.Org = new(string)
-			return d.ReadString(schemas.IpOwner_org, v.Org)
-		}
-		return nil
-	})
 }
 
 // Specifies whether any one-time or recurring classification jobs are configured
@@ -4094,54 +1645,6 @@ type JobDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsDefinedInJob != "" {
-		s.WriteString(schemas.JobDetails_isDefinedInJob, string(v.IsDefinedInJob))
-	}
-	if v.IsMonitoredByJob != "" {
-		s.WriteString(schemas.JobDetails_isMonitoredByJob, string(v.IsMonitoredByJob))
-	}
-	if v.LastJobId != nil {
-		s.WriteString(schemas.JobDetails_lastJobId, *v.LastJobId)
-	}
-	if v.LastJobRunTime != nil {
-		s.WriteTime(schemas.JobDetails_lastJobRunTime, *v.LastJobRunTime)
-	}
-}
-func (v *JobDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobDetails_isDefinedInJob:
-			var ev string
-			if err := d.ReadString(schemas.JobDetails_isDefinedInJob, &ev); err != nil {
-				return err
-			}
-			v.IsDefinedInJob = IsDefinedInJob(ev)
-			return nil
-		case schemas.JobDetails_isMonitoredByJob:
-			var ev string
-			if err := d.ReadString(schemas.JobDetails_isMonitoredByJob, &ev); err != nil {
-				return err
-			}
-			v.IsMonitoredByJob = IsMonitoredByJob(ev)
-			return nil
-		case schemas.JobDetails_lastJobId:
-			v.LastJobId = new(string)
-			return d.ReadString(schemas.JobDetails_lastJobId, v.LastJobId)
-		case schemas.JobDetails_lastJobRunTime:
-			v.LastJobRunTime = new(time.Time)
-			return d.ReadTime(schemas.JobDetails_lastJobRunTime, v.LastJobRunTime)
-		}
-		return nil
-	})
-}
-
 // Specifies the recurrence pattern for running a classification job.
 type JobScheduleFrequency struct {
 
@@ -4155,46 +1658,6 @@ type JobScheduleFrequency struct {
 	WeeklySchedule *WeeklySchedule
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobScheduleFrequency) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobScheduleFrequency)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobScheduleFrequency) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DailySchedule != nil {
-		s.WriteStruct(schemas.JobScheduleFrequency_dailySchedule)
-		v.DailySchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.MonthlySchedule != nil {
-		s.WriteStruct(schemas.JobScheduleFrequency_monthlySchedule)
-		v.MonthlySchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.WeeklySchedule != nil {
-		s.WriteStruct(schemas.JobScheduleFrequency_weeklySchedule)
-		v.WeeklySchedule.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *JobScheduleFrequency) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobScheduleFrequency, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobScheduleFrequency_dailySchedule:
-			v.DailySchedule = &DailySchedule{}
-			return v.DailySchedule.Deserialize(d)
-		case schemas.JobScheduleFrequency_monthlySchedule:
-			v.MonthlySchedule = &MonthlySchedule{}
-			return v.MonthlySchedule.Deserialize(d)
-		case schemas.JobScheduleFrequency_weeklySchedule:
-			v.WeeklySchedule = &WeeklySchedule{}
-			return v.WeeklySchedule.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies a property- or tag-based condition that defines criteria for
@@ -4213,38 +1676,6 @@ type JobScopeTerm struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobScopeTerm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobScopeTerm)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobScopeTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SimpleScopeTerm != nil {
-		s.WriteStruct(schemas.JobScopeTerm_simpleScopeTerm)
-		v.SimpleScopeTerm.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TagScopeTerm != nil {
-		s.WriteStruct(schemas.JobScopeTerm_tagScopeTerm)
-		v.TagScopeTerm.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *JobScopeTerm) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobScopeTerm, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobScopeTerm_simpleScopeTerm:
-			v.SimpleScopeTerm = &SimpleScopeTerm{}
-			return v.SimpleScopeTerm.Deserialize(d)
-		case schemas.JobScopeTerm_tagScopeTerm:
-			v.TagScopeTerm = &TagScopeTerm{}
-			return v.TagScopeTerm.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies one or more property- and tag-based conditions that define criteria
 // for including or excluding S3 objects from a classification job.
 type JobScopingBlock struct {
@@ -4255,25 +1686,6 @@ type JobScopingBlock struct {
 	And []JobScopeTerm
 
 	noSmithyDocumentSerde
-}
-
-func (v *JobScopingBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobScopingBlock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobScopingBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfJobScopeTerm(s, schemas.JobScopingBlock_and, v.And)
-}
-func (v *JobScopingBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobScopingBlock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobScopingBlock_and:
-			return deserialize__listOfJobScopeTerm(d, schemas.JobScopingBlock_and, &v.And)
-		}
-		return nil
-	})
 }
 
 // Provides information about a classification job, including the current status
@@ -4347,87 +1759,6 @@ type JobSummary struct {
 	noSmithyDocumentSerde
 }
 
-func (v *JobSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.JobSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketCriteria != nil {
-		s.WriteStruct(schemas.JobSummary_bucketCriteria)
-		v.BucketCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serialize__listOfS3BucketDefinitionForJob(s, schemas.JobSummary_bucketDefinitions, v.BucketDefinitions)
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.JobSummary_createdAt, *v.CreatedAt)
-	}
-	if v.JobId != nil {
-		s.WriteString(schemas.JobSummary_jobId, *v.JobId)
-	}
-	if v.JobStatus != "" {
-		s.WriteString(schemas.JobSummary_jobStatus, string(v.JobStatus))
-	}
-	if v.JobType != "" {
-		s.WriteString(schemas.JobSummary_jobType, string(v.JobType))
-	}
-	if v.LastRunErrorStatus != nil {
-		s.WriteStruct(schemas.JobSummary_lastRunErrorStatus)
-		v.LastRunErrorStatus.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.JobSummary_name, *v.Name)
-	}
-	if v.UserPausedDetails != nil {
-		s.WriteStruct(schemas.JobSummary_userPausedDetails)
-		v.UserPausedDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *JobSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.JobSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.JobSummary_bucketCriteria:
-			v.BucketCriteria = &S3BucketCriteriaForJob{}
-			return v.BucketCriteria.Deserialize(d)
-		case schemas.JobSummary_bucketDefinitions:
-			return deserialize__listOfS3BucketDefinitionForJob(d, schemas.JobSummary_bucketDefinitions, &v.BucketDefinitions)
-		case schemas.JobSummary_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.JobSummary_createdAt, v.CreatedAt)
-		case schemas.JobSummary_jobId:
-			v.JobId = new(string)
-			return d.ReadString(schemas.JobSummary_jobId, v.JobId)
-		case schemas.JobSummary_jobStatus:
-			var ev string
-			if err := d.ReadString(schemas.JobSummary_jobStatus, &ev); err != nil {
-				return err
-			}
-			v.JobStatus = JobStatus(ev)
-			return nil
-		case schemas.JobSummary_jobType:
-			var ev string
-			if err := d.ReadString(schemas.JobSummary_jobType, &ev); err != nil {
-				return err
-			}
-			v.JobType = JobType(ev)
-			return nil
-		case schemas.JobSummary_lastRunErrorStatus:
-			v.LastRunErrorStatus = &LastRunErrorStatus{}
-			return v.LastRunErrorStatus.Deserialize(d)
-		case schemas.JobSummary_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.JobSummary_name, v.Name)
-		case schemas.JobSummary_userPausedDetails:
-			v.UserPausedDetails = &UserPausedDetails{}
-			return v.UserPausedDetails.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides information about the tags that are associated with an S3 bucket or
 // object. Each tag consists of a required tag key and an associated tag value.
 type KeyValuePair struct {
@@ -4441,34 +1772,6 @@ type KeyValuePair struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *KeyValuePair) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.KeyValuePair)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *KeyValuePair) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.KeyValuePair_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.KeyValuePair_value, *v.Value)
-	}
-}
-func (v *KeyValuePair) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.KeyValuePair, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.KeyValuePair_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.KeyValuePair_key, v.Key)
-		case schemas.KeyValuePair_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.KeyValuePair_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Specifies whether any account- or bucket-level access errors occurred when a
@@ -4492,32 +1795,6 @@ type LastRunErrorStatus struct {
 	noSmithyDocumentSerde
 }
 
-func (v *LastRunErrorStatus) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.LastRunErrorStatus)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *LastRunErrorStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != "" {
-		s.WriteString(schemas.LastRunErrorStatus_code, string(v.Code))
-	}
-}
-func (v *LastRunErrorStatus) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.LastRunErrorStatus, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.LastRunErrorStatus_code:
-			var ev string
-			if err := d.ReadString(schemas.LastRunErrorStatus_code, &ev); err != nil {
-				return err
-			}
-			v.Code = LastRunErrorStatusCode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for filtering the results of a request for information about
 // classification jobs.
 type ListJobsFilterCriteria struct {
@@ -4531,28 +1808,6 @@ type ListJobsFilterCriteria struct {
 	Includes []ListJobsFilterTerm
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListJobsFilterCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListJobsFilterCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListJobsFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_excludes, v.Excludes)
-	serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_includes, v.Includes)
-}
-func (v *ListJobsFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListJobsFilterCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListJobsFilterCriteria_excludes:
-			return deserialize__listOfListJobsFilterTerm(d, schemas.ListJobsFilterCriteria_excludes, &v.Excludes)
-		case schemas.ListJobsFilterCriteria_includes:
-			return deserialize__listOfListJobsFilterTerm(d, schemas.ListJobsFilterCriteria_includes, &v.Includes)
-		}
-		return nil
-	})
 }
 
 // Specifies a condition that filters the results of a request for information
@@ -4572,45 +1827,6 @@ type ListJobsFilterTerm struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListJobsFilterTerm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListJobsFilterTerm)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListJobsFilterTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.ListJobsFilterTerm_comparator, string(v.Comparator))
-	}
-	if v.Key != "" {
-		s.WriteString(schemas.ListJobsFilterTerm_key, string(v.Key))
-	}
-	serialize__listOf__string(s, schemas.ListJobsFilterTerm_values, v.Values)
-}
-func (v *ListJobsFilterTerm) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListJobsFilterTerm, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListJobsFilterTerm_comparator:
-			var ev string
-			if err := d.ReadString(schemas.ListJobsFilterTerm_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = JobComparator(ev)
-			return nil
-		case schemas.ListJobsFilterTerm_key:
-			var ev string
-			if err := d.ReadString(schemas.ListJobsFilterTerm_key, &ev); err != nil {
-				return err
-			}
-			v.Key = ListJobsFilterKey(ev)
-			return nil
-		case schemas.ListJobsFilterTerm_values:
-			return deserialize__listOf__string(d, schemas.ListJobsFilterTerm_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a request for information about
 // classification jobs.
 type ListJobsSortCriteria struct {
@@ -4624,42 +1840,6 @@ type ListJobsSortCriteria struct {
 	OrderBy OrderBy
 
 	noSmithyDocumentSerde
-}
-
-func (v *ListJobsSortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListJobsSortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListJobsSortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != "" {
-		s.WriteString(schemas.ListJobsSortCriteria_attributeName, string(v.AttributeName))
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.ListJobsSortCriteria_orderBy, string(v.OrderBy))
-	}
-}
-func (v *ListJobsSortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListJobsSortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListJobsSortCriteria_attributeName:
-			var ev string
-			if err := d.ReadString(schemas.ListJobsSortCriteria_attributeName, &ev); err != nil {
-				return err
-			}
-			v.AttributeName = ListJobsSortAttributeName(ev)
-			return nil
-		case schemas.ListJobsSortCriteria_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.ListJobsSortCriteria_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about a managed data identifier. For additional
@@ -4683,38 +1863,6 @@ type ManagedDataIdentifierSummary struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ManagedDataIdentifierSummary) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ManagedDataIdentifierSummary)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ManagedDataIdentifierSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.ManagedDataIdentifierSummary_category, string(v.Category))
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.ManagedDataIdentifierSummary_id, *v.Id)
-	}
-}
-func (v *ManagedDataIdentifierSummary) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ManagedDataIdentifierSummary, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ManagedDataIdentifierSummary_category:
-			var ev string
-			if err := d.ReadString(schemas.ManagedDataIdentifierSummary_category, &ev); err != nil {
-				return err
-			}
-			v.Category = SensitiveDataItemCategory(ev)
-			return nil
-		case schemas.ManagedDataIdentifierSummary_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.ManagedDataIdentifierSummary_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
@@ -4836,134 +1984,6 @@ type MatchingBucket struct {
 	noSmithyDocumentSerde
 }
 
-func (v *MatchingBucket) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MatchingBucket)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MatchingBucket) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.MatchingBucket_accountId, *v.AccountId)
-	}
-	if v.AutomatedDiscoveryMonitoringStatus != "" {
-		s.WriteString(schemas.MatchingBucket_automatedDiscoveryMonitoringStatus, string(v.AutomatedDiscoveryMonitoringStatus))
-	}
-	if v.BucketName != nil {
-		s.WriteString(schemas.MatchingBucket_bucketName, *v.BucketName)
-	}
-	if v.ClassifiableObjectCount != nil {
-		s.WriteInt64(schemas.MatchingBucket_classifiableObjectCount, *v.ClassifiableObjectCount)
-	}
-	if v.ClassifiableSizeInBytes != nil {
-		s.WriteInt64(schemas.MatchingBucket_classifiableSizeInBytes, *v.ClassifiableSizeInBytes)
-	}
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.MatchingBucket_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.MatchingBucket_errorMessage, *v.ErrorMessage)
-	}
-	if v.JobDetails != nil {
-		s.WriteStruct(schemas.MatchingBucket_jobDetails)
-		v.JobDetails.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.LastAutomatedDiscoveryTime != nil {
-		s.WriteTime(schemas.MatchingBucket_lastAutomatedDiscoveryTime, *v.LastAutomatedDiscoveryTime)
-	}
-	if v.ObjectCount != nil {
-		s.WriteInt64(schemas.MatchingBucket_objectCount, *v.ObjectCount)
-	}
-	if v.ObjectCountByEncryptionType != nil {
-		s.WriteStruct(schemas.MatchingBucket_objectCountByEncryptionType)
-		v.ObjectCountByEncryptionType.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SensitivityScore != nil {
-		s.WriteInt32(schemas.MatchingBucket_sensitivityScore, *v.SensitivityScore)
-	}
-	if v.SizeInBytes != nil {
-		s.WriteInt64(schemas.MatchingBucket_sizeInBytes, *v.SizeInBytes)
-	}
-	if v.SizeInBytesCompressed != nil {
-		s.WriteInt64(schemas.MatchingBucket_sizeInBytesCompressed, *v.SizeInBytesCompressed)
-	}
-	if v.UnclassifiableObjectCount != nil {
-		s.WriteStruct(schemas.MatchingBucket_unclassifiableObjectCount)
-		v.UnclassifiableObjectCount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UnclassifiableObjectSizeInBytes != nil {
-		s.WriteStruct(schemas.MatchingBucket_unclassifiableObjectSizeInBytes)
-		v.UnclassifiableObjectSizeInBytes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MatchingBucket) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MatchingBucket, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MatchingBucket_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.MatchingBucket_accountId, v.AccountId)
-		case schemas.MatchingBucket_automatedDiscoveryMonitoringStatus:
-			var ev string
-			if err := d.ReadString(schemas.MatchingBucket_automatedDiscoveryMonitoringStatus, &ev); err != nil {
-				return err
-			}
-			v.AutomatedDiscoveryMonitoringStatus = AutomatedDiscoveryMonitoringStatus(ev)
-			return nil
-		case schemas.MatchingBucket_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.MatchingBucket_bucketName, v.BucketName)
-		case schemas.MatchingBucket_classifiableObjectCount:
-			v.ClassifiableObjectCount = new(int64)
-			return d.ReadInt64(schemas.MatchingBucket_classifiableObjectCount, v.ClassifiableObjectCount)
-		case schemas.MatchingBucket_classifiableSizeInBytes:
-			v.ClassifiableSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.MatchingBucket_classifiableSizeInBytes, v.ClassifiableSizeInBytes)
-		case schemas.MatchingBucket_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.MatchingBucket_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = BucketMetadataErrorCode(ev)
-			return nil
-		case schemas.MatchingBucket_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.MatchingBucket_errorMessage, v.ErrorMessage)
-		case schemas.MatchingBucket_jobDetails:
-			v.JobDetails = &JobDetails{}
-			return v.JobDetails.Deserialize(d)
-		case schemas.MatchingBucket_lastAutomatedDiscoveryTime:
-			v.LastAutomatedDiscoveryTime = new(time.Time)
-			return d.ReadTime(schemas.MatchingBucket_lastAutomatedDiscoveryTime, v.LastAutomatedDiscoveryTime)
-		case schemas.MatchingBucket_objectCount:
-			v.ObjectCount = new(int64)
-			return d.ReadInt64(schemas.MatchingBucket_objectCount, v.ObjectCount)
-		case schemas.MatchingBucket_objectCountByEncryptionType:
-			v.ObjectCountByEncryptionType = &ObjectCountByEncryptionType{}
-			return v.ObjectCountByEncryptionType.Deserialize(d)
-		case schemas.MatchingBucket_sensitivityScore:
-			v.SensitivityScore = new(int32)
-			return d.ReadInt32(schemas.MatchingBucket_sensitivityScore, v.SensitivityScore)
-		case schemas.MatchingBucket_sizeInBytes:
-			v.SizeInBytes = new(int64)
-			return d.ReadInt64(schemas.MatchingBucket_sizeInBytes, v.SizeInBytes)
-		case schemas.MatchingBucket_sizeInBytesCompressed:
-			v.SizeInBytesCompressed = new(int64)
-			return d.ReadInt64(schemas.MatchingBucket_sizeInBytesCompressed, v.SizeInBytesCompressed)
-		case schemas.MatchingBucket_unclassifiableObjectCount:
-			v.UnclassifiableObjectCount = &ObjectLevelStatistics{}
-			return v.UnclassifiableObjectCount.Deserialize(d)
-		case schemas.MatchingBucket_unclassifiableObjectSizeInBytes:
-			v.UnclassifiableObjectSizeInBytes = &ObjectLevelStatistics{}
-			return v.UnclassifiableObjectSizeInBytes.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides statistical data and other information about an Amazon Web Services
 // resource that Amazon Macie monitors and analyzes for your account.
 type MatchingResource struct {
@@ -4973,30 +1993,6 @@ type MatchingResource struct {
 	MatchingBucket *MatchingBucket
 
 	noSmithyDocumentSerde
-}
-
-func (v *MatchingResource) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MatchingResource)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MatchingResource) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MatchingBucket != nil {
-		s.WriteStruct(schemas.MatchingResource_matchingBucket)
-		v.MatchingBucket.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *MatchingResource) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MatchingResource, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MatchingResource_matchingBucket:
-			v.MatchingBucket = &MatchingBucket{}
-			return v.MatchingBucket.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about an account that's associated with an Amazon Macie
@@ -5042,77 +2038,6 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Member) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Member)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.Member_accountId, *v.AccountId)
-	}
-	if v.AdministratorAccountId != nil {
-		s.WriteString(schemas.Member_administratorAccountId, *v.AdministratorAccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.Member_arn, *v.Arn)
-	}
-	if v.Email != nil {
-		s.WriteString(schemas.Member_email, *v.Email)
-	}
-	if v.InvitedAt != nil {
-		s.WriteTime(schemas.Member_invitedAt, *v.InvitedAt)
-	}
-	if v.MasterAccountId != nil {
-		s.WriteString(schemas.Member_masterAccountId, *v.MasterAccountId)
-	}
-	if v.RelationshipStatus != "" {
-		s.WriteString(schemas.Member_relationshipStatus, string(v.RelationshipStatus))
-	}
-	serializeTagMap(s, schemas.Member_tags, v.Tags)
-	if v.UpdatedAt != nil {
-		s.WriteTime(schemas.Member_updatedAt, *v.UpdatedAt)
-	}
-}
-func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Member_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.Member_accountId, v.AccountId)
-		case schemas.Member_administratorAccountId:
-			v.AdministratorAccountId = new(string)
-			return d.ReadString(schemas.Member_administratorAccountId, v.AdministratorAccountId)
-		case schemas.Member_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.Member_arn, v.Arn)
-		case schemas.Member_email:
-			v.Email = new(string)
-			return d.ReadString(schemas.Member_email, v.Email)
-		case schemas.Member_invitedAt:
-			v.InvitedAt = new(time.Time)
-			return d.ReadTime(schemas.Member_invitedAt, v.InvitedAt)
-		case schemas.Member_masterAccountId:
-			v.MasterAccountId = new(string)
-			return d.ReadString(schemas.Member_masterAccountId, v.MasterAccountId)
-		case schemas.Member_relationshipStatus:
-			var ev string
-			if err := d.ReadString(schemas.Member_relationshipStatus, &ev); err != nil {
-				return err
-			}
-			v.RelationshipStatus = RelationshipStatus(ev)
-			return nil
-		case schemas.Member_tags:
-			return deserializeTagMap(d, schemas.Member_tags, &v.Tags)
-		case schemas.Member_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.Member_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
-
 // Specifies a monthly recurrence pattern for running a classification job.
 type MonthlySchedule struct {
 
@@ -5127,28 +2052,6 @@ type MonthlySchedule struct {
 	DayOfMonth *int32
 
 	noSmithyDocumentSerde
-}
-
-func (v *MonthlySchedule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.MonthlySchedule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *MonthlySchedule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfMonth != nil {
-		s.WriteInt32(schemas.MonthlySchedule_dayOfMonth, *v.DayOfMonth)
-	}
-}
-func (v *MonthlySchedule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.MonthlySchedule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.MonthlySchedule_dayOfMonth:
-			v.DayOfMonth = new(int32)
-			return d.ReadInt32(schemas.MonthlySchedule_dayOfMonth, v.DayOfMonth)
-		}
-		return nil
-	})
 }
 
 // Provides information about the number of objects that are in an S3 bucket and
@@ -5181,52 +2084,6 @@ type ObjectCountByEncryptionType struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ObjectCountByEncryptionType) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ObjectCountByEncryptionType)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ObjectCountByEncryptionType) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CustomerManaged != nil {
-		s.WriteInt64(schemas.ObjectCountByEncryptionType_customerManaged, *v.CustomerManaged)
-	}
-	if v.KmsManaged != nil {
-		s.WriteInt64(schemas.ObjectCountByEncryptionType_kmsManaged, *v.KmsManaged)
-	}
-	if v.S3Managed != nil {
-		s.WriteInt64(schemas.ObjectCountByEncryptionType_s3Managed, *v.S3Managed)
-	}
-	if v.Unencrypted != nil {
-		s.WriteInt64(schemas.ObjectCountByEncryptionType_unencrypted, *v.Unencrypted)
-	}
-	if v.Unknown != nil {
-		s.WriteInt64(schemas.ObjectCountByEncryptionType_unknown, *v.Unknown)
-	}
-}
-func (v *ObjectCountByEncryptionType) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ObjectCountByEncryptionType, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ObjectCountByEncryptionType_customerManaged:
-			v.CustomerManaged = new(int64)
-			return d.ReadInt64(schemas.ObjectCountByEncryptionType_customerManaged, v.CustomerManaged)
-		case schemas.ObjectCountByEncryptionType_kmsManaged:
-			v.KmsManaged = new(int64)
-			return d.ReadInt64(schemas.ObjectCountByEncryptionType_kmsManaged, v.KmsManaged)
-		case schemas.ObjectCountByEncryptionType_s3Managed:
-			v.S3Managed = new(int64)
-			return d.ReadInt64(schemas.ObjectCountByEncryptionType_s3Managed, v.S3Managed)
-		case schemas.ObjectCountByEncryptionType_unencrypted:
-			v.Unencrypted = new(int64)
-			return d.ReadInt64(schemas.ObjectCountByEncryptionType_unencrypted, v.Unencrypted)
-		case schemas.ObjectCountByEncryptionType_unknown:
-			v.Unknown = new(int64)
-			return d.ReadInt64(schemas.ObjectCountByEncryptionType_unknown, v.Unknown)
-		}
-		return nil
-	})
-}
-
 // Provides information about the total storage size (in bytes) or number of
 // objects that Amazon Macie can't analyze in one or more S3 buckets. In a
 // BucketMetadata or MatchingBucket object, this data is for a specific bucket. In
@@ -5251,40 +2108,6 @@ type ObjectLevelStatistics struct {
 	Total *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *ObjectLevelStatistics) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ObjectLevelStatistics)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ObjectLevelStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FileType != nil {
-		s.WriteInt64(schemas.ObjectLevelStatistics_fileType, *v.FileType)
-	}
-	if v.StorageClass != nil {
-		s.WriteInt64(schemas.ObjectLevelStatistics_storageClass, *v.StorageClass)
-	}
-	if v.Total != nil {
-		s.WriteInt64(schemas.ObjectLevelStatistics_total, *v.Total)
-	}
-}
-func (v *ObjectLevelStatistics) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ObjectLevelStatistics, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ObjectLevelStatistics_fileType:
-			v.FileType = new(int64)
-			return d.ReadInt64(schemas.ObjectLevelStatistics_fileType, v.FileType)
-		case schemas.ObjectLevelStatistics_storageClass:
-			v.StorageClass = new(int64)
-			return d.ReadInt64(schemas.ObjectLevelStatistics_storageClass, v.StorageClass)
-		case schemas.ObjectLevelStatistics_total:
-			v.Total = new(int64)
-			return d.ReadInt64(schemas.ObjectLevelStatistics_total, v.Total)
-		}
-		return nil
-	})
 }
 
 // Specifies the location of 1-15 occurrences of sensitive data that was detected
@@ -5334,37 +2157,6 @@ type Occurrences struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Occurrences) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Occurrences)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Occurrences) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCells(s, schemas.Occurrences_cells, v.Cells)
-	serializeRanges(s, schemas.Occurrences_lineRanges, v.LineRanges)
-	serializeRanges(s, schemas.Occurrences_offsetRanges, v.OffsetRanges)
-	serializePages(s, schemas.Occurrences_pages, v.Pages)
-	serializeRecords(s, schemas.Occurrences_records, v.Records)
-}
-func (v *Occurrences) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Occurrences, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Occurrences_cells:
-			return deserializeCells(d, schemas.Occurrences_cells, &v.Cells)
-		case schemas.Occurrences_lineRanges:
-			return deserializeRanges(d, schemas.Occurrences_lineRanges, &v.LineRanges)
-		case schemas.Occurrences_offsetRanges:
-			return deserializeRanges(d, schemas.Occurrences_offsetRanges, &v.OffsetRanges)
-		case schemas.Occurrences_pages:
-			return deserializePages(d, schemas.Occurrences_pages, &v.Pages)
-		case schemas.Occurrences_records:
-			return deserializeRecords(d, schemas.Occurrences_records, &v.Records)
-		}
-		return nil
-	})
-}
-
 // Specifies the location of an occurrence of sensitive data in an Adobe Portable
 // Document Format file.
 type Page struct {
@@ -5381,44 +2173,6 @@ type Page struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Page) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Page)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Page) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.LineRange != nil {
-		s.WriteStruct(schemas.Page_lineRange)
-		v.LineRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.OffsetRange != nil {
-		s.WriteStruct(schemas.Page_offsetRange)
-		v.OffsetRange.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PageNumber != nil {
-		s.WriteInt64(schemas.Page_pageNumber, *v.PageNumber)
-	}
-}
-func (v *Page) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Page, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Page_lineRange:
-			v.LineRange = &Range{}
-			return v.LineRange.Deserialize(d)
-		case schemas.Page_offsetRange:
-			v.OffsetRange = &Range{}
-			return v.OffsetRange.Deserialize(d)
-		case schemas.Page_pageNumber:
-			v.PageNumber = new(int64)
-			return d.ReadInt64(schemas.Page_pageNumber, v.PageNumber)
-		}
-		return nil
-	})
-}
-
 // Provides the details of a policy finding.
 type PolicyDetails struct {
 
@@ -5429,38 +2183,6 @@ type PolicyDetails struct {
 	Actor *FindingActor
 
 	noSmithyDocumentSerde
-}
-
-func (v *PolicyDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PolicyDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PolicyDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != nil {
-		s.WriteStruct(schemas.PolicyDetails_action)
-		v.Action.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Actor != nil {
-		s.WriteStruct(schemas.PolicyDetails_actor)
-		v.Actor.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *PolicyDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PolicyDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PolicyDetails_action:
-			v.Action = &FindingAction{}
-			return v.Action.Deserialize(d)
-		case schemas.PolicyDetails_actor:
-			v.Actor = &FindingActor{}
-			return v.Actor.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies the location of an occurrence of sensitive data in an email message
@@ -5481,40 +2203,6 @@ type Range struct {
 	StartColumn *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Range) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Range)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Range) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.End != nil {
-		s.WriteInt64(schemas.Range_end, *v.End)
-	}
-	if v.Start != nil {
-		s.WriteInt64(schemas.Range_start, *v.Start)
-	}
-	if v.StartColumn != nil {
-		s.WriteInt64(schemas.Range_startColumn, *v.StartColumn)
-	}
-}
-func (v *Range) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Range, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Range_end:
-			v.End = new(int64)
-			return d.ReadInt64(schemas.Range_end, v.End)
-		case schemas.Range_start:
-			v.Start = new(int64)
-			return d.ReadInt64(schemas.Range_start, v.Start)
-		case schemas.Range_startColumn:
-			v.StartColumn = new(int64)
-			return d.ReadInt64(schemas.Range_startColumn, v.StartColumn)
-		}
-		return nil
-	})
 }
 
 // Specifies the location of an occurrence of sensitive data in an Apache Avro
@@ -5544,34 +2232,6 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Record) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Record)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JsonPath != nil {
-		s.WriteString(schemas.Record_jsonPath, *v.JsonPath)
-	}
-	if v.RecordIndex != nil {
-		s.WriteInt64(schemas.Record_recordIndex, *v.RecordIndex)
-	}
-}
-func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Record_jsonPath:
-			v.JsonPath = new(string)
-			return d.ReadString(schemas.Record_jsonPath, v.JsonPath)
-		case schemas.Record_recordIndex:
-			v.RecordIndex = new(int64)
-			return d.ReadInt64(schemas.Record_recordIndex, v.RecordIndex)
-		}
-		return nil
-	})
-}
-
 // Provides information about settings that define whether one or more objects in
 // an S3 bucket are replicated to S3 buckets for other Amazon Web Services accounts
 // and, if so, which accounts.
@@ -5594,37 +2254,6 @@ type ReplicationDetails struct {
 	ReplicationAccounts []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *ReplicationDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReplicationDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReplicationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Replicated != nil {
-		s.WriteBool(schemas.ReplicationDetails_replicated, *v.Replicated)
-	}
-	if v.ReplicatedExternally != nil {
-		s.WriteBool(schemas.ReplicationDetails_replicatedExternally, *v.ReplicatedExternally)
-	}
-	serialize__listOf__string(s, schemas.ReplicationDetails_replicationAccounts, v.ReplicationAccounts)
-}
-func (v *ReplicationDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReplicationDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReplicationDetails_replicated:
-			v.Replicated = new(bool)
-			return d.ReadBool(schemas.ReplicationDetails_replicated, v.Replicated)
-		case schemas.ReplicationDetails_replicatedExternally:
-			v.ReplicatedExternally = new(bool)
-			return d.ReadBool(schemas.ReplicationDetails_replicatedExternally, v.ReplicatedExternally)
-		case schemas.ReplicationDetails_replicationAccounts:
-			return deserialize__listOf__string(d, schemas.ReplicationDetails_replicationAccounts, &v.ReplicationAccounts)
-		}
-		return nil
-	})
 }
 
 // Provides information about an S3 object that Amazon Macie selected for analysis
@@ -5657,40 +2286,6 @@ type ResourceProfileArtifact struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceProfileArtifact) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceProfileArtifact)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceProfileArtifact) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ResourceProfileArtifact_arn, *v.Arn)
-	}
-	if v.ClassificationResultStatus != nil {
-		s.WriteString(schemas.ResourceProfileArtifact_classificationResultStatus, *v.ClassificationResultStatus)
-	}
-	if v.Sensitive != nil {
-		s.WriteBool(schemas.ResourceProfileArtifact_sensitive, *v.Sensitive)
-	}
-}
-func (v *ResourceProfileArtifact) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceProfileArtifact, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceProfileArtifact_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ResourceProfileArtifact_arn, v.Arn)
-		case schemas.ResourceProfileArtifact_classificationResultStatus:
-			v.ClassificationResultStatus = new(string)
-			return d.ReadString(schemas.ResourceProfileArtifact_classificationResultStatus, v.ClassificationResultStatus)
-		case schemas.ResourceProfileArtifact_sensitive:
-			v.Sensitive = new(bool)
-			return d.ReadBool(schemas.ResourceProfileArtifact_sensitive, v.Sensitive)
-		}
-		return nil
-	})
-}
-
 // Provides information about the resources that a finding applies to.
 type ResourcesAffected struct {
 
@@ -5701,38 +2296,6 @@ type ResourcesAffected struct {
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
-}
-
-func (v *ResourcesAffected) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourcesAffected)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourcesAffected) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.S3Bucket != nil {
-		s.WriteStruct(schemas.ResourcesAffected_s3Bucket)
-		v.S3Bucket.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.S3Object != nil {
-		s.WriteStruct(schemas.ResourcesAffected_s3Object)
-		v.S3Object.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ResourcesAffected) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourcesAffected, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourcesAffected_s3Bucket:
-			v.S3Bucket = &S3Bucket{}
-			return v.S3Bucket.Deserialize(d)
-		case schemas.ResourcesAffected_s3Object:
-			v.S3Object = &S3Object{}
-			return v.S3Object.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides statistical data for sensitive data discovery metrics that apply to an
@@ -5789,76 +2352,6 @@ type ResourceStatistics struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ResourceStatistics) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ResourceStatistics)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ResourceStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TotalBytesClassified != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalBytesClassified, *v.TotalBytesClassified)
-	}
-	if v.TotalDetections != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalDetections, *v.TotalDetections)
-	}
-	if v.TotalDetectionsSuppressed != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalDetectionsSuppressed, *v.TotalDetectionsSuppressed)
-	}
-	if v.TotalItemsClassified != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsClassified, *v.TotalItemsClassified)
-	}
-	if v.TotalItemsSensitive != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsSensitive, *v.TotalItemsSensitive)
-	}
-	if v.TotalItemsSkipped != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsSkipped, *v.TotalItemsSkipped)
-	}
-	if v.TotalItemsSkippedInvalidEncryption != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsSkippedInvalidEncryption, *v.TotalItemsSkippedInvalidEncryption)
-	}
-	if v.TotalItemsSkippedInvalidKms != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsSkippedInvalidKms, *v.TotalItemsSkippedInvalidKms)
-	}
-	if v.TotalItemsSkippedPermissionDenied != nil {
-		s.WriteInt64(schemas.ResourceStatistics_totalItemsSkippedPermissionDenied, *v.TotalItemsSkippedPermissionDenied)
-	}
-}
-func (v *ResourceStatistics) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ResourceStatistics, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ResourceStatistics_totalBytesClassified:
-			v.TotalBytesClassified = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalBytesClassified, v.TotalBytesClassified)
-		case schemas.ResourceStatistics_totalDetections:
-			v.TotalDetections = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalDetections, v.TotalDetections)
-		case schemas.ResourceStatistics_totalDetectionsSuppressed:
-			v.TotalDetectionsSuppressed = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalDetectionsSuppressed, v.TotalDetectionsSuppressed)
-		case schemas.ResourceStatistics_totalItemsClassified:
-			v.TotalItemsClassified = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsClassified, v.TotalItemsClassified)
-		case schemas.ResourceStatistics_totalItemsSensitive:
-			v.TotalItemsSensitive = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsSensitive, v.TotalItemsSensitive)
-		case schemas.ResourceStatistics_totalItemsSkipped:
-			v.TotalItemsSkipped = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsSkipped, v.TotalItemsSkipped)
-		case schemas.ResourceStatistics_totalItemsSkippedInvalidEncryption:
-			v.TotalItemsSkippedInvalidEncryption = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsSkippedInvalidEncryption, v.TotalItemsSkippedInvalidEncryption)
-		case schemas.ResourceStatistics_totalItemsSkippedInvalidKms:
-			v.TotalItemsSkippedInvalidKms = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsSkippedInvalidKms, v.TotalItemsSkippedInvalidKms)
-		case schemas.ResourceStatistics_totalItemsSkippedPermissionDenied:
-			v.TotalItemsSkippedPermissionDenied = new(int64)
-			return d.ReadInt64(schemas.ResourceStatistics_totalItemsSkippedPermissionDenied, v.TotalItemsSkippedPermissionDenied)
-		}
-		return nil
-	})
-}
-
 // Provides information about the access method and settings that are used to
 // retrieve occurrences of sensitive data reported by findings.
 type RetrievalConfiguration struct {
@@ -5890,44 +2383,6 @@ type RetrievalConfiguration struct {
 	RoleName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RetrievalConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RetrievalConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RetrievalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ExternalId != nil {
-		s.WriteString(schemas.RetrievalConfiguration_externalId, *v.ExternalId)
-	}
-	if v.RetrievalMode != "" {
-		s.WriteString(schemas.RetrievalConfiguration_retrievalMode, string(v.RetrievalMode))
-	}
-	if v.RoleName != nil {
-		s.WriteString(schemas.RetrievalConfiguration_roleName, *v.RoleName)
-	}
-}
-func (v *RetrievalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RetrievalConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RetrievalConfiguration_externalId:
-			v.ExternalId = new(string)
-			return d.ReadString(schemas.RetrievalConfiguration_externalId, v.ExternalId)
-		case schemas.RetrievalConfiguration_retrievalMode:
-			var ev string
-			if err := d.ReadString(schemas.RetrievalConfiguration_retrievalMode, &ev); err != nil {
-				return err
-			}
-			v.RetrievalMode = RetrievalMode(ev)
-			return nil
-		case schemas.RetrievalConfiguration_roleName:
-			v.RoleName = new(string)
-			return d.ReadString(schemas.RetrievalConfiguration_roleName, v.RoleName)
-		}
-		return nil
-	})
 }
 
 // Specifies the status of the Amazon Macie configuration for retrieving
@@ -5963,38 +2418,6 @@ type RevealConfiguration struct {
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *RevealConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.RevealConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *RevealConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.KmsKeyId != nil {
-		s.WriteString(schemas.RevealConfiguration_kmsKeyId, *v.KmsKeyId)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.RevealConfiguration_status, string(v.Status))
-	}
-}
-func (v *RevealConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.RevealConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.RevealConfiguration_kmsKeyId:
-			v.KmsKeyId = new(string)
-			return d.ReadString(schemas.RevealConfiguration_kmsKeyId, v.KmsKeyId)
-		case schemas.RevealConfiguration_status:
-			var ev string
-			if err := d.ReadString(schemas.RevealConfiguration_status, &ev); err != nil {
-				return err
-			}
-			v.Status = RevealStatus(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about the S3 bucket that a finding applies to. If a quota
@@ -6052,77 +2475,6 @@ type S3Bucket struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3Bucket) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Bucket)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Bucket) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AllowsUnencryptedObjectUploads != "" {
-		s.WriteString(schemas.S3Bucket_allowsUnencryptedObjectUploads, string(v.AllowsUnencryptedObjectUploads))
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.S3Bucket_arn, *v.Arn)
-	}
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.S3Bucket_createdAt, *v.CreatedAt)
-	}
-	if v.DefaultServerSideEncryption != nil {
-		s.WriteStruct(schemas.S3Bucket_defaultServerSideEncryption)
-		v.DefaultServerSideEncryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.S3Bucket_name, *v.Name)
-	}
-	if v.Owner != nil {
-		s.WriteStruct(schemas.S3Bucket_owner)
-		v.Owner.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.PublicAccess != nil {
-		s.WriteStruct(schemas.S3Bucket_publicAccess)
-		v.PublicAccess.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeKeyValuePairList(s, schemas.S3Bucket_tags, v.Tags)
-}
-func (v *S3Bucket) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Bucket, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Bucket_allowsUnencryptedObjectUploads:
-			var ev string
-			if err := d.ReadString(schemas.S3Bucket_allowsUnencryptedObjectUploads, &ev); err != nil {
-				return err
-			}
-			v.AllowsUnencryptedObjectUploads = AllowsUnencryptedObjectUploads(ev)
-			return nil
-		case schemas.S3Bucket_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.S3Bucket_arn, v.Arn)
-		case schemas.S3Bucket_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.S3Bucket_createdAt, v.CreatedAt)
-		case schemas.S3Bucket_defaultServerSideEncryption:
-			v.DefaultServerSideEncryption = &ServerSideEncryption{}
-			return v.DefaultServerSideEncryption.Deserialize(d)
-		case schemas.S3Bucket_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.S3Bucket_name, v.Name)
-		case schemas.S3Bucket_owner:
-			v.Owner = &S3BucketOwner{}
-			return v.Owner.Deserialize(d)
-		case schemas.S3Bucket_publicAccess:
-			v.PublicAccess = &BucketPublicAccess{}
-			return v.PublicAccess.Deserialize(d)
-		case schemas.S3Bucket_tags:
-			return deserializeKeyValuePairList(d, schemas.S3Bucket_tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
 // Specifies property- and tag-based conditions that define criteria for including
 // or excluding S3 buckets from a classification job. Exclude conditions take
 // precedence over include conditions.
@@ -6137,38 +2489,6 @@ type S3BucketCriteriaForJob struct {
 	Includes *CriteriaBlockForJob
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3BucketCriteriaForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3BucketCriteriaForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3BucketCriteriaForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Excludes != nil {
-		s.WriteStruct(schemas.S3BucketCriteriaForJob_excludes)
-		v.Excludes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Includes != nil {
-		s.WriteStruct(schemas.S3BucketCriteriaForJob_includes)
-		v.Includes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *S3BucketCriteriaForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3BucketCriteriaForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3BucketCriteriaForJob_excludes:
-			v.Excludes = &CriteriaBlockForJob{}
-			return v.Excludes.Deserialize(d)
-		case schemas.S3BucketCriteriaForJob_includes:
-			v.Includes = &CriteriaBlockForJob{}
-			return v.Includes.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies an Amazon Web Services account that owns S3 buckets for a
@@ -6189,31 +2509,6 @@ type S3BucketDefinitionForJob struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3BucketDefinitionForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3BucketDefinitionForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3BucketDefinitionForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.S3BucketDefinitionForJob_accountId, *v.AccountId)
-	}
-	serialize__listOf__string(s, schemas.S3BucketDefinitionForJob_buckets, v.Buckets)
-}
-func (v *S3BucketDefinitionForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3BucketDefinitionForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3BucketDefinitionForJob_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.S3BucketDefinitionForJob_accountId, v.AccountId)
-		case schemas.S3BucketDefinitionForJob_buckets:
-			return deserialize__listOf__string(d, schemas.S3BucketDefinitionForJob_buckets, &v.Buckets)
-		}
-		return nil
-	})
-}
-
 // Provides information about the Amazon Web Services account that owns an S3
 // bucket.
 type S3BucketOwner struct {
@@ -6225,34 +2520,6 @@ type S3BucketOwner struct {
 	Id *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3BucketOwner) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3BucketOwner)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3BucketOwner) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DisplayName != nil {
-		s.WriteString(schemas.S3BucketOwner_displayName, *v.DisplayName)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.S3BucketOwner_id, *v.Id)
-	}
-}
-func (v *S3BucketOwner) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3BucketOwner, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3BucketOwner_displayName:
-			v.DisplayName = new(string)
-			return d.ReadString(schemas.S3BucketOwner_displayName, v.DisplayName)
-		case schemas.S3BucketOwner_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.S3BucketOwner_id, v.Id)
-		}
-		return nil
-	})
 }
 
 // Specifies the S3 buckets that are excluded from automated sensitive data
@@ -6267,30 +2534,6 @@ type S3ClassificationScope struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3ClassificationScope) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ClassificationScope)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ClassificationScope) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Excludes != nil {
-		s.WriteStruct(schemas.S3ClassificationScope_excludes)
-		v.Excludes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *S3ClassificationScope) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ClassificationScope, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ClassificationScope_excludes:
-			v.Excludes = &S3ClassificationScopeExclusion{}
-			return v.Excludes.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies the names of the S3 buckets that are excluded from automated
 // sensitive data discovery.
 type S3ClassificationScopeExclusion struct {
@@ -6302,25 +2545,6 @@ type S3ClassificationScopeExclusion struct {
 	BucketNames []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3ClassificationScopeExclusion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ClassificationScopeExclusion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ClassificationScopeExclusion) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusion_bucketNames, v.BucketNames)
-}
-func (v *S3ClassificationScopeExclusion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ClassificationScopeExclusion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ClassificationScopeExclusion_bucketNames:
-			return deserialize__listOfS3BucketName(d, schemas.S3ClassificationScopeExclusion_bucketNames, &v.BucketNames)
-		}
-		return nil
-	})
 }
 
 // Specifies S3 buckets to add or remove from the exclusion list defined by the
@@ -6352,35 +2576,6 @@ type S3ClassificationScopeExclusionUpdate struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3ClassificationScopeExclusionUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ClassificationScopeExclusionUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ClassificationScopeExclusionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusionUpdate_bucketNames, v.BucketNames)
-	if v.Operation != "" {
-		s.WriteString(schemas.S3ClassificationScopeExclusionUpdate_operation, string(v.Operation))
-	}
-}
-func (v *S3ClassificationScopeExclusionUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ClassificationScopeExclusionUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ClassificationScopeExclusionUpdate_bucketNames:
-			return deserialize__listOfS3BucketName(d, schemas.S3ClassificationScopeExclusionUpdate_bucketNames, &v.BucketNames)
-		case schemas.S3ClassificationScopeExclusionUpdate_operation:
-			var ev string
-			if err := d.ReadString(schemas.S3ClassificationScopeExclusionUpdate_operation, &ev); err != nil {
-				return err
-			}
-			v.Operation = ClassificationScopeUpdateOperation(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies changes to the list of S3 buckets that are excluded from automated
 // sensitive data discovery for an Amazon Macie account.
 type S3ClassificationScopeUpdate struct {
@@ -6391,30 +2586,6 @@ type S3ClassificationScopeUpdate struct {
 	Excludes *S3ClassificationScopeExclusionUpdate
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3ClassificationScopeUpdate) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3ClassificationScopeUpdate)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3ClassificationScopeUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Excludes != nil {
-		s.WriteStruct(schemas.S3ClassificationScopeUpdate_excludes)
-		v.Excludes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *S3ClassificationScopeUpdate) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3ClassificationScopeUpdate, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3ClassificationScopeUpdate_excludes:
-			v.Excludes = &S3ClassificationScopeExclusionUpdate{}
-			return v.Excludes.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies an S3 bucket to store data classification results in, and the
@@ -6449,46 +2620,6 @@ type S3Destination struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3Destination) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Destination)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Destination) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3Destination_bucketName, *v.BucketName)
-	}
-	if v.ExpectedBucketOwner != nil {
-		s.WriteString(schemas.S3Destination_expectedBucketOwner, *v.ExpectedBucketOwner)
-	}
-	if v.KeyPrefix != nil {
-		s.WriteString(schemas.S3Destination_keyPrefix, *v.KeyPrefix)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.S3Destination_kmsKeyArn, *v.KmsKeyArn)
-	}
-}
-func (v *S3Destination) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Destination, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Destination_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3Destination_bucketName, v.BucketName)
-		case schemas.S3Destination_expectedBucketOwner:
-			v.ExpectedBucketOwner = new(string)
-			return d.ReadString(schemas.S3Destination_expectedBucketOwner, v.ExpectedBucketOwner)
-		case schemas.S3Destination_keyPrefix:
-			v.KeyPrefix = new(string)
-			return d.ReadString(schemas.S3Destination_keyPrefix, v.KeyPrefix)
-		case schemas.S3Destination_kmsKeyArn:
-			v.KmsKeyArn = new(string)
-			return d.ReadString(schemas.S3Destination_kmsKeyArn, v.KmsKeyArn)
-		}
-		return nil
-	})
-}
-
 // Specifies which S3 buckets contain the objects that a classification job
 // analyzes, and the scope of that analysis. The bucket specification can be static
 // (bucketDefinitions) or dynamic (bucketCriteria). If it's static, the job
@@ -6516,41 +2647,6 @@ type S3JobDefinition struct {
 	Scoping *Scoping
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3JobDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3JobDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3JobDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketCriteria != nil {
-		s.WriteStruct(schemas.S3JobDefinition_bucketCriteria)
-		v.BucketCriteria.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serialize__listOfS3BucketDefinitionForJob(s, schemas.S3JobDefinition_bucketDefinitions, v.BucketDefinitions)
-	if v.Scoping != nil {
-		s.WriteStruct(schemas.S3JobDefinition_scoping)
-		v.Scoping.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *S3JobDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3JobDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3JobDefinition_bucketCriteria:
-			v.BucketCriteria = &S3BucketCriteriaForJob{}
-			return v.BucketCriteria.Deserialize(d)
-		case schemas.S3JobDefinition_bucketDefinitions:
-			return deserialize__listOfS3BucketDefinitionForJob(d, schemas.S3JobDefinition_bucketDefinitions, &v.BucketDefinitions)
-		case schemas.S3JobDefinition_scoping:
-			v.Scoping = &Scoping{}
-			return v.Scoping.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Provides information about the S3 object that a finding applies to.
@@ -6601,97 +2697,6 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
-func (v *S3Object) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Object)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Object) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketArn != nil {
-		s.WriteString(schemas.S3Object_bucketArn, *v.BucketArn)
-	}
-	if v.ETag != nil {
-		s.WriteString(schemas.S3Object_eTag, *v.ETag)
-	}
-	if v.Extension != nil {
-		s.WriteString(schemas.S3Object_extension, *v.Extension)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.S3Object_key, *v.Key)
-	}
-	if v.LastModified != nil {
-		s.WriteTime(schemas.S3Object_lastModified, *v.LastModified)
-	}
-	if v.Path != nil {
-		s.WriteString(schemas.S3Object_path, *v.Path)
-	}
-	if v.PublicAccess != nil {
-		s.WriteBool(schemas.S3Object_publicAccess, *v.PublicAccess)
-	}
-	if v.ServerSideEncryption != nil {
-		s.WriteStruct(schemas.S3Object_serverSideEncryption)
-		v.ServerSideEncryption.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Size != nil {
-		s.WriteInt64(schemas.S3Object_size, *v.Size)
-	}
-	if v.StorageClass != "" {
-		s.WriteString(schemas.S3Object_storageClass, string(v.StorageClass))
-	}
-	serializeKeyValuePairList(s, schemas.S3Object_tags, v.Tags)
-	if v.VersionId != nil {
-		s.WriteString(schemas.S3Object_versionId, *v.VersionId)
-	}
-}
-func (v *S3Object) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Object, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Object_bucketArn:
-			v.BucketArn = new(string)
-			return d.ReadString(schemas.S3Object_bucketArn, v.BucketArn)
-		case schemas.S3Object_eTag:
-			v.ETag = new(string)
-			return d.ReadString(schemas.S3Object_eTag, v.ETag)
-		case schemas.S3Object_extension:
-			v.Extension = new(string)
-			return d.ReadString(schemas.S3Object_extension, v.Extension)
-		case schemas.S3Object_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.S3Object_key, v.Key)
-		case schemas.S3Object_lastModified:
-			v.LastModified = new(time.Time)
-			return d.ReadTime(schemas.S3Object_lastModified, v.LastModified)
-		case schemas.S3Object_path:
-			v.Path = new(string)
-			return d.ReadString(schemas.S3Object_path, v.Path)
-		case schemas.S3Object_publicAccess:
-			v.PublicAccess = new(bool)
-			return d.ReadBool(schemas.S3Object_publicAccess, v.PublicAccess)
-		case schemas.S3Object_serverSideEncryption:
-			v.ServerSideEncryption = &ServerSideEncryption{}
-			return v.ServerSideEncryption.Deserialize(d)
-		case schemas.S3Object_size:
-			v.Size = new(int64)
-			return d.ReadInt64(schemas.S3Object_size, v.Size)
-		case schemas.S3Object_storageClass:
-			var ev string
-			if err := d.ReadString(schemas.S3Object_storageClass, &ev); err != nil {
-				return err
-			}
-			v.StorageClass = StorageClass(ev)
-			return nil
-		case schemas.S3Object_tags:
-			return deserializeKeyValuePairList(d, schemas.S3Object_tags, &v.Tags)
-		case schemas.S3Object_versionId:
-			v.VersionId = new(string)
-			return d.ReadString(schemas.S3Object_versionId, v.VersionId)
-		}
-		return nil
-	})
-}
-
 // Provides information about an S3 object that lists specific text to ignore.
 type S3WordsList struct {
 
@@ -6706,34 +2711,6 @@ type S3WordsList struct {
 	ObjectKey *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3WordsList) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3WordsList)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3WordsList) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BucketName != nil {
-		s.WriteString(schemas.S3WordsList_bucketName, *v.BucketName)
-	}
-	if v.ObjectKey != nil {
-		s.WriteString(schemas.S3WordsList_objectKey, *v.ObjectKey)
-	}
-}
-func (v *S3WordsList) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3WordsList, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3WordsList_bucketName:
-			v.BucketName = new(string)
-			return d.ReadString(schemas.S3WordsList_bucketName, v.BucketName)
-		case schemas.S3WordsList_objectKey:
-			v.ObjectKey = new(string)
-			return d.ReadString(schemas.S3WordsList_objectKey, v.ObjectKey)
-		}
-		return nil
-	})
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
@@ -6752,38 +2729,6 @@ type Scoping struct {
 	noSmithyDocumentSerde
 }
 
-func (v *Scoping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Scoping)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Scoping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Excludes != nil {
-		s.WriteStruct(schemas.Scoping_excludes)
-		v.Excludes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Includes != nil {
-		s.WriteStruct(schemas.Scoping_includes)
-		v.Includes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *Scoping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Scoping, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Scoping_excludes:
-			v.Excludes = &JobScopingBlock{}
-			return v.Excludes.Deserialize(d)
-		case schemas.Scoping_includes:
-			v.Includes = &JobScopingBlock{}
-			return v.Includes.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies property- and tag-based conditions that define filter criteria for
 // including or excluding S3 buckets from the query results. Exclude conditions
 // take precedence over include conditions.
@@ -6798,38 +2743,6 @@ type SearchResourcesBucketCriteria struct {
 	Includes *SearchResourcesCriteriaBlock
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchResourcesBucketCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesBucketCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesBucketCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Excludes != nil {
-		s.WriteStruct(schemas.SearchResourcesBucketCriteria_excludes)
-		v.Excludes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Includes != nil {
-		s.WriteStruct(schemas.SearchResourcesBucketCriteria_includes)
-		v.Includes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SearchResourcesBucketCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesBucketCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesBucketCriteria_excludes:
-			v.Excludes = &SearchResourcesCriteriaBlock{}
-			return v.Excludes.Deserialize(d)
-		case schemas.SearchResourcesBucketCriteria_includes:
-			v.Includes = &SearchResourcesCriteriaBlock{}
-			return v.Includes.Deserialize(d)
-		}
-		return nil
-	})
 }
 
 // Specifies a property- or tag-based filter condition for including or excluding
@@ -6847,38 +2760,6 @@ type SearchResourcesCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchResourcesCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.SimpleCriterion != nil {
-		s.WriteStruct(schemas.SearchResourcesCriteria_simpleCriterion)
-		v.SimpleCriterion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.TagCriterion != nil {
-		s.WriteStruct(schemas.SearchResourcesCriteria_tagCriterion)
-		v.TagCriterion.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SearchResourcesCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesCriteria_simpleCriterion:
-			v.SimpleCriterion = &SearchResourcesSimpleCriterion{}
-			return v.SimpleCriterion.Deserialize(d)
-		case schemas.SearchResourcesCriteria_tagCriterion:
-			v.TagCriterion = &SearchResourcesTagCriterion{}
-			return v.TagCriterion.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Specifies property- and tag-based conditions that define filter criteria for
 // including or excluding Amazon Web Services resources from the query results.
 type SearchResourcesCriteriaBlock struct {
@@ -6889,25 +2770,6 @@ type SearchResourcesCriteriaBlock struct {
 	And []SearchResourcesCriteria
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchResourcesCriteriaBlock) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesCriteriaBlock)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesCriteriaBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSearchResourcesCriteria(s, schemas.SearchResourcesCriteriaBlock_and, v.And)
-}
-func (v *SearchResourcesCriteriaBlock) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesCriteriaBlock, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesCriteriaBlock_and:
-			return deserialize__listOfSearchResourcesCriteria(d, schemas.SearchResourcesCriteriaBlock_and, &v.And)
-		}
-		return nil
-	})
 }
 
 // Specifies a property-based filter condition that determines which Amazon Web
@@ -6950,45 +2812,6 @@ type SearchResourcesSimpleCriterion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchResourcesSimpleCriterion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesSimpleCriterion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesSimpleCriterion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.SearchResourcesSimpleCriterion_comparator, string(v.Comparator))
-	}
-	if v.Key != "" {
-		s.WriteString(schemas.SearchResourcesSimpleCriterion_key, string(v.Key))
-	}
-	serialize__listOf__string(s, schemas.SearchResourcesSimpleCriterion_values, v.Values)
-}
-func (v *SearchResourcesSimpleCriterion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesSimpleCriterion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesSimpleCriterion_comparator:
-			var ev string
-			if err := d.ReadString(schemas.SearchResourcesSimpleCriterion_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = SearchResourcesComparator(ev)
-			return nil
-		case schemas.SearchResourcesSimpleCriterion_key:
-			var ev string
-			if err := d.ReadString(schemas.SearchResourcesSimpleCriterion_key, &ev); err != nil {
-				return err
-			}
-			v.Key = SearchResourcesSimpleCriterionKey(ev)
-			return nil
-		case schemas.SearchResourcesSimpleCriterion_values:
-			return deserialize__listOf__string(d, schemas.SearchResourcesSimpleCriterion_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a query for information about
 // Amazon Web Services resources that Amazon Macie monitors and analyzes.
 type SearchResourcesSortCriteria struct {
@@ -7002,42 +2825,6 @@ type SearchResourcesSortCriteria struct {
 	OrderBy OrderBy
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchResourcesSortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesSortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesSortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != "" {
-		s.WriteString(schemas.SearchResourcesSortCriteria_attributeName, string(v.AttributeName))
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.SearchResourcesSortCriteria_orderBy, string(v.OrderBy))
-	}
-}
-func (v *SearchResourcesSortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesSortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesSortCriteria_attributeName:
-			var ev string
-			if err := d.ReadString(schemas.SearchResourcesSortCriteria_attributeName, &ev); err != nil {
-				return err
-			}
-			v.AttributeName = SearchResourcesSortAttributeName(ev)
-			return nil
-		case schemas.SearchResourcesSortCriteria_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.SearchResourcesSortCriteria_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Specifies a tag-based filter condition that determines which Amazon Web
@@ -7054,35 +2841,6 @@ type SearchResourcesTagCriterion struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SearchResourcesTagCriterion) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesTagCriterion)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesTagCriterion) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.SearchResourcesTagCriterion_comparator, string(v.Comparator))
-	}
-	serialize__listOfSearchResourcesTagCriterionPair(s, schemas.SearchResourcesTagCriterion_tagValues, v.TagValues)
-}
-func (v *SearchResourcesTagCriterion) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesTagCriterion, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesTagCriterion_comparator:
-			var ev string
-			if err := d.ReadString(schemas.SearchResourcesTagCriterion_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = SearchResourcesComparator(ev)
-			return nil
-		case schemas.SearchResourcesTagCriterion_tagValues:
-			return deserialize__listOfSearchResourcesTagCriterionPair(d, schemas.SearchResourcesTagCriterion_tagValues, &v.TagValues)
-		}
-		return nil
-	})
-}
-
 // Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in
 // a tag-based filter condition for a query. Tag keys and values are case
 // sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard
@@ -7096,34 +2854,6 @@ type SearchResourcesTagCriterionPair struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SearchResourcesTagCriterionPair) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SearchResourcesTagCriterionPair)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SearchResourcesTagCriterionPair) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.SearchResourcesTagCriterionPair_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.SearchResourcesTagCriterionPair_value, *v.Value)
-	}
-}
-func (v *SearchResourcesTagCriterionPair) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SearchResourcesTagCriterionPair, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SearchResourcesTagCriterionPair_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.SearchResourcesTagCriterionPair_key, v.Key)
-		case schemas.SearchResourcesTagCriterionPair_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.SearchResourcesTagCriterionPair_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Specifies configuration settings that determine which findings are published to
@@ -7152,34 +2882,6 @@ type SecurityHubConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SecurityHubConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SecurityHubConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SecurityHubConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PublishClassificationFindings != nil {
-		s.WriteBool(schemas.SecurityHubConfiguration_publishClassificationFindings, *v.PublishClassificationFindings)
-	}
-	if v.PublishPolicyFindings != nil {
-		s.WriteBool(schemas.SecurityHubConfiguration_publishPolicyFindings, *v.PublishPolicyFindings)
-	}
-}
-func (v *SecurityHubConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SecurityHubConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SecurityHubConfiguration_publishClassificationFindings:
-			v.PublishClassificationFindings = new(bool)
-			return d.ReadBool(schemas.SecurityHubConfiguration_publishClassificationFindings, v.PublishClassificationFindings)
-		case schemas.SecurityHubConfiguration_publishPolicyFindings:
-			v.PublishPolicyFindings = new(bool)
-			return d.ReadBool(schemas.SecurityHubConfiguration_publishPolicyFindings, v.PublishPolicyFindings)
-		}
-		return nil
-	})
-}
-
 // Provides information about the category, types, and occurrences of sensitive
 // data that produced a sensitive data finding.
 type SensitiveDataItem struct {
@@ -7201,41 +2903,6 @@ type SensitiveDataItem struct {
 	TotalCount *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *SensitiveDataItem) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SensitiveDataItem)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SensitiveDataItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Category != "" {
-		s.WriteString(schemas.SensitiveDataItem_category, string(v.Category))
-	}
-	serializeDefaultDetections(s, schemas.SensitiveDataItem_detections, v.Detections)
-	if v.TotalCount != nil {
-		s.WriteInt64(schemas.SensitiveDataItem_totalCount, *v.TotalCount)
-	}
-}
-func (v *SensitiveDataItem) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SensitiveDataItem, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SensitiveDataItem_category:
-			var ev string
-			if err := d.ReadString(schemas.SensitiveDataItem_category, &ev); err != nil {
-				return err
-			}
-			v.Category = SensitiveDataItemCategory(ev)
-			return nil
-		case schemas.SensitiveDataItem_detections:
-			return deserializeDefaultDetections(d, schemas.SensitiveDataItem_detections, &v.Detections)
-		case schemas.SensitiveDataItem_totalCount:
-			v.TotalCount = new(int64)
-			return d.ReadInt64(schemas.SensitiveDataItem_totalCount, v.TotalCount)
-		}
-		return nil
-	})
 }
 
 // Provides aggregated statistical data for sensitive data discovery metrics that
@@ -7273,46 +2940,6 @@ type SensitivityAggregations struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SensitivityAggregations) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SensitivityAggregations)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SensitivityAggregations) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClassifiableSizeInBytes != nil {
-		s.WriteInt64(schemas.SensitivityAggregations_classifiableSizeInBytes, *v.ClassifiableSizeInBytes)
-	}
-	if v.PubliclyAccessibleCount != nil {
-		s.WriteInt64(schemas.SensitivityAggregations_publiclyAccessibleCount, *v.PubliclyAccessibleCount)
-	}
-	if v.TotalCount != nil {
-		s.WriteInt64(schemas.SensitivityAggregations_totalCount, *v.TotalCount)
-	}
-	if v.TotalSizeInBytes != nil {
-		s.WriteInt64(schemas.SensitivityAggregations_totalSizeInBytes, *v.TotalSizeInBytes)
-	}
-}
-func (v *SensitivityAggregations) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SensitivityAggregations, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SensitivityAggregations_classifiableSizeInBytes:
-			v.ClassifiableSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.SensitivityAggregations_classifiableSizeInBytes, v.ClassifiableSizeInBytes)
-		case schemas.SensitivityAggregations_publiclyAccessibleCount:
-			v.PubliclyAccessibleCount = new(int64)
-			return d.ReadInt64(schemas.SensitivityAggregations_publiclyAccessibleCount, v.PubliclyAccessibleCount)
-		case schemas.SensitivityAggregations_totalCount:
-			v.TotalCount = new(int64)
-			return d.ReadInt64(schemas.SensitivityAggregations_totalCount, v.TotalCount)
-		case schemas.SensitivityAggregations_totalSizeInBytes:
-			v.TotalSizeInBytes = new(int64)
-			return d.ReadInt64(schemas.SensitivityAggregations_totalSizeInBytes, v.TotalSizeInBytes)
-		}
-		return nil
-	})
-}
-
 // Specifies managed data identifiers to exclude (not use) when performing
 // automated sensitive data discovery. For information about the managed data
 // identifiers that Amazon Macie currently provides, see [Using managed data identifiers]in the Amazon Macie User
@@ -7327,25 +2954,6 @@ type SensitivityInspectionTemplateExcludes struct {
 	ManagedDataIdentifierIds []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SensitivityInspectionTemplateExcludes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SensitivityInspectionTemplateExcludes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SensitivityInspectionTemplateExcludes) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateExcludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
-}
-func (v *SensitivityInspectionTemplateExcludes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SensitivityInspectionTemplateExcludes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SensitivityInspectionTemplateExcludes_managedDataIdentifierIds:
-			return deserialize__listOf__string(d, schemas.SensitivityInspectionTemplateExcludes_managedDataIdentifierIds, &v.ManagedDataIdentifierIds)
-		}
-		return nil
-	})
 }
 
 // Specifies the allow lists, custom data identifiers, and managed data
@@ -7375,31 +2983,6 @@ type SensitivityInspectionTemplateIncludes struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SensitivityInspectionTemplateIncludes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SensitivityInspectionTemplateIncludes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SensitivityInspectionTemplateIncludes) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_allowListIds, v.AllowListIds)
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_customDataIdentifierIds, v.CustomDataIdentifierIds)
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
-}
-func (v *SensitivityInspectionTemplateIncludes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SensitivityInspectionTemplateIncludes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SensitivityInspectionTemplateIncludes_allowListIds:
-			return deserialize__listOf__string(d, schemas.SensitivityInspectionTemplateIncludes_allowListIds, &v.AllowListIds)
-		case schemas.SensitivityInspectionTemplateIncludes_customDataIdentifierIds:
-			return deserialize__listOf__string(d, schemas.SensitivityInspectionTemplateIncludes_customDataIdentifierIds, &v.CustomDataIdentifierIds)
-		case schemas.SensitivityInspectionTemplateIncludes_managedDataIdentifierIds:
-			return deserialize__listOf__string(d, schemas.SensitivityInspectionTemplateIncludes_managedDataIdentifierIds, &v.ManagedDataIdentifierIds)
-		}
-		return nil
-	})
-}
-
 // Provides information about the sensitivity inspection template for an Amazon
 // Macie account.
 type SensitivityInspectionTemplatesEntry struct {
@@ -7412,34 +2995,6 @@ type SensitivityInspectionTemplatesEntry struct {
 	Name *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SensitivityInspectionTemplatesEntry) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SensitivityInspectionTemplatesEntry)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SensitivityInspectionTemplatesEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.SensitivityInspectionTemplatesEntry_id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.SensitivityInspectionTemplatesEntry_name, *v.Name)
-	}
-}
-func (v *SensitivityInspectionTemplatesEntry) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SensitivityInspectionTemplatesEntry, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SensitivityInspectionTemplatesEntry_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SensitivityInspectionTemplatesEntry_id, v.Id)
-		case schemas.SensitivityInspectionTemplatesEntry_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.SensitivityInspectionTemplatesEntry_name, v.Name)
-		}
-		return nil
-	})
 }
 
 // Provides information about the default server-side encryption settings for an
@@ -7460,38 +3015,6 @@ type ServerSideEncryption struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServerSideEncryption) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServerSideEncryption)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServerSideEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionType != "" {
-		s.WriteString(schemas.ServerSideEncryption_encryptionType, string(v.EncryptionType))
-	}
-	if v.KmsMasterKeyId != nil {
-		s.WriteString(schemas.ServerSideEncryption_kmsMasterKeyId, *v.KmsMasterKeyId)
-	}
-}
-func (v *ServerSideEncryption) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServerSideEncryption, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServerSideEncryption_encryptionType:
-			var ev string
-			if err := d.ReadString(schemas.ServerSideEncryption_encryptionType, &ev); err != nil {
-				return err
-			}
-			v.EncryptionType = EncryptionType(ev)
-			return nil
-		case schemas.ServerSideEncryption_kmsMasterKeyId:
-			v.KmsMasterKeyId = new(string)
-			return d.ReadString(schemas.ServerSideEncryption_kmsMasterKeyId, v.KmsMasterKeyId)
-		}
-		return nil
-	})
-}
-
 // Specifies a current quota for an Amazon Macie account.
 type ServiceLimit struct {
 
@@ -7509,44 +3032,6 @@ type ServiceLimit struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ServiceLimit) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ServiceLimit)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ServiceLimit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsServiceLimited != nil {
-		s.WriteBool(schemas.ServiceLimit_isServiceLimited, *v.IsServiceLimited)
-	}
-	if v.Unit != "" {
-		s.WriteString(schemas.ServiceLimit_unit, string(v.Unit))
-	}
-	if v.Value != nil {
-		s.WriteInt64(schemas.ServiceLimit_value, *v.Value)
-	}
-}
-func (v *ServiceLimit) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ServiceLimit, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ServiceLimit_isServiceLimited:
-			v.IsServiceLimited = new(bool)
-			return d.ReadBool(schemas.ServiceLimit_isServiceLimited, v.IsServiceLimited)
-		case schemas.ServiceLimit_unit:
-			var ev string
-			if err := d.ReadString(schemas.ServiceLimit_unit, &ev); err != nil {
-				return err
-			}
-			v.Unit = Unit(ev)
-			return nil
-		case schemas.ServiceLimit_value:
-			v.Value = new(int64)
-			return d.ReadInt64(schemas.ServiceLimit_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Provides information about a session that was created for an entity that
 // performed an action by using temporary security credentials.
 type SessionContext struct {
@@ -7561,38 +3046,6 @@ type SessionContext struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionContext) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionContext)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Attributes != nil {
-		s.WriteStruct(schemas.SessionContext_attributes)
-		v.Attributes.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.SessionIssuer != nil {
-		s.WriteStruct(schemas.SessionContext_sessionIssuer)
-		v.SessionIssuer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *SessionContext) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionContext, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionContext_attributes:
-			v.Attributes = &SessionContextAttributes{}
-			return v.Attributes.Deserialize(d)
-		case schemas.SessionContext_sessionIssuer:
-			v.SessionIssuer = &SessionIssuer{}
-			return v.SessionIssuer.Deserialize(d)
-		}
-		return nil
-	})
-}
-
 // Provides information about the context in which temporary security credentials
 // were issued to an entity.
 type SessionContextAttributes struct {
@@ -7605,34 +3058,6 @@ type SessionContextAttributes struct {
 	MfaAuthenticated *bool
 
 	noSmithyDocumentSerde
-}
-
-func (v *SessionContextAttributes) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionContextAttributes)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionContextAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreationDate != nil {
-		s.WriteTime(schemas.SessionContextAttributes_creationDate, *v.CreationDate)
-	}
-	if v.MfaAuthenticated != nil {
-		s.WriteBool(schemas.SessionContextAttributes_mfaAuthenticated, *v.MfaAuthenticated)
-	}
-}
-func (v *SessionContextAttributes) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionContextAttributes, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionContextAttributes_creationDate:
-			v.CreationDate = new(time.Time)
-			return d.ReadTime(schemas.SessionContextAttributes_creationDate, v.CreationDate)
-		case schemas.SessionContextAttributes_mfaAuthenticated:
-			v.MfaAuthenticated = new(bool)
-			return d.ReadBool(schemas.SessionContextAttributes_mfaAuthenticated, v.MfaAuthenticated)
-		}
-		return nil
-	})
 }
 
 // Provides information about the source and type of temporary security
@@ -7662,52 +3087,6 @@ type SessionIssuer struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SessionIssuer) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SessionIssuer)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SessionIssuer) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.SessionIssuer_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.SessionIssuer_arn, *v.Arn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.SessionIssuer_principalId, *v.PrincipalId)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.SessionIssuer_type, *v.Type)
-	}
-	if v.UserName != nil {
-		s.WriteString(schemas.SessionIssuer_userName, *v.UserName)
-	}
-}
-func (v *SessionIssuer) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SessionIssuer, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SessionIssuer_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.SessionIssuer_accountId, v.AccountId)
-		case schemas.SessionIssuer_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.SessionIssuer_arn, v.Arn)
-		case schemas.SessionIssuer_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.SessionIssuer_principalId, v.PrincipalId)
-		case schemas.SessionIssuer_type:
-			v.Type = new(string)
-			return d.ReadString(schemas.SessionIssuer_type, v.Type)
-		case schemas.SessionIssuer_userName:
-			v.UserName = new(string)
-			return d.ReadString(schemas.SessionIssuer_userName, v.UserName)
-		}
-		return nil
-	})
-}
-
 // Provides the numerical and qualitative representations of a finding's severity.
 type Severity struct {
 
@@ -7720,38 +3099,6 @@ type Severity struct {
 	Score *int64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Severity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Severity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Severity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != "" {
-		s.WriteString(schemas.Severity_description, string(v.Description))
-	}
-	if v.Score != nil {
-		s.WriteInt64(schemas.Severity_score, *v.Score)
-	}
-}
-func (v *Severity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Severity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Severity_description:
-			var ev string
-			if err := d.ReadString(schemas.Severity_description, &ev); err != nil {
-				return err
-			}
-			v.Description = SeverityDescription(ev)
-			return nil
-		case schemas.Severity_score:
-			v.Score = new(int64)
-			return d.ReadInt64(schemas.Severity_score, v.Score)
-		}
-		return nil
-	})
 }
 
 // Specifies a severity level for findings that a custom data identifier produces.
@@ -7777,38 +3124,6 @@ type SeverityLevel struct {
 	Severity DataIdentifierSeverity
 
 	noSmithyDocumentSerde
-}
-
-func (v *SeverityLevel) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SeverityLevel)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SeverityLevel) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OccurrencesThreshold != nil {
-		s.WriteInt64(schemas.SeverityLevel_occurrencesThreshold, *v.OccurrencesThreshold)
-	}
-	if v.Severity != "" {
-		s.WriteString(schemas.SeverityLevel_severity, string(v.Severity))
-	}
-}
-func (v *SeverityLevel) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SeverityLevel, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SeverityLevel_occurrencesThreshold:
-			v.OccurrencesThreshold = new(int64)
-			return d.ReadInt64(schemas.SeverityLevel_occurrencesThreshold, v.OccurrencesThreshold)
-		case schemas.SeverityLevel_severity:
-			var ev string
-			if err := d.ReadString(schemas.SeverityLevel_severity, &ev); err != nil {
-				return err
-			}
-			v.Severity = DataIdentifierSeverity(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Specifies a property-based condition that determines whether an S3 bucket is
@@ -7845,45 +3160,6 @@ type SimpleCriterionForJob struct {
 	Values []string
 
 	noSmithyDocumentSerde
-}
-
-func (v *SimpleCriterionForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimpleCriterionForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimpleCriterionForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.SimpleCriterionForJob_comparator, string(v.Comparator))
-	}
-	if v.Key != "" {
-		s.WriteString(schemas.SimpleCriterionForJob_key, string(v.Key))
-	}
-	serialize__listOf__string(s, schemas.SimpleCriterionForJob_values, v.Values)
-}
-func (v *SimpleCriterionForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimpleCriterionForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimpleCriterionForJob_comparator:
-			var ev string
-			if err := d.ReadString(schemas.SimpleCriterionForJob_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = JobComparator(ev)
-			return nil
-		case schemas.SimpleCriterionForJob_key:
-			var ev string
-			if err := d.ReadString(schemas.SimpleCriterionForJob_key, &ev); err != nil {
-				return err
-			}
-			v.Key = SimpleCriterionKeyForJob(ev)
-			return nil
-		case schemas.SimpleCriterionForJob_values:
-			return deserialize__listOf__string(d, schemas.SimpleCriterionForJob_values, &v.Values)
-		}
-		return nil
-	})
 }
 
 // Specifies a property-based condition that determines whether an S3 object is
@@ -7935,45 +3211,6 @@ type SimpleScopeTerm struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SimpleScopeTerm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SimpleScopeTerm)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SimpleScopeTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.SimpleScopeTerm_comparator, string(v.Comparator))
-	}
-	if v.Key != "" {
-		s.WriteString(schemas.SimpleScopeTerm_key, string(v.Key))
-	}
-	serialize__listOf__string(s, schemas.SimpleScopeTerm_values, v.Values)
-}
-func (v *SimpleScopeTerm) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SimpleScopeTerm, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SimpleScopeTerm_comparator:
-			var ev string
-			if err := d.ReadString(schemas.SimpleScopeTerm_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = JobComparator(ev)
-			return nil
-		case schemas.SimpleScopeTerm_key:
-			var ev string
-			if err := d.ReadString(schemas.SimpleScopeTerm_key, &ev); err != nil {
-				return err
-			}
-			v.Key = ScopeFilterKey(ev)
-			return nil
-		case schemas.SimpleScopeTerm_values:
-			return deserialize__listOf__string(d, schemas.SimpleScopeTerm_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a request for findings.
 type SortCriteria struct {
 
@@ -7991,38 +3228,6 @@ type SortCriteria struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SortCriteria) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SortCriteria)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AttributeName != nil {
-		s.WriteString(schemas.SortCriteria_attributeName, *v.AttributeName)
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.SortCriteria_orderBy, string(v.OrderBy))
-	}
-}
-func (v *SortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SortCriteria, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SortCriteria_attributeName:
-			v.AttributeName = new(string)
-			return d.ReadString(schemas.SortCriteria_attributeName, v.AttributeName)
-		case schemas.SortCriteria_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.SortCriteria_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides processing statistics for a classification job.
 type Statistics struct {
 
@@ -8034,34 +3239,6 @@ type Statistics struct {
 	NumberOfRuns *float64
 
 	noSmithyDocumentSerde
-}
-
-func (v *Statistics) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Statistics)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Statistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApproximateNumberOfObjectsToProcess != nil {
-		s.WriteFloat64(schemas.Statistics_approximateNumberOfObjectsToProcess, *v.ApproximateNumberOfObjectsToProcess)
-	}
-	if v.NumberOfRuns != nil {
-		s.WriteFloat64(schemas.Statistics_numberOfRuns, *v.NumberOfRuns)
-	}
-}
-func (v *Statistics) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Statistics, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Statistics_approximateNumberOfObjectsToProcess:
-			v.ApproximateNumberOfObjectsToProcess = new(float64)
-			return d.ReadFloat64(schemas.Statistics_approximateNumberOfObjectsToProcess, v.ApproximateNumberOfObjectsToProcess)
-		case schemas.Statistics_numberOfRuns:
-			v.NumberOfRuns = new(float64)
-			return d.ReadFloat64(schemas.Statistics_numberOfRuns, v.NumberOfRuns)
-		}
-		return nil
-	})
 }
 
 // Specifies a custom data identifier or managed data identifier that detected a
@@ -8080,38 +3257,6 @@ type SuppressDataIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-func (v *SuppressDataIdentifier) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SuppressDataIdentifier)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SuppressDataIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Id != nil {
-		s.WriteString(schemas.SuppressDataIdentifier_id, *v.Id)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.SuppressDataIdentifier_type, string(v.Type))
-	}
-}
-func (v *SuppressDataIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SuppressDataIdentifier, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SuppressDataIdentifier_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.SuppressDataIdentifier_id, v.Id)
-		case schemas.SuppressDataIdentifier_type:
-			var ev string
-			if err := d.ReadString(schemas.SuppressDataIdentifier_type, &ev); err != nil {
-				return err
-			}
-			v.Type = DataIdentifierType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies a tag-based condition that determines whether an S3 bucket is
 // included or excluded from a classification job.
 type TagCriterionForJob struct {
@@ -8124,35 +3269,6 @@ type TagCriterionForJob struct {
 	TagValues []TagCriterionPairForJob
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagCriterionForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagCriterionForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagCriterionForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.TagCriterionForJob_comparator, string(v.Comparator))
-	}
-	serialize__listOfTagCriterionPairForJob(s, schemas.TagCriterionForJob_tagValues, v.TagValues)
-}
-func (v *TagCriterionForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagCriterionForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagCriterionForJob_comparator:
-			var ev string
-			if err := d.ReadString(schemas.TagCriterionForJob_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = JobComparator(ev)
-			return nil
-		case schemas.TagCriterionForJob_tagValues:
-			return deserialize__listOfTagCriterionPairForJob(d, schemas.TagCriterionForJob_tagValues, &v.TagValues)
-		}
-		return nil
-	})
 }
 
 // Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in
@@ -8169,34 +3285,6 @@ type TagCriterionPairForJob struct {
 	Value *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *TagCriterionPairForJob) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagCriterionPairForJob)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagCriterionPairForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.TagCriterionPairForJob_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.TagCriterionPairForJob_value, *v.Value)
-	}
-}
-func (v *TagCriterionPairForJob) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagCriterionPairForJob, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagCriterionPairForJob_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagCriterionPairForJob_key, v.Key)
-		case schemas.TagCriterionPairForJob_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.TagCriterionPairForJob_value, v.Value)
-		}
-		return nil
-	})
 }
 
 // Specifies a tag-based condition that determines whether an S3 object is
@@ -8221,51 +3309,6 @@ type TagScopeTerm struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagScopeTerm) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagScopeTerm)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagScopeTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.TagScopeTerm_comparator, string(v.Comparator))
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.TagScopeTerm_key, *v.Key)
-	}
-	serialize__listOfTagValuePair(s, schemas.TagScopeTerm_tagValues, v.TagValues)
-	if v.Target != "" {
-		s.WriteString(schemas.TagScopeTerm_target, string(v.Target))
-	}
-}
-func (v *TagScopeTerm) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagScopeTerm, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagScopeTerm_comparator:
-			var ev string
-			if err := d.ReadString(schemas.TagScopeTerm_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = JobComparator(ev)
-			return nil
-		case schemas.TagScopeTerm_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagScopeTerm_key, v.Key)
-		case schemas.TagScopeTerm_tagValues:
-			return deserialize__listOfTagValuePair(d, schemas.TagScopeTerm_tagValues, &v.TagValues)
-		case schemas.TagScopeTerm_target:
-			var ev string
-			if err := d.ReadString(schemas.TagScopeTerm_target, &ev); err != nil {
-				return err
-			}
-			v.Target = TagTarget(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Specifies a tag key or tag key and value pair to use in a tag-based condition
 // that determines whether an S3 object is included or excluded from a
 // classification job. Tag keys and values are case sensitive. Also, Amazon Macie
@@ -8284,34 +3327,6 @@ type TagValuePair struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TagValuePair) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TagValuePair)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TagValuePair) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != nil {
-		s.WriteString(schemas.TagValuePair_key, *v.Key)
-	}
-	if v.Value != nil {
-		s.WriteString(schemas.TagValuePair_value, *v.Value)
-	}
-}
-func (v *TagValuePair) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TagValuePair, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TagValuePair_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.TagValuePair_key, v.Key)
-		case schemas.TagValuePair_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.TagValuePair_value, v.Value)
-		}
-		return nil
-	})
-}
-
 // Provides information about an account-related request that hasn't been
 // processed.
 type UnprocessedAccount struct {
@@ -8326,44 +3341,6 @@ type UnprocessedAccount struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UnprocessedAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UnprocessedAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UnprocessedAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.UnprocessedAccount_accountId, *v.AccountId)
-	}
-	if v.ErrorCode != "" {
-		s.WriteString(schemas.UnprocessedAccount_errorCode, string(v.ErrorCode))
-	}
-	if v.ErrorMessage != nil {
-		s.WriteString(schemas.UnprocessedAccount_errorMessage, *v.ErrorMessage)
-	}
-}
-func (v *UnprocessedAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UnprocessedAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UnprocessedAccount_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.UnprocessedAccount_accountId, v.AccountId)
-		case schemas.UnprocessedAccount_errorCode:
-			var ev string
-			if err := d.ReadString(schemas.UnprocessedAccount_errorCode, &ev); err != nil {
-				return err
-			}
-			v.ErrorCode = ErrorCode(ev)
-			return nil
-		case schemas.UnprocessedAccount_errorMessage:
-			v.ErrorMessage = new(string)
-			return d.ReadString(schemas.UnprocessedAccount_errorMessage, v.ErrorMessage)
-		}
-		return nil
-	})
 }
 
 // Specifies the access method and settings to use when retrieving occurrences of
@@ -8400,38 +3377,6 @@ type UpdateRetrievalConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRetrievalConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRetrievalConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRetrievalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RetrievalMode != "" {
-		s.WriteString(schemas.UpdateRetrievalConfiguration_retrievalMode, string(v.RetrievalMode))
-	}
-	if v.RoleName != nil {
-		s.WriteString(schemas.UpdateRetrievalConfiguration_roleName, *v.RoleName)
-	}
-}
-func (v *UpdateRetrievalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRetrievalConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRetrievalConfiguration_retrievalMode:
-			var ev string
-			if err := d.ReadString(schemas.UpdateRetrievalConfiguration_retrievalMode, &ev); err != nil {
-				return err
-			}
-			v.RetrievalMode = RetrievalMode(ev)
-			return nil
-		case schemas.UpdateRetrievalConfiguration_roleName:
-			v.RoleName = new(string)
-			return d.ReadString(schemas.UpdateRetrievalConfiguration_roleName, v.RoleName)
-		}
-		return nil
-	})
-}
-
 // Provides data for a specific usage metric and the corresponding quota for an
 // Amazon Macie account.
 type UsageByAccount struct {
@@ -8457,56 +3402,6 @@ type UsageByAccount struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UsageByAccount) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageByAccount)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageByAccount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != "" {
-		s.WriteString(schemas.UsageByAccount_currency, string(v.Currency))
-	}
-	if v.EstimatedCost != nil {
-		s.WriteString(schemas.UsageByAccount_estimatedCost, *v.EstimatedCost)
-	}
-	if v.ServiceLimit != nil {
-		s.WriteStruct(schemas.UsageByAccount_serviceLimit)
-		v.ServiceLimit.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.UsageByAccount_type, string(v.Type))
-	}
-}
-func (v *UsageByAccount) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageByAccount, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageByAccount_currency:
-			var ev string
-			if err := d.ReadString(schemas.UsageByAccount_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = Currency(ev)
-			return nil
-		case schemas.UsageByAccount_estimatedCost:
-			v.EstimatedCost = new(string)
-			return d.ReadString(schemas.UsageByAccount_estimatedCost, v.EstimatedCost)
-		case schemas.UsageByAccount_serviceLimit:
-			v.ServiceLimit = &ServiceLimit{}
-			return v.ServiceLimit.Deserialize(d)
-		case schemas.UsageByAccount_type:
-			var ev string
-			if err := d.ReadString(schemas.UsageByAccount_type, &ev); err != nil {
-				return err
-			}
-			v.Type = UsageType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides quota and aggregated usage data for an Amazon Macie account.
 type UsageRecord struct {
 
@@ -8529,43 +3424,6 @@ type UsageRecord struct {
 	Usage []UsageByAccount
 
 	noSmithyDocumentSerde
-}
-
-func (v *UsageRecord) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageRecord)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageRecord) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.UsageRecord_accountId, *v.AccountId)
-	}
-	if v.AutomatedDiscoveryFreeTrialStartDate != nil {
-		s.WriteTime(schemas.UsageRecord_automatedDiscoveryFreeTrialStartDate, *v.AutomatedDiscoveryFreeTrialStartDate)
-	}
-	if v.FreeTrialStartDate != nil {
-		s.WriteTime(schemas.UsageRecord_freeTrialStartDate, *v.FreeTrialStartDate)
-	}
-	serialize__listOfUsageByAccount(s, schemas.UsageRecord_usage, v.Usage)
-}
-func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageRecord, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageRecord_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.UsageRecord_accountId, v.AccountId)
-		case schemas.UsageRecord_automatedDiscoveryFreeTrialStartDate:
-			v.AutomatedDiscoveryFreeTrialStartDate = new(time.Time)
-			return d.ReadTime(schemas.UsageRecord_automatedDiscoveryFreeTrialStartDate, v.AutomatedDiscoveryFreeTrialStartDate)
-		case schemas.UsageRecord_freeTrialStartDate:
-			v.FreeTrialStartDate = new(time.Time)
-			return d.ReadTime(schemas.UsageRecord_freeTrialStartDate, v.FreeTrialStartDate)
-		case schemas.UsageRecord_usage:
-			return deserialize__listOfUsageByAccount(d, schemas.UsageRecord_usage, &v.Usage)
-		}
-		return nil
-	})
 }
 
 // Specifies a condition for filtering the results of a query for quota and usage
@@ -8601,45 +3459,6 @@ type UsageStatisticsFilter struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UsageStatisticsFilter) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageStatisticsFilter)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageStatisticsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Comparator != "" {
-		s.WriteString(schemas.UsageStatisticsFilter_comparator, string(v.Comparator))
-	}
-	if v.Key != "" {
-		s.WriteString(schemas.UsageStatisticsFilter_key, string(v.Key))
-	}
-	serialize__listOf__string(s, schemas.UsageStatisticsFilter_values, v.Values)
-}
-func (v *UsageStatisticsFilter) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageStatisticsFilter, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageStatisticsFilter_comparator:
-			var ev string
-			if err := d.ReadString(schemas.UsageStatisticsFilter_comparator, &ev); err != nil {
-				return err
-			}
-			v.Comparator = UsageStatisticsFilterComparator(ev)
-			return nil
-		case schemas.UsageStatisticsFilter_key:
-			var ev string
-			if err := d.ReadString(schemas.UsageStatisticsFilter_key, &ev); err != nil {
-				return err
-			}
-			v.Key = UsageStatisticsFilterKey(ev)
-			return nil
-		case schemas.UsageStatisticsFilter_values:
-			return deserialize__listOf__string(d, schemas.UsageStatisticsFilter_values, &v.Values)
-		}
-		return nil
-	})
-}
-
 // Specifies criteria for sorting the results of a query for Amazon Macie account
 // quotas and usage data.
 type UsageStatisticsSortBy struct {
@@ -8653,42 +3472,6 @@ type UsageStatisticsSortBy struct {
 	OrderBy OrderBy
 
 	noSmithyDocumentSerde
-}
-
-func (v *UsageStatisticsSortBy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageStatisticsSortBy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageStatisticsSortBy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Key != "" {
-		s.WriteString(schemas.UsageStatisticsSortBy_key, string(v.Key))
-	}
-	if v.OrderBy != "" {
-		s.WriteString(schemas.UsageStatisticsSortBy_orderBy, string(v.OrderBy))
-	}
-}
-func (v *UsageStatisticsSortBy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageStatisticsSortBy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageStatisticsSortBy_key:
-			var ev string
-			if err := d.ReadString(schemas.UsageStatisticsSortBy_key, &ev); err != nil {
-				return err
-			}
-			v.Key = UsageStatisticsSortKey(ev)
-			return nil
-		case schemas.UsageStatisticsSortBy_orderBy:
-			var ev string
-			if err := d.ReadString(schemas.UsageStatisticsSortBy_orderBy, &ev); err != nil {
-				return err
-			}
-			v.OrderBy = OrderBy(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides aggregated data for an Amazon Macie usage metric. The value for the
@@ -8712,48 +3495,6 @@ type UsageTotal struct {
 	Type UsageType
 
 	noSmithyDocumentSerde
-}
-
-func (v *UsageTotal) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UsageTotal)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UsageTotal) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Currency != "" {
-		s.WriteString(schemas.UsageTotal_currency, string(v.Currency))
-	}
-	if v.EstimatedCost != nil {
-		s.WriteString(schemas.UsageTotal_estimatedCost, *v.EstimatedCost)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.UsageTotal_type, string(v.Type))
-	}
-}
-func (v *UsageTotal) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UsageTotal, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UsageTotal_currency:
-			var ev string
-			if err := d.ReadString(schemas.UsageTotal_currency, &ev); err != nil {
-				return err
-			}
-			v.Currency = Currency(ev)
-			return nil
-		case schemas.UsageTotal_estimatedCost:
-			v.EstimatedCost = new(string)
-			return d.ReadString(schemas.UsageTotal_estimatedCost, v.EstimatedCost)
-		case schemas.UsageTotal_type:
-			var ev string
-			if err := d.ReadString(schemas.UsageTotal_type, &ev); err != nil {
-				return err
-			}
-			v.Type = UsageType(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 // Provides information about the type and other characteristics of an entity that
@@ -8793,80 +3534,6 @@ type UserIdentity struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UserIdentity) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserIdentity)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserIdentity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssumedRole != nil {
-		s.WriteStruct(schemas.UserIdentity_assumedRole)
-		v.AssumedRole.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AwsAccount != nil {
-		s.WriteStruct(schemas.UserIdentity_awsAccount)
-		v.AwsAccount.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.AwsService != nil {
-		s.WriteStruct(schemas.UserIdentity_awsService)
-		v.AwsService.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FederatedUser != nil {
-		s.WriteStruct(schemas.UserIdentity_federatedUser)
-		v.FederatedUser.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.IamUser != nil {
-		s.WriteStruct(schemas.UserIdentity_iamUser)
-		v.IamUser.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Root != nil {
-		s.WriteStruct(schemas.UserIdentity_root)
-		v.Root.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.UserIdentity_type, string(v.Type))
-	}
-}
-func (v *UserIdentity) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserIdentity, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserIdentity_assumedRole:
-			v.AssumedRole = &AssumedRole{}
-			return v.AssumedRole.Deserialize(d)
-		case schemas.UserIdentity_awsAccount:
-			v.AwsAccount = &AwsAccount{}
-			return v.AwsAccount.Deserialize(d)
-		case schemas.UserIdentity_awsService:
-			v.AwsService = &AwsService{}
-			return v.AwsService.Deserialize(d)
-		case schemas.UserIdentity_federatedUser:
-			v.FederatedUser = &FederatedUser{}
-			return v.FederatedUser.Deserialize(d)
-		case schemas.UserIdentity_iamUser:
-			v.IamUser = &IamUser{}
-			return v.IamUser.Deserialize(d)
-		case schemas.UserIdentity_root:
-			v.Root = &UserIdentityRoot{}
-			return v.Root.Deserialize(d)
-		case schemas.UserIdentity_type:
-			var ev string
-			if err := d.ReadString(schemas.UserIdentity_type, &ev); err != nil {
-				return err
-			}
-			v.Type = UserIdentityType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Provides information about an Amazon Web Services account and entity that
 // performed an action on an affected resource. The action was performed using the
 // credentials for your Amazon Web Services account.
@@ -8884,40 +3551,6 @@ type UserIdentityRoot struct {
 	PrincipalId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *UserIdentityRoot) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserIdentityRoot)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserIdentityRoot) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountId != nil {
-		s.WriteString(schemas.UserIdentityRoot_accountId, *v.AccountId)
-	}
-	if v.Arn != nil {
-		s.WriteString(schemas.UserIdentityRoot_arn, *v.Arn)
-	}
-	if v.PrincipalId != nil {
-		s.WriteString(schemas.UserIdentityRoot_principalId, *v.PrincipalId)
-	}
-}
-func (v *UserIdentityRoot) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserIdentityRoot, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserIdentityRoot_accountId:
-			v.AccountId = new(string)
-			return d.ReadString(schemas.UserIdentityRoot_accountId, v.AccountId)
-		case schemas.UserIdentityRoot_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.UserIdentityRoot_arn, v.Arn)
-		case schemas.UserIdentityRoot_principalId:
-			v.PrincipalId = new(string)
-			return d.ReadString(schemas.UserIdentityRoot_principalId, v.PrincipalId)
-		}
-		return nil
-	})
 }
 
 // Provides information about when a classification job was paused. For a one-time
@@ -8944,40 +3577,6 @@ type UserPausedDetails struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UserPausedDetails) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UserPausedDetails)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UserPausedDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.JobExpiresAt != nil {
-		s.WriteTime(schemas.UserPausedDetails_jobExpiresAt, *v.JobExpiresAt)
-	}
-	if v.JobImminentExpirationHealthEventArn != nil {
-		s.WriteString(schemas.UserPausedDetails_jobImminentExpirationHealthEventArn, *v.JobImminentExpirationHealthEventArn)
-	}
-	if v.JobPausedAt != nil {
-		s.WriteTime(schemas.UserPausedDetails_jobPausedAt, *v.JobPausedAt)
-	}
-}
-func (v *UserPausedDetails) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UserPausedDetails, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UserPausedDetails_jobExpiresAt:
-			v.JobExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.UserPausedDetails_jobExpiresAt, v.JobExpiresAt)
-		case schemas.UserPausedDetails_jobImminentExpirationHealthEventArn:
-			v.JobImminentExpirationHealthEventArn = new(string)
-			return d.ReadString(schemas.UserPausedDetails_jobImminentExpirationHealthEventArn, v.JobImminentExpirationHealthEventArn)
-		case schemas.UserPausedDetails_jobPausedAt:
-			v.JobPausedAt = new(time.Time)
-			return d.ReadTime(schemas.UserPausedDetails_jobPausedAt, v.JobPausedAt)
-		}
-		return nil
-	})
-}
-
 // Specifies a weekly recurrence pattern for running a classification job.
 type WeeklySchedule struct {
 
@@ -8985,32 +3584,6 @@ type WeeklySchedule struct {
 	DayOfWeek DayOfWeek
 
 	noSmithyDocumentSerde
-}
-
-func (v *WeeklySchedule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.WeeklySchedule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *WeeklySchedule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DayOfWeek != "" {
-		s.WriteString(schemas.WeeklySchedule_dayOfWeek, string(v.DayOfWeek))
-	}
-}
-func (v *WeeklySchedule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.WeeklySchedule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.WeeklySchedule_dayOfWeek:
-			var ev string
-			if err := d.ReadString(schemas.WeeklySchedule_dayOfWeek, &ev); err != nil {
-				return err
-			}
-			v.DayOfWeek = DayOfWeek(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

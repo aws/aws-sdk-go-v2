@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,24 +43,6 @@ type ListTestGridSessionActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTestGridSessionActionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTestGridSessionActionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTestGridSessionActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResult != nil {
-		s.WriteInt32(schemas.ListTestGridSessionActionsRequest_maxResult, *v.MaxResult)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTestGridSessionActionsRequest_nextToken, *v.NextToken)
-	}
-	if v.SessionArn != nil {
-		s.WriteString(schemas.ListTestGridSessionActionsRequest_sessionArn, *v.SessionArn)
-	}
-}
-
 type ListTestGridSessionActionsOutput struct {
 
 	// The action taken by the session.
@@ -77,26 +57,16 @@ type ListTestGridSessionActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTestGridSessionActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTestGridSessionActionsResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTestGridSessionActionsResult_actions:
-			return deserializeTestGridSessionActions(d, schemas.ListTestGridSessionActionsResult_actions, &v.Actions)
-		case schemas.ListTestGridSessionActionsResult_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTestGridSessionActionsResult_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionActions, schemas.ListTestGridSessionActionsRequest, schemas.ListTestGridSessionActionsResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessionActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionActions, schemas.ListTestGridSessionActionsRequest, schemas.ListTestGridSessionActionsResult), output: &ListTestGridSessionActionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridSessionActions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTestGridSessionActions"); err != nil {

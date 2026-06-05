@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -97,24 +95,6 @@ type ExportStreamSessionFilesInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportStreamSessionFilesInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ExportStreamSessionFilesInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ExportStreamSessionFilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.ExportStreamSessionFilesInput_Identifier, *v.Identifier)
-	}
-	if v.OutputUri != nil {
-		s.WriteString(schemas.ExportStreamSessionFilesInput_OutputUri, *v.OutputUri)
-	}
-	if v.StreamSessionIdentifier != nil {
-		s.WriteString(schemas.ExportStreamSessionFilesInput_StreamSessionIdentifier, *v.StreamSessionIdentifier)
-	}
-}
-
 type ExportStreamSessionFilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,21 +102,16 @@ type ExportStreamSessionFilesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ExportStreamSessionFilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ExportStreamSessionFilesOutput, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationExportStreamSessionFilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportStreamSessionFiles, schemas.ExportStreamSessionFilesInput, schemas.ExportStreamSessionFilesOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportStreamSessionFiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportStreamSessionFiles, schemas.ExportStreamSessionFilesInput, schemas.ExportStreamSessionFilesOutput), output: &ExportStreamSessionFilesOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportStreamSessionFiles{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportStreamSessionFiles"); err != nil {

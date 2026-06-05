@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,18 +42,6 @@ type GetAccessTokenInput struct {
 	AccessTokenId *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetAccessTokenInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccessTokenId != nil {
-		s.WriteString(schemas.GetAccessTokenInput_accessTokenId, *v.AccessTokenId)
-	}
 }
 
 type GetAccessTokenOutput struct {
@@ -119,58 +105,16 @@ type GetAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetAccessTokenOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetAccessTokenOutput_arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_arn, v.Arn)
-		case schemas.GetAccessTokenOutput_clientToken:
-			v.ClientToken = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_clientToken, v.ClientToken)
-		case schemas.GetAccessTokenOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccessTokenOutput_createdAt, v.CreatedAt)
-		case schemas.GetAccessTokenOutput_dnsViewId:
-			v.DnsViewId = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_dnsViewId, v.DnsViewId)
-		case schemas.GetAccessTokenOutput_expiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccessTokenOutput_expiresAt, v.ExpiresAt)
-		case schemas.GetAccessTokenOutput_globalResolverId:
-			v.GlobalResolverId = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_globalResolverId, v.GlobalResolverId)
-		case schemas.GetAccessTokenOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_id, v.Id)
-		case schemas.GetAccessTokenOutput_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_name, v.Name)
-		case schemas.GetAccessTokenOutput_status:
-			var ev string
-			if err := d.ReadString(schemas.GetAccessTokenOutput_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TokenStatus(ev)
-			return nil
-		case schemas.GetAccessTokenOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetAccessTokenOutput_updatedAt, v.UpdatedAt)
-		case schemas.GetAccessTokenOutput_value:
-			v.Value = new(string)
-			return d.ReadString(schemas.GetAccessTokenOutput_value, v.Value)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessToken, schemas.GetAccessTokenInput, schemas.GetAccessTokenOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessToken, schemas.GetAccessTokenInput, schemas.GetAccessTokenOutput), output: &GetAccessTokenOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccessToken{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccessToken"); err != nil {

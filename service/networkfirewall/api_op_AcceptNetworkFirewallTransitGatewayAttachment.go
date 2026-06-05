@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,18 +51,6 @@ type AcceptNetworkFirewallTransitGatewayAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptNetworkFirewallTransitGatewayAttachmentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AcceptNetworkFirewallTransitGatewayAttachmentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AcceptNetworkFirewallTransitGatewayAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TransitGatewayAttachmentId != nil {
-		s.WriteString(schemas.AcceptNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId, *v.TransitGatewayAttachmentId)
-	}
-}
-
 type AcceptNetworkFirewallTransitGatewayAttachmentOutput struct {
 
 	// The unique identifier of the transit gateway attachment that was accepted.
@@ -101,31 +87,16 @@ type AcceptNetworkFirewallTransitGatewayAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AcceptNetworkFirewallTransitGatewayAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId:
-			v.TransitGatewayAttachmentId = new(string)
-			return d.ReadString(schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentId, v.TransitGatewayAttachmentId)
-		case schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus:
-			var ev string
-			if err := d.ReadString(schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus, &ev); err != nil {
-				return err
-			}
-			v.TransitGatewayAttachmentStatus = types.TransitGatewayAttachmentStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAcceptNetworkFirewallTransitGatewayAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.AcceptNetworkFirewallTransitGatewayAttachmentRequest, schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.AcceptNetworkFirewallTransitGatewayAttachmentRequest, schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse), output: &AcceptNetworkFirewallTransitGatewayAttachmentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptNetworkFirewallTransitGatewayAttachment{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptNetworkFirewallTransitGatewayAttachment"); err != nil {

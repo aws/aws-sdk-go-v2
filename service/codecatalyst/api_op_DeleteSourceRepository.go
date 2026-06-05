@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type DeleteSourceRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSourceRepositoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteSourceRepositoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteSourceRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Name != nil {
-		s.WriteString(schemas.DeleteSourceRepositoryRequest_name, *v.Name)
-	}
-	if v.ProjectName != nil {
-		s.WriteString(schemas.DeleteSourceRepositoryRequest_projectName, *v.ProjectName)
-	}
-	if v.SpaceName != nil {
-		s.WriteString(schemas.DeleteSourceRepositoryRequest_spaceName, *v.SpaceName)
-	}
-}
-
 type DeleteSourceRepositoryOutput struct {
 
 	// The name of the repository.
@@ -91,30 +71,16 @@ type DeleteSourceRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteSourceRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteSourceRepositoryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteSourceRepositoryResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.DeleteSourceRepositoryResponse_name, v.Name)
-		case schemas.DeleteSourceRepositoryResponse_projectName:
-			v.ProjectName = new(string)
-			return d.ReadString(schemas.DeleteSourceRepositoryResponse_projectName, v.ProjectName)
-		case schemas.DeleteSourceRepositoryResponse_spaceName:
-			v.SpaceName = new(string)
-			return d.ReadString(schemas.DeleteSourceRepositoryResponse_spaceName, v.SpaceName)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteSourceRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceRepository, schemas.DeleteSourceRepositoryRequest, schemas.DeleteSourceRepositoryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceRepository{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceRepository, schemas.DeleteSourceRepositoryRequest, schemas.DeleteSourceRepositoryResponse), output: &DeleteSourceRepositoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSourceRepository{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSourceRepository"); err != nil {

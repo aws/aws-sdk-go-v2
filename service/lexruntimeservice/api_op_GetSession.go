@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetSessionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BotAlias != nil {
-		s.WriteString(schemas.GetSessionRequest_botAlias, *v.BotAlias)
-	}
-	if v.BotName != nil {
-		s.WriteString(schemas.GetSessionRequest_botName, *v.BotName)
-	}
-	if v.CheckpointLabelFilter != nil {
-		s.WriteString(schemas.GetSessionRequest_checkpointLabelFilter, *v.CheckpointLabelFilter)
-	}
-	if v.UserId != nil {
-		s.WriteString(schemas.GetSessionRequest_userId, *v.UserId)
-	}
-}
-
 type GetSessionOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent
@@ -113,33 +90,16 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetSessionResponse_activeContexts:
-			return deserializeActiveContextsList(d, schemas.GetSessionResponse_activeContexts, &v.ActiveContexts)
-		case schemas.GetSessionResponse_dialogAction:
-			v.DialogAction = &types.DialogAction{}
-			return v.DialogAction.Deserialize(d)
-		case schemas.GetSessionResponse_recentIntentSummaryView:
-			return deserializeIntentSummaryList(d, schemas.GetSessionResponse_recentIntentSummaryView, &v.RecentIntentSummaryView)
-		case schemas.GetSessionResponse_sessionAttributes:
-			return deserializeStringMap(d, schemas.GetSessionResponse_sessionAttributes, &v.SessionAttributes)
-		case schemas.GetSessionResponse_sessionId:
-			v.SessionId = new(string)
-			return d.ReadString(schemas.GetSessionResponse_sessionId, v.SessionId)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSession"); err != nil {

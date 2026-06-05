@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,21 +46,6 @@ type ListMLEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMLEndpointsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListMLEndpointsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListMLEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxItems != nil {
-		s.WriteInt32(schemas.ListMLEndpointsInput_maxItems, *v.MaxItems)
-	}
-	if v.NeptuneIamRoleArn != nil {
-		s.WriteString(schemas.ListMLEndpointsInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
-	}
-}
-
 type ListMLEndpointsOutput struct {
 
 	// A page from the list of inference endpoint IDs.
@@ -74,23 +57,16 @@ type ListMLEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListMLEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListMLEndpointsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListMLEndpointsOutput_ids:
-			return deserializeStringList(d, schemas.ListMLEndpointsOutput_ids, &v.Ids)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListMLEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLEndpoints, schemas.ListMLEndpointsInput, schemas.ListMLEndpointsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMLEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMLEndpoints, schemas.ListMLEndpointsInput, schemas.ListMLEndpointsOutput), output: &ListMLEndpointsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMLEndpoints{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMLEndpoints"); err != nil {

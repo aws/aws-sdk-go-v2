@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,33 +64,6 @@ type ListRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRuleGroupsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRuleGroupsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListRuleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ManagedType != "" {
-		s.WriteString(schemas.ListRuleGroupsRequest_ManagedType, string(v.ManagedType))
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListRuleGroupsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRuleGroupsRequest_NextToken, *v.NextToken)
-	}
-	if v.Scope != "" {
-		s.WriteString(schemas.ListRuleGroupsRequest_Scope, string(v.Scope))
-	}
-	if v.SubscriptionStatus != "" {
-		s.WriteString(schemas.ListRuleGroupsRequest_SubscriptionStatus, string(v.SubscriptionStatus))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListRuleGroupsRequest_Type, string(v.Type))
-	}
-}
-
 type ListRuleGroupsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -112,26 +83,16 @@ type ListRuleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRuleGroupsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRuleGroupsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRuleGroupsResponse_NextToken, v.NextToken)
-		case schemas.ListRuleGroupsResponse_RuleGroups:
-			return deserializeRuleGroups(d, schemas.ListRuleGroupsResponse_RuleGroups, &v.RuleGroups)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleGroups, schemas.ListRuleGroupsRequest, schemas.ListRuleGroupsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRuleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleGroups, schemas.ListRuleGroupsRequest, schemas.ListRuleGroupsResponse), output: &ListRuleGroupsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRuleGroups{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRuleGroups"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,34 +43,6 @@ type ListTrustAnchorsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrustAnchorsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrustAnchorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListRequest_nextToken, *v.NextToken)
-	}
-	if v.PageSize != nil {
-		s.WriteInt32(schemas.ListRequest_pageSize, *v.PageSize)
-	}
-}
-func (v *ListTrustAnchorsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListRequest_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListRequest_nextToken, v.NextToken)
-		case schemas.ListRequest_pageSize:
-			v.PageSize = new(int32)
-			return d.ReadInt32(schemas.ListRequest_pageSize, v.PageSize)
-		}
-		return nil
-	})
-}
-
 type ListTrustAnchorsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous
@@ -89,38 +59,16 @@ type ListTrustAnchorsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListTrustAnchorsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListTrustAnchorsResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListTrustAnchorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListTrustAnchorsResponse_nextToken, *v.NextToken)
-	}
-	serializeTrustAnchorDetails(s, schemas.ListTrustAnchorsResponse_trustAnchors, v.TrustAnchors)
-}
-func (v *ListTrustAnchorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListTrustAnchorsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListTrustAnchorsResponse_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListTrustAnchorsResponse_nextToken, v.NextToken)
-		case schemas.ListTrustAnchorsResponse_trustAnchors:
-			return deserializeTrustAnchorDetails(d, schemas.ListTrustAnchorsResponse_trustAnchors, &v.TrustAnchors)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListTrustAnchorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustAnchors, schemas.ListRequest, schemas.ListTrustAnchorsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrustAnchors{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustAnchors, schemas.ListRequest, schemas.ListTrustAnchorsResponse), output: &ListTrustAnchorsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrustAnchors{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrustAnchors"); err != nil {

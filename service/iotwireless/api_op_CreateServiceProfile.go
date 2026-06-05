@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,27 +55,6 @@ type CreateServiceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceProfileInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateServiceProfileRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateServiceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientRequestToken != nil {
-		s.WriteString(schemas.CreateServiceProfileRequest_ClientRequestToken, *v.ClientRequestToken)
-	}
-	if v.LoRaWAN != nil {
-		s.WriteStruct(schemas.CreateServiceProfileRequest_LoRaWAN)
-		v.LoRaWAN.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateServiceProfileRequest_Name, *v.Name)
-	}
-	serializeTagList(s, schemas.CreateServiceProfileRequest_Tags, v.Tags)
-}
-
 type CreateServiceProfileOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -92,27 +69,16 @@ type CreateServiceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateServiceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateServiceProfileResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateServiceProfileResponse_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.CreateServiceProfileResponse_Arn, v.Arn)
-		case schemas.CreateServiceProfileResponse_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.CreateServiceProfileResponse_Id, v.Id)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateServiceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceProfile, schemas.CreateServiceProfileRequest, schemas.CreateServiceProfileResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceProfile, schemas.CreateServiceProfileRequest, schemas.CreateServiceProfileResponse), output: &CreateServiceProfileOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceProfile{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateServiceProfile"); err != nil {

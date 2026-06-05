@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -216,69 +214,6 @@ type PutIntentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutIntentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutIntentRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Checksum != nil {
-		s.WriteString(schemas.PutIntentRequest_checksum, *v.Checksum)
-	}
-	if v.ConclusionStatement != nil {
-		s.WriteStruct(schemas.PutIntentRequest_conclusionStatement)
-		v.ConclusionStatement.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ConfirmationPrompt != nil {
-		s.WriteStruct(schemas.PutIntentRequest_confirmationPrompt)
-		v.ConfirmationPrompt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.CreateVersion != nil {
-		s.WriteBool(schemas.PutIntentRequest_createVersion, *v.CreateVersion)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.PutIntentRequest_description, *v.Description)
-	}
-	if v.DialogCodeHook != nil {
-		s.WriteStruct(schemas.PutIntentRequest_dialogCodeHook)
-		v.DialogCodeHook.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FollowUpPrompt != nil {
-		s.WriteStruct(schemas.PutIntentRequest_followUpPrompt)
-		v.FollowUpPrompt.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.FulfillmentActivity != nil {
-		s.WriteStruct(schemas.PutIntentRequest_fulfillmentActivity)
-		v.FulfillmentActivity.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeInputContextList(s, schemas.PutIntentRequest_inputContexts, v.InputContexts)
-	if v.KendraConfiguration != nil {
-		s.WriteStruct(schemas.PutIntentRequest_kendraConfiguration)
-		v.KendraConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.PutIntentRequest_name, *v.Name)
-	}
-	serializeOutputContextList(s, schemas.PutIntentRequest_outputContexts, v.OutputContexts)
-	if v.ParentIntentSignature != nil {
-		s.WriteString(schemas.PutIntentRequest_parentIntentSignature, *v.ParentIntentSignature)
-	}
-	if v.RejectionStatement != nil {
-		s.WriteStruct(schemas.PutIntentRequest_rejectionStatement)
-		v.RejectionStatement.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeIntentUtteranceList(s, schemas.PutIntentRequest_sampleUtterances, v.SampleUtterances)
-	serializeSlotList(s, schemas.PutIntentRequest_slots, v.Slots)
-}
-
 type PutIntentOutput struct {
 
 	// Checksum of the $LATEST version of the intent created or updated.
@@ -357,74 +292,16 @@ type PutIntentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutIntentResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutIntentResponse_checksum:
-			v.Checksum = new(string)
-			return d.ReadString(schemas.PutIntentResponse_checksum, v.Checksum)
-		case schemas.PutIntentResponse_conclusionStatement:
-			v.ConclusionStatement = &types.Statement{}
-			return v.ConclusionStatement.Deserialize(d)
-		case schemas.PutIntentResponse_confirmationPrompt:
-			v.ConfirmationPrompt = &types.Prompt{}
-			return v.ConfirmationPrompt.Deserialize(d)
-		case schemas.PutIntentResponse_createVersion:
-			v.CreateVersion = new(bool)
-			return d.ReadBool(schemas.PutIntentResponse_createVersion, v.CreateVersion)
-		case schemas.PutIntentResponse_createdDate:
-			v.CreatedDate = new(time.Time)
-			return d.ReadTime(schemas.PutIntentResponse_createdDate, v.CreatedDate)
-		case schemas.PutIntentResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.PutIntentResponse_description, v.Description)
-		case schemas.PutIntentResponse_dialogCodeHook:
-			v.DialogCodeHook = &types.CodeHook{}
-			return v.DialogCodeHook.Deserialize(d)
-		case schemas.PutIntentResponse_followUpPrompt:
-			v.FollowUpPrompt = &types.FollowUpPrompt{}
-			return v.FollowUpPrompt.Deserialize(d)
-		case schemas.PutIntentResponse_fulfillmentActivity:
-			v.FulfillmentActivity = &types.FulfillmentActivity{}
-			return v.FulfillmentActivity.Deserialize(d)
-		case schemas.PutIntentResponse_inputContexts:
-			return deserializeInputContextList(d, schemas.PutIntentResponse_inputContexts, &v.InputContexts)
-		case schemas.PutIntentResponse_kendraConfiguration:
-			v.KendraConfiguration = &types.KendraConfiguration{}
-			return v.KendraConfiguration.Deserialize(d)
-		case schemas.PutIntentResponse_lastUpdatedDate:
-			v.LastUpdatedDate = new(time.Time)
-			return d.ReadTime(schemas.PutIntentResponse_lastUpdatedDate, v.LastUpdatedDate)
-		case schemas.PutIntentResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.PutIntentResponse_name, v.Name)
-		case schemas.PutIntentResponse_outputContexts:
-			return deserializeOutputContextList(d, schemas.PutIntentResponse_outputContexts, &v.OutputContexts)
-		case schemas.PutIntentResponse_parentIntentSignature:
-			v.ParentIntentSignature = new(string)
-			return d.ReadString(schemas.PutIntentResponse_parentIntentSignature, v.ParentIntentSignature)
-		case schemas.PutIntentResponse_rejectionStatement:
-			v.RejectionStatement = &types.Statement{}
-			return v.RejectionStatement.Deserialize(d)
-		case schemas.PutIntentResponse_sampleUtterances:
-			return deserializeIntentUtteranceList(d, schemas.PutIntentResponse_sampleUtterances, &v.SampleUtterances)
-		case schemas.PutIntentResponse_slots:
-			return deserializeSlotList(d, schemas.PutIntentResponse_slots, &v.Slots)
-		case schemas.PutIntentResponse_version:
-			v.Version = new(string)
-			return d.ReadString(schemas.PutIntentResponse_version, v.Version)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntent, schemas.PutIntentRequest, schemas.PutIntentResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutIntent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIntent, schemas.PutIntentRequest, schemas.PutIntentResponse), output: &PutIntentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutIntent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutIntent"); err != nil {

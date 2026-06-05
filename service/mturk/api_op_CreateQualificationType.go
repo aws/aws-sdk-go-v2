@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -107,45 +105,6 @@ type CreateQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQualificationTypeInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateQualificationTypeRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateQualificationTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AnswerKey != nil {
-		s.WriteString(schemas.CreateQualificationTypeRequest_AnswerKey, *v.AnswerKey)
-	}
-	if v.AutoGranted != nil {
-		s.WriteBool(schemas.CreateQualificationTypeRequest_AutoGranted, *v.AutoGranted)
-	}
-	if v.AutoGrantedValue != nil {
-		s.WriteInt32(schemas.CreateQualificationTypeRequest_AutoGrantedValue, *v.AutoGrantedValue)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateQualificationTypeRequest_Description, *v.Description)
-	}
-	if v.Keywords != nil {
-		s.WriteString(schemas.CreateQualificationTypeRequest_Keywords, *v.Keywords)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateQualificationTypeRequest_Name, *v.Name)
-	}
-	if v.QualificationTypeStatus != "" {
-		s.WriteString(schemas.CreateQualificationTypeRequest_QualificationTypeStatus, string(v.QualificationTypeStatus))
-	}
-	if v.RetryDelayInSeconds != nil {
-		s.WriteInt64(schemas.CreateQualificationTypeRequest_RetryDelayInSeconds, *v.RetryDelayInSeconds)
-	}
-	if v.Test != nil {
-		s.WriteString(schemas.CreateQualificationTypeRequest_Test, *v.Test)
-	}
-	if v.TestDurationInSeconds != nil {
-		s.WriteInt64(schemas.CreateQualificationTypeRequest_TestDurationInSeconds, *v.TestDurationInSeconds)
-	}
-}
-
 type CreateQualificationTypeOutput struct {
 
 	// The created Qualification type, returned as a QualificationType data structure.
@@ -157,24 +116,16 @@ type CreateQualificationTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateQualificationTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateQualificationTypeResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateQualificationTypeResponse_QualificationType:
-			v.QualificationType = &types.QualificationType{}
-			return v.QualificationType.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQualificationType, schemas.CreateQualificationTypeRequest, schemas.CreateQualificationTypeResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateQualificationType{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQualificationType, schemas.CreateQualificationTypeRequest, schemas.CreateQualificationTypeResponse), output: &CreateQualificationTypeOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateQualificationType{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQualificationType"); err != nil {

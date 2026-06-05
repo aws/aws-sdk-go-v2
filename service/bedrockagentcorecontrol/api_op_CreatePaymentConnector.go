@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -71,31 +69,6 @@ type CreatePaymentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePaymentConnectorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreatePaymentConnectorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreatePaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreatePaymentConnectorRequest_clientToken, *v.ClientToken)
-	}
-	serializeCredentialsProviderConfigurations(s, schemas.CreatePaymentConnectorRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
-	if v.Description != nil {
-		s.WriteString(schemas.CreatePaymentConnectorRequest_description, *v.Description)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreatePaymentConnectorRequest_name, *v.Name)
-	}
-	if v.PaymentManagerId != nil {
-		s.WriteString(schemas.CreatePaymentConnectorRequest_paymentManagerId, *v.PaymentManagerId)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.CreatePaymentConnectorRequest_type, string(v.Type))
-	}
-}
-
 type CreatePaymentConnectorOutput struct {
 
 	// The timestamp when the payment connector was created.
@@ -140,49 +113,16 @@ type CreatePaymentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreatePaymentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreatePaymentConnectorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreatePaymentConnectorResponse_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.CreatePaymentConnectorResponse_createdAt, v.CreatedAt)
-		case schemas.CreatePaymentConnectorResponse_credentialProviderConfigurations:
-			return deserializeCredentialsProviderConfigurations(d, schemas.CreatePaymentConnectorResponse_credentialProviderConfigurations, &v.CredentialProviderConfigurations)
-		case schemas.CreatePaymentConnectorResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreatePaymentConnectorResponse_name, v.Name)
-		case schemas.CreatePaymentConnectorResponse_paymentConnectorId:
-			v.PaymentConnectorId = new(string)
-			return d.ReadString(schemas.CreatePaymentConnectorResponse_paymentConnectorId, v.PaymentConnectorId)
-		case schemas.CreatePaymentConnectorResponse_paymentManagerId:
-			v.PaymentManagerId = new(string)
-			return d.ReadString(schemas.CreatePaymentConnectorResponse_paymentManagerId, v.PaymentManagerId)
-		case schemas.CreatePaymentConnectorResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreatePaymentConnectorResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.PaymentConnectorStatus(ev)
-			return nil
-		case schemas.CreatePaymentConnectorResponse_type:
-			var ev string
-			if err := d.ReadString(schemas.CreatePaymentConnectorResponse_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.PaymentConnectorType(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreatePaymentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentConnector, schemas.CreatePaymentConnectorRequest, schemas.CreatePaymentConnectorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentConnector, schemas.CreatePaymentConnectorRequest, schemas.CreatePaymentConnectorResponse), output: &CreatePaymentConnectorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePaymentConnector{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePaymentConnector"); err != nil {

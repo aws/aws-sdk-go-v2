@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,39 +66,6 @@ type DescribeFolderContentsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFolderContentsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeFolderContentsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeFolderContentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AuthenticationToken != nil {
-		s.WriteString(schemas.DescribeFolderContentsRequest_AuthenticationToken, *v.AuthenticationToken)
-	}
-	if v.FolderId != nil {
-		s.WriteString(schemas.DescribeFolderContentsRequest_FolderId, *v.FolderId)
-	}
-	if v.Include != nil {
-		s.WriteString(schemas.DescribeFolderContentsRequest_Include, *v.Include)
-	}
-	if v.Limit != nil {
-		s.WriteInt32(schemas.DescribeFolderContentsRequest_Limit, *v.Limit)
-	}
-	if v.Marker != nil {
-		s.WriteString(schemas.DescribeFolderContentsRequest_Marker, *v.Marker)
-	}
-	if v.Order != "" {
-		s.WriteString(schemas.DescribeFolderContentsRequest_Order, string(v.Order))
-	}
-	if v.Sort != "" {
-		s.WriteString(schemas.DescribeFolderContentsRequest_Sort, string(v.Sort))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.DescribeFolderContentsRequest_Type, string(v.Type))
-	}
-}
-
 type DescribeFolderContentsOutput struct {
 
 	// The documents in the specified folder.
@@ -119,28 +84,16 @@ type DescribeFolderContentsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeFolderContentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeFolderContentsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeFolderContentsResponse_Documents:
-			return deserializeDocumentMetadataList(d, schemas.DescribeFolderContentsResponse_Documents, &v.Documents)
-		case schemas.DescribeFolderContentsResponse_Folders:
-			return deserializeFolderMetadataList(d, schemas.DescribeFolderContentsResponse_Folders, &v.Folders)
-		case schemas.DescribeFolderContentsResponse_Marker:
-			v.Marker = new(string)
-			return d.ReadString(schemas.DescribeFolderContentsResponse_Marker, v.Marker)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolderContents, schemas.DescribeFolderContentsRequest, schemas.DescribeFolderContentsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFolderContents{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolderContents, schemas.DescribeFolderContentsRequest, schemas.DescribeFolderContentsResponse), output: &DescribeFolderContentsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFolderContents{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFolderContents"); err != nil {

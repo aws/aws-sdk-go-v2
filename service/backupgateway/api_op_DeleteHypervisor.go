@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,28 +36,6 @@ type DeleteHypervisorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteHypervisorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteHypervisorInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteHypervisorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HypervisorArn != nil {
-		s.WriteString(schemas.DeleteHypervisorInput_HypervisorArn, *v.HypervisorArn)
-	}
-}
-func (v *DeleteHypervisorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteHypervisorInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteHypervisorInput_HypervisorArn:
-			v.HypervisorArn = new(string)
-			return d.ReadString(schemas.DeleteHypervisorInput_HypervisorArn, v.HypervisorArn)
-		}
-		return nil
-	})
-}
-
 type DeleteHypervisorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor you deleted.
@@ -71,35 +47,16 @@ type DeleteHypervisorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteHypervisorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteHypervisorOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteHypervisorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HypervisorArn != nil {
-		s.WriteString(schemas.DeleteHypervisorOutput_HypervisorArn, *v.HypervisorArn)
-	}
-}
-func (v *DeleteHypervisorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteHypervisorOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteHypervisorOutput_HypervisorArn:
-			v.HypervisorArn = new(string)
-			return d.ReadString(schemas.DeleteHypervisorOutput_HypervisorArn, v.HypervisorArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteHypervisorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHypervisor, schemas.DeleteHypervisorInput, schemas.DeleteHypervisorOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteHypervisor{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHypervisor, schemas.DeleteHypervisorInput, schemas.DeleteHypervisorOutput), output: &DeleteHypervisorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteHypervisor{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteHypervisor"); err != nil {

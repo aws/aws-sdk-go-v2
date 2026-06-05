@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -106,49 +104,6 @@ type CreateHarnessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateHarnessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateHarnessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessAllowedTools(s, schemas.CreateHarnessRequest_allowedTools, v.AllowedTools)
-	serializeAuthorizerConfiguration(s, schemas.CreateHarnessRequest_authorizerConfiguration, v.AuthorizerConfiguration)
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateHarnessRequest_clientToken, *v.ClientToken)
-	}
-	serializeHarnessEnvironmentProviderRequest(s, schemas.CreateHarnessRequest_environment, v.Environment)
-	serializeHarnessEnvironmentArtifact(s, schemas.CreateHarnessRequest_environmentArtifact, v.EnvironmentArtifact)
-	serializeEnvironmentVariablesMap(s, schemas.CreateHarnessRequest_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.CreateHarnessRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.HarnessName != nil {
-		s.WriteString(schemas.CreateHarnessRequest_harnessName, *v.HarnessName)
-	}
-	if v.MaxIterations != nil {
-		s.WriteInt32(schemas.CreateHarnessRequest_maxIterations, *v.MaxIterations)
-	}
-	if v.MaxTokens != nil {
-		s.WriteInt32(schemas.CreateHarnessRequest_maxTokens, *v.MaxTokens)
-	}
-	serializeHarnessMemoryConfiguration(s, schemas.CreateHarnessRequest_memory, v.Memory)
-	serializeHarnessModelConfiguration(s, schemas.CreateHarnessRequest_model, v.Model)
-	serializeHarnessSkills(s, schemas.CreateHarnessRequest_skills, v.Skills)
-	serializeHarnessSystemPrompt(s, schemas.CreateHarnessRequest_systemPrompt, v.SystemPrompt)
-	serializeTagsMap(s, schemas.CreateHarnessRequest_tags, v.Tags)
-	if v.TimeoutSeconds != nil {
-		s.WriteInt32(schemas.CreateHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
-	}
-	serializeHarnessTools(s, schemas.CreateHarnessRequest_tools, v.Tools)
-	if v.Truncation != nil {
-		s.WriteStruct(schemas.CreateHarnessRequest_truncation)
-		v.Truncation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type CreateHarnessOutput struct {
 
 	// The harness that was created.
@@ -162,24 +117,16 @@ type CreateHarnessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateHarnessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateHarnessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateHarnessResponse_harness:
-			v.Harness = &types.Harness{}
-			return v.Harness.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarness, schemas.CreateHarnessRequest, schemas.CreateHarnessResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHarness{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHarness, schemas.CreateHarnessRequest, schemas.CreateHarnessResponse), output: &CreateHarnessOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHarness{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHarness"); err != nil {

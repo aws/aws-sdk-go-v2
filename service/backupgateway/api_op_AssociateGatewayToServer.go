@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,34 +43,6 @@ type AssociateGatewayToServerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateGatewayToServerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateGatewayToServerInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateGatewayToServerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.AssociateGatewayToServerInput_GatewayArn, *v.GatewayArn)
-	}
-	if v.ServerArn != nil {
-		s.WriteString(schemas.AssociateGatewayToServerInput_ServerArn, *v.ServerArn)
-	}
-}
-func (v *AssociateGatewayToServerInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateGatewayToServerInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateGatewayToServerInput_GatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.AssociateGatewayToServerInput_GatewayArn, v.GatewayArn)
-		case schemas.AssociateGatewayToServerInput_ServerArn:
-			v.ServerArn = new(string)
-			return d.ReadString(schemas.AssociateGatewayToServerInput_ServerArn, v.ServerArn)
-		}
-		return nil
-	})
-}
-
 type AssociateGatewayToServerOutput struct {
 
 	// The Amazon Resource Name (ARN) of a gateway.
@@ -84,35 +54,16 @@ type AssociateGatewayToServerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *AssociateGatewayToServerOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssociateGatewayToServerOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *AssociateGatewayToServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.GatewayArn != nil {
-		s.WriteString(schemas.AssociateGatewayToServerOutput_GatewayArn, *v.GatewayArn)
-	}
-}
-func (v *AssociateGatewayToServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssociateGatewayToServerOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.AssociateGatewayToServerOutput_GatewayArn:
-			v.GatewayArn = new(string)
-			return d.ReadString(schemas.AssociateGatewayToServerOutput_GatewayArn, v.GatewayArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationAssociateGatewayToServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateGatewayToServer, schemas.AssociateGatewayToServerInput, schemas.AssociateGatewayToServerOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateGatewayToServer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateGatewayToServer, schemas.AssociateGatewayToServerInput, schemas.AssociateGatewayToServerOutput), output: &AssociateGatewayToServerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateGatewayToServer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateGatewayToServer"); err != nil {

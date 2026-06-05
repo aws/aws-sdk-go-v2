@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type GetOdbPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOdbPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetOdbPeeringConnectionInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.OdbPeeringConnectionId != nil {
-		s.WriteString(schemas.GetOdbPeeringConnectionInput_odbPeeringConnectionId, *v.OdbPeeringConnectionId)
-	}
-}
-
 type GetOdbPeeringConnectionOutput struct {
 
 	// A peering connection between an ODB network and either another ODB network or a
@@ -64,24 +50,16 @@ type GetOdbPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetOdbPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetOdbPeeringConnectionOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetOdbPeeringConnectionOutput_odbPeeringConnection:
-			v.OdbPeeringConnection = &types.OdbPeeringConnection{}
-			return v.OdbPeeringConnection.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetOdbPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOdbPeeringConnection, schemas.GetOdbPeeringConnectionInput, schemas.GetOdbPeeringConnectionOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOdbPeeringConnection, schemas.GetOdbPeeringConnectionInput, schemas.GetOdbPeeringConnectionOutput), output: &GetOdbPeeringConnectionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetOdbPeeringConnection{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOdbPeeringConnection"); err != nil {

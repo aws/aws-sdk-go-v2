@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,18 +36,6 @@ type GetIdNamespaceInput struct {
 	IdNamespaceName *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetIdNamespaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetIdNamespaceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IdNamespaceName != nil {
-		s.WriteString(schemas.GetIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
-	}
 }
 
 type GetIdNamespaceOutput struct {
@@ -110,52 +96,16 @@ type GetIdNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetIdNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetIdNamespaceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetIdNamespaceOutput_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetIdNamespaceOutput_createdAt, v.CreatedAt)
-		case schemas.GetIdNamespaceOutput_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetIdNamespaceOutput_description, v.Description)
-		case schemas.GetIdNamespaceOutput_idMappingWorkflowProperties:
-			return deserializeIdNamespaceIdMappingWorkflowPropertiesList(d, schemas.GetIdNamespaceOutput_idMappingWorkflowProperties, &v.IdMappingWorkflowProperties)
-		case schemas.GetIdNamespaceOutput_idNamespaceArn:
-			v.IdNamespaceArn = new(string)
-			return d.ReadString(schemas.GetIdNamespaceOutput_idNamespaceArn, v.IdNamespaceArn)
-		case schemas.GetIdNamespaceOutput_idNamespaceName:
-			v.IdNamespaceName = new(string)
-			return d.ReadString(schemas.GetIdNamespaceOutput_idNamespaceName, v.IdNamespaceName)
-		case schemas.GetIdNamespaceOutput_inputSourceConfig:
-			return deserializeIdNamespaceInputSourceConfig(d, schemas.GetIdNamespaceOutput_inputSourceConfig, &v.InputSourceConfig)
-		case schemas.GetIdNamespaceOutput_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetIdNamespaceOutput_roleArn, v.RoleArn)
-		case schemas.GetIdNamespaceOutput_tags:
-			return deserializeTagMap(d, schemas.GetIdNamespaceOutput_tags, &v.Tags)
-		case schemas.GetIdNamespaceOutput_type:
-			var ev string
-			if err := d.ReadString(schemas.GetIdNamespaceOutput_type, &ev); err != nil {
-				return err
-			}
-			v.Type = types.IdNamespaceType(ev)
-			return nil
-		case schemas.GetIdNamespaceOutput_updatedAt:
-			v.UpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetIdNamespaceOutput_updatedAt, v.UpdatedAt)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetIdNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdNamespace, schemas.GetIdNamespaceInput, schemas.GetIdNamespaceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdNamespace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdNamespace, schemas.GetIdNamespaceInput, schemas.GetIdNamespaceOutput), output: &GetIdNamespaceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdNamespace{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIdNamespace"); err != nil {

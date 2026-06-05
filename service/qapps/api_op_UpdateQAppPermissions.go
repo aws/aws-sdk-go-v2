@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,23 +50,6 @@ type UpdateQAppPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQAppPermissionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateQAppPermissionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateQAppPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AppId != nil {
-		s.WriteString(schemas.UpdateQAppPermissionsInput_appId, *v.AppId)
-	}
-	serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_grantPermissions, v.GrantPermissions)
-	if v.InstanceId != nil {
-		s.WriteString(schemas.UpdateQAppPermissionsInput_instanceId, *v.InstanceId)
-	}
-	serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_revokePermissions, v.RevokePermissions)
-}
-
 type UpdateQAppPermissionsOutput struct {
 
 	// The unique identifier of the Amazon Q App for which permissions were updated.
@@ -87,29 +68,16 @@ type UpdateQAppPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateQAppPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateQAppPermissionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateQAppPermissionsOutput_appId:
-			v.AppId = new(string)
-			return d.ReadString(schemas.UpdateQAppPermissionsOutput_appId, v.AppId)
-		case schemas.UpdateQAppPermissionsOutput_permissions:
-			return deserializePermissionsOutputList(d, schemas.UpdateQAppPermissionsOutput_permissions, &v.Permissions)
-		case schemas.UpdateQAppPermissionsOutput_resourceArn:
-			v.ResourceArn = new(string)
-			return d.ReadString(schemas.UpdateQAppPermissionsOutput_resourceArn, v.ResourceArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateQAppPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppPermissions, schemas.UpdateQAppPermissionsInput, schemas.UpdateQAppPermissionsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQAppPermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppPermissions, schemas.UpdateQAppPermissionsInput, schemas.UpdateQAppPermissionsOutput), output: &UpdateQAppPermissionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQAppPermissions{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQAppPermissions"); err != nil {

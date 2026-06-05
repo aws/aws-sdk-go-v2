@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,21 +55,6 @@ type DeleteKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKeywordInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DeleteKeywordRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DeleteKeywordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Keyword != nil {
-		s.WriteString(schemas.DeleteKeywordRequest_Keyword, *v.Keyword)
-	}
-	if v.OriginationIdentity != nil {
-		s.WriteString(schemas.DeleteKeywordRequest_OriginationIdentity, *v.OriginationIdentity)
-	}
-}
-
 type DeleteKeywordOutput struct {
 
 	// The keyword that was deleted.
@@ -95,40 +78,16 @@ type DeleteKeywordOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DeleteKeywordOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DeleteKeywordResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DeleteKeywordResult_Keyword:
-			v.Keyword = new(string)
-			return d.ReadString(schemas.DeleteKeywordResult_Keyword, v.Keyword)
-		case schemas.DeleteKeywordResult_KeywordAction:
-			var ev string
-			if err := d.ReadString(schemas.DeleteKeywordResult_KeywordAction, &ev); err != nil {
-				return err
-			}
-			v.KeywordAction = types.KeywordAction(ev)
-			return nil
-		case schemas.DeleteKeywordResult_KeywordMessage:
-			v.KeywordMessage = new(string)
-			return d.ReadString(schemas.DeleteKeywordResult_KeywordMessage, v.KeywordMessage)
-		case schemas.DeleteKeywordResult_OriginationIdentity:
-			v.OriginationIdentity = new(string)
-			return d.ReadString(schemas.DeleteKeywordResult_OriginationIdentity, v.OriginationIdentity)
-		case schemas.DeleteKeywordResult_OriginationIdentityArn:
-			v.OriginationIdentityArn = new(string)
-			return d.ReadString(schemas.DeleteKeywordResult_OriginationIdentityArn, v.OriginationIdentityArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDeleteKeywordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyword, schemas.DeleteKeywordRequest, schemas.DeleteKeywordResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteKeyword{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyword, schemas.DeleteKeywordRequest, schemas.DeleteKeywordResult), output: &DeleteKeywordOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteKeyword{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKeyword"); err != nil {

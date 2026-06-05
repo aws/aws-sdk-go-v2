@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,48 +59,6 @@ type ImportCrlInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportCrlInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ImportCrlRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CrlData != nil {
-		s.WriteBlob(schemas.ImportCrlRequest_crlData, v.CrlData)
-	}
-	if v.Enabled != nil {
-		s.WriteBool(schemas.ImportCrlRequest_enabled, *v.Enabled)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ImportCrlRequest_name, *v.Name)
-	}
-	serializeTagList(s, schemas.ImportCrlRequest_tags, v.Tags)
-	if v.TrustAnchorArn != nil {
-		s.WriteString(schemas.ImportCrlRequest_trustAnchorArn, *v.TrustAnchorArn)
-	}
-}
-func (v *ImportCrlInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ImportCrlRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ImportCrlRequest_crlData:
-			return d.ReadBlob(schemas.ImportCrlRequest_crlData, &v.CrlData)
-		case schemas.ImportCrlRequest_enabled:
-			v.Enabled = new(bool)
-			return d.ReadBool(schemas.ImportCrlRequest_enabled, v.Enabled)
-		case schemas.ImportCrlRequest_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ImportCrlRequest_name, v.Name)
-		case schemas.ImportCrlRequest_tags:
-			return deserializeTagList(d, schemas.ImportCrlRequest_tags, &v.Tags)
-		case schemas.ImportCrlRequest_trustAnchorArn:
-			v.TrustAnchorArn = new(string)
-			return d.ReadString(schemas.ImportCrlRequest_trustAnchorArn, v.TrustAnchorArn)
-		}
-		return nil
-	})
-}
-
 type ImportCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write
@@ -117,37 +73,16 @@ type ImportCrlOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ImportCrlOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CrlDetailResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ImportCrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Crl != nil {
-		s.WriteStruct(schemas.CrlDetailResponse_crl)
-		v.Crl.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-func (v *ImportCrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CrlDetailResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CrlDetailResponse_crl:
-			v.Crl = &types.CrlDetail{}
-			return v.Crl.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationImportCrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCrl, schemas.ImportCrlRequest, schemas.CrlDetailResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportCrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCrl, schemas.ImportCrlRequest, schemas.CrlDetailResponse), output: &ImportCrlOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportCrl{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportCrl"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chatbot/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,27 +50,6 @@ type UpdateCustomActionInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCustomActionInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateCustomActionRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AliasName != nil {
-		s.WriteString(schemas.UpdateCustomActionRequest_AliasName, *v.AliasName)
-	}
-	serializeCustomActionAttachmentList(s, schemas.UpdateCustomActionRequest_Attachments, v.Attachments)
-	if v.CustomActionArn != nil {
-		s.WriteString(schemas.UpdateCustomActionRequest_CustomActionArn, *v.CustomActionArn)
-	}
-	if v.Definition != nil {
-		s.WriteStruct(schemas.UpdateCustomActionRequest_Definition)
-		v.Definition.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateCustomActionOutput struct {
 
 	// The fully defined ARN of the custom action.
@@ -86,24 +63,16 @@ type UpdateCustomActionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateCustomActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateCustomActionResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateCustomActionResult_CustomActionArn:
-			v.CustomActionArn = new(string)
-			return d.ReadString(schemas.UpdateCustomActionResult_CustomActionArn, v.CustomActionArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateCustomActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomAction, schemas.UpdateCustomActionRequest, schemas.UpdateCustomActionResult)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCustomAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomAction, schemas.UpdateCustomActionRequest, schemas.UpdateCustomActionResult), output: &UpdateCustomActionOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCustomAction{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCustomAction"); err != nil {

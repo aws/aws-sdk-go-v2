@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,19 +49,6 @@ type TerminateSolNetworkInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TerminateSolNetworkInstanceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TerminateSolNetworkInstanceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TerminateSolNetworkInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NsInstanceId != nil {
-		s.WriteString(schemas.TerminateSolNetworkInstanceInput_nsInstanceId, *v.NsInstanceId)
-	}
-	serializeTagMap(s, schemas.TerminateSolNetworkInstanceInput_tags, v.Tags)
-}
-
 type TerminateSolNetworkInstanceOutput struct {
 
 	// The identifier of the network operation.
@@ -82,26 +67,16 @@ type TerminateSolNetworkInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *TerminateSolNetworkInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TerminateSolNetworkInstanceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TerminateSolNetworkInstanceOutput_nsLcmOpOccId:
-			v.NsLcmOpOccId = new(string)
-			return d.ReadString(schemas.TerminateSolNetworkInstanceOutput_nsLcmOpOccId, v.NsLcmOpOccId)
-		case schemas.TerminateSolNetworkInstanceOutput_tags:
-			return deserializeTagMap(d, schemas.TerminateSolNetworkInstanceOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationTerminateSolNetworkInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSolNetworkInstance, schemas.TerminateSolNetworkInstanceInput, schemas.TerminateSolNetworkInstanceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateSolNetworkInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSolNetworkInstance, schemas.TerminateSolNetworkInstanceInput, schemas.TerminateSolNetworkInstanceOutput), output: &TerminateSolNetworkInstanceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateSolNetworkInstance{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TerminateSolNetworkInstance"); err != nil {

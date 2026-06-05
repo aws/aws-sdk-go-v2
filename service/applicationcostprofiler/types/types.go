@@ -3,8 +3,6 @@
 package types
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
-	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -37,74 +35,6 @@ type ReportDefinition struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ReportDefinition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ReportDefinition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ReportDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreatedAt != nil {
-		s.WriteTime(schemas.ReportDefinition_createdAt, *v.CreatedAt)
-	}
-	if v.DestinationS3Location != nil {
-		s.WriteStruct(schemas.ReportDefinition_destinationS3Location)
-		v.DestinationS3Location.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Format != "" {
-		s.WriteString(schemas.ReportDefinition_format, string(v.Format))
-	}
-	if v.LastUpdatedAt != nil {
-		s.WriteTime(schemas.ReportDefinition_lastUpdatedAt, *v.LastUpdatedAt)
-	}
-	if v.ReportDescription != nil {
-		s.WriteString(schemas.ReportDefinition_reportDescription, *v.ReportDescription)
-	}
-	if v.ReportFrequency != "" {
-		s.WriteString(schemas.ReportDefinition_reportFrequency, string(v.ReportFrequency))
-	}
-	if v.ReportId != nil {
-		s.WriteString(schemas.ReportDefinition_reportId, *v.ReportId)
-	}
-}
-func (v *ReportDefinition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ReportDefinition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ReportDefinition_createdAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.ReportDefinition_createdAt, v.CreatedAt)
-		case schemas.ReportDefinition_destinationS3Location:
-			v.DestinationS3Location = &S3Location{}
-			return v.DestinationS3Location.Deserialize(d)
-		case schemas.ReportDefinition_format:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_format, &ev); err != nil {
-				return err
-			}
-			v.Format = Format(ev)
-			return nil
-		case schemas.ReportDefinition_lastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.ReportDefinition_lastUpdatedAt, v.LastUpdatedAt)
-		case schemas.ReportDefinition_reportDescription:
-			v.ReportDescription = new(string)
-			return d.ReadString(schemas.ReportDefinition_reportDescription, v.ReportDescription)
-		case schemas.ReportDefinition_reportFrequency:
-			var ev string
-			if err := d.ReadString(schemas.ReportDefinition_reportFrequency, &ev); err != nil {
-				return err
-			}
-			v.ReportFrequency = ReportFrequency(ev)
-			return nil
-		case schemas.ReportDefinition_reportId:
-			v.ReportId = new(string)
-			return d.ReadString(schemas.ReportDefinition_reportId, v.ReportId)
-		}
-		return nil
-	})
-}
-
 // Represents the Amazon Simple Storage Service (Amazon S3) location where AWS
 // Application Cost Profiler reports are generated and then written to.
 type S3Location struct {
@@ -120,34 +50,6 @@ type S3Location struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.S3Location)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bucket != nil {
-		s.WriteString(schemas.S3Location_bucket, *v.Bucket)
-	}
-	if v.Prefix != nil {
-		s.WriteString(schemas.S3Location_prefix, *v.Prefix)
-	}
-}
-func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.S3Location_bucket:
-			v.Bucket = new(string)
-			return d.ReadString(schemas.S3Location_bucket, v.Bucket)
-		case schemas.S3Location_prefix:
-			v.Prefix = new(string)
-			return d.ReadString(schemas.S3Location_prefix, v.Prefix)
-		}
-		return nil
-	})
 }
 
 // Represents the Amazon Simple Storage Service (Amazon S3) location where usage
@@ -172,44 +74,6 @@ type SourceS3Location struct {
 	Region S3BucketRegion
 
 	noSmithyDocumentSerde
-}
-
-func (v *SourceS3Location) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.SourceS3Location)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *SourceS3Location) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Bucket != nil {
-		s.WriteString(schemas.SourceS3Location_bucket, *v.Bucket)
-	}
-	if v.Key != nil {
-		s.WriteString(schemas.SourceS3Location_key, *v.Key)
-	}
-	if v.Region != "" {
-		s.WriteString(schemas.SourceS3Location_region, string(v.Region))
-	}
-}
-func (v *SourceS3Location) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.SourceS3Location, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.SourceS3Location_bucket:
-			v.Bucket = new(string)
-			return d.ReadString(schemas.SourceS3Location_bucket, v.Bucket)
-		case schemas.SourceS3Location_key:
-			v.Key = new(string)
-			return d.ReadString(schemas.SourceS3Location_key, v.Key)
-		case schemas.SourceS3Location_region:
-			var ev string
-			if err := d.ReadString(schemas.SourceS3Location_region, &ev); err != nil {
-				return err
-			}
-			v.Region = S3BucketRegion(ev)
-			return nil
-		}
-		return nil
-	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

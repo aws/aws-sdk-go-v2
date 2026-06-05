@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,21 +38,6 @@ type ListSipMediaApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSipMediaApplicationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListSipMediaApplicationsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListSipMediaApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListSipMediaApplicationsRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListSipMediaApplicationsRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListSipMediaApplicationsOutput struct {
 
 	// The token used to return the next page of results.
@@ -69,26 +52,16 @@ type ListSipMediaApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListSipMediaApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListSipMediaApplicationsResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListSipMediaApplicationsResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListSipMediaApplicationsResponse_NextToken, v.NextToken)
-		case schemas.ListSipMediaApplicationsResponse_SipMediaApplications:
-			return deserializeSipMediaApplicationList(d, schemas.ListSipMediaApplicationsResponse_SipMediaApplications, &v.SipMediaApplications)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListSipMediaApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSipMediaApplications, schemas.ListSipMediaApplicationsRequest, schemas.ListSipMediaApplicationsResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSipMediaApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSipMediaApplications, schemas.ListSipMediaApplicationsRequest, schemas.ListSipMediaApplicationsResponse), output: &ListSipMediaApplicationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSipMediaApplications{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSipMediaApplications"); err != nil {

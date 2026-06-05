@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -106,60 +104,6 @@ type UpdateHarnessInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHarnessInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateHarnessRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessAllowedTools(s, schemas.UpdateHarnessRequest_allowedTools, v.AllowedTools)
-	if v.AuthorizerConfiguration != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_authorizerConfiguration)
-		v.AuthorizerConfiguration.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_clientToken, *v.ClientToken)
-	}
-	serializeHarnessEnvironmentProviderRequest(s, schemas.UpdateHarnessRequest_environment, v.Environment)
-	if v.EnvironmentArtifact != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_environmentArtifact)
-		v.EnvironmentArtifact.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeEnvironmentVariablesMap(s, schemas.UpdateHarnessRequest_environmentVariables, v.EnvironmentVariables)
-	if v.ExecutionRoleArn != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_executionRoleArn, *v.ExecutionRoleArn)
-	}
-	if v.HarnessId != nil {
-		s.WriteString(schemas.UpdateHarnessRequest_harnessId, *v.HarnessId)
-	}
-	if v.MaxIterations != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_maxIterations, *v.MaxIterations)
-	}
-	if v.MaxTokens != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_maxTokens, *v.MaxTokens)
-	}
-	if v.Memory != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_memory)
-		v.Memory.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	serializeHarnessModelConfiguration(s, schemas.UpdateHarnessRequest_model, v.Model)
-	serializeHarnessSkills(s, schemas.UpdateHarnessRequest_skills, v.Skills)
-	serializeHarnessSystemPrompt(s, schemas.UpdateHarnessRequest_systemPrompt, v.SystemPrompt)
-	if v.TimeoutSeconds != nil {
-		s.WriteInt32(schemas.UpdateHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
-	}
-	serializeHarnessTools(s, schemas.UpdateHarnessRequest_tools, v.Tools)
-	if v.Truncation != nil {
-		s.WriteStruct(schemas.UpdateHarnessRequest_truncation)
-		v.Truncation.SerializeMembers(s)
-		s.CloseStruct()
-	}
-}
-
 type UpdateHarnessOutput struct {
 
 	// The updated harness.
@@ -173,24 +117,16 @@ type UpdateHarnessOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateHarnessOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateHarnessResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateHarnessResponse_harness:
-			v.Harness = &types.Harness{}
-			return v.Harness.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHarness, schemas.UpdateHarnessRequest, schemas.UpdateHarnessResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateHarness{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHarness, schemas.UpdateHarnessRequest, schemas.UpdateHarnessResponse), output: &UpdateHarnessOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateHarness{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHarness"); err != nil {

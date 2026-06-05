@@ -7,9 +7,7 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,18 +45,6 @@ type GetStreamGroupInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetStreamGroupInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetStreamGroupInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetStreamGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Identifier != nil {
-		s.WriteString(schemas.GetStreamGroupInput_Identifier, *v.Identifier)
-	}
 }
 
 type GetStreamGroupOutput struct {
@@ -377,67 +363,16 @@ type GetStreamGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetStreamGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetStreamGroupOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetStreamGroupOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetStreamGroupOutput_Arn, v.Arn)
-		case schemas.GetStreamGroupOutput_AssociatedApplications:
-			return deserializeArnList(d, schemas.GetStreamGroupOutput_AssociatedApplications, &v.AssociatedApplications)
-		case schemas.GetStreamGroupOutput_CreatedAt:
-			v.CreatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetStreamGroupOutput_CreatedAt, v.CreatedAt)
-		case schemas.GetStreamGroupOutput_DefaultApplication:
-			v.DefaultApplication = &types.DefaultApplication{}
-			return v.DefaultApplication.Deserialize(d)
-		case schemas.GetStreamGroupOutput_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetStreamGroupOutput_Description, v.Description)
-		case schemas.GetStreamGroupOutput_ExpiresAt:
-			v.ExpiresAt = new(time.Time)
-			return d.ReadTime(schemas.GetStreamGroupOutput_ExpiresAt, v.ExpiresAt)
-		case schemas.GetStreamGroupOutput_Id:
-			v.Id = new(string)
-			return d.ReadString(schemas.GetStreamGroupOutput_Id, v.Id)
-		case schemas.GetStreamGroupOutput_LastUpdatedAt:
-			v.LastUpdatedAt = new(time.Time)
-			return d.ReadTime(schemas.GetStreamGroupOutput_LastUpdatedAt, v.LastUpdatedAt)
-		case schemas.GetStreamGroupOutput_LocationStates:
-			return deserializeLocationStates(d, schemas.GetStreamGroupOutput_LocationStates, &v.LocationStates)
-		case schemas.GetStreamGroupOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamGroupOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.StreamGroupStatus(ev)
-			return nil
-		case schemas.GetStreamGroupOutput_StatusReason:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamGroupOutput_StatusReason, &ev); err != nil {
-				return err
-			}
-			v.StatusReason = types.StreamGroupStatusReason(ev)
-			return nil
-		case schemas.GetStreamGroupOutput_StreamClass:
-			var ev string
-			if err := d.ReadString(schemas.GetStreamGroupOutput_StreamClass, &ev); err != nil {
-				return err
-			}
-			v.StreamClass = types.StreamClass(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetStreamGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamGroup, schemas.GetStreamGroupInput, schemas.GetStreamGroupOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamGroup, schemas.GetStreamGroupInput, schemas.GetStreamGroupOutput), output: &GetStreamGroupOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamGroup{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStreamGroup"); err != nil {

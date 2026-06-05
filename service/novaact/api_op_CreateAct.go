@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,31 +60,6 @@ type CreateActInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateActInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateActRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateActInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateActRequest_clientToken, *v.ClientToken)
-	}
-	if v.SessionId != nil {
-		s.WriteString(schemas.CreateActRequest_sessionId, *v.SessionId)
-	}
-	if v.Task != nil {
-		s.WriteString(schemas.CreateActRequest_task, *v.Task)
-	}
-	serializeToolSpecs(s, schemas.CreateActRequest_toolSpecs, v.ToolSpecs)
-	if v.WorkflowDefinitionName != nil {
-		s.WriteString(schemas.CreateActRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
-	}
-	if v.WorkflowRunId != nil {
-		s.WriteString(schemas.CreateActRequest_workflowRunId, *v.WorkflowRunId)
-	}
-}
-
 type CreateActOutput struct {
 
 	// The unique identifier for the created act.
@@ -105,31 +78,16 @@ type CreateActOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateActOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateActResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateActResponse_actId:
-			v.ActId = new(string)
-			return d.ReadString(schemas.CreateActResponse_actId, v.ActId)
-		case schemas.CreateActResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.CreateActResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ActStatus(ev)
-			return nil
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateActMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAct, schemas.CreateActRequest, schemas.CreateActResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAct, schemas.CreateActRequest, schemas.CreateActResponse), output: &CreateActOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAct{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAct"); err != nil {

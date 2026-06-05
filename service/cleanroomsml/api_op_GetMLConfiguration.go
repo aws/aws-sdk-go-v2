@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,18 +39,6 @@ type GetMLConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMLConfigurationInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetMLConfigurationRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetMLConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MembershipIdentifier != nil {
-		s.WriteString(schemas.GetMLConfigurationRequest_membershipIdentifier, *v.MembershipIdentifier)
-	}
-}
-
 type GetMLConfigurationOutput struct {
 
 	// The time at which the ML configuration was created.
@@ -81,33 +67,16 @@ type GetMLConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetMLConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetMLConfigurationResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetMLConfigurationResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.GetMLConfigurationResponse_createTime, v.CreateTime)
-		case schemas.GetMLConfigurationResponse_defaultOutputLocation:
-			v.DefaultOutputLocation = &types.MLOutputConfiguration{}
-			return v.DefaultOutputLocation.Deserialize(d)
-		case schemas.GetMLConfigurationResponse_membershipIdentifier:
-			v.MembershipIdentifier = new(string)
-			return d.ReadString(schemas.GetMLConfigurationResponse_membershipIdentifier, v.MembershipIdentifier)
-		case schemas.GetMLConfigurationResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.GetMLConfigurationResponse_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetMLConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLConfiguration, schemas.GetMLConfigurationRequest, schemas.GetMLConfigurationResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLConfiguration, schemas.GetMLConfigurationRequest, schemas.GetMLConfigurationResponse), output: &GetMLConfigurationOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLConfiguration{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMLConfiguration"); err != nil {

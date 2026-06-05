@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,18 +37,6 @@ type GetTrainingDatasetInput struct {
 	TrainingDatasetArn *string
 
 	noSmithyDocumentSerde
-}
-
-func (v *GetTrainingDatasetInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetTrainingDatasetRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetTrainingDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.TrainingDatasetArn != nil {
-		s.WriteString(schemas.GetTrainingDatasetRequest_trainingDatasetArn, *v.TrainingDatasetArn)
-	}
 }
 
 type GetTrainingDatasetOutput struct {
@@ -102,50 +88,16 @@ type GetTrainingDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetTrainingDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetTrainingDatasetResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetTrainingDatasetResponse_createTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.GetTrainingDatasetResponse_createTime, v.CreateTime)
-		case schemas.GetTrainingDatasetResponse_description:
-			v.Description = new(string)
-			return d.ReadString(schemas.GetTrainingDatasetResponse_description, v.Description)
-		case schemas.GetTrainingDatasetResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.GetTrainingDatasetResponse_name, v.Name)
-		case schemas.GetTrainingDatasetResponse_roleArn:
-			v.RoleArn = new(string)
-			return d.ReadString(schemas.GetTrainingDatasetResponse_roleArn, v.RoleArn)
-		case schemas.GetTrainingDatasetResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetTrainingDatasetResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.TrainingDatasetStatus(ev)
-			return nil
-		case schemas.GetTrainingDatasetResponse_tags:
-			return deserializeTagMap(d, schemas.GetTrainingDatasetResponse_tags, &v.Tags)
-		case schemas.GetTrainingDatasetResponse_trainingData:
-			return deserializeDatasetList(d, schemas.GetTrainingDatasetResponse_trainingData, &v.TrainingData)
-		case schemas.GetTrainingDatasetResponse_trainingDatasetArn:
-			v.TrainingDatasetArn = new(string)
-			return d.ReadString(schemas.GetTrainingDatasetResponse_trainingDatasetArn, v.TrainingDatasetArn)
-		case schemas.GetTrainingDatasetResponse_updateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.GetTrainingDatasetResponse_updateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetTrainingDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainingDataset, schemas.GetTrainingDatasetRequest, schemas.GetTrainingDatasetResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrainingDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrainingDataset, schemas.GetTrainingDatasetRequest, schemas.GetTrainingDatasetResponse), output: &GetTrainingDatasetOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrainingDataset{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrainingDataset"); err != nil {

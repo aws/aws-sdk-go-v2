@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,43 +49,6 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOperationsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOperationsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ApplicationId != nil {
-		s.WriteString(schemas.ListOperationsInput_ApplicationId, *v.ApplicationId)
-	}
-	serializeFilterList(s, schemas.ListOperationsInput_Filters, v.Filters)
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListOperationsInput_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOperationsInput_NextToken, *v.NextToken)
-	}
-}
-func (v *ListOperationsInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOperationsInput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOperationsInput_ApplicationId:
-			v.ApplicationId = new(string)
-			return d.ReadString(schemas.ListOperationsInput_ApplicationId, v.ApplicationId)
-		case schemas.ListOperationsInput_Filters:
-			return deserializeFilterList(d, schemas.ListOperationsInput_Filters, &v.Filters)
-		case schemas.ListOperationsInput_MaxResults:
-			v.MaxResults = new(int32)
-			return d.ReadInt32(schemas.ListOperationsInput_MaxResults, v.MaxResults)
-		case schemas.ListOperationsInput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOperationsInput_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
-
 type ListOperationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -103,38 +64,16 @@ type ListOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListOperationsOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListOperationsOutput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListOperationsOutput_NextToken, *v.NextToken)
-	}
-	serializeOperationList(s, schemas.ListOperationsOutput_Operations, v.Operations)
-}
-func (v *ListOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListOperationsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListOperationsOutput_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListOperationsOutput_NextToken, v.NextToken)
-		case schemas.ListOperationsOutput_Operations:
-			return deserializeOperationList(d, schemas.ListOperationsOutput_Operations, &v.Operations)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsInput, schemas.ListOperationsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOperations{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsInput, schemas.ListOperationsOutput), output: &ListOperationsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOperations{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOperations"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -68,44 +66,6 @@ type UpdateRouteCalculatorInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRouteCalculatorInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRouteCalculatorRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRouteCalculatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CalculatorName != nil {
-		s.WriteString(schemas.UpdateRouteCalculatorRequest_CalculatorName, *v.CalculatorName)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.UpdateRouteCalculatorRequest_Description, *v.Description)
-	}
-	if v.PricingPlan != "" {
-		s.WriteString(schemas.UpdateRouteCalculatorRequest_PricingPlan, string(v.PricingPlan))
-	}
-}
-func (v *UpdateRouteCalculatorInput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRouteCalculatorRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRouteCalculatorRequest_CalculatorName:
-			v.CalculatorName = new(string)
-			return d.ReadString(schemas.UpdateRouteCalculatorRequest_CalculatorName, v.CalculatorName)
-		case schemas.UpdateRouteCalculatorRequest_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.UpdateRouteCalculatorRequest_Description, v.Description)
-		case schemas.UpdateRouteCalculatorRequest_PricingPlan:
-			var ev string
-			if err := d.ReadString(schemas.UpdateRouteCalculatorRequest_PricingPlan, &ev); err != nil {
-				return err
-			}
-			v.PricingPlan = types.PricingPlan(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 type UpdateRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated route calculator resource. Used
@@ -136,47 +96,16 @@ type UpdateRouteCalculatorOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateRouteCalculatorOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateRouteCalculatorResponse)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateRouteCalculatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CalculatorArn != nil {
-		s.WriteString(schemas.UpdateRouteCalculatorResponse_CalculatorArn, *v.CalculatorArn)
-	}
-	if v.CalculatorName != nil {
-		s.WriteString(schemas.UpdateRouteCalculatorResponse_CalculatorName, *v.CalculatorName)
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.UpdateRouteCalculatorResponse_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *UpdateRouteCalculatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateRouteCalculatorResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateRouteCalculatorResponse_CalculatorArn:
-			v.CalculatorArn = new(string)
-			return d.ReadString(schemas.UpdateRouteCalculatorResponse_CalculatorArn, v.CalculatorArn)
-		case schemas.UpdateRouteCalculatorResponse_CalculatorName:
-			v.CalculatorName = new(string)
-			return d.ReadString(schemas.UpdateRouteCalculatorResponse_CalculatorName, v.CalculatorName)
-		case schemas.UpdateRouteCalculatorResponse_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.UpdateRouteCalculatorResponse_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateRouteCalculatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouteCalculator, schemas.UpdateRouteCalculatorRequest, schemas.UpdateRouteCalculatorResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouteCalculator{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouteCalculator, schemas.UpdateRouteCalculatorRequest, schemas.UpdateRouteCalculatorResponse), output: &UpdateRouteCalculatorOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouteCalculator{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRouteCalculator"); err != nil {

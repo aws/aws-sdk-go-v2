@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -90,34 +88,6 @@ type CreateAudienceModelInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAudienceModelInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAudienceModelRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAudienceModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAudienceModelRequest_description, *v.Description)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateAudienceModelRequest_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAudienceModelRequest_name, *v.Name)
-	}
-	serializeTagMap(s, schemas.CreateAudienceModelRequest_tags, v.Tags)
-	if v.TrainingDataEndTime != nil {
-		s.WriteTime(schemas.CreateAudienceModelRequest_trainingDataEndTime, *v.TrainingDataEndTime)
-	}
-	if v.TrainingDataStartTime != nil {
-		s.WriteTime(schemas.CreateAudienceModelRequest_trainingDataStartTime, *v.TrainingDataStartTime)
-	}
-	if v.TrainingDatasetArn != nil {
-		s.WriteString(schemas.CreateAudienceModelRequest_trainingDatasetArn, *v.TrainingDatasetArn)
-	}
-}
-
 type CreateAudienceModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the audience model.
@@ -131,24 +101,16 @@ type CreateAudienceModelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAudienceModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAudienceModelResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAudienceModelResponse_audienceModelArn:
-			v.AudienceModelArn = new(string)
-			return d.ReadString(schemas.CreateAudienceModelResponse_audienceModelArn, v.AudienceModelArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAudienceModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAudienceModel, schemas.CreateAudienceModelRequest, schemas.CreateAudienceModelResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAudienceModel, schemas.CreateAudienceModelRequest, schemas.CreateAudienceModelResponse), output: &CreateAudienceModelOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAudienceModel{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAudienceModel"); err != nil {

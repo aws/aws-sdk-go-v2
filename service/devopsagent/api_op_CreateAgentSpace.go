@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,31 +58,6 @@ type CreateAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateAgentSpaceInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CreateAgentSpaceInput_clientToken, *v.ClientToken)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateAgentSpaceInput_description, *v.Description)
-	}
-	if v.KmsKeyArn != nil {
-		s.WriteString(schemas.CreateAgentSpaceInput_kmsKeyArn, *v.KmsKeyArn)
-	}
-	if v.Locale != nil {
-		s.WriteString(schemas.CreateAgentSpaceInput_locale, *v.Locale)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.CreateAgentSpaceInput_name, *v.Name)
-	}
-	serializeTags(s, schemas.CreateAgentSpaceInput_tags, v.Tags)
-}
-
 // Output containing the newly created AgentSpace.
 type CreateAgentSpaceOutput struct {
 
@@ -103,26 +76,16 @@ type CreateAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateAgentSpaceOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateAgentSpaceOutput_agentSpace:
-			v.AgentSpace = &types.AgentSpace{}
-			return v.AgentSpace.Deserialize(d)
-		case schemas.CreateAgentSpaceOutput_tags:
-			return deserializeTags(d, schemas.CreateAgentSpaceOutput_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentSpace, schemas.CreateAgentSpaceInput, schemas.CreateAgentSpaceOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentSpace, schemas.CreateAgentSpaceInput, schemas.CreateAgentSpaceOutput), output: &CreateAgentSpaceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentSpace{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgentSpace"); err != nil {

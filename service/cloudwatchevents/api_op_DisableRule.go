@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,21 +44,6 @@ type DisableRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableRuleInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisableRuleRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EventBusName != nil {
-		s.WriteString(schemas.DisableRuleRequest_EventBusName, *v.EventBusName)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DisableRuleRequest_Name, *v.Name)
-	}
-}
-
 type DisableRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,29 +51,16 @@ type DisableRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableRuleOutput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(nil)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-}
-func (v *DisableRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRule, schemas.DisableRuleRequest, nil)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRule, schemas.DisableRuleRequest, nil), output: &DisableRuleOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableRule{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableRule"); err != nil {

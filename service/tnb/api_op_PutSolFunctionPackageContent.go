@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,24 +50,6 @@ type PutSolFunctionPackageContentInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSolFunctionPackageContentInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.PutSolFunctionPackageContentInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *PutSolFunctionPackageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ContentType != "" {
-		s.WriteString(schemas.PutSolFunctionPackageContentInput_contentType, string(v.ContentType))
-	}
-	if v.File != nil {
-		s.WriteBlob(schemas.PutSolFunctionPackageContentInput_file, v.File)
-	}
-	if v.VnfPkgId != nil {
-		s.WriteString(schemas.PutSolFunctionPackageContentInput_vnfPkgId, *v.VnfPkgId)
-	}
-}
-
 type PutSolFunctionPackageContentOutput struct {
 
 	// Function package ID.
@@ -108,39 +88,16 @@ type PutSolFunctionPackageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *PutSolFunctionPackageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.PutSolFunctionPackageContentOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.PutSolFunctionPackageContentOutput_id:
-			v.Id = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_id, v.Id)
-		case schemas.PutSolFunctionPackageContentOutput_metadata:
-			v.Metadata = &types.PutSolFunctionPackageContentMetadata{}
-			return v.Metadata.Deserialize(d)
-		case schemas.PutSolFunctionPackageContentOutput_vnfProductName:
-			v.VnfProductName = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfProductName, v.VnfProductName)
-		case schemas.PutSolFunctionPackageContentOutput_vnfProvider:
-			v.VnfProvider = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfProvider, v.VnfProvider)
-		case schemas.PutSolFunctionPackageContentOutput_vnfdId:
-			v.VnfdId = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfdId, v.VnfdId)
-		case schemas.PutSolFunctionPackageContentOutput_vnfdVersion:
-			v.VnfdVersion = new(string)
-			return d.ReadString(schemas.PutSolFunctionPackageContentOutput_vnfdVersion, v.VnfdVersion)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationPutSolFunctionPackageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSolFunctionPackageContent, schemas.PutSolFunctionPackageContentInput, schemas.PutSolFunctionPackageContentOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSolFunctionPackageContent, schemas.PutSolFunctionPackageContentInput, schemas.PutSolFunctionPackageContentOutput), output: &PutSolFunctionPackageContentOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSolFunctionPackageContent{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSolFunctionPackageContent"); err != nil {

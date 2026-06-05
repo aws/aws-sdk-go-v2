@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,24 +48,6 @@ type DescribeProductInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProductInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DescribeProductInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DescribeProductInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AcceptLanguage != nil {
-		s.WriteString(schemas.DescribeProductInput_AcceptLanguage, *v.AcceptLanguage)
-	}
-	if v.Id != nil {
-		s.WriteString(schemas.DescribeProductInput_Id, *v.Id)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.DescribeProductInput_Name, *v.Name)
-	}
-}
-
 type DescribeProductOutput struct {
 
 	// Information about the associated budgets.
@@ -88,30 +68,16 @@ type DescribeProductOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DescribeProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DescribeProductOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DescribeProductOutput_Budgets:
-			return deserializeBudgets(d, schemas.DescribeProductOutput_Budgets, &v.Budgets)
-		case schemas.DescribeProductOutput_LaunchPaths:
-			return deserializeLaunchPaths(d, schemas.DescribeProductOutput_LaunchPaths, &v.LaunchPaths)
-		case schemas.DescribeProductOutput_ProductViewSummary:
-			v.ProductViewSummary = &types.ProductViewSummary{}
-			return v.ProductViewSummary.Deserialize(d)
-		case schemas.DescribeProductOutput_ProvisioningArtifacts:
-			return deserializeProvisioningArtifacts(d, schemas.DescribeProductOutput_ProvisioningArtifacts, &v.ProvisioningArtifacts)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDescribeProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProduct, schemas.DescribeProductInput, schemas.DescribeProductOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProduct, schemas.DescribeProductInput, schemas.DescribeProductOutput), output: &DescribeProductOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProduct{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProduct"); err != nil {

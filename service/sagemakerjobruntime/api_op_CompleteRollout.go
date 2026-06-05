@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,27 +53,6 @@ type CompleteRolloutInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CompleteRolloutInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CompleteRolloutRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CompleteRolloutInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CompleteRolloutRequest_ClientToken, *v.ClientToken)
-	}
-	if v.JobArn != nil {
-		s.WriteString(schemas.CompleteRolloutRequest_JobArn, *v.JobArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.CompleteRolloutRequest_Status, string(v.Status))
-	}
-	if v.TrajectoryId != nil {
-		s.WriteString(schemas.CompleteRolloutRequest_TrajectoryId, *v.TrajectoryId)
-	}
-}
-
 type CompleteRolloutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,21 +60,16 @@ type CompleteRolloutOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CompleteRolloutOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CompleteRolloutResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCompleteRolloutMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteRollout, schemas.CompleteRolloutRequest, schemas.CompleteRolloutResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteRollout{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteRollout, schemas.CompleteRolloutRequest, schemas.CompleteRolloutResponse), output: &CompleteRolloutOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteRollout{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CompleteRollout"); err != nil {

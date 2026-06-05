@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,18 +38,6 @@ type DisableDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableDirectoryInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.DisableDirectoryRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *DisableDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DirectoryArn != nil {
-		s.WriteString(schemas.DisableDirectoryRequest_DirectoryArn, *v.DirectoryArn)
-	}
-}
-
 type DisableDirectoryOutput struct {
 
 	// The ARN of the directory that has been disabled.
@@ -65,24 +51,16 @@ type DisableDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *DisableDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.DisableDirectoryResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.DisableDirectoryResponse_DirectoryArn:
-			v.DirectoryArn = new(string)
-			return d.ReadString(schemas.DisableDirectoryResponse_DirectoryArn, v.DirectoryArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationDisableDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDirectory, schemas.DisableDirectoryRequest, schemas.DisableDirectoryResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableDirectory{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDirectory, schemas.DisableDirectoryRequest, schemas.DisableDirectoryResponse), output: &DisableDirectoryOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableDirectory{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableDirectory"); err != nil {

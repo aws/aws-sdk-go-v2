@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,18 +60,6 @@ type GetCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCoreDeviceInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.GetCoreDeviceRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *GetCoreDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CoreDeviceThingName != nil {
-		s.WriteString(schemas.GetCoreDeviceRequest_coreDeviceThingName, *v.CoreDeviceThingName)
-	}
-}
-
 type GetCoreDeviceOutput struct {
 
 	// The computer architecture of the core device.
@@ -125,48 +111,16 @@ type GetCoreDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *GetCoreDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.GetCoreDeviceResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.GetCoreDeviceResponse_architecture:
-			v.Architecture = new(string)
-			return d.ReadString(schemas.GetCoreDeviceResponse_architecture, v.Architecture)
-		case schemas.GetCoreDeviceResponse_coreDeviceThingName:
-			v.CoreDeviceThingName = new(string)
-			return d.ReadString(schemas.GetCoreDeviceResponse_coreDeviceThingName, v.CoreDeviceThingName)
-		case schemas.GetCoreDeviceResponse_coreVersion:
-			v.CoreVersion = new(string)
-			return d.ReadString(schemas.GetCoreDeviceResponse_coreVersion, v.CoreVersion)
-		case schemas.GetCoreDeviceResponse_lastStatusUpdateTimestamp:
-			v.LastStatusUpdateTimestamp = new(time.Time)
-			return d.ReadTime(schemas.GetCoreDeviceResponse_lastStatusUpdateTimestamp, v.LastStatusUpdateTimestamp)
-		case schemas.GetCoreDeviceResponse_platform:
-			v.Platform = new(string)
-			return d.ReadString(schemas.GetCoreDeviceResponse_platform, v.Platform)
-		case schemas.GetCoreDeviceResponse_runtime:
-			v.Runtime = new(string)
-			return d.ReadString(schemas.GetCoreDeviceResponse_runtime, v.Runtime)
-		case schemas.GetCoreDeviceResponse_status:
-			var ev string
-			if err := d.ReadString(schemas.GetCoreDeviceResponse_status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.CoreDeviceStatus(ev)
-			return nil
-		case schemas.GetCoreDeviceResponse_tags:
-			return deserializeTagMap(d, schemas.GetCoreDeviceResponse_tags, &v.Tags)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationGetCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDevice, schemas.GetCoreDeviceRequest, schemas.GetCoreDeviceResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDevice, schemas.GetCoreDeviceRequest, schemas.GetCoreDeviceResponse), output: &GetCoreDeviceOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreDevice{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCoreDevice"); err != nil {

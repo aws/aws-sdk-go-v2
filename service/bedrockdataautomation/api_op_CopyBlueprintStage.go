@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,27 +51,6 @@ type CopyBlueprintStageInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyBlueprintStageInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CopyBlueprintStageRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CopyBlueprintStageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.BlueprintArn != nil {
-		s.WriteString(schemas.CopyBlueprintStageRequest_blueprintArn, *v.BlueprintArn)
-	}
-	if v.ClientToken != nil {
-		s.WriteString(schemas.CopyBlueprintStageRequest_clientToken, *v.ClientToken)
-	}
-	if v.SourceStage != "" {
-		s.WriteString(schemas.CopyBlueprintStageRequest_sourceStage, string(v.SourceStage))
-	}
-	if v.TargetStage != "" {
-		s.WriteString(schemas.CopyBlueprintStageRequest_targetStage, string(v.TargetStage))
-	}
-}
-
 // CopyBlueprintStage Response
 type CopyBlueprintStageOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -82,21 +59,16 @@ type CopyBlueprintStageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CopyBlueprintStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CopyBlueprintStageResponse, func(s *smithy.Schema) error {
-		switch s {
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCopyBlueprintStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBlueprintStage, schemas.CopyBlueprintStageRequest, schemas.CopyBlueprintStageResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyBlueprintStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBlueprintStage, schemas.CopyBlueprintStageRequest, schemas.CopyBlueprintStageResponse), output: &CopyBlueprintStageOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyBlueprintStage{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyBlueprintStage"); err != nil {

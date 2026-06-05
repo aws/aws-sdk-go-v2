@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,23 +61,6 @@ type CreateBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBGPPeerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateBGPPeerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateBGPPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NewBGPPeer != nil {
-		s.WriteStruct(schemas.CreateBGPPeerRequest_newBGPPeer)
-		v.NewBGPPeer.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.VirtualInterfaceId != nil {
-		s.WriteString(schemas.CreateBGPPeerRequest_virtualInterfaceId, *v.VirtualInterfaceId)
-	}
-}
-
 type CreateBGPPeerOutput struct {
 
 	// The virtual interface.
@@ -91,24 +72,16 @@ type CreateBGPPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateBGPPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateBGPPeerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateBGPPeerResponse_virtualInterface:
-			v.VirtualInterface = &types.VirtualInterface{}
-			return v.VirtualInterface.Deserialize(d)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBGPPeer, schemas.CreateBGPPeerRequest, schemas.CreateBGPPeerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBGPPeer{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBGPPeer, schemas.CreateBGPPeerRequest, schemas.CreateBGPPeerResponse), output: &CreateBGPPeerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBGPPeer{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBGPPeer"); err != nil {

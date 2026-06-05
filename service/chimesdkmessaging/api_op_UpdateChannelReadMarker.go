@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,21 +45,6 @@ type UpdateChannelReadMarkerInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateChannelReadMarkerInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.UpdateChannelReadMarkerRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *UpdateChannelReadMarkerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelArn != nil {
-		s.WriteString(schemas.UpdateChannelReadMarkerRequest_ChannelArn, *v.ChannelArn)
-	}
-	if v.ChimeBearer != nil {
-		s.WriteString(schemas.UpdateChannelReadMarkerRequest_ChimeBearer, *v.ChimeBearer)
-	}
-}
-
 type UpdateChannelReadMarkerOutput struct {
 
 	// The ARN of the channel.
@@ -73,24 +56,16 @@ type UpdateChannelReadMarkerOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *UpdateChannelReadMarkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.UpdateChannelReadMarkerResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.UpdateChannelReadMarkerResponse_ChannelArn:
-			v.ChannelArn = new(string)
-			return d.ReadString(schemas.UpdateChannelReadMarkerResponse_ChannelArn, v.ChannelArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationUpdateChannelReadMarkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelReadMarker, schemas.UpdateChannelReadMarkerRequest, schemas.UpdateChannelReadMarkerResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelReadMarker{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelReadMarker, schemas.UpdateChannelReadMarkerRequest, schemas.UpdateChannelReadMarkerResponse), output: &UpdateChannelReadMarkerOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannelReadMarker{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannelReadMarker"); err != nil {

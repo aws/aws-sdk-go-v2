@@ -6,8 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,20 +45,6 @@ type CreateWorkloadIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkloadIdentityInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateWorkloadIdentityRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateWorkloadIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceOauth2ReturnUrlListType(s, schemas.CreateWorkloadIdentityRequest_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
-	if v.Name != nil {
-		s.WriteString(schemas.CreateWorkloadIdentityRequest_name, *v.Name)
-	}
-	serializeTagsMap(s, schemas.CreateWorkloadIdentityRequest_tags, v.Tags)
-}
-
 type CreateWorkloadIdentityOutput struct {
 
 	// The name of the workload identity.
@@ -83,29 +67,16 @@ type CreateWorkloadIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *CreateWorkloadIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateWorkloadIdentityResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls:
-			return deserializeResourceOauth2ReturnUrlListType(d, schemas.CreateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, &v.AllowedResourceOauth2ReturnUrls)
-		case schemas.CreateWorkloadIdentityResponse_name:
-			v.Name = new(string)
-			return d.ReadString(schemas.CreateWorkloadIdentityResponse_name, v.Name)
-		case schemas.CreateWorkloadIdentityResponse_workloadIdentityArn:
-			v.WorkloadIdentityArn = new(string)
-			return d.ReadString(schemas.CreateWorkloadIdentityResponse_workloadIdentityArn, v.WorkloadIdentityArn)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationCreateWorkloadIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadIdentity, schemas.CreateWorkloadIdentityRequest, schemas.CreateWorkloadIdentityResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkloadIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkloadIdentity, schemas.CreateWorkloadIdentityRequest, schemas.CreateWorkloadIdentityResponse), output: &CreateWorkloadIdentityOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkloadIdentity{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkloadIdentity"); err != nil {

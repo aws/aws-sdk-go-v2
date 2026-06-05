@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,24 +46,6 @@ type ListChannelsAssociatedWithChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelsAssociatedWithChannelFlowInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListChannelsAssociatedWithChannelFlowRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListChannelsAssociatedWithChannelFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelFlowArn != nil {
-		s.WriteString(schemas.ListChannelsAssociatedWithChannelFlowRequest_ChannelFlowArn, *v.ChannelFlowArn)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListChannelsAssociatedWithChannelFlowRequest_MaxResults, *v.MaxResults)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListChannelsAssociatedWithChannelFlowRequest_NextToken, *v.NextToken)
-	}
-}
-
 type ListChannelsAssociatedWithChannelFlowOutput struct {
 
 	// The information about each channel.
@@ -81,26 +61,16 @@ type ListChannelsAssociatedWithChannelFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListChannelsAssociatedWithChannelFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListChannelsAssociatedWithChannelFlowResponse, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListChannelsAssociatedWithChannelFlowResponse_Channels:
-			return deserializeChannelAssociatedWithFlowSummaryList(d, schemas.ListChannelsAssociatedWithChannelFlowResponse_Channels, &v.Channels)
-		case schemas.ListChannelsAssociatedWithChannelFlowResponse_NextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListChannelsAssociatedWithChannelFlowResponse_NextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListChannelsAssociatedWithChannelFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsAssociatedWithChannelFlow, schemas.ListChannelsAssociatedWithChannelFlowRequest, schemas.ListChannelsAssociatedWithChannelFlowResponse)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelsAssociatedWithChannelFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsAssociatedWithChannelFlow, schemas.ListChannelsAssociatedWithChannelFlowRequest, schemas.ListChannelsAssociatedWithChannelFlowResponse), output: &ListChannelsAssociatedWithChannelFlowOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelsAssociatedWithChannelFlow{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChannelsAssociatedWithChannelFlow"); err != nil {

@@ -6,9 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,45 +73,6 @@ type ListConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectionsInput) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListConnectionsInput)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DomainIdentifier != nil {
-		s.WriteString(schemas.ListConnectionsInput_domainIdentifier, *v.DomainIdentifier)
-	}
-	if v.EnvironmentIdentifier != nil {
-		s.WriteString(schemas.ListConnectionsInput_environmentIdentifier, *v.EnvironmentIdentifier)
-	}
-	if v.MaxResults != nil {
-		s.WriteInt32(schemas.ListConnectionsInput_maxResults, *v.MaxResults)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ListConnectionsInput_name, *v.Name)
-	}
-	if v.NextToken != nil {
-		s.WriteString(schemas.ListConnectionsInput_nextToken, *v.NextToken)
-	}
-	if v.ProjectIdentifier != nil {
-		s.WriteString(schemas.ListConnectionsInput_projectIdentifier, *v.ProjectIdentifier)
-	}
-	if v.Scope != "" {
-		s.WriteString(schemas.ListConnectionsInput_scope, string(v.Scope))
-	}
-	if v.SortBy != "" {
-		s.WriteString(schemas.ListConnectionsInput_sortBy, string(v.SortBy))
-	}
-	if v.SortOrder != "" {
-		s.WriteString(schemas.ListConnectionsInput_sortOrder, string(v.SortOrder))
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListConnectionsInput_type, string(v.Type))
-	}
-}
-
 type ListConnectionsOutput struct {
 
 	// The results of the ListConnections action.
@@ -134,26 +93,16 @@ type ListConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (v *ListConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListConnectionsOutput, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListConnectionsOutput_items:
-			return deserializeConnectionSummaries(d, schemas.ListConnectionsOutput_items, &v.Items)
-		case schemas.ListConnectionsOutput_nextToken:
-			v.NextToken = new(string)
-			return d.ReadString(schemas.ListConnectionsOutput_nextToken, v.NextToken)
-		}
-		return nil
-	})
-}
 func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnections, schemas.ListConnectionsInput, schemas.ListConnectionsOutput)}, middleware.After); err != nil {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
-	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnections, schemas.ListConnectionsInput, schemas.ListConnectionsOutput), output: &ListConnectionsOutput{}}, middleware.After); err != nil {
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnections{}, middleware.After)
+	if err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnections"); err != nil {
