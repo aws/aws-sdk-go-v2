@@ -2045,6 +2045,13 @@
                         "smithy.api#jsonName": "languageCode"
                     }
                 },
+                "ObjectCount": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of audio objects in an object-based or immersive audio track. This field is present for codecs that support object-based audio, such as E-AC-3 with Joint Object Coding (JOC) or IAMF. This field is null when the audio track does not contain object-based audio metadata.",
+                        "smithy.api#jsonName": "objectCount"
+                    }
+                },
                 "SampleRate": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -4303,11 +4310,11 @@
         "com.amazonaws.mediaconvert#CmafEncryptionSettings": {
             "type": "structure",
             "members": {
-                "ClearLead": {
-                    "target": "com.amazonaws.mediaconvert#HlsClearLead",
+                "ClearLeadSegments": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max9999",
                     "traits": {
-                        "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning.",
-                        "smithy.api#jsonName": "clearLead"
+                        "smithy.api#documentation": "Reduce video startup latency by leaving initial segments unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. Specify the number of initial segments to leave unencrypted. Omit this field to disable Clear Lead. The HLS manifest will omit #EXT-X-KEY tags during clear segments and insert the first #EXT-X-KEY immediately before the first encrypted segment. Because encryption is applied at the fragment level, the actual duration of unencrypted content may be slightly longer than expected if the segment length is not evenly divisible by the fragment length. In such cases, encryption begins at the next fragment boundary after the specified clear lead segments, rather than at the exact segment boundary. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec.",
+                        "smithy.api#jsonName": "clearLeadSegments"
                     }
                 },
                 "ConstantInitializationVector": {
@@ -4453,7 +4460,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#CmafImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -4462,6 +4469,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfCmafImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "ManifestCompression": {
@@ -4607,10 +4621,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#CmafImageBasedTrickPlaySettings": {
@@ -4647,7 +4667,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -4661,6 +4681,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#CmafImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#CmafIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#CmafInitializationVectorInManifest": {
@@ -5387,6 +5457,12 @@
                         "smithy.api#enumValue": "FLAC"
                     }
                 },
+                "MP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MP2"
+                    }
+                },
                 "MP3": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5552,6 +5628,13 @@
                         "smithy.api#jsonName": "colorPrimaries"
                     }
                 },
+                "ContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#ContentLightLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content.",
+                        "smithy.api#jsonName": "contentLightLevel"
+                    }
+                },
                 "Height": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -5578,6 +5661,13 @@
                     "traits": {
                         "smithy.api#documentation": "The codec profile used to encode the video. Profiles define specific feature sets and capabilities within a codec standard. For example, H.264 profiles include Baseline, Main, and High, each supporting different encoding features and complexity levels.",
                         "smithy.api#jsonName": "profile"
+                    }
+                },
+                "Rotation": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The clockwise rotation angle of the video, in degrees, as specified in the codec bitstream via a Display Orientation SEI message (payload type 47 for both H.264 and H.265). This field is null when the video essence does not contain a Display Orientation SEI message or when the rotation is 0 degrees.",
+                        "smithy.api#jsonName": "rotation"
                     }
                 },
                 "ScanType": {
@@ -6033,7 +6123,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, or MPEG-TS. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, or MPEG-PS. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -6217,6 +6307,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Container for this output. Some containers require a container settings object. If not specified, the default object will be created."
+            }
+        },
+        "com.amazonaws.mediaconvert#ContentLightLevel": {
+            "type": "structure",
+            "members": {
+                "MaxContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum content light level (MaxCLL), in cd/m².",
+                        "smithy.api#jsonName": "maxContentLightLevel"
+                    }
+                },
+                "MaxFrameAverageLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum frame-average light level (MaxFALL), in cd/m².",
+                        "smithy.api#jsonName": "maxFrameAverageLightLevel"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content."
             }
         },
         "com.amazonaws.mediaconvert#CopyProtectionAction": {
@@ -6978,7 +7090,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -6987,6 +7099,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashIsoImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "MinBufferTime": {
@@ -7110,10 +7229,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlaySettings": {
@@ -7150,7 +7275,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -7164,6 +7289,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#DashIsoIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#DashIsoIntervalCadence": {
@@ -10484,6 +10659,12 @@
                     "traits": {
                         "smithy.api#enumValue": "mpegts"
                     }
+                },
+                "mpegps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpegps"
+                    }
                 }
             }
         },
@@ -13583,6 +13764,28 @@
                 "smithy.api#documentation": "Setting for HDR10+ metadata insertion"
             }
         },
+        "com.amazonaws.mediaconvert#HdrMetadata": {
+            "type": "structure",
+            "members": {
+                "ContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#ContentLightLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content.",
+                        "smithy.api#jsonName": "contentLightLevel"
+                    }
+                },
+                "MasteringDisplayColorVolume": {
+                    "target": "com.amazonaws.mediaconvert#MasteringDisplayColorVolume",
+                    "traits": {
+                        "smithy.api#documentation": "Mastering display color volume metadata (SMPTE ST 2086). Describes the color volume of the display used to master the content. Chromaticity coordinates are in units of 0.00002. Luminance values are in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "masteringDisplayColorVolume"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "HDR (High Dynamic Range) metadata extracted from the container, including mastering display color volume and content light level information. This metadata is present in HDR10 and similar HDR content."
+            }
+        },
         "com.amazonaws.mediaconvert#HlsAdMarkers": {
             "type": "enum",
             "members": {
@@ -13777,26 +13980,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "Set Caption segment length control to Match video to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments to create caption segments that are 300 seconds long."
-            }
-        },
-        "com.amazonaws.mediaconvert#HlsClearLead": {
-            "type": "enum",
-            "members": {
-                "ENABLED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ENABLED"
-                    }
-                },
-                "DISABLED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DISABLED"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning."
             }
         },
         "com.amazonaws.mediaconvert#HlsClientCache": {
@@ -14053,7 +14236,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#HlsImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -14062,6 +14245,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfHlsImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "ManifestCompression": {
@@ -14240,10 +14430,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#HlsImageBasedTrickPlaySettings": {
@@ -14280,7 +14476,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -14294,6 +14490,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#HlsImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#HlsIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#HlsInitializationVectorInManifest": {
@@ -16010,7 +16256,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -16283,7 +16529,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -19251,6 +19497,84 @@
             },
             "traits": {
                 "smithy.api#documentation": "These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs."
+            }
+        },
+        "com.amazonaws.mediaconvert#MasteringDisplayColorVolume": {
+            "type": "structure",
+            "members": {
+                "BluePrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Blue primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "bluePrimaryX"
+                    }
+                },
+                "BluePrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Blue primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "bluePrimaryY"
+                    }
+                },
+                "GreenPrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Green primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "greenPrimaryX"
+                    }
+                },
+                "GreenPrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Green primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "greenPrimaryY"
+                    }
+                },
+                "MaxLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum display mastering luminance, in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "maxLuminance"
+                    }
+                },
+                "MinLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "Minimum display mastering luminance, in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "minLuminance"
+                    }
+                },
+                "RedPrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Red primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "redPrimaryX"
+                    }
+                },
+                "RedPrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Red primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "redPrimaryY"
+                    }
+                },
+                "WhitePointX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "White point chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "whitePointX"
+                    }
+                },
+                "WhitePointY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "White point chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "whitePointY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Mastering display color volume metadata (SMPTE ST 2086). Describes the color volume of the display used to master the content. Chromaticity coordinates are in units of 0.00002. Luminance values are in units of 0.0001 cd/m²."
             }
         },
         "com.amazonaws.mediaconvert#MatrixCoefficients": {
@@ -25727,7 +26051,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
+                "smithy.api#documentation": "Add tags to a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2017-08-29/tags",
@@ -26714,7 +27038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
+                "smithy.api#documentation": "Remove tags from a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2017-08-29/tags/{Arn}",
@@ -28066,6 +28390,13 @@
                         "smithy.api#jsonName": "frameRate"
                     }
                 },
+                "HdrMetadata": {
+                    "target": "com.amazonaws.mediaconvert#HdrMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "HDR (High Dynamic Range) metadata extracted from the container, including mastering display color volume and content light level information. This metadata is present in HDR10 and similar HDR content.",
+                        "smithy.api#jsonName": "hdrMetadata"
+                    }
+                },
                 "Height": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -28078,6 +28409,13 @@
                     "traits": {
                         "smithy.api#documentation": "The color space matrix coefficients of the video track, defining how RGB color values are converted to and from YUV color space. This affects color accuracy during encoding and decoding processes.",
                         "smithy.api#jsonName": "matrixCoefficients"
+                    }
+                },
+                "Rotation": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The clockwise rotation angle of the video track, in degrees, as derived from container-level metadata (e.g. the MP4 tkhd transformation matrix or the Matroska ProjectionPoseRoll element). Common values are 90, 180, and 270. This field is null when no rotation metadata is present or when the rotation is 0 degrees. For MP4, non-standard transformation matrices also yield null.",
+                        "smithy.api#jsonName": "rotation"
                     }
                 },
                 "TransferCharacteristics": {
@@ -30394,6 +30732,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin1Max9999": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 9999
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin2000Max30000": {
             "type": "integer",
             "traits": {
@@ -30823,6 +31170,12 @@
                 "target": "com.amazonaws.mediaconvert#CmafAdditionalManifest"
             }
         },
+        "com.amazonaws.mediaconvert#__listOfCmafImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#CmafImageBasedTrickPlayVariant"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOfColorConversion3DLUTSetting": {
             "type": "list",
             "member": {
@@ -30833,6 +31186,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#DashAdditionalManifest"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfDashIsoImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlayVariant"
             }
         },
         "com.amazonaws.mediaconvert#__listOfElementalInferenceFeature": {
@@ -30881,6 +31240,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#HlsCaptionLanguageMapping"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfHlsImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#HlsImageBasedTrickPlayVariant"
             }
         },
         "com.amazonaws.mediaconvert#__listOfHopDestination": {

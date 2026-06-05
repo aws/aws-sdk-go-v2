@@ -4837,6 +4837,38 @@
                 "smithy.api#documentation": "<p>Aggregation for attributes.</p>"
             }
         },
+        "com.amazonaws.quicksight#AudioExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "audioExtractionStatus": {
+                    "target": "com.amazonaws.quicksight#AudioExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of audio extraction. Valid values are ENABLED and DISABLED.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for audio extraction from knowledge base documents.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AudioExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#AuroraParameters": {
             "type": "structure",
             "members": {
@@ -6111,6 +6143,180 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes one or more knowledge bases.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/batch-delete",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseFailure": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the knowledge base that failed to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the deletion failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for the deletion failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a knowledge base that failed to be deleted in a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseFailure"
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseIds": {
+                    "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of knowledge base identifiers to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#KnowledgeBaseId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseResponse": {
+            "type": "structure",
+            "members": {
+                "Deleted": {
+                    "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseSuccessList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of knowledge bases that were successfully deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of knowledge bases that failed to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseSuccess": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the successfully deleted knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the successfully deleted knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a knowledge base that was successfully deleted in a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseSuccessList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBaseSuccess"
             }
         },
         "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswer": {
@@ -8779,6 +8985,42 @@
                     "traits": {
                         "smithy.api#enumValue": "DENY"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CapacityBytesRangeFilter": {
+            "type": "structure",
+            "members": {
+                "minBytes": {
+                    "target": "com.amazonaws.quicksight#CapacityBytesRangeFilterMinBytesLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>"
+                    }
+                },
+                "maxBytes": {
+                    "target": "com.amazonaws.quicksight#CapacityBytesRangeFilterMaxBytesLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum capacity in bytes (inclusive). At least one of minBytes or maxBytes is required.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches users by total capacity range in bytes.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CapacityBytesRangeFilterMaxBytesLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CapacityBytesRangeFilterMinBytesLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
                 }
             }
         },
@@ -18867,6 +19109,41 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DataSetStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DataSetStringComparisonFilterCondition": {
             "type": "structure",
             "members": {
@@ -19242,6 +19519,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The structure of a data source.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.quicksight#DataSourceCredentials": {
@@ -23487,6 +23774,112 @@
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
                         "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteKnowledgeBase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteKnowledgeBaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteKnowledgeBaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a knowledge base.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteKnowledgeBaseRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteKnowledgeBaseResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deleted knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -29271,6 +29664,213 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeKnowledgeBase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeKnowledgeBaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeKnowledgeBaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a knowledge base.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKnowledgeBasePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeKnowledgeBasePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeKnowledgeBasePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the resource permissions for a knowledge base.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKnowledgeBasePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKnowledgeBasePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions for the knowledge base.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKnowledgeBaseRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeKnowledgeBaseResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBase": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeNamespace": {
             "type": "operation",
             "input": {
@@ -33903,6 +34503,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A control to display a text box that is used to enter a single entry.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.quicksight#FilterVisualScope": {
@@ -39550,6 +40159,38 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ImageExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionStatus": {
+                    "target": "com.amazonaws.quicksight#ImageExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of image extraction. Valid values are ENABLED and DISABLED.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for image extraction from knowledge base documents.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#ImageExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#ImageInteractionOptions": {
             "type": "structure",
             "members": {
@@ -40702,6 +41343,9 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#IntegerValue": {
+            "type": "integer"
+        },
         "com.amazonaws.quicksight#IntegerValueWhenUnsetConfiguration": {
             "type": "structure",
             "members": {
@@ -41553,6 +42197,96 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#KbAwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
+        "com.amazonaws.quicksight#KbIngestionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_=.+]+$"
+            }
+        },
+        "com.amazonaws.quicksight#KbIngestionStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "INCOMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPLETE"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMEOUT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#KbTemplate": {
+            "type": "document"
+        },
+        "com.amazonaws.quicksight#KbTemplateConfiguration": {
+            "type": "structure",
+            "members": {
+                "template": {
+                    "target": "com.amazonaws.quicksight#KbTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template document that defines the knowledge base behavior.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The template configuration for a knowledge base.</p>"
+            }
+        },
         "com.amazonaws.quicksight#KeyPairCredentials": {
             "type": "structure",
             "members": {
@@ -41585,6 +42319,482 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#RegisteredCustomerManagedKey"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBase": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#DataSetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#DataSourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data source associated with the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#MediaExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media extraction configuration for the knowledge base.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the knowledge base.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the knowledge base was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the knowledge base was last updated.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the knowledge base.</p>"
+                    }
+                },
+                "IsEmailNotificationOptedForIngestionFailures": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Indicates whether email notifications are enabled for ingestion failures.</p>"
+                    }
+                },
+                "FirstCompletedIngestionSummary": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseIngestionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the first completed ingestion for the knowledge base.</p>"
+                    }
+                },
+                "FirstIncompleteIngestionSummary": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseIngestionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the first incomplete ingestion for the knowledge base.</p>"
+                    }
+                },
+                "LatestIngestionSummary": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseIngestionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the most recent ingestion for the knowledge base.</p>"
+                    }
+                },
+                "KnowledgeBaseSizeBytes": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The size of the knowledge base in bytes.</p>"
+                    }
+                },
+                "DocumentCount": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of documents in the knowledge base.</p>"
+                    }
+                },
+                "PrimaryOwnerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the primary owner of the knowledge base.</p>"
+                    }
+                },
+                "PrimaryOwnerUsername": {
+                    "target": "com.amazonaws.quicksight#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the primary owner of the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A knowledge base resource that provides data from connected sources for AI-powered experiences in Amazon QuickSight.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "templateConfiguration": {
+                    "target": "com.amazonaws.quicksight#KbTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template configuration for the knowledge base.</p>"
+                    }
+                },
+                "eventEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Indicates whether event notifications are enabled for the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for a knowledge base.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_=.+]+$"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseIngestionSummary": {
+            "type": "structure",
+            "members": {
+                "IngestionId": {
+                    "target": "com.amazonaws.quicksight#KbIngestionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the ingestion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngestionStatus": {
+                    "target": "com.amazonaws.quicksight#KbIngestionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ingestion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the ingestion job.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the ingestion job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an ingestion job for a knowledge base.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N}][\\p{L}\\p{N} _\\-\\.]*$"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSearchFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSearchFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSearchOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter to apply when searching knowledge bases.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSearchFilterName": {
+            "type": "enum",
+            "members": {
+                "KNOWLEDGE_BASE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE_ID"
+                    }
+                },
+                "KNOWLEDGE_BASE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE_NAME"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "KNOWLEDGE_BASE_SIZE_BYTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE_SIZE_BYTES"
+                    }
+                },
+                "PRIMARY_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY_OWNER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSearchFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#KnowledgeBaseSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSearchOperator": {
+            "type": "enum",
+            "members": {
+                "STRING_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_EQUALS"
+                    }
+                },
+                "STRING_LIKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LIKE"
+                    }
+                },
+                "GREATER_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUALS"
+                    }
+                },
+                "LESS_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSortBy": {
+            "type": "structure",
+            "members": {
+                "sortByField": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSortByField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.quicksight#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order (ascending or descending).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort configuration for searching knowledge bases.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSortByField": {
+            "type": "enum",
+            "members": {
+                "KNOWLEDGE_BASE_SIZE_BYTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE_SIZE_BYTES"
+                    }
+                },
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_AT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#KnowledgeBaseSummary"
+            }
+        },
+        "com.amazonaws.quicksight#KnowledgeBaseSummary": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#DataSetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#DataSourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the data source associated with the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the knowledge base.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the knowledge base was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the knowledge base was last updated.</p>"
+                    }
+                },
+                "KnowledgeBaseSizeBytes": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The size of the knowledge base in bytes.</p>"
+                    }
+                },
+                "DocumentCount": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of documents in the knowledge base.</p>"
+                    }
+                },
+                "PrimaryOwnerArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the primary owner of the knowledge base.</p>"
+                    }
+                },
+                "PrimaryOwnerUsername": {
+                    "target": "com.amazonaws.quicksight#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the primary owner of the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a knowledge base, including its identifier, name, status, and metadata.</p>"
             }
         },
         "com.amazonaws.quicksight#LabelOptions": {
@@ -44897,6 +46107,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListKnowledgeBases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListKnowledgeBasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListKnowledgeBasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all knowledge bases in an Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "KnowledgeBaseSummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListKnowledgeBasesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListKnowledgeBasesResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseSummaries": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of knowledge base summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListNamespaces": {
             "type": "operation",
             "input": {
@@ -46896,6 +48215,130 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ListUsersIndexCapacity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListUsersIndexCapacityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListUsersIndexCapacityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists per-user index capacity consumption for an account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{awsAccountId}/quick-index/user-capacity",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListUsersIndexCapacityRequest": {
+            "type": "structure",
+            "members": {
+                "awsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the index capacity data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.quicksight#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace to scope the user search to. Required when the userNameOrEmail filter is present.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.quicksight#UserIndexCapacityFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply. Only one filter is supported per request. The userNameOrEmail and totalCapacityBytes filters are mutually exclusive.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.quicksight#UserIndexCapacitySortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort results by.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.quicksight#UserIndexCapacitySortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for results. Defaults to DESC if not specified.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.quicksight#ListUsersIndexCapacityRequestMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, received from a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListUsersIndexCapacityRequestMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListUsersIndexCapacityResponse": {
+            "type": "structure",
+            "members": {
+                "users": {
+                    "target": "com.amazonaws.quicksight#UserIndexCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of users with their index capacity metrics.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListUsersRequest": {
             "type": "structure",
             "members": {
@@ -47322,6 +48765,9 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#LongValue": {
+            "type": "long"
+        },
         "com.amazonaws.quicksight#Longitude": {
             "type": "double",
             "traits": {
@@ -47641,6 +49087,32 @@
                     "min": 0,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.quicksight#MediaExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#ImageExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for image extraction.</p>"
+                    }
+                },
+                "audioExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#AudioExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for audio extraction.</p>"
+                    }
+                },
+                "videoExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#VideoExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for video extraction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for media extraction from knowledge base documents.</p>"
             }
         },
         "com.amazonaws.quicksight#MemberIdArnPair": {
@@ -53039,6 +54511,9 @@
                     "target": "com.amazonaws.quicksight#BatchCreateTopicReviewedAnswer"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#BatchDeleteKnowledgeBase"
+                },
+                {
                     "target": "com.amazonaws.quicksight#BatchDeleteTopicReviewedAnswer"
                 },
                 {
@@ -53193,6 +54668,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteIdentityPropagationConfig"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteKnowledgeBase"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteNamespace"
@@ -53363,6 +54841,12 @@
                     "target": "com.amazonaws.quicksight#DescribeKeyRegistration"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeKnowledgeBase"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeKnowledgeBasePermissions"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeNamespace"
                 },
                 {
@@ -53516,6 +55000,9 @@
                     "target": "com.amazonaws.quicksight#ListIngestions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListKnowledgeBases"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListNamespaces"
                 },
                 {
@@ -53573,6 +55060,9 @@
                     "target": "com.amazonaws.quicksight#ListUsers"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListUsersIndexCapacity"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListVPCConnections"
                 },
                 {
@@ -53613,6 +55103,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#SearchGroups"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#SearchKnowledgeBases"
                 },
                 {
                     "target": "com.amazonaws.quicksight#SearchSpaces"
@@ -53739,6 +55232,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateKeyRegistration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateKnowledgeBasePermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateOAuthClientApplication"
@@ -59304,6 +60800,128 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#SearchKnowledgeBases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchKnowledgeBasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchKnowledgeBasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for a subset of knowledge bases based on specified filters.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/search/knowledge-bases",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "KnowledgeBaseSummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchKnowledgeBasesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSearchFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply when searching knowledge bases.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort configuration for the search results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchKnowledgeBasesResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseSummaries": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of knowledge base summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#SearchSpaces": {
             "type": "operation",
             "input": {
@@ -62205,6 +63823,23 @@
             }
         },
         "com.amazonaws.quicksight#SortDirection": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SortOrder": {
             "type": "enum",
             "members": {
                 "ASC": {
@@ -74086,6 +75721,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateKnowledgeBasePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateKnowledgeBasePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateKnowledgeBasePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource permissions for a knowledge base.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKnowledgeBasePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GrantPermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions that you want to grant on the knowledge base.</p>"
+                    }
+                },
+                "RevokePermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions that you want to revoke from the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKnowledgeBasePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions for the knowledge base.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateLinkPermissionList": {
             "type": "list",
             "member": {
@@ -76986,6 +78746,134 @@
                 "smithy.api#documentation": "<p>A structure that contains information to identify a user.</p>"
             }
         },
+        "com.amazonaws.quicksight#UserIndexCapacity": {
+            "type": "structure",
+            "members": {
+                "userArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the user.</p>"
+                    }
+                },
+                "userName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the user.</p>"
+                    }
+                },
+                "email": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the user.</p>"
+                    }
+                },
+                "role": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the user.</p>"
+                    }
+                },
+                "totalCapacityBytes": {
+                    "target": "com.amazonaws.quicksight#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total index capacity consumed by the user in bytes.</p>"
+                    }
+                },
+                "totalKBCapacityBytes": {
+                    "target": "com.amazonaws.quicksight#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total index capacity consumed by the user's knowledge bases in bytes.</p>"
+                    }
+                },
+                "totalSpaceCapacityBytes": {
+                    "target": "com.amazonaws.quicksight#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total index capacity consumed by the user's spaces in bytes.</p>"
+                    }
+                },
+                "kbCount": {
+                    "target": "com.amazonaws.quicksight#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of knowledge bases owned by the user.</p>"
+                    }
+                },
+                "spaceCount": {
+                    "target": "com.amazonaws.quicksight#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of spaces owned by the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a user's index capacity consumption.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UserIndexCapacityFilter": {
+            "type": "union",
+            "members": {
+                "userNameOrEmail": {
+                    "target": "com.amazonaws.quicksight#UserNameOrEmailFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter users by username or email prefix.</p>"
+                    }
+                },
+                "totalCapacityBytes": {
+                    "target": "com.amazonaws.quicksight#CapacityBytesRangeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter users by total capacity range in bytes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for user index capacity queries. Only one filter type can be specified per request.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UserIndexCapacityFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#UserIndexCapacityFilter"
+            }
+        },
+        "com.amazonaws.quicksight#UserIndexCapacityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#UserIndexCapacity"
+            }
+        },
+        "com.amazonaws.quicksight#UserIndexCapacitySortBy": {
+            "type": "enum",
+            "members": {
+                "TOTAL_CAPACITY_BYTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOTAL_CAPACITY_BYTES"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The field to sort user index capacity results by.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#UserIndexCapacitySortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sort order for user index capacity results.</p>"
+            }
+        },
         "com.amazonaws.quicksight#UserList": {
             "type": "list",
             "member": {
@@ -76999,6 +78887,21 @@
                     "min": 1
                 },
                 "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.quicksight#UserNameOrEmailFilter": {
+            "type": "structure",
+            "members": {
+                "prefix": {
+                    "target": "com.amazonaws.quicksight#FilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix to match against username or email (starts-with match).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches users by username or email prefix.</p>"
             }
         },
         "com.amazonaws.quicksight#UserRole": {
@@ -77426,6 +79329,61 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AUTO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#VideoExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "videoExtractionStatus": {
+                    "target": "com.amazonaws.quicksight#VideoExtractionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of video extraction. Valid values are ENABLED and DISABLED.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "videoExtractionType": {
+                    "target": "com.amazonaws.quicksight#VideoExtractionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of video extraction to perform.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for video extraction from knowledge base documents.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VideoExtractionStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#VideoExtractionType": {
+            "type": "enum",
+            "members": {
+                "AUDIO_TRANSCRIPTION_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUDIO_TRANSCRIPTION_ONLY"
+                    }
+                },
+                "VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION"
                     }
                 }
             }

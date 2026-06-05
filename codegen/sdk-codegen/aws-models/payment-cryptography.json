@@ -1,6 +1,24 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.magnus.controlplane#CfnKeyItem": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.paymentcryptography#ResourcePolicy",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "The resource-based policy attached to the key, in JSON format.",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "CFN-only properties for the KeyResource that don't exist on the SDK Key shape.\nPolicy is managed via the separate Get/Put/DeleteResourcePolicy operations and is\nnot returned by GetKey, so it doesn't belong on the Key structure. This dedicated\nadditional-schemas structure keeps the SDK contract accurate while still letting\nCloudFormation expose the field with native Smithy validation."
+            }
+        },
         "com.amazonaws.paymentcryptography#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -560,7 +578,7 @@
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>",
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>",
                         "smithy.api#suppress": [
                             "UnstableTrait"
                         ]
@@ -1190,7 +1208,7 @@
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity. Specify KCV for IPEK export only.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>"
                     }
                 }
             },
@@ -2425,7 +2443,7 @@
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>"
                     }
                 },
                 "Enabled": {
@@ -2657,7 +2675,7 @@
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>",
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3277,7 +3295,8 @@
                 "aws.cloudformation#cfnResource": {
                     "name": "Key",
                     "additionalSchemas": [
-                        "com.amazonaws.paymentcryptography#Key"
+                        "com.amazonaws.paymentcryptography#Key",
+                        "com.amazonaws.magnus.controlplane#CfnKeyItem"
                     ]
                 },
                 "smithy.api#suppress": [
@@ -5873,7 +5892,7 @@
                 "KeyCheckValueAlgorithm": {
                     "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result.</p>"
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV). It is used to validate the key integrity.</p> <p>For TDES keys, the KCV is computed by encrypting 8 bytes, each with value of zero, with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where the input data is 16 bytes of zero and retaining the 3 highest order bytes of the encrypted result. For HMAC keys, the KCV is computed using the hash selected at key creation on a zero-length message, taking the leftmost 3 bytes.</p>"
                     }
                 }
             },
