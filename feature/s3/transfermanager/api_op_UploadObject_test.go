@@ -1120,7 +1120,8 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	}
 	if e, a := "upload part error due to context canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected %q to be within %q", e, a)
-	} else if e = "error that should not occur in output"; strings.Contains(a, e) {
+	}
+	if e, a := "error that should not occur in output", err.Error(); strings.Contains(a, e) {
 		t.Errorf("expect %q to not be within %q", e, a)
 	}
 
