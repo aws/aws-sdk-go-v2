@@ -571,7 +571,7 @@ tasks.register("generate-smithy-build") {
                             .withMember("go-codegen", Node.objectNodeBuilder()
                                     .withMember("service", service.id.toString())
                                     .withMember("module", "github.com/aws/aws-sdk-go-v2/service/$sdkId")
-                                    .withMember("useLegacySerde", useLegacySerde)
+                                    .withMember("useLegacySerde", true)
                                     .build()))
                     .build()
             projectionsBuilder.withMember(sdkId + "." + service.version.toLowerCase(), projectionContents)
