@@ -1,3 +1,7 @@
+# v1.20.46 (2026-06-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.45 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

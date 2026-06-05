@@ -1,3 +1,7 @@
+# v1.31.0 (2026-06-05)
+
+* **Feature**: Adds CloudFormation support for resource-based policies on AWS Payment Cryptography keys.
+
 # v1.30.5 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

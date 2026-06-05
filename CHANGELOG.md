@@ -1,3 +1,24 @@
+# Release (2026-06-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.2.7](feature/s3/transfermanager/CHANGELOG.md#v027-2026-06-05)
+  * **Bug Fix**: Fix upload object flaky test to avoid repeat closing test ctx channel
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.58.0](service/dynamodb/CHANGELOG.md#v1580-2026-06-05)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.42.0](service/emrserverless/CHANGELOG.md#v1420-2026-06-05)
+  * **Feature**: Adds support for updating max capacity and custom fields while application is started
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.93.0](service/mediaconvert/CHANGELOG.md#v1930-2026-06-05)
+  * **Feature**: Adds support for configurable number of Clear Lead segments at the beginning of encrypted output. Adds support for multiple trickplay variants.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.31.0](service/paymentcryptography/CHANGELOG.md#v1310-2026-06-05)
+  * **Feature**: Adds CloudFormation support for resource-based policies on AWS Payment Cryptography keys.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.114.0](service/quicksight/CHANGELOG.md#v11140-2026-06-05)
+  * **Feature**: Adds support for Knowledge Base APIs and Index Capacity API
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.253.0](service/sagemaker/CHANGELOG.md#v12530-2026-06-05)
+  * **Feature**: This release adds support for MLflow experiment tracking in SageMaker inference optimization. CreateAIRecommendationJob and CreateAIBenchmarkJob now accept an optional OutputConfig.MlflowConfig (MLflow App ARN, experiment, run name) to stream benchmark metrics and artifacts to your own MLflow App.
+
 # Release (2026-06-04.2)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "51eaa401-fc75-4864-8e8e-6e1bcca4bd0a",
-    "type": "feature",
-    "description": "Adds support for Knowledge Base APIs and Index Capacity API",
-    "modules": [
-        "service/quicksight"
-    ]
-}

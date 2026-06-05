@@ -1,3 +1,7 @@
+# v1.42.0 (2026-06-05)
+
+* **Feature**: Adds support for updating max capacity and custom fields while application is started
+
 # v1.41.5 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

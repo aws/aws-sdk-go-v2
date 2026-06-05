@@ -1,3 +1,7 @@
+# v1.114.0 (2026-06-05)
+
+* **Feature**: Adds support for Knowledge Base APIs and Index Capacity API
+
 # v1.113.3 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

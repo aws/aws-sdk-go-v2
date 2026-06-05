@@ -1,3 +1,7 @@
+# v1.93.0 (2026-06-05)
+
+* **Feature**: Adds support for configurable number of Clear Lead segments at the beginning of encrypted output. Adds support for multiple trickplay variants.
+
 # v1.92.2 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

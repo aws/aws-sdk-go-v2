@@ -1,3 +1,7 @@
+# v1.35.1 (2026-06-05)
+
+* No change notes available for this release.
+
 # v1.35.0 (2026-06-04)
 
 * **Feature**: BDD bulk update change rollout

@@ -1,3 +1,7 @@
+# v0.2.7 (2026-06-05)
+
+* **Bug Fix**: Fix upload object flaky test to avoid repeat closing test ctx channel
+
 # v0.2.6 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

@@ -1,8 +1,0 @@
-{
-    "id": "7d8c6db4-beb3-4997-a461-6e03d6112ca8",
-    "type": "bugfix",
-    "description": "Fix upload object flaky test to avoid repeat closing test ctx channel",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}
