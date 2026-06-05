@@ -1,0 +1,8 @@
+{
+    "id": "67c778b3-4efa-43f8-ac59-131d3e18adf5",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

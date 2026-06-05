@@ -6165,6 +6165,40 @@ func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]types.C
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfCmafImageBasedTrickPlayVariant(v *[]types.CmafImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CmafImageBasedTrickPlayVariant
+	if *v == nil {
+		cv = []types.CmafImageBasedTrickPlayVariant{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CmafImageBasedTrickPlayVariant
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCmafImageBasedTrickPlayVariant(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfColorConversion3DLUTSetting(v *[]types.ColorConversion3DLUTSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6223,6 +6257,40 @@ func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]types.D
 		var col types.DashAdditionalManifest
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentDashAdditionalManifest(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfDashIsoImageBasedTrickPlayVariant(v *[]types.DashIsoImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DashIsoImageBasedTrickPlayVariant
+	if *v == nil {
+		cv = []types.DashIsoImageBasedTrickPlayVariant{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DashIsoImageBasedTrickPlayVariant
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlayVariant(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -6501,6 +6569,40 @@ func awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(v *[]type
 		var col types.HlsCaptionLanguageMapping
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfHlsImageBasedTrickPlayVariant(v *[]types.HlsImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HlsImageBasedTrickPlayVariant
+	if *v == nil {
+		cv = []types.HlsImageBasedTrickPlayVariant{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HlsImageBasedTrickPlayVariant
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHlsImageBasedTrickPlayVariant(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -9003,6 +9105,19 @@ func awsRestjson1_deserializeDocumentAudioProperties(v **types.AudioProperties, 
 				sv.LanguageCode = ptr.String(jtv)
 			}
 
+		case "objectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ObjectCount = ptr.Int32(int32(i64))
+			}
+
 		case "sampleRate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10879,13 +10994,17 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 
 	for key, value := range shape {
 		switch key {
-		case "clearLead":
+		case "clearLeadSegments":
 			if value != nil {
-				jtv, ok := value.(string)
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected HlsClearLead to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __integerMin1Max9999 to be json.Number, got %T instead", value)
 				}
-				sv.ClearLead = types.HlsClearLead(jtv)
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ClearLeadSegments = ptr.Int32(int32(i64))
 			}
 
 		case "constantInitializationVector":
@@ -11058,6 +11177,11 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 
 		case "imageBasedTrickPlaySettings":
 			if err := awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
+				return err
+			}
+
+		case "imageBasedTrickPlayVariants":
+			if err := awsRestjson1_deserializeDocument__listOfCmafImageBasedTrickPlayVariant(&sv.ImageBasedTrickPlayVariants, value); err != nil {
 				return err
 			}
 
@@ -11263,6 +11387,132 @@ func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.C
 	var sv *types.CmafImageBasedTrickPlaySettings
 	if *v == nil {
 		sv = &types.CmafImageBasedTrickPlaySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.CmafIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = ptr.Int32(int32(i64))
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = ptr.Int32(int32(i64))
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = ptr.Int32(int32(i64))
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlayVariant(v **types.CmafImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafImageBasedTrickPlayVariant
+	if *v == nil {
+		sv = &types.CmafImageBasedTrickPlayVariant{}
 	} else {
 		sv = *v
 	}
@@ -11615,6 +11865,11 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 				sv.ColorPrimaries = types.ColorPrimaries(jtv)
 			}
 
+		case "contentLightLevel":
+			if err := awsRestjson1_deserializeDocumentContentLightLevel(&sv.ContentLightLevel, value); err != nil {
+				return err
+			}
+
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11653,6 +11908,19 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Profile = ptr.String(jtv)
+			}
+
+		case "rotation":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rotation = ptr.Int32(int32(i64))
 			}
 
 		case "scanType":
@@ -12133,6 +12401,63 @@ func awsRestjson1_deserializeDocumentContainerSettings(v **types.ContainerSettin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentContentLightLevel(v **types.ContentLightLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentLightLevel
+	if *v == nil {
+		sv = &types.ContentLightLevel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxContentLightLevel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxContentLightLevel = ptr.Int32(int32(i64))
+			}
+
+		case "maxFrameAverageLightLevel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFrameAverageLightLevel = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDashAdditionalManifest(v **types.DashAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12341,6 +12666,11 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				return err
 			}
 
+		case "imageBasedTrickPlayVariants":
+			if err := awsRestjson1_deserializeDocument__listOfDashIsoImageBasedTrickPlayVariant(&sv.ImageBasedTrickPlayVariants, value); err != nil {
+				return err
+			}
+
 		case "minBufferTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12509,6 +12839,132 @@ func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **type
 				jtv, ok := value.(json.Number)
 				if !ok {
 					return fmt.Errorf("expected __integerMin1Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = ptr.Int32(int32(i64))
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = ptr.Int32(int32(i64))
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = ptr.Int32(int32(i64))
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlayVariant(v **types.DashIsoImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DashIsoImageBasedTrickPlayVariant
+	if *v == nil {
+		sv = &types.DashIsoImageBasedTrickPlayVariant{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.DashIsoIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max4096 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -16736,6 +17192,47 @@ func awsRestjson1_deserializeDocumentHdr10Plus(v **types.Hdr10Plus, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHdrMetadata(v **types.HdrMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HdrMetadata
+	if *v == nil {
+		sv = &types.HdrMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "contentLightLevel":
+			if err := awsRestjson1_deserializeDocumentContentLightLevel(&sv.ContentLightLevel, value); err != nil {
+				return err
+			}
+
+		case "masteringDisplayColorVolume":
+			if err := awsRestjson1_deserializeDocumentMasteringDisplayColorVolume(&sv.MasteringDisplayColorVolume, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHlsAdditionalManifest(v **types.HlsAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17071,6 +17568,11 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				return err
 			}
 
+		case "imageBasedTrickPlayVariants":
+			if err := awsRestjson1_deserializeDocument__listOfHlsImageBasedTrickPlayVariant(&sv.ImageBasedTrickPlayVariants, value); err != nil {
+				return err
+			}
+
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17298,6 +17800,132 @@ func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.Hl
 	var sv *types.HlsImageBasedTrickPlaySettings
 	if *v == nil {
 		sv = &types.HlsImageBasedTrickPlaySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.HlsIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = ptr.Int32(int32(i64))
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = ptr.Int32(int32(i64))
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = ptr.Int32(int32(i64))
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlayVariant(v **types.HlsImageBasedTrickPlayVariant, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HlsImageBasedTrickPlayVariant
+	if *v == nil {
+		sv = &types.HlsImageBasedTrickPlayVariant{}
 	} else {
 		sv = *v
 	}
@@ -20533,6 +21161,167 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 					return err
 				}
 				sv.VideoPid = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMasteringDisplayColorVolume(v **types.MasteringDisplayColorVolume, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MasteringDisplayColorVolume
+	if *v == nil {
+		sv = &types.MasteringDisplayColorVolume{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bluePrimaryX":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BluePrimaryX = ptr.Int32(int32(i64))
+			}
+
+		case "bluePrimaryY":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BluePrimaryY = ptr.Int32(int32(i64))
+			}
+
+		case "greenPrimaryX":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GreenPrimaryX = ptr.Int32(int32(i64))
+			}
+
+		case "greenPrimaryY":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GreenPrimaryY = ptr.Int32(int32(i64))
+			}
+
+		case "maxLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLuminance = ptr.Int64(i64)
+			}
+
+		case "minLuminance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinLuminance = ptr.Int64(i64)
+			}
+
+		case "redPrimaryX":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RedPrimaryX = ptr.Int32(int32(i64))
+			}
+
+		case "redPrimaryY":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RedPrimaryY = ptr.Int32(int32(i64))
+			}
+
+		case "whitePointX":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WhitePointX = ptr.Int32(int32(i64))
+			}
+
+		case "whitePointY":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WhitePointY = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -26655,6 +27444,11 @@ func awsRestjson1_deserializeDocumentVideoProperties(v **types.VideoProperties, 
 				return err
 			}
 
+		case "hdrMetadata":
+			if err := awsRestjson1_deserializeDocumentHdrMetadata(&sv.HdrMetadata, value); err != nil {
+				return err
+			}
+
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -26675,6 +27469,19 @@ func awsRestjson1_deserializeDocumentVideoProperties(v **types.VideoProperties, 
 					return fmt.Errorf("expected MatrixCoefficients to be of type string, got %T instead", value)
 				}
 				sv.MatrixCoefficients = types.MatrixCoefficients(jtv)
+			}
+
+		case "rotation":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rotation = ptr.Int32(int32(i64))
 			}
 
 		case "transferCharacteristics":

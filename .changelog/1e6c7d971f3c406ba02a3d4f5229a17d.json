@@ -1,0 +1,8 @@
+{
+    "id": "1e6c7d97-1f3c-406b-a02a-3d4f5229a17d",
+    "type": "feature",
+    "description": "Adds support for updating max capacity and custom fields while application is started",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

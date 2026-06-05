@@ -8212,6 +8212,11 @@ func validateAIBenchmarkOutputConfig(v *types.AIBenchmarkOutputConfig) error {
 	if v.S3OutputLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
 	}
+	if v.MlflowConfig != nil {
+		if err := validateAIMlflowConfig(v.MlflowConfig); err != nil {
+			invalidParams.AddNested("MlflowConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8257,6 +8262,21 @@ func validateAIDatasetConfig(v types.AIDatasetConfig) error {
 	}
 }
 
+func validateAIMlflowConfig(v *types.AIMlflowConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIMlflowConfig"}
+	if v.MlflowResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MlflowResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAIRecommendationConstraint(v *types.AIRecommendationConstraint) error {
 	if v == nil {
 		return nil
@@ -8280,6 +8300,23 @@ func validateAIRecommendationConstraintList(v []types.AIRecommendationConstraint
 	for i := range v {
 		if err := validateAIRecommendationConstraint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIRecommendationOutputConfig(v *types.AIRecommendationOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIRecommendationOutputConfig"}
+	if v.MlflowConfig != nil {
+		if err := validateAIMlflowConfig(v.MlflowConfig); err != nil {
+			invalidParams.AddNested("MlflowConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16299,6 +16336,10 @@ func validateOpCreateAIRecommendationJobInput(v *CreateAIRecommendationJobInput)
 	}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateAIRecommendationOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AIWorkloadConfigIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigIdentifier"))

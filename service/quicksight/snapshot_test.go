@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchCreateTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
@@ -691,6 +703,18 @@ func TestCheckSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	_, err := svc.DeleteIdentityPropagationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteIdentityPropagationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteKnowledgeBase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1370,6 +1394,30 @@ func TestCheckSnapshot_DescribeKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNamespace(context.Background(), nil, func(o *Options) {
@@ -1982,6 +2030,18 @@ func TestCheckSnapshot_ListIngestions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListKnowledgeBases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListKnowledgeBases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNamespaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNamespaces(context.Background(), nil, func(o *Options) {
@@ -2210,6 +2270,18 @@ func TestCheckSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUsersIndexCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUsersIndexCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUsersIndexCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListVPCConnections(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListVPCConnections(context.Background(), nil, func(o *Options) {
@@ -2371,6 +2443,18 @@ func TestCheckSnapshot_SearchGroups(t *testing.T) {
 	_, err := svc.SearchGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchKnowledgeBases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchKnowledgeBases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchKnowledgeBases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2882,6 +2966,18 @@ func TestCheckSnapshot_UpdateKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateOAuthClientApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateOAuthClientApplication(context.Background(), nil, func(o *Options) {
@@ -3174,6 +3270,18 @@ func TestUpdateSnapshot_BatchCreateTopicReviewedAnswer(t *testing.T) {
 	_, err := svc.BatchCreateTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchCreateTopicReviewedAnswer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteKnowledgeBase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3798,6 +3906,18 @@ func TestUpdateSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	_, err := svc.DeleteIdentityPropagationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteIdentityPropagationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteKnowledgeBase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4477,6 +4597,30 @@ func TestUpdateSnapshot_DescribeKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNamespace(context.Background(), nil, func(o *Options) {
@@ -5089,6 +5233,18 @@ func TestUpdateSnapshot_ListIngestions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListKnowledgeBases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListKnowledgeBases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListNamespaces(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNamespaces(context.Background(), nil, func(o *Options) {
@@ -5317,6 +5473,18 @@ func TestUpdateSnapshot_ListUsers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListUsersIndexCapacity(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUsersIndexCapacity(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUsersIndexCapacity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListVPCConnections(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListVPCConnections(context.Background(), nil, func(o *Options) {
@@ -5478,6 +5646,18 @@ func TestUpdateSnapshot_SearchGroups(t *testing.T) {
 	_, err := svc.SearchGroups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchKnowledgeBases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchKnowledgeBases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchKnowledgeBases")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5982,6 +6162,18 @@ func TestUpdateSnapshot_UpdateKeyRegistration(t *testing.T) {
 	_, err := svc.UpdateKeyRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKeyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateKnowledgeBasePermissions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

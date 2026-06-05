@@ -24909,6 +24909,13 @@ func awsAwsjson11_serializeDocumentAIBenchmarkOutputConfig(v *types.AIBenchmarkO
 	object := value.Object()
 	defer object.Close()
 
+	if v.MlflowConfig != nil {
+		ok := object.Key("MlflowConfig")
+		if err := awsAwsjson11_serializeDocumentAIMlflowConfig(v.MlflowConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3OutputLocation != nil {
 		ok := object.Key("S3OutputLocation")
 		ok.String(*v.S3OutputLocation)
@@ -24969,6 +24976,28 @@ func awsAwsjson11_serializeDocumentAIDatasetConfig(v types.AIDatasetConfig, valu
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAIMlflowConfig(v *types.AIMlflowConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MlflowExperimentName != nil {
+		ok := object.Key("MlflowExperimentName")
+		ok.String(*v.MlflowExperimentName)
+	}
+
+	if v.MlflowResourceArn != nil {
+		ok := object.Key("MlflowResourceArn")
+		ok.String(*v.MlflowResourceArn)
+	}
+
+	if v.MlflowRunName != nil {
+		ok := object.Key("MlflowRunName")
+		ok.String(*v.MlflowRunName)
+	}
+
 	return nil
 }
 
@@ -25085,6 +25114,13 @@ func awsAwsjson11_serializeDocumentAIRecommendationInstanceTypeList(v []types.AI
 func awsAwsjson11_serializeDocumentAIRecommendationOutputConfig(v *types.AIRecommendationOutputConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MlflowConfig != nil {
+		ok := object.Key("MlflowConfig")
+		if err := awsAwsjson11_serializeDocumentAIMlflowConfig(v.MlflowConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ModelPackageGroupIdentifier != nil {
 		ok := object.Key("ModelPackageGroupIdentifier")

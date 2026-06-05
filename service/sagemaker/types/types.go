@@ -284,6 +284,10 @@ type AIBenchmarkOutputConfig struct {
 	// This member is required.
 	S3OutputLocation *string
 
+	// The MLflow tracking configuration for the job. If you don't specify this
+	// parameter, MLflow tracking is disabled.
+	MlflowConfig *AIMlflowConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -298,6 +302,9 @@ type AIBenchmarkOutputResult struct {
 
 	// The CloudWatch log information for the benchmark job.
 	CloudWatchLogs []AICloudWatchLogs
+
+	// The MLflow tracking configuration for the job.
+	MlflowConfig *AIMlflowConfig
 
 	noSmithyDocumentSerde
 }
@@ -364,6 +371,24 @@ type AIDatasetConfigMemberInputDataConfig struct {
 }
 
 func (*AIDatasetConfigMemberInputDataConfig) isAIDatasetConfig() {}
+
+// The MLflow tracking configuration for logging metrics and parameters to a
+// SageMaker managed MLflow tracking server.
+type AIMlflowConfig struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker managed MLflow resource.
+	//
+	// This member is required.
+	MlflowResourceArn *string
+
+	// The MLflow experiment name used for tracking.
+	MlflowExperimentName *string
+
+	// The MLflow run name used for tracking.
+	MlflowRunName *string
+
+	noSmithyDocumentSerde
+}
 
 // The source of the model for an AI recommendation job. This is a union type.
 //
@@ -566,6 +591,10 @@ type AIRecommendationOptimizationDetail struct {
 // The output configuration for an AI recommendation job.
 type AIRecommendationOutputConfig struct {
 
+	// The MLflow tracking configuration for the job. If you don't specify this
+	// parameter, MLflow tracking is disabled.
+	MlflowConfig *AIMlflowConfig
+
 	// The name or Amazon Resource Name (ARN) of the model package group where the
 	// optimized model is registered as a new model package version.
 	ModelPackageGroupIdentifier *string
@@ -584,6 +613,9 @@ type AIRecommendationOutputResult struct {
 	//
 	// This member is required.
 	S3OutputLocation *string
+
+	// The MLflow tracking configuration for the job.
+	MlflowConfig *AIMlflowConfig
 
 	// The name or Amazon Resource Name (ARN) of the model package group where
 	// deployment-ready model packages are registered.

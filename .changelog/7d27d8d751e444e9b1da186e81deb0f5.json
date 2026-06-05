@@ -1,0 +1,8 @@
+{
+    "id": "7d27d8d7-51e4-44e9-b1da-186e81deb0f5",
+    "type": "feature",
+    "description": "Adds CloudFormation support for resource-based policies on AWS Payment Cryptography keys.",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

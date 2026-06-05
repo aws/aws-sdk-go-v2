@@ -2089,6 +2089,17 @@ type AttributeAggregationFunction struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for audio extraction from knowledge base documents.
+type AudioExtractionConfiguration struct {
+
+	// The status of audio extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	AudioExtractionStatus AudioExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Parameters for Amazon Aurora.
 type AuroraParameters struct {
 
@@ -2703,6 +2714,45 @@ type BasicAuthConnectionMetadata struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a knowledge base that failed to be deleted in a batch
+// operation.
+type BatchDeleteKnowledgeBaseFailure struct {
+
+	// The error code for the deletion failure.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the deletion failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The unique identifier of the knowledge base that failed to be deleted.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a knowledge base that was successfully deleted in a batch
+// operation.
+type BatchDeleteKnowledgeBaseSuccess struct {
+
+	// The ARN of the successfully deleted knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The unique identifier of the successfully deleted knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
 }
@@ -3923,6 +3973,20 @@ type Capabilities struct {
 
 	// The ability to perform actions using Zendesk connectors.
 	ZendeskAction CapabilityState
+
+	noSmithyDocumentSerde
+}
+
+// A filter that matches users by total capacity range in bytes.
+type CapacityBytesRangeFilter struct {
+
+	// The maximum capacity in bytes (inclusive). At least one of minBytes or maxBytes
+	// is required.
+	MaxBytes *int64
+
+	// The minimum capacity in bytes (inclusive). At least one of minBytes or maxBytes
+	// is required.
+	MinBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -11647,6 +11711,17 @@ type ImageCustomActionOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for image extraction from knowledge base documents.
+type ImageExtractionConfiguration struct {
+
+	// The status of image extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	ImageExtractionStatus ImageExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
 // The general image interactions setup for image publish options.
 type ImageInteractionOptions struct {
 
@@ -12196,6 +12271,15 @@ type JoinOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The template configuration for a knowledge base.
+type KbTemplateConfiguration struct {
+
+	// The template document that defines the knowledge base behavior.
+	Template document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // The combination of username, private key and passphrase that are used as
 // credentials.
 type KeyPairCredentials struct {
@@ -12212,6 +12296,206 @@ type KeyPairCredentials struct {
 
 	// PrivateKeyPassphrase
 	PrivateKeyPassphrase *string
+
+	noSmithyDocumentSerde
+}
+
+// A knowledge base resource that provides data from connected sources for
+// AI-powered experiences in Amazon QuickSight.
+type KnowledgeBase struct {
+
+	// The ARN of the data source associated with the knowledge base.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The configuration settings for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseConfiguration *KnowledgeBaseConfiguration
+
+	// The unique identifier for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The name of the knowledge base.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the knowledge base.
+	//
+	// This member is required.
+	Status DataSetStatus
+
+	// The date and time that the knowledge base was created.
+	CreatedAt *time.Time
+
+	// The description of the knowledge base.
+	Description *string
+
+	// The number of documents in the knowledge base.
+	DocumentCount *int64
+
+	// A summary of the first completed ingestion for the knowledge base.
+	FirstCompletedIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// A summary of the first incomplete ingestion for the knowledge base.
+	FirstIncompleteIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// Indicates whether email notifications are enabled for ingestion failures.
+	IsEmailNotificationOptedForIngestionFailures *bool
+
+	// The size of the knowledge base in bytes.
+	KnowledgeBaseSizeBytes *int64
+
+	// A summary of the most recent ingestion for the knowledge base.
+	LatestIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// The media extraction configuration for the knowledge base.
+	MediaExtractionConfiguration *MediaExtractionConfiguration
+
+	// The ARN of the primary owner of the knowledge base.
+	PrimaryOwnerArn *string
+
+	// The username of the primary owner of the knowledge base.
+	PrimaryOwnerUsername *string
+
+	// The type of the knowledge base.
+	Type *string
+
+	// The date and time that the knowledge base was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for a knowledge base.
+type KnowledgeBaseConfiguration struct {
+
+	// Indicates whether event notifications are enabled for the knowledge base.
+	EventEnabled *bool
+
+	// The template configuration for the knowledge base.
+	TemplateConfiguration *KbTemplateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an ingestion job for a knowledge base.
+type KnowledgeBaseIngestionSummary struct {
+
+	// The unique identifier for the ingestion job.
+	//
+	// This member is required.
+	IngestionId *string
+
+	// The status of the ingestion job.
+	//
+	// This member is required.
+	IngestionStatus KbIngestionStatus
+
+	// The end time of the ingestion job.
+	EndTime *time.Time
+
+	// The start time of the ingestion job.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when searching knowledge bases.
+type KnowledgeBaseSearchFilter struct {
+
+	// The name of the field to filter on.
+	//
+	// This member is required.
+	Name KnowledgeBaseSearchFilterName
+
+	// The comparison operator to use for the filter.
+	//
+	// This member is required.
+	Operator KnowledgeBaseSearchOperator
+
+	// The value to filter on.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The sort configuration for searching knowledge bases.
+type KnowledgeBaseSortBy struct {
+
+	// The field to sort by.
+	//
+	// This member is required.
+	SortByField KnowledgeBaseSortByField
+
+	// The sort order (ascending or descending).
+	//
+	// This member is required.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a knowledge base, including its identifier, name, status, and
+// metadata.
+type KnowledgeBaseSummary struct {
+
+	// The ARN of the data source associated with the knowledge base.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The unique identifier for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The name of the knowledge base.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the knowledge base.
+	//
+	// This member is required.
+	Status DataSetStatus
+
+	// The date and time that the knowledge base was created.
+	CreatedAt *time.Time
+
+	// The number of documents in the knowledge base.
+	DocumentCount *int64
+
+	// The size of the knowledge base in bytes.
+	KnowledgeBaseSizeBytes *int64
+
+	// The ARN of the primary owner of the knowledge base.
+	PrimaryOwnerArn *string
+
+	// The username of the primary owner of the knowledge base.
+	PrimaryOwnerUsername *string
+
+	// The type of the knowledge base.
+	Type *string
+
+	// The date and time that the knowledge base was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -13207,6 +13491,21 @@ type MeasureField struct {
 
 	// The measure type field with numerical type columns.
 	NumericalMeasureField *NumericalMeasureField
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for media extraction from knowledge base documents.
+type MediaExtractionConfiguration struct {
+
+	// The configuration for audio extraction.
+	AudioExtractionConfiguration *AudioExtractionConfiguration
+
+	// The configuration for image extraction.
+	ImageExtractionConfiguration *ImageExtractionConfiguration
+
+	// The configuration for video extraction.
+	VideoExtractionConfiguration *VideoExtractionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -22034,6 +22333,79 @@ type UserIdentifierMemberUserName struct {
 
 func (*UserIdentifierMemberUserName) isUserIdentifier() {}
 
+// A summary of a user's index capacity consumption.
+type UserIndexCapacity struct {
+
+	// The email address of the user.
+	Email *string
+
+	// The number of knowledge bases owned by the user.
+	KbCount *int32
+
+	// The role of the user.
+	Role *string
+
+	// The number of spaces owned by the user.
+	SpaceCount *int32
+
+	// The total index capacity consumed by the user in bytes.
+	TotalCapacityBytes *int64
+
+	// The total index capacity consumed by the user's knowledge bases in bytes.
+	TotalKBCapacityBytes *int64
+
+	// The total index capacity consumed by the user's spaces in bytes.
+	TotalSpaceCapacityBytes *int64
+
+	// The ARN of the user.
+	UserArn *string
+
+	// The username of the user.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for user index capacity queries. Only one filter type can be specified
+// per request.
+//
+// The following types satisfy this interface:
+//
+//	UserIndexCapacityFilterMemberTotalCapacityBytes
+//	UserIndexCapacityFilterMemberUserNameOrEmail
+type UserIndexCapacityFilter interface {
+	isUserIndexCapacityFilter()
+}
+
+// Filter users by total capacity range in bytes.
+type UserIndexCapacityFilterMemberTotalCapacityBytes struct {
+	Value CapacityBytesRangeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIndexCapacityFilterMemberTotalCapacityBytes) isUserIndexCapacityFilter() {}
+
+// Filter users by username or email prefix.
+type UserIndexCapacityFilterMemberUserNameOrEmail struct {
+	Value UserNameOrEmailFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIndexCapacityFilterMemberUserNameOrEmail) isUserIndexCapacityFilter() {}
+
+// A filter that matches users by username or email prefix.
+type UserNameOrEmailFilter struct {
+
+	// The prefix to match against username or email (starts-with match).
+	//
+	// This member is required.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // The option to relax the validation that is required to create and update
 // analyses, dashboards, and templates with definition objects. When you set this
 // value to LENIENT , validation is skipped for specific errors.
@@ -22056,6 +22428,20 @@ type ValueColumnConfiguration struct {
 	// The aggregation function to apply when multiple values map to the same pivoted
 	// cell.
 	AggregationFunction *DataPrepAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for video extraction from knowledge base documents.
+type VideoExtractionConfiguration struct {
+
+	// The status of video extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	VideoExtractionStatus VideoExtractionStatus
+
+	// The type of video extraction to perform.
+	VideoExtractionType VideoExtractionType
 
 	noSmithyDocumentSerde
 }
@@ -22945,3 +23331,4 @@ func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}
 func (*UnknownUnionMember) isSpaceQuickSightResourceDetails()               {}
 func (*UnknownUnionMember) isTransformOperation()                           {}
 func (*UnknownUnionMember) isUserIdentifier()                               {}
+func (*UnknownUnionMember) isUserIndexCapacityFilter()                      {}

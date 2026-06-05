@@ -625,6 +625,12 @@ type AudioProperties struct {
 	// The language code of the audio track, in three character ISO 639-3 format.
 	LanguageCode *string
 
+	// The number of audio objects in an object-based or immersive audio track. This
+	// field is present for codecs that support object-based audio, such as E-AC-3 with
+	// Joint Object Coding (JOC) or IAMF. This field is null when the audio track does
+	// not contain object-based audio metadata.
+	ObjectCount *int32
+
 	// The sample rate of the audio track.
 	SampleRate *int32
 
@@ -1733,20 +1739,22 @@ type CmafAdditionalManifest struct {
 // Settings for CMAF encryption
 type CmafEncryptionSettings struct {
 
-	// Enable Clear Lead DRM to reduce video startup latency by leaving the first
-	// segment unencrypted while DRM license retrieval occurs in parallel. This
-	// optimization allows immediate playback startup while maintaining content
-	// protection for the remainder of the stream. When enabled, the first output
-	// segment remains fully unencrypted, and encryption begins at the start of the
-	// second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear
-	// segment and insert the first #EXT-X-KEY immediately before the first encrypted
-	// fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and
-	// is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2,
-	// and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video
-	// codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM
-	// optimization. Choose Disabled to use standard encryption where all segments are
-	// encrypted from the beginning.
-	ClearLead HlsClearLead
+	// Reduce video startup latency by leaving initial segments unencrypted while DRM
+	// license retrieval occurs in parallel. This optimization allows immediate
+	// playback startup while maintaining content protection for the remainder of the
+	// stream. Specify the number of initial segments to leave unencrypted. Omit this
+	// field to disable Clear Lead. The HLS manifest will omit #EXT-X-KEY tags during
+	// clear segments and insert the first #EXT-X-KEY immediately before the first
+	// encrypted segment. Because encryption is applied at the fragment level, the
+	// actual duration of unencrypted content may be slightly longer than expected if
+	// the segment length is not evenly divisible by the fragment length. In such
+	// cases, encryption begins at the next fragment boundary after the specified clear
+	// lead segments, rather than at the exact segment boundary. This feature is
+	// supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all
+	// existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key
+	// encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio
+	// codec.
+	ClearLeadSegments *int32
 
 	// This is a 128-bit, 16-byte hex value represented by a 32-character text string.
 	// If this parameter is not set then the Initialization Vector will follow the
@@ -1847,18 +1855,26 @@ type CmafGroupSettings struct {
 	// Specify whether MediaConvert generates images for trick play. Keep the default
 	// value, None, to not generate any images. Choose Thumbnail to generate tiled
 	// thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and
-	// full-resolution images of single frames. When you enable Write HLS manifest,
-	// MediaConvert creates a child manifest for each set of images that you generate
-	// and adds corresponding entries to the parent manifest. When you enable Write
-	// DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of
-	// images that you generate. A common application for these images is Roku trick
-	// mode. The thumbnails and full-frame images that MediaConvert creates with this
-	// feature are compatible with this Roku specification:
+	// full-resolution images of single frames. Choose Advanced to customize thumbnail
+	// and tile settings for a single trick play variant. Choose Variants to specify
+	// multiple trick play variants, each with its own thumbnail and tile settings.
+	// When you enable Write HLS manifest, MediaConvert creates a child manifest for
+	// each set of images that you generate and adds corresponding entries to the
+	// parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry
+	// in the .mpd manifest for each set of images that you generate. A common
+	// application for these images is Roku trick mode. The thumbnails and full-frame
+	// images that MediaConvert creates with this feature are compatible with this Roku
+	// specification:
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay CmafImageBasedTrickPlay
 
 	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 	ImageBasedTrickPlaySettings *CmafImageBasedTrickPlaySettings
+
+	// Specify multiple image-based trick play variants. Each entry creates a separate
+	// set of JPEG tile images with its own resolution, tile layout, and cadence
+	// settings. Set imageBasedTrickPlay to VARIANTS when using this setting.
+	ImageBasedTrickPlayVariants []CmafImageBasedTrickPlayVariant
 
 	// When set to GZIP, compresses HLS playlist.
 	ManifestCompression CmafManifestCompression
@@ -2011,8 +2027,48 @@ type CmafImageBasedTrickPlaySettings struct {
 	// be divisible by 8.
 	ThumbnailWidth *int32
 
-	// Number of thumbnails in each column of a tile image. Set a value between 2 and
-	// 2048. Must be divisible by 2.
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
+	TileHeight *int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for one image-based trick play variant. Each variant produces its own
+// set of JPEG tile images and corresponding manifest entries.
+type CmafImageBasedTrickPlayVariant struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	// If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries
+	// that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires
+	// 1x1 tiling.
+	IntervalCadence CmafIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight *int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval *float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth *int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
 	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
@@ -2208,6 +2264,10 @@ type CodecMetadata struct {
 	// color reproduction during playback and transcoding.
 	ColorPrimaries ColorPrimaries
 
+	// Content light level information (CTA-861.3). Describes the light level
+	// characteristics of the content.
+	ContentLightLevel *ContentLightLevel
+
 	// The height in pixels as coded by the codec. This represents the actual encoded
 	// video height as specified in the video stream headers.
 	Height *int32
@@ -2227,6 +2287,12 @@ type CodecMetadata struct {
 	// include Baseline, Main, and High, each supporting different encoding features
 	// and complexity levels.
 	Profile *string
+
+	// The clockwise rotation angle of the video, in degrees, as specified in the
+	// codec bitstream via a Display Orientation SEI message (payload type 47 for both
+	// H.264 and H.265). This field is null when the video essence does not contain a
+	// Display Orientation SEI message or when the rotation is 0 degrees.
+	Rotation *int32
 
 	// The scanning method specified in the video essence, indicating whether the
 	// video uses progressive or interlaced scanning.
@@ -2376,8 +2442,8 @@ type Container struct {
 	Duration *float64
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
-	// (MKV), WebM, MXF, Wave, AVI, or MPEG-TS. Note that this will be blank if your
-	// media file has a format that the MediaConvert Probe operation does not
+	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, or MPEG-PS. Note that this will be blank
+	// if your media file has a format that the MediaConvert Probe operation does not
 	// recognize.
 	Format Format
 
@@ -2435,6 +2501,19 @@ type ContainerSettings struct {
 
 	// These settings relate to your MXF output container.
 	MxfSettings *MxfSettings
+
+	noSmithyDocumentSerde
+}
+
+// Content light level information (CTA-861.3). Describes the light level
+// characteristics of the content.
+type ContentLightLevel struct {
+
+	// Maximum content light level (MaxCLL), in cd/m².
+	MaxContentLightLevel *int32
+
+	// Maximum frame-average light level (MaxFALL), in cd/m².
+	MaxFrameAverageLightLevel *int32
 
 	noSmithyDocumentSerde
 }
@@ -2553,16 +2632,23 @@ type DashIsoGroupSettings struct {
 	// Specify whether MediaConvert generates images for trick play. Keep the default
 	// value, None, to not generate any images. Choose Thumbnail to generate tiled
 	// thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and
-	// full-resolution images of single frames. MediaConvert adds an entry in the .mpd
-	// manifest for each set of images that you generate. A common application for
-	// these images is Roku trick mode. The thumbnails and full-frame images that
-	// MediaConvert creates with this feature are compatible with this Roku
-	// specification:
+	// full-resolution images of single frames. Choose Advanced to customize thumbnail
+	// and tile settings for a single trick play variant. Choose Variants to specify
+	// multiple trick play variants, each with its own thumbnail and tile settings.
+	// MediaConvert adds an entry in the .mpd manifest for each set of images that you
+	// generate. A common application for these images is Roku trick mode. The
+	// thumbnails and full-frame images that MediaConvert creates with this feature are
+	// compatible with this Roku specification:
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay DashIsoImageBasedTrickPlay
 
 	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 	ImageBasedTrickPlaySettings *DashIsoImageBasedTrickPlaySettings
+
+	// Specify multiple image-based trick play variants. Each entry creates a separate
+	// set of JPEG tile images with its own resolution, tile layout, and cadence
+	// settings. Set imageBasedTrickPlay to VARIANTS when using this setting.
+	ImageBasedTrickPlayVariants []DashIsoImageBasedTrickPlayVariant
 
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
@@ -2687,8 +2773,48 @@ type DashIsoImageBasedTrickPlaySettings struct {
 	// be divisible by 8.
 	ThumbnailWidth *int32
 
-	// Number of thumbnails in each column of a tile image. Set a value between 2 and
-	// 2048. Must be divisible by 2.
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
+	TileHeight *int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for one image-based trick play variant. Each variant produces its own
+// set of JPEG tile images and corresponding manifest entries.
+type DashIsoImageBasedTrickPlayVariant struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	// If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries
+	// that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires
+	// 1x1 tiling.
+	IntervalCadence DashIsoIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight *int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval *float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth *int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
 	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
@@ -4768,6 +4894,23 @@ type Hdr10Plus struct {
 	noSmithyDocumentSerde
 }
 
+// HDR (High Dynamic Range) metadata extracted from the container, including
+// mastering display color volume and content light level information. This
+// metadata is present in HDR10 and similar HDR content.
+type HdrMetadata struct {
+
+	// Content light level information (CTA-861.3). Describes the light level
+	// characteristics of the content.
+	ContentLightLevel *ContentLightLevel
+
+	// Mastering display color volume metadata (SMPTE ST 2086). Describes the color
+	// volume of the display used to master the content. Chromaticity coordinates are
+	// in units of 0.00002. Luminance values are in units of 0.0001 cd/m².
+	MasteringDisplayColorVolume *MasteringDisplayColorVolume
+
+	noSmithyDocumentSerde
+}
+
 // Specify the details for each additional HLS manifest that you want the service
 // to generate for this output group. Each manifest can reference a different
 // subset of outputs in the group.
@@ -4924,16 +5067,24 @@ type HlsGroupSettings struct {
 	// Specify whether MediaConvert generates images for trick play. Keep the default
 	// value, None, to not generate any images. Choose Thumbnail to generate tiled
 	// thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and
-	// full-resolution images of single frames. MediaConvert creates a child manifest
-	// for each set of images that you generate and adds corresponding entries to the
-	// parent manifest. A common application for these images is Roku trick mode. The
-	// thumbnails and full-frame images that MediaConvert creates with this feature are
-	// compatible with this Roku specification:
+	// full-resolution images of single frames. Choose Advanced to customize thumbnail
+	// and tile settings for a single trick play variant. Choose Variants to specify
+	// multiple trick play variants, each with its own thumbnail and tile settings.
+	// MediaConvert creates a child manifest for each set of images that you generate
+	// and adds corresponding entries to the parent manifest. A common application for
+	// these images is Roku trick mode. The thumbnails and full-frame images that
+	// MediaConvert creates with this feature are compatible with this Roku
+	// specification:
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay HlsImageBasedTrickPlay
 
 	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 	ImageBasedTrickPlaySettings *HlsImageBasedTrickPlaySettings
+
+	// Specify multiple image-based trick play variants. Each entry creates a separate
+	// set of JPEG tile images with its own resolution, tile layout, and cadence
+	// settings. Set imageBasedTrickPlay to VARIANTS when using this setting.
+	ImageBasedTrickPlayVariants []HlsImageBasedTrickPlayVariant
 
 	// When set to GZIP, compresses HLS playlist.
 	ManifestCompression HlsManifestCompression
@@ -5080,8 +5231,48 @@ type HlsImageBasedTrickPlaySettings struct {
 	// be divisible by 8.
 	ThumbnailWidth *int32
 
-	// Number of thumbnails in each column of a tile image. Set a value between 2 and
-	// 2048. Must be divisible by 2.
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
+	TileHeight *int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth *int32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for one image-based trick play variant. Each variant produces its own
+// set of JPEG tile images and corresponding manifest entries.
+type HlsImageBasedTrickPlayVariant struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	// If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries
+	// that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires
+	// 1x1 tiling.
+	IntervalCadence HlsIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight *int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval *float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth *int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 1 and
+	// 2048.
 	TileHeight *int32
 
 	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
@@ -6782,6 +6973,44 @@ type M3u8Settings struct {
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	VideoPid *int32
+
+	noSmithyDocumentSerde
+}
+
+// Mastering display color volume metadata (SMPTE ST 2086). Describes the color
+// volume of the display used to master the content. Chromaticity coordinates are
+// in units of 0.00002. Luminance values are in units of 0.0001 cd/m².
+type MasteringDisplayColorVolume struct {
+
+	// Blue primary chromaticity x coordinate, in units of 0.00002.
+	BluePrimaryX *int32
+
+	// Blue primary chromaticity y coordinate, in units of 0.00002.
+	BluePrimaryY *int32
+
+	// Green primary chromaticity x coordinate, in units of 0.00002.
+	GreenPrimaryX *int32
+
+	// Green primary chromaticity y coordinate, in units of 0.00002.
+	GreenPrimaryY *int32
+
+	// Maximum display mastering luminance, in units of 0.0001 cd/m².
+	MaxLuminance *int64
+
+	// Minimum display mastering luminance, in units of 0.0001 cd/m².
+	MinLuminance *int64
+
+	// Red primary chromaticity x coordinate, in units of 0.00002.
+	RedPrimaryX *int32
+
+	// Red primary chromaticity y coordinate, in units of 0.00002.
+	RedPrimaryY *int32
+
+	// White point chromaticity x coordinate, in units of 0.00002.
+	WhitePointX *int32
+
+	// White point chromaticity y coordinate, in units of 0.00002.
+	WhitePointY *int32
 
 	noSmithyDocumentSerde
 }
@@ -9678,6 +9907,11 @@ type VideoProperties struct {
 	// numerator and denominator values.
 	FrameRate *FrameRate
 
+	// HDR (High Dynamic Range) metadata extracted from the container, including
+	// mastering display color volume and content light level information. This
+	// metadata is present in HDR10 and similar HDR content.
+	HdrMetadata *HdrMetadata
+
 	// The height of the video track, in pixels.
 	Height *int32
 
@@ -9685,6 +9919,13 @@ type VideoProperties struct {
 	// values are converted to and from YUV color space. This affects color accuracy
 	// during encoding and decoding processes.
 	MatrixCoefficients MatrixCoefficients
+
+	// The clockwise rotation angle of the video track, in degrees, as derived from
+	// container-level metadata (e.g. the MP4 tkhd transformation matrix or the
+	// Matroska ProjectionPoseRoll element). Common values are 90, 180, and 270. This
+	// field is null when no rotation metadata is present or when the rotation is 0
+	// degrees. For MP4, non-standard transformation matrices also yield null.
+	Rotation *int32
 
 	// The color space transfer characteristics of the video track, defining the
 	// relationship between linear light values and the encoded signal values. This

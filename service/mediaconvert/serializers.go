@@ -3183,6 +3183,19 @@ func awsRestjson1_serializeDocument__listOfCmafAdditionalManifest(v []types.Cmaf
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfCmafImageBasedTrickPlayVariant(v []types.CmafImageBasedTrickPlayVariant, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCmafImageBasedTrickPlayVariant(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfColorConversion3DLUTSetting(v []types.ColorConversion3DLUTSetting, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3203,6 +3216,19 @@ func awsRestjson1_serializeDocument__listOfDashAdditionalManifest(v []types.Dash
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentDashAdditionalManifest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfDashIsoImageBasedTrickPlayVariant(v []types.DashIsoImageBasedTrickPlayVariant, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDashIsoImageBasedTrickPlayVariant(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3264,6 +3290,19 @@ func awsRestjson1_serializeDocument__listOfHlsCaptionLanguageMapping(v []types.H
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentHlsCaptionLanguageMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfHlsImageBasedTrickPlayVariant(v []types.HlsImageBasedTrickPlayVariant, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHlsImageBasedTrickPlayVariant(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5045,9 +5084,9 @@ func awsRestjson1_serializeDocumentCmafEncryptionSettings(v *types.CmafEncryptio
 	object := value.Object()
 	defer object.Close()
 
-	if len(v.ClearLead) > 0 {
-		ok := object.Key("clearLead")
-		ok.String(string(v.ClearLead))
+	if v.ClearLeadSegments != nil {
+		ok := object.Key("clearLeadSegments")
+		ok.Integer(*v.ClearLeadSegments)
 	}
 
 	if v.ConstantInitializationVector != nil {
@@ -5159,6 +5198,13 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		}
 	}
 
+	if v.ImageBasedTrickPlayVariants != nil {
+		ok := object.Key("imageBasedTrickPlayVariants")
+		if err := awsRestjson1_serializeDocument__listOfCmafImageBasedTrickPlayVariant(v.ImageBasedTrickPlayVariants, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ManifestCompression) > 0 {
 		ok := object.Key("manifestCompression")
 		ok.String(string(v.ManifestCompression))
@@ -5256,6 +5302,56 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 }
 
 func awsRestjson1_serializeDocumentCmafImageBasedTrickPlaySettings(v *types.CmafImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != nil {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(*v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != nil {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(*v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != nil {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(*v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != nil {
+		ok := object.Key("tileHeight")
+		ok.Integer(*v.TileHeight)
+	}
+
+	if v.TileWidth != nil {
+		ok := object.Key("tileWidth")
+		ok.Integer(*v.TileWidth)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCmafImageBasedTrickPlayVariant(v *types.CmafImageBasedTrickPlayVariant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5673,6 +5769,13 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 		}
 	}
 
+	if v.ImageBasedTrickPlayVariants != nil {
+		ok := object.Key("imageBasedTrickPlayVariants")
+		if err := awsRestjson1_serializeDocument__listOfDashIsoImageBasedTrickPlayVariant(v.ImageBasedTrickPlayVariants, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MinBufferTime != nil {
 		ok := object.Key("minBufferTime")
 		ok.Integer(*v.MinBufferTime)
@@ -5740,6 +5843,56 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 }
 
 func awsRestjson1_serializeDocumentDashIsoImageBasedTrickPlaySettings(v *types.DashIsoImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != nil {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(*v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != nil {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(*v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != nil {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(*v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != nil {
+		ok := object.Key("tileHeight")
+		ok.Integer(*v.TileHeight)
+	}
+
+	if v.TileWidth != nil {
+		ok := object.Key("tileWidth")
+		ok.Integer(*v.TileWidth)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashIsoImageBasedTrickPlayVariant(v *types.DashIsoImageBasedTrickPlayVariant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7626,6 +7779,13 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		}
 	}
 
+	if v.ImageBasedTrickPlayVariants != nil {
+		ok := object.Key("imageBasedTrickPlayVariants")
+		if err := awsRestjson1_serializeDocument__listOfHlsImageBasedTrickPlayVariant(v.ImageBasedTrickPlayVariants, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ManifestCompression) > 0 {
 		ok := object.Key("manifestCompression")
 		ok.String(string(v.ManifestCompression))
@@ -7728,6 +7888,56 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 }
 
 func awsRestjson1_serializeDocumentHlsImageBasedTrickPlaySettings(v *types.HlsImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != nil {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(*v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != nil {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(*v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != nil {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(*v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != nil {
+		ok := object.Key("tileHeight")
+		ok.Integer(*v.TileHeight)
+	}
+
+	if v.TileWidth != nil {
+		ok := object.Key("tileWidth")
+		ok.Integer(*v.TileWidth)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHlsImageBasedTrickPlayVariant(v *types.HlsImageBasedTrickPlayVariant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

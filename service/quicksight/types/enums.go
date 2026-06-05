@@ -715,6 +715,25 @@ func (AssignmentStatus) Values() []AssignmentStatus {
 	}
 }
 
+type AudioExtractionStatus string
+
+// Enum values for AudioExtractionStatus
+const (
+	AudioExtractionStatusEnabled  AudioExtractionStatus = "ENABLED"
+	AudioExtractionStatusDisabled AudioExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for AudioExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioExtractionStatus) Values() []AudioExtractionStatus {
+	return []AudioExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AuthenticationMethodOption string
 
 // Enum values for AuthenticationMethodOption
@@ -1948,6 +1967,31 @@ func (DatasetParameterValueType) Values() []DatasetParameterValueType {
 	}
 }
 
+type DataSetStatus string
+
+// Enum values for DataSetStatus
+const (
+	DataSetStatusCreating DataSetStatus = "CREATING"
+	DataSetStatusUpdating DataSetStatus = "UPDATING"
+	DataSetStatusActive   DataSetStatus = "ACTIVE"
+	DataSetStatusFailed   DataSetStatus = "FAILED"
+	DataSetStatusDeleting DataSetStatus = "DELETING"
+)
+
+// Values returns all known values for DataSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetStatus) Values() []DataSetStatus {
+	return []DataSetStatus{
+		"CREATING",
+		"UPDATING",
+		"ACTIVE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type DataSetStringComparisonFilterOperator string
 
 // Enum values for DataSetStringComparisonFilterOperator
@@ -3127,6 +3171,25 @@ func (ImageCustomActionTrigger) Values() []ImageCustomActionTrigger {
 	}
 }
 
+type ImageExtractionStatus string
+
+// Enum values for ImageExtractionStatus
+const (
+	ImageExtractionStatusEnabled  ImageExtractionStatus = "ENABLED"
+	ImageExtractionStatusDisabled ImageExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for ImageExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageExtractionStatus) Values() []ImageExtractionStatus {
+	return []ImageExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type IncludeFolderMembers string
 
 // Enum values for IncludeFolderMembers
@@ -3453,6 +3516,109 @@ func (JoinType) Values() []JoinType {
 		"OUTER",
 		"LEFT",
 		"RIGHT",
+	}
+}
+
+type KbIngestionStatus string
+
+// Enum values for KbIngestionStatus
+const (
+	KbIngestionStatusQueued     KbIngestionStatus = "QUEUED"
+	KbIngestionStatusRunning    KbIngestionStatus = "RUNNING"
+	KbIngestionStatusFailed     KbIngestionStatus = "FAILED"
+	KbIngestionStatusCompleted  KbIngestionStatus = "COMPLETED"
+	KbIngestionStatusIncomplete KbIngestionStatus = "INCOMPLETE"
+	KbIngestionStatusCancelled  KbIngestionStatus = "CANCELLED"
+	KbIngestionStatusCancelling KbIngestionStatus = "CANCELLING"
+	KbIngestionStatusTimeout    KbIngestionStatus = "TIMEOUT"
+)
+
+// Values returns all known values for KbIngestionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KbIngestionStatus) Values() []KbIngestionStatus {
+	return []KbIngestionStatus{
+		"QUEUED",
+		"RUNNING",
+		"FAILED",
+		"COMPLETED",
+		"INCOMPLETE",
+		"CANCELLED",
+		"CANCELLING",
+		"TIMEOUT",
+	}
+}
+
+type KnowledgeBaseSearchFilterName string
+
+// Enum values for KnowledgeBaseSearchFilterName
+const (
+	KnowledgeBaseSearchFilterNameKnowledgeBaseId               KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_ID"
+	KnowledgeBaseSearchFilterNameKnowledgeBaseName             KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_NAME"
+	KnowledgeBaseSearchFilterNameDirectQuicksightOwner         KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_OWNER"
+	KnowledgeBaseSearchFilterNameDirectQuicksightViewerOrOwner KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	KnowledgeBaseSearchFilterNameDirectQuicksightSoleOwner     KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	KnowledgeBaseSearchFilterNameKnowledgeBaseSizeBytes        KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_SIZE_BYTES"
+	KnowledgeBaseSearchFilterNamePrimaryOwner                  KnowledgeBaseSearchFilterName = "PRIMARY_OWNER"
+)
+
+// Values returns all known values for KnowledgeBaseSearchFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSearchFilterName) Values() []KnowledgeBaseSearchFilterName {
+	return []KnowledgeBaseSearchFilterName{
+		"KNOWLEDGE_BASE_ID",
+		"KNOWLEDGE_BASE_NAME",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"KNOWLEDGE_BASE_SIZE_BYTES",
+		"PRIMARY_OWNER",
+	}
+}
+
+type KnowledgeBaseSearchOperator string
+
+// Enum values for KnowledgeBaseSearchOperator
+const (
+	KnowledgeBaseSearchOperatorStringEquals        KnowledgeBaseSearchOperator = "STRING_EQUALS"
+	KnowledgeBaseSearchOperatorStringLike          KnowledgeBaseSearchOperator = "STRING_LIKE"
+	KnowledgeBaseSearchOperatorGreaterThanOrEquals KnowledgeBaseSearchOperator = "GREATER_THAN_OR_EQUALS"
+	KnowledgeBaseSearchOperatorLessThanOrEquals    KnowledgeBaseSearchOperator = "LESS_THAN_OR_EQUALS"
+)
+
+// Values returns all known values for KnowledgeBaseSearchOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSearchOperator) Values() []KnowledgeBaseSearchOperator {
+	return []KnowledgeBaseSearchOperator{
+		"STRING_EQUALS",
+		"STRING_LIKE",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN_OR_EQUALS",
+	}
+}
+
+type KnowledgeBaseSortByField string
+
+// Enum values for KnowledgeBaseSortByField
+const (
+	KnowledgeBaseSortByFieldKnowledgeBaseSizeBytes KnowledgeBaseSortByField = "KNOWLEDGE_BASE_SIZE_BYTES"
+	KnowledgeBaseSortByFieldCreatedAt              KnowledgeBaseSortByField = "CREATED_AT"
+)
+
+// Values returns all known values for KnowledgeBaseSortByField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSortByField) Values() []KnowledgeBaseSortByField {
+	return []KnowledgeBaseSortByField{
+		"KNOWLEDGE_BASE_SIZE_BYTES",
+		"CREATED_AT",
 	}
 }
 
@@ -5484,6 +5650,25 @@ func (SortDirection) Values() []SortDirection {
 	}
 }
 
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
 type SpaceQuickSightResourceType string
 
 // Enum values for SpaceQuickSightResourceType
@@ -6382,6 +6567,42 @@ func (URLTargetConfiguration) Values() []URLTargetConfiguration {
 	}
 }
 
+type UserIndexCapacitySortBy string
+
+// Enum values for UserIndexCapacitySortBy
+const (
+	UserIndexCapacitySortByTotalCapacityBytes UserIndexCapacitySortBy = "TOTAL_CAPACITY_BYTES"
+)
+
+// Values returns all known values for UserIndexCapacitySortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserIndexCapacitySortBy) Values() []UserIndexCapacitySortBy {
+	return []UserIndexCapacitySortBy{
+		"TOTAL_CAPACITY_BYTES",
+	}
+}
+
+type UserIndexCapacitySortOrder string
+
+// Enum values for UserIndexCapacitySortOrder
+const (
+	UserIndexCapacitySortOrderAsc  UserIndexCapacitySortOrder = "ASC"
+	UserIndexCapacitySortOrderDesc UserIndexCapacitySortOrder = "DESC"
+)
+
+// Values returns all known values for UserIndexCapacitySortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserIndexCapacitySortOrder) Values() []UserIndexCapacitySortOrder {
+	return []UserIndexCapacitySortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -6471,6 +6692,44 @@ func (VerticalTextAlignment) Values() []VerticalTextAlignment {
 		"MIDDLE",
 		"BOTTOM",
 		"AUTO",
+	}
+}
+
+type VideoExtractionStatus string
+
+// Enum values for VideoExtractionStatus
+const (
+	VideoExtractionStatusEnabled  VideoExtractionStatus = "ENABLED"
+	VideoExtractionStatusDisabled VideoExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for VideoExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionStatus) Values() []VideoExtractionStatus {
+	return []VideoExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type VideoExtractionType string
+
+// Enum values for VideoExtractionType
+const (
+	VideoExtractionTypeAudioTranscriptionOnly             VideoExtractionType = "AUDIO_TRANSCRIPTION_ONLY"
+	VideoExtractionTypeVisualContentAndAudioTranscription VideoExtractionType = "VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION"
+)
+
+// Values returns all known values for VideoExtractionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionType) Values() []VideoExtractionType {
+	return []VideoExtractionType{
+		"AUDIO_TRANSCRIPTION_ONLY",
+		"VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION",
 	}
 }
 

@@ -502,16 +502,20 @@ var _IdentityCenterInstanceArn = smithy.NewSchema(smithy.ShapeID{
 var ImageConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "ImageConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ImageConfiguration_imageUri *smithy.Schema
 
 var ImageConfiguration_resolvedImageDigest *smithy.Schema
 
+var ImageConfiguration_applicationLevelDigestResolution *smithy.Schema
+
 var ImageConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "ImageConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ImageConfigurationInput_imageUri *smithy.Schema
+
+var ImageConfigurationInput_applicationLevelDigestResolution *smithy.Schema
 
 var _ImageDigest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
@@ -582,7 +586,7 @@ var JobLevelCostAllocationConfiguration_enabled *smithy.Schema
 var JobRun = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "JobRun",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 30)
 var JobRun_applicationId *smithy.Schema
 
 var JobRun_jobRunId *smithy.Schema
@@ -638,6 +642,10 @@ var JobRun_startedAt *smithy.Schema
 var JobRun_endedAt *smithy.Schema
 
 var JobRun_queuedDurationMilliseconds *smithy.Schema
+
+var JobRun_imageConfiguration *smithy.Schema
+
+var JobRun_workerTypeSpecifications *smithy.Schema
 
 var _JobRunAttempts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
@@ -1702,6 +1710,8 @@ func init() {
 
 	ImageConfiguration_resolvedImageDigest = ImageConfiguration.AddMember("resolvedImageDigest", _ImageDigest)
 
+	ImageConfiguration_applicationLevelDigestResolution = ImageConfiguration.AddMember("applicationLevelDigestResolution", smithyprelude.Boolean)
+
 	WorkerTypeSpecification_imageConfiguration = WorkerTypeSpecification.AddMember("imageConfiguration", ImageConfiguration)
 
 	_WorkerTypeSpecificationMap_key = _WorkerTypeSpecificationMap.AddMember("key", _WorkerTypeString)
@@ -1876,6 +1886,8 @@ func init() {
 
 	ImageConfigurationInput_imageUri = ImageConfigurationInput.AddMember("imageUri", _ImageUri)
 
+	ImageConfigurationInput_applicationLevelDigestResolution = ImageConfigurationInput.AddMember("applicationLevelDigestResolution", smithyprelude.Boolean)
+
 	InternalServerException_message = InternalServerException.AddMember("message", _String1024)
 
 	SparkSubmit_entryPoint = SparkSubmit.AddMember("entryPoint", _EntryPointPath)
@@ -1965,6 +1977,10 @@ func init() {
 	JobRun_endedAt = JobRun.AddMember("endedAt", _Date)
 
 	JobRun_queuedDurationMilliseconds = JobRun.AddMember("queuedDurationMilliseconds", smithyprelude.Long)
+
+	JobRun_imageConfiguration = JobRun.AddMember("imageConfiguration", ImageConfiguration)
+
+	JobRun_workerTypeSpecifications = JobRun.AddMember("workerTypeSpecifications", _WorkerTypeSpecificationMap)
 
 	JobRunAttemptSummary_applicationId = JobRunAttemptSummary.AddMember("applicationId", _ApplicationId)
 

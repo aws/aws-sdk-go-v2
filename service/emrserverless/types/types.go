@@ -885,6 +885,12 @@ type ImageConfiguration struct {
 	// This member is required.
 	ImageUri *string
 
+	// Boolean value indicating if the digest resolution is application level or
+	// workload level. If true, a custom image URI is resolved at application start
+	// time and all workloads submitted will use that image digest. If false, the
+	// custom image URI is resolved at the workload submission time.
+	ApplicationLevelDigestResolution *bool
+
 	// The SHA256 digest of the image URI. This indicates which specific image the
 	// application is configured for. The image digest doesn't exist until an
 	// application has started.
@@ -900,6 +906,9 @@ func (v *ImageConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLevelDigestResolution != nil {
+		s.WriteBool(schemas.ImageConfiguration_applicationLevelDigestResolution, *v.ApplicationLevelDigestResolution)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.ImageConfiguration_imageUri, *v.ImageUri)
 	}
@@ -910,6 +919,9 @@ func (v *ImageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ImageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ImageConfiguration_applicationLevelDigestResolution:
+			v.ApplicationLevelDigestResolution = new(bool)
+			return d.ReadBool(schemas.ImageConfiguration_applicationLevelDigestResolution, v.ApplicationLevelDigestResolution)
 		case schemas.ImageConfiguration_imageUri:
 			v.ImageUri = new(string)
 			return d.ReadString(schemas.ImageConfiguration_imageUri, v.ImageUri)
@@ -923,6 +935,12 @@ func (v *ImageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 
 // The image configuration.
 type ImageConfigurationInput struct {
+
+	// Boolean value indicating if the digest resolution is application level or
+	// workload level. If true, a custom image URI is resolved at application start
+	// time and all workloads submitted will use that image digest. If false, the
+	// custom image URI is resolved at the workload submission time.
+	ApplicationLevelDigestResolution *bool
 
 	// The URI of an image in the Amazon ECR registry. This field is required when you
 	// create a new application. If you leave this field blank in an update, Amazon EMR
@@ -939,6 +957,9 @@ func (v *ImageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLevelDigestResolution != nil {
+		s.WriteBool(schemas.ImageConfigurationInput_applicationLevelDigestResolution, *v.ApplicationLevelDigestResolution)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.ImageConfigurationInput_imageUri, *v.ImageUri)
 	}
@@ -946,6 +967,9 @@ func (v *ImageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ImageConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageConfigurationInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ImageConfigurationInput_applicationLevelDigestResolution:
+			v.ApplicationLevelDigestResolution = new(bool)
+			return d.ReadBool(schemas.ImageConfigurationInput_applicationLevelDigestResolution, v.ApplicationLevelDigestResolution)
 		case schemas.ImageConfigurationInput_imageUri:
 			v.ImageUri = new(string)
 			return d.ReadString(schemas.ImageConfigurationInput_imageUri, v.ImageUri)
@@ -1216,6 +1240,9 @@ type JobRun struct {
 	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64
 
+	// The applied image configuration.
+	ImageConfiguration *ImageConfiguration
+
 	// The mode of the job run.
 	Mode JobRunMode
 
@@ -1245,6 +1272,11 @@ type JobRun struct {
 	// starts to execute, until the time the job terminates, rounded up to the nearest
 	// second.
 	TotalResourceUtilization *TotalResourceUtilization
+
+	// The specification applied to each worker type. Includes the JobRun-level
+	// ImageConfiguration when the applicationLevelDigestResolution is false for the
+	// application.
+	WorkerTypeSpecifications map[string]WorkerTypeSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1301,6 +1333,11 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionTimeoutMinutes != nil {
 		s.WriteInt64(schemas.JobRun_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
 	}
+	if v.ImageConfiguration != nil {
+		s.WriteStruct(schemas.JobRun_imageConfiguration)
+		v.ImageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeJobDriver(s, schemas.JobRun_jobDriver, v.JobDriver)
 	if v.JobRunId != nil {
 		s.WriteString(schemas.JobRun_jobRunId, *v.JobRunId)
@@ -1348,6 +1385,7 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.JobRun_updatedAt, *v.UpdatedAt)
 	}
+	serializeWorkerTypeSpecificationMap(s, schemas.JobRun_workerTypeSpecifications, v.WorkerTypeSpecifications)
 }
 func (v *JobRun) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobRun, func(s *smithy.Schema) error {
@@ -1391,6 +1429,9 @@ func (v *JobRun) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobRun_executionTimeoutMinutes:
 			v.ExecutionTimeoutMinutes = new(int64)
 			return d.ReadInt64(schemas.JobRun_executionTimeoutMinutes, v.ExecutionTimeoutMinutes)
+		case schemas.JobRun_imageConfiguration:
+			v.ImageConfiguration = &ImageConfiguration{}
+			return v.ImageConfiguration.Deserialize(d)
 		case schemas.JobRun_jobDriver:
 			return deserializeJobDriver(d, schemas.JobRun_jobDriver, &v.JobDriver)
 		case schemas.JobRun_jobRunId:
@@ -1442,6 +1483,8 @@ func (v *JobRun) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobRun_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.JobRun_updatedAt, v.UpdatedAt)
+		case schemas.JobRun_workerTypeSpecifications:
+			return deserializeWorkerTypeSpecificationMap(d, schemas.JobRun_workerTypeSpecifications, &v.WorkerTypeSpecifications)
 		}
 		return nil
 	})

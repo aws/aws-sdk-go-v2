@@ -69,7 +69,8 @@ type GetSessionEndpointOutput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Authentication token for accessing the session endpoint.
+	// The authentication token for connecting to the session endpoint. Call
+	// GetSessionEndpoint again to obtain a new token before it expires.
 	//
 	// This member is required.
 	AuthToken *string

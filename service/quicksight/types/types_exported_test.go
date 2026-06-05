@@ -484,3 +484,25 @@ func ExampleUserIdentifier_outputUsage() {
 
 var _ *string
 var _ *string
+
+func ExampleUserIndexCapacityFilter_outputUsage() {
+	var union types.UserIndexCapacityFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserIndexCapacityFilterMemberTotalCapacityBytes:
+		_ = v.Value // Value is types.CapacityBytesRangeFilter
+
+	case *types.UserIndexCapacityFilterMemberUserNameOrEmail:
+		_ = v.Value // Value is types.UserNameOrEmailFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UserNameOrEmailFilter
+var _ *types.CapacityBytesRangeFilter
