@@ -272,8 +272,13 @@ func (u *directoryUploader) traverse(path, keyPrefix string, ch chan fileEntry) 
 	}
 }
 
-// getAbsPath resolves a path's desination absolute path with deduplication
-// in case any symlink causes traverse loop or repeated upload
+// getAbsPath resolves a path's destination absolute path with deduplication
+// in case any symlink causes a directory traversal loop.
+//
+// Only directory paths are tracked in u.traversed. Multiple distinct symlinks
+// may legitimately resolve to the same underlying file; they represent separate
+// S3 objects (with different keys) and should all be uploaded. Tracking only
+// directories is sufficient to prevent infinite traversal loops.
 func (u *directoryUploader) getAbsPath(path string) (string, error) {
 	fileInfo, err := os.Lstat(path)
 	if err != nil {
@@ -288,11 +293,20 @@ func (u *directoryUploader) getAbsPath(path string) (string, error) {
 		if err != nil {
 			return "", err
 		}
+		// Re-stat the resolved target to determine whether it is a directory.
+		fileInfo, err = os.Lstat(path)
+		if err != nil {
+			return "", fmt.Errorf("error when stating resolved path %s: %v", path, err)
+		}
 	}
-	if u.traversed[path] != nil {
-		return "", fmt.Errorf("traversed duplicate path %s", path)
+
+	// Only deduplicate directory paths to prevent traversal loops.
+	if fileInfo.IsDir() {
+		if u.traversed[path] != nil {
+			return "", fmt.Errorf("traversed duplicate path %s", path)
+		}
+		u.traversed[path] = struct{}{}
 	}
-	u.traversed[path] = struct{}{}
 
 	return path, nil
 }
@@ -318,6 +332,10 @@ func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
 
 func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 	originPath := path
+	// visited is local to this resolution chain and detects circular symlink
+	// references (e.g. a → b → a) without interfering with other symlinks that
+	// may legitimately resolve to the same target.
+	visited := map[string]struct{}{path: {}}
 	for {
 		dst, err := os.Readlink(path)
 		if err != nil {
@@ -328,7 +346,7 @@ func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 		} else {
 			path = filepath.Join(filepath.Dir(path), dst)
 		}
-		if u.traversed[path] != nil {
+		if _, seen := visited[path]; seen {
 			return "", fmt.Errorf("traversed duplicate path: %s", path)
 		}
 		fileInfo, err := os.Lstat(path)
@@ -338,7 +356,7 @@ func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 		if fileInfo.Mode()&os.ModeSymlink != os.ModeSymlink {
 			return path, nil
 		}
-		u.traversed[path] = struct{}{}
+		visited[path] = struct{}{}
 	}
 }
 
