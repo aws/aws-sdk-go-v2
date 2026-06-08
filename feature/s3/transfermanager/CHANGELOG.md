@@ -1,3 +1,7 @@
+# v0.2.9 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.2.8 (2026-06-05.2)
 
 * **Bug Fix**: Fix the concurrent reader to return cached read error instead of panic when called again

@@ -1,3 +1,7 @@
+# v1.143.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.143.0 (2026-06-04)
 
 * **Feature**: AWS Glue Interactive Sessions now supports Apache Spark Connect, enabling remote Spark execution over gRPC with minimal client-side dependencies. Adds GetSessionEndpoint and GetDashboardUrl APIs. Modifies CreateSession now accepts SPARK CONNECT session type.

@@ -1,3 +1,7 @@
+# v1.52.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2026-06-04)
 
 * **Feature**: adds UpdateAdConfiguration operation to AWS IVS low-latency APIs

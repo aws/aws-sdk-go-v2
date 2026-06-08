@@ -1,3 +1,8 @@
+# v1.33.0 (2026-06-08)
+
+* **Feature**: Added optional identityCenterRegion parameter to AssociateMember APIs to allow managing memberships for users and groups in other regions.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.4 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

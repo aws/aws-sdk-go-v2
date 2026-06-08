@@ -1,3 +1,7 @@
+# v1.31.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2026-06-05)
 
 * **Feature**: Adds CloudFormation support for resource-based policies on AWS Payment Cryptography keys.

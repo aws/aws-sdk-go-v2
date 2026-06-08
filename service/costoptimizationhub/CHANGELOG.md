@@ -1,3 +1,8 @@
+# v1.24.0 (2026-06-08)
+
+* **Feature**: Adds new Idle Recommendation types in the Cost Optimization Hub API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.5 (2026-06-05.2)
 
 * **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.

@@ -1,3 +1,7 @@
+# v1.93.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.0 (2026-06-05)
 
 * **Feature**: Adds support for configurable number of Clear Lead segments at the beginning of encrypted output. Adds support for multiple trickplay variants.

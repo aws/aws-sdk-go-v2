@@ -1,8 +1,0 @@
-{
-    "id": "c6a16017-6679-470e-b4d3-ab02c36819c6",
-    "type": "feature",
-    "description": "Add Asset APIs for managing versioned assets and asset files in AWS DevOps Agent agent spaces.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.21.7 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.6 (2026-06-05.2)
 
 * **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.

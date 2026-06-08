@@ -1,8 +1,0 @@
-{
-    "id": "8c21593e-e047-49e2-bc59-67c9a643f1b6",
-    "type": "feature",
-    "description": "Adds new Idle Recommendation Resource types in the AWS Compute Optimizer API",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

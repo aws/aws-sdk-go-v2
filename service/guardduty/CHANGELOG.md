@@ -1,3 +1,7 @@
+# v1.79.3 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.79.2 (2026-06-04)
 
 * **Documentation**: Remove unsupported RDS field for filter

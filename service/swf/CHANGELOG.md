@@ -1,3 +1,8 @@
+# v1.35.0 (2026-06-08)
+
+* **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.2 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

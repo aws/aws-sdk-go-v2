@@ -1,3 +1,8 @@
+# v1.17.0 (2026-06-08)
+
+* **Feature**: CloudWatch Observability Admin extends CentralizationRuleForOrganization APIs to support metrics, enabling centralization of metrics across accounts and Regions alongside logs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.6 (2026-06-05.2)
 
 * **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.

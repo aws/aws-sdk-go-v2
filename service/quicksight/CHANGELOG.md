@@ -1,3 +1,7 @@
+# v1.114.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.114.0 (2026-06-05)
 
 * **Feature**: Adds support for Knowledge Base APIs and Index Capacity API

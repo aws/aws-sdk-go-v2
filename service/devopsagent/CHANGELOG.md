@@ -1,3 +1,8 @@
+# v1.6.0 (2026-06-08)
+
+* **Feature**: Add Asset APIs for managing versioned assets and asset files in AWS DevOps Agent agent spaces.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.6 (2026-06-05.2)
 
 * **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.

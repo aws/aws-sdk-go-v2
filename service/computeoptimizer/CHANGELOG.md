@@ -1,3 +1,8 @@
+# v1.53.0 (2026-06-08)
+
+* **Feature**: Adds new Idle Recommendation Resource types in the AWS Compute Optimizer API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.1 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

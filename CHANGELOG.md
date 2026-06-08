@@ -1,3 +1,40 @@
+# Release (2026-06-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.42.0
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.53.0](service/computeoptimizer/CHANGELOG.md#v1530-2026-06-08)
+  * **Feature**: Adds new Idle Recommendation Resource types in the AWS Compute Optimizer API
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.24.0](service/costoptimizationhub/CHANGELOG.md#v1240-2026-06-08)
+  * **Feature**: Adds new Idle Recommendation types in the Cost Optimization Hub API
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.33.0](service/deadline/CHANGELOG.md#v1330-2026-06-08)
+  * **Feature**: Added optional identityCenterRegion parameter to AssociateMember APIs to allow managing memberships for users and groups in other regions.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.6.0](service/devopsagent/CHANGELOG.md#v160-2026-06-08)
+  * **Feature**: Add Asset APIs for managing versioned assets and asset files in AWS DevOps Agent agent spaces.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.59.0](service/dynamodb/CHANGELOG.md#v1590-2026-06-08)
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.33.0](service/dynamodbstreams/CHANGELOG.md#v1330-2026-06-08)
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.40.0](service/mediapackagev2/CHANGELOG.md#v1400-2026-06-08)
+  * **Feature**: Adds support for DASH Audio Timeline Patternization. This enables your DASH manifests to templatize the repeating patterns that emerge in audio segment timelines. This compacts the total timeline length, utilizing the repeat notation, such that manifests don't grow indefinitely long.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.45.0](service/mgn/CHANGELOG.md#v1450-2026-06-08)
+  * **Feature**: AWS Transform discovery tool now supported as network migration input source. You can now use the AWS Transform Discovery tool as a source for network migration alongside modelizeIT, enabling hybrid network migrations for environments running both VMware and non-VMware workloads.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.17.0](service/observabilityadmin/CHANGELOG.md#v1170-2026-06-08)
+  * **Feature**: CloudWatch Observability Admin extends CentralizationRuleForOrganization APIs to support metrics, enabling centralization of metrics across accounts and Regions alongside logs.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.44.0](service/omics/CHANGELOG.md#v1440-2026-06-08)
+  * **Feature**: StartRunBatch API - Add EngineSettings
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.43.0](service/sfn/CHANGELOG.md#v1430-2026-06-08)
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.44.0](service/sqs/CHANGELOG.md#v1440-2026-06-08)
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.35.0](service/swf/CHANGELOG.md#v1350-2026-06-08)
+  * **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.18.0](service/taxsettings/CHANGELOG.md#v1180-2026-06-08)
+  * **Feature**: Adds support for additional tax information fields for Philippines, Belgium, Chile, France, Poland, and Italy in the Tax Settings API.
+
 # Release (2026-06-05.2)
 
 ## General Highlights

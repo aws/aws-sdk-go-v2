@@ -1,3 +1,8 @@
+# v1.18.0 (2026-06-08)
+
+* **Feature**: Adds support for additional tax information fields for Philippines, Belgium, Chile, France, Poland, and Italy in the Tax Settings API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2026-06-04)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

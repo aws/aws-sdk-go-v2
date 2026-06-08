@@ -1,3 +1,8 @@
+# v1.59.0 (2026-06-08)
+
+* **Feature**: Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-06-05)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

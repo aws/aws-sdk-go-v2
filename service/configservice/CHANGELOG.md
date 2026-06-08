@@ -1,3 +1,7 @@
+# v1.64.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2026-06-04)
 
 * **Feature**: AWS Config now supports internal service-linked rules, allowing AWS service partners to deploy Config rules for customers and use the evaluation results to build enhanced features.
