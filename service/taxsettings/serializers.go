@@ -1347,9 +1347,23 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 	object := value.Object()
 	defer object.Close()
 
+	if v.BelgiumAdditionalInfo != nil {
+		ok := object.Key("belgiumAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentBelgiumAdditionalInfo(v.BelgiumAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CanadaAdditionalInfo != nil {
 		ok := object.Key("canadaAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentCanadaAdditionalInfo(v.CanadaAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ChileAdditionalInfo != nil {
+		ok := object.Key("chileAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentChileAdditionalInfo(v.ChileAdditionalInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -1364,6 +1378,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 	if v.EstoniaAdditionalInfo != nil {
 		ok := object.Key("estoniaAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentEstoniaAdditionalInfo(v.EstoniaAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FranceAdditionalInfo != nil {
+		ok := object.Key("franceAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentFranceAdditionalInfo(v.FranceAdditionalInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -1413,6 +1434,13 @@ func awsRestjson1_serializeDocumentAdditionalInfoRequest(v *types.AdditionalInfo
 	if v.MalaysiaAdditionalInfo != nil {
 		ok := object.Key("malaysiaAdditionalInfo")
 		if err := awsRestjson1_serializeDocumentMalaysiaAdditionalInfo(v.MalaysiaAdditionalInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PhilippinesAdditionalInfo != nil {
+		ok := object.Key("philippinesAdditionalInfo")
+		if err := awsRestjson1_serializeDocumentPhilippinesAdditionalInfo(v.PhilippinesAdditionalInfo, ok); err != nil {
 			return err
 		}
 	}
@@ -1547,6 +1575,23 @@ func awsRestjson1_serializeDocumentAuthority(v *types.Authority, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBelgiumAdditionalInfo(v *types.BelgiumAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsMercuriusBoxEnabled != nil {
+		ok := object.Key("isMercuriusBoxEnabled")
+		ok.Boolean(*v.IsMercuriusBoxEnabled)
+	}
+
+	if v.PeppolId != nil {
+		ok := object.Key("peppolId")
+		ok.String(*v.PeppolId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCanadaAdditionalInfo(v *types.CanadaAdditionalInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1569,6 +1614,23 @@ func awsRestjson1_serializeDocumentCanadaAdditionalInfo(v *types.CanadaAdditiona
 	if v.ProvincialSalesTaxId != nil {
 		ok := object.Key("provincialSalesTaxId")
 		ok.String(*v.ProvincialSalesTaxId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChileAdditionalInfo(v *types.ChileAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BusinessActivity != nil {
+		ok := object.Key("businessActivity")
+		ok.String(*v.BusinessActivity)
+	}
+
+	if len(v.DocumentType) > 0 {
+		ok := object.Key("documentType")
+		ok.String(string(v.DocumentType))
 	}
 
 	return nil
@@ -1632,6 +1694,18 @@ func awsRestjson1_serializeDocumentExemptionCertificate(v *types.ExemptionCertif
 	if v.DocumentName != nil {
 		ok := object.Key("documentName")
 		ok.String(*v.DocumentName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFranceAdditionalInfo(v *types.FranceAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SirenNumber != nil {
+		ok := object.Key("sirenNumber")
+		ok.String(*v.SirenNumber)
 	}
 
 	return nil
@@ -1714,6 +1788,11 @@ func awsRestjson1_serializeDocumentItalyAdditionalInfo(v *types.ItalyAdditionalI
 		ok.String(*v.CupNumber)
 	}
 
+	if len(v.CustomerType) > 0 {
+		ok := object.Key("customerType")
+		ok.String(string(v.CustomerType))
+	}
+
 	if v.SdiAccountId != nil {
 		ok := object.Key("sdiAccountId")
 		ok.String(*v.SdiAccountId)
@@ -1774,6 +1853,18 @@ func awsRestjson1_serializeDocumentMalaysiaServiceTaxCodesList(v []types.Malaysi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPhilippinesAdditionalInfo(v *types.PhilippinesAdditionalInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsVatRegistered != nil {
+		ok := object.Key("isVatRegistered")
+		ok.Boolean(*v.IsVatRegistered)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPolandAdditionalInfo(v *types.PolandAdditionalInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1786,6 +1877,11 @@ func awsRestjson1_serializeDocumentPolandAdditionalInfo(v *types.PolandAdditiona
 	if v.IsGroupVatEnabled != nil {
 		ok := object.Key("isGroupVatEnabled")
 		ok.Boolean(*v.IsGroupVatEnabled)
+	}
+
+	if len(v.TaxRegistrationNumberType) > 0 {
+		ok := object.Key("taxRegistrationNumberType")
+		ok.String(string(v.TaxRegistrationNumberType))
 	}
 
 	return nil

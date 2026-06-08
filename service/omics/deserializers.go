@@ -22402,6 +22402,11 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 				sv.ConfigurationName = ptr.String(jtv)
 			}
 
+		case "engineSettings":
+			if err := awsRestjson1_deserializeDocumentEngineSettings(&sv.EngineSettings, value); err != nil {
+				return err
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)

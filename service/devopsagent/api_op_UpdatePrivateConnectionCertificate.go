@@ -66,6 +66,13 @@ type UpdatePrivateConnectionCertificateOutput struct {
 	// present when a certificate is associated.
 	CertificateExpiryTime *time.Time
 
+	// DNS resolution mode for the Private Connection's resource gateway.
+	DnsResolution types.ResourceConfigDnsResolution
+
+	// Message describing the reason for a failed Private Connection update, if
+	// applicable.
+	FailureMessage *string
+
 	// IP address or DNS name of the target resource. Only present for service-managed
 	// Private Connections.
 	HostAddress *string

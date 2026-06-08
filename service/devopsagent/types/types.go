@@ -202,6 +202,231 @@ type AgentSpace struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an asset in an agent space, including its identifier, type,
+// metadata, version, and timestamps.
+type Asset struct {
+
+	// The unique identifier for this asset
+	//
+	// This member is required.
+	AssetId *string
+
+	// The type of this asset
+	//
+	// This member is required.
+	AssetType *string
+
+	// Timestamp when this asset was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The metadata for this asset
+	//
+	// This member is required.
+	Metadata document.Interface
+
+	// Timestamp when this asset was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version number of this asset
+	//
+	// This member is required.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// Content for an asset, either a single file or a zip bundle
+//
+// The following types satisfy this interface:
+//
+//	AssetContentMemberFile
+//	AssetContentMemberZip
+type AssetContent interface {
+	isAssetContent()
+}
+
+// A single file with path and content
+type AssetContentMemberFile struct {
+	Value AssetFileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetContentMemberFile) isAssetContent() {}
+
+// A zip file containing multiple files
+type AssetContentMemberZip struct {
+	Value AssetZipContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetContentMemberZip) isAssetContent() {}
+
+// Represents a single file within an asset, including its path, content, version,
+// and timestamps.
+type AssetFile struct {
+
+	// The content of this file
+	//
+	// This member is required.
+	Content AssetFileBody
+
+	// Timestamp when this file was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The path of this file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Timestamp when this file was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The asset version this file belongs to
+	//
+	// This member is required.
+	Version *int32
+
+	// The metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Content of an individual asset file
+//
+// The following types satisfy this interface:
+//
+//	AssetFileBodyMemberBytes
+//	AssetFileBodyMemberText
+type AssetFileBody interface {
+	isAssetFileBody()
+}
+
+// Binary file content
+type AssetFileBodyMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFileBodyMemberBytes) isAssetFileBody() {}
+
+// Text file content
+type AssetFileBodyMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFileBodyMemberText) isAssetFileBody() {}
+
+// A single file with path and content
+type AssetFileContent struct {
+
+	// The file content
+	//
+	// This member is required.
+	Body AssetFileBody
+
+	// The path of the file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Optional metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a file within an asset, including its path, version, and timestamps.
+type AssetFileSummary struct {
+
+	// Timestamp when this file was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The path of this file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Timestamp when this file was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The asset version this file belongs to
+	//
+	// This member is required.
+	Version *int32
+
+	// The metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an asset type, including its identifier and description.
+type AssetTypeSummary struct {
+
+	// The asset type identifier
+	//
+	// This member is required.
+	AssetType *string
+
+	// A description of the asset type
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a single version of an asset, including the version number and
+// timestamps.
+type AssetVersionMetadata struct {
+
+	// Timestamp when this asset version was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Timestamp when this asset version was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version number of this asset
+	//
+	// This member is required.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// A zip file containing asset files
+type AssetZipContent struct {
+
+	// The zip file bytes
+	//
+	// This member is required.
+	ZipFile []byte
+
+	noSmithyDocumentSerde
+}
+
 // A block of content in an assistant message.
 //
 // The following types satisfy this interface:
@@ -1134,11 +1359,6 @@ type MCPServerSigV4AuthorizationConfig struct {
 	// This member is required.
 	Region *string
 
-	// IAM role ARN to assume for SigV4 signing.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// AWS service name for SigV4 signing.
 	//
 	// This member is required.
@@ -1146,6 +1366,15 @@ type MCPServerSigV4AuthorizationConfig struct {
 
 	// Custom headers for the SigV4 MCP server.
 	CustomHeaders map[string]string
+
+	// IAM role ARN to assume for SigV4 signing. Optional — when omitted, credentials
+	// are resolved at runtime via a monitor account association.
+	McpRoleArn *string
+
+	// Deprecated — use mcpRoleArn instead. IAM role ARN to assume for SigV4 signing.
+	//
+	// Deprecated: Use mcpRoleArn instead.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1425,6 +1654,12 @@ type PrivateConnectionSummary struct {
 	// The expiry time of the certificate associated with the Private Connection. Only
 	// present when a certificate is associated.
 	CertificateExpiryTime *time.Time
+
+	// DNS resolution mode for the Private Connection's resource gateway.
+	DnsResolution ResourceConfigDnsResolution
+
+	// Message describing the reason for a failed Private Connection, if applicable.
+	FailureMessage *string
 
 	// IP address or DNS name of the target resource. Only present for service-managed
 	// Private Connections.
@@ -1732,6 +1967,8 @@ type RegisteredMCPServerSigV4Details struct {
 	// IAM role ARN to assume for SigV4 signing.
 	//
 	// This member is required.
+	//
+	// Deprecated: Use mcpRoleArn instead.
 	RoleArn *string
 
 	// AWS service name for SigV4 signing.
@@ -1744,6 +1981,9 @@ type RegisteredMCPServerSigV4Details struct {
 
 	// Optional description for the MCP server.
 	Description *string
+
+	// AWS IAM role ARN.
+	McpRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2489,6 +2729,9 @@ type ServiceManagedInput struct {
 	// Certificate for the Private Connection.
 	Certificate *string
 
+	// DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.
+	DnsResolution ResourceConfigDnsResolution
+
 	// IP address type of the service-managed Resource Gateway.
 	IpAddressType IpAddressType
 
@@ -2751,7 +2994,7 @@ type TaskFilter struct {
 // Represents a usage metric with its configured limit and current usage value.
 type UsageMetric struct {
 
-	// Configured limit for this metric.
+	// Configured limit for this metric. A value of -1 indicates no limit is enforced.
 	//
 	// This member is required.
 	Limit *int32
@@ -2857,6 +3100,8 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAdditionalServiceDetails()             {}
 func (*UnknownUnionMember) isAdditionalServiceRegistrationStep()    {}
+func (*UnknownUnionMember) isAssetContent()                         {}
+func (*UnknownUnionMember) isAssetFileBody()                        {}
 func (*UnknownUnionMember) isAssistantMessageBlock()                {}
 func (*UnknownUnionMember) isDatadogAuthorizationConfig()           {}
 func (*UnknownUnionMember) isDynatraceServiceAuthorizationConfig()  {}

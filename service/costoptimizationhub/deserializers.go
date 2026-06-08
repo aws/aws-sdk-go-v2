@@ -1738,6 +1738,42 @@ func awsAwsjson10_deserializeDocumentDbInstanceConfiguration(v **types.DbInstanc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDocumentDbCluster(v **types.DocumentDbCluster, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentDbCluster
+	if *v == nil {
+		sv = &types.DocumentDbCluster{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDynamoDbReservedCapacity(v **types.DynamoDbReservedCapacity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1880,6 +1916,42 @@ func awsAwsjson10_deserializeDocumentDynamoDbReservedCapacityConfiguration(v **t
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UpfrontCost = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDynamoDbTable(v **types.DynamoDbTable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamoDbTable
+	if *v == nil {
+		sv = &types.DynamoDbTable{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2666,6 +2738,42 @@ func awsAwsjson10_deserializeDocumentEfficiencyMetricsByGroupList(v *[]types.Eff
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentElastiCacheCluster(v **types.ElastiCacheCluster, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElastiCacheCluster
+	if *v == nil {
+		sv = &types.ElastiCacheCluster{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentElastiCacheReservedInstances(v **types.ElastiCacheReservedInstances, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3133,6 +3241,42 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionConfiguration(v **types.Lambd
 		switch key {
 		case "compute":
 			if err := awsAwsjson10_deserializeDocumentComputeConfiguration(&sv.Compute, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMemoryDbCluster(v **types.MemoryDbCluster, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryDbCluster
+	if *v == nil {
+		sv = &types.MemoryDbCluster{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
 				return err
 			}
 
@@ -5339,6 +5483,16 @@ loop:
 			uv = &types.ResourceDetailsMemberComputeSavingsPlans{Value: mv}
 			break loop
 
+		case "documentDbCluster":
+			var mv types.DocumentDbCluster
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentDocumentDbCluster(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberDocumentDbCluster{Value: mv}
+			break loop
+
 		case "dynamoDbReservedCapacity":
 			var mv types.DynamoDbReservedCapacity
 			destAddr := &mv
@@ -5347,6 +5501,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberDynamoDbReservedCapacity{Value: mv}
+			break loop
+
+		case "dynamoDbTable":
+			var mv types.DynamoDbTable
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentDynamoDbTable(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberDynamoDbTable{Value: mv}
 			break loop
 
 		case "ebsVolume":
@@ -5409,6 +5573,16 @@ loop:
 			uv = &types.ResourceDetailsMemberEcsService{Value: mv}
 			break loop
 
+		case "elastiCacheCluster":
+			var mv types.ElastiCacheCluster
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentElastiCacheCluster(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberElastiCacheCluster{Value: mv}
+			break loop
+
 		case "elastiCacheReservedInstances":
 			var mv types.ElastiCacheReservedInstances
 			destAddr := &mv
@@ -5427,6 +5601,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberLambdaFunction{Value: mv}
+			break loop
+
+		case "memoryDbCluster":
+			var mv types.MemoryDbCluster
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentMemoryDbCluster(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberMemoryDbCluster{Value: mv}
 			break loop
 
 		case "memoryDbReservedInstances":
@@ -5499,6 +5683,16 @@ loop:
 			uv = &types.ResourceDetailsMemberRedshiftReservedInstances{Value: mv}
 			break loop
 
+		case "sageMakerEndpoint":
+			var mv types.SageMakerEndpoint
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentSageMakerEndpoint(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberSageMakerEndpoint{Value: mv}
+			break loop
+
 		case "sageMakerSavingsPlans":
 			var mv types.SageMakerSavingsPlans
 			destAddr := &mv
@@ -5507,6 +5701,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ResourceDetailsMemberSageMakerSavingsPlans{Value: mv}
+			break loop
+
+		case "workSpaces":
+			var mv types.WorkSpaces
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentWorkSpaces(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ResourceDetailsMemberWorkSpaces{Value: mv}
 			break loop
 
 		default:
@@ -5695,6 +5899,42 @@ func awsAwsjson10_deserializeDocumentResourcePricing(v **types.ResourcePricing, 
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSageMakerEndpoint(v **types.SageMakerEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SageMakerEndpoint
+	if *v == nil {
+		sv = &types.SageMakerEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6523,6 +6763,42 @@ func awsAwsjson10_deserializeDocumentValidationExceptionDetails(v *[]types.Valid
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentWorkSpaces(v **types.WorkSpaces, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkSpaces
+	if *v == nil {
+		sv = &types.WorkSpaces{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "costCalculation":
+			if err := awsAwsjson10_deserializeDocumentResourceCostCalculation(&sv.CostCalculation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

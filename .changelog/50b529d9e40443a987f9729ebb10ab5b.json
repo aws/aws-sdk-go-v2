@@ -1,0 +1,8 @@
+{
+    "id": "50b529d9-e404-43a9-87f9-729ebb10ab5b",
+    "type": "feature",
+    "description": "CloudWatch Observability Admin extends CentralizationRuleForOrganization APIs to support metrics, enabling centralization of metrics across accounts and Regions alongside logs.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

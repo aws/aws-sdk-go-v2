@@ -62,6 +62,10 @@ type AssociateMemberToFleetInput struct {
 	// This member is required.
 	PrincipalType types.DeadlinePrincipalType
 
+	// The Region of the IAM Identity Center instance. If not provided, the service
+	// defaults to the Region of the farm.
+	IdentityCenterRegion *string
+
 	noSmithyDocumentSerde
 }
 

@@ -95,6 +95,9 @@ type CentralizationRuleDestination struct {
 	// Log specific configuration for centralization destination log groups.
 	DestinationLogsConfiguration *DestinationLogsConfiguration
 
+	// Metric specific configuration for centralization destination metrics.
+	DestinationMetricsConfiguration *DestinationMetricsConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -112,6 +115,9 @@ type CentralizationRuleSource struct {
 
 	// Log specific configuration for centralization source log groups.
 	SourceLogsConfiguration *SourceLogsConfiguration
+
+	// Metric specific configuration for centralization source metrics.
+	SourceMetricsConfiguration *SourceMetricsConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -236,6 +242,15 @@ type DestinationLogsConfiguration struct {
 
 	// The encryption configuration for centralization destination log groups.
 	LogsEncryptionConfiguration *LogsEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for centralization destination metrics, including backup settings.
+type DestinationMetricsConfiguration struct {
+
+	// Configuration defining the backup region for the metrics backup destination.
+	BackupConfiguration *MetricsBackupConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -436,6 +451,18 @@ type LogsEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for backing up centralized metrics data to a secondary region.
+type MetricsBackupConfiguration struct {
+
+	// Metrics specific backup destination region within the primary destination
+	// account to which metrics data should be centralized.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 //	Configuration parameters for Amazon MSK cluster monitoring, including enhanced
 //
 // monitoring level settings.
@@ -556,6 +583,17 @@ type SourceLogsConfiguration struct {
 	// The selection criteria that specifies which source log groups to centralize.
 	// The selection criteria uses the same format as OAM link filters.
 	LogGroupSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for selecting source metrics for centralization.
+type SourceMetricsConfiguration struct {
+
+	// The filter expression that selects which source metrics to centralize.
+	// Currently, only * (all metrics) is supported. Other values return a validation
+	// error.
+	MetricsSelectionCriteria *string
 
 	noSmithyDocumentSerde
 }

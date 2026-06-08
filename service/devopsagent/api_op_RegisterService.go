@@ -41,6 +41,10 @@ type RegisterServiceInput struct {
 	// This member is required.
 	ServiceDetails types.ServiceDetails
 
+	// The name of the private connection to use for OAuth token exchange requests
+	// only. Cannot be specified when privateConnectionName is provided.
+	ExchangeUrlPrivateConnectionName *string
+
 	// The ARN of the AWS Key Management Service (AWS KMS) customer managed key that's
 	// used to encrypt resources.
 	KmsKeyArn *string
@@ -53,6 +57,10 @@ type RegisterServiceInput struct {
 
 	// Tags to add to the Service at registration time.
 	Tags map[string]string
+
+	// The name of the private connection to use for API calls (target URL) only.
+	// Cannot be specified when privateConnectionName is provided.
+	TargetUrlPrivateConnectionName *string
 
 	noSmithyDocumentSerde
 }

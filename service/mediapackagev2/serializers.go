@@ -2987,6 +2987,11 @@ func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.Crea
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioTimelinePattern) > 0 {
+		ok := object.Key("AudioTimelinePattern")
+		ok.String(string(v.AudioTimelinePattern))
+	}
+
 	if v.AvailabilityStartTimeConfiguration != nil {
 		ok := object.Key("AvailabilityStartTimeConfiguration")
 		if err := awsRestjson1_serializeDocumentDashAvailabilityStartTimeConfiguration(v.AvailabilityStartTimeConfiguration, ok); err != nil {

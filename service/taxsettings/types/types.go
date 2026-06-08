@@ -60,14 +60,23 @@ type AccountMetaData struct {
 // must also specify the canadaAdditionalInfo parameter.
 type AdditionalInfoRequest struct {
 
+	// Additional tax information to specify for a TRN in Belgium.
+	BelgiumAdditionalInfo *BelgiumAdditionalInfo
+
 	//  Additional tax information associated with your TRN in Canada.
 	CanadaAdditionalInfo *CanadaAdditionalInfo
+
+	//  Additional tax information to specify for a TRN in Chile.
+	ChileAdditionalInfo *ChileAdditionalInfo
 
 	// Additional tax information to specify for a TRN in Egypt.
 	EgyptAdditionalInfo *EgyptAdditionalInfo
 
 	//  Additional tax information to specify for a TRN in Estonia.
 	EstoniaAdditionalInfo *EstoniaAdditionalInfo
+
+	// Additional tax information to specify for a TRN in France.
+	FranceAdditionalInfo *FranceAdditionalInfo
 
 	//  Additional tax information to specify for a TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
@@ -89,6 +98,9 @@ type AdditionalInfoRequest struct {
 
 	//  Additional tax information to specify for a TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
+
+	// Additional tax information to specify for a TRN in the Philippines.
+	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Poland.
 	PolandAdditionalInfo *PolandAdditionalInfo
@@ -126,6 +138,9 @@ type AdditionalInfoRequest struct {
 // information is present with your TRN for the following countries.
 type AdditionalInfoResponse struct {
 
+	// Additional tax information associated with your TRN in Belgium.
+	BelgiumAdditionalInfo *BelgiumAdditionalInfo
+
 	// Additional tax information associated with your TRN in Brazil. The Tax Settings
 	// API returns this information in your response when any additional information is
 	// present with your TRN in Brazil.
@@ -134,11 +149,17 @@ type AdditionalInfoResponse struct {
 	// Additional tax information associated with your TRN in Canada.
 	CanadaAdditionalInfo *CanadaAdditionalInfo
 
+	//  Additional tax information associated with your TRN in Chile.
+	ChileAdditionalInfo *ChileAdditionalInfo
+
 	// Additional tax information to specify for a TRN in Egypt.
 	EgyptAdditionalInfo *EgyptAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Estonia.
 	EstoniaAdditionalInfo *EstoniaAdditionalInfo
+
+	// Additional tax information associated with your TRN in France.
+	FranceAdditionalInfo *FranceAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Georgia.
 	GeorgiaAdditionalInfo *GeorgiaAdditionalInfo
@@ -163,6 +184,9 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
+
+	// Additional tax information associated with your TRN in the Philippines.
+	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Poland.
 	PolandAdditionalInfo *PolandAdditionalInfo
@@ -197,16 +221,6 @@ type AdditionalInfoResponse struct {
 // The details of the address associated with the TRN information.
 type Address struct {
 
-	// The first line of the address.
-	//
-	// This member is required.
-	AddressLine1 *string
-
-	// The city that the address is in.
-	//
-	// This member is required.
-	City *string
-
 	// The country code for the country that the address is in.
 	//
 	// This member is required.
@@ -217,6 +231,9 @@ type Address struct {
 	// This member is required.
 	PostalCode *string
 
+	// The first line of the address.
+	AddressLine1 *string
+
 	// The second line of the address, if applicable.
 	AddressLine2 *string
 
@@ -225,6 +242,9 @@ type Address struct {
 	// TRN in Saudi Arabia, you must enter the addressLine3 and specify the building
 	// number for the address. For example, you might enter 1234 .
 	AddressLine3 *string
+
+	// The city that the address is in.
+	City *string
 
 	// The district or county the address is located.
 	//
@@ -305,6 +325,19 @@ type BatchPutTaxRegistrationError struct {
 	noSmithyDocumentSerde
 }
 
+// Additional tax information associated with your TRN in Belgium.
+type BelgiumAdditionalInfo struct {
+
+	// Indicates whether the Mercurius e-invoicing box is enabled for
+	// business-to-government (B2G) invoicing in Belgium.
+	IsMercuriusBoxEnabled *bool
+
+	// The Peppol ID for electronic invoicing in Belgium.
+	PeppolId *string
+
+	noSmithyDocumentSerde
+}
+
 // Additional tax information associated with your TRN in Brazil.
 type BrazilAdditionalInfo struct {
 
@@ -355,6 +388,18 @@ type CanadaAdditionalInfo struct {
 	// previous provinces. For other provinces, the Tax Settings API doesn't accept
 	// this parameter.
 	ProvincialSalesTaxId *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information associated with your TRN in Chile.
+type ChileAdditionalInfo struct {
+
+	//  The business activity of the taxpayer in Chile.
+	BusinessActivity *string
+
+	//  The type of tax document. For Chile, this can be Invoice or Receipt .
+	DocumentType ChileDocumentType
 
 	noSmithyDocumentSerde
 }
@@ -412,6 +457,17 @@ type ExemptionCertificate struct {
 	//
 	// This member is required.
 	DocumentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional tax information associated with your TRN in France.
+type FranceAdditionalInfo struct {
+
+	// The SIREN number for the company in France. Must be a 9-digit number.
+	//
+	// This member is required.
+	SirenNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -492,6 +548,10 @@ type ItalyAdditionalInfo struct {
 	// the Interministerial Committee for Economic Planning (CIPE) which characterizes
 	// every public investment project (Individual Project Code).
 	CupNumber *string
+
+	// The customer type for tax registration in Italy. Valid values are Business or
+	// Individual .
+	CustomerType CustomerType
 
 	//  Additional tax information to specify for a TRN in Italy. Use
 	// CodiceDestinatario to receive your invoices via web service (API) or FTP.
@@ -575,6 +635,16 @@ type MalaysiaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Additional tax information associated with your TRN in the Philippines.
+type PhilippinesAdditionalInfo struct {
+
+	// Indicates whether the account is VAT-registered with the Philippines Bureau of
+	// Internal Revenue (BIR).
+	IsVatRegistered *bool
+
+	noSmithyDocumentSerde
+}
+
 // Additional tax information associated with your TRN in Poland.
 type PolandAdditionalInfo struct {
 
@@ -585,6 +655,10 @@ type PolandAdditionalInfo struct {
 	//  True if your business is a member of a VAT group with a NIP active for VAT
 	// purposes. Otherwise, this is false.
 	IsGroupVatEnabled *bool
+
+	// The tax registration number type. Valid values are EUTaxRegistrationNumber ,
+	// LocalTaxRegistrationNumber , or LocalRegistrationNumber .
+	TaxRegistrationNumberType PolandTaxRegistrationNumberType
 
 	noSmithyDocumentSerde
 }

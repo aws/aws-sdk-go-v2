@@ -7558,6 +7558,15 @@ func awsRestjson1_deserializeDocumentGetDashManifestConfiguration(v **types.GetD
 
 	for key, value := range shape {
 		switch key {
+		case "AudioTimelinePattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashAudioTimelinePattern to be of type string, got %T instead", value)
+				}
+				sv.AudioTimelinePattern = types.DashAudioTimelinePattern(jtv)
+			}
+
 		case "AvailabilityStartTimeConfiguration":
 			if err := awsRestjson1_deserializeDocumentDashAvailabilityStartTimeConfiguration(&sv.AvailabilityStartTimeConfiguration, value); err != nil {
 				return err

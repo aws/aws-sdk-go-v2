@@ -447,6 +447,28 @@ func (RecommendationStatus) Values() []RecommendationStatus {
 	}
 }
 
+type ResourceConfigDnsResolution string
+
+// Enum values for ResourceConfigDnsResolution
+const (
+	// Use public DNS resolution for resources behind this resource gateway.
+	ResourceConfigDnsResolutionPublic ResourceConfigDnsResolution = "PUBLIC"
+	// Enable private DNS resolution within VPC for resources behind this resource
+	// gateway.
+	ResourceConfigDnsResolutionInVpc ResourceConfigDnsResolution = "IN_VPC"
+)
+
+// Values returns all known values for ResourceConfigDnsResolution. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigDnsResolution) Values() []ResourceConfigDnsResolution {
+	return []ResourceConfigDnsResolution{
+		"PUBLIC",
+		"IN_VPC",
+	}
+}
+
 type SchedulerState string
 
 // Enum values for SchedulerState
@@ -603,6 +625,8 @@ const (
 	TaskStatusTimedOut TaskStatus = "TIMED_OUT"
 	// Task has been canceled
 	TaskStatusCanceled TaskStatus = "CANCELED"
+	// Task has been skipped by triage
+	TaskStatusSkipped TaskStatus = "SKIPPED"
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
@@ -620,6 +644,7 @@ func (TaskStatus) Values() []TaskStatus {
 		"FAILED",
 		"TIMED_OUT",
 		"CANCELED",
+		"SKIPPED",
 	}
 }
 

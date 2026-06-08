@@ -128,6 +128,25 @@ func (CustomAdType) Values() []CustomAdType {
 	}
 }
 
+type DashAudioTimelinePattern string
+
+// Enum values for DashAudioTimelinePattern
+const (
+	DashAudioTimelinePatternNone      DashAudioTimelinePattern = "NONE"
+	DashAudioTimelinePatternPatterned DashAudioTimelinePattern = "PATTERNED"
+)
+
+// Values returns all known values for DashAudioTimelinePattern. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashAudioTimelinePattern) Values() []DashAudioTimelinePattern {
+	return []DashAudioTimelinePattern{
+		"NONE",
+		"PATTERNED",
+	}
+}
+
 type DashCompactness string
 
 // Enum values for DashCompactness
@@ -499,6 +518,8 @@ const (
 	ScteFilterDistributorPromo                       ScteFilter = "DISTRIBUTOR_PROMO"
 	ScteFilterProviderAdBlock                        ScteFilter = "PROVIDER_AD_BLOCK"
 	ScteFilterDistributorAdBlock                     ScteFilter = "DISTRIBUTOR_AD_BLOCK"
+	ScteFilterContentIdentification                  ScteFilter = "CONTENT_IDENTIFICATION"
+	ScteFilterCallAdServer                           ScteFilter = "CALL_AD_SERVER"
 )
 
 // Values returns all known values for ScteFilter. Note that this can be expanded
@@ -524,6 +545,8 @@ func (ScteFilter) Values() []ScteFilter {
 		"DISTRIBUTOR_PROMO",
 		"PROVIDER_AD_BLOCK",
 		"DISTRIBUTOR_AD_BLOCK",
+		"CONTENT_IDENTIFICATION",
+		"CALL_AD_SERVER",
 	}
 }
 

@@ -3505,6 +3505,13 @@ func awsRestjson1_serializeDocumentCentralizationRuleDestination(v *types.Centra
 		}
 	}
 
+	if v.DestinationMetricsConfiguration != nil {
+		ok := object.Key("DestinationMetricsConfiguration")
+		if err := awsRestjson1_serializeDocumentDestinationMetricsConfiguration(v.DestinationMetricsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Region != nil {
 		ok := object.Key("Region")
 		ok.String(*v.Region)
@@ -3532,6 +3539,13 @@ func awsRestjson1_serializeDocumentCentralizationRuleSource(v *types.Centralizat
 	if v.SourceLogsConfiguration != nil {
 		ok := object.Key("SourceLogsConfiguration")
 		if err := awsRestjson1_serializeDocumentSourceLogsConfiguration(v.SourceLogsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceMetricsConfiguration != nil {
+		ok := object.Key("SourceMetricsConfiguration")
+		if err := awsRestjson1_serializeDocumentSourceMetricsConfiguration(v.SourceMetricsConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -3608,6 +3622,20 @@ func awsRestjson1_serializeDocumentDestinationLogsConfiguration(v *types.Destina
 	if v.LogsEncryptionConfiguration != nil {
 		ok := object.Key("LogsEncryptionConfiguration")
 		if err := awsRestjson1_serializeDocumentLogsEncryptionConfiguration(v.LogsEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDestinationMetricsConfiguration(v *types.DestinationMetricsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupConfiguration != nil {
+		ok := object.Key("BackupConfiguration")
+		if err := awsRestjson1_serializeDocumentMetricsBackupConfiguration(v.BackupConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -3835,6 +3863,18 @@ func awsRestjson1_serializeDocumentLogTypes(v []types.LogType, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMetricsBackupConfiguration(v *types.MetricsBackupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMskMonitoringParameters(v *types.MskMonitoringParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3952,6 +3992,18 @@ func awsRestjson1_serializeDocumentSourceLogsConfiguration(v *types.SourceLogsCo
 	if v.LogGroupSelectionCriteria != nil {
 		ok := object.Key("LogGroupSelectionCriteria")
 		ok.String(*v.LogGroupSelectionCriteria)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceMetricsConfiguration(v *types.SourceMetricsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricsSelectionCriteria != nil {
+		ok := object.Key("MetricsSelectionCriteria")
+		ok.String(*v.MetricsSelectionCriteria)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "b36af791-cb51-4290-86c0-4dbb039896a0",
+    "type": "feature",
+    "description": "StartRunBatch API - Add EngineSettings",
+    "modules": [
+        "service/omics"
+    ]
+}

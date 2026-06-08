@@ -1,0 +1,8 @@
+{
+    "id": "77f2e14c-f199-4cdd-94e5-0f72b23ed90d",
+    "type": "feature",
+    "description": "Adds support for DASH Audio Timeline Patternization. This enables your DASH manifests to templatize the repeating patterns that emerge in audio segment timelines. This compacts the total timeline length, utilizing the repeat notation, such that manifests don't grow indefinitely long.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

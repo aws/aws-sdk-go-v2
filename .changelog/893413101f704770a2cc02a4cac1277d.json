@@ -1,0 +1,8 @@
+{
+    "id": "89341310-1f70-4770-a2cc-02a4cac1277d",
+    "type": "feature",
+    "description": "Adds new Idle Recommendation types in the Cost Optimization Hub API",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

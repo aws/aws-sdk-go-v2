@@ -90,6 +90,50 @@ func ExampleAdditionalServiceRegistrationStep_outputUsage() {
 
 var _ *types.OAuthAdditionalStepDetails
 
+func ExampleAssetContent_outputUsage() {
+	var union types.AssetContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssetContentMemberFile:
+		_ = v.Value // Value is types.AssetFileContent
+
+	case *types.AssetContentMemberZip:
+		_ = v.Value // Value is types.AssetZipContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AssetFileContent
+var _ *types.AssetZipContent
+
+func ExampleAssetFileBody_outputUsage() {
+	var union types.AssetFileBody
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssetFileBodyMemberBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.AssetFileBodyMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
+
 func ExampleAssistantMessageBlock_outputUsage() {
 	var union types.AssistantMessageBlock
 	// type switches can be used to check the union value

@@ -1212,6 +1212,18 @@ type GpuInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the dimension of an idle resource utilization metric.
+type IdleDimension struct {
+
+	// The name of the dimension key.
+	Key *string
+
+	// The value of the dimension.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the estimated monthly savings possible for idle resources by adopting
 // Compute Optimizer recommendations.
 type IdleEstimatedMonthlySavings struct {
@@ -1363,6 +1375,9 @@ type IdleSummary struct {
 
 // Describes the utilization metric of an idle resource.
 type IdleUtilizationMetric struct {
+
+	// The dimensions of the utilization metric.
+	Dimensions []IdleDimension
 
 	// The name of the utilization metric.
 	Name IdleMetricName

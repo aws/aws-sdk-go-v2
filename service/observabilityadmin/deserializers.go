@@ -6953,6 +6953,11 @@ func awsRestjson1_deserializeDocumentCentralizationRuleDestination(v **types.Cen
 				return err
 			}
 
+		case "DestinationMetricsConfiguration":
+			if err := awsRestjson1_deserializeDocumentDestinationMetricsConfiguration(&sv.DestinationMetricsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7009,6 +7014,11 @@ func awsRestjson1_deserializeDocumentCentralizationRuleSource(v **types.Centrali
 
 		case "SourceLogsConfiguration":
 			if err := awsRestjson1_deserializeDocumentSourceLogsConfiguration(&sv.SourceLogsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SourceMetricsConfiguration":
+			if err := awsRestjson1_deserializeDocumentSourceMetricsConfiguration(&sv.SourceMetricsConfiguration, value); err != nil {
 				return err
 			}
 
@@ -7534,6 +7544,42 @@ func awsRestjson1_deserializeDocumentDestinationLogsConfiguration(v **types.Dest
 
 		case "LogsEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogsEncryptionConfiguration(&sv.LogsEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDestinationMetricsConfiguration(v **types.DestinationMetricsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DestinationMetricsConfiguration
+	if *v == nil {
+		sv = &types.DestinationMetricsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupConfiguration":
+			if err := awsRestjson1_deserializeDocumentMetricsBackupConfiguration(&sv.BackupConfiguration, value); err != nil {
 				return err
 			}
 
@@ -8354,6 +8400,46 @@ func awsRestjson1_deserializeDocumentLogTypes(v *[]types.LogType, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMetricsBackupConfiguration(v **types.MetricsBackupConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricsBackupConfiguration
+	if *v == nil {
+		sv = &types.MetricsBackupConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMskMonitoringParameters(v **types.MskMonitoringParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9071,6 +9157,46 @@ func awsRestjson1_deserializeDocumentSourceLogsConfiguration(v **types.SourceLog
 					return fmt.Errorf("expected LogsFilterString to be of type string, got %T instead", value)
 				}
 				sv.LogGroupSelectionCriteria = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceMetricsConfiguration(v **types.SourceMetricsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceMetricsConfiguration
+	if *v == nil {
+		sv = &types.SourceMetricsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricsSelectionCriteria":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricsFilterString to be of type string, got %T instead", value)
+				}
+				sv.MetricsSelectionCriteria = ptr.String(jtv)
 			}
 
 		default:

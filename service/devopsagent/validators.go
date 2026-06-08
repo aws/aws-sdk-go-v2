@@ -50,6 +50,46 @@ func (m *validateOpCreateAgentSpace) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAssetFile struct {
+}
+
+func (*validateOpCreateAssetFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAssetFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAssetFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAssetFileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAsset struct {
+}
+
+func (*validateOpCreateAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBacklogTask struct {
 }
 
@@ -125,6 +165,46 @@ func (m *validateOpDeleteAgentSpace) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAgentSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAssetFile struct {
+}
+
+func (*validateOpDeleteAssetFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssetFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetFileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAsset struct {
+}
+
+func (*validateOpDeleteAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +350,66 @@ func (m *validateOpGetAgentSpace) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAssetContent struct {
+}
+
+func (*validateOpGetAssetContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssetContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAssetFile struct {
+}
+
+func (*validateOpGetAssetFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssetFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetFileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAsset struct {
+}
+
+func (*validateOpGetAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAssociation struct {
 }
 
@@ -365,6 +505,66 @@ func (m *validateOpGetService) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetServiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetFiles struct {
+}
+
+func (*validateOpListAssetFiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetFiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetFilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetFilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssets struct {
+}
+
+func (*validateOpListAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetVersions struct {
+}
+
+func (*validateOpListAssetVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +870,46 @@ func (m *validateOpUpdateAgentSpace) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAssetFile struct {
+}
+
+func (*validateOpUpdateAssetFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssetFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetFileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAsset struct {
+}
+
+func (*validateOpUpdateAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAssociation struct {
 }
 
@@ -818,6 +1058,14 @@ func addOpCreateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentSpace{}, middleware.After)
 }
 
+func addOpCreateAssetFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAssetFile{}, middleware.After)
+}
+
+func addOpCreateAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAsset{}, middleware.After)
+}
+
 func addOpCreateBacklogTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBacklogTask{}, middleware.After)
 }
@@ -832,6 +1080,14 @@ func addOpCreatePrivateConnectionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentSpace{}, middleware.After)
+}
+
+func addOpDeleteAssetFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssetFile{}, middleware.After)
+}
+
+func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
 }
 
 func addOpDeletePrivateConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -862,6 +1118,18 @@ func addOpGetAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentSpace{}, middleware.After)
 }
 
+func addOpGetAssetContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssetContent{}, middleware.After)
+}
+
+func addOpGetAssetFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssetFile{}, middleware.After)
+}
+
+func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAsset{}, middleware.After)
+}
+
 func addOpGetAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAssociation{}, middleware.After)
 }
@@ -880,6 +1148,18 @@ func addOpGetRecommendationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetService{}, middleware.After)
+}
+
+func addOpListAssetFilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetFiles{}, middleware.After)
+}
+
+func addOpListAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssets{}, middleware.After)
+}
+
+func addOpListAssetVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetVersions{}, middleware.After)
 }
 
 func addOpListAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -942,6 +1222,14 @@ func addOpUpdateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentSpace{}, middleware.After)
 }
 
+func addOpUpdateAssetFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssetFile{}, middleware.After)
+}
+
+func addOpUpdateAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAsset{}, middleware.After)
+}
+
 func addOpUpdateAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAssociation{}, middleware.After)
 }
@@ -968,6 +1256,63 @@ func addOpUpdateRecommendationValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpValidateAwsAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateAwsAssociations{}, middleware.After)
+}
+
+func validateAssetContent(v types.AssetContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetContent"}
+	switch uv := v.(type) {
+	case *types.AssetContentMemberFile:
+		if err := validateAssetFileContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AssetContentMemberZip:
+		if err := validateAssetZipContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[zip]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetFileContent(v *types.AssetFileContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetFileContent"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetZipContent(v *types.AssetZipContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetZipContent"}
+	if v.ZipFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ZipFile"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAWSConfiguration(v *types.AWSConfiguration) error {
@@ -1467,9 +1812,6 @@ func validateMCPServerSigV4AuthorizationConfig(v *types.MCPServerSigV4Authorizat
 	}
 	if v.Service == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Service"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2092,6 +2434,55 @@ func validateOpCreateAgentSpaceInput(v *CreateAgentSpaceInput) error {
 	}
 }
 
+func validateOpCreateAssetFileInput(v *CreateAssetFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssetFileInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAssetInput(v *CreateAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssetInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetType"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateAssetContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateBacklogTaskInput(v *CreateBacklogTaskInput) error {
 	if v == nil {
 		return nil
@@ -2165,6 +2556,45 @@ func validateOpDeleteAgentSpaceInput(v *DeleteAgentSpaceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentSpaceInput"}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAssetFileInput(v *DeleteAssetFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetFileInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2287,6 +2717,63 @@ func validateOpGetAgentSpaceInput(v *GetAgentSpaceInput) error {
 	}
 }
 
+func validateOpGetAssetContentInput(v *GetAssetContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetContentInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssetFileInput(v *GetAssetFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetFileInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssetInput(v *GetAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssetInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAssociationInput(v *GetAssociationInput) error {
 	if v == nil {
 		return nil
@@ -2363,6 +2850,57 @@ func validateOpGetServiceInput(v *GetServiceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceInput"}
 	if v.ServiceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetFilesInput(v *ListAssetFilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetFilesInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetsInput(v *ListAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetVersionsInput(v *ListAssetVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetVersionsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2619,6 +3157,50 @@ func validateOpUpdateAgentSpaceInput(v *UpdateAgentSpaceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentSpaceInput"}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssetFileInput(v *UpdateAssetFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetFileInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssetInput(v *UpdateAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.Content != nil {
+		if err := validateAssetContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

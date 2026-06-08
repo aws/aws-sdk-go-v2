@@ -86,6 +86,30 @@ func TestCheckSnapshot_CreateAgentSpace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAssetFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBacklogTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBacklogTask(context.Background(), nil, func(o *Options) {
@@ -127,6 +151,30 @@ func TestCheckSnapshot_DeleteAgentSpace(t *testing.T) {
 	_, err := svc.DeleteAgentSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAgentSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAssetFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +278,42 @@ func TestCheckSnapshot_GetAgentSpace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAssetContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAssetContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAssetFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAssociation(context.Background(), nil, func(o *Options) {
@@ -295,6 +379,54 @@ func TestCheckSnapshot_ListAgentSpaces(t *testing.T) {
 	_, err := svc.ListAgentSpaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAgentSpaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssetFiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetFiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetFiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssetTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -506,6 +638,30 @@ func TestCheckSnapshot_UpdateAgentSpace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAssetFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateAssociation(context.Background(), nil, func(o *Options) {
@@ -613,6 +769,30 @@ func TestUpdateSnapshot_CreateAgentSpace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAssetFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBacklogTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBacklogTask(context.Background(), nil, func(o *Options) {
@@ -654,6 +834,30 @@ func TestUpdateSnapshot_DeleteAgentSpace(t *testing.T) {
 	_, err := svc.DeleteAgentSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAgentSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAssetFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -757,6 +961,42 @@ func TestUpdateSnapshot_GetAgentSpace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAssetContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAssetContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAssetFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAssociation(context.Background(), nil, func(o *Options) {
@@ -822,6 +1062,54 @@ func TestUpdateSnapshot_ListAgentSpaces(t *testing.T) {
 	_, err := svc.ListAgentSpaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAgentSpaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssetFiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetFiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetFiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssetTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1026,6 +1314,30 @@ func TestUpdateSnapshot_UpdateAgentSpace(t *testing.T) {
 	_, err := svc.UpdateAgentSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgentSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAssetFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAssetFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

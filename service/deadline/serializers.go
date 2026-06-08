@@ -112,6 +112,11 @@ func awsRestjson1_serializeOpDocumentAssociateMemberToFarmInput(v *AssociateMemb
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdentityCenterRegion != nil {
+		ok := object.Key("identityCenterRegion")
+		ok.String(*v.IdentityCenterRegion)
+	}
+
 	if v.IdentityStoreId != nil {
 		ok := object.Key("identityStoreId")
 		ok.String(*v.IdentityStoreId)
@@ -233,6 +238,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateMemberToFleetInput(v *Associat
 func awsRestjson1_serializeOpDocumentAssociateMemberToFleetInput(v *AssociateMemberToFleetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.IdentityCenterRegion != nil {
+		ok := object.Key("identityCenterRegion")
+		ok.String(*v.IdentityCenterRegion)
+	}
 
 	if v.IdentityStoreId != nil {
 		ok := object.Key("identityStoreId")
@@ -365,6 +375,11 @@ func awsRestjson1_serializeOpDocumentAssociateMemberToJobInput(v *AssociateMembe
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdentityCenterRegion != nil {
+		ok := object.Key("identityCenterRegion")
+		ok.String(*v.IdentityCenterRegion)
+	}
+
 	if v.IdentityStoreId != nil {
 		ok := object.Key("identityStoreId")
 		ok.String(*v.IdentityStoreId)
@@ -486,6 +501,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateMemberToQueueInput(v *Associat
 func awsRestjson1_serializeOpDocumentAssociateMemberToQueueInput(v *AssociateMemberToQueueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.IdentityCenterRegion != nil {
+		ok := object.Key("identityCenterRegion")
+		ok.String(*v.IdentityCenterRegion)
+	}
 
 	if v.IdentityStoreId != nil {
 		ok := object.Key("identityStoreId")

@@ -1,0 +1,8 @@
+{
+    "id": "f5f436c7-416b-4f76-8427-9cac932faead",
+    "type": "feature",
+    "description": "AWS Transform discovery tool now supported as network migration input source. You can now use the AWS Transform Discovery tool as a source for network migration alongside modelizeIT, enabling hybrid network migrations for environments running both VMware and non-VMware workloads.",
+    "modules": [
+        "service/mgn"
+    ]
+}

@@ -440,6 +440,11 @@ type DefaultRunSetting struct {
 	// Optional configuration name to use for the workflow run.
 	ConfigurationName *string
 
+	// Engine-specific settings for the workflow run. Use this field to specify
+	// configuration options that are specific to the workflow engine (for example,
+	// Nextflow profiles).
+	EngineSettings document.Interface
+
 	// The verbosity level for CloudWatch Logs emitted during each run.
 	LogLevel RunLogLevel
 
@@ -932,6 +937,11 @@ type InlineSetting struct {
 	//
 	// This member is required.
 	RunSettingId *string
+
+	// Per-run engine-specific settings. Use this field to specify configuration
+	// options that are specific to the workflow engine (for example, Nextflow
+	// profiles). Overrides defaultRunSetting.engineSettings for this run.
+	EngineSettings document.Interface
 
 	// An optional user-friendly name for this run.
 	Name *string

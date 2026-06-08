@@ -122,6 +122,15 @@ type DbInstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon DocumentDB cluster recommendation details.
+type DocumentDbCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
 // The DynamoDB reserved capacity recommendation details.
 type DynamoDbReservedCapacity struct {
 
@@ -164,6 +173,15 @@ type DynamoDbReservedCapacityConfiguration struct {
 
 	// How much purchasing this reserved capacity costs you upfront.
 	UpfrontCost *string
+
+	noSmithyDocumentSerde
+}
+
+// The DynamoDB table recommendation details.
+type DynamoDbTable struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
 
 	noSmithyDocumentSerde
 }
@@ -404,6 +422,15 @@ type EfficiencyMetricsByGroup struct {
 	noSmithyDocumentSerde
 }
 
+// The ElastiCache cluster recommendation details.
+type ElastiCacheCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
+
+	noSmithyDocumentSerde
+}
+
 // The ElastiCache reserved instances recommendation details.
 type ElastiCacheReservedInstances struct {
 
@@ -545,6 +572,15 @@ type LambdaFunctionConfiguration struct {
 
 	// Details about the compute configuration.
 	Compute *ComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The MemoryDB cluster recommendation details.
+type MemoryDbCluster struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
 
 	noSmithyDocumentSerde
 }
@@ -1073,15 +1109,19 @@ type ResourceCostCalculation struct {
 //
 //	ResourceDetailsMemberAuroraDbClusterStorage
 //	ResourceDetailsMemberComputeSavingsPlans
+//	ResourceDetailsMemberDocumentDbCluster
 //	ResourceDetailsMemberDynamoDbReservedCapacity
+//	ResourceDetailsMemberDynamoDbTable
 //	ResourceDetailsMemberEbsVolume
 //	ResourceDetailsMemberEc2AutoScalingGroup
 //	ResourceDetailsMemberEc2Instance
 //	ResourceDetailsMemberEc2InstanceSavingsPlans
 //	ResourceDetailsMemberEc2ReservedInstances
 //	ResourceDetailsMemberEcsService
+//	ResourceDetailsMemberElastiCacheCluster
 //	ResourceDetailsMemberElastiCacheReservedInstances
 //	ResourceDetailsMemberLambdaFunction
+//	ResourceDetailsMemberMemoryDbCluster
 //	ResourceDetailsMemberMemoryDbReservedInstances
 //	ResourceDetailsMemberNatGateway
 //	ResourceDetailsMemberOpenSearchReservedInstances
@@ -1089,7 +1129,9 @@ type ResourceCostCalculation struct {
 //	ResourceDetailsMemberRdsDbInstanceStorage
 //	ResourceDetailsMemberRdsReservedInstances
 //	ResourceDetailsMemberRedshiftReservedInstances
+//	ResourceDetailsMemberSageMakerEndpoint
 //	ResourceDetailsMemberSageMakerSavingsPlans
+//	ResourceDetailsMemberWorkSpaces
 type ResourceDetails interface {
 	isResourceDetails()
 }
@@ -1112,6 +1154,15 @@ type ResourceDetailsMemberComputeSavingsPlans struct {
 
 func (*ResourceDetailsMemberComputeSavingsPlans) isResourceDetails() {}
 
+// The Amazon DocumentDB cluster recommendation details.
+type ResourceDetailsMemberDocumentDbCluster struct {
+	Value DocumentDbCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberDocumentDbCluster) isResourceDetails() {}
+
 // The DynamoDB reserved capacity recommendation details.
 type ResourceDetailsMemberDynamoDbReservedCapacity struct {
 	Value DynamoDbReservedCapacity
@@ -1120,6 +1171,15 @@ type ResourceDetailsMemberDynamoDbReservedCapacity struct {
 }
 
 func (*ResourceDetailsMemberDynamoDbReservedCapacity) isResourceDetails() {}
+
+// The DynamoDB table recommendation details.
+type ResourceDetailsMemberDynamoDbTable struct {
+	Value DynamoDbTable
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberDynamoDbTable) isResourceDetails() {}
 
 // The Amazon Elastic Block Store volume recommendation details.
 type ResourceDetailsMemberEbsVolume struct {
@@ -1175,6 +1235,15 @@ type ResourceDetailsMemberEcsService struct {
 
 func (*ResourceDetailsMemberEcsService) isResourceDetails() {}
 
+// The ElastiCache cluster recommendation details.
+type ResourceDetailsMemberElastiCacheCluster struct {
+	Value ElastiCacheCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberElastiCacheCluster) isResourceDetails() {}
+
 // The ElastiCache reserved instances recommendation details.
 type ResourceDetailsMemberElastiCacheReservedInstances struct {
 	Value ElastiCacheReservedInstances
@@ -1192,6 +1261,15 @@ type ResourceDetailsMemberLambdaFunction struct {
 }
 
 func (*ResourceDetailsMemberLambdaFunction) isResourceDetails() {}
+
+// The MemoryDB cluster recommendation details.
+type ResourceDetailsMemberMemoryDbCluster struct {
+	Value MemoryDbCluster
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberMemoryDbCluster) isResourceDetails() {}
 
 // The MemoryDB reserved instances recommendation details.
 type ResourceDetailsMemberMemoryDbReservedInstances struct {
@@ -1256,6 +1334,15 @@ type ResourceDetailsMemberRedshiftReservedInstances struct {
 
 func (*ResourceDetailsMemberRedshiftReservedInstances) isResourceDetails() {}
 
+// The SageMaker endpoint recommendation details.
+type ResourceDetailsMemberSageMakerEndpoint struct {
+	Value SageMakerEndpoint
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberSageMakerEndpoint) isResourceDetails() {}
+
 // The SageMaker AI Savings Plans recommendation details.
 type ResourceDetailsMemberSageMakerSavingsPlans struct {
 	Value SageMakerSavingsPlans
@@ -1264,6 +1351,15 @@ type ResourceDetailsMemberSageMakerSavingsPlans struct {
 }
 
 func (*ResourceDetailsMemberSageMakerSavingsPlans) isResourceDetails() {}
+
+// The WorkSpaces recommendation details.
+type ResourceDetailsMemberWorkSpaces struct {
+	Value WorkSpaces
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceDetailsMemberWorkSpaces) isResourceDetails() {}
 
 // Contains pricing information about the specified resource.
 type ResourcePricing struct {
@@ -1281,6 +1377,15 @@ type ResourcePricing struct {
 
 	// The estimated net unused amortized commitment for the recommendation.
 	EstimatedNetUnusedAmortizedCommitments *float64
+
+	noSmithyDocumentSerde
+}
+
+// The SageMaker endpoint recommendation details.
+type SageMakerEndpoint struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
 
 	noSmithyDocumentSerde
 }
@@ -1434,6 +1539,15 @@ type ValidationExceptionDetail struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The WorkSpaces recommendation details.
+type WorkSpaces struct {
+
+	// Cost impact of the resource recommendation.
+	CostCalculation *ResourceCostCalculation
 
 	noSmithyDocumentSerde
 }

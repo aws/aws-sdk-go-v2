@@ -82,6 +82,9 @@ type EnableOperatorAppOutput struct {
 	// Operator App.
 	Idp *types.IdpAuthConfiguration
 
+	// The URL for operators to access the Operator App
+	OperatorAppUrl *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

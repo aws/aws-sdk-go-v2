@@ -3982,6 +3982,73 @@ func deserializeCBOR_Idle(v smithycbor.Value) (types.Idle, error) {
 	return types.Idle(av), nil
 }
 
+func deserializeCBOR_IdleDimension(v smithycbor.Value) (*types.IdleDimension, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.IdleDimension{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "key" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Key = ptr.String(dv)
+		}
+
+		if key == "values" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_IdleDimensionValues(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Values = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_IdleDimensions(v smithycbor.Value) ([]types.IdleDimension, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.IdleDimension
+	for _, si := range av {
+
+		di, err := deserializeCBOR_IdleDimension(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_IdleDimensionValues(v smithycbor.Value) ([]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []string
+	for _, si := range av {
+
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
 func deserializeCBOR_IdleEstimatedMonthlySavings(v smithycbor.Value) (*types.IdleEstimatedMonthlySavings, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -4400,6 +4467,17 @@ func deserializeCBOR_IdleUtilizationMetric(v smithycbor.Value) (*types.IdleUtili
 				return nil, err
 			}
 			ds.Value = dv
+		}
+
+		if key == "dimensions" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_IdleDimensions(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Dimensions = dv
 		}
 	}
 	return ds, nil

@@ -63,8 +63,9 @@ import (
 //
 //	either 01 , 07 , or 08 .
 //
-//	- If ppnExceptionDesignationCode is 07 , you must specify the decisionNumber
-//	in the indonesiaAdditionalInfo field of the additionalTaxInformation object.
+//	- If ppnExceptionDesignationCode is 07 or 08 , you must specify the
+//	decisionNumber in the indonesiaAdditionalInfo field of the
+//	additionalTaxInformation object.
 //
 // Kenya
 //
@@ -116,6 +117,14 @@ import (
 // # IT service - 9907101676
 //
 // # Digital services and electronic medium - 9907121690
+//
+// Mexico
+//
+//   - You must provide a Constancia de Situación fiscal (CSF) document in the
+//     verificationDetails field.
+//
+//   - You do not need to provide address and legal name. These will be populated
+//     based on your tax registration number.
 //
 // Nepal
 //
@@ -172,6 +181,34 @@ import (
 // Ukraine
 //
 //   - The sector valid values are Business and Individual .
+//
+// Philippines
+//
+//   - You can optionally specify the isVatRegistered in the
+//     philippinesAdditionalInfo field of the additionalTaxInformation object to
+//     indicate your VAT registration status with the Bureau of Internal Revenue (BIR).
+//
+// Belgium
+//
+//   - You can optionally specify the peppolId in the belgiumAdditionalInfo field
+//     of the additionalTaxInformation object.
+//
+// Chile
+//
+//   - You can optionally specify the documentType and businessActivity in the
+//     chileAdditionalInfo field of the additionalTaxInformation object.
+//
+// France
+//
+//   - You must specify the sirenNumber in the franceAdditionalInfo field of the
+//     additionalTaxInformation object.
+//
+// Poland
+//
+//   - You can optionally specify the taxRegistrationNumberType in the
+//     polandAdditionalInfo field of the additionalTaxInformation object. Valid
+//     values are EUTaxRegistrationNumber , LocalTaxRegistrationNumber , or
+//     LocalRegistrationNumber .
 //
 // [Amazon Web Services service terms]: http://aws.amazon.com/service-terms/
 // [Payment preferences]: https://console.aws.amazon.com/billing/home#/paymentpreferences/paymentmethods

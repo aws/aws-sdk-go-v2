@@ -2957,6 +2957,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 
 	for key, value := range shape {
 		switch key {
+		case "belgiumAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentBelgiumAdditionalInfo(&sv.BelgiumAdditionalInfo, value); err != nil {
+				return err
+			}
+
 		case "brazilAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentBrazilAdditionalInfo(&sv.BrazilAdditionalInfo, value); err != nil {
 				return err
@@ -2967,6 +2972,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 				return err
 			}
 
+		case "chileAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentChileAdditionalInfo(&sv.ChileAdditionalInfo, value); err != nil {
+				return err
+			}
+
 		case "egyptAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentEgyptAdditionalInfo(&sv.EgyptAdditionalInfo, value); err != nil {
 				return err
@@ -2974,6 +2984,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 
 		case "estoniaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(&sv.EstoniaAdditionalInfo, value); err != nil {
+				return err
+			}
+
+		case "franceAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentFranceAdditionalInfo(&sv.FranceAdditionalInfo, value); err != nil {
 				return err
 			}
 
@@ -3014,6 +3029,11 @@ func awsRestjson1_deserializeDocumentAdditionalInfoResponse(v **types.Additional
 
 		case "malaysiaAdditionalInfo":
 			if err := awsRestjson1_deserializeDocumentMalaysiaAdditionalInfo(&sv.MalaysiaAdditionalInfo, value); err != nil {
+				return err
+			}
+
+		case "philippinesAdditionalInfo":
+			if err := awsRestjson1_deserializeDocumentPhilippinesAdditionalInfo(&sv.PhilippinesAdditionalInfo, value); err != nil {
 				return err
 			}
 
@@ -3516,6 +3536,55 @@ func awsRestjson1_deserializeDocumentBatchPutTaxRegistrationErrors(v *[]types.Ba
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBelgiumAdditionalInfo(v **types.BelgiumAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BelgiumAdditionalInfo
+	if *v == nil {
+		sv = &types.BelgiumAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isMercuriusBoxEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMercuriusBoxEnabled = ptr.Bool(jtv)
+			}
+
+		case "peppolId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PeppolId to be of type string, got %T instead", value)
+				}
+				sv.PeppolId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBrazilAdditionalInfo(v **types.BrazilAdditionalInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3672,6 +3741,55 @@ func awsRestjson1_deserializeDocumentCaseCreationLimitExceededException(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentChileAdditionalInfo(v **types.ChileAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChileAdditionalInfo
+	if *v == nil {
+		sv = &types.ChileAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "businessActivity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.BusinessActivity = ptr.String(jtv)
+			}
+
+		case "documentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChileDocumentType to be of type string, got %T instead", value)
+				}
+				sv.DocumentType = types.ChileDocumentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3799,6 +3917,46 @@ func awsRestjson1_deserializeDocumentEstoniaAdditionalInfo(v **types.EstoniaAddi
 					return fmt.Errorf("expected RegistryCommercialCode to be of type string, got %T instead", value)
 				}
 				sv.RegistryCommercialCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFranceAdditionalInfo(v **types.FranceAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FranceAdditionalInfo
+	if *v == nil {
+		sv = &types.FranceAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sirenNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SirenNumber to be of type string, got %T instead", value)
+				}
+				sv.SirenNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -4126,6 +4284,15 @@ func awsRestjson1_deserializeDocumentItalyAdditionalInfo(v **types.ItalyAddition
 				sv.CupNumber = ptr.String(jtv)
 			}
 
+		case "customerType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomerType to be of type string, got %T instead", value)
+				}
+				sv.CustomerType = types.CustomerType(jtv)
+			}
+
 		case "sdiAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4332,6 +4499,46 @@ func awsRestjson1_deserializeDocumentMalaysiaServiceTaxCodesList(v *[]types.Mala
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPhilippinesAdditionalInfo(v **types.PhilippinesAdditionalInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PhilippinesAdditionalInfo
+	if *v == nil {
+		sv = &types.PhilippinesAdditionalInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isVatRegistered":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsVatRegistered = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPolandAdditionalInfo(v **types.PolandAdditionalInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4370,6 +4577,15 @@ func awsRestjson1_deserializeDocumentPolandAdditionalInfo(v **types.PolandAdditi
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.IsGroupVatEnabled = ptr.Bool(jtv)
+			}
+
+		case "taxRegistrationNumberType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolandTaxRegistrationNumberType to be of type string, got %T instead", value)
+				}
+				sv.TaxRegistrationNumberType = types.PolandTaxRegistrationNumberType(jtv)
 			}
 
 		default:

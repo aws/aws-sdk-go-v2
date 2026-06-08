@@ -48,6 +48,9 @@ type SendMessageInput struct {
 	// This member is required.
 	ExecutionId *string
 
+	// Optional list of asset identifiers to attach to the message
+	AssetIds []string
+
 	// Optional context for the message
 	Context *types.SendMessageContext
 

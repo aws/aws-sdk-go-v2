@@ -676,6 +676,11 @@ func validateCentralizationRuleDestination(v *types.CentralizationRuleDestinatio
 			invalidParams.AddNested("DestinationLogsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DestinationMetricsConfiguration != nil {
+		if err := validateDestinationMetricsConfiguration(v.DestinationMetricsConfiguration); err != nil {
+			invalidParams.AddNested("DestinationMetricsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -740,6 +745,23 @@ func validateDestinationLogsConfiguration(v *types.DestinationLogsConfiguration)
 	if v.LogGroupNameConfiguration != nil {
 		if err := validateLogGroupNameConfiguration(v.LogGroupNameConfiguration); err != nil {
 			invalidParams.AddNested("LogGroupNameConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationMetricsConfiguration(v *types.DestinationMetricsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationMetricsConfiguration"}
+	if v.BackupConfiguration != nil {
+		if err := validateMetricsBackupConfiguration(v.BackupConfiguration); err != nil {
+			invalidParams.AddNested("BackupConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -818,6 +840,21 @@ func validateLogsEncryptionConfiguration(v *types.LogsEncryptionConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "LogsEncryptionConfiguration"}
 	if len(v.EncryptionStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsBackupConfiguration(v *types.MetricsBackupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsBackupConfiguration"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -116,6 +116,22 @@ type CreateDashManifestConfiguration struct {
 	// This member is required.
 	ManifestName *string
 
+	// How MediaPackage represents the audio timeline in the DASH manifest. This
+	// setting applies DASH Segment Duration Patternization, as defined in the
+	// MPEG-DASH specification, to audio adaptation sets. When set to PATTERNED ,
+	// MediaPackage uses a pattern-based segment template for audio, which reduces
+	// manifest size by expressing repeating segment durations as a pattern instead of
+	// listing each segment individually. When set to NONE , the manifest contains an
+	// explicit timeline that lists each audio segment.
+	//
+	// Valid values: NONE | PATTERNED
+	//
+	// For information about audio timeline patterns, see [DASH audio timeline pattern] in the Elemental
+	// MediaPackage v2 User Guide.
+	//
+	// [DASH audio timeline pattern]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-audio-timeline-pattern.html
+	AudioTimelinePattern DashAudioTimelinePattern
+
 	// The configuration for the DASH availabilityStartTime attribute of the Media
 	// Presentation Description (MPD). If you don't specify a value, MediaPackage uses
 	// the default availability start time of 2024-01-01T00:00:00Z .
@@ -756,6 +772,13 @@ type GetDashManifestConfiguration struct {
 	//
 	// This member is required.
 	Url *string
+
+	// How MediaPackage represents the audio timeline in the DASH manifest, using DASH
+	// Segment Duration Patternization for audio adaptation sets. PATTERNED indicates
+	// that MediaPackage uses a pattern-based segment template for audio, reducing
+	// manifest size. NONE indicates that the manifest contains an explicit timeline
+	// for each audio segment.
+	AudioTimelinePattern DashAudioTimelinePattern
 
 	// The configuration for the DASH availabilityStartTime attribute of the Media
 	// Presentation Description (MPD).
