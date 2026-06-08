@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the hours of operation for the specified Amazon
-// Connect instance.
+// Provides information about the hours of operation for the specified Connect
+// Customer instance.
 //
-// For more information about hours of operation, see [Set the Hours of Operation for a Queue] in the Amazon Connect
+// For more information about hours of operation, see [Set the Hours of Operation for a Queue] in the Connect Customer
 // Administrator Guide.
 //
 // [Set the Hours of Operation for a Queue]: https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html
@@ -35,8 +35,8 @@ func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfO
 
 type ListHoursOfOperationsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

@@ -1024,6 +1024,7 @@ const (
 	UpdateParamTypeRemoteNetworkConfig              UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection               UpdateParamType = "DeletionProtection"
 	UpdateParamTypeNodeRepairConfig                 UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
 	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
 	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
 	UpdateParamTypeWarmPoolEnabled                  UpdateParamType = "WarmPoolEnabled"
@@ -1077,6 +1078,7 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
 		"WarmPoolEnabled",

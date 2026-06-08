@@ -103,6 +103,31 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type CustomAdType string
+
+// Enum values for CustomAdType
+const (
+	CustomAdTypeProgram                     CustomAdType = "PROGRAM"
+	CustomAdTypeChapter                     CustomAdType = "CHAPTER"
+	CustomAdTypeUnscheduledEvent            CustomAdType = "UNSCHEDULED_EVENT"
+	CustomAdTypeAlternateContentOpportunity CustomAdType = "ALTERNATE_CONTENT_OPPORTUNITY"
+	CustomAdTypeNetwork                     CustomAdType = "NETWORK"
+)
+
+// Values returns all known values for CustomAdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomAdType) Values() []CustomAdType {
+	return []CustomAdType{
+		"PROGRAM",
+		"CHAPTER",
+		"UNSCHEDULED_EVENT",
+		"ALTERNATE_CONTENT_OPPORTUNITY",
+		"NETWORK",
+	}
+}
+
 type DashCompactness string
 
 // Enum values for DashCompactness
@@ -466,6 +491,14 @@ const (
 	ScteFilterProviderOverlayPlacementOpportunity    ScteFilter = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
 	ScteFilterDistributorOverlayPlacementOpportunity ScteFilter = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
 	ScteFilterProgram                                ScteFilter = "PROGRAM"
+	ScteFilterChapter                                ScteFilter = "CHAPTER"
+	ScteFilterUnscheduledEvent                       ScteFilter = "UNSCHEDULED_EVENT"
+	ScteFilterAlternateContentOpportunity            ScteFilter = "ALTERNATE_CONTENT_OPPORTUNITY"
+	ScteFilterNetwork                                ScteFilter = "NETWORK"
+	ScteFilterProviderPromo                          ScteFilter = "PROVIDER_PROMO"
+	ScteFilterDistributorPromo                       ScteFilter = "DISTRIBUTOR_PROMO"
+	ScteFilterProviderAdBlock                        ScteFilter = "PROVIDER_AD_BLOCK"
+	ScteFilterDistributorAdBlock                     ScteFilter = "DISTRIBUTOR_AD_BLOCK"
 )
 
 // Values returns all known values for ScteFilter. Note that this can be expanded
@@ -483,6 +516,33 @@ func (ScteFilter) Values() []ScteFilter {
 		"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
 		"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
 		"PROGRAM",
+		"CHAPTER",
+		"UNSCHEDULED_EVENT",
+		"ALTERNATE_CONTENT_OPPORTUNITY",
+		"NETWORK",
+		"PROVIDER_PROMO",
+		"DISTRIBUTOR_PROMO",
+		"PROVIDER_AD_BLOCK",
+		"DISTRIBUTOR_AD_BLOCK",
+	}
+}
+
+type ScteInManifests string
+
+// Enum values for ScteInManifests
+const (
+	ScteInManifestsAll           ScteInManifests = "ALL"
+	ScteInManifestsMatchesFilter ScteInManifests = "MATCHES_FILTER"
+)
+
+// Values returns all known values for ScteInManifests. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScteInManifests) Values() []ScteInManifests {
+	return []ScteInManifests{
+		"ALL",
+		"MATCHES_FILTER",
 	}
 }
 
@@ -490,8 +550,9 @@ type ScteInSegments string
 
 // Enum values for ScteInSegments
 const (
-	ScteInSegmentsNone ScteInSegments = "NONE"
-	ScteInSegmentsAll  ScteInSegments = "ALL"
+	ScteInSegmentsNone          ScteInSegments = "NONE"
+	ScteInSegmentsAll           ScteInSegments = "ALL"
+	ScteInSegmentsMatchesFilter ScteInSegments = "MATCHES_FILTER"
 )
 
 // Values returns all known values for ScteInSegments. Note that this can be
@@ -502,6 +563,7 @@ func (ScteInSegments) Values() []ScteInSegments {
 	return []ScteInSegments{
 		"NONE",
 		"ALL",
+		"MATCHES_FILTER",
 	}
 }
 
@@ -521,6 +583,44 @@ func (TsEncryptionMethod) Values() []TsEncryptionMethod {
 	return []TsEncryptionMethod{
 		"AES_128",
 		"SAMPLE_AES",
+	}
+}
+
+type UriPathType string
+
+// Enum values for UriPathType
+const (
+	UriPathTypeLeaf UriPathType = "LEAF"
+	UriPathTypeRoot UriPathType = "ROOT"
+)
+
+// Values returns all known values for UriPathType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UriPathType) Values() []UriPathType {
+	return []UriPathType{
+		"LEAF",
+		"ROOT",
+	}
+}
+
+type UriSeparator string
+
+// Enum values for UriSeparator
+const (
+	UriSeparatorUnderscore UriSeparator = "UNDERSCORE"
+	UriSeparatorHyphen     UriSeparator = "HYPHEN"
+)
+
+// Values returns all known values for UriSeparator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UriSeparator) Values() []UriSeparator {
+	return []UriSeparator{
+		"UNDERSCORE",
+		"HYPHEN",
 	}
 }
 
@@ -626,6 +726,8 @@ const (
 	ValidationExceptionTypeInvalidCertificateSignatureAlgorithm                   ValidationExceptionType = "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM"
 	ValidationExceptionTypeMissingCertificateDomainName                           ValidationExceptionType = "MISSING_CERTIFICATE_DOMAIN_NAME"
 	ValidationExceptionTypeInvalidArn                                             ValidationExceptionType = "INVALID_ARN"
+	ValidationExceptionTypeScteInManifestsInvalidConfiguration                    ValidationExceptionType = "SCTE_IN_MANIFESTS_INVALID_CONFIGURATION"
+	ValidationExceptionTypeCustomAdTypesInvalidConfiguration                      ValidationExceptionType = "CUSTOM_AD_TYPES_INVALID_CONFIGURATION"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -732,5 +834,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"INVALID_CERTIFICATE_SIGNATURE_ALGORITHM",
 		"MISSING_CERTIFICATE_DOMAIN_NAME",
 		"INVALID_ARN",
+		"SCTE_IN_MANIFESTS_INVALID_CONFIGURATION",
+		"CUSTOM_AD_TYPES_INVALID_CONFIGURATION",
 	}
 }

@@ -2367,6 +2367,11 @@ func awsRestjson1_serializeDocumentImageConfigurationInput(v *types.ImageConfigu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplicationLevelDigestResolution != nil {
+		ok := object.Key("applicationLevelDigestResolution")
+		ok.Boolean(*v.ApplicationLevelDigestResolution)
+	}
+
 	if v.ImageUri != nil {
 		ok := object.Key("imageUri")
 		ok.String(*v.ImageUri)

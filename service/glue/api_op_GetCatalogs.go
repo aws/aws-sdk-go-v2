@@ -31,6 +31,13 @@ func (c *Client) GetCatalogs(ctx context.Context, params *GetCatalogsInput, optF
 
 type GetCatalogsInput struct {
 
+	// When true , the response only includes catalogs that can contain databases. Some
+	// catalogs are organizational containers that hold only other catalogs, not
+	// databases. When this parameter is set to true , those container-only catalogs
+	// are excluded, and only catalogs capable of containing databases are returned.
+	// Defaults to false .
+	HasDatabases *bool
+
 	// Whether to list the default catalog in the account and region in the response.
 	// Defaults to false . When true and ParentCatalogId = NULL | Amazon Web Services
 	// Account ID , all catalogs and the default catalog are enumerated in the response.

@@ -12,12 +12,12 @@ import (
 )
 
 // Send outbound email for outbound campaigns. For more information about outbound
-// campaigns, see [Set up Amazon Connect outbound campaigns].
+// campaigns, see [Set up Connect Customer outbound campaigns].
 //
-// Only the Amazon Connect outbound campaigns service principal is allowed to
+// Only the Connect Customer outbound campaigns service principal is allowed to
 // assume a role in your account and call this API.
 //
-// [Set up Amazon Connect outbound campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html
+// [Set up Connect Customer outbound campaigns]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html
 func (c *Client) SendOutboundEmail(ctx context.Context, params *SendOutboundEmailInput, optFns ...func(*Options)) (*SendOutboundEmailOutput, error) {
 	if params == nil {
 		params = &SendOutboundEmailInput{}
@@ -50,8 +50,8 @@ type SendOutboundEmailInput struct {
 	// This member is required.
 	FromEmailAddress *types.EmailAddressInfo
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

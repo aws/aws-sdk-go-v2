@@ -25,6 +25,8 @@ import (
 // successful.
 //
 // This operation requires permission for the lex:DeleteSlotType action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput, optFns ...func(*Options)) (*DeleteSlotTypeOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeInput{}

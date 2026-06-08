@@ -2,6 +2,27 @@
 
 package types
 
+type ActorTokenContentType string
+
+// Enum values for ActorTokenContentType
+const (
+	ActorTokenContentTypeNone             ActorTokenContentType = "NONE"
+	ActorTokenContentTypeM2m              ActorTokenContentType = "M2M"
+	ActorTokenContentTypeAwsIamIdTokenJwt ActorTokenContentType = "AWS_IAM_ID_TOKEN_JWT"
+)
+
+// Values returns all known values for ActorTokenContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActorTokenContentType) Values() []ActorTokenContentType {
+	return []ActorTokenContentType{
+		"NONE",
+		"M2M",
+		"AWS_IAM_ID_TOKEN_JWT",
+	}
+}
+
 type AgentManagedRuntimeType string
 
 // Enum values for AgentManagedRuntimeType
@@ -11,6 +32,7 @@ const (
 	AgentManagedRuntimeTypePython312 AgentManagedRuntimeType = "PYTHON_3_12"
 	AgentManagedRuntimeTypePython313 AgentManagedRuntimeType = "PYTHON_3_13"
 	AgentManagedRuntimeTypePython314 AgentManagedRuntimeType = "PYTHON_3_14"
+	AgentManagedRuntimeTypeNode22    AgentManagedRuntimeType = "NODE_22"
 )
 
 // Values returns all known values for AgentManagedRuntimeType. Note that this can
@@ -24,6 +46,7 @@ func (AgentManagedRuntimeType) Values() []AgentManagedRuntimeType {
 		"PYTHON_3_12",
 		"PYTHON_3_13",
 		"PYTHON_3_14",
+		"NODE_22",
 	}
 }
 
@@ -104,9 +127,10 @@ type AuthorizerType string
 
 // Enum values for AuthorizerType
 const (
-	AuthorizerTypeCustomJwt AuthorizerType = "CUSTOM_JWT"
-	AuthorizerTypeAwsIam    AuthorizerType = "AWS_IAM"
-	AuthorizerTypeNone      AuthorizerType = "NONE"
+	AuthorizerTypeCustomJwt        AuthorizerType = "CUSTOM_JWT"
+	AuthorizerTypeAwsIam           AuthorizerType = "AWS_IAM"
+	AuthorizerTypeNone             AuthorizerType = "NONE"
+	AuthorizerTypeAuthenticateOnly AuthorizerType = "AUTHENTICATE_ONLY"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -118,6 +142,7 @@ func (AuthorizerType) Values() []AuthorizerType {
 		"CUSTOM_JWT",
 		"AWS_IAM",
 		"NONE",
+		"AUTHENTICATE_ONLY",
 	}
 }
 
@@ -230,6 +255,28 @@ func (ClaimMatchOperatorType) Values() []ClaimMatchOperatorType {
 	}
 }
 
+type ClientAuthenticationMethodType string
+
+// Enum values for ClientAuthenticationMethodType
+const (
+	ClientAuthenticationMethodTypeClientSecretBasic ClientAuthenticationMethodType = "CLIENT_SECRET_BASIC"
+	ClientAuthenticationMethodTypeClientSecretPost  ClientAuthenticationMethodType = "CLIENT_SECRET_POST"
+	ClientAuthenticationMethodTypeAwsIamIdTokenJwt  ClientAuthenticationMethodType = "AWS_IAM_ID_TOKEN_JWT"
+)
+
+// Values returns all known values for ClientAuthenticationMethodType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientAuthenticationMethodType) Values() []ClientAuthenticationMethodType {
+	return []ClientAuthenticationMethodType{
+		"CLIENT_SECRET_BASIC",
+		"CLIENT_SECRET_POST",
+		"AWS_IAM_ID_TOKEN_JWT",
+	}
+}
+
 type CodeInterpreterNetworkMode string
 
 // Enum values for CodeInterpreterNetworkMode
@@ -278,6 +325,35 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 	}
 }
 
+type ConfigurationBundleStatus string
+
+// Enum values for ConfigurationBundleStatus
+const (
+	ConfigurationBundleStatusActive       ConfigurationBundleStatus = "ACTIVE"
+	ConfigurationBundleStatusCreating     ConfigurationBundleStatus = "CREATING"
+	ConfigurationBundleStatusCreateFailed ConfigurationBundleStatus = "CREATE_FAILED"
+	ConfigurationBundleStatusUpdating     ConfigurationBundleStatus = "UPDATING"
+	ConfigurationBundleStatusUpdateFailed ConfigurationBundleStatus = "UPDATE_FAILED"
+	ConfigurationBundleStatusDeleting     ConfigurationBundleStatus = "DELETING"
+	ConfigurationBundleStatusDeleteFailed ConfigurationBundleStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ConfigurationBundleStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationBundleStatus) Values() []ConfigurationBundleStatus {
+	return []ConfigurationBundleStatus{
+		"ACTIVE",
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
 type ContentLevel string
 
 // Enum values for ContentLevel
@@ -318,9 +394,11 @@ type CredentialProviderType string
 
 // Enum values for CredentialProviderType
 const (
-	CredentialProviderTypeGatewayIamRole CredentialProviderType = "GATEWAY_IAM_ROLE"
-	CredentialProviderTypeOauth          CredentialProviderType = "OAUTH"
-	CredentialProviderTypeApiKey         CredentialProviderType = "API_KEY"
+	CredentialProviderTypeGatewayIamRole       CredentialProviderType = "GATEWAY_IAM_ROLE"
+	CredentialProviderTypeOauth                CredentialProviderType = "OAUTH"
+	CredentialProviderTypeApiKey               CredentialProviderType = "API_KEY"
+	CredentialProviderTypeCallerIamCredentials CredentialProviderType = "CALLER_IAM_CREDENTIALS"
+	CredentialProviderTypeJwtPassthrough       CredentialProviderType = "JWT_PASSTHROUGH"
 )
 
 // Values returns all known values for CredentialProviderType. Note that this can
@@ -332,6 +410,8 @@ func (CredentialProviderType) Values() []CredentialProviderType {
 		"GATEWAY_IAM_ROLE",
 		"OAUTH",
 		"API_KEY",
+		"CALLER_IAM_CREDENTIALS",
+		"JWT_PASSTHROUGH",
 	}
 }
 
@@ -401,6 +481,78 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 	}
 }
 
+type DatasetSchemaType string
+
+// Enum values for DatasetSchemaType
+const (
+	// AgentCore predefined evaluation schema, version 1. Dataset with pre-written
+	// inputs per conversation turn. Required: input. Optional: expectedResponse,
+	// assertions, expectedTrajectory.
+	DatasetSchemaTypeAgentcoreEvaluationPredefinedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_PREDEFINED_V1"
+	// AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
+	// generation. Each example is a Scenario that a simulator uses to generate full
+	// conversations. Required: input. Optional: name (→exampleId), actor_profile,
+	// max_turns, assertions.
+	DatasetSchemaTypeAgentcoreEvaluationSimulatedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_SIMULATED_V1"
+)
+
+// Values returns all known values for DatasetSchemaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetSchemaType) Values() []DatasetSchemaType {
+	return []DatasetSchemaType{
+		"AGENTCORE_EVALUATION_PREDEFINED_V1",
+		"AGENTCORE_EVALUATION_SIMULATED_V1",
+	}
+}
+
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	// CreateDataset async ingestion in progress. All writes are blocked. Poll
+	// GetDataset until status resolves to ACTIVE or CREATE_FAILED.
+	DatasetStatusCreating DatasetStatus = "CREATING"
+	// An async example mutation or CreateDatasetVersion is in progress. All writes
+	// are blocked. Poll GetDataset until status resolves.
+	DatasetStatusUpdating DatasetStatus = "UPDATING"
+	// Full or version-specific delete is in progress. Read operations (GetDataset,
+	// ListDatasetExamples) are still allowed.
+	DatasetStatusDeleting DatasetStatus = "DELETING"
+	// Dataset is stable. All operations are allowed per per-operation guards.
+	// failureReason is cleared.
+	DatasetStatusActive DatasetStatus = "ACTIVE"
+	// Initial ingestion failed. DRAFT record exists but contains no examples.
+	// failureReason is populated. AddDatasetExamples and DeleteDatasetExamples
+	// allowed. UpdateDatasetExamples and CreateDatasetVersion blocked (no examples
+	// exist).
+	DatasetStatusCreateFailed DatasetStatus = "CREATE_FAILED"
+	// Last example mutation or CreateDatasetVersion failed. DRAFT may be partially
+	// modified. failureReason is populated. All example mutations and
+	// CreateDatasetVersion allowed for retry.
+	DatasetStatusUpdateFailed DatasetStatus = "UPDATE_FAILED"
+	// Delete failed after retries. Dataset record/S3 may be in inconsistent state.
+	// failureReason is populated. Only DeleteDataset (retry) is allowed.
+	DatasetStatusDeleteFailed DatasetStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
 type DescriptorType string
 
 // Enum values for DescriptorType
@@ -421,6 +573,29 @@ func (DescriptorType) Values() []DescriptorType {
 		"A2A",
 		"CUSTOM",
 		"AGENT_SKILLS",
+	}
+}
+
+type DraftStatus string
+
+// Enum values for DraftStatus
+const (
+	// DRAFT has changes not yet reflected in any published version, or no versions
+	// have been published yet.
+	DraftStatusModified DraftStatus = "MODIFIED"
+	// DRAFT content matches the latest published version exactly. Any example
+	// mutation transitions draftStatus back to MODIFIED.
+	DraftStatusUnmodified DraftStatus = "UNMODIFIED"
+)
+
+// Values returns all known values for DraftStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DraftStatus) Values() []DraftStatus {
+	return []DraftStatus{
+		"MODIFIED",
+		"UNMODIFIED",
 	}
 }
 
@@ -644,6 +819,29 @@ func (GatewayProtocolType) Values() []GatewayProtocolType {
 	}
 }
 
+type GatewayRuleStatus string
+
+// Enum values for GatewayRuleStatus
+const (
+	GatewayRuleStatusCreating GatewayRuleStatus = "CREATING"
+	GatewayRuleStatusActive   GatewayRuleStatus = "ACTIVE"
+	GatewayRuleStatusUpdating GatewayRuleStatus = "UPDATING"
+	GatewayRuleStatusDeleting GatewayRuleStatus = "DELETING"
+)
+
+// Values returns all known values for GatewayRuleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRuleStatus) Values() []GatewayRuleStatus {
+	return []GatewayRuleStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type GatewayStatus string
 
 // Enum values for GatewayStatus
@@ -668,6 +866,51 @@ func (GatewayStatus) Values() []GatewayStatus {
 		"DELETING",
 		"READY",
 		"FAILED",
+	}
+}
+
+type HarnessBedrockApiFormat string
+
+// Enum values for HarnessBedrockApiFormat
+const (
+	// Use the Bedrock Converse Stream API format.
+	HarnessBedrockApiFormatConverseStream HarnessBedrockApiFormat = "converse_stream"
+	// Use the Responses API format.
+	HarnessBedrockApiFormatResponses HarnessBedrockApiFormat = "responses"
+	// Use the Chat Completions API format.
+	HarnessBedrockApiFormatChatCompletions HarnessBedrockApiFormat = "chat_completions"
+)
+
+// Values returns all known values for HarnessBedrockApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessBedrockApiFormat) Values() []HarnessBedrockApiFormat {
+	return []HarnessBedrockApiFormat{
+		"converse_stream",
+		"responses",
+		"chat_completions",
+	}
+}
+
+type HarnessOpenAiApiFormat string
+
+// Enum values for HarnessOpenAiApiFormat
+const (
+	// Use the Chat Completions API format.
+	HarnessOpenAiApiFormatChatCompletions HarnessOpenAiApiFormat = "chat_completions"
+	// Use the Responses API format.
+	HarnessOpenAiApiFormatResponses HarnessOpenAiApiFormat = "responses"
+)
+
+// Values returns all known values for HarnessOpenAiApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessOpenAiApiFormat) Values() []HarnessOpenAiApiFormat {
+	return []HarnessOpenAiApiFormat{
+		"chat_completions",
+		"responses",
 	}
 }
 
@@ -762,6 +1005,25 @@ func (InboundTokenClaimValueType) Values() []InboundTokenClaimValueType {
 	return []InboundTokenClaimValueType{
 		"STRING",
 		"STRING_ARRAY",
+	}
+}
+
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "ALL_DATA"
+	IncludedDataMetadataOnly IncludedData = "METADATA_ONLY"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"ALL_DATA",
+		"METADATA_ONLY",
 	}
 }
 
@@ -893,6 +1155,27 @@ func (MemoryView) Values() []MemoryView {
 	}
 }
 
+type MetadataValueType string
+
+// Enum values for MetadataValueType
+const (
+	MetadataValueTypeString     MetadataValueType = "STRING"
+	MetadataValueTypeStringlist MetadataValueType = "STRINGLIST"
+	MetadataValueTypeNumber     MetadataValueType = "NUMBER"
+)
+
+// Values returns all known values for MetadataValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataValueType) Values() []MetadataValueType {
+	return []MetadataValueType{
+		"STRING",
+		"STRINGLIST",
+		"NUMBER",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
@@ -918,6 +1201,7 @@ type OAuthGrantType string
 const (
 	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
 	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+	OAuthGrantTypeTokenExchange     OAuthGrantType = "TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for OAuthGrantType. Note that this can be
@@ -928,6 +1212,30 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 	return []OAuthGrantType{
 		"CLIENT_CREDENTIALS",
 		"AUTHORIZATION_CODE",
+		"TOKEN_EXCHANGE",
+	}
+}
+
+type OnBehalfOfTokenExchangeGrantTypeType string
+
+// Enum values for OnBehalfOfTokenExchangeGrantTypeType
+const (
+	// RFC 8693 token exchange, adopted by the majority of identity providers
+	// supporting on-behalf-of flows.
+	OnBehalfOfTokenExchangeGrantTypeTypeTokenExchange OnBehalfOfTokenExchangeGrantTypeType = "TOKEN_EXCHANGE"
+	// RFC 7523 JWT authorization grant, adopted by Microsoft Entra ID.
+	OnBehalfOfTokenExchangeGrantTypeTypeJwtAuthorizationGrant OnBehalfOfTokenExchangeGrantTypeType = "JWT_AUTHORIZATION_GRANT"
+)
+
+// Values returns all known values for OnBehalfOfTokenExchangeGrantTypeType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnBehalfOfTokenExchangeGrantTypeType) Values() []OnBehalfOfTokenExchangeGrantTypeType {
+	return []OnBehalfOfTokenExchangeGrantTypeType{
+		"TOKEN_EXCHANGE",
+		"JWT_AUTHORIZATION_GRANT",
 	}
 }
 
@@ -1003,6 +1311,124 @@ func (OverrideType) Values() []OverrideType {
 		"USER_PREFERENCE_OVERRIDE",
 		"SELF_MANAGED",
 		"EPISODIC_OVERRIDE",
+	}
+}
+
+type PaymentConnectorStatus string
+
+// Enum values for PaymentConnectorStatus
+const (
+	PaymentConnectorStatusCreating     PaymentConnectorStatus = "CREATING"
+	PaymentConnectorStatusUpdating     PaymentConnectorStatus = "UPDATING"
+	PaymentConnectorStatusDeleting     PaymentConnectorStatus = "DELETING"
+	PaymentConnectorStatusReady        PaymentConnectorStatus = "READY"
+	PaymentConnectorStatusCreateFailed PaymentConnectorStatus = "CREATE_FAILED"
+	PaymentConnectorStatusUpdateFailed PaymentConnectorStatus = "UPDATE_FAILED"
+	PaymentConnectorStatusDeleteFailed PaymentConnectorStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PaymentConnectorStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentConnectorStatus) Values() []PaymentConnectorStatus {
+	return []PaymentConnectorStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"READY",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PaymentConnectorType string
+
+// Enum values for PaymentConnectorType
+const (
+	PaymentConnectorTypeCoinbaseCdp PaymentConnectorType = "CoinbaseCDP"
+	PaymentConnectorTypeStripePrivy PaymentConnectorType = "StripePrivy"
+)
+
+// Values returns all known values for PaymentConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentConnectorType) Values() []PaymentConnectorType {
+	return []PaymentConnectorType{
+		"CoinbaseCDP",
+		"StripePrivy",
+	}
+}
+
+type PaymentCredentialProviderVendorType string
+
+// Enum values for PaymentCredentialProviderVendorType
+const (
+	// Coinbase Developer Platform.
+	PaymentCredentialProviderVendorTypeCoinbaseCDP PaymentCredentialProviderVendorType = "CoinbaseCDP"
+	// Stripe and Privy.
+	PaymentCredentialProviderVendorTypeStripePrivy PaymentCredentialProviderVendorType = "StripePrivy"
+)
+
+// Values returns all known values for PaymentCredentialProviderVendorType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentCredentialProviderVendorType) Values() []PaymentCredentialProviderVendorType {
+	return []PaymentCredentialProviderVendorType{
+		"CoinbaseCDP",
+		"StripePrivy",
+	}
+}
+
+type PaymentManagerStatus string
+
+// Enum values for PaymentManagerStatus
+const (
+	PaymentManagerStatusCreating     PaymentManagerStatus = "CREATING"
+	PaymentManagerStatusUpdating     PaymentManagerStatus = "UPDATING"
+	PaymentManagerStatusDeleting     PaymentManagerStatus = "DELETING"
+	PaymentManagerStatusReady        PaymentManagerStatus = "READY"
+	PaymentManagerStatusCreateFailed PaymentManagerStatus = "CREATE_FAILED"
+	PaymentManagerStatusUpdateFailed PaymentManagerStatus = "UPDATE_FAILED"
+	PaymentManagerStatusDeleteFailed PaymentManagerStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PaymentManagerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentManagerStatus) Values() []PaymentManagerStatus {
+	return []PaymentManagerStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"READY",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type PaymentsAuthorizerType string
+
+// Enum values for PaymentsAuthorizerType
+const (
+	PaymentsAuthorizerTypeCustomJwt PaymentsAuthorizerType = "CUSTOM_JWT"
+	PaymentsAuthorizerTypeAwsIam    PaymentsAuthorizerType = "AWS_IAM"
+)
+
+// Values returns all known values for PaymentsAuthorizerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentsAuthorizerType) Values() []PaymentsAuthorizerType {
+	return []PaymentsAuthorizerType{
+		"CUSTOM_JWT",
+		"AWS_IAM",
 	}
 }
 
@@ -1103,6 +1529,25 @@ func (PolicyValidationMode) Values() []PolicyValidationMode {
 	return []PolicyValidationMode{
 		"FAIL_ON_ANY_FINDINGS",
 		"IGNORE_ALL_FINDINGS",
+	}
+}
+
+type PrincipalMatchOperator string
+
+// Enum values for PrincipalMatchOperator
+const (
+	PrincipalMatchOperatorStringEquals PrincipalMatchOperator = "StringEquals"
+	PrincipalMatchOperatorStringLike   PrincipalMatchOperator = "StringLike"
+)
+
+// Values returns all known values for PrincipalMatchOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalMatchOperator) Values() []PrincipalMatchOperator {
+	return []PrincipalMatchOperator{
+		"StringEquals",
+		"StringLike",
 	}
 }
 
@@ -1317,6 +1762,25 @@ func (SearchType) Values() []SearchType {
 	}
 }
 
+type SecretSourceType string
+
+// Enum values for SecretSourceType
+const (
+	SecretSourceTypeManaged  SecretSourceType = "MANAGED"
+	SecretSourceTypeExternal SecretSourceType = "EXTERNAL"
+)
+
+// Values returns all known values for SecretSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecretSourceType) Values() []SecretSourceType {
+	return []SecretSourceType{
+		"MANAGED",
+		"EXTERNAL",
+	}
+}
+
 type ServerProtocol string
 
 // Enum values for ServerProtocol
@@ -1340,6 +1804,35 @@ func (ServerProtocol) Values() []ServerProtocol {
 	}
 }
 
+type Status string
+
+// Enum values for Status
+const (
+	StatusCreating     Status = "CREATING"
+	StatusCreateFailed Status = "CREATE_FAILED"
+	StatusUpdating     Status = "UPDATING"
+	StatusUpdateFailed Status = "UPDATE_FAILED"
+	StatusReady        Status = "READY"
+	StatusDeleting     Status = "DELETING"
+	StatusDeleteFailed Status = "DELETE_FAILED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
 type SynchronizationType string
 
 // Enum values for SynchronizationType
@@ -1354,6 +1847,25 @@ const (
 func (SynchronizationType) Values() []SynchronizationType {
 	return []SynchronizationType{
 		"URL",
+	}
+}
+
+type TargetProtocolType string
+
+// Enum values for TargetProtocolType
+const (
+	TargetProtocolTypeMcp  TargetProtocolType = "MCP"
+	TargetProtocolTypeHttp TargetProtocolType = "HTTP"
+)
+
+// Values returns all known values for TargetProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetProtocolType) Values() []TargetProtocolType {
+	return []TargetProtocolType{
+		"MCP",
+		"HTTP",
 	}
 }
 

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,34 @@ type ConstantAndVariableQueryStringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConstantAndVariableQueryStringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConstantAndVariableQueryStringInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConstantAndVariableQueryStringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Baz != nil {
+		s.WriteString(schemas.ConstantAndVariableQueryStringInput_baz, *v.Baz)
+	}
+	if v.MaybeSet != nil {
+		s.WriteString(schemas.ConstantAndVariableQueryStringInput_maybeSet, *v.MaybeSet)
+	}
+}
+func (v *ConstantAndVariableQueryStringInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConstantAndVariableQueryStringInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConstantAndVariableQueryStringInput_baz:
+			v.Baz = new(string)
+			return d.ReadString(schemas.ConstantAndVariableQueryStringInput_baz, v.Baz)
+		case schemas.ConstantAndVariableQueryStringInput_maybeSet:
+			v.MaybeSet = new(string)
+			return d.ReadString(schemas.ConstantAndVariableQueryStringInput_maybeSet, v.MaybeSet)
+		}
+		return nil
+	})
+}
+
 type ConstantAndVariableQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +73,29 @@ type ConstantAndVariableQueryStringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConstantAndVariableQueryStringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConstantAndVariableQueryStringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ConstantAndVariableQueryStringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpConstantAndVariableQueryString{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConstantAndVariableQueryString, schemas.ConstantAndVariableQueryStringInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpConstantAndVariableQueryString{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConstantAndVariableQueryString, schemas.ConstantAndVariableQueryStringInput, nil), output: &ConstantAndVariableQueryStringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ConstantAndVariableQueryString"); err != nil {

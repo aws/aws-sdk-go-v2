@@ -66,6 +66,15 @@ type CreateEvaluatorInput struct {
 	// criteria.
 	Description *string
 
+	//  The Amazon Resource Name (ARN) of a customer managed KMS key to use for
+	// encrypting sensitive evaluator data, including instructions and rating scale. If
+	// you don't specify a KMS key, the evaluator data is encrypted with an Amazon Web
+	// Services owned key. Only symmetric encryption KMS keys are supported. For more
+	// information, see [Encryption at rest for AgentCore Evaluations].
+	//
+	// [Encryption at rest for AgentCore Evaluations]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html
+	KmsKeyArn *string
+
 	// A map of tag keys and values to assign to an AgentCore Evaluator. Tags enable
 	// you to categorize your resources in different ways, for example, by purpose,
 	// owner, or environment.

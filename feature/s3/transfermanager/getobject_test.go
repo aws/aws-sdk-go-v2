@@ -29,6 +29,7 @@ func TestGetObject(t *testing.T) {
 		errReaders        []s3testing.TestErrReader
 		getObjectFn       func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		optFn             func(*Options)
+		rng               string
 		versionID         string
 		checksumType      s3types.ChecksumType
 		expectInvocations int
@@ -51,6 +52,38 @@ func TestGetObject(t *testing.T) {
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
 			expectETags:       []string{etag, etag, etag},
+		},
+		"range download a limited range in single chunk": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:               "bytes=2-8388609",
+			expectInvocations: 1,
+			expectRanges:      []string{"bytes=2-8388609"},
+			expectETags:       []string{etag},
+		},
+		"range download a limited range sequentially in multiple chunks": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+				o.Concurrency = 1
+			},
+			rng:               "bytes=2-16777218",
+			expectInvocations: 3,
+			expectRanges:      []string{"bytes=2-8388609", "bytes=8388610-16777217", "bytes=16777218-16777218"},
+			expectETags:       []string{etag, etag, etag},
+		},
+		"range download a limited range with invalid range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:          "bytes=2--8388609",
+			expectGetErr: "invalid range format",
 		},
 		"range download zero": {
 			data:        []byte{},
@@ -288,6 +321,7 @@ func TestGetObject(t *testing.T) {
 			input := &GetObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
+				Range:  aws.String(c.rng),
 			}
 			input.VersionID = nzstring(c.versionID)
 

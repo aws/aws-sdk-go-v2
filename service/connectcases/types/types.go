@@ -472,6 +472,9 @@ type CompoundCondition struct {
 
 	// The list of conditions to combine using the logical operator.
 	//
+	// For API users: A case rule can have a maximum of 5 conditions, spread across a
+	// maximum of 2 levels of nesting.
+	//
 	// This member is required.
 	Conditions []BooleanCondition
 

@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"math"
 	"strconv"
 	"strings"
@@ -4753,7 +4752,7 @@ func (m *awsRestjson1_deserializeOpCreateTags) HandleDeserialize(ctx context.Con
 	output := &CreateTagsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5398,7 +5397,7 @@ func (m *awsRestjson1_deserializeOpDeleteCloudWatchAlarmTemplate) HandleDeserial
 	output := &DeleteCloudWatchAlarmTemplateOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5507,7 +5506,7 @@ func (m *awsRestjson1_deserializeOpDeleteCloudWatchAlarmTemplateGroup) HandleDes
 	output := &DeleteCloudWatchAlarmTemplateGroupOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5848,7 +5847,7 @@ func (m *awsRestjson1_deserializeOpDeleteEventBridgeRuleTemplate) HandleDeserial
 	output := &DeleteEventBridgeRuleTemplateOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5957,7 +5956,7 @@ func (m *awsRestjson1_deserializeOpDeleteEventBridgeRuleTemplateGroup) HandleDes
 	output := &DeleteEventBridgeRuleTemplateGroupOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7870,7 +7869,7 @@ func (m *awsRestjson1_deserializeOpDeleteSignalMap) HandleDeserialize(ctx contex
 	output := &DeleteSignalMapOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7979,7 +7978,7 @@ func (m *awsRestjson1_deserializeOpDeleteTags) HandleDeserialize(ctx context.Con
 	output := &DeleteTagsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -25482,6 +25481,40 @@ func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDe
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAudioFeedInput(v *[]types.AudioFeedInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioFeedInput
+	if *v == nil {
+		cv = []types.AudioFeedInput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioFeedInput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioFeedInput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioSelector(v *[]types.AudioSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29058,6 +29091,55 @@ func awsRestjson1_deserializeDocumentAudioDolbyEDecode(v **types.AudioDolbyEDeco
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioFeedInput(v **types.AudioFeedInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioFeedInput
+	if *v == nil {
+		sv = &types.AudioFeedInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioSelectorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioSelectorName = ptr.String(jtv)
+			}
+
+		case "feedInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FeedInput = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioHlsRenditionSelection(v **types.AudioHlsRenditionSelection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31324,6 +31406,11 @@ func awsRestjson1_deserializeDocumentCaptionSelectorSettings(v **types.CaptionSe
 				return err
 			}
 
+		case "smartSubtitleSourceSettings":
+			if err := awsRestjson1_deserializeDocumentSmartSubtitleSourceSettings(&sv.SmartSubtitleSourceSettings, value); err != nil {
+				return err
+			}
+
 		case "teletextSourceSettings":
 			if err := awsRestjson1_deserializeDocumentTeletextSourceSettings(&sv.TeletextSourceSettings, value); err != nil {
 				return err
@@ -33167,6 +33254,11 @@ func awsRestjson1_deserializeDocumentDescribeInferenceSettings(v **types.Describ
 
 	for key, value := range shape {
 		switch key {
+		case "audioFeedInputs":
+			if err := awsRestjson1_deserializeDocument__listOfAudioFeedInput(&sv.AudioFeedInputs, value); err != nil {
+				return err
+			}
+
 		case "feedArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -41771,6 +41863,46 @@ func awsRestjson1_deserializeDocumentMediaConnectRouterGroupSettings(v **types.M
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnection(v **types.MediaConnectRouterOutputConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterOutputConnection
+	if *v == nil {
+		sv = &types.MediaConnectRouterOutputConnection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "routerInputArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RouterInputArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(v **types.MediaConnectRouterOutputConnectionMap, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41817,6 +41949,41 @@ func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(v **t
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnections(v *map[string]types.MediaConnectRouterOutputConnection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.MediaConnectRouterOutputConnection
+	if *v == nil {
+		mv = map[string]types.MediaConnectRouterOutputConnection{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.MediaConnectRouterOutputConnection
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnection(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -46123,6 +46290,11 @@ func awsRestjson1_deserializeDocumentPipelineDetail(v **types.PipelineDetail, va
 				return err
 			}
 
+		case "mediaConnectRouterOutputConnectionMap":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnections(&sv.MediaConnectRouterOutputConnectionMap, value); err != nil {
+				return err
+			}
+
 		case "pipelineId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48522,6 +48694,55 @@ func awsRestjson1_deserializeDocumentSignalMapSummary(v **types.SignalMapSummary
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSmartSubtitleSourceSettings(v **types.SmartSubtitleSourceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SmartSubtitleSourceSettings
+	if *v == nil {
+		sv = &types.SmartSubtitleSourceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "captionSynchronizationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaptionSynchronizationMode to be of type string, got %T instead", value)
+				}
+				sv.CaptionSynchronizationMode = types.CaptionSynchronizationMode(jtv)
+			}
+
+		case "inferenceFeedOutput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.InferenceFeedOutput = ptr.String(jtv)
 			}
 
 		default:

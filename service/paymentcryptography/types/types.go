@@ -119,7 +119,8 @@ type ExportAttributes struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde
@@ -667,7 +668,8 @@ type Key struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	//
 	// This member is required.
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
@@ -697,6 +699,9 @@ type Key struct {
 	// The cryptographic usage of an ECDH derived key as deﬁned in section A.5.2 of
 	// the TR-31 spec.
 	DeriveKeyUsage DeriveKeyUsage
+
+	// The Multi-Party Approval (MPA) status for the key, if applicable.
+	MpaStatus *MpaStatus
 
 	// Indicates whether this key is a Multi-Region key and its role in the
 	// Multi-Region key hierarchy.
@@ -929,6 +934,54 @@ type KeySummary struct {
 	noSmithyDocumentSerde
 }
 
+// The status of an MPA session.
+type MpaStatus struct {
+
+	// The date and time when the MPA session was initiated.
+	//
+	// This member is required.
+	InitiationDate *time.Time
+
+	// The ARN of the MPA session.
+	//
+	// This member is required.
+	MpaSessionArn *string
+
+	// The current status of the MPA session.
+	//
+	// This member is required.
+	Status SessionStatus
+
+	// The message providing additional information about the MPA session status.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an MPA team association with a protected operation.
+type MpaTeamAssociation struct {
+
+	// The protected operation associated with the MPA team.
+	//
+	// This member is required.
+	Action MpaOperation
+
+	// The state of the MPA team association.
+	//
+	// This member is required.
+	AssociationState AssociationState
+
+	// The ARN of the MPA team.
+	//
+	// This member is required.
+	MpaTeamArn *string
+
+	// The MPA session status for the association, if applicable.
+	MpaStatus *MpaStatus
+
+	noSmithyDocumentSerde
+}
+
 // Represents the replication status information for a key in a replication region
 // for [Multi-Region key replication].
 //
@@ -1049,7 +1102,8 @@ type WrappedKey struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde

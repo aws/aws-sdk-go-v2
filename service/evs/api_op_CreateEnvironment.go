@@ -75,13 +75,18 @@ type CreateEnvironmentInput struct {
 
 	// The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// The VCF solution key must meet minimum core requirements, and the vSAN license
+	// key must meet minimum capacity requirements for your selected instance type.
+	//
+	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
+	// Guide.
 	//
 	// VCF licenses can be used for only one Amazon EVS environment. Amazon EVS does
 	// not support reuse of VCF licenses for multiple environments.
 	//
 	// VCF license information can be retrieved from the Broadcom portal.
+	//
+	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
 	//
 	// This member is required.
 	LicenseInfo []types.LicenseInfo

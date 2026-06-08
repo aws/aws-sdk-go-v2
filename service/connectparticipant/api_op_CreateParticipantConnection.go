@@ -13,9 +13,9 @@ import (
 
 // Creates the participant's connection.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
-// For WebRTC security recommendations, see [Amazon Connect WebRTC security best practices].
+// For WebRTC security recommendations, see [Connect Customer WebRTC security best practices].
 //
 // ParticipantToken is used for invoking this API instead of ConnectionToken .
 //
@@ -75,12 +75,12 @@ import (
 //
 // [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
 // [StartContactStreaming]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+// [Connect Customer WebRTC security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security
 // [CreateParticipant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html
-// [Amazon Connect WebRTC security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security
 // [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Enable multi-user web, in-app, and video calling]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
 		params = &CreateParticipantConnectionInput{}

@@ -754,6 +754,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
 	}
 
+	if v.RequestMetadata != nil {
+		locationName := "X-Amzn-Bedrock-Request-Metadata"
+		encoder.SetHeader(locationName).String(*v.RequestMetadata)
+	}
+
 	if len(v.ServiceTier) > 0 {
 		locationName := "X-Amzn-Bedrock-Service-Tier"
 		encoder.SetHeader(locationName).String(string(v.ServiceTier))
@@ -943,6 +948,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 	if len(v.PerformanceConfigLatency) > 0 {
 		locationName := "X-Amzn-Bedrock-Performanceconfig-Latency"
 		encoder.SetHeader(locationName).String(string(v.PerformanceConfigLatency))
+	}
+
+	if v.RequestMetadata != nil {
+		locationName := "X-Amzn-Bedrock-Request-Metadata"
+		encoder.SetHeader(locationName).String(*v.RequestMetadata)
 	}
 
 	if len(v.ServiceTier) > 0 {

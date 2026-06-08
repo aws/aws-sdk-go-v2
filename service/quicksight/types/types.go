@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -233,11 +234,145 @@ type ActiveIAMPolicyAssignment struct {
 	noSmithyDocumentSerde
 }
 
+// Additional notes that provide supplementary context for a column.
+type AdditionalNotes struct {
+
+	// The additional notes text.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // An ad hoc (one-time) filtering option.
 type AdHocFilteringOption struct {
 
 	// Availability status.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// An agent resource in Amazon QuickSight that provides AI-powered conversational
+// experiences.
+type Agent struct {
+
+	// The unique identifier for the agent.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The lifecycle state of the agent. Valid values are PREVIEW and PUBLISHED .
+	//
+	// This member is required.
+	AgentLifecycle AgentLifecycle
+
+	// The status of the agent.
+	//
+	// This member is required.
+	AgentStatus AgentStatus
+
+	// The Amazon Resource Name (ARN) of the agent.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the agent was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identity of the user who created the agent.
+	//
+	// This member is required.
+	Creator *string
+
+	// The name of the agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The date and time that the agent was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Amazon Resource Names (ARNs) of the action connectors attached to the agent.
+	ActionConnectors []string
+
+	// The custom prompt interface configuration for the agent.
+	CustomPromptInterface *CustomPromptInterface
+
+	// A description of the agent.
+	Description *string
+
+	// An error message associated with the agent, if applicable.
+	ErrorMessage *string
+
+	// The icon identifier for the agent.
+	IconId *string
+
+	// The Amazon Resource Names (ARNs) of the spaces attached to the agent.
+	Spaces []string
+
+	// A list of starter prompts that are displayed to users when they begin
+	// interacting with the agent.
+	StarterPrompts []string
+
+	// The welcome message that is displayed when a user starts a conversation with
+	// the agent.
+	WelcomeMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when searching agents.
+type AgentSearchFilter struct {
+
+	// The name of the field to filter on.
+	Name AgentOwnershipFilterAttribute
+
+	// The comparison operator to use for the filter.
+	Operator ComparisonOperator
+
+	// The value to filter on.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an agent, including its identifier, name, and metadata.
+type AgentSummary struct {
+
+	// The unique identifier for the agent.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The Amazon Resource Name (ARN) of the agent.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the agent was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The date and time that the agent was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the agent.
+	Description *string
+
+	// The icon identifier for the agent.
+	IconId *string
 
 	noSmithyDocumentSerde
 }
@@ -1954,6 +2089,17 @@ type AttributeAggregationFunction struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for audio extraction from knowledge base documents.
+type AudioExtractionConfiguration struct {
+
+	// The status of audio extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	AudioExtractionStatus AudioExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Parameters for Amazon Aurora.
 type AuroraParameters struct {
 
@@ -2572,6 +2718,45 @@ type BasicAuthConnectionMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a knowledge base that failed to be deleted in a batch
+// operation.
+type BatchDeleteKnowledgeBaseFailure struct {
+
+	// The error code for the deletion failure.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the deletion failure.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The unique identifier of the knowledge base that failed to be deleted.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a knowledge base that was successfully deleted in a batch
+// operation.
+type BatchDeleteKnowledgeBaseSuccess struct {
+
+	// The ARN of the successfully deleted knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The unique identifier of the successfully deleted knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters that are required to connect to a Google BigQuery data source.
 type BigQueryParameters struct {
 
@@ -3096,6 +3281,9 @@ type CalculatedMeasureField struct {
 // A set of actions that correspond to Amazon Quick Sight permissions.
 type Capabilities struct {
 
+	// The ability to access the native data store for new and existing apps.
+	AccessAppsNativeDataStore CapabilityState
+
 	// The ability to perform actions in external services through Action connectors.
 	// Actions allow users to interact with third-party systems.
 	Action CapabilityState
@@ -3120,6 +3308,9 @@ type Capabilities struct {
 
 	// The ability to review and approve sharing requests of Flows.
 	ApproveFlowShareRequests CapabilityState
+
+	// The ability to perform apps-related actions.
+	Apps CapabilityState
 
 	// The ability to perform actions using Asana connectors.
 	AsanaAction CapabilityState
@@ -3162,6 +3353,9 @@ type Capabilities struct {
 
 	// The ability to create and update Amazon S3 actions.
 	CreateAndUpdateAmazonSThreeAction CapabilityState
+
+	// The ability to create or update apps.
+	CreateAndUpdateApps CapabilityState
 
 	// The ability to create and update Asana actions.
 	CreateAndUpdateAsanaAction CapabilityState
@@ -3367,6 +3561,9 @@ type Capabilities struct {
 	// The ability to perform actions using Intercom connectors.
 	IntercomAction CapabilityState
 
+	// The ability to add and invoke AI inference in new and existing apps.
+	InvokeAppsAIInference CapabilityState
+
 	// The ability to perform actions using Jira connectors.
 	JiraAction CapabilityState
 
@@ -3451,6 +3648,9 @@ type Capabilities struct {
 	// The ability to perform actions using S&P Global Energy connectors.
 	SandPGlobalEnergyAction CapabilityState
 
+	// The ability to perform Scenario-related actions.
+	Scenario CapabilityState
+
 	// The ability to enable users to upgrade their user role.
 	SelfUpgradeUserRole CapabilityState
 
@@ -3471,6 +3671,9 @@ type Capabilities struct {
 
 	// The ability to share analyses.
 	ShareAnalyses CapabilityState
+
+	// The ability to share apps with other users.
+	ShareApps CapabilityState
 
 	// The ability to share Asana actions.
 	ShareAsanaAction CapabilityState
@@ -3615,6 +3818,9 @@ type Capabilities struct {
 
 	// The ability to perform space-related actions.
 	Space CapabilityState
+
+	// The ability to perform Story-related actions.
+	Story CapabilityState
 
 	// The ability to subscribe to email reports.
 	SubscribeDashboardEmailReports CapabilityState
@@ -3767,6 +3973,20 @@ type Capabilities struct {
 
 	// The ability to perform actions using Zendesk connectors.
 	ZendeskAction CapabilityState
+
+	noSmithyDocumentSerde
+}
+
+// A filter that matches users by total capacity range in bytes.
+type CapacityBytesRangeFilter struct {
+
+	// The maximum capacity in bytes (inclusive). At least one of minBytes or maxBytes
+	// is required.
+	MaxBytes *int64
+
+	// The minimum capacity in bytes (inclusive). At least one of minBytes or maxBytes
+	// is required.
+	MinBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -4260,6 +4480,31 @@ type ColumnSchema struct {
 
 	// The name of the column schema.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A semantic property for a column.
+type ColumnSemanticProperty struct {
+
+	// Additional notes for the column.
+	AdditionalNotes *AdditionalNotes
+
+	// A description of the column.
+	Description *ColumnDescription
+
+	// The semantic type of the column.
+	SemanticType *ColumnSemanticType
+
+	noSmithyDocumentSerde
+}
+
+// The semantic type information for a column in the new data preparation
+// experience.
+type ColumnSemanticType struct {
+
+	// The geographical role of the column in the new data preparation experience.
+	GeographicalRole GeoSpatialDataRole
 
 	noSmithyDocumentSerde
 }
@@ -4853,6 +5098,31 @@ type ControlSortConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the display properties of the control title.
+type ControlTitleFontConfiguration struct {
+
+	// Configures the font settings for the control title.
+	FontConfiguration *FontConfiguration
+
+	// Determines the alignment of the control title.
+	TextAlignment HorizontalTextAlignment
+
+	noSmithyDocumentSerde
+}
+
+// The title format text configuration for a sheet control. This is a tagged union
+// type. Specify either PlainText or RichText , but not both.
+type ControlTitleFormatText struct {
+
+	// The plain text format of the title text.
+	PlainText *string
+
+	// The rich text format of the title text.
+	RichText *string
+
+	noSmithyDocumentSerde
+}
+
 // The preference coordinate for the geocode preference.
 type Coordinate struct {
 
@@ -5193,6 +5463,17 @@ type CustomFilterListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A custom instruction that provides guidance on how the dataset should be
+// consumed.
+type CustomInstruction struct {
+
+	// An inline custom instruction containing text and optional uploaded document
+	// metadata.
+	InlineCustomInstruction *InlineCustomInstruction
+
+	noSmithyDocumentSerde
+}
+
 // Instructions that provide additional guidance and context for response
 // generation.
 type CustomInstructions struct {
@@ -5249,6 +5530,117 @@ type CustomPermissions struct {
 
 	// The name of the custom permissions profile.
 	CustomPermissionsName *string
+
+	noSmithyDocumentSerde
+}
+
+// The custom prompt input for an agent. This is a union type that can be either
+// an existing prompt profile or new prompt parameters.
+//
+// The following types satisfy this interface:
+//
+//	CustomPromptInputMemberExistingPrompt
+//	CustomPromptInputMemberNewPrompt
+type CustomPromptInput interface {
+	isCustomPromptInput()
+}
+
+// An existing custom prompt profile to use for the agent.
+type CustomPromptInputMemberExistingPrompt struct {
+	Value CustomPromptProfile
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomPromptInputMemberExistingPrompt) isCustomPromptInput() {}
+
+// New custom prompt parameters to configure for the agent.
+type CustomPromptInputMemberNewPrompt struct {
+	Value CustomPromptInputParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomPromptInputMemberNewPrompt) isCustomPromptInput() {}
+
+// The parameters for configuring a custom prompt for an agent.
+type CustomPromptInputParameters struct {
+
+	// Custom instructions for the agent's behavior.
+	CustomInstructions *string
+
+	// Instructions that define the agent's identity and persona.
+	Identity *string
+
+	// Instructions for the desired output style.
+	OutputStyle *string
+
+	// Instructions for the desired response length.
+	ResponseLength *string
+
+	// Instructions for the desired tone of responses.
+	Tone *string
+
+	noSmithyDocumentSerde
+}
+
+// The custom prompt interface configuration that defines how an agent's prompt is
+// configured.
+type CustomPromptInterface struct {
+
+	// The identifier of the model profile.
+	//
+	// This member is required.
+	ModelProfileId *string
+
+	// The Amazon Web Services account ID for the Q Business service.
+	//
+	// This member is required.
+	QbsAwsAccountId *string
+
+	// The subscription identifier.
+	//
+	// This member is required.
+	SubscriptionId *string
+
+	// Custom instructions for the agent's behavior.
+	CustomInstructions *string
+
+	// Instructions that define the agent's identity and persona.
+	Identity *string
+
+	// Instructions for the desired output style.
+	OutputStyle *string
+
+	// A summary of the custom prompt configuration.
+	PromptSummary *string
+
+	// Instructions for the desired response length.
+	ResponseLength *string
+
+	// Instructions for the desired tone of responses.
+	Tone *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an existing custom prompt profile.
+type CustomPromptProfile struct {
+
+	// The identifier of the model profile.
+	//
+	// This member is required.
+	ModelProfileId *string
+
+	// The Amazon Web Services account ID for the Q Business service.
+	//
+	// This member is required.
+	QbsAwsAccountId *string
+
+	// The subscription identifier.
+	//
+	// This member is required.
+	SubscriptionId *string
 
 	noSmithyDocumentSerde
 }
@@ -6524,6 +6916,30 @@ type DataSetSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A description structure for dataset-level semantic metadata.
+type DataSetSemanticDescription struct {
+
+	// The descriptive text for the dataset.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata for a dataset, including a description and custom
+// instructions.
+type DataSetSemanticMetadata struct {
+
+	// A list of custom instructions that guide how the dataset should be consumed.
+	CustomInstructions []CustomInstruction
+
+	// A description of the dataset.
+	Description *DataSetSemanticDescription
+
+	noSmithyDocumentSerde
+}
+
 // A filter condition that compares string values using operators like EQUALS ,
 // CONTAINS , or STARTS_WITH .
 type DataSetStringComparisonFilterCondition struct {
@@ -7663,10 +8079,11 @@ type DefaultFilterControlConfiguration struct {
 	// This member is required.
 	ControlOptions *DefaultFilterControlOptions
 
+	// The title text format configuration for the default filter control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The title of the DefaultFilterControlConfiguration . This title is shared by all
 	// controls that are tied to this filter.
-	//
-	// This member is required.
 	Title *string
 
 	noSmithyDocumentSerde
@@ -8286,6 +8703,40 @@ type FailedKeyRegistrationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A resource operation that failed.
+type FailedSpaceResourceOperation struct {
+
+	// The error message that describes why the operation failed.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	// The details of the resource.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about a per-ARN failure when updating agent associations.
+type FailedToUpdateAssociation struct {
+
+	// The ARN that could not be added or removed.
+	Arn *string
+
+	// The error code for the failure.
+	ErrorCode *string
+
+	// A description of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The field series item configuration of a BarChartVisual .
 type FieldBarSeriesItem struct {
 
@@ -8698,16 +9149,17 @@ type FilterDateTimePickerControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configurationof the Apply button on a DateTimePickerControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the FilterDateTimePickerControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8733,11 +9185,6 @@ type FilterDropDownControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -8749,11 +9196,17 @@ type FilterDropDownControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of the FilterDropDownControl .
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterDropDownControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8850,11 +9303,6 @@ type FilterListControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -8863,11 +9311,17 @@ type FilterListControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterListControl .
+	Title *string
 
 	// The type of the FilterListControl . Choose one of the following options:
 	//
@@ -8946,17 +9400,18 @@ type FilterRelativeDateTimeControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configuration of the Apply button on a
 	// FilterRelativeDateTimeControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *RelativeDateTimeControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -9017,13 +9472,14 @@ type FilterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the FilterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the FilterSliderControl .
+	Title *string
 
 	// The type of the FilterSliderControl . Choose one of the following options:
 	//
@@ -9069,16 +9525,17 @@ type FilterTextAreaControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -9096,13 +9553,68 @@ type FilterTextFieldControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the FilterTextFieldControl .
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The full details of a flow, including its definition specifying the steps.
+type FlowDetail struct {
+
+	// The Amazon Resource Name (ARN) of the flow.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time this flow was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The definition of the flow, specifying the steps and configurations. This is
+	// the flow definition in Quick Flow's internal format. The format is subject to
+	// change.
+	//
+	// This member is required.
+	FlowDefinition document.Interface
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The display name of the flow.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish state of the flow. Valid values are DRAFT , PUBLISHED , or
+	// PENDING_APPROVAL .
+	//
+	// This member is required.
+	PublishState FlowPublishState
+
+	// The identifier of the principal who created the flow.
+	CreatedBy *string
+
+	// The description of the flow.
+	Description *string
+
+	// The identifier of the last principal who updated the flow.
+	LastUpdatedBy *string
+
+	// The last time this flow was modified.
+	LastUpdatedTime *time.Time
+
+	// A list of step alias mappings for the flow.
+	StepAliases []StepAliasMapping
 
 	noSmithyDocumentSerde
 }
@@ -11199,6 +11711,17 @@ type ImageCustomActionOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for image extraction from knowledge base documents.
+type ImageExtractionConfiguration struct {
+
+	// The status of image extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	ImageExtractionStatus ImageExtractionStatus
+
+	noSmithyDocumentSerde
+}
+
 // The general image interactions setup for image publish options.
 type ImageInteractionOptions struct {
 
@@ -11396,6 +11919,21 @@ type Ingestion struct {
 
 	// Information about rows for a data set SPICE ingestion.
 	RowInfo *RowInfo
+
+	noSmithyDocumentSerde
+}
+
+// An inline custom instruction with text content and optional file upload
+// metadata.
+type InlineCustomInstruction struct {
+
+	// The instruction text content.
+	//
+	// This member is required.
+	InstructionText *string
+
+	// Metadata about an uploaded document associated with this instruction.
+	UploadedDocumentMetadata *UploadedDocumentMetadata
 
 	noSmithyDocumentSerde
 }
@@ -11733,6 +12271,15 @@ type JoinOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The template configuration for a knowledge base.
+type KbTemplateConfiguration struct {
+
+	// The template document that defines the knowledge base behavior.
+	Template document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // The combination of username, private key and passphrase that are used as
 // credentials.
 type KeyPairCredentials struct {
@@ -11749,6 +12296,206 @@ type KeyPairCredentials struct {
 
 	// PrivateKeyPassphrase
 	PrivateKeyPassphrase *string
+
+	noSmithyDocumentSerde
+}
+
+// A knowledge base resource that provides data from connected sources for
+// AI-powered experiences in Amazon QuickSight.
+type KnowledgeBase struct {
+
+	// The ARN of the data source associated with the knowledge base.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The configuration settings for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseConfiguration *KnowledgeBaseConfiguration
+
+	// The unique identifier for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The name of the knowledge base.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the knowledge base.
+	//
+	// This member is required.
+	Status DataSetStatus
+
+	// The date and time that the knowledge base was created.
+	CreatedAt *time.Time
+
+	// The description of the knowledge base.
+	Description *string
+
+	// The number of documents in the knowledge base.
+	DocumentCount *int64
+
+	// A summary of the first completed ingestion for the knowledge base.
+	FirstCompletedIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// A summary of the first incomplete ingestion for the knowledge base.
+	FirstIncompleteIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// Indicates whether email notifications are enabled for ingestion failures.
+	IsEmailNotificationOptedForIngestionFailures *bool
+
+	// The size of the knowledge base in bytes.
+	KnowledgeBaseSizeBytes *int64
+
+	// A summary of the most recent ingestion for the knowledge base.
+	LatestIngestionSummary *KnowledgeBaseIngestionSummary
+
+	// The media extraction configuration for the knowledge base.
+	MediaExtractionConfiguration *MediaExtractionConfiguration
+
+	// The ARN of the primary owner of the knowledge base.
+	PrimaryOwnerArn *string
+
+	// The username of the primary owner of the knowledge base.
+	PrimaryOwnerUsername *string
+
+	// The type of the knowledge base.
+	Type *string
+
+	// The date and time that the knowledge base was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for a knowledge base.
+type KnowledgeBaseConfiguration struct {
+
+	// Indicates whether event notifications are enabled for the knowledge base.
+	EventEnabled *bool
+
+	// The template configuration for the knowledge base.
+	TemplateConfiguration *KbTemplateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an ingestion job for a knowledge base.
+type KnowledgeBaseIngestionSummary struct {
+
+	// The unique identifier for the ingestion job.
+	//
+	// This member is required.
+	IngestionId *string
+
+	// The status of the ingestion job.
+	//
+	// This member is required.
+	IngestionStatus KbIngestionStatus
+
+	// The end time of the ingestion job.
+	EndTime *time.Time
+
+	// The start time of the ingestion job.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when searching knowledge bases.
+type KnowledgeBaseSearchFilter struct {
+
+	// The name of the field to filter on.
+	//
+	// This member is required.
+	Name KnowledgeBaseSearchFilterName
+
+	// The comparison operator to use for the filter.
+	//
+	// This member is required.
+	Operator KnowledgeBaseSearchOperator
+
+	// The value to filter on.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The sort configuration for searching knowledge bases.
+type KnowledgeBaseSortBy struct {
+
+	// The field to sort by.
+	//
+	// This member is required.
+	SortByField KnowledgeBaseSortByField
+
+	// The sort order (ascending or descending).
+	//
+	// This member is required.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a knowledge base, including its identifier, name, status, and
+// metadata.
+type KnowledgeBaseSummary struct {
+
+	// The ARN of the data source associated with the knowledge base.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The Amazon Resource Name (ARN) of the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The unique identifier for the knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseId *string
+
+	// The name of the knowledge base.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the knowledge base.
+	//
+	// This member is required.
+	Status DataSetStatus
+
+	// The date and time that the knowledge base was created.
+	CreatedAt *time.Time
+
+	// The number of documents in the knowledge base.
+	DocumentCount *int64
+
+	// The size of the knowledge base in bytes.
+	KnowledgeBaseSizeBytes *int64
+
+	// The ARN of the primary owner of the knowledge base.
+	PrimaryOwnerArn *string
+
+	// The username of the primary owner of the knowledge base.
+	PrimaryOwnerUsername *string
+
+	// The type of the knowledge base.
+	Type *string
+
+	// The date and time that the knowledge base was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -12748,6 +13495,21 @@ type MeasureField struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for media extraction from knowledge base documents.
+type MediaExtractionConfiguration struct {
+
+	// The configuration for audio extraction.
+	AudioExtractionConfiguration *AudioExtractionConfiguration
+
+	// The configuration for image extraction.
+	ImageExtractionConfiguration *ImageExtractionConfiguration
+
+	// The configuration for video extraction.
+	VideoExtractionConfiguration *VideoExtractionConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // An object that consists of a member Amazon Resource Name (ARN) and a member ID.
 type MemberIdArnPair struct {
 
@@ -13334,6 +14096,85 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An OAuth client application that is used to authenticate connections to a data
+// source through an OAuth identity provider.
+type OAuthClientApplication struct {
+
+	// The Amazon Resource Name (ARN) of the OAuthClientApplication.
+	Arn *string
+
+	// The time that the OAuthClientApplication was created.
+	CreatedTime *time.Time
+
+	// The type of data source that the OAuthClientApplication is used with. Valid
+	// values are SNOWFLAKE .
+	DataSourceType DataSourceType
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The time that the OAuthClientApplication was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the OAuthClientApplication.
+	Name *string
+
+	// The authorization endpoint URL of the identity provider that is used to obtain
+	// authorization codes.
+	OAuthAuthorizationEndpointUrl *string
+
+	// The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services
+	// Region for each Amazon Web Services account.
+	OAuthClientApplicationId *string
+
+	// The OAuth client authentication type used by the OAuthClientApplication. Valid
+	// values are TOKEN .
+	OAuthClientAuthenticationType OAuthClientAuthenticationType
+
+	// The OAuth scopes that are requested when the OAuthClientApplication obtains an
+	// access token from the identity provider.
+	OAuthScopes *string
+
+	// The token endpoint URL of the identity provider that is used to obtain access
+	// tokens.
+	OAuthTokenEndpointUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an OAuthClientApplication.
+type OAuthClientApplicationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the OAuthClientApplication.
+	Arn *string
+
+	// The time that the OAuthClientApplication was created.
+	CreatedTime *time.Time
+
+	// The type of data source that the OAuthClientApplication is used with. Valid
+	// values are SNOWFLAKE .
+	DataSourceType DataSourceType
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The time that the OAuthClientApplication was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the OAuthClientApplication.
+	Name *string
+
+	// The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services
+	// Region for each Amazon Web Services account.
+	OAuthClientApplicationId *string
+
+	// The OAuth client authentication type used by the OAuthClientApplication. Valid
+	// values are TOKEN .
+	OAuthClientAuthenticationType OAuthClientAuthenticationType
+
+	noSmithyDocumentSerde
+}
+
 // The OAuth 2.0 client credentials used for authenticating a data source
 // connection. Use this structure to provide a client ID, client secret, and
 // username directly instead of referencing a secret stored in Amazon Secrets
@@ -13365,6 +14206,12 @@ type OAuthParameters struct {
 	//
 	// This member is required.
 	TokenProviderUrl *string
+
+	// The S3 URI of the identity provider's CA certificates bundle in PEM format. Use
+	// this parameter to provide a custom CA certificate bundle for the identity
+	// provider when the default trust store does not include the required
+	// certificates.
+	IdentityProviderCACertificatesBundleS3Uri *string
 
 	// The resource uri of the identity provider.
 	IdentityProviderResourceUri *string
@@ -13580,13 +14427,14 @@ type ParameterDateTimePickerControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the ParameterDateTimePickerControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13630,11 +14478,6 @@ type ParameterDropDownControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -13646,11 +14489,17 @@ type ParameterDropDownControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterDropDownControl .
+	Title *string
 
 	// The type parameter name of the ParameterDropDownControl .
 	Type SheetControlListType
@@ -13672,11 +14521,6 @@ type ParameterListControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -13685,11 +14529,17 @@ type ParameterListControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterListControl .
+	Title *string
 
 	// The type of ParameterListControl .
 	Type SheetControlListType
@@ -13756,13 +14606,14 @@ type ParameterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the ParameterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the ParameterSliderControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13780,16 +14631,17 @@ type ParameterTextAreaControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the ParameterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13807,13 +14659,14 @@ type ParameterTextFieldControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the ParameterTextFieldControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -17020,6 +17873,10 @@ type SemanticEntityType struct {
 // structured for analysis and reporting.
 type SemanticModelConfiguration struct {
 
+	// The dataset-level semantic metadata, including a description and custom
+	// instructions.
+	SemanticMetadata []DataSetSemanticMetadata
+
 	// A map of semantic tables that define the analytical structure.
 	TableMap map[string]SemanticTable
 
@@ -17043,6 +17900,9 @@ type SemanticTable struct {
 	// Configuration for row level security that control data access for this semantic
 	// table.
 	RowLevelPermissionConfiguration *RowLevelPermissionConfiguration
+
+	// The column-level semantic metadata for this semantic table.
+	SemanticMetadata *TableSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -17143,6 +18003,20 @@ type ShapeConditionalFormat struct {
 	//
 	// This member is required.
 	BackgroundColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata shared across one or more columns.
+type SharedColumnSemanticMetadata struct {
+
+	// The semantic properties for the specified columns.
+	//
+	// This member is required.
+	ColumnProperties []ColumnSemanticProperty
+
+	// The names of the columns this metadata applies to.
+	ColumnNames []string
 
 	noSmithyDocumentSerde
 }
@@ -17943,6 +18817,190 @@ type SourceTable struct {
 	noSmithyDocumentSerde
 }
 
+// A contributor to an Amazon QuickSight space.
+type SpaceContributor struct {
+
+	// The raw file size in bytes contributed by the user.
+	//
+	// This member is required.
+	RawFileSizeBytes *int64
+
+	// The percentage of total contributions made by the user.
+	Percentage *float64
+
+	// The user name of the contributor.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an Amazon QuickSight space.
+type SpaceDetails struct {
+
+	// The number of consumed source documents.
+	ConsumedSourceDocCount *int32
+
+	// The total consumed source size in bytes.
+	ConsumedSourceSize *int64
+
+	// The date and time that the space was created.
+	CreatedAt *time.Time
+
+	// The user who created the space.
+	CreatedBy *string
+
+	// The ARN of the user who created the space.
+	CreatedByArn *string
+
+	// The description of the space.
+	Description *string
+
+	// The display name of the space.
+	Name *string
+
+	// The resources in the space.
+	Resources []SpaceQuickSightResource
+
+	// The date and time that the space was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A QuickSight resource that is associated with a space.
+type SpaceQuickSightResource struct {
+
+	// The details of the QuickSight resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the QuickSight resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	noSmithyDocumentSerde
+}
+
+// The details of a QuickSight resource in a space.
+//
+// The following types satisfy this interface:
+//
+//	SpaceQuickSightResourceDetailsMemberResourceArn
+type SpaceQuickSightResourceDetails interface {
+	isSpaceQuickSightResourceDetails()
+}
+
+// The ARN of the QuickSight resource.
+type SpaceQuickSightResourceDetailsMemberResourceArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SpaceQuickSightResourceDetailsMemberResourceArn) isSpaceQuickSightResourceDetails() {}
+
+// A filter to use when searching for spaces.
+type SpaceQuicksightSearchFilter struct {
+
+	// The name of the filter field to use.
+	//
+	// This member is required.
+	Name SpaceQuickSightSearchFilterName
+
+	// The comparison operator to use for the filter.
+	//
+	// This member is required.
+	Operator SpaceSearchOperator
+
+	// The value to use for the filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An operation to perform on a resource in a space.
+type SpaceResourceOperation struct {
+
+	// The details of the resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a resource in a space.
+type SpaceResourceSummary struct {
+
+	// The details of the resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	// The name of the resource.
+	ResourceName *string
+
+	// The date and time that the resource was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an Amazon QuickSight space.
+type SpaceSummary struct {
+
+	// The ID of the space.
+	//
+	// This member is required.
+	SpaceId *string
+
+	// The number of consumed source documents.
+	ConsumedSourceDocCount *int32
+
+	// The total consumed source size in bytes.
+	ConsumedSourceSize *int64
+
+	// The date and time that the space was created.
+	CreatedAt *time.Time
+
+	// The user who created the space.
+	CreatedBy *string
+
+	// The ARN of the user who created the space.
+	CreatedByArn *string
+
+	// The description of the space.
+	Description *string
+
+	// The display name of the space.
+	Name *string
+
+	// The number of resources in the space.
+	ResourcesCount *int32
+
+	// The ARN of the space.
+	SpaceArn *string
+
+	// The date and time that the space was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of spacing (often a margin or padding).
 type Spacing struct {
 
@@ -18161,6 +19219,22 @@ type StaticFileUrlSourceOptions struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// A mapping between a step identifier and its alias in a flow.
+type StepAliasMapping struct {
+
+	// The alias for the step.
+	//
+	// This member is required.
+	StepAlias *string
+
+	// The unique identifier of the step.
+	//
+	// This member is required.
+	StepId *string
 
 	noSmithyDocumentSerde
 }
@@ -18690,6 +19764,15 @@ type TableRowConditionalFormatting struct {
 
 	// The conditional formatting color (solid, gradient) of the text for a table row.
 	TextColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Column-level semantic metadata for a semantic table.
+type TableSemanticMetadata struct {
+
+	// A list of column semantic metadata entries.
+	ColumnMetadata []SharedColumnSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -20904,6 +21987,9 @@ type Typography struct {
 	// Configures the display properties of the given text.
 	AxisTitleFontConfiguration *FontConfiguration
 
+	// Configures the display properties of the control title.
+	ControlTitleFontConfiguration *ControlTitleFontConfiguration
+
 	// Configures the display properties of the given text.
 	DataLabelFontConfiguration *FontConfiguration
 
@@ -21100,6 +22186,15 @@ type UntagColumnOperation struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata for an uploaded document associated with a custom instruction.
+type UploadedDocumentMetadata struct {
+
+	// The name of the uploaded document.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the format for a source file or files.
 type UploadSettings struct {
 
@@ -21238,6 +22333,79 @@ type UserIdentifierMemberUserName struct {
 
 func (*UserIdentifierMemberUserName) isUserIdentifier() {}
 
+// A summary of a user's index capacity consumption.
+type UserIndexCapacity struct {
+
+	// The email address of the user.
+	Email *string
+
+	// The number of knowledge bases owned by the user.
+	KbCount *int32
+
+	// The role of the user.
+	Role *string
+
+	// The number of spaces owned by the user.
+	SpaceCount *int32
+
+	// The total index capacity consumed by the user in bytes.
+	TotalCapacityBytes *int64
+
+	// The total index capacity consumed by the user's knowledge bases in bytes.
+	TotalKBCapacityBytes *int64
+
+	// The total index capacity consumed by the user's spaces in bytes.
+	TotalSpaceCapacityBytes *int64
+
+	// The ARN of the user.
+	UserArn *string
+
+	// The username of the user.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for user index capacity queries. Only one filter type can be specified
+// per request.
+//
+// The following types satisfy this interface:
+//
+//	UserIndexCapacityFilterMemberTotalCapacityBytes
+//	UserIndexCapacityFilterMemberUserNameOrEmail
+type UserIndexCapacityFilter interface {
+	isUserIndexCapacityFilter()
+}
+
+// Filter users by total capacity range in bytes.
+type UserIndexCapacityFilterMemberTotalCapacityBytes struct {
+	Value CapacityBytesRangeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIndexCapacityFilterMemberTotalCapacityBytes) isUserIndexCapacityFilter() {}
+
+// Filter users by username or email prefix.
+type UserIndexCapacityFilterMemberUserNameOrEmail struct {
+	Value UserNameOrEmailFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*UserIndexCapacityFilterMemberUserNameOrEmail) isUserIndexCapacityFilter() {}
+
+// A filter that matches users by username or email prefix.
+type UserNameOrEmailFilter struct {
+
+	// The prefix to match against username or email (starts-with match).
+	//
+	// This member is required.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // The option to relax the validation that is required to create and update
 // analyses, dashboards, and templates with definition objects. When you set this
 // value to LENIENT , validation is skipped for specific errors.
@@ -21260,6 +22428,20 @@ type ValueColumnConfiguration struct {
 	// The aggregation function to apply when multiple values map to the same pivoted
 	// cell.
 	AggregationFunction *DataPrepAggregationFunction
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for video extraction from knowledge base documents.
+type VideoExtractionConfiguration struct {
+
+	// The status of video extraction. Valid values are ENABLED and DISABLED.
+	//
+	// This member is required.
+	VideoExtractionStatus VideoExtractionStatus
+
+	// The type of video extraction to perform.
+	VideoExtractionType VideoExtractionType
 
 	noSmithyDocumentSerde
 }
@@ -22138,6 +23320,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAuthenticationMetadata()                       {}
 func (*UnknownUnionMember) isAuthorizationCodeGrantCredentialsDetails()     {}
 func (*UnknownUnionMember) isClientCredentialsDetails()                     {}
+func (*UnknownUnionMember) isCustomPromptInput()                            {}
 func (*UnknownUnionMember) isDataSourceParameters()                         {}
 func (*UnknownUnionMember) isGeocodePreferenceValue()                       {}
 func (*UnknownUnionMember) isImageSource()                                  {}
@@ -22145,5 +23328,7 @@ func (*UnknownUnionMember) isPhysicalTable()                                {}
 func (*UnknownUnionMember) isReadAuthenticationMetadata()                   {}
 func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails() {}
 func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}
+func (*UnknownUnionMember) isSpaceQuickSightResourceDetails()               {}
 func (*UnknownUnionMember) isTransformOperation()                           {}
 func (*UnknownUnionMember) isUserIdentifier()                               {}
+func (*UnknownUnionMember) isUserIndexCapacityFilter()                      {}

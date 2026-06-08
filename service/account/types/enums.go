@@ -2,6 +2,29 @@
 
 package types
 
+type AccountState string
+
+// Enum values for AccountState
+const (
+	AccountStatePendingActivation AccountState = "PENDING_ACTIVATION"
+	AccountStateActive            AccountState = "ACTIVE"
+	AccountStateSuspended         AccountState = "SUSPENDED"
+	AccountStateClosed            AccountState = "CLOSED"
+)
+
+// Values returns all known values for AccountState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountState) Values() []AccountState {
+	return []AccountState{
+		"PENDING_ACTIVATION",
+		"ACTIVE",
+		"SUSPENDED",
+		"CLOSED",
+	}
+}
+
 type AlternateContactType string
 
 // Enum values for AlternateContactType

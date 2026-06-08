@@ -54,6 +54,28 @@ type AutoScalingGroupsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a summary of a certificate association.
+type CertificateAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACM certificate.
+	//
+	// This member is required.
+	AcmCertificateArn *string
+
+	// The status of the certificate association.
+	//
+	// This member is required.
+	Status CertificateAssociationStatus
+
+	// The timestamp of when the certificate was associated.
+	AssociatedAt *time.Time
+
+	// The timestamp of when the certificate association was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of an Amazon Elastic Kubernetes Service endpoint.
 type EksEndpointsConfiguration struct {
 
@@ -219,6 +241,42 @@ type LinkLogSettings struct {
 	//
 	// This member is required.
 	ApplicationLogs *LinkApplicationLogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a link routing rule.
+type LinkRoutingRuleSummary struct {
+
+	// The conditions for the routing rule.
+	//
+	// This member is required.
+	Conditions *RuleCondition
+
+	// The timestamp of when the routing rule was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The priority of the routing rule.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The unique identifier of the routing rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The status of the routing rule.
+	//
+	// This member is required.
+	Status RuleStatus
+
+	// The timestamp of when the routing rule was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -431,6 +489,24 @@ type OpenRtbAttributeModuleParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A key-value pair for query string matching in a routing rule condition.
+type QueryStringKeyValuePair struct {
+
+	// The key of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the parameters of a rate limit.
 type RateLimiterModuleParameters struct {
 
@@ -460,6 +536,32 @@ type ResponderErrorMaskingForHttpCode struct {
 
 	// The percentage of response logging.
 	ResponseLoggingPercentage *float32
+
+	noSmithyDocumentSerde
+}
+
+// The conditions for a routing rule. All specified fields must match for the rule
+// to apply (AND logic). At least one condition field must be set.
+type RuleCondition struct {
+
+	// The exact host header value to match.
+	HostHeader *string
+
+	// A wildcard pattern for host header matching (for example, *.example.com ).
+	HostHeaderWildcard *string
+
+	// The exact path to match. Must start with / .
+	PathExact *string
+
+	// The path prefix to match. The request path must start with this value. Must
+	// start with / .
+	PathPrefix *string
+
+	// A query string key-value pair that must be present and match exactly.
+	QueryStringEquals *QueryStringKeyValuePair
+
+	// A query string key that must be present in the request (any value is accepted).
+	QueryStringExists *string
 
 	noSmithyDocumentSerde
 }

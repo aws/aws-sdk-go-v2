@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for available phone numbers that you can claim to your Amazon Connect
-// instance or traffic distribution group. If the provided TargetArn is a traffic
-// distribution group, you can call this API in both Amazon Web Services Regions
-// associated with the traffic distribution group.
+// Searches for available phone numbers that you can claim to your Connect
+// Customer instance or traffic distribution group. If the provided TargetArn is a
+// traffic distribution group, you can call this API in both Amazon Web Services
+// Regions associated with the traffic distribution group.
 func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *SearchAvailablePhoneNumbersInput, optFns ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &SearchAvailablePhoneNumbersInput{}
@@ -42,7 +42,7 @@ type SearchAvailablePhoneNumbersInput struct {
 	// This member is required.
 	PhoneNumberType types.PhoneNumberType
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. You must enter
 	// InstanceId or TargetArn .
 	//
@@ -60,7 +60,7 @@ type SearchAvailablePhoneNumbersInput struct {
 	// country code.
 	PhoneNumberPrefix *string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through. You
 	// must enter InstanceId or TargetArn .
 	TargetArn *string
@@ -70,7 +70,7 @@ type SearchAvailablePhoneNumbersInput struct {
 
 type SearchAvailablePhoneNumbersOutput struct {
 
-	// A list of available phone numbers that you can claim to your Amazon Connect
+	// A list of available phone numbers that you can claim to your Connect Customer
 	// instance or traffic distribution group.
 	AvailableNumbersList []types.AvailableNumberSummary
 

@@ -110,17 +110,27 @@ type GetControlOutput struct {
 	// life) as a governance capability in Amazon Web Services.
 	CreateTime *time.Time
 
-	// A list of Amazon Web Services resource types that are governed by this control.
-	// This information helps you understand which controls can govern certain types of
-	// resources, and conversely, which resources are affected when the control is
-	// implemented. The resources are represented as Amazon Web Services CloudFormation
-	// resource types. If GovernedResources cannot be represented by available
-	// CloudFormation resource types, it’s returned as an empty list.
+	// A list of providers whose resources are governed by this control. For example,
+	// a value of AWS indicates that the control governs Amazon Web Services resources.
+	GovernedProviders []string
+
+	// A list of resource types that are governed by this control. This information
+	// helps you understand which controls can govern certain types of resources, and
+	// conversely, which resources are affected when the control is implemented. For
+	// Amazon Web Services controls, the resources are represented as CloudFormation
+	// resource types. For non-Amazon Web Services controls, the resources are
+	// represented in a provider-specific format. If GovernedResources cannot be
+	// represented by available resource types, it’s returned as an empty list.
 	GovernedResources []string
 
 	// Returns information about the control, as an ImplementationDetails object that
 	// shows the underlying implementation type for a control.
 	Implementation *types.ImplementationDetails
+
+	// A summary that indicates whether the control requires parameters, accepts
+	// optional parameters, or does not support parameters. Use this field to determine
+	// whether you need to supply parameter values when you enable the control.
+	ParameterRequirementSummary types.ParameterRequirementSummary
 
 	// Returns an array of ControlParameter objects that specify the parameters a
 	// control supports. An empty list is returned for controls that don’t support

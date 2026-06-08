@@ -35,17 +35,18 @@ type UpdateConnectivityInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// Information about the broker access configuration.
-	//
-	// This member is required.
-	ConnectivityInfo *types.ConnectivityInfo
-
 	// The version of the MSK cluster to update. Cluster versions aren't simple
 	// numbers. You can describe an MSK cluster to find its version. When this update
 	// operation is successful, it generates a new cluster version.
 	//
 	// This member is required.
 	CurrentVersion *string
+
+	// Information about the broker access configuration.
+	ConnectivityInfo *types.ConnectivityInfo
+
+	// Access control settings for zookeeper
+	ZookeeperAccess *types.ZookeeperAccess
 
 	noSmithyDocumentSerde
 }

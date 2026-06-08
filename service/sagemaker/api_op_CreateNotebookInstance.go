@@ -156,7 +156,7 @@ type CreateNotebookInstanceInput struct {
 	LifecycleConfigName *string
 
 	// The platform identifier of the notebook instance runtime environment. The
-	// default value is notebook-al2-v2 .
+	// default value is notebook-al2023-v1 .
 	PlatformIdentifier *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.

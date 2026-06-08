@@ -54,6 +54,16 @@ type UpdateEvaluatorInput struct {
 	// settings with a customer-managed Lambda function.
 	EvaluatorConfig types.EvaluatorConfig
 
+	//  The Amazon Resource Name (ARN) of a customer managed KMS key to use for
+	// encrypting sensitive evaluator data. Specify a new key ARN to rotate the
+	// encryption key, or specify a key ARN to add encryption to an evaluator that was
+	// previously created without one. When you rotate to a new key, the service
+	// decrypts the existing data with the old key and re-encrypts it with the new key.
+	// Only symmetric encryption KMS keys are supported. For more information, see [Encryption at rest for AgentCore Evaluations].
+	//
+	// [Encryption at rest for AgentCore Evaluations]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html
+	KmsKeyArn *string
+
 	//  The updated evaluation level ( TOOL_CALL , TRACE , or SESSION ) that determines
 	// the scope of evaluation.
 	Level types.EvaluatorLevel

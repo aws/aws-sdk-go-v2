@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteAdvancedPromptOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -79,6 +91,18 @@ func TestCheckSnapshot_CancelAutomatedReasoningPolicyBuildWorkflow(t *testing.T)
 	_, err := svc.CancelAutomatedReasoningPolicyBuildWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CancelAutomatedReasoningPolicyBuildWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAdvancedPromptOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -494,6 +518,18 @@ func TestCheckSnapshot_ExportAutomatedReasoningPolicyVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAdvancedPromptOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAutomatedReasoningPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutomatedReasoningPolicy(context.Background(), nil, func(o *Options) {
@@ -787,6 +823,18 @@ func TestCheckSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAdvancedPromptOptimizationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAdvancedPromptOptimizationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAdvancedPromptOptimizationJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1130,6 +1178,18 @@ func TestCheckSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopAdvancedPromptOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -1273,6 +1333,18 @@ func TestCheckSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteAdvancedPromptOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteEvaluationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteEvaluationJob(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1362,18 @@ func TestUpdateSnapshot_CancelAutomatedReasoningPolicyBuildWorkflow(t *testing.T
 	_, err := svc.CancelAutomatedReasoningPolicyBuildWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelAutomatedReasoningPolicyBuildWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAdvancedPromptOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1705,6 +1789,18 @@ func TestUpdateSnapshot_ExportAutomatedReasoningPolicyVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAdvancedPromptOptimizationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAutomatedReasoningPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAutomatedReasoningPolicy(context.Background(), nil, func(o *Options) {
@@ -1998,6 +2094,18 @@ func TestUpdateSnapshot_GetUseCaseForModelAccess(t *testing.T) {
 	_, err := svc.GetUseCaseForModelAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetUseCaseForModelAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAdvancedPromptOptimizationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAdvancedPromptOptimizationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAdvancedPromptOptimizationJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2334,6 +2442,18 @@ func TestUpdateSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *testing.T) 
 	_, err := svc.StartAutomatedReasoningPolicyTestWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAutomatedReasoningPolicyTestWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopAdvancedPromptOptimizationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopAdvancedPromptOptimizationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1080,6 +1080,25 @@ func (SuppressionListReason) Values() []SuppressionListReason {
 	}
 }
 
+type SuppressionListScope string
+
+// Enum values for SuppressionListScope
+const (
+	SuppressionListScopeAccount SuppressionListScope = "ACCOUNT"
+	SuppressionListScopeTenant  SuppressionListScope = "TENANT"
+)
+
+// Values returns all known values for SuppressionListScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SuppressionListScope) Values() []SuppressionListScope {
+	return []SuppressionListScope{
+		"ACCOUNT",
+		"TENANT",
+	}
+}
+
 type TlsPolicy string
 
 // Enum values for TlsPolicy

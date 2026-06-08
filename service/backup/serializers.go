@@ -3899,6 +3899,84 @@ func awsRestjson1_serializeOpHttpBindingsGetLegalHoldInput(v *GetLegalHoldInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpGetPITRMalwareScanResults struct {
+}
+
+func (*awsRestjson1_serializeOpGetPITRMalwareScanResults) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPITRMalwareScanResults) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPITRMalwareScanResultsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/scan/pitr-malware-scan-results")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetPITRMalwareScanResultsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPITRMalwareScanResultsInput(v *GetPITRMalwareScanResultsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName != nil {
+		encoder.SetQuery("BackupVaultName").String(*v.BackupVaultName)
+	}
+
+	if len(v.MalwareScanner) > 0 {
+		encoder.SetQuery("MalwareScanner").String(string(v.MalwareScanner))
+	}
+
+	if v.RecoveryPointArn != nil {
+		encoder.SetQuery("RecoveryPointArn").String(*v.RecoveryPointArn)
+	}
+
+	if v.ScanEndTime != nil {
+		encoder.SetQuery("ScanEndTime").String(smithytime.FormatDateTime(*v.ScanEndTime))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetRecoveryPointIndexDetails struct {
 }
 
@@ -7957,6 +8035,11 @@ func awsRestjson1_serializeOpDocumentStartScanJobInput(v *StartScanJobInput, val
 	if v.BackupVaultName != nil {
 		ok := object.Key("BackupVaultName")
 		ok.String(*v.BackupVaultName)
+	}
+
+	if v.ContinuousScanEndTime != nil {
+		ok := object.Key("ContinuousScanEndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ContinuousScanEndTime))
 	}
 
 	if v.IamRoleArn != nil {

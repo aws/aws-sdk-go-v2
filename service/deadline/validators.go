@@ -890,6 +890,26 @@ func (m *validateOpDeleteStorageProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVolume struct {
+}
+
+func (*validateOpDeleteVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWorker struct {
 }
 
@@ -1365,6 +1385,26 @@ func (m *validateOpGetTask) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVolume struct {
+}
+
+func (*validateOpGetVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1865,6 +1905,26 @@ func (m *validateOpListTasks) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListVolumes struct {
+}
+
+func (*validateOpListVolumes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVolumes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVolumesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVolumesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2566,6 +2626,10 @@ func addOpDeleteStorageProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteStorageProfile{}, middleware.After)
 }
 
+func addOpDeleteVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVolume{}, middleware.After)
+}
+
 func addOpDeleteWorkerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorker{}, middleware.After)
 }
@@ -2660,6 +2724,10 @@ func addOpGetStorageProfileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTask{}, middleware.After)
+}
+
+func addOpGetVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVolume{}, middleware.After)
 }
 
 func addOpGetWorkerValidationMiddleware(stack *middleware.Stack) error {
@@ -2760,6 +2828,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTasks{}, middleware.After)
+}
+
+func addOpListVolumesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVolumes{}, middleware.After)
 }
 
 func addOpListWorkersValidationMiddleware(stack *middleware.Stack) error {
@@ -3897,6 +3969,21 @@ func validateParameterSortExpression(v *types.ParameterSortExpression) error {
 	}
 }
 
+func validatePersistentVolumeConfiguration(v *types.PersistentVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PersistentVolumeConfiguration"}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePosixUser(v *types.PosixUser) error {
 	if v == nil {
 		return nil
@@ -4094,6 +4181,11 @@ func validateServiceManagedEc2FleetConfiguration(v *types.ServiceManagedEc2Fleet
 	} else if v.InstanceMarketOptions != nil {
 		if err := validateServiceManagedEc2InstanceMarketOptions(v.InstanceMarketOptions); err != nil {
 			invalidParams.AddNested("InstanceMarketOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PersistentVolumeConfiguration != nil {
+		if err := validatePersistentVolumeConfiguration(v.PersistentVolumeConfiguration); err != nil {
+			invalidParams.AddNested("PersistentVolumeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5337,6 +5429,27 @@ func validateOpDeleteStorageProfileInput(v *DeleteStorageProfileInput) error {
 	}
 }
 
+func validateOpDeleteVolumeInput(v *DeleteVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVolumeInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWorkerInput(v *DeleteWorkerInput) error {
 	if v == nil {
 		return nil
@@ -5814,6 +5927,27 @@ func validateOpGetTaskInput(v *GetTaskInput) error {
 	}
 }
 
+func validateOpGetVolumeInput(v *GetVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVolumeInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkerInput(v *GetWorkerInput) error {
 	if v == nil {
 		return nil
@@ -6265,6 +6399,24 @@ func validateOpListTasksInput(v *ListTasksInput) error {
 	}
 	if v.StepId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListVolumesInput(v *ListVolumesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVolumesInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

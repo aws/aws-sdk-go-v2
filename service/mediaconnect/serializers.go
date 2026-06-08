@@ -6608,6 +6608,11 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.Integer(*v.MinLatency)
 	}
 
+	if len(v.NdiOutputTimecodeSource) > 0 {
+		ok := object.Key("ndiOutputTimecodeSource")
+		ok.String(string(v.NdiOutputTimecodeSource))
+	}
+
 	if v.NdiProgramName != nil {
 		ok := object.Key("ndiProgramName")
 		ok.String(*v.NdiProgramName)
@@ -7838,6 +7843,11 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.NdiOutputTimecodeSource) > 0 {
+		ok := object.Key("ndiOutputTimecodeSource")
+		ok.String(string(v.NdiOutputTimecodeSource))
 	}
 
 	if v.NdiProgramName != nil {

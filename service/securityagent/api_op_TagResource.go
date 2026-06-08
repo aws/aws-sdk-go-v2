@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags to a Security Agent resource
+// Adds tags to a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -26,15 +26,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-// Input for TagResource operation
+// Input for TagResource operation.
 type TagResourceInput struct {
 
-	// ARN of the resource to tag
+	// The Amazon Resource Name (ARN) of the resource to tag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Tags to add to the resource
+	// The tags to add to the resource.
 	//
 	// This member is required.
 	Tags map[string]string
@@ -42,7 +42,7 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for TagResource operation
+// Output for TagResource operation.
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

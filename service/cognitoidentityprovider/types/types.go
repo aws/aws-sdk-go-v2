@@ -703,6 +703,10 @@ type DomainDescriptionType struct {
 	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
 	ManagedLoginVersion *int32
 
+	// The routing configuration for the domain, including failover settings for
+	// multi-region deployments. Currently only Failover configurations are allowed.
+	Routing *RoutingType
+
 	// The Amazon S3 bucket where the static files for this domain are stored.
 	S3Bucket *string
 
@@ -925,6 +929,26 @@ type EventRiskType struct {
 	// The risk level that adaptive authentication assessed for the authentication
 	// event.
 	RiskLevel RiskLevelType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies failover configuration for multi-region user pool domains. Contains
+// settings for the secondary region and health check configuration.
+type FailoverType struct {
+
+	// The ID of the Amazon Web Services Route53 healthcheck that controls routing. If
+	// the healthcheck is healthy, traffic will be routed to the primary replica, and
+	// if the healthcheck is unhealthy, traffic will be routed to the secondary region.
+	//
+	// This member is required.
+	PrimaryRoute53HealthCheckId *string
+
+	// The secondary Amazon Web Services Region to use for failover when the primary
+	// region becomes unavailable.
+	//
+	// This member is required.
+	SecondaryRegion *string
 
 	noSmithyDocumentSerde
 }
@@ -1152,6 +1176,52 @@ type InboundFederationLambdaType struct {
 	//
 	// This member is required.
 	LambdaVersion InboundFederationLambdaVersionType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the issuer configuration for a user pool. Contains settings that
+// determine how tokens are issued and validated.
+type IssuerConfigurationType struct {
+
+	// The type of issuer configuration. Determines the token issuing behavior for the
+	// user pool.
+	//
+	// ORIGINAL The original issuer configuration for user pools. The issuer URL is
+	// hosted in the user pool’s region and provides OIDC endpoints specific to that
+	// region.
+	//
+	// Original issuers have the format of
+	// https://cognito-idp.[region].amazonaws.com/[userPoolId]
+	//
+	// UPDATED Recommended for all user pools, including for multi-Region replication.
+	// Updated issuers host the same JWKS content in multiple regions, resulting in
+	// improved resilience and efficiency.
+	//
+	// Updated issuers have the format of
+	// https://issuer-cognito-idp.[region].amazonaws.com/[userPoolId] , where region is
+	// the primary Amazon Web Services Region of your user pool.
+	Type IssuerType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the key configuration for a user pool. Contains settings for
+// encryption keys used to secure user pool data.
+type KeyConfigurationType struct {
+
+	// The type of encryption key used for the user pool.
+	//
+	// AWS_OWNED_KEY A key owned by Amazon Web Services in Key Management Service.
+	//
+	// CUSTOMER_MANAGED_KEY A key managed by the customer in Key Management Service.
+	// You must use a multi-region key to enable multi-region replication for a user
+	// pool.
+	KeyType EncryptionKeyType
+
+	// The Amazon Resource Name (ARN) of the KMS key used for encryption. If not
+	// specified, Amazon Web Services managed keys are used.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1737,6 +1807,17 @@ type RiskExceptionConfigurationType struct {
 	// addresses in this range list. This parameter is displayed and set in CIDR
 	// notation.
 	SkippedIPRangeList []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies routing configuration for user pool domains. Contains failover
+// settings for multi-region deployments.
+type RoutingType struct {
+
+	// The failover configuration that specifies the secondary region and health check
+	// settings.
+	Failover *FailoverType
 
 	noSmithyDocumentSerde
 }
@@ -2641,6 +2722,9 @@ type UserPoolDescriptionType struct {
 	// The user pool name.
 	Name *string
 
+	// A list of Amazon Web Services Regions where replicas of this user pool exist.
+	ReplicaRegions []string
+
 	// The user pool status.
 	//
 	// Deprecated: This property is no longer available.
@@ -2659,6 +2743,42 @@ type UserPoolPolicyType struct {
 
 	// The policy for allowed types of authentication in a user pool.
 	SignInPolicy *SignInPolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a replica user pool, including Region, status, role,
+// and ARN.
+type UserPoolReplicaType struct {
+
+	// The Amazon Web Services Region where the replica is located.
+	RegionName *string
+
+	// The role of the user pool replica that determines which API operations are
+	// enabled.
+	//
+	// PRIMARY The primary replica supports all end user and administrator operations.
+	//
+	// SECONDARY The secondary replica supports a limited set of end user and
+	// administrator operations. Generally, only administrator operations that set
+	// configurations specific to the replica, and only end-user operations that do not
+	// create or change attributes of a user are supported.
+	Role ReplicaRoleType
+
+	// The current status of the replica.
+	//
+	// CREATING The replica is being created.
+	//
+	// INACTIVE The replica has been created, but is not accepting requests for
+	// end-users. Administrator configuration operations are supported.
+	//
+	// ACTIVE The replica is available for both end-user and administrator operations.
+	//
+	// DELETING The replica is being deleted.
+	Status ReplicaStatusType
+
+	// The Amazon Resource Name (ARN) of the replica user pool.
+	UserPoolArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2744,6 +2864,12 @@ type UserPoolType struct {
 
 	// The ID of the user pool.
 	Id *string
+
+	// The issuer configuration for the user pool, including token issuing settings.
+	IssuerConfiguration *IssuerConfigurationType
+
+	// The key configuration for the user pool, including encryption settings.
+	KeyConfiguration *KeyConfigurationType
 
 	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 	// several possible stages of user pool operations. Triggers can modify the outcome

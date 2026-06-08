@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all applications in the account
+// Returns a paginated list of application summaries in your account.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -29,10 +29,12 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,12 +42,14 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	// List of application summaries
+	// The list of application summaries.
 	//
 	// This member is required.
 	ApplicationSummaries []types.ApplicationSummary
 
-	// Token for next page of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +154,7 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 
 // ListApplicationsPaginatorOptions is the paginator options for ListApplications
 type ListApplicationsPaginatorOptions struct {
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

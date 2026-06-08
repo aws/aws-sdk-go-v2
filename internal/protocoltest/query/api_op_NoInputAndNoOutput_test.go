@@ -11,7 +11,6 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
@@ -185,6 +184,17 @@ func TestClient_NoInputAndNoOutput_Deserialize(t *testing.T) {
 			StatusCode:   200,
 			ExpectResult: &NoInputAndNoOutputOutput{},
 		},
+		// Empty output, but the server returns ResponseMetadata.
+		"QueryNoInputAndNoOutputWithResponseMetadata": {
+			StatusCode: 200,
+			Body: []byte(`<NoInputAndNoOutputResponse>
+			    <ResponseMetadata>
+			        <RequestId>abc-123</RequestId>
+			    </ResponseMetadata>
+			</NoInputAndNoOutputResponse>
+			`),
+			ExpectResult: &NoInputAndNoOutputOutput{},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -207,7 +217,7 @@ func TestClient_NoInputAndNoOutput_Deserialize(t *testing.T) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -251,6 +261,16 @@ func BenchmarkClient_NoInputAndNoOutput_Deserialize(b *testing.B) {
 			StatusCode:   200,
 			ExpectResult: &NoInputAndNoOutputOutput{},
 		},
+		"QueryNoInputAndNoOutputWithResponseMetadata": {
+			StatusCode: 200,
+			Body: []byte(`<NoInputAndNoOutputResponse>
+			    <ResponseMetadata>
+			        <RequestId>abc-123</RequestId>
+			    </ResponseMetadata>
+			</NoInputAndNoOutputResponse>
+			`),
+			ExpectResult: &NoInputAndNoOutputOutput{},
+		},
 	}
 	for name, c := range cases {
 		b.Run(name, func(b *testing.B) {
@@ -274,7 +294,7 @@ func BenchmarkClient_NoInputAndNoOutput_Deserialize(b *testing.B) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody

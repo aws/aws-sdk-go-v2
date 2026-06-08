@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the Integration of the Security Agent App with an external Provider
+// Creates a new integration with a third-party provider, such as GitHub, for code
+// review and remediation.
 func (c *Client) CreateIntegration(ctx context.Context, params *CreateIntegrationInput, optFns ...func(*Options)) (*CreateIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationInput{}
@@ -29,25 +30,26 @@ func (c *Client) CreateIntegration(ctx context.Context, params *CreateIntegratio
 
 type CreateIntegrationInput struct {
 
-	// Provider-specific input parameters
+	// The provider-specific input required to create the integration.
 	//
 	// This member is required.
 	Input types.ProviderInput
 
-	// Display name for the integration
+	// The display name for the integration.
 	//
 	// This member is required.
 	IntegrationDisplayName *string
 
-	// Provider to integrate with
+	// The integration provider. Currently, only GITHUB is supported.
 	//
 	// This member is required.
 	Provider types.Provider
 
-	// KMS key ID for encrypting integration details
+	// The identifier of the AWS KMS key to use for encrypting data associated with
+	// the integration.
 	KmsKeyId *string
 
-	// Tags to associate with the integration
+	// The tags to associate with the integration.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -55,7 +57,7 @@ type CreateIntegrationInput struct {
 
 type CreateIntegrationOutput struct {
 
-	// Unique identifier of the created integration
+	// The unique identifier of the created integration.
 	//
 	// This member is required.
 	IntegrationId *string

@@ -3,4 +3,4 @@
 package devopsagent
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.3.1"
+const goModuleVersion = "1.5.6"

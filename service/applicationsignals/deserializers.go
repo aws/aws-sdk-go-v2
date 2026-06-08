@@ -4752,6 +4752,121 @@ func awsRestjson1_deserializeDocumentChangeEvents(v *[]types.ChangeEvent, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCompositeSliComponent(v *types.CompositeSliComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CompositeSliComponent
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "OperationName":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OperationName to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.CompositeSliComponentMemberOperationName{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositeSliComponents(v *[]types.CompositeSliComponent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CompositeSliComponent
+	if *v == nil {
+		cv = []types.CompositeSliComponent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CompositeSliComponent
+		if err := awsRestjson1_deserializeDocumentCompositeSliComponent(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositeSliConfig(v **types.CompositeSliConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompositeSliConfig
+	if *v == nil {
+		sv = &types.CompositeSliConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Components":
+			if err := awsRestjson1_deserializeDocumentCompositeSliComponents(&sv.Components, value); err != nil {
+				return err
+			}
+
+		case "SelectionConfig":
+			if err := awsRestjson1_deserializeDocumentSelectionConfig(&sv.SelectionConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6419,6 +6534,11 @@ func awsRestjson1_deserializeDocumentRequestBasedServiceLevelIndicatorMetric(v *
 
 	for key, value := range shape {
 		switch key {
+		case "CompositeSliConfig":
+			if err := awsRestjson1_deserializeDocumentCompositeSliConfig(&sv.CompositeSliConfig, value); err != nil {
+				return err
+			}
+
 		case "DependencyConfig":
 			if err := awsRestjson1_deserializeDocumentDependencyConfig(&sv.DependencyConfig, value); err != nil {
 				return err
@@ -6571,6 +6691,55 @@ func awsRestjson1_deserializeDocumentRollingInterval(v **types.RollingInterval, 
 					return fmt.Errorf("expected DurationUnit to be of type string, got %T instead", value)
 				}
 				sv.DurationUnit = types.DurationUnit(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelectionConfig(v **types.SelectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectionConfig
+	if *v == nil {
+		sv = &types.SelectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Pattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SelectionPattern to be of type string, got %T instead", value)
+				}
+				sv.Pattern = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SelectionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SelectionType(jtv)
 			}
 
 		default:
@@ -7026,6 +7195,11 @@ func awsRestjson1_deserializeDocumentServiceLevelIndicatorMetric(v **types.Servi
 
 	for key, value := range shape {
 		switch key {
+		case "CompositeSliConfig":
+			if err := awsRestjson1_deserializeDocumentCompositeSliConfig(&sv.CompositeSliConfig, value); err != nil {
+				return err
+			}
+
 		case "DependencyConfig":
 			if err := awsRestjson1_deserializeDocumentDependencyConfig(&sv.DependencyConfig, value); err != nil {
 				return err
@@ -7102,6 +7276,15 @@ func awsRestjson1_deserializeDocumentServiceLevelObjective(v **types.ServiceLeve
 					return fmt.Errorf("expected ServiceLevelObjectiveArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AutoInvestigationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoInvestigationEnabled = ptr.Bool(jtv)
 			}
 
 		case "BurnRateConfigurations":
@@ -7603,6 +7786,11 @@ func awsRestjson1_deserializeDocumentServiceLevelObjectiveSummary(v **types.Serv
 					return fmt.Errorf("expected ServiceLevelObjectiveArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "CompositeSliConfig":
+			if err := awsRestjson1_deserializeDocumentCompositeSliConfig(&sv.CompositeSliConfig, value); err != nil {
+				return err
 			}
 
 		case "CreatedTime":

@@ -290,6 +290,8 @@ const (
 	PostRegisterServiceSupportedServiceMcpServerSplunk PostRegisterServiceSupportedService = "mcpserversplunk"
 	// Azure Service with AWS Outbound Identity Federation.
 	PostRegisterServiceSupportedServiceAzureIdentity PostRegisterServiceSupportedService = "azureidentity"
+	// SigV4-authenticated MCP server.
+	PostRegisterServiceSupportedServiceMcpServerSigv4 PostRegisterServiceSupportedService = "mcpserversigv4"
 )
 
 // Values returns all known values for PostRegisterServiceSupportedService. Note
@@ -310,6 +312,7 @@ func (PostRegisterServiceSupportedService) Values() []PostRegisterServiceSupport
 		"mcpserver",
 		"mcpserversplunk",
 		"azureidentity",
+		"mcpserversigv4",
 	}
 }
 
@@ -490,6 +493,8 @@ const (
 	ServiceMcpServerSplunk Service = "mcpserversplunk"
 	// Azure Service with AWS Outbound Identity Federation.
 	ServiceAzureIdentity Service = "azureidentity"
+	// SigV4-authenticated MCP server.
+	ServiceMcpServerSigv4 Service = "mcpserversigv4"
 )
 
 // Values returns all known values for Service. Note that this can be expanded in
@@ -513,6 +518,7 @@ func (Service) Values() []Service {
 		"mcpserver",
 		"mcpserversplunk",
 		"azureidentity",
+		"mcpserversigv4",
 	}
 }
 

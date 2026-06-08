@@ -1239,6 +1239,100 @@ func serializeCBOR_AuroraClusterArns(v []string) (smithycbor.Value, error) {
 	return vl, nil
 }
 
+func serializeCBOR_AuroraProvisionedScalingConfiguration(v *types.AuroraProvisionedScalingConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.GlobalClusterIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.GlobalClusterIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["globalClusterIdentifier"] = ser
+	}
+	if v.RegionDatabaseClusterArns != nil {
+		ser, err := serializeCBOR_RegionAuroraClusterMap(v.RegionDatabaseClusterArns)
+		if err != nil {
+			return nil, err
+		}
+		vm["regionDatabaseClusterArns"] = ser
+	}
+	if v.InstanceArns != nil {
+		ser, err := serializeCBOR_RegionAuroraInstanceArnMap(v.InstanceArns)
+		if err != nil {
+			return nil, err
+		}
+		vm["instanceArns"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_AuroraServerlessScalingConfiguration(v *types.AuroraServerlessScalingConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.GlobalClusterIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.GlobalClusterIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["globalClusterIdentifier"] = ser
+	}
+	if v.RegionDatabaseClusterArns != nil {
+		ser, err := serializeCBOR_RegionAuroraClusterMap(v.RegionDatabaseClusterArns)
+		if err != nil {
+			return nil, err
+		}
+		vm["regionDatabaseClusterArns"] = ser
+	}
+	if v.TargetPercent != nil {
+		ser, err := serializeCBOR_Int32(*v.TargetPercent)
+		if err != nil {
+			return nil, err
+		}
+		vm["targetPercent"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_CustomActionLambdaConfiguration(v *types.CustomActionLambdaConfiguration) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.TimeoutMinutes != nil {
@@ -1587,6 +1681,36 @@ func serializeCBOR_EksResourceScalingUngraceful(v *types.EksResourceScalingUngra
 	return vm, nil
 }
 
+func serializeCBOR_EventSourceMapping(v *types.EventSourceMapping) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if v.Arn != nil {
+		ser, err := serializeCBOR_String(*v.Arn)
+		if err != nil {
+			return nil, err
+		}
+		vm["arn"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_EventSourceMappingAction(v types.EventSourceMappingAction) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
 func serializeCBOR_ExecutionAction(v types.ExecutionAction) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
@@ -1691,6 +1815,30 @@ func serializeCBOR_ExecutionBlockConfiguration(v types.ExecutionBlockConfigurati
 			return nil, err
 		}
 		vm["rdsCreateCrossRegionReadReplicaConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
+		ser, err := serializeCBOR_LambdaEventSourceMappingConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["lambdaEventSourceMappingConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig:
+		ser, err := serializeCBOR_AuroraServerlessScalingConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["auroraServerlessScalingConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig:
+		ser, err := serializeCBOR_AuroraProvisionedScalingConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["auroraProvisionedScalingConfig"] = ser
+	case *types.ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig:
+		ser, err := serializeCBOR_NeptuneGlobalDatabaseConfiguration(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["neptuneGlobalDatabaseConfig"] = ser
 	default:
 		return nil, fmt.Errorf("unknown variant type %T", v)
 	}
@@ -1860,6 +2008,55 @@ func serializeCBOR_KubernetesScalingResource(v *types.KubernetesScalingResource)
 	return vm, nil
 }
 
+func serializeCBOR_LambdaEventSourceMappingConfiguration(v *types.LambdaEventSourceMappingConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if len(v.Action) > 0 {
+		ser, err := serializeCBOR_EventSourceMappingAction(v.Action)
+		if err != nil {
+			return nil, err
+		}
+		vm["action"] = ser
+	}
+	if v.RegionEventSourceMappings != nil {
+		ser, err := serializeCBOR_RegionEventSourceMappingMap(v.RegionEventSourceMappings)
+		if err != nil {
+			return nil, err
+		}
+		vm["regionEventSourceMappings"] = ser
+	}
+	if v.Ungraceful != nil {
+		ser, err := serializeCBOR_LambdaEventSourceMappingUngraceful(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaEventSourceMappingUngraceful(v *types.LambdaEventSourceMappingUngraceful) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.Behavior) > 0 {
+		ser, err := serializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v.Behavior)
+		if err != nil {
+			return nil, err
+		}
+		vm["behavior"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v types.LambdaEventSourceMappingUngracefulBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
 func serializeCBOR_LambdaList(v []types.Lambdas) (smithycbor.Value, error) {
 	vl := smithycbor.List{}
 	for i := range v {
@@ -1912,6 +2109,80 @@ func serializeCBOR_LambdaUngraceful(v *types.LambdaUngraceful) (smithycbor.Value
 }
 
 func serializeCBOR_LambdaUngracefulBehavior(v types.LambdaUngracefulBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_NeptuneDefaultBehavior(v types.NeptuneDefaultBehavior) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_NeptuneGlobalDatabaseConfiguration(v *types.NeptuneGlobalDatabaseConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TimeoutMinutes != nil {
+		ser, err := serializeCBOR_Int32(*v.TimeoutMinutes)
+		if err != nil {
+			return nil, err
+		}
+		vm["timeoutMinutes"] = ser
+	}
+	if v.CrossAccountRole != nil {
+		ser, err := serializeCBOR_String(*v.CrossAccountRole)
+		if err != nil {
+			return nil, err
+		}
+		vm["crossAccountRole"] = ser
+	}
+	if v.ExternalId != nil {
+		ser, err := serializeCBOR_String(*v.ExternalId)
+		if err != nil {
+			return nil, err
+		}
+		vm["externalId"] = ser
+	}
+	if len(v.Behavior) > 0 {
+		ser, err := serializeCBOR_NeptuneDefaultBehavior(v.Behavior)
+		if err != nil {
+			return nil, err
+		}
+		vm["behavior"] = ser
+	}
+	if v.Ungraceful != nil {
+		ser, err := serializeCBOR_NeptuneUngraceful(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	if v.GlobalClusterIdentifier != nil {
+		ser, err := serializeCBOR_String(*v.GlobalClusterIdentifier)
+		if err != nil {
+			return nil, err
+		}
+		vm["globalClusterIdentifier"] = ser
+	}
+	if v.RegionDatabaseClusterArns != nil {
+		ser, err := serializeCBOR_RegionNeptuneClusterArnMap(v.RegionDatabaseClusterArns)
+		if err != nil {
+			return nil, err
+		}
+		vm["regionDatabaseClusterArns"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_NeptuneUngraceful(v *types.NeptuneUngraceful) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.Ungraceful) > 0 {
+		ser, err := serializeCBOR_NeptuneUngracefulBehavior(v.Ungraceful)
+		if err != nil {
+			return nil, err
+		}
+		vm["ungraceful"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_NeptuneUngracefulBehavior(v types.NeptuneUngracefulBehavior) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
 
@@ -2039,6 +2310,45 @@ func serializeCBOR_RegionAndRoutingControls(v map[string][]types.ArcRoutingContr
 	return vm, nil
 }
 
+func serializeCBOR_RegionAuroraClusterMap(v map[string]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_String(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RegionAuroraInstanceArnMap(v map[string]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_String(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RegionEventSourceMappingMap(v map[string]types.EventSourceMapping) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_EventSourceMapping(&vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_RegionList(v []string) (smithycbor.Value, error) {
 	vl := smithycbor.List{}
 	for i := range v {
@@ -2050,6 +2360,19 @@ func serializeCBOR_RegionList(v []string) (smithycbor.Value, error) {
 		vl = append(vl, ser)
 	}
 	return vl, nil
+}
+
+func serializeCBOR_RegionNeptuneClusterArnMap(v map[string]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_String(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_RegionSwitchPlanConfiguration(v *types.RegionSwitchPlanConfiguration) (smithycbor.Value, error) {

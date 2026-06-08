@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"math"
 	"strings"
 )
@@ -2443,7 +2442,7 @@ func (m *awsRestjson1_deserializeOpDeleteMalwareProtectionPlan) HandleDeserializ
 	output := &DeleteMalwareProtectionPlanOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -11777,7 +11776,7 @@ func (m *awsRestjson1_deserializeOpUpdateMalwareProtectionPlan) HandleDeserializ
 	output := &UpdateMalwareProtectionPlanOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -25132,6 +25131,42 @@ func awsRestjson1_deserializeDocumentRecoveryPointDetails(v **types.RecoveryPoin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRelatedFilePathsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRemoteAccountDetails(v **types.RemoteAccountDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25919,6 +25954,24 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 				sv.CommandLineExample = ptr.String(jtv)
 			}
 
+		case "fileOperation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileOperation = ptr.String(jtv)
+			}
+
+		case "filePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FilePath = ptr.String(jtv)
+			}
+
 		case "fileSystemType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26033,6 +26086,11 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MountTarget = ptr.String(jtv)
+			}
+
+		case "relatedFilePaths":
+			if err := awsRestjson1_deserializeDocumentRelatedFilePathsList(&sv.RelatedFilePaths, value); err != nil {
+				return err
 			}
 
 		case "releaseAgentPath":
@@ -26976,6 +27034,69 @@ func awsRestjson1_deserializeDocumentScanConfiguration(v **types.ScanConfigurati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScanConfigurationContinuousScanDetails(v **types.ScanConfigurationContinuousScanDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScanConfigurationContinuousScanDetails
+	if *v == nil {
+		sv = &types.ScanConfigurationContinuousScanDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(v **types.ScanConfigurationRecoveryPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27005,6 +27126,11 @@ func awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(v **types.Sc
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		case "continuousScanDetails":
+			if err := awsRestjson1_deserializeDocumentScanConfigurationContinuousScanDetails(&sv.ContinuousScanDetails, value); err != nil {
+				return err
 			}
 
 		default:

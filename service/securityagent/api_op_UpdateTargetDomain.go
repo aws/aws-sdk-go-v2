@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates a target domain record
+// Updates the verification method for a target domain.
 func (c *Client) UpdateTargetDomain(ctx context.Context, params *UpdateTargetDomainInput, optFns ...func(*Options)) (*UpdateTargetDomainOutput, error) {
 	if params == nil {
 		params = &UpdateTargetDomainInput{}
@@ -28,15 +28,15 @@ func (c *Client) UpdateTargetDomain(ctx context.Context, params *UpdateTargetDom
 	return out, nil
 }
 
-// Input for updating a target domain
+// Input for updating a target domain.
 type UpdateTargetDomainInput struct {
 
-	// Unique identifier of the target domain to update
+	// The unique identifier of the target domain to update.
 	//
 	// This member is required.
 	TargetDomainId *string
 
-	// Verification method for the target domain
+	// The updated verification method for the target domain.
 	//
 	// This member is required.
 	VerificationMethod types.DomainVerificationMethod
@@ -44,31 +44,34 @@ type UpdateTargetDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the UpdateTargetDomain operation
+// Output for the UpdateTargetDomain operation.
 type UpdateTargetDomainOutput struct {
 
-	// Name of the target domain
+	// The domain name of the target domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Unique identifier of the target domain
+	// The unique identifier of the target domain.
 	//
 	// This member is required.
 	TargetDomainId *string
 
-	// Current verification status of the registered target domain
+	// The current verification status of the target domain.
 	//
 	// This member is required.
 	VerificationStatus types.TargetDomainStatus
 
-	// Timestamp when the target domain was registered
+	// The date and time the target domain was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Verification details to verify registered target domain
+	// The updated verification details for the target domain.
 	VerificationDetails *types.VerificationDetails
 
-	// Timestamp when the target domain was last successfully verified
+	// The reason for the current target domain verification status.
+	VerificationStatusReason *string
+
+	// The date and time the target domain was verified, in UTC format.
 	VerifiedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

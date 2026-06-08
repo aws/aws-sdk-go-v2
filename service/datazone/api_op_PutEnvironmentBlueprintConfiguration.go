@@ -46,6 +46,10 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// This member is required.
 	EnvironmentBlueprintIdentifier *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The environment role permissions boundary.
 	EnvironmentRolePermissionBoundary *string
 
@@ -64,6 +68,9 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// The regional parameters in the environment blueprint.
 	RegionalParameters map[string]map[string]string
 
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []types.PutResourceConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -78,6 +85,10 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 	//
 	// This member is required.
 	EnvironmentBlueprintId *string
+
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
 
 	// The timestamp of when the environment blueprint was created.
 	CreatedAt *time.Time
@@ -99,6 +110,9 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 
 	// The regional parameters in the environment blueprint.
 	RegionalParameters map[string]map[string]string
+
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []types.ResourceConfiguration
 
 	// The timestamp of when the environment blueprint was updated.
 	UpdatedAt *time.Time

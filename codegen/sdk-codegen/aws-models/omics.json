@@ -1007,6 +1007,10 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
                         "name": "PENDING",
                         "value": "PENDING"
                     },
@@ -3817,6 +3821,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version name of the specified workflow.</p>"
                     }
+                },
+                "networkingMode": {
+                    "target": "com.amazonaws.omics#NetworkingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration for run networking behavior. If not specified, this will default to RESTRICTED.</p>"
+                    }
+                },
+                "configurationName": {
+                    "target": "com.amazonaws.omics#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5154,6 +5170,9 @@
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
+        "com.amazonaws.omics#EngineSettings": {
+            "type": "document"
+        },
         "com.amazonaws.omics#EngineVersion": {
             "type": "string",
             "traits": {
@@ -6309,7 +6328,7 @@
                 "status": {
                     "target": "com.amazonaws.omics#BatchStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the run batch.</p>"
+                        "smithy.api#documentation": "<p>The current status of the run batch. Possible values: <code>CREATING</code> (initial setup), <code>PENDING</code> (ready to submit runs), <code>SUBMITTING</code> (submitting runs), <code>INPROGRESS</code> (runs executing), <code>STOPPING</code> (cancellation in progress), <code>PROCESSED</code> (all runs completed), <code>CANCELLED</code> (batch cancelled), <code>FAILED</code> (batch failed), <code>RUNS_DELETING</code> (deleting runs), <code>RUNS_DELETED</code> (runs deleted).</p>"
                     }
                 },
                 "tags": {
@@ -8698,6 +8717,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>VPC configuration for the workflow run.</p>"
                     }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine-specific settings for the workflow run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10051,6 +10076,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
                     }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10352,6 +10389,18 @@
                     "target": "com.amazonaws.omics#ReadmePath",
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow version README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
+                    }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow version. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
                     }
                 }
             },
@@ -14062,6 +14111,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Amazon Web Services HealthOmics is a service that helps users such as bioinformaticians, researchers, and scientists to store, query, analyze, and generate insights from genomics and other biological data. It simplifies and accelerates the process of storing and analyzing genomic information for Amazon Web Services.</p> <p>For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/what-is-healthomics.html\">What is Amazon Web Services HealthOmics?</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Omics",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://omics.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -18829,7 +19066,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a batch of workflow runs. You can group up to 100,000 runs into a single batch that share a common configuration defined in <code>defaultRunSetting</code>. Per-run overrides can be provided either inline via <code>inlineSettings</code> (up to 100 runs) or via a JSON file stored in Amazon S3 via <code>s3UriSettings</code> (up to 100,000 runs).</p> <p> <code>StartRunBatch</code> validates common fields synchronously and returns immediately with a batch ID and status <code>PENDING</code>. Runs are submitted gradually and asynchronously at a rate governed by your <code>StartRun</code> throughput quota.</p>",
+                "smithy.api#documentation": "<p>Starts a batch of workflow runs. You can group up to 100,000 runs into a single batch that share a common configuration defined in <code>defaultRunSetting</code>. Per-run overrides can be provided either inline via <code>inlineSettings</code> (up to 100 runs) or via a JSON file stored in Amazon S3 via <code>s3UriSettings</code> (up to 100,000 runs).</p> <p> <code>StartRunBatch</code> validates common fields synchronously and returns immediately with a batch ID and status <code>CREATING</code>. The batch transitions to <code>PENDING</code> once initial setup completes. Runs are then submitted gradually and asynchronously at a rate governed by your <code>StartRun</code> throughput quota.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -18900,7 +19137,7 @@
                 "status": {
                     "target": "com.amazonaws.omics#BatchStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The initial status of the run batch.</p>"
+                        "smithy.api#documentation": "<p>The initial status of the run batch. Returns <code>CREATING</code> while the batch is being initialized.</p>"
                     }
                 },
                 "uuid": {
@@ -19059,6 +19296,12 @@
                     "target": "com.amazonaws.omics#ConfigurationName",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
                     }
                 }
             },
@@ -21934,6 +22177,24 @@
                     "min": 1,
                     "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileName": {
+            "type": "string"
+        },
+        "com.amazonaws.omics#WorkflowProfileParameterTemplates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            },
+            "value": {
+                "target": "com.amazonaws.omics#WorkflowParameterTemplate"
             }
         },
         "com.amazonaws.omics#WorkflowRequestId": {

@@ -30,13 +30,13 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 
 // This section contains the Amazon Managed Workflows for Apache Airflow (Amazon
 // MWAA) API reference documentation to create an environment. For more
-// information, see [Get started with Amazon Managed Workflows for Apache Airflow].
+// information, refer to [Get started with Amazon Managed Workflows for Apache Airflow].
 //
 // [Get started with Amazon Managed Workflows for Apache Airflow]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
 type CreateEnvironmentInput struct {
 
 	// The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags
-	// . For more information, see [Adding or updating DAGs].
+	// . For more information, refer to [Adding or updating DAGs].
 	//
 	// [Adding or updating DAGs]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
 	//
@@ -47,7 +47,7 @@ type CreateEnvironmentInput struct {
 	// execution role is an Amazon Web Services Identity and Access Management (IAM)
 	// role that grants MWAA permission to access Amazon Web Services services and
 	// resources used by your environment. For example,
-	// arn:aws:iam::123456789:role/my-execution-role . For more information, see [Amazon MWAA Execution role].
+	// arn:aws:iam::123456789:role/my-execution-role . For more information, refer to [Amazon MWAA Execution role].
 	//
 	// [Amazon MWAA Execution role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 	//
@@ -61,7 +61,7 @@ type CreateEnvironmentInput struct {
 
 	// The VPC networking components used to secure and enable network traffic between
 	// the Amazon Web Services resources for your environment. For more information,
-	// see [About networking on Amazon MWAA].
+	// refer to [About networking on Amazon MWAA].
 	//
 	// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 	//
@@ -70,7 +70,7 @@ type CreateEnvironmentInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and
 	// supporting files are stored. For example,
-	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, see [Create an Amazon S3 bucket for Amazon MWAA].
+	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, refer to [Create an Amazon S3 bucket for Amazon MWAA].
 	//
 	// [Create an Amazon S3 bucket for Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
 	//
@@ -78,16 +78,15 @@ type CreateEnvironmentInput struct {
 	SourceBucketArn *string
 
 	// A list of key-value pairs containing the Apache Airflow configuration options
-	// you want to attach to your environment. For more information, see [Apache Airflow configuration options].
+	// you want to attach to your environment. For more information, refer to [Apache Airflow configuration options].
 	//
 	// [Apache Airflow configuration options]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version for your environment. If no value is specified, it
-	// defaults to the latest version. For more information, see [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)].
+	// defaults to the latest version. For more information, refer to [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)].
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
-	// 2.9.2 , 2.10.1 , and 2.10.3 .
+	// Valid values: 2.7.2 , 2.8.1 , 2.9.2 , 2.10.1 , 2.10.3 , 2.11.0 , and 3.0.6 .
 	//
 	// [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
 	AirflowVersion *string
@@ -104,14 +103,14 @@ type CreateEnvironmentInput struct {
 	EndpointManagement types.EndpointManagement
 
 	// The environment class type. Valid values: mw1.micro , mw1.small , mw1.medium ,
-	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, refer to [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
 
 	// The Amazon Web Services Key Management Service (KMS) key to encrypt the data in
 	// your environment. You can use an Amazon Web Services owned CMK, or a Customer
-	// managed CMK (advanced). For more information, see [Create an Amazon MWAA environment].
+	// managed CMK (advanced). For more information, refer to [Create an Amazon MWAA environment].
 	//
 	// [Create an Amazon MWAA environment]: https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html
 	KmsKey *string
@@ -160,28 +159,29 @@ type CreateEnvironmentInput struct {
 	MinWorkers *int32
 
 	// The version of the plugins.zip file on your Amazon S3 bucket. You must specify
-	// a version each time a plugins.zip file is updated. For more information, see [How S3 Versioning works].
+	// a version each time a plugins.zip file is updated. For more information, refer
+	// to [How S3 Versioning works].
 	//
 	// [How S3 Versioning works]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	PluginsS3ObjectVersion *string
 
 	// The relative path to the plugins.zip file on your Amazon S3 bucket. For
 	// example, plugins.zip . If specified, then the plugins.zip version is required.
-	// For more information, see [Installing custom plugins].
+	// For more information, refer to [Installing custom plugins].
 	//
 	// [Installing custom plugins]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
 	PluginsS3Path *string
 
 	// The version of the requirements.txt file on your Amazon S3 bucket. You must
 	// specify a version each time a requirements.txt file is updated. For more
-	// information, see [How S3 Versioning works].
+	// information, refer to [How S3 Versioning works].
 	//
 	// [How S3 Versioning works]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	RequirementsS3ObjectVersion *string
 
 	// The relative path to the requirements.txt file on your Amazon S3 bucket. For
 	// example, requirements.txt . If specified, then a version is required. For more
-	// information, see [Installing Python dependencies].
+	// information, refer to [Installing Python dependencies].
 	//
 	// [Installing Python dependencies]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
 	RequirementsS3Path *string
@@ -204,7 +204,7 @@ type CreateEnvironmentInput struct {
 	//
 	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
 	//
-	// For more information, see [Using a startup script].
+	// For more information, refer to [Using a startup script].
 	//
 	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
@@ -216,19 +216,24 @@ type CreateEnvironmentInput struct {
 	// Amazon MWAA runs the script as your environment starts, and before running the
 	// Apache Airflow process. You can use this script to install dependencies, modify
 	// Apache Airflow configuration options, and set environment variables. For more
-	// information, see [Using a startup script].
+	// information, refer to [Using a startup script].
 	//
 	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	StartupScriptS3Path *string
 
 	// The key-value tag pairs you want to associate to your environment. For example,
-	// "Environment": "Staging" . For more information, see [Tagging Amazon Web Services resources].
+	// "Environment": "Staging" . For more information, refer to [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Defines the access mode for the Apache Airflow web server. For more
-	// information, see [Apache Airflow access modes].
+	// information, refer to [Apache Airflow access modes].
+	//
+	// If set to PUBLIC_AND_PRIVATE , creates both a public network load balancer (NLB)
+	// for browser access and a private VPC endpoint (VPCE) for worker-to-webserver
+	// communication. This mode is only available for Apache Airflow version 3.2 and
+	// later.
 	//
 	// [Apache Airflow access modes]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
 	WebserverAccessMode types.WebserverAccessMode

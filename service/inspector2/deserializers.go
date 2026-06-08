@@ -17830,6 +17830,11 @@ func awsRestjson1_deserializeDocumentEc2ConfigurationState(v **types.Ec2Configur
 				return err
 			}
 
+		case "vmScannerState":
+			if err := awsRestjson1_deserializeDocumentVMScannerState(&sv.VmScannerState, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -24807,6 +24812,71 @@ func awsRestjson1_deserializeDocumentValidationExceptionFields(v *[]types.Valida
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVMScannerState(v **types.VMScannerState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VMScannerState
+	if *v == nil {
+		sv = &types.VMScannerState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Activated = ptr.Bool(jtv)
+			}
+
+		case "activatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ActivatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VMScannerStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.VMScannerStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

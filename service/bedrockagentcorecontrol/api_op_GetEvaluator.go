@@ -39,6 +39,14 @@ type GetEvaluatorInput struct {
 	// This member is required.
 	EvaluatorId *string
 
+	//  Controls which data is returned in the response. ALL_DATA (default) returns
+	// the full evaluator including decrypted instructions and rating scale. For
+	// evaluators encrypted with a customer managed KMS key, this requires kms:Decrypt
+	// permission on the key. METADATA_ONLY returns evaluator metadata and model
+	// configuration without instructions or rating scale, and does not require any KMS
+	// permissions.
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
 }
 
@@ -88,6 +96,11 @@ type GetEvaluatorOutput struct {
 
 	//  The description of the evaluator.
 	Description *string
+
+	//  The Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt
+	// the evaluator's sensitive data. This field is only present for evaluators
+	// encrypted with a customer managed key.
+	KmsKeyArn *string
 
 	//  Whether the evaluator is locked for modification due to being referenced by
 	// active online evaluation configurations.

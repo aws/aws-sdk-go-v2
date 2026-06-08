@@ -37,6 +37,10 @@ type UpdateCapacityProviderInput struct {
 	// The updated scaling configuration for the capacity provider.
 	CapacityProviderScalingConfig *types.CapacityProviderScalingConfig
 
+	// Configuration for tag propagation to managed resources launched by the capacity
+	// provider.
+	PropagateTags *types.PropagateTags
+
 	noSmithyDocumentSerde
 }
 

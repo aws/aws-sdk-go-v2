@@ -850,6 +850,26 @@ func (m *validateOpCreateUserPool) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUserPoolReplica struct {
+}
+
+func (*validateOpCreateUserPoolReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUserPoolReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUserPoolReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUserPoolReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteGroup struct {
 }
 
@@ -1065,6 +1085,26 @@ func (m *validateOpDeleteUserPool) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserPoolInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteUserPoolReplica struct {
+}
+
+func (*validateOpDeleteUserPoolReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserPoolReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserPoolReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserPoolReplicaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1790,6 +1830,26 @@ func (m *validateOpListUserPoolClients) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListUserPoolReplicas struct {
+}
+
+func (*validateOpListUserPoolReplicas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUserPoolReplicas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUserPoolReplicasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUserPoolReplicasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUserPools struct {
 }
 
@@ -2390,6 +2450,26 @@ func (m *validateOpUpdateUserPool) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateUserPoolReplica struct {
+}
+
+func (*validateOpUpdateUserPoolReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUserPoolReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUserPoolReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUserPoolReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpVerifySoftwareToken struct {
 }
 
@@ -2598,6 +2678,10 @@ func addOpCreateUserPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserPool{}, middleware.After)
 }
 
+func addOpCreateUserPoolReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUserPoolReplica{}, middleware.After)
+}
+
 func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGroup{}, middleware.After)
 }
@@ -2640,6 +2724,10 @@ func addOpDeleteUserPoolDomainValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteUserPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUserPool{}, middleware.After)
+}
+
+func addOpDeleteUserPoolReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserPoolReplica{}, middleware.After)
 }
 
 func addOpDeleteWebAuthnCredentialValidationMiddleware(stack *middleware.Stack) error {
@@ -2786,6 +2874,10 @@ func addOpListUserPoolClientsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListUserPoolClients{}, middleware.After)
 }
 
+func addOpListUserPoolReplicasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUserPoolReplicas{}, middleware.After)
+}
+
 func addOpListUserPoolsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserPools{}, middleware.After)
 }
@@ -2904,6 +2996,10 @@ func addOpUpdateUserPoolDomainValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateUserPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserPool{}, middleware.After)
+}
+
+func addOpUpdateUserPoolReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUserPoolReplica{}, middleware.After)
 }
 
 func addOpVerifySoftwareTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -3176,6 +3272,24 @@ func validateCustomSMSLambdaVersionConfigType(v *types.CustomSMSLambdaVersionCon
 	}
 }
 
+func validateFailoverType(v *types.FailoverType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverType"}
+	if v.SecondaryRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondaryRegion"))
+	}
+	if v.PrimaryRoute53HealthCheckId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryRoute53HealthCheckId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInboundFederationLambdaType(v *types.InboundFederationLambdaType) error {
 	if v == nil {
 		return nil
@@ -3401,6 +3515,23 @@ func validateResourceServerScopeType(v *types.ResourceServerScopeType) error {
 	}
 	if v.ScopeDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScopeDescription"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingType(v *types.RoutingType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingType"}
+	if v.Failover != nil {
+		if err := validateFailoverType(v.Failover); err != nil {
+			invalidParams.AddNested("Failover", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4318,6 +4449,11 @@ func validateOpCreateUserPoolDomainInput(v *CreateUserPoolDomainInput) error {
 			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Routing != nil {
+		if err := validateRoutingType(v.Routing); err != nil {
+			invalidParams.AddNested("Routing", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4357,6 +4493,24 @@ func validateOpCreateUserPoolInput(v *CreateUserPoolInput) error {
 		if err := validateAccountRecoverySettingType(v.AccountRecoverySetting); err != nil {
 			invalidParams.AddNested("AccountRecoverySetting", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUserPoolReplicaInput(v *CreateUserPoolReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUserPoolReplicaInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4552,6 +4706,24 @@ func validateOpDeleteUserPoolInput(v *DeleteUserPoolInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserPoolInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteUserPoolReplicaInput(v *DeleteUserPoolReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserPoolReplicaInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5148,6 +5320,21 @@ func validateOpListUserPoolClientsInput(v *ListUserPoolClientsInput) error {
 	}
 }
 
+func validateOpListUserPoolReplicasInput(v *ListUserPoolReplicasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUserPoolReplicasInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListUserPoolsInput(v *ListUserPoolsInput) error {
 	if v == nil {
 		return nil
@@ -5698,6 +5885,11 @@ func validateOpUpdateUserPoolDomainInput(v *UpdateUserPoolDomainInput) error {
 			invalidParams.AddNested("CustomDomainConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Routing != nil {
+		if err := validateRoutingType(v.Routing); err != nil {
+			invalidParams.AddNested("Routing", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5732,6 +5924,27 @@ func validateOpUpdateUserPoolInput(v *UpdateUserPoolInput) error {
 		if err := validateAccountRecoverySettingType(v.AccountRecoverySetting); err != nil {
 			invalidParams.AddNested("AccountRecoverySetting", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUserPoolReplicaInput(v *UpdateUserPoolReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserPoolReplicaInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

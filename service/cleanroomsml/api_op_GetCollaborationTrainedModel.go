@@ -117,6 +117,10 @@ type GetCollaborationTrainedModelOutput struct {
 	// Details about the status information for the model metrics.
 	MetricsStatusDetails *string
 
+	// The account ID of the member that is responsible for paying for model training
+	// costs.
+	MlModelTrainingPayerAccountId *string
+
 	// The EC2 resource configuration that was used to train this model.
 	ResourceConfig *types.ResourceConfig
 

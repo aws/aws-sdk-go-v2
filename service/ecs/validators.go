@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpContinueServiceDeployment struct {
+}
+
+func (*validateOpContinueServiceDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpContinueServiceDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ContinueServiceDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpContinueServiceDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCapacityProvider struct {
 }
 
@@ -1268,6 +1288,10 @@ func (m *validateOpUpdateTaskSet) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpContinueServiceDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpContinueServiceDeployment{}, middleware.After)
 }
 
 func addOpCreateCapacityProviderValidationMiddleware(stack *middleware.Stack) error {
@@ -3195,6 +3219,24 @@ func validateVpcLatticeConfigurations(v []types.VpcLatticeConfiguration) error {
 		if err := validateVpcLatticeConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpContinueServiceDeploymentInput(v *ContinueServiceDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinueServiceDeploymentInput"}
+	if v.ServiceDeploymentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceDeploymentArn"))
+	}
+	if v.HookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HookId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

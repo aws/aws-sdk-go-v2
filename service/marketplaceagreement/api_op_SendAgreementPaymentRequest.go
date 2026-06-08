@@ -82,7 +82,7 @@ type SendAgreementPaymentRequestOutput struct {
 	// The amount being charged to the buyer.
 	ChargeAmount *string
 
-	// The time when the payment request was created, in ISO 8601 format.
+	// The time when the payment request was created.
 	CreatedAt *time.Time
 
 	// The currency code for the charge amount (e.g., USD ).

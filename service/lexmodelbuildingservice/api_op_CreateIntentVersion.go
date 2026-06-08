@@ -25,6 +25,8 @@ import (
 //
 // This operation requires permissions to perform the lex:CreateIntentVersion
 // action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) CreateIntentVersion(ctx context.Context, params *CreateIntentVersionInput, optFns ...func(*Options)) (*CreateIntentVersionOutput, error) {
 	if params == nil {
 		params = &CreateIntentVersionInput{}

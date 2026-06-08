@@ -45,6 +45,12 @@ type UpdateInferenceComponentInput struct {
 	// the model, container, and compute resources.
 	Specification *types.InferenceComponentSpecification
 
+	// A list of specification objects for the inference component, one per instance
+	// type. Use this parameter when you want to specify different model or resource
+	// configurations for the inference component on each instance type. You can use
+	// either this parameter or the singular Specification parameter, but not both.
+	Specifications []types.InferenceComponentSpecification
+
 	noSmithyDocumentSerde
 }
 

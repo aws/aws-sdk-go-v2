@@ -105,6 +105,7 @@
         "api_op_PutEmailIdentityFeedbackAttributes.go",
         "api_op_PutEmailIdentityMailFromAttributes.go",
         "api_op_PutSuppressedDestination.go",
+        "api_op_PutTenantSuppressionAttributes.go",
         "api_op_SendBulkEmail.go",
         "api_op_SendCustomVerificationEmail.go",
         "api_op_SendEmail.go",

@@ -85,6 +85,10 @@ type DescribeClusterOutput struct {
 	// created in the SageMaker HyperPod cluster.
 	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupDetails
 
+	// The configuration for the restricted instance groups (RIG) in the SageMaker
+	// HyperPod cluster.
+	RestrictedInstanceGroupsConfig *types.ClusterRestrictedInstanceGroupsConfigOutput
+
 	// The current configuration for managed tier checkpointing on the HyperPod
 	// cluster. For example, this shows whether the feature is enabled and the
 	// percentage of cluster memory allocated for checkpoint storage.

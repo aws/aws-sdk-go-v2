@@ -15,10 +15,6 @@ import (
 // Retrieves detailed information about a specific agreement cancellation request.
 // Both sellers (proposers) and buyers (acceptors) can use this operation to view
 // cancellation requests associated with their agreements.
-//
-// The calling identity must be either the acceptor or proposer of the agreement.
-// A ResourceNotFoundException is returned if the cancellation request does not
-// exist.
 func (c *Client) GetAgreementCancellationRequest(ctx context.Context, params *GetAgreementCancellationRequestInput, optFns ...func(*Options)) (*GetAgreementCancellationRequestOutput, error) {
 	if params == nil {
 		params = &GetAgreementCancellationRequestInput{}
@@ -58,8 +54,7 @@ type GetAgreementCancellationRequestOutput struct {
 	// request. Use DescribeAgreement to retrieve full agreement details.
 	AgreementId *string
 
-	// The date and time when the cancellation request was created, as a POSIX
-	// timestamp (Unix epoch seconds).
+	// The date and time when the cancellation request was created.
 	CreatedAt *time.Time
 
 	// The detailed description of the cancellation reason, if provided.
@@ -68,15 +63,13 @@ type GetAgreementCancellationRequestOutput struct {
 	// The reason code provided for the cancellation.
 	ReasonCode types.AgreementCancellationRequestReasonCode
 
-	// The current status of the cancellation request. Possible values include
-	// PENDING_APPROVAL , APPROVED , REJECTED , CANCELLED , and VALIDATION_FAILED .
+	// The current status of the cancellation request.
 	Status types.AgreementCancellationRequestStatus
 
 	// A message providing additional context about the cancellation request status.
 	StatusMessage *string
 
-	// The date and time when the cancellation request was last updated, as a POSIX
-	// timestamp (Unix epoch seconds).
+	// The date and time when the cancellation request was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

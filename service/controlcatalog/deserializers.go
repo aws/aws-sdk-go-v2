@@ -218,6 +218,11 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "GovernedProviders":
+			if err := awsRestjson1_deserializeDocumentGovernedProviders(&sv.GovernedProviders, value); err != nil {
+				return err
+			}
+
 		case "GovernedResources":
 			if err := awsRestjson1_deserializeDocumentGovernedResources(&sv.GovernedResources, value); err != nil {
 				return err
@@ -235,6 +240,15 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "ParameterRequirementSummary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterRequirementSummary to be of type string, got %T instead", value)
+				}
+				sv.ParameterRequirementSummary = types.ParameterRequirementSummary(jtv)
 			}
 
 		case "Parameters":
@@ -1762,6 +1776,15 @@ func awsRestjson1_deserializeDocumentControlParameter(v **types.ControlParameter
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Requirement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlParameterRequirement to be of type string, got %T instead", value)
+				}
+				sv.Requirement = types.ControlParameterRequirement(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -1909,6 +1932,11 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "GovernedProviders":
+			if err := awsRestjson1_deserializeDocumentGovernedProviders(&sv.GovernedProviders, value); err != nil {
+				return err
+			}
+
 		case "GovernedResources":
 			if err := awsRestjson1_deserializeDocumentGovernedResources(&sv.GovernedResources, value); err != nil {
 				return err
@@ -1926,6 +1954,15 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "ParameterRequirementSummary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterRequirementSummary to be of type string, got %T instead", value)
+				}
+				sv.ParameterRequirementSummary = types.ParameterRequirementSummary(jtv)
 			}
 
 		case "Severity":
@@ -2152,6 +2189,42 @@ func awsRestjson1_deserializeDocumentFrameworkMappingDetails(v **types.Framework
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGovernedProviders(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GovernedProvider to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

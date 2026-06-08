@@ -21,6 +21,11 @@ import (
 // You can only call this operation from the management account. Member accounts
 // can remove themselves with LeaveOrganizationinstead.
 //
+// When an account is removed from an organization, Organizations logs a
+// membership event in CloudTrail. The event is an AccountDepartedOrganization
+// event with departedMethod:Removed and departedTime . This event is available
+// only in the management account's event history.
+//
 //   - You can remove an account from your organization only if the account is
 //     configured with the information required to operate as a standalone account.
 //     When you create an account in an organization using the Organizations console,

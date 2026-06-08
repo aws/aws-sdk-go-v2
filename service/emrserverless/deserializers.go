@@ -4518,6 +4518,15 @@ func awsRestjson1_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 
 	for key, value := range shape {
 		switch key {
+		case "applicationLevelDigestResolution":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApplicationLevelDigestResolution = ptr.Bool(jtv)
+			}
+
 		case "imageUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4980,6 +4989,11 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.ExecutionTimeoutMinutes = ptr.Int64(i64)
 			}
 
+		case "imageConfiguration":
+			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "jobDriver":
 			if err := awsRestjson1_deserializeDocumentJobDriver(&sv.JobDriver, value); err != nil {
 				return err
@@ -5115,6 +5129,11 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "workerTypeSpecifications":
+			if err := awsRestjson1_deserializeDocumentWorkerTypeSpecificationMap(&sv.WorkerTypeSpecifications, value); err != nil {
+				return err
 			}
 
 		default:

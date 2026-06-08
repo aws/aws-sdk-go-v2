@@ -698,6 +698,18 @@ func TestCheckSnapshot_EnableSecurityHubV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GenerateRecommendedPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GenerateRecommendedPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAdministratorAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdministratorAccount(context.Background(), nil, func(o *Options) {
@@ -907,6 +919,18 @@ func TestCheckSnapshot_GetMembers(t *testing.T) {
 	_, err := svc.GetMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRecommendedPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecommendedPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1981,6 +2005,18 @@ func TestUpdateSnapshot_EnableSecurityHubV2(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GenerateRecommendedPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GenerateRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GenerateRecommendedPolicyV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAdministratorAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAdministratorAccount(context.Background(), nil, func(o *Options) {
@@ -2190,6 +2226,18 @@ func TestUpdateSnapshot_GetMembers(t *testing.T) {
 	_, err := svc.GetMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRecommendedPolicyV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecommendedPolicyV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecommendedPolicyV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

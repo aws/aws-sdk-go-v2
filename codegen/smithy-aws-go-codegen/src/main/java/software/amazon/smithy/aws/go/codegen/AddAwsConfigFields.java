@@ -527,7 +527,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("newStringReader", SymbolUtils.createValueSymbolBuilder("NewReader",
                 SmithyGoDependency.STRINGS).build());
         writer.putContext("nopCloser", SymbolUtils.createValueSymbolBuilder("NopCloser",
-                SmithyGoDependency.IOUTIL).build());
+                SmithyGoDependency.IO).build());
 
         writer.addUseImports(SmithyGoDependency.TESTING);
         writer.write("""

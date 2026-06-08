@@ -112,6 +112,11 @@ type UpdateFirewallRuleInput struct {
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
 
+	// The rule type configuration for the firewall rule. This setting is mutually
+	// exclusive with the top-level FirewallDomainListId and DnsThreatProtection
+	// fields.
+	FirewallRuleType *types.FirewallRuleType
+
 	//  The DNS Firewall Advanced rule ID.
 	FirewallThreatProtectionId *string
 
@@ -157,7 +162,7 @@ type UpdateFirewallRuleInput struct {
 	//   - TXT: Verifies email senders and application-specific values.
 	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
-	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
 	//
 	// If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals

@@ -1,3 +1,50 @@
+# v1.62.6 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+# v1.62.5 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.4 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.3 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.0 (2026-05-26)
+
+* **Feature**: Added resourceConfigurations and allowUserProvidedConfigurations fields to environment blueprint configuration APIs, enabling customers who migrated from V1 to V2 domains to update resource configurations (such as lineage schedules) programmatically via the SDK.
+
+# v1.61.0 (2026-05-22)
+
+* **Feature**: Add support for VPC connection
+
+# v1.60.0 (2026-05-14)
+
+* **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+
+# v1.59.0 (2026-04-30)
+
+* **Feature**: Adds support for asynchronous notebook runs
+
+# v1.58.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-04-23)
 
 * **Feature**: Releasing For LakehouseProperties attributes in the Connections API's

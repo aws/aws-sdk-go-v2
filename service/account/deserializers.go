@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -222,7 +221,7 @@ func (m *awsRestjson1_deserializeOpDeleteAlternateContact) HandleDeserialize(ctx
 	output := &DeleteAlternateContactOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -328,7 +327,7 @@ func (m *awsRestjson1_deserializeOpDisableRegion) HandleDeserialize(ctx context.
 	output := &DisableRegionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -434,7 +433,7 @@ func (m *awsRestjson1_deserializeOpEnableRegion) HandleDeserialize(ctx context.C
 	output := &EnableRegionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -686,6 +685,15 @@ func awsRestjson1_deserializeOpDocumentGetAccountInformationOutput(v **GetAccoun
 					return fmt.Errorf("expected AccountName to be of type string, got %T instead", value)
 				}
 				sv.AccountName = ptr.String(jtv)
+			}
+
+		case "AccountState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountState to be of type string, got %T instead", value)
+				}
+				sv.AccountState = types.AccountState(jtv)
 			}
 
 		default:
@@ -1747,7 +1755,7 @@ func (m *awsRestjson1_deserializeOpPutAccountName) HandleDeserialize(ctx context
 	output := &PutAccountNameOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1850,7 +1858,7 @@ func (m *awsRestjson1_deserializeOpPutAlternateContact) HandleDeserialize(ctx co
 	output := &PutAlternateContactOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1953,7 +1961,7 @@ func (m *awsRestjson1_deserializeOpPutContactInformation) HandleDeserialize(ctx 
 	output := &PutContactInformationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

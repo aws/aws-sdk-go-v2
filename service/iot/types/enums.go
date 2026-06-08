@@ -956,6 +956,7 @@ const (
 	DisconnectReasonValueMqttKeepAliveTimeout      DisconnectReasonValue = "MQTT_KEEP_ALIVE_TIMEOUT"
 	DisconnectReasonValueServerError               DisconnectReasonValue = "SERVER_ERROR"
 	DisconnectReasonValueServerInitiatedDisconnect DisconnectReasonValue = "SERVER_INITIATED_DISCONNECT"
+	DisconnectReasonValueApiInitiatedDisconnect    DisconnectReasonValue = "API_INITIATED_DISCONNECT"
 	DisconnectReasonValueThrottled                 DisconnectReasonValue = "THROTTLED"
 	DisconnectReasonValueWebsocketTtlExpiration    DisconnectReasonValue = "WEBSOCKET_TTL_EXPIRATION"
 	DisconnectReasonValueCustomauthTtlExpiration   DisconnectReasonValue = "CUSTOMAUTH_TTL_EXPIRATION"
@@ -978,6 +979,7 @@ func (DisconnectReasonValue) Values() []DisconnectReasonValue {
 		"MQTT_KEEP_ALIVE_TIMEOUT",
 		"SERVER_ERROR",
 		"SERVER_INITIATED_DISCONNECT",
+		"API_INITIATED_DISCONNECT",
 		"THROTTLED",
 		"WEBSOCKET_TTL_EXPIRATION",
 		"CUSTOMAUTH_TTL_EXPIRATION",
@@ -1140,6 +1142,23 @@ func (FieldType) Values() []FieldType {
 		"Number",
 		"String",
 		"Boolean",
+	}
+}
+
+type FleetIndexingApi string
+
+// Enum values for FleetIndexingApi
+const (
+	FleetIndexingApiGetThingConnectivityData FleetIndexingApi = "GET_THING_CONNECTIVITY_DATA"
+)
+
+// Values returns all known values for FleetIndexingApi. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetIndexingApi) Values() []FleetIndexingApi {
+	return []FleetIndexingApi{
+		"GET_THING_CONNECTIVITY_DATA",
 	}
 }
 

@@ -2,6 +2,60 @@
 
 package types
 
+type ABTestExecutionStatus string
+
+// Enum values for ABTestExecutionStatus
+const (
+	ABTestExecutionStatusPaused     ABTestExecutionStatus = "PAUSED"
+	ABTestExecutionStatusRunning    ABTestExecutionStatus = "RUNNING"
+	ABTestExecutionStatusStopped    ABTestExecutionStatus = "STOPPED"
+	ABTestExecutionStatusNotStarted ABTestExecutionStatus = "NOT_STARTED"
+)
+
+// Values returns all known values for ABTestExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ABTestExecutionStatus) Values() []ABTestExecutionStatus {
+	return []ABTestExecutionStatus{
+		"PAUSED",
+		"RUNNING",
+		"STOPPED",
+		"NOT_STARTED",
+	}
+}
+
+type ABTestStatus string
+
+// Enum values for ABTestStatus
+const (
+	ABTestStatusCreating     ABTestStatus = "CREATING"
+	ABTestStatusActive       ABTestStatus = "ACTIVE"
+	ABTestStatusCreateFailed ABTestStatus = "CREATE_FAILED"
+	ABTestStatusUpdating     ABTestStatus = "UPDATING"
+	ABTestStatusUpdateFailed ABTestStatus = "UPDATE_FAILED"
+	ABTestStatusDeleting     ABTestStatus = "DELETING"
+	ABTestStatusDeleteFailed ABTestStatus = "DELETE_FAILED"
+	ABTestStatusFailed       ABTestStatus = "FAILED"
+)
+
+// Values returns all known values for ABTestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ABTestStatus) Values() []ABTestStatus {
+	return []ABTestStatus{
+		"CREATING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+		"FAILED",
+	}
+}
+
 type AutomationStreamStatus string
 
 // Enum values for AutomationStreamStatus
@@ -18,6 +72,67 @@ func (AutomationStreamStatus) Values() []AutomationStreamStatus {
 	return []AutomationStreamStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type BatchEvaluationStatus string
+
+// Enum values for BatchEvaluationStatus
+const (
+	BatchEvaluationStatusPending             BatchEvaluationStatus = "PENDING"
+	BatchEvaluationStatusInProgress          BatchEvaluationStatus = "IN_PROGRESS"
+	BatchEvaluationStatusCompleted           BatchEvaluationStatus = "COMPLETED"
+	BatchEvaluationStatusCompletedWithErrors BatchEvaluationStatus = "COMPLETED_WITH_ERRORS"
+	BatchEvaluationStatusFailed              BatchEvaluationStatus = "FAILED"
+	BatchEvaluationStatusStopping            BatchEvaluationStatus = "STOPPING"
+	BatchEvaluationStatusStopped             BatchEvaluationStatus = "STOPPED"
+	BatchEvaluationStatusDeleting            BatchEvaluationStatus = "DELETING"
+)
+
+// Values returns all known values for BatchEvaluationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchEvaluationStatus) Values() []BatchEvaluationStatus {
+	return []BatchEvaluationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+		"DELETING",
+	}
+}
+
+type BlockchainChainId string
+
+// Enum values for BlockchainChainId
+const (
+	// Base Mainnet (EVM L2)
+	BlockchainChainIdBase BlockchainChainId = "BASE"
+	// Base Sepolia testnet (EVM L2)
+	BlockchainChainIdBaseSepolia BlockchainChainId = "BASE_SEPOLIA"
+	// Ethereum Mainnet (EVM L1)
+	BlockchainChainIdEthereum BlockchainChainId = "ETHEREUM"
+	// Solana Mainnet
+	BlockchainChainIdSolana BlockchainChainId = "SOLANA"
+	// Solana Devnet testnet
+	BlockchainChainIdSolanaDevnet BlockchainChainId = "SOLANA_DEVNET"
+)
+
+// Values returns all known values for BlockchainChainId. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BlockchainChainId) Values() []BlockchainChainId {
+	return []BlockchainChainId{
+		"BASE",
+		"BASE_SEPOLIA",
+		"ETHEREUM",
+		"SOLANA",
+		"SOLANA_DEVNET",
 	}
 }
 
@@ -75,6 +190,38 @@ func (BrowserSessionStatus) Values() []BrowserSessionStatus {
 	return []BrowserSessionStatus{
 		"READY",
 		"TERMINATED",
+	}
+}
+
+type CloudWatchLogsFilterOperator string
+
+// Enum values for CloudWatchLogsFilterOperator
+const (
+	CloudWatchLogsFilterOperatorEquals             CloudWatchLogsFilterOperator = "Equals"
+	CloudWatchLogsFilterOperatorNotEquals          CloudWatchLogsFilterOperator = "NotEquals"
+	CloudWatchLogsFilterOperatorGreaterThan        CloudWatchLogsFilterOperator = "GreaterThan"
+	CloudWatchLogsFilterOperatorLessThan           CloudWatchLogsFilterOperator = "LessThan"
+	CloudWatchLogsFilterOperatorGreaterThanOrEqual CloudWatchLogsFilterOperator = "GreaterThanOrEqual"
+	CloudWatchLogsFilterOperatorLessThanOrEqual    CloudWatchLogsFilterOperator = "LessThanOrEqual"
+	CloudWatchLogsFilterOperatorContains           CloudWatchLogsFilterOperator = "Contains"
+	CloudWatchLogsFilterOperatorNotContains        CloudWatchLogsFilterOperator = "NotContains"
+)
+
+// Values returns all known values for CloudWatchLogsFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudWatchLogsFilterOperator) Values() []CloudWatchLogsFilterOperator {
+	return []CloudWatchLogsFilterOperator{
+		"Equals",
+		"NotEquals",
+		"GreaterThan",
+		"LessThan",
+		"GreaterThanOrEqual",
+		"LessThanOrEqual",
+		"Contains",
+		"NotContains",
 	}
 }
 
@@ -140,6 +287,42 @@ func (ContentBlockType) Values() []ContentBlockType {
 	}
 }
 
+type CryptoWalletNetwork string
+
+// Enum values for CryptoWalletNetwork
+const (
+	CryptoWalletNetworkEthereum CryptoWalletNetwork = "ETHEREUM"
+	CryptoWalletNetworkSolana   CryptoWalletNetwork = "SOLANA"
+)
+
+// Values returns all known values for CryptoWalletNetwork. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CryptoWalletNetwork) Values() []CryptoWalletNetwork {
+	return []CryptoWalletNetwork{
+		"ETHEREUM",
+		"SOLANA",
+	}
+}
+
+type Currency string
+
+// Enum values for Currency
+const (
+	CurrencyUsd Currency = "USD"
+)
+
+// Values returns all known values for Currency. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Currency) Values() []Currency {
+	return []Currency{
+		"USD",
+	}
+}
+
 type DescriptorType string
 
 // Enum values for DescriptorType
@@ -197,6 +380,30 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type HarnessBedrockApiFormat string
+
+// Enum values for HarnessBedrockApiFormat
+const (
+	// Use the Bedrock Converse Stream API format.
+	HarnessBedrockApiFormatConverseStream HarnessBedrockApiFormat = "converse_stream"
+	// Use the Responses API format.
+	HarnessBedrockApiFormatResponses HarnessBedrockApiFormat = "responses"
+	// Use the Chat Completions API format.
+	HarnessBedrockApiFormatChatCompletions HarnessBedrockApiFormat = "chat_completions"
+)
+
+// Values returns all known values for HarnessBedrockApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessBedrockApiFormat) Values() []HarnessBedrockApiFormat {
+	return []HarnessBedrockApiFormat{
+		"converse_stream",
+		"responses",
+		"chat_completions",
+	}
+}
+
 type HarnessConversationRole string
 
 // Enum values for HarnessConversationRole
@@ -213,6 +420,27 @@ func (HarnessConversationRole) Values() []HarnessConversationRole {
 	return []HarnessConversationRole{
 		"user",
 		"assistant",
+	}
+}
+
+type HarnessOpenAiApiFormat string
+
+// Enum values for HarnessOpenAiApiFormat
+const (
+	// Use the Chat Completions API format.
+	HarnessOpenAiApiFormatChatCompletions HarnessOpenAiApiFormat = "chat_completions"
+	// Use the Responses API format.
+	HarnessOpenAiApiFormatResponses HarnessOpenAiApiFormat = "responses"
+)
+
+// Values returns all known values for HarnessOpenAiApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessOpenAiApiFormat) Values() []HarnessOpenAiApiFormat {
+	return []HarnessOpenAiApiFormat{
+		"chat_completions",
+		"responses",
 	}
 }
 
@@ -324,6 +552,23 @@ func (HarnessToolUseType) Values() []HarnessToolUseType {
 	}
 }
 
+type InstrumentBalanceToken string
+
+// Enum values for InstrumentBalanceToken
+const (
+	InstrumentBalanceTokenUsdc InstrumentBalanceToken = "USDC"
+)
+
+// Values returns all known values for InstrumentBalanceToken. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstrumentBalanceToken) Values() []InstrumentBalanceToken {
+	return []InstrumentBalanceToken{
+		"USDC",
+	}
+}
+
 type LanguageRuntime string
 
 // Enum values for LanguageRuntime
@@ -342,6 +587,41 @@ func (LanguageRuntime) Values() []LanguageRuntime {
 		"nodejs",
 		"deno",
 		"python",
+	}
+}
+
+type MemoryRecordOperatorType string
+
+// Enum values for MemoryRecordOperatorType
+const (
+	MemoryRecordOperatorTypeEqualsTo            MemoryRecordOperatorType = "EQUALS_TO"
+	MemoryRecordOperatorTypeExists              MemoryRecordOperatorType = "EXISTS"
+	MemoryRecordOperatorTypeNotExists           MemoryRecordOperatorType = "NOT_EXISTS"
+	MemoryRecordOperatorTypeBefore              MemoryRecordOperatorType = "BEFORE"
+	MemoryRecordOperatorTypeAfter               MemoryRecordOperatorType = "AFTER"
+	MemoryRecordOperatorTypeContains            MemoryRecordOperatorType = "CONTAINS"
+	MemoryRecordOperatorTypeGreaterThan         MemoryRecordOperatorType = "GREATER_THAN"
+	MemoryRecordOperatorTypeGreaterThanOrEquals MemoryRecordOperatorType = "GREATER_THAN_OR_EQUALS"
+	MemoryRecordOperatorTypeLessThan            MemoryRecordOperatorType = "LESS_THAN"
+	MemoryRecordOperatorTypeLessThanOrEquals    MemoryRecordOperatorType = "LESS_THAN_OR_EQUALS"
+)
+
+// Values returns all known values for MemoryRecordOperatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryRecordOperatorType) Values() []MemoryRecordOperatorType {
+	return []MemoryRecordOperatorType{
+		"EQUALS_TO",
+		"EXISTS",
+		"NOT_EXISTS",
+		"BEFORE",
+		"AFTER",
+		"CONTAINS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS",
 	}
 }
 
@@ -389,8 +669,9 @@ type Oauth2FlowType string
 
 // Enum values for Oauth2FlowType
 const (
-	Oauth2FlowTypeUserFederation Oauth2FlowType = "USER_FEDERATION"
-	Oauth2FlowTypeM2m            Oauth2FlowType = "M2M"
+	Oauth2FlowTypeUserFederation          Oauth2FlowType = "USER_FEDERATION"
+	Oauth2FlowTypeM2m                     Oauth2FlowType = "M2M"
+	Oauth2FlowTypeOnBehalfOfTokenExchange Oauth2FlowType = "ON_BEHALF_OF_TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for Oauth2FlowType. Note that this can be
@@ -401,6 +682,7 @@ func (Oauth2FlowType) Values() []Oauth2FlowType {
 	return []Oauth2FlowType{
 		"USER_FEDERATION",
 		"M2M",
+		"ON_BEHALF_OF_TOKEN_EXCHANGE",
 	}
 }
 
@@ -410,6 +692,7 @@ type OAuthGrantType string
 const (
 	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
 	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+	OAuthGrantTypeTokenExchange     OAuthGrantType = "TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for OAuthGrantType. Note that this can be
@@ -420,6 +703,7 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 	return []OAuthGrantType{
 		"CLIENT_CREDENTIALS",
 		"AUTHORIZATION_CODE",
+		"TOKEN_EXCHANGE",
 	}
 }
 
@@ -444,6 +728,126 @@ func (OperatorType) Values() []OperatorType {
 	}
 }
 
+type PaymentHttpMethodType string
+
+// Enum values for PaymentHttpMethodType
+const (
+	PaymentHttpMethodTypeGet    PaymentHttpMethodType = "GET"
+	PaymentHttpMethodTypePost   PaymentHttpMethodType = "POST"
+	PaymentHttpMethodTypePut    PaymentHttpMethodType = "PUT"
+	PaymentHttpMethodTypeDelete PaymentHttpMethodType = "DELETE"
+	PaymentHttpMethodTypePatch  PaymentHttpMethodType = "PATCH"
+)
+
+// Values returns all known values for PaymentHttpMethodType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentHttpMethodType) Values() []PaymentHttpMethodType {
+	return []PaymentHttpMethodType{
+		"GET",
+		"POST",
+		"PUT",
+		"DELETE",
+		"PATCH",
+	}
+}
+
+type PaymentInstrumentStatus string
+
+// Enum values for PaymentInstrumentStatus
+const (
+	PaymentInstrumentStatusInitiated PaymentInstrumentStatus = "INITIATED"
+	PaymentInstrumentStatusActive    PaymentInstrumentStatus = "ACTIVE"
+	PaymentInstrumentStatusFailed    PaymentInstrumentStatus = "FAILED"
+	PaymentInstrumentStatusDeleted   PaymentInstrumentStatus = "DELETED"
+)
+
+// Values returns all known values for PaymentInstrumentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentInstrumentStatus) Values() []PaymentInstrumentStatus {
+	return []PaymentInstrumentStatus{
+		"INITIATED",
+		"ACTIVE",
+		"FAILED",
+		"DELETED",
+	}
+}
+
+type PaymentInstrumentType string
+
+// Enum values for PaymentInstrumentType
+const (
+	PaymentInstrumentTypeEmbeddedCryptoWallet PaymentInstrumentType = "EMBEDDED_CRYPTO_WALLET"
+)
+
+// Values returns all known values for PaymentInstrumentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentInstrumentType) Values() []PaymentInstrumentType {
+	return []PaymentInstrumentType{
+		"EMBEDDED_CRYPTO_WALLET",
+	}
+}
+
+type PaymentSessionStatus string
+
+// Enum values for PaymentSessionStatus
+const (
+	PaymentSessionStatusActive  PaymentSessionStatus = "ACTIVE"
+	PaymentSessionStatusExpired PaymentSessionStatus = "EXPIRED"
+	PaymentSessionStatusDeleted PaymentSessionStatus = "DELETED"
+)
+
+// Values returns all known values for PaymentSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentSessionStatus) Values() []PaymentSessionStatus {
+	return []PaymentSessionStatus{
+		"ACTIVE",
+		"EXPIRED",
+		"DELETED",
+	}
+}
+
+type PaymentStatus string
+
+// Enum values for PaymentStatus
+const (
+	PaymentStatusProofGenerated PaymentStatus = "PROOF_GENERATED"
+)
+
+// Values returns all known values for PaymentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentStatus) Values() []PaymentStatus {
+	return []PaymentStatus{
+		"PROOF_GENERATED",
+	}
+}
+
+type PaymentType string
+
+// Enum values for PaymentType
+const (
+	PaymentTypeCryptoX402 PaymentType = "CRYPTO_X402"
+)
+
+// Values returns all known values for PaymentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentType) Values() []PaymentType {
+	return []PaymentType{
+		"CRYPTO_X402",
+	}
+}
+
 type ProgrammingLanguage string
 
 // Enum values for ProgrammingLanguage
@@ -462,6 +866,50 @@ func (ProgrammingLanguage) Values() []ProgrammingLanguage {
 		"python",
 		"javascript",
 		"typescript",
+	}
+}
+
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusPending    RecommendationStatus = "PENDING"
+	RecommendationStatusInProgress RecommendationStatus = "IN_PROGRESS"
+	RecommendationStatusCompleted  RecommendationStatus = "COMPLETED"
+	RecommendationStatusFailed     RecommendationStatus = "FAILED"
+	RecommendationStatusDeleting   RecommendationStatus = "DELETING"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"DELETING",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeSystemPromptRecommendation    RecommendationType = "SYSTEM_PROMPT_RECOMMENDATION"
+	RecommendationTypeToolDescriptionRecommendation RecommendationType = "TOOL_DESCRIPTION_RECOMMENDATION"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"SYSTEM_PROMPT_RECOMMENDATION",
+		"TOOL_DESCRIPTION_RECOMMENDATION",
 	}
 }
 

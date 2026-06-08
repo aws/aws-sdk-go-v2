@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ContinueServiceDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContinueServiceDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ContinueServiceDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityProvider(context.Background(), nil, func(o *Options) {
@@ -973,6 +985,18 @@ func TestCheckSnapshot_UpdateTaskSet(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ContinueServiceDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ContinueServiceDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ContinueServiceDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCapacityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityProvider(context.Background(), nil, func(o *Options) {

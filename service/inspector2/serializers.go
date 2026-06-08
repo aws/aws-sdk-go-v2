@@ -8006,6 +8006,11 @@ func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.ActivateVMScanner != nil {
+		ok := object.Key("activateVMScanner")
+		ok.Boolean(*v.ActivateVMScanner)
+	}
+
 	if len(v.ScanMode) > 0 {
 		ok := object.Key("scanMode")
 		ok.String(string(v.ScanMode))

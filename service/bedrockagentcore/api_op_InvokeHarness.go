@@ -66,6 +66,10 @@ type InvokeHarnessInput struct {
 	// harness default.
 	Model types.HarnessModelConfiguration
 
+	// An identifier for the end user making the request. This value is passed through
+	// to the runtime container.
+	RuntimeUserId *string
+
 	// The skills available to the agent for this invocation. If specified, overrides
 	// the harness default.
 	Skills []types.HarnessSkill

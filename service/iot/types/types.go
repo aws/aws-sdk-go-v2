@@ -802,6 +802,20 @@ type AwsJsonSubstitutionCommandPreprocessorConfig struct {
 // Configuration settings for batching.
 type BatchConfig struct {
 
+	// Whether to allow batching messages from different MQTT topics into a single
+	// HTTP request. By default, only messages from the same topic are batched
+	// together. The default value is false .
+	//
+	// When batchAcrossTopics is enabled, the error payload format changes: the topic
+	// field moves from the top level to inside each entry in the payloadsWithMetadata
+	// array, since each message in the batch may originate from a different topic.
+	//
+	// Messages are always batched within the scope of the same account, rule name,
+	// target HTTP endpoint URL, and billing group. Messages that differ in any of
+	// these attributes are never combined into the same batch, regardless of the
+	// batchAcrossTopics setting.
+	BatchAcrossTopics bool
+
 	// The maximum amount of time (in milliseconds) that an outgoing call waits for
 	// other calls with which it batches messages of the same type. The higher the
 	// setting, the longer the latency of the batched HTTP Action will be.
@@ -1541,6 +1555,16 @@ type ConfigurationDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides connectivity filter selections for the fleet indexing configuration.
+type ConnectivityFilter struct {
+
+	// A list of fleet indexing APIs for which to enable socket information retrieval.
+	// Currently, the only supported value is GET_THING_CONNECTIVITY_DATA .
+	IncludeSocketInformation []FleetIndexingApi
+
+	noSmithyDocumentSerde
+}
+
 // Describes a custom method used to code sign a file.
 type CustomCodeSigning struct {
 
@@ -2181,6 +2205,10 @@ type ImplicitDeny struct {
 //
 // [Managing fleet indexing]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html
 type IndexingFilter struct {
+
+	// Provides additional connectivity filter selections for the fleet indexing
+	// configuration.
+	Connectivity *ConnectivityFilter
 
 	// The list of geolocation targets that you select to index. The default maximum
 	// number of geolocation targets for indexing is 1 . To increase the limit, see [Amazon Web Services IoT Device Management Quotas]
@@ -4434,17 +4462,30 @@ type ThingAttribute struct {
 // The connectivity status of the thing.
 type ThingConnectivity struct {
 
+	// Indicates whether the client is using a clean session. Returns true for clean
+	// sessions.
+	CleanSession *bool
+
+	// The unique identifier of the MQTT client.
+	ClientId *string
+
 	// True if the thing is connected to the Amazon Web Services IoT Core service;
 	// false if it is not connected.
 	Connected *bool
 
-	// The reason why the client is disconnected. If the thing has been disconnected
-	// for approximately an hour, the disconnectReason value might be missing.
+	// The reason that the client is disconnected.
 	DisconnectReason *string
 
+	// The keep-alive interval in seconds that the client specified when establishing
+	// the connection.
+	KeepAliveDuration *int32
+
+	// The session expiry interval in seconds for the MQTT client connection. This
+	// value indicates how long the session will remain active after the client
+	// disconnects.
+	SessionExpiry *int64
+
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.
-	// If the thing has been disconnected for approximately an hour, the time value
-	// might be missing.
 	Timestamp *int64
 
 	noSmithyDocumentSerde

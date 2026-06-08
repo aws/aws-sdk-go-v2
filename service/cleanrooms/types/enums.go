@@ -378,10 +378,16 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeAddMember                   ChangeType = "ADD_MEMBER"
-	ChangeTypeGrantReceiveResultsAbility  ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeRevokeReceiveResultsAbility ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeEditAutoApprovedChangeTypes ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+	ChangeTypeAddMember                       ChangeType = "ADD_MEMBER"
+	ChangeTypeGrantReceiveResultsAbility      ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeRevokeReceiveResultsAbility     ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeEditAutoApprovedChangeTypes     ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+	ChangeTypeAddPayerCandidate               ChangeType = "ADD_PAYER_CANDIDATE"
+	ChangeTypeRemovePayerCandidate            ChangeType = "REMOVE_PAYER_CANDIDATE"
+	ChangeTypeGrantCanReceiveModelOutput      ChangeType = "GRANT_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeGrantCanReceiveInferenceOutput  ChangeType = "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeRevokeCanReceiveModelOutput     ChangeType = "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeRevokeCanReceiveInferenceOutput ChangeType = "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -394,6 +400,12 @@ func (ChangeType) Values() []ChangeType {
 		"GRANT_RECEIVE_RESULTS_ABILITY",
 		"REVOKE_RECEIVE_RESULTS_ABILITY",
 		"EDIT_AUTO_APPROVED_CHANGE_TYPES",
+		"ADD_PAYER_CANDIDATE",
+		"REMOVE_PAYER_CANDIDATE",
+		"GRANT_CAN_RECEIVE_MODEL_OUTPUT",
+		"GRANT_CAN_RECEIVE_INFERENCE_OUTPUT",
+		"REVOKE_CAN_RECEIVE_MODEL_OUTPUT",
+		"REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT",
 	}
 }
 

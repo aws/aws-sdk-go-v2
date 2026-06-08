@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the integrated resources for an agent space
+// Lists the integrated resources for an agent space, optionally filtered by
+// integration or resource type.
 func (c *Client) ListIntegratedResources(ctx context.Context, params *ListIntegratedResourcesInput, optFns ...func(*Options)) (*ListIntegratedResourcesOutput, error) {
 	if params == nil {
 		params = &ListIntegratedResourcesInput{}
@@ -29,21 +30,23 @@ func (c *Client) ListIntegratedResources(ctx context.Context, params *ListIntegr
 
 type ListIntegratedResourcesInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space to list integrated resources for.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Filter integrated resources by a specific integration
+	// The unique identifier of the integration to filter by.
 	IntegrationId *string
 
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
-	// Filter integrated resources by resource type
+	// The type of resource to filter by.
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde
@@ -51,12 +54,14 @@ type ListIntegratedResourcesInput struct {
 
 type ListIntegratedResourcesOutput struct {
 
-	// List of integrated resources
+	// The list of integrated resource summaries.
 	//
 	// This member is required.
 	IntegratedResourceSummaries []types.IntegratedResourceSummary
 
-	// Token for pagination to retrieve the next set of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -165,7 +170,7 @@ func (c *Client) addOperationListIntegratedResourcesMiddlewares(stack *middlewar
 // ListIntegratedResourcesPaginatorOptions is the paginator options for
 // ListIntegratedResources
 type ListIntegratedResourcesPaginatorOptions struct {
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

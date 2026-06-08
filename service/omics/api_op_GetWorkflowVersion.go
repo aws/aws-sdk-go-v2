@@ -98,6 +98,15 @@ type GetWorkflowVersionOutput struct {
 	// The parameter template for the workflow version.
 	ParameterTemplate map[string]types.WorkflowParameter
 
+	// A mapping of profile names to their parameter templates. Each profile defines
+	// its own set of parameters that you can use when starting a run with that
+	// profile.
+	ProfileParameterTemplates map[string]map[string]types.WorkflowParameter
+
+	// The list of Nextflow profiles that are available for this workflow version.
+	// Profiles allow you to select predefined configuration settings at runtime.
+	Profiles []string
+
 	// The README content for the workflow version, providing documentation and usage
 	// information specific to this version.
 	Readme *string

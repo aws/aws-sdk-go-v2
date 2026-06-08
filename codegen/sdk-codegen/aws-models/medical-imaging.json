@@ -82,6 +82,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html\">What is AWS HealthImaging?</a> in the <i>AWS HealthImaging Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS Health Imaging",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medical-imaging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medical-imaging-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medical-imaging.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medical-imaging.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1274,6 +1462,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The error message thrown if an import job fails.</p>"
                     }
+                },
+                "importConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#ImportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object containing <code>DicomJsonMetadataImportConfiguration</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2019,6 +2213,61 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomJsonMetadataImportConfiguration": {
+            "type": "structure",
+            "members": {
+                "dicomMetadataMappings": {
+                    "target": "com.amazonaws.medicalimaging#DicomMetadataMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maps DCM files to their metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration parameters that are specific to DICOM JSON metadata import operations.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomMetadataMapping": {
+            "type": "structure",
+            "members": {
+                "studyInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Study Instance UID that identifies the study.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "seriesInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Series Instance UID that identifies the series. This parameter is optional because the mapping might be at the study level.</p>"
+                    }
+                },
+                "metadataFilePath": {
+                    "target": "com.amazonaws.medicalimaging#MetadataFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the JSON metadata file relative to inputS3Uri.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Maps DCM files to their metadata.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DicomMetadataMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#DicomMetadataMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.medicalimaging#GetDICOMImportJob": {
@@ -2842,6 +3091,17 @@
                 "smithy.api#documentation": "<p>Summary of the image set metadata.</p>"
             }
         },
+        "com.amazonaws.medicalimaging#ImportConfiguration": {
+            "type": "union",
+            "members": {
+                "dicomJsonMetadataImportConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#DicomJsonMetadataImportConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration options for different types of import operations.</p>"
+            }
+        },
         "com.amazonaws.medicalimaging#InternalServerException": {
             "type": "structure",
             "members": {
@@ -3336,6 +3596,16 @@
                 "smithy.api#documentation": "<p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>"
             }
         },
+        "com.amazonaws.medicalimaging#MetadataFilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9!-~]+([a-zA-Z0-9!-~ ]*[a-zA-Z0-9!-~]+)*$"
+            }
+        },
         "com.amazonaws.medicalimaging#MetadataUpdates": {
             "type": "union",
             "members": {
@@ -3806,7 +4076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
+                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files or enhances existing DICOM files with JSON metadata. The <code>importConfiguration</code> parameter specifies the import type. The data is found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/startDICOMImportJob/datastore/{datastoreId}"
@@ -3864,6 +4134,12 @@
                     "target": "com.amazonaws.medicalimaging#AwsAccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the source S3 bucket owner.</p>"
+                    }
+                },
+                "importConfiguration": {
+                    "target": "com.amazonaws.medicalimaging#ImportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import configuration for the import job.</p>"
                     }
                 }
             },

@@ -10,6 +10,66 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAgreementCancellationRequest struct {
+}
+
+func (*validateOpAcceptAgreementCancellationRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAgreementCancellationRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAgreementCancellationRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAgreementCancellationRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAcceptAgreementPaymentRequest struct {
+}
+
+func (*validateOpAcceptAgreementPaymentRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAgreementPaymentRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAgreementPaymentRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAgreementPaymentRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAcceptAgreementRequest struct {
+}
+
+func (*validateOpAcceptAgreementRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAgreementRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAgreementRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAgreementRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchCreateBillingAdjustmentRequest struct {
 }
 
@@ -50,6 +110,26 @@ func (m *validateOpCancelAgreementCancellationRequest) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelAgreement struct {
+}
+
+func (*validateOpCancelAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelAgreementPaymentRequest struct {
 }
 
@@ -65,6 +145,26 @@ func (m *validateOpCancelAgreementPaymentRequest) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelAgreementPaymentRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAgreementRequest struct {
+}
+
+func (*validateOpCreateAgreementRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgreementRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgreementRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgreementRequestInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +205,26 @@ func (m *validateOpGetAgreementCancellationRequest) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgreementCancellationRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgreementEntitlements struct {
+}
+
+func (*validateOpGetAgreementEntitlements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgreementEntitlements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgreementEntitlementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgreementEntitlementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +350,46 @@ func (m *validateOpListAgreementPaymentRequests) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectAgreementCancellationRequest struct {
+}
+
+func (*validateOpRejectAgreementCancellationRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectAgreementCancellationRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectAgreementCancellationRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectAgreementCancellationRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRejectAgreementPaymentRequest struct {
+}
+
+func (*validateOpRejectAgreementPaymentRequest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectAgreementPaymentRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectAgreementPaymentRequestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectAgreementPaymentRequestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendAgreementCancellationRequest struct {
 }
 
@@ -270,6 +430,38 @@ func (m *validateOpSendAgreementPaymentRequest) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePurchaseOrders struct {
+}
+
+func (*validateOpUpdatePurchaseOrders) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePurchaseOrders) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePurchaseOrdersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePurchaseOrdersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAcceptAgreementCancellationRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAgreementCancellationRequest{}, middleware.After)
+}
+
+func addOpAcceptAgreementPaymentRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAgreementPaymentRequest{}, middleware.After)
+}
+
+func addOpAcceptAgreementRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAgreementRequest{}, middleware.After)
+}
+
 func addOpBatchCreateBillingAdjustmentRequestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchCreateBillingAdjustmentRequest{}, middleware.After)
 }
@@ -278,8 +470,16 @@ func addOpCancelAgreementCancellationRequestValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpCancelAgreementCancellationRequest{}, middleware.After)
 }
 
+func addOpCancelAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelAgreement{}, middleware.After)
+}
+
 func addOpCancelAgreementPaymentRequestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelAgreementPaymentRequest{}, middleware.After)
+}
+
+func addOpCreateAgreementRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgreementRequest{}, middleware.After)
 }
 
 func addOpDescribeAgreementValidationMiddleware(stack *middleware.Stack) error {
@@ -288,6 +488,10 @@ func addOpDescribeAgreementValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAgreementCancellationRequestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgreementCancellationRequest{}, middleware.After)
+}
+
+func addOpGetAgreementEntitlementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgreementEntitlements{}, middleware.After)
 }
 
 func addOpGetAgreementPaymentRequestValidationMiddleware(stack *middleware.Stack) error {
@@ -314,12 +518,24 @@ func addOpListAgreementPaymentRequestsValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpListAgreementPaymentRequests{}, middleware.After)
 }
 
+func addOpRejectAgreementCancellationRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectAgreementCancellationRequest{}, middleware.After)
+}
+
+func addOpRejectAgreementPaymentRequestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectAgreementPaymentRequest{}, middleware.After)
+}
+
 func addOpSendAgreementCancellationRequestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendAgreementCancellationRequest{}, middleware.After)
 }
 
 func addOpSendAgreementPaymentRequestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendAgreementPaymentRequest{}, middleware.After)
+}
+
+func addOpUpdatePurchaseOrdersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePurchaseOrders{}, middleware.After)
 }
 
 func validateBatchCreateBillingAdjustmentRequestEntry(v *types.BatchCreateBillingAdjustmentRequestEntry) error {
@@ -369,6 +585,60 @@ func validateBatchCreateBillingAdjustmentRequestEntryList(v []types.BatchCreateB
 	}
 }
 
+func validateConfigurableUpfrontPricingTermConfiguration(v *types.ConfigurableUpfrontPricingTermConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurableUpfrontPricingTermConfiguration"}
+	if v.SelectorValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectorValue"))
+	}
+	if v.Dimensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Dimensions"))
+	} else if v.Dimensions != nil {
+		if err := validateDimensionList(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDimension(v *types.Dimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Dimension"}
+	if v.DimensionKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DimensionKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDimensionList(v []types.Dimension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DimensionList"}
+	for i := range v {
+		if err := validateDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvoiceBillingPeriod(v *types.InvoiceBillingPeriod) error {
 	if v == nil {
 		return nil
@@ -379,6 +649,190 @@ func validateInvoiceBillingPeriod(v *types.InvoiceBillingPeriod) error {
 	}
 	if v.Year == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Year"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePurchaseOrder(v *types.PurchaseOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurchaseOrder"}
+	if v.ChargeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChargeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePurchaseOrders(v []types.PurchaseOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurchaseOrders"}
+	for i := range v {
+		if err := validatePurchaseOrder(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRenewalTermConfiguration(v *types.RenewalTermConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenewalTermConfiguration"}
+	if v.EnableAutoRenew == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableAutoRenew"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestedTerm(v *types.RequestedTerm) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestedTerm"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Configuration != nil {
+		if err := validateRequestedTermConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestedTermConfiguration(v types.RequestedTermConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestedTermConfiguration"}
+	switch uv := v.(type) {
+	case *types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration:
+		if err := validateConfigurableUpfrontPricingTermConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[configurableUpfrontPricingTermConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RequestedTermConfigurationMemberRenewalTermConfiguration:
+		if err := validateRenewalTermConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[renewalTermConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RequestedTermConfigurationMemberVariablePaymentTermConfiguration:
+		if err := validateVariablePaymentTermConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[variablePaymentTermConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestedTermList(v []types.RequestedTerm) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestedTermList"}
+	for i := range v {
+		if err := validateRequestedTerm(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVariablePaymentTermConfiguration(v *types.VariablePaymentTermConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VariablePaymentTermConfiguration"}
+	if len(v.PaymentRequestApprovalStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentRequestApprovalStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAgreementCancellationRequestInput(v *AcceptAgreementCancellationRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAgreementCancellationRequestInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if v.AgreementCancellationRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementCancellationRequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAgreementPaymentRequestInput(v *AcceptAgreementPaymentRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAgreementPaymentRequestInput"}
+	if v.PaymentRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentRequestId"))
+	}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAgreementRequestInput(v *AcceptAgreementRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAgreementRequestInput"}
+	if v.AgreementRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementRequestId"))
+	}
+	if v.PurchaseOrders != nil {
+		if err := validatePurchaseOrders(v.PurchaseOrders); err != nil {
+			invalidParams.AddNested("PurchaseOrders", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -427,6 +881,21 @@ func validateOpCancelAgreementCancellationRequestInput(v *CancelAgreementCancell
 	}
 }
 
+func validateOpCancelAgreementInput(v *CancelAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelAgreementInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelAgreementPaymentRequestInput(v *CancelAgreementPaymentRequestInput) error {
 	if v == nil {
 		return nil
@@ -437,6 +906,28 @@ func validateOpCancelAgreementPaymentRequestInput(v *CancelAgreementPaymentReque
 	}
 	if v.AgreementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAgreementRequestInput(v *CreateAgreementRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgreementRequestInput"}
+	if len(v.Intent) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Intent"))
+	}
+	if v.RequestedTerms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestedTerms"))
+	} else if v.RequestedTerms != nil {
+		if err := validateRequestedTermList(v.RequestedTerms); err != nil {
+			invalidParams.AddNested("RequestedTerms", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -468,6 +959,21 @@ func validateOpGetAgreementCancellationRequestInput(v *GetAgreementCancellationR
 	if v.AgreementCancellationRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgreementCancellationRequestId"))
 	}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgreementEntitlementsInput(v *GetAgreementEntitlementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgreementEntitlementsInput"}
 	if v.AgreementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
 	}
@@ -582,6 +1088,45 @@ func validateOpListAgreementPaymentRequestsInput(v *ListAgreementPaymentRequests
 	}
 }
 
+func validateOpRejectAgreementCancellationRequestInput(v *RejectAgreementCancellationRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectAgreementCancellationRequestInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if v.AgreementCancellationRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementCancellationRequestId"))
+	}
+	if v.RejectionReason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RejectionReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectAgreementPaymentRequestInput(v *RejectAgreementPaymentRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectAgreementPaymentRequestInput"}
+	if v.PaymentRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentRequestId"))
+	}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendAgreementCancellationRequestInput(v *SendAgreementCancellationRequestInput) error {
 	if v == nil {
 		return nil
@@ -616,6 +1161,25 @@ func validateOpSendAgreementPaymentRequestInput(v *SendAgreementPaymentRequestIn
 	}
 	if v.ChargeAmount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChargeAmount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePurchaseOrdersInput(v *UpdatePurchaseOrdersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePurchaseOrdersInput"}
+	if v.PurchaseOrders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PurchaseOrders"))
+	} else if v.PurchaseOrders != nil {
+		if err := validatePurchaseOrders(v.PurchaseOrders); err != nil {
+			invalidParams.AddNested("PurchaseOrders", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

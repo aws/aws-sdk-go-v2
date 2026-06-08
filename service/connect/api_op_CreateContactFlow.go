@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a flow for the specified Amazon Connect instance.
+// Creates a flow for the specified Connect Customer instance.
 //
-// You can also create and update flows using the [Amazon Connect Flow language].
+// You can also create and update flows using the [Connect Customer Flow language].
 //
-// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
+// [Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlowInput, optFns ...func(*Options)) (*CreateContactFlowOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowInput{}
@@ -33,16 +33,16 @@ func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlo
 
 type CreateContactFlowInput struct {
 
-	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Connect Customer Flow language].
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 256000.
 	//
-	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+	// [Example flow in Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	//
 	// This member is required.
 	Content *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -53,7 +53,7 @@ type CreateContactFlowInput struct {
 	Name *string
 
 	// The type of the flow. For descriptions of the available types, see [Choose a flow type] in the
-	// Amazon Connect Administrator Guide.
+	// Connect Customer Administrator Guide.
 	//
 	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	//

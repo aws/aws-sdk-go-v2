@@ -16,6 +16,8 @@ import (
 // aliases, see versioning-aliases.
 //
 // This operation requires permissions for the lex:GetBotAlias action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBotAlias(ctx context.Context, params *GetBotAliasInput, optFns ...func(*Options)) (*GetBotAliasOutput, error) {
 	if params == nil {
 		params = &GetBotAliasInput{}

@@ -204,8 +204,9 @@ type WebserverAccessMode string
 
 // Enum values for WebserverAccessMode
 const (
-	WebserverAccessModePrivateOnly WebserverAccessMode = "PRIVATE_ONLY"
-	WebserverAccessModePublicOnly  WebserverAccessMode = "PUBLIC_ONLY"
+	WebserverAccessModePrivateOnly      WebserverAccessMode = "PRIVATE_ONLY"
+	WebserverAccessModePublicOnly       WebserverAccessMode = "PUBLIC_ONLY"
+	WebserverAccessModePublicAndPrivate WebserverAccessMode = "PUBLIC_AND_PRIVATE"
 )
 
 // Values returns all known values for WebserverAccessMode. Note that this can be
@@ -216,6 +217,7 @@ func (WebserverAccessMode) Values() []WebserverAccessMode {
 	return []WebserverAccessMode{
 		"PRIVATE_ONLY",
 		"PUBLIC_ONLY",
+		"PUBLIC_AND_PRIVATE",
 	}
 }
 

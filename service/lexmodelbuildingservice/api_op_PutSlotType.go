@@ -26,6 +26,8 @@ import (
 // contains the slot type, the bot's status field is set to NOT_BUILT .
 //
 // This operation requires permissions for the lex:PutSlotType action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutSlotType(ctx context.Context, params *PutSlotTypeInput, optFns ...func(*Options)) (*PutSlotTypeOutput, error) {
 	if params == nil {
 		params = &PutSlotTypeInput{}

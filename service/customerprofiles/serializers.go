@@ -331,6 +331,107 @@ func awsRestjson1_serializeOpDocumentBatchGetProfileInput(v *BatchGetProfileInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchPutProfileObject struct {
+}
+
+func (*awsRestjson1_serializeOpBatchPutProfileObject) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchPutProfileObject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchPutProfileObjectInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/profiles/objects/batch-put-profile-object")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchPutProfileObjectInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchPutProfileObjectInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchPutProfileObjectInput(v *BatchPutProfileObjectInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchPutProfileObjectInput(v *BatchPutProfileObjectInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Items != nil {
+		ok := object.Key("Items")
+		if err := awsRestjson1_serializeDocumentBatchPutProfileObjectRequestItemList(v.Items, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ObjectTypeName != nil {
+		ok := object.Key("ObjectTypeName")
+		ok.String(*v.ObjectTypeName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateCalculatedAttributeDefinition struct {
 }
 
@@ -10703,6 +10804,36 @@ func awsRestjson1_serializeDocumentBatchGetProfileIdList(v []string, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBatchPutProfileObjectRequestItem(v *types.BatchPutProfileObjectRequestItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Object != nil {
+		ok := object.Key("Object")
+		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchPutProfileObjectRequestItemList(v []types.BatchPutProfileObjectRequestItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBatchPutProfileObjectRequestItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCalculatedAttributeDimension(v *types.CalculatedAttributeDimension, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12336,6 +12467,13 @@ func awsRestjson1_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 	if v.EventsConfig != nil {
 		ok := object.Key("EventsConfig")
 		if err := awsRestjson1_serializeDocumentEventsConfig(v.EventsConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedColumns != nil {
+		ok := object.Key("ExcludedColumns")
+		if err := awsRestjson1_serializeDocumentIncludedColumns(v.ExcludedColumns, ok); err != nil {
 			return err
 		}
 	}

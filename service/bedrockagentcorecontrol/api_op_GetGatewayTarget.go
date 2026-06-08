@@ -107,6 +107,9 @@ type GetGatewayTargetOutput struct {
 	// The managed resources created by the gateway for private endpoint connectivity.
 	PrivateEndpointManagedResources []types.ManagedResourceDetails
 
+	// The protocol type of the gateway target.
+	ProtocolType types.TargetProtocolType
+
 	// The reasons for the current status of the gateway target.
 	StatusReasons []string
 

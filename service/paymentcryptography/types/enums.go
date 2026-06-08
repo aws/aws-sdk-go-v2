@@ -25,6 +25,27 @@ func (As2805KeyVariant) Values() []As2805KeyVariant {
 	}
 }
 
+type AssociationState string
+
+// Enum values for AssociationState
+const (
+	AssociationStateActive        AssociationState = "ACTIVE"
+	AssociationStateUpdatePending AssociationState = "UPDATE_PENDING"
+	AssociationStateDeletePending AssociationState = "DELETE_PENDING"
+)
+
+// Values returns all known values for AssociationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationState) Values() []AssociationState {
+	return []AssociationState{
+		"ACTIVE",
+		"UPDATE_PENDING",
+		"DELETE_PENDING",
+	}
+}
+
 type DeriveKeyUsage string
 
 // Enum values for DeriveKeyUsage
@@ -383,6 +404,23 @@ func (KeyUsage) Values() []KeyUsage {
 	}
 }
 
+type MpaOperation string
+
+// Enum values for MpaOperation
+const (
+	MpaOperationImportRootPublicKeyCertificate MpaOperation = "IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE"
+)
+
+// Values returns all known values for MpaOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpaOperation) Values() []MpaOperation {
+	return []MpaOperation{
+		"IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE",
+	}
+}
+
 type MultiRegionKeyType string
 
 // Enum values for MultiRegionKeyType
@@ -399,6 +437,29 @@ func (MultiRegionKeyType) Values() []MultiRegionKeyType {
 	return []MultiRegionKeyType{
 		"PRIMARY",
 		"REPLICA",
+	}
+}
+
+type SessionStatus string
+
+// Enum values for SessionStatus
+const (
+	SessionStatusPending   SessionStatus = "PENDING"
+	SessionStatusApproved  SessionStatus = "APPROVED"
+	SessionStatusFailed    SessionStatus = "FAILED"
+	SessionStatusCancelled SessionStatus = "CANCELLED"
+)
+
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"PENDING",
+		"APPROVED",
+		"FAILED",
+		"CANCELLED",
 	}
 }
 

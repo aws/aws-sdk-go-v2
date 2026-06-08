@@ -88,6 +88,12 @@ type DescribeInferenceComponentOutput struct {
 	// Details about the resources that are deployed with this inference component.
 	Specification *types.InferenceComponentSpecificationSummary
 
+	// A list of specification summaries for the inference component, one per instance
+	// type. This parameter is populated when the inference component was created with
+	// multiple specifications. When this parameter is populated, the singular
+	// Specification parameter is not returned.
+	Specifications []types.InferenceComponentSpecificationSummary
+
 	// The name of the production variant that hosts the inference component.
 	VariantName *string
 

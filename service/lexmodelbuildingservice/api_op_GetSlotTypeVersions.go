@@ -22,6 +22,8 @@ import (
 // $LATEST version.
 //
 // This operation requires permissions for the lex:GetSlotTypeVersions action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetSlotTypeVersions(ctx context.Context, params *GetSlotTypeVersionsInput, optFns ...func(*Options)) (*GetSlotTypeVersionsOutput, error) {
 	if params == nil {
 		params = &GetSlotTypeVersionsInput{}

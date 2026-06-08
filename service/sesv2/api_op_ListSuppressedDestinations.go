@@ -13,7 +13,9 @@ import (
 )
 
 // Retrieves a list of email addresses that are on the suppression list for your
-// account.
+// account or for a specific tenant. To target a tenant's suppression list, specify
+// the TenantName parameter. If you omit TenantName , the operation targets the
+// account-level suppression list.
 func (c *Client) ListSuppressedDestinations(ctx context.Context, params *ListSuppressedDestinationsInput, optFns ...func(*Options)) (*ListSuppressedDestinationsOutput, error) {
 	if params == nil {
 		params = &ListSuppressedDestinationsInput{}
@@ -30,7 +32,7 @@ func (c *Client) ListSuppressedDestinations(ctx context.Context, params *ListSup
 }
 
 // A request to obtain a list of email destinations that are on the suppression
-// list for your account.
+// list for your account or for a specific tenant.
 type ListSuppressedDestinationsInput struct {
 
 	// Used to filter the list of suppressed email destinations so that it only
@@ -47,12 +49,17 @@ type ListSuppressedDestinationsInput struct {
 	// obtain additional results.
 	PageSize *int32
 
-	// The factors that caused the email address to be added to .
+	// The factors that caused the email address to be added to the suppression list
+	// for your account or for a specific tenant.
 	Reasons []types.SuppressionListReason
 
 	// Used to filter the list of suppressed email destinations so that it only
 	// includes addresses that were added to the list after a specific date.
 	StartDate *time.Time
+
+	// The name of the tenant whose suppression list you want to retrieve. If you omit
+	// this parameter, the operation targets the account-level suppression list.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }
@@ -61,9 +68,9 @@ type ListSuppressedDestinationsInput struct {
 type ListSuppressedDestinationsOutput struct {
 
 	// A token that indicates that there are additional email addresses on the
-	// suppression list for your account. To view additional suppressed addresses,
-	// issue another request to ListSuppressedDestinations , and pass this token in the
-	// NextToken parameter.
+	// suppression list for your account or for the specified tenant. To view
+	// additional suppressed addresses, issue another request to
+	// ListSuppressedDestinations , and pass this token in the NextToken parameter.
 	NextToken *string
 
 	// A list of summaries, each containing a summary for a suppressed email

@@ -85,14 +85,32 @@ type PutRecommendationPreferencesInput struct {
 	// Amazon Web Services resource are analyzed. When this preference isn't specified,
 	// we use the default value DAYS_14 .
 	//
-	// You can only set this preference for the Amazon EC2 instance and Auto Scaling
-	// group resource types.
+	// You can only set this preference for the Amazon EC2 instance, Auto Scaling
+	// group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance,
+	// and Aurora DB cluster storage resource types.
 	//
-	//   - Amazon EC2 instance lookback preferences can be set at the organization,
-	//   account, and resource levels.
+	//   - Lookback period preferences for Amazon EC2 instances, Amazon EBS volumes,
+	//   Amazon ECS services, Amazon RDS DB instances, and Aurora DB cluster storage
+	//   resource types can be set at the organization, account, and resource levels.
 	//
 	//   - Auto Scaling group lookback preferences can only be set at the resource
 	//   level.
+	//
+	//   - Amazon EBS volume lookback preferences can be set at the organization,
+	//   account, and resource levels.
+	//
+	//   - Amazon ECS service on Fargate lookback preferences can be set at the
+	//   organization, account, and resource levels.
+	//
+	//   - Amazon RDS DB instance lookback preferences can be set at the organization,
+	//   account, and resource levels.
+	//
+	//   - Aurora DB cluster storage lookback preferences can be set at the
+	//   organization, account, and resource levels.
+	//
+	//   - Changing the lookback period for Amazon EBS volumes to 14 days does not
+	//   affect the 32-day lookback period used to determine whether an Amazon EBS volume
+	//   is unattached.
 	LookBackPeriod types.LookBackPeriodPreference
 
 	//  The preference to control which resource type values are considered when
@@ -101,8 +119,9 @@ type PutRecommendationPreferencesInput struct {
 	// or excludeList . If the preference is an empty set of resource type values, an
 	// error occurs.
 	//
-	// You can only set this preference for the Amazon EC2 instance and Auto Scaling
-	// group resource types.
+	// You can only set this preference for the Amazon EC2 instance, Auto Scaling
+	// group, Amazon EBS volume, Amazon ECS service, Amazon RDS DB instance, and Aurora
+	// DB cluster storage resource types.
 	PreferredResources []types.PreferredResource
 
 	//  The status of the savings estimation mode preference to create or update.

@@ -46,7 +46,8 @@ type Action struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -3514,6 +3515,11 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
 	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
 
+	// A custom prefix for the CloudWatch log group names. When specified, evaluation
+	// run logs are written to /error and /output instead of the default
+	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
+	CustomLogGroupPrefix *string
+
 	// Prefix for Amazon S3 to store results.
 	ResultsS3Prefix *string
 
@@ -3783,6 +3789,9 @@ type DataQualityRulesetEvaluationRunFilter struct {
 	//
 	// This member is required.
 	DataSource *DataSource
+
+	// Filter results by the name of the ruleset.
+	RulesetName *string
 
 	// Filter results by runs that started after this time.
 	StartedAfter *time.Time
@@ -6510,7 +6519,8 @@ type Job struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -6834,7 +6844,8 @@ type JobRun struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -7064,7 +7075,8 @@ type JobUpdate struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -10340,6 +10352,9 @@ type Session struct {
 	// The name of the SecurityConfiguration structure to be used with the session.
 	SecurityConfiguration *string
 
+	// The type of the session.
+	SessionType SessionType
+
 	// The session status.
 	Status SessionStatus
 
@@ -10360,6 +10375,28 @@ type SessionCommand struct {
 	// Specifies the Python version. The Python version indicates the version
 	// supported for jobs of type Spark.
 	PythonVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Spark Connect endpoint details for an interactive session,
+// including the URL and authentication credentials.
+type SessionEndpoint struct {
+
+	// The authentication token to include in requests to the Spark Connect endpoint.
+	//
+	// This member is required.
+	AuthToken *string
+
+	// The time at which the authentication token expires.
+	//
+	// This member is required.
+	AuthTokenExpirationTime *time.Time
+
+	// The Spark Connect endpoint URL for the session.
+	//
+	// This member is required.
+	Url *string
 
 	noSmithyDocumentSerde
 }

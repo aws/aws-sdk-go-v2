@@ -56,6 +56,11 @@ type UpdateGlobalResolverInput struct {
 	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
+	// The list of Amazon Web Services Regions where the Global Resolver will operate.
+	// The resolver will be distributed across these Regions to provide global
+	// availability and low-latency DNS resolution.
+	Regions []string
+
 	noSmithyDocumentSerde
 }
 

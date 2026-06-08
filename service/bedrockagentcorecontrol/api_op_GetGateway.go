@@ -65,11 +65,6 @@ type GetGatewayOutput struct {
 	// This member is required.
 	Name *string
 
-	// Protocol applied to a gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
-
 	// The current status of the gateway.
 	//
 	// This member is required.
@@ -110,6 +105,9 @@ type GetGatewayOutput struct {
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
+
+	// Protocol applied to a gateway.
+	ProtocolType types.GatewayProtocolType
 
 	// The IAM role ARN that provides permissions for the gateway.
 	RoleArn *string

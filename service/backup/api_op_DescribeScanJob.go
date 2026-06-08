@@ -141,6 +141,12 @@ type DescribeScanJobOutput struct {
 	// 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
+	// The point in time the scan job scanned up to for a continuous backup.
+	ContinuousScanEndTime *time.Time
+
+	// The point in time the scan job started scan from for a continuous backup.
+	ContinuousScanStartTime *time.Time
+
 	// An ARN that uniquely identifies the base recovery point for scanning. This
 	// field will only be populated when an incremental scan job has taken place.
 	ScanBaseRecoveryPointArn *string

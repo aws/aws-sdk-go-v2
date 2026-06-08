@@ -23,8 +23,8 @@ import (
 // Ensure that no active cryptographic operations or applications depend on the
 // key in the regions you're removing before performing this operation.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -34,6 +34,7 @@ import (
 //
 // [Multi-Region key replication]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
 // [DisableDefaultKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [AddKeyReplicationRegions]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
 func (c *Client) RemoveKeyReplicationRegions(ctx context.Context, params *RemoveKeyReplicationRegionsInput, optFns ...func(*Options)) (*RemoveKeyReplicationRegionsOutput, error) {
 	if params == nil {

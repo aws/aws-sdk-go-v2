@@ -17,6 +17,8 @@ import (
 //
 // This operation requires permission for the lex:GetBuiltInSlotTypes action.
 //
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+//
 // [Slot Type Reference]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
 	if params == nil {

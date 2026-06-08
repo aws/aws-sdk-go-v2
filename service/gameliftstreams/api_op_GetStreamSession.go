@@ -221,9 +221,6 @@ type GetStreamSessionOutput struct {
 	//   failed to connect within the connection timeout period specified by
 	//   ConnectionTimeoutSeconds .
 	//
-	//   - idleTimeout : The stream session was terminated because it exceeded the idle
-	//   timeout period of 60 minutes with no user input activity.
-	//
 	//   - maxSessionLengthTimeout : The stream session was terminated because it
 	//   exceeded the maximum session length timeout period specified by
 	//   SessionLengthSeconds .

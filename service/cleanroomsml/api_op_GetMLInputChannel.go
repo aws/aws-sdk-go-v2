@@ -110,6 +110,9 @@ type GetMLInputChannelOutput struct {
 	// The number of records in the ML input channel.
 	NumberOfRecords *int64
 
+	// The payer configuration for the ML input channel.
+	PayerConfiguration *types.PayerConfiguration
+
 	// Returns the privacy budgets that control access to this Clean Rooms ML input
 	// channel. Use these budgets to monitor and limit resource consumption over
 	// specified time periods.

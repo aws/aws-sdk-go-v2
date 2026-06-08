@@ -48,6 +48,9 @@ type StartProtectedJobInput struct {
 	// The compute configuration for the protected job.
 	ComputeConfiguration types.ProtectedJobComputeConfiguration
 
+	// The account ID of the member that pays for the job compute costs.
+	JobComputePayerAccountId *string
+
 	// The details needed to write the job results.
 	ResultConfiguration *types.ProtectedJobResultConfigurationInput
 

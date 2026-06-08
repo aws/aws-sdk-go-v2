@@ -71,6 +71,7 @@
         "api_op_ListMessageTemplateVersions.go",
         "api_op_ListMessageTemplates.go",
         "api_op_ListMessages.go",
+        "api_op_ListModels.go",
         "api_op_ListQuickResponses.go",
         "api_op_ListSpans.go",
         "api_op_ListTagsForResource.go",

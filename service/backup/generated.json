@@ -56,6 +56,7 @@
         "api_op_GetBackupVaultAccessPolicy.go",
         "api_op_GetBackupVaultNotifications.go",
         "api_op_GetLegalHold.go",
+        "api_op_GetPITRMalwareScanResults.go",
         "api_op_GetRecoveryPointIndexDetails.go",
         "api_op_GetRecoveryPointRestoreMetadata.go",
         "api_op_GetRestoreJobMetadata.go",

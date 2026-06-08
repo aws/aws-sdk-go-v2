@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,6 +36,28 @@ type EndpointWithHostLabelHeaderOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelHeaderOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostLabelHeaderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointWithHostLabelHeaderOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.HostLabelHeaderInput_accountId, *v.AccountId)
+	}
+}
+func (v *EndpointWithHostLabelHeaderOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostLabelHeaderInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostLabelHeaderInput_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.HostLabelHeaderInput_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
 type EndpointWithHostLabelHeaderOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,16 +65,29 @@ type EndpointWithHostLabelHeaderOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelHeaderOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointWithHostLabelHeaderOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EndpointWithHostLabelHeaderOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelHeaderOperation, schemas.HostLabelHeaderInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelHeaderOperation, schemas.HostLabelHeaderInput, nil), output: &EndpointWithHostLabelHeaderOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EndpointWithHostLabelHeaderOperation"); err != nil {

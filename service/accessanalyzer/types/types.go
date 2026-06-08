@@ -437,6 +437,11 @@ type AnalyzerSummary struct {
 	// The time at which the most recently analyzed resource was analyzed.
 	LastResourceAnalyzedAt *time.Time
 
+	// The service principal that manages this analyzer (for example,
+	// securityhubv2.amazonaws.com ). This field is only present for service-linked
+	// analyzers and is not included for customer-managed analyzers.
+	ManagedBy *string
+
 	// The statusReason provides more details about the current status of the
 	// analyzer. For example, if the creation for the analyzer fails, a Failed status
 	// is returned. For an analyzer with organization as the type, this failure can be

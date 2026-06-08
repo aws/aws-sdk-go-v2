@@ -12,7 +12,7 @@ import (
 )
 
 // Enables rehydration of chats for the lifespan of a contact. For more
-// information about chat rehydration, see [Enable persistent chat]in the Amazon Connect Administrator
+// information about chat rehydration, see [Enable persistent chat]in the Connect Customer Administrator
 // Guide.
 //
 // [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
@@ -39,8 +39,8 @@ type CreatePersistentContactAssociationInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -52,7 +52,7 @@ type CreatePersistentContactAssociationInput struct {
 	//   - ENTIRE_PAST_SESSION : Rehydrates a chat from the most recently terminated
 	//   past chat contact of the specified past ended chat session. To use this type,
 	//   provide the initialContactId of the past ended chat session in the
-	//   sourceContactId field. In this type, Amazon Connect determines what the most
+	//   sourceContactId field. In this type, Connect Customer determines what the most
 	//   recent chat contact on the past ended chat session and uses it to start a
 	//   persistent chat.
 	//

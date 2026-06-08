@@ -169,6 +169,10 @@ type SignInput struct {
 	//
 	//   - ED25519_PH_SHA_512 signing algorithm requires KMS MessageType:DIGEST
 	//
+	// When you specify the ED25519_PH_SHA_512 signing algorithm with
+	// MessageType:DIGEST , KMS still performs the SHA-512 prehash described in [Step 1 of Section 7.8.1 in FIPS 186-5]. This
+	// means the input is hashed twice: once by you and once by KMS.
+	//
 	// When the value of MessageType is DIGEST , the length of the Message value must
 	// match the length of hashed messages for the specified signing algorithm.
 	//
@@ -192,6 +196,7 @@ type SignInput struct {
 	//
 	//   - SM2DSA uses the SM3 hashing algorithm. For details, see [Offline verification with SM2 key pairs].
 	//
+	// [Step 1 of Section 7.8.1 in FIPS 186-5]: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf#page=39
 	// [Offline verification with SM2 key pairs]: https://docs.aws.amazon.com/kms/latest/developerguide/offline-operations.html#key-spec-sm-offline-verification
 	MessageType types.MessageType
 

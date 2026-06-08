@@ -3,4 +3,4 @@
 package mediastoredata
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.29.21"
+const goModuleVersion = "1.30.4"

@@ -48,18 +48,18 @@ type StopContactInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The reason a contact can be disconnected. Only Amazon Connect outbound
+	// The reason a contact can be disconnected. Only Connect Customer outbound
 	// campaigns can provide this field. For a list and description of all the possible
 	// disconnect reasons by channel (including outbound campaign voice contacts) see
-	// DisconnectReason under [ContactTraceRecord]in the Amazon Connect Administrator Guide.
+	// DisconnectReason under [ContactTraceRecord]in the Connect Customer Administrator Guide.
 	//
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	DisconnectReason *types.DisconnectReason

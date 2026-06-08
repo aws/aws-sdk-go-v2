@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves the live connectivity status per device.
+// Retrieves the live connectivity status per device. If a device has never
+// connected to IoT Core or was disconnected for more than 1 hour before fleet
+// indexing's thingConnectivityIndexingMode was enabled, the response will have
+// the connected field set to false with no additional session details.
 func (c *Client) GetThingConnectivityData(ctx context.Context, params *GetThingConnectivityDataInput, optFns ...func(*Options)) (*GetThingConnectivityDataOutput, error) {
 	if params == nil {
 		params = &GetThingConnectivityDataInput{}
@@ -35,22 +38,62 @@ type GetThingConnectivityDataInput struct {
 	// This member is required.
 	ThingName *string
 
+	// Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp,
+	// vpcEndpointId) should be included in the GetThingConnectivityData response. Set
+	// to true to include socket information. Set to false to omit socket information.
+	// By default, this is set to false .
+	IncludeSocketInformation *bool
+
 	noSmithyDocumentSerde
 }
 
 type GetThingConnectivityDataOutput struct {
 
+	// Indicates whether the client is using a clean session. Returns true for clean
+	// sessions.
+	CleanSession *bool
+
+	// The unique identifier of the MQTT client.
+	ClientId *string
+
 	// A Boolean that indicates the connectivity status.
 	Connected *bool
 
-	// The reason why the client is disconnecting.
+	// The reason that the client is disconnected.
 	DisconnectReason types.DisconnectReasonValue
+
+	// The keep-alive interval in seconds that the client specified when establishing
+	// the connection.
+	KeepAliveDuration *int32
+
+	// The session expiry interval in seconds for the MQTT client connection. This
+	// value indicates how long the session will remain active after the client
+	// disconnects.
+	SessionExpiry *int64
+
+	// The IP address of the client that initiated the connection.
+	SourceIp *string
+
+	// The client's source port.
+	SourcePort *int32
+
+	// The IP address of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetIp *string
+
+	// The port number of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetPort *int32
 
 	// The name of your IoT thing.
 	ThingName *string
 
-	// The timestamp of when the event occurred.
+	// The timestamp of when the device connected or disconnected.
 	Timestamp *time.Time
+
+	// The ID of the VPC endpoint. Present for clients connected to Amazon Web
+	// Services IoT Core via a VPC endpoint.
+	VpcEndpointId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

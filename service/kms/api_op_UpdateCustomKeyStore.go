@@ -47,8 +47,10 @@ import (
 // store friendly name ( NewCustomKeyStoreName ), to tell KMS about a change to the
 // kmsuser crypto user password ( KeyStorePassword ), or to associate the custom
 // key store with a different, but related, CloudHSM cluster ( CloudHsmClusterId ).
-// To update any property of an CloudHSM key store, the ConnectionState of the
-// CloudHSM key store must be DISCONNECTED .
+// To update most properties of an CloudHSM key store, the ConnectionState of the
+// CloudHSM key store must be DISCONNECTED . However, you can update the
+// CustomKeyStoreName of an AWS CloudHSM key store when it is in the CONNECTED or
+// DISCONNECTED state.
 //
 // For an external key store, you can use this operation to change the custom key
 // store friendly name ( NewCustomKeyStoreName ), or to tell KMS about a change to
@@ -153,8 +155,7 @@ type UpdateCustomKeyStoreInput struct {
 	// Do not include confidential or sensitive information in this field. This field
 	// may be displayed in plaintext in CloudTrail logs and other output.
 	//
-	// To change this value, an CloudHSM key store must be disconnected. An external
-	// key store can be connected or disconnected.
+	// To change this value, the custom key store can be connected or disconnected.
 	NewCustomKeyStoreName *string
 
 	// Changes the credentials that KMS uses to sign requests to the external key

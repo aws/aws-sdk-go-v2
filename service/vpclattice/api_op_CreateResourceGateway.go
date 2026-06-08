@@ -67,6 +67,21 @@ type CreateResourceGatewayInput struct {
 	// The number of IPv4 addresses in each ENI for the resource gateway.
 	Ipv4AddressesPerEni *int32
 
+	// Indicates how DNS is resolved for resource configurations associated to this
+	// resource gateway. ResourceConfigDnsResolution is set at creation time and cannot
+	// be changed.
+	//
+	//   - IN_VPC - DNS resolution occurs privately within the resource gateway's VPC.
+	//   DNS queries for resources behind this resource gateway resolve using the DNS
+	//   resolvers defined in the VPC's DHCP option sets. Use this when your resource
+	//   domain names are hosted in private Route 53 hosted zones or on-premises DNS
+	//   servers reachable from the VPC.
+	//
+	//   - PUBLIC - DNS resolution occurs against public DNS resolvers. DNS queries for
+	//   resources behind this resource gateway resolve using standard public DNS. Use
+	//   this when your resource domain names are publicly resolvable.
+	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
+
 	// The IDs of the security groups to apply to the resource gateway. The security
 	// groups must be in the same VPC.
 	SecurityGroupIds []string
@@ -99,6 +114,10 @@ type CreateResourceGatewayOutput struct {
 
 	// The name of the resource gateway.
 	Name *string
+
+	// The DNS resolution type for resource configurations that are associated with
+	// this resource gateway.
+	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
 
 	// The IDs of the security groups for the resource gateway.
 	SecurityGroupIds []string

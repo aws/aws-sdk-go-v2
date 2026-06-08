@@ -260,6 +260,189 @@ func (m *awsAwsjson11_serializeOpAssociateResolverRule) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchCreateFirewallRule struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchCreateFirewallRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchCreateFirewallRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchCreateFirewallRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.BatchCreateFirewallRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchCreateFirewallRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpBatchDeleteFirewallRule struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchDeleteFirewallRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchDeleteFirewallRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDeleteFirewallRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.BatchDeleteFirewallRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteFirewallRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpBatchUpdateFirewallRule struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchUpdateFirewallRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchUpdateFirewallRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchUpdateFirewallRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.BatchUpdateFirewallRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchUpdateFirewallRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateFirewallDomainList struct {
 }
 
@@ -2700,6 +2883,67 @@ func (m *awsAwsjson11_serializeOpListFirewallRules) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListFirewallRuleTypes struct {
+}
+
+func (*awsAwsjson11_serializeOpListFirewallRuleTypes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListFirewallRuleTypes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFirewallRuleTypesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListFirewallRuleTypes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListFirewallRuleTypesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListOutpostResolvers struct {
 }
 
@@ -4163,6 +4407,160 @@ func (m *awsAwsjson11_serializeOpUpdateResolverRule) HandleSerialize(ctx context
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentCreateFirewallRuleEntries(v []types.CreateFirewallRuleEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCreateFirewallRuleEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateFirewallRuleEntry(v *types.CreateFirewallRuleEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if len(v.BlockOverrideDnsType) > 0 {
+		ok := object.Key("BlockOverrideDnsType")
+		ok.String(string(v.BlockOverrideDnsType))
+	}
+
+	if v.BlockOverrideDomain != nil {
+		ok := object.Key("BlockOverrideDomain")
+		ok.String(*v.BlockOverrideDomain)
+	}
+
+	if v.BlockOverrideTtl != nil {
+		ok := object.Key("BlockOverrideTtl")
+		ok.Integer(*v.BlockOverrideTtl)
+	}
+
+	if len(v.BlockResponse) > 0 {
+		ok := object.Key("BlockResponse")
+		ok.String(string(v.BlockResponse))
+	}
+
+	if len(v.ConfidenceThreshold) > 0 {
+		ok := object.Key("ConfidenceThreshold")
+		ok.String(string(v.ConfidenceThreshold))
+	}
+
+	if v.CreatorRequestId != nil {
+		ok := object.Key("CreatorRequestId")
+		ok.String(*v.CreatorRequestId)
+	}
+
+	if len(v.DnsThreatProtection) > 0 {
+		ok := object.Key("DnsThreatProtection")
+		ok.String(string(v.DnsThreatProtection))
+	}
+
+	if v.FirewallDomainListId != nil {
+		ok := object.Key("FirewallDomainListId")
+		ok.String(*v.FirewallDomainListId)
+	}
+
+	if len(v.FirewallDomainRedirectionAction) > 0 {
+		ok := object.Key("FirewallDomainRedirectionAction")
+		ok.String(string(v.FirewallDomainRedirectionAction))
+	}
+
+	if v.FirewallRuleGroupId != nil {
+		ok := object.Key("FirewallRuleGroupId")
+		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.FirewallRuleType != nil {
+		ok := object.Key("FirewallRuleType")
+		if err := awsAwsjson11_serializeDocumentFirewallRuleType(v.FirewallRuleType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("Priority")
+		ok.Integer(*v.Priority)
+	}
+
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeleteFirewallRuleEntries(v []types.DeleteFirewallRuleEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDeleteFirewallRuleEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeleteFirewallRuleEntry(v *types.DeleteFirewallRuleEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirewallDomainListId != nil {
+		ok := object.Key("FirewallDomainListId")
+		ok.String(*v.FirewallDomainListId)
+	}
+
+	if v.FirewallRuleGroupId != nil {
+		ok := object.Key("FirewallRuleGroupId")
+		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.FirewallThreatProtectionId != nil {
+		ok := object.Key("FirewallThreatProtectionId")
+		ok.String(*v.FirewallThreatProtectionId)
+	}
+
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDnsThreatProtectionRuleTypeConfig(v *types.DnsThreatProtectionRuleTypeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConfidenceThreshold) > 0 {
+		ok := object.Key("ConfidenceThreshold")
+		ok.String(string(v.ConfidenceThreshold))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4206,6 +4604,30 @@ func awsAwsjson11_serializeDocumentFilterValues(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFirewallAdvancedContentCategoryConfig(v *types.FirewallAdvancedContentCategoryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Category != nil {
+		ok := object.Key("Category")
+		ok.String(*v.Category)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFirewallAdvancedThreatCategoryConfig(v *types.FirewallAdvancedThreatCategoryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Category != nil {
+		ok := object.Key("Category")
+		ok.String(*v.Category)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFirewallDomains(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4214,6 +4636,34 @@ func awsAwsjson11_serializeDocumentFirewallDomains(v []string, value smithyjson.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFirewallRuleType(v *types.FirewallRuleType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsThreatProtection != nil {
+		ok := object.Key("DnsThreatProtection")
+		if err := awsAwsjson11_serializeDocumentDnsThreatProtectionRuleTypeConfig(v.DnsThreatProtection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallAdvancedContentCategory != nil {
+		ok := object.Key("FirewallAdvancedContentCategory")
+		if err := awsAwsjson11_serializeDocumentFirewallAdvancedContentCategoryConfig(v.FirewallAdvancedContentCategory, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallAdvancedThreatCategory != nil {
+		ok := object.Key("FirewallAdvancedThreatCategory")
+		if err := awsAwsjson11_serializeDocumentFirewallAdvancedThreatCategoryConfig(v.FirewallAdvancedThreatCategory, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4411,6 +4861,103 @@ func awsAwsjson11_serializeDocumentTargetList(v []types.TargetAddress, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUpdateFirewallRuleEntries(v []types.UpdateFirewallRuleEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentUpdateFirewallRuleEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateFirewallRuleEntry(v *types.UpdateFirewallRuleEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	if len(v.BlockOverrideDnsType) > 0 {
+		ok := object.Key("BlockOverrideDnsType")
+		ok.String(string(v.BlockOverrideDnsType))
+	}
+
+	if v.BlockOverrideDomain != nil {
+		ok := object.Key("BlockOverrideDomain")
+		ok.String(*v.BlockOverrideDomain)
+	}
+
+	if v.BlockOverrideTtl != nil {
+		ok := object.Key("BlockOverrideTtl")
+		ok.Integer(*v.BlockOverrideTtl)
+	}
+
+	if len(v.BlockResponse) > 0 {
+		ok := object.Key("BlockResponse")
+		ok.String(string(v.BlockResponse))
+	}
+
+	if len(v.ConfidenceThreshold) > 0 {
+		ok := object.Key("ConfidenceThreshold")
+		ok.String(string(v.ConfidenceThreshold))
+	}
+
+	if len(v.DnsThreatProtection) > 0 {
+		ok := object.Key("DnsThreatProtection")
+		ok.String(string(v.DnsThreatProtection))
+	}
+
+	if v.FirewallDomainListId != nil {
+		ok := object.Key("FirewallDomainListId")
+		ok.String(*v.FirewallDomainListId)
+	}
+
+	if len(v.FirewallDomainRedirectionAction) > 0 {
+		ok := object.Key("FirewallDomainRedirectionAction")
+		ok.String(string(v.FirewallDomainRedirectionAction))
+	}
+
+	if v.FirewallRuleGroupId != nil {
+		ok := object.Key("FirewallRuleGroupId")
+		ok.String(*v.FirewallRuleGroupId)
+	}
+
+	if v.FirewallRuleType != nil {
+		ok := object.Key("FirewallRuleType")
+		if err := awsAwsjson11_serializeDocumentFirewallRuleType(v.FirewallRuleType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FirewallThreatProtectionId != nil {
+		ok := object.Key("FirewallThreatProtectionId")
+		ok.String(*v.FirewallThreatProtectionId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("Priority")
+		ok.Integer(*v.Priority)
+	}
+
+	if v.Qtype != nil {
+		ok := object.Key("Qtype")
+		ok.String(*v.Qtype)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUpdateIpAddress(v *types.UpdateIpAddress, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4543,6 +5090,48 @@ func awsAwsjson11_serializeOpDocumentAssociateResolverRuleInput(v *AssociateReso
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentBatchCreateFirewallRuleInput(v *BatchCreateFirewallRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CreateFirewallRuleEntries != nil {
+		ok := object.Key("CreateFirewallRuleEntries")
+		if err := awsAwsjson11_serializeDocumentCreateFirewallRuleEntries(v.CreateFirewallRuleEntries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchDeleteFirewallRuleInput(v *BatchDeleteFirewallRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteFirewallRuleEntries != nil {
+		ok := object.Key("DeleteFirewallRuleEntries")
+		if err := awsAwsjson11_serializeDocumentDeleteFirewallRuleEntries(v.DeleteFirewallRuleEntries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchUpdateFirewallRuleInput(v *BatchUpdateFirewallRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UpdateFirewallRuleEntries != nil {
+		ok := object.Key("UpdateFirewallRuleEntries")
+		if err := awsAwsjson11_serializeDocumentUpdateFirewallRuleEntries(v.UpdateFirewallRuleEntries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateFirewallDomainListInput(v *CreateFirewallDomainListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4650,6 +5239,13 @@ func awsAwsjson11_serializeOpDocumentCreateFirewallRuleInput(v *CreateFirewallRu
 		ok.String(*v.FirewallRuleGroupId)
 	}
 
+	if v.FirewallRuleType != nil {
+		ok := object.Key("FirewallRuleType")
+		if err := awsAwsjson11_serializeDocumentFirewallRuleType(v.FirewallRuleType, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -4721,11 +5317,21 @@ func awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(v *CreateResolv
 		ok.String(string(v.Direction))
 	}
 
+	if v.Dns64Enabled != nil {
+		ok := object.Key("Dns64Enabled")
+		ok.Boolean(*v.Dns64Enabled)
+	}
+
 	if v.IpAddresses != nil {
 		ok := object.Key("IpAddresses")
 		if err := awsAwsjson11_serializeDocumentIpAddressesRequest(v.IpAddresses, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Ipv6InternetAccessEnabled != nil {
+		ok := object.Key("Ipv6InternetAccessEnabled")
+		ok.Boolean(*v.Ipv6InternetAccessEnabled)
 	}
 
 	if v.Name != nil {
@@ -5370,6 +5976,28 @@ func awsAwsjson11_serializeOpDocumentListFirewallRulesInput(v *ListFirewallRules
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListFirewallRuleTypesInput(v *ListFirewallRuleTypesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RuleType != nil {
+		ok := object.Key("RuleType")
+		ok.String(*v.RuleType)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListOutpostResolversInput(v *ListOutpostResolversInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5828,6 +6456,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFirewallRuleInput(v *UpdateFirewallRu
 		ok.String(*v.FirewallRuleGroupId)
 	}
 
+	if v.FirewallRuleType != nil {
+		ok := object.Key("FirewallRuleType")
+		if err := awsAwsjson11_serializeDocumentFirewallRuleType(v.FirewallRuleType, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FirewallThreatProtectionId != nil {
 		ok := object.Key("FirewallThreatProtectionId")
 		ok.String(*v.FirewallThreatProtectionId)
@@ -5915,6 +6550,16 @@ func awsAwsjson11_serializeOpDocumentUpdateResolverDnssecConfigInput(v *UpdateRe
 func awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(v *UpdateResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Dns64Enabled != nil {
+		ok := object.Key("Dns64Enabled")
+		ok.Boolean(*v.Dns64Enabled)
+	}
+
+	if v.Ipv6InternetAccessEnabled != nil {
+		ok := object.Key("Ipv6InternetAccessEnabled")
+		ok.Boolean(*v.Ipv6InternetAccessEnabled)
+	}
 
 	if v.Name != nil {
 		ok := object.Key("Name")

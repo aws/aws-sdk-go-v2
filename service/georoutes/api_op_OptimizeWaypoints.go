@@ -97,7 +97,15 @@ type OptimizeWaypointsInput struct {
 	// Travel mode related options for the provided travel mode.
 	TravelModeOptions *types.WaypointOptimizationTravelModeOptions
 
-	// List of waypoints between the Origin and Destination .
+	// List of waypoints between the Origin and Destination , in World Geodetic System
+	// (WGS 84) format: [longitude, latitude].
+	//
+	// The maximum number of waypoints allowed per request:
+	//
+	//   - Maximum 50 waypoints per request
+	//
+	//   - Maximum 20 waypoints when using constraints ( AccessHours , AppointmentTime
+	//   , ServiceDuration , Heading , SideOfStreet , Before )
 	Waypoints []types.WaypointOptimizationWaypoint
 
 	noSmithyDocumentSerde

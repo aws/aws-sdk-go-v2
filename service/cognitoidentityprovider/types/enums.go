@@ -517,6 +517,25 @@ func (EmailSendingAccountType) Values() []EmailSendingAccountType {
 	}
 }
 
+type EncryptionKeyType string
+
+// Enum values for EncryptionKeyType
+const (
+	EncryptionKeyTypeAwsOwnedKey        EncryptionKeyType = "AWS_OWNED_KEY"
+	EncryptionKeyTypeCustomerManagedKey EncryptionKeyType = "CUSTOMER_MANAGED_KEY"
+)
+
+// Values returns all known values for EncryptionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyType) Values() []EncryptionKeyType {
+	return []EncryptionKeyType{
+		"AWS_OWNED_KEY",
+		"CUSTOMER_MANAGED_KEY",
+	}
+}
+
 type EventFilterType string
 
 // Enum values for EventFilterType
@@ -719,6 +738,25 @@ func (InboundFederationLambdaVersionType) Values() []InboundFederationLambdaVers
 	}
 }
 
+type IssuerType string
+
+// Enum values for IssuerType
+const (
+	IssuerTypeOriginal IssuerType = "ORIGINAL"
+	IssuerTypeUpdated  IssuerType = "UPDATED"
+)
+
+// Values returns all known values for IssuerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IssuerType) Values() []IssuerType {
+	return []IssuerType{
+		"ORIGINAL",
+		"UPDATED",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -841,6 +879,48 @@ func (RecoveryOptionNameType) Values() []RecoveryOptionNameType {
 	}
 }
 
+type ReplicaRoleType string
+
+// Enum values for ReplicaRoleType
+const (
+	ReplicaRoleTypePrimary   ReplicaRoleType = "PRIMARY"
+	ReplicaRoleTypeSecondary ReplicaRoleType = "SECONDARY"
+)
+
+// Values returns all known values for ReplicaRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaRoleType) Values() []ReplicaRoleType {
+	return []ReplicaRoleType{
+		"PRIMARY",
+		"SECONDARY",
+	}
+}
+
+type ReplicaStatusType string
+
+// Enum values for ReplicaStatusType
+const (
+	ReplicaStatusTypeCreating ReplicaStatusType = "CREATING"
+	ReplicaStatusTypeActive   ReplicaStatusType = "ACTIVE"
+	ReplicaStatusTypeInactive ReplicaStatusType = "INACTIVE"
+	ReplicaStatusTypeDeleting ReplicaStatusType = "DELETING"
+)
+
+// Values returns all known values for ReplicaStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaStatusType) Values() []ReplicaStatusType {
+	return []ReplicaStatusType{
+		"CREATING",
+		"ACTIVE",
+		"INACTIVE",
+		"DELETING",
+	}
+}
+
 type RiskDecisionType string
 
 // Enum values for RiskDecisionType
@@ -956,6 +1036,25 @@ func (TimeUnitsType) Values() []TimeUnitsType {
 		"minutes",
 		"hours",
 		"days",
+	}
+}
+
+type UpdateReplicaStatusType string
+
+// Enum values for UpdateReplicaStatusType
+const (
+	UpdateReplicaStatusTypeActive   UpdateReplicaStatusType = "ACTIVE"
+	UpdateReplicaStatusTypeInactive UpdateReplicaStatusType = "INACTIVE"
+)
+
+// Values returns all known values for UpdateReplicaStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateReplicaStatusType) Values() []UpdateReplicaStatusType {
+	return []UpdateReplicaStatusType{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }
 

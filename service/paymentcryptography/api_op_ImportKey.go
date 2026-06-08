@@ -184,8 +184,8 @@ import (
 //   - CertificateAuthorityPublicKeyIdentifier : The keyARN of the CA that signed
 //     the public key certificate of the receiving ECC key pair.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -195,6 +195,7 @@ import (
 //
 // [Importing symmetric keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-import.html
 // [ExportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [GetParametersForImport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
 // [Importing and exporting keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-importexport.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
@@ -231,7 +232,8 @@ type ImportKeyInput struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
 	// A list of Amazon Web Services Regions for key replication operations.
@@ -241,6 +243,12 @@ type ImportKeyInput struct {
 	// to specify which regions should be added to or removed from a key's replication
 	// configuration.
 	ReplicationRegions []string
+
+	// The comment from the requester explaining the reason for the import.
+	//
+	// Don't include personal, confidential or sensitive information in this field.
+	// This field may be displayed in plaintext in CloudTrail logs and other output.
+	RequesterComment *string
 
 	// Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
 	// Use this parameter to tag a key when it is imported. To tag an existing Amazon

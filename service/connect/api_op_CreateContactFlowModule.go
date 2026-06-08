@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a flow module for the specified Amazon Connect instance.
+// Creates a flow module for the specified Connect Customer instance.
 func (c *Client) CreateContactFlowModule(ctx context.Context, params *CreateContactFlowModuleInput, optFns ...func(*Options)) (*CreateContactFlowModuleOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowModuleInput{}
@@ -29,15 +29,15 @@ func (c *Client) CreateContactFlowModule(ctx context.Context, params *CreateCont
 
 type CreateContactFlowModuleInput struct {
 
-	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Connect Customer Flow language].
 	//
-	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+	// [Example flow in Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	//
 	// This member is required.
 	Content *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

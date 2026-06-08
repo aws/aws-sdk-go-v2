@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an Artifact for the given agent space
+// Uploads an artifact to an agent space. Artifacts provide additional context for
+// security testing, such as architecture diagrams, API specifications, or
+// configuration files.
 func (c *Client) AddArtifact(ctx context.Context, params *AddArtifactInput, optFns ...func(*Options)) (*AddArtifactOutput, error) {
 	if params == nil {
 		params = &AddArtifactInput{}
@@ -29,22 +31,23 @@ func (c *Client) AddArtifact(ctx context.Context, params *AddArtifactInput, optF
 
 type AddArtifactInput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space to add the artifact to.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Binary content of the artifact
+	// The binary content of the artifact to upload.
 	//
 	// This member is required.
 	ArtifactContent []byte
 
-	// Type of the artifact file
+	// The file type of the artifact. Valid values include TXT, PNG, JPEG, MD, PDF,
+	// DOCX, DOC, JSON, and YAML.
 	//
 	// This member is required.
 	ArtifactType types.ArtifactType
 
-	// Name of the artifact file
+	// The file name of the artifact.
 	//
 	// This member is required.
 	FileName *string
@@ -54,7 +57,7 @@ type AddArtifactInput struct {
 
 type AddArtifactOutput struct {
 
-	// Unique identifier of the created artifact
+	// The unique identifier assigned to the uploaded artifact.
 	//
 	// This member is required.
 	ArtifactId *string

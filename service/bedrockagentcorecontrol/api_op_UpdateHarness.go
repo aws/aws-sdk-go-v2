@@ -68,8 +68,9 @@ type UpdateHarnessInput struct {
 	// not specified, the existing value is retained.
 	MaxIterations *int32
 
-	// The maximum number of tokens the agent can generate per iteration. If not
-	// specified, the existing value is retained.
+	// The maximum total number of output tokens the agent can generate across all
+	// model calls within a single invocation. If not specified, the existing value is
+	// retained.
 	MaxTokens *int32
 
 	// The AgentCore Memory configuration. Use the optionalValue wrapper to set a new

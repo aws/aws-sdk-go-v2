@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,19 @@ type HttpEmptyPrefixHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEmptyPrefixHeadersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpEmptyPrefixHeadersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpEmptyPrefixHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.HttpEmptyPrefixHeadersInput_prefixHeaders, v.PrefixHeaders)
+	if v.SpecificHeader != nil {
+		s.WriteString(schemas.HttpEmptyPrefixHeadersInput_specificHeader, *v.SpecificHeader)
+	}
+}
+
 type HttpEmptyPrefixHeadersOutput struct {
 
 	// Map keys will be normalized to lower-case.
@@ -47,16 +62,26 @@ type HttpEmptyPrefixHeadersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpEmptyPrefixHeadersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpEmptyPrefixHeadersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpEmptyPrefixHeadersOutput_prefixHeaders:
+			return deserializeStringMap(d, schemas.HttpEmptyPrefixHeadersOutput_prefixHeaders, &v.PrefixHeaders)
+		case schemas.HttpEmptyPrefixHeadersOutput_specificHeader:
+			v.SpecificHeader = new(string)
+			return d.ReadString(schemas.HttpEmptyPrefixHeadersOutput_specificHeader, v.SpecificHeader)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpEmptyPrefixHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpEmptyPrefixHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpEmptyPrefixHeaders, schemas.HttpEmptyPrefixHeadersInput, schemas.HttpEmptyPrefixHeadersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpEmptyPrefixHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpEmptyPrefixHeaders, schemas.HttpEmptyPrefixHeadersInput, schemas.HttpEmptyPrefixHeadersOutput), output: &HttpEmptyPrefixHeadersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpEmptyPrefixHeaders"); err != nil {

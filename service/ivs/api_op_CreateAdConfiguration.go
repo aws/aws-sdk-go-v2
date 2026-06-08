@@ -29,13 +29,25 @@ func (c *Client) CreateAdConfiguration(ctx context.Context, params *CreateAdConf
 
 type CreateAdConfigurationInput struct {
 
-	// List of integration configurations with media tailor resources.
+	// List of integration configurations with MediaTailor resources. The first item
+	// in the list is the default playback configuration used for the ad configuration.
+	// To select a different configuration per viewing session, see [Generate and Sign IVS Playback Tokens].
+	//
+	// [Generate and Sign IVS Playback Tokens]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
 	//
 	// This member is required.
 	MediaTailorPlaybackConfigurations []types.MediaTailorPlaybackConfiguration
 
 	// Ad configuration name. Defaults to “”.
 	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value) . See [Best practices and strategies] in
+	// Tagging Amazon Web Services Resources and Tag Editor for details, including
+	// restrictions that apply to tags and "Tag naming limits and requirements"; Amazon
+	// IVS has no service-specific constraints beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

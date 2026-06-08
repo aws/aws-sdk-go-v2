@@ -842,6 +842,18 @@ func TestCheckSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationCancellationQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -3458,6 +3470,18 @@ func TestCheckSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityReservationFleets(context.Background(), nil, func(o *Options) {
@@ -4135,6 +4159,18 @@ func TestCheckSnapshot_DescribeIpamPolicies(t *testing.T) {
 	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPoolAllocations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7658,6 +7694,18 @@ func TestCheckSnapshot_ModifyIpamPool(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPoolAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyIpamPrefixListResolver(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
@@ -9990,6 +10038,18 @@ func TestUpdateSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
 	_, err := svc.CreateCapacityReservationBySplitting(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCapacityReservationBySplitting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationCancellationQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12613,6 +12673,18 @@ func TestUpdateSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T)
 	}
 }
 
+func TestUpdateSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityReservationFleets(context.Background(), nil, func(o *Options) {
@@ -13290,6 +13362,18 @@ func TestUpdateSnapshot_DescribeIpamPolicies(t *testing.T) {
 	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPoolAllocations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16806,6 +16890,18 @@ func TestUpdateSnapshot_ModifyIpamPool(t *testing.T) {
 	_, err := svc.ModifyIpamPool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyIpamPool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPoolAllocation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

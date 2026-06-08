@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the alias association between two email addresses in an Amazon Connect
-// instance. After disassociation, emails sent to the former alias email address
-// are no longer forwarded to the primary email address. Both email addresses
-// continue to exist independently and can receive emails directly.
+// Removes the alias association between two email addresses in an Connect
+// Customer instance. After disassociation, emails sent to the former alias email
+// address are no longer forwarded to the primary email address. Both email
+// addresses continue to exist independently and can receive emails directly.
 //
 // # Use cases
 //
@@ -52,13 +52,13 @@ import (
 //
 //   - The timestamp of when the disassociation occurred.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // # Related operations
 //
 // [AssociateEmailAddressAlias]
 //   - : Associates an email address alias with an existing email address in an
-//     Amazon Connect instance.
+//     Connect Customer instance.
 //
 // [DescribeEmailAddress]
 //   - : View current alias configurations for an email address.
@@ -79,8 +79,8 @@ import (
 // [DeleteEmailAddress]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteEmailAddress.html
 // [SearchEmailAddresses]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html
 // [UpdateEmailAddressMetadata]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 // [CreateEmailAddress]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 // [AssociateEmailAddressAlias]: https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociateEmailAddressAlias.html
 func (c *Client) DisassociateEmailAddressAlias(ctx context.Context, params *DisassociateEmailAddressAliasInput, optFns ...func(*Options)) (*DisassociateEmailAddressAliasOutput, error) {
 	if params == nil {
@@ -111,8 +111,8 @@ type DisassociateEmailAddressAliasInput struct {
 	// This member is required.
 	EmailAddressId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

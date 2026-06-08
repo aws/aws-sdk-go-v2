@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // A summary of the properties of a cluster.
@@ -42,6 +43,25 @@ type EncryptionDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Kinesis stream target configuration.
+type KinesisTargetDefinition struct {
+
+	// The ARN of the IAM role that grants permission to write to the Kinesis stream.
+	// This can be a standard role ( arn:aws:iam::account-id:role/role-name ) or a role
+	// with a path prefix ( arn:aws:iam::account-id:role/service-role/role-name ), such
+	// as roles auto-created by the console.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The ARN of the Kinesis stream.
+	//
+	// This member is required.
+	StreamArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the structure for multi-Region cluster configurations, containing the
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {
@@ -56,6 +76,71 @@ type MultiRegionProperties struct {
 
 	noSmithyDocumentSerde
 }
+
+// Stream status reason with error and timestamp.
+type StatusReason struct {
+
+	// The error code for the stream failure.
+	//
+	// This member is required.
+	Error StreamFailureErrorCode
+
+	// The timestamp when the status was updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a stream.
+type StreamSummary struct {
+
+	// The ARN of the stream.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the cluster.
+	//
+	// This member is required.
+	ClusterIdentifier *string
+
+	// The timestamp when the stream was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The current status of the stream.
+	//
+	// This member is required.
+	Status StreamStatus
+
+	// The ID of the stream.
+	//
+	// This member is required.
+	StreamIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Target definition for stream destination.
+//
+// The following types satisfy this interface:
+//
+//	TargetDefinitionMemberKinesis
+type TargetDefinition interface {
+	isTargetDefinition()
+}
+
+// Kinesis stream target configuration.
+type TargetDefinitionMemberKinesis struct {
+	Value KinesisTargetDefinition
+
+	noSmithyDocumentSerde
+}
+
+func (*TargetDefinitionMemberKinesis) isTargetDefinition() {}
 
 // Stores information about a field passed inside a request that resulted in an
 // validation error.
@@ -75,3 +160,14 @@ type ValidationExceptionField struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isTargetDefinition() {}

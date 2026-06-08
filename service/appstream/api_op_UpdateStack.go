@@ -39,6 +39,11 @@ type UpdateStackInput struct {
 	// endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
+	// The configuration for agent access on the stack. Specify this to update agent
+	// access settings. To remove agent access, use AttributesToDelete with the
+	// AGENT_ACCESS_CONFIG value.
+	AgentAccessConfig *types.AgentAccessConfigForUpdate
+
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
 	// automatically saved after each session and applied to the next session.

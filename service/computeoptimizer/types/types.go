@@ -362,6 +362,9 @@ type DBStorageConfiguration struct {
 // Describes the effective recommendation preferences for Amazon EBS volumes.
 type EBSEffectiveRecommendationPreferences struct {
 
+	// The number of days for which utilization metrics were analyzed for the volume.
+	LookBackPeriod LookBackPeriodPreference
+
 	//  Describes the savings estimation mode preference applied for calculating
 	// savings opportunity for Amazon EBS volumes.
 	SavingsEstimationMode *EBSSavingsEstimationMode
@@ -507,6 +510,9 @@ type EBSUtilizationMetric struct {
 
 // Describes the effective recommendation preferences for Amazon ECS services.
 type ECSEffectiveRecommendationPreferences struct {
+
+	//  The number of days the Amazon ECS service utilization metrics were analyzed.
+	LookBackPeriod LookBackPeriodPreference
 
 	//  Describes the savings estimation mode preference applied for calculating
 	// savings opportunity for Amazon ECS services.

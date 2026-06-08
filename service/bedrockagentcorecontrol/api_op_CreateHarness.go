@@ -68,7 +68,8 @@ type CreateHarnessInput struct {
 	// The maximum number of iterations the agent loop can execute per invocation.
 	MaxIterations *int32
 
-	// The maximum number of tokens the agent can generate per iteration.
+	// The maximum total number of output tokens the agent can generate across all
+	// model calls within a single invocation.
 	MaxTokens *int32
 
 	// The AgentCore Memory configuration for persisting conversation context across

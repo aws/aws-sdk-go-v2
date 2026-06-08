@@ -94,6 +94,11 @@ type CreateUserPoolDomainInput struct {
 	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
 	ManagedLoginVersion *int32
 
+	// The configuration of routing for requests to the domain for replicas of a
+	// replicated user pool. The routing configuration is currently only supported for
+	// custom domains.
+	Routing *types.RoutingType
+
 	noSmithyDocumentSerde
 }
 
@@ -110,6 +115,9 @@ type CreateUserPoolDomainOutput struct {
 	// The version of managed login branding applied your domain. A value of 1
 	// indicates hosted UI (classic) and a version of 2 indicates managed login.
 	ManagedLoginVersion *int32
+
+	// The routing configuration that was applied to the user pool domain.
+	Routing *types.RoutingType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

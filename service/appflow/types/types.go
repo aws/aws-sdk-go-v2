@@ -363,7 +363,7 @@ type ConnectorMetadata struct {
 	//  The connector metadata specific to Amplitude.
 	Amplitude *AmplitudeMetadata
 
-	//  The connector metadata specific to Amazon Connect Customer Profiles.
+	//  The connector metadata specific to Connect Customer Customer Profiles.
 	CustomerProfiles *CustomerProfilesMetadata
 
 	//  The connector metadata specific to Datadog.
@@ -838,23 +838,24 @@ type CustomConnectorSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
-//	The properties that are applied when Amazon Connect Customer Profiles is used
+//	The properties that are applied when Connect Customer Customer Profiles is
 //
-// as a destination.
+// used as a destination.
 type CustomerProfilesDestinationProperties struct {
 
-	//  The unique name of the Amazon Connect Customer Profiles domain.
+	//  The unique name of the Connect Customer Customer Profiles domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	//  The object specified in the Amazon Connect Customer Profiles flow destination.
+	//  The object specified in the Connect Customer Customer Profiles flow
+	// destination.
 	ObjectTypeName *string
 
 	noSmithyDocumentSerde
 }
 
-// The connector metadata specific to Amazon Connect Customer Profiles.
+// The connector metadata specific to Connect Customer Customer Profiles.
 type CustomerProfilesMetadata struct {
 	noSmithyDocumentSerde
 }
@@ -934,7 +935,7 @@ type DestinationConnectorProperties struct {
 	// The properties that are required to query the custom Connector.
 	CustomConnector *CustomConnectorDestinationProperties
 
-	//  The properties required to query Amazon Connect Customer Profiles.
+	//  The properties required to query Connect Customer Customer Profiles.
 	CustomerProfiles *CustomerProfilesDestinationProperties
 
 	//  The properties required to query Amazon EventBridge.

@@ -65,6 +65,14 @@ type GetApiKeyCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
+	// The JSON key used to extract the API key value from the AWS Secrets Manager
+	// secret.
+	ApiKeySecretJsonKey *string
+
+	// The source type of the API key secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	ApiKeySecretSource types.SecretSourceType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -50,7 +50,7 @@ type UpdateAnycastIpListInput struct {
 	//   - dualstack - Allocate a list of both IPv4 and IPv6 addresses
 	IpAddressType types.IpAddressType
 
-	//  A list of IPAM CIDR configurations that specify the IP address ranges and IPAM
+	// A list of IPAM CIDR configurations that specify the IP address ranges and IPAM
 	// pool settings for updating the Anycast static IP list.
 	IpamCidrConfigs []types.IpamCidrConfig
 

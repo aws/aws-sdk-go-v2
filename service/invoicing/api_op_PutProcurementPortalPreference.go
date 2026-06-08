@@ -11,8 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This feature API is subject to changing at any time. For more information, see
+//
+// the [Amazon Web Services Service Terms](Betas and Previews).
+//
 // Updates an existing procurement portal preference configuration. This operation
 // can modify settings for e-invoice delivery and purchase order retrieval.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
 func (c *Client) PutProcurementPortalPreference(ctx context.Context, params *PutProcurementPortalPreferenceInput, optFns ...func(*Options)) (*PutProcurementPortalPreferenceOutput, error) {
 	if params == nil {
 		params = &PutProcurementPortalPreferenceInput{}
@@ -52,6 +58,10 @@ type PutProcurementPortalPreferenceInput struct {
 	//
 	// This member is required.
 	PurchaseOrderRetrievalEnabled *bool
+
+	// A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
 
 	// Updated e-invoice delivery configuration including document types, attachment
 	// types, and customization settings for the portal.
@@ -153,6 +163,9 @@ func (c *Client) addOperationPutProcurementPortalPreferenceMiddlewares(stack *mi
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opPutProcurementPortalPreferenceMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpPutProcurementPortalPreferenceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -184,6 +197,39 @@ func (c *Client) addOperationPutProcurementPortalPreferenceMiddlewares(stack *mi
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpPutProcurementPortalPreference struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpPutProcurementPortalPreference) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpPutProcurementPortalPreference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*PutProcurementPortalPreferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *PutProcurementPortalPreferenceInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opPutProcurementPortalPreferenceMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpPutProcurementPortalPreference{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opPutProcurementPortalPreference(region string) *awsmiddleware.RegisterServiceMetadata {

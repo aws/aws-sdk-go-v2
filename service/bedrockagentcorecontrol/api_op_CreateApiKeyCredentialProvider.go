@@ -29,17 +29,25 @@ func (c *Client) CreateApiKeyCredentialProvider(ctx context.Context, params *Cre
 
 type CreateApiKeyCredentialProviderInput struct {
 
-	// The API key to use for authentication. This value is encrypted and stored
-	// securely.
-	//
-	// This member is required.
-	ApiKey *string
-
 	// The name of the API key credential provider. The name must be unique within
 	// your account.
 	//
 	// This member is required.
 	Name *string
+
+	// The API key to use for authentication. This value is encrypted and stored
+	// securely.
+	ApiKey *string
+
+	// A reference to the AWS Secrets Manager secret that stores the API key. This
+	// includes the secret ID and the JSON key used to extract the API key value from
+	// the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	ApiKeySecretConfig *types.SecretReference
+
+	// The source type of the API key secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ApiKeySecretSource types.SecretSourceType
 
 	// A map of tag keys and values to assign to the API key credential provider. Tags
 	// enable you to categorize your resources in different ways, for example, by
@@ -65,6 +73,14 @@ type CreateApiKeyCredentialProviderOutput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The JSON key used to extract the API key value from the AWS Secrets Manager
+	// secret.
+	ApiKeySecretJsonKey *string
+
+	// The source type of the API key secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	ApiKeySecretSource types.SecretSourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

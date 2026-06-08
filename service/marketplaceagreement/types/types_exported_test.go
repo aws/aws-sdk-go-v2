@@ -68,3 +68,29 @@ var _ *types.LegalTerm
 var _ *types.ConfigurableUpfrontPricingTerm
 var _ *types.ByolPricingTerm
 var _ *types.SupportTerm
+
+func ExampleRequestedTermConfiguration_outputUsage() {
+	var union types.RequestedTermConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration:
+		_ = v.Value // Value is types.ConfigurableUpfrontPricingTermConfiguration
+
+	case *types.RequestedTermConfigurationMemberRenewalTermConfiguration:
+		_ = v.Value // Value is types.RenewalTermConfiguration
+
+	case *types.RequestedTermConfigurationMemberVariablePaymentTermConfiguration:
+		_ = v.Value // Value is types.VariablePaymentTermConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VariablePaymentTermConfiguration
+var _ *types.ConfigurableUpfrontPricingTermConfiguration
+var _ *types.RenewalTermConfiguration

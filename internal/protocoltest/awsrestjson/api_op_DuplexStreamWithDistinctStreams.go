@@ -6,10 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"sync"
 	"time"
 )
@@ -33,6 +35,15 @@ type DuplexStreamWithDistinctStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamWithDistinctStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplexStreamWithDistinctStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplexStreamWithDistinctStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DuplexStreamWithDistinctStreamsOutput struct {
 	Stream types.SingletonEventStream
 
@@ -44,6 +55,16 @@ type DuplexStreamWithDistinctStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DuplexStreamWithDistinctStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplexStreamWithDistinctStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplexStreamWithDistinctStreamsOutput_stream:
+			return deserializeSingletonEventStream(d, schemas.DuplexStreamWithDistinctStreamsOutput_stream, &v.Stream)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *DuplexStreamWithDistinctStreamsOutput) GetStream() *DuplexStreamWithDistinctStreamsEventStream {
 	return o.eventStream
@@ -53,12 +74,16 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDuplexStreamWithDistinctStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DuplexStreamWithDistinctStreams, schemas.DuplexStreamWithDistinctStreamsInput, schemas.DuplexStreamWithDistinctStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDuplexStreamWithDistinctStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DuplexStreamWithDistinctStreams, schemas.DuplexStreamWithDistinctStreamsInput, schemas.DuplexStreamWithDistinctStreamsOutput), output: &DuplexStreamWithDistinctStreamsOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamDuplexStreamWithDistinctStreams{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DuplexStreamWithDistinctStreams"); err != nil {
@@ -66,9 +91,6 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamDuplexStreamWithDistinctStreamsMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -99,9 +121,6 @@ func (c *Client) addOperationDuplexStreamWithDistinctStreamsMiddlewares(stack *m
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {

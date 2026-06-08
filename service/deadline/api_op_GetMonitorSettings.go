@@ -29,7 +29,7 @@ func (c *Client) GetMonitorSettings(ctx context.Context, params *GetMonitorSetti
 type GetMonitorSettingsInput struct {
 
 	// The unique identifier of the monitor. This ID is returned by the CreateMonitor
-	// operation, and is included in the response to the GetMonitor operation.
+	// operation, and is included in the response to the ListMonitors operation.
 	//
 	// This member is required.
 	MonitorId *string
@@ -39,7 +39,7 @@ type GetMonitorSettingsInput struct {
 
 type GetMonitorSettingsOutput struct {
 
-	// Monitor settings as key-value pairs.
+	// The monitor settings as key-value pairs.
 	//
 	// This member is required.
 	Settings map[string]string

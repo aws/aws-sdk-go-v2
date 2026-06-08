@@ -312,6 +312,10 @@ type Compute struct {
 // The set of port numbers to open on each instance in a container fleet.
 // Connection ports are used by inbound traffic to connect with processes that are
 // running in containers on the fleet.
+//
+// The port range must not overlap with the Amazon GameLift Servers reserved port
+// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+// services.
 type ConnectionPortRange struct {
 
 	// Starting value for the port range.
@@ -476,6 +480,10 @@ type ContainerFleet struct {
 	// The set of port numbers to open on each instance in a container fleet.
 	// Connection ports are used by inbound traffic to connect with processes that are
 	// running in containers on the fleet.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceConnectionPortRange *ConnectionPortRange
 
 	// The IP address ranges and port settings that allow inbound traffic to access
@@ -735,6 +743,29 @@ type ContainerGroupDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the port mappings for a single container in a container group. Each
+// mapping shows how a container port maps to a connection port on the fleet
+// instance.
+//
+// Returned by: [DescribeContainerGroupPortMappings]
+//
+// [DescribeContainerGroupPortMappings]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupPortMappings.html
+type ContainerGroupPortMapping struct {
+
+	// The name of the container, as defined in the container group definition.
+	ContainerName *string
+
+	// A list of ContainerPortMapping objects that describe the port mappings for this
+	// container.
+	ContainerPortMappings []ContainerPortMapping
+
+	// The runtime ID for the container that's running in a compute. This value is
+	// unique within the compute.
+	ContainerRuntimeId *string
+
+	noSmithyDocumentSerde
+}
+
 // Instructions on when and how to check the health of a support container in a
 // container fleet. These properties override any Docker health checks that are set
 // in the container image. For more information on container health checks, see [HealthCheck command]in
@@ -859,6 +890,32 @@ type ContainerPortConfiguration struct {
 	//
 	// This member is required.
 	ContainerPortRanges []ContainerPortRange
+
+	noSmithyDocumentSerde
+}
+
+// Describes a mapping between a container port and a connection port on a fleet
+// instance. You define container ports in a container group definition. Amazon
+// GameLift Servers assigns connection ports when it deploys the container group to
+// an instance.
+//
+// Part of: [ContainerGroupPortMapping]
+//
+// [ContainerGroupPortMapping]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupPortMapping.html
+type ContainerPortMapping struct {
+
+	// The port number on the fleet instance that maps to the container port.
+	// Connection ports are assigned by Amazon GameLift Servers when the container
+	// group is deployed to an instance.
+	ConnectionPort *int32
+
+	// The port number on the container. This port is defined in the container group
+	// definition. Container port numbers must be unique within a container group
+	// definition.
+	ContainerPort *int32
+
+	// The network protocol for the port mapping. Valid values are TCP or UDP .
+	Protocol IpProtocol
 
 	noSmithyDocumentSerde
 }
@@ -2090,8 +2147,8 @@ type GameSession struct {
 	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
-	// A unique identifier for the game session. A game session ARN has the following
-	// format: arn:aws:gamelift:::gamesession// .
+	// An identifier for the game session that is unique across all regions. The value
+	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers
@@ -2186,7 +2243,8 @@ type GameSessionConnectionInfo struct {
 	// [Amazon EC2 Instance IP Addressing]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses
 	DnsName *string
 
-	// A unique identifier for the game session. Use the game session ID.
+	// An identifier for the game session that is unique across all regions. The value
+	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
 	GameSessionArn *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers
@@ -2305,8 +2363,9 @@ type GameSessionPlacement struct {
 	//   SearchGameSessions API results.
 	GameProperties []GameProperty
 
-	// Identifier for the game session created by this placement request. This
-	// identifier is unique across all Regions. This value isn't final until placement
+	// An identifier for the game session that is unique across all regions. The value
+	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
+	// This value is the same as GameSessionId . This value isn't final until placement
 	// status is FULFILLED .
 	GameSessionArn *string
 
@@ -2317,7 +2376,9 @@ type GameSessionPlacement struct {
 	// [Start a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
-	// A unique identifier for the game session. This value isn't final until
+	// An identifier for the game session that is unique across all regions. The value
+	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
+	// This value is the same as GameSessionArn . This value isn't final until
 	// placement status is FULFILLED .
 	GameSessionId *string
 
@@ -3395,8 +3456,9 @@ type PlayerSession struct {
 	// A unique identifier for the fleet that the player's game session is running on.
 	FleetId *string
 
-	// A unique identifier for the game session that the player session is connected
-	// to.
+	// An identifier for the game session that is unique across all regions that the
+	// player session is connected to. The value is always a full ARN in the following
+	// format: arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// The IP address of the game session. To connect to a Amazon GameLift Servers

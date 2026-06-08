@@ -2362,6 +2362,9 @@ func awsAwsjson11_deserializeOpErrorCreateImportedImage(response *smithyhttp.Res
 	case strings.EqualFold("InvalidAccountStatusException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidAccountStatusException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
 	case strings.EqualFold("InvalidRoleException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRoleException(response, errorBody)
 
@@ -11372,6 +11375,161 @@ func awsAwsjson11_deserializeDocumentAdminAppLicenseUsageRecord(v **types.AdminA
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAgentAccessConfig(v **types.AgentAccessConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentAccessConfig
+	if *v == nil {
+		sv = &types.AgentAccessConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3BucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketArn to be of type string, got %T instead", value)
+				}
+				sv.S3BucketArn = ptr.String(jtv)
+			}
+
+		case "ScreenImageFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScreenImageFormat to be of type string, got %T instead", value)
+				}
+				sv.ScreenImageFormat = types.ScreenImageFormat(jtv)
+			}
+
+		case "ScreenResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScreenResolution to be of type string, got %T instead", value)
+				}
+				sv.ScreenResolution = types.ScreenResolution(jtv)
+			}
+
+		case "ScreenshotsUploadEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ScreenshotsUploadEnabled = ptr.Bool(jtv)
+			}
+
+		case "Settings":
+			if err := awsAwsjson11_deserializeDocumentAgentAccessSettingList(&sv.Settings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAgentAccessSetting(v **types.AgentAccessSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentAccessSetting
+	if *v == nil {
+		sv = &types.AgentAccessSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentAction to be of type string, got %T instead", value)
+				}
+				sv.AgentAction = types.AgentAction(jtv)
+			}
+
+		case "Permission":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Permission to be of type string, got %T instead", value)
+				}
+				sv.Permission = types.Permission(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAgentAccessSettingList(v *[]types.AgentAccessSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AgentAccessSetting
+	if *v == nil {
+		cv = []types.AgentAccessSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AgentAccessSetting
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAgentAccessSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAppBlock(v **types.AppBlock, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15745,6 +15903,11 @@ func awsAwsjson11_deserializeDocumentStack(v **types.Stack, value interface{}) e
 		switch key {
 		case "AccessEndpoints":
 			if err := awsAwsjson11_deserializeDocumentAccessEndpointList(&sv.AccessEndpoints, value); err != nil {
+				return err
+			}
+
+		case "AgentAccessConfig":
+			if err := awsAwsjson11_deserializeDocumentAgentAccessConfig(&sv.AgentAccessConfig, value); err != nil {
 				return err
 			}
 

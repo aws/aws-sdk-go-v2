@@ -35,8 +35,9 @@ type UpdateMonitorSettingsInput struct {
 	// This member is required.
 	MonitorId *string
 
-	// Monitor settings as key-value pairs. Keys present in the request are upserted;
-	// keys absent are left unchanged. Send an empty string value to delete a key.
+	// The monitor settings to update as key-value pairs. Keys present in the request
+	// are upserted; keys absent are left unchanged. Send an empty string value to
+	// delete a key.
 	//
 	// This member is required.
 	Settings map[string]string

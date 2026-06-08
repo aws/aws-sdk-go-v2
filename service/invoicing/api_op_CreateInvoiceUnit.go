@@ -48,6 +48,10 @@ type CreateInvoiceUnitInput struct {
 	// This member is required.
 	Rule *types.InvoiceUnitRule
 
+	//  A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	//  The invoice unit's description. This can be changed at a later time.
 	Description *string
 
@@ -137,6 +141,9 @@ func (c *Client) addOperationCreateInvoiceUnitMiddlewares(stack *middleware.Stac
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateInvoiceUnitMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateInvoiceUnitValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,6 +175,39 @@ func (c *Client) addOperationCreateInvoiceUnitMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateInvoiceUnit struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateInvoiceUnit) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateInvoiceUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateInvoiceUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateInvoiceUnitInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateInvoiceUnitMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInvoiceUnit{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateInvoiceUnit(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AddDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -134,6 +146,42 @@ func TestCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDatasetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDatasetVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -151,6 +199,18 @@ func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -211,6 +271,42 @@ func TestCheckSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.CreateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +446,42 @@ func TestCheckSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -367,6 +499,18 @@ func TestCheckSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -427,6 +571,42 @@ func TestCheckSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +758,42 @@ func TestCheckSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfigurationBundleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -595,6 +811,18 @@ func TestCheckSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -662,6 +890,42 @@ func TestCheckSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPaymentManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
@@ -686,11 +950,47 @@ func TestCheckSnapshot_GetPolicyEngine(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPolicyEngineSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngineSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyEngineSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPolicyGeneration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicyGenerationSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGenerationSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyGenerationSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicySummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicySummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicySummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -842,11 +1142,83 @@ func TestCheckSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConfigurationBundles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurationBundles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConfigurationBundleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGatewayRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGatewayRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -926,6 +1298,42 @@ func TestCheckSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPaymentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentCredentialProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentCredentialProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPaymentManagers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentManagers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPaymentManagers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
@@ -950,6 +1358,18 @@ func TestCheckSnapshot_ListPolicyEngines(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPolicyEngineSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngineSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyEngineSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
@@ -967,6 +1387,30 @@ func TestCheckSnapshot_ListPolicyGenerations(t *testing.T) {
 	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyGenerationSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicySummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicySummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicySummaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,6 +1586,42 @@ func TestCheckSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
@@ -1159,6 +1639,18 @@ func TestCheckSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1219,6 +1711,42 @@ func TestCheckSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.UpdateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1297,6 +1825,18 @@ func TestCheckSnapshot_UpdateWorkloadIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AddDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -1369,6 +1909,42 @@ func TestUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDatasetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDatasetVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1962,18 @@ func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1446,6 +2034,42 @@ func TestUpdateSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.CreateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1585,6 +2209,42 @@ func TestUpdateSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -1602,6 +2262,18 @@ func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1662,6 +2334,42 @@ func TestUpdateSnapshot_DeleteOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.DeleteOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1813,6 +2521,42 @@ func TestUpdateSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfigurationBundleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -1830,6 +2574,18 @@ func TestUpdateSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1897,6 +2653,42 @@ func TestUpdateSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPaymentManager")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
@@ -1921,11 +2713,47 @@ func TestUpdateSnapshot_GetPolicyEngine(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPolicyEngineSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyEngineSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyEngineSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPolicyGeneration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicyGenerationSummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyGenerationSummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyGenerationSummary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicySummary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicySummary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicySummary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2077,11 +2905,83 @@ func TestUpdateSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConfigurationBundles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurationBundles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConfigurationBundleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGatewayRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGatewayRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2161,6 +3061,42 @@ func TestUpdateSnapshot_ListOnlineEvaluationConfigs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPaymentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentCredentialProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentCredentialProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentCredentialProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPaymentManagers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPaymentManagers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPaymentManagers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
@@ -2185,6 +3121,18 @@ func TestUpdateSnapshot_ListPolicyEngines(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPolicyEngineSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEngineSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyEngineSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPolicyGenerationAssets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicyGenerationAssets(context.Background(), nil, func(o *Options) {
@@ -2202,6 +3150,30 @@ func TestUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
 	_, err := svc.ListPolicyGenerations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPolicyGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyGenerationSummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyGenerationSummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyGenerationSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicySummaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicySummaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicySummaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2377,6 +3349,42 @@ func TestUpdateSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
@@ -2394,6 +3402,18 @@ func TestUpdateSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2454,6 +3474,42 @@ func TestUpdateSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 	_, err := svc.UpdateOnlineEvaluationConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateOnlineEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentCredentialProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentCredentialProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentCredentialProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePaymentManager(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePaymentManager(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePaymentManager")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

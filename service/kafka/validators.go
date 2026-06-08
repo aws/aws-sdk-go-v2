@@ -2837,9 +2837,6 @@ func validateOpUpdateConnectivityInput(v *UpdateConnectivityInput) error {
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
-	if v.ConnectivityInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityInfo"))
-	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}

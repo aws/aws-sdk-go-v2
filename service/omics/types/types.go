@@ -437,12 +437,19 @@ type DefaultRunSetting struct {
 	// The identifier of the run cache to associate with the runs.
 	CacheId *string
 
+	// Optional configuration name to use for the workflow run.
+	ConfigurationName *string
+
 	// The verbosity level for CloudWatch Logs emitted during each run.
 	LogLevel RunLogLevel
 
 	// An optional user-friendly name applied to each workflow run. Can be overridden
 	// per run.
 	Name *string
+
+	// Optional configuration for run networking behavior. If not specified, this will
+	// default to RESTRICTED.
+	NetworkingMode NetworkingMode
 
 	// The expected AWS account ID of the owner of the output S3 bucket. Can be
 	// overridden per run.

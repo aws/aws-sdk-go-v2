@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,25 @@ type JsonUnionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonUnionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnionInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonUnionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMyUnion(s, schemas.UnionInputOutput_contents, v.Contents)
+}
+func (v *JsonUnionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnionInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnionInputOutput_contents:
+			return deserializeMyUnion(d, schemas.UnionInputOutput_contents, &v.Contents)
+		}
+		return nil
+	})
+}
+
 // A shared structure that contains a single union member.
 type JsonUnionsOutput struct {
 
@@ -48,16 +69,32 @@ type JsonUnionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonUnionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnionInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonUnionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMyUnion(s, schemas.UnionInputOutput_contents, v.Contents)
+}
+func (v *JsonUnionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnionInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnionInputOutput_contents:
+			return deserializeMyUnion(d, schemas.UnionInputOutput_contents, &v.Contents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJsonUnions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonUnions, schemas.UnionInputOutput, schemas.UnionInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpJsonUnions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonUnions, schemas.UnionInputOutput, schemas.UnionInputOutput), output: &JsonUnionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonUnions"); err != nil {

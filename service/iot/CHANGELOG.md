@@ -1,3 +1,40 @@
+# v1.75.3 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.2 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.1 (2026-06-02)
+
+* **Documentation**: Fleet indexing documentation update
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.0 (2026-06-01)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
+# v1.74.1 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.74.0 (2026-05-28)
+
+* **Feature**: Adds new connectivity-related fields to Fleet Indexing API requests and responses.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.0 (2026-05-01)
+
+* **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.
+
+# v1.72.8 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.7 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

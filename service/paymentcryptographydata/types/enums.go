@@ -357,6 +357,27 @@ func (PinBlockPaddingType) Values() []PinBlockPaddingType {
 	}
 }
 
+type RandomKeyMaxLength string
+
+// Enum values for RandomKeyMaxLength
+const (
+	RandomKeyMaxLengthBytes8  RandomKeyMaxLength = "BYTES_8"
+	RandomKeyMaxLengthBytes16 RandomKeyMaxLength = "BYTES_16"
+	RandomKeyMaxLengthBytes24 RandomKeyMaxLength = "BYTES_24"
+)
+
+// Values returns all known values for RandomKeyMaxLength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RandomKeyMaxLength) Values() []RandomKeyMaxLength {
+	return []RandomKeyMaxLength{
+		"BYTES_8",
+		"BYTES_16",
+		"BYTES_24",
+	}
+}
+
 type RandomKeySendVariantMask string
 
 // Enum values for RandomKeySendVariantMask

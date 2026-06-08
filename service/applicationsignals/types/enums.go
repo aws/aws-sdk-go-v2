@@ -128,6 +128,27 @@ func (MetricSourceType) Values() []MetricSourceType {
 	}
 }
 
+type SelectionType string
+
+// Enum values for SelectionType
+const (
+	SelectionTypeExplicit SelectionType = "EXPLICIT"
+	SelectionTypePrefix   SelectionType = "PREFIX"
+	SelectionTypeRegex    SelectionType = "REGEX"
+)
+
+// Values returns all known values for SelectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelectionType) Values() []SelectionType {
+	return []SelectionType{
+		"EXPLICIT",
+		"PREFIX",
+		"REGEX",
+	}
+}
+
 type ServiceLevelIndicatorComparisonOperator string
 
 // Enum values for ServiceLevelIndicatorComparisonOperator

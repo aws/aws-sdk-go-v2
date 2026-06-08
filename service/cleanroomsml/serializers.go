@@ -773,6 +773,13 @@ func awsRestjson1_serializeOpDocumentCreateMLInputChannelInput(v *CreateMLInputC
 		ok.String(*v.Name)
 	}
 
+	if v.PayerConfiguration != nil {
+		ok := object.Key("payerConfiguration")
+		if err := awsRestjson1_serializeDocumentPayerConfiguration(v.PayerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionInDays != nil {
 		ok := object.Key("retentionInDays")
 		ok.Integer(*v.RetentionInDays)
@@ -915,6 +922,11 @@ func awsRestjson1_serializeOpDocumentCreateTrainedModelInput(v *CreateTrainedMod
 	if v.KmsKeyArn != nil {
 		ok := object.Key("kmsKeyArn")
 		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.MlModelTrainingPayerAccountId != nil {
+		ok := object.Key("mlModelTrainingPayerAccountId")
+		ok.String(*v.MlModelTrainingPayerAccountId)
 	}
 
 	if v.Name != nil {
@@ -4852,6 +4864,11 @@ func awsRestjson1_serializeOpDocumentStartTrainedModelInferenceJobInput(v *Start
 		ok.String(*v.KmsKeyArn)
 	}
 
+	if v.MlModelInferencePayerAccountId != nil {
+		ok := object.Key("mlModelInferencePayerAccountId")
+		ok.String(*v.MlModelInferencePayerAccountId)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -5961,6 +5978,23 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]string, value smith
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPayerConfiguration(v *types.PayerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ComputePayerAccountId != nil {
+		ok := object.Key("computePayerAccountId")
+		ok.String(*v.ComputePayerAccountId)
+	}
+
+	if v.SyntheticDataPayerAccountId != nil {
+		ok := object.Key("syntheticDataPayerAccountId")
+		ok.String(*v.SyntheticDataPayerAccountId)
+	}
+
 	return nil
 }
 

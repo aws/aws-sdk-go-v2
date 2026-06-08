@@ -62,6 +62,9 @@ public class AwsGoDependency {
     public static final GoDependency S3_INTERNAL_ARN = aws("service/internal/s3shared/arn", "s3arn");
     public static final GoDependency AWS_ARN = aws("aws/arn", "awsarn");
     public static final GoDependency AWS_PROTOCOL_TEST_HTTP_CLIENT = aws("internal/protocoltest", "protocoltesthttp");
+    public static final GoDependency AWS_PROTOCOL_TEST_EVENTSTREAM = awsModuleDep(
+            "internal/protocoltest/eventstreamtest", null, "v0.0.0-00010101000000-000000000000",
+            "eventstreamtest");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

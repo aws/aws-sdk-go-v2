@@ -124,6 +124,25 @@ func (DnsThreatProtection) Values() []DnsThreatProtection {
 	}
 }
 
+type DomainListType string
+
+// Enum values for DomainListType
+const (
+	DomainListTypeThreat  DomainListType = "THREAT"
+	DomainListTypeContent DomainListType = "CONTENT"
+)
+
+// Values returns all known values for DomainListType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainListType) Values() []DomainListType {
+	return []DomainListType{
+		"THREAT",
+		"CONTENT",
+	}
+}
+
 type FirewallDomainImportOperation string
 
 // Enum values for FirewallDomainImportOperation

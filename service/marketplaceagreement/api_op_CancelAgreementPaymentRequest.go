@@ -56,8 +56,7 @@ type CancelAgreementPaymentRequestOutput struct {
 	// The amount that was requested to be charged.
 	ChargeAmount *string
 
-	// The date and time when the payment request was originally created, in ISO 8601
-	// format.
+	// The date and time when the payment request was originally created.
 	CreatedAt *time.Time
 
 	// The currency code for the charge amount.
@@ -75,7 +74,7 @@ type CancelAgreementPaymentRequestOutput struct {
 	// The updated status of the payment request, which is CANCELLED .
 	Status types.PaymentRequestStatus
 
-	// The date and time when the payment request was cancelled, in ISO 8601 format.
+	// The date and time when the payment request was cancelled.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

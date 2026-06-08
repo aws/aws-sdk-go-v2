@@ -17,6 +17,8 @@ import (
 // replace the alias. For more information about aliases, see versioning-aliases.
 //
 // This operation requires permissions for the lex:PutBotAlias action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optFns ...func(*Options)) (*PutBotAliasOutput, error) {
 	if params == nil {
 		params = &PutBotAliasInput{}

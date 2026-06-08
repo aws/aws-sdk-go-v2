@@ -128,6 +128,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
 		_ = v.Value // Value is types.WorkflowsMwaaPropertiesInput
 
@@ -145,6 +148,7 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 
 var _ *types.SparkEmrPropertiesInput
 var _ *types.LakehousePropertiesInput
+var _ *types.VpcPropertiesInput
 var _ *types.AthenaPropertiesInput
 var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
@@ -194,6 +198,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesOutput
+
 	case *types.ConnectionPropertiesOutputMemberWorkflowsMwaaProperties:
 		_ = v.Value // Value is types.WorkflowsMwaaPropertiesOutput
 
@@ -218,6 +225,7 @@ var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput
 var _ *types.SparkEmrPropertiesOutput
 var _ *types.LakehousePropertiesOutput
+var _ *types.VpcPropertiesOutput
 var _ *types.IamPropertiesOutput
 var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
@@ -254,6 +262,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesPatch
 
+	case *types.ConnectionPropertiesPatchMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesPatch
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -272,6 +283,7 @@ var _ *types.AthenaPropertiesPatch
 var _ *types.GluePropertiesPatch
 var _ *types.LakehousePropertiesPatch
 var _ *types.S3PropertiesPatch
+var _ *types.VpcPropertiesPatch
 
 func ExampleDataSourceConfigurationInput_outputUsage() {
 	var union types.DataSourceConfigurationInput
@@ -602,6 +614,24 @@ func ExampleModel_outputUsage() {
 }
 
 var _ *string
+
+func ExampleOutputLocation_outputUsage() {
+	var union types.OutputLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OutputLocationMemberS3:
+		_ = v.Value // Value is types.S3Destination
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Destination
 
 func ExampleOwnerProperties_outputUsage() {
 	var union types.OwnerProperties
@@ -1148,6 +1178,24 @@ func ExampleSelfGrantStatusOutput_outputUsage() {
 
 var _ *types.RedshiftSelfGrantStatusOutput
 var _ *types.GlueSelfGrantStatusOutput
+
+func ExampleSourceLocation_outputUsage() {
+	var union types.SourceLocation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceLocationMemberS3:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleSubscribedListingItem_outputUsage() {
 	var union types.SubscribedListingItem

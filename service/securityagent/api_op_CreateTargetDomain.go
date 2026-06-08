@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Creates a target domain record
+// Creates a new target domain for penetration testing. A target domain is a web
+// domain that must be registered and verified before it can be tested.
 func (c *Client) CreateTargetDomain(ctx context.Context, params *CreateTargetDomainInput, optFns ...func(*Options)) (*CreateTargetDomainOutput, error) {
 	if params == nil {
 		params = &CreateTargetDomainInput{}
@@ -28,50 +29,55 @@ func (c *Client) CreateTargetDomain(ctx context.Context, params *CreateTargetDom
 	return out, nil
 }
 
-// Input for creating a new target domain
+// Input for creating a new target domain.
 type CreateTargetDomainInput struct {
 
-	// Domain name of the target domain
+	// The domain name to register as a target domain.
 	//
 	// This member is required.
 	TargetDomainName *string
 
-	// Verification method for the target domain
+	// The method to use for verifying domain ownership. Valid values are DNS_TXT,
+	// HTTP_ROUTE, and PRIVATE_VPC.
 	//
 	// This member is required.
 	VerificationMethod types.DomainVerificationMethod
 
-	// Tags to associate with the target domain
+	// The tags to associate with the target domain.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the CreateTargetDomain operation
+// Output for the CreateTargetDomain operation.
 type CreateTargetDomainOutput struct {
 
-	// Name of the created target domain
+	// The domain name of the target domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Unique identifier of the created target domain
+	// The unique identifier of the created target domain.
 	//
 	// This member is required.
 	TargetDomainId *string
 
-	// Current verification status of the registered target domain
+	// The current verification status of the target domain.
 	//
 	// This member is required.
 	VerificationStatus types.TargetDomainStatus
 
-	// Timestamp when the target domain was registered
+	// The date and time the target domain was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Verification details to verify registered target domain
+	// The verification details for the target domain, including the verification
+	// token and instructions.
 	VerificationDetails *types.VerificationDetails
 
-	// Timestamp when the target domain was last successfully verified
+	// The reason for the current target domain verification status.
+	VerificationStatusReason *string
+
+	// The date and time the target domain was verified, in UTC format.
 	VerifiedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -3,21 +3,24 @@
 // Package georoutes provides the API client, operations, and parameter types for
 // Amazon Location Service Routes V2.
 //
-// With the Amazon Location Routes API you can calculate routes and estimate
-// travel time based on up-to-date road network and live traffic information.
-//
-// Calculate optimal travel routes and estimate travel times using up-to-date road
-// network and traffic data. Key features include:
+// With the Routes API you can calculate routes and estimate travel time based on
+// up-to-date road network and live traffic information. Key features include:
 //
 //   - Point-to-point routing with estimated travel time, distance, and
-//     turn-by-turn directions
+//     turn-by-turn directions. See [CalculateRoutes].
 //
-//   - Multi-point route optimization to minimize travel time or distance
+//   - Multi-point route optimization to minimize travel time or distance. See [OptimizeWaypoints].
 //
-//   - Route matrices for efficient multi-destination planning
+//   - Route matrices for efficient multi-destination planning. See [CalculateRouteMatrix].
 //
 //   - Isoline calculations to determine reachable areas within specified time or
-//     distance thresholds
+//     distance thresholds. See [CalculateIsolines].
 //
-//   - Map-matching to align GPS traces with the road network
+//   - Map-matching to align GPS traces with the road network. See [SnapToRoads].
+//
+// [CalculateIsolines]: https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateIsolines.html
+// [CalculateRouteMatrix]: https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateRouteMatrix.html
+// [OptimizeWaypoints]: https://docs.aws.amazon.com/location/latest/APIReference/API_OptimizeWaypoints.html
+// [CalculateRoutes]: https://docs.aws.amazon.com/location/latest/APIReference/API_CalculateRoutes.html
+// [SnapToRoads]: https://docs.aws.amazon.com/location/latest/APIReference/API_SnapToRoads.html
 package georoutes

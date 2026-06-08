@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -8144,6 +8145,23 @@ func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContinuousScanDetails(v *types.ContinuousScanDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("endTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("startTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCoverageFilterCondition(v *types.CoverageFilterCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8985,6 +9003,13 @@ func awsRestjson1_serializeDocumentRecoveryPoint(v *types.RecoveryPoint, value s
 	if v.BackupVaultName != nil {
 		ok := object.Key("backupVaultName")
 		ok.String(*v.BackupVaultName)
+	}
+
+	if v.ContinuousScanDetails != nil {
+		ok := object.Key("continuousScanDetails")
+		if err := awsRestjson1_serializeDocumentContinuousScanDetails(v.ContinuousScanDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

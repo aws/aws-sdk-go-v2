@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all members associated to an agent space with pagination support
+// Returns a paginated list of membership summaries for the specified agent space
+// within an application.
 func (c *Client) ListMemberships(ctx context.Context, params *ListMembershipsInput, optFns ...func(*Options)) (*ListMembershipsOutput, error) {
 	if params == nil {
 		params = &ListMembershipsInput{}
@@ -27,40 +28,44 @@ func (c *Client) ListMemberships(ctx context.Context, params *ListMembershipsInp
 	return out, nil
 }
 
-// Request structure for listing agent space members
+// Request structure for listing agent space members.
 type ListMembershipsInput struct {
 
-	// Agent space identifier
+	// The unique identifier of the agent space to list memberships for.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Application identifier
+	// The unique identifier of the application that contains the agent space.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// Filter by member type
+	// Filter memberships by member type.
 	MemberType types.MembershipTypeFilter
 
-	// Token for pagination
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Response structure for listing members associated to an agent space
+// Response structure for listing members associated to an agent space.
 type ListMembershipsOutput struct {
 
-	// List of membership summaries
+	// The list of membership summaries.
 	//
 	// This member is required.
 	MembershipSummaries []types.MembershipSummary
 
-	// Token for next page of results
+	// A token to use for paginating results that are returned in the response. Set
+	// the value of this parameter to null for the first request. For subsequent calls,
+	// use the nextToken value returned from the previous request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -168,7 +173,7 @@ func (c *Client) addOperationListMembershipsMiddlewares(stack *middleware.Stack,
 
 // ListMembershipsPaginatorOptions is the paginator options for ListMemberships
 type ListMembershipsPaginatorOptions struct {
-	// Maximum number of results to return
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

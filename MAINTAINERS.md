@@ -11,6 +11,7 @@ See [CONTRIBUTING.md](https://github.com/aws/aws-sdk-go-v2/blob/main/CONTRIBUTIN
 ## Maintainers (in alphabetical order)
 * [Madrigal](https://github.com/Madrigal)
 * [lucix-aws](https://github.com/lucix-aws)
+* [Tongs2000](https://github.com/Tongs2000)
 * [wty-Bryant](https://github.com/wty-Bryant)
 
 ## Emeritus (in alphabetical order)

@@ -53,8 +53,9 @@ func (c *Client) GetPlayerConnectionDetails(ctx context.Context, params *GetPlay
 
 type GetPlayerConnectionDetailsInput struct {
 
-	// A unique identifier for the game session for which to retrieve player
-	// connection details.
+	// An identifier for the game session that is unique across all regions for which
+	// to retrieve player connection details. The value is always a full ARN in the
+	// following format: arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -70,8 +71,9 @@ type GetPlayerConnectionDetailsInput struct {
 
 type GetPlayerConnectionDetailsOutput struct {
 
-	// A unique identifier for the game session for which the player connection
-	// details were retrieved.
+	// An identifier for the game session that is unique across all regions for which
+	// the player connection details were retrieved. The value is always a full ARN in
+	// the following format: arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// A collection of player connection detail objects, one for each requested player.

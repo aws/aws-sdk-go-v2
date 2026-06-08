@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,16 @@ type FlattenedXmlMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlattenedXmlMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlattenedXmlMapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlattenedXmlMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFooEnumMap(s, schemas.FlattenedXmlMapRequest_myMap, v.MyMap)
+}
+
 type FlattenedXmlMapOutput struct {
 	MyMap map[string]types.FooEnum
 
@@ -42,16 +54,23 @@ type FlattenedXmlMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlattenedXmlMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlattenedXmlMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlattenedXmlMapResponse_myMap:
+			return deserializeFooEnumMap(d, schemas.FlattenedXmlMapResponse_myMap, &v.MyMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFlattenedXmlMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpFlattenedXmlMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlattenedXmlMap, schemas.FlattenedXmlMapRequest, schemas.FlattenedXmlMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpFlattenedXmlMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlattenedXmlMap, schemas.FlattenedXmlMapRequest, schemas.FlattenedXmlMapResponse), output: &FlattenedXmlMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "FlattenedXmlMap"); err != nil {

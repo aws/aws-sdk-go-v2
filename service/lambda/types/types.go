@@ -238,6 +238,10 @@ type CapacityProvider struct {
 	// The date and time when the capacity provider was last modified.
 	LastModified *string
 
+	// Configuration for tag propagation to managed resources launched by the capacity
+	// provider.
+	PropagateTags *PropagateTags
+
 	noSmithyDocumentSerde
 }
 
@@ -2165,6 +2169,21 @@ type OperationUpdate struct {
 
 	// Options for wait operations.
 	WaitOptions *WaitOptions
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for tag propagation to managed resources launched by the capacity
+// provider.
+type PropagateTags struct {
+
+	// A list of tags to apply to managed resources when Mode is set to Explicit . You
+	// can specify up to 40 tags.
+	ExplicitTags map[string]string
+
+	// The tag propagation mode. Set to Explicit to propagate the tags specified in
+	// ExplicitTags to managed resources. Set to None to disable tag propagation.
+	Mode PropagateTagsMode
 
 	noSmithyDocumentSerde
 }

@@ -7,118 +7,122 @@ import (
 	"time"
 )
 
-// Represents an entity that interacts with the system during security testing
+// Represents an actor used during penetration testing. An actor defines a user or
+// entity that interacts with the target application, including authentication
+// credentials and target URIs.
 type Actor struct {
 
-	// Authentication information used by the actor to access resources
+	// The authentication configuration for the actor.
 	Authentication *Authentication
 
-	// Additional description or details about the actor
+	// A description of the actor.
 	Description *string
 
-	// Unique identifier for the actor (case-insensitive)
+	// The unique identifier for the actor.
 	Identifier *string
 
-	// List of URIs accessible with the actor's credentials
+	// The list of URIs that the actor targets during testing.
 	Uris []string
 
 	noSmithyDocumentSerde
 }
 
-// Agent space structure
+// Represents an agent space, which is a dedicated workspace for securing a
+// specific application. An agent space contains the configuration, resources, and
+// settings needed for security testing.
 type AgentSpace struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Name of the agent space
+	// The name of the agent space.
 	//
 	// This member is required.
 	Name *string
 
-	// AWS resource configurations
+	// The AWS resources associated with the agent space.
 	AwsResources *AWSResources
 
-	// Configuration for code review analysis, including controls scanning and general
-	// purpose scanning settings
+	// The code review settings for the agent space.
 	CodeReviewSettings *CodeReviewSettings
 
-	// Timestamp when the agent space was created
+	// The date and time the agent space was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Description of the agent space
+	// A description of the agent space.
 	Description *string
 
-	// Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias
-	// name, or alias ARN. If not specified, an AWS managed key is used.
+	// The identifier of the AWS KMS key used to encrypt data in the agent space.
 	KmsKeyId *string
 
-	// List of target domain IDs registered with the agent space
+	// The list of target domain identifiers associated with the agent space.
 	TargetDomainIds []string
 
-	// Timestamp when the agent space was last updated
+	// The date and time the agent space was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for an agent space
+// Contains summary information about an agent space.
 type AgentSpaceSummary struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Name of the agent space
+	// The name of the agent space.
 	//
 	// This member is required.
 	Name *string
 
-	// Timestamp when the agent space was created
+	// The date and time the agent space was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Timestamp when the agent space was last updated
+	// The date and time the agent space was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Application summary for list operations
+// Contains summary information about an application.
 type ApplicationSummary struct {
 
-	// Unique identifier of the application
+	// The unique identifier of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Name of the application, automatically assigned by the service
+	// The name of the application.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// Domain where the application is available
+	// The domain associated with the application.
 	//
 	// This member is required.
 	Domain *string
 
-	// Default KMS key identifier used to encrypt application data
+	// The identifier of the default AWS KMS key used to encrypt data for the
+	// application.
 	DefaultKmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Files containing relevant data for review
+// Represents an artifact that provides context for security testing, such as
+// documentation, diagrams, or configuration files.
 type Artifact struct {
 
-	// The content of the artifact
+	// The content of the artifact.
 	//
 	// This member is required.
 	Contents *string
 
-	// The file type of the artifact
+	// The file type of the artifact.
 	//
 	// This member is required.
 	Type ArtifactType
@@ -126,25 +130,25 @@ type Artifact struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata in relation to the artifact
+// Contains metadata about an artifact.
 type ArtifactMetadataItem struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the agent space that contains the artifact.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier of the artifact
+	// The unique identifier of the artifact.
 	//
 	// This member is required.
 	ArtifactId *string
 
-	// Name of the artifact file
+	// The file name of the artifact.
 	//
 	// This member is required.
 	FileName *string
 
-	// Timestamp when the artifact was last updated
+	// The date and time the artifact was last updated, in UTC format.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -152,20 +156,20 @@ type ArtifactMetadataItem struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about an artifact
+// Contains summary information about an artifact.
 type ArtifactSummary struct {
 
-	// Unique identifier of the artifact
+	// The unique identifier of the artifact.
 	//
 	// This member is required.
 	ArtifactId *string
 
-	// Type of the artifact file
+	// The file type of the artifact.
 	//
 	// This member is required.
 	ArtifactType ArtifactType
 
-	// Name of the artifact file
+	// The file name of the artifact.
 	//
 	// This member is required.
 	FileName *string
@@ -173,129 +177,367 @@ type ArtifactSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Collection of assets to be tested or used during a pentest
+// The collection of assets used in a pentest configuration, including endpoints,
+// actors, documents, source code repositories, and integrated repositories.
 type Assets struct {
 
-	// List of actors that interact with the system
+	// The list of actors used during penetration testing.
 	Actors []Actor
 
-	// List of documents providing context for testing
+	// The list of documents that provide context for the pentest.
 	Documents []DocumentInfo
 
-	// List of web application endpoints to test
+	// The list of endpoints to test during the pentest.
 	Endpoints []Endpoint
 
-	// List of integrated code repositories
+	// The list of integrated repositories associated with the pentest.
 	IntegratedRepositories []IntegratedRepository
 
-	// List of source code repositories for static analysis
+	// The list of source code repositories to analyze during the pentest.
 	SourceCode []SourceCodeRepository
 
 	noSmithyDocumentSerde
 }
 
-// Authentication information used to access protected resources
+// The authentication configuration for an actor, specifying the provider type and
+// credentials.
 type Authentication struct {
 
-	// Provider type for the authentication credentials
+	// The type of authentication provider. Valid values include SECRETS_MANAGER,
+	// AWS_LAMBDA, AWS_IAM_ROLE, and AWS_INTERNAL.
 	ProviderType AuthenticationProviderType
 
-	// Authentication credential value or reference
+	// The authentication value, such as a secret ARN, Lambda function ARN, or IAM
+	// role ARN, depending on the provider type.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// AWS resource configurations associated with the agent space
+// The AWS resources associated with an agent space, including VPCs, log groups,
+// S3 buckets, secrets, Lambda functions, and IAM roles.
 type AWSResources struct {
 
-	// IAM role ARNs that the Security Agent can assume to access customer resources
+	// The IAM roles associated with the agent space.
 	IamRoles []string
 
-	// Lambda function ARNs or names used to retrieve tester credentials for pentests
+	// The Amazon Resource Names (ARNs) of the Lambda functions associated with the
+	// agent space.
 	LambdaFunctionArns []string
 
-	// CloudWatch log group ARNs or names used to store Security Agent logs
+	// The Amazon Resource Names (ARNs) of the CloudWatch log groups associated with
+	// the agent space.
 	LogGroups []string
 
-	// S3 bucket ARNs or names used to store Security Agent artifacts
+	// The Amazon Resource Names (ARNs) of the S3 buckets associated with the agent
+	// space.
 	S3Buckets []string
 
-	// SecretsManager secret ARNs or names used to store tester credentials for
-	// pentests
+	// The Amazon Resource Names (ARNs) of the Secrets Manager secrets associated with
+	// the agent space.
 	SecretArns []string
 
-	// VPC configurations that the Security Agent accesses in the customer environment
+	// The VPC configurations associated with the agent space.
 	Vpcs []VpcConfig
 
 	noSmithyDocumentSerde
 }
 
-// Represents a category classification for tasks
+// Represents a category assigned to a security testing task.
 type Category struct {
 
-	// Whether this is the primary category for the task
+	// Indicates whether this is the primary category for the task.
 	IsPrimary *bool
 
-	// Name of the category
+	// The name of the category.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Reference to logs stored in CloudWatch
+// The Amazon CloudWatch Logs configuration for pentest job logging.
 type CloudWatchLog struct {
 
-	// Name of the CloudWatch log group
+	// The name of the CloudWatch log group.
 	LogGroup *string
 
-	// Name of the CloudWatch log stream
+	// The name of the CloudWatch log stream.
 	LogStream *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about task for code remediation
+// Represents a location in source code associated with a security finding.
+type CodeLocation struct {
+
+	// The absolute path to the file containing the code location.
+	//
+	// This member is required.
+	FilePath *string
+
+	// The role of this location in the vulnerability, such as source or sink.
+	Label *string
+
+	// The ending line number of the code location.
+	LineEnd *int32
+
+	// The starting line number of the code location.
+	LineStart *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents a code remediation task that was initiated to fix a security finding.
 type CodeRemediationTask struct {
 
-	// Current status of the code remediation task
+	// The current status of the code remediation task.
 	//
 	// This member is required.
 	Status CodeRemediationTaskStatus
 
-	// Reason for the current code remediation task status
+	// The reason for the current status of the code remediation task.
 	StatusReason *string
 
-	// Details of the code remediation for each repository
+	// The list of details for the code remediation task, including repository name,
+	// code diff link, and pull request link.
 	TaskDetails []CodeRemediationTaskDetails
 
 	noSmithyDocumentSerde
 }
 
-// Code remediation details for a single repository
+// Contains details about a code remediation task, including links to the code
+// diff and pull request.
 type CodeRemediationTaskDetails struct {
 
-	// Link to the code diff for the remediation
+	// The link to the code diff for the remediation.
 	CodeDiffLink *string
 
-	// Link to the pull request for the remediation
+	// The link to the pull request created for the remediation.
 	PullRequestLink *string
 
-	// Name of the repository
+	// The name of the repository where the remediation was applied.
 	RepoName *string
 
 	noSmithyDocumentSerde
 }
 
-// Details of code review settings
+// Represents a code review configuration that defines the parameters for
+// automated security-focused code analysis, including target assets and logging
+// configuration.
+type CodeReview struct {
+
+	// The unique identifier of the agent space that contains the code review.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The assets included in the code review.
+	//
+	// This member is required.
+	Assets *Assets
+
+	// The unique identifier of the code review.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The title of the code review.
+	//
+	// This member is required.
+	Title *string
+
+	// The code remediation strategy for the code review.
+	CodeRemediationStrategy CodeRemediationStrategy
+
+	// The date and time the code review was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The CloudWatch Logs configuration for the code review.
+	LogConfig *CloudWatchLog
+
+	// The IAM service role used for the code review.
+	ServiceRole *string
+
+	// The date and time the code review was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a code review job, which is an execution instance of a code review.
+// A code review job progresses through preflight, static analysis, and finalizing
+// steps.
+type CodeReviewJob struct {
+
+	// The code remediation strategy for the code review job.
+	CodeRemediationStrategy CodeRemediationStrategy
+
+	// The unique identifier of the code review associated with the job.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job.
+	CodeReviewJobId *string
+
+	// The date and time the code review job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The list of documents providing context for the code review job.
+	Documents []DocumentInfo
+
+	// Error information if the code review job encountered an error.
+	ErrorInformation *ErrorInformation
+
+	// The execution context messages for the code review job.
+	ExecutionContext []ExecutionContext
+
+	// The list of integrated repositories associated with the code review job.
+	IntegratedRepositories []IntegratedRepository
+
+	// The CloudWatch Logs configuration for the code review job.
+	LogConfig *CloudWatchLog
+
+	// An overview of the code review job results.
+	Overview *string
+
+	// The IAM service role used for the code review job.
+	ServiceRole *string
+
+	// The list of source code repositories analyzed during the code review job.
+	SourceCode []SourceCodeRepository
+
+	// The current status of the code review job.
+	Status JobStatus
+
+	// The list of steps in the code review job execution.
+	Steps []Step
+
+	// The title of the code review job.
+	Title *string
+
+	// The date and time the code review job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a code review job.
+type CodeReviewJobSummary struct {
+
+	// The unique identifier of the code review associated with the job.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job.
+	//
+	// This member is required.
+	CodeReviewJobId *string
+
+	// The date and time the code review job was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current status of the code review job.
+	Status JobStatus
+
+	// The title of the code review job.
+	Title *string
+
+	// The date and time the code review job was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an individual security test task within a code review job. Each task
+// targets a specific risk type and executes independently.
+type CodeReviewJobTask struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The list of categories assigned to the task.
+	Categories []Category
+
+	// The unique identifier of the code review associated with the task.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that contains the task.
+	CodeReviewJobId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// A description of the task.
+	Description *string
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The location of the task execution logs.
+	LogsLocation *LogLocation
+
+	// The type of security risk the task is testing for.
+	RiskType RiskType
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a code review job task.
+type CodeReviewJobTaskSummary struct {
+
+	// The unique identifier of the task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The unique identifier of the agent space.
+	AgentSpaceId *string
+
+	// The unique identifier of the code review associated with the task.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that contains the task.
+	CodeReviewJobId *string
+
+	// The date and time the task was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The current execution status of the task.
+	ExecutionStatus TaskExecutionStatus
+
+	// The type of security risk the task is testing for.
+	RiskType RiskType
+
+	// The title of the task.
+	Title *string
+
+	// The date and time the task was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The code review settings for an agent space, controlling which types of
+// scanning are enabled.
 type CodeReviewSettings struct {
 
-	// Whether Controls are utilized for code review analysis
+	// Indicates whether controls scanning is enabled for code reviews.
 	//
 	// This member is required.
 	ControlsScanning *bool
 
-	// Whether general purpose analysis is performed for code review
+	// Indicates whether general-purpose scanning is enabled for code reviews.
 	//
 	// This member is required.
 	GeneralPurposeScanning *bool
@@ -303,287 +545,359 @@ type CodeReviewSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Custom headers to be set for network requests
+// Contains summary information about a code review.
+type CodeReviewSummary struct {
+
+	// The unique identifier of the agent space that contains the code review.
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The unique identifier of the code review.
+	//
+	// This member is required.
+	CodeReviewId *string
+
+	// The title of the code review.
+	//
+	// This member is required.
+	Title *string
+
+	// The date and time the code review was created, in UTC format.
+	CreatedAt *time.Time
+
+	// The date and time the code review was last updated, in UTC format.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A custom HTTP header to include in network traffic during penetration testing.
 type CustomHeader struct {
 
-	// Name of header to set value for
+	// The name of the custom header.
 	Name *string
 
-	// Value to set for header
+	// The value of the custom header.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about a failed pentest deletion attempt
-type DeletePentestFailure struct {
+// Contains information about a code review that failed to delete.
+type DeleteCodeReviewFailure struct {
 
-	// Identifier of the pentest that failed to delete
-	PentestId *string
+	// The unique identifier of the code review that failed to delete.
+	CodeReviewId *string
 
-	// Reason for the deletion failure
+	// The reason the code review failed to delete.
 	Reason *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a discovered endpoint during pentest execution
+// Contains information about a pentest that failed to delete.
+type DeletePentestFailure struct {
+
+	// The unique identifier of the pentest that failed to delete.
+	PentestId *string
+
+	// The reason the pentest failed to delete.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an endpoint discovered during a pentest job.
 type DiscoveredEndpoint struct {
 
-	// Identifier of the agent space where the endpoint was discovered
+	// The unique identifier of the agent space associated with the discovered
+	// endpoint.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Identifier of the pentest job that discovered this endpoint
+	// The unique identifier of the pentest job that discovered the endpoint.
 	//
 	// This member is required.
 	PentestJobId *string
 
-	// Identifier of the task that discovered this endpoint
+	// The unique identifier of the task that discovered the endpoint.
 	//
 	// This member is required.
 	TaskId *string
 
-	// The URI of the discovered endpoint
+	// The URI of the discovered endpoint.
 	//
 	// This member is required.
 	Uri *string
 
-	// Additional description of the endpoint
+	// A description of the discovered endpoint.
 	Description *string
 
-	// Optional evidence or additional information about the endpoint
+	// The evidence that led to the discovery of the endpoint.
 	Evidence *string
 
-	// Operation or action associated with the endpoint
+	// The HTTP operation associated with the discovered endpoint.
 	Operation *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents dns txt verification details
+// Contains DNS verification details for a target domain, including the DNS record
+// to create for domain ownership verification.
 type DnsVerification struct {
 
-	// Record name to be added in DNS for target domain
+	// The name of the DNS record to create for verification.
 	DnsRecordName *string
 
-	// Type of record to be added in DNS for target domain
+	// The type of DNS record to create. Currently, only TXT is supported.
 	DnsRecordType DNSRecordType
 
-	// Token used to verify domain ownership
+	// The verification token to include in the DNS record value.
 	Token *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about a document relevant to security testing
+// Represents a document that provides context for security testing.
 type DocumentInfo struct {
 
-	// Artifact ID of the document
+	// The unique identifier of the artifact associated with the document.
 	ArtifactId *string
 
-	// S3 storage location of the document
+	// The Amazon S3 location of the document.
 	S3Location *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a web application endpoint to be tested
+// Represents a target endpoint for penetration testing.
 type Endpoint struct {
 
-	// URI of the endpoint to test
+	// The URI of the endpoint.
 	Uri *string
 
 	noSmithyDocumentSerde
 }
 
-// Error information regarding the pentest job
+// Contains error information for a pentest job that encountered an error.
 type ErrorInformation struct {
 
-	// Pentest job failure error code
+	// The error code. Valid values include CLIENT_ERROR, INTERNAL_ERROR, and
+	// STOPPED_BY_USER.
 	Code ErrorCode
 
-	// Pentest job failure error message
+	// A message describing the error.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// Additional context about a pentest or task execution
+// Contains contextual information about the execution of a pentest job, such as
+// errors, warnings, or informational messages.
 type ExecutionContext struct {
 
-	// Context associated with a pentest or task execution
+	// The context message.
 	Context *string
 
-	// The category of context
+	// The type of context. Valid values include ERROR, CLIENT_ERROR, WARNING, and
+	// INFO.
 	ContextType ContextType
 
-	// Timestamp associated with a pentest or task execution
+	// The date and time the context was recorded, in UTC format.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Represents a security vulnerability or issue discovered during testing
+// Represents a security finding discovered during a pentest job. A finding
+// contains details about a vulnerability, including its risk level, confidence,
+// and remediation status.
 type Finding struct {
 
-	// Identifier of the agent space that created this finding
+	// The unique identifier of the agent space associated with the finding.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier for the finding
+	// The unique identifier of the finding.
 	//
 	// This member is required.
 	FindingId *string
 
-	// Proof-of-concept code demonstrating the vulnerability
+	// The attack script used to reproduce the finding.
 	AttackScript *string
 
-	// Code remediation task associated with this finding
+	// The file locations involved in the vulnerability, as reported by the code
+	// scanner.
+	CodeLocations []CodeLocation
+
+	// The code remediation task associated with the finding, if code remediation was
+	// initiated.
 	CodeRemediationTask *CodeRemediationTask
 
-	// Confidence level of the finding
+	// The unique identifier of the code review associated with the finding.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that produced the finding.
+	CodeReviewJobId *string
+
+	// The confidence level of the finding. Valid values include FALSE_POSITIVE,
+	// UNCONFIRMED, LOW, MEDIUM, and HIGH.
 	Confidence ConfidenceLevel
 
-	// Timestamp when the finding was created
+	// The date and time the finding was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Detailed description of the security vulnerability
+	// A description of the finding.
 	Description *string
 
-	// Identifier of the task or agent that last updated this finding
+	// The identifier of the entity that last updated the finding.
 	LastUpdatedBy *string
 
-	// Name or title of the finding
+	// The name of the finding.
 	Name *string
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the finding.
 	PentestId *string
 
-	// Identifier of the pentest job
+	// The unique identifier of the pentest job that produced the finding.
 	PentestJobId *string
 
-	// Justification for the assigned risk score
+	// The reasoning behind the finding, explaining why it was identified as a
+	// vulnerability.
 	Reasoning *string
 
-	// Severity level of the identified risk
+	// The risk level of the finding. Valid values include UNKNOWN, INFORMATIONAL,
+	// LOW, MEDIUM, HIGH, and CRITICAL.
 	RiskLevel RiskLevel
 
-	// Risk score associated with the finding
+	// The numerical risk score of the finding.
 	RiskScore *string
 
-	// Type of security risk identified
+	// The type of security risk identified by the finding.
 	RiskType *string
 
-	// Current status of the finding
+	// The current status of the finding. Valid values include ACTIVE, RESOLVED,
+	// ACCEPTED, and FALSE_POSITIVE.
 	Status FindingStatus
 
-	// Identifier of the associated task
+	// The unique identifier of the task that produced the finding.
 	TaskId *string
 
-	// Timestamp when the finding was last updated
+	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
+
+	// The verification script metadata for reproducing the finding, including
+	// download URL, instructions, and required environment variables.
+	VerificationScript *VerificationScript
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a security finding
+// Contains summary information about a security finding.
 type FindingSummary struct {
 
-	// Identifier of the agent space that created this finding
+	// The unique identifier of the agent space associated with the finding.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier for the finding
+	// The unique identifier of the finding.
 	//
 	// This member is required.
 	FindingId *string
 
-	// Confidence level of the finding
+	// The unique identifier of the code review associated with the finding.
+	CodeReviewId *string
+
+	// The unique identifier of the code review job that produced the finding.
+	CodeReviewJobId *string
+
+	// The confidence level of the finding.
 	Confidence ConfidenceLevel
 
-	// Timestamp when the finding was created
+	// The date and time the finding was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Name or title of the finding
+	// The name of the finding.
 	Name *string
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the finding.
 	PentestId *string
 
-	// Identifier of the pentest job
+	// The unique identifier of the pentest job that produced the finding.
 	PentestJobId *string
 
-	// Severity level of the identified risk
+	// The risk level of the finding.
 	RiskLevel RiskLevel
 
-	// Type of security risk identified
+	// The type of security risk identified by the finding.
 	RiskType *string
 
-	// Current status of the finding
+	// The current status of the finding.
 	Status FindingStatus
 
-	// Timestamp when the finding was last updated
+	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Input parameters for GitHub integration
+// The input required to create a GitHub integration, including the OAuth
+// authorization code and CSRF state.
 type GitHubIntegrationInput struct {
 
-	// Authorization code from OAuth flow
+	// The OAuth authorization code received from GitHub.
 	//
 	// This member is required.
 	Code *string
 
-	// CSRF state token for OAuth security
+	// The CSRF state token for validating the OAuth flow.
 	//
 	// This member is required.
 	State *string
 
-	// Name of the GitHub organization
+	// The name of the GitHub organization to integrate with.
 	OrganizationName *string
 
 	noSmithyDocumentSerde
 }
 
-// Metadata specific to a GitHub repository integrated resource
+// Contains metadata about a GitHub repository that is integrated with the service.
 type GitHubRepositoryMetadata struct {
 
-	// Name of the resource e.g. repository name, etc
+	// The name of the GitHub repository.
 	//
 	// This member is required.
 	Name *string
 
-	// Owner of the repository
+	// The owner of the GitHub repository.
 	//
 	// This member is required.
 	Owner *string
 
-	// Unique resource identifier from the vendor
+	// The provider-specific resource identifier for the GitHub repository.
 	//
 	// This member is required.
 	ProviderResourceId *string
 
-	// Access / Visibility Type of the integrated resource
+	// The access type of the GitHub repository. Valid values are PRIVATE and PUBLIC.
 	AccessType AccessType
 
 	noSmithyDocumentSerde
 }
 
-// GitHub repository resource details
+// Represents a GitHub repository resource used in an integration.
 type GitHubRepositoryResource struct {
 
-	// Name of the resource e.g. repository name, etc
+	// The name of the GitHub repository.
 	//
 	// This member is required.
 	Name *string
 
-	// Owner of the repository
+	// The owner of the GitHub repository.
 	//
 	// This member is required.
 	Owner *string
@@ -591,51 +905,53 @@ type GitHubRepositoryResource struct {
 	noSmithyDocumentSerde
 }
 
-// Capabilities for GitHub repositories
+// The capabilities enabled for a GitHub resource integration.
 type GitHubResourceCapabilities struct {
 
-	// Post code review comments on pull requests
+	// Indicates whether the integration can leave comments on pull requests.
 	LeaveComments *bool
 
-	// Create pull requests with automated fixes
+	// Indicates whether the integration can create code remediation pull requests.
 	RemediateCode *bool
 
 	noSmithyDocumentSerde
 }
 
-// Represents http route verification details
+// Contains HTTP route verification details for a target domain, including the
+// route path and token to serve for domain ownership verification.
 type HttpVerification struct {
 
-	// Route path where verification token should be placed
+	// The HTTP route path where the verification token must be served.
 	RoutePath *string
 
-	// Token used to verify domain ownership
+	// The verification token to serve at the specified route path.
 	Token *string
 
 	noSmithyDocumentSerde
 }
 
-// IdC configuration containing application and instance ARNs
+// The IAM Identity Center configuration for an application.
 type IdCConfiguration struct {
 
-	// ARN of the IAM Identity Center application associated with this application
+	// The Amazon Resource Name (ARN) of the IAM Identity Center application.
 	IdcApplicationArn *string
 
-	// ARN of the IAM Identity Center instance used for user authentication
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
 	IdcInstanceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about an integrated repository
+// Represents a code repository that is integrated with the service through a
+// third-party provider.
 type IntegratedRepository struct {
 
-	// Integration identifier
+	// The unique identifier of the integration that provides access to the repository.
 	//
 	// This member is required.
 	IntegrationId *string
 
-	// External provider resource identifier, e.g., Github repository identifier
+	// The provider-specific resource identifier for the repository.
 	//
 	// This member is required.
 	ProviderResourceId *string
@@ -643,7 +959,8 @@ type IntegratedRepository struct {
 	noSmithyDocumentSerde
 }
 
-// Integrated resource details from a provider
+// Represents an integrated resource from a third-party provider. This is a union
+// type that contains provider-specific resource information.
 //
 // The following types satisfy this interface:
 //
@@ -652,7 +969,7 @@ type IntegratedResource interface {
 	isIntegratedResource()
 }
 
-// GitHub repository resource
+// The GitHub repository resource information.
 type IntegratedResourceMemberGithubRepository struct {
 	Value GitHubRepositoryResource
 
@@ -661,21 +978,23 @@ type IntegratedResourceMemberGithubRepository struct {
 
 func (*IntegratedResourceMemberGithubRepository) isIntegratedResource() {}
 
-// Input item for updating an integrated resource
+// Represents an input item for updating integrated resources, including the
+// resource and its capabilities.
 type IntegratedResourceInputItem struct {
 
-	// Configuration of the resource
+	// The integrated resource to update.
 	//
 	// This member is required.
 	Resource IntegratedResource
 
-	// Provider-specific capabilities for the resource
+	// The capabilities to enable for the integrated resource.
 	Capabilities ProviderResourceCapabilities
 
 	noSmithyDocumentSerde
 }
 
-// Metadata about an integrated resource
+// Contains metadata about an integrated resource. This is a union type that
+// contains provider-specific metadata.
 //
 // The following types satisfy this interface:
 //
@@ -684,7 +1003,7 @@ type IntegratedResourceMetadata interface {
 	isIntegratedResourceMetadata()
 }
 
-// Metadata for a GitHub repository resource
+// The GitHub repository metadata.
 type IntegratedResourceMetadataMemberGithubRepository struct {
 	Value GitHubRepositoryMetadata
 
@@ -693,26 +1012,27 @@ type IntegratedResourceMetadataMemberGithubRepository struct {
 
 func (*IntegratedResourceMetadataMemberGithubRepository) isIntegratedResourceMetadata() {}
 
-// Summary information about an integrated resource
+// Contains summary information about an integrated resource.
 type IntegratedResourceSummary struct {
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration that provides access to the resource.
 	//
 	// This member is required.
 	IntegrationId *string
 
-	// The integrated resource details
+	// The metadata for the integrated resource.
 	//
 	// This member is required.
 	Resource IntegratedResourceMetadata
 
-	// Capabilities of the integrated resource
+	// The capabilities enabled for the integrated resource.
 	Capabilities ProviderResourceCapabilities
 
 	noSmithyDocumentSerde
 }
 
-// Filter criteria for integrations
+// A filter for listing integrations. This is a union type where you can filter by
+// provider or provider type.
 //
 // The following types satisfy this interface:
 //
@@ -722,7 +1042,7 @@ type IntegrationFilter interface {
 	isIntegrationFilter()
 }
 
-// Filter by provider
+// Filter integrations by provider.
 type IntegrationFilterMemberProvider struct {
 	Value Provider
 
@@ -731,7 +1051,7 @@ type IntegrationFilterMemberProvider struct {
 
 func (*IntegrationFilterMemberProvider) isIntegrationFilter() {}
 
-// Filter by provider type
+// Filter integrations by provider type.
 type IntegrationFilterMemberProviderType struct {
 	Value ProviderType
 
@@ -740,30 +1060,30 @@ type IntegrationFilterMemberProviderType struct {
 
 func (*IntegrationFilterMemberProviderType) isIntegrationFilter() {}
 
-// Summary information about an integration
+// Contains summary information about an integration.
 type IntegrationSummary struct {
 
-	// Display name for the integration
+	// The display name of the integration.
 	//
 	// This member is required.
 	DisplayName *string
 
-	// Installation identifier from the provider
+	// The installation identifier from the integration provider.
 	//
 	// This member is required.
 	InstallationId *string
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration.
 	//
 	// This member is required.
 	IntegrationId *string
 
-	// Provider type
+	// The integration provider.
 	//
 	// This member is required.
 	Provider Provider
 
-	// Type of provider integration
+	// The type of the integration provider.
 	//
 	// This member is required.
 	ProviderType ProviderType
@@ -771,19 +1091,20 @@ type IntegrationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Location information for execution logs
+// The log location for a task, specifying where task execution logs are stored.
 type LogLocation struct {
 
-	// CloudWatch log information if logs are stored in CloudWatch
+	// The CloudWatch Logs location for the task logs.
 	CloudWatchLog *CloudWatchLog
 
-	// Type of log storage
+	// The type of log storage. Currently, only CLOUDWATCH is supported.
 	LogType LogType
 
 	noSmithyDocumentSerde
 }
 
-// Metadata associated with the member
+// Contains metadata about a member. This is a union type that contains
+// member-type-specific metadata.
 //
 // The following types satisfy this interface:
 //
@@ -792,7 +1113,7 @@ type MemberMetadata interface {
 	isMemberMetadata()
 }
 
-// User metadata for USER members
+// The user metadata for the member.
 type MemberMetadataMemberUser struct {
 	Value UserMetadata
 
@@ -801,7 +1122,8 @@ type MemberMetadataMemberUser struct {
 
 func (*MemberMetadataMemberUser) isMemberMetadata() {}
 
-// Member-specific configuration
+// The configuration for a membership. This is a union type that contains
+// member-type-specific configuration.
 //
 // The following types satisfy this interface:
 //
@@ -810,7 +1132,7 @@ type MembershipConfig interface {
 	isMembershipConfig()
 }
 
-// Configuration for user members
+// The user configuration for the membership.
 type MembershipConfigMemberUser struct {
 	Value UserConfig
 
@@ -819,266 +1141,274 @@ type MembershipConfigMemberUser struct {
 
 func (*MembershipConfigMemberUser) isMembershipConfig() {}
 
-// Membership summary for list operations
+// Contains summary information about a membership.
 type MembershipSummary struct {
 
-	// Agent space identifier
+	// The unique identifier of the agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Application identifier
+	// The unique identifier of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Timestamp when the membership was created (ISO 8601)
+	// The date and time the membership was created, in UTC format.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// User ID who created the membership
+	// The identifier of the entity that created the membership.
 	//
 	// This member is required.
 	CreatedBy *string
 
-	// Type of member
+	// The type of member.
 	//
 	// This member is required.
 	MemberType MembershipType
 
-	// Member identifier (userId or agentSpaceId)
+	// The unique identifier of the membership.
 	//
 	// This member is required.
 	MembershipId *string
 
-	// Timestamp when the membership was last updated (ISO 8601)
+	// The date and time the membership was last updated, in UTC format.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// User ID who last updated the membership
+	// The identifier of the entity that last updated the membership.
 	//
 	// This member is required.
 	UpdatedBy *string
 
-	// Configuration specific to the member type
+	// The configuration for the membership.
 	Config MembershipConfig
 
-	// Member-specific metadata
+	// The metadata for the member.
 	Metadata MemberMetadata
 
 	noSmithyDocumentSerde
 }
 
-// Configuration for network traffic filtering
+// The network traffic configuration for a pentest, including custom headers and
+// traffic rules.
 type NetworkTrafficConfig struct {
 
-	// Custom headers for requests
+	// The list of custom HTTP headers to include in network traffic during testing.
 	CustomHeaders []CustomHeader
 
-	// Traffic filtering rules
+	// The list of network traffic rules that control which URLs are allowed or denied
+	// during testing.
 	Rules []NetworkTrafficRule
 
 	noSmithyDocumentSerde
 }
 
-// Network traffic filtering rule
+// A rule that controls network traffic during penetration testing by allowing or
+// denying traffic to specific URL patterns.
 type NetworkTrafficRule struct {
 
-	// Action to take when the rule matches
+	// The effect of the rule. Valid values are ALLOW and DENY.
 	Effect NetworkTrafficRuleEffect
 
-	// Type of network traffic rule
+	// The type of the network traffic rule. Currently, only URL is supported.
 	NetworkTrafficRuleType NetworkTrafficRuleType
 
-	// Pattern to match against
+	// The URL pattern to match for the rule.
 	Pattern *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a pentest configuration and execution details
+// Represents a pentest configuration that defines the parameters for security
+// testing, including target assets, risk type exclusions, and infrastructure
+// settings.
 type Pentest struct {
 
-	// ID of the agent space where the pentest exists
+	// The unique identifier of the agent space that contains the pentest.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Collection of assets to be tested or used during the pentest
+	// The assets included in the pentest.
 	//
 	// This member is required.
 	Assets *Assets
 
-	// Unique identifier for the pentest
+	// The unique identifier of the pentest.
 	//
 	// This member is required.
 	PentestId *string
 
-	// Title or name of the pentest
+	// The title of the pentest.
 	//
 	// This member is required.
 	Title *string
 
-	// Strategy for code remediation on findings
+	// The code remediation strategy for the pentest.
 	CodeRemediationStrategy CodeRemediationStrategy
 
-	// Timestamp when the pentest was created
+	// The date and time the pentest was created, in UTC format.
 	CreatedAt *time.Time
 
-	// A list of risk types excluded from the pentest execution
+	// The list of risk types excluded from the pentest.
 	ExcludeRiskTypes []RiskType
 
-	// CloudWatch log group and stream prefix where pentest execution logs are stored
+	// The CloudWatch Logs configuration for the pentest.
 	LogConfig *CloudWatchLog
 
-	// Configuration for network traffic filtering
+	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
-	// Service role ARN for accessing customer resources
+	// The IAM service role used for the pentest.
 	ServiceRole *string
 
-	// Timestamp when the pentest was last updated
+	// The date and time the pentest was last updated, in UTC format.
 	UpdatedAt *time.Time
 
-	// VPC configuration that the Security Agent accesses
+	// The VPC configuration for the pentest.
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
 
-// Represents a pentest job
+// Represents a pentest job, which is an execution instance of a pentest. A
+// pentest job progresses through preflight, static analysis, pentest, and
+// finalizing steps.
 type PentestJob struct {
 
-	// List of actors that interact with the system
+	// The list of actors used during the pentest job.
 	Actors []Actor
 
-	// List of allowed domains for network access
+	// The list of domains allowed during the pentest job.
 	AllowedDomains []Endpoint
 
-	// Strategy for code remediation on findings
+	// The code remediation strategy for the pentest job.
 	CodeRemediationStrategy CodeRemediationStrategy
 
-	// Timestamp when the pentest job was created
+	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
 
-	// List of documents providing context for testing
+	// The list of documents providing context for the pentest job.
 	Documents []DocumentInfo
 
-	// List of web application endpoints to test
+	// The list of endpoints being tested in the pentest job.
 	Endpoints []Endpoint
 
-	// Error information regarding the pentest job
+	// Error information if the pentest job encountered an error.
 	ErrorInformation *ErrorInformation
 
-	// List of URL paths to exclude from testing
+	// The list of paths excluded from the pentest job.
 	ExcludePaths []Endpoint
 
-	// A list of risk types excluded from the pentest job
+	// The list of risk types excluded from the pentest job.
 	ExcludeRiskTypes []RiskType
 
-	// A list of execution context messages associated with the pentest job
+	// The execution context messages for the pentest job.
 	ExecutionContext []ExecutionContext
 
-	// List of integrated code repositories
+	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
-	// CloudWatch log group and stream prefix where pentest job logs are stored
+	// The CloudWatch Logs configuration for the pentest job.
 	LogConfig *CloudWatchLog
 
-	// Configuration for network traffic filtering
+	// The network traffic configuration for the pentest job.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
-	// Overview or description of the pentest job
+	// An overview of the pentest job results.
 	Overview *string
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the job.
 	PentestId *string
 
-	// Unique identifier of the pentest job
+	// The unique identifier of the pentest job.
 	PentestJobId *string
 
-	// Service role ARN for accessing customer resources
+	// The IAM service role used for the pentest job.
 	ServiceRole *string
 
-	// List of source code repositories for static analysis
+	// The list of source code repositories analyzed during the pentest job.
 	SourceCode []SourceCodeRepository
 
-	// Current status of the pentest job
+	// The current status of the pentest job.
 	Status JobStatus
 
-	// List of execution steps for the pentest job
+	// The list of steps in the pentest job execution.
 	Steps []Step
 
-	// Title or name of the pentest
+	// The title of the pentest job.
 	Title *string
 
-	// Timestamp when the pentest job was last updated
+	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
-	// VPC configuration that the Security Agent accesses
+	// The VPC configuration for the pentest job.
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a pentest job
+// Contains summary information about a pentest job.
 type PentestJobSummary struct {
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the job.
 	//
 	// This member is required.
 	PentestId *string
 
-	// Unique identifier of the pentest job
+	// The unique identifier of the pentest job.
 	//
 	// This member is required.
 	PentestJobId *string
 
-	// Timestamp when the pentest job was created
+	// The date and time the pentest job was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Current status of the pentest job
+	// The current status of the pentest job.
 	Status JobStatus
 
-	// Title or name of the pentest
+	// The title of the pentest job.
 	Title *string
 
-	// Timestamp when the pentest job was last updated
+	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a pentest
+// Contains summary information about a pentest.
 type PentestSummary struct {
 
-	// ID of the agent space where the pentest exists
+	// The unique identifier of the agent space that contains the pentest.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Unique identifier for the pentest
+	// The unique identifier of the pentest.
 	//
 	// This member is required.
 	PentestId *string
 
-	// Title or name of the pentest
+	// The title of the pentest.
 	//
 	// This member is required.
 	Title *string
 
-	// Timestamp when the pentest was created
+	// The date and time the pentest was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Timestamp when the pentest was last updated
+	// The date and time the pentest was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Provider-specific input parameters for integration
+// The provider-specific input for creating an integration. This is a union type
+// that contains provider-specific configuration.
 //
 // The following types satisfy this interface:
 //
@@ -1087,7 +1417,7 @@ type ProviderInput interface {
 	isProviderInput()
 }
 
-// GitHub integration input
+// The GitHub-specific input for creating an integration.
 type ProviderInputMemberGithub struct {
 	Value GitHubIntegrationInput
 
@@ -1096,7 +1426,8 @@ type ProviderInputMemberGithub struct {
 
 func (*ProviderInputMemberGithub) isProviderInput() {}
 
-// Provider-specific capabilities for integrated resources
+// The capabilities for an integrated resource from a third-party provider. This
+// is a union type that contains provider-specific capabilities.
 //
 // The following types satisfy this interface:
 //
@@ -1105,7 +1436,7 @@ type ProviderResourceCapabilities interface {
 	isProviderResourceCapabilities()
 }
 
-// Capabilities for GitHub repositories
+// The GitHub-specific resource capabilities.
 type ProviderResourceCapabilitiesMemberGithub struct {
 	Value GitHubResourceCapabilities
 
@@ -1114,180 +1445,189 @@ type ProviderResourceCapabilitiesMemberGithub struct {
 
 func (*ProviderResourceCapabilitiesMemberGithub) isProviderResourceCapabilities() {}
 
-// Information about a source code repository for static analysis
+// Represents a source code repository used for security analysis during a pentest.
 type SourceCodeRepository struct {
 
-	// S3 storage location of the repository
+	// The Amazon S3 location of the source code repository archive.
 	S3Location *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a single step in pentest job execution
+// Represents a step in the pentest job execution pipeline. Steps include
+// preflight, static analysis, pentest, and finalizing.
 type Step struct {
 
-	// Timestamp when the step was created
+	// The date and time the step was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Name of the execution step
+	// The name of the step. Valid values include PREFLIGHT, STATIC_ANALYSIS, PENTEST,
+	// and FINALIZING.
 	Name StepName
 
-	// Current status of the step
+	// The current status of the step.
 	Status StepStatus
 
-	// Timestamp when the step was last updated
+	// The date and time the step was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Represents a target domain
+// Represents a target domain registered for penetration testing. A target domain
+// must be verified through DNS TXT or HTTP route verification before it can be
+// used in pentests.
 type TargetDomain struct {
 
-	// Name of the registered target domain
+	// The domain name of the target domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Unique identifier of the target domain
+	// The unique identifier of the target domain.
 	//
 	// This member is required.
 	TargetDomainId *string
 
-	// Timestamp when the target domain was registered
+	// The date and time the target domain was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Verification details to verify registered target domain
+	// The verification details for the target domain.
 	VerificationDetails *VerificationDetails
 
-	// Current verification status of the registered target domain
+	// The current verification status of the target domain.
 	VerificationStatus TargetDomainStatus
 
-	// Timestamp when the target domain was last successfully verified
+	// The reason for the current target domain verification status.
+	VerificationStatusReason *string
+
+	// The date and time the target domain was verified, in UTC format.
 	VerifiedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a target domain
+// Contains summary information about a target domain.
 type TargetDomainSummary struct {
 
-	// Name of the registered target domain
+	// The domain name of the target domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Unique identifier of the target domain
+	// The unique identifier of the target domain.
 	//
 	// This member is required.
 	TargetDomainId *string
 
-	// Current verification status of the registered target domain
+	// The current verification status of the target domain.
 	VerificationStatus TargetDomainStatus
 
 	noSmithyDocumentSerde
 }
 
-// Represents a task within a pentest job
+// Represents an individual security test task within a pentest job. Each task
+// targets a specific risk type or endpoint and executes independently.
 type Task struct {
 
-	// Unique identifier for the task
+	// The unique identifier of the task.
 	//
 	// This member is required.
 	TaskId *string
 
-	// Identifier of the agent space this task belongs to
+	// The unique identifier of the agent space.
 	AgentSpaceId *string
 
-	// List of categories associated with this task
+	// The list of categories assigned to the task.
 	Categories []Category
 
-	// Timestamp when the task was created
+	// The date and time the task was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Detailed description of the task's purpose and scope
+	// A description of the task.
 	Description *string
 
-	// Current status of the task execution
+	// The current execution status of the task.
 	ExecutionStatus TaskExecutionStatus
 
-	// Location of execution logs for auditing and review
+	// The location of the task execution logs.
 	LogsLocation *LogLocation
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the task.
 	PentestId *string
 
-	// Identifier of the pentest job this task belongs to
+	// The unique identifier of the pentest job that contains the task.
 	PentestJobId *string
 
-	// Type of security risk this task is designed to test
+	// The type of security risk the task is testing for.
 	RiskType RiskType
 
-	// Target endpoint for this security test
+	// The target endpoint being tested by the task.
 	TargetEndpoint *Endpoint
 
-	// Title or name of the task
+	// The title of the task.
 	Title *string
 
-	// Timestamp when the task was last updated
+	// The date and time the task was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for a task
+// Contains summary information about a task.
 type TaskSummary struct {
 
-	// Unique identifier for the task
+	// The unique identifier of the task.
 	//
 	// This member is required.
 	TaskId *string
 
-	// Identifier of the agent space this task belongs to
+	// The unique identifier of the agent space.
 	AgentSpaceId *string
 
-	// Timestamp when the task was created
+	// The date and time the task was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Current status of the task execution
+	// The current execution status of the task.
 	ExecutionStatus TaskExecutionStatus
 
-	// Identifier of the parent pentest
+	// The unique identifier of the pentest associated with the task.
 	PentestId *string
 
-	// Identifier of the pentest job this task belongs to
+	// The unique identifier of the pentest job that contains the task.
 	PentestJobId *string
 
-	// Type of security risk this task is designed to test
+	// The type of security risk the task is testing for.
 	RiskType RiskType
 
-	// Title or name of the task
+	// The title of the task.
 	Title *string
 
-	// Timestamp when the task was last updated
+	// The date and time the task was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// User membership configuration
+// The configuration for a user membership, including the role assigned to the
+// user within the agent space.
 type UserConfig struct {
 
-	// Role of the user associated to the agent space
+	// The role assigned to the user. Currently, only MEMBER is supported.
 	Role UserRole
 
 	noSmithyDocumentSerde
 }
 
-// User-specific metadata
+// Contains metadata about a user member, including the username and email address.
 type UserMetadata struct {
 
-	// User email address
+	// The email address of the user.
 	//
 	// This member is required.
 	Email *string
 
-	// User name/display name
+	// The username of the user.
 	//
 	// This member is required.
 	Username *string
@@ -1304,7 +1644,7 @@ type ValidationExceptionField struct {
 	Message *string
 
 	// A JSONPointer expression to the structure member whose value failed to satisfy
-	// the modeled constraints.
+	// the modeled constraint.
 	//
 	// This member is required.
 	Path *string
@@ -1312,31 +1652,66 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// Verification details to verify registered target domain
+// Contains the verification details for a target domain, including the
+// verification method and provider-specific details.
 type VerificationDetails struct {
 
-	// Represents dns txt verification details
+	// The DNS TXT verification details.
 	DnsTxt *DnsVerification
 
-	// Represents http route verification details
+	// The HTTP route verification details.
 	HttpRoute *HttpVerification
 
-	// Type of domain ownership verification method
+	// The verification method used for the target domain.
 	Method DomainVerificationMethod
 
 	noSmithyDocumentSerde
 }
 
-// Customer VPC configuration that the Security Agent accesses
+// Contains metadata for a verification script that can be used to reproduce a
+// security finding.
+type VerificationScript struct {
+
+	// The list of environment variables required to run the verification script.
+	EnvVars []VerificationScriptEnvVar
+
+	// Instructions for running the verification script, including prerequisites and
+	// how to interpret results.
+	Instructions *string
+
+	// The type of script. Valid values are python and bash.
+	ScriptType *string
+
+	// URL to download the verification script.
+	ScriptUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an environment variable required to run a verification script.
+type VerificationScriptEnvVar struct {
+
+	// The name of the environment variable.
+	Name *string
+
+	// The value of the environment variable.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC configuration for a pentest, specifying the VPC, security groups, and
+// subnets to use during testing.
 type VpcConfig struct {
 
-	// List of security group ARNs or IDs in the customer VPC
+	// The Amazon Resource Names (ARNs) of the security groups for the VPC
+	// configuration.
 	SecurityGroupArns []string
 
-	// List of subnet ARNs or IDs in the customer VPC
+	// The Amazon Resource Names (ARNs) of the subnets for the VPC configuration.
 	SubnetArns []string
 
-	// ARN or ID of the customer VPC
+	// The Amazon Resource Name (ARN) of the VPC.
 	VpcArn *string
 
 	noSmithyDocumentSerde

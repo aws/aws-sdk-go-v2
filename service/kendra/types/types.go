@@ -1300,8 +1300,8 @@ type DataSourceConfiguration struct {
 	// Provides the configuration information required for Amazon Kendra Web Crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
 
-	// Provides the configuration information to connect to Amazon WorkDocs as your
-	// data source.
+	// Provides the configuration information to connect to WorkDocs as your data
+	// source.
 	WorkDocsConfiguration *WorkDocsConfiguration
 
 	noSmithyDocumentSerde
@@ -4939,21 +4939,19 @@ type WebCrawlerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to connect to Amazon WorkDocs as your
-// data source.
+// Provides the configuration information to connect to WorkDocs as your data
+// source.
 //
-// Amazon WorkDocs connector is available in Oregon, North Virginia, Sydney,
-// Singapore and Ireland regions.
+// WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore
+// and Ireland regions.
 type WorkDocsConfiguration struct {
 
-	// The identifier of the directory corresponding to your Amazon WorkDocs site
-	// repository.
+	// The identifier of the directory corresponding to your WorkDocs site repository.
 	//
 	// You can find the organization ID in the [Directory Service] by going to Active Directory, then
-	// Directories. Your Amazon WorkDocs site directory has an ID, which is the
-	// organization ID. You can also set up a new Amazon WorkDocs directory in the
-	// Directory Service console and enable a Amazon WorkDocs site for the directory in
-	// the Amazon WorkDocs console.
+	// Directories. Your WorkDocs site directory has an ID, which is the organization
+	// ID. You can also set up a new WorkDocs directory in the Directory Service
+	// console and enable a WorkDocs site for the directory in the WorkDocs console.
 	//
 	// [Directory Service]: https://console.aws.amazon.com/directoryservicev2/
 	//
@@ -4966,33 +4964,33 @@ type WorkDocsConfiguration struct {
 	// The default is set to FALSE .
 	CrawlComments bool
 
-	// A list of regular expression patterns to exclude certain files in your Amazon
-	// WorkDocs site repository. Files that match the patterns are excluded from the
-	// index. Files that don’t match the patterns are included in the index. If a file
-	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
-	// precedence and the file isn't included in the index.
+	// A list of regular expression patterns to exclude certain files in your WorkDocs
+	// site repository. Files that match the patterns are excluded from the index.
+	// Files that don’t match the patterns are included in the index. If a file matches
+	// both an inclusion and exclusion pattern, the exclusion pattern takes precedence
+	// and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs data
-	// source attributes or field names to Amazon Kendra index field names. To create
-	// custom fields, use the UpdateIndex API before you map to Amazon WorkDocs
-	// fields. For more information, see [Mapping data source fields]. The Amazon WorkDocs data source field names
-	// must exist in your Amazon WorkDocs custom metadata.
+	// A list of DataSourceToIndexFieldMapping objects that map WorkDocs data source
+	// attributes or field names to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to WorkDocs fields. For more
+	// information, see [Mapping data source fields]. The WorkDocs data source field names must exist in your
+	// WorkDocs custom metadata.
 	//
 	// [Mapping data source fields]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
 	FieldMappings []DataSourceToIndexFieldMapping
 
-	// A list of regular expression patterns to include certain files in your Amazon
-	// WorkDocs site repository. Files that match the patterns are included in the
-	// index. Files that don't match the patterns are excluded from the index. If a
-	// file matches both an inclusion and exclusion pattern, the exclusion pattern
-	// takes precedence and the file isn't included in the index.
+	// A list of regular expression patterns to include certain files in your WorkDocs
+	// site repository. Files that match the patterns are included in the index. Files
+	// that don't match the patterns are excluded from the index. If a file matches
+	// both an inclusion and exclusion pattern, the exclusion pattern takes precedence
+	// and the file isn't included in the index.
 	InclusionPatterns []string
 
-	// TRUE to use the Amazon WorkDocs change log to determine which documents require
+	// TRUE to use the WorkDocs change log to determine which documents require
 	// updating in the index. Depending on the change log's size, it may take longer
 	// for Amazon Kendra to use the change log than to scan all of your documents in
-	// Amazon WorkDocs.
+	// WorkDocs.
 	UseChangeLog bool
 
 	noSmithyDocumentSerde

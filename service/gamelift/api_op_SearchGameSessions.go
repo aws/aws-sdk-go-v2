@@ -45,8 +45,8 @@ import (
 // game session attributes. For game session search examples, see the Examples
 // section of this topic.
 //
-//   - gameSessionId -- A unique identifier for the game session. You can use
-//     either a GameSessionId or GameSessionArn value.
+//   - gameSessionId -- An identifier for the game session that is unique across
+//     all regions. You must use the full ARN value.
 //
 //   - gameSessionName -- Name assigned to a game session. Game session names do
 //     not need to be unique to a game session.

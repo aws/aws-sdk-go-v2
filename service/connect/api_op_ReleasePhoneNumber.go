@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Releases a phone number previously claimed to an Amazon Connect instance or
+// Releases a phone number previously claimed to an Connect Customer instance or
 // traffic distribution group. You can call this API only in the Amazon Web
 // Services Region where the number was claimed.
 //
 // To release phone numbers from a traffic distribution group, use the
-// ReleasePhoneNumber API, not the Amazon Connect admin website.
+// ReleasePhoneNumber API, not the Connect Customer admin website.
 //
 // After releasing a phone number, the phone number enters into a cooldown period
 // for up to 180 days. It cannot be searched for or claimed again until the period

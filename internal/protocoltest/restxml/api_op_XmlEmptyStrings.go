@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,18 @@ type XmlEmptyStringsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyStringsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyStringsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyStringsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmptyString != nil {
+		s.WriteString(schemas.XmlEmptyStringsRequest_emptyString, *v.EmptyString)
+	}
+}
+
 type XmlEmptyStringsOutput struct {
 	EmptyString *string
 
@@ -40,16 +54,24 @@ type XmlEmptyStringsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyStringsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlEmptyStringsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlEmptyStringsResponse_emptyString:
+			v.EmptyString = new(string)
+			return d.ReadString(schemas.XmlEmptyStringsResponse_emptyString, v.EmptyString)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlEmptyStringsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEmptyStrings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyStrings, schemas.XmlEmptyStringsRequest, schemas.XmlEmptyStringsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlEmptyStrings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyStrings, schemas.XmlEmptyStringsRequest, schemas.XmlEmptyStringsResponse), output: &XmlEmptyStringsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEmptyStrings"); err != nil {

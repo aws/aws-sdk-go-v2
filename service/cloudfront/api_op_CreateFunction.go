@@ -60,6 +60,9 @@ type CreateFunctionInput struct {
 	// This member is required.
 	Name *string
 
+	// A complex type that contains zero or more Tag elements.
+	Tags *types.Tags
+
 	noSmithyDocumentSerde
 }
 

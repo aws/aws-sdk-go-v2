@@ -275,6 +275,11 @@ func awsRestjson1_serializeOpDocumentCreateServiceLevelObjectiveInput(v *CreateS
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoInvestigationEnabled != nil {
+		ok := object.Key("AutoInvestigationEnabled")
+		ok.Boolean(*v.AutoInvestigationEnabled)
+	}
+
 	if v.BurnRateConfigurations != nil {
 		ok := object.Key("BurnRateConfigurations")
 		if err := awsRestjson1_serializeDocumentBurnRateConfigurations(v.BurnRateConfigurations, ok); err != nil {
@@ -2103,6 +2108,11 @@ func awsRestjson1_serializeOpDocumentUpdateServiceLevelObjectiveInput(v *UpdateS
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoInvestigationEnabled != nil {
+		ok := object.Key("AutoInvestigationEnabled")
+		ok.Boolean(*v.AutoInvestigationEnabled)
+	}
+
 	if v.BurnRateConfigurations != nil {
 		ok := object.Key("BurnRateConfigurations")
 		if err := awsRestjson1_serializeDocumentBurnRateConfigurations(v.BurnRateConfigurations, ok); err != nil {
@@ -2326,6 +2336,59 @@ func awsRestjson1_serializeDocumentCanaryEntity(v *types.CanaryEntity, value smi
 	if v.CanaryName != nil {
 		ok := object.Key("CanaryName")
 		ok.String(*v.CanaryName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositeSliComponent(v types.CompositeSliComponent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CompositeSliComponentMemberOperationName:
+		av := object.Key("OperationName")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositeSliComponents(v []types.CompositeSliComponent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentCompositeSliComponent(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositeSliConfig(v *types.CompositeSliConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Components != nil {
+		ok := object.Key("Components")
+		if err := awsRestjson1_serializeDocumentCompositeSliComponents(v.Components, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectionConfig != nil {
+		ok := object.Key("SelectionConfig")
+		if err := awsRestjson1_serializeDocumentSelectionConfig(v.SelectionConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2765,6 +2828,13 @@ func awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorMetricConfig
 	object := value.Object()
 	defer object.Close()
 
+	if v.CompositeSliConfig != nil {
+		ok := object.Key("CompositeSliConfig")
+		if err := awsRestjson1_serializeDocumentCompositeSliConfig(v.CompositeSliConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DependencyConfig != nil {
 		ok := object.Key("DependencyConfig")
 		if err := awsRestjson1_serializeDocumentDependencyConfig(v.DependencyConfig, ok); err != nil {
@@ -2830,6 +2900,23 @@ func awsRestjson1_serializeDocumentRollingInterval(v *types.RollingInterval, val
 	if len(v.DurationUnit) > 0 {
 		ok := object.Key("DurationUnit")
 		ok.String(string(v.DurationUnit))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelectionConfig(v *types.SelectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Pattern != nil {
+		ok := object.Key("Pattern")
+		ok.String(*v.Pattern)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -2902,6 +2989,13 @@ func awsRestjson1_serializeDocumentServiceLevelIndicatorConfig(v *types.ServiceL
 func awsRestjson1_serializeDocumentServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMetricConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompositeSliConfig != nil {
+		ok := object.Key("CompositeSliConfig")
+		if err := awsRestjson1_serializeDocumentCompositeSliConfig(v.CompositeSliConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DependencyConfig != nil {
 		ok := object.Key("DependencyConfig")

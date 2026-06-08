@@ -1,3 +1,38 @@
+# v1.58.0 (2026-06-05)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
+# v1.57.9 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.8 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.7 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.6 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.5 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.4 (2026-05-22)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.3 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.2 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

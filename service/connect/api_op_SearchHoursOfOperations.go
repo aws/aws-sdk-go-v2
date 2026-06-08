@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches the hours of operation in an Amazon Connect instance, with optional
+// Searches the hours of operation in an Connect Customer instance, with optional
 // filtering.
 func (c *Client) SearchHoursOfOperations(ctx context.Context, params *SearchHoursOfOperationsInput, optFns ...func(*Options)) (*SearchHoursOfOperationsOutput, error) {
 	if params == nil {
@@ -30,8 +30,8 @@ func (c *Client) SearchHoursOfOperations(ctx context.Context, params *SearchHour
 
 type SearchHoursOfOperationsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

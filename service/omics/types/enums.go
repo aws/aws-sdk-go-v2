@@ -61,6 +61,7 @@ type BatchStatus string
 
 // Enum values for BatchStatus
 const (
+	BatchStatusCreating     BatchStatus = "CREATING"
 	BatchStatusPending      BatchStatus = "PENDING"
 	BatchStatusSubmitting   BatchStatus = "SUBMITTING"
 	BatchStatusInprogress   BatchStatus = "INPROGRESS"
@@ -78,6 +79,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchStatus) Values() []BatchStatus {
 	return []BatchStatus{
+		"CREATING",
 		"PENDING",
 		"SUBMITTING",
 		"INPROGRESS",

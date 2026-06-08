@@ -38,10 +38,7 @@ type SendAgreementCancellationRequestInput struct {
 	// This member is required.
 	AgreementId *string
 
-	// The reason code for the cancellation request. Valid values include
-	// INCORRECT_TERMS_ACCEPTED , REPLACING_AGREEMENT , TEST_AGREEMENT ,
-	// ALTERNATIVE_PROCUREMENT_CHANNEL , PRODUCT_DISCONTINUED , UNINTENDED_RENEWAL ,
-	// BUYER_DISSATISFACTION , and OTHER .
+	// The reason code for the cancellation request.
 	//
 	// This member is required.
 	ReasonCode types.AgreementCancellationRequestReasonCode
@@ -64,8 +61,7 @@ type SendAgreementCancellationRequestOutput struct {
 	// The unique identifier of the agreement.
 	AgreementId *string
 
-	// The time when the cancellation request was created, as a POSIX timestamp (Unix
-	// epoch seconds).
+	// The time when the cancellation request was created.
 	CreatedAt *time.Time
 
 	// The detailed description of the cancellation reason, if provided.
@@ -78,8 +74,7 @@ type SendAgreementCancellationRequestOutput struct {
 	// PENDING_APPROVAL .
 	Status types.AgreementCancellationRequestStatus
 
-	// The time when the cancellation request was last updated, as a POSIX timestamp
-	// (Unix epoch seconds).
+	// The time when the cancellation request was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

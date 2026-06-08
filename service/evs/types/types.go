@@ -34,7 +34,7 @@ type Check struct {
 	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts.
 	//
 	// If this check fails, you will need to add hosts so that your environment meets
-	//   this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.
+	//   this minimum requirement. Amazon EVS only supports environments with 4-32 hosts.
 	Type CheckType
 
 	noSmithyDocumentSerde
@@ -181,8 +181,13 @@ type Environment struct {
 
 	//  The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// The VCF solution key must meet minimum core requirements, and the vSAN license
+	// key must meet minimum capacity requirements for your selected instance type.
+	//
+	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
+	// Guide.
+	//
+	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
 	LicenseInfo []LicenseInfo
 
 	//  The date and time that the environment was modified.
@@ -282,7 +287,7 @@ type ErrorDetail struct {
 // An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
-// supports 4-16 hosts per environment.
+// supports 4-32 hosts per environment.
 type Host struct {
 
 	//  The date and time that the host was created.
@@ -302,8 +307,6 @@ type Host struct {
 	HostState HostState
 
 	// The EC2 instance type of the host.
-	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// EC2 instances created through Amazon EVS do not support associating an IAM
 	// instance profile.
@@ -343,8 +346,6 @@ type HostInfoForCreate struct {
 	HostName *string
 
 	// The EC2 instance type that represents the host.
-	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// This member is required.
 	InstanceType InstanceType
@@ -500,13 +501,13 @@ type LicenseInfo struct {
 
 	//  The VCF solution key. This license unlocks VMware VCF product features,
 	// including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key
-	// must cover a minimum of 256 cores.
+	// must meet the instance-type-specific minimum core requirements.
 	//
 	// This member is required.
 	SolutionKey *string
 
 	//  The VSAN license key. This license unlocks vSAN features. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// must meet the instance-type-specific minimum capacity requirements.
 	//
 	// This member is required.
 	VsanKey *string

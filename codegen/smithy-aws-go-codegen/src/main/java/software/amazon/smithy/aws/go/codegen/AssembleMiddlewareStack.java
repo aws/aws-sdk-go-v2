@@ -208,7 +208,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add Event Stream Input Writer (must be added AFTER retryer)
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) ->
-                                EventStreamIndex.of(model).getInputInfo(operation).isPresent())
+                                // if !useLegacySerde then the smithy-go version is already added instead
+                                useLegacySerde && EventStreamIndex.of(model).getInputInfo(operation).isPresent()
+                        )
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                                 "AddInitializeStreamWriter",
@@ -228,6 +230,14 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 writer.write(addSigV4XMiddleware());
             }
         });
+    }
+
+    private boolean useLegacySerde;
+
+    // cheat for schema-serde to capture whether we're using it so we can not add the event stream writer setup
+    @Override
+    public void processFinalizedModel(GoSettings settings, Model model) {
+        useLegacySerde = settings.useLegacySerde();
     }
 
     private Writable spanRetryLoopMiddleware() {

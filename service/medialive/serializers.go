@@ -11056,6 +11056,19 @@ func awsRestjson1_serializeDocument__listOfAudioDescription(v []types.AudioDescr
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAudioFeedInput(v []types.AudioFeedInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAudioFeedInput(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAudioSelector(v []types.AudioSelector, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12169,6 +12182,23 @@ func awsRestjson1_serializeDocumentAudioDolbyEDecode(v *types.AudioDolbyEDecode,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioFeedInput(v *types.AudioFeedInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioSelectorName != nil {
+		ok := object.Key("audioSelectorName")
+		ok.String(*v.AudioSelectorName)
+	}
+
+	if v.FeedInput != nil {
+		ok := object.Key("feedInput")
+		ok.String(*v.FeedInput)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioHlsRenditionSelection(v *types.AudioHlsRenditionSelection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13174,6 +13204,13 @@ func awsRestjson1_serializeDocumentCaptionSelectorSettings(v *types.CaptionSelec
 	if v.Scte27SourceSettings != nil {
 		ok := object.Key("scte27SourceSettings")
 		if err := awsRestjson1_serializeDocumentScte27SourceSettings(v.Scte27SourceSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SmartSubtitleSourceSettings != nil {
+		ok := object.Key("smartSubtitleSourceSettings")
+		if err := awsRestjson1_serializeDocumentSmartSubtitleSourceSettings(v.SmartSubtitleSourceSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -15606,6 +15643,13 @@ func awsRestjson1_serializeDocumentImmediateModeScheduleActionStartSettings(v *t
 func awsRestjson1_serializeDocumentInferenceSettings(v *types.InferenceSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AudioFeedInputs != nil {
+		ok := object.Key("audioFeedInputs")
+		if err := awsRestjson1_serializeDocument__listOfAudioFeedInput(v.AudioFeedInputs, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FeedArn != nil {
 		ok := object.Key("feedArn")
@@ -19070,6 +19114,23 @@ func awsRestjson1_serializeDocumentSdiSourceMappingUpdateRequest(v *types.SdiSou
 	if v.SdiSource != nil {
 		ok := object.Key("sdiSource")
 		ok.String(*v.SdiSource)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSmartSubtitleSourceSettings(v *types.SmartSubtitleSourceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CaptionSynchronizationMode) > 0 {
+		ok := object.Key("captionSynchronizationMode")
+		ok.String(string(v.CaptionSynchronizationMode))
+	}
+
+	if v.InferenceFeedOutput != nil {
+		ok := object.Key("inferenceFeedOutput")
+		ok.String(*v.InferenceFeedOutput)
 	}
 
 	return nil

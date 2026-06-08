@@ -118,6 +118,72 @@ func (ActionConnectorType) Values() []ActionConnectorType {
 	}
 }
 
+type AgentLifecycle string
+
+// Enum values for AgentLifecycle
+const (
+	AgentLifecyclePreview   AgentLifecycle = "PREVIEW"
+	AgentLifecyclePublished AgentLifecycle = "PUBLISHED"
+)
+
+// Values returns all known values for AgentLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentLifecycle) Values() []AgentLifecycle {
+	return []AgentLifecycle{
+		"PREVIEW",
+		"PUBLISHED",
+	}
+}
+
+type AgentOwnershipFilterAttribute string
+
+// Enum values for AgentOwnershipFilterAttribute
+const (
+	AgentOwnershipFilterAttributeDirectQuicksightOwner         AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	AgentOwnershipFilterAttributeDirectQuicksightViewerOrOwner AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	AgentOwnershipFilterAttributeDirectQuicksightSoleOwner     AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	AgentOwnershipFilterAttributeAgentName                     AgentOwnershipFilterAttribute = "AGENT_NAME"
+)
+
+// Values returns all known values for AgentOwnershipFilterAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentOwnershipFilterAttribute) Values() []AgentOwnershipFilterAttribute {
+	return []AgentOwnershipFilterAttribute{
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"AGENT_NAME",
+	}
+}
+
+type AgentStatus string
+
+// Enum values for AgentStatus
+const (
+	AgentStatusActive   AgentStatus = "ACTIVE"
+	AgentStatusUpdating AgentStatus = "UPDATING"
+	AgentStatusFailed   AgentStatus = "FAILED"
+	AgentStatusCreating AgentStatus = "CREATING"
+)
+
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentStatus) Values() []AgentStatus {
+	return []AgentStatus{
+		"ACTIVE",
+		"UPDATING",
+		"FAILED",
+		"CREATING",
+	}
+}
+
 type AggType string
 
 // Enum values for AggType
@@ -645,6 +711,25 @@ func (AssignmentStatus) Values() []AssignmentStatus {
 	return []AssignmentStatus{
 		"ENABLED",
 		"DRAFT",
+		"DISABLED",
+	}
+}
+
+type AudioExtractionStatus string
+
+// Enum values for AudioExtractionStatus
+const (
+	AudioExtractionStatusEnabled  AudioExtractionStatus = "ENABLED"
+	AudioExtractionStatusDisabled AudioExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for AudioExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioExtractionStatus) Values() []AudioExtractionStatus {
+	return []AudioExtractionStatus{
+		"ENABLED",
 		"DISABLED",
 	}
 }
@@ -1277,6 +1362,25 @@ func (ComparisonMethodType) Values() []ComparisonMethodType {
 	}
 }
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorStringEquals ComparisonOperator = "StringEquals"
+	ComparisonOperatorStringLike   ComparisonOperator = "StringLike"
+)
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"StringEquals",
+		"StringLike",
+	}
+}
+
 type ConditionalFormattingIconDisplayOption string
 
 // Enum values for ConditionalFormattingIconDisplayOption
@@ -1860,6 +1964,31 @@ func (DatasetParameterValueType) Values() []DatasetParameterValueType {
 	return []DatasetParameterValueType{
 		"MULTI_VALUED",
 		"SINGLE_VALUED",
+	}
+}
+
+type DataSetStatus string
+
+// Enum values for DataSetStatus
+const (
+	DataSetStatusCreating DataSetStatus = "CREATING"
+	DataSetStatusUpdating DataSetStatus = "UPDATING"
+	DataSetStatusActive   DataSetStatus = "ACTIVE"
+	DataSetStatusFailed   DataSetStatus = "FAILED"
+	DataSetStatusDeleting DataSetStatus = "DELETING"
+)
+
+// Values returns all known values for DataSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetStatus) Values() []DataSetStatus {
+	return []DataSetStatus{
+		"CREATING",
+		"UPDATING",
+		"ACTIVE",
+		"FAILED",
+		"DELETING",
 	}
 }
 
@@ -3042,6 +3171,25 @@ func (ImageCustomActionTrigger) Values() []ImageCustomActionTrigger {
 	}
 }
 
+type ImageExtractionStatus string
+
+// Enum values for ImageExtractionStatus
+const (
+	ImageExtractionStatusEnabled  ImageExtractionStatus = "ENABLED"
+	ImageExtractionStatusDisabled ImageExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for ImageExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageExtractionStatus) Values() []ImageExtractionStatus {
+	return []ImageExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type IncludeFolderMembers string
 
 // Enum values for IncludeFolderMembers
@@ -3368,6 +3516,109 @@ func (JoinType) Values() []JoinType {
 		"OUTER",
 		"LEFT",
 		"RIGHT",
+	}
+}
+
+type KbIngestionStatus string
+
+// Enum values for KbIngestionStatus
+const (
+	KbIngestionStatusQueued     KbIngestionStatus = "QUEUED"
+	KbIngestionStatusRunning    KbIngestionStatus = "RUNNING"
+	KbIngestionStatusFailed     KbIngestionStatus = "FAILED"
+	KbIngestionStatusCompleted  KbIngestionStatus = "COMPLETED"
+	KbIngestionStatusIncomplete KbIngestionStatus = "INCOMPLETE"
+	KbIngestionStatusCancelled  KbIngestionStatus = "CANCELLED"
+	KbIngestionStatusCancelling KbIngestionStatus = "CANCELLING"
+	KbIngestionStatusTimeout    KbIngestionStatus = "TIMEOUT"
+)
+
+// Values returns all known values for KbIngestionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KbIngestionStatus) Values() []KbIngestionStatus {
+	return []KbIngestionStatus{
+		"QUEUED",
+		"RUNNING",
+		"FAILED",
+		"COMPLETED",
+		"INCOMPLETE",
+		"CANCELLED",
+		"CANCELLING",
+		"TIMEOUT",
+	}
+}
+
+type KnowledgeBaseSearchFilterName string
+
+// Enum values for KnowledgeBaseSearchFilterName
+const (
+	KnowledgeBaseSearchFilterNameKnowledgeBaseId               KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_ID"
+	KnowledgeBaseSearchFilterNameKnowledgeBaseName             KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_NAME"
+	KnowledgeBaseSearchFilterNameDirectQuicksightOwner         KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_OWNER"
+	KnowledgeBaseSearchFilterNameDirectQuicksightViewerOrOwner KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	KnowledgeBaseSearchFilterNameDirectQuicksightSoleOwner     KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	KnowledgeBaseSearchFilterNameKnowledgeBaseSizeBytes        KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_SIZE_BYTES"
+	KnowledgeBaseSearchFilterNamePrimaryOwner                  KnowledgeBaseSearchFilterName = "PRIMARY_OWNER"
+)
+
+// Values returns all known values for KnowledgeBaseSearchFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSearchFilterName) Values() []KnowledgeBaseSearchFilterName {
+	return []KnowledgeBaseSearchFilterName{
+		"KNOWLEDGE_BASE_ID",
+		"KNOWLEDGE_BASE_NAME",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"KNOWLEDGE_BASE_SIZE_BYTES",
+		"PRIMARY_OWNER",
+	}
+}
+
+type KnowledgeBaseSearchOperator string
+
+// Enum values for KnowledgeBaseSearchOperator
+const (
+	KnowledgeBaseSearchOperatorStringEquals        KnowledgeBaseSearchOperator = "STRING_EQUALS"
+	KnowledgeBaseSearchOperatorStringLike          KnowledgeBaseSearchOperator = "STRING_LIKE"
+	KnowledgeBaseSearchOperatorGreaterThanOrEquals KnowledgeBaseSearchOperator = "GREATER_THAN_OR_EQUALS"
+	KnowledgeBaseSearchOperatorLessThanOrEquals    KnowledgeBaseSearchOperator = "LESS_THAN_OR_EQUALS"
+)
+
+// Values returns all known values for KnowledgeBaseSearchOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSearchOperator) Values() []KnowledgeBaseSearchOperator {
+	return []KnowledgeBaseSearchOperator{
+		"STRING_EQUALS",
+		"STRING_LIKE",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN_OR_EQUALS",
+	}
+}
+
+type KnowledgeBaseSortByField string
+
+// Enum values for KnowledgeBaseSortByField
+const (
+	KnowledgeBaseSortByFieldKnowledgeBaseSizeBytes KnowledgeBaseSortByField = "KNOWLEDGE_BASE_SIZE_BYTES"
+	KnowledgeBaseSortByFieldCreatedAt              KnowledgeBaseSortByField = "CREATED_AT"
+)
+
+// Values returns all known values for KnowledgeBaseSortByField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSortByField) Values() []KnowledgeBaseSortByField {
+	return []KnowledgeBaseSortByField{
+		"KNOWLEDGE_BASE_SIZE_BYTES",
+		"CREATED_AT",
 	}
 }
 
@@ -4004,6 +4255,24 @@ func (NumericSeparatorSymbol) Values() []NumericSeparatorSymbol {
 		"COMMA",
 		"DOT",
 		"SPACE",
+	}
+}
+
+type OAuthClientAuthenticationType string
+
+// Enum values for OAuthClientAuthenticationType
+const (
+	OAuthClientAuthenticationTypeToken OAuthClientAuthenticationType = "TOKEN"
+)
+
+// Values returns all known values for OAuthClientAuthenticationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthClientAuthenticationType) Values() []OAuthClientAuthenticationType {
+	return []OAuthClientAuthenticationType{
+		"TOKEN",
 	}
 }
 
@@ -5381,6 +5650,107 @@ func (SortDirection) Values() []SortDirection {
 	}
 }
 
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
+type SpaceQuickSightResourceType string
+
+// Enum values for SpaceQuickSightResourceType
+const (
+	SpaceQuickSightResourceTypeTopic           SpaceQuickSightResourceType = "TOPIC"
+	SpaceQuickSightResourceTypeDashboard       SpaceQuickSightResourceType = "DASHBOARD"
+	SpaceQuickSightResourceTypeKnowledgeBase   SpaceQuickSightResourceType = "KNOWLEDGE_BASE"
+	SpaceQuickSightResourceTypeSpace           SpaceQuickSightResourceType = "SPACE"
+	SpaceQuickSightResourceTypeActionConnector SpaceQuickSightResourceType = "ACTION_CONNECTOR"
+	SpaceQuickSightResourceTypeDataSet         SpaceQuickSightResourceType = "DATA_SET"
+	SpaceQuickSightResourceTypeArtifact        SpaceQuickSightResourceType = "ARTIFACT"
+)
+
+// Values returns all known values for SpaceQuickSightResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceQuickSightResourceType) Values() []SpaceQuickSightResourceType {
+	return []SpaceQuickSightResourceType{
+		"TOPIC",
+		"DASHBOARD",
+		"KNOWLEDGE_BASE",
+		"SPACE",
+		"ACTION_CONNECTOR",
+		"DATA_SET",
+		"ARTIFACT",
+	}
+}
+
+type SpaceQuickSightSearchFilterName string
+
+// Enum values for SpaceQuickSightSearchFilterName
+const (
+	SpaceQuickSightSearchFilterNameSpaceId                       SpaceQuickSightSearchFilterName = "SPACE_ID"
+	SpaceQuickSightSearchFilterNameSpaceName                     SpaceQuickSightSearchFilterName = "SPACE_NAME"
+	SpaceQuickSightSearchFilterNameDirectQuicksightOwner         SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_OWNER"
+	SpaceQuickSightSearchFilterNameDirectQuicksightViewerOrOwner SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	SpaceQuickSightSearchFilterNameDirectQuicksightSoleOwner     SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	SpaceQuickSightSearchFilterNameContributedBy                 SpaceQuickSightSearchFilterName = "CONTRIBUTED_BY"
+	SpaceQuickSightSearchFilterNameConsumedSourceSize            SpaceQuickSightSearchFilterName = "CONSUMED_SOURCE_SIZE"
+	SpaceQuickSightSearchFilterNameCreatedBy                     SpaceQuickSightSearchFilterName = "CREATED_BY"
+)
+
+// Values returns all known values for SpaceQuickSightSearchFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceQuickSightSearchFilterName) Values() []SpaceQuickSightSearchFilterName {
+	return []SpaceQuickSightSearchFilterName{
+		"SPACE_ID",
+		"SPACE_NAME",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"CONTRIBUTED_BY",
+		"CONSUMED_SOURCE_SIZE",
+		"CREATED_BY",
+	}
+}
+
+type SpaceSearchOperator string
+
+// Enum values for SpaceSearchOperator
+const (
+	SpaceSearchOperatorStringEquals SpaceSearchOperator = "STRING_EQUALS"
+	SpaceSearchOperatorStringLike   SpaceSearchOperator = "STRING_LIKE"
+	SpaceSearchOperatorNumberRange  SpaceSearchOperator = "NUMBER_RANGE"
+)
+
+// Values returns all known values for SpaceSearchOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceSearchOperator) Values() []SpaceSearchOperator {
+	return []SpaceSearchOperator{
+		"STRING_EQUALS",
+		"STRING_LIKE",
+		"NUMBER_RANGE",
+	}
+}
+
 type SparklineAxisBehavior string
 
 // Enum values for SparklineAxisBehavior
@@ -6197,6 +6567,42 @@ func (URLTargetConfiguration) Values() []URLTargetConfiguration {
 	}
 }
 
+type UserIndexCapacitySortBy string
+
+// Enum values for UserIndexCapacitySortBy
+const (
+	UserIndexCapacitySortByTotalCapacityBytes UserIndexCapacitySortBy = "TOTAL_CAPACITY_BYTES"
+)
+
+// Values returns all known values for UserIndexCapacitySortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserIndexCapacitySortBy) Values() []UserIndexCapacitySortBy {
+	return []UserIndexCapacitySortBy{
+		"TOTAL_CAPACITY_BYTES",
+	}
+}
+
+type UserIndexCapacitySortOrder string
+
+// Enum values for UserIndexCapacitySortOrder
+const (
+	UserIndexCapacitySortOrderAsc  UserIndexCapacitySortOrder = "ASC"
+	UserIndexCapacitySortOrderDesc UserIndexCapacitySortOrder = "DESC"
+)
+
+// Values returns all known values for UserIndexCapacitySortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UserIndexCapacitySortOrder) Values() []UserIndexCapacitySortOrder {
+	return []UserIndexCapacitySortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -6286,6 +6692,44 @@ func (VerticalTextAlignment) Values() []VerticalTextAlignment {
 		"MIDDLE",
 		"BOTTOM",
 		"AUTO",
+	}
+}
+
+type VideoExtractionStatus string
+
+// Enum values for VideoExtractionStatus
+const (
+	VideoExtractionStatusEnabled  VideoExtractionStatus = "ENABLED"
+	VideoExtractionStatusDisabled VideoExtractionStatus = "DISABLED"
+)
+
+// Values returns all known values for VideoExtractionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionStatus) Values() []VideoExtractionStatus {
+	return []VideoExtractionStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type VideoExtractionType string
+
+// Enum values for VideoExtractionType
+const (
+	VideoExtractionTypeAudioTranscriptionOnly             VideoExtractionType = "AUDIO_TRANSCRIPTION_ONLY"
+	VideoExtractionTypeVisualContentAndAudioTranscription VideoExtractionType = "VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION"
+)
+
+// Values returns all known values for VideoExtractionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoExtractionType) Values() []VideoExtractionType {
+	return []VideoExtractionType{
+		"AUDIO_TRANSCRIPTION_ONLY",
+		"VISUAL_CONTENT_AND_AUDIO_TRANSCRIPTION",
 	}
 }
 

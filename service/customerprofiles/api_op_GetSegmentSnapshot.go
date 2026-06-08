@@ -65,7 +65,8 @@ type GetSegmentSnapshotOutput struct {
 	Status types.SegmentSnapshotStatus
 
 	// The destination to which the segment will be exported. This field must be
-	// provided if the request is not submitted from the Amazon Connect Admin Website.
+	// provided if the request is not submitted from the Connect Customer Admin
+	// Website.
 	DestinationUri *string
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported

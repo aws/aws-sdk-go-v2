@@ -124,7 +124,7 @@ type CreatePrefetchScheduleOutput struct {
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
-	// The tags to assign to the prefetch schedule. Tags are key-value pairs that you
+	// The tags assigned to the prefetch schedule. Tags are key-value pairs that you
 	// can associate with Amazon resources to help with organization, access control,
 	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
 	//

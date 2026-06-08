@@ -659,6 +659,7 @@ const (
 	ExportableECSServiceFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableECSServiceField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
 	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableECSServiceFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableECSServiceField = "EffectiveRecommendationPreferencesLookBackPeriod"
 )
 
 // Values returns all known values for ExportableECSServiceField. Note that this
@@ -695,6 +696,7 @@ func (ExportableECSServiceField) Values() []ExportableECSServiceField {
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
 	}
 }
 
@@ -1269,6 +1271,7 @@ const (
 	ExportableVolumeFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableVolumeField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableVolumeFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableVolumeField = "EffectiveRecommendationPreferencesLookBackPeriod"
 )
 
 // Values returns all known values for ExportableVolumeField. Note that this can
@@ -1312,6 +1315,7 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
 	}
 }
 

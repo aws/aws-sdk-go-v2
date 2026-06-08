@@ -20,6 +20,7 @@ import (
 //	AdditionalServiceDetailsMemberMcpserverdatadog
 //	AdditionalServiceDetailsMemberMcpservergrafana
 //	AdditionalServiceDetailsMemberMcpservernewrelic
+//	AdditionalServiceDetailsMemberMcpserversigv4
 //	AdditionalServiceDetailsMemberMcpserversplunk
 //	AdditionalServiceDetailsMemberPagerduty
 //	AdditionalServiceDetailsMemberServicenow
@@ -99,6 +100,15 @@ type AdditionalServiceDetailsMemberMcpservernewrelic struct {
 }
 
 func (*AdditionalServiceDetailsMemberMcpservernewrelic) isAdditionalServiceDetails() {}
+
+// SigV4-authenticated MCP server-specific service details.
+type AdditionalServiceDetailsMemberMcpserversigv4 struct {
+	Value RegisteredMCPServerSigV4Details
+
+	noSmithyDocumentSerde
+}
+
+func (*AdditionalServiceDetailsMemberMcpserversigv4) isAdditionalServiceDetails() {}
 
 // Splunk MCP server-specific service details.
 type AdditionalServiceDetailsMemberMcpserversplunk struct {
@@ -1116,6 +1126,65 @@ type MCPServerOAuthClientCredentialsConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Authorization configuration for SigV4-authenticated MCP server.
+type MCPServerSigV4AuthorizationConfig struct {
+
+	// AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.
+	//
+	// This member is required.
+	Region *string
+
+	// IAM role ARN to assume for SigV4 signing.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// AWS service name for SigV4 signing.
+	//
+	// This member is required.
+	Service *string
+
+	// Custom headers for the SigV4 MCP server.
+	CustomHeaders map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for SigV4-authenticated MCP server integration.
+type MCPServerSigV4Configuration struct {
+
+	// List of MCP tools available for the association.
+	//
+	// This member is required.
+	Tools []string
+
+	noSmithyDocumentSerde
+}
+
+// Complete service details for SigV4-authenticated MCP server integration.
+type MCPServerSigV4ServiceDetails struct {
+
+	// MCP Server SigV4 authorization configuration.
+	//
+	// This member is required.
+	AuthorizationConfig *MCPServerSigV4AuthorizationConfig
+
+	// MCP server endpoint URL.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// MCP server name.
+	//
+	// This member is required.
+	Name *string
+
+	// Optional description for the MCP server.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Mixin for webhook update support.
 type MCPServerSplunkConfiguration struct {
 	noSmithyDocumentSerde
@@ -1438,6 +1507,12 @@ type Recommendation struct {
 	// Version of the goal at the time this recommendation was generated
 	GoalVersion *int64
 
+	// Position in ranked list (1 = highest priority)
+	RankPosition *int32
+
+	// Timestamp when the recommendation was last ranked
+	RankedAt *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -1629,6 +1704,43 @@ type RegisteredMCPServerDetails struct {
 
 	// If the MCP server uses API key authentication, these details are provided.
 	ApiKeyHeader *string
+
+	// Optional description for the MCP server.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Details specific to a registered SigV4-authenticated MCP server.
+type RegisteredMCPServerSigV4Details struct {
+
+	// MCP server endpoint URL.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// MCP server name.
+	//
+	// This member is required.
+	Name *string
+
+	// AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.
+	//
+	// This member is required.
+	Region *string
+
+	// IAM role ARN to assume for SigV4 signing.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// AWS service name for SigV4 signing.
+	//
+	// This member is required.
+	Service *string
+
+	// Custom headers for the SigV4 MCP server.
+	CustomHeaders map[string]string
 
 	// Optional description for the MCP server.
 	Description *string
@@ -1840,10 +1952,9 @@ type SendMessageContext struct {
 // Event stream for chat message responses using the content block model. Events
 // follow a lifecycle: responseCreated -> responseInProgress ->
 // (contentBlockStart/contentBlockDelta/contentBlockStop events) ->
-// responseCompleted|responseFailed
-//
-// SendMessage always uses content block mode — legacy per-field events
-// (outputTextDelta, functionCallArgumentsDelta, etc.) are not emitted.
+// responseCompleted|responseFailed SendMessage always uses content block mode —
+// legacy per-field events (outputTextDelta, functionCallArgumentsDelta, etc.) are
+// not emitted.
 //
 // The following types satisfy this interface:
 //
@@ -2065,6 +2176,7 @@ type SendMessageUsageInfo struct {
 //	ServiceConfigurationMemberMcpserverdatadog
 //	ServiceConfigurationMemberMcpservergrafana
 //	ServiceConfigurationMemberMcpservernewrelic
+//	ServiceConfigurationMemberMcpserversigv4
 //	ServiceConfigurationMemberMcpserversplunk
 //	ServiceConfigurationMemberPagerduty
 //	ServiceConfigurationMemberServicenow
@@ -2173,6 +2285,15 @@ type ServiceConfigurationMemberMcpservernewrelic struct {
 
 func (*ServiceConfigurationMemberMcpservernewrelic) isServiceConfiguration() {}
 
+// SigV4-authenticated MCP server integration configuration.
+type ServiceConfigurationMemberMcpserversigv4 struct {
+	Value MCPServerSigV4Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberMcpserversigv4) isServiceConfiguration() {}
+
 // Splunk MCP server integration configuration.
 type ServiceConfigurationMemberMcpserversplunk struct {
 	Value MCPServerSplunkConfiguration
@@ -2230,6 +2351,7 @@ func (*ServiceConfigurationMemberSourceAws) isServiceConfiguration() {}
 //	ServiceDetailsMemberMcpserverdatadog
 //	ServiceDetailsMemberMcpservergrafana
 //	ServiceDetailsMemberMcpservernewrelic
+//	ServiceDetailsMemberMcpserversigv4
 //	ServiceDetailsMemberMcpserversplunk
 //	ServiceDetailsMemberPagerduty
 //	ServiceDetailsMemberServicenow
@@ -2309,6 +2431,15 @@ type ServiceDetailsMemberMcpservernewrelic struct {
 }
 
 func (*ServiceDetailsMemberMcpservernewrelic) isServiceDetails() {}
+
+// SigV4-authenticated MCP server-specific service details.
+type ServiceDetailsMemberMcpserversigv4 struct {
+	Value MCPServerSigV4ServiceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceDetailsMemberMcpserversigv4) isServiceDetails() {}
 
 // Splunk MCP server-specific service details.
 type ServiceDetailsMemberMcpserversplunk struct {

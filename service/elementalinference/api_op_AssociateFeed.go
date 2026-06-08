@@ -12,9 +12,27 @@ import (
 )
 
 // Associates a resource with the feed. The resource provides the input that
-// Elemental Inference needs needs in order to perform an Elemental Inference
-// feature, such as cropping video. You always provide the resource by associating
-// it with a feed. You can associate only one resource with each feed.
+// Elemental Inference needs in order to perform an Elemental Inference feature,
+// such as cropping video. You always provide the resource by associating it with a
+// feed. You can associate only one resource with each feed. With an association, a
+// specific source media is claiming ownership of the feed.
+//
+// AssociateFeed is a PATCH operation, which means that you can include only
+// parameters that you want to change. Parameters that you don't include will not
+// be affected by the operation.
+//
+// Specifically:
+//
+//   - You can add more outputs to the existing outputs. New outputs will be
+//     appended.
+//
+//   - You can't modify an existing output (for example to change its name).
+//     Instead, use UpdateFeed.
+//
+//   - You can't delete an existing output. Instead, use UpdateFeed.
+//
+// Also note that you can't change the feed name with AssociateFeed. Instead, use
+// UpdateFeed.
 func (c *Client) AssociateFeed(ctx context.Context, params *AssociateFeedInput, optFns ...func(*Options)) (*AssociateFeedOutput, error) {
 	if params == nil {
 		params = &AssociateFeedInput{}
@@ -32,10 +50,12 @@ func (c *Client) AssociateFeed(ctx context.Context, params *AssociateFeedInput, 
 
 type AssociateFeedInput struct {
 
-	// An identifier for the resource. If the resource is from an AWS service, this
-	// identifier must be the full ARN of that resource. Otherwise, the identifier is a
-	// name that you assign and that is appropriate for the application that owns the
-	// resource. This name must not resemble an ARN.
+	// An identifier for the resource. This name must not resemble an ARN.
+	//
+	// The resource is the source media that the feed will process. The name you
+	// assign should help you to later identify the source media that belongs to the
+	// feed. In this way, you will know which source media to push to the feed (using
+	// PutMedia).
 	//
 	// This member is required.
 	AssociatedResourceName *string
@@ -45,13 +65,19 @@ type AssociateFeedInput struct {
 	// This member is required.
 	Id *string
 
-	// The outputs to add to this feed. You must specify at least one output. You can
-	// later use the UpdateFeed action to change the list of outputs.
+	// An array of one or more outputs that you want to add to this feed now, to
+	// supplement any outputs that you specified when you created or updated the feed.
 	//
 	// This member is required.
 	Outputs []types.CreateOutput
 
 	// Set to true if you want to do a dry run of the associate action.
+	//
+	// Elemental Inference will validate that the real request would succeed without
+	// actually making any changes. A dry run catches errors such as missing IAM
+	// permissions, quota limits exceeded, conflicting outputs, and so on. If the dry
+	// run fails, the action returns a 4xx error code. After you've fixed the errors,
+	// resubmit the request.
 	DryRun bool
 
 	noSmithyDocumentSerde
@@ -59,13 +85,12 @@ type AssociateFeedInput struct {
 
 type AssociateFeedOutput struct {
 
-	// The AWS ARN for this association.
+	// The ARN of the feed.
 	//
 	// This member is required.
 	Arn *string
 
-	// An ID for this response. It is unique in Elemental Inference for this AWS
-	// account.
+	// The ID of the feed.
 	//
 	// This member is required.
 	Id *string

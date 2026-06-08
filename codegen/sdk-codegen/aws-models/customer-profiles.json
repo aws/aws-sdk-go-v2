@@ -1101,6 +1101,186 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#BatchPutProfileObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds multiple profile objects to a domain of a given ObjectType in a single API call.</p>\n         <p>When adding a specific profile object, like a Contact Record, an inferred profile can\n         get created if it is not mapped to an existing profile. The resulting profile will only\n         have a phone number populated in the standard ProfileObject. Any additional Contact Records\n         with the same phone number will be mapped to the same inferred profile.</p>\n         <p>When a ProfileObject is created and if a ProfileObjectType already exists for the\n         ProfileObject, it will provide data to a standard profile depending on the\n         ProfileObjectType definition.</p>\n         <p>BatchPutProfileObject needs an ObjectType, which can be created using\n         PutProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/profiles/objects/batch-put-profile-object",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item in the batch request that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.customerprofiles#responseCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item that failed to be added to the domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items to add to the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this item in the batch request. Used to correlate items in the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#stringifiedJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that is serialized from a JSON object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item to add to the domain as part of a batch request.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponse": {
+            "type": "structure",
+            "members": {
+                "Successful": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items that were successfully added to the domain.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items that failed to be added to the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item in the batch request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item that was successfully added to the domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseItem"
+            }
+        },
         "com.amazonaws.customerprofiles#Batches": {
             "type": "list",
             "member": {
@@ -1906,7 +2086,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple\n            Amazon Connect instances can be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <note>\n            <p>It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from\n            the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect\n            admin website. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1\">Enable Customer Profiles</a>.</p>\n            <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances\n            can be associated with one domain.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Connect Customer instance can be associated with only one domain. Multiple\n            Connect Customer instances can be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <note>\n            <p>It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from\n            the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect\n            admin website. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1\">Enable Customer Profiles</a>.</p>\n            <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances\n            can be associated with one domain.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}",
@@ -2128,7 +2308,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -2186,7 +2366,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -2246,7 +2426,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when\n         profiles are created and updated through Amazon Connect Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the\n         same region and Amazon Web Services account as the customer profiles domain</p>",
+                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when\n         profiles are created and updated through Connect Customer Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the\n         same region and Amazon Web Services account as the customer profiles domain</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
@@ -3061,7 +3241,7 @@
                 "Fields": {
                     "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of dataset type to column definitions that specifies which data columns to include in the schema. Currently only the <code>_webAnalytics</code> key is supported.</p>",
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions that specifies which data columns to include in the schema. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3437,7 +3617,7 @@
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Connect Customer Admin Website.</p>"
                     }
                 }
             },
@@ -3574,6 +3754,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#BatchGetProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObject"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition"
@@ -3897,8 +4080,196 @@
                     "name": "profile"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html\">Customer Profiles actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html\">Customer Profiles data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>\n         <p>For more information about the Amazon Connect Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>",
+                "smithy.api#documentation": "<fullname>Connect Customer Customer Profiles</fullname>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html\">Customer Profiles actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html\">Customer Profiles data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Connect Customer Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Connect Customer contact center. </p>\n         <p>For more information about the Connect Customer Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Connect Customer Administrator's Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://profile-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://profile-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://profile.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://profile.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -7948,7 +8319,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -10093,7 +10464,7 @@
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Connect Customer Admin Website.</p>"
                     }
                 }
             },
@@ -10933,7 +11304,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 500
+                    "max": 1000
                 }
             }
         },
@@ -14680,7 +15051,7 @@
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.customerprofiles#maxSize24",
+                    "target": "com.amazonaws.customerprofiles#maxSize60",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time of the specified unit.</p>",
                         "smithy.api#required": {}
@@ -14707,6 +15078,12 @@
         "com.amazonaws.customerprofiles#PeriodUnit": {
             "type": "enum",
             "members": {
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTES"
+                    }
+                },
                 "HOURS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -16258,7 +16635,7 @@
                 "TrainingFrequency": {
                     "target": "com.amazonaws.customerprofiles#RecommenderConfigTrainingFrequencyInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the recommender should retrain its model with new data.</p>"
+                        "smithy.api#documentation": "<p>How often the recommender should retrain its model with new data. If set to 0, automatic retraining will not be enabled.</p>"
                     }
                 },
                 "InferenceConfig": {
@@ -16270,7 +16647,13 @@
                 "IncludedColumns": {
                     "target": "com.amazonaws.customerprofiles#IncludedColumns",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to train on. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included and do not need to be specified: <code>Item.Id</code>, <code>ItemList[].Id</code>, <code>EventTimestamp</code>, <code>EventType</code>, and <code>EventValue</code>.</p>"
+                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to train on. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included in training and do not need to be specified: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with ExcludedColumns — both cannot be specified in the same request.</p>"
+                    }
+                },
+                "ExcludedColumns": {
+                    "target": "com.amazonaws.customerprofiles#IncludedColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to exclude from training. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be valid columns defined in the recommender schema. All columns in the schema except the listed columns will be used for training. The following columns are mandatory and cannot be excluded: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with IncludedColumns — both cannot be specified in the same request.</p>"
                     }
                 }
             },
@@ -16282,7 +16665,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 0,
                     "max": 30
                 }
             }
@@ -16644,7 +17027,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -19713,7 +20096,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -19770,7 +20153,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -20722,12 +21105,12 @@
                 }
             }
         },
-        "com.amazonaws.customerprofiles#maxSize24": {
+        "com.amazonaws.customerprofiles#maxSize60": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 24
+                    "max": 60
                 }
             }
         },
@@ -20779,6 +21162,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#string1To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#responseCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 200,
+                    "max": 599
+                }
             }
         },
         "com.amazonaws.customerprofiles#s3BucketName": {

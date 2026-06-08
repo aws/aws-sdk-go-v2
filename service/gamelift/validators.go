@@ -830,6 +830,26 @@ func (m *validateOpDescribeContainerGroupDefinition) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeContainerGroupPortMappings struct {
+}
+
+func (*validateOpDescribeContainerGroupPortMappings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContainerGroupPortMappings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContainerGroupPortMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContainerGroupPortMappingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFleetDeployment struct {
 }
 
@@ -2112,6 +2132,10 @@ func addOpDescribeContainerFleetValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeContainerGroupDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContainerGroupDefinition{}, middleware.After)
+}
+
+func addOpDescribeContainerGroupPortMappingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContainerGroupPortMappings{}, middleware.After)
 }
 
 func addOpDescribeFleetDeploymentValidationMiddleware(stack *middleware.Stack) error {
@@ -3767,6 +3791,24 @@ func validateOpDescribeContainerGroupDefinitionInput(v *DescribeContainerGroupDe
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeContainerGroupDefinitionInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeContainerGroupPortMappingsInput(v *DescribeContainerGroupPortMappingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContainerGroupPortMappingsInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if len(v.ContainerGroupType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerGroupType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

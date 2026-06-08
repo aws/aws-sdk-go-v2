@@ -917,6 +917,11 @@ func validateCustomOutputConfiguration(v *types.CustomOutputConfiguration) error
 			invalidParams.AddNested("Blueprints", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Document != nil {
+		if err := validateDocumentCustomOutputConfiguration(v.Document); err != nil {
+			invalidParams.AddNested("Document", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1025,6 +1030,23 @@ func validateDocumentBoundingBox(v *types.DocumentBoundingBox) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DocumentBoundingBox"}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentCustomOutputConfiguration(v *types.DocumentCustomOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentCustomOutputConfiguration"}
+	if v.FallbackBlueprints != nil {
+		if err := validateFallbackBlueprintItems(v.FallbackBlueprints); err != nil {
+			invalidParams.AddNested("FallbackBlueprints", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1173,6 +1195,23 @@ func validateEventBridgeConfiguration(v *types.EventBridgeConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeConfiguration"}
 	if v.EventBridgeEnabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventBridgeEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFallbackBlueprintItems(v []types.BlueprintItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FallbackBlueprintItems"}
+	for i := range v {
+		if err := validateBlueprintItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

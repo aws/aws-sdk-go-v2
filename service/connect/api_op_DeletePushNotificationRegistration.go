@@ -28,7 +28,7 @@ func (c *Client) DeletePushNotificationRegistration(ctx context.Context, params 
 
 type DeletePushNotificationRegistrationInput struct {
 
-	// The identifier of the contact within the Amazon Connect instance.
+	// The identifier of the contact within the Connect Customer instance.
 	//
 	// This member is required.
 	ContactId *string

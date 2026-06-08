@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,16 @@ type NestedXmlMapWithXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NestedXmlMapWithXmlNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NestedXmlMapWithXmlNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NestedXmlMapWithXmlNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNestedXmlMapWithXmlNameMap(s, schemas.NestedXmlMapWithXmlNameRequest_nestedXmlMapWithXmlNameMap, v.NestedXmlMapWithXmlNameMap)
+}
+
 type NestedXmlMapWithXmlNameOutput struct {
 	NestedXmlMapWithXmlNameMap map[string]map[string]string
 
@@ -41,16 +53,23 @@ type NestedXmlMapWithXmlNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NestedXmlMapWithXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NestedXmlMapWithXmlNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NestedXmlMapWithXmlNameResponse_nestedXmlMapWithXmlNameMap:
+			return deserializeNestedXmlMapWithXmlNameMap(d, schemas.NestedXmlMapWithXmlNameResponse_nestedXmlMapWithXmlNameMap, &v.NestedXmlMapWithXmlNameMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNestedXmlMapWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpNestedXmlMapWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NestedXmlMapWithXmlName, schemas.NestedXmlMapWithXmlNameRequest, schemas.NestedXmlMapWithXmlNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpNestedXmlMapWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NestedXmlMapWithXmlName, schemas.NestedXmlMapWithXmlNameRequest, schemas.NestedXmlMapWithXmlNameResponse), output: &NestedXmlMapWithXmlNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NestedXmlMapWithXmlName"); err != nil {

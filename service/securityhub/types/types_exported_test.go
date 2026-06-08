@@ -199,6 +199,24 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 var _ *types.ServiceNowUpdateConfiguration
 var _ *types.JiraCloudUpdateConfiguration
 
+func ExampleRecommendationStep_outputUsage() {
+	var union types.RecommendationStep
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationStepMemberUnusedPermissions:
+		_ = v.Value // Value is types.UnusedPermissionsRecommendationStep
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UnusedPermissionsRecommendationStep
+
 func ExampleTarget_outputUsage() {
 	var union types.Target
 	// type switches can be used to check the union value

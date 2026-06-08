@@ -284,6 +284,10 @@ type AIBenchmarkOutputConfig struct {
 	// This member is required.
 	S3OutputLocation *string
 
+	// The MLflow tracking configuration for the job. If you don't specify this
+	// parameter, MLflow tracking is disabled.
+	MlflowConfig *AIMlflowConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -298,6 +302,9 @@ type AIBenchmarkOutputResult struct {
 
 	// The CloudWatch log information for the benchmark job.
 	CloudWatchLogs []AICloudWatchLogs
+
+	// The MLflow tracking configuration for the job.
+	MlflowConfig *AIMlflowConfig
 
 	noSmithyDocumentSerde
 }
@@ -364,6 +371,24 @@ type AIDatasetConfigMemberInputDataConfig struct {
 }
 
 func (*AIDatasetConfigMemberInputDataConfig) isAIDatasetConfig() {}
+
+// The MLflow tracking configuration for logging metrics and parameters to a
+// SageMaker managed MLflow tracking server.
+type AIMlflowConfig struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker managed MLflow resource.
+	//
+	// This member is required.
+	MlflowResourceArn *string
+
+	// The MLflow experiment name used for tracking.
+	MlflowExperimentName *string
+
+	// The MLflow run name used for tracking.
+	MlflowRunName *string
+
+	noSmithyDocumentSerde
+}
 
 // The source of the model for an AI recommendation job. This is a union type.
 //
@@ -566,6 +591,10 @@ type AIRecommendationOptimizationDetail struct {
 // The output configuration for an AI recommendation job.
 type AIRecommendationOutputConfig struct {
 
+	// The MLflow tracking configuration for the job. If you don't specify this
+	// parameter, MLflow tracking is disabled.
+	MlflowConfig *AIMlflowConfig
+
 	// The name or Amazon Resource Name (ARN) of the model package group where the
 	// optimized model is registered as a new model package version.
 	ModelPackageGroupIdentifier *string
@@ -584,6 +613,9 @@ type AIRecommendationOutputResult struct {
 	//
 	// This member is required.
 	S3OutputLocation *string
+
+	// The MLflow tracking configuration for the job.
+	MlflowConfig *AIMlflowConfig
 
 	// The name or Amazon Resource Name (ARN) of the model package group where
 	// deployment-ready model packages are registered.
@@ -4423,6 +4455,9 @@ type ClusterEventDetail struct {
 	// Additional details about the event, including event-specific metadata.
 	EventDetails *EventDetails
 
+	// The severity level of the event. Valid values are Info , Warn , and Error .
+	EventLevel ClusterEventLevel
+
 	// The name of the instance group associated with the event, if applicable.
 	InstanceGroupName *string
 
@@ -4464,6 +4499,9 @@ type ClusterEventSummary struct {
 
 	// A brief, human-readable description of the event.
 	Description *string
+
+	// The severity level of the event. Valid values are Info , Warn , and Error .
+	EventLevel ClusterEventLevel
 
 	// The name of the instance group associated with the event, if applicable.
 	InstanceGroupName *string
@@ -4538,6 +4576,10 @@ type ClusterInstanceGroupDetails struct {
 
 	// The execution role for the instance group to assume.
 	ExecutionRole *string
+
+	// The status of the image version for the instance group. Indicates whether the
+	// instance group is running the latest image version or if an update is available.
+	ImageVersionStatus ClusterImageVersionStatus
 
 	// The name of the instance group of a SageMaker HyperPod cluster.
 	InstanceGroupName *string
@@ -5087,6 +5129,9 @@ type ClusterNodeDetails struct {
 	// The ID of the Amazon Machine Image (AMI) desired for the node.
 	DesiredImageId *string
 
+	// The status of the image version for the cluster node.
+	ImageVersionStatus ClusterImageVersionStatus
+
 	// The instance group name in which the instance is.
 	InstanceGroupName *string
 
@@ -5182,6 +5227,9 @@ type ClusterNodeSummary struct {
 	//
 	// This member is required.
 	LaunchTime *time.Time
+
+	// The status of the image version for the cluster node.
+	ImageVersionStatus ClusterImageVersionStatus
 
 	// The time when SageMaker last updated the software of the instances in the
 	// cluster.
@@ -5327,13 +5375,33 @@ type ClusterRestrictedInstanceGroupDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The specifications of a restricted instance group that you need to define.
-type ClusterRestrictedInstanceGroupSpecification struct {
+// The configuration for the restricted instance groups (RIG) in the SageMaker
+// HyperPod cluster.
+type ClusterRestrictedInstanceGroupsConfig struct {
 
-	// The configuration for the restricted instance groups (RIG) environment.
+	// The shared environment configuration for the restricted instance groups (RIG).
 	//
 	// This member is required.
-	EnvironmentConfig *EnvironmentConfig
+	SharedEnvironmentConfig *ClusterSharedEnvironmentConfig
+
+	noSmithyDocumentSerde
+}
+
+// The output configuration for the restricted instance groups (RIG) in the
+// SageMaker HyperPod cluster.
+type ClusterRestrictedInstanceGroupsConfigOutput struct {
+
+	// The shared environment configuration details for the restricted instance groups
+	// (RIG).
+	//
+	// This member is required.
+	SharedEnvironmentConfig *ClusterSharedEnvironmentConfigDetails
+
+	noSmithyDocumentSerde
+}
+
+// The specifications of a restricted instance group that you need to define.
+type ClusterRestrictedInstanceGroupSpecification struct {
 
 	// Specifies an IAM execution role to be assumed by the restricted instance group.
 	//
@@ -5355,6 +5423,9 @@ type ClusterRestrictedInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	InstanceType ClusterInstanceType
+
+	// The configuration for the restricted instance groups (RIG) environment.
+	EnvironmentConfig *EnvironmentConfig
 
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster restricted instance group.
@@ -5430,6 +5501,47 @@ type ClusterSchedulerConfigSummary struct {
 
 	// Last modified time of the cluster policy.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The shared environment configuration for the restricted instance groups (RIG).
+type ClusterSharedEnvironmentConfig struct {
+
+	// Configuration settings for an Amazon FSx for Lustre file system in the shared
+	// environment.
+	//
+	// This member is required.
+	FSxLustreConfig *FSxLustreConfig
+
+	// The deletion policy for the Amazon FSx for Lustre file system in the shared
+	// environment.
+	//
+	// This member is required.
+	FSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
+
+	noSmithyDocumentSerde
+}
+
+// The shared environment configuration details for the restricted instance groups
+// (RIG).
+type ClusterSharedEnvironmentConfigDetails struct {
+
+	// The current Amazon FSx for Lustre file system configuration in the shared
+	// environment.
+	CurrentFSxLustreConfig *FSxLustreConfig
+
+	// The current deletion policy for the Amazon FSx for Lustre file system in the
+	// shared environment.
+	CurrentFSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
+
+	// The desired Amazon FSx for Lustre file system configuration in the shared
+	// environment.
+	DesiredFSxLustreConfig *FSxLustreConfig
+
+	// The desired deletion policy for the Amazon FSx for Lustre file system in the
+	// shared environment.
+	DesiredFSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
 
 	noSmithyDocumentSerde
 }
@@ -11470,6 +11582,25 @@ type InferenceComponentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The placement status of an inference component on a specific instance type.
+// Shows the number of inference component copies currently placed on instances of
+// a given type.
+type InferenceComponentPlacementStatus struct {
+
+	// The number of inference component copies currently placed on instances of this
+	// type.
+	//
+	// This member is required.
+	CurrentCopyCount *int32
+
+	// The ML compute instance type where the inference component copies are placed.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a rolling deployment strategy for updating a SageMaker AI inference
 // component.
 type InferenceComponentRollingUpdatePolicy struct {
@@ -11522,6 +11653,10 @@ type InferenceComponentRuntimeConfigSummary struct {
 	// The number of runtime copies of the model container that you requested to
 	// deploy with the inference component.
 	DesiredCopyCount *int32
+
+	// The placement status of the inference component across instance types. Shows
+	// how the inference component copies are distributed across instance types.
+	PlacementStatus []InferenceComponentPlacementStatus
 
 	noSmithyDocumentSerde
 }
@@ -11586,6 +11721,11 @@ type InferenceComponentSpecification struct {
 	// Settings that affect how the inference component caches data.
 	DataCacheConfig *InferenceComponentDataCacheConfig
 
+	// The ML compute instance type for the inference component specification.
+	// Specifies which instance type this specification applies to. Required when using
+	// the Specifications parameter with multiple entries.
+	InstanceType ProductionVariantInstanceType
+
 	// The name of an existing SageMaker AI model object in your account that you want
 	// to deploy with the inference component.
 	ModelName *string
@@ -11616,6 +11756,10 @@ type InferenceComponentSpecificationSummary struct {
 
 	// Settings that affect how the inference component caches data.
 	DataCacheConfig *InferenceComponentDataCacheConfigSummary
+
+	// The ML compute instance type associated with this inference component
+	// specification.
+	InstanceType ProductionVariantInstanceType
 
 	// The name of the SageMaker AI model object that is deployed with the inference
 	// component.
@@ -12287,6 +12431,11 @@ type InstanceMetadata struct {
 	// applicable.
 	FailureMessage *string
 
+	// The ENI configurations for the instance types in the instance requirements,
+	// grouped by network interface category (for example, ENI-only or EFA with ENIs).
+	// At most one configuration per category.
+	InstanceRequirementsEniConfigurations []InstanceRequirementsEniConfiguration
+
 	// The execution state of the Lifecycle Script (LCS) for the instance.
 	LcsExecutionState *string
 
@@ -12323,6 +12472,67 @@ type InstancePlacementConfig struct {
 	// A list of specifications for how instances should be placed on specific
 	// UltraServers. Maximum of 10 items is supported.
 	PlacementSpecifications []PlacementSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an instance type and its priority for a heterogeneous endpoint. Use
+// instance pools to configure a production variant with multiple instance types,
+// enabling the endpoint to provision instances across different types based on
+// priority.
+type InstancePool struct {
+
+	// The ML compute instance type for the instance pool.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	// The priority for the instance pool. SageMaker attempts to provision instances
+	// in order of priority, starting with the lowest value. If instances for a
+	// higher-priority pool are unavailable, SageMaker attempts to provision from the
+	// next pool.
+	//
+	// Valid values: 1 to 5, where 1 is the highest priority.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The name of a SageMaker model to use for this instance pool instead of the
+	// model specified for the production variant. Use this to deploy a different model
+	// optimized for the instance type in this pool.
+	ModelNameOverride *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an instance pool for a production variant, including the instance
+// type and the current number of instances.
+type InstancePoolSummary struct {
+
+	// The current number of instances of this type in the instance pool.
+	//
+	// This member is required.
+	CurrentInstanceCount *int32
+
+	// The ML compute instance type for the instance pool.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// The customer ENI and additional ENIs associated with a network interface
+// category.
+type InstanceRequirementsEniConfiguration struct {
+
+	// Information about additional Elastic Network Interfaces (ENIs) associated with
+	// the instance type category.
+	AdditionalEnis *AdditionalEnis
+
+	// The ID of the customer-managed Elastic Network Interface (ENI) associated with
+	// the instance type category.
+	CustomerEni *string
 
 	noSmithyDocumentSerde
 }
@@ -12379,6 +12589,149 @@ type IntegerParameterRangeSpecification struct {
 	//
 	// This member is required.
 	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
+// DescribeJobResponse, update this structure as well.
+type Job struct {
+
+	// The date and time that the job was created.
+	CreationTime *time.Time
+
+	// The date and time that the job ended.
+	EndTime *time.Time
+
+	// If the job failed, the reason it failed.
+	FailureReason *string
+
+	// The Amazon Resource Name (ARN) of the job.
+	JobArn *string
+
+	// The category of the job.
+	JobCategory JobCategory
+
+	// The JSON configuration document for the job.
+	JobConfigDocument *string
+
+	// The schema version used for the job configuration document.
+	JobConfigSchemaVersion *string
+
+	// The name of the job.
+	JobName *string
+
+	// The current status of the job.
+	JobStatus JobStatus
+
+	// The date and time that the job was last modified.
+	LastModifiedTime *time.Time
+
+	// The ARN of the IAM role associated with the job.
+	RoleArn *string
+
+	// The detailed secondary status of the job, providing more granular information
+	// about the job's progress.
+	SecondaryStatus JobSecondaryStatus
+
+	// A list of secondary status transitions for the job, with timestamps and
+	// optional status messages.
+	SecondaryStatusTransitions []JobSecondaryStatusTransition
+
+	// The tags associated with the job.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about a job configuration schema version.
+type JobConfigSchemaVersionSummary struct {
+
+	// The version of the job configuration schema.
+	//
+	// This member is required.
+	JobConfigSchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a secondary status transition for a job. Jobs progress through
+// multiple secondary statuses during execution. Each transition records the
+// status, start time, optional end time, and an optional message with additional
+// details.
+type JobSecondaryStatusTransition struct {
+
+	// The date and time that the status transition started.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The secondary status of the job at this transition point.
+	//
+	// This member is required.
+	Status JobSecondaryStatus
+
+	// The date and time that the status transition ended.
+	EndTime *time.Time
+
+	// A detailed message about the status transition.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a SageMaker job step.
+type JobStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker job that was run by this step
+	// execution.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about a job, returned by the ListJobs operation.
+// Use DescribeJob to get full details for a specific job.
+type JobSummary struct {
+
+	// The date and time that the job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The category of the job.
+	//
+	// This member is required.
+	JobCategory JobCategory
+
+	// The name of the job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The secondary status of the job, providing more granular information about the
+	// job's progress. Secondary statuses may change between releases.
+	//
+	// This member is required.
+	JobSecondaryStatus JobSecondaryStatus
+
+	// The current status of the job.
+	//
+	// This member is required.
+	JobStatus JobStatus
+
+	// The date and time that the job was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The date and time that the job ended.
+	EndTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -12975,6 +13328,15 @@ type LineageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The managed configuration of a model package group.
+type ManagedConfiguration struct {
+
+	// The storage type of the model package.
+	ManagedStorageType ManagedStorageType
+
+	noSmithyDocumentSerde
+}
+
 // Defines an Amazon Cognito or your own OIDC IdP user group that is part of a
 // work team.
 type MemberDefinition struct {
@@ -13079,12 +13441,17 @@ type MetricDefinition struct {
 type MetricsConfig struct {
 
 	// Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics
-	// provide utilization data at instance and container granularity. Container
-	// granularity is supported for Inference Components. The default is False .
+	// provide utilization and invocation data at instance and container granularity.
+	// Container granularity is supported for Inference Components. The default is
+	// False .
 	EnableEnhancedMetrics *bool
 
-	// The frequency, in seconds, at which utilization metrics are published to Amazon
-	// CloudWatch. The default is 60 seconds.
+	// The interval, in seconds, at which metrics are published to Amazon CloudWatch.
+	// Defaults to 60 . Valid values: 10 , 30 , 60 , 120 , 180 , 240 , 300 . When
+	// EnableEnhancedMetrics is set to False , this interval applies to utilization
+	// metrics only; invocation metrics continue to be published at the default
+	// 60-second interval. When EnableEnhancedMetrics is set to True , this interval
+	// applies to both utilization and invocation metrics.
 	MetricPublishFrequencyInSeconds MetricPublishFrequencyInSeconds
 
 	noSmithyDocumentSerde
@@ -14329,6 +14696,9 @@ type ModelPackageGroupSummary struct {
 	//
 	// This member is required.
 	ModelPackageGroupStatus ModelPackageGroupStatus
+
+	// The managed configuration of the model package group.
+	ManagedConfiguration *ManagedConfiguration
 
 	// A description of the model group.
 	ModelPackageGroupDescription *string
@@ -16541,6 +16911,10 @@ type PendingProductionVariantSummary struct {
 	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	DesiredWeight *float32
 
+	// A list of instance pools for the production variant. Each pool indicates the
+	// instance type and the current number of instances of that type.
+	InstancePools []InstancePoolSummary
+
 	// The type of instances associated with the variant.
 	InstanceType ProductionVariantInstanceType
 
@@ -16805,6 +17179,9 @@ type PipelineExecutionStepMetadata struct {
 
 	//  The metadata of the inference component used in pipeline execution step.
 	InferenceComponent *InferenceComponentMetadata
+
+	// The metadata for a SageMaker job used in a pipeline execution step.
+	Job *JobStepMetadata
 
 	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
 	// execution and a list of output parameters.
@@ -17538,6 +17915,12 @@ type ProductionVariant struct {
 	// values across all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
 
+	// A list of instance pools for the production variant. Each instance pool
+	// specifies an instance type and its priority for provisioning. Use instance pools
+	// to configure heterogeneous endpoints that deploy models across multiple instance
+	// types.
+	InstancePools []InstancePool
+
 	// The ML compute instance type.
 	InstanceType ProductionVariantInstanceType
 
@@ -17561,6 +17944,16 @@ type ProductionVariant struct {
 	// The serverless configuration for an endpoint. Specifies a serverless endpoint
 	// configuration instead of an instance-based endpoint configuration.
 	ServerlessConfig *ProductionVariantServerlessConfig
+
+	// The timeout value, in seconds, for provisioning instances for the production
+	// variant. When SageMaker encounters an insufficient capacity error while
+	// provisioning instances, it retries with the next instance pool (if configured)
+	// or waits until the timeout expires. This timeout applies only to capacity
+	// provisioning and does not include the time for model download or container
+	// startup.
+	//
+	// Valid values: 300 to 3600.
+	VariantInstanceProvisionTimeoutInSeconds *int32
 
 	// The size, in GB, of the ML storage volume attached to individual inference
 	// instance associated with the production variant. Currently only Amazon EBS gp2
@@ -17849,6 +18242,10 @@ type ProductionVariantSummary struct {
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
+	// A list of instance pools for the production variant. Each pool indicates the
+	// instance type and the current number of instances of that type.
+	InstancePools []InstancePoolSummary
 
 	// Settings that control the range in the number of instances that the endpoint
 	// provisions as it scales up or down to accommodate traffic.
@@ -18409,7 +18806,7 @@ type RealTimeInferenceConfig struct {
 	// The instance type the model is deployed to.
 	//
 	// This member is required.
-	InstanceType InstanceType
+	InstanceType ProductionVariantInstanceType
 
 	noSmithyDocumentSerde
 }
@@ -18969,6 +19366,9 @@ type ReservedCapacitySummary struct {
 	// The availability zone for the reserved capacity.
 	AvailabilityZone *string
 
+	// The Availability Zone ID of the reserved capacity.
+	AvailabilityZoneId *string
+
 	// The number of whole hours in the total duration for this reserved capacity.
 	DurationHours *int64
 
@@ -19226,6 +19626,16 @@ type ResourceSpec struct {
 	// The ARN of the image version created on the instance. To clear the value set
 	// for SageMakerImageVersionArn , pass None as the value.
 	SageMakerImageVersionArn *string
+
+	// The ARN of the SageMaker AI Training Plan to use for this app. When you specify
+	// a training plan, the app launches on reserved GPU capacity. This field is
+	// supported for JupyterLab and CodeEditor app types.
+	//
+	// For more information about how to reserve GPU capacity with SageMaker AI
+	// Training Plans, see [Using training plans in Studio applications].
+	//
+	// [Using training plans in Studio applications]: https://docs.aws.amazon.com/sagemaker/latest/dg/training-plan-utilization-for-studio-apps.html
+	TrainingPlanArn *string
 
 	noSmithyDocumentSerde
 }
@@ -19939,6 +20349,10 @@ type SearchRecord struct {
 
 	// The properties of a hyperparameter tuning job.
 	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
+
+	// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
+	// DescribeJobResponse, update this structure as well.
+	Job *Job
 
 	// A model displayed in the Amazon SageMaker Model Dashboard.
 	Model *ModelDashboardModel
@@ -20716,6 +21130,14 @@ type StudioLifecycleConfigDetails struct {
 // Studio settings. If these settings are applied on a user level, they take
 // priority over the settings applied on a domain level.
 type StudioWebPortalSettings struct {
+
+	// The execution role session name mode. If this value is set to USER_IDENTITY ,
+	// the session name of the execution role corresponds to the user's identity. For
+	// IAM domains, the session name is the IAM session name used to generate the
+	// presigned URL. For IAM Identity Center domains, the session name is the username
+	// of the associated IAM Identity Center user. If this value is set to STATIC or
+	// is not set, the session name defaults to SageMaker .
+	ExecutionRoleSessionNameMode ExecutionRoleSessionNameMode
 
 	// The [Applications supported in Studio] that are hidden from the Studio left navigation pane.
 	//
@@ -21754,6 +22176,9 @@ type TrainingJob struct {
 	// [Protect Training Jobs by Using an Amazon Virtual Private Cloud]: https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html
 	VpcConfig *VpcConfig
 
+	// The status of the warm pool associated with the training job.
+	WarmPoolStatus *WarmPoolStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -22027,7 +22452,7 @@ type TrainingPlanFilter struct {
 type TrainingPlanOffering struct {
 
 	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-	// SageMaker Endpoints) for this training plan offering.
+	// SageMaker Endpoints, Studio apps) for this training plan offering.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -22039,6 +22464,9 @@ type TrainingPlanOffering struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	//
 	// This member is required.
 	TargetResources []SageMakerResourceName
@@ -22133,8 +22561,8 @@ type TrainingPlanSummary struct {
 	// training plan.
 	StatusMessage *string
 
-	// The target resources (e.g., training jobs, HyperPod clusters, Endpoints) that
-	// can use this training plan.
+	// The target resources (e.g., training jobs, HyperPod clusters, Endpoints, Studio
+	// apps) that can use this training plan.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -22146,6 +22574,9 @@ type TrainingPlanSummary struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	TargetResources []SageMakerResourceName
 
 	// The total number of instances reserved in this training plan.

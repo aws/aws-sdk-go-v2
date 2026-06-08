@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -51,7 +50,7 @@ func (m *awsAwsjson10_deserializeOpAcceptEngagementInvitation) HandleDeserialize
 	output := &AcceptEngagementInvitationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -155,7 +154,7 @@ func (m *awsAwsjson10_deserializeOpAssignOpportunity) HandleDeserialize(ctx cont
 	output := &AssignOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -256,7 +255,7 @@ func (m *awsAwsjson10_deserializeOpAssociateOpportunity) HandleDeserialize(ctx c
 	output := &AssociateOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1128,7 +1127,7 @@ func (m *awsAwsjson10_deserializeOpDeleteResourceSnapshotJob) HandleDeserialize(
 	output := &DeleteResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1232,7 +1231,7 @@ func (m *awsAwsjson10_deserializeOpDisassociateOpportunity) HandleDeserialize(ct
 	output := &DisassociateOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3793,7 +3792,7 @@ func (m *awsAwsjson10_deserializeOpRejectEngagementInvitation) HandleDeserialize
 	output := &RejectEngagementInvitationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4284,7 +4283,7 @@ func (m *awsAwsjson10_deserializeOpStartResourceSnapshotJob) HandleDeserialize(c
 	output := &StartResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4385,7 +4384,7 @@ func (m *awsAwsjson10_deserializeOpStopResourceSnapshotJob) HandleDeserialize(ct
 	output := &StopResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4486,7 +4485,7 @@ func (m *awsAwsjson10_deserializeOpSubmitOpportunity) HandleDeserialize(ctx cont
 	output := &SubmitOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7977,6 +7976,55 @@ func awsAwsjson10_deserializeDocumentEngagementSummaryList(v *[]types.Engagement
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentExpectedContractDuration(v **types.ExpectedContractDuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExpectedContractDuration
+	if *v == nil {
+		sv = &types.ExpectedContractDuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Term":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpectedContractDurationTerm to be of type string, got %T instead", value)
+				}
+				sv.Term = types.ExpectedContractDurationTerm(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentExpectedCustomerSpend(v **types.ExpectedCustomerSpend, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10161,6 +10209,11 @@ func awsAwsjson10_deserializeDocumentProject(v **types.Project, value interface{
 				return err
 			}
 
+		case "ExpectedContractDuration":
+			if err := awsAwsjson10_deserializeDocumentExpectedContractDuration(&sv.ExpectedContractDuration, value); err != nil {
+				return err
+			}
+
 		case "ExpectedCustomerSpend":
 			if err := awsAwsjson10_deserializeDocumentExpectedCustomerSpendList(&sv.ExpectedCustomerSpend, value); err != nil {
 				return err
@@ -10306,6 +10359,11 @@ func awsAwsjson10_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				return err
 			}
 
+		case "ExpectedContractDuration":
+			if err := awsAwsjson10_deserializeDocumentExpectedContractDuration(&sv.ExpectedContractDuration, value); err != nil {
+				return err
+			}
+
 		case "ExpectedCustomerSpend":
 			if err := awsAwsjson10_deserializeDocumentExpectedCustomerSpendList(&sv.ExpectedCustomerSpend, value); err != nil {
 				return err
@@ -10353,6 +10411,11 @@ func awsAwsjson10_deserializeDocumentProjectView(v **types.ProjectView, value in
 
 		case "DeliveryModels":
 			if err := awsAwsjson10_deserializeDocumentDeliveryModels(&sv.DeliveryModels, value); err != nil {
+				return err
+			}
+
+		case "ExpectedContractDuration":
+			if err := awsAwsjson10_deserializeDocumentExpectedContractDuration(&sv.ExpectedContractDuration, value); err != nil {
 				return err
 			}
 

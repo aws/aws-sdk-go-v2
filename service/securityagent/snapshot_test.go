@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddArtifact(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDeleteCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteCodeReviews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeletePentests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeletePentests(context.Background(), nil, func(o *Options) {
@@ -103,6 +115,42 @@ func TestCheckSnapshot_BatchGetArtifactMetadata(t *testing.T) {
 	_, err := svc.BatchGetArtifactMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetArtifactMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviewJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCodeReviewJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetCodeReviewJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviewJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCodeReviewJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetCodeReviews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -187,6 +235,18 @@ func TestCheckSnapshot_CreateApplication(t *testing.T) {
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCodeReview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -398,6 +458,42 @@ func TestCheckSnapshot_ListArtifacts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCodeReviewJobsForCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviewJobsForCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeReviewJobsForCodeReview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCodeReviewJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviewJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeReviewJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCodeReviews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDiscoveredEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDiscoveredEndpoints(context.Background(), nil, func(o *Options) {
@@ -530,11 +626,35 @@ func TestCheckSnapshot_StartCodeRemediation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartCodeReviewJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCodeReviewJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCodeReviewJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartPentestJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartPentestJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartPentestJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopCodeReviewJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopCodeReviewJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopCodeReviewJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -595,6 +715,18 @@ func TestCheckSnapshot_UpdateApplication(t *testing.T) {
 	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCodeReview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -673,6 +805,18 @@ func TestUpdateSnapshot_AddArtifact(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchDeleteCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteCodeReviews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeletePentests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeletePentests(context.Background(), nil, func(o *Options) {
@@ -702,6 +846,42 @@ func TestUpdateSnapshot_BatchGetArtifactMetadata(t *testing.T) {
 	_, err := svc.BatchGetArtifactMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetArtifactMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviewJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCodeReviewJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetCodeReviewJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviewJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCodeReviewJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetCodeReviews")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -786,6 +966,18 @@ func TestUpdateSnapshot_CreateApplication(t *testing.T) {
 	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCodeReview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -997,6 +1189,42 @@ func TestUpdateSnapshot_ListArtifacts(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCodeReviewJobsForCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviewJobsForCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeReviewJobsForCodeReview")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCodeReviewJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviewJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeReviewJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCodeReviews(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCodeReviews(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCodeReviews")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDiscoveredEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDiscoveredEndpoints(context.Background(), nil, func(o *Options) {
@@ -1129,11 +1357,35 @@ func TestUpdateSnapshot_StartCodeRemediation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartCodeReviewJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCodeReviewJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCodeReviewJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartPentestJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartPentestJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPentestJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopCodeReviewJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopCodeReviewJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopCodeReviewJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1194,6 +1446,18 @@ func TestUpdateSnapshot_UpdateApplication(t *testing.T) {
 	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCodeReview(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCodeReview(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCodeReview")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -14,15 +14,14 @@ import (
 
 // Creates a policy store. A policy store is a container for policy resources.
 //
-// Although [Cedar supports multiple namespaces], Verified Permissions currently supports only one namespace per
-// policy store.
+// As of May 2026, Verified Permissions has aligned with Cedar and now supports
+// multiple namespaces.
 //
 // Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
 // element to propagate through the service and be visible in the results of other
 // Verified Permissions operations.
 //
 // [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
-// [Cedar supports multiple namespaces]: https://docs.cedarpolicy.com/schema/schema.html#namespace
 func (c *Client) CreatePolicyStore(ctx context.Context, params *CreatePolicyStoreInput, optFns ...func(*Options)) (*CreatePolicyStoreOutput, error) {
 	if params == nil {
 		params = &CreatePolicyStoreInput{}

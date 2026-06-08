@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from a Security Agent resource
+// Removes tags from a resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -26,15 +26,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	return out, nil
 }
 
-// Input for UntagResource operation
+// Input for UntagResource operation.
 type UntagResourceInput struct {
 
-	// ARN of the resource to untag
+	// The Amazon Resource Name (ARN) of the resource to remove tags from.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// List of tag keys to remove from the resource
+	// The list of tag keys to remove from the resource.
 	//
 	// This member is required.
 	TagKeys []string
@@ -42,7 +42,7 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for UntagResource operation
+// Output for UntagResource operation.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

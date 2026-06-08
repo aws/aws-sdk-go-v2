@@ -64,7 +64,7 @@ type CreateServerlessCacheInput struct {
 	MajorEngineVersion *string
 
 	// The IP protocol version used by the serverless cache. Must be either ipv4 | ipv6
-	// | dual_stack . ipv6 is only supported with ipv6-only subnets. If not specified,
+	// | dual_stack . ipv6 is only supported with IPv6-only subnets. If not specified,
 	// defaults to ipv4 , unless all provided subnets are IPv6-only, in which case it
 	// defaults to ipv6 .
 	NetworkType types.NetworkType

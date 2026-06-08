@@ -47,6 +47,10 @@ type RemoveTagsInput struct {
 	// This member is required.
 	TagKeys []string
 
+	// The ID of the cluster that scopes the tag operation. Required when the resource
+	// being untagged is a session-scoped resource.
+	ClusterId *string
+
 	noSmithyDocumentSerde
 }
 

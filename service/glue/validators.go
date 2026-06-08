@@ -1990,6 +1990,26 @@ func (m *validateOpGetCustomEntityType) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDashboardUrl struct {
+}
+
+func (*validateOpGetDashboardUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDashboardUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDashboardUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDashboardUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDatabase struct {
 }
 
@@ -2585,6 +2605,26 @@ func (m *validateOpGetSecurityConfiguration) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSecurityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSessionEndpoint struct {
+}
+
+func (*validateOpGetSessionEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSessionEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4826,6 +4866,10 @@ func addOpGetCustomEntityTypeValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetCustomEntityType{}, middleware.After)
 }
 
+func addOpGetDashboardUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDashboardUrl{}, middleware.After)
+}
+
 func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDatabase{}, middleware.After)
 }
@@ -4944,6 +4988,10 @@ func addOpGetSchemaVersionsDiffValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecurityConfiguration{}, middleware.After)
+}
+
+func addOpGetSessionEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSessionEndpoint{}, middleware.After)
 }
 
 func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -12074,6 +12122,24 @@ func validateOpGetCustomEntityTypeInput(v *GetCustomEntityTypeInput) error {
 	}
 }
 
+func validateOpGetDashboardUrlInput(v *GetDashboardUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardUrlInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDatabaseInput(v *GetDatabaseInput) error {
 	if v == nil {
 		return nil
@@ -12601,6 +12667,21 @@ func validateOpGetSecurityConfigurationInput(v *GetSecurityConfigurationInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetSecurityConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSessionEndpointInput(v *GetSessionEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionEndpointInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

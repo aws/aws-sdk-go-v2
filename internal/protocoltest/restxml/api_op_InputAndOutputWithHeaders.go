@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -65,6 +67,104 @@ type InputAndOutputWithHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputAndOutputWithHeadersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputAndOutputWithHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputAndOutputWithHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	if v.HeaderByte != nil {
+		s.WriteInt8(schemas.InputAndOutputWithHeadersIO_headerByte, *v.HeaderByte)
+	}
+	if v.HeaderDouble != nil {
+		s.WriteFloat64(schemas.InputAndOutputWithHeadersIO_headerDouble, *v.HeaderDouble)
+	}
+	if v.HeaderEnum != "" {
+		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerEnum, string(v.HeaderEnum))
+	}
+	serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	if v.HeaderFalseBool != nil {
+		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, *v.HeaderFalseBool)
+	}
+	if v.HeaderFloat != nil {
+		s.WriteFloat32(schemas.InputAndOutputWithHeadersIO_headerFloat, *v.HeaderFloat)
+	}
+	if v.HeaderInteger != nil {
+		s.WriteInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, *v.HeaderInteger)
+	}
+	serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	if v.HeaderLong != nil {
+		s.WriteInt64(schemas.InputAndOutputWithHeadersIO_headerLong, *v.HeaderLong)
+	}
+	if v.HeaderShort != nil {
+		s.WriteInt16(schemas.InputAndOutputWithHeadersIO_headerShort, *v.HeaderShort)
+	}
+	if v.HeaderString != nil {
+		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerString, *v.HeaderString)
+	}
+	serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
+	serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
+	serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	if v.HeaderTrueBool != nil {
+		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, *v.HeaderTrueBool)
+	}
+}
+func (v *InputAndOutputWithHeadersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputAndOutputWithHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputAndOutputWithHeadersIO_headerBooleanList:
+			return deserializeBooleanList(d, schemas.InputAndOutputWithHeadersIO_headerBooleanList, &v.HeaderBooleanList)
+		case schemas.InputAndOutputWithHeadersIO_headerByte:
+			v.HeaderByte = new(int8)
+			return d.ReadInt8(schemas.InputAndOutputWithHeadersIO_headerByte, v.HeaderByte)
+		case schemas.InputAndOutputWithHeadersIO_headerDouble:
+			v.HeaderDouble = new(float64)
+			return d.ReadFloat64(schemas.InputAndOutputWithHeadersIO_headerDouble, v.HeaderDouble)
+		case schemas.InputAndOutputWithHeadersIO_headerEnum:
+			var ev string
+			if err := d.ReadString(schemas.InputAndOutputWithHeadersIO_headerEnum, &ev); err != nil {
+				return err
+			}
+			v.HeaderEnum = types.FooEnum(ev)
+			return nil
+		case schemas.InputAndOutputWithHeadersIO_headerEnumList:
+			return deserializeFooEnumList(d, schemas.InputAndOutputWithHeadersIO_headerEnumList, &v.HeaderEnumList)
+		case schemas.InputAndOutputWithHeadersIO_headerFalseBool:
+			v.HeaderFalseBool = new(bool)
+			return d.ReadBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, v.HeaderFalseBool)
+		case schemas.InputAndOutputWithHeadersIO_headerFloat:
+			v.HeaderFloat = new(float32)
+			return d.ReadFloat32(schemas.InputAndOutputWithHeadersIO_headerFloat, v.HeaderFloat)
+		case schemas.InputAndOutputWithHeadersIO_headerInteger:
+			v.HeaderInteger = new(int32)
+			return d.ReadInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, v.HeaderInteger)
+		case schemas.InputAndOutputWithHeadersIO_headerIntegerList:
+			return deserializeIntegerList(d, schemas.InputAndOutputWithHeadersIO_headerIntegerList, &v.HeaderIntegerList)
+		case schemas.InputAndOutputWithHeadersIO_headerLong:
+			v.HeaderLong = new(int64)
+			return d.ReadInt64(schemas.InputAndOutputWithHeadersIO_headerLong, v.HeaderLong)
+		case schemas.InputAndOutputWithHeadersIO_headerShort:
+			v.HeaderShort = new(int16)
+			return d.ReadInt16(schemas.InputAndOutputWithHeadersIO_headerShort, v.HeaderShort)
+		case schemas.InputAndOutputWithHeadersIO_headerString:
+			v.HeaderString = new(string)
+			return d.ReadString(schemas.InputAndOutputWithHeadersIO_headerString, v.HeaderString)
+		case schemas.InputAndOutputWithHeadersIO_headerStringList:
+			return deserializeStringList(d, schemas.InputAndOutputWithHeadersIO_headerStringList, &v.HeaderStringList)
+		case schemas.InputAndOutputWithHeadersIO_headerStringSet:
+			return deserializeStringSet(d, schemas.InputAndOutputWithHeadersIO_headerStringSet, &v.HeaderStringSet)
+		case schemas.InputAndOutputWithHeadersIO_headerTimestampList:
+			return deserializeTimestampList(d, schemas.InputAndOutputWithHeadersIO_headerTimestampList, &v.HeaderTimestampList)
+		case schemas.InputAndOutputWithHeadersIO_headerTrueBool:
+			v.HeaderTrueBool = new(bool)
+			return d.ReadBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, v.HeaderTrueBool)
+		}
+		return nil
+	})
+}
+
 type InputAndOutputWithHeadersOutput struct {
 	HeaderBooleanList []bool
 
@@ -104,16 +204,111 @@ type InputAndOutputWithHeadersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputAndOutputWithHeadersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputAndOutputWithHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputAndOutputWithHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBooleanList(s, schemas.InputAndOutputWithHeadersIO_headerBooleanList, v.HeaderBooleanList)
+	if v.HeaderByte != nil {
+		s.WriteInt8(schemas.InputAndOutputWithHeadersIO_headerByte, *v.HeaderByte)
+	}
+	if v.HeaderDouble != nil {
+		s.WriteFloat64(schemas.InputAndOutputWithHeadersIO_headerDouble, *v.HeaderDouble)
+	}
+	if v.HeaderEnum != "" {
+		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerEnum, string(v.HeaderEnum))
+	}
+	serializeFooEnumList(s, schemas.InputAndOutputWithHeadersIO_headerEnumList, v.HeaderEnumList)
+	if v.HeaderFalseBool != nil {
+		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, *v.HeaderFalseBool)
+	}
+	if v.HeaderFloat != nil {
+		s.WriteFloat32(schemas.InputAndOutputWithHeadersIO_headerFloat, *v.HeaderFloat)
+	}
+	if v.HeaderInteger != nil {
+		s.WriteInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, *v.HeaderInteger)
+	}
+	serializeIntegerList(s, schemas.InputAndOutputWithHeadersIO_headerIntegerList, v.HeaderIntegerList)
+	if v.HeaderLong != nil {
+		s.WriteInt64(schemas.InputAndOutputWithHeadersIO_headerLong, *v.HeaderLong)
+	}
+	if v.HeaderShort != nil {
+		s.WriteInt16(schemas.InputAndOutputWithHeadersIO_headerShort, *v.HeaderShort)
+	}
+	if v.HeaderString != nil {
+		s.WriteString(schemas.InputAndOutputWithHeadersIO_headerString, *v.HeaderString)
+	}
+	serializeStringList(s, schemas.InputAndOutputWithHeadersIO_headerStringList, v.HeaderStringList)
+	serializeStringSet(s, schemas.InputAndOutputWithHeadersIO_headerStringSet, v.HeaderStringSet)
+	serializeTimestampList(s, schemas.InputAndOutputWithHeadersIO_headerTimestampList, v.HeaderTimestampList)
+	if v.HeaderTrueBool != nil {
+		s.WriteBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, *v.HeaderTrueBool)
+	}
+}
+func (v *InputAndOutputWithHeadersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputAndOutputWithHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputAndOutputWithHeadersIO_headerBooleanList:
+			return deserializeBooleanList(d, schemas.InputAndOutputWithHeadersIO_headerBooleanList, &v.HeaderBooleanList)
+		case schemas.InputAndOutputWithHeadersIO_headerByte:
+			v.HeaderByte = new(int8)
+			return d.ReadInt8(schemas.InputAndOutputWithHeadersIO_headerByte, v.HeaderByte)
+		case schemas.InputAndOutputWithHeadersIO_headerDouble:
+			v.HeaderDouble = new(float64)
+			return d.ReadFloat64(schemas.InputAndOutputWithHeadersIO_headerDouble, v.HeaderDouble)
+		case schemas.InputAndOutputWithHeadersIO_headerEnum:
+			var ev string
+			if err := d.ReadString(schemas.InputAndOutputWithHeadersIO_headerEnum, &ev); err != nil {
+				return err
+			}
+			v.HeaderEnum = types.FooEnum(ev)
+			return nil
+		case schemas.InputAndOutputWithHeadersIO_headerEnumList:
+			return deserializeFooEnumList(d, schemas.InputAndOutputWithHeadersIO_headerEnumList, &v.HeaderEnumList)
+		case schemas.InputAndOutputWithHeadersIO_headerFalseBool:
+			v.HeaderFalseBool = new(bool)
+			return d.ReadBool(schemas.InputAndOutputWithHeadersIO_headerFalseBool, v.HeaderFalseBool)
+		case schemas.InputAndOutputWithHeadersIO_headerFloat:
+			v.HeaderFloat = new(float32)
+			return d.ReadFloat32(schemas.InputAndOutputWithHeadersIO_headerFloat, v.HeaderFloat)
+		case schemas.InputAndOutputWithHeadersIO_headerInteger:
+			v.HeaderInteger = new(int32)
+			return d.ReadInt32(schemas.InputAndOutputWithHeadersIO_headerInteger, v.HeaderInteger)
+		case schemas.InputAndOutputWithHeadersIO_headerIntegerList:
+			return deserializeIntegerList(d, schemas.InputAndOutputWithHeadersIO_headerIntegerList, &v.HeaderIntegerList)
+		case schemas.InputAndOutputWithHeadersIO_headerLong:
+			v.HeaderLong = new(int64)
+			return d.ReadInt64(schemas.InputAndOutputWithHeadersIO_headerLong, v.HeaderLong)
+		case schemas.InputAndOutputWithHeadersIO_headerShort:
+			v.HeaderShort = new(int16)
+			return d.ReadInt16(schemas.InputAndOutputWithHeadersIO_headerShort, v.HeaderShort)
+		case schemas.InputAndOutputWithHeadersIO_headerString:
+			v.HeaderString = new(string)
+			return d.ReadString(schemas.InputAndOutputWithHeadersIO_headerString, v.HeaderString)
+		case schemas.InputAndOutputWithHeadersIO_headerStringList:
+			return deserializeStringList(d, schemas.InputAndOutputWithHeadersIO_headerStringList, &v.HeaderStringList)
+		case schemas.InputAndOutputWithHeadersIO_headerStringSet:
+			return deserializeStringSet(d, schemas.InputAndOutputWithHeadersIO_headerStringSet, &v.HeaderStringSet)
+		case schemas.InputAndOutputWithHeadersIO_headerTimestampList:
+			return deserializeTimestampList(d, schemas.InputAndOutputWithHeadersIO_headerTimestampList, &v.HeaderTimestampList)
+		case schemas.InputAndOutputWithHeadersIO_headerTrueBool:
+			v.HeaderTrueBool = new(bool)
+			return d.ReadBool(schemas.InputAndOutputWithHeadersIO_headerTrueBool, v.HeaderTrueBool)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpInputAndOutputWithHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InputAndOutputWithHeaders, schemas.InputAndOutputWithHeadersIO, schemas.InputAndOutputWithHeadersIO)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpInputAndOutputWithHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InputAndOutputWithHeaders, schemas.InputAndOutputWithHeadersIO, schemas.InputAndOutputWithHeadersIO), output: &InputAndOutputWithHeadersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InputAndOutputWithHeaders"); err != nil {

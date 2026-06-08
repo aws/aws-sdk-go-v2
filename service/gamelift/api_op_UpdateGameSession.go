@@ -40,7 +40,9 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 
 type UpdateGameSessionInput struct {
 
-	// A unique identifier for the game session to update.
+	// An identifier for the game session that is unique across all regions to update.
+	// The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string

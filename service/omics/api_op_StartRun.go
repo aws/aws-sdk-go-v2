@@ -122,6 +122,11 @@ type StartRunInput struct {
 	// Optional configuration name to use for the workflow run.
 	ConfigurationName *string
 
+	// Engine-specific settings for the workflow run. Use this field to specify
+	// configuration options that are specific to the workflow engine (for example,
+	// Nextflow profiles).
+	EngineSettings document.Interface
+
 	// A log level for the run.
 	LogLevel types.RunLogLevel
 

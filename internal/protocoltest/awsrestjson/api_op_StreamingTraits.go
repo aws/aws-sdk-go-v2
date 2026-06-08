@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -38,6 +40,35 @@ type StreamingTraitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamingTraitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamingTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingTraitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.StreamingTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *StreamingTraitsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamingTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamingTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.StreamingTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+func (v *StreamingTraitsInput) GetPayloadStream() io.Reader { return v.Blob }
+
+var _ smithy.StreamingInput = (*StreamingTraitsInput)(nil)
+
+func (v *StreamingTraitsInput) SetPayloadStream(r io.ReadCloser) { v.Blob = r }
+
+var _ smithy.StreamingOutput = (*StreamingTraitsInput)(nil)
+
 type StreamingTraitsOutput struct {
 	Blob io.ReadCloser
 
@@ -49,16 +80,43 @@ type StreamingTraitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamingTraitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamingTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingTraitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.StreamingTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *StreamingTraitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamingTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamingTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.StreamingTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+func (v *StreamingTraitsOutput) GetPayloadStream() io.Reader { return v.Blob }
+
+var _ smithy.StreamingInput = (*StreamingTraitsOutput)(nil)
+
+func (v *StreamingTraitsOutput) SetPayloadStream(r io.ReadCloser) { v.Blob = r }
+
+var _ smithy.StreamingOutput = (*StreamingTraitsOutput)(nil)
+
 func (c *Client) addOperationStreamingTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStreamingTraits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StreamingTraits, schemas.StreamingTraitsInputOutput, schemas.StreamingTraitsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStreamingTraits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StreamingTraits, schemas.StreamingTraitsInputOutput, schemas.StreamingTraitsInputOutput), output: &StreamingTraitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StreamingTraits"); err != nil {

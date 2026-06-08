@@ -173,6 +173,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#CreateUserPoolDomain"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplica"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#DeleteGroup"
                 },
                 {
@@ -204,6 +207,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomain"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplica"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#DeleteWebAuthnCredential"
@@ -314,6 +320,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolClientSecrets"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicas"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ListUserPools"
                 },
                 {
@@ -404,6 +413,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolDomain"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplica"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#VerifySoftwareToken"
                 },
                 {
@@ -427,6 +439,290 @@
                 "smithy.api#title": "Amazon Cognito Identity Provider",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cognito-idp.amazonaws.com/doc/2016-04-18/"
+                },
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "us-east-1"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "us-east-2"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "us-west-1"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "us-west-2"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.us-east-1.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.us-east-2.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.us-west-1.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.us-west-2.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cognito-idp.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 18,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABEAAAADAAAAAQAAAAQF9eEQAAAAAgAAAAUF9eEQAAAAAwAAAAkAAAAGAAAABQAAAAcF9eEPAAAABgAAAAgF9eEOAAAABwX14QwF9eENAAAABAAAAAsAAAAKAAAABQX14QkF9eELAAAABQAAAAwF9eEKAAAABgAAAA0F9eEJAAAACAX14QQAAAAOAAAACQX14QUAAAAPAAAACgX14QYAAAAQAAAACwX14QcF9eEIAAAAAwX14QEAAAASAAAABQX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1743,6 +2039,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -1882,6 +2181,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -1947,6 +2249,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2040,6 +2345,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PreconditionNotMetException"
@@ -2264,6 +2572,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -2294,6 +2605,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2392,6 +2706,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -2451,6 +2768,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2514,6 +2834,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2582,6 +2905,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -2645,6 +2971,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2720,6 +3049,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -2858,6 +3190,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -3012,6 +3347,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -3081,6 +3419,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3166,6 +3507,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3258,6 +3602,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3355,6 +3702,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -3429,6 +3779,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3534,6 +3887,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
@@ -3679,6 +4035,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -3770,6 +4129,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
                 },
                 {
@@ -3848,6 +4210,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -3913,6 +4278,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -3994,6 +4362,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -4087,6 +4458,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -4167,6 +4541,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -4602,6 +4979,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -5230,6 +5610,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
                 },
                 {
@@ -5517,6 +5900,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -5701,6 +6087,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -5811,6 +6200,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
@@ -5947,6 +6339,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -6130,6 +6525,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -6322,6 +6720,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -6409,6 +6810,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -6492,6 +6896,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -6590,6 +6997,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PreconditionNotMetException"
@@ -7185,6 +7595,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -7441,7 +7854,7 @@
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user pool analytics configuration for collecting metrics and sending them to your\n            Amazon Pinpoint campaign.</p>\n         <p>In Amazon Web Services Regions where Amazon Pinpoint isn't available, user pools might not have access to\n            analytics or might be configurable with campaigns in the US East (N. Virginia) Region.\n            For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html\">Using Amazon Pinpoint analytics</a>.</p>"
+                        "smithy.api#documentation": "<p>The user pool analytics configuration for collecting metrics and sending them to your\n            Amazon Pinpoint campaign.</p>\n         <p>In Amazon Web Services Regions where Amazon Pinpoint isn't available, user pools might not have access to\n            analytics or might be configurable with campaigns in the US East (N. Virginia) Region. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html\">Using Amazon Pinpoint analytics</a>.</p>"
                     }
                 },
                 "PreventUserExistenceErrors": {
@@ -7523,6 +7936,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 }
             ],
@@ -7558,6 +7974,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for a custom domain. Configures your domain with an Certificate Manager\n            certificate in the <code>us-east-1</code> Region.</p>\n         <p>Provide this parameter only if you want to use a <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html\">custom domain</a> for your user pool. Otherwise, you can\n            omit this parameter and use a <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain-prefix.html\">prefix domain</a> instead.</p>\n         <p>When you create a custom domain, the passkey RP ID defaults to the custom domain. If\n            you had a prefix domain active, this will cause passkey integration for your prefix\n            domain to stop working due to a mismatch in RP ID. To keep the prefix domain passkey\n            integration working, you can explicitly set RP ID to the prefix domain.</p>"
                     }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RoutingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of routing for requests to the domain for replicas of a replicated user pool.\n            The routing configuration is currently only supported for custom domains.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7577,6 +7999,113 @@
                     "target": "com.amazonaws.cognitoidentityprovider#DomainType",
                     "traits": {
                         "smithy.api#documentation": "<p>The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution that hosts your\n            managed login or classic hosted UI pages. Your domain-name authority must have an alias\n            record that points requests for your custom domain to this FQDN. Amazon Cognito returns this\n            value if you set a custom domain with <code>CustomDomainConfig</code>. If you set an\n            Amazon Cognito prefix domain, this parameter returns null.</p>"
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RoutingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration that was applied to the user pool domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#FeatureUnavailableInTierException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolTaggingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a replica of an existing user pool in a specified Amazon Web Services Region. The replica\n            enables multi-region replication for high availability and disaster recovery. To create\n            a replica, you must have permissions to create user pools in the target Region.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example create a replica of a user pool in a new Region",
+                        "documentation": "The following example creates a replica of a user pool in the ap-south-1 Region.",
+                        "input": {
+                            "UserPoolId": "us-east-1_abcd12345",
+                            "RegionName": "ap-south-1"
+                        },
+                        "output": {
+                            "UserPoolReplica": {
+                                "RegionName": "ap-south-1",
+                                "Status": "CREATING",
+                                "Role": "SECONDARY",
+                                "UserPoolArn": "arn:aws:cognito-idp:ap-south-1:123456789012:userpool/us-east-1_abcd12345"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool to replicate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where you want to create the replica user pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolTags": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolTagsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags to assign to the replica user pool. Each tag consists of a key and an\n            optional value, both of which you define. You can maintain tags independently on replica\n            user pools.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#CreateUserPoolReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolReplica": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the created user pool replica, including its status and role.</p>"
                     }
                 }
             },
@@ -7730,6 +8259,18 @@
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolTierType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user pool <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html\">feature plan</a>, or tier. This parameter determines the\n            eligibility of the user pool for features like managed login, access-token\n            customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>"
+                    }
+                },
+                "KeyConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#KeyConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key configuration for the user pool. Specifies the key type and KMS key ARN for\n            encryption.</p>"
+                    }
+                },
+                "IssuerConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer configuration for the user pool. Specifies the issuer type for token\n            generation.</p>"
                     }
                 }
             },
@@ -7895,6 +8436,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8006,6 +8550,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8055,6 +8602,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -8111,6 +8661,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8165,6 +8718,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -8206,6 +8762,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -8279,6 +8838,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8312,6 +8874,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -8436,6 +9001,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 }
             ],
@@ -8468,6 +9036,92 @@
         "com.amazonaws.cognitoidentityprovider#DeleteUserPoolDomainResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a secondary replica user pool. You can only delete replicas that are in the\n            INACTIVE status. This operation must be called from the primary Region.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example delete a user pool replica",
+                        "documentation": "The following example deletes a user pool replica in the us-east-2 Region.",
+                        "input": {
+                            "UserPoolId": "us-west-2_abcd12345",
+                            "RegionName": "us-east-2"
+                        },
+                        "output": {
+                            "UserPoolReplica": {
+                                "RegionName": "us-east-2",
+                                "Status": "DELETING",
+                                "Role": "SECONDARY",
+                                "UserPoolArn": "arn:aws:cognito-idp:us-east-2:123456789012:userpool/us-west-2_abcd12345"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the replica to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the replica to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DeleteUserPoolReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolReplica": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the deleted user pool replica.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -8527,6 +9181,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -8698,6 +9355,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8725,6 +9385,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -8842,6 +9505,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -8906,6 +9572,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -8976,6 +9645,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -9039,6 +9711,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -9108,6 +9783,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -9138,6 +9816,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -9205,6 +9886,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -9476,6 +10160,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#WrappedIntegerType",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of managed login branding that you want to apply to your domain. A value\n            of <code>1</code> indicates hosted UI (classic) branding and a version of <code>2</code>\n            indicates managed login branding.</p>\n         <p>Managed login requires that your user pool be configured for any <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html\">feature plan</a> other than <code>Lite</code>.</p>"
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RoutingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration for the domain, including failover settings for multi-region deployments.\n            Currently only <code>Failover</code> configurations are allowed.</p>"
                     }
                 }
             },
@@ -9750,6 +10440,33 @@
                 "smithy.api#documentation": "<p>This exception is thrown when there is a code mismatch and the service fails to\n            configure the software token TOTP multi-factor authentication (MFA).</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#EncryptionKeyArnType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?$"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#EncryptionKeyType": {
+            "type": "enum",
+            "members": {
+                "AWS_OWNED_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KEY"
+                    }
+                },
+                "CUSTOMER_MANAGED_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#EventContextDataType": {
@@ -10039,6 +10756,28 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#FailoverType": {
+            "type": "structure",
+            "members": {
+                "SecondaryRegion": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary Amazon Web Services Region to use for failover when the primary region becomes unavailable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrimaryRoute53HealthCheckId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#HealthCheckIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Route53 healthcheck that controls routing. If the healthcheck is healthy,\n            traffic will be routed to the primary replica, and if the healthcheck is unhealthy,\n            traffic will be routed to the secondary region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies failover configuration for multi-region user pool domains. Contains settings for the secondary region and health check configuration.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#FeatureType": {
             "type": "enum",
             "members": {
@@ -10147,6 +10886,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -10228,6 +10970,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -10338,6 +11083,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -10408,6 +11156,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -10486,6 +11237,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -10674,6 +11428,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 }
             ],
@@ -10735,6 +11492,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#RefreshTokenReuseException"
@@ -10831,6 +11591,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -10899,6 +11662,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -10958,6 +11724,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -11051,6 +11820,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -11283,6 +12055,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -11402,6 +12177,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A user pool group. Contains details about the group and the way that it contributes to\n            IAM role decisions with identity pools. Identity pools can make decisions about the\n            IAM role to assign based on groups: users get credentials for the role associated with\n            their highest-priority group.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#HealthCheckIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#HexStringType": {
@@ -11646,6 +12430,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -11728,7 +12515,7 @@
                 "ClientMetadata": {
                     "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>The <code>ClientMetadata</code> value is passed as input to the functions for only the\n            following triggers:</p>\n         <ul>\n            <li>\n               <p>Pre signup</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>This request also invokes the functions for the following triggers, but doesn't pass\n            <code>ClientMetadata</code>:</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <p>The <code>ClientMetadata</code> value is passed as input to the functions for only the\n            following triggers:</p>\n         <ul>\n            <li>\n               <p>Pre signup</p>\n            </li>\n            <li>\n               <p>Pre authentication</p>\n            </li>\n            <li>\n               <p>User migration</p>\n            </li>\n         </ul>\n         <p>This request also invokes the functions for the following triggers, but doesn't pass\n                <code>ClientMetadata</code>:</p>\n         <ul>\n            <li>\n               <p>Post authentication</p>\n            </li>\n            <li>\n               <p>Custom message</p>\n            </li>\n            <li>\n               <p>Pre token generation</p>\n            </li>\n            <li>\n               <p>Create auth challenge</p>\n            </li>\n            <li>\n               <p>Define auth challenge</p>\n            </li>\n            <li>\n               <p>Custom email sender</p>\n            </li>\n            <li>\n               <p>Custom SMS sender</p>\n            </li>\n         </ul>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "ClientId": {
@@ -11968,6 +12755,57 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of issuer configuration. Determines the token issuing behavior for the user pool.</p>\n         <dl>\n            <dt>ORIGINAL</dt>\n            <dd>\n               <p>The original issuer configuration for user pools. The issuer URL is hosted in the user\n                        pool’s region and provides OIDC endpoints specific to that region.</p>\n               <p>Original issuers have the format of\n                        <code>https://cognito-idp.[region].amazonaws.com/[userPoolId]</code>\n               </p>\n            </dd>\n            <dt>UPDATED</dt>\n            <dd>\n               <p>Recommended for all user pools, including for multi-Region replication. Updated issuers host\n                        the same JWKS content in multiple regions, resulting in improved resilience and efficiency.</p>\n               <p>Updated issuers have the format of\n                        <code>https://issuer-cognito-idp.[region].amazonaws.com/[userPoolId]</code>, where region is the\n                        primary Amazon Web Services Region of your user pool.</p>\n            </dd>\n         </dl>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the issuer configuration for a user pool. Contains settings that determine how tokens are issued and validated.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#IssuerType": {
+            "type": "enum",
+            "members": {
+                "ORIGINAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORIGINAL"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#KeyConfigurationType": {
+            "type": "structure",
+            "members": {
+                "KeyType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#EncryptionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of encryption key used for the user pool.</p>\n         <dl>\n            <dt>AWS_OWNED_KEY</dt>\n            <dd>\n               <p>A key owned by Amazon Web Services in Key Management Service.</p>\n            </dd>\n            <dt>CUSTOMER_MANAGED_KEY</dt>\n            <dd>\n               <p>A key managed by the customer in Key Management Service. You must use a multi-region key to enable multi-region\n                        replication for a user pool.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#EncryptionKeyArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used for encryption. If not specified, Amazon Web Services managed keys are used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the key configuration for a user pool. Contains settings for encryption keys used to secure user pool data.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#LambdaConfigType": {
             "type": "structure",
             "members": {
@@ -12138,6 +12976,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -12225,6 +13066,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -12407,6 +13251,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -12499,6 +13346,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -12555,6 +13405,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -12641,6 +13494,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -12801,6 +13657,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -12863,6 +13722,104 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the response from the server that lists user pool clients.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all replicas for a user pool, including both primary and secondary replicas. We\n            recommend using pagination to ensure that the operation returns quickly and\n            successfully.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example list the replicas of a user pool",
+                        "documentation": "The following example lists the replicas of a user pool that has a replica in the ap-south-1 Region.",
+                        "input": {
+                            "UserPoolId": "eu-north-1_abcd12345"
+                        },
+                        "output": {
+                            "UserPoolReplicas": [
+                                {
+                                    "RegionName": "ap-south-1",
+                                    "Status": "CREATING",
+                                    "Role": "SECONDARY",
+                                    "UserPoolArn": "arn:aws:cognito-idp:ap-south-1:123456789012:userpool/eu-north-1_abcd12345"
+                                },
+                                {
+                                    "RegionName": "eu-north-1",
+                                    "Status": "ACTIVE",
+                                    "Role": "PRIMARY",
+                                    "UserPoolArn": "arn:aws:cognito-idp:eu-north-1:123456789012:userpool/eu-north-1_abcd12345"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool for which to list replicas.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token for retrieving the next page of results. If this parameter is\n            omitted, the operation returns the first page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ListUserPoolReplicasResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolReplicas": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolReplicaListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of user pool replicas, including information about their status, role, and\n            Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PaginationKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token for retrieving the next page of results. If this value is null,\n            there are no more results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -12975,6 +13932,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -13080,6 +14040,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -13236,6 +14199,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -13728,6 +14694,19 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#PaginationKey": {
             "type": "string",
             "traits": {
@@ -14210,12 +15189,73 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#RegionNameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 32
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#RelyingPartyIdType": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 127
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ReplicaRegionsType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#StringType"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ReplicaRoleType": {
+            "type": "enum",
+            "members": {
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY"
+                    }
+                },
+                "SECONDARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECONDARY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ReplicaStatusType": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
                 }
             }
         },
@@ -14257,6 +15297,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -14531,6 +15574,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException"
                 },
                 {
@@ -14676,6 +15722,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
@@ -14839,6 +15888,20 @@
                         "smithy.api#enumValue": "High"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#RoutingType": {
+            "type": "structure",
+            "members": {
+                "Failover": {
+                    "target": "com.amazonaws.cognitoidentityprovider#FailoverType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failover configuration that specifies the secondary region and health check settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies routing configuration for user pool domains. Contains failover settings for multi-region deployments.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#S3ArnType": {
@@ -15146,6 +16209,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -15156,7 +16222,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures threat protection for a user pool or app client. Sets configuration for the\n            following.</p>\n         <ul>\n            <li>\n               <p>Responses to risks with adaptive authentication</p>\n            </li>\n            <li>\n               <p>Responses to vulnerable passwords with compromised-credentials\n                    detection</p>\n            </li>\n            <li>\n               <p>Notifications to users who have had risky activity detected</p>\n            </li>\n            <li>\n               <p>IP-address denylist and allowlist</p>\n            </li>\n         </ul>\n         <p>To set the risk configuration for the user pool to defaults, send this request with\n            only the <code>UserPoolId</code> parameter. To reset the threat protection settings of\n            an app client to be inherited from the user pool, send <code>UserPoolId</code> and\n                <code>ClientId</code> parameters only. To change threat protection to audit-only or\n            off, update the value of <code>UserPoolAddOns</code> in an <code>UpdateUserPool</code>\n            request. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
+                "smithy.api#documentation": "<p>Configures threat protection for a user pool or app client. Sets configuration for the\n            following.</p>\n         <ul>\n            <li>\n               <p>Responses to risks with adaptive authentication</p>\n            </li>\n            <li>\n               <p>Responses to vulnerable passwords with compromised-credentials\n                    detection</p>\n            </li>\n            <li>\n               <p>Notifications to users who have had risky activity detected</p>\n            </li>\n            <li>\n               <p>IP-address denylist and allowlist</p>\n            </li>\n         </ul>\n         <p>To set the risk configuration for the user pool to defaults, send this request with\n            only the <code>UserPoolId</code> parameter. To reset the threat protection settings of\n            an app client to be inherited from the user pool, send <code>UserPoolId</code> and\n                <code>ClientId</code> parameters only. To change threat protection to audit-only or\n            off, update the value of <code>UserPoolAddOns</code> in an <code>UpdateUserPool</code>\n            request. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>\n         <p>In secondary regions for user pools with multi-region replication, only the\n                <code>SourceARN</code> and <code>From</code> attributes of\n                <code>NotifyConfiguration</code> can be modified to configure region-specific SES\n            integration. All other risk configuration settings must match the existing values to\n            maintain consistency across replicas.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#SetRiskConfigurationRequest": {
@@ -15230,6 +16296,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -15310,6 +16379,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -15405,6 +16477,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -15522,6 +16597,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -15626,6 +16704,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -15909,6 +16990,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PreconditionNotMetException"
                 },
                 {
@@ -15983,6 +17067,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -16067,6 +17154,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PreconditionNotMetException"
@@ -16181,6 +17271,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -16668,6 +17761,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -16724,6 +17820,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -16819,6 +17918,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -16894,6 +17996,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -17072,6 +18177,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -17135,6 +18243,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#UpdateReplicaStatusType": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#UpdateResourceServer": {
             "type": "operation",
             "input": {
@@ -17152,6 +18277,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -17236,6 +18364,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -17287,7 +18418,7 @@
                 "Links": {
                     "target": "com.amazonaws.cognitoidentityprovider#LinksType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of URLs to languages. For each localized language that will view the requested\n            <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>\n            displays for all languages that don't have a language-specific URL.</p>\n         <p>For example, <code>\"cognito:default\": \"https://terms.example.com\", \"cognito:spanish\":\n                \"https://terms.example.com/es\"</code>.</p>"
+                        "smithy.api#documentation": "<p>A map of URLs to languages. For each localized language that will view the requested\n                <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>\n            displays for all languages that don't have a language-specific URL.</p>\n         <p>For example, <code>\"cognito:default\": \"https://terms.example.com\", \"cognito:spanish\":\n                \"https://terms.example.com/es\"</code>.</p>"
                     }
                 }
             },
@@ -17353,6 +18484,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
@@ -17460,6 +18594,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -17476,7 +18613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of a user pool. To avoid setting parameters to Amazon Cognito\n            defaults, construct this API request to pass the existing configuration of your user\n            pool, modified to include the changes that you want to make.</p>\n         <important>\n            <p>With the exception of <code>UserPoolTier</code>, if you don't provide a value for an attribute, Amazon Cognito sets it to its default value.</p>\n         </important>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the configuration of a user pool. To avoid setting parameters to Amazon Cognito\n            defaults, construct this API request to pass the existing configuration of your user\n            pool, modified to include the changes that you want to make.</p>\n         <important>\n            <p>If you don't provide a value for an attribute, Amazon Cognito sets it to its default value.</p>\n         </important>\n         <p>In secondary regions for user pools with multi-region replication, regional\n            configurations for email, SMS, Lambda functions, and tags can be updated. Both global\n            and regional settings must be provided as inputs, with global settings required to match\n            existing values to maintain consistency across replicas.</p>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Services service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClient": {
@@ -17505,6 +18642,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
@@ -17632,7 +18772,7 @@
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user pool analytics configuration for collecting metrics and sending them to your\n            Amazon Pinpoint campaign.</p>\n         <p>In Amazon Web Services Regions where Amazon Pinpoint isn't available, user pools might not have access to\n            analytics or might be configurable with campaigns in the US East (N. Virginia) Region.\n            For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html\">Using Amazon Pinpoint analytics</a>.</p>"
+                        "smithy.api#documentation": "<p>The user pool analytics configuration for collecting metrics and sending them to your\n            Amazon Pinpoint campaign.</p>\n         <p>In Amazon Web Services Regions where Amazon Pinpoint isn't available, user pools might not have access to\n            analytics or might be configurable with campaigns in the US East (N. Virginia) Region. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html\">Using Amazon Pinpoint analytics</a>.</p>"
                     }
                 },
                 "PreventUserExistenceErrors": {
@@ -17711,6 +18851,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
                 },
                 {
@@ -17749,6 +18892,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for a custom domain that hosts managed login for your application.\n            In an <code>UpdateUserPoolDomain</code> request, this parameter specifies an SSL\n            certificate for the managed login hosted webserver. The certificate must be an ACM ARN\n            in <code>us-east-1</code>.</p>\n         <p>When you create a custom domain, the passkey RP ID defaults to the custom domain. If\n            you had a prefix domain active, this will cause passkey integration for your prefix\n            domain to stop working due to a mismatch in RP ID. To keep the prefix domain passkey\n            integration working, you can explicitly set RP ID to the prefix domain.</p>"
                     }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RoutingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration for the user pool domain. Specifies failover settings for\n            multi-region deployments.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17770,10 +18919,110 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution that hosts your\n            managed login or classic hosted UI pages. You domain-name authority must have an alias\n            record that points requests for your custom domain to this FQDN. Amazon Cognito returns this\n            value if you set a custom domain with <code>CustomDomainConfig</code>. If you set an\n            Amazon Cognito prefix domain, this operation returns a blank response.</p>"
                     }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RoutingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated routing configuration for the user pool domain.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The UpdateUserPoolDomain response output.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates replica-specific settings for a user pool replica. You can modify the status\n            to activate or deactivate the replica. This request can be made in both primary and secondary\n            regions of the user pool.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example update a user pool replica",
+                        "documentation": "The following example sets the status of a user pool replica in the us-east-1 Region to ACTIVE.",
+                        "input": {
+                            "UserPoolId": "ap-south-1_abcd12345",
+                            "RegionName": "us-east-1",
+                            "Status": "ACTIVE"
+                        },
+                        "output": {
+                            "UserPoolReplica": {
+                                "RegionName": "us-east-1",
+                                "Status": "ACTIVE",
+                                "Role": "SECONDARY",
+                                "UserPoolArn": "arn:aws:cognito-idp:us-east-1:123456789012:userpool/ap-south-1_abcd12345"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the replica to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the replica to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UpdateReplicaStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status to set for the replica. Valid values are ACTIVE and INACTIVE.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateUserPoolReplicaResponse": {
+            "type": "structure",
+            "members": {
+                "UserPoolReplica": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the updated user pool replica.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -17905,6 +19154,18 @@
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolTierType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user pool <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html\">feature plan</a>, or tier. This parameter determines the\n            eligibility of the user pool for features like managed login, access-token\n            customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>"
+                    }
+                },
+                "KeyConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#KeyConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key configuration for the user pool. In secondary regions, this parameter must\n            match the existing configuration and cannot be modified.</p>"
+                    }
+                },
+                "IssuerConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer configuration for the user pool. In secondary regions, this parameter must\n            match the existing configuration and cannot be modified.</p>"
                     }
                 }
             },
@@ -18482,6 +19743,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
+                },
+                "ReplicaRegions": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ReplicaRegionsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services Regions where replicas of this user pool exist.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18555,6 +19822,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of user pool policies. Contains the policy that sets password-complexity\n            requirements.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UserPoolReplicaListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UserPoolReplicaType": {
+            "type": "structure",
+            "members": {
+                "RegionName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the replica is located.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ReplicaStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the replica.</p>\n         <dl>\n            <dt>CREATING</dt>\n            <dd>\n               <p>The replica is being created.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The replica has been created, but is not accepting requests for end-users.\n                        Administrator configuration operations are supported.</p>\n            </dd>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The replica is available for both end-user and administrator operations.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The replica is being deleted.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ReplicaRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the user pool replica that determines which API operations are enabled.</p>\n         <dl>\n            <dt>PRIMARY</dt>\n            <dd>\n               <p>The primary replica supports all end user and administrator operations.</p>\n            </dd>\n            <dt>SECONDARY</dt>\n            <dd>\n               <p>The secondary replica supports a limited set of end user and administrator operations.\n                        Generally, only administrator operations that set configurations specific to the replica, and\n                        only end-user operations that do not create or change attributes of a user are supported.\n                    </p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "UserPoolArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replica user pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a replica user pool, including Region, status, role, and ARN.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserPoolTaggingException": {
@@ -18817,6 +20122,18 @@
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolTierType",
                     "traits": {
                         "smithy.api#documentation": "<p>The user pool <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html\">feature plan</a>, or tier. This parameter determines the\n            eligibility of the user pool for features like managed login, access-token\n            customization, and threat protection. Defaults to <code>ESSENTIALS</code>.</p>"
+                    }
+                },
+                "KeyConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#KeyConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key configuration for the user pool, including encryption settings.</p>"
+                    }
+                },
+                "IssuerConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer configuration for the user pool, including token issuing settings.</p>"
                     }
                 }
             },
@@ -19114,6 +20431,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"
                 },
                 {
@@ -19240,6 +20560,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordResetRequiredException"

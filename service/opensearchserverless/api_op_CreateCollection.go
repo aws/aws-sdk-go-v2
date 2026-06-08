@@ -42,6 +42,10 @@ type CreateCollectionInput struct {
 	// The name of the collection group to associate with the collection.
 	CollectionGroupName *string
 
+	// Indicates whether to enable deletion protection for the collection. When set to
+	// ENABLED , the collection cannot be deleted.
+	DeletionProtection types.DeletionProtection
+
 	// Description of the collection.
 	Description *string
 

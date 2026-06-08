@@ -5229,6 +5229,11 @@ func awsAwsjson11_serializeDocumentUpdateWebAppVpcConfig(v *types.UpdateWebAppVp
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.SubnetIds != nil {
 		ok := object.Key("SubnetIds")
 		if err := awsAwsjson11_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
@@ -5294,6 +5299,11 @@ func awsAwsjson11_serializeDocumentWebAppUnits(v types.WebAppUnits, value smithy
 func awsAwsjson11_serializeDocumentWebAppVpcConfig(v *types.WebAppVpcConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
 
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")

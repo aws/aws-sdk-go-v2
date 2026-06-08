@@ -31,15 +31,14 @@ type Dimension struct {
 type Environment struct {
 
 	// A list of key-value pairs containing the Apache Airflow configuration options
-	// attached to your environment. For more information, see [Apache Airflow configuration options].
+	// attached to your environment. For more information, refer to [Apache Airflow configuration options].
 	//
 	// [Apache Airflow configuration options]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version on your environment.
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
-	// 2.9.2 , 2.10.1 , and 2.10.3 .
+	// Valid values: 2.7.2 , 2.8.1 , 2.9.2 , 2.10.1 , 2.10.3 , 2.11.0 , and 3.0.6 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -56,7 +55,7 @@ type Environment struct {
 	CreatedAt *time.Time
 
 	// The relative path to the DAGs folder in your Amazon S3 bucket. For example,
-	// s3://mwaa-environment/dags . For more information, see [Adding or updating DAGs].
+	// s3://mwaa-environment/dags . For more information, refer to [Adding or updating DAGs].
 	//
 	// [Adding or updating DAGs]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
 	DagS3Path *string
@@ -71,14 +70,14 @@ type Environment struct {
 	EndpointManagement EndpointManagement
 
 	// The environment class type. Valid values: mw1.micro , mw1.small , mw1.medium ,
-	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	// mw1.large , mw1.xlarge , and mw1.2xlarge . For more information, refer to [Amazon MWAA environment class].
 	//
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
 
 	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
 	// access Amazon Web Services resources in your environment. For example,
-	// arn:aws:iam::123456789:role/my-execution-role . For more information, see [Amazon MWAA Execution role].
+	// arn:aws:iam::123456789:role/my-execution-role . For more information, refer to [Amazon MWAA Execution role].
 	//
 	// [Amazon MWAA Execution role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 	ExecutionRoleArn *string
@@ -129,7 +128,7 @@ type Environment struct {
 
 	// Describes the VPC networking components used to secure and enable network
 	// traffic between the Amazon Web Services resources for your environment. For more
-	// information, see [About networking on Amazon MWAA].
+	// information, refer to [About networking on Amazon MWAA].
 	//
 	// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 	NetworkConfiguration *NetworkConfiguration
@@ -142,14 +141,14 @@ type Environment struct {
 	//
 	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
 	//
-	// For more information, see [Installing custom plugins].
+	// For more information, refer to [Installing custom plugins].
 	//
 	// [Installing custom plugins]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
 	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	PluginsS3ObjectVersion *string
 
 	// The relative path to the file in your Amazon S3 bucket. For example,
-	// s3://mwaa-environment/plugins.zip . For more information, see [Installing custom plugins].
+	// s3://mwaa-environment/plugins.zip . For more information, refer to [Installing custom plugins].
 	//
 	// [Installing custom plugins]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
 	PluginsS3Path *string
@@ -162,14 +161,15 @@ type Environment struct {
 	//
 	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
 	//
-	// For more information, see [Installing Python dependencies].
+	// For more information, refer to [Installing Python dependencies].
 	//
 	// [Installing Python dependencies]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
 	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	RequirementsS3ObjectVersion *string
 
 	// The relative path to the requirements.txt file in your Amazon S3 bucket. For
-	// example, s3://mwaa-environment/requirements.txt . For more information, see [Installing Python dependencies].
+	// example, s3://mwaa-environment/requirements.txt . For more information, refer to [Installing Python dependencies]
+	// .
 	//
 	// [Installing Python dependencies]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
 	RequirementsS3Path *string
@@ -179,14 +179,14 @@ type Environment struct {
 	Schedulers *int32
 
 	// The Amazon Resource Name (ARN) for the service-linked role of the environment.
-	// For more information, see [Amazon MWAA Service-linked role].
+	// For more information, refer to [Amazon MWAA Service-linked role].
 	//
 	// [Amazon MWAA Service-linked role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html
 	ServiceRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and
 	// supporting files are stored. For example,
-	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, see [Create an Amazon S3 bucket for Amazon MWAA].
+	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, refer to [Create an Amazon S3 bucket for Amazon MWAA].
 	//
 	// [Create an Amazon S3 bucket for Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
 	SourceBucketArn *string
@@ -199,7 +199,7 @@ type Environment struct {
 	//
 	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
 	//
-	// For more information, see [Using a startup script].
+	// For more information, refer to [Using a startup script].
 	//
 	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
@@ -211,7 +211,7 @@ type Environment struct {
 	// Amazon MWAA runs the script as your environment starts, and before running the
 	// Apache Airflow process. You can use this script to install dependencies, modify
 	// Apache Airflow configuration options, and set environment variables. For more
-	// information, see [Using a startup script].
+	// information, refer to [Using a startup script].
 	//
 	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	StartupScriptS3Path *string
@@ -220,67 +220,71 @@ type Environment struct {
 	//
 	// Valid values:
 	//
-	//   - CREATING - Indicates the request to create the environment is in progress.
+	//   - CREATING - The request to create the environment is in progress.
 	//
-	//   - CREATING_SNAPSHOT - Indicates the request to update environment details, or
-	//   upgrade the environment version, is in progress and Amazon MWAA is creating a
-	//   storage volume snapshot of the Amazon RDS database cluster associated with the
+	//   - CREATING_SNAPSHOT - The request to update environment details, or upgrade
+	//   the environment version, is in progress and Amazon MWAA is creating a storage
+	//   volume snapshot of the Amazon RDS database cluster associated with the
 	//   environment. A database snapshot is a backup created at a specific point in
 	//   time. Amazon MWAA uses snapshots to recover environment metadata if the process
 	//   to update or upgrade an environment fails.
 	//
-	//   - CREATE_FAILED - Indicates the request to create the environment failed, and
-	//   the environment could not be created.
+	//   - CREATE_FAILED - The request to create the environment failed and the
+	//   environment was not created.
 	//
-	//   - AVAILABLE - Indicates the request was successful and the environment is
-	//   ready to use.
+	//   - AVAILABLE - The request was successful and the environment is ready to use.
 	//
-	//   - PENDING - Indicates the request was successful, but the process to create
-	//   the environment is paused until you create the required VPC endpoints in your
-	//   VPC. After you create the VPC endpoints, the process resumes.
+	//   - PENDING - The request was successful, but the process to create the
+	//   environment is paused until you create the required VPC endpoints in your VPC.
+	//   After you create the VPC endpoints, the process resumes.
 	//
-	//   - UPDATING - Indicates the request to update the environment is in progress.
+	//   - UPDATING - The request to update the environment is in progress.
 	//
-	//   - ROLLING_BACK - Indicates the request to update environment details, or
-	//   upgrade the environment version, failed and Amazon MWAA is restoring the
-	//   environment using the latest storage volume snapshot.
+	//   - ROLLING_BACK - The request to update environment details or upgrade the
+	//   environment version failed and Amazon MWAA is restoring the environment using
+	//   the latest storage volume snapshot.
 	//
-	//   - DELETING - Indicates the request to delete the environment is in progress.
+	//   - DELETING - The request to delete the environment is in progress.
 	//
-	//   - DELETED - Indicates the request to delete the environment is complete, and
-	//   the environment has been deleted.
+	//   - DELETED - The request to delete the environment is complete, and the
+	//   environment has been deleted.
 	//
-	//   - UNAVAILABLE - Indicates the request failed, but the environment did not
-	//   return to its previous state and is not stable.
+	//   - UNAVAILABLE - The request failed, but the environment did not return to its
+	//   previous state and is not stable.
 	//
-	//   - UPDATE_FAILED - Indicates the request to update the environment failed, and
-	//   the environment was restored to its previous state successfully and is ready to
-	//   use.
+	//   - UPDATE_FAILED - The request to update the environment failed and the
+	//   environment was restored to its previous state successfully and is ready to use.
 	//
-	//   - MAINTENANCE - Indicates that the environment is undergoing maintenance.
-	//   Depending on the type of work Amazon MWAA is performing, your environment might
-	//   become unavailable during this process. After all operations are done, your
-	//   environment will return to its status prior to mainteneace operations.
+	//   - MAINTENANCE - The environment is undergoing maintenance. Depending on the
+	//   type of work Amazon MWAA is performing, your environment might be unavailable
+	//   during this process. Note that as part of the maintenance work, Amazon MWAA
+	//   performs with a GRACEFUL[workerReplacementStrategy] workerReplacementStrategy .
 	//
-	// We recommend reviewing our troubleshooting guide for a list of common errors
-	// and their solutions. For more information, see [Amazon MWAA troubleshooting].
+	// You can review our troubleshooting guide for a list of common errors and their
+	// solutions. For more information, refer to [Amazon MWAA troubleshooting].
 	//
+	// [workerReplacementStrategy]: https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html#mwaa-UpdateEnvironment-request-WorkerReplacementStrategy
 	// [Amazon MWAA troubleshooting]: https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html
 	Status EnvironmentStatus
 
 	// The key-value tag pairs associated to your environment. For example,
-	// "Environment": "Staging" . For more information, see [Tagging Amazon Web Services resources].
+	// "Environment": "Staging" . For more information, refer to [Tagging Amazon Web Services resources].
 	//
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
-	// The Apache Airflow web server access mode. For more information, see [Apache Airflow access modes].
+	// The Apache Airflow web server access mode. For more information, refer to [Apache Airflow access modes].
+	//
+	// If set to PUBLIC_AND_PRIVATE , creates both a public network load balancer (NLB)
+	// for browser access and a private VPC endpoint (VPCE) for worker-to-webserver
+	// communication. This mode is only available for Apache Airflow version 3.2 and
+	// later.
 	//
 	// [Apache Airflow access modes]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
 	WebserverAccessMode WebserverAccessMode
 
 	// The Apache Airflow web server host name for the Amazon MWAA environment. For
-	// more information, see [Accessing the Apache Airflow UI].
+	// more information, refer to [Accessing the Apache Airflow UI].
 	//
 	// [Accessing the Apache Airflow UI]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html
 	WebserverUrl *string
@@ -373,7 +377,8 @@ type MetricDatum struct {
 	// This member is required.
 	MetricName *string
 
-	//  Internal only. The time the metric data was received.
+	//  Internal only. The time the metric data was received, expressed as an ISO 8601
+	// datetime string.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -439,17 +444,17 @@ type ModuleLoggingConfigurationInput struct {
 
 // Describes the VPC networking components used to secure and enable network
 // traffic between the Amazon Web Services resources for your environment. For more
-// information, see [About networking on Amazon MWAA].
+// information, refer to [About networking on Amazon MWAA].
 //
 // [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 type NetworkConfiguration struct {
 
-	// A list of security group IDs. For more information, see [Security in your VPC on Amazon MWAA].
+	// A list of security group IDs. For more information, refer to [Security in your VPC on Amazon MWAA].
 	//
 	// [Security in your VPC on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
 	SecurityGroupIds []string
 
-	// A list of subnet IDs. For more information, see [About networking on Amazon MWAA].
+	// A list of subnet IDs. For more information, refer to [About networking on Amazon MWAA].
 	//
 	// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 	SubnetIds []string
@@ -493,13 +498,13 @@ type UpdateError struct {
 
 // Defines the VPC networking components used to secure and enable network traffic
 // between the Amazon Web Services resources for your environment. For more
-// information, see [About networking on Amazon MWAA].
+// information, refer to [About networking on Amazon MWAA].
 //
 // [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 type UpdateNetworkConfigurationInput struct {
 
 	// A list of security group IDs. A security group must be attached to the same VPC
-	// as the subnets. For more information, see [Security in your VPC on Amazon MWAA].
+	// as the subnets. For more information, refer to [Security in your VPC on Amazon MWAA].
 	//
 	// [Security in your VPC on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
 	//

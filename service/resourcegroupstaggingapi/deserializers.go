@@ -1378,6 +1378,11 @@ func awsAwsjson11_deserializeDocumentComplianceDetails(v **types.ComplianceDetai
 				return err
 			}
 
+		case "MissingTagKeys":
+			if err := awsAwsjson11_deserializeDocumentTagKeyList(&sv.MissingTagKeys, value); err != nil {
+				return err
+			}
+
 		case "NoncompliantKeys":
 			if err := awsAwsjson11_deserializeDocumentTagKeyList(&sv.NoncompliantKeys, value); err != nil {
 				return err

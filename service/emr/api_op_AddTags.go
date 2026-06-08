@@ -48,6 +48,10 @@ type AddTagsInput struct {
 	// This member is required.
 	Tags []types.Tag
 
+	// The ID of the cluster that scopes the tag operation. Required when the resource
+	// being tagged is a session-scoped resource.
+	ClusterId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -6,10 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"sync"
 	"time"
 )
@@ -37,6 +39,18 @@ type InputStreamWithInitialRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputStreamWithInitialRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputStreamWithInitialRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputStreamWithInitialRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitialRequestMember != nil {
+		s.WriteString(schemas.InputStreamWithInitialRequestInput_initialRequestMember, *v.InitialRequestMember)
+	}
+}
+
 type InputStreamWithInitialRequestOutput struct {
 	eventStream *InputStreamWithInitialRequestEventStream
 
@@ -44,6 +58,22 @@ type InputStreamWithInitialRequestOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputStreamWithInitialRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputStreamWithInitialRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InputStreamWithInitialRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -55,12 +85,16 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInputStreamWithInitialRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InputStreamWithInitialRequest, schemas.InputStreamWithInitialRequestInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInputStreamWithInitialRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InputStreamWithInitialRequest, schemas.InputStreamWithInitialRequestInput, nil), output: &InputStreamWithInitialRequestOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInputStreamWithInitialRequest{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InputStreamWithInitialRequest"); err != nil {
@@ -68,9 +102,6 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamInputStreamWithInitialRequestMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -101,9 +132,6 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {

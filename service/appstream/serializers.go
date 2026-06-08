@@ -5474,6 +5474,104 @@ func awsAwsjson11_serializeDocumentAccessEndpointList(v []types.AccessEndpoint, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAgentAccessConfig(v *types.AgentAccessConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	if len(v.ScreenImageFormat) > 0 {
+		ok := object.Key("ScreenImageFormat")
+		ok.String(string(v.ScreenImageFormat))
+	}
+
+	if len(v.ScreenResolution) > 0 {
+		ok := object.Key("ScreenResolution")
+		ok.String(string(v.ScreenResolution))
+	}
+
+	if v.ScreenshotsUploadEnabled != nil {
+		ok := object.Key("ScreenshotsUploadEnabled")
+		ok.Boolean(*v.ScreenshotsUploadEnabled)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentAgentAccessSettingList(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessConfigForUpdate(v *types.AgentAccessConfigForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	if len(v.ScreenImageFormat) > 0 {
+		ok := object.Key("ScreenImageFormat")
+		ok.String(string(v.ScreenImageFormat))
+	}
+
+	if len(v.ScreenResolution) > 0 {
+		ok := object.Key("ScreenResolution")
+		ok.String(string(v.ScreenResolution))
+	}
+
+	if v.ScreenshotsUploadEnabled != nil {
+		ok := object.Key("ScreenshotsUploadEnabled")
+		ok.Boolean(*v.ScreenshotsUploadEnabled)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentAgentAccessSettingList(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessSetting(v *types.AgentAccessSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AgentAction) > 0 {
+		ok := object.Key("AgentAction")
+		ok.String(string(v.AgentAction))
+	}
+
+	if len(v.Permission) > 0 {
+		ok := object.Key("Permission")
+		ok.String(string(v.Permission))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessSettingList(v []types.AgentAccessSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAgentAccessSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAppBlockBuilderAttributes(v []types.AppBlockBuilderAttribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6987,6 +7085,11 @@ func awsAwsjson11_serializeOpDocumentCreateImportedImageInput(v *CreateImportedI
 		}
 	}
 
+	if v.WorkspaceImageId != nil {
+		ok := object.Key("WorkspaceImageId")
+		ok.String(*v.WorkspaceImageId)
+	}
+
 	return nil
 }
 
@@ -6997,6 +7100,13 @@ func awsAwsjson11_serializeOpDocumentCreateStackInput(v *CreateStackInput, value
 	if v.AccessEndpoints != nil {
 		ok := object.Key("AccessEndpoints")
 		if err := awsAwsjson11_serializeDocumentAccessEndpointList(v.AccessEndpoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AgentAccessConfig != nil {
+		ok := object.Key("AgentAccessConfig")
+		if err := awsAwsjson11_serializeDocumentAgentAccessConfig(v.AgentAccessConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -8629,6 +8739,13 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 	if v.AccessEndpoints != nil {
 		ok := object.Key("AccessEndpoints")
 		if err := awsAwsjson11_serializeDocumentAccessEndpointList(v.AccessEndpoints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AgentAccessConfig != nil {
+		ok := object.Key("AgentAccessConfig")
+		if err := awsAwsjson11_serializeDocumentAgentAccessConfigForUpdate(v.AgentAccessConfig, ok); err != nil {
 			return err
 		}
 	}

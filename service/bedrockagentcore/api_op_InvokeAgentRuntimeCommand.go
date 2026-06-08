@@ -95,6 +95,7 @@ type InvokeAgentRuntimeCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response for InvokeAgentRuntimeCommand operation.
 type InvokeAgentRuntimeCommandOutput struct {
 	eventStream *InvokeAgentRuntimeCommandEventStream
 

@@ -183,6 +183,52 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.invoicing#BillSourceAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.invoicing#AccountIdString"
+            }
+        },
+        "com.amazonaws.invoicing#BillType": {
+            "type": "enum",
+            "members": {
+                "ANNIVERSARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANNIVERSARY"
+                    }
+                },
+                "PURCHASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PURCHASE"
+                    }
+                },
+                "REFUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFUND"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.invoicing#BillingEntity": {
+            "type": "enum",
+            "members": {
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS"
+                    }
+                },
+                "AWS_MARKETPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_MARKETPLACE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.invoicing#BillingPeriod": {
             "type": "structure",
             "members": {
@@ -337,13 +383,15 @@
                                     "Key": "TagKey",
                                     "Value": "TagValue"
                                 }
-                            ]
+                            ],
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b42"
                         },
                         "output": {
                             "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#CreateInvoiceUnitRequest": {
@@ -387,6 +435,13 @@
                     "target": "com.amazonaws.invoicing#ResourceTagList",
                     "traits": {
                         "smithy.api#documentation": "<p> The tag structure that contains a tag key and value. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -437,7 +492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a procurement portal preference configuration for e-invoice delivery and purchase order retrieval. This preference defines how invoices are delivered to a procurement portal and how purchase orders are retrieved.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Creates a procurement portal preference configuration for e-invoice delivery and purchase order retrieval. This preference defines how invoices are delivered to a procurement portal and how purchase orders are retrieved.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateProcurementPortalPreference for Coupa",
@@ -715,13 +770,15 @@
                     {
                         "title": "DeleteInvoiceUnit",
                         "input": {
-                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
+                            "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b44"
                         },
                         "output": {
                             "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#DeleteInvoiceUnitRequest": {
@@ -732,6 +789,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The ARN to identify an invoice unit. This information can't be modified or deleted. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -782,18 +846,20 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing procurement portal preference. This action cannot be undone. Active e-invoice delivery and PO retrieval configurations will be terminated.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Deletes an existing procurement portal preference. This action cannot be undone. Active e-invoice delivery and PO retrieval configurations will be terminated.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "DeleteProcurementPortalPreference call",
                         "input": {
-                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
+                            "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd",
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b47"
                         },
                         "output": {
                             "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#DeleteProcurementPortalPreferenceRequest": {
@@ -804,6 +870,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the procurement portal preference to delete.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -1007,6 +1080,23 @@
                 "smithy.api#documentation": "<p>Specifies the preferences for e-invoice delivery, including document types, attachment types, and customization settings.</p>"
             }
         },
+        "com.amazonaws.invoicing#EinvoiceDeliveryStatus": {
+            "type": "enum",
+            "members": {
+                "DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERED"
+                    }
+                },
+                "NOT_DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_DELIVERED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.invoicing#EmailString": {
             "type": "string",
             "traits": {
@@ -1024,6 +1114,12 @@
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the entity that issues the Amazon Web Services invoice.</p>"
+                    }
+                },
+                "BillingEntity": {
+                    "target": "com.amazonaws.invoicing#BillingEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Helps you identify whether your invoices are for Amazon Web Services Marketplace or for purchases of other Amazon Web Services services.</p>"
                     }
                 }
             },
@@ -1107,7 +1203,7 @@
                 "BillSourceAccounts": {
                     "target": "com.amazonaws.invoicing#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of Amazon Web Services account account IDs used to filter invoice units. These are payer accounts from other Organizations that have delegated their billing responsibility to the receiver account through the billing transfer feature. </p>"
+                        "smithy.api#documentation": "<p> A list of Amazon Web Services account IDs used to filter invoice units. These are payer accounts from other Organizations that have delegated their billing responsibility to the receiver account through the billing transfer feature. </p>"
                     }
                 }
             },
@@ -1169,6 +1265,8 @@
                                 "DocumentUrlExpirationDate": "2025-04-01T01:00:00.000Z",
                                 "SupplementalDocuments": [
                                     {
+                                        "DocumentType": "TAX_E_INVOICE",
+                                        "DocumentId": "supp-doc-1",
                                         "DocumentUrl": "https://abcd123.com?securityTokenForSupplementalDoc",
                                         "DocumentUrlExpirationDate": "2025-04-01T01:00:00.000Z"
                                     }
@@ -1381,7 +1479,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the details of a specific procurement portal preference configuration.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Retrieves the details of a specific procurement portal preference configuration.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "GetProcurementPortalPreference for Coupa pref",
@@ -1547,6 +1645,23 @@
                 "smithy.api#documentation": "<p> The amount charged after taxes, in the preferred currency. </p>"
             }
         },
+        "com.amazonaws.invoicing#InvoiceFrequency": {
+            "type": "enum",
+            "members": {
+                "ONE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_TIME"
+                    }
+                },
+                "RECURRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURRING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.invoicing#InvoicePDF": {
             "type": "structure",
             "members": {
@@ -1649,6 +1764,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the entity that issues the Amazon Web Services invoice.</p>"
                     }
+                },
+                "ReceiverRole": {
+                    "target": "com.amazonaws.invoicing#ReceiverRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the invoice receiver to filter by.</p> <note> <p>When <code>ReceiverRole</code> is specified:</p> <ul> <li> <p>Data is available starting <code>2025-06-01</code>. Queries for periods before <code>2025-06-01</code> return a validation error.</p> </li> <li> <p> <code>TimeInterval</code> supports a time interval of up to 5 years. Without <code>ReceiverRole</code>, <code>TimeInterval</code> is limited to one month.</p> </li> </ul> </note>"
+                    }
                 }
             },
             "traits": {
@@ -1713,6 +1834,24 @@
                         "smithy.api#documentation": "<p> The invoice due date. </p>"
                     }
                 },
+                "BillSourceAccounts": {
+                    "target": "com.amazonaws.invoicing#BillSourceAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of Amazon Web Services account IDs that are the bill source of the invoice. Currently, only a single bill source account is returned.</p>"
+                    }
+                },
+                "BillSourceAccountsTotalCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The total number of accounts that are the bill source of the invoice. </p>"
+                    }
+                },
+                "ReceiverRole": {
+                    "target": "com.amazonaws.invoicing#ReceiverRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the invoice receiver.</p>"
+                    }
+                },
                 "Entity": {
                     "target": "com.amazonaws.invoicing#Entity",
                     "traits": {
@@ -1725,10 +1864,28 @@
                         "smithy.api#documentation": "<p> The billing period of the invoice-related document. </p>"
                     }
                 },
+                "InvoiceFrequency": {
+                    "target": "com.amazonaws.invoicing#InvoiceFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The frequency of the invoice. </p>"
+                    }
+                },
+                "BillType": {
+                    "target": "com.amazonaws.invoicing#BillType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of the bill. </p>"
+                    }
+                },
                 "InvoiceType": {
                     "target": "com.amazonaws.invoicing#InvoiceType",
                     "traits": {
                         "smithy.api#documentation": "<p> The type of invoice. </p>"
+                    }
+                },
+                "CommercialInvoiceId": {
+                    "target": "com.amazonaws.invoicing#BasicString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The commercial invoice ID. This is only applicable for tax invoices and identifies the associated commercial invoice. </p>"
                     }
                 },
                 "OriginalInvoiceId": {
@@ -1741,6 +1898,18 @@
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
                         "smithy.api#documentation": "<p> The purchase order number associated to the invoice.</p>"
+                    }
+                },
+                "EinvoiceDeliveryStatus": {
+                    "target": "com.amazonaws.invoicing#EinvoiceDeliveryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The e-invoice delivery status. </p>"
+                    }
+                },
+                "TaxAuthorityStatus": {
+                    "target": "com.amazonaws.invoicing#TaxAuthorityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of an invoice as reported to the tax authority. This captures scenarios where an invoice may be cancelled after issuance. </p>"
                     }
                 },
                 "BaseCurrencyAmount": {
@@ -1779,6 +1948,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CREDIT_MEMO"
+                    }
+                },
+                "PAYMENT_RECEIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENT_RECEIPT"
                     }
                 }
             }
@@ -1884,7 +2059,7 @@
                 "BillSourceAccounts": {
                     "target": "com.amazonaws.invoicing#RuleAccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of Amazon Web Services account account IDs that have delegated their billing responsibility to the receiver account through transfer billing. Unlike linked accounts, these bill source accounts can be payer accounts from other organizations that have authorized billing transfer to this account. </p>"
+                        "smithy.api#documentation": "<p> A list of Amazon Web Services account IDs that have delegated their billing responsibility to the receiver account through transfer billing. Unlike linked accounts, these bill source accounts can be payer accounts from other organizations that have authorized billing transfer to this account. </p>"
                     }
                 }
             },
@@ -1972,6 +2147,124 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p> <b>Amazon Web Services Invoice Configuration</b> </p> <p>You can use Amazon Web Services Invoice Configuration APIs to programmatically create, update, delete, get, and list invoice units. You can also programmatically fetch the information of the invoice receiver. For example, business legal name, address, and invoicing contacts. </p> <p>You can use Amazon Web Services Invoice Configuration to receive separate Amazon Web Services invoices based your organizational needs. By using Amazon Web Services Invoice Configuration, you can configure invoice units that are groups of Amazon Web Services accounts that represent your business entities, and receive separate invoices for each business entity. You can also assign a unique member or payer account as the invoice receiver for each invoice unit. As you create new accounts within your Organizations using Amazon Web Services Invoice Configuration APIs, you can automate the creation of new invoice units and subsequently automate the addition of new accounts to your invoice units.</p> <p> <b>Amazon Web Services Procurement Portal Preferences</b> </p> <p>You can use Amazon Web Services Procurement Portal Preferences APIs to programmatically create, update, delete, get, and list procurement portal connections and e-invoice delivery settings. You can also programmatically fetch and modify the status of procurement portal configurations. For example, SAP Business Network or Coupa connections, configure e-invoice delivery and purchase order retrieval features.</p> <p>You can use Amazon Web Services Procurement Portal Preferences to connect e-invoice delivery to your procurement portals based on your organizational needs. By using Amazon Web Services Procurement Portal Preferences, you can configure connections to SAP Business Network and Coupa procurement portals that retrieve purchase orders and deliver Amazon Web Services invoices on the same day they are generated. You can also set up testing environments to validate invoice delivery without affecting live transactions, and manage contact information for portal setup and support. </p> <p>Administrative users should understand that billing read-only policies will show all procurement portal connection details. Review your IAM policies to ensure appropriate access controls are in place for procurement portal preferences.</p> <p> <b>Amazon Web Services Invoice Management</b> </p> <p>You can use Amazon Web Services Invoice Management APIs to programmatically list invoice summaries and get invoice documents. You can also programmatically fetch invoice documents with S3 pre-signed URLs.</p> <p>You can use Amazon Web Services Invoice Management to access invoice information based on your organizational needs. By using Amazon Web Services Invoice Management, you can retrieve paginated lists of invoice summaries that include invoice metadata such as invoice IDs, amounts, and currencies without downloading documents. You can also download invoice documents in PDF format using S3 pre-signed URLs with built-in expiration. As you manage invoices across your organization using Amazon Web Services Invoice Management APIs, you can create invoice retrieval processes and integrate invoice data into your financial systems.</p> <p>Service endpoint</p> <p>You can use the following endpoints for Amazon Web Services Invoice Configuration, Amazon Web Services Procurement Portal Preferences, and Amazon Web Services Invoice Management:</p> <ul> <li> <p> <code>https://invoicing.us-east-1.api.aws</code> </p> </li> </ul>",
                 "smithy.api#title": "AWS Invoicing",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://invoicing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://invoicing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -2322,16 +2615,29 @@
                                 {
                                     "AccountId": "111111111111",
                                     "InvoiceId": "1111111111",
-                                    "InvoiceType": "INVOICE",
                                     "IssuedDate": "2025-04-01T01:00:00.000Z",
                                     "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "111111111111"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "BUYER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS"
+                                    },
                                     "BillingPeriod": {
                                         "Month": 1,
                                         "Year": 2025
                                     },
-                                    "Entity": {
-                                        "InvoicingEntity": "Amazon Web Services, Inc."
-                                    },
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "CommercialInvoiceId": "2222222222",
+                                    "OriginalInvoiceId": "1111111111",
+                                    "PurchaseOrderNumber": "PO-12345",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
                                     "BaseCurrencyAmount": {
                                         "AmountBreakdown": {
                                             "Discounts": {
@@ -2421,16 +2727,26 @@
                                 {
                                     "AccountId": "111111111111",
                                     "InvoiceId": "1111111111",
-                                    "InvoiceType": "INVOICE",
                                     "IssuedDate": "2025-04-01T01:00:00.000Z",
                                     "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "111111111111"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "BUYER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS"
+                                    },
                                     "BillingPeriod": {
                                         "Month": 1,
                                         "Year": 2025
                                     },
-                                    "Entity": {
-                                        "InvoicingEntity": "Amazon Web Services, Inc."
-                                    },
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
                                     "BaseCurrencyAmount": {
                                         "AmountBreakdown": {
                                             "Discounts": {
@@ -2520,16 +2836,136 @@
                                 {
                                     "AccountId": "111111111111",
                                     "InvoiceId": "1111111111",
-                                    "InvoiceType": "INVOICE",
                                     "IssuedDate": "2025-04-01T01:00:00.000Z",
                                     "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "111111111111"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "BUYER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS"
+                                    },
                                     "BillingPeriod": {
                                         "Month": 1,
                                         "Year": 2025
                                     },
-                                    "Entity": {
-                                        "InvoicingEntity": "Amazon Web Services, Inc."
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
+                                    "BaseCurrencyAmount": {
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00"
+                                            }
+                                        },
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD"
                                     },
+                                    "PaymentCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    },
+                                    "TaxCurrencyAmount": {
+                                        "TotalAmount": "1.00",
+                                        "TotalAmountBeforeTax": "1.00",
+                                        "CurrencyCode": "USD",
+                                        "AmountBreakdown": {
+                                            "Discounts": {
+                                                "TotalAmount": "1.00"
+                                            },
+                                            "SubTotalAmount": "1.00",
+                                            "Taxes": {
+                                                "TotalAmount": "1.00",
+                                                "Breakdown": [
+                                                    {
+                                                        "Amount": "1",
+                                                        "Description": "VAT",
+                                                        "Rate": "1.0"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "CurrencyExchangeDetails": {
+                                            "SourceCurrencyCode": "USD",
+                                            "TargetCurrencyCode": "USD",
+                                            "Rate": "1.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "ListInvoiceSummaries filtered by ReceiverRole",
+                        "input": {
+                            "Selector": {
+                                "ResourceType": "ACCOUNT_ID",
+                                "Value": "111111111111"
+                            },
+                            "Filter": {
+                                "TimeInterval": {
+                                    "StartDate": 1748736000,
+                                    "EndDate": 1751328000
+                                },
+                                "ReceiverRole": "SELLER"
+                            }
+                        },
+                        "output": {
+                            "InvoiceSummaries": [
+                                {
+                                    "AccountId": "111111111111",
+                                    "InvoiceId": "1111111111",
+                                    "IssuedDate": "2025-06-15T01:00:00.000Z",
+                                    "DueDate": "2025-07-15T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "222222222222"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "SELLER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS_MARKETPLACE"
+                                    },
+                                    "BillingPeriod": {
+                                        "Month": 6,
+                                        "Year": 2025
+                                    },
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
                                     "BaseCurrencyAmount": {
                                         "AmountBreakdown": {
                                             "Discounts": {
@@ -2620,16 +3056,26 @@
                                 {
                                     "AccountId": "111111111111",
                                     "InvoiceId": "1111111111",
-                                    "InvoiceType": "INVOICE",
                                     "IssuedDate": "2025-04-01T01:00:00.000Z",
                                     "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "111111111111"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "BUYER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS"
+                                    },
                                     "BillingPeriod": {
                                         "Month": 1,
                                         "Year": 2025
                                     },
-                                    "Entity": {
-                                        "InvoicingEntity": "Amazon Web Services, Inc."
-                                    },
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
                                     "BaseCurrencyAmount": {
                                         "AmountBreakdown": {
                                             "Discounts": {
@@ -2721,16 +3167,26 @@
                                 {
                                     "AccountId": "111111111111",
                                     "InvoiceId": "1111111111",
-                                    "InvoiceType": "INVOICE",
                                     "IssuedDate": "2025-04-01T01:00:00.000Z",
                                     "DueDate": "2025-04-01T01:00:00.000Z",
+                                    "BillSourceAccounts": [
+                                        "111111111111"
+                                    ],
+                                    "BillSourceAccountsTotalCount": 1,
+                                    "ReceiverRole": "BUYER",
+                                    "Entity": {
+                                        "InvoicingEntity": "Amazon Web Services, Inc.",
+                                        "BillingEntity": "AWS"
+                                    },
                                     "BillingPeriod": {
                                         "Month": 1,
                                         "Year": 2025
                                     },
-                                    "Entity": {
-                                        "InvoicingEntity": "Amazon Web Services, Inc."
-                                    },
+                                    "InvoiceFrequency": "RECURRING",
+                                    "BillType": "ANNIVERSARY",
+                                    "InvoiceType": "INVOICE",
+                                    "EinvoiceDeliveryStatus": "DELIVERED",
+                                    "TaxAuthorityStatus": "ISSUED",
                                     "BaseCurrencyAmount": {
                                         "AmountBreakdown": {
                                             "Discounts": {
@@ -2829,7 +3285,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.invoicing#NextTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. (You received this token from a previous call.)</p>"
                     }
                 },
                 "MaxResults": {
@@ -2873,7 +3329,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.invoicing#NextTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next set of results, or null if there are no more results.</p>"
                     }
                 }
             },
@@ -3121,7 +3577,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of procurement portal preferences associated with the Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Retrieves a list of procurement portal preferences associated with the Amazon Web Services account.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "ListProcurementPortalPreferences for Coupa prefs. First Call with following pages",
@@ -3842,7 +4298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing procurement portal preference configuration. This operation can modify settings for e-invoice delivery and purchase order retrieval.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Updates an existing procurement portal preference configuration. This operation can modify settings for e-invoice delivery and purchase order retrieval.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "PutProcurementPortalPreference for Coupa pref",
@@ -3890,13 +4346,15 @@
                                     "Name": "John Doe2",
                                     "Email": "example-placeholder2@amazon.com"
                                 }
-                            ]
+                            ],
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b45"
                         },
                         "output": {
                             "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#PutProcurementPortalPreferenceRequest": {
@@ -3955,6 +4413,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Updated list of contact information for portal administrators and technical contacts.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -4038,6 +4503,29 @@
             "traits": {
                 "smithy.api#documentation": "<p> The details of the address associated with the receiver. </p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.invoicing#ReceiverRole": {
+            "type": "enum",
+            "members": {
+                "SELLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELLER"
+                    }
+                },
+                "RESELLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESELLER"
+                    }
+                },
+                "BUYER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUYER"
+                    }
+                }
             }
         },
         "com.amazonaws.invoicing#ResourceNotFoundException": {
@@ -4195,6 +4683,18 @@
         "com.amazonaws.invoicing#SupplementalDocument": {
             "type": "structure",
             "members": {
+                "DocumentType": {
+                    "target": "com.amazonaws.invoicing#SupplementalDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of supplemental document.</p>"
+                    }
+                },
+                "DocumentId": {
+                    "target": "com.amazonaws.invoicing#StringWithoutNewLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the supplemental document.</p>"
+                    }
+                },
                 "DocumentUrl": {
                     "target": "com.amazonaws.invoicing#StringWithoutNewLine",
                     "traits": {
@@ -4210,6 +4710,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Supplemental document associated with the invoice.</p>"
+            }
+        },
+        "com.amazonaws.invoicing#SupplementalDocumentType": {
+            "type": "enum",
+            "members": {
+                "GOVERNMENT_INVOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GOVERNMENT_INVOICE"
+                    }
+                },
+                "TAX_E_INVOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_E_INVOICE"
+                    }
+                },
+                "PAYMENT_RECEIPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENT_RECEIPT"
+                    }
+                },
+                "SUPPLEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPLEMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.invoicing#SupplementalDocuments": {
@@ -4313,6 +4842,23 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[-a-z0-9]*:(invoicing)::[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+            }
+        },
+        "com.amazonaws.invoicing#TaxAuthorityStatus": {
+            "type": "enum",
+            "members": {
+                "ISSUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISSUED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.invoicing#TaxInheritanceDisabledFlag": {
@@ -4601,7 +5147,8 @@
                                     "111111111111",
                                     "222222222222"
                                 ]
-                            }
+                            },
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b42"
                         },
                         "output": {
                             "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
@@ -4611,13 +5158,15 @@
                         "title": "UpdateInvoiceUnit with specific fields",
                         "input": {
                             "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678",
-                            "Description": "Updated IU description. All other fields remain unchanged"
+                            "Description": "Updated IU description. All other fields remain unchanged",
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b43"
                         },
                         "output": {
                             "InvoiceUnitArn": "arn:aws:invoicing::000000000000:invoice-unit/12345678"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#UpdateInvoiceUnitRequest": {
@@ -4647,6 +5196,13 @@
                     "target": "com.amazonaws.invoicing#InvoiceUnitRule",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>InvoiceUnitRule</code> object used to update invoice units. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique, case-sensitive identifier that you provide to ensure idempotency of the request. </p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },
@@ -4700,7 +5256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the status of a procurement portal preference, including the activation state of e-invoice delivery and purchase order retrieval features.</p>",
+                "smithy.api#documentation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Updates the status of a procurement portal preference, including the activation state of e-invoice delivery and purchase order retrieval features.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "UpdateProcurementPortalPreference for EinvoiceDeliveryPreferenceStatus and PurchaseOrderRetrievalPreferenceStatus",
@@ -4709,13 +5265,15 @@
                             "EinvoiceDeliveryPreferenceStatus": "SUSPENDED",
                             "EinvoiceDeliveryPreferenceStatusReason": "suspended example reason",
                             "PurchaseOrderRetrievalPreferenceStatus": "SUSPENDED",
-                            "PurchaseOrderRetrievalPreferenceStatusReason": "suspended example reason"
+                            "PurchaseOrderRetrievalPreferenceStatusReason": "suspended example reason",
+                            "ClientToken": "e362c68e-4e74-48d7-9228-0bc5aa447b46"
                         },
                         "output": {
                             "ProcurementPortalPreferenceArn": "arn:aws:invoicing::111111111111:procurement-portal-preference/f71dd02e-f855-4b13-b793-0fd25c0b3ecd"
                         }
                     }
-                ]
+                ],
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.invoicing#UpdateProcurementPortalPreferenceStatusRequest": {
@@ -4750,6 +5308,13 @@
                     "target": "com.amazonaws.invoicing#BasicString",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason for the purchase order retrieval preference status update, providing context for the change.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.invoicing#BasicStringWithoutSpace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },

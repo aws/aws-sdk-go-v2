@@ -80,6 +80,20 @@ type GetOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
+	// The JSON key used to extract the client secret value from the AWS Secrets
+	// Manager secret.
+	ClientSecretJsonKey *string
+
+	// The source type of the client secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	ClientSecretSource types.SecretSourceType
+
+	// The reason for failure if the OAuth2 credential provider is in a failed state.
+	FailureReason *string
+
+	// The current status of the OAuth2 credential provider.
+	Status types.Status
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -70,6 +70,26 @@ func (m *validateOpGenerateAs2805KekValidation) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateAuthRequestCryptogram struct {
+}
+
+func (*validateOpGenerateAuthRequestCryptogram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateAuthRequestCryptogram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateAuthRequestCryptogramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateAuthRequestCryptogramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGenerateCardValidationData struct {
 }
 
@@ -300,6 +320,10 @@ func addOpEncryptDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGenerateAs2805KekValidationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGenerateAs2805KekValidation{}, middleware.After)
+}
+
+func addOpGenerateAuthRequestCryptogramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateAuthRequestCryptogram{}, middleware.After)
 }
 
 func addOpGenerateCardValidationDataValidationMiddleware(stack *middleware.Stack) error {
@@ -1824,6 +1848,34 @@ func validateOpGenerateAs2805KekValidationInput(v *GenerateAs2805KekValidationIn
 	}
 	if len(v.RandomKeySendVariantMask) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RandomKeySendVariantMask"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGenerateAuthRequestCryptogramInput(v *GenerateAuthRequestCryptogramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateAuthRequestCryptogramInput"}
+	if v.KeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyIdentifier"))
+	}
+	if v.TransactionData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionData"))
+	}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.SessionKeyDerivationAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionKeyDerivationAttributes"))
+	} else if v.SessionKeyDerivationAttributes != nil {
+		if err := validateSessionKeyDerivation(v.SessionKeyDerivationAttributes); err != nil {
+			invalidParams.AddNested("SessionKeyDerivationAttributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

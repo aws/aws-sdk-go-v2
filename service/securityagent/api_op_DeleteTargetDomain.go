@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a target domain record
+// Deletes a target domain registration. After deletion, the domain can no longer
+// be used for penetration testing.
 func (c *Client) DeleteTargetDomain(ctx context.Context, params *DeleteTargetDomainInput, optFns ...func(*Options)) (*DeleteTargetDomainOutput, error) {
 	if params == nil {
 		params = &DeleteTargetDomainInput{}
@@ -26,10 +27,10 @@ func (c *Client) DeleteTargetDomain(ctx context.Context, params *DeleteTargetDom
 	return out, nil
 }
 
-// Input for deleting a target domain
+// Input for deleting a target domain.
 type DeleteTargetDomainInput struct {
 
-	// Unique identifier of the target domain to delete
+	// The unique identifier of the target domain to delete.
 	//
 	// This member is required.
 	TargetDomainId *string
@@ -37,10 +38,10 @@ type DeleteTargetDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the DeleteTargetDomain operation
+// Output for the DeleteTargetDomain operation.
 type DeleteTargetDomainOutput struct {
 
-	// Unique identifier of the deleted target domain
+	// The unique identifier of the deleted target domain.
 	TargetDomainId *string
 
 	// Metadata pertaining to the operation's result.

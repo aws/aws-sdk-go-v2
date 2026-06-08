@@ -37,7 +37,7 @@ type CreateRecommenderSchemaInput struct {
 	DomainName *string
 
 	// A map of dataset type to column definitions that specifies which data columns
-	// to include in the schema. Currently only the _webAnalytics key is supported.
+	// to include in the schema. The _webAnalytics and _catalogItem keys are supported.
 	//
 	// This member is required.
 	Fields map[string][]types.RecommenderSchemaField

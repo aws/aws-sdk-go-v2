@@ -30,6 +30,26 @@ func (m *validateOpAcceptLink) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateCertificate struct {
+}
+
+func (*validateOpAssociateCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInboundExternalLink struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateLink) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLinkRoutingRule struct {
+}
+
+func (*validateOpCreateLinkRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLinkRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLinkRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLinkRoutingRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +210,26 @@ func (m *validateOpDeleteLink) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLinkRoutingRule struct {
+}
+
+func (*validateOpDeleteLinkRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLinkRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLinkRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLinkRoutingRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteOutboundExternalLink struct {
 }
 
@@ -230,6 +290,46 @@ func (m *validateOpDeleteResponderGateway) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateCertificate struct {
+}
+
+func (*validateOpDisassociateCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCertificateAssociation struct {
+}
+
+func (*validateOpGetCertificateAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCertificateAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCertificateAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCertificateAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInboundExternalLink struct {
 }
 
@@ -265,6 +365,26 @@ func (m *validateOpGetLink) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLinkRoutingRule struct {
+}
+
+func (*validateOpGetLinkRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLinkRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLinkRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLinkRoutingRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +445,46 @@ func (m *validateOpGetResponderGateway) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResponderGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCertificateAssociations struct {
+}
+
+func (*validateOpListCertificateAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCertificateAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCertificateAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCertificateAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLinkRoutingRules struct {
+}
+
+func (*validateOpListLinkRoutingRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLinkRoutingRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLinkRoutingRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLinkRoutingRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +630,26 @@ func (m *validateOpUpdateLinkModuleFlow) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLinkRoutingRule struct {
+}
+
+func (*validateOpUpdateLinkRoutingRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLinkRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLinkRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLinkRoutingRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRequesterGateway struct {
 }
 
@@ -514,12 +694,20 @@ func addOpAcceptLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptLink{}, middleware.After)
 }
 
+func addOpAssociateCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateCertificate{}, middleware.After)
+}
+
 func addOpCreateInboundExternalLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInboundExternalLink{}, middleware.After)
 }
 
 func addOpCreateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLink{}, middleware.After)
+}
+
+func addOpCreateLinkRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLinkRoutingRule{}, middleware.After)
 }
 
 func addOpCreateOutboundExternalLinkValidationMiddleware(stack *middleware.Stack) error {
@@ -542,6 +730,10 @@ func addOpDeleteLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLink{}, middleware.After)
 }
 
+func addOpDeleteLinkRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLinkRoutingRule{}, middleware.After)
+}
+
 func addOpDeleteOutboundExternalLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOutboundExternalLink{}, middleware.After)
 }
@@ -554,12 +746,24 @@ func addOpDeleteResponderGatewayValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteResponderGateway{}, middleware.After)
 }
 
+func addOpDisassociateCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateCertificate{}, middleware.After)
+}
+
+func addOpGetCertificateAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCertificateAssociation{}, middleware.After)
+}
+
 func addOpGetInboundExternalLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInboundExternalLink{}, middleware.After)
 }
 
 func addOpGetLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLink{}, middleware.After)
+}
+
+func addOpGetLinkRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLinkRoutingRule{}, middleware.After)
 }
 
 func addOpGetOutboundExternalLinkValidationMiddleware(stack *middleware.Stack) error {
@@ -572,6 +776,14 @@ func addOpGetRequesterGatewayValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetResponderGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResponderGateway{}, middleware.After)
+}
+
+func addOpListCertificateAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCertificateAssociations{}, middleware.After)
+}
+
+func addOpListLinkRoutingRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLinkRoutingRules{}, middleware.After)
 }
 
 func addOpListLinksValidationMiddleware(stack *middleware.Stack) error {
@@ -600,6 +812,10 @@ func addOpUpdateLinkValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLinkModuleFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLinkModuleFlow{}, middleware.After)
+}
+
+func addOpUpdateLinkRoutingRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLinkRoutingRule{}, middleware.After)
 }
 
 func addOpUpdateRequesterGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -989,6 +1205,24 @@ func validateOpenRtbAttributeModuleParameters(v *types.OpenRtbAttributeModulePar
 	}
 }
 
+func validateQueryStringKeyValuePair(v *types.QueryStringKeyValuePair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryStringKeyValuePair"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResponderErrorMasking(v []types.ResponderErrorMaskingForHttpCode) error {
 	if v == nil {
 		return nil
@@ -1019,6 +1253,23 @@ func validateResponderErrorMaskingForHttpCode(v *types.ResponderErrorMaskingForH
 	}
 	if v.LoggingTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoggingTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleCondition(v *types.RuleCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleCondition"}
+	if v.QueryStringEquals != nil {
+		if err := validateQueryStringKeyValuePair(v.QueryStringEquals); err != nil {
+			invalidParams.AddNested("QueryStringEquals", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1064,6 +1315,27 @@ func validateOpAcceptLinkInput(v *AcceptLinkInput) error {
 		if err := validateLinkLogSettings(v.LogSettings); err != nil {
 			invalidParams.AddNested("LogSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateCertificateInput(v *AssociateCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateCertificateInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.AcmCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmCertificateArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1123,6 +1395,37 @@ func validateOpCreateLinkInput(v *CreateLinkInput) error {
 	} else if v.LogSettings != nil {
 		if err := validateLinkLogSettings(v.LogSettings); err != nil {
 			invalidParams.AddNested("LogSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLinkRoutingRuleInput(v *CreateLinkRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLinkRoutingRuleInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateRuleCondition(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1270,6 +1573,27 @@ func validateOpDeleteLinkInput(v *DeleteLinkInput) error {
 	}
 }
 
+func validateOpDeleteLinkRoutingRuleInput(v *DeleteLinkRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLinkRoutingRuleInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteOutboundExternalLinkInput(v *DeleteOutboundExternalLinkInput) error {
 	if v == nil {
 		return nil
@@ -1318,6 +1642,42 @@ func validateOpDeleteResponderGatewayInput(v *DeleteResponderGatewayInput) error
 	}
 }
 
+func validateOpDisassociateCertificateInput(v *DisassociateCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateCertificateInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.AcmCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmCertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCertificateAssociationInput(v *GetCertificateAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCertificateAssociationInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.AcmCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcmCertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInboundExternalLinkInput(v *GetInboundExternalLinkInput) error {
 	if v == nil {
 		return nil
@@ -1346,6 +1706,27 @@ func validateOpGetLinkInput(v *GetLinkInput) error {
 	}
 	if v.LinkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLinkRoutingRuleInput(v *GetLinkRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLinkRoutingRuleInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1394,6 +1775,39 @@ func validateOpGetResponderGatewayInput(v *GetResponderGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetResponderGatewayInput"}
 	if v.GatewayId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCertificateAssociationsInput(v *ListCertificateAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCertificateAssociationsInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLinkRoutingRulesInput(v *ListLinkRoutingRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLinkRoutingRulesInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1528,6 +1942,37 @@ func validateOpUpdateLinkModuleFlowInput(v *UpdateLinkModuleFlowInput) error {
 	} else if v.Modules != nil {
 		if err := validateModuleConfigurationList(v.Modules); err != nil {
 			invalidParams.AddNested("Modules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLinkRoutingRuleInput(v *UpdateLinkRoutingRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLinkRoutingRuleInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateRuleCondition(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

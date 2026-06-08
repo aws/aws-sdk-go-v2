@@ -39,8 +39,8 @@ import (
 // involve PIN change. When assigning IAM permissions, it is important to
 // understand that EncryptDatausing EMV keys and GenerateMac perform similar functions to this command.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -49,6 +49,7 @@ import (
 // # GenerateMac
 //
 // [EMV 4.4 - Book 2 - Security and Key Management]: https://www.emvco.com/specifications/
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) GenerateMacEmvPinChange(ctx context.Context, params *GenerateMacEmvPinChangeInput, optFns ...func(*Options)) (*GenerateMacEmvPinChangeOutput, error) {
 	if params == nil {
 		params = &GenerateMacEmvPinChangeInput{}

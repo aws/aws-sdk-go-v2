@@ -3,27 +3,29 @@
 // Package connect provides the API client, operations, and parameter types for
 // Amazon Connect Service.
 //
-// [Amazon Connect actions]
+// Amazon Connect now refers to a portfolio of agentic solutions for business
+// functions. The legacy product is now called Amazon Connect Customer, or simply
+// Customer. The legacy name is used interchangeably in this documentation.
 //
-// [Amazon Connect data types]
+// [Connect Customer Customer actions]
 //
-// Amazon Connect is a cloud-based contact center solution that you use to set up
-// and manage a customer contact center and provide reliable customer engagement at
-// any scale.
+// [Connect Customer Customer data types]
 //
-// Amazon Connect provides metrics and real-time reporting that enable you to
-// optimize contact routing. You can also resolve customer issues more efficiently
-// by getting customers in touch with the appropriate agents.
+// Connect Customer Customer engages customers at every touchpoint and creates
+// deeper relationships with AI powered capabilities.
 //
-// There are limits to the number of Amazon Connect resources that you can create.
-// There are also limits to the number of requests that you can make per second.
-// For more information, see [Amazon Connect Service Quotas]in the Amazon Connect Administrator Guide.
+// Build and manage customer communication experiences. Connect customers to
+// agents, enable intelligent routing, and track performance in real-time.
+//
+// There are limits to the number of Connect Customer resources that you can
+// create. There are also limits to the number of requests that you can make per
+// second. For more information, see [Connect Customer Service Quotas]in the Connect Customer Administrator Guide.
 //
 // You can use an endpoint to connect programmatically to an Amazon Web Services
-// service. For a list of Amazon Connect endpoints, see [Amazon Connect Endpoints].
+// service. For a list of Connect Customer endpoints, see [Connect Customer Endpoints].
 //
-// [Amazon Connect Endpoints]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
-// [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
-// [Amazon Connect data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html
-// [Amazon Connect actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html
+// [Connect Customer Customer data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Service.html
+// [Connect Customer Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Connect Customer Customer actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Service.html
+// [Connect Customer Endpoints]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 package connect

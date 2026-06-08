@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches tags used in an Amazon Connect instance using optional search criteria.
+// Searches tags used in an Connect Customer instance using optional search
+// criteria.
 func (c *Client) SearchResourceTags(ctx context.Context, params *SearchResourceTagsInput, optFns ...func(*Options)) (*SearchResourceTagsOutput, error) {
 	if params == nil {
 		params = &SearchResourceTagsInput{}
@@ -29,7 +30,7 @@ func (c *Client) SearchResourceTags(ctx context.Context, params *SearchResourceT
 
 type SearchResourceTagsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
@@ -80,7 +81,7 @@ type SearchResourceTagsOutput struct {
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
-	// A list of tags used in the Amazon Connect instance.
+	// A list of tags used in the Connect Customer instance.
 	Tags []types.TagSet
 
 	// Metadata pertaining to the operation's result.

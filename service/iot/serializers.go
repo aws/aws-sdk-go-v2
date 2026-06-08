@@ -12391,6 +12391,17 @@ func (m *awsRestjson1_serializeOpGetThingConnectivityData) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetThingConnectivityDataInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -12412,6 +12423,18 @@ func awsRestjson1_serializeOpHttpBindingsGetThingConnectivityDataInput(v *GetThi
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetThingConnectivityDataInput(v *GetThingConnectivityDataInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IncludeSocketInformation != nil {
+		ok := object.Key("includeSocketInformation")
+		ok.Boolean(*v.IncludeSocketInformation)
 	}
 
 	return nil
@@ -24452,6 +24475,11 @@ func awsRestjson1_serializeDocumentBatchConfig(v *types.BatchConfig, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchAcrossTopics {
+		ok := object.Key("batchAcrossTopics")
+		ok.Boolean(v.BatchAcrossTopics)
+	}
+
 	if v.MaxBatchOpenMs != nil {
 		ok := object.Key("maxBatchOpenMs")
 		ok.Integer(*v.MaxBatchOpenMs)
@@ -25047,6 +25075,20 @@ func awsRestjson1_serializeDocumentConfiguration(v *types.Configuration, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConnectivityFilter(v *types.ConnectivityFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IncludeSocketInformation != nil {
+		ok := object.Key("includeSocketInformation")
+		if err := awsRestjson1_serializeDocumentFleetIndexingApiList(v.IncludeSocketInformation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomCodeSigning(v *types.CustomCodeSigning, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25425,6 +25467,17 @@ func awsRestjson1_serializeDocumentFirehoseAction(v *types.FirehoseAction, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFleetIndexingApiList(v []types.FleetIndexingApi, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGeoLocationsFilter(v []types.GeoLocationTarget, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -25587,6 +25640,13 @@ func awsRestjson1_serializeDocumentHttpUrlDestinationConfiguration(v *types.Http
 func awsRestjson1_serializeDocumentIndexingFilter(v *types.IndexingFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Connectivity != nil {
+		ok := object.Key("connectivity")
+		if err := awsRestjson1_serializeDocumentConnectivityFilter(v.Connectivity, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.GeoLocations != nil {
 		ok := object.Key("geoLocations")

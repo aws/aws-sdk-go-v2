@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Updates an agent space record
+// Updates the configuration of an existing agent space, including its name,
+// description, AWS resources, target domains, and code review settings.
 func (c *Client) UpdateAgentSpace(ctx context.Context, params *UpdateAgentSpaceInput, optFns ...func(*Options)) (*UpdateAgentSpaceOutput, error) {
 	if params == nil {
 		params = &UpdateAgentSpaceInput{}
@@ -28,63 +29,61 @@ func (c *Client) UpdateAgentSpace(ctx context.Context, params *UpdateAgentSpaceI
 	return out, nil
 }
 
-// Input for updating an agent space
+// Input for updating an agent space.
 type UpdateAgentSpaceInput struct {
 
-	// ID of the agent space to update
+	// The unique identifier of the agent space to update.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// AWS resource configurations associated with the agent space
+	// The updated AWS resources to associate with the agent space.
 	AwsResources *types.AWSResources
 
-	// Configuration for code review analysis, including controls scanning and general
-	// purpose scanning settings
+	// The updated code review settings for the agent space.
 	CodeReviewSettings *types.CodeReviewSettings
 
-	// Description of the agent space
+	// The updated description of the agent space.
 	Description *string
 
-	// Name of the agent space
+	// The updated name of the agent space.
 	Name *string
 
-	// Target domain IDs to associate with the agent space
+	// The updated list of target domain identifiers to associate with the agent space.
 	TargetDomainIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Output for the UpdateAgentSpace operation
+// Output for the UpdateAgentSpace operation.
 type UpdateAgentSpaceOutput struct {
 
-	// Unique identifier of the agent space
+	// The unique identifier of the updated agent space.
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Name of the agent space
+	// The name of the agent space.
 	//
 	// This member is required.
 	Name *string
 
-	// AWS resource configurations associated with the agent space
+	// The AWS resources associated with the agent space.
 	AwsResources *types.AWSResources
 
-	// Configuration for code review analysis, including controls scanning and general
-	// purpose scanning settings
+	// The code review settings for the agent space.
 	CodeReviewSettings *types.CodeReviewSettings
 
-	// Timestamp when the agent space was created
+	// The date and time the agent space was created, in UTC format.
 	CreatedAt *time.Time
 
-	// Description of the agent space
+	// The description of the agent space.
 	Description *string
 
-	// List of target domain IDs registered with the agent space
+	// The list of target domain identifiers associated with the agent space.
 	TargetDomainIds []string
 
-	// Timestamp when the agent space was last updated
+	// The date and time the agent space was last updated, in UTC format.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

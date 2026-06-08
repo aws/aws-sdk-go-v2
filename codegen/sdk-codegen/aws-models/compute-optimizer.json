@@ -523,6 +523,194 @@
                 "smithy.api#documentation": "<p>Compute Optimizer is a service that analyzes the configuration and utilization\n            metrics of your Amazon Web Services compute resources, such as Amazon EC2\n            instances, Amazon EC2 Auto Scaling groups, Lambda functions, Amazon EBS volumes, and Amazon ECS services on Fargate. \n            It reports whether your resources are optimal, and generates\n            optimization recommendations to reduce the cost and improve the performance of your\n            workloads. Compute Optimizer also provides recent utilization metric data, in addition\n            to projected utilization metric data for the recommendations, which you can use to\n            evaluate which recommendation provides the best price-performance trade-off. The\n            analysis of your usage patterns can help you decide when to move or resize your running\n            resources, and still meet your performance and capacity requirements. For more\n            information about Compute Optimizer, including the required permissions to use the\n            service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">Compute Optimizer User Guide</a>.</p>",
                 "smithy.api#title": "AWS Compute Optimizer",
                 "smithy.protocols#rpcv2Cbor": {},
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://compute-optimizer-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://compute-optimizer.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1847,6 +2035,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon EBS volumes.\n        </p>"
                     }
+                },
+                "lookBackPeriod": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the volume.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2055,6 +2249,12 @@
                     "target": "com.amazonaws.computeoptimizer#ECSSavingsEstimationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon ECS services.\n        </p>"
+                    }
+                },
+                "lookBackPeriod": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of days the Amazon ECS service utilization metrics were analyzed.\n        </p>"
                     }
                 }
             },
@@ -4212,6 +4412,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
                     }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
                 }
             }
         },
@@ -5856,6 +6062,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
                     }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
                 }
             }
         },
@@ -6821,7 +7033,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review \n            the <code>effectiveRecommendationPreferences</code> value in the response of the \n            GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>"
+                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon Web Services resource are analyzed.\n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review\n            the <code>effectiveRecommendationPreferences</code> value in the response of the\n            GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEBSVolumeRecommendations,\n            GetECSServiceRecommendations, or GetRDSDatabaseRecommendations actions.</p>"
                     }
                 },
                 "utilizationPreferences": {
@@ -10438,7 +10650,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance, and Aurora DB cluster storage resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Lookback period preferences for Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services, Amazon RDS DB instances, and Aurora DB cluster storage resource types can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n               <li>\n                  <p>Amazon EBS volume lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Amazon ECS service on Fargate lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Amazon RDS DB instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Aurora DB cluster storage lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Changing the lookback period for Amazon EBS volumes to 14 days does not affect the 32-day lookback period used to determine whether an Amazon EBS volume is unattached.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "utilizationPreferences": {
@@ -10450,7 +10662,7 @@
                 "preferredResources": {
                     "target": "com.amazonaws.computeoptimizer#PreferredResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service, Amazon RDS DB instance, and Aurora DB cluster storage resource types.</p>\n         </note>"
                     }
                 },
                 "savingsEstimationMode": {

@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an email address from the suppression list for your account.
+// Removes an email address from the suppression list for your account or for a
+// specific tenant. To target a tenant's suppression list, specify the TenantName
+// parameter. If you omit TenantName , the address is removed from the
+// account-level suppression list.
 func (c *Client) DeleteSuppressedDestination(ctx context.Context, params *DeleteSuppressedDestinationInput, optFns ...func(*Options)) (*DeleteSuppressedDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteSuppressedDestinationInput{}
@@ -26,13 +29,20 @@ func (c *Client) DeleteSuppressedDestination(ctx context.Context, params *Delete
 	return out, nil
 }
 
-// A request to remove an email address from the suppression list for your account.
+// A request to remove an email address from the suppression list for your account
+// or for a specific tenant.
 type DeleteSuppressedDestinationInput struct {
 
-	// The suppressed email destination to remove from the account suppression list.
+	// The suppressed email destination to remove from the suppression list for your
+	// account or for the specified tenant.
 	//
 	// This member is required.
 	EmailAddress *string
+
+	// The name of the tenant whose suppression list you want to remove the address
+	// from. If you omit this parameter, the address is removed from the account-level
+	// suppression list.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }

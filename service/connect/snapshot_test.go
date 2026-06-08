@@ -1346,6 +1346,18 @@ func TestCheckSnapshot_DescribeAgentStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAttachedFilesConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAttachedFilesConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAttachedFilesConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAuthenticationProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAuthenticationProfile(context.Background(), nil, func(o *Options) {
@@ -2215,6 +2227,18 @@ func TestCheckSnapshot_ListAssociatedContacts(t *testing.T) {
 	_, err := svc.ListAssociatedContacts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssociatedContacts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAttachedFilesConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachedFilesConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAttachedFilesConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3715,6 +3739,18 @@ func TestCheckSnapshot_UpdateAgentStatus(t *testing.T) {
 	_, err := svc.UpdateAgentStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAgentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAttachedFilesConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAttachedFilesConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAttachedFilesConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5749,6 +5785,18 @@ func TestUpdateSnapshot_DescribeAgentStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAttachedFilesConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAttachedFilesConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAttachedFilesConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAuthenticationProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAuthenticationProfile(context.Background(), nil, func(o *Options) {
@@ -6618,6 +6666,18 @@ func TestUpdateSnapshot_ListAssociatedContacts(t *testing.T) {
 	_, err := svc.ListAssociatedContacts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssociatedContacts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAttachedFilesConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAttachedFilesConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAttachedFilesConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8118,6 +8178,18 @@ func TestUpdateSnapshot_UpdateAgentStatus(t *testing.T) {
 	_, err := svc.UpdateAgentStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgentStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAttachedFilesConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAttachedFilesConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAttachedFilesConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

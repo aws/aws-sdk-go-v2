@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpApprovePlanExecutionStep) HandleDeserializ
 		return out, metadata, rpc2_deserializeOpErrorApprovePlanExecutionStep(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -107,7 +106,7 @@ func (m *smithyRpcv2cbor_deserializeOpCancelPlanExecution) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorCancelPlanExecution(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -221,7 +220,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeletePlan) HandleDeserialize(ctx context.
 		return out, metadata, rpc2_deserializeOpErrorDeletePlan(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1050,7 +1049,7 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorTagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1099,7 +1098,7 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorUntagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1213,7 +1212,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdatePlanExecution) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorUpdatePlanExecution(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1262,7 +1261,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdatePlanExecutionStep) HandleDeserialize
 		return out, metadata, rpc2_deserializeOpErrorUpdatePlanExecutionStep(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1865,6 +1864,160 @@ func deserializeCBOR_AuroraClusterArns(v smithycbor.Value) ([]string, error) {
 	return dl, nil
 }
 
+func deserializeCBOR_AuroraProvisionedScalingConfiguration(v smithycbor.Value) (*types.AuroraProvisionedScalingConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.AuroraProvisionedScalingConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "globalClusterIdentifier" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.GlobalClusterIdentifier = ptr.String(dv)
+		}
+
+		if key == "regionDatabaseClusterArns" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionAuroraClusterMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RegionDatabaseClusterArns = dv
+		}
+
+		if key == "instanceArns" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionAuroraInstanceArnMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.InstanceArns = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_AuroraServerlessScalingConfiguration(v smithycbor.Value) (*types.AuroraServerlessScalingConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.AuroraServerlessScalingConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "globalClusterIdentifier" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.GlobalClusterIdentifier = ptr.String(dv)
+		}
+
+		if key == "regionDatabaseClusterArns" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionAuroraClusterMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RegionDatabaseClusterArns = dv
+		}
+
+		if key == "targetPercent" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetPercent = ptr.Int32(dv)
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_CustomActionLambdaConfiguration(v smithycbor.Value) (*types.CustomActionLambdaConfiguration, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -2441,6 +2594,58 @@ func deserializeCBOR_EvaluationStatus(v smithycbor.Value) (types.EvaluationStatu
 	return types.EvaluationStatus(av), nil
 }
 
+func deserializeCBOR_EventSourceMapping(v smithycbor.Value) (*types.EventSourceMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.EventSourceMapping{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "arn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Arn = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_EventSourceMappingAction(v smithycbor.Value) (types.EventSourceMappingAction, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.EventSourceMappingAction(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.EventSourceMappingAction(av), nil
+}
+
 func deserializeCBOR_ExecutionAction(v smithycbor.Value) (types.ExecutionAction, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -2629,6 +2834,50 @@ func deserializeCBOR_ExecutionBlockConfiguration(v smithycbor.Value) (types.Exec
 				return nil, err
 			}
 			return &types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig{Value: *dv}, nil
+		}
+
+		if key == "lambdaEventSourceMappingConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LambdaEventSourceMappingConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig{Value: *dv}, nil
+		}
+
+		if key == "auroraServerlessScalingConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_AuroraServerlessScalingConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig{Value: *dv}, nil
+		}
+
+		if key == "auroraProvisionedScalingConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_AuroraProvisionedScalingConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig{Value: *dv}, nil
+		}
+
+		if key == "neptuneGlobalDatabaseConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_NeptuneGlobalDatabaseConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig{Value: *dv}, nil
 		}
 	}
 	return nil, fmt.Errorf("unrecognized variant")
@@ -3181,6 +3430,87 @@ func deserializeCBOR_KubernetesScalingResource(v smithycbor.Value) (*types.Kuber
 	return ds, nil
 }
 
+func deserializeCBOR_LambdaEventSourceMappingConfiguration(v smithycbor.Value) (*types.LambdaEventSourceMappingConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LambdaEventSourceMappingConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "action" {
+
+			dv, err := deserializeCBOR_EventSourceMappingAction(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Action = dv
+		}
+
+		if key == "regionEventSourceMappings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionEventSourceMappingMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RegionEventSourceMappings = dv
+		}
+
+		if key == "ungraceful" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LambdaEventSourceMappingUngraceful(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Ungraceful = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LambdaEventSourceMappingUngraceful(v smithycbor.Value) (*types.LambdaEventSourceMappingUngraceful, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LambdaEventSourceMappingUngraceful{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "behavior" {
+
+			dv, err := deserializeCBOR_LambdaEventSourceMappingUngracefulBehavior(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Behavior = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v smithycbor.Value) (types.LambdaEventSourceMappingUngracefulBehavior, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.LambdaEventSourceMappingUngracefulBehavior(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.LambdaEventSourceMappingUngracefulBehavior(av), nil
+}
+
 func deserializeCBOR_LambdaList(v smithycbor.Value) ([]types.Lambdas, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
@@ -3299,6 +3629,128 @@ func deserializeCBOR_MinimalWorkflow(v smithycbor.Value) (*types.MinimalWorkflow
 		}
 	}
 	return ds, nil
+}
+
+func deserializeCBOR_NeptuneDefaultBehavior(v smithycbor.Value) (types.NeptuneDefaultBehavior, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.NeptuneDefaultBehavior(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.NeptuneDefaultBehavior(av), nil
+}
+
+func deserializeCBOR_NeptuneGlobalDatabaseConfiguration(v smithycbor.Value) (*types.NeptuneGlobalDatabaseConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.NeptuneGlobalDatabaseConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "behavior" {
+
+			dv, err := deserializeCBOR_NeptuneDefaultBehavior(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Behavior = dv
+		}
+
+		if key == "ungraceful" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_NeptuneUngraceful(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Ungraceful = dv
+		}
+
+		if key == "globalClusterIdentifier" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.GlobalClusterIdentifier = ptr.String(dv)
+		}
+
+		if key == "regionDatabaseClusterArns" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionNeptuneClusterArnMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RegionDatabaseClusterArns = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_NeptuneUngraceful(v smithycbor.Value) (*types.NeptuneUngraceful, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.NeptuneUngraceful{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ungraceful" {
+
+			dv, err := deserializeCBOR_NeptuneUngracefulBehavior(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Ungraceful = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_NeptuneUngracefulBehavior(v smithycbor.Value) (types.NeptuneUngracefulBehavior, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.NeptuneUngracefulBehavior(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.NeptuneUngracefulBehavior(av), nil
 }
 
 func deserializeCBOR_ParallelExecutionBlockConfiguration(v smithycbor.Value) (*types.ParallelExecutionBlockConfiguration, error) {
@@ -3703,6 +4155,57 @@ func deserializeCBOR_RegionAndRoutingControls(v smithycbor.Value) (map[string][]
 	return dm, nil
 }
 
+func deserializeCBOR_RegionAuroraClusterMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_RegionAuroraInstanceArnMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_RegionEventSourceMappingMap(v smithycbor.Value) (map[string]types.EventSourceMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]types.EventSourceMapping{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_EventSourceMapping(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = *dv
+	}
+	return dm, nil
+}
+
 func deserializeCBOR_RegionList(v smithycbor.Value) ([]string, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
@@ -3718,6 +4221,23 @@ func deserializeCBOR_RegionList(v smithycbor.Value) ([]string, error) {
 		dl = append(dl, di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_RegionNeptuneClusterArnMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
 }
 
 func deserializeCBOR_RegionSwitchPlanConfiguration(v smithycbor.Value) (*types.RegionSwitchPlanConfiguration, error) {
@@ -5954,6 +6474,16 @@ func rpc2_deserializeOpErrorListRoute53HealthChecks(resp *smithyhttp.Response) e
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#AccessDeniedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "IllegalArgumentException":
+		verr, err := deserializeCBOR_IllegalArgumentException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.arcregionswitch#IllegalArgumentException: %w", err),
 				Snapshot: payload,
 			}
 		}

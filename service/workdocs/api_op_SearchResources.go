@@ -34,8 +34,8 @@ type SearchResourcesInput struct {
 	// are not normally returned in a standard response.
 	AdditionalResponseFields []types.AdditionalResponseFieldType
 
-	// Amazon WorkDocs authentication token. Not required when using Amazon Web
-	// Services administrator credentials to access the API.
+	// WorkDocs authentication token. Not required when using Amazon Web Services
+	// administrator credentials to access the API.
 	AuthenticationToken *string
 
 	// Filters results based on entity metadata.

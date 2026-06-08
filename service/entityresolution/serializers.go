@@ -3682,6 +3682,18 @@ func awsRestjson1_serializeDocumentIntermediateSourceConfiguration(v *types.Inte
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMatchingConfig(v *types.MatchingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableTransitiveMatching != nil {
+		ok := object.Key("enableTransitiveMatching")
+		ok.Boolean(*v.EnableTransitiveMatching)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMatchingKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4029,6 +4041,13 @@ func awsRestjson1_serializeDocumentRuleConditionList(v []types.RuleCondition, va
 func awsRestjson1_serializeDocumentRuleConditionProperties(v *types.RuleConditionProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MatchingConfig != nil {
+		ok := object.Key("matchingConfig")
+		if err := awsRestjson1_serializeDocumentMatchingConfig(v.MatchingConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Rules != nil {
 		ok := object.Key("rules")

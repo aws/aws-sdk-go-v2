@@ -50,6 +50,10 @@ type GetResourceOauth2TokenInput struct {
 	// This member is required.
 	WorkloadIdentityToken *string
 
+	// The audiences to include in the token request. These are used to specify the
+	// intended recipients of the OAuth2 token.
+	Audiences []string
+
 	// A map of custom parameters to include in the authorization request to the
 	// resource credential provider. These parameters are in addition to the standard
 	// OAuth 2.0 flow parameters, and will not override them.
@@ -69,6 +73,10 @@ type GetResourceOauth2TokenInput struct {
 	// complete. This URL must be one of the provided URLs configured for the workload
 	// identity.
 	ResourceOauth2ReturnUrl *string
+
+	// The resources to include in the token request. These are used to specify the
+	// target resources for which the OAuth2 token is being requested.
+	Resources []string
 
 	// Unique identifier for the user's authentication session for retrieving OAuth2
 	// tokens. This ID tracks the authorization flow state across multiple requests and

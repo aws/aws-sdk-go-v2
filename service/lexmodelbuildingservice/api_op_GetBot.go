@@ -16,6 +16,8 @@ import (
 // and the bot version or alias.
 //
 // This operation requires permissions for the lex:GetBot action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBot(ctx context.Context, params *GetBotInput, optFns ...func(*Options)) (*GetBotOutput, error) {
 	if params == nil {
 		params = &GetBotInput{}

@@ -638,6 +638,18 @@ func TestCheckSnapshot_GetLegalHold(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPITRMalwareScanResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPITRMalwareScanResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPITRMalwareScanResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRecoveryPointIndexDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecoveryPointIndexDetails(context.Background(), nil, func(o *Options) {
@@ -1926,6 +1938,18 @@ func TestUpdateSnapshot_GetLegalHold(t *testing.T) {
 	_, err := svc.GetLegalHold(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLegalHold")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPITRMalwareScanResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPITRMalwareScanResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPITRMalwareScanResults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -976,6 +976,9 @@ type MutableClusterInfo struct {
 	// This controls storage mode for supported storage tiers.
 	StorageMode StorageMode
 
+	// Access control settings for zookeeper
+	ZookeeperAccess *ZookeeperAccess
+
 	noSmithyDocumentSerde
 }
 
@@ -1811,6 +1814,15 @@ type VpcConnectivityScram struct {
 type VpcConnectivityTls struct {
 
 	// TLS authentication is on or off for VPC connectivity.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Access control settings for zookeeper
+type ZookeeperAccess struct {
+
+	// Zookeeper Access was on or off for the cluster
 	Enabled *bool
 
 	noSmithyDocumentSerde

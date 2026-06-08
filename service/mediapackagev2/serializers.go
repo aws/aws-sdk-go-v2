@@ -671,6 +671,11 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 		}
 	}
 
+	if len(v.UriSeparator) > 0 {
+		ok := object.Key("UriSeparator")
+		ok.String(string(v.UriSeparator))
+	}
+
 	return nil
 }
 
@@ -2940,6 +2945,11 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
+	if len(v.UriSeparator) > 0 {
+		ok := object.Key("UriSeparator")
+		ok.String(string(v.UriSeparator))
+	}
+
 	return nil
 }
 
@@ -2976,6 +2986,13 @@ func awsRestjson1_serializeDocumentCdnIdentifierSecretArns(v []string, value smi
 func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.CreateDashManifestConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AvailabilityStartTimeConfiguration != nil {
+		ok := object.Key("AvailabilityStartTimeConfiguration")
+		if err := awsRestjson1_serializeDocumentDashAvailabilityStartTimeConfiguration(v.AvailabilityStartTimeConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BaseUrls != nil {
 		ok := object.Key("BaseUrls")
@@ -3073,6 +3090,11 @@ func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.Crea
 		ok.Integer(*v.SuggestedPresentationDelaySeconds)
 	}
 
+	if len(v.UriPathType) > 0 {
+		ok := object.Key("UriPathType")
+		ok.String(string(v.UriPathType))
+	}
+
 	if v.UtcTiming != nil {
 		ok := object.Key("UtcTiming")
 		if err := awsRestjson1_serializeDocumentDashUtcTiming(v.UtcTiming, ok); err != nil {
@@ -3141,6 +3163,11 @@ func awsRestjson1_serializeDocumentCreateHlsManifestConfiguration(v *types.Creat
 		}
 	}
 
+	if len(v.UriPathType) > 0 {
+		ok := object.Key("UriPathType")
+		ok.String(string(v.UriPathType))
+	}
+
 	if v.UrlEncodeChildManifest != nil {
 		ok := object.Key("UrlEncodeChildManifest")
 		ok.Boolean(*v.UrlEncodeChildManifest)
@@ -3207,6 +3234,11 @@ func awsRestjson1_serializeDocumentCreateLowLatencyHlsManifestConfiguration(v *t
 		}
 	}
 
+	if len(v.UriPathType) > 0 {
+		ok := object.Key("UriPathType")
+		ok.String(string(v.UriPathType))
+	}
+
 	if v.UrlEncodeChildManifest != nil {
 		ok := object.Key("UrlEncodeChildManifest")
 		ok.Boolean(*v.UrlEncodeChildManifest)
@@ -3266,6 +3298,33 @@ func awsRestjson1_serializeDocumentCreateMssManifests(v []types.CreateMssManifes
 		if err := awsRestjson1_serializeDocumentCreateMssManifestConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomAdTypeList(v []types.CustomAdType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashAvailabilityStartTimeConfiguration(v types.DashAvailabilityStartTimeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime:
+		av := object.Key("FixedAvailabilityStartTime")
+		av.String(smithytime.FormatDateTime(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -3812,6 +3871,13 @@ func awsRestjson1_serializeDocumentScte(v *types.Scte, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomAdTypes != nil {
+		ok := object.Key("CustomAdTypes")
+		if err := awsRestjson1_serializeDocumentCustomAdTypeList(v.CustomAdTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScteFilter != nil {
 		ok := object.Key("ScteFilter")
 		if err := awsRestjson1_serializeDocumentScteFilterList(v.ScteFilter, ok); err != nil {
@@ -3836,6 +3902,11 @@ func awsRestjson1_serializeDocumentScteDash(v *types.ScteDash, value smithyjson.
 		ok.String(string(v.AdMarkerDash))
 	}
 
+	if len(v.ScteInManifests) > 0 {
+		ok := object.Key("ScteInManifests")
+		ok.String(string(v.ScteInManifests))
+	}
+
 	return nil
 }
 
@@ -3857,6 +3928,11 @@ func awsRestjson1_serializeDocumentScteHls(v *types.ScteHls, value smithyjson.Va
 	if len(v.AdMarkerHls) > 0 {
 		ok := object.Key("AdMarkerHls")
 		ok.String(string(v.AdMarkerHls))
+	}
+
+	if len(v.ScteInManifests) > 0 {
+		ok := object.Key("ScteInManifests")
+		ok.String(string(v.ScteInManifests))
 	}
 
 	return nil

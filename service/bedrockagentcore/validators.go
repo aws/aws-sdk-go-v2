@@ -90,6 +90,26 @@ func (m *validateOpCompleteResourceTokenAuth) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateABTest struct {
+}
+
+func (*validateOpCreateABTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateABTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateABTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateABTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvent struct {
 }
 
@@ -105,6 +125,86 @@ func (m *validateOpCreateEvent) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePaymentInstrument struct {
+}
+
+func (*validateOpCreatePaymentInstrument) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePaymentInstrument) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePaymentInstrumentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePaymentInstrumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePaymentSession struct {
+}
+
+func (*validateOpCreatePaymentSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePaymentSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePaymentSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePaymentSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteABTest struct {
+}
+
+func (*validateOpDeleteABTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteABTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteABTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteABTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBatchEvaluation struct {
+}
+
+func (*validateOpDeleteBatchEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBatchEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBatchEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBatchEvaluationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +250,66 @@ func (m *validateOpDeleteMemoryRecord) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePaymentInstrument struct {
+}
+
+func (*validateOpDeletePaymentInstrument) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePaymentInstrument) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePaymentInstrumentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePaymentInstrumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePaymentSession struct {
+}
+
+func (*validateOpDeletePaymentSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePaymentSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePaymentSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePaymentSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRecommendation struct {
+}
+
+func (*validateOpDeleteRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEvaluate struct {
 }
 
@@ -170,6 +330,26 @@ func (m *validateOpEvaluate) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetABTest struct {
+}
+
+func (*validateOpGetABTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetABTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetABTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetABTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAgentCard struct {
 }
 
@@ -185,6 +365,26 @@ func (m *validateOpGetAgentCard) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgentCardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBatchEvaluation struct {
+}
+
+func (*validateOpGetBatchEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBatchEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBatchEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBatchEvaluationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +470,86 @@ func (m *validateOpGetMemoryRecord) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPaymentInstrumentBalance struct {
+}
+
+func (*validateOpGetPaymentInstrumentBalance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentInstrumentBalance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentInstrumentBalanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentInstrumentBalanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPaymentInstrument struct {
+}
+
+func (*validateOpGetPaymentInstrument) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentInstrument) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentInstrumentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentInstrumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPaymentSession struct {
+}
+
+func (*validateOpGetPaymentSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPaymentSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPaymentSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPaymentSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecommendation struct {
+}
+
+func (*validateOpGetRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceApiKey struct {
 }
 
@@ -305,6 +585,26 @@ func (m *validateOpGetResourceOauth2Token) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourceOauth2TokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourcePaymentToken struct {
+}
+
+func (*validateOpGetResourcePaymentToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePaymentToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePaymentTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePaymentTokenInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +890,46 @@ func (m *validateOpListMemoryRecords) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPaymentInstruments struct {
+}
+
+func (*validateOpListPaymentInstruments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPaymentInstruments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPaymentInstrumentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPaymentInstrumentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPaymentSessions struct {
+}
+
+func (*validateOpListPaymentSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPaymentSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPaymentSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPaymentSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSessions struct {
 }
 
@@ -605,6 +945,26 @@ func (m *validateOpListSessions) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpProcessPayment struct {
+}
+
+func (*validateOpProcessPayment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpProcessPayment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ProcessPaymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpProcessPaymentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +1030,26 @@ func (m *validateOpSearchRegistryRecords) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartBatchEvaluation struct {
+}
+
+func (*validateOpStartBatchEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBatchEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBatchEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBatchEvaluationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartBrowserSession struct {
 }
 
@@ -725,6 +1105,46 @@ func (m *validateOpStartMemoryExtractionJob) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartMemoryExtractionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRecommendation struct {
+}
+
+func (*validateOpStartRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopBatchEvaluation struct {
+}
+
+func (*validateOpStopBatchEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopBatchEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopBatchEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopBatchEvaluationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +1210,26 @@ func (m *validateOpStopRuntimeSession) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateABTest struct {
+}
+
+func (*validateOpUpdateABTest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateABTest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateABTestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateABTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBrowserStream struct {
 }
 
@@ -826,8 +1266,28 @@ func addOpCompleteResourceTokenAuthValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCompleteResourceTokenAuth{}, middleware.After)
 }
 
+func addOpCreateABTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateABTest{}, middleware.After)
+}
+
 func addOpCreateEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvent{}, middleware.After)
+}
+
+func addOpCreatePaymentInstrumentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePaymentInstrument{}, middleware.After)
+}
+
+func addOpCreatePaymentSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePaymentSession{}, middleware.After)
+}
+
+func addOpDeleteABTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteABTest{}, middleware.After)
+}
+
+func addOpDeleteBatchEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBatchEvaluation{}, middleware.After)
 }
 
 func addOpDeleteEventValidationMiddleware(stack *middleware.Stack) error {
@@ -838,12 +1298,32 @@ func addOpDeleteMemoryRecordValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteMemoryRecord{}, middleware.After)
 }
 
+func addOpDeletePaymentInstrumentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePaymentInstrument{}, middleware.After)
+}
+
+func addOpDeletePaymentSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePaymentSession{}, middleware.After)
+}
+
+func addOpDeleteRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecommendation{}, middleware.After)
+}
+
 func addOpEvaluateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEvaluate{}, middleware.After)
 }
 
+func addOpGetABTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetABTest{}, middleware.After)
+}
+
 func addOpGetAgentCardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentCard{}, middleware.After)
+}
+
+func addOpGetBatchEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBatchEvaluation{}, middleware.After)
 }
 
 func addOpGetBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -862,12 +1342,32 @@ func addOpGetMemoryRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMemoryRecord{}, middleware.After)
 }
 
+func addOpGetPaymentInstrumentBalanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentInstrumentBalance{}, middleware.After)
+}
+
+func addOpGetPaymentInstrumentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentInstrument{}, middleware.After)
+}
+
+func addOpGetPaymentSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPaymentSession{}, middleware.After)
+}
+
+func addOpGetRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecommendation{}, middleware.After)
+}
+
 func addOpGetResourceApiKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceApiKey{}, middleware.After)
 }
 
 func addOpGetResourceOauth2TokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceOauth2Token{}, middleware.After)
+}
+
+func addOpGetResourcePaymentTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePaymentToken{}, middleware.After)
 }
 
 func addOpGetWorkloadAccessTokenForJWTValidationMiddleware(stack *middleware.Stack) error {
@@ -926,8 +1426,20 @@ func addOpListMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMemoryRecords{}, middleware.After)
 }
 
+func addOpListPaymentInstrumentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPaymentInstruments{}, middleware.After)
+}
+
+func addOpListPaymentSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPaymentSessions{}, middleware.After)
+}
+
 func addOpListSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSessions{}, middleware.After)
+}
+
+func addOpProcessPaymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpProcessPayment{}, middleware.After)
 }
 
 func addOpRetrieveMemoryRecordsValidationMiddleware(stack *middleware.Stack) error {
@@ -942,6 +1454,10 @@ func addOpSearchRegistryRecordsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpSearchRegistryRecords{}, middleware.After)
 }
 
+func addOpStartBatchEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBatchEvaluation{}, middleware.After)
+}
+
 func addOpStartBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartBrowserSession{}, middleware.After)
 }
@@ -952,6 +1468,14 @@ func addOpStartCodeInterpreterSessionValidationMiddleware(stack *middleware.Stac
 
 func addOpStartMemoryExtractionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMemoryExtractionJob{}, middleware.After)
+}
+
+func addOpStartRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRecommendation{}, middleware.After)
+}
+
+func addOpStopBatchEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopBatchEvaluation{}, middleware.After)
 }
 
 func addOpStopBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -966,8 +1490,68 @@ func addOpStopRuntimeSessionValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpStopRuntimeSession{}, middleware.After)
 }
 
+func addOpUpdateABTestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateABTest{}, middleware.After)
+}
+
 func addOpUpdateBrowserStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrowserStream{}, middleware.After)
+}
+
+func validateABTestEvaluationConfig(v types.ABTestEvaluationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ABTestEvaluationConfig"}
+	switch uv := v.(type) {
+	case *types.ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig:
+		if err := validatePerVariantOnlineEvaluationConfigList(uv.Value); err != nil {
+			invalidParams.AddNested("[perVariantOnlineEvaluationConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentTracesConfig(v types.AgentTracesConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentTracesConfig"}
+	switch uv := v.(type) {
+	case *types.AgentTracesConfigMemberCloudwatchLogs:
+		if err := validateCloudWatchLogsTraceConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[cloudwatchLogs]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmount(v *types.Amount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Amount"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBasicAuth(v *types.BasicAuth) error {
@@ -1206,6 +1790,179 @@ func validateCertificates(v []types.Certificate) error {
 	}
 }
 
+func validateCloudWatchLogsFilter(v *types.CloudWatchLogsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsFilter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogsFilterList(v []types.CloudWatchLogsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsFilterList"}
+	for i := range v {
+		if err := validateCloudWatchLogsFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogsRule(v *types.CloudWatchLogsRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsRule"}
+	if v.Filters != nil {
+		if err := validateCloudWatchLogsFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogsSource(v *types.CloudWatchLogsSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsSource"}
+	if v.ServiceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNames"))
+	}
+	if v.LogGroupNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCloudWatchLogsTraceConfig(v *types.CloudWatchLogsTraceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsTraceConfig"}
+	if v.LogGroupArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArns"))
+	}
+	if v.ServiceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNames"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Rule != nil {
+		if err := validateCloudWatchLogsRule(v.Rule); err != nil {
+			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCoinbaseCdpTokenRequestInput(v *types.CoinbaseCdpTokenRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoinbaseCdpTokenRequestInput"}
+	if len(v.RequestMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestMethod"))
+	}
+	if v.RequestPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationBundleRef(v *types.ConfigurationBundleRef) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationBundleRef"}
+	if v.BundleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleArn"))
+	}
+	if v.BundleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationBundleToolEntry(v *types.ConfigurationBundleToolEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationBundleToolEntry"}
+	if v.ToolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToolName"))
+	}
+	if v.ToolDescriptionJsonPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToolDescriptionJsonPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationBundleToolEntryList(v []types.ConfigurationBundleToolEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationBundleToolEntryList"}
+	for i := range v {
+		if err := validateConfigurationBundleToolEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContext(v types.Context) error {
 	if v == nil {
 		return nil
@@ -1243,6 +2000,84 @@ func validateConversational(v *types.Conversational) error {
 	}
 }
 
+func validateCryptoX402PaymentInput(v *types.CryptoX402PaymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CryptoX402PaymentInput"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceConfig(v types.DataSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfig"}
+	switch uv := v.(type) {
+	case *types.DataSourceConfigMemberCloudWatchLogs:
+		if err := validateCloudWatchLogsSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[cloudWatchLogs]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmbeddedCryptoWallet(v *types.EmbeddedCryptoWallet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmbeddedCryptoWallet"}
+	if len(v.Network) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if v.LinkedAccounts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkedAccounts"))
+	} else if v.LinkedAccounts != nil {
+		if err := validateLinkedAccountList(v.LinkedAccounts); err != nil {
+			invalidParams.AddNested("LinkedAccounts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluationMetadata(v types.EvaluationMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationMetadata"}
+	switch uv := v.(type) {
+	case *types.EvaluationMetadataMemberSessionMetadata:
+		if err := validateSessionMetadataList(uv.Value); err != nil {
+			invalidParams.AddNested("[sessionMetadata]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluationReferenceInput(v *types.EvaluationReferenceInput) error {
 	if v == nil {
 		return nil
@@ -1269,6 +2104,38 @@ func validateEvaluationReferenceInputs(v []types.EvaluationReferenceInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationReferenceInputs"}
 	for i := range v {
 		if err := validateEvaluationReferenceInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluator(v *types.Evaluator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Evaluator"}
+	if v.EvaluatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluatorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluatorList(v []types.Evaluator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluatorList"}
+	for i := range v {
+		if err := validateEvaluator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1510,6 +2377,21 @@ func validateHarnessInlineFunctionConfig(v *types.HarnessInlineFunctionConfig) e
 	}
 }
 
+func validateHarnessLiteLlmModelConfig(v *types.HarnessLiteLlmModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessLiteLlmModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHarnessMessage(v *types.HarnessMessage) error {
 	if v == nil {
 		return nil
@@ -1563,6 +2445,11 @@ func validateHarnessModelConfiguration(v types.HarnessModelConfiguration) error 
 	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
 		if err := validateHarnessGeminiModelConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[geminiModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessModelConfigurationMemberLiteLlmModelConfig:
+		if err := validateHarnessLiteLlmModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[liteLlmModelConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
@@ -1637,6 +2524,97 @@ func validateHarnessRemoteMcpConfig(v *types.HarnessRemoteMcpConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpConfig"}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkill(v types.HarnessSkill) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkill"}
+	switch uv := v.(type) {
+	case *types.HarnessSkillMemberGit:
+		if err := validateHarnessSkillGitSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[git]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessSkillMemberS3:
+		if err := validateHarnessSkillS3Source(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillGitAuth(v *types.HarnessSkillGitAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillGitAuth"}
+	if v.CredentialArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillGitSource(v *types.HarnessSkillGitSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillGitSource"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Auth != nil {
+		if err := validateHarnessSkillGitAuth(v.Auth); err != nil {
+			invalidParams.AddNested("Auth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkills(v []types.HarnessSkill) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkills"}
+	for i := range v {
+		if err := validateHarnessSkill(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillS3Source(v *types.HarnessSkillS3Source) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillS3Source"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1834,6 +2812,144 @@ func validateKeyTypeArguments(v *types.KeyTypeArguments) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KeyTypeArguments"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccount(v types.LinkedAccount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccount"}
+	switch uv := v.(type) {
+	case *types.LinkedAccountMemberDeveloperJwt:
+		if err := validateLinkedAccountDeveloperJwt(&uv.Value); err != nil {
+			invalidParams.AddNested("[developerJwt]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountMemberEmail:
+		if err := validateLinkedAccountEmail(&uv.Value); err != nil {
+			invalidParams.AddNested("[email]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountMemberOAuth2:
+		if err := validateLinkedAccountOAuth2(uv.Value); err != nil {
+			invalidParams.AddNested("[oAuth2]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountMemberSms:
+		if err := validateLinkedAccountSms(&uv.Value); err != nil {
+			invalidParams.AddNested("[sms]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccountDeveloperJwt(v *types.LinkedAccountDeveloperJwt) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccountDeveloperJwt"}
+	if v.Kid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Kid"))
+	}
+	if v.Sub == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sub"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccountEmail(v *types.LinkedAccountEmail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccountEmail"}
+	if v.EmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccountList(v []types.LinkedAccount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccountList"}
+	for i := range v {
+		if err := validateLinkedAccount(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccountOAuth2(v types.LinkedAccountOAuth2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccountOAuth2"}
+	switch uv := v.(type) {
+	case *types.LinkedAccountOAuth2MemberApple:
+		if err := validateOAuth2Authentication(&uv.Value); err != nil {
+			invalidParams.AddNested("[apple]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountOAuth2MemberGithub:
+		if err := validateOAuth2Authentication(&uv.Value); err != nil {
+			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountOAuth2MemberGoogle:
+		if err := validateOAuth2Authentication(&uv.Value); err != nil {
+			invalidParams.AddNested("[google]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountOAuth2MemberTelegram:
+		if err := validateOAuth2Authentication(&uv.Value); err != nil {
+			invalidParams.AddNested("[telegram]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LinkedAccountOAuth2MemberX:
+		if err := validateOAuth2Authentication(&uv.Value); err != nil {
+			invalidParams.AddNested("[x]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLinkedAccountSms(v *types.LinkedAccountSms) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkedAccountSms"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2063,6 +3179,21 @@ func validateMouseScrollArguments(v *types.MouseScrollArguments) error {
 	}
 }
 
+func validateOAuth2Authentication(v *types.OAuth2Authentication) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OAuth2Authentication"}
+	if v.Sub == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sub"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOAuthCredentialProvider(v *types.OAuthCredentialProvider) error {
 	if v == nil {
 		return nil
@@ -2107,6 +3238,103 @@ func validatePayloadTypeList(v []types.PayloadType) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PayloadTypeList"}
 	for i := range v {
 		if err := validatePayloadType(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentInput(v types.PaymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentInput"}
+	switch uv := v.(type) {
+	case *types.PaymentInputMemberCryptoX402:
+		if err := validateCryptoX402PaymentInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[cryptoX402]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentInstrumentDetails(v types.PaymentInstrumentDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentInstrumentDetails"}
+	switch uv := v.(type) {
+	case *types.PaymentInstrumentDetailsMemberEmbeddedCryptoWallet:
+		if err := validateEmbeddedCryptoWallet(&uv.Value); err != nil {
+			invalidParams.AddNested("[embeddedCryptoWallet]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentTokenRequestInput(v types.PaymentTokenRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentTokenRequestInput"}
+	switch uv := v.(type) {
+	case *types.PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest:
+		if err := validateCoinbaseCdpTokenRequestInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[coinbaseCdpTokenRequest]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PaymentTokenRequestInputMemberStripePrivyTokenRequest:
+		if err := validateStripePrivyTokenRequestInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[stripePrivyTokenRequest]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePerVariantOnlineEvaluationConfig(v *types.PerVariantOnlineEvaluationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerVariantOnlineEvaluationConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.OnlineEvaluationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OnlineEvaluationConfigArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePerVariantOnlineEvaluationConfigList(v []types.PerVariantOnlineEvaluationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerVariantOnlineEvaluationConfigList"}
+	for i := range v {
+		if err := validatePerVariantOnlineEvaluationConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2191,6 +3419,81 @@ func validateProxyCredentials(v types.ProxyCredentials) error {
 	}
 }
 
+func validateRecommendationConfig(v types.RecommendationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationConfig"}
+	switch uv := v.(type) {
+	case *types.RecommendationConfigMemberSystemPromptRecommendationConfig:
+		if err := validateSystemPromptRecommendationConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[systemPromptRecommendationConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RecommendationConfigMemberToolDescriptionRecommendationConfig:
+		if err := validateToolDescriptionRecommendationConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolDescriptionRecommendationConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendationEvaluationConfig(v *types.RecommendationEvaluationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationEvaluationConfig"}
+	if v.Evaluators == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Evaluators"))
+	} else if v.Evaluators != nil {
+		if err := validateRecommendationEvaluatorList(v.Evaluators); err != nil {
+			invalidParams.AddNested("Evaluators", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendationEvaluatorList(v []types.RecommendationEvaluatorReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationEvaluatorList"}
+	for i := range v {
+		if err := validateRecommendationEvaluatorReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendationEvaluatorReference(v *types.RecommendationEvaluatorReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationEvaluatorReference"}
+	if v.EvaluatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluatorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceLocation(v types.ResourceLocation) error {
 	if v == nil {
 		return nil
@@ -2263,6 +3566,57 @@ func validateSecretsManagerLocation(v *types.SecretsManagerLocation) error {
 	}
 }
 
+func validateSessionLimits(v *types.SessionLimits) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionLimits"}
+	if v.MaxSpendAmount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxSpendAmount"))
+	} else if v.MaxSpendAmount != nil {
+		if err := validateAmount(v.MaxSpendAmount); err != nil {
+			invalidParams.AddNested("MaxSpendAmount", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionMetadataList(v []types.SessionMetadataShape) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionMetadataList"}
+	for i := range v {
+		if err := validateSessionMetadataShape(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionMetadataShape(v *types.SessionMetadataShape) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionMetadataShape"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSpanContext(v *types.SpanContext) error {
 	if v == nil {
 		return nil
@@ -2270,6 +3624,112 @@ func validateSpanContext(v *types.SpanContext) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SpanContext"}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStripePrivyTokenRequestInput(v *types.StripePrivyTokenRequestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StripePrivyTokenRequestInput"}
+	if v.RequestPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestPath"))
+	}
+	if v.RequestBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestBody"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemPromptConfig(v types.SystemPromptConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemPromptConfig"}
+	switch uv := v.(type) {
+	case *types.SystemPromptConfigMemberConfigurationBundle:
+		if err := validateSystemPromptConfigurationBundle(&uv.Value); err != nil {
+			invalidParams.AddNested("[configurationBundle]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemPromptConfigurationBundle(v *types.SystemPromptConfigurationBundle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemPromptConfigurationBundle"}
+	if v.BundleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleArn"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if v.SystemPromptJsonPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SystemPromptJsonPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSystemPromptRecommendationConfig(v *types.SystemPromptRecommendationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SystemPromptRecommendationConfig"}
+	if v.SystemPrompt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SystemPrompt"))
+	} else if v.SystemPrompt != nil {
+		if err := validateSystemPromptConfig(v.SystemPrompt); err != nil {
+			invalidParams.AddNested("SystemPrompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentTraces == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentTraces"))
+	} else if v.AgentTraces != nil {
+		if err := validateAgentTracesConfig(v.AgentTraces); err != nil {
+			invalidParams.AddNested("AgentTraces", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationConfig"))
+	} else if v.EvaluationConfig != nil {
+		if err := validateRecommendationEvaluationConfig(v.EvaluationConfig); err != nil {
+			invalidParams.AddNested("EvaluationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetRef(v *types.TargetRef) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetRef"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2286,6 +3746,199 @@ func validateToolArguments(v *types.ToolArguments) error {
 	if v.Content != nil {
 		if err := validateInputContentBlockList(v.Content); err != nil {
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionConfigurationBundle(v *types.ToolDescriptionConfigurationBundle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionConfigurationBundle"}
+	if v.BundleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleArn"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if v.Tools == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
+	} else if v.Tools != nil {
+		if err := validateConfigurationBundleToolEntryList(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionInput(v *types.ToolDescriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionInput"}
+	if v.ToolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToolName"))
+	}
+	if v.ToolDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToolDescription"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionList(v []types.ToolDescriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionList"}
+	for i := range v {
+		if err := validateToolDescriptionInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionRecommendationConfig(v *types.ToolDescriptionRecommendationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionRecommendationConfig"}
+	if v.ToolDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToolDescription"))
+	} else if v.ToolDescription != nil {
+		if err := validateToolDescriptionSource(v.ToolDescription); err != nil {
+			invalidParams.AddNested("ToolDescription", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentTraces == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentTraces"))
+	} else if v.AgentTraces != nil {
+		if err := validateAgentTracesConfig(v.AgentTraces); err != nil {
+			invalidParams.AddNested("AgentTraces", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionSource(v types.ToolDescriptionSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionSource"}
+	switch uv := v.(type) {
+	case *types.ToolDescriptionSourceMemberConfigurationBundle:
+		if err := validateToolDescriptionConfigurationBundle(&uv.Value); err != nil {
+			invalidParams.AddNested("[configurationBundle]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ToolDescriptionSourceMemberToolDescriptionText:
+		if err := validateToolDescriptionTextInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolDescriptionText]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolDescriptionTextInput(v *types.ToolDescriptionTextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolDescriptionTextInput"}
+	if v.Tools == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
+	} else if v.Tools != nil {
+		if err := validateToolDescriptionList(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVariant(v *types.Variant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Variant"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Weight == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
+	}
+	if v.VariantConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VariantConfiguration"))
+	} else if v.VariantConfiguration != nil {
+		if err := validateVariantConfiguration(v.VariantConfiguration); err != nil {
+			invalidParams.AddNested("VariantConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVariantConfiguration(v *types.VariantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VariantConfiguration"}
+	if v.ConfigurationBundle != nil {
+		if err := validateConfigurationBundleRef(v.ConfigurationBundle); err != nil {
+			invalidParams.AddNested("ConfigurationBundle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Target != nil {
+		if err := validateTargetRef(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVariantList(v []types.Variant) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VariantList"}
+	for i := range v {
+		if err := validateVariant(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2397,6 +4050,41 @@ func validateOpCompleteResourceTokenAuthInput(v *CompleteResourceTokenAuthInput)
 	}
 }
 
+func validateOpCreateABTestInput(v *CreateABTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateABTestInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if v.Variants == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Variants"))
+	} else if v.Variants != nil {
+		if err := validateVariantList(v.Variants); err != nil {
+			invalidParams.AddNested("Variants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationConfig"))
+	} else if v.EvaluationConfig != nil {
+		if err := validateABTestEvaluationConfig(v.EvaluationConfig); err != nil {
+			invalidParams.AddNested("EvaluationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEventInput(v *CreateEventInput) error {
 	if v == nil {
 		return nil
@@ -2422,6 +4110,87 @@ func validateOpCreateEventInput(v *CreateEventInput) error {
 		if err := validateBranch(v.Branch); err != nil {
 			invalidParams.AddNested("Branch", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePaymentInstrumentInput(v *CreatePaymentInstrumentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePaymentInstrumentInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if len(v.PaymentInstrumentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentType"))
+	}
+	if v.PaymentInstrumentDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentDetails"))
+	} else if v.PaymentInstrumentDetails != nil {
+		if err := validatePaymentInstrumentDetails(v.PaymentInstrumentDetails); err != nil {
+			invalidParams.AddNested("PaymentInstrumentDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePaymentSessionInput(v *CreatePaymentSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePaymentSessionInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.Limits != nil {
+		if err := validateSessionLimits(v.Limits); err != nil {
+			invalidParams.AddNested("Limits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExpiryTimeInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpiryTimeInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteABTestInput(v *DeleteABTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteABTestInput"}
+	if v.AbTestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AbTestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBatchEvaluationInput(v *DeleteBatchEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchEvaluationInput"}
+	if v.BatchEvaluationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2472,6 +4241,60 @@ func validateOpDeleteMemoryRecordInput(v *DeleteMemoryRecordInput) error {
 	}
 }
 
+func validateOpDeletePaymentInstrumentInput(v *DeletePaymentInstrumentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePaymentInstrumentInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if v.PaymentInstrumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePaymentSessionInput(v *DeletePaymentSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePaymentSessionInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentSessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRecommendationInput(v *DeleteRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecommendationInput"}
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEvaluateInput(v *EvaluateInput) error {
 	if v == nil {
 		return nil
@@ -2495,6 +4318,21 @@ func validateOpEvaluateInput(v *EvaluateInput) error {
 	}
 }
 
+func validateOpGetABTestInput(v *GetABTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetABTestInput"}
+	if v.AbTestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AbTestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAgentCardInput(v *GetAgentCardInput) error {
 	if v == nil {
 		return nil
@@ -2502,6 +4340,21 @@ func validateOpGetAgentCardInput(v *GetAgentCardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAgentCardInput"}
 	if v.AgentRuntimeArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBatchEvaluationInput(v *GetBatchEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBatchEvaluationInput"}
+	if v.BatchEvaluationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2588,6 +4441,84 @@ func validateOpGetMemoryRecordInput(v *GetMemoryRecordInput) error {
 	}
 }
 
+func validateOpGetPaymentInstrumentBalanceInput(v *GetPaymentInstrumentBalanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentInstrumentBalanceInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentConnectorId"))
+	}
+	if v.PaymentInstrumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentId"))
+	}
+	if len(v.Chain) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Chain"))
+	}
+	if len(v.Token) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPaymentInstrumentInput(v *GetPaymentInstrumentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentInstrumentInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentInstrumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPaymentSessionInput(v *GetPaymentSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPaymentSessionInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentSessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecommendationInput(v *GetRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendationInput"}
+	if v.RecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceApiKeyInput(v *GetResourceApiKeyInput) error {
 	if v == nil {
 		return nil
@@ -2622,6 +4553,31 @@ func validateOpGetResourceOauth2TokenInput(v *GetResourceOauth2TokenInput) error
 	}
 	if len(v.Oauth2Flow) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Oauth2Flow"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourcePaymentTokenInput(v *GetResourcePaymentTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePaymentTokenInput"}
+	if v.WorkloadIdentityToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadIdentityToken"))
+	}
+	if v.ResourceCredentialProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceCredentialProviderName"))
+	}
+	if v.PaymentTokenRequest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentTokenRequest"))
+	} else if v.PaymentTokenRequest != nil {
+		if err := validatePaymentTokenRequestInput(v.PaymentTokenRequest); err != nil {
+			invalidParams.AddNested("PaymentTokenRequest", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2797,6 +4753,11 @@ func validateOpInvokeHarnessInput(v *InvokeHarnessInput) error {
 			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Skills != nil {
+		if err := validateHarnessSkills(v.Skills); err != nil {
+			invalidParams.AddNested("Skills", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2898,6 +4859,41 @@ func validateOpListMemoryRecordsInput(v *ListMemoryRecordsInput) error {
 	if v.MemoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
 	}
+	if v.MetadataFilters != nil {
+		if err := validateMemoryMetadataFilterList(v.MetadataFilters); err != nil {
+			invalidParams.AddNested("MetadataFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPaymentInstrumentsInput(v *ListPaymentInstrumentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPaymentInstrumentsInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPaymentSessionsInput(v *ListPaymentSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPaymentSessionsInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2915,6 +4911,37 @@ func validateOpListSessionsInput(v *ListSessionsInput) error {
 	}
 	if v.ActorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpProcessPaymentInput(v *ProcessPaymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProcessPaymentInput"}
+	if v.PaymentManagerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentManagerArn"))
+	}
+	if v.PaymentSessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentSessionId"))
+	}
+	if v.PaymentInstrumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInstrumentId"))
+	}
+	if len(v.PaymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentType"))
+	}
+	if v.PaymentInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentInput"))
+	} else if v.PaymentInput != nil {
+		if err := validatePaymentInput(v.PaymentInput); err != nil {
+			invalidParams.AddNested("PaymentInput", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2976,6 +5003,38 @@ func validateOpSearchRegistryRecordsInput(v *SearchRegistryRecordsInput) error {
 	}
 	if v.RegistryIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistryIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartBatchEvaluationInput(v *StartBatchEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBatchEvaluationInput"}
+	if v.BatchEvaluationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationName"))
+	}
+	if v.Evaluators != nil {
+		if err := validateEvaluatorList(v.Evaluators); err != nil {
+			invalidParams.AddNested("Evaluators", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceConfig"))
+	} else if v.DataSourceConfig != nil {
+		if err := validateDataSourceConfig(v.DataSourceConfig); err != nil {
+			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluationMetadata != nil {
+		if err := validateEvaluationMetadata(v.EvaluationMetadata); err != nil {
+			invalidParams.AddNested("EvaluationMetadata", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3071,6 +5130,46 @@ func validateOpStartMemoryExtractionJobInput(v *StartMemoryExtractionJobInput) e
 	}
 }
 
+func validateOpStartRecommendationInput(v *StartRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRecommendationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.RecommendationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationConfig"))
+	} else if v.RecommendationConfig != nil {
+		if err := validateRecommendationConfig(v.RecommendationConfig); err != nil {
+			invalidParams.AddNested("RecommendationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopBatchEvaluationInput(v *StopBatchEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopBatchEvaluationInput"}
+	if v.BatchEvaluationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopBrowserSessionInput(v *StopBrowserSessionInput) error {
 	if v == nil {
 		return nil
@@ -3117,6 +5216,31 @@ func validateOpStopRuntimeSessionInput(v *StopRuntimeSessionInput) error {
 	}
 	if v.AgentRuntimeArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateABTestInput(v *UpdateABTestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateABTestInput"}
+	if v.AbTestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AbTestId"))
+	}
+	if v.Variants != nil {
+		if err := validateVariantList(v.Variants); err != nil {
+			invalidParams.AddNested("Variants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EvaluationConfig != nil {
+		if err := validateABTestEvaluationConfig(v.EvaluationConfig); err != nil {
+			invalidParams.AddNested("EvaluationConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

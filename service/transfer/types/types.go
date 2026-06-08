@@ -2643,6 +2643,10 @@ func (*UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isUpdateWe
 // including the subnet IDs where the endpoint should be deployed.
 type UpdateWebAppVpcConfig struct {
 
+	// The IP address type for the web app's VPC endpoint. This determines whether the
+	// endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.
+	IpAddressType WebAppVpcEndpointIpAddressType
+
 	// The list of subnet IDs within the VPC where the web app endpoint should be
 	// deployed during the update operation.
 	SubnetIds []string
@@ -2735,6 +2739,10 @@ func (*WebAppUnitsMemberProvisioned) isWebAppUnits() {}
 // Contains the VPC configuration settings for hosting a web app endpoint,
 // including the VPC ID, subnet IDs, and security group IDs for access control.
 type WebAppVpcConfig struct {
+
+	// The IP address type for the web app's VPC endpoint. This determines whether the
+	// endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.
+	IpAddressType WebAppVpcEndpointIpAddressType
 
 	// The list of security group IDs that control access to the web app endpoint.
 	// These security groups determine which sources can access the endpoint based on

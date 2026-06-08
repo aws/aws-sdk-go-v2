@@ -23566,6 +23566,16 @@ func awsRestjson1_deserializeDocumentMemberChangeSpecification(v **types.MemberC
 				return err
 			}
 
+		case "mlMemberAbilities":
+			if err := awsRestjson1_deserializeDocumentMLMemberAbilities(&sv.MlMemberAbilities, value); err != nil {
+				return err
+			}
+
+		case "paymentConfiguration":
+			if err := awsRestjson1_deserializeDocumentPaymentConfiguration(&sv.PaymentConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -25584,6 +25594,15 @@ func awsRestjson1_deserializeDocumentProtectedJob(v **types.ProtectedJob, value 
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "jobComputePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.JobComputePayerAccountId = ptr.String(jtv)
+			}
+
 		case "jobParameters":
 			if err := awsRestjson1_deserializeDocumentProtectedJobParameters(&sv.JobParameters, value); err != nil {
 				return err
@@ -26483,6 +26502,15 @@ func awsRestjson1_deserializeDocumentProtectedJobSummary(v **types.ProtectedJobS
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "jobComputePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.JobComputePayerAccountId = ptr.String(jtv)
+			}
+
 		case "membershipArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26694,6 +26722,15 @@ func awsRestjson1_deserializeDocumentProtectedQuery(v **types.ProtectedQuery, va
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipId = ptr.String(jtv)
+			}
+
+		case "queryComputePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.QueryComputePayerAccountId = ptr.String(jtv)
 			}
 
 		case "result":
@@ -27519,6 +27556,15 @@ func awsRestjson1_deserializeDocumentProtectedQuerySummary(v **types.ProtectedQu
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipId = ptr.String(jtv)
+			}
+
+		case "queryComputePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.QueryComputePayerAccountId = ptr.String(jtv)
 			}
 
 		case "receiverConfigurations":

@@ -32,25 +32,11 @@ func (c *Client) CreateImportedImage(ctx context.Context, params *CreateImported
 
 type CreateImportedImageInput struct {
 
-	// The ARN of the IAM role that allows WorkSpaces Applications to access your AMI.
-	// The role must have permissions to modify image attributes and describe images,
-	// with a trust relationship allowing appstream.amazonaws.com to assume the role.
-	//
-	// This member is required.
-	IamRoleArn *string
-
 	// A unique name for the imported image. The name must be between 1 and 100
 	// characters and can contain letters, numbers, underscores, periods, and hyphens.
 	//
 	// This member is required.
 	Name *string
-
-	// The ID of the EC2 AMI to import. The AMI must meet specific requirements
-	// including Windows Server 2022 Full Base, UEFI boot mode, TPM 2.0 support, and
-	// proper drivers.
-	//
-	// This member is required.
-	SourceAmiId *string
 
 	// The version of the WorkSpaces Applications agent to use for the imported image.
 	// Choose CURRENT_LATEST to use the agent version available at the time of import,
@@ -76,14 +62,25 @@ type CreateImportedImageInput struct {
 	// actual import operation.
 	DryRun *bool
 
+	// The ARN of the IAM role that allows WorkSpaces Applications to access your AMI.
+	// The role must have permissions to modify image attributes and describe images,
+	// with a trust relationship allowing appstream.amazonaws.com to assume the role.
+	IamRoleArn *string
+
 	// Configuration for runtime validation of the imported image. When specified,
 	// WorkSpaces Applications provisions an instance to test streaming functionality,
 	// which helps ensure the image is suitable for use.
 	RuntimeValidationConfig *types.RuntimeValidationConfig
 
+	// The ID of the EC2 AMI to import.
+	SourceAmiId *string
+
 	// The tags to apply to the imported image. Tags help you organize and manage your
 	// WorkSpaces Applications resources.
 	Tags map[string]string
+
+	// The ID of the Workspaces Image to import.
+	WorkspaceImageId *string
 
 	noSmithyDocumentSerde
 }

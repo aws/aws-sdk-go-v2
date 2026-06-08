@@ -6,9 +6,12 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Geometry defined as a circle. When request routing boundary was set as
-// AutoCircle , the response routing boundary will return Circle derived from the
-// AutoCircle settings.
+// Geometry defined as a circle. The circle defines the routing boundary area. Any
+// waypoints outside the circle will result in a route matrix entry error.
+//
+// You can specify a Circle directly in the request, or it will be auto-derived
+// when AutoCircle is used. When AutoCircle is set in the request, the response
+// routing boundary will return Circle derived from the AutoCircle settings.
 type Circle struct {
 
 	// Center of the Circle in World Geodetic System (WGS 84) format: [longitude,
@@ -23,6 +26,8 @@ type Circle struct {
 	// Radius of the Circle.
 	//
 	// Unit: meters
+	//
+	// Valid Range: Minimum value of 0. Maximum value of 200000.
 	//
 	// This member is required.
 	Radius *float64
@@ -1006,6 +1011,24 @@ type Route struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the availability of accessibility features.
+type RouteAccessibilityAvailabilityDetails struct {
+
+	// Wheelchair accessibility status.
+	Wheelchair RouteAccessibilityAvailability
+
+	noSmithyDocumentSerde
+}
+
+// Details of the access point.
+type RouteAccessPointDetails struct {
+
+	// Wheelchair accessibility information for the access point.
+	Accessibility *RouteAccessibilityAvailabilityDetails
+
+	noSmithyDocumentSerde
+}
+
 // Features that are allowed while calculating a route.
 type RouteAllowOptions struct {
 
@@ -1018,6 +1041,20 @@ type RouteAllowOptions struct {
 	//
 	// Default value: false
 	Hov *bool
+
+	noSmithyDocumentSerde
+}
+
+// Required attribution to display.
+type RouteAttribution struct {
+
+	// The URL to an external resource.
+	//
+	// This member is required.
+	WebLink *RouteWebLink
+
+	// The type of the attribution link.
+	AttributionType RouteAttributionType
 
 	noSmithyDocumentSerde
 }
@@ -1191,6 +1228,25 @@ type RouteCarOptions struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Occupancy *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about the EV charge at the current step.
+type RouteChargeStepDetails struct {
+
+	// Estimated vehicle battery charge before this step (in kWh).
+	ArrivalCharge *float64
+
+	// Maximum charging power available to the vehicle.
+	//
+	// Unit: KwH
+	ConsumablePower *float64
+
+	// Details that are specific to a Charge step.
+	//
+	// Unit: KwH
+	DesiredCharge *float64
 
 	noSmithyDocumentSerde
 }
@@ -1386,12 +1442,12 @@ type RouteFerryAfterTravelStep struct {
 // Details corresponding to the arrival for the leg.
 type RouteFerryArrival struct {
 
-	// The place details.
+	// Place details corresponding to the arrival.
 	//
 	// This member is required.
 	Place *RouteFerryPlace
 
-	// The time.
+	// The arrival time.
 	Time *string
 
 	noSmithyDocumentSerde
@@ -1423,12 +1479,12 @@ type RouteFerryBeforeTravelStep struct {
 // Details corresponding to the departure for the leg.
 type RouteFerryDeparture struct {
 
-	// The place details.
+	// Place details corresponding to the departure.
 	//
 	// This member is required.
 	Place *RouteFerryPlace
 
-	// The time.
+	// The departure time.
 	Time *string
 
 	noSmithyDocumentSerde
@@ -1506,15 +1562,17 @@ type RouteFerryNotice struct {
 	noSmithyDocumentSerde
 }
 
-// Summarized details of the leg.
+// Summary including duration and distance for the entire leg.
 type RouteFerryOverviewSummary struct {
 
-	// Distance of the step.
+	// Distance of the entire leg.
+	//
+	// Unit: meters
 	//
 	// This member is required.
 	Distance int64
 
-	// Duration of the step.
+	// Duration of the entire leg.
 	//
 	// Unit: seconds
 	//
@@ -1565,7 +1623,7 @@ type RouteFerrySpan struct {
 	// Offset in the leg geometry corresponding to the start of this span.
 	GeometryOffset *int32
 
-	// Provides an array of names of the ferry span in available languages.
+	// Names of the ferry span in available languages.
 	Names []LocalizedString
 
 	// 2-3 letter Region code corresponding to the Span. This is either a province or
@@ -1636,6 +1694,161 @@ type RouteFerryTravelStep struct {
 	noSmithyDocumentSerde
 }
 
+// Options related to intermodal routing.
+//
+// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+type RouteIntermodalOptions struct {
+
+	// Accessibility attributes to consider when calculating the route.
+	AccessibilityAttributes []RouteAccessibilityAttribute
+
+	// Maximum number of transfers allowed when calculating the route.
+	MaxTransfers *int32
+
+	// Options for the pedestrian leg of the intermodal route.
+	Pedestrian *RouteIntermodalPedestrianOptions
+
+	// Options for the rental leg of the intermodal route.
+	Rental *RouteIntermodalRentalOptions
+
+	// Options for the taxi leg of the intermodal route.
+	Taxi *RouteIntermodalTaxiOptions
+
+	// Options for the transit leg of the intermodal route.
+	Transit *RouteIntermodalTransitOptions
+
+	// Options for the vehicle leg of the intermodal route.
+	Vehicle *RouteIntermodalVehicleOptions
+
+	noSmithyDocumentSerde
+}
+
+// Options for the pedestrian leg of the intermodal route.
+type RouteIntermodalPedestrianOptions struct {
+
+	// Maximum walking distance allowed.
+	//
+	// Unit: meters
+	MaxDistance *int64
+
+	// Walking speed.
+	//
+	// Unit: kilometers per hour
+	Speed *float64
+
+	noSmithyDocumentSerde
+}
+
+// Options for the rental leg of the intermodal route.
+type RouteIntermodalRentalOptions struct {
+
+	// Allowed rental transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with ExcludedModes .
+	AllowedModes []RouteRentalMode
+
+	// Specifies the portion of the route for which this leg type is enabled. By
+	// default, the leg type is enabled for all legs. Valid values:
+	//
+	//   - FirstLeg - Enable this leg type for the first non-pedestrian leg of the
+	//   route.
+	//
+	//   - LastLeg - Enable this leg type for the last non-pedestrian leg of the route.
+	//
+	//   - EntireRoute - Enable this leg type for the entire route.
+	//
+	//   - None - Disable this leg type entirely.
+	EnabledFor []RouteIntermodalEnabledLegs
+
+	// Excluded rental transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with AllowedModes .
+	ExcludedModes []RouteRentalMode
+
+	noSmithyDocumentSerde
+}
+
+// Options for the taxi leg of the intermodal route.
+type RouteIntermodalTaxiOptions struct {
+
+	// Allowed taxi transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with ExcludedModes .
+	AllowedModes []RouteTaxiMode
+
+	// Specifies the portion of the route for which this leg type is enabled. By
+	// default, the leg type is enabled for all legs. Valid values:
+	//
+	//   - FirstLeg - Enable this leg type for the first non-pedestrian leg of the
+	//   route.
+	//
+	//   - LastLeg - Enable this leg type for the last non-pedestrian leg of the route.
+	//
+	//   - EntireRoute - Enable this leg type for the entire route.
+	//
+	//   - None - Disable this leg type entirely.
+	EnabledFor []RouteIntermodalEnabledLegs
+
+	// Excluded taxi transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with AllowedModes .
+	ExcludedModes []RouteTaxiMode
+
+	noSmithyDocumentSerde
+}
+
+// Options for the transit leg of the intermodal route.
+type RouteIntermodalTransitOptions struct {
+
+	// Allowed transit transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with ExcludedModes .
+	AllowedModes []RouteTransitMode
+
+	// Specifies the portion of the route for which this leg type is enabled. By
+	// default, the leg type is enabled for all legs. Valid values:
+	//
+	//   - FirstLeg - Enable this leg type for the first non-pedestrian leg of the
+	//   route.
+	//
+	//   - LastLeg - Enable this leg type for the last non-pedestrian leg of the route.
+	//
+	//   - EntireRoute - Enable this leg type for the entire route.
+	//
+	//   - None - Disable this leg type entirely.
+	EnabledFor []RouteIntermodalEnabledLegs
+
+	// Excluded transit transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with AllowedModes .
+	ExcludedModes []RouteTransitMode
+
+	noSmithyDocumentSerde
+}
+
+// Options for the vehicle leg of the intermodal route.
+type RouteIntermodalVehicleOptions struct {
+
+	// Allowed vehicle transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with ExcludedModes .
+	AllowedModes []RouteVehicleMode
+
+	// Specifies the portion of the route for which this leg type is enabled. By
+	// default, the leg type is enabled for all legs. Valid values:
+	//
+	//   - FirstLeg - Enable this leg type for the first non-pedestrian leg of the
+	//   route.
+	//
+	//   - LastLeg - Enable this leg type for the last non-pedestrian leg of the route.
+	//
+	//   - EntireRoute - Enable this leg type for the entire route.
+	//
+	//   - None - Disable this leg type entirely.
+	EnabledFor []RouteIntermodalEnabledLegs
+
+	// Excluded vehicle transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with AllowedModes .
+	ExcludedModes []RouteVehicleMode
+
+	noSmithyDocumentSerde
+}
+
 // Details that are specific to a Keep step.
 type RouteKeepStepDetails struct {
 
@@ -1696,6 +1909,23 @@ type RouteLeg struct {
 
 	// Details related to the pedestrian leg.
 	PedestrianLegDetails *RoutePedestrianLegDetails
+
+	// Details related to the rental leg.
+	//
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	RentalLegDetails *RouteRentalLegDetails
+
+	// Details related to the taxi leg.
+	//
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	TaxiLegDetails *RouteTaxiLegDetails
+
+	// Details related to the transit leg.
+	TransitLegDetails *RouteTransitLegDetails
 
 	// Details related to the vehicle leg.
 	VehicleLegDetails *RouteVehicleLegDetails
@@ -1776,13 +2006,28 @@ type RouteMatrixAllowOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the circle that was used while calculating the route.
+// AutoCircle requests the route matrix service to define a Circle boundary that
+// best attempts to include most waypoints ( Origins and Destinations ) using the
+// AutoCircle settings. Any waypoints outside of the auto-defined Circle boundary
+// will be considered out of the routing boundary, which results in a route matrix
+// entry error.
+//
+// AutoCircle is only used in the request to configure a Circle for the route
+// calculation. The derived Circle will also be provided in the response.
 type RouteMatrixAutoCircle struct {
 
-	// The margin provided for the calculation.
+	// The minimal distance, in meters, between any waypoint and the perimeter of the
+	// circle auto-defined for the boundary. Some margin is usually recommended so that
+	// the routing has enough leeway to travel from one waypoint to another optimally
+	// without conflicting with the routing boundary.
+	//
+	// The total of MaxRadius and Margin must be less than or equal to 200,000 meters.
 	Margin int64
 
-	// The maximum size of the radius provided for the calculation.
+	// The maximum radius, in meters, that the auto-defined Circle boundary should
+	// have, before the Margin distance is added to the circle.
+	//
+	// The total of MaxRadius and Margin must be less than or equal to 200,000 meters.
 	MaxRadius int64
 
 	noSmithyDocumentSerde
@@ -1894,21 +2139,44 @@ type RouteMatrixBoundary struct {
 // Geometry of the routing boundary.
 type RouteMatrixBoundaryGeometry struct {
 
-	// Provides the circle that was used while calculating the route.
+	// AutoCircle requests the route matrix service to define a Circle boundary that
+	// best attempts to include most waypoints ( Origins and Destinations ) using the
+	// AutoCircle settings. Any waypoints outside of the auto-defined Circle boundary
+	// will be considered out of the routing boundary, which results in a route matrix
+	// entry error.
+	//
+	// AutoCircle is only used in the request to configure a Circle for the route
+	// calculation. The derived Circle will also be provided in the response.
 	AutoCircle *RouteMatrixAutoCircle
 
 	// Geometry defined as a bounding box. The first pair represents the X and Y
 	// coordinates (longitude and latitude,) of the southwest corner of the bounding
 	// box; the second pair represents the X and Y coordinates (longitude and latitude)
 	// of the northeast corner.
+	//
+	// Diagonal distance of the bounding box must be less than or equal to 400,000
+	// meters.
 	BoundingBox []float64
 
-	// Geometry defined as a circle. When request routing boundary was set as
-	// AutoCircle , the response routing boundary will return Circle derived from the
-	// AutoCircle settings.
+	// Geometry defined as a circle. The circle defines the routing boundary area. Any
+	// waypoints outside the circle will result in a route matrix entry error.
+	//
+	// You can specify a Circle directly in the request, or it will be auto-derived
+	// when AutoCircle is used. When AutoCircle is set in the request, the response
+	// routing boundary will return Circle derived from the AutoCircle settings.
 	Circle *Circle
 
-	// Geometry defined as a polygon with only one linear ring.
+	// Geometry defined as a polygon with only one linear ring. A linear ring is a
+	// closed sequence of four or more coordinates. The first and last coordinates are
+	// the same, forming a closed boundary. Each coordinate is a position in
+	// [longitude, latitude] format.
+	//
+	// The structure is an array of linear rings (only 1 allowed). Each linear ring is
+	// an array of coordinates (minimum 4), and each coordinate is an array of two
+	// doubles [longitude, latitude].
+	//
+	// Maximum distance between any two vertices must be less than or equal to 400,000
+	// meters.
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
@@ -2342,13 +2610,36 @@ type RoutePassThroughPlace struct {
 // different legs around the stop.
 type RoutePassThroughWaypoint struct {
 
-	// The place details.
+	// Place details corresponding to the pass-through waypoint.
 	//
 	// This member is required.
 	Place *RoutePassThroughPlace
 
 	// Offset in the leg geometry corresponding to the start of this step.
 	GeometryOffset *int32
+
+	noSmithyDocumentSerde
+}
+
+// Steps of a leg that must be performed after the travel portion of the leg.
+type RoutePedestrianAfterTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RoutePedestrianAfterTravelStepType
+
+	// Brief description of the step in the requested language.
+	//
+	// Only available when the TravelStepType is Default.
+	Instruction *string
 
 	noSmithyDocumentSerde
 }
@@ -2364,12 +2655,12 @@ type RoutePassThroughWaypoint struct {
 //	2020-04-22T17:57:24+02:00
 type RoutePedestrianArrival struct {
 
-	// The place details.
+	// Place details corresponding to the arrival.
 	//
 	// This member is required.
 	Place *RoutePedestrianPlace
 
-	// The time.
+	// The arrival time.
 	Time *string
 
 	noSmithyDocumentSerde
@@ -2386,12 +2677,12 @@ type RoutePedestrianArrival struct {
 //	2020-04-22T17:57:24+02:00
 type RoutePedestrianDeparture struct {
 
-	// The place details.
+	// Place details corresponding to the departure.
 	//
 	// This member is required.
 	Place *RoutePedestrianPlace
 
-	// The time.
+	// The departure time.
 	Time *string
 
 	noSmithyDocumentSerde
@@ -2399,6 +2690,11 @@ type RoutePedestrianDeparture struct {
 
 // Details that are specific to a pedestrian leg.
 type RoutePedestrianLegDetails struct {
+
+	// Steps of a leg that must be performed after the travel portion of the leg.
+	//
+	// This member is required.
+	AfterTravelSteps []RoutePedestrianAfterTravelStep
 
 	// Details corresponding to the arrival for the leg.
 	//
@@ -2473,15 +2769,19 @@ type RoutePedestrianOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of a pedestrian route step.
+// Summary including duration and distance for the entire leg.
 type RoutePedestrianOverviewSummary struct {
 
-	// Distance of the step.
+	// Distance of the entire leg.
+	//
+	// Unit: meters
 	//
 	// This member is required.
 	Distance int64
 
-	// Duration of the step.
+	// Duration of the entire leg.
+	//
+	// Unit: seconds
 	//
 	// This member is required.
 	Duration int64
@@ -2497,6 +2797,9 @@ type RoutePedestrianPlace struct {
 	// This member is required.
 	Position []float64
 
+	// Details of the access point.
+	AccessPointDetails *RouteAccessPointDetails
+
 	// The name of the place.
 	Name *string
 
@@ -2505,6 +2808,12 @@ type RoutePedestrianPlace struct {
 
 	// Options to configure matching the provided position to a side of the street.
 	SideOfStreet RouteSideOfStreet
+
+	// Details about the station.
+	StationDetails *RouteStationDetails
+
+	// The type of the place.
+	Type RoutePedestrianPlaceType
 
 	// Index of the waypoint in the request.
 	WaypointIndex *int32
@@ -2700,6 +3009,310 @@ type RouteRampStepDetails struct {
 
 	// Intensity of the turn.
 	TurnIntensity RouteTurnIntensity
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed after the travel portion of the leg.
+type RouteRentalAfterTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteRentalAfterTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the rental agency.
+type RouteRentalAgency struct {
+
+	// Name of the agency.
+	//
+	// This member is required.
+	Name *string
+
+	// URL to the agency's website.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the arrival for the leg.
+type RouteRentalArrival struct {
+
+	// Place details corresponding to the arrival.
+	//
+	// This member is required.
+	Place *RouteRentalPlace
+
+	// The arrival time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed before the travel portion of the leg.
+type RouteRentalBeforeTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteRentalBeforeTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the departure for the leg.
+type RouteRentalDeparture struct {
+
+	// Place details corresponding to the departure.
+	//
+	// This member is required.
+	Place *RouteRentalPlace
+
+	// The departure time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// Populated when the Leg type is Rental, and provides additional information that
+// is specific to rental vehicle travel.
+type RouteRentalLegDetails struct {
+
+	// Steps of a leg that must be performed after the travel portion of the leg.
+	//
+	// This member is required.
+	AfterTravelSteps []RouteRentalAfterTravelStep
+
+	// Details about the rental agency.
+	//
+	// This member is required.
+	Agency *RouteRentalAgency
+
+	// Details corresponding to the arrival for the leg.
+	//
+	// This member is required.
+	Arrival *RouteRentalArrival
+
+	// List of required attributions to display.
+	//
+	// This member is required.
+	Attributions []RouteAttribution
+
+	// Steps of a leg that must be performed before the travel portion of the leg.
+	//
+	// This member is required.
+	BeforeTravelSteps []RouteRentalBeforeTravelStep
+
+	// Web links to external ticket booking services for the rental.
+	//
+	// This member is required.
+	BookingWebLinks []RouteWebLink
+
+	// Details corresponding to the departure for the leg.
+	//
+	// This member is required.
+	Departure *RouteRentalDeparture
+
+	// Transport mode details for the rental leg.
+	//
+	// This member is required.
+	Transport *RouteRentalTransportModeDetails
+
+	// Steps of a leg that must be performed during the travel portion of the leg.
+	//
+	// This member is required.
+	TravelSteps []RouteRentalTravelStep
+
+	// Summary of the rental leg.
+	Summary *RouteRentalSummary
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the entire leg.
+type RouteRentalOverviewSummary struct {
+
+	// Distance of the entire leg.
+	//
+	// Unit: meters
+	//
+	// This member is required.
+	Distance *int64
+
+	// Duration of the entire leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// Place details corresponding to the arrival or departure.
+type RouteRentalPlace struct {
+
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
+	//
+	// This member is required.
+	Position []float64
+
+	// Details of the access point.
+	AccessPointDetails *RouteAccessPointDetails
+
+	// The name of the place.
+	Name *string
+
+	// Position provided in the request.
+	OriginalPosition []float64
+
+	// Details about the station.
+	StationDetails *RouteStationDetails
+
+	// The type of the place.
+	Type RouteRentalPlaceType
+
+	// Index of the waypoint in the request.
+	WaypointIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the rental leg.
+type RouteRentalSummary struct {
+
+	// Summary including duration and distance for the entire leg.
+	Overview *RouteRentalOverviewSummary
+
+	// Summary including duration and distance for the travel portion of the leg only.
+	TravelOnly *RouteRentalTravelOnlySummary
+
+	noSmithyDocumentSerde
+}
+
+// Transport mode details for the rental leg.
+type RouteRentalTransportModeDetails struct {
+
+	// Mode of the rental transport.
+	//
+	// This member is required.
+	Mode RouteRentalMode
+
+	// Number of available seats in the vehicle.
+	AvailableSeats *int32
+
+	// Human readable transport category.
+	Category *string
+
+	// Color of the transport polyline and background for the transport name.
+	Color *string
+
+	// Vehicle engine type.
+	Engine RouteEngineType
+
+	// Vehicle license plate number.
+	LicensePlate *string
+
+	// Vehicle model.
+	Model *string
+
+	// Vehicle name or mobility provider name.
+	Name *string
+
+	// Color of the transport name text.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the travel portion of the leg only.
+type RouteRentalTravelOnlySummary struct {
+
+	// Duration of the travel portion of the rental leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed during the travel portion of the leg.
+type RouteRentalTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteRentalTravelStepType
+
+	// Details related to the continue step.
+	ContinueStepDetails *RouteContinueStepDetails
+
+	// Distance of the step.
+	//
+	// Unit: meters
+	Distance *int64
+
+	// Details related to the exit step.
+	ExitStepDetails *RouteExitStepDetails
+
+	// Offset in the leg geometry corresponding to the start of this step.
+	GeometryOffset *int32
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	// Details that are specific to a Keep step.
+	KeepStepDetails *RouteKeepStepDetails
+
+	// Details that are specific to a ramp step.
+	RampStepDetails *RouteRampStepDetails
+
+	// Details about the roundabout leg.
+	RoundaboutEnterStepDetails *RouteRoundaboutEnterStepDetails
+
+	// Details about the roundabout step.
+	RoundaboutExitStepDetails *RouteRoundaboutExitStepDetails
+
+	// Details about the step.
+	RoundaboutPassStepDetails *RouteRoundaboutPassStepDetails
+
+	// Details related to the turn step.
+	TurnStepDetails *RouteTurnStepDetails
+
+	// Details related to the U-turn step.
+	UTurnStepDetails *RouteUTurnStepDetails
 
 	noSmithyDocumentSerde
 }
@@ -2918,6 +3531,21 @@ type RouteSpanSpeedLimitDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the station.
+type RouteStationDetails struct {
+
+	// Wheelchair accessibility information for the station.
+	Accessibility *RouteAccessibilityAvailabilityDetails
+
+	// Platform name or number.
+	PlatformName *string
+
+	// Short text or a number that identifies the station.
+	ShortName *string
+
+	noSmithyDocumentSerde
+}
+
 // Summarized details for the leg including travel steps only. The Distance for
 // the travel only portion of the journey is the same as the Distance within the
 // Overview summary.
@@ -2933,6 +3561,330 @@ type RouteSummary struct {
 
 	// Toll summary for the complete route.
 	Tolls *RouteTollSummary
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed after the travel portion of the leg.
+type RouteTaxiAfterTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTaxiAfterTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the taxi agency.
+type RouteTaxiAgency struct {
+
+	// Name of the agency.
+	//
+	// This member is required.
+	Name *string
+
+	// URL to the agency's website.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the arrival for the leg.
+type RouteTaxiArrival struct {
+
+	// Place details corresponding to the arrival.
+	//
+	// This member is required.
+	Place *RouteTaxiPlace
+
+	// The arrival time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed before the travel portion of the leg.
+type RouteTaxiBeforeTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTaxiBeforeTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the departure for the leg.
+type RouteTaxiDeparture struct {
+
+	// Place details corresponding to the departure.
+	//
+	// This member is required.
+	Place *RouteTaxiPlace
+
+	// The departure time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// Populated when the Leg type is Taxi, and provides additional information that
+// is specific to taxi travel.
+type RouteTaxiLegDetails struct {
+
+	// Steps of a leg that must be performed after the travel portion of the leg.
+	//
+	// This member is required.
+	AfterTravelSteps []RouteTaxiAfterTravelStep
+
+	// Details about the taxi agency.
+	//
+	// This member is required.
+	Agency *RouteTaxiAgency
+
+	// Details corresponding to the arrival for the leg.
+	//
+	// This member is required.
+	Arrival *RouteTaxiArrival
+
+	// List of required attributions to display.
+	//
+	// This member is required.
+	Attributions []RouteAttribution
+
+	// Steps of a leg that must be performed before the travel portion of the leg.
+	//
+	// This member is required.
+	BeforeTravelSteps []RouteTaxiBeforeTravelStep
+
+	// Web links to external ticket booking services for the taxi.
+	//
+	// This member is required.
+	BookingWebLinks []RouteWebLink
+
+	// Details corresponding to the departure for the leg.
+	//
+	// This member is required.
+	Departure *RouteTaxiDeparture
+
+	// List of notices that indicate issues that occurred during route calculation.
+	//
+	// This member is required.
+	Notices []RouteTaxiNotice
+
+	// Transport mode details for the taxi leg.
+	//
+	// This member is required.
+	Transport *RouteTaxiTransportModeDetails
+
+	// Steps of a leg that must be performed during the travel portion of the leg.
+	//
+	// This member is required.
+	TravelSteps []RouteTaxiTravelStep
+
+	// Summary of the taxi leg.
+	Summary *RouteTaxiSummary
+
+	noSmithyDocumentSerde
+}
+
+// A notice that indicates an issue that occurred during route calculation.
+type RouteTaxiNotice struct {
+
+	// Code corresponding to the issue.
+	//
+	// This member is required.
+	Code RouteTaxiNoticeCode
+
+	// Impact corresponding to the issue. While Low impact notices can be safely
+	// ignored, High impact notices must be evaluated further to determine the impact.
+	Impact RouteNoticeImpact
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the entire leg.
+type RouteTaxiOverviewSummary struct {
+
+	// Distance of the entire leg.
+	//
+	// Unit: meters
+	//
+	// This member is required.
+	Distance *int64
+
+	// Duration of the entire leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// Place details corresponding to the arrival or departure.
+type RouteTaxiPlace struct {
+
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
+	//
+	// This member is required.
+	Position []float64
+
+	// Details of the access point.
+	AccessPointDetails *RouteAccessPointDetails
+
+	// The name of the place.
+	Name *string
+
+	// Position provided in the request.
+	OriginalPosition []float64
+
+	// Details about the station.
+	StationDetails *RouteStationDetails
+
+	// The type of the place.
+	Type RouteTaxiPlaceType
+
+	// Index of the waypoint in the request.
+	WaypointIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the taxi leg.
+type RouteTaxiSummary struct {
+
+	// Summary including duration and distance for the entire leg.
+	Overview *RouteTaxiOverviewSummary
+
+	// Summary including duration and distance for the travel portion of the leg only.
+	TravelOnly *RouteTaxiTravelOnlySummary
+
+	noSmithyDocumentSerde
+}
+
+// Transport mode details for the taxi leg.
+type RouteTaxiTransportModeDetails struct {
+
+	// Mode of the taxi transport.
+	//
+	// This member is required.
+	Mode RouteTaxiMode
+
+	// Number of available seats in the vehicle.
+	AvailableSeats *int32
+
+	// Human readable transport category.
+	Category *string
+
+	// Color of the transport polyline and background for the transport name.
+	Color *string
+
+	// Vehicle engine type.
+	Engine RouteEngineType
+
+	// Vehicle license plate number.
+	LicensePlate *string
+
+	// Vehicle model.
+	Model *string
+
+	// Vehicle name or mobility provider name.
+	Name *string
+
+	// Color of the transport name text.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the travel portion of the leg only.
+type RouteTaxiTravelOnlySummary struct {
+
+	// Duration of the travel portion of the taxi leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed during the travel portion of the leg.
+type RouteTaxiTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTaxiTravelStepType
+
+	// Details related to the continue step.
+	ContinueStepDetails *RouteContinueStepDetails
+
+	// Distance of the step.
+	//
+	// Unit: meters
+	Distance *int64
+
+	// Details related to the exit step.
+	ExitStepDetails *RouteExitStepDetails
+
+	// Offset in the leg geometry corresponding to the start of this step.
+	GeometryOffset *int32
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	// Details that are specific to a Keep step.
+	KeepStepDetails *RouteKeepStepDetails
+
+	// Details that are specific to a ramp step.
+	RampStepDetails *RouteRampStepDetails
+
+	// Details about the roundabout leg.
+	RoundaboutEnterStepDetails *RouteRoundaboutEnterStepDetails
+
+	// Details about the roundabout step.
+	RoundaboutExitStepDetails *RouteRoundaboutExitStepDetails
+
+	// Details about the step.
+	RoundaboutPassStepDetails *RouteRoundaboutPassStepDetails
+
+	// Details related to the turn step.
+	TurnStepDetails *RouteTurnStepDetails
+
+	// Details related to the U-turn step.
+	UTurnStepDetails *RouteUTurnStepDetails
 
 	noSmithyDocumentSerde
 }
@@ -3226,6 +4178,493 @@ type RouteTrailerOptions struct {
 	noSmithyDocumentSerde
 }
 
+// A step that must be performed after the travel portion of the leg.
+type RouteTransitAfterTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTransitAfterTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the transit agency.
+type RouteTransitAgency struct {
+
+	// Name of the agency.
+	//
+	// This member is required.
+	Name *string
+
+	// URL to the agency's website.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the arrival for the leg.
+type RouteTransitArrival struct {
+
+	// Place details corresponding to the arrival.
+	//
+	// This member is required.
+	Place *RouteTransitPlace
+
+	// The delay from the scheduled arrival time.
+	//
+	// Unit: seconds
+	Delay *int64
+
+	// The status of the arrival.
+	Status RouteTransitTripStatus
+
+	// The arrival time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed before the travel portion of the leg.
+type RouteTransitBeforeTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTransitBeforeTravelStepType
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+// Details corresponding to the departure for the leg.
+type RouteTransitDeparture struct {
+
+	// Place details corresponding to the departure.
+	//
+	// This member is required.
+	Place *RouteTransitPlace
+
+	// The delay from the scheduled departure time.
+	//
+	// Unit: seconds
+	Delay *int64
+
+	// The status of the departure.
+	Status RouteTransitTripStatus
+
+	// The departure time.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// An incident describes disruptions on the transit route.
+type RouteTransitIncident struct {
+
+	// The effect of the incident on the transit service.
+	//
+	// This member is required.
+	Effect RouteTransitIncidentEffect
+
+	// Type of the incident.
+	//
+	// This member is required.
+	Type RouteTransitIncidentType
+
+	// A human readable description of the incident.
+	Description *string
+
+	// The end time of the incident.
+	EndTime *string
+
+	// The start time of the incident.
+	StartTime *string
+
+	// URL to the original incident published at the agency website.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// An intermediate stop between departure and destination of the transit route.
+type RouteTransitIntermediateStop struct {
+
+	// Departure details for the intermediate stop.
+	//
+	// This member is required.
+	Departure *RouteTransitDeparture
+
+	// Duration of the stop.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Attributes of the intermediate stop.
+	Attributes []RouteTransitIntermediateStopAttribute
+
+	// Offset in the leg geometry corresponding to the start of this stop.
+	GeometryOffset *int32
+
+	// Transport mode details at the intermediate stop.
+	Transport *RouteTransitTransportModeDetails
+
+	noSmithyDocumentSerde
+}
+
+// Populated when the Leg type is Transit, and provides additional information
+// that is specific to public transit travel.
+type RouteTransitLegDetails struct {
+
+	// Steps of a leg that must be performed after the travel portion of the leg.
+	//
+	// This member is required.
+	AfterTravelSteps []RouteTransitAfterTravelStep
+
+	// Details corresponding to the arrival for the leg.
+	//
+	// This member is required.
+	Arrival *RouteTransitArrival
+
+	// List of required attributions to display.
+	//
+	// This member is required.
+	Attributions []RouteAttribution
+
+	// Steps of a leg that must be performed before the travel portion of the leg.
+	//
+	// This member is required.
+	BeforeTravelSteps []RouteTransitBeforeTravelStep
+
+	// Web links to external ticket booking services for the transit.
+	//
+	// This member is required.
+	BookingWebLinks []RouteWebLink
+
+	// Details corresponding to the departure for the leg.
+	//
+	// This member is required.
+	Departure *RouteTransitDeparture
+
+	// Incidents affecting this leg of the transit route.
+	//
+	// This member is required.
+	Incidents []RouteTransitIncident
+
+	// Intermediate stops between departure and destination of the transit route.
+	//
+	// This member is required.
+	IntermediateStops []RouteTransitIntermediateStop
+
+	// List of next departures that cover the same section of the route.
+	//
+	// This member is required.
+	NextDepartures []RouteTransitNextDeparture
+
+	// List of notices that indicate issues that occurred during route calculation.
+	//
+	// This member is required.
+	Notices []RouteTransitNotice
+
+	// Waypoints that were passed through during the leg. This includes the waypoints
+	// that were configured with the PassThrough option. Not populated when the
+	// TravelMode is Transit or Intermodal .
+	//
+	// This member is required.
+	PassThroughWaypoints []RoutePassThroughWaypoint
+
+	// Spans that were computed for the requested SpanAdditionalFeatures. Not
+	// populated when the TravelMode is Transit or Intermodal .
+	//
+	// This member is required.
+	Spans []RouteTransitSpan
+
+	// Transport mode details for the transit leg.
+	//
+	// This member is required.
+	Transport *RouteTransitTransportModeDetails
+
+	// Steps of a leg that must be performed during the travel portion of the leg.
+	//
+	// This member is required.
+	TravelSteps []RouteTransitTravelStep
+
+	// Details about the transit agency.
+	Agency *RouteTransitAgency
+
+	// Summary of the transit leg.
+	Summary *RouteTransitSummary
+
+	noSmithyDocumentSerde
+}
+
+// Details about the next available departure for the transit service.
+type RouteTransitNextDeparture struct {
+
+	// The departure time.
+	//
+	// This member is required.
+	Time *string
+
+	// The delay from the scheduled departure time.
+	//
+	// Unit: seconds
+	Delay *int64
+
+	// Platform name or number for the departure.
+	PlatformName *string
+
+	// The status of the departure.
+	Status RouteTransitTripStatus
+
+	// Transport mode details for this departure.
+	Transport *RouteTransitTransportModeDetails
+
+	noSmithyDocumentSerde
+}
+
+// A notice that indicates an issue that occurred during route calculation.
+type RouteTransitNotice struct {
+
+	// Code corresponding to the issue.
+	//
+	// This member is required.
+	Code RouteTransitNoticeCode
+
+	// Impact corresponding to the issue. While Low impact notices can be safely
+	// ignored, High impact notices must be evaluated further to determine the impact.
+	Impact RouteNoticeImpact
+
+	noSmithyDocumentSerde
+}
+
+// Options related to transit routing.
+//
+// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+//
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+type RouteTransitOptions struct {
+
+	// Accessibility attributes to consider when calculating the route.
+	AccessibilityAttributes []RouteAccessibilityAttribute
+
+	// Allowed transit transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with ExcludedModes .
+	AllowedModes []RouteTransitMode
+
+	// Excluded transit transport modes when calculating the route. By default, all
+	// transport modes are allowed. Cannot be used together with AllowedModes .
+	ExcludedModes []RouteTransitMode
+
+	// Maximum number of transfers allowed when calculating the route.
+	MaxTransfers *int32
+
+	// Options for the pedestrian leg of the transit route.
+	Pedestrian *RouteTransitPedestrianOptions
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the entire leg.
+type RouteTransitOverviewSummary struct {
+
+	// Distance of the entire leg.
+	//
+	// Unit: meters
+	//
+	// This member is required.
+	Distance *int64
+
+	// Duration of the entire leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// Options for the pedestrian leg of the transit route.
+type RouteTransitPedestrianOptions struct {
+
+	// Maximum walking distance allowed.
+	//
+	// Unit: meters
+	MaxDistance *int64
+
+	// Walking speed.
+	//
+	// Unit: kilometers per hour
+	Speed *float64
+
+	noSmithyDocumentSerde
+}
+
+// Place details corresponding to the arrival or departure.
+type RouteTransitPlace struct {
+
+	// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
+	//
+	// This member is required.
+	Position []float64
+
+	// The name of the place.
+	Name *string
+
+	// Position provided in the request.
+	OriginalPosition []float64
+
+	// Details about the station.
+	StationDetails *RouteStationDetails
+
+	// The type of the place.
+	Type RouteTransitPlaceType
+
+	// Index of the waypoint in the request.
+	WaypointIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Span computed for the requested SpanAdditionalFeatures.
+type RouteTransitSpan struct {
+
+	// 3 letter Country code corresponding to the Span.
+	Country *string
+
+	// Distance of the computed span. This feature doesn't split a span, but is always
+	// computed on a span split by other properties.
+	//
+	// Unit: meters
+	Distance *int64
+
+	// Duration of the computed span. This feature doesn't split a span, but is always
+	// computed on a span split by other properties.
+	//
+	// Unit: seconds
+	Duration *int64
+
+	// Offset in the leg geometry corresponding to the start of this span.
+	GeometryOffset *int32
+
+	// Names of the transit span in available languages.
+	Names []LocalizedString
+
+	// 2-3 letter Region code corresponding to the Span. This is either a province or
+	// a state.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the transit leg.
+type RouteTransitSummary struct {
+
+	// Summary including duration and distance for the entire leg.
+	Overview *RouteTransitOverviewSummary
+
+	// Summary including duration and distance for the travel portion of the leg only.
+	TravelOnly *RouteTransitTravelOnlySummary
+
+	noSmithyDocumentSerde
+}
+
+// Transport mode details for the transit leg.
+type RouteTransitTransportModeDetails struct {
+
+	// Mode of the transit transport.
+	//
+	// This member is required.
+	Mode RouteTransitMode
+
+	// Wheelchair accessibility information for the transit vehicle.
+	Accessibility *RouteAccessibilityAvailabilityDetails
+
+	// Color of the transport polyline and background for the transport name.
+	Color *string
+
+	// Transit route headsign.
+	Headsign *string
+
+	// Long name of the transit route.
+	LongRouteName *string
+
+	// Transit route name.
+	RouteName *string
+
+	// Short name of the transit route.
+	ShortRouteName *string
+
+	// Color of the transport name text.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary including duration and distance for the travel portion of the leg only.
+type RouteTransitTravelOnlySummary struct {
+
+	// Duration of the travel portion of the transit leg.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	noSmithyDocumentSerde
+}
+
+// A step that must be performed during the travel portion of the leg.
+type RouteTransitTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteTransitTravelStepType
+
+	// Distance of the step.
+	//
+	// Unit: meters
+	Distance *int64
+
+	// Offset in the leg geometry corresponding to the start of this step.
+	GeometryOffset *int32
+
+	// Brief description of the step in the requested language.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
 // Transponders for which this toll can be applied.
 type RouteTransponder struct {
 
@@ -3241,6 +4680,13 @@ type RouteTravelModeOptions struct {
 	// Travel mode options when the provided travel mode is Car .
 	Car *RouteCarOptions
 
+	// Travel mode options when the provided travel mode is Intermodal .
+	//
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	Intermodal *RouteIntermodalOptions
+
 	// Travel mode options when the provided travel mode is Pedestrian .
 	Pedestrian *RoutePedestrianOptions
 
@@ -3249,6 +4695,13 @@ type RouteTravelModeOptions struct {
 	// When travel mode is set to Scooter , then the avoidance option
 	// ControlledAccessHighways defaults to true .
 	Scooter *RouteScooterOptions
+
+	// Travel mode options when the provided travel mode is Transit .
+	//
+	// Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	Transit *RouteTransitOptions
 
 	// Travel mode options when the provided travel mode is Truck .
 	Truck *RouteTruckOptions
@@ -3417,15 +4870,43 @@ type RouteUTurnStepDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Steps of a leg that must be performed after the travel portion of the leg.
+type RouteVehicleAfterTravelStep struct {
+
+	// Duration of the step.
+	//
+	// Unit: seconds
+	//
+	// This member is required.
+	Duration *int64
+
+	// Type of the step.
+	//
+	// This member is required.
+	Type RouteVehicleAfterTravelStepType
+
+	// Details that are specific to a Charge step.
+	//
+	// Unit: KwH
+	ChargeStepDetails *RouteChargeStepDetails
+
+	// Brief description of the step in the requested language.
+	//
+	// Only available when the TravelStepType is Default.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
 // Details corresponding to the arrival for a leg.
 type RouteVehicleArrival struct {
 
-	// The place details.
+	// Place details corresponding to the arrival.
 	//
 	// This member is required.
 	Place *RouteVehiclePlace
 
-	// The time.
+	// The arrival time.
 	Time *string
 
 	noSmithyDocumentSerde
@@ -3434,7 +4915,7 @@ type RouteVehicleArrival struct {
 // Details corresponding to the departure for the leg.
 type RouteVehicleDeparture struct {
 
-	// The place details.
+	// Place details corresponding to the departure.
 	//
 	// This member is required.
 	Place *RouteVehiclePlace
@@ -3471,6 +4952,11 @@ type RouteVehicleIncident struct {
 
 // Steps of a leg that correspond to the travel portion of the leg.
 type RouteVehicleLegDetails struct {
+
+	// Steps of a leg that must be performed after the travel portion of the leg.
+	//
+	// This member is required.
+	AfterTravelSteps []RouteVehicleAfterTravelStep
 
 	// Details corresponding to the arrival for the leg.
 	//
@@ -3602,15 +5088,17 @@ type RouteVehicleNoticeDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Summarized details of the leg.
+// Summary including duration and distance for the entire leg.
 type RouteVehicleOverviewSummary struct {
 
-	// Distance of the step.
+	// Distance of the entire leg.
+	//
+	// Unit: meters
 	//
 	// This member is required.
 	Distance int64
 
-	// Duration of the step.
+	// Duration of the entire leg.
 	//
 	// Unit: seconds
 	//
@@ -3623,7 +5111,7 @@ type RouteVehicleOverviewSummary struct {
 	// Unit: seconds
 	BestCaseDuration int64
 
-	// Duration of the computed span under typical traffic congestion.
+	// Duration of the leg under typical traffic congestion.
 	//
 	// Unit: seconds
 	TypicalDuration int64
@@ -3639,6 +5127,9 @@ type RouteVehiclePlace struct {
 	// This member is required.
 	Position []float64
 
+	// Details of the access point.
+	AccessPointDetails *RouteAccessPointDetails
+
 	// The name of the place.
 	Name *string
 
@@ -3647,6 +5138,12 @@ type RouteVehiclePlace struct {
 
 	// Options to configure matching the provided position to a side of the street.
 	SideOfStreet RouteSideOfStreet
+
+	// Details about the station.
+	StationDetails *RouteStationDetails
+
+	// The type of the place.
+	Type RouteVehiclePlaceType
 
 	// Index of the waypoint in the request.
 	WaypointIndex *int32
@@ -3798,7 +5295,7 @@ type RouteVehicleTravelOnlySummary struct {
 	// Unit: seconds
 	BestCaseDuration int64
 
-	// Duration of the computed span under typical traffic congestion.
+	// Duration of the leg under typical traffic congestion.
 	//
 	// Unit: seconds
 	TypicalDuration int64
@@ -4047,6 +5544,26 @@ type RouteWaypoint struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	StopDuration int64
+
+	noSmithyDocumentSerde
+}
+
+// The URL to an external resource.
+type RouteWebLink struct {
+
+	// Text describing the URL.
+	//
+	// This member is required.
+	Description *string
+
+	// The interactive or clickable portion of the text.
+	AnchorText *string
+
+	// Device type for which the link is intended.
+	DeviceType RouteWebLinkDeviceType
+
+	// The URL of the link.
+	Url *string
 
 	noSmithyDocumentSerde
 }
@@ -4304,7 +5821,7 @@ type WaypointOptimizationDrivingDistanceOptions struct {
 	// each other into a single cluster.
 	//
 	// This member is required.
-	DrivingDistance int64
+	DrivingDistance *int64
 
 	noSmithyDocumentSerde
 }

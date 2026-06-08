@@ -82,6 +82,10 @@ type CreateTrainedModelInput struct {
 	// decrypt customer-owned data in the trained ML model and the associated data.
 	KmsKeyArn *string
 
+	// The account ID of the member that is responsible for paying for model training
+	// costs.
+	MlModelTrainingPayerAccountId *string
+
 	// The criteria that is used to stop model training.
 	StoppingCondition *types.StoppingCondition
 

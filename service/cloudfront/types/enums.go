@@ -1007,8 +1007,9 @@ type ViewerMtlsMode string
 
 // Enum values for ViewerMtlsMode
 const (
-	ViewerMtlsModeRequired ViewerMtlsMode = "required"
-	ViewerMtlsModeOptional ViewerMtlsMode = "optional"
+	ViewerMtlsModeRequired    ViewerMtlsMode = "required"
+	ViewerMtlsModeOptional    ViewerMtlsMode = "optional"
+	ViewerMtlsModePassthrough ViewerMtlsMode = "passthrough"
 )
 
 // Values returns all known values for ViewerMtlsMode. Note that this can be
@@ -1019,6 +1020,7 @@ func (ViewerMtlsMode) Values() []ViewerMtlsMode {
 	return []ViewerMtlsMode{
 		"required",
 		"optional",
+		"passthrough",
 	}
 }
 

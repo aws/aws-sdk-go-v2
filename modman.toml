@@ -1,7 +1,6 @@
 
 [dependencies]
-  "github.com/aws/aws-sdk-go" = "v1.44.28"
-  "github.com/aws/smithy-go" = "v1.25.0"
+  "github.com/aws/smithy-go" = "v1.27.1"
 
 [modules]
 
@@ -33,6 +32,9 @@
     no_tag = true
 
   [modules."internal/protocoltest/awsrestjson"]
+    no_tag = true
+
+  [modules."internal/protocoltest/eventstreamtest"]
     no_tag = true
 
   [modules."internal/protocoltest/ec2query"]
@@ -78,9 +80,6 @@
     no_tag = true
 
   [modules."internal/repotools/changes"]
-    no_tag = true
-
-  [modules."service/internal/benchmark"]
     no_tag = true
 
   [modules."service/internal/integrationtest"]

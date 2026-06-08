@@ -13,7 +13,7 @@ import (
 
 // Creates a security profile.
 //
-// For information about security profiles, see [Security Profiles] in the Amazon Connect
+// For information about security profiles, see [Security Profiles] in the Connect Customer
 // Administrator Guide. For a mapping of the API name and user interface name of
 // the security profile permissions, see [List of security profile permissions].
 //
@@ -36,8 +36,8 @@ func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecuri
 
 type CreateSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -50,11 +50,11 @@ type CreateSecurityProfileInput struct {
 	SecurityProfileName *string
 
 	// The identifier of the hierarchy group that a security profile uses to restrict
-	// access to resources in Amazon Connect.
+	// access to resources in Connect Customer.
 	AllowedAccessControlHierarchyGroupId *string
 
 	// The list of tags that a security profile uses to restrict access to resources
-	// in Amazon Connect.
+	// in Connect Customer.
 	AllowedAccessControlTags map[string]string
 
 	//  A list of Flow Modules an AI Agent can invoke as a tool.
@@ -72,7 +72,7 @@ type CreateSecurityProfileInput struct {
 	GranularAccessControlConfiguration *types.GranularAccessControlConfiguration
 
 	// The list of resources that a security profile applies hierarchy restrictions to
-	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	// in Connect Customer. Following are acceptable ResourceNames: User .
 	HierarchyRestrictedResources []string
 
 	// Permissions assigned to the security profile. For a list of valid permissions,
@@ -82,10 +82,10 @@ type CreateSecurityProfileInput struct {
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect. For a list of Amazon Connect resources that you can tag, see [Add tags to resources in Amazon Connect]in
-	// the Amazon Connect Administrator Guide.
+	// Connect Customer. For a list of Connect Customer resources that you can tag, see
+	// [Add tags to resources in Connect Customer]in the Connect Customer Administrator Guide.
 	//
-	// [Add tags to resources in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
+	// [Add tags to resources in Connect Customer]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For

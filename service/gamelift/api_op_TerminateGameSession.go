@@ -77,8 +77,9 @@ func (c *Client) TerminateGameSession(ctx context.Context, params *TerminateGame
 
 type TerminateGameSessionInput struct {
 
-	// A unique identifier for the game session to be terminated. A game session ARN
-	// has the following format: arn:aws:gamelift:::gamesession// .
+	// An identifier for the game session that is unique across all regions to be
+	// terminated. The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string

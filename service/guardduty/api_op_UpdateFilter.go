@@ -72,8 +72,6 @@ type UpdateFilterInput struct {
 	//
 	// Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000
 	//
-	//   - description
-	//
 	//   - id
 	//
 	//   - partition
@@ -420,10 +418,6 @@ type UpdateFilterInput struct {
 	//
 	//   - resource.rdsDbInstanceDetails.publiclyAccessible
 	//
-	//   - resource.rdsDbInstanceDetails.tags.key
-	//
-	//   - resource.rdsDbInstanceDetails.tags.value
-	//
 	//   - resource.rdsDbInstanceDetails.vpcId
 	//
 	//   - resource.rdsDbInstanceDetails.vpcSecurityGroups.status
@@ -533,8 +527,6 @@ type UpdateFilterInput struct {
 	//   - schemaVersion
 	//
 	//   - service.action.actionType
-	//
-	//   - service.action.awsApiCallAction.affectedResources
 	//
 	//   - service.action.awsApiCallAction.api
 	//
@@ -832,10 +824,6 @@ type UpdateFilterInput struct {
 	//   - service.archived
 	//
 	//   - service.count
-	//
-	//   - service.detection.anomaly.profiles
-	//
-	//   - service.detection.anomaly.unusual.behavior
 	//
 	//   - service.detection.sequence.actors.id
 	//
@@ -1437,8 +1425,6 @@ type UpdateFilterInput struct {
 	//   - Critical: ["9", "10"]
 	//
 	// For more information, see [Findings severity levels]in the Amazon GuardDuty User Guide.
-	//
-	//   - title
 	//
 	//   - type
 	//

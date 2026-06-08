@@ -19,11 +19,11 @@ import (
 //
 //   - Remove deleted users so they don't appear to agents as transfer options.
 //
-//   - Avoid the disruption of other Amazon Connect processes, such as instance
-//     replication and syncing if you're using [Amazon Connect Global Resiliency].
+//   - Avoid the disruption of other Connect Customer processes, such as instance
+//     replication and syncing if you're using [Connect Customer Global Resiliency].
 //
-// [Amazon Connect Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
 // [DeleteUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteUser.html
+// [Connect Customer Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
 func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConnectInput, optFns ...func(*Options)) (*DeleteQuickConnectOutput, error) {
 	if params == nil {
 		params = &DeleteQuickConnectInput{}
@@ -41,8 +41,8 @@ func (c *Client) DeleteQuickConnect(ctx context.Context, params *DeleteQuickConn
 
 type DeleteQuickConnectInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

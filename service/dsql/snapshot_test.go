@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_DeleteClusterPolicy(t *testing.T) {
 	_, err := svc.DeleteClusterPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteClusterPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,6 +146,18 @@ func TestCheckSnapshot_GetClusterPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetVpcEndpointServiceName(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVpcEndpointServiceName(context.Background(), nil, func(o *Options) {
@@ -139,6 +175,18 @@ func TestCheckSnapshot_ListClusters(t *testing.T) {
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListClusters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListStreams(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreams(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListStreams")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,6 +265,18 @@ func TestUpdateSnapshot_CreateCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
@@ -234,6 +294,18 @@ func TestUpdateSnapshot_DeleteClusterPolicy(t *testing.T) {
 	_, err := svc.DeleteClusterPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteClusterPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteStream")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -265,6 +337,18 @@ func TestUpdateSnapshot_GetClusterPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetVpcEndpointServiceName(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetVpcEndpointServiceName(context.Background(), nil, func(o *Options) {
@@ -282,6 +366,18 @@ func TestUpdateSnapshot_ListClusters(t *testing.T) {
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListClusters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListStreams(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreams(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListStreams")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

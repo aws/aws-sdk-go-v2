@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a client-add-in for Amazon Connect within a directory. You can create
-// only one Amazon Connect client add-in within a directory.
+// Creates a client-add-in for Connect Customer within a directory. You can create
+// only one Connect Customer client add-in within a directory.
 //
-// This client add-in allows WorkSpaces users to seamlessly connect to Amazon
-// Connect.
+// This client add-in allows WorkSpaces users to seamlessly connect to Connect
+// Customer.
 func (c *Client) CreateConnectClientAddIn(ctx context.Context, params *CreateConnectClientAddInInput, optFns ...func(*Options)) (*CreateConnectClientAddInOutput, error) {
 	if params == nil {
 		params = &CreateConnectClientAddInInput{}
@@ -42,7 +42,7 @@ type CreateConnectClientAddInInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// The endpoint URL of the Amazon Connect client add-in.
+	// The endpoint URL of the Connect Customer client add-in.
 	//
 	// This member is required.
 	URL *string

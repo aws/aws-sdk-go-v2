@@ -55,6 +55,10 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 	// This member is required.
 	EnvironmentBlueprintId *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The timestamp of when this blueprint was created.
 	CreatedAt *time.Time
 
@@ -75,6 +79,9 @@ type GetEnvironmentBlueprintConfigurationOutput struct {
 
 	// The regional parameters of the blueprint.
 	RegionalParameters map[string]map[string]string
+
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []types.ResourceConfiguration
 
 	// The timestamp of when this blueprint was upated.
 	UpdatedAt *time.Time

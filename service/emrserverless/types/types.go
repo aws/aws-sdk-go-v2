@@ -338,6 +338,12 @@ type ImageConfiguration struct {
 	// This member is required.
 	ImageUri *string
 
+	// Boolean value indicating if the digest resolution is application level or
+	// workload level. If true, a custom image URI is resolved at application start
+	// time and all workloads submitted will use that image digest. If false, the
+	// custom image URI is resolved at the workload submission time.
+	ApplicationLevelDigestResolution *bool
+
 	// The SHA256 digest of the image URI. This indicates which specific image the
 	// application is configured for. The image digest doesn't exist until an
 	// application has started.
@@ -348,6 +354,12 @@ type ImageConfiguration struct {
 
 // The image configuration.
 type ImageConfigurationInput struct {
+
+	// Boolean value indicating if the digest resolution is application level or
+	// workload level. If true, a custom image URI is resolved at application start
+	// time and all workloads submitted will use that image digest. If false, the
+	// custom image URI is resolved at the workload submission time.
+	ApplicationLevelDigestResolution *bool
 
 	// The URI of an image in the Amazon ECR registry. This field is required when you
 	// create a new application. If you leave this field blank in an update, Amazon EMR
@@ -517,6 +529,9 @@ type JobRun struct {
 	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64
 
+	// The applied image configuration.
+	ImageConfiguration *ImageConfiguration
+
 	// The mode of the job run.
 	Mode JobRunMode
 
@@ -546,6 +561,11 @@ type JobRun struct {
 	// starts to execute, until the time the job terminates, rounded up to the nearest
 	// second.
 	TotalResourceUtilization *TotalResourceUtilization
+
+	// The specification applied to each worker type. Includes the JobRun-level
+	// ImageConfiguration when the applicationLevelDigestResolution is false for the
+	// application.
+	WorkerTypeSpecifications map[string]WorkerTypeSpecification
 
 	noSmithyDocumentSerde
 }

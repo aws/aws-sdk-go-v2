@@ -70,6 +70,26 @@ func (m *validateOpBatchGetProfile) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchPutProfileObject struct {
+}
+
+func (*validateOpBatchPutProfileObject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchPutProfileObject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchPutProfileObjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchPutProfileObjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCalculatedAttributeDefinition struct {
 }
 
@@ -2082,6 +2102,10 @@ func addOpBatchGetProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetProfile{}, middleware.After)
 }
 
+func addOpBatchPutProfileObjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchPutProfileObject{}, middleware.After)
+}
+
 func addOpCreateCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCalculatedAttributeDefinition{}, middleware.After)
 }
@@ -2738,6 +2762,41 @@ func validateBatches(v []types.Batch) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Batches"}
 	for i := range v {
 		if err := validateBatch(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchPutProfileObjectRequestItem(v *types.BatchPutProfileObjectRequestItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutProfileObjectRequestItem"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchPutProfileObjectRequestItemList(v []types.BatchPutProfileObjectRequestItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutProfileObjectRequestItemList"}
+	for i := range v {
+		if err := validateBatchPutProfileObjectRequestItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4236,6 +4295,31 @@ func validateOpBatchGetProfileInput(v *BatchGetProfileInput) error {
 	}
 	if v.ProfileIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchPutProfileObjectInput(v *BatchPutProfileObjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchPutProfileObjectInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ObjectTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	} else if v.Items != nil {
+		if err := validateBatchPutProfileObjectRequestItemList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

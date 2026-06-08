@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of Amazon Connect client add-ins that have been created.
+// Retrieves a list of Connect Customer client add-ins that have been created.
 func (c *Client) DescribeConnectClientAddIns(ctx context.Context, params *DescribeConnectClientAddInsInput, optFns ...func(*Options)) (*DescribeConnectClientAddInsOutput, error) {
 	if params == nil {
 		params = &DescribeConnectClientAddInsInput{}

@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a feed. The feed is the target for live streams being sent by the
-// calling application. An example of a calling application is AWS Elemental
-// MediaLive. After you create the feed, you can associate a resource with the
-// feed.
+// Creates a feed. The feed is the target for the live media stream that is being
+// sent by the calling application. An example of a calling application is AWS
+// Elemental MediaLive.
+//
+// The key contents of the feed is an array of outputs. Each output represents an
+// Elemental Inference feature. After you create the feed, you must associate a
+// resource with the feed. At that point, you will have a useable feed: resource -
+// feed - output or outputs.
 func (c *Client) CreateFeed(ctx context.Context, params *CreateFeedInput, optFns ...func(*Options)) (*CreateFeedOutput, error) {
 	if params == nil {
 		params = &CreateFeedInput{}
@@ -32,18 +36,20 @@ func (c *Client) CreateFeed(ctx context.Context, params *CreateFeedInput, optFns
 
 type CreateFeedInput struct {
 
-	// A name for this feed.
+	// A user-friendly name for this feed.
 	//
 	// This member is required.
 	Name *string
 
 	// An array of outputs for this feed. Each output represents a specific Elemental
-	// Inference feature. For example, an output might represent the crop feature.
+	// Inference feature. For example, there is one output type for the smart crop
+	// feature. You must specify at least one output, but you can later add outputs
+	// using AssociateFeed, or add, modify, and delete outputs using UpdateFeed.
 	//
 	// This member is required.
 	Outputs []types.CreateOutput
 
-	// If you want to include tags, add them now. You won't be able to add them later.
+	// Optional tags. You can also add tags later, using TagResource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -56,7 +62,10 @@ type CreateFeedOutput struct {
 	// This member is required.
 	Arn *string
 
-	// A unique ARN that Elemental Inference assigns to the feed.
+	// An array of endpoints for the feed. Typically, there is only one endpoint. The
+	// feed receives source media at this endpoint (when the calling application calls
+	// PutMedia) and returns the resulting metadata to this endpoint (when the calling
+	// application calls GetMetadata).
 	//
 	// This member is required.
 	DataEndpoints []string
@@ -66,12 +75,12 @@ type CreateFeedOutput struct {
 	// This member is required.
 	Id *string
 
-	// The name that you specified.
+	// The name that you specified in the request.
 	//
 	// This member is required.
 	Name *string
 
-	// Data endpoints that Elemental Inference assigns to the feed.
+	// Repeats the outputs that you specified in the request.
 	//
 	// This member is required.
 	Outputs []types.GetOutput
@@ -83,7 +92,8 @@ type CreateFeedOutput struct {
 	Status types.FeedStatus
 
 	// The association for this feed. When you create the feed, this property is
-	// empty. You must associate a resource with the feed using AssociateFeed.
+	// empty. You must associate a resource with the feed using AssociateFeed or
+	// UpdateFeed.
 	Association *types.FeedAssociation
 
 	// Any tags that you included when you created the feed.

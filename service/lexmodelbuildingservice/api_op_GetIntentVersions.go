@@ -22,6 +22,8 @@ import (
 // $LATEST version.
 //
 // This operation requires permissions for the lex:GetIntentVersions action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetIntentVersions(ctx context.Context, params *GetIntentVersionsInput, optFns ...func(*Options)) (*GetIntentVersionsOutput, error) {
 	if params == nil {
 		params = &GetIntentVersionsInput{}

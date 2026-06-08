@@ -1119,6 +1119,9 @@ type KekValidationRequest struct {
 	// This member is required.
 	DeriveKeyAlgorithm SymmetricKeyAlgorithm
 
+	// The maximum length of the random key to generate for a KEK validation request.
+	RandomKeyMaxLength RandomKeyMaxLength
+
 	noSmithyDocumentSerde
 }
 
@@ -1126,7 +1129,8 @@ type KekValidationRequest struct {
 // node-to-node initialization.
 type KekValidationResponse struct {
 
-	// The random key for generating a KEK validation response.
+	// The random key send value received from the initiating node to generate a KEK
+	// validation response.
 	//
 	// This member is required.
 	RandomKeySend *string

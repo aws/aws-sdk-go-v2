@@ -875,6 +875,7 @@ const (
 	ModificationResourceEnumRootVolume  ModificationResourceEnum = "ROOT_VOLUME"
 	ModificationResourceEnumUserVolume  ModificationResourceEnum = "USER_VOLUME"
 	ModificationResourceEnumComputeType ModificationResourceEnum = "COMPUTE_TYPE"
+	ModificationResourceEnumProtocol    ModificationResourceEnum = "PROTOCOL"
 )
 
 // Values returns all known values for ModificationResourceEnum. Note that this
@@ -886,6 +887,7 @@ func (ModificationResourceEnum) Values() []ModificationResourceEnum {
 		"ROOT_VOLUME",
 		"USER_VOLUME",
 		"COMPUTE_TYPE",
+		"PROTOCOL",
 	}
 }
 
@@ -895,6 +897,7 @@ type ModificationStateEnum string
 const (
 	ModificationStateEnumUpdateInitiated  ModificationStateEnum = "UPDATE_INITIATED"
 	ModificationStateEnumUpdateInProgress ModificationStateEnum = "UPDATE_IN_PROGRESS"
+	ModificationStateEnumUpdateFailed     ModificationStateEnum = "UPDATE_FAILED"
 )
 
 // Values returns all known values for ModificationStateEnum. Note that this can
@@ -905,6 +908,7 @@ func (ModificationStateEnum) Values() []ModificationStateEnum {
 	return []ModificationStateEnum{
 		"UPDATE_INITIATED",
 		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
 	}
 }
 

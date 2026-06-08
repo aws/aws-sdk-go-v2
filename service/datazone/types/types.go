@@ -938,6 +938,12 @@ type BusinessNameGenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The information about a cell in a notebook run in Amazon SageMaker Unified
+// Studio.
+type CellInformation struct {
+	noSmithyDocumentSerde
+}
+
 // Part of the provisioning properties of the environment blueprint.
 type CloudFormationProperties struct {
 
@@ -955,6 +961,18 @@ type ColumnFilterConfiguration struct {
 
 	// Specifies whether to include column names.
 	IncludedColumnNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The compute configuration for a notebook run in Amazon SageMaker Unified Studio.
+type ComputeConfig struct {
+
+	// The environment version for the notebook run compute.
+	EnvironmentVersion *string
+
+	// The instance type for the notebook run compute.
+	InstanceType *string
 
 	noSmithyDocumentSerde
 }
@@ -1036,6 +1054,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
+//	ConnectionPropertiesInputMemberVpcProperties
 //	ConnectionPropertiesInputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesInputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesInput interface {
@@ -1141,6 +1160,15 @@ type ConnectionPropertiesInputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertiesInput() {}
 
+// The VPC properties of a connection.
+type ConnectionPropertiesInputMemberVpcProperties struct {
+	Value VpcPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberVpcProperties) isConnectionPropertiesInput() {}
+
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesInputMemberWorkflowsMwaaProperties struct {
 	Value WorkflowsMwaaPropertiesInput
@@ -1174,6 +1202,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
+//	ConnectionPropertiesOutputMemberVpcProperties
 //	ConnectionPropertiesOutputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesOutputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesOutput interface {
@@ -1279,6 +1308,15 @@ type ConnectionPropertiesOutputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionPropertiesOutput() {}
 
+// The VPC properties of a connection.
+type ConnectionPropertiesOutputMemberVpcProperties struct {
+	Value VpcPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberVpcProperties) isConnectionPropertiesOutput() {}
+
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesOutputMemberWorkflowsMwaaProperties struct {
 	Value WorkflowsMwaaPropertiesOutput
@@ -1311,6 +1349,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
+//	ConnectionPropertiesPatchMemberVpcProperties
 type ConnectionPropertiesPatch interface {
 	isConnectionPropertiesPatch()
 }
@@ -1395,6 +1434,15 @@ type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberSparkEmrProperties) isConnectionPropertiesPatch() {}
+
+// The VPC properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberVpcProperties struct {
+	Value VpcPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberVpcProperties) isConnectionPropertiesPatch() {}
 
 // The summary of a connection.
 type ConnectionSummary struct {
@@ -2337,6 +2385,10 @@ type EnvironmentBlueprintConfigurationItem struct {
 	// This member is required.
 	EnvironmentBlueprintId *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The timestamp of when an environment blueprint was created.
 	CreatedAt *time.Time
 
@@ -2359,6 +2411,9 @@ type EnvironmentBlueprintConfigurationItem struct {
 
 	// The regional parameters of the environment blueprint.
 	RegionalParameters map[string]map[string]string
+
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []ResourceConfiguration
 
 	// The timestamp of when the environment blueprint was updated.
 	UpdatedAt *time.Time
@@ -2397,6 +2452,19 @@ type EnvironmentBlueprintSummary struct {
 
 	// The timestamp of when the blueprint was enabled.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The environment configuration for a notebook run in Amazon SageMaker Unified
+// Studio.
+type EnvironmentConfig struct {
+
+	// The image version for the notebook run environment.
+	ImageVersion *string
+
+	// The package configuration for the notebook run environment.
+	PackageConfig *PackageConfig
 
 	noSmithyDocumentSerde
 }
@@ -4338,6 +4406,165 @@ type NameIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// The network configuration for a notebook run in Amazon SageMaker Unified Studio.
+type NetworkConfig struct {
+
+	// The network access type for the notebook run. Valid values are
+	// PUBLIC_INTERNET_ONLY and VPC_ONLY .
+	//
+	// This member is required.
+	NetworkAccessType NetworkAccessType
+
+	// The identifiers of the security groups for the notebook run. You can specify up
+	// to 5 security groups.
+	SecurityGroupIds []string
+
+	// The identifiers of the subnets for the notebook run. You can specify up to 10
+	// subnets.
+	SubnetIds []string
+
+	// The identifier of the VPC for the notebook run. This is required when the
+	// network access type is VPC_ONLY .
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a notebook in Amazon SageMaker Unified Studio.
+type NotebookError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook export in Amazon SageMaker Unified
+// Studio.
+type NotebookExportError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook run in Amazon SageMaker Unified Studio.
+type NotebookRunError struct {
+
+	// The error message. The maximum length is 1024 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook run in Amazon SageMaker Unified Studio.
+type NotebookRunSummary struct {
+
+	// The identifier of the Amazon SageMaker Unified Studio domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook run.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	NotebookId *string
+
+	// The identifier of the project that owns the notebook run.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook run.
+	//
+	// This member is required.
+	Status NotebookRunStatus
+
+	// The timestamp of when the notebook run completed.
+	CompletedAt *time.Time
+
+	// The timestamp of when the notebook run was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook run.
+	CreatedBy *string
+
+	// The identifier of the schedule associated with the notebook run.
+	ScheduleId *string
+
+	// The timestamp of when the notebook run started executing.
+	StartedAt *time.Time
+
+	// The source that triggered the notebook run.
+	TriggerSource *TriggerSource
+
+	// The timestamp of when the notebook run was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook run.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook in Amazon SageMaker Unified Studio.
+type NotebookSummary struct {
+
+	// The identifier of the Amazon SageMaker Unified Studio domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the notebook.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the project that owns the notebook.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook.
+	//
+	// This member is required.
+	Status NotebookStatus
+
+	// The timestamp of when the notebook was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook.
+	CreatedBy *string
+
+	// The description of the notebook.
+	Description *string
+
+	// The timestamp of when the notebook was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that a value is not equal to the expression.
 type NotEqualToExpression struct {
 
@@ -4520,6 +4747,24 @@ type OpenLineageRunEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The output location for a notebook export in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	OutputLocationMemberS3
+type OutputLocation interface {
+	isOutputLocation()
+}
+
+// The Amazon Simple Storage Service destination for the notebook export.
+type OutputLocationMemberS3 struct {
+	Value S3Destination
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputLocationMemberS3) isOutputLocation() {}
+
 // The grant details of the override domain unit owners policy.
 type OverrideDomainUnitOwnersPolicyGrantDetail struct {
 
@@ -4630,6 +4875,22 @@ type OwnerUserPropertiesOutput struct {
 
 	// The ID of the owner user.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The package configuration for a notebook run environment in Amazon SageMaker
+// Unified Studio.
+type PackageConfig struct {
+
+	// The package manager for the notebook run environment. The default value is UV .
+	//
+	// This member is required.
+	PackageManager PackageManager
+
+	// The package specification content for the notebook run environment. The maximum
+	// length is 10240 characters.
+	PackageSpecification *string
 
 	noSmithyDocumentSerde
 }
@@ -5152,6 +5413,30 @@ type ProvisioningPropertiesMemberCloudFormation struct {
 
 func (*ProvisioningPropertiesMemberCloudFormation) isProvisioningProperties() {}
 
+// The resource configuration that is used to configure the environment blueprint.
+type PutResourceConfiguration struct {
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The recommendation to be updated as part of the UpdateDataSource action.
 type RecommendationConfiguration struct {
 
@@ -5573,6 +5858,35 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the resource configuration.
+type ResourceConfiguration struct {
+
+	// The identifier of the resource configuration.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The resource tag of the project.
 type ResourceTag struct {
 
@@ -5932,6 +6246,16 @@ type RunStatisticsForAssets struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Simple Storage Service destination for a notebook export in Amazon
+// SageMaker Unified Studio.
+type S3Destination struct {
+
+	// The Amazon Simple Storage Service URI of the exported notebook.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 properties of a connection.
 type S3PropertiesInput struct {
 
@@ -6236,6 +6560,24 @@ type SingleSignOn struct {
 	noSmithyDocumentSerde
 }
 
+// The source location for a notebook import in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	SourceLocationMemberS3
+type SourceLocation interface {
+	isSourceLocation()
+}
+
+// The Amazon Simple Storage Service URI of the notebook source file.
+type SourceLocationMemberS3 struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceLocationMemberS3) isSourceLocation() {}
+
 // The Spark EMR properties.
 type SparkEmrPropertiesInput struct {
 
@@ -6438,6 +6780,18 @@ type SsoUserProfileDetails struct {
 
 	// The username as part of the SSO user profile detail.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// The storage configuration for a notebook run in Amazon SageMaker Unified Studio.
+type StorageConfig struct {
+
+	// The ARN of the KMS key used for encryption.
+	KmsKeyArn *string
+
+	// The Amazon Simple Storage Service path for the project storage.
+	ProjectS3Path *string
 
 	noSmithyDocumentSerde
 }
@@ -7101,6 +7455,17 @@ type TextMatchItem struct {
 	noSmithyDocumentSerde
 }
 
+// The timeout configuration for a notebook run in Amazon SageMaker Unified Studio.
+type TimeoutConfig struct {
+
+	// The timeout for the notebook run, in minutes. The minimum value is 60 minutes
+	// (1 hour), the maximum value is 1440 minutes (24 hours), and the default value is
+	// 720 minutes (12 hours).
+	RunTimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // The time series data points form.
 type TimeSeriesDataPointFormInput struct {
 
@@ -7205,6 +7570,19 @@ type Topic struct {
 	//
 	// This member is required.
 	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// The source that triggered a notebook run in Amazon SageMaker Unified Studio.
+type TriggerSource struct {
+
+	// The name of the trigger source.
+	Name *string
+
+	// The type of the trigger source. Valid values are MANUAL , SCHEDULED , and
+	// WORKFLOW .
+	Type TriggerSourceType
 
 	noSmithyDocumentSerde
 }
@@ -7328,6 +7706,71 @@ type UserProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The VPC connection properties used when creating a connection.
+type VpcPropertiesInput struct {
+
+	// The subnet IDs of the VPC connection. You can specify between 1 and 16 subnet
+	// IDs.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC. Must match the pattern ^vpc-[a-z0-9]+$ . Maximum
+	// length of 32.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The security group ID of the VPC connection. Must match the pattern
+	// ^sg-[a-z0-9]+$ . Maximum length of 32.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties returned in responses.
+type VpcPropertiesOutput struct {
+
+	// The status of the VPC connection.
+	//
+	// This member is required.
+	Status ConnectionStatus
+
+	// The subnet IDs of the VPC connection.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The Amazon Web Services Glue connection names associated with the VPC
+	// connection.
+	GlueConnectionNames []string
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties used when updating a connection.
+type VpcPropertiesPatch struct {
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	// The subnet IDs of the VPC connection.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon MWAA properties.
 type WorkflowsMwaaPropertiesInput struct {
 
@@ -7390,6 +7833,7 @@ func (*UnknownUnionMember) isMatchRationaleItem()            {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
+func (*UnknownUnionMember) isOutputLocation()                {}
 func (*UnknownUnionMember) isOwnerProperties()               {}
 func (*UnknownUnionMember) isOwnerPropertiesOutput()         {}
 func (*UnknownUnionMember) isPermissions()                   {}
@@ -7411,6 +7855,7 @@ func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}
 func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
+func (*UnknownUnionMember) isSourceLocation()                {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}

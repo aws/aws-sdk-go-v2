@@ -17,8 +17,9 @@ import (
 // via a JSON file stored in Amazon S3 via s3UriSettings (up to 100,000 runs).
 //
 // StartRunBatch validates common fields synchronously and returns immediately
-// with a batch ID and status PENDING . Runs are submitted gradually and
-// asynchronously at a rate governed by your StartRun throughput quota.
+// with a batch ID and status CREATING . The batch transitions to PENDING once
+// initial setup completes. Runs are then submitted gradually and asynchronously at
+// a rate governed by your StartRun throughput quota.
 func (c *Client) StartRunBatch(ctx context.Context, params *StartRunBatchInput, optFns ...func(*Options)) (*StartRunBatchOutput, error) {
 	if params == nil {
 		params = &StartRunBatchInput{}
@@ -71,7 +72,8 @@ type StartRunBatchOutput struct {
 	// The identifier portion of the run batch ARN.
 	Id *string
 
-	// The initial status of the run batch.
+	// The initial status of the run batch. Returns CREATING while the batch is being
+	// initialized.
 	Status types.BatchStatus
 
 	// AWS tags associated with the run batch.

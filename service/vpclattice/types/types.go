@@ -569,6 +569,10 @@ type ResourceGatewaySummary struct {
 	// The name of the resource gateway.
 	Name *string
 
+	// The DNS resolution type for resource configurations that are associated with
+	// this resource gateway.
+	ResourceConfigDnsResolution ResourceConfigDnsResolution
+
 	// The IDs of the security groups applied to the resource gateway.
 	SecurityGroupIds []string
 
@@ -1111,7 +1115,7 @@ type TargetSummary struct {
 	//
 	//   - DRAINING : The target is being deregistered. No new connections are sent to
 	//   this target while current connections are being drained. The default draining
-	//   time is 5 minutes.
+	//   time is 1 minute.
 	//
 	//   - UNAVAILABLE : Health checks are unavailable for the target group.
 	//

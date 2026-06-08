@@ -64,7 +64,7 @@ type ResetConnectorMetadataCacheInput struct {
 	// The name of the connector profile that you want to reset cached metadata for.
 	//
 	// You can omit this parameter if you're resetting the cache for any of the
-	// following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for
+	// following connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for
 	// Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other
 	// connector, you must include this parameter in your request.
 	ConnectorProfileName *string
@@ -72,9 +72,9 @@ type ResetConnectorMetadataCacheInput struct {
 	// The type of connector to reset cached metadata for.
 	//
 	// You must include this parameter in your request if you're resetting the cache
-	// for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon
-	// Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for
-	// any other connector, you can omit this parameter from your request.
+	// for any of the following connectors: Connect Customer, Amazon EventBridge,
+	// Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the
+	// cache for any other connector, you can omit this parameter from your request.
 	ConnectorType types.ConnectorType
 
 	// Use this parameter only if you’re resetting the cached metadata about a nested

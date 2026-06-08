@@ -175,7 +175,7 @@ func TestEndpointCase6(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -348,7 +348,7 @@ func TestEndpointCase12(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -406,7 +406,7 @@ func TestEndpointCase13(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -464,7 +464,7 @@ func TestEndpointCase14(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
@@ -614,7 +614,7 @@ func TestEndpointCase19(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -718,7 +718,7 @@ func TestEndpointCase22(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -798,7 +798,7 @@ func TestEndpointCase24(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -855,7 +855,7 @@ func TestEndpointCase25(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -913,7 +913,7 @@ func TestEndpointCase26(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -971,7 +971,7 @@ func TestEndpointCase27(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1029,7 +1029,7 @@ func TestEndpointCase28(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1110,7 +1110,7 @@ func TestEndpointCase30(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1192,7 +1192,7 @@ func TestEndpointCase32(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1251,7 +1251,7 @@ func TestEndpointCase33(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1305,7 +1305,7 @@ func TestEndpointCase34(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1359,7 +1359,7 @@ func TestEndpointCase35(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1413,7 +1413,7 @@ func TestEndpointCase36(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1467,7 +1467,7 @@ func TestEndpointCase37(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1522,7 +1522,7 @@ func TestEndpointCase38(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1597,7 +1597,7 @@ func TestEndpointCase40(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1654,7 +1654,7 @@ func TestEndpointCase41(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1711,7 +1711,7 @@ func TestEndpointCase42(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1769,7 +1769,7 @@ func TestEndpointCase43(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1827,7 +1827,7 @@ func TestEndpointCase44(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1885,7 +1885,7 @@ func TestEndpointCase45(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -1943,7 +1943,7 @@ func TestEndpointCase46(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2001,7 +2001,7 @@ func TestEndpointCase47(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2059,7 +2059,7 @@ func TestEndpointCase48(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2115,7 +2115,7 @@ func TestEndpointCase49(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2171,7 +2171,7 @@ func TestEndpointCase50(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2227,7 +2227,7 @@ func TestEndpointCase51(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2283,7 +2283,7 @@ func TestEndpointCase52(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2340,7 +2340,7 @@ func TestEndpointCase53(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2398,7 +2398,7 @@ func TestEndpointCase54(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2455,7 +2455,7 @@ func TestEndpointCase55(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2515,7 +2515,7 @@ func TestEndpointCase56(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2576,7 +2576,7 @@ func TestEndpointCase57(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2633,7 +2633,7 @@ func TestEndpointCase58(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2691,7 +2691,7 @@ func TestEndpointCase59(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2749,7 +2749,7 @@ func TestEndpointCase60(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2807,7 +2807,7 @@ func TestEndpointCase61(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2865,7 +2865,7 @@ func TestEndpointCase62(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2924,7 +2924,7 @@ func TestEndpointCase63(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -2983,7 +2983,7 @@ func TestEndpointCase64(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3042,7 +3042,7 @@ func TestEndpointCase65(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3101,7 +3101,7 @@ func TestEndpointCase66(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3160,7 +3160,7 @@ func TestEndpointCase67(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3219,7 +3219,7 @@ func TestEndpointCase68(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3277,7 +3277,7 @@ func TestEndpointCase69(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3335,7 +3335,7 @@ func TestEndpointCase70(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3394,7 +3394,7 @@ func TestEndpointCase71(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3453,7 +3453,7 @@ func TestEndpointCase72(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3512,7 +3512,7 @@ func TestEndpointCase73(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3571,7 +3571,7 @@ func TestEndpointCase74(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3631,7 +3631,7 @@ func TestEndpointCase75(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3692,7 +3692,7 @@ func TestEndpointCase76(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3750,7 +3750,7 @@ func TestEndpointCase77(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -3763,7 +3763,7 @@ func TestEndpointCase77(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -3837,7 +3837,7 @@ func TestEndpointCase79(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -3895,7 +3895,7 @@ func TestEndpointCase80(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4014,7 +4014,7 @@ func TestEndpointCase84(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4089,7 +4089,7 @@ func TestEndpointCase86(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4144,7 +4144,7 @@ func TestEndpointCase87(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4199,7 +4199,7 @@ func TestEndpointCase88(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4254,7 +4254,7 @@ func TestEndpointCase89(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4312,7 +4312,7 @@ func TestEndpointCase90(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4369,7 +4369,7 @@ func TestEndpointCase91(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4427,7 +4427,7 @@ func TestEndpointCase92(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4483,7 +4483,7 @@ func TestEndpointCase93(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4540,7 +4540,7 @@ func TestEndpointCase94(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4643,7 +4643,7 @@ func TestEndpointCase97(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4701,7 +4701,7 @@ func TestEndpointCase98(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4758,7 +4758,7 @@ func TestEndpointCase99(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4839,7 +4839,7 @@ func TestEndpointCase101(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4897,7 +4897,7 @@ func TestEndpointCase102(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -4955,7 +4955,7 @@ func TestEndpointCase103(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -5014,7 +5014,7 @@ func TestEndpointCase104(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -5097,7 +5097,7 @@ func TestEndpointCase106(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -5241,7 +5241,7 @@ func TestEndpointCase111(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5299,7 +5299,7 @@ func TestEndpointCase112(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5356,7 +5356,7 @@ func TestEndpointCase113(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5410,7 +5410,7 @@ func TestEndpointCase114(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5491,7 +5491,7 @@ func TestEndpointCase116(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5570,7 +5570,7 @@ func TestEndpointCase118(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5629,7 +5629,7 @@ func TestEndpointCase119(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5726,7 +5726,7 @@ func TestEndpointCase122(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -5802,7 +5802,7 @@ func TestEndpointCase124(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -6130,7 +6130,7 @@ func TestEndpointCase139(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6186,7 +6186,7 @@ func TestEndpointCase140(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6241,7 +6241,7 @@ func TestEndpointCase141(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6297,7 +6297,7 @@ func TestEndpointCase142(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6353,7 +6353,7 @@ func TestEndpointCase143(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6410,7 +6410,7 @@ func TestEndpointCase144(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-2")
@@ -6468,7 +6468,7 @@ func TestEndpointCase145(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6526,7 +6526,7 @@ func TestEndpointCase146(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6584,7 +6584,7 @@ func TestEndpointCase147(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6642,7 +6642,7 @@ func TestEndpointCase148(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6700,7 +6700,7 @@ func TestEndpointCase149(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6758,7 +6758,7 @@ func TestEndpointCase150(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6839,7 +6839,7 @@ func TestEndpointCase152(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -6897,7 +6897,7 @@ func TestEndpointCase153(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7001,7 +7001,7 @@ func TestEndpointCase156(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7059,7 +7059,7 @@ func TestEndpointCase157(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7117,7 +7117,7 @@ func TestEndpointCase158(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7175,7 +7175,7 @@ func TestEndpointCase159(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7233,7 +7233,7 @@ func TestEndpointCase160(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7291,7 +7291,7 @@ func TestEndpointCase161(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7372,7 +7372,7 @@ func TestEndpointCase163(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7429,7 +7429,7 @@ func TestEndpointCase164(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7510,7 +7510,7 @@ func TestEndpointCase166(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7591,7 +7591,7 @@ func TestEndpointCase168(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7648,7 +7648,7 @@ func TestEndpointCase169(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7706,7 +7706,7 @@ func TestEndpointCase170(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7810,7 +7810,7 @@ func TestEndpointCase173(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7891,7 +7891,7 @@ func TestEndpointCase175(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -7948,7 +7948,7 @@ func TestEndpointCase176(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8006,7 +8006,7 @@ func TestEndpointCase177(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8064,7 +8064,7 @@ func TestEndpointCase178(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8145,7 +8145,7 @@ func TestEndpointCase180(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8226,7 +8226,7 @@ func TestEndpointCase182(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8283,7 +8283,7 @@ func TestEndpointCase183(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8342,7 +8342,7 @@ func TestEndpointCase184(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8401,7 +8401,7 @@ func TestEndpointCase185(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8532,7 +8532,7 @@ func TestEndpointCase189(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8591,7 +8591,7 @@ func TestEndpointCase190(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8650,7 +8650,7 @@ func TestEndpointCase191(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8780,7 +8780,7 @@ func TestEndpointCase195(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8839,7 +8839,7 @@ func TestEndpointCase196(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -8898,7 +8898,7 @@ func TestEndpointCase197(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9029,7 +9029,7 @@ func TestEndpointCase201(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9087,7 +9087,7 @@ func TestEndpointCase202(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9145,7 +9145,7 @@ func TestEndpointCase203(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9226,7 +9226,7 @@ func TestEndpointCase205(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9284,7 +9284,7 @@ func TestEndpointCase206(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9411,7 +9411,7 @@ func TestEndpointCase210(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9469,7 +9469,7 @@ func TestEndpointCase211(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9550,7 +9550,7 @@ func TestEndpointCase213(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -9607,7 +9607,7 @@ func TestEndpointCase214(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9620,7 +9620,7 @@ func TestEndpointCase214(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9678,7 +9678,7 @@ func TestEndpointCase215(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9691,7 +9691,7 @@ func TestEndpointCase215(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9799,7 +9799,7 @@ func TestEndpointCase218(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9812,7 +9812,7 @@ func TestEndpointCase218(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9870,7 +9870,7 @@ func TestEndpointCase219(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9883,7 +9883,7 @@ func TestEndpointCase219(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9965,7 +9965,7 @@ func TestEndpointCase221(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -9978,7 +9978,7 @@ func TestEndpointCase221(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -10096,8 +10096,30 @@ func TestEndpointCase225(t *testing.T) {
 	}
 }
 
-// object lambda @us-east-1
+// validates against access point host label
 func TestEndpointCase226(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-west-2"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(false),
+		Accelerate:   ptr.Bool(false),
+		Bucket:       ptr.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:invalid.bucket#"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `invalid.bucket#`", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// object lambda @us-east-1
+func TestEndpointCase227(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -10124,7 +10146,7 @@ func TestEndpointCase226(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10155,7 +10177,7 @@ func TestEndpointCase226(t *testing.T) {
 }
 
 // object lambda @us-west-2
-func TestEndpointCase227(t *testing.T) {
+func TestEndpointCase228(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10182,7 +10204,7 @@ func TestEndpointCase227(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10213,7 +10235,7 @@ func TestEndpointCase227(t *testing.T) {
 }
 
 // object lambda, colon resource deliminator @us-west-2
-func TestEndpointCase228(t *testing.T) {
+func TestEndpointCase229(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10240,7 +10262,7 @@ func TestEndpointCase228(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10271,7 +10293,7 @@ func TestEndpointCase228(t *testing.T) {
 }
 
 // object lambda @us-east-1, client region us-west-2, useArnRegion=true
-func TestEndpointCase229(t *testing.T) {
+func TestEndpointCase230(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10298,7 +10320,7 @@ func TestEndpointCase229(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10329,7 +10351,7 @@ func TestEndpointCase229(t *testing.T) {
 }
 
 // object lambda @us-east-1, client region s3-external-1, useArnRegion=true
-func TestEndpointCase230(t *testing.T) {
+func TestEndpointCase231(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("s3-external-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -10356,7 +10378,7 @@ func TestEndpointCase230(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10387,7 +10409,7 @@ func TestEndpointCase230(t *testing.T) {
 }
 
 // object lambda @us-east-1, client region s3-external-1, useArnRegion=false
-func TestEndpointCase231(t *testing.T) {
+func TestEndpointCase232(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("s3-external-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -10410,7 +10432,7 @@ func TestEndpointCase231(t *testing.T) {
 }
 
 // object lambda @us-east-1, client region aws-global, useArnRegion=true
-func TestEndpointCase232(t *testing.T) {
+func TestEndpointCase233(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("aws-global"),
 		UseFIPS:      ptr.Bool(false),
@@ -10437,7 +10459,7 @@ func TestEndpointCase232(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10468,7 +10490,7 @@ func TestEndpointCase232(t *testing.T) {
 }
 
 // object lambda @us-east-1, client region aws-global, useArnRegion=false
-func TestEndpointCase233(t *testing.T) {
+func TestEndpointCase234(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("aws-global"),
 		UseFIPS:      ptr.Bool(false),
@@ -10492,7 +10514,7 @@ func TestEndpointCase233(t *testing.T) {
 
 // object lambda @cn-north-1, client region us-west-2 (cross partition),
 // useArnRegion=true
-func TestEndpointCase234(t *testing.T) {
+func TestEndpointCase235(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("aws-global"),
 		UseFIPS:      ptr.Bool(false),
@@ -10515,7 +10537,7 @@ func TestEndpointCase234(t *testing.T) {
 }
 
 // object lambda with dualstack
-func TestEndpointCase235(t *testing.T) {
+func TestEndpointCase236(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10538,7 +10560,7 @@ func TestEndpointCase235(t *testing.T) {
 }
 
 // object lambda @us-gov-east-1
-func TestEndpointCase236(t *testing.T) {
+func TestEndpointCase237(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-east-1"),
 		UseFIPS:      ptr.Bool(false),
@@ -10565,7 +10587,7 @@ func TestEndpointCase236(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10596,7 +10618,7 @@ func TestEndpointCase236(t *testing.T) {
 }
 
 // object lambda @us-gov-east-1, with fips
-func TestEndpointCase237(t *testing.T) {
+func TestEndpointCase238(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-gov-east-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -10623,7 +10645,7 @@ func TestEndpointCase237(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10654,7 +10676,7 @@ func TestEndpointCase237(t *testing.T) {
 }
 
 // object lambda @cn-north-1, with fips
-func TestEndpointCase238(t *testing.T) {
+func TestEndpointCase239(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("cn-north-1"),
 		UseFIPS:      ptr.Bool(true),
@@ -10677,7 +10699,7 @@ func TestEndpointCase238(t *testing.T) {
 }
 
 // object lambda with accelerate
-func TestEndpointCase239(t *testing.T) {
+func TestEndpointCase240(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10700,7 +10722,7 @@ func TestEndpointCase239(t *testing.T) {
 }
 
 // object lambda with invalid arn - bad service and someresource
-func TestEndpointCase240(t *testing.T) {
+func TestEndpointCase241(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10723,7 +10745,7 @@ func TestEndpointCase240(t *testing.T) {
 }
 
 // object lambda with invalid arn - invalid resource
-func TestEndpointCase241(t *testing.T) {
+func TestEndpointCase242(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10746,7 +10768,7 @@ func TestEndpointCase241(t *testing.T) {
 }
 
 // object lambda with invalid arn - missing region
-func TestEndpointCase242(t *testing.T) {
+func TestEndpointCase243(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10769,7 +10791,7 @@ func TestEndpointCase242(t *testing.T) {
 }
 
 // object lambda with invalid arn - missing account-id
-func TestEndpointCase243(t *testing.T) {
+func TestEndpointCase244(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10792,7 +10814,7 @@ func TestEndpointCase243(t *testing.T) {
 }
 
 // object lambda with invalid arn - account id contains invalid characters
-func TestEndpointCase244(t *testing.T) {
+func TestEndpointCase245(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10815,7 +10837,7 @@ func TestEndpointCase244(t *testing.T) {
 }
 
 // object lambda with invalid arn - missing access point name
-func TestEndpointCase245(t *testing.T) {
+func TestEndpointCase246(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10838,7 +10860,7 @@ func TestEndpointCase245(t *testing.T) {
 }
 
 // object lambda with invalid arn - access point name contains invalid character: *
-func TestEndpointCase246(t *testing.T) {
+func TestEndpointCase247(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10861,7 +10883,7 @@ func TestEndpointCase246(t *testing.T) {
 }
 
 // object lambda with invalid arn - access point name contains invalid character: .
-func TestEndpointCase247(t *testing.T) {
+func TestEndpointCase248(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10884,7 +10906,7 @@ func TestEndpointCase247(t *testing.T) {
 }
 
 // object lambda with invalid arn - access point name contains sub resources
-func TestEndpointCase248(t *testing.T) {
+func TestEndpointCase249(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10907,7 +10929,7 @@ func TestEndpointCase248(t *testing.T) {
 }
 
 // object lambda with custom endpoint
-func TestEndpointCase249(t *testing.T) {
+func TestEndpointCase250(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		UseFIPS:      ptr.Bool(false),
@@ -10935,7 +10957,7 @@ func TestEndpointCase249(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -10966,7 +10988,7 @@ func TestEndpointCase249(t *testing.T) {
 }
 
 // object lambda arn with region mismatch and UseArnRegion=false
-func TestEndpointCase250(t *testing.T) {
+func TestEndpointCase251(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:     ptr.Bool(false),
 		Bucket:         ptr.String("arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/mybanner"),
@@ -10990,7 +11012,7 @@ func TestEndpointCase250(t *testing.T) {
 }
 
 // WriteGetObjectResponse @ us-west-2
-func TestEndpointCase251(t *testing.T) {
+func TestEndpointCase252(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11016,7 +11038,7 @@ func TestEndpointCase251(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -11047,7 +11069,7 @@ func TestEndpointCase251(t *testing.T) {
 }
 
 // WriteGetObjectResponse with custom endpoint
-func TestEndpointCase252(t *testing.T) {
+func TestEndpointCase253(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11074,7 +11096,7 @@ func TestEndpointCase252(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -11105,7 +11127,7 @@ func TestEndpointCase252(t *testing.T) {
 }
 
 // WriteGetObjectResponse @ us-east-1
-func TestEndpointCase253(t *testing.T) {
+func TestEndpointCase254(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11131,7 +11153,7 @@ func TestEndpointCase253(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -11162,7 +11184,7 @@ func TestEndpointCase253(t *testing.T) {
 }
 
 // WriteGetObjectResponse with fips
-func TestEndpointCase254(t *testing.T) {
+func TestEndpointCase255(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11188,7 +11210,7 @@ func TestEndpointCase254(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -11219,7 +11241,7 @@ func TestEndpointCase254(t *testing.T) {
 }
 
 // WriteGetObjectResponse with dualstack
-func TestEndpointCase255(t *testing.T) {
+func TestEndpointCase256(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11241,7 +11263,7 @@ func TestEndpointCase255(t *testing.T) {
 }
 
 // WriteGetObjectResponse with accelerate
-func TestEndpointCase256(t *testing.T) {
+func TestEndpointCase257(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(true),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11263,7 +11285,7 @@ func TestEndpointCase256(t *testing.T) {
 }
 
 // WriteGetObjectResponse with fips in CN
-func TestEndpointCase257(t *testing.T) {
+func TestEndpointCase258(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		Region:                  ptr.String("cn-north-1"),
@@ -11285,7 +11307,7 @@ func TestEndpointCase257(t *testing.T) {
 }
 
 // WriteGetObjectResponse with invalid partition
-func TestEndpointCase258(t *testing.T) {
+func TestEndpointCase259(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11307,7 +11329,7 @@ func TestEndpointCase258(t *testing.T) {
 }
 
 // WriteGetObjectResponse with an unknown partition
-func TestEndpointCase259(t *testing.T) {
+func TestEndpointCase260(t *testing.T) {
 	var params = EndpointParameters{
 		Accelerate:              ptr.Bool(false),
 		UseObjectLambdaEndpoint: ptr.Bool(true),
@@ -11333,7 +11355,7 @@ func TestEndpointCase259(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-object-lambda")
@@ -11364,7 +11386,7 @@ func TestEndpointCase259(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Real Outpost Prod us-west-1
-func TestEndpointCase260(t *testing.T) {
+func TestEndpointCase261(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-1"),
 		Bucket:       ptr.String("test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11390,7 +11412,7 @@ func TestEndpointCase260(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11403,7 +11425,7 @@ func TestEndpointCase260(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11434,7 +11456,7 @@ func TestEndpointCase260(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Real Outpost Prod ap-east-1
-func TestEndpointCase261(t *testing.T) {
+func TestEndpointCase262(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("ap-east-1"),
 		Bucket:       ptr.String("test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11460,7 +11482,7 @@ func TestEndpointCase261(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11473,7 +11495,7 @@ func TestEndpointCase261(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11504,7 +11526,7 @@ func TestEndpointCase261(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Ec2 Outpost Prod us-east-1
-func TestEndpointCase262(t *testing.T) {
+func TestEndpointCase263(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11530,7 +11552,7 @@ func TestEndpointCase262(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11543,7 +11565,7 @@ func TestEndpointCase262(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11574,7 +11596,7 @@ func TestEndpointCase262(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Ec2 Outpost Prod me-south-1
-func TestEndpointCase263(t *testing.T) {
+func TestEndpointCase264(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("me-south-1"),
 		Bucket:       ptr.String("test-accessp-e0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11600,7 +11622,7 @@ func TestEndpointCase263(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11613,7 +11635,7 @@ func TestEndpointCase263(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11644,7 +11666,7 @@ func TestEndpointCase263(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Real Outpost Beta
-func TestEndpointCase264(t *testing.T) {
+func TestEndpointCase265(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3"),
@@ -11671,7 +11693,7 @@ func TestEndpointCase264(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11684,7 +11706,7 @@ func TestEndpointCase264(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11715,7 +11737,7 @@ func TestEndpointCase264(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Ec2 Outpost Beta
-func TestEndpointCase265(t *testing.T) {
+func TestEndpointCase266(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("161743052723-e00000136899934034jeahy1t8gpzpbwjj8kb7beta0--op-s3"),
@@ -11742,7 +11764,7 @@ func TestEndpointCase265(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11755,7 +11777,7 @@ func TestEndpointCase265(t *testing.T) {
 					}(),
 				},
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3-outposts")
@@ -11786,7 +11808,7 @@ func TestEndpointCase265(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias - No endpoint set for beta
-func TestEndpointCase266(t *testing.T) {
+func TestEndpointCase267(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-o0b1d075431d83bebde8xz5w8ijx1qzlbp3i3kbeta0--op-s3"),
@@ -11808,7 +11830,7 @@ func TestEndpointCase266(t *testing.T) {
 }
 
 // S3 Outposts invalid bucket name
-func TestEndpointCase267(t *testing.T) {
+func TestEndpointCase268(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-o0b1de75431d83bebd/8xz5w8ijx1qzlbp3i3kbeta0--op-s3"),
@@ -11831,7 +11853,7 @@ func TestEndpointCase267(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Invalid hardware type
-func TestEndpointCase268(t *testing.T) {
+func TestEndpointCase269(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-h0000075431d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11853,7 +11875,7 @@ func TestEndpointCase268(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias Special character in Outpost Arn
-func TestEndpointCase269(t *testing.T) {
+func TestEndpointCase270(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-o00000754%1d83bebde8xz5w8ijx1qzlbp3i3kuse10--op-s3"),
@@ -11875,7 +11897,7 @@ func TestEndpointCase269(t *testing.T) {
 }
 
 // S3 Outposts bucketAlias - No endpoint set for beta
-func TestEndpointCase270(t *testing.T) {
+func TestEndpointCase271(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-east-1"),
 		Bucket:       ptr.String("test-accessp-e0b1d075431d83bebde8xz5w8ijx1qzlbp3i3ebeta0--op-s3"),
@@ -11897,7 +11919,7 @@ func TestEndpointCase270(t *testing.T) {
 }
 
 // S3 Snow with bucket
-func TestEndpointCase271(t *testing.T) {
+func TestEndpointCase272(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -11924,7 +11946,7 @@ func TestEndpointCase271(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -11955,7 +11977,7 @@ func TestEndpointCase271(t *testing.T) {
 }
 
 // S3 Snow without bucket
-func TestEndpointCase272(t *testing.T) {
+func TestEndpointCase273(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Endpoint:     ptr.String("https://10.0.1.12:433"),
@@ -11981,7 +12003,7 @@ func TestEndpointCase272(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -12012,7 +12034,7 @@ func TestEndpointCase272(t *testing.T) {
 }
 
 // S3 Snow no port
-func TestEndpointCase273(t *testing.T) {
+func TestEndpointCase274(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -12039,7 +12061,7 @@ func TestEndpointCase273(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -12070,7 +12092,7 @@ func TestEndpointCase273(t *testing.T) {
 }
 
 // S3 Snow dns endpoint
-func TestEndpointCase274(t *testing.T) {
+func TestEndpointCase275(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("snow"),
 		Bucket:       ptr.String("bucketName"),
@@ -12097,7 +12119,7 @@ func TestEndpointCase274(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3")
@@ -12128,7 +12150,7 @@ func TestEndpointCase274(t *testing.T) {
 }
 
 // Data Plane with short zone name
-func TestEndpointCase275(t *testing.T) {
+func TestEndpointCase276(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--abcd-ab1--x-s3"),
@@ -12187,7 +12209,7 @@ func TestEndpointCase275(t *testing.T) {
 }
 
 // Data Plane with short zone name china region
-func TestEndpointCase276(t *testing.T) {
+func TestEndpointCase277(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("mybucket--abcd-ab1--x-s3"),
@@ -12246,7 +12268,7 @@ func TestEndpointCase276(t *testing.T) {
 }
 
 // Data Plane with short zone name with AP
-func TestEndpointCase277(t *testing.T) {
+func TestEndpointCase278(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("myaccesspoint--abcd-ab1--xa-s3"),
@@ -12305,7 +12327,7 @@ func TestEndpointCase277(t *testing.T) {
 }
 
 // Data Plane with short zone name with AP china region
-func TestEndpointCase278(t *testing.T) {
+func TestEndpointCase279(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("myaccesspoint--abcd-ab1--xa-s3"),
@@ -12364,7 +12386,7 @@ func TestEndpointCase278(t *testing.T) {
 }
 
 // Data Plane with short zone names (13 chars)
-func TestEndpointCase279(t *testing.T) {
+func TestEndpointCase280(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -12423,7 +12445,7 @@ func TestEndpointCase279(t *testing.T) {
 }
 
 // Data Plane with short zone names (13 chars) with AP
-func TestEndpointCase280(t *testing.T) {
+func TestEndpointCase281(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -12482,7 +12504,7 @@ func TestEndpointCase280(t *testing.T) {
 }
 
 // Data Plane with medium zone names (14 chars)
-func TestEndpointCase281(t *testing.T) {
+func TestEndpointCase282(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -12541,7 +12563,7 @@ func TestEndpointCase281(t *testing.T) {
 }
 
 // Data Plane with medium zone names (14 chars) with AP
-func TestEndpointCase282(t *testing.T) {
+func TestEndpointCase283(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -12600,7 +12622,7 @@ func TestEndpointCase282(t *testing.T) {
 }
 
 // Data Plane with long zone names (20 chars)
-func TestEndpointCase283(t *testing.T) {
+func TestEndpointCase284(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -12659,7 +12681,7 @@ func TestEndpointCase283(t *testing.T) {
 }
 
 // Data Plane with long zone names (20 chars)
-func TestEndpointCase284(t *testing.T) {
+func TestEndpointCase285(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -12718,7 +12740,7 @@ func TestEndpointCase284(t *testing.T) {
 }
 
 // Data Plane with short zone fips
-func TestEndpointCase285(t *testing.T) {
+func TestEndpointCase286(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -12777,7 +12799,7 @@ func TestEndpointCase285(t *testing.T) {
 }
 
 // Data Plane with short zone fips china region
-func TestEndpointCase286(t *testing.T) {
+func TestEndpointCase287(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -12800,7 +12822,7 @@ func TestEndpointCase286(t *testing.T) {
 }
 
 // Data Plane with short zone fips with AP
-func TestEndpointCase287(t *testing.T) {
+func TestEndpointCase288(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("myaccesspoint--test-ab1--xa-s3"),
@@ -12859,7 +12881,7 @@ func TestEndpointCase287(t *testing.T) {
 }
 
 // Data Plane with short zone fips with AP china region
-func TestEndpointCase288(t *testing.T) {
+func TestEndpointCase289(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("myaccesspoint--test-ab1--xa-s3"),
@@ -12882,7 +12904,7 @@ func TestEndpointCase288(t *testing.T) {
 }
 
 // Data Plane with short zone (13 chars) fips
-func TestEndpointCase289(t *testing.T) {
+func TestEndpointCase290(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -12941,7 +12963,7 @@ func TestEndpointCase289(t *testing.T) {
 }
 
 // Data Plane with short zone (13 chars) fips with AP
-func TestEndpointCase290(t *testing.T) {
+func TestEndpointCase291(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -13000,7 +13022,7 @@ func TestEndpointCase290(t *testing.T) {
 }
 
 // Data Plane with medium zone (14 chars) fips
-func TestEndpointCase291(t *testing.T) {
+func TestEndpointCase292(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -13059,7 +13081,7 @@ func TestEndpointCase291(t *testing.T) {
 }
 
 // Data Plane with medium zone (14 chars) fips with AP
-func TestEndpointCase292(t *testing.T) {
+func TestEndpointCase293(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -13118,7 +13140,7 @@ func TestEndpointCase292(t *testing.T) {
 }
 
 // Data Plane with long zone (20 chars) fips
-func TestEndpointCase293(t *testing.T) {
+func TestEndpointCase294(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -13177,7 +13199,7 @@ func TestEndpointCase293(t *testing.T) {
 }
 
 // Data Plane with long zone (20 chars) fips with AP
-func TestEndpointCase294(t *testing.T) {
+func TestEndpointCase295(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -13236,7 +13258,7 @@ func TestEndpointCase294(t *testing.T) {
 }
 
 // Data Plane with long AZ
-func TestEndpointCase295(t *testing.T) {
+func TestEndpointCase296(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-az1--x-s3"),
@@ -13295,7 +13317,7 @@ func TestEndpointCase295(t *testing.T) {
 }
 
 // Data Plane with long AZ with AP
-func TestEndpointCase296(t *testing.T) {
+func TestEndpointCase297(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-az1--xa-s3"),
@@ -13354,7 +13376,7 @@ func TestEndpointCase296(t *testing.T) {
 }
 
 // Data Plane with long AZ fips
-func TestEndpointCase297(t *testing.T) {
+func TestEndpointCase298(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-az1--x-s3"),
@@ -13413,7 +13435,7 @@ func TestEndpointCase297(t *testing.T) {
 }
 
 // Data Plane with long AZ fips with AP
-func TestEndpointCase298(t *testing.T) {
+func TestEndpointCase299(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-az1--xa-s3"),
@@ -13472,7 +13494,7 @@ func TestEndpointCase298(t *testing.T) {
 }
 
 // Control plane with short AZ bucket
-func TestEndpointCase299(t *testing.T) {
+func TestEndpointCase300(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -13500,7 +13522,7 @@ func TestEndpointCase299(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13532,7 +13554,7 @@ func TestEndpointCase299(t *testing.T) {
 }
 
 // Control plane with short AZ bucket china region
-func TestEndpointCase300(t *testing.T) {
+func TestEndpointCase301(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -13560,7 +13582,7 @@ func TestEndpointCase300(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13592,7 +13614,7 @@ func TestEndpointCase300(t *testing.T) {
 }
 
 // Control plane with short AZ bucket and fips
-func TestEndpointCase301(t *testing.T) {
+func TestEndpointCase302(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -13620,7 +13642,7 @@ func TestEndpointCase301(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13652,7 +13674,7 @@ func TestEndpointCase301(t *testing.T) {
 }
 
 // Control plane with short AZ bucket and fips china region
-func TestEndpointCase302(t *testing.T) {
+func TestEndpointCase303(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("cn-north-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -13676,7 +13698,7 @@ func TestEndpointCase302(t *testing.T) {
 }
 
 // Control plane without bucket
-func TestEndpointCase303(t *testing.T) {
+func TestEndpointCase304(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		UseFIPS:                     ptr.Bool(false),
@@ -13703,7 +13725,7 @@ func TestEndpointCase303(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13735,7 +13757,7 @@ func TestEndpointCase303(t *testing.T) {
 }
 
 // Control plane without bucket and fips
-func TestEndpointCase304(t *testing.T) {
+func TestEndpointCase305(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		UseFIPS:                     ptr.Bool(true),
@@ -13762,7 +13784,7 @@ func TestEndpointCase304(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13794,7 +13816,7 @@ func TestEndpointCase304(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ
-func TestEndpointCase305(t *testing.T) {
+func TestEndpointCase306(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -13821,7 +13843,7 @@ func TestEndpointCase305(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13853,7 +13875,7 @@ func TestEndpointCase305(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ with AP
-func TestEndpointCase306(t *testing.T) {
+func TestEndpointCase307(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -13880,7 +13902,7 @@ func TestEndpointCase306(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13912,7 +13934,7 @@ func TestEndpointCase306(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short zone (13 chars)
-func TestEndpointCase307(t *testing.T) {
+func TestEndpointCase308(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -13939,7 +13961,7 @@ func TestEndpointCase307(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -13971,7 +13993,7 @@ func TestEndpointCase307(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short zone (13 chars) with AP
-func TestEndpointCase308(t *testing.T) {
+func TestEndpointCase309(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -13998,7 +14020,7 @@ func TestEndpointCase308(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14030,7 +14052,7 @@ func TestEndpointCase308(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ fips
-func TestEndpointCase309(t *testing.T) {
+func TestEndpointCase310(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -14057,7 +14079,7 @@ func TestEndpointCase309(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14089,7 +14111,7 @@ func TestEndpointCase309(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ fips with AP
-func TestEndpointCase310(t *testing.T) {
+func TestEndpointCase311(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -14116,7 +14138,7 @@ func TestEndpointCase310(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14148,7 +14170,7 @@ func TestEndpointCase310(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short zone (13 chars) fips
-func TestEndpointCase311(t *testing.T) {
+func TestEndpointCase312(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -14175,7 +14197,7 @@ func TestEndpointCase311(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14207,7 +14229,7 @@ func TestEndpointCase311(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short zone (13 chars) fips with AP
-func TestEndpointCase312(t *testing.T) {
+func TestEndpointCase313(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -14234,7 +14256,7 @@ func TestEndpointCase312(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14266,7 +14288,7 @@ func TestEndpointCase312(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long AZ
-func TestEndpointCase313(t *testing.T) {
+func TestEndpointCase314(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-az1--x-s3"),
@@ -14294,7 +14316,7 @@ func TestEndpointCase313(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14326,7 +14348,7 @@ func TestEndpointCase313(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long AZ with AP
-func TestEndpointCase314(t *testing.T) {
+func TestEndpointCase315(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-az1--xa-s3"),
@@ -14354,7 +14376,7 @@ func TestEndpointCase314(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14386,7 +14408,7 @@ func TestEndpointCase314(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with medium zone(14 chars)
-func TestEndpointCase315(t *testing.T) {
+func TestEndpointCase316(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -14414,7 +14436,7 @@ func TestEndpointCase315(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14446,7 +14468,7 @@ func TestEndpointCase315(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with medium zone(14 chars) with AP
-func TestEndpointCase316(t *testing.T) {
+func TestEndpointCase317(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -14474,7 +14496,7 @@ func TestEndpointCase316(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14506,7 +14528,7 @@ func TestEndpointCase316(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone(20 chars)
-func TestEndpointCase317(t *testing.T) {
+func TestEndpointCase318(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -14534,7 +14556,7 @@ func TestEndpointCase317(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14566,7 +14588,7 @@ func TestEndpointCase317(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone(20 chars) with AP
-func TestEndpointCase318(t *testing.T) {
+func TestEndpointCase319(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -14594,7 +14616,7 @@ func TestEndpointCase318(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14626,7 +14648,7 @@ func TestEndpointCase318(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long AZ fips
-func TestEndpointCase319(t *testing.T) {
+func TestEndpointCase320(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-az1--x-s3"),
@@ -14654,7 +14676,7 @@ func TestEndpointCase319(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14686,7 +14708,7 @@ func TestEndpointCase319(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long AZ fips with AP
-func TestEndpointCase320(t *testing.T) {
+func TestEndpointCase321(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-az1--xa-s3"),
@@ -14714,7 +14736,7 @@ func TestEndpointCase320(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14746,7 +14768,7 @@ func TestEndpointCase320(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with medium zone (14 chars) fips
-func TestEndpointCase321(t *testing.T) {
+func TestEndpointCase322(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -14774,7 +14796,7 @@ func TestEndpointCase321(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14806,7 +14828,7 @@ func TestEndpointCase321(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with medium zone (14 chars) fips with AP
-func TestEndpointCase322(t *testing.T) {
+func TestEndpointCase323(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -14834,7 +14856,7 @@ func TestEndpointCase322(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14866,7 +14888,7 @@ func TestEndpointCase322(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 chars) fips
-func TestEndpointCase323(t *testing.T) {
+func TestEndpointCase324(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -14894,7 +14916,7 @@ func TestEndpointCase323(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14926,7 +14948,7 @@ func TestEndpointCase323(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 chars) fips with AP
-func TestEndpointCase324(t *testing.T) {
+func TestEndpointCase325(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -14954,7 +14976,7 @@ func TestEndpointCase324(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -14986,7 +15008,7 @@ func TestEndpointCase324(t *testing.T) {
 }
 
 // Control Plane host override
-func TestEndpointCase325(t *testing.T) {
+func TestEndpointCase326(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -15015,7 +15037,7 @@ func TestEndpointCase325(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15047,7 +15069,7 @@ func TestEndpointCase325(t *testing.T) {
 }
 
 // Control Plane host override with AP
-func TestEndpointCase326(t *testing.T) {
+func TestEndpointCase327(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -15076,7 +15098,7 @@ func TestEndpointCase326(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15108,7 +15130,7 @@ func TestEndpointCase326(t *testing.T) {
 }
 
 // Control Plane host override no bucket
-func TestEndpointCase327(t *testing.T) {
+func TestEndpointCase328(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		UseFIPS:                     ptr.Bool(false),
@@ -15136,7 +15158,7 @@ func TestEndpointCase327(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15168,7 +15190,7 @@ func TestEndpointCase327(t *testing.T) {
 }
 
 // Data plane host override non virtual session auth
-func TestEndpointCase328(t *testing.T) {
+func TestEndpointCase329(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("mybucket--usw2-az1--x-s3"),
@@ -15227,7 +15249,7 @@ func TestEndpointCase328(t *testing.T) {
 }
 
 // Data plane host override non virtual session auth with AP
-func TestEndpointCase329(t *testing.T) {
+func TestEndpointCase330(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -15286,7 +15308,7 @@ func TestEndpointCase329(t *testing.T) {
 }
 
 // Control Plane host override ip
-func TestEndpointCase330(t *testing.T) {
+func TestEndpointCase331(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -15315,7 +15337,7 @@ func TestEndpointCase330(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15347,7 +15369,7 @@ func TestEndpointCase330(t *testing.T) {
 }
 
 // Control Plane host override ip with AP
-func TestEndpointCase331(t *testing.T) {
+func TestEndpointCase332(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -15376,7 +15398,7 @@ func TestEndpointCase331(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15408,7 +15430,7 @@ func TestEndpointCase331(t *testing.T) {
 }
 
 // Data plane host override
-func TestEndpointCase332(t *testing.T) {
+func TestEndpointCase333(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("mybucket--usw2-az1--x-s3"),
@@ -15467,7 +15489,7 @@ func TestEndpointCase332(t *testing.T) {
 }
 
 // Data plane host override with AP
-func TestEndpointCase333(t *testing.T) {
+func TestEndpointCase334(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -15526,7 +15548,7 @@ func TestEndpointCase333(t *testing.T) {
 }
 
 // bad format error
-func TestEndpointCase334(t *testing.T) {
+func TestEndpointCase335(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--usaz1--x-s3"),
@@ -15549,7 +15571,7 @@ func TestEndpointCase334(t *testing.T) {
 }
 
 // bad AP format error
-func TestEndpointCase335(t *testing.T) {
+func TestEndpointCase336(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("myaccesspoint--usaz1--xa-s3"),
@@ -15572,7 +15594,7 @@ func TestEndpointCase335(t *testing.T) {
 }
 
 // bad format error no session auth
-func TestEndpointCase336(t *testing.T) {
+func TestEndpointCase337(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--usaz1--x-s3"),
@@ -15596,7 +15618,7 @@ func TestEndpointCase336(t *testing.T) {
 }
 
 // bad AP format error no session auth
-func TestEndpointCase337(t *testing.T) {
+func TestEndpointCase338(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("myaccesspoint--usaz1--xa-s3"),
@@ -15620,7 +15642,7 @@ func TestEndpointCase337(t *testing.T) {
 }
 
 // accelerate error
-func TestEndpointCase338(t *testing.T) {
+func TestEndpointCase339(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -15643,7 +15665,7 @@ func TestEndpointCase338(t *testing.T) {
 }
 
 // accelerate error with AP
-func TestEndpointCase339(t *testing.T) {
+func TestEndpointCase340(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("myaccesspoint--test-ab1--xa-s3"),
@@ -15666,7 +15688,7 @@ func TestEndpointCase339(t *testing.T) {
 }
 
 // Data plane bucket format error
-func TestEndpointCase340(t *testing.T) {
+func TestEndpointCase341(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("my.bucket--test-ab1--x-s3"),
@@ -15689,7 +15711,7 @@ func TestEndpointCase340(t *testing.T) {
 }
 
 // Data plane AP format error
-func TestEndpointCase341(t *testing.T) {
+func TestEndpointCase342(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("my.myaccesspoint--test-ab1--xa-s3"),
@@ -15712,7 +15734,7 @@ func TestEndpointCase341(t *testing.T) {
 }
 
 // host override data plane bucket error session auth
-func TestEndpointCase342(t *testing.T) {
+func TestEndpointCase343(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("my.bucket--usw2-az1--x-s3"),
@@ -15735,7 +15757,7 @@ func TestEndpointCase342(t *testing.T) {
 }
 
 // host override data plane AP error session auth
-func TestEndpointCase343(t *testing.T) {
+func TestEndpointCase344(t *testing.T) {
 	var params = EndpointParameters{
 		Region:       ptr.String("us-west-2"),
 		Bucket:       ptr.String("my.myaccesspoint--usw2-az1--xa-s3"),
@@ -15758,7 +15780,7 @@ func TestEndpointCase343(t *testing.T) {
 }
 
 // host override data plane bucket error
-func TestEndpointCase344(t *testing.T) {
+func TestEndpointCase345(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("my.bucket--usw2-az1--x-s3"),
@@ -15782,7 +15804,7 @@ func TestEndpointCase344(t *testing.T) {
 }
 
 // host override data plane AP error
-func TestEndpointCase345(t *testing.T) {
+func TestEndpointCase346(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("my.myaccesspoint--usw2-az1--xa-s3"),
@@ -15806,7 +15828,7 @@ func TestEndpointCase345(t *testing.T) {
 }
 
 // Control plane without bucket and dualstack
-func TestEndpointCase346(t *testing.T) {
+func TestEndpointCase347(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		UseFIPS:                     ptr.Bool(false),
@@ -15833,7 +15855,7 @@ func TestEndpointCase346(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15865,7 +15887,7 @@ func TestEndpointCase346(t *testing.T) {
 }
 
 // Control plane without bucket, fips and dualstack
-func TestEndpointCase347(t *testing.T) {
+func TestEndpointCase348(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		UseFIPS:                     ptr.Bool(true),
@@ -15892,7 +15914,7 @@ func TestEndpointCase347(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -15924,7 +15946,7 @@ func TestEndpointCase347(t *testing.T) {
 }
 
 // Data Plane with bucket containing delimiters
-func TestEndpointCase348(t *testing.T) {
+func TestEndpointCase349(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("my--s3--bucket--abcd-ab1--x-s3"),
@@ -15983,7 +16005,7 @@ func TestEndpointCase348(t *testing.T) {
 }
 
 // Control plane with with bucket containing delimiters
-func TestEndpointCase349(t *testing.T) {
+func TestEndpointCase350(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("my--s3--bucket--abcd-ab1--x-s3"),
@@ -16011,7 +16033,7 @@ func TestEndpointCase349(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16043,7 +16065,7 @@ func TestEndpointCase349(t *testing.T) {
 }
 
 // Data Plane with short AZ and dualstack
-func TestEndpointCase350(t *testing.T) {
+func TestEndpointCase351(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16102,7 +16124,7 @@ func TestEndpointCase350(t *testing.T) {
 }
 
 // Data Plane with short AZ and FIPS with dualstack
-func TestEndpointCase351(t *testing.T) {
+func TestEndpointCase352(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16161,7 +16183,7 @@ func TestEndpointCase351(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ and dualstack
-func TestEndpointCase352(t *testing.T) {
+func TestEndpointCase353(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16188,7 +16210,7 @@ func TestEndpointCase352(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16220,7 +16242,7 @@ func TestEndpointCase352(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ and FIPS with dualstack
-func TestEndpointCase353(t *testing.T) {
+func TestEndpointCase354(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16247,7 +16269,7 @@ func TestEndpointCase353(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16279,7 +16301,7 @@ func TestEndpointCase353(t *testing.T) {
 }
 
 // Data Plane with zone and dualstack
-func TestEndpointCase354(t *testing.T) {
+func TestEndpointCase355(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16338,7 +16360,7 @@ func TestEndpointCase354(t *testing.T) {
 }
 
 // Data Plane with zone and FIPS with dualstack
-func TestEndpointCase355(t *testing.T) {
+func TestEndpointCase356(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16397,7 +16419,7 @@ func TestEndpointCase355(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with zone and dualstack
-func TestEndpointCase356(t *testing.T) {
+func TestEndpointCase357(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16424,7 +16446,7 @@ func TestEndpointCase356(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16456,7 +16478,7 @@ func TestEndpointCase356(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 9-char zone and FIPS with dualstack
-func TestEndpointCase357(t *testing.T) {
+func TestEndpointCase358(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16483,7 +16505,7 @@ func TestEndpointCase357(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16515,7 +16537,7 @@ func TestEndpointCase357(t *testing.T) {
 }
 
 // Data Plane with 13-char zone and dualstack
-func TestEndpointCase358(t *testing.T) {
+func TestEndpointCase359(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16574,7 +16596,7 @@ func TestEndpointCase358(t *testing.T) {
 }
 
 // Data Plane with 13-char zone and FIPS with dualstack
-func TestEndpointCase359(t *testing.T) {
+func TestEndpointCase360(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16633,7 +16655,7 @@ func TestEndpointCase359(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 13-char zone and dualstack
-func TestEndpointCase360(t *testing.T) {
+func TestEndpointCase361(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16660,7 +16682,7 @@ func TestEndpointCase360(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16692,7 +16714,7 @@ func TestEndpointCase360(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 13-char zone and FIPS with dualstack
-func TestEndpointCase361(t *testing.T) {
+func TestEndpointCase362(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16719,7 +16741,7 @@ func TestEndpointCase361(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16751,7 +16773,7 @@ func TestEndpointCase361(t *testing.T) {
 }
 
 // Data Plane with 14-char zone and dualstack
-func TestEndpointCase362(t *testing.T) {
+func TestEndpointCase363(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16810,7 +16832,7 @@ func TestEndpointCase362(t *testing.T) {
 }
 
 // Data Plane with 14-char zone and FIPS with dualstack
-func TestEndpointCase363(t *testing.T) {
+func TestEndpointCase364(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16869,7 +16891,7 @@ func TestEndpointCase363(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 14-char zone and dualstack
-func TestEndpointCase364(t *testing.T) {
+func TestEndpointCase365(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16896,7 +16918,7 @@ func TestEndpointCase364(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16928,7 +16950,7 @@ func TestEndpointCase364(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 14-char zone and FIPS with dualstack
-func TestEndpointCase365(t *testing.T) {
+func TestEndpointCase366(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16955,7 +16977,7 @@ func TestEndpointCase365(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -16987,7 +17009,7 @@ func TestEndpointCase365(t *testing.T) {
 }
 
 // Data Plane with long zone (20 cha) and dualstack
-func TestEndpointCase366(t *testing.T) {
+func TestEndpointCase367(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17046,7 +17068,7 @@ func TestEndpointCase366(t *testing.T) {
 }
 
 // Data Plane with long zone (20 char) and FIPS with dualstack
-func TestEndpointCase367(t *testing.T) {
+func TestEndpointCase368(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17105,7 +17127,7 @@ func TestEndpointCase367(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 char) and dualstack
-func TestEndpointCase368(t *testing.T) {
+func TestEndpointCase369(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17132,7 +17154,7 @@ func TestEndpointCase368(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17164,7 +17186,7 @@ func TestEndpointCase368(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 char) and FIPS with dualstack
-func TestEndpointCase369(t *testing.T) {
+func TestEndpointCase370(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17191,7 +17213,7 @@ func TestEndpointCase369(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17223,7 +17245,7 @@ func TestEndpointCase369(t *testing.T) {
 }
 
 // Control plane and FIPS with dualstack
-func TestEndpointCase370(t *testing.T) {
+func TestEndpointCase371(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -17250,7 +17272,7 @@ func TestEndpointCase370(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17282,7 +17304,7 @@ func TestEndpointCase370(t *testing.T) {
 }
 
 // Data plane with zone and dualstack and AP
-func TestEndpointCase371(t *testing.T) {
+func TestEndpointCase372(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17341,7 +17363,7 @@ func TestEndpointCase371(t *testing.T) {
 }
 
 // Data plane with zone and FIPS with dualstack and AP
-func TestEndpointCase372(t *testing.T) {
+func TestEndpointCase373(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17400,7 +17422,7 @@ func TestEndpointCase372(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with zone and dualstack and AP
-func TestEndpointCase373(t *testing.T) {
+func TestEndpointCase374(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17427,7 +17449,7 @@ func TestEndpointCase373(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17459,7 +17481,7 @@ func TestEndpointCase373(t *testing.T) {
 }
 
 // Data Plane AP sigv4 auth with zone and FIPS with dualstack
-func TestEndpointCase374(t *testing.T) {
+func TestEndpointCase375(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17486,7 +17508,7 @@ func TestEndpointCase374(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17518,7 +17540,7 @@ func TestEndpointCase374(t *testing.T) {
 }
 
 // Data Plane with zone (9 char) and AP with dualstack
-func TestEndpointCase375(t *testing.T) {
+func TestEndpointCase376(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17577,7 +17599,7 @@ func TestEndpointCase375(t *testing.T) {
 }
 
 // Data Plane with zone (9 char) and FIPS with AP and dualstack
-func TestEndpointCase376(t *testing.T) {
+func TestEndpointCase377(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17636,7 +17658,7 @@ func TestEndpointCase376(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (9 char) zone and dualstack with AP
-func TestEndpointCase377(t *testing.T) {
+func TestEndpointCase378(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17663,7 +17685,7 @@ func TestEndpointCase377(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17695,7 +17717,7 @@ func TestEndpointCase377(t *testing.T) {
 }
 
 // Access Point sigv4 auth with (9 char) zone and FIPS with dualstack
-func TestEndpointCase378(t *testing.T) {
+func TestEndpointCase379(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17722,7 +17744,7 @@ func TestEndpointCase378(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17754,7 +17776,7 @@ func TestEndpointCase378(t *testing.T) {
 }
 
 // Data Plane with zone (13 char) and AP with dualstack
-func TestEndpointCase379(t *testing.T) {
+func TestEndpointCase380(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17813,7 +17835,7 @@ func TestEndpointCase379(t *testing.T) {
 }
 
 // Data Plane with zone (13 char) and AP with FIPS and dualstack
-func TestEndpointCase380(t *testing.T) {
+func TestEndpointCase381(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17872,7 +17894,7 @@ func TestEndpointCase380(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (13 char) zone with AP and dualstack
-func TestEndpointCase381(t *testing.T) {
+func TestEndpointCase382(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17899,7 +17921,7 @@ func TestEndpointCase381(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17931,7 +17953,7 @@ func TestEndpointCase381(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (13 char) zone with AP and FIPS and dualstack
-func TestEndpointCase382(t *testing.T) {
+func TestEndpointCase383(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17958,7 +17980,7 @@ func TestEndpointCase382(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -17990,7 +18012,7 @@ func TestEndpointCase382(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with dualstack
-func TestEndpointCase383(t *testing.T) {
+func TestEndpointCase384(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18049,7 +18071,7 @@ func TestEndpointCase383(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with FIPS and dualstack
-func TestEndpointCase384(t *testing.T) {
+func TestEndpointCase385(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18108,7 +18130,7 @@ func TestEndpointCase384(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (14 char) zone and AP with dualstack
-func TestEndpointCase385(t *testing.T) {
+func TestEndpointCase386(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18135,7 +18157,7 @@ func TestEndpointCase385(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -18167,7 +18189,7 @@ func TestEndpointCase385(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with FIPS and dualstack
-func TestEndpointCase386(t *testing.T) {
+func TestEndpointCase387(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18194,7 +18216,7 @@ func TestEndpointCase386(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -18226,7 +18248,7 @@ func TestEndpointCase386(t *testing.T) {
 }
 
 // Data Plane with (20 char) zone and AP with dualstack
-func TestEndpointCase387(t *testing.T) {
+func TestEndpointCase388(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18285,7 +18307,7 @@ func TestEndpointCase387(t *testing.T) {
 }
 
 // Data Plane with (20 char) zone and AP with FIPS and dualstack
-func TestEndpointCase388(t *testing.T) {
+func TestEndpointCase389(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18344,7 +18366,7 @@ func TestEndpointCase388(t *testing.T) {
 }
 
 // Data plane AP with sigv4 and dualstack
-func TestEndpointCase389(t *testing.T) {
+func TestEndpointCase390(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18371,7 +18393,7 @@ func TestEndpointCase389(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -18403,7 +18425,7 @@ func TestEndpointCase389(t *testing.T) {
 }
 
 // Data plane AP sigv4 with fips and dualstack
-func TestEndpointCase390(t *testing.T) {
+func TestEndpointCase391(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18430,7 +18452,7 @@ func TestEndpointCase390(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")
@@ -18462,7 +18484,7 @@ func TestEndpointCase390(t *testing.T) {
 }
 
 // Control plane with dualstack and bucket
-func TestEndpointCase391(t *testing.T) {
+func TestEndpointCase392(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -18489,7 +18511,7 @@ func TestEndpointCase391(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "s3express")

@@ -864,6 +864,257 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>IoT</fullname>\n         <p>IoT provides secure, bi-directional communication between Internet-connected\n         devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services\n         cloud. You can discover your custom IoT-Data endpoint to communicate with, configure\n         rules for data processing and integration with other services, organize resources\n         associated with each device (Registry), configure logging, and create and manage\n         policies and credentials to authenticate devices.</p>\n         <p>The service endpoints that expose this API are listed in\n         <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.\n         You must use the endpoint for the region that has the resources you want to access.</p>\n         <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services\n         Signature Version 4</a> to sign the request is:\n         <i>execute-api</i>.</p>\n         <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer\n         Guide</a>.</p>\n         <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>",
                 "smithy.api#title": "AWS IoT",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-cn"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot.{Region}.amazonaws.com.cn",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iot.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 16,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA8AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAsAAAAGAAAABQAAAAoAAAAHAAAABwX14QoAAAAIAAAACAX14QsAAAAJAAAACQX14QoF9eEMAAAABgX14QgF9eEJAAAABAAAAA0AAAAMAAAABQX14QUF9eEHAAAABQAAAA4F9eEGAAAABgX14QQF9eEFAAAAAwX14QEAAAAQAAAABQX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -4583,6 +4834,12 @@
                 "smithy.api#documentation": "<p>Configures the command to treat the <code>payloadTemplate</code> as a JSON document for preprocessing.\n            This preprocessor substitutes placeholders with parameter values to generate the command execution request payload.\n            </p>"
             }
         },
+        "com.amazonaws.iot#BatchAcrossTopics": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.iot#BatchConfig": {
             "type": "structure",
             "members": {
@@ -4602,6 +4859,13 @@
                     "target": "com.amazonaws.iot#MaxBatchSizeBytes",
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum size of a message batch, in bytes.</p>"
+                    }
+                },
+                "batchAcrossTopics": {
+                    "target": "com.amazonaws.iot#BatchAcrossTopics",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether to allow batching messages from different MQTT topics into a single HTTP request.\n         By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>\n         <note>\n            <p>When <code>batchAcrossTopics</code> is enabled, the error payload format changes: the <code>topic</code> field moves from the top level to inside each entry in the <code>payloadsWithMetadata</code> array, since each message in the batch may originate from a different topic.</p>\n         </note>\n         <note>\n            <p>Messages are always batched within the scope of the same account, rule name, target HTTP endpoint URL, and billing group. Messages that differ in any of these attributes are never combined into the same batch, regardless of the <code>batchAcrossTopics</code> setting.</p>\n         </note>"
                     }
                 }
             },
@@ -7241,6 +7505,20 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#ConnectivityFilter": {
+            "type": "structure",
+            "members": {
+                "includeSocketInformation": {
+                    "target": "com.amazonaws.iot#FleetIndexingApiList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fleet indexing APIs for which to enable socket information retrieval. Currently, the only supported value is <code>GET_THING_CONNECTIVITY_DATA</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides connectivity filter selections for the fleet indexing configuration.</p>"
             }
         },
         "com.amazonaws.iot#ConnectivityTimestamp": {
@@ -17309,6 +17587,12 @@
                         "smithy.api#enumValue": "SERVER_INITIATED_DISCONNECT"
                     }
                 },
+                "API_INITIATED_DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_INITIATED_DISCONNECT"
+                    }
+                },
                 "THROTTLED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -18231,6 +18515,23 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.iot#FleetIndexingApi": {
+            "type": "enum",
+            "members": {
+                "GET_THING_CONNECTIVITY_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GET_THING_CONNECTIVITY_DATA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#FleetIndexingApiList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#FleetIndexingApi"
             }
         },
         "com.amazonaws.iot#FleetMetricArn": {
@@ -20208,7 +20509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the live connectivity status per device.</p>",
+                "smithy.api#documentation": "<p>Retrieves the live connectivity status per device. If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/things/{thingName}/connectivity-data",
@@ -20225,6 +20526,12 @@
                         "smithy.api#documentation": "<p>The name of your IoT thing.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "includeSocketInformation": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp, vpcEndpointId) should be included in the GetThingConnectivityData response. Set to <code>true</code> to include socket information. Set to <code>false</code> to omit socket information. By default, this is set to <code>false</code>.</p>"
                     }
                 }
             },
@@ -20250,13 +20557,67 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the event occurred.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the device connected or disconnected.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReasonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnecting.</p>"
+                        "smithy.api#documentation": "<p>The reason that the client is disconnected.</p>"
+                    }
+                },
+                "sourceIp": {
+                    "target": "com.amazonaws.iot#SourceIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the client that initiated the connection.</p>"
+                    }
+                },
+                "sourcePort": {
+                    "target": "com.amazonaws.iot#SourcePort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client's source port.</p>"
+                    }
+                },
+                "targetIp": {
+                    "target": "com.amazonaws.iot#TargetIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the Amazon Web Services IoT Core endpoint that the client connected to.</p>"
+                    }
+                },
+                "targetPort": {
+                    "target": "com.amazonaws.iot#TargetPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the Amazon Web Services IoT Core endpoint that the client connected to.</p>"
+                    }
+                },
+                "vpcEndpointId": {
+                    "target": "com.amazonaws.iot#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint. Present for clients connected to Amazon Web Services IoT Core via a VPC endpoint.</p>"
+                    }
+                },
+                "keepAliveDuration": {
+                    "target": "com.amazonaws.iot#KeepAliveDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>"
+                    }
+                },
+                "cleanSession": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>"
+                    }
+                },
+                "sessionExpiry": {
+                    "target": "com.amazonaws.iot#SessionExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>"
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.iot#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the MQTT client.</p>"
                     }
                 }
             },
@@ -20810,6 +21171,12 @@
                     "target": "com.amazonaws.iot#GeoLocationsFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of geolocation targets that you select to index. The default maximum number of\n      geolocation targets for indexing is <code>1</code>. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device\n        Management Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "connectivity": {
+                    "target": "com.amazonaws.iot#ConnectivityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional connectivity filter selections for the fleet indexing configuration.</p>"
                     }
                 }
             },
@@ -21972,6 +22339,9 @@
                     "max": 100
                 }
             }
+        },
+        "com.amazonaws.iot#KeepAliveDuration": {
+            "type": "integer"
         },
         "com.amazonaws.iot#Key": {
             "type": "string"
@@ -32498,7 +32868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The query search index.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">SearchIndex</a> action.</p>",
+                "smithy.api#documentation": "<p>Searches the specified index.</p>\n         <p>If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the <code>connectivity</code> object for this device in the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">SearchIndex</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/indices/search",
@@ -32862,6 +33232,9 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
+        },
+        "com.amazonaws.iot#SessionExpiry": {
+            "type": "long"
         },
         "com.amazonaws.iot#SetAsActive": {
             "type": "boolean",
@@ -33321,6 +33694,18 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iot#SourceIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#SourcePort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iot#SqlParseException": {
@@ -34415,6 +34800,18 @@
                 }
             }
         },
+        "com.amazonaws.iot#TargetIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#TargetPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.iot#TargetSelection": {
             "type": "enum",
             "members": {
@@ -34922,13 +35319,37 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#ConnectivityTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the\n      thing has been disconnected for approximately an hour, the time value might be missing.</p>"
+                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>"
+                        "smithy.api#documentation": "<p>The reason that the client is disconnected.</p>"
+                    }
+                },
+                "keepAliveDuration": {
+                    "target": "com.amazonaws.iot#KeepAliveDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>"
+                    }
+                },
+                "cleanSession": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>"
+                    }
+                },
+                "sessionExpiry": {
+                    "target": "com.amazonaws.iot#SessionExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>"
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.iot#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the MQTT client.</p>"
                     }
                 }
             },
@@ -39630,6 +40051,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The summary of a virtual private cloud (VPC) destination.</p>"
+            }
+        },
+        "com.amazonaws.iot#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iot#VpcId": {

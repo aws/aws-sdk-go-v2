@@ -45,9 +45,9 @@ type ListFeedsInput struct {
 
 	// The token that identifies the batch of results that you want to see.
 	//
-	// For example, you submit a ListBridges request with MaxResults set at 5. The
+	// For example, you submit a ListFeeds request with MaxResults set at 5. The
 	// service returns the first batch of results (up to 5) and a NextToken value. To
-	// see the next batch of results, you can submit the ListBridges request a second
+	// see the next batch of results, you can submit the ListFeeds request a second
 	// time and specify the NextToken value.
 	NextToken *string
 
@@ -56,7 +56,7 @@ type ListFeedsInput struct {
 
 type ListFeedsOutput struct {
 
-	// A list of feed summaries.
+	// A list of FeedSummary objects.
 	//
 	// This member is required.
 	Feeds []types.FeedSummary

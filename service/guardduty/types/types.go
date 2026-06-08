@@ -54,10 +54,12 @@ type AccessKeyDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the account.
+// Contains information about the Amazon Web Services account within which the
+// activity took place.
 type Account struct {
 
-	// ID of the member's Amazon Web Services account
+	// The Amazon Web Services account ID within which the activity took place. This
+	// may differ from the account that owns the user identity.
 	//
 	// This member is required.
 	Uid *string
@@ -623,6 +625,22 @@ type ContainerInstanceDetails struct {
 	// Represents the nodes in the Amazon ECS cluster that has a HEALTHY coverage
 	// status.
 	CoveredContainerInstances *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the time range within the continuous backup in
+// Amazon Web Services Backup to scan for a point-in-time recovery resource.
+type ContinuousScanDetails struct {
+
+	// The timestamp representing the end of the time range to scan.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The timestamp representing the start of the time range to scan. Reserved for
+	// internal use.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -3439,6 +3457,10 @@ type RecoveryPoint struct {
 	// This member is required.
 	BackupVaultName *string
 
+	// Contains information about the time range within the continuous backup in
+	// Amazon Web Services Backup to scan.
+	ContinuousScanDetails *ContinuousScanDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -3739,6 +3761,15 @@ type RuntimeContext struct {
 	// Example of the command line involved in the suspicious activity.
 	CommandLineExample *string
 
+	// Represents the type of file operation that triggered the finding, such as
+	// Write, Delete, Rename, Link, or Symlink.
+	FileOperation *string
+
+	// The path of the sensitive file that was modified. Modification includes write,
+	// delete, rename, link, or symlink operations. This field is indexed for
+	// filtering.
+	FilePath *string
+
 	// Represents the type of mounted fileSystem.
 	FileSystemType *string
 
@@ -3782,6 +3813,10 @@ type RuntimeContext struct {
 
 	// The path in the container that is mapped to the host directory.
 	MountTarget *string
+
+	// All file paths modified by the same process that triggered the finding, up to a
+	// maximum of 25 paths.
+	RelatedFilePaths []string
 
 	// The path in the container that modified the release agent file.
 	ReleaseAgentPath *string
@@ -4100,12 +4135,32 @@ type ScanConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the time range within the continuous backup in
+// Amazon Web Services Backup that was scanned for a point-in-time recovery
+// resource.
+type ScanConfigurationContinuousScanDetails struct {
+
+	// The timestamp representing the end of the time range that was scanned.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The timestamp representing the start of the time range that was scanned.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the recovery point configuration used in the scan.
 type ScanConfigurationRecoveryPoint struct {
 
 	// The name of the Amazon Web Services Backup vault that contains the recovery
 	// point for the scanned.
 	BackupVaultName *string
+
+	// The time range within the continuous backup in Amazon Web Services Backup that
+	// was scanned for a point-in-time recovery resource.
+	ContinuousScanDetails *ScanConfigurationContinuousScanDetails
 
 	noSmithyDocumentSerde
 }
@@ -4879,7 +4934,9 @@ type User struct {
 	// This member is required.
 	Uid *string
 
-	// Contains information about the Amazon Web Services account.
+	// Contains information about the Amazon Web Services account within which the
+	// activity took place. This is not necessarily the account that owns the user
+	// identity.
 	Account *Account
 
 	// The credentials of the user ID.

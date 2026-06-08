@@ -810,6 +810,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGenerateRecommendedPolicyV2 struct {
+}
+
+func (*validateOpGenerateRecommendedPolicyV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGenerateRecommendedPolicyV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GenerateRecommendedPolicyV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGenerateRecommendedPolicyV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAggregatorV2 struct {
 }
 
@@ -1025,6 +1045,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecommendedPolicyV2 struct {
+}
+
+func (*validateOpGetRecommendedPolicyV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecommendedPolicyV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecommendedPolicyV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecommendedPolicyV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1630,6 +1670,10 @@ func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpGenerateRecommendedPolicyV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGenerateRecommendedPolicyV2{}, middleware.After)
+}
+
 func addOpGetAggregatorV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAggregatorV2{}, middleware.After)
 }
@@ -1672,6 +1716,10 @@ func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
+}
+
+func addOpGetRecommendedPolicyV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecommendedPolicyV2{}, middleware.After)
 }
 
 func addOpGetResourcesStatisticsV2ValidationMiddleware(stack *middleware.Stack) error {
@@ -3397,6 +3445,21 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	}
 }
 
+func validateOpGenerateRecommendedPolicyV2Input(v *GenerateRecommendedPolicyV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerateRecommendedPolicyV2Input"}
+	if v.MetadataUid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataUid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAggregatorV2Input(v *GetAggregatorV2Input) error {
 	if v == nil {
 		return nil
@@ -3565,6 +3628,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetMembersInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecommendedPolicyV2Input(v *GetRecommendedPolicyV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendedPolicyV2Input"}
+	if v.MetadataUid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataUid"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

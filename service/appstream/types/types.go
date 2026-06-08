@@ -67,6 +67,80 @@ type AdminAppLicenseUsageRecord struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for agent access on a stack. Agent access enables AI agents
+// to interact with desktop applications during streaming sessions.
+type AgentAccessConfig struct {
+
+	// The image format for agent screen captures.
+	//
+	// This member is required.
+	ScreenImageFormat ScreenImageFormat
+
+	// The screen resolution for the agent streaming environment.
+	//
+	// This member is required.
+	ScreenResolution ScreenResolution
+
+	// The list of agent access settings that define permissions for each agent
+	// action. You must specify at least one setting.
+	//
+	// This member is required.
+	Settings []AgentAccessSetting
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
+	// are stored. Required when ScreenshotsUploadEnabled is true.
+	S3BucketArn *string
+
+	// Indicates whether screenshot uploads to Amazon S3 are enabled for agent
+	// sessions.
+	ScreenshotsUploadEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for updating agent access on a stack. This type supports
+// partial updates, so you only need to specify the fields you want to change.
+type AgentAccessConfigForUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
+	// are stored.
+	S3BucketArn *string
+
+	// The image format for agent screen captures.
+	ScreenImageFormat ScreenImageFormat
+
+	// The screen resolution for the agent streaming environment.
+	ScreenResolution ScreenResolution
+
+	// Indicates whether screenshot uploads to Amazon S3 are enabled for agent
+	// sessions.
+	ScreenshotsUploadEnabled *bool
+
+	// The list of agent access settings that define permissions for each agent action.
+	Settings []AgentAccessSetting
+
+	noSmithyDocumentSerde
+}
+
+// A permission setting for an agent action. Each setting specifies an agent
+// action and whether it is enabled or disabled.
+type AgentAccessSetting struct {
+
+	// The agent action to configure. Valid values are COMPUTER_VISION and
+	// COMPUTER_INPUT. If you enable COMPUTER_INPUT, you must also enable
+	// COMPUTER_VISION.
+	//
+	// This member is required.
+	AgentAction AgentAction
+
+	// Whether the agent action is enabled or disabled.
+	//
+	// This member is required.
+	Permission Permission
+
+	noSmithyDocumentSerde
+}
+
 // Describes an app block.
 //
 // App blocks are a WorkSpaces Applications resource that stores the details about
@@ -1568,6 +1642,9 @@ type Stack struct {
 	// the stack can connect to WorkSpaces Applications only through the specified
 	// endpoints.
 	AccessEndpoints []AccessEndpoint
+
+	// The agent access configuration of the stack, if agent access is enabled.
+	AgentAccessConfig *AgentAccessConfig
 
 	// The persistent application settings for users of the stack.
 	ApplicationSettings *ApplicationSettingsResponse

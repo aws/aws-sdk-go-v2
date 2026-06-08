@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -507,7 +506,7 @@ func (m *awsAwsjson10_deserializeOpDeleteActivityType) HandleDeserialize(ctx con
 	output := &DeleteActivityTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -602,7 +601,7 @@ func (m *awsAwsjson10_deserializeOpDeleteWorkflowType) HandleDeserialize(ctx con
 	output := &DeleteWorkflowTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -697,7 +696,7 @@ func (m *awsAwsjson10_deserializeOpDeprecateActivityType) HandleDeserialize(ctx 
 	output := &DeprecateActivityTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -792,7 +791,7 @@ func (m *awsAwsjson10_deserializeOpDeprecateDomain) HandleDeserialize(ctx contex
 	output := &DeprecateDomainOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -887,7 +886,7 @@ func (m *awsAwsjson10_deserializeOpDeprecateWorkflowType) HandleDeserialize(ctx 
 	output := &DeprecateWorkflowTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2584,7 +2583,7 @@ func (m *awsAwsjson10_deserializeOpRegisterActivityType) HandleDeserialize(ctx c
 	output := &RegisterActivityTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2682,7 +2681,7 @@ func (m *awsAwsjson10_deserializeOpRegisterDomain) HandleDeserialize(ctx context
 	output := &RegisterDomainOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2780,7 +2779,7 @@ func (m *awsAwsjson10_deserializeOpRegisterWorkflowType) HandleDeserialize(ctx c
 	output := &RegisterWorkflowTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2878,7 +2877,7 @@ func (m *awsAwsjson10_deserializeOpRequestCancelWorkflowExecution) HandleDeseria
 	output := &RequestCancelWorkflowExecutionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2970,7 +2969,7 @@ func (m *awsAwsjson10_deserializeOpRespondActivityTaskCanceled) HandleDeserializ
 	output := &RespondActivityTaskCanceledOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3062,7 +3061,7 @@ func (m *awsAwsjson10_deserializeOpRespondActivityTaskCompleted) HandleDeseriali
 	output := &RespondActivityTaskCompletedOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3154,7 +3153,7 @@ func (m *awsAwsjson10_deserializeOpRespondActivityTaskFailed) HandleDeserialize(
 	output := &RespondActivityTaskFailedOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3246,7 +3245,7 @@ func (m *awsAwsjson10_deserializeOpRespondDecisionTaskCompleted) HandleDeseriali
 	output := &RespondDecisionTaskCompletedOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3338,7 +3337,7 @@ func (m *awsAwsjson10_deserializeOpSignalWorkflowExecution) HandleDeserialize(ct
 	output := &SignalWorkflowExecutionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3556,7 +3555,7 @@ func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	output := &TagResourceOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3654,7 +3653,7 @@ func (m *awsAwsjson10_deserializeOpTerminateWorkflowExecution) HandleDeserialize
 	output := &TerminateWorkflowExecutionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3746,7 +3745,7 @@ func (m *awsAwsjson10_deserializeOpUndeprecateActivityType) HandleDeserialize(ct
 	output := &UndeprecateActivityTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3841,7 +3840,7 @@ func (m *awsAwsjson10_deserializeOpUndeprecateDomain) HandleDeserialize(ctx cont
 	output := &UndeprecateDomainOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3936,7 +3935,7 @@ func (m *awsAwsjson10_deserializeOpUndeprecateWorkflowType) HandleDeserialize(ct
 	output := &UndeprecateWorkflowTypeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4031,7 +4030,7 @@ func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	output := &UntagResourceOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

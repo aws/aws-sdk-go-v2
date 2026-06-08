@@ -25,7 +25,7 @@ import (
 //
 // For information about how manual contact assignment works in the agent
 //
-//	workspace, see the [Access the Worklist app in the Amazon Connect agent workspace]in the Amazon Connect Administrator Guide.
+//	workspace, see the [Access the Worklist app in the Connect Customer agent workspace]in the Connect Customer Administrator Guide.
 //
 // Important things to know
 //
@@ -33,11 +33,11 @@ import (
 //     routing profile. Use the ListRoutingProfileQueues API to list the auto
 //     assignment queues for the routing profile.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 //
-// [Access the Worklist app in the Amazon Connect agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
+// [Access the Worklist app in the Connect Customer agent workspace]: https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html
 func (c *Client) ListRoutingProfileManualAssignmentQueues(ctx context.Context, params *ListRoutingProfileManualAssignmentQueuesInput, optFns ...func(*Options)) (*ListRoutingProfileManualAssignmentQueuesOutput, error) {
 	if params == nil {
 		params = &ListRoutingProfileManualAssignmentQueuesInput{}
@@ -55,8 +55,8 @@ func (c *Client) ListRoutingProfileManualAssignmentQueues(ctx context.Context, p
 
 type ListRoutingProfileManualAssignmentQueuesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

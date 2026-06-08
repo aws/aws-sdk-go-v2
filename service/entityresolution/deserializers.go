@@ -9976,6 +9976,46 @@ func awsRestjson1_deserializeDocumentMatchGroupsList(v *[]types.MatchGroup, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMatchingConfig(v **types.MatchingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MatchingConfig
+	if *v == nil {
+		sv = &types.MatchingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enableTransitiveMatching":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableTransitiveMatching = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMatchingKeys(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11292,6 +11332,11 @@ func awsRestjson1_deserializeDocumentRuleConditionProperties(v **types.RuleCondi
 
 	for key, value := range shape {
 		switch key {
+		case "matchingConfig":
+			if err := awsRestjson1_deserializeDocumentMatchingConfig(&sv.MatchingConfig, value); err != nil {
+				return err
+			}
+
 		case "rules":
 			if err := awsRestjson1_deserializeDocumentRuleConditionList(&sv.Rules, value); err != nil {
 				return err

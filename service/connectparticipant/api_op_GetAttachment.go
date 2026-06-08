@@ -13,7 +13,7 @@ import (
 // Provides a pre-signed URL for download of a completed attachment. This is an
 // asynchronous API for use with active contacts.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 //   - The participant role CUSTOM_BOT is not permitted to access attachments
 //     customers may upload. An AccessDeniedException can indicate that the
@@ -23,8 +23,8 @@ import (
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) GetAttachment(ctx context.Context, params *GetAttachmentInput, optFns ...func(*Options)) (*GetAttachmentOutput, error) {
 	if params == nil {
 		params = &GetAttachmentInput{}

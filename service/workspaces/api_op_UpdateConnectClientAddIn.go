@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Amazon Connect client add-in. Use this action to update the name and
-// endpoint URL of a Amazon Connect client add-in.
+// Updates a Connect Customer client add-in. Use this action to update the name
+// and endpoint URL of a Connect Customer client add-in.
 func (c *Client) UpdateConnectClientAddIn(ctx context.Context, params *UpdateConnectClientAddInInput, optFns ...func(*Options)) (*UpdateConnectClientAddInOutput, error) {
 	if params == nil {
 		params = &UpdateConnectClientAddInInput{}
@@ -42,7 +42,7 @@ type UpdateConnectClientAddInInput struct {
 	// The name of the client add-in.
 	Name *string
 
-	// The endpoint URL of the Amazon Connect client add-in.
+	// The endpoint URL of the Connect Customer client add-in.
 	URL *string
 
 	noSmithyDocumentSerde

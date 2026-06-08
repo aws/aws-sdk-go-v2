@@ -116,6 +116,11 @@ type CreateDashManifestConfiguration struct {
 	// This member is required.
 	ManifestName *string
 
+	// The configuration for the DASH availabilityStartTime attribute of the Media
+	// Presentation Description (MPD). If you don't specify a value, MediaPackage uses
+	// the default availability start time of 2024-01-01T00:00:00Z .
+	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
+
 	// The base URLs to use for retrieving segments.
 	BaseUrls []DashBaseUrl
 
@@ -190,6 +195,12 @@ type CreateDashManifestConfiguration struct {
 	// manifest.
 	SuggestedPresentationDelaySeconds *int32
 
+	// The type of path to use in manifest URIs. LEAF uses leaf-relative paths (for
+	// example, index_1.mpd ). ROOT uses root-relative paths that include the full
+	// path from root (for example, /out/v1/channel-group/channel/endpoint/index_1.mpd
+	// ). If you don't specify a value, the default is LEAF .
+	UriPathType UriPathType
+
 	// Determines the type of UTC timing included in the DASH Media Presentation
 	// Description (MPD).
 	UtcTiming *DashUtcTiming
@@ -241,6 +252,12 @@ type CreateHlsManifestConfiguration struct {
 	// configuration object with a valid TimeOffset. When you do, you can also
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
+
+	// The type of path to use in manifest URIs. LEAF uses leaf-relative paths (for
+	// example, index_1.m3u8 ). ROOT uses root-relative paths that include the full
+	// path from root (for example, /out/v1/channel-group/channel/endpoint/index_1.m3u8
+	// ). If you don't specify a value, the default is LEAF .
+	UriPathType UriPathType
 
 	// When enabled, MediaPackage URL-encodes the query string for API requests for
 	// HLS child manifests to comply with Amazon Web Services Signature Version 4
@@ -298,6 +315,12 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
 
+	// The type of path to use in manifest URIs. LEAF uses leaf-relative paths (for
+	// example, index_1.m3u8 ). ROOT uses root-relative paths that include the full
+	// path from root (for example, /out/v1/channel-group/channel/endpoint/index_1.m3u8
+	// ). If you don't specify a value, the default is LEAF .
+	UriPathType UriPathType
+
 	// When enabled, MediaPackage URL-encodes the query string for API requests for
 	// LL-HLS child manifests to comply with Amazon Web Services Signature Version 4
 	// (SigV4) signature signing protocol. For more information, see [Amazon Web Services Signature Version 4 for API requests]in Identity and
@@ -338,6 +361,30 @@ type CreateMssManifestConfiguration struct {
 	ManifestWindowSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+// The configuration for the DASH availabilityStartTime attribute of the Media
+// Presentation Description (MPD). Use this configuration to set a custom
+// availability start time for your DASH manifest.
+//
+// The following types satisfy this interface:
+//
+//	DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime
+type DashAvailabilityStartTimeConfiguration interface {
+	isDashAvailabilityStartTimeConfiguration()
+}
+
+// The fixed availability start time for the DASH manifest, in ISO 8601 date-time
+// format. The value must have hourly granularity, meaning that the minutes,
+// seconds, and fractional seconds must be zero. The value must be on or after
+// 2024-01-01T00:00:00Z and must be at least 14 days before the current time.
+type DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime) isDashAvailabilityStartTimeConfiguration() {
 }
 
 // The base URLs to use for retrieving segments. You can specify multiple
@@ -710,6 +757,10 @@ type GetDashManifestConfiguration struct {
 	// This member is required.
 	Url *string
 
+	// The configuration for the DASH availabilityStartTime attribute of the Media
+	// Presentation Description (MPD).
+	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
+
 	// The base URL to use for retrieving segments.
 	BaseUrls []DashBaseUrl
 
@@ -777,6 +828,10 @@ type GetDashManifestConfiguration struct {
 	// manifest.
 	SuggestedPresentationDelaySeconds *int32
 
+	// The type of path used in manifest URIs. LEAF indicates leaf-relative paths. ROOT
+	// indicates root-relative paths that include the full path from root.
+	UriPathType UriPathType
+
 	// Determines the type of UTC timing included in the DASH Media Presentation
 	// Description (MPD).
 	UtcTiming *DashUtcTiming
@@ -833,6 +888,10 @@ type GetHlsManifestConfiguration struct {
 	// configuration object with a valid TimeOffset. When you do, you can also
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
+
+	// The type of path used in manifest URIs. LEAF indicates leaf-relative paths. ROOT
+	// indicates root-relative paths that include the full path from root.
+	UriPathType UriPathType
 
 	// When enabled, MediaPackage URL-encodes the query string for API requests for
 	// HLS child manifests to comply with Amazon Web Services Signature Version 4
@@ -894,6 +953,10 @@ type GetLowLatencyHlsManifestConfiguration struct {
 	// configuration object with a valid TimeOffset. When you do, you can also
 	// optionally specify whether to include a PRECISE value in the EXT-X-START tag.
 	StartTag *StartTag
+
+	// The type of path used in manifest URIs. LEAF indicates leaf-relative paths. ROOT
+	// indicates root-relative paths that include the full path from root.
+	UriPathType UriPathType
 
 	// When enabled, MediaPackage URL-encodes the query string for API requests for
 	// LL-HLS child manifests to comply with Amazon Web Services Signature Version 4
@@ -1252,6 +1315,9 @@ type OriginEndpointListConfiguration struct {
 	// streaming option available from this endpoint.
 	MssManifests []ListMssManifestConfiguration
 
+	// The separator character used in generated URIs for this origin endpoint.
+	UriSeparator UriSeparator
+
 	noSmithyDocumentSerde
 }
 
@@ -1287,6 +1353,17 @@ type S3DestinationConfig struct {
 // The SCTE configuration.
 type Scte struct {
 
+	// A list of additional non-Ad SCTE-35 event types to treat as advertisements.
+	// When configured, events matching these types produce ad markers (such as
+	// SCTE35-OUT and SCTE35-IN in HLS DATERANGE tags) in manifests.
+	//
+	// Valid values: PROGRAM | CHAPTER | UNSCHEDULED_EVENT |
+	// ALTERNATE_CONTENT_OPPORTUNITY | NETWORK
+	//
+	// If you don't specify any values, the default is empty (only default ad types
+	// are used).
+	CustomAdTypes []CustomAdType
+
 	// The SCTE-35 message types that you want to be treated as ad markers in the
 	// output.
 	ScteFilter []ScteFilter
@@ -1297,9 +1374,12 @@ type Scte struct {
 	//
 	//   - All – SCTE-35 messages are embedded in segment data
 	//
-	// For DASH manifests, when set to All , an InbandEventStream tag signals that
-	// SCTE messages are present in segments. This setting works independently of
-	// manifest ad markers.
+	//   - MatchesFilter – SCTE-35 messages which match the ScteFilter are embedded in
+	//   segment data
+	//
+	// For DASH manifests, when set to All or MatchesFilter , an InbandEventStream tag
+	// signals that SCTE messages are present in segments. This setting works
+	// independently of manifest ad markers.
 	ScteInSegments ScteInSegments
 
 	noSmithyDocumentSerde
@@ -1319,6 +1399,13 @@ type ScteDash struct {
 	//
 	//   - XML - The SCTE marker is expressed fully in XML.
 	AdMarkerDash AdMarkerDash
+
+	// Controls which SCTE-35 events appear in DASH manifests. ALL includes all
+	// non-implicit SCTE-35 events. MATCHES_FILTER includes only events whose type
+	// matches the configured ScteFilter .
+	//
+	// If you don't specify a value, the default is ALL .
+	ScteInManifests ScteInManifests
 
 	noSmithyDocumentSerde
 }
@@ -1343,6 +1430,13 @@ type ScteHls struct {
 	//
 	// [SCTE-35 Ad Marker EXT-X-DATERANGE]: http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html
 	AdMarkerHls AdMarkerHls
+
+	// Controls which SCTE-35 events appear in HLS manifests. ALL includes all
+	// non-implicit SCTE-35 events. MATCHES_FILTER includes only events whose type
+	// matches the configured ScteFilter .
+	//
+	// If you don't specify a value, the default is ALL .
+	ScteInManifests ScteInManifests
 
 	noSmithyDocumentSerde
 }
@@ -1469,3 +1563,14 @@ type StartTag struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDashAvailabilityStartTimeConfiguration() {}

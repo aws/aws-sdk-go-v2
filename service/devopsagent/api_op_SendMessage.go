@@ -61,6 +61,7 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for sending chat message events
 type SendMessageOutput struct {
 	eventStream *SendMessageEventStream
 

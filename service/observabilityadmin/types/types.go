@@ -436,6 +436,17 @@ type LogsEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//	Configuration parameters for Amazon MSK cluster monitoring, including enhanced
+//
+// monitoring level settings.
+type MskMonitoringParameters struct {
+
+	//  The level of enhanced monitoring for the MSK cluster.
+	EnhancedMonitoring MskEnhancedMonitoringLevel
+
+	noSmithyDocumentSerde
+}
+
 // Contains the output from pipeline test operations, including processed records
 // and any errors encountered.
 type PipelineOutput struct {
@@ -609,6 +620,10 @@ type TelemetryDestinationConfiguration struct {
 	// Configuration parameters specific to Amazon Bedrock AgentCore logging when
 	// Amazon Bedrock AgentCore is the resource type.
 	LogDeliveryParameters *LogDeliveryParameters
+
+	//  Configuration parameters specific to MSK monitoring when MSK is the resource
+	// type.
+	MskMonitoringParameters *MskMonitoringParameters
 
 	//  The number of days to retain the telemetry data in the destination.
 	RetentionInDays *int32

@@ -242,6 +242,11 @@ type DataReplicationInitiationStep struct {
 	noSmithyDocumentSerde
 }
 
+// An operation that deletes a construct from the mapping.
+type DeleteOperation struct {
+	noSmithyDocumentSerde
+}
+
 // Request to describe Job log filters.
 type DescribeJobsRequestFilters struct {
 
@@ -1092,6 +1097,28 @@ type ManagedAccount struct {
 	noSmithyDocumentSerde
 }
 
+// A construct reference specifying the source segment and construct to merge.
+type MergeConstruct struct {
+
+	// The construct ID to merge.
+	ConstructID *string
+
+	// The segment ID of the construct to merge.
+	SegmentID *string
+
+	noSmithyDocumentSerde
+}
+
+// An operation that merges constructs from different segments into the target
+// construct.
+type MergeOperation struct {
+
+	// The list of constructs to merge into the target.
+	MergeConstructs []MergeConstruct
+
+	noSmithyDocumentSerde
+}
+
 // Network interface.
 type NetworkInterface struct {
 
@@ -1270,6 +1297,9 @@ type NetworkMigrationCodeGenerationSegment struct {
 
 	// The unique identifier of the network migration execution.
 	NetworkMigrationExecutionID *string
+
+	// A list of other segments that this segment depends on or references.
+	ReferencedSegments []string
 
 	// The unique identifier of the segment.
 	SegmentID *string
@@ -1469,6 +1499,9 @@ type NetworkMigrationMapperSegmentConstruct struct {
 	// A description of the construct.
 	Description *string
 
+	// Whether this construct is excluded from the migration.
+	Excluded *bool
+
 	// The logical identifier for the construct in the infrastructure code.
 	LogicalID *string
 
@@ -1543,10 +1576,41 @@ type NetworkMigrationMappingUpdateJobDetails struct {
 //
 // The following types satisfy this interface:
 //
+//	OperationUnionMemberDelete
+//	OperationUnionMemberMerge
+//	OperationUnionMemberSplit
 //	OperationUnionMemberUpdate
 type OperationUnion interface {
 	isOperationUnion()
 }
+
+// A delete operation to remove a construct from the mapping.
+type OperationUnionMemberDelete struct {
+	Value DeleteOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberDelete) isOperationUnion() {}
+
+// A merge operation to combine constructs from different segments.
+type OperationUnionMemberMerge struct {
+	Value MergeOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberMerge) isOperationUnion() {}
+
+// A split operation to divide a construct into multiple constructs with specified
+// CIDR blocks.
+type OperationUnionMemberSplit struct {
+	Value SplitOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberSplit) isOperationUnion() {}
 
 // An update operation to modify construct properties.
 type OperationUnionMemberUpdate struct {
@@ -1913,6 +1977,25 @@ type SourceServerConnectorAction struct {
 	noSmithyDocumentSerde
 }
 
+// A split target specifying the CIDR block for the new construct.
+type SplitConstruct struct {
+
+	// The CIDR block for the split construct.
+	CidrBlock *string
+
+	noSmithyDocumentSerde
+}
+
+// An operation that splits a construct into multiple constructs with different
+// CIDR blocks.
+type SplitOperation struct {
+
+	// The list of split targets with their CIDR blocks.
+	SplitConstructs []SplitConstruct
+
+	noSmithyDocumentSerde
+}
+
 // AWS Systems Manager Document.
 type SsmDocument struct {
 
@@ -2137,6 +2220,12 @@ type TemplateActionsRequestFilters struct {
 
 // An operation that updates the properties of a construct.
 type UpdateOperation struct {
+
+	// Whether to exclude this construct from the migration.
+	Excluded *bool
+
+	// The updated name for the construct.
+	Name *string
 
 	// The properties to update on the construct.
 	Properties map[string]string

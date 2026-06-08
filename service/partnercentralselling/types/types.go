@@ -882,12 +882,35 @@ type EngagementSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The expected duration of a partner's contract with the customer. Used to
+// convert Total Contract Value (TCV) to Monthly Recurring Revenue (MRR) for
+// opportunity dealsizing calculations.
+type ExpectedContractDuration struct {
+
+	// The unit of measurement for the contract duration value. Currently accepts only
+	// Months .
+	//
+	// This member is required.
+	Term ExpectedContractDurationTerm
+
+	// A String representation of the contract duration as an integer, expressed in
+	// the unit defined by Term . Valid values range from 1 to 144 .
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides an estimate of the revenue that the partner is expected to generate
 // from the opportunity. This information helps partners assess the financial value
 // of the project.
 type ExpectedCustomerSpend struct {
 
-	// Currency code for the expected customer spend. Supported currencies: USD, EUR
+	// Indicates the currency in which the revenue estimate is provided. This helps in
+	// understanding the financial impact across different markets. Accepted values are
+	// USD (US Dollars) and EUR (Euros). If the AWS Partition is aws-eusc (AWS
+	// European Sovereign Cloud), the currency code must be EUR .
 	//
 	// This member is required.
 	CurrencyCode CurrencyCode
@@ -2054,6 +2077,11 @@ type Project struct {
 	//   - Other: Delivery model not described above.
 	DeliveryModels []DeliveryModel
 
+	// Optional. The expected duration of the contract associated with this
+	// opportunity. Partners use this value alongside expected customer spend to
+	// convert Total Contract Value (TCV) into Monthly Recurring Revenue (MRR).
+	ExpectedContractDuration *ExpectedContractDuration
+
 	// Represents the estimated amount that the customer is expected to spend on AWS
 	// services related to the opportunity. This helps in evaluating the potential
 	// financial value of the opportunity for AWS.
@@ -2164,6 +2192,10 @@ type ProjectSummary struct {
 	//   - Other: Delivery model not described above.
 	DeliveryModels []DeliveryModel
 
+	// Optional. The expected contract duration for this opportunity, representing the
+	// anticipated length of the contract in the unit specified by Term .
+	ExpectedContractDuration *ExpectedContractDuration
+
 	// Provides a summary of the expected customer spend for the project, offering a
 	// high-level view of the potential financial impact.
 	ExpectedCustomerSpend []ExpectedCustomerSpend
@@ -2183,6 +2215,10 @@ type ProjectView struct {
 	// offering. This field indicates how the project's solution will be delivered or
 	// implemented for the customer.
 	DeliveryModels []DeliveryModel
+
+	// Optional. The expected contract duration for this opportunity, representing the
+	// anticipated length of the contract in the unit specified by Term .
+	ExpectedContractDuration *ExpectedContractDuration
 
 	//  Provides information about the anticipated customer spend related to this
 	// project. This may include details such as amount, frequency, and currency of

@@ -36,6 +36,10 @@ type UpdateInvoiceUnitInput struct {
 	// This member is required.
 	InvoiceUnitArn *string
 
+	//  A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	// The assigned description for an invoice unit. This information can't be
 	// modified or deleted.
 	Description *string
@@ -126,6 +130,9 @@ func (c *Client) addOperationUpdateInvoiceUnitMiddlewares(stack *middleware.Stac
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateInvoiceUnitMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateInvoiceUnitValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,6 +164,39 @@ func (c *Client) addOperationUpdateInvoiceUnitMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateInvoiceUnit struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateInvoiceUnit) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateInvoiceUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateInvoiceUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateInvoiceUnitInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateInvoiceUnitMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateInvoiceUnit{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateInvoiceUnit(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"math"
 	"strings"
 )
@@ -52,7 +51,7 @@ func (m *awsRestjson1_deserializeOpCancelTrainedModel) HandleDeserialize(ctx con
 	output := &CancelTrainedModelOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -158,7 +157,7 @@ func (m *awsRestjson1_deserializeOpCancelTrainedModelInferenceJob) HandleDeseria
 	output := &CancelTrainedModelInferenceJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1452,7 +1451,7 @@ func (m *awsRestjson1_deserializeOpDeleteAudienceGenerationJob) HandleDeserializ
 	output := &DeleteAudienceGenerationJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1555,7 +1554,7 @@ func (m *awsRestjson1_deserializeOpDeleteAudienceModel) HandleDeserialize(ctx co
 	output := &DeleteAudienceModelOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1658,7 +1657,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguredAudienceModel) HandleDeserial
 	output := &DeleteConfiguredAudienceModelOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1761,7 +1760,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguredAudienceModelPolicy) HandleDe
 	output := &DeleteConfiguredAudienceModelPolicyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1861,7 +1860,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguredModelAlgorithm) HandleDeseria
 	output := &DeleteConfiguredModelAlgorithmOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1964,7 +1963,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguredModelAlgorithmAssociation) Ha
 	output := &DeleteConfiguredModelAlgorithmAssociationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2070,7 +2069,7 @@ func (m *awsRestjson1_deserializeOpDeleteMLConfiguration) HandleDeserialize(ctx 
 	output := &DeleteMLConfigurationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2173,7 +2172,7 @@ func (m *awsRestjson1_deserializeOpDeleteMLInputChannelData) HandleDeserialize(c
 	output := &DeleteMLInputChannelDataOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2279,7 +2278,7 @@ func (m *awsRestjson1_deserializeOpDeleteTrainedModelOutput) HandleDeserialize(c
 	output := &DeleteTrainedModelOutputOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2385,7 +2384,7 @@ func (m *awsRestjson1_deserializeOpDeleteTrainingDataset) HandleDeserialize(ctx 
 	output := &DeleteTrainingDatasetOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3489,6 +3488,11 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationMLInputChannelOutput(v **
 				sv.NumberOfRecords = ptr.Int64(i64)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "privacyBudgets":
 			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
 				return err
@@ -3792,6 +3796,15 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationTrainedModelOutput(v **Ge
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MetricsStatusDetails = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -5283,6 +5296,11 @@ func awsRestjson1_deserializeOpDocumentGetMLInputChannelOutput(v **GetMLInputCha
 				sv.NumberOfRecords = ptr.Int64(i64)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "privacyBudgets":
 			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
 				return err
@@ -5651,6 +5669,15 @@ func awsRestjson1_deserializeOpDocumentGetTrainedModelOutput(v **GetTrainedModel
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6001,6 +6028,15 @@ func awsRestjson1_deserializeOpDocumentGetTrainedModelInferenceJobOutput(v **Get
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MetricsStatusDetails = ptr.String(jtv)
+			}
+
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -9340,7 +9376,7 @@ func (m *awsRestjson1_deserializeOpPutMLConfiguration) HandleDeserialize(ctx con
 	output := &PutMLConfigurationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9440,7 +9476,7 @@ func (m *awsRestjson1_deserializeOpStartAudienceExportJob) HandleDeserialize(ctx
 	output := &StartAudienceExportJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9717,7 +9753,7 @@ func (m *awsRestjson1_deserializeOpStartTrainedModelExportJob) HandleDeserialize
 	output := &StartTrainedModelExportJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -11889,6 +11925,11 @@ func awsRestjson1_deserializeDocumentCollaborationMLInputChannelSummary(v **type
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12243,6 +12284,15 @@ func awsRestjson1_deserializeDocumentCollaborationTrainedModelInferenceJobSummar
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12432,6 +12482,15 @@ func awsRestjson1_deserializeDocumentCollaborationTrainedModelSummary(v **types.
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipIdentifier = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -14864,6 +14923,11 @@ func awsRestjson1_deserializeDocumentMLInputChannelSummary(v **types.MLInputChan
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "protectedQueryIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15218,6 +15282,55 @@ func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPayerConfiguration(v **types.PayerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PayerConfiguration
+	if *v == nil {
+		sv = &types.PayerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "computePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.ComputePayerAccountId = ptr.String(jtv)
+			}
+
+		case "syntheticDataPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.SyntheticDataPayerAccountId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16635,6 +16748,15 @@ func awsRestjson1_deserializeDocumentTrainedModelInferenceJobSummary(v **types.T
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16935,6 +17057,15 @@ func awsRestjson1_deserializeDocumentTrainedModelSummary(v **types.TrainedModelS
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipIdentifier = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":

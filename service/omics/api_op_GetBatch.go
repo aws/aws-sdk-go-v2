@@ -71,7 +71,11 @@ type GetBatchOutput struct {
 	// the batch reaches PROCESSED status. See RunSummary .
 	RunSummary *types.RunSummary
 
-	// The current status of the run batch.
+	// The current status of the run batch. Possible values: CREATING (initial setup),
+	// PENDING (ready to submit runs), SUBMITTING (submitting runs), INPROGRESS (runs
+	// executing), STOPPING (cancellation in progress), PROCESSED (all runs
+	// completed), CANCELLED (batch cancelled), FAILED (batch failed), RUNS_DELETING
+	// (deleting runs), RUNS_DELETED (runs deleted).
 	Status types.BatchStatus
 
 	// A summary of run submission outcomes. See SubmissionSummary .

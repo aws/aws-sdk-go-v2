@@ -834,6 +834,9 @@ type Container struct {
 	// The network interfaces associated with the container.
 	NetworkInterfaces []NetworkInterface
 
+	// The IDs of each Neuron device assigned to the container.
+	NeuronDeviceIds []string
+
 	// A short (1024 max characters) human-readable string to provide additional
 	// details about a running or stopped container.
 	Reason *string
@@ -1310,8 +1313,8 @@ type ContainerDefinition struct {
 	// The private repository authentication credentials to use.
 	RepositoryCredentials *RepositoryCredentials
 
-	// The type and amount of a resource to assign to a container. The only supported
-	// resource is a GPU.
+	// The type and amount of a resource to assign to a container. The supported
+	// resources are GPUs and Neuron devices.
 	ResourceRequirements []ResourceRequirement
 
 	// The restart policy for a container. When you set up a restart policy, Amazon
@@ -1753,7 +1756,8 @@ type ContainerOverride struct {
 	Name *string
 
 	// The type and amount of a resource to assign to a container, instead of the
-	// default value from the task definition. The only supported resource is a GPU.
+	// default value from the task definition. The supported resources are GPUs and
+	// Neuron devices.
 	ResourceRequirements []ResourceRequirement
 
 	noSmithyDocumentSerde
@@ -3008,6 +3012,77 @@ type DeploymentLifecycleHook struct {
 	//
 	// [Permissions required for Lambda functions in Amazon ECS blue/green deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html
 	RoleArn *string
+
+	// The type of action the lifecycle hook performs. Valid values are:
+	//
+	//   - AWS_LAMBDA - Invokes a Lambda function at the specified lifecycle stage.
+	//   This is the default value.
+	//
+	//   - PAUSE - Pauses the deployment at the specified lifecycle stage until you
+	//   call ContinueServiceDeployment to continue or roll back.
+	//
+	// This field is optional. If not specified, the default value is AWS_LAMBDA .
+	TargetType DeploymentLifecycleHookTargetType
+
+	// The timeout configuration for the lifecycle hook. This specifies how long
+	// Amazon ECS waits before taking the timeout action if the hook is not resolved.
+	TimeoutConfiguration *DeploymentLifecycleHookTimeoutConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The details of a deployment lifecycle hook that is active during a service
+// deployment.
+//
+// You can view lifecycle hook details by calling [DescribeServiceDeployments].
+//
+// [DescribeServiceDeployments]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+type DeploymentLifecycleHookDetail struct {
+
+	// The time when the lifecycle hook times out. If the hook has not been completed
+	// by this time, Amazon ECS takes the timeout action.
+	ExpiresAt *time.Time
+
+	// The ID of the lifecycle hook. Use this value when calling
+	// ContinueServiceDeployment to continue or roll back a paused deployment.
+	HookId *string
+
+	// The status of the lifecycle hook. Valid values depend on the hook type:
+	//
+	//   - For AWS_LAMBDA hooks: IN_PROGRESS , SUCCEEDED , FAILED , and TIMED_OUT .
+	//
+	//   - For PAUSE hooks: AWAITING_ACTION , SUCCEEDED , FAILED , and TIMED_OUT .
+	Status DeploymentLifecycleHookStatus
+
+	// The Amazon Resource Name (ARN) of the hook target. For AWS_LAMBDA hooks, this
+	// is the Lambda function ARN. For PAUSE hooks, this field is not set.
+	TargetArn *string
+
+	// The type of action the lifecycle hook performs, such as AWS_LAMBDA or PAUSE .
+	TargetType DeploymentLifecycleHookTargetType
+
+	// The action Amazon ECS takes when the lifecycle hook times out. Valid values are
+	// CONTINUE and ROLLBACK .
+	TimeoutAction DeploymentLifecycleHookAction
+
+	noSmithyDocumentSerde
+}
+
+// The timeout configuration for a deployment lifecycle hook. This determines how
+// long Amazon ECS waits for the hook to complete before taking the specified
+// timeout action.
+type DeploymentLifecycleHookTimeoutConfiguration struct {
+
+	// The action Amazon ECS takes when the lifecycle hook times out. Valid values are:
+	//
+	//   - CONTINUE - Proceeds the deployment to the next lifecycle stage.
+	//
+	//   - ROLLBACK - Rolls back the deployment to the previous service revision.
+	Action DeploymentLifecycleHookAction
+
+	// The number of minutes Amazon ECS waits for the lifecycle hook to complete
+	// before taking the timeout action.
+	TimeoutInMinutes *int32
 
 	noSmithyDocumentSerde
 }
@@ -5552,19 +5627,20 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// The devices that are available on the container instance. The only supported
-// device type is a GPU.
+// The devices that are available on the container instance. The supported device
+// types are GPUs and Neuron devices.
 type PlatformDevice struct {
 
-	// The ID for the GPUs on the container instance. The available GPU IDs can also
-	// be obtained on the container instance in the
-	// /var/lib/ecs/gpu/nvidia_gpu_info.json file.
+	// The ID for the GPU or Neuron device on the container instance. For GPUs, the
+	// available GPU IDs can also be obtained on the container instance in the
+	// /var/lib/ecs/gpu/nvidia_gpu_info.json file. For Neuron devices, the ID
+	// corresponds to the device index (for example, 0 for /dev/neuron0 ).
 	//
 	// This member is required.
 	Id *string
 
-	// The type of device that's available on the container instance. The only
-	// supported value is GPU .
+	// The type of device that's available on the container instance. The supported
+	// values are GPU and NEURON_DEVICE .
 	//
 	// This member is required.
 	Type PlatformDeviceType
@@ -5872,8 +5948,9 @@ type Resource struct {
 }
 
 // The type and amount of a resource to assign to a container. The supported
-// resource types are GPUs and Elastic Inference accelerators. For more
-// information, see [Working with GPUs on Amazon ECS]or [Working with Amazon Elastic Inference on Amazon ECS] in the Amazon Elastic Container Service Developer Guide
+// resource types are GPUs, Neuron devices, and Elastic Inference accelerators. For
+// more information, see [Working with GPUs on Amazon ECS]or [Working with Amazon Elastic Inference on Amazon ECS] in the Amazon Elastic Container Service Developer
+// Guide
 //
 // [Working with Amazon Elastic Inference on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
 // [Working with GPUs on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
@@ -5889,7 +5966,13 @@ type ResourceRequirement struct {
 	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
 	// container agent reserves for the container. The number of GPUs that's reserved
 	// for all containers in a task can't exceed the number of available GPUs on the
-	// container instance that the task is launched on.
+	// container instance that the task is launched on. You can also specify ALL to
+	// allocate all available GPUs on the instance to the container.
+	//
+	// When the type is NeuronDevice , the value must be ALL . This allocates all
+	// available Neuron devices on the instance to the container. Only one container in
+	// a task can specify NeuronDevice resources. This resource type is only supported
+	// on Managed Instances.
 	//
 	// When the type is InferenceAccelerator , the value matches the deviceName for an [InferenceAccelerator]
 	// specified in a task definition.
@@ -5943,11 +6026,11 @@ type RuntimePlatform struct {
 // for task storage. For more information, see [Amazon S3 Files volumes]in the Amazon Elastic Container
 // Service Developer Guide.
 //
-// Your task definition must include a Task IAM Role. See [IAM role for attaching your file system to AWS compute resources] for required
+// Your task definition must include a Task IAM Role. See [IAM role for attaching your file system to Amazon Web Services compute resources] for required
 // permissions.
 //
 // [Amazon S3 Files volumes]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/s3files-volumes.html
-// [IAM role for attaching your file system to AWS compute resources]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role
+// [IAM role for attaching your file system to Amazon Web Services compute resources]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role
 type S3FilesVolumeConfiguration struct {
 
 	// The full ARN of the S3 Files file system to mount.
@@ -6658,6 +6741,9 @@ type ServiceDeployment struct {
 	// The time the service deployment finished. The format is yyyy-MM-dd
 	// HH:mm:ss.SSSSSS.
 	FinishedAt *time.Time
+
+	// The details of the lifecycle hooks for the current service deployment.
+	LifecycleHookDetails []DeploymentLifecycleHookDetail
 
 	// The current lifecycle stage of the deployment. Possible values include:
 	//

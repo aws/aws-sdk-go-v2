@@ -158,6 +158,18 @@ func TestCheckSnapshot_CreateArchiveRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateServiceLinkedAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceLinkedAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateServiceLinkedAnalyzer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAnalyzer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnalyzer(context.Background(), nil, func(o *Options) {
@@ -175,6 +187,18 @@ func TestCheckSnapshot_DeleteArchiveRule(t *testing.T) {
 	_, err := svc.DeleteArchiveRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteArchiveRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteServiceLinkedAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceLinkedAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteServiceLinkedAnalyzer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -601,6 +625,18 @@ func TestUpdateSnapshot_CreateArchiveRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateServiceLinkedAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateServiceLinkedAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateServiceLinkedAnalyzer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAnalyzer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnalyzer(context.Background(), nil, func(o *Options) {
@@ -618,6 +654,18 @@ func TestUpdateSnapshot_DeleteArchiveRule(t *testing.T) {
 	_, err := svc.DeleteArchiveRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteArchiveRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteServiceLinkedAnalyzer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteServiceLinkedAnalyzer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteServiceLinkedAnalyzer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

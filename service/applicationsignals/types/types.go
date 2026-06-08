@@ -316,6 +316,45 @@ type ChangeEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a single operation to include in a composite SLI for a service-level
+// SLO. Used as an element of the Components list in CompositeSliConfig .
+//
+// The following types satisfy this interface:
+//
+//	CompositeSliComponentMemberOperationName
+type CompositeSliComponent interface {
+	isCompositeSliComponent()
+}
+
+// The name of the operation to include in the composite SLI.
+type CompositeSliComponentMemberOperationName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CompositeSliComponentMemberOperationName) isCompositeSliComponent() {}
+
+// This structure contains the configuration for a composite service level
+// indicator (SLI) that aggregates metrics across multiple operations of a service
+// for service-level SLOs.
+type CompositeSliConfig struct {
+
+	// Specifies how operations are selected for this service-level SLO. Operations
+	// can be selected explicitly by listing them, by specifying a prefix to match
+	// operation names, or by providing a regular expression pattern.
+	//
+	// This member is required.
+	SelectionConfig *SelectionConfig
+
+	// The list of operations included in this composite SLI. You must specify between
+	// 2 and 20 components. Each component is a CompositeSliComponent that identifies
+	// a single operation by its OperationName .
+	Components []CompositeSliComponent
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the dependency using the DependencyKeyAttributes and
 // DependencyOperationName .
 //
@@ -915,6 +954,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	// This member is required.
 	TotalRequestCountMetric []MetricDataQuery
 
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
+
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
 	DependencyConfig *DependencyConfig
@@ -955,6 +998,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type RequestBasedServiceLevelIndicatorMetricConfig struct {
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
@@ -1027,6 +1074,33 @@ type RollingInterval struct {
 	//
 	// This member is required.
 	DurationUnit DurationUnit
+
+	noSmithyDocumentSerde
+}
+
+// Defines how operations are selected for a service-level SLO.
+type SelectionConfig struct {
+
+	// The strategy for selecting operations to include in a service-level SLO.
+	//
+	//   - EXPLICIT — You provide a specific list of operations in the Components field
+	//   of CompositeSliConfig .
+	//
+	//   - PREFIX — You provide a prefix string in the Pattern field of SelectionConfig
+	//   , and all operations whose names start with the prefix are included.
+	//
+	//   - REGEX — You provide a regular expression in the Pattern field of
+	//   SelectionConfig , and all operations whose names match the pattern are
+	//   included.
+	//
+	// This member is required.
+	Type SelectionType
+
+	// A prefix string or regular expression that specifies which operations to
+	// include in a service-level SLO. When SelectionType is PREFIX , this value is a
+	// prefix string that matches the beginning of operation names. When SelectionType
+	// is REGEX , this value is a regular expression that matches operation names.
+	Pattern *string
 
 	noSmithyDocumentSerde
 }
@@ -1321,6 +1395,10 @@ type ServiceLevelIndicatorMetric struct {
 	// This member is required.
 	MetricDataQueries []MetricDataQuery
 
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
+
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
 	DependencyConfig *DependencyConfig
@@ -1361,6 +1439,10 @@ type ServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type ServiceLevelIndicatorMetricConfig struct {
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
@@ -1460,6 +1542,10 @@ type ServiceLevelObjective struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Indicates whether DevOps Agent will automatically investigate this SLO when it
+	// is breached
+	AutoInvestigationEnabled *bool
 
 	// Each object in this array defines the length of the look-back window used to
 	// calculate one burn rate metric for this SLO. The burn rate measures how fast the
@@ -1647,6 +1733,10 @@ type ServiceLevelObjectiveSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// The date and time that this service level objective was created. It is
 	// expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
@@ -1897,5 +1987,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAuditTargetEntity()                      {}
+func (*UnknownUnionMember) isCompositeSliComponent()                  {}
 func (*UnknownUnionMember) isInterval()                               {}
 func (*UnknownUnionMember) isMonitoredRequestCountMetricDataQueries() {}

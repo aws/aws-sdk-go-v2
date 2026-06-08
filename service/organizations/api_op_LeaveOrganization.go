@@ -16,6 +16,11 @@ import (
 //
 // You can only call from operation from a member account.
 //
+// When an account leaves an organization, Organizations logs a membership event
+// in CloudTrail. The event is an AccountDepartedOrganization event with
+// departedMethod:Left and departedTime . This event is available only in the
+// management account's event history.
+//
 //   - The management account in an organization with all features enabled can set
 //     service control policies (SCPs) that can restrict what administrators of member
 //     accounts can do. This includes preventing them from successfully calling

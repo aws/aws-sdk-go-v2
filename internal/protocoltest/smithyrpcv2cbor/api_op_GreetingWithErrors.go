@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,22 @@ type GreetingWithErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GreetingWithErrorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreetingWithErrorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GreetingWithErrorsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GreetingWithErrorsOutput struct {
 	Greeting *string
 
@@ -46,16 +64,35 @@ type GreetingWithErrorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GreetingWithErrorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreetingWithErrorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreetingWithErrorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Greeting != nil {
+		s.WriteString(schemas.GreetingWithErrorsOutput_greeting, *v.Greeting)
+	}
+}
+func (v *GreetingWithErrorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreetingWithErrorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreetingWithErrorsOutput_greeting:
+			v.Greeting = new(string)
+			return d.ReadString(schemas.GreetingWithErrorsOutput_greeting, v.Greeting)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGreetingWithErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGreetingWithErrors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GreetingWithErrors, nil, schemas.GreetingWithErrorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGreetingWithErrors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GreetingWithErrors, nil, schemas.GreetingWithErrorsOutput), output: &GreetingWithErrorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GreetingWithErrors"); err != nil {

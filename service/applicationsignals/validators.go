@@ -651,6 +651,25 @@ func validateCanaryEntity(v *types.CanaryEntity) error {
 	}
 }
 
+func validateCompositeSliConfig(v *types.CompositeSliConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeSliConfig"}
+	if v.SelectionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionConfig"))
+	} else if v.SelectionConfig != nil {
+		if err := validateSelectionConfig(v.SelectionConfig); err != nil {
+			invalidParams.AddNested("SelectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDependencyConfig(v *types.DependencyConfig) error {
 	if v == nil {
 		return nil
@@ -995,6 +1014,11 @@ func validateRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBased
 			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CompositeSliConfig != nil {
+		if err := validateCompositeSliConfig(v.CompositeSliConfig); err != nil {
+			invalidParams.AddNested("CompositeSliConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1012,6 +1036,21 @@ func validateRollingInterval(v *types.RollingInterval) error {
 	}
 	if v.Duration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Duration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectionConfig(v *types.SelectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectionConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1057,6 +1096,11 @@ func validateServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMet
 	if v.DependencyConfig != nil {
 		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeSliConfig != nil {
+		if err := validateCompositeSliConfig(v.CompositeSliConfig); err != nil {
+			invalidParams.AddNested("CompositeSliConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

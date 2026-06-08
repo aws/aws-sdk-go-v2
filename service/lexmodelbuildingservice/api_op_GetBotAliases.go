@@ -14,6 +14,8 @@ import (
 // Returns a list of aliases for a specified Amazon Lex bot.
 //
 // This operation requires permissions for the lex:GetBotAliases action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, optFns ...func(*Options)) (*GetBotAliasesOutput, error) {
 	if params == nil {
 		params = &GetBotAliasesInput{}

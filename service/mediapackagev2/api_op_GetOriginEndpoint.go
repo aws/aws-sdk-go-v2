@@ -137,6 +137,9 @@ type GetOriginEndpointOutput struct {
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
+	// The separator character used in generated URIs for this origin endpoint.
+	UriSeparator types.UriSeparator
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

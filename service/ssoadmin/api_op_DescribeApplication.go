@@ -61,6 +61,10 @@ type DescribeApplicationOutput struct {
 	// The description of the .
 	Description *string
 
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
+
 	// The ARN of the IAM Identity Center application under which the operation will
 	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
 	// Reference.

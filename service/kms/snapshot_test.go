@@ -362,6 +362,18 @@ func TestCheckSnapshot_GenerateRandom(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetKeyLastUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetKeyLastUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetKeyLastUsage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetKeyPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetKeyPolicy(context.Background(), nil, func(o *Options) {
@@ -990,6 +1002,18 @@ func TestUpdateSnapshot_GenerateRandom(t *testing.T) {
 	_, err := svc.GenerateRandom(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GenerateRandom")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetKeyLastUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetKeyLastUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetKeyLastUsage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

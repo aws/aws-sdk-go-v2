@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,31 @@ type OperationWithDefaultsInput struct {
 	TopLevelDefault *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OperationWithDefaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithDefaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithDefaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientOptionalDefaults != nil {
+		s.WriteStruct(schemas.OperationWithDefaultsInput_clientOptionalDefaults)
+		v.ClientOptionalDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Defaults != nil {
+		s.WriteStruct(schemas.OperationWithDefaultsInput_defaults)
+		v.Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtherTopLevelDefault != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsInput_otherTopLevelDefault, v.OtherTopLevelDefault)
+	}
+	if v.TopLevelDefault != nil {
+		s.WriteString(schemas.OperationWithDefaultsInput_topLevelDefault, *v.TopLevelDefault)
+	}
 }
 
 type OperationWithDefaultsOutput struct {
@@ -92,16 +119,87 @@ type OperationWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationWithDefaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationWithDefaultsOutput_defaultBlob:
+			return d.ReadBlob(schemas.OperationWithDefaultsOutput_defaultBlob, &v.DefaultBlob)
+		case schemas.OperationWithDefaultsOutput_defaultBoolean:
+			v.DefaultBoolean = new(bool)
+			return d.ReadBool(schemas.OperationWithDefaultsOutput_defaultBoolean, v.DefaultBoolean)
+		case schemas.OperationWithDefaultsOutput_defaultByte:
+			v.DefaultByte = new(int8)
+			return d.ReadInt8(schemas.OperationWithDefaultsOutput_defaultByte, v.DefaultByte)
+		case schemas.OperationWithDefaultsOutput_defaultDouble:
+			v.DefaultDouble = new(float64)
+			return d.ReadFloat64(schemas.OperationWithDefaultsOutput_defaultDouble, v.DefaultDouble)
+		case schemas.OperationWithDefaultsOutput_defaultEnum:
+			var ev string
+			if err := d.ReadString(schemas.OperationWithDefaultsOutput_defaultEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultEnum = types.TestEnum(ev)
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultFloat:
+			v.DefaultFloat = new(float32)
+			return d.ReadFloat32(schemas.OperationWithDefaultsOutput_defaultFloat, v.DefaultFloat)
+		case schemas.OperationWithDefaultsOutput_defaultIntEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.OperationWithDefaultsOutput_defaultIntEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultIntEnum = types.TestIntEnum(ev)
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultInteger:
+			v.DefaultInteger = new(int32)
+			return d.ReadInt32(schemas.OperationWithDefaultsOutput_defaultInteger, v.DefaultInteger)
+		case schemas.OperationWithDefaultsOutput_defaultList:
+			return deserializeTestStringList(d, schemas.OperationWithDefaultsOutput_defaultList, &v.DefaultList)
+		case schemas.OperationWithDefaultsOutput_defaultLong:
+			v.DefaultLong = new(int64)
+			return d.ReadInt64(schemas.OperationWithDefaultsOutput_defaultLong, v.DefaultLong)
+		case schemas.OperationWithDefaultsOutput_defaultMap:
+			return deserializeTestStringMap(d, schemas.OperationWithDefaultsOutput_defaultMap, &v.DefaultMap)
+		case schemas.OperationWithDefaultsOutput_defaultShort:
+			v.DefaultShort = new(int16)
+			return d.ReadInt16(schemas.OperationWithDefaultsOutput_defaultShort, v.DefaultShort)
+		case schemas.OperationWithDefaultsOutput_defaultString:
+			v.DefaultString = new(string)
+			return d.ReadString(schemas.OperationWithDefaultsOutput_defaultString, v.DefaultString)
+		case schemas.OperationWithDefaultsOutput_defaultTimestamp:
+			v.DefaultTimestamp = new(time.Time)
+			return d.ReadTime(schemas.OperationWithDefaultsOutput_defaultTimestamp, v.DefaultTimestamp)
+		case schemas.OperationWithDefaultsOutput_emptyBlob:
+			return d.ReadBlob(schemas.OperationWithDefaultsOutput_emptyBlob, &v.EmptyBlob)
+		case schemas.OperationWithDefaultsOutput_emptyString:
+			v.EmptyString = new(string)
+			return d.ReadString(schemas.OperationWithDefaultsOutput_emptyString, v.EmptyString)
+		case schemas.OperationWithDefaultsOutput_falseBoolean:
+			return d.ReadBool(schemas.OperationWithDefaultsOutput_falseBoolean, &v.FalseBoolean)
+		case schemas.OperationWithDefaultsOutput_zeroByte:
+			return d.ReadInt8(schemas.OperationWithDefaultsOutput_zeroByte, &v.ZeroByte)
+		case schemas.OperationWithDefaultsOutput_zeroDouble:
+			return d.ReadFloat64(schemas.OperationWithDefaultsOutput_zeroDouble, &v.ZeroDouble)
+		case schemas.OperationWithDefaultsOutput_zeroFloat:
+			return d.ReadFloat32(schemas.OperationWithDefaultsOutput_zeroFloat, &v.ZeroFloat)
+		case schemas.OperationWithDefaultsOutput_zeroInteger:
+			return d.ReadInt32(schemas.OperationWithDefaultsOutput_zeroInteger, &v.ZeroInteger)
+		case schemas.OperationWithDefaultsOutput_zeroLong:
+			return d.ReadInt64(schemas.OperationWithDefaultsOutput_zeroLong, &v.ZeroLong)
+		case schemas.OperationWithDefaultsOutput_zeroShort:
+			return d.ReadInt16(schemas.OperationWithDefaultsOutput_zeroShort, &v.ZeroShort)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpOperationWithDefaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithDefaults, schemas.OperationWithDefaultsInput, schemas.OperationWithDefaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpOperationWithDefaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithDefaults, schemas.OperationWithDefaultsInput, schemas.OperationWithDefaultsOutput), output: &OperationWithDefaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithDefaults"); err != nil {

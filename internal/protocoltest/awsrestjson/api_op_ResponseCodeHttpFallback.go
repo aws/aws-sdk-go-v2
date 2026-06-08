@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,22 @@ type ResponseCodeHttpFallbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseCodeHttpFallbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseCodeHttpFallbackInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseCodeHttpFallbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResponseCodeHttpFallbackInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseCodeHttpFallbackInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type ResponseCodeHttpFallbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -36,16 +54,29 @@ type ResponseCodeHttpFallbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseCodeHttpFallbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseCodeHttpFallbackInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseCodeHttpFallbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResponseCodeHttpFallbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseCodeHttpFallbackInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResponseCodeHttpFallbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResponseCodeHttpFallback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResponseCodeHttpFallback, schemas.ResponseCodeHttpFallbackInputOutput, schemas.ResponseCodeHttpFallbackInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResponseCodeHttpFallback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResponseCodeHttpFallback, schemas.ResponseCodeHttpFallbackInputOutput, schemas.ResponseCodeHttpFallbackInputOutput), output: &ResponseCodeHttpFallbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ResponseCodeHttpFallback"); err != nil {

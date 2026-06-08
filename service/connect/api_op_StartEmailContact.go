@@ -31,7 +31,7 @@ func (c *Client) StartEmailContact(ctx context.Context, params *StartEmailContac
 
 type StartEmailContactInput struct {
 
-	// The email address associated with the Amazon Connect instance.
+	// The email address associated with the Connect Customer instance.
 	//
 	// This member is required.
 	DestinationEmailAddress *string
@@ -46,8 +46,8 @@ type StartEmailContactInput struct {
 	// This member is required.
 	FromEmailAddress *types.EmailAddressInfo
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -61,7 +61,7 @@ type StartEmailContactInput struct {
 	Attachments []types.EmailAttachment
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -76,7 +76,7 @@ type StartEmailContactInput struct {
 	ClientToken *string
 
 	// The identifier of the flow for initiating the emails. To see the ContactFlowId
-	// in the Amazon Connect admin website, on the navigation menu go to Routing,
+	// in the Connect Customer admin website, on the navigation menu go to Routing,
 	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
 	// Show additional flow information. The ContactFlowId is the last part of the ARN,
 	// shown here in bold:
@@ -105,7 +105,7 @@ type StartEmailContactInput struct {
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// using an attribute map. The attributes are standard Amazon Connect attributes.
+	// using an attribute map. The attributes are standard Connect Customer attributes.
 	// They can be accessed in flows.
 	//
 	// Attribute keys can include only alphanumeric, -, and _.
@@ -123,7 +123,7 @@ type StartEmailContactInput struct {
 
 type StartEmailContactOutput struct {
 
-	// The identifier of this contact within the Amazon Connect instance.
+	// The identifier of this contact within the Connect Customer instance.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

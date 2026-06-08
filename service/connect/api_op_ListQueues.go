@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the queues for the specified Amazon Connect instance.
+// Provides information about the queues for the specified Connect Customer
+// instance.
 //
 // If you do not specify a QueueTypes parameter, both standard and agent queues
 // are returned. This might cause an unexpected truncation of results if you have
 // more than 1000 agents and you limit the number of results of the API call in
 // code.
 //
-// For more information about queues, see [Queues: Standard and Agent] in the Amazon Connect Administrator
+// For more information about queues, see [Queues: Standard and Agent] in the Connect Customer Administrator
 // Guide.
 //
 // [Queues: Standard and Agent]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html
@@ -39,8 +40,8 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 
 type ListQueuesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

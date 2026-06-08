@@ -13,9 +13,10 @@ import (
 )
 
 // Start importing bulk data into an ACTIVE data store. The import job imports
-// DICOM P10 files found in the S3 prefix specified by the inputS3Uri parameter.
-// The import job stores processing results in the file specified by the
-// outputS3Uri parameter.
+// DICOM P10 files or enhances existing DICOM files with JSON metadata. The
+// importConfiguration parameter specifies the import type. The data is found in
+// the S3 prefix specified by the inputS3Uri parameter. The import job stores
+// processing results in the file specified by the outputS3Uri parameter.
 func (c *Client) StartDICOMImportJob(ctx context.Context, params *StartDICOMImportJobInput, optFns ...func(*Options)) (*StartDICOMImportJobOutput, error) {
 	if params == nil {
 		params = &StartDICOMImportJobInput{}
@@ -60,6 +61,9 @@ type StartDICOMImportJobInput struct {
 	//
 	// This member is required.
 	OutputS3Uri *string
+
+	// The import configuration for the import job.
+	ImportConfiguration types.ImportConfiguration
 
 	// The account ID of the source S3 bucket owner.
 	InputOwnerAccountId *string

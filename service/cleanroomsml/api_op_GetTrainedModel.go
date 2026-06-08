@@ -126,6 +126,10 @@ type GetTrainedModelOutput struct {
 	// Details about the metrics status for the trained model.
 	MetricsStatusDetails *string
 
+	// The account ID of the member that is responsible for paying for model training
+	// costs.
+	MlModelTrainingPayerAccountId *string
+
 	// The EC2 resource configuration that was used to create the trained model.
 	ResourceConfig *types.ResourceConfig
 

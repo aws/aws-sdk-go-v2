@@ -101,6 +101,15 @@ type GetWorkflowOutput struct {
 	// The workflow's parameter template.
 	ParameterTemplate map[string]types.WorkflowParameter
 
+	// A mapping of profile names to their parameter templates. Each profile defines
+	// its own set of parameters that you can use when starting a run with that
+	// profile.
+	ProfileParameterTemplates map[string]map[string]types.WorkflowParameter
+
+	// The list of Nextflow profiles that are available for this workflow. Profiles
+	// allow you to select predefined configuration settings at runtime.
+	Profiles []string
+
 	// The README content for the workflow, providing documentation and usage
 	// information.
 	Readme *string

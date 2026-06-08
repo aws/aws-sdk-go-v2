@@ -1,6 +1,8 @@
 package sign
 
 import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/rsa"
 	"testing"
 	"time"
@@ -16,7 +18,7 @@ func TestNewCookieSigner(t *testing.T) {
 	if e, a := "keyID", signer.keyID; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := privKey, signer.privKey; e != a {
+	if e, a := privKey, signer.signer; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 }
@@ -117,5 +119,69 @@ func TestSignCookie_WithCookieOptions(t *testing.T) {
 		if !c.Secure {
 			t.Errorf("expect to be true")
 		}
+	}
+}
+
+func TestSignCookie_ECDSA(t *testing.T) {
+	privKey, err := ecdsa.GenerateKey(elliptic.P256(), randReader)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	signer := NewCookieSigner("keyID", privKey)
+	cookies, err := signer.Sign("http*://*", time.Now().Add(1*time.Hour))
+
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := CookiePolicyName, cookies[0].Name; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := CookieSignatureName, cookies[1].Name; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := CookieKeyIDName, cookies[2].Name; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestSignCookieSHA256(t *testing.T) {
+	privKey, err := rsa.GenerateKey(randReader, 1024)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	signer := NewCookieSigner("keyID", privKey)
+	signer.HashAlg = HashSHA256
+	cookies, err := signer.Sign("http*://*", time.Now().Add(1*time.Hour))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 4, len(cookies); e != a {
+		t.Fatalf("expect %v cookies, got %v", e, a)
+	}
+	if e, a := CookieHashAlgorithmName, cookies[3].Name; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SHA256", cookies[3].Value; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestSignCookieSHA1NoHashCookie(t *testing.T) {
+	privKey, err := rsa.GenerateKey(randReader, 1024)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	signer := NewCookieSigner("keyID", privKey)
+	cookies, err := signer.Sign("http*://*", time.Now().Add(1*time.Hour))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 3, len(cookies); e != a {
+		t.Fatalf("expect %v cookies, got %v", e, a)
 	}
 }

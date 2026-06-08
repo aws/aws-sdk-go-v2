@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,46 @@ type MalformedBooleanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedBooleanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedBooleanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedBooleanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BooleanInBody != nil {
+		s.WriteBool(schemas.MalformedBooleanInput_booleanInBody, *v.BooleanInBody)
+	}
+	if v.BooleanInHeader != nil {
+		s.WriteBool(schemas.MalformedBooleanInput_booleanInHeader, *v.BooleanInHeader)
+	}
+	if v.BooleanInPath != nil {
+		s.WriteBool(schemas.MalformedBooleanInput_booleanInPath, *v.BooleanInPath)
+	}
+	if v.BooleanInQuery != nil {
+		s.WriteBool(schemas.MalformedBooleanInput_booleanInQuery, *v.BooleanInQuery)
+	}
+}
+func (v *MalformedBooleanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedBooleanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedBooleanInput_booleanInBody:
+			v.BooleanInBody = new(bool)
+			return d.ReadBool(schemas.MalformedBooleanInput_booleanInBody, v.BooleanInBody)
+		case schemas.MalformedBooleanInput_booleanInHeader:
+			v.BooleanInHeader = new(bool)
+			return d.ReadBool(schemas.MalformedBooleanInput_booleanInHeader, v.BooleanInHeader)
+		case schemas.MalformedBooleanInput_booleanInPath:
+			v.BooleanInPath = new(bool)
+			return d.ReadBool(schemas.MalformedBooleanInput_booleanInPath, v.BooleanInPath)
+		case schemas.MalformedBooleanInput_booleanInQuery:
+			v.BooleanInQuery = new(bool)
+			return d.ReadBool(schemas.MalformedBooleanInput_booleanInQuery, v.BooleanInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedBooleanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +88,29 @@ type MalformedBooleanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedBooleanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedBooleanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedBooleanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedBooleanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedBoolean{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedBoolean, schemas.MalformedBooleanInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedBoolean{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedBoolean, schemas.MalformedBooleanInput, nil), output: &MalformedBooleanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedBoolean"); err != nil {

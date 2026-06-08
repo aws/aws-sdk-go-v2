@@ -556,6 +556,45 @@ func validateAssociatedAlarmMap(v map[string]types.AssociatedAlarm) error {
 	}
 }
 
+func validateAuroraProvisionedScalingConfiguration(v *types.AuroraProvisionedScalingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuroraProvisionedScalingConfiguration"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
+	}
+	if v.InstanceArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuroraServerlessScalingConfiguration(v *types.AuroraServerlessScalingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuroraServerlessScalingConfiguration"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomActionLambdaConfiguration(v *types.CustomActionLambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -749,6 +788,21 @@ func validateEksResourceScalingUngraceful(v *types.EksResourceScalingUngraceful)
 	}
 }
 
+func validateEventSourceMapping(v *types.EventSourceMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventSourceMapping"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExecutionApprovalConfiguration(v *types.ExecutionApprovalConfiguration) error {
 	if v == nil {
 		return nil
@@ -773,6 +827,16 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 	case *types.ExecutionBlockConfigurationMemberArcRoutingControlConfig:
 		if err := validateArcRoutingControlConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[arcRoutingControlConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig:
+		if err := validateAuroraProvisionedScalingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[auroraProvisionedScalingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig:
+		if err := validateAuroraServerlessScalingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[auroraServerlessScalingConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
@@ -808,6 +872,16 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 	case *types.ExecutionBlockConfigurationMemberGlobalAuroraConfig:
 		if err := validateGlobalAuroraConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[globalAuroraConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
+		if err := validateLambdaEventSourceMappingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaEventSourceMappingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig:
+		if err := validateNeptuneGlobalDatabaseConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[neptuneGlobalDatabaseConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ExecutionBlockConfigurationMemberParallelConfig:
@@ -934,6 +1008,49 @@ func validateKubernetesScalingResource(v *types.KubernetesScalingResource) error
 	}
 }
 
+func validateLambdaEventSourceMappingConfiguration(v *types.LambdaEventSourceMappingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaEventSourceMappingConfiguration"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.RegionEventSourceMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionEventSourceMappings"))
+	} else if v.RegionEventSourceMappings != nil {
+		if err := validateRegionEventSourceMappingMap(v.RegionEventSourceMappings); err != nil {
+			invalidParams.AddNested("RegionEventSourceMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNeptuneGlobalDatabaseConfiguration(v *types.NeptuneGlobalDatabaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NeptuneGlobalDatabaseConfiguration"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParallelExecutionBlockConfiguration(v *types.ParallelExecutionBlockConfiguration) error {
 	if v == nil {
 		return nil
@@ -1008,6 +1125,24 @@ func validateRegionAndRoutingControls(v map[string][]types.ArcRoutingControlStat
 	invalidParams := smithy.InvalidParamsError{Context: "RegionAndRoutingControls"}
 	for key := range v {
 		if err := validateArcRoutingControlStates(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegionEventSourceMappingMap(v map[string]types.EventSourceMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegionEventSourceMappingMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateEventSourceMapping(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}

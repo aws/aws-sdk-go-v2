@@ -2,6 +2,31 @@
 
 package types
 
+type AccessDeniedExceptionReason string
+
+// Enum values for AccessDeniedExceptionReason
+const (
+	AccessDeniedExceptionReasonInvalidAccountState              AccessDeniedExceptionReason = "INVALID_ACCOUNT_STATE"
+	AccessDeniedExceptionReasonDeniedByPrivateMarketplacePolicy AccessDeniedExceptionReason = "DENIED_BY_PRIVATE_MARKETPLACE_POLICY"
+	AccessDeniedExceptionReasonFailedKycCompliance              AccessDeniedExceptionReason = "FAILED_KYC_COMPLIANCE"
+	AccessDeniedExceptionReasonMissingMfa                       AccessDeniedExceptionReason = "MISSING_MFA"
+	AccessDeniedExceptionReasonInvalidAccess                    AccessDeniedExceptionReason = "INVALID_ACCESS"
+)
+
+// Values returns all known values for AccessDeniedExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
+	return []AccessDeniedExceptionReason{
+		"INVALID_ACCOUNT_STATE",
+		"DENIED_BY_PRIVATE_MARKETPLACE_POLICY",
+		"FAILED_KYC_COMPLIANCE",
+		"MISSING_MFA",
+		"INVALID_ACCESS",
+	}
+}
+
 type AgreementCancellationRequestReasonCode string
 
 // Enum values for AgreementCancellationRequestReasonCode
@@ -57,6 +82,65 @@ func (AgreementCancellationRequestStatus) Values() []AgreementCancellationReques
 		"REJECTED",
 		"CANCELLED",
 		"VALIDATION_FAILED",
+	}
+}
+
+type AgreementEntitlementStatus string
+
+// Enum values for AgreementEntitlementStatus
+const (
+	AgreementEntitlementStatusProvisioned   AgreementEntitlementStatus = "PROVISIONED"
+	AgreementEntitlementStatusScheduled     AgreementEntitlementStatus = "SCHEDULED"
+	AgreementEntitlementStatusPending       AgreementEntitlementStatus = "PENDING"
+	AgreementEntitlementStatusFailed        AgreementEntitlementStatus = "FAILED"
+	AgreementEntitlementStatusDeprovisioned AgreementEntitlementStatus = "DEPROVISIONED"
+)
+
+// Values returns all known values for AgreementEntitlementStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementEntitlementStatus) Values() []AgreementEntitlementStatus {
+	return []AgreementEntitlementStatus{
+		"PROVISIONED",
+		"SCHEDULED",
+		"PENDING",
+		"FAILED",
+		"DEPROVISIONED",
+	}
+}
+
+type AgreementEntitlementStatusReasonCode string
+
+// Enum values for AgreementEntitlementStatusReasonCode
+const (
+	AgreementEntitlementStatusReasonCodeProvisioningInProgress   AgreementEntitlementStatusReasonCode = "PROVISIONING_IN_PROGRESS"
+	AgreementEntitlementStatusReasonCodeFutureStartDate          AgreementEntitlementStatusReasonCode = "FUTURE_START_DATE"
+	AgreementEntitlementStatusReasonCodeInvalidPaymentInstrument AgreementEntitlementStatusReasonCode = "INVALID_PAYMENT_INSTRUMENT"
+	AgreementEntitlementStatusReasonCodeIncompatibleCurrency     AgreementEntitlementStatusReasonCode = "INCOMPATIBLE_CURRENCY"
+	AgreementEntitlementStatusReasonCodeAccountSuspended         AgreementEntitlementStatusReasonCode = "ACCOUNT_SUSPENDED"
+	AgreementEntitlementStatusReasonCodeUnsupportedOperation     AgreementEntitlementStatusReasonCode = "UNSUPPORTED_OPERATION"
+	AgreementEntitlementStatusReasonCodeAgreementInactive        AgreementEntitlementStatusReasonCode = "AGREEMENT_INACTIVE"
+	AgreementEntitlementStatusReasonCodeAgreementActive          AgreementEntitlementStatusReasonCode = "AGREEMENT_ACTIVE"
+	AgreementEntitlementStatusReasonCodeProductRestricted        AgreementEntitlementStatusReasonCode = "PRODUCT_RESTRICTED"
+)
+
+// Values returns all known values for AgreementEntitlementStatusReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementEntitlementStatusReasonCode) Values() []AgreementEntitlementStatusReasonCode {
+	return []AgreementEntitlementStatusReasonCode{
+		"PROVISIONING_IN_PROGRESS",
+		"FUTURE_START_DATE",
+		"INVALID_PAYMENT_INSTRUMENT",
+		"INCOMPATIBLE_CURRENCY",
+		"ACCOUNT_SUSPENDED",
+		"UNSUPPORTED_OPERATION",
+		"AGREEMENT_INACTIVE",
+		"AGREEMENT_ACTIVE",
+		"PRODUCT_RESTRICTED",
 	}
 }
 
@@ -166,6 +250,27 @@ func (BillingAdjustmentStatus) Values() []BillingAdjustmentStatus {
 	}
 }
 
+type Intent string
+
+// Enum values for Intent
+const (
+	IntentNew     Intent = "NEW"
+	IntentAmend   Intent = "AMEND"
+	IntentReplace Intent = "REPLACE"
+)
+
+// Values returns all known values for Intent. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Intent) Values() []Intent {
+	return []Intent{
+		"NEW",
+		"AMEND",
+		"REPLACE",
+	}
+}
+
 type InvoiceType string
 
 // Enum values for InvoiceType
@@ -253,9 +358,14 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAgreement      ResourceType = "Agreement"
-	ResourceTypeCharge         ResourceType = "Charge"
-	ResourceTypePaymentRequest ResourceType = "PaymentRequest"
+	ResourceTypeAgreement                    ResourceType = "Agreement"
+	ResourceTypeAgreementRequest             ResourceType = "AgreementRequest"
+	ResourceTypeAgreementProposal            ResourceType = "AgreementProposal"
+	ResourceTypeCharge                       ResourceType = "Charge"
+	ResourceTypePaymentRequest               ResourceType = "PaymentRequest"
+	ResourceTypeInvoice                      ResourceType = "Invoice"
+	ResourceTypeAgreementCancellationRequest ResourceType = "AgreementCancellationRequest"
+	ResourceTypeBillingAdjustmentRequest     ResourceType = "BillingAdjustmentRequest"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -265,8 +375,13 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Agreement",
+		"AgreementRequest",
+		"AgreementProposal",
 		"Charge",
 		"PaymentRequest",
+		"Invoice",
+		"AgreementCancellationRequest",
+		"BillingAdjustmentRequest",
 	}
 }
 
@@ -289,34 +404,132 @@ func (SortOrder) Values() []SortOrder {
 	}
 }
 
+type TaxEstimation string
+
+// Enum values for TaxEstimation
+const (
+	TaxEstimationDisabled TaxEstimation = "DISABLED"
+	TaxEstimationEnabled  TaxEstimation = "ENABLED"
+)
+
+// Values returns all known values for TaxEstimation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TaxEstimation) Values() []TaxEstimation {
+	return []TaxEstimation{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type Timing string
+
+// Enum values for Timing
+const (
+	TimingOnAcceptance  Timing = "ON_ACCEPTANCE"
+	TimingScheduled     Timing = "SCHEDULED"
+	TimingBillingPeriod Timing = "BILLING_PERIOD"
+)
+
+// Values returns all known values for Timing. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Timing) Values() []Timing {
+	return []Timing{
+		"ON_ACCEPTANCE",
+		"SCHEDULED",
+		"BILLING_PERIOD",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonInvalidAgreementId          ValidationExceptionReason = "INVALID_AGREEMENT_ID"
-	ValidationExceptionReasonMissingAgreementId          ValidationExceptionReason = "MISSING_AGREEMENT_ID"
-	ValidationExceptionReasonInvalidCatalog              ValidationExceptionReason = "INVALID_CATALOG"
-	ValidationExceptionReasonInvalidFilterName           ValidationExceptionReason = "INVALID_FILTER_NAME"
-	ValidationExceptionReasonInvalidFilterValues         ValidationExceptionReason = "INVALID_FILTER_VALUES"
-	ValidationExceptionReasonInvalidSortBy               ValidationExceptionReason = "INVALID_SORT_BY"
-	ValidationExceptionReasonInvalidSortOrder            ValidationExceptionReason = "INVALID_SORT_ORDER"
-	ValidationExceptionReasonInvalidNextToken            ValidationExceptionReason = "INVALID_NEXT_TOKEN"
-	ValidationExceptionReasonInvalidMaxResults           ValidationExceptionReason = "INVALID_MAX_RESULTS"
-	ValidationExceptionReasonInvalidTermId               ValidationExceptionReason = "INVALID_TERM_ID"
-	ValidationExceptionReasonMissingTermId               ValidationExceptionReason = "MISSING_TERM_ID"
-	ValidationExceptionReasonMissingName                 ValidationExceptionReason = "MISSING_NAME"
-	ValidationExceptionReasonInvalidName                 ValidationExceptionReason = "INVALID_NAME"
-	ValidationExceptionReasonInvalidDescription          ValidationExceptionReason = "INVALID_DESCRIPTION"
-	ValidationExceptionReasonMissingChargeAmount         ValidationExceptionReason = "MISSING_CHARGE_AMOUNT"
-	ValidationExceptionReasonInvalidChargeAmount         ValidationExceptionReason = "INVALID_CHARGE_AMOUNT"
-	ValidationExceptionReasonMissingPaymentRequestId     ValidationExceptionReason = "MISSING_PAYMENT_REQUEST_ID"
-	ValidationExceptionReasonInvalidPaymentRequestId     ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_ID"
-	ValidationExceptionReasonMissingPartyType            ValidationExceptionReason = "MISSING_PARTY_TYPE"
-	ValidationExceptionReasonInvalidPartyType            ValidationExceptionReason = "INVALID_PARTY_TYPE"
-	ValidationExceptionReasonUnsupportedFilters          ValidationExceptionReason = "UNSUPPORTED_FILTERS"
-	ValidationExceptionReasonInvalidRejectionReason      ValidationExceptionReason = "INVALID_REJECTION_REASON"
-	ValidationExceptionReasonInvalidPaymentRequestStatus ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_STATUS"
-	ValidationExceptionReasonOther                       ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonMissingBillingAdjustments             ValidationExceptionReason = "MISSING_BILLING_ADJUSTMENTS"
+	ValidationExceptionReasonBillingAdjustmentsLimitExceeded       ValidationExceptionReason = "BILLING_ADJUSTMENTS_LIMIT_EXCEEDED"
+	ValidationExceptionReasonMissingInvoiceId                      ValidationExceptionReason = "MISSING_INVOICE_ID"
+	ValidationExceptionReasonInvalidAdjustmentAmount               ValidationExceptionReason = "INVALID_ADJUSTMENT_AMOUNT"
+	ValidationExceptionReasonMissingAdjustmentAmount               ValidationExceptionReason = "MISSING_ADJUSTMENT_AMOUNT"
+	ValidationExceptionReasonInvalidReasonCode                     ValidationExceptionReason = "INVALID_REASON_CODE"
+	ValidationExceptionReasonMissingReasonCode                     ValidationExceptionReason = "MISSING_REASON_CODE"
+	ValidationExceptionReasonMissingDescription                    ValidationExceptionReason = "MISSING_DESCRIPTION"
+	ValidationExceptionReasonInvalidInvoiceAdjustmentPeriod        ValidationExceptionReason = "INVALID_INVOICE_ADJUSTMENT_PERIOD"
+	ValidationExceptionReasonInvalidCurrencyCode                   ValidationExceptionReason = "INVALID_CURRENCY_CODE"
+	ValidationExceptionReasonMissingCurrencyCode                   ValidationExceptionReason = "MISSING_CURRENCY_CODE"
+	ValidationExceptionReasonExceededMaximumAdjustmentAmount       ValidationExceptionReason = "EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT"
+	ValidationExceptionReasonMissingBillingAdjustmentRequestEntry  ValidationExceptionReason = "MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY"
+	ValidationExceptionReasonMultipleAgreementIds                  ValidationExceptionReason = "MULTIPLE_AGREEMENT_IDS"
+	ValidationExceptionReasonInvalidAgreementCancellationRequestId ValidationExceptionReason = "INVALID_AGREEMENT_CANCELLATION_REQUEST_ID"
+	ValidationExceptionReasonMissingAgreementCancellationRequestId ValidationExceptionReason = "MISSING_AGREEMENT_CANCELLATION_REQUEST_ID"
+	ValidationExceptionReasonMissingReason                         ValidationExceptionReason = "MISSING_REASON"
+	ValidationExceptionReasonInvalidReason                         ValidationExceptionReason = "INVALID_REASON"
+	ValidationExceptionReasonInvalidStatus                         ValidationExceptionReason = "INVALID_STATUS"
+	ValidationExceptionReasonInvalidAgreementId                    ValidationExceptionReason = "INVALID_AGREEMENT_ID"
+	ValidationExceptionReasonMissingAgreementId                    ValidationExceptionReason = "MISSING_AGREEMENT_ID"
+	ValidationExceptionReasonInvalidCatalog                        ValidationExceptionReason = "INVALID_CATALOG"
+	ValidationExceptionReasonInvalidFilters                        ValidationExceptionReason = "INVALID_FILTERS"
+	ValidationExceptionReasonInvalidFilterName                     ValidationExceptionReason = "INVALID_FILTER_NAME"
+	ValidationExceptionReasonMissingFilterName                     ValidationExceptionReason = "MISSING_FILTER_NAME"
+	ValidationExceptionReasonInvalidFilterValues                   ValidationExceptionReason = "INVALID_FILTER_VALUES"
+	ValidationExceptionReasonMissingFilterValues                   ValidationExceptionReason = "MISSING_FILTER_VALUES"
+	ValidationExceptionReasonInvalidSortBy                         ValidationExceptionReason = "INVALID_SORT_BY"
+	ValidationExceptionReasonInvalidSortOrder                      ValidationExceptionReason = "INVALID_SORT_ORDER"
+	ValidationExceptionReasonInvalidNextToken                      ValidationExceptionReason = "INVALID_NEXT_TOKEN"
+	ValidationExceptionReasonInvalidMaxResults                     ValidationExceptionReason = "INVALID_MAX_RESULTS"
+	ValidationExceptionReasonInvalidTermId                         ValidationExceptionReason = "INVALID_TERM_ID"
+	ValidationExceptionReasonMissingTermId                         ValidationExceptionReason = "MISSING_TERM_ID"
+	ValidationExceptionReasonMissingName                           ValidationExceptionReason = "MISSING_NAME"
+	ValidationExceptionReasonInvalidName                           ValidationExceptionReason = "INVALID_NAME"
+	ValidationExceptionReasonInvalidDescription                    ValidationExceptionReason = "INVALID_DESCRIPTION"
+	ValidationExceptionReasonMissingChargeAmount                   ValidationExceptionReason = "MISSING_CHARGE_AMOUNT"
+	ValidationExceptionReasonInvalidChargeAmount                   ValidationExceptionReason = "INVALID_CHARGE_AMOUNT"
+	ValidationExceptionReasonMissingPaymentRequestId               ValidationExceptionReason = "MISSING_PAYMENT_REQUEST_ID"
+	ValidationExceptionReasonInvalidPaymentRequestId               ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_ID"
+	ValidationExceptionReasonMissingPartyType                      ValidationExceptionReason = "MISSING_PARTY_TYPE"
+	ValidationExceptionReasonInvalidPartyType                      ValidationExceptionReason = "INVALID_PARTY_TYPE"
+	ValidationExceptionReasonUnsupportedFilters                    ValidationExceptionReason = "UNSUPPORTED_FILTERS"
+	ValidationExceptionReasonInvalidClientToken                    ValidationExceptionReason = "INVALID_CLIENT_TOKEN"
+	ValidationExceptionReasonInvalidIntent                         ValidationExceptionReason = "INVALID_INTENT"
+	ValidationExceptionReasonMissingIntent                         ValidationExceptionReason = "MISSING_INTENT"
+	ValidationExceptionReasonInvalidSourceAgreementIdentifier      ValidationExceptionReason = "INVALID_SOURCE_AGREEMENT_IDENTIFIER"
+	ValidationExceptionReasonMissingSourceAgreementIdentifier      ValidationExceptionReason = "MISSING_SOURCE_AGREEMENT_IDENTIFIER"
+	ValidationExceptionReasonInvalidAgreementProposalIdentifier    ValidationExceptionReason = "INVALID_AGREEMENT_PROPOSAL_IDENTIFIER"
+	ValidationExceptionReasonMissingAgreementProposalIdentifier    ValidationExceptionReason = "MISSING_AGREEMENT_PROPOSAL_IDENTIFIER"
+	ValidationExceptionReasonInvalidRequestedTerms                 ValidationExceptionReason = "INVALID_REQUESTED_TERMS"
+	ValidationExceptionReasonMissingRequestedTerms                 ValidationExceptionReason = "MISSING_REQUESTED_TERMS"
+	ValidationExceptionReasonInvalidRequestedTermId                ValidationExceptionReason = "INVALID_REQUESTED_TERM_ID"
+	ValidationExceptionReasonMissingRequestedTermId                ValidationExceptionReason = "MISSING_REQUESTED_TERM_ID"
+	ValidationExceptionReasonInvalidRequestedTermConfiguration     ValidationExceptionReason = "INVALID_REQUESTED_TERM_CONFIGURATION"
+	ValidationExceptionReasonMissingRequestedTermConfiguration     ValidationExceptionReason = "MISSING_REQUESTED_TERM_CONFIGURATION"
+	ValidationExceptionReasonInvalidAgreementRequestId             ValidationExceptionReason = "INVALID_AGREEMENT_REQUEST_ID"
+	ValidationExceptionReasonMissingAgreementRequestId             ValidationExceptionReason = "MISSING_AGREEMENT_REQUEST_ID"
+	ValidationExceptionReasonInvalidPurchaseOrders                 ValidationExceptionReason = "INVALID_PURCHASE_ORDERS"
+	ValidationExceptionReasonMissingPurchaseOrders                 ValidationExceptionReason = "MISSING_PURCHASE_ORDERS"
+	ValidationExceptionReasonInvalidChargeId                       ValidationExceptionReason = "INVALID_CHARGE_ID"
+	ValidationExceptionReasonMissingChargeId                       ValidationExceptionReason = "MISSING_CHARGE_ID"
+	ValidationExceptionReasonInvalidChargeRevision                 ValidationExceptionReason = "INVALID_CHARGE_REVISION"
+	ValidationExceptionReasonMissingChargeRevision                 ValidationExceptionReason = "MISSING_CHARGE_REVISION"
+	ValidationExceptionReasonInvalidAgreementType                  ValidationExceptionReason = "INVALID_AGREEMENT_TYPE"
+	ValidationExceptionReasonInvalidPurchaseOrderReference         ValidationExceptionReason = "INVALID_PURCHASE_ORDER_REFERENCE"
+	ValidationExceptionReasonInactiveAgreement                     ValidationExceptionReason = "INACTIVE_AGREEMENT"
+	ValidationExceptionReasonSupersededAgreementProposal           ValidationExceptionReason = "SUPERSEDED_AGREEMENT_PROPOSAL"
+	ValidationExceptionReasonExpiredAgreementProposal              ValidationExceptionReason = "EXPIRED_AGREEMENT_PROPOSAL"
+	ValidationExceptionReasonMissingMandatoryTerms                 ValidationExceptionReason = "MISSING_MANDATORY_TERMS"
+	ValidationExceptionReasonIncompatibleTerms                     ValidationExceptionReason = "INCOMPATIBLE_TERMS"
+	ValidationExceptionReasonMissingUsageAgreement                 ValidationExceptionReason = "MISSING_USAGE_AGREEMENT"
+	ValidationExceptionReasonInvalidIncrementalCharge              ValidationExceptionReason = "INVALID_INCREMENTAL_CHARGE"
+	ValidationExceptionReasonMissingAccountAddress                 ValidationExceptionReason = "MISSING_ACCOUNT_ADDRESS"
+	ValidationExceptionReasonUnsupportedAction                     ValidationExceptionReason = "UNSUPPORTED_ACTION"
+	ValidationExceptionReasonInvalidRejectionReason                ValidationExceptionReason = "INVALID_REJECTION_REASON"
+	ValidationExceptionReasonInvalidPaymentRequestStatus           ValidationExceptionReason = "INVALID_PAYMENT_REQUEST_STATUS"
+	ValidationExceptionReasonOther                                 ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonDuplicateCharges                      ValidationExceptionReason = "DUPLICATE_CHARGES"
+	ValidationExceptionReasonUnsupportedAccountPlan                ValidationExceptionReason = "UNSUPPORTED_ACCOUNT_PLAN"
+	ValidationExceptionReasonDuplicateAgreementInOrganization      ValidationExceptionReason = "DUPLICATE_AGREEMENT_IN_ORGANIZATION"
+	ValidationExceptionReasonMissingPurchaseOrderReference         ValidationExceptionReason = "MISSING_PURCHASE_ORDER_REFERENCE"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -325,11 +538,33 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
+		"MISSING_BILLING_ADJUSTMENTS",
+		"BILLING_ADJUSTMENTS_LIMIT_EXCEEDED",
+		"MISSING_INVOICE_ID",
+		"INVALID_ADJUSTMENT_AMOUNT",
+		"MISSING_ADJUSTMENT_AMOUNT",
+		"INVALID_REASON_CODE",
+		"MISSING_REASON_CODE",
+		"MISSING_DESCRIPTION",
+		"INVALID_INVOICE_ADJUSTMENT_PERIOD",
+		"INVALID_CURRENCY_CODE",
+		"MISSING_CURRENCY_CODE",
+		"EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT",
+		"MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY",
+		"MULTIPLE_AGREEMENT_IDS",
+		"INVALID_AGREEMENT_CANCELLATION_REQUEST_ID",
+		"MISSING_AGREEMENT_CANCELLATION_REQUEST_ID",
+		"MISSING_REASON",
+		"INVALID_REASON",
+		"INVALID_STATUS",
 		"INVALID_AGREEMENT_ID",
 		"MISSING_AGREEMENT_ID",
 		"INVALID_CATALOG",
+		"INVALID_FILTERS",
 		"INVALID_FILTER_NAME",
+		"MISSING_FILTER_NAME",
 		"INVALID_FILTER_VALUES",
+		"MISSING_FILTER_VALUES",
 		"INVALID_SORT_BY",
 		"INVALID_SORT_ORDER",
 		"INVALID_NEXT_TOKEN",
@@ -346,8 +581,44 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"MISSING_PARTY_TYPE",
 		"INVALID_PARTY_TYPE",
 		"UNSUPPORTED_FILTERS",
+		"INVALID_CLIENT_TOKEN",
+		"INVALID_INTENT",
+		"MISSING_INTENT",
+		"INVALID_SOURCE_AGREEMENT_IDENTIFIER",
+		"MISSING_SOURCE_AGREEMENT_IDENTIFIER",
+		"INVALID_AGREEMENT_PROPOSAL_IDENTIFIER",
+		"MISSING_AGREEMENT_PROPOSAL_IDENTIFIER",
+		"INVALID_REQUESTED_TERMS",
+		"MISSING_REQUESTED_TERMS",
+		"INVALID_REQUESTED_TERM_ID",
+		"MISSING_REQUESTED_TERM_ID",
+		"INVALID_REQUESTED_TERM_CONFIGURATION",
+		"MISSING_REQUESTED_TERM_CONFIGURATION",
+		"INVALID_AGREEMENT_REQUEST_ID",
+		"MISSING_AGREEMENT_REQUEST_ID",
+		"INVALID_PURCHASE_ORDERS",
+		"MISSING_PURCHASE_ORDERS",
+		"INVALID_CHARGE_ID",
+		"MISSING_CHARGE_ID",
+		"INVALID_CHARGE_REVISION",
+		"MISSING_CHARGE_REVISION",
+		"INVALID_AGREEMENT_TYPE",
+		"INVALID_PURCHASE_ORDER_REFERENCE",
+		"INACTIVE_AGREEMENT",
+		"SUPERSEDED_AGREEMENT_PROPOSAL",
+		"EXPIRED_AGREEMENT_PROPOSAL",
+		"MISSING_MANDATORY_TERMS",
+		"INCOMPATIBLE_TERMS",
+		"MISSING_USAGE_AGREEMENT",
+		"INVALID_INCREMENTAL_CHARGE",
+		"MISSING_ACCOUNT_ADDRESS",
+		"UNSUPPORTED_ACTION",
 		"INVALID_REJECTION_REASON",
 		"INVALID_PAYMENT_REQUEST_STATUS",
 		"OTHER",
+		"DUPLICATE_CHARGES",
+		"UNSUPPORTED_ACCOUNT_PLAN",
+		"DUPLICATE_AGREEMENT_IN_ORGANIZATION",
+		"MISSING_PURCHASE_ORDER_REFERENCE",
 	}
 }

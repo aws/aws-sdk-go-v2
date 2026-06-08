@@ -2770,6 +2770,16 @@ func validateMemberChangeSpecification(v *types.MemberChangeSpecification) error
 	if v.MemberAbilities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberAbilities"))
 	}
+	if v.MlMemberAbilities != nil {
+		if err := validateMLMemberAbilities(v.MlMemberAbilities); err != nil {
+			invalidParams.AddNested("MlMemberAbilities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PaymentConfiguration != nil {
+		if err := validatePaymentConfiguration(v.PaymentConfiguration); err != nil {
+			invalidParams.AddNested("PaymentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3716,6 +3726,33 @@ func validateTableReference(v types.TableReference) error {
 			invalidParams.AddNested("[snowflake]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateMembershipPaymentConfiguration(v *types.UpdateMembershipPaymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMembershipPaymentConfiguration"}
+	if v.QueryCompute != nil {
+		if err := validateMembershipQueryComputePaymentConfig(v.QueryCompute); err != nil {
+			invalidParams.AddNested("QueryCompute", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MachineLearning != nil {
+		if err := validateMembershipMLPaymentConfig(v.MachineLearning); err != nil {
+			invalidParams.AddNested("MachineLearning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobCompute != nil {
+		if err := validateMembershipJobComputePaymentConfig(v.JobCompute); err != nil {
+			invalidParams.AddNested("JobCompute", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5330,6 +5367,11 @@ func validateOpUpdateMembershipInput(v *UpdateMembershipInput) error {
 	if v.DefaultJobResultConfiguration != nil {
 		if err := validateMembershipProtectedJobResultConfiguration(v.DefaultJobResultConfiguration); err != nil {
 			invalidParams.AddNested("DefaultJobResultConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MembershipPaymentConfiguration != nil {
+		if err := validateUpdateMembershipPaymentConfiguration(v.MembershipPaymentConfiguration); err != nil {
+			invalidParams.AddNested("MembershipPaymentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -205,6 +205,68 @@ type AssociatedAlarm struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Amazon Aurora provisioned cluster scaling used in a Region
+// switch plan.
+type AuroraProvisionedScalingConfiguration struct {
+
+	// The global cluster identifier for a global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// Per-Region configuration that maps each Region to the Aurora database instance
+	// ARN for scaling.
+	//
+	// This member is required.
+	InstanceArns map[string]string
+
+	// Per-Region configuration that maps each Region to the Aurora database cluster
+	// ARN for scaling.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Amazon Aurora Serverless scaling used in a Region switch plan.
+type AuroraServerlessScalingConfiguration struct {
+
+	// The global cluster identifier for a global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// Per-Region configuration that maps each Region to the Aurora database cluster
+	// ARN for scaling.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The target capacity percentage for Aurora Serverless scaling.
+	TargetPercent *int32
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for Amazon Web Services Lambda functions that perform custom
 // actions during a Region switch.
 type CustomActionLambdaConfiguration struct {
@@ -295,7 +357,8 @@ type Ec2AsgCapacityIncreaseConfiguration struct {
 	// configuration.
 	CapacityMonitoringApproach Ec2AsgCapacityMonitoringApproach
 
-	// The target percentage that you specify for EC2 Auto Scaling groups.
+	// The target percentage that you specify for EC2 Auto Scaling groups. The default
+	// is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -330,7 +393,7 @@ type EcsCapacityIncreaseConfiguration struct {
 	// Most_Recent .
 	CapacityMonitoringApproach EcsCapacityMonitoringApproach
 
-	// The target percentage specified for the configuration.
+	// The target percentage specified for the configuration. The default is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -388,7 +451,7 @@ type EksResourceScalingConfiguration struct {
 	// The scaling resources for the configuration.
 	ScalingResources []map[string]map[string]KubernetesScalingResource
 
-	// The target percentage for the configuration.
+	// The target percentage for the configuration. The default is 100.
 	TargetPercent *int32
 
 	// The timeout value specified for the configuration.
@@ -407,6 +470,24 @@ type EksResourceScalingUngraceful struct {
 	//
 	// This member is required.
 	MinimumSuccessPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Web Services Lambda event source mapping configuration, containing
+// the resource ARN and optional cross-account configuration.
+type EventSourceMapping struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda event source mapping.
+	//
+	// This member is required.
+	Arn *string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
 
 	noSmithyDocumentSerde
 }
@@ -433,6 +514,8 @@ type ExecutionApprovalConfiguration struct {
 // The following types satisfy this interface:
 //
 //	ExecutionBlockConfigurationMemberArcRoutingControlConfig
+//	ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig
+//	ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig
 //	ExecutionBlockConfigurationMemberCustomActionLambdaConfig
 //	ExecutionBlockConfigurationMemberDocumentDbConfig
 //	ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig
@@ -440,6 +523,8 @@ type ExecutionApprovalConfiguration struct {
 //	ExecutionBlockConfigurationMemberEksResourceScalingConfig
 //	ExecutionBlockConfigurationMemberExecutionApprovalConfig
 //	ExecutionBlockConfigurationMemberGlobalAuroraConfig
+//	ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig
+//	ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig
 //	ExecutionBlockConfigurationMemberParallelConfig
 //	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
@@ -457,6 +542,26 @@ type ExecutionBlockConfigurationMemberArcRoutingControlConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberArcRoutingControlConfig) isExecutionBlockConfiguration() {}
+
+// An Aurora provisioned cluster scaling execution block.
+type ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig struct {
+	Value AuroraProvisionedScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) isExecutionBlockConfiguration() {
+}
+
+// An Aurora Serverless scaling execution block.
+type ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig struct {
+	Value AuroraServerlessScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) isExecutionBlockConfiguration() {
+}
 
 // An Amazon Web Services Lambda execution block.
 type ExecutionBlockConfigurationMemberCustomActionLambdaConfig struct {
@@ -522,6 +627,26 @@ type ExecutionBlockConfigurationMemberGlobalAuroraConfig struct {
 }
 
 func (*ExecutionBlockConfigurationMemberGlobalAuroraConfig) isExecutionBlockConfiguration() {}
+
+// A Lambda event source mapping execution block.
+type ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig struct {
+	Value LambdaEventSourceMappingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) isExecutionBlockConfiguration() {
+}
+
+// A Neptune global database execution block.
+type ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig struct {
+	Value NeptuneGlobalDatabaseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) isExecutionBlockConfiguration() {
+}
 
 // A parallel configuration execution block.
 type ExecutionBlockConfigurationMemberParallelConfig struct {
@@ -709,6 +834,41 @@ type KubernetesScalingResource struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Amazon Web Services Lambda event source mappings used in a
+// Region switch plan.
+type LambdaEventSourceMappingConfiguration struct {
+
+	// The action to take - whether to enable or disable an event source mapping.
+	//
+	// This member is required.
+	Action EventSourceMappingAction
+
+	// Per-region configuration for which Lambda event source mapping to enable or
+	// disable when activating or deactivating a region.
+	//
+	// This member is required.
+	RegionEventSourceMappings map[string]EventSourceMapping
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The settings for ungraceful execution.
+	Ungraceful *LambdaEventSourceMappingUngraceful
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether to skip enabling or disabling an event source mapping during
+// an ungraceful execution.
+type LambdaEventSourceMappingUngraceful struct {
+
+	// Set to skip to skip executing this event source mapping step during an
+	// ungraceful execution.
+	Behavior LambdaEventSourceMappingUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for Amazon Web Services Lambda functions used in a Region switch
 // plan.
 type Lambdas struct {
@@ -742,6 +902,50 @@ type MinimalWorkflow struct {
 
 	// The name for a minimal workflow
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Amazon Neptune global databases used in a Region switch plan.
+type NeptuneGlobalDatabaseConfiguration struct {
+
+	// The behavior for a global database, that is, only allow switchover or also
+	// allow failover.
+	//
+	// This member is required.
+	Behavior NeptuneDefaultBehavior
+
+	// The global cluster identifier for a Neptune global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// The database cluster Amazon Resource Names (ARNs) for a Neptune global database.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The settings for ungraceful execution.
+	Ungraceful *NeptuneUngraceful
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for handling failures when performing operations on Neptune
+// global databases.
+type NeptuneUngraceful struct {
+
+	// The settings for ungraceful execution.
+	Ungraceful NeptuneUngracefulBehavior
 
 	noSmithyDocumentSerde
 }

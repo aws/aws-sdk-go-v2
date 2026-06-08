@@ -54,6 +54,12 @@ type CreateInferenceComponentInput struct {
 	// the model, container, and compute resources.
 	Specification *types.InferenceComponentSpecification
 
+	// A list of specification objects for the inference component, one per instance
+	// type. Use this parameter when you want to deploy a different model or resource
+	// configuration for the inference component on each instance type. You can use
+	// either this parameter or the singular Specification parameter, but not both.
+	Specifications []types.InferenceComponentSpecification
+
 	// A list of key-value pairs associated with the model. For more information, see [Tagging Amazon Web Services resources]
 	// in the Amazon Web Services General Reference.
 	//

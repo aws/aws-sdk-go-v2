@@ -155,6 +155,10 @@ type EinvoiceDeliveryPreference struct {
 // The organization name providing Amazon Web Services services.
 type Entity struct {
 
+	// Helps you identify whether your invoices are for Amazon Web Services
+	// Marketplace or for purchases of other Amazon Web Services services.
+	BillingEntity BillingEntity
+
 	// The name of the entity that issues the Amazon Web Services invoice.
 	InvoicingEntity *string
 
@@ -200,10 +204,9 @@ type Filters struct {
 	// receiver or the linked accounts in the rules.
 	Accounts []string
 
-	//  A list of Amazon Web Services account account IDs used to filter invoice
-	// units. These are payer accounts from other Organizations that have delegated
-	// their billing responsibility to the receiver account through the billing
-	// transfer feature.
+	//  A list of Amazon Web Services account IDs used to filter invoice units. These
+	// are payer accounts from other Organizations that have delegated their billing
+	// responsibility to the receiver account through the billing transfer feature.
 	BillSourceAccounts []string
 
 	//  You can specify a list of Amazon Web Services account IDs inside filters to
@@ -294,6 +297,17 @@ type InvoiceSummariesFilter struct {
 	// The name of the entity that issues the Amazon Web Services invoice.
 	InvoicingEntity *string
 
+	// The role of the invoice receiver to filter by.
+	//
+	// When ReceiverRole is specified:
+	//
+	//   - Data is available starting 2025-06-01 . Queries for periods before
+	//   2025-06-01 return a validation error.
+	//
+	//   - TimeInterval supports a time interval of up to 5 years. Without ReceiverRole
+	//   , TimeInterval is limited to one month.
+	ReceiverRole ReceiverRole
+
 	// The date range for invoice summary retrieval.
 	TimeInterval *DateInterval
 
@@ -325,14 +339,34 @@ type InvoiceSummary struct {
 	//  The summary with the product and service currency.
 	BaseCurrencyAmount *InvoiceCurrencyAmount
 
+	//  The list of Amazon Web Services account IDs that are the bill source of the
+	// invoice. Currently, only a single bill source account is returned.
+	BillSourceAccounts []string
+
+	//  The total number of accounts that are the bill source of the invoice.
+	BillSourceAccountsTotalCount *int32
+
+	//  The type of the bill.
+	BillType BillType
+
 	//  The billing period of the invoice-related document.
 	BillingPeriod *BillingPeriod
+
+	//  The commercial invoice ID. This is only applicable for tax invoices and
+	// identifies the associated commercial invoice.
+	CommercialInvoiceId *string
 
 	//  The invoice due date.
 	DueDate *time.Time
 
+	//  The e-invoice delivery status.
+	EinvoiceDeliveryStatus EinvoiceDeliveryStatus
+
 	// The organization name providing Amazon Web Services services.
 	Entity *Entity
+
+	//  The frequency of the invoice.
+	InvoiceFrequency InvoiceFrequency
 
 	//  The invoice ID.
 	InvoiceId *string
@@ -351,6 +385,13 @@ type InvoiceSummary struct {
 
 	//  The purchase order number associated to the invoice.
 	PurchaseOrderNumber *string
+
+	// The role of the invoice receiver.
+	ReceiverRole ReceiverRole
+
+	//  The current status of an invoice as reported to the tax authority. This
+	// captures scenarios where an invoice may be cancelled after issuance.
+	TaxAuthorityStatus TaxAuthorityStatus
 
 	//  The summary with the tax currency.
 	TaxCurrencyAmount *InvoiceCurrencyAmount
@@ -396,9 +437,9 @@ type InvoiceUnit struct {
 // account IDs. Currently, the only supported rule is LINKED_ACCOUNT .
 type InvoiceUnitRule struct {
 
-	//  A list of Amazon Web Services account account IDs that have delegated their
-	// billing responsibility to the receiver account through transfer billing. Unlike
-	// linked accounts, these bill source accounts can be payer accounts from other
+	//  A list of Amazon Web Services account IDs that have delegated their billing
+	// responsibility to the receiver account through transfer billing. Unlike linked
+	// accounts, these bill source accounts can be payer accounts from other
 	// organizations that have authorized billing transfer to this account.
 	BillSourceAccounts []string
 
@@ -681,6 +722,12 @@ type ResourceTag struct {
 
 // Supplemental document associated with the invoice.
 type SupplementalDocument struct {
+
+	// The ID of the supplemental document.
+	DocumentId *string
+
+	// The type of supplemental document.
+	DocumentType SupplementalDocumentType
 
 	// The pre-signed URL to download invoice supplemental document.
 	DocumentUrl *string

@@ -14,6 +14,15 @@ import (
 // Creates a new custom model in Amazon Bedrock. After the model is active, you
 // can use it for inference.
 //
+// You can provide the model data source in one of the following ways:
+//
+//   - customModelDataSource — Specify a SageMaker AI model package ARN. Amazon
+//     Bedrock resolves the model package to retrieve the model artifacts. This is the
+//     preferred method for new SageMaker AI training outputs.
+//
+//   - modelSourceConfig — Specify an Amazon S3 URI pointing to the Amazon-managed
+//     Amazon S3 bucket containing your model artifacts.
+//
 // To use the model for inference, you must purchase Provisioned Throughput for
 // it. You can't use On-demand inference with these custom models. For more
 // information about Provisioned Throughput, see [Provisioned Throughput].
@@ -62,18 +71,19 @@ type CreateCustomModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// The data source for the model. The Amazon S3 URI in the model source must be
-	// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
-	//
-	// This member is required.
-	ModelSourceConfig types.ModelDataSource
-
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
+
+	// The data source for the custom model. Use this field to specify a SageMaker AI
+	// model package ARN as the source for your custom model. Amazon Bedrock resolves
+	// the model package to retrieve the model artifacts.
+	//
+	// You can specify either customModelDataSource or modelSourceConfig , but not both.
+	CustomModelDataSource types.CustomModelDataSource
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the
 	// custom model. If you don't provide a KMS key, Amazon Bedrock uses an Amazon Web
@@ -84,6 +94,10 @@ type CreateCustomModelInput struct {
 	//
 	// [Encryption of imported models]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
 	ModelKmsKeyArn *string
+
+	// The data source for the model. The Amazon S3 URI in the model source must be
+	// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
+	ModelSourceConfig types.ModelDataSource
 
 	// A list of key-value pairs to associate with the custom model resource. You can
 	// use these tags to organize and identify your resources.
@@ -98,6 +112,11 @@ type CreateCustomModelInput struct {
 	// assumes to perform tasks on your behalf. This role must have permissions to
 	// access the Amazon S3 bucket containing your model artifacts and the KMS key (if
 	// specified). For more information, see [Setting up an IAM service role for importing models]in the Amazon Bedrock User Guide.
+	//
+	// This field is required when you use modelSourceConfig with an Amazon S3 data
+	// source. It is not required when you use customModelDataSource with a model
+	// package ARN, because Amazon Bedrock uses its own credentials to access the model
+	// artifacts.
 	//
 	// [Setting up an IAM service role for importing models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
 	RoleArn *string

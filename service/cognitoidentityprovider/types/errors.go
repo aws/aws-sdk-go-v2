@@ -719,6 +719,35 @@ func (e *NotAuthorizedException) ErrorCode() string {
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when an operation is not available in the current
+// region or for the current user pool configuration. This can occur when
+// attempting to perform operations that are not supported in secondary replica
+// regions.
+type OperationNotEnabledException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OperationNotEnabledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OperationNotEnabledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OperationNotEnabledException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OperationNotEnabledException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OperationNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The message returned when a user's new password matches a previous password and
 // doesn't comply with the password-history policy.
 type PasswordHistoryPolicyViolationException struct {

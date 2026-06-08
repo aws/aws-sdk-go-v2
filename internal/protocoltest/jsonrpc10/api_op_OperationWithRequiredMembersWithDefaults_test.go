@@ -11,7 +11,7 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 )
@@ -76,7 +76,7 @@ func TestClient_OperationWithRequiredMembersWithDefaults_Deserialize(t *testing.
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -162,7 +162,7 @@ func BenchmarkClient_OperationWithRequiredMembersWithDefaults_Deserialize(b *tes
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody

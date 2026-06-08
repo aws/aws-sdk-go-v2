@@ -237,6 +237,10 @@ type RunJobFlowInput struct {
 	// specify it for the service role when you launch your cluster.
 	ServiceRole *string
 
+	// Indicates whether Spark Connect sessions are enabled on the cluster. When set
+	// to true , you can start Spark Connect sessions using the StartSession operation.
+	SessionEnabled *bool
+
 	// Specifies the number of steps that can be executed concurrently. The default
 	// value is 1 . The maximum value is 256 .
 	StepConcurrencyLevel *int32

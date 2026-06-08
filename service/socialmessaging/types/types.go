@@ -124,6 +124,11 @@ type LinkedWhatsAppBusinessAccount struct {
 	// This member is required.
 	WabaName *string
 
+	// The onboarding status for the Marketing Messages API. This value is fetched
+	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
+	// Meta's Marketing Messages API.
+	MarketingMessagesOnboardingStatus *string
+
 	noSmithyDocumentSerde
 }
 
@@ -184,6 +189,166 @@ type LinkedWhatsAppBusinessAccountSummary struct {
 	//
 	// This member is required.
 	WabaName *string
+
+	// The onboarding status for the Marketing Messages API. This value is fetched
+	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
+	// Meta's Marketing Messages API.
+	MarketingMessagesOnboardingStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Meta application metadata associated with a WhatsApp Flow.
+type MetaFlowApplicationInfo struct {
+
+	// The unique identifier of the Meta application.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the Meta application.
+	//
+	// This member is required.
+	Name *string
+
+	// The URL link for the Meta application.
+	Link *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single asset file associated with a WhatsApp Flow, including a
+// presigned download URL.
+type MetaFlowAsset struct {
+
+	// The type of asset. Currently the only supported value is FLOW_JSON.
+	//
+	// This member is required.
+	AssetType *string
+
+	// A presigned URL from Meta for downloading the asset. The URL expires after a
+	// short period.
+	//
+	// This member is required.
+	DownloadUrl *string
+
+	// The filename of the asset (for example, flow.json).
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entity in the health status check for a WhatsApp Flow.
+type MetaFlowHealthEntity struct {
+
+	// The messaging availability status for this entity (for example, AVAILABLE,
+	// LIMITED, or BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// The type of entity (for example, FLOW, WABA, BUSINESS, or APP).
+	//
+	// This member is required.
+	EntityType *string
+
+	// The unique identifier of the entity.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the overall health status and per-entity breakdown for a WhatsApp Flow.
+type MetaFlowHealthStatus struct {
+
+	// The overall messaging availability status (for example, AVAILABLE, LIMITED, or
+	// BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// A list of health status entities with per-entity availability information.
+	Entities []MetaFlowHealthEntity
+
+	noSmithyDocumentSerde
+}
+
+// Contains the preview URL for testing a WhatsApp Flow and its expiration
+// timestamp.
+type MetaFlowPreviewInfo struct {
+
+	// The timestamp when the preview URL expires.
+	//
+	// This member is required.
+	ExpiresAt *string
+
+	// The web URL for previewing the Flow. Can be shared with stakeholders for review.
+	//
+	// This member is required.
+	PreviewUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a WhatsApp Flow, including its ID, name,
+// status, and categories.
+type MetaFlowSummary struct {
+
+	// The categories that classify the business purpose of the Flow.
+	//
+	// This member is required.
+	FlowCategories []MetaFlowCategory
+
+	// The unique identifier of the Flow assigned by Meta.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The name of the Flow.
+	//
+	// This member is required.
+	FlowName *string
+
+	// The lifecycle status of the Flow (DRAFT, PUBLISHED, DEPRECATED, BLOCKED, or
+	// THROTTLED).
+	//
+	// This member is required.
+	FlowStatus *string
+
+	// A list of validation errors from Meta, if any.
+	//
+	// This member is required.
+	ValidationErrors []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains WhatsApp Business Account metadata associated with a Flow, as returned
+// by Meta.
+type MetaFlowWhatsAppBusinessAccountInfo struct {
+
+	// The WhatsApp Business Account ID from Meta.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the WhatsApp Business Account.
+	//
+	// This member is required.
+	Name *string
+
+	// The currency code for the WhatsApp Business Account (for example, USD).
+	Currency *string
+
+	// The message template namespace for the WhatsApp Business Account.
+	MessageTemplateNamespace *string
+
+	// The timezone ID for the WhatsApp Business Account.
+	TimezoneId *string
 
 	noSmithyDocumentSerde
 }

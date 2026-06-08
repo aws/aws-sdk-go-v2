@@ -349,6 +349,9 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyGenerateFidelityReportContent
 
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyIterativeRefinementContent
+
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildWorkflowRepairContent
 
@@ -361,6 +364,7 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 	}
 }
 
+var _ *types.AutomatedReasoningPolicyIterativeRefinementContent
 var _ *types.AutomatedReasoningPolicyBuildWorkflowRepairContent
 var _ types.AutomatedReasoningPolicyGenerateFidelityReportContent
 var _ []types.AutomatedReasoningPolicyBuildWorkflowDocument
@@ -386,6 +390,24 @@ func ExampleCustomizationConfig_outputUsage() {
 
 var _ *types.DistillationConfig
 var _ *types.RFTConfig
+
+func ExampleCustomModelDataSource_outputUsage() {
+	var union types.CustomModelDataSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomModelDataSourceMemberModelPackageArnDataSource:
+		_ = v.Value // Value is types.ModelPackageArnDataSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ModelPackageArnDataSource
 
 func ExampleEndpointConfig_outputUsage() {
 	var union types.EndpointConfig

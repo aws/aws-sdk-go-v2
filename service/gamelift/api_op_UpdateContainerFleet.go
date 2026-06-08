@@ -125,9 +125,17 @@ type UpdateContainerFleetInput struct {
 	// Amazon GameLift Servers calculates an optimal port range based on your fleet
 	// configuration. If you previously set this parameter manually, you can't reset
 	// this to use the calculated settings.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceConnectionPortRange *types.ConnectionPortRange
 
 	// A set of ports to add to the container fleet's inbound permissions.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceInboundPermissionAuthorizations []types.IpPermission
 
 	// A set of ports to remove from the container fleet's inbound permissions.

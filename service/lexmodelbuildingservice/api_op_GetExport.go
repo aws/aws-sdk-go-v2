@@ -12,6 +12,8 @@ import (
 )
 
 // Exports the contents of a Amazon Lex resource in a specified format.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns ...func(*Options)) (*GetExportOutput, error) {
 	if params == nil {
 		params = &GetExportInput{}

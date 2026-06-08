@@ -2347,6 +2347,12 @@ type SavingsPlansPurchaseAnalysisConfiguration struct {
 	// The account scope that you want your analysis for.
 	AccountScope AccountScope
 
+	// Specifies the target Savings Plans coverage as a percentage from 10 to 100 .
+	// This field is required when AnalysisType is TARGET_AVERAGE_COVERAGE . It defines
+	// the target average hourly coverage that the recommended Savings Plans commitment
+	// should achieve over the lookback period.
+	SavingsPlansTargetCoverage *int32
+
 	// Savings Plans to exclude from the analysis.
 	SavingsPlansToExclude []string
 

@@ -26,6 +26,8 @@ import (
 // DeleteBot operation is successful.
 //
 // This operation requires permissions for the lex:DeleteBot action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns ...func(*Options)) (*DeleteBotOutput, error) {
 	if params == nil {
 		params = &DeleteBotInput{}

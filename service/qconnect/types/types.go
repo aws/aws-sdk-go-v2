@@ -2783,6 +2783,26 @@ type GuardrailPiiEntityConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Per-policy guardrail assessment result. Captures which policy triggered, its
+// outcome, and a policy-specific detail string.
+type GuardrailPolicyResult struct {
+
+	// Outcome of this specific policy.
+	//
+	// This member is required.
+	Action GuardrailAction
+
+	// The type of guardrail policy that was evaluated.
+	//
+	// This member is required.
+	PolicyType GuardrailPolicyType
+
+	// Policy-specific detail.
+	Details *string
+
+	noSmithyDocumentSerde
+}
+
 // The regular expression to configure for the AI Guardrail.
 type GuardrailRegexConfig struct {
 
@@ -3912,6 +3932,45 @@ type MessageTemplateVersionSummary struct {
 
 	// The channel of the message template.
 	Channel *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a model available to an Amazon Q in Connect assistant.
+type ModelSummary struct {
+
+	// The display name of the model.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The identifier of the model.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The cross-region availability status of the model. NONE indicates the model is
+	// only available in a single region, REGIONAL indicates the model is available
+	// through regional inference, and GLOBAL indicates the model is available through
+	// global cross-region inference.
+	CrossRegionStatus CrossRegionStatus
+
+	// The timestamp when the model will reach end of life and no longer be available
+	// for use.
+	EndOfLifeTimestamp *time.Time
+
+	// The timestamp when the model lifecycle will transition from ACTIVE to LEGACY .
+	LegacyTimestamp *time.Time
+
+	// The current lifecycle of the model. ACTIVE indicates the model is recommended
+	// for use and LEGACY indicates the model is still usable but is deprecated.
+	ModelLifecycle ModelLifecycle
+
+	// The list of AI Prompt types that the model supports.
+	SupportedAIPromptTypes []AIPromptType
+
+	// Whether the model supports prompt caching.
+	SupportsPromptCaching *bool
 
 	noSmithyDocumentSerde
 }
@@ -5526,6 +5585,9 @@ type Span struct {
 	// Parent span identifier for hierarchy. Null for root spans.
 	ParentSpanId *string
 
+	// Human-readable error description when status is ERROR or TIMEOUT
+	StatusDescription *string
+
 	noSmithyDocumentSerde
 }
 
@@ -5568,6 +5630,10 @@ type SpanAttributes struct {
 
 	// Error classification if span failed (e.g., throttle, timeout)
 	ErrorType *string
+
+	// Guardrail assessments for the inference span. Absent on other span types and
+	// when no AI Guardrail is attached to the AI Agent.
+	GuardrailAssessments []SpanGuardrailAssessment
 
 	// Amazon Connect contact identifier
 	InitialContactId *string
@@ -5623,6 +5689,10 @@ type SpanAttributes struct {
 	// Sampling temperature for generation
 	Temperature *float32
 
+	// Time to first token in milliseconds, measured from when Amazon Bedrock was
+	// invoked to when the first token was returned
+	TimeToFirstTokenMs *int32
+
 	// Top-p sampling parameter for generation
 	TopP *float32
 
@@ -5657,6 +5727,36 @@ type SpanCitation struct {
 	noSmithyDocumentSerde
 }
 
+// Result of a single guardrail assessment, covering either the input
+// (customer/user message) or the output (LLM response) of a Bedrock Converse call.
+type SpanGuardrailAssessment struct {
+
+	// Outcome of the guardrail assessment.
+	//
+	// This member is required.
+	Action GuardrailAction
+
+	// Unique AI Guardrail identifier.
+	//
+	// This member is required.
+	GuardrailId *string
+
+	// Customer-defined display name of the AI Guardrail resource.
+	//
+	// This member is required.
+	GuardrailName *string
+
+	// Content source the guardrail was evaluated against.
+	//
+	// This member is required.
+	Source GuardrailSource
+
+	// Per-policy assessment results. Absent or empty when action is NONE.
+	Policies []GuardrailPolicyResult
+
+	noSmithyDocumentSerde
+}
+
 // A message in the conversation history with participant role and content values
 type SpanMessage struct {
 
@@ -5675,7 +5775,7 @@ type SpanMessage struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	// Message content values (text, tool use, tool result)
+	// Message content values (text, tool use, tool result, reasoning)
 	//
 	// This member is required.
 	Values []SpanMessageValue
@@ -5683,16 +5783,26 @@ type SpanMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Message content value - can be text, tool invocation, or tool result
+// Message content value - can be text, tool invocation, tool result, or reasoning
 //
 // The following types satisfy this interface:
 //
+//	SpanMessageValueMemberReasoning
 //	SpanMessageValueMemberText
 //	SpanMessageValueMemberToolResult
 //	SpanMessageValueMemberToolUse
 type SpanMessageValue interface {
 	isSpanMessageValue()
 }
+
+// Model reasoning and it's internal decision making process
+type SpanMessageValueMemberReasoning struct {
+	Value SpanReasoningValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberReasoning) isSpanMessageValue() {}
 
 // Text message content
 type SpanMessageValueMemberText struct {
@@ -5720,6 +5830,17 @@ type SpanMessageValueMemberToolUse struct {
 }
 
 func (*SpanMessageValueMemberToolUse) isSpanMessageValue() {}
+
+// Model reasoning and it's internal decision making process
+type SpanReasoningValue struct {
+
+	// The reasoning text content
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
 
 // Text message content
 type SpanTextValue struct {

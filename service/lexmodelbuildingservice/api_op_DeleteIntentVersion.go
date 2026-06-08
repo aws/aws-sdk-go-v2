@@ -14,6 +14,8 @@ import (
 // use the DeleteIntentoperation.
 //
 // This operation requires permissions for the lex:DeleteIntentVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteIntentVersion(ctx context.Context, params *DeleteIntentVersionInput, optFns ...func(*Options)) (*DeleteIntentVersionOutput, error) {
 	if params == nil {
 		params = &DeleteIntentVersionInput{}

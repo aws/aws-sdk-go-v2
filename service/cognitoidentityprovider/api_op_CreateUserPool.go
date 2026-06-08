@@ -136,6 +136,14 @@ type CreateUserPoolInput struct {
 	// This parameter is no longer used.
 	EmailVerificationSubject *string
 
+	// The issuer configuration for the user pool. Specifies the issuer type for token
+	// generation.
+	IssuerConfiguration *types.IssuerConfigurationType
+
+	// The key configuration for the user pool. Specifies the key type and KMS key ARN
+	// for encryption.
+	KeyConfiguration *types.KeyConfigurationType
+
 	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 	// several possible stages of authentication operations. Triggers can modify the
 	// outcome of the operations that invoked them.

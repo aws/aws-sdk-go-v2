@@ -1181,6 +1181,33 @@ func (e *SchedulerTransitioningException) ErrorCode() string {
 }
 func (e *SchedulerTransitioningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The session is currently busy processing another request and cannot accept new
+// operations.
+type SessionBusyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SessionBusyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SessionBusyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SessionBusyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SessionBusyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SessionBusyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The target resource could not be found.
 type TargetResourceNotFound struct {
 	Message *string

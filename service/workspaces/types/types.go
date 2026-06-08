@@ -297,7 +297,7 @@ type ComputeType struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Amazon Connect client add-in.
+// Describes an Connect Customer client add-in.
 type ConnectClientAddIn struct {
 
 	// The client add-in identifier.

@@ -83,6 +83,9 @@ type DescribeDomainOutput struct {
 	// The failure reason.
 	FailureReason *string
 
+	// Indicates whether a home EFS file system is created for the domain.
+	HomeEfsFileSystemCreation types.HomeEfsFileSystemCreation
+
 	// The ID of the Amazon Elastic File System managed by this Domain.
 	HomeEfsFileSystemId *string
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves multiple agent spaces in a single request
+// Retrieves information about one or more agent spaces.
 func (c *Client) BatchGetAgentSpaces(ctx context.Context, params *BatchGetAgentSpacesInput, optFns ...func(*Options)) (*BatchGetAgentSpacesOutput, error) {
 	if params == nil {
 		params = &BatchGetAgentSpacesInput{}
@@ -27,10 +27,10 @@ func (c *Client) BatchGetAgentSpaces(ctx context.Context, params *BatchGetAgentS
 	return out, nil
 }
 
-// Input for batch retrieving agent spaces
+// Input for batch retrieving agent spaces.
 type BatchGetAgentSpacesInput struct {
 
-	// List of agent space IDs to retrieve
+	// The list of agent space identifiers to retrieve.
 	//
 	// This member is required.
 	AgentSpaceIds []string
@@ -38,13 +38,13 @@ type BatchGetAgentSpacesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the BatchGetAgentSpaces operation
+// Output for the BatchGetAgentSpaces operation.
 type BatchGetAgentSpacesOutput struct {
 
-	// List of agent spaces that were successfully retrieved
+	// The list of agent spaces that were found.
 	AgentSpaces []types.AgentSpace
 
-	// List of agent space IDs that could not be found
+	// The list of agent space identifiers that were not found.
 	NotFound []string
 
 	// Metadata pertaining to the operation's result.

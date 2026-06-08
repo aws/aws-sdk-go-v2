@@ -2641,6 +2641,67 @@ func (m *awsAwsjson11_serializeOpCreateUserPoolDomain) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateUserPoolReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateUserPoolReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateUserPoolReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.CreateUserPoolReplica")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateUserPoolReplicaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteGroup struct {
 }
 
@@ -3295,6 +3356,67 @@ func (m *awsAwsjson11_serializeOpDeleteUserPoolDomain) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteUserPoolDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteUserPoolReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteUserPoolReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteUserPoolReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.DeleteUserPoolReplica")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteUserPoolReplicaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5508,6 +5630,67 @@ func (m *awsAwsjson11_serializeOpListUserPoolClientSecrets) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListUserPoolReplicas struct {
+}
+
+func (*awsAwsjson11_serializeOpListUserPoolReplicas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListUserPoolReplicas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListUserPoolReplicasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.ListUserPoolReplicas")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListUserPoolReplicasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListUserPools struct {
 }
 
@@ -7338,6 +7521,67 @@ func (m *awsAwsjson11_serializeOpUpdateUserPoolDomain) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateUserPoolReplica) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateUserPoolReplica) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateUserPoolReplicaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCognitoIdentityProviderService.UpdateUserPoolReplica")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateUserPoolReplicaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpVerifySoftwareToken struct {
 }
 
@@ -8101,6 +8345,23 @@ func awsAwsjson11_serializeDocumentExplicitAuthFlowsListType(v []types.ExplicitA
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFailoverType(v *types.FailoverType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrimaryRoute53HealthCheckId != nil {
+		ok := object.Key("PrimaryRoute53HealthCheckId")
+		ok.String(*v.PrimaryRoute53HealthCheckId)
+	}
+
+	if v.SecondaryRegion != nil {
+		ok := object.Key("SecondaryRegion")
+		ok.String(*v.SecondaryRegion)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFirehoseConfigurationType(v *types.FirehoseConfigurationType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8166,6 +8427,35 @@ func awsAwsjson11_serializeDocumentInboundFederationLambdaType(v *types.InboundF
 	if len(v.LambdaVersion) > 0 {
 		ok := object.Key("LambdaVersion")
 		ok.String(string(v.LambdaVersion))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIssuerConfigurationType(v *types.IssuerConfigurationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentKeyConfigurationType(v *types.KeyConfigurationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.KeyType) > 0 {
+		ok := object.Key("KeyType")
+		ok.String(string(v.KeyType))
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	return nil
@@ -8662,6 +8952,20 @@ func awsAwsjson11_serializeDocumentRiskExceptionConfigurationType(v *types.RiskE
 	if v.SkippedIPRangeList != nil {
 		ok := object.Key("SkippedIPRangeList")
 		if err := awsAwsjson11_serializeDocumentSkippedIPRangeListType(v.SkippedIPRangeList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRoutingType(v *types.RoutingType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Failover != nil {
+		ok := object.Key("Failover")
+		if err := awsAwsjson11_serializeDocumentFailoverType(v.Failover, ok); err != nil {
 			return err
 		}
 	}
@@ -10454,6 +10758,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolDomainInput(v *CreateUserPool
 		ok.Integer(*v.ManagedLoginVersion)
 	}
 
+	if v.Routing != nil {
+		ok := object.Key("Routing")
+		if err := awsAwsjson11_serializeDocumentRoutingType(v.Routing, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
@@ -10521,6 +10832,20 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolInput(v *CreateUserPoolInput,
 	if v.EmailVerificationSubject != nil {
 		ok := object.Key("EmailVerificationSubject")
 		ok.String(*v.EmailVerificationSubject)
+	}
+
+	if v.IssuerConfiguration != nil {
+		ok := object.Key("IssuerConfiguration")
+		if err := awsAwsjson11_serializeDocumentIssuerConfigurationType(v.IssuerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyConfiguration != nil {
+		ok := object.Key("KeyConfiguration")
+		if err := awsAwsjson11_serializeDocumentKeyConfigurationType(v.KeyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LambdaConfig != nil {
@@ -10614,6 +10939,30 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolInput(v *CreateUserPoolInput,
 	if v.VerificationMessageTemplate != nil {
 		ok := object.Key("VerificationMessageTemplate")
 		if err := awsAwsjson11_serializeDocumentVerificationMessageTemplateType(v.VerificationMessageTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateUserPoolReplicaInput(v *CreateUserPoolReplicaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegionName != nil {
+		ok := object.Key("RegionName")
+		ok.String(*v.RegionName)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	if v.UserPoolTags != nil {
+		ok := object.Key("UserPoolTags")
+		if err := awsAwsjson11_serializeDocumentUserPoolTagsType(v.UserPoolTags, ok); err != nil {
 			return err
 		}
 	}
@@ -10796,6 +11145,23 @@ func awsAwsjson11_serializeOpDocumentDeleteUserPoolDomainInput(v *DeleteUserPool
 func awsAwsjson11_serializeOpDocumentDeleteUserPoolInput(v *DeleteUserPoolInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteUserPoolReplicaInput(v *DeleteUserPoolReplicaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegionName != nil {
+		ok := object.Key("RegionName")
+		ok.String(*v.RegionName)
+	}
 
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
@@ -11486,6 +11852,23 @@ func awsAwsjson11_serializeOpDocumentListUserPoolClientsInput(v *ListUserPoolCli
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
 	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListUserPoolReplicasInput(v *ListUserPoolReplicasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
@@ -12468,6 +12851,13 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolDomainInput(v *UpdateUserPool
 		ok.Integer(*v.ManagedLoginVersion)
 	}
 
+	if v.Routing != nil {
+		ok := object.Key("Routing")
+		if err := awsAwsjson11_serializeDocumentRoutingType(v.Routing, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
@@ -12528,6 +12918,20 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 	if v.EmailVerificationSubject != nil {
 		ok := object.Key("EmailVerificationSubject")
 		ok.String(*v.EmailVerificationSubject)
+	}
+
+	if v.IssuerConfiguration != nil {
+		ok := object.Key("IssuerConfiguration")
+		if err := awsAwsjson11_serializeDocumentIssuerConfigurationType(v.IssuerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyConfiguration != nil {
+		ok := object.Key("KeyConfiguration")
+		if err := awsAwsjson11_serializeDocumentKeyConfigurationType(v.KeyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LambdaConfig != nil {
@@ -12607,6 +13011,28 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 		if err := awsAwsjson11_serializeDocumentVerificationMessageTemplateType(v.VerificationMessageTemplate, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateUserPoolReplicaInput(v *UpdateUserPoolReplicaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegionName != nil {
+		ok := object.Key("RegionName")
+		ok.String(*v.RegionName)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.UserPoolId != nil {
+		ok := object.Key("UserPoolId")
+		ok.String(*v.UserPoolId)
 	}
 
 	return nil

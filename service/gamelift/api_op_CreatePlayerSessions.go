@@ -52,7 +52,9 @@ func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerS
 
 type CreatePlayerSessionsInput struct {
 
-	// A unique identifier for the game session to add players to.
+	// An identifier for the game session that is unique across all regions to add
+	// players to. The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string

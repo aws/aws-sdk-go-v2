@@ -197,45 +197,46 @@ type AIRecommendationInstanceType string
 
 // Enum values for AIRecommendationInstanceType
 const (
-	AIRecommendationInstanceTypeMlG5Xlarge     AIRecommendationInstanceType = "ml.g5.xlarge"
-	AIRecommendationInstanceTypeMlG52xlarge    AIRecommendationInstanceType = "ml.g5.2xlarge"
-	AIRecommendationInstanceTypeMlG54xlarge    AIRecommendationInstanceType = "ml.g5.4xlarge"
-	AIRecommendationInstanceTypeMlG58xlarge    AIRecommendationInstanceType = "ml.g5.8xlarge"
-	AIRecommendationInstanceTypeMlG512xlarge   AIRecommendationInstanceType = "ml.g5.12xlarge"
-	AIRecommendationInstanceTypeMlG516xlarge   AIRecommendationInstanceType = "ml.g5.16xlarge"
-	AIRecommendationInstanceTypeMlG524xlarge   AIRecommendationInstanceType = "ml.g5.24xlarge"
-	AIRecommendationInstanceTypeMlG548xlarge   AIRecommendationInstanceType = "ml.g5.48xlarge"
-	AIRecommendationInstanceTypeMlG6Xlarge     AIRecommendationInstanceType = "ml.g6.xlarge"
-	AIRecommendationInstanceTypeMlG62xlarge    AIRecommendationInstanceType = "ml.g6.2xlarge"
-	AIRecommendationInstanceTypeMlG64xlarge    AIRecommendationInstanceType = "ml.g6.4xlarge"
-	AIRecommendationInstanceTypeMlG68xlarge    AIRecommendationInstanceType = "ml.g6.8xlarge"
-	AIRecommendationInstanceTypeMlG612xlarge   AIRecommendationInstanceType = "ml.g6.12xlarge"
-	AIRecommendationInstanceTypeMlG616xlarge   AIRecommendationInstanceType = "ml.g6.16xlarge"
-	AIRecommendationInstanceTypeMlG624xlarge   AIRecommendationInstanceType = "ml.g6.24xlarge"
-	AIRecommendationInstanceTypeMlG648xlarge   AIRecommendationInstanceType = "ml.g6.48xlarge"
-	AIRecommendationInstanceTypeMlG6eXlarge    AIRecommendationInstanceType = "ml.g6e.xlarge"
-	AIRecommendationInstanceTypeMlG6e2xlarge   AIRecommendationInstanceType = "ml.g6e.2xlarge"
-	AIRecommendationInstanceTypeMlG6e4xlarge   AIRecommendationInstanceType = "ml.g6e.4xlarge"
-	AIRecommendationInstanceTypeMlG6e8xlarge   AIRecommendationInstanceType = "ml.g6e.8xlarge"
-	AIRecommendationInstanceTypeMlG6e12xlarge  AIRecommendationInstanceType = "ml.g6e.12xlarge"
-	AIRecommendationInstanceTypeMlG6e16xlarge  AIRecommendationInstanceType = "ml.g6e.16xlarge"
-	AIRecommendationInstanceTypeMlG6e24xlarge  AIRecommendationInstanceType = "ml.g6e.24xlarge"
-	AIRecommendationInstanceTypeMlG6e48xlarge  AIRecommendationInstanceType = "ml.g6e.48xlarge"
-	AIRecommendationInstanceTypeMlG7e2xlarge   AIRecommendationInstanceType = "ml.g7e.2xlarge"
-	AIRecommendationInstanceTypeMlG7e4xlarge   AIRecommendationInstanceType = "ml.g7e.4xlarge"
-	AIRecommendationInstanceTypeMlG7e8xlarge   AIRecommendationInstanceType = "ml.g7e.8xlarge"
-	AIRecommendationInstanceTypeMlG7e12xlarge  AIRecommendationInstanceType = "ml.g7e.12xlarge"
-	AIRecommendationInstanceTypeMlG7e24xlarge  AIRecommendationInstanceType = "ml.g7e.24xlarge"
-	AIRecommendationInstanceTypeMlG7e48xlarge  AIRecommendationInstanceType = "ml.g7e.48xlarge"
-	AIRecommendationInstanceTypeMlP32xlarge    AIRecommendationInstanceType = "ml.p3.2xlarge"
-	AIRecommendationInstanceTypeMlP38xlarge    AIRecommendationInstanceType = "ml.p3.8xlarge"
-	AIRecommendationInstanceTypeMlP316xlarge   AIRecommendationInstanceType = "ml.p3.16xlarge"
-	AIRecommendationInstanceTypeMlP4d24xlarge  AIRecommendationInstanceType = "ml.p4d.24xlarge"
-	AIRecommendationInstanceTypeMlP4de24xlarge AIRecommendationInstanceType = "ml.p4de.24xlarge"
-	AIRecommendationInstanceTypeMlP54xlarge    AIRecommendationInstanceType = "ml.p5.4xlarge"
-	AIRecommendationInstanceTypeMlP548xlarge   AIRecommendationInstanceType = "ml.p5.48xlarge"
-	AIRecommendationInstanceTypeMlP5e48xlarge  AIRecommendationInstanceType = "ml.p5e.48xlarge"
-	AIRecommendationInstanceTypeMlP5en48xlarge AIRecommendationInstanceType = "ml.p5en.48xlarge"
+	AIRecommendationInstanceTypeMlG5Xlarge       AIRecommendationInstanceType = "ml.g5.xlarge"
+	AIRecommendationInstanceTypeMlG52xlarge      AIRecommendationInstanceType = "ml.g5.2xlarge"
+	AIRecommendationInstanceTypeMlG54xlarge      AIRecommendationInstanceType = "ml.g5.4xlarge"
+	AIRecommendationInstanceTypeMlG58xlarge      AIRecommendationInstanceType = "ml.g5.8xlarge"
+	AIRecommendationInstanceTypeMlG512xlarge     AIRecommendationInstanceType = "ml.g5.12xlarge"
+	AIRecommendationInstanceTypeMlG516xlarge     AIRecommendationInstanceType = "ml.g5.16xlarge"
+	AIRecommendationInstanceTypeMlG524xlarge     AIRecommendationInstanceType = "ml.g5.24xlarge"
+	AIRecommendationInstanceTypeMlG548xlarge     AIRecommendationInstanceType = "ml.g5.48xlarge"
+	AIRecommendationInstanceTypeMlG6Xlarge       AIRecommendationInstanceType = "ml.g6.xlarge"
+	AIRecommendationInstanceTypeMlG62xlarge      AIRecommendationInstanceType = "ml.g6.2xlarge"
+	AIRecommendationInstanceTypeMlG64xlarge      AIRecommendationInstanceType = "ml.g6.4xlarge"
+	AIRecommendationInstanceTypeMlG68xlarge      AIRecommendationInstanceType = "ml.g6.8xlarge"
+	AIRecommendationInstanceTypeMlG612xlarge     AIRecommendationInstanceType = "ml.g6.12xlarge"
+	AIRecommendationInstanceTypeMlG616xlarge     AIRecommendationInstanceType = "ml.g6.16xlarge"
+	AIRecommendationInstanceTypeMlG624xlarge     AIRecommendationInstanceType = "ml.g6.24xlarge"
+	AIRecommendationInstanceTypeMlG648xlarge     AIRecommendationInstanceType = "ml.g6.48xlarge"
+	AIRecommendationInstanceTypeMlG6eXlarge      AIRecommendationInstanceType = "ml.g6e.xlarge"
+	AIRecommendationInstanceTypeMlG6e2xlarge     AIRecommendationInstanceType = "ml.g6e.2xlarge"
+	AIRecommendationInstanceTypeMlG6e4xlarge     AIRecommendationInstanceType = "ml.g6e.4xlarge"
+	AIRecommendationInstanceTypeMlG6e8xlarge     AIRecommendationInstanceType = "ml.g6e.8xlarge"
+	AIRecommendationInstanceTypeMlG6e12xlarge    AIRecommendationInstanceType = "ml.g6e.12xlarge"
+	AIRecommendationInstanceTypeMlG6e16xlarge    AIRecommendationInstanceType = "ml.g6e.16xlarge"
+	AIRecommendationInstanceTypeMlG6e24xlarge    AIRecommendationInstanceType = "ml.g6e.24xlarge"
+	AIRecommendationInstanceTypeMlG6e48xlarge    AIRecommendationInstanceType = "ml.g6e.48xlarge"
+	AIRecommendationInstanceTypeMlG7e2xlarge     AIRecommendationInstanceType = "ml.g7e.2xlarge"
+	AIRecommendationInstanceTypeMlG7e4xlarge     AIRecommendationInstanceType = "ml.g7e.4xlarge"
+	AIRecommendationInstanceTypeMlG7e8xlarge     AIRecommendationInstanceType = "ml.g7e.8xlarge"
+	AIRecommendationInstanceTypeMlG7e12xlarge    AIRecommendationInstanceType = "ml.g7e.12xlarge"
+	AIRecommendationInstanceTypeMlG7e24xlarge    AIRecommendationInstanceType = "ml.g7e.24xlarge"
+	AIRecommendationInstanceTypeMlG7e48xlarge    AIRecommendationInstanceType = "ml.g7e.48xlarge"
+	AIRecommendationInstanceTypeMlP32xlarge      AIRecommendationInstanceType = "ml.p3.2xlarge"
+	AIRecommendationInstanceTypeMlP38xlarge      AIRecommendationInstanceType = "ml.p3.8xlarge"
+	AIRecommendationInstanceTypeMlP316xlarge     AIRecommendationInstanceType = "ml.p3.16xlarge"
+	AIRecommendationInstanceTypeMlP4d24xlarge    AIRecommendationInstanceType = "ml.p4d.24xlarge"
+	AIRecommendationInstanceTypeMlP4de24xlarge   AIRecommendationInstanceType = "ml.p4de.24xlarge"
+	AIRecommendationInstanceTypeMlP54xlarge      AIRecommendationInstanceType = "ml.p5.4xlarge"
+	AIRecommendationInstanceTypeMlP548xlarge     AIRecommendationInstanceType = "ml.p5.48xlarge"
+	AIRecommendationInstanceTypeMlP5e48xlarge    AIRecommendationInstanceType = "ml.p5e.48xlarge"
+	AIRecommendationInstanceTypeMlP5en48xlarge   AIRecommendationInstanceType = "ml.p5en.48xlarge"
+	AIRecommendationInstanceTypeMlP6B20048xlarge AIRecommendationInstanceType = "ml.p6-b200.48xlarge"
 )
 
 // Values returns all known values for AIRecommendationInstanceType. Note that
@@ -284,6 +285,7 @@ func (AIRecommendationInstanceType) Values() []AIRecommendationInstanceType {
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
+		"ml.p6-b200.48xlarge",
 	}
 }
 
@@ -585,6 +587,7 @@ const (
 	AppInstanceTypeMlR6id16xlarge          AppInstanceType = "ml.r6id.16xlarge"
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
+	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -756,6 +759,7 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.16xlarge",
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
+		"ml.p5.4xlarge",
 	}
 }
 
@@ -2071,6 +2075,27 @@ func (ClusterConfigMode) Values() []ClusterConfigMode {
 	}
 }
 
+type ClusterEventLevel string
+
+// Enum values for ClusterEventLevel
+const (
+	ClusterEventLevelInfo  ClusterEventLevel = "Info"
+	ClusterEventLevelWarn  ClusterEventLevel = "Warn"
+	ClusterEventLevelError ClusterEventLevel = "Error"
+)
+
+// Values returns all known values for ClusterEventLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterEventLevel) Values() []ClusterEventLevel {
+	return []ClusterEventLevel{
+		"Info",
+		"Warn",
+		"Error",
+	}
+}
+
 type ClusterEventResourceType string
 
 // Enum values for ClusterEventResourceType
@@ -2089,6 +2114,45 @@ func (ClusterEventResourceType) Values() []ClusterEventResourceType {
 		"Cluster",
 		"InstanceGroup",
 		"Instance",
+	}
+}
+
+type ClusterFSxLustreDeletionPolicy string
+
+// Enum values for ClusterFSxLustreDeletionPolicy
+const (
+	ClusterFSxLustreDeletionPolicyDeleteIfNotUsed ClusterFSxLustreDeletionPolicy = "DeleteIfNotUsed"
+	ClusterFSxLustreDeletionPolicyKeep            ClusterFSxLustreDeletionPolicy = "Keep"
+)
+
+// Values returns all known values for ClusterFSxLustreDeletionPolicy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterFSxLustreDeletionPolicy) Values() []ClusterFSxLustreDeletionPolicy {
+	return []ClusterFSxLustreDeletionPolicy{
+		"DeleteIfNotUsed",
+		"Keep",
+	}
+}
+
+type ClusterImageVersionStatus string
+
+// Enum values for ClusterImageVersionStatus
+const (
+	ClusterImageVersionStatusUpToDate        ClusterImageVersionStatus = "UpToDate"
+	ClusterImageVersionStatusUpdateAvailable ClusterImageVersionStatus = "UpdateAvailable"
+)
+
+// Values returns all known values for ClusterImageVersionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterImageVersionStatus) Values() []ClusterImageVersionStatus {
+	return []ClusterImageVersionStatus{
+		"UpToDate",
+		"UpdateAvailable",
 	}
 }
 
@@ -3206,6 +3270,26 @@ func (ExecutionRoleIdentityConfig) Values() []ExecutionRoleIdentityConfig {
 	}
 }
 
+type ExecutionRoleSessionNameMode string
+
+// Enum values for ExecutionRoleSessionNameMode
+const (
+	ExecutionRoleSessionNameModeStatic       ExecutionRoleSessionNameMode = "STATIC"
+	ExecutionRoleSessionNameModeUserIdentity ExecutionRoleSessionNameMode = "USER_IDENTITY"
+)
+
+// Values returns all known values for ExecutionRoleSessionNameMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRoleSessionNameMode) Values() []ExecutionRoleSessionNameMode {
+	return []ExecutionRoleSessionNameMode{
+		"STATIC",
+		"USER_IDENTITY",
+	}
+}
+
 type ExecutionStatus string
 
 // Enum values for ExecutionStatus
@@ -3521,6 +3605,25 @@ func (Framework) Values() []Framework {
 		"TFLITE",
 		"DARKNET",
 		"SKLEARN",
+	}
+}
+
+type HomeEfsFileSystemCreation string
+
+// Enum values for HomeEfsFileSystemCreation
+const (
+	HomeEfsFileSystemCreationEnabled  HomeEfsFileSystemCreation = "Enabled"
+	HomeEfsFileSystemCreationDisabled HomeEfsFileSystemCreation = "Disabled"
+)
+
+// Values returns all known values for HomeEfsFileSystemCreation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HomeEfsFileSystemCreation) Values() []HomeEfsFileSystemCreation {
+	return []HomeEfsFileSystemCreation{
+		"Enabled",
+		"Disabled",
 	}
 }
 
@@ -4001,6 +4104,25 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "AllData"
+	IncludedDataMetadataOnly IncludedData = "MetadataOnly"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"AllData",
+		"MetadataOnly",
+	}
+}
+
 type InferenceComponentCapacitySizeType string
 
 // Enum values for InferenceComponentCapacitySizeType
@@ -4399,6 +4521,8 @@ const (
 	InstanceTypeMlG616xlarge     InstanceType = "ml.g6.16xlarge"
 	InstanceTypeMlG624xlarge     InstanceType = "ml.g6.24xlarge"
 	InstanceTypeMlG648xlarge     InstanceType = "ml.g6.48xlarge"
+	InstanceTypeMlP54xlarge      InstanceType = "ml.p5.4xlarge"
+	InstanceTypeMlP5en48xlarge   InstanceType = "ml.p5en.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -4580,6 +4704,8 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.p5.4xlarge",
+		"ml.p5en.48xlarge",
 	}
 }
 
@@ -4618,6 +4744,99 @@ func (IsTrackingServerActive) Values() []IsTrackingServerActive {
 	return []IsTrackingServerActive{
 		"Active",
 		"Inactive",
+	}
+}
+
+type JobCategory string
+
+// Enum values for JobCategory
+const (
+	JobCategoryAgentRft           JobCategory = "AgentRFT"
+	JobCategoryAgentRftEvaluation JobCategory = "AgentRFTEvaluation"
+)
+
+// Values returns all known values for JobCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobCategory) Values() []JobCategory {
+	return []JobCategory{
+		"AgentRFT",
+		"AgentRFTEvaluation",
+	}
+}
+
+type JobSecondaryStatus string
+
+// Enum values for JobSecondaryStatus
+const (
+	JobSecondaryStatusStarting           JobSecondaryStatus = "Starting"
+	JobSecondaryStatusDownloading        JobSecondaryStatus = "Downloading"
+	JobSecondaryStatusTraining           JobSecondaryStatus = "Training"
+	JobSecondaryStatusUploading          JobSecondaryStatus = "Uploading"
+	JobSecondaryStatusStopping           JobSecondaryStatus = "Stopping"
+	JobSecondaryStatusStopped            JobSecondaryStatus = "Stopped"
+	JobSecondaryStatusMaxRuntimeExceeded JobSecondaryStatus = "MaxRuntimeExceeded"
+	JobSecondaryStatusInterrupted        JobSecondaryStatus = "Interrupted"
+	JobSecondaryStatusFailed             JobSecondaryStatus = "Failed"
+	JobSecondaryStatusCompleted          JobSecondaryStatus = "Completed"
+	JobSecondaryStatusRestarting         JobSecondaryStatus = "Restarting"
+	JobSecondaryStatusPending            JobSecondaryStatus = "Pending"
+	JobSecondaryStatusEvaluating         JobSecondaryStatus = "Evaluating"
+	JobSecondaryStatusDeleting           JobSecondaryStatus = "Deleting"
+	JobSecondaryStatusDeleteFailed       JobSecondaryStatus = "DeleteFailed"
+)
+
+// Values returns all known values for JobSecondaryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobSecondaryStatus) Values() []JobSecondaryStatus {
+	return []JobSecondaryStatus{
+		"Starting",
+		"Downloading",
+		"Training",
+		"Uploading",
+		"Stopping",
+		"Stopped",
+		"MaxRuntimeExceeded",
+		"Interrupted",
+		"Failed",
+		"Completed",
+		"Restarting",
+		"Pending",
+		"Evaluating",
+		"Deleting",
+		"DeleteFailed",
+	}
+}
+
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusInProgress   JobStatus = "InProgress"
+	JobStatusCompleted    JobStatus = "Completed"
+	JobStatusFailed       JobStatus = "Failed"
+	JobStatusStopping     JobStatus = "Stopping"
+	JobStatusStopped      JobStatus = "Stopped"
+	JobStatusDeleting     JobStatus = "Deleting"
+	JobStatusDeleteFailed JobStatus = "DeleteFailed"
+)
+
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+		"Deleting",
+		"DeleteFailed",
 	}
 }
 
@@ -5061,6 +5280,23 @@ func (ManagedInstanceScalingStatus) Values() []ManagedInstanceScalingStatus {
 	return []ManagedInstanceScalingStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ManagedStorageType string
+
+// Enum values for ManagedStorageType
+const (
+	ManagedStorageTypeRestricted ManagedStorageType = "Restricted"
+)
+
+// Values returns all known values for ManagedStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedStorageType) Values() []ManagedStorageType {
+	return []ManagedStorageType{
+		"Restricted",
 	}
 }
 
@@ -8031,6 +8267,7 @@ const (
 	ResourceTypeHyperParameterTuningJob  ResourceType = "HyperParameterTuningJob"
 	ResourceTypeModelCard                ResourceType = "ModelCard"
 	ResourceTypePipelineVersion          ResourceType = "PipelineVersion"
+	ResourceTypeJob                      ResourceType = "Job"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -8057,6 +8294,7 @@ func (ResourceType) Values() []ResourceType {
 		"HyperParameterTuningJob",
 		"ModelCard",
 		"PipelineVersion",
+		"Job",
 	}
 }
 
@@ -8268,6 +8506,7 @@ const (
 	SageMakerResourceNameTrainingJob     SageMakerResourceName = "training-job"
 	SageMakerResourceNameHyperpodCluster SageMakerResourceName = "hyperpod-cluster"
 	SageMakerResourceNameEndpoint        SageMakerResourceName = "endpoint"
+	SageMakerResourceNameStudioApps      SageMakerResourceName = "studio-apps"
 )
 
 // Values returns all known values for SageMakerResourceName. Note that this can
@@ -8279,6 +8518,7 @@ func (SageMakerResourceName) Values() []SageMakerResourceName {
 		"training-job",
 		"hyperpod-cluster",
 		"endpoint",
+		"studio-apps",
 	}
 }
 

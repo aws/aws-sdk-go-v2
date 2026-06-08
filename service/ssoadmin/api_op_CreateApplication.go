@@ -92,6 +92,15 @@ type CreateApplicationOutput struct {
 	// Specifies the ARN of the application.
 	ApplicationArn *string
 
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
+
+	// The ARN of the instance of IAM Identity Center under which the operation will
+	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
+	// Reference.
+	InstanceArn *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

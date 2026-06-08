@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches AgentStatuses in an Amazon Connect instance, with optional filtering.
+// Searches AgentStatuses in an Connect Customer instance, with optional filtering.
 func (c *Client) SearchAgentStatuses(ctx context.Context, params *SearchAgentStatusesInput, optFns ...func(*Options)) (*SearchAgentStatusesOutput, error) {
 	if params == nil {
 		params = &SearchAgentStatusesInput{}
@@ -29,7 +29,7 @@ func (c *Client) SearchAgentStatuses(ctx context.Context, params *SearchAgentSta
 
 type SearchAgentStatusesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
 	// This member is required.

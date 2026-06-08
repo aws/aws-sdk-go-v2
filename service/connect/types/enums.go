@@ -275,6 +275,29 @@ func (AttachedFileServiceQuotaExceededExceptionReason) Values() []AttachedFileSe
 	}
 }
 
+type AttachmentScope string
+
+// Enum values for AttachmentScope
+const (
+	AttachmentScopeEmail AttachmentScope = "EMAIL"
+	AttachmentScopeChat  AttachmentScope = "CHAT"
+	AttachmentScopeCase  AttachmentScope = "CASE"
+	AttachmentScopeTask  AttachmentScope = "TASK"
+)
+
+// Values returns all known values for AttachmentScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentScope) Values() []AttachmentScope {
+	return []AttachmentScope{
+		"EMAIL",
+		"CHAT",
+		"CASE",
+		"TASK",
+	}
+}
+
 type AutoEvaluationStatus string
 
 // Enum values for AutoEvaluationStatus
@@ -1439,19 +1462,23 @@ type EventSourceName string
 
 // Enum values for EventSourceName
 const (
-	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
-	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
-	EventSourceNameOnRealTimeChatAnalysisAvailable EventSourceName = "OnRealTimeChatAnalysisAvailable"
-	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
-	EventSourceNameOnEmailAnalysisAvailable        EventSourceName = "OnEmailAnalysisAvailable"
-	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
-	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
-	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
-	EventSourceNameOnContactEvaluationSubmit       EventSourceName = "OnContactEvaluationSubmit"
-	EventSourceNameOnMetricDataUpdate              EventSourceName = "OnMetricDataUpdate"
-	EventSourceNameOnCaseCreate                    EventSourceName = "OnCaseCreate"
-	EventSourceNameOnCaseUpdate                    EventSourceName = "OnCaseUpdate"
-	EventSourceNameOnSlaBreach                     EventSourceName = "OnSlaBreach"
+	EventSourceNameOnPostCallAnalysisAvailable      EventSourceName = "OnPostCallAnalysisAvailable"
+	EventSourceNameOnRealTimeCallAnalysisAvailable  EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnRealTimeChatAnalysisAvailable  EventSourceName = "OnRealTimeChatAnalysisAvailable"
+	EventSourceNameOnPostChatAnalysisAvailable      EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnEmailAnalysisAvailable         EventSourceName = "OnEmailAnalysisAvailable"
+	EventSourceNameOnZendeskTicketCreate            EventSourceName = "OnZendeskTicketCreate"
+	EventSourceNameOnZendeskTicketStatusUpdate      EventSourceName = "OnZendeskTicketStatusUpdate"
+	EventSourceNameOnSalesforceCaseCreate           EventSourceName = "OnSalesforceCaseCreate"
+	EventSourceNameOnContactEvaluationSubmit        EventSourceName = "OnContactEvaluationSubmit"
+	EventSourceNameOnMetricDataUpdate               EventSourceName = "OnMetricDataUpdate"
+	EventSourceNameOnCaseCreate                     EventSourceName = "OnCaseCreate"
+	EventSourceNameOnCaseUpdate                     EventSourceName = "OnCaseUpdate"
+	EventSourceNameOnSlaBreach                      EventSourceName = "OnSlaBreach"
+	EventSourceNameOnAlertUpdate                    EventSourceName = "OnAlertUpdate"
+	EventSourceNameOnSchedulePublish                EventSourceName = "OnSchedulePublish"
+	EventSourceNameOnScheduleUpdate                 EventSourceName = "OnScheduleUpdate"
+	EventSourceNameOnScheduleTimeOffRequestActivity EventSourceName = "OnScheduleTimeOffRequestActivity"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -1473,6 +1500,10 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnCaseCreate",
 		"OnCaseUpdate",
 		"OnSlaBreach",
+		"OnAlertUpdate",
+		"OnSchedulePublish",
+		"OnScheduleUpdate",
+		"OnScheduleTimeOffRequestActivity",
 	}
 }
 

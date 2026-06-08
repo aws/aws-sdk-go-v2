@@ -170,6 +170,26 @@ func (m *validateOpCreateArchiveRule) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateServiceLinkedAnalyzer struct {
+}
+
+func (*validateOpCreateServiceLinkedAnalyzer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateServiceLinkedAnalyzer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateServiceLinkedAnalyzerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateServiceLinkedAnalyzerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAnalyzer struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpDeleteArchiveRule) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteArchiveRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteServiceLinkedAnalyzer struct {
+}
+
+func (*validateOpDeleteServiceLinkedAnalyzer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteServiceLinkedAnalyzer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteServiceLinkedAnalyzerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteServiceLinkedAnalyzerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -742,12 +782,20 @@ func addOpCreateArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateArchiveRule{}, middleware.After)
 }
 
+func addOpCreateServiceLinkedAnalyzerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateServiceLinkedAnalyzer{}, middleware.After)
+}
+
 func addOpDeleteAnalyzerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalyzer{}, middleware.After)
 }
 
 func addOpDeleteArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteArchiveRule{}, middleware.After)
+}
+
+func addOpDeleteServiceLinkedAnalyzerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteServiceLinkedAnalyzer{}, middleware.After)
 }
 
 func addOpGenerateFindingRecommendationValidationMiddleware(stack *middleware.Stack) error {
@@ -1423,6 +1471,26 @@ func validateOpCreateArchiveRuleInput(v *CreateArchiveRuleInput) error {
 	}
 }
 
+func validateOpCreateServiceLinkedAnalyzerInput(v *CreateServiceLinkedAnalyzerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceLinkedAnalyzerInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ArchiveRules != nil {
+		if err := validateInlineArchiveRulesList(v.ArchiveRules); err != nil {
+			invalidParams.AddNested("ArchiveRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnalyzerInput(v *DeleteAnalyzerInput) error {
 	if v == nil {
 		return nil
@@ -1448,6 +1516,21 @@ func validateOpDeleteArchiveRuleInput(v *DeleteArchiveRuleInput) error {
 	}
 	if v.RuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteServiceLinkedAnalyzerInput(v *DeleteServiceLinkedAnalyzerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceLinkedAnalyzerInput"}
+	if v.AnalyzerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1095,6 +1095,28 @@
                 "smithy.api#documentation": "Audio Dolby EDecode"
             }
         },
+        "com.amazonaws.medialive#AudioFeedInput": {
+            "type": "structure",
+            "members": {
+                "AudioSelectorName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the audio selector in the channel that will be sent to the Elemental Inference feed input.",
+                        "smithy.api#jsonName": "audioSelectorName"
+                    }
+                },
+                "FeedInput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the feed input on the Elemental Inference feed that will receive the audio from the specified audio selector.",
+                        "smithy.api#jsonName": "feedInput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Maps an audio selector in the channel to a feed input on the associated Elemental Inference feed."
+            }
+        },
         "com.amazonaws.medialive#AudioHlsRenditionSelection": {
             "type": "structure",
             "members": {
@@ -3574,10 +3596,36 @@
                     "traits": {
                         "smithy.api#jsonName": "teletextSourceSettings"
                     }
+                },
+                "SmartSubtitleSourceSettings": {
+                    "target": "com.amazonaws.medialive#SmartSubtitleSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "smartSubtitleSourceSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Caption Selector Settings"
+            }
+        },
+        "com.amazonaws.medialive#CaptionSynchronizationMode": {
+            "type": "enum",
+            "members": {
+                "NO_VIDEO_DELAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_VIDEO_DELAY"
+                    }
+                },
+                "VIDEO_ALIGNED_CAPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ALIGNED_CAPTIONS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Controls how MediaLive synchronizes Elemental Inference generated subtitles with video output.\n\nvideo_aligned_captions - MediaLive delays video to ensure captions are synchronized with\n     audio and video.\nno_video_delay - MediaLive does not delay video for caption alignment. Captions output\n     timing is adjusted to align with video as captions become available."
             }
         },
         "com.amazonaws.medialive#CdiInputResolution": {
@@ -10886,6 +10934,13 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
+                    }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
                     }
                 }
             },
@@ -20010,6 +20065,13 @@
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
                     }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
+                    }
                 }
             },
             "traits": {
@@ -26059,6 +26121,21 @@
                 "smithy.api#documentation": "Media Connect Router Group Settings"
             }
         },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnection": {
+            "type": "structure",
+            "members": {
+                "RouterInputArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect Router Input connected to this pipeline.",
+                        "smithy.api#jsonName": "routerInputArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Connection details for a single pipeline of a MediaConnect Router output."
+            }
+        },
         "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap": {
             "type": "structure",
             "members": {
@@ -26079,6 +26156,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to which this Output is connected."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnections": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.medialive#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnection"
+            },
+            "traits": {
+                "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline."
             }
         },
         "com.amazonaws.medialive#MediaConnectRouterOutputDestinationSettings": {
@@ -26129,7 +26218,7 @@
                 "ConnectedRouterInputs": {
                     "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap",
                     "traits": {
-                        "smithy.api#documentation": "Shows the MediaConnect Router Inputs that are connected to this output. This parameter is purely informative, and editing it will have no effect. To connect or disconnect MediaConnect Router Inputs, go to MediaConnect.",
+                        "smithy.api#documentation": "This parameter is deprecated and unused.",
                         "smithy.api#jsonName": "connectedRouterInputs"
                     }
                 },
@@ -26546,6 +26635,194 @@
                 ],
                 "smithy.api#documentation": "API for AWS Elemental MediaLive",
                 "smithy.api#title": "AWS Elemental MediaLive",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -30409,6 +30686,13 @@
                         "smithy.api#documentation": "Current engine version of the encoder for this pipeline.",
                         "smithy.api#jsonName": "channelEngineVersion"
                     }
+                },
+                "MediaConnectRouterOutputConnectionMap": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnections",
+                    "traits": {
+                        "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline. Only present for channels with MediaConnect Router outputs.",
+                        "smithy.api#jsonName": "mediaConnectRouterOutputConnectionMap"
+                    }
                 }
             },
             "traits": {
@@ -33346,6 +33630,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for SignalMapSummary"
+            }
+        },
+        "com.amazonaws.medialive#SmartSubtitleSourceSettings": {
+            "type": "structure",
+            "members": {
+                "CaptionSynchronizationMode": {
+                    "target": "com.amazonaws.medialive#CaptionSynchronizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "Controls whether MediaLive delays video to synchronize captions with audio and video output.",
+                        "smithy.api#jsonName": "captionSynchronizationMode"
+                    }
+                },
+                "InferenceFeedOutput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Elemental Inference feed output that supplies subtitle input into this caption selector.",
+                        "smithy.api#jsonName": "inferenceFeedOutput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Smart Subtitle Source Settings"
             }
         },
         "com.amazonaws.medialive#SmoothGroupAudioOnlyTimecodeControl": {
@@ -40279,6 +40585,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfAudioDescription"
+            }
+        },
+        "com.amazonaws.medialive#__listOfAudioFeedInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AudioFeedInput"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAudioFeedInput"
             }
         },
         "com.amazonaws.medialive#__listOfAudioSelector": {

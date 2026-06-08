@@ -24,6 +24,8 @@ import (
 //   - l4 : Uses G6 and Gr6 instance families
 //
 //   - l40s : Uses G6e instance family
+//
+//   - rtx-pro-server-6000 : Uses G7e instance family
 type AcceleratorCapabilities struct {
 
 	// A list of accelerator capabilities requested for this fleet. Only Amazon
@@ -84,6 +86,8 @@ type AcceleratorSelection struct {
 	//
 	//   - l40s - NVIDIA L40S Tensor Core GPU (48 GiB memory)
 	//
+	//   - rtx-pro-server-6000 - NVIDIA RTX PRO Server 6000 GPU (96 GiB memory)
+	//
 	// This member is required.
 	Name AcceleratorName
 
@@ -96,6 +100,8 @@ type AcceleratorSelection struct {
 	//   latest and a new version of the runtime is released, the new version of the
 	//   runtime is used.
 	//
+	//   - grid:r580 - [NVIDIA vGPU software 19]
+	//
 	//   - grid:r570 - [NVIDIA vGPU software 18]
 	//
 	//   - grid:r535 - [NVIDIA vGPU software 16]
@@ -107,16 +113,19 @@ type AcceleratorSelection struct {
 	//
 	// Not all runtimes are compatible with all accelerator types:
 	//
-	//   - t4 and a10g : Support all runtimes ( grid:r570 , grid:r535 )
+	//   - t4 and a10g : Support all runtimes ( grid:r580 , grid:r570 , grid:r535 )
 	//
 	//   - l4 and l40s : Only support grid:r570 and newer
+	//
+	//   - rtx-pro-server-6000 : Only supports grid:r580
 	//
 	// All accelerators in a fleet must use the same runtime version. You cannot mix
 	// different runtime versions within a single fleet.
 	//
-	// When you specify latest , it resolves to grid:r570 for all currently supported
+	// When you specify latest , it resolves to grid:r580 for all currently supported
 	// accelerators.
 	//
+	// [NVIDIA vGPU software 19]: https://docs.nvidia.com/vgpu/19.0/index.html
 	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
 	// [NVIDIA vGPU software 18]: https://docs.nvidia.com/vgpu/18.0/index.html
 	Runtime *string
@@ -1448,7 +1457,7 @@ type ConsumedUsages struct {
 type CustomerManagedAutoScalingConfiguration struct {
 
 	// The number of workers that can be added per minute to the fleet. The default is
-	// a service-defined value that balances efficiency with cost.
+	// 10 workers per minute.
 	ScaleOutWorkersPerMinute *int32
 
 	// The number of idle workers maintained and ready to process incoming tasks. The
@@ -2902,7 +2911,7 @@ type MonitorSummary struct {
 	// This member is required.
 	Url *string
 
-	// The AWS region where IAM Identity Center is enabled.
+	// The Region where IAM Identity Center is enabled.
 	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the date and time that the monitor was last updated.
@@ -2982,6 +2991,32 @@ type PathMappingRule struct {
 	//
 	// This member is required.
 	SourcePathFormat PathFormat
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the persistent EBS volume configuration for workers in a service
+// managed fleet.
+type PersistentVolumeConfiguration struct {
+
+	// The file system path where the persistent volume is mounted on the worker
+	// instance.
+	//
+	// This member is required.
+	MountPath *string
+
+	// The IOPS per persistent volume. The default is 3000.
+	Iops *int32
+
+	// The number of hours a persistent volume can remain unused before it is deleted.
+	// The default is 168 (7 days).
+	LastUsedTtlHours *int32
+
+	// The persistent volume size in GiB. The default is 250.
+	SizeGiB *int32
+
+	// The throughput per persistent volume in MiB. The default is 125.
+	ThroughputMiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -3511,7 +3546,7 @@ type SearchTermFilterExpression struct {
 type ServiceManagedEc2AutoScalingConfiguration struct {
 
 	// The number of workers that can be added per minute to the fleet. The default is
-	// a service-defined value that balances efficiency with cost.
+	// 10 workers per minute.
 	ScaleOutWorkersPerMinute *int32
 
 	// The number of idle workers maintained and ready to process incoming tasks. The
@@ -3540,6 +3575,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 
 	// The auto scaling configuration settings for the service managed EC2 fleet.
 	AutoScalingConfiguration *ServiceManagedEc2AutoScalingConfiguration
+
+	// The persistent volume configuration for the service managed EC2 fleet.
+	PersistentVolumeConfiguration *PersistentVolumeConfiguration
 
 	// The storage profile ID for the service managed EC2 fleet.
 	StorageProfileId *string
@@ -4633,6 +4671,45 @@ type VCpuCountRange struct {
 
 	// The maximum amount of vCPU.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a persistent volume.
+type VolumeSummary struct {
+
+	// The Availability Zone ID of the volume.
+	//
+	// This member is required.
+	AvailabilityZoneId *string
+
+	// The farm ID of the farm that contains the fleet.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the fleet that contains the volume.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The volume size in GiB.
+	//
+	// This member is required.
+	SizeGiB *int32
+
+	// The state of the volume.
+	//
+	// This member is required.
+	State VolumeState
+
+	// The volume ID.
+	//
+	// This member is required.
+	VolumeId *string
+
+	// The worker ID of the worker the volume is attached to.
+	AttachedWorkerId *string
 
 	noSmithyDocumentSerde
 }

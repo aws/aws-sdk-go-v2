@@ -1550,6 +1550,26 @@ func (m *validateOpPutSuppressedDestination) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTenantSuppressionAttributes struct {
+}
+
+func (*validateOpPutTenantSuppressionAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTenantSuppressionAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTenantSuppressionAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTenantSuppressionAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendBulkEmail struct {
 }
 
@@ -2136,6 +2156,10 @@ func addOpPutEmailIdentityMailFromAttributesValidationMiddleware(stack *middlewa
 
 func addOpPutSuppressedDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutSuppressedDestination{}, middleware.After)
+}
+
+func addOpPutTenantSuppressionAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTenantSuppressionAttributes{}, middleware.After)
 }
 
 func addOpSendBulkEmailValidationMiddleware(stack *middleware.Stack) error {
@@ -4473,6 +4497,21 @@ func validateOpPutSuppressedDestinationInput(v *PutSuppressedDestinationInput) e
 	}
 	if len(v.Reason) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTenantSuppressionAttributesInput(v *PutTenantSuppressionAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTenantSuppressionAttributesInput"}
+	if v.TenantName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

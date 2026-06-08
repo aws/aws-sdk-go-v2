@@ -48,6 +48,9 @@ type StartProtectedQueryInput struct {
 	//  The compute configuration for the protected query.
 	ComputeConfiguration types.ComputeConfiguration
 
+	// The account ID of the member that pays for the query compute costs.
+	QueryComputePayerAccountId *string
+
 	// The details needed to write the query results.
 	ResultConfiguration *types.ProtectedQueryResultConfiguration
 

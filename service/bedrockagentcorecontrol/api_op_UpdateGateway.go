@@ -46,11 +46,6 @@ type UpdateGatewayInput struct {
 	// This member is required.
 	Name *string
 
-	// The updated protocol type for the gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
-
 	// The updated IAM role ARN that provides permissions for the gateway.
 	//
 	// This member is required.
@@ -87,6 +82,9 @@ type UpdateGatewayInput struct {
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
 
+	// The updated protocol type for the gateway.
+	ProtocolType types.GatewayProtocolType
+
 	noSmithyDocumentSerde
 }
 
@@ -116,11 +114,6 @@ type UpdateGatewayOutput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The updated protocol type for the gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
 
 	// The current status of the updated gateway.
 	//
@@ -162,6 +155,9 @@ type UpdateGatewayOutput struct {
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
+
+	// The updated protocol type for the gateway.
+	ProtocolType types.GatewayProtocolType
 
 	// The updated IAM role ARN that provides permissions for the gateway.
 	RoleArn *string

@@ -13849,6 +13849,19 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseAnalysisConfiguration(v
 				return err
 			}
 
+		case "SavingsPlansTargetCoverage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SavingsPlansTargetCoverage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SavingsPlansTargetCoverage = ptr.Int32(int32(i64))
+			}
+
 		case "SavingsPlansToAdd":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansToAdd(&sv.SavingsPlansToAdd, value); err != nil {
 				return err

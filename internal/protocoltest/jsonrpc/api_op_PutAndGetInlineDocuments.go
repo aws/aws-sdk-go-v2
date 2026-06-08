@@ -7,6 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/internal/document"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +37,32 @@ type PutAndGetInlineDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAndGetInlineDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAndGetInlineDocumentsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAndGetInlineDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+}
+func (v *PutAndGetInlineDocumentsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAndGetInlineDocumentsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.InlineDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 type PutAndGetInlineDocumentsOutput struct {
 	InlineDocument document.Interface
 
@@ -42,16 +72,39 @@ type PutAndGetInlineDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAndGetInlineDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAndGetInlineDocumentsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAndGetInlineDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &smithydocument.Opaque{Value: v.InlineDocument})
+}
+func (v *PutAndGetInlineDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAndGetInlineDocumentsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.PutAndGetInlineDocumentsInputOutput_inlineDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.InlineDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAndGetInlineDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAndGetInlineDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAndGetInlineDocuments, schemas.PutAndGetInlineDocumentsInputOutput, schemas.PutAndGetInlineDocumentsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAndGetInlineDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAndGetInlineDocuments, schemas.PutAndGetInlineDocumentsInputOutput, schemas.PutAndGetInlineDocumentsInputOutput), output: &PutAndGetInlineDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAndGetInlineDocuments"); err != nil {

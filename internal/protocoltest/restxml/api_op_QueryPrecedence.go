@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,31 @@ type QueryPrecedenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryPrecedenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryPrecedenceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryPrecedenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.QueryPrecedenceInput_baz, v.Baz)
+	if v.Foo != nil {
+		s.WriteString(schemas.QueryPrecedenceInput_foo, *v.Foo)
+	}
+}
+func (v *QueryPrecedenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryPrecedenceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryPrecedenceInput_baz:
+			return deserializeStringMap(d, schemas.QueryPrecedenceInput_baz, &v.Baz)
+		case schemas.QueryPrecedenceInput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.QueryPrecedenceInput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type QueryPrecedenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +67,29 @@ type QueryPrecedenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryPrecedenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryPrecedenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryPrecedenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpQueryPrecedence{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryPrecedence, schemas.QueryPrecedenceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpQueryPrecedence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryPrecedence, schemas.QueryPrecedenceInput, nil), output: &QueryPrecedenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryPrecedence"); err != nil {

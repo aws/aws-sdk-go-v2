@@ -16,8 +16,8 @@ import (
 // Marketplace agreements using flexible grouping. Supports invoice-level
 // aggregation with filtering by billing period, invoice type, and issued date.
 //
-// The groupBy parameter is required and currently supports only INVOICE_ID as a
-// value. The agreementId parameter is required.
+// The groupBy parameter is required and supports only INVOICE_ID as a value. The
+// agreementId parameter is required.
 func (c *Client) ListAgreementInvoiceLineItems(ctx context.Context, params *ListAgreementInvoiceLineItemsInput, optFns ...func(*Options)) (*ListAgreementInvoiceLineItemsOutput, error) {
 	if params == nil {
 		params = &ListAgreementInvoiceLineItemsInput{}
@@ -75,8 +75,7 @@ type ListAgreementInvoiceLineItemsOutput struct {
 	// A list of grouped billing data objects.
 	AgreementInvoiceLineItemGroupSummaries []types.AgreementInvoiceLineItemGroupSummary
 
-	// A token to retrieve the next page of results. If not present, there are no more
-	// results available.
+	// The token used for pagination. The field is null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

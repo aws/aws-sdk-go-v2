@@ -1818,6 +1818,83 @@ func validateAccessEndpointList(v []types.AccessEndpoint) error {
 	}
 }
 
+func validateAgentAccessConfig(v *types.AgentAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessConfig"}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ScreenResolution) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenResolution"))
+	}
+	if len(v.ScreenImageFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenImageFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessConfigForUpdate(v *types.AgentAccessConfigForUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessConfigForUpdate"}
+	if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessSetting(v *types.AgentAccessSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessSetting"}
+	if len(v.AgentAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAction"))
+	}
+	if len(v.Permission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessSettingList(v []types.AgentAccessSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessSettingList"}
+	for i := range v {
+		if err := validateAgentAccessSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppCatalogConfig(v []types.ApplicationConfig) error {
 	if v == nil {
 		return nil
@@ -2536,12 +2613,6 @@ func validateOpCreateImportedImageInput(v *CreateImportedImageInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.SourceAmiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceAmiId"))
-	}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if v.AppCatalogConfig != nil {
 		if err := validateAppCatalogConfig(v.AppCatalogConfig); err != nil {
 			invalidParams.AddNested("AppCatalogConfig", err.(smithy.InvalidParamsError))
@@ -2585,6 +2656,11 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 	if v.ContentRedirection != nil {
 		if err := validateContentRedirection(v.ContentRedirection); err != nil {
 			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateAgentAccessConfig(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3515,6 +3591,11 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 	if v.ContentRedirection != nil {
 		if err := validateContentRedirection(v.ContentRedirection); err != nil {
 			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateAgentAccessConfigForUpdate(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

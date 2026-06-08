@@ -131,6 +131,10 @@ type GetTrainedModelInferenceJobOutput struct {
 	// Details about the metrics status for the trained model inference job.
 	MetricsStatusDetails *string
 
+	// The account ID of the member that is responsible for paying for model inference
+	// costs.
+	MlModelInferencePayerAccountId *string
+
 	// Details about the status of a resource.
 	StatusDetails *types.StatusDetails
 

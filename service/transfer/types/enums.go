@@ -812,6 +812,26 @@ func (WebAppEndpointType) Values() []WebAppEndpointType {
 	}
 }
 
+type WebAppVpcEndpointIpAddressType string
+
+// Enum values for WebAppVpcEndpointIpAddressType
+const (
+	WebAppVpcEndpointIpAddressTypeIpv4      WebAppVpcEndpointIpAddressType = "IPV4"
+	WebAppVpcEndpointIpAddressTypeDualstack WebAppVpcEndpointIpAddressType = "DUALSTACK"
+)
+
+// Values returns all known values for WebAppVpcEndpointIpAddressType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebAppVpcEndpointIpAddressType) Values() []WebAppVpcEndpointIpAddressType {
+	return []WebAppVpcEndpointIpAddressType{
+		"IPV4",
+		"DUALSTACK",
+	}
+}
+
 type WorkflowStepType string
 
 // Enum values for WorkflowStepType

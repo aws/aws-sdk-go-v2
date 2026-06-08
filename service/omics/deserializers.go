@@ -19,7 +19,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -603,7 +602,7 @@ func (m *awsRestjson1_deserializeOpCancelRun) HandleDeserialize(ctx context.Cont
 	output := &CancelRunOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4104,7 +4103,7 @@ func (m *awsRestjson1_deserializeOpDeleteBatch) HandleDeserialize(ctx context.Co
 	output := &DeleteBatchOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4219,7 +4218,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfiguration) HandleDeserialize(ctx co
 	output := &DeleteConfigurationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4546,7 +4545,7 @@ func (m *awsRestjson1_deserializeOpDeleteRun) HandleDeserialize(ctx context.Cont
 	output := &DeleteRunOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4770,7 +4769,7 @@ func (m *awsRestjson1_deserializeOpDeleteRunCache) HandleDeserialize(ctx context
 	output := &DeleteRunCacheOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4885,7 +4884,7 @@ func (m *awsRestjson1_deserializeOpDeleteRunGroup) HandleDeserialize(ctx context
 	output := &DeleteRunGroupOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5557,7 +5556,7 @@ func (m *awsRestjson1_deserializeOpDeleteWorkflow) HandleDeserialize(ctx context
 	output := &DeleteWorkflowOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5672,7 +5671,7 @@ func (m *awsRestjson1_deserializeOpDeleteWorkflowVersion) HandleDeserialize(ctx 
 	output := &DeleteWorkflowVersionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9367,6 +9366,11 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.Digest = ptr.String(jtv)
 			}
 
+		case "engineSettings":
+			if err := awsRestjson1_deserializeDocumentEngineSettings(&sv.EngineSettings, value); err != nil {
+				return err
+			}
+
 		case "engineVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11970,6 +11974,16 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				return err
 			}
 
+		case "profileParameterTemplates":
+			if err := awsRestjson1_deserializeDocumentWorkflowProfileParameterTemplates(&sv.ProfileParameterTemplates, value); err != nil {
+				return err
+			}
+
+		case "profiles":
+			if err := awsRestjson1_deserializeDocumentWorkflowProfileList(&sv.Profiles, value); err != nil {
+				return err
+			}
+
 		case "readme":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12312,6 +12326,16 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowVersionOutput(v **GetWorkflowV
 
 		case "parameterTemplate":
 			if err := awsRestjson1_deserializeDocumentWorkflowParameterTemplate(&sv.ParameterTemplate, value); err != nil {
+				return err
+			}
+
+		case "profileParameterTemplates":
+			if err := awsRestjson1_deserializeDocumentWorkflowProfileParameterTemplates(&sv.ProfileParameterTemplates, value); err != nil {
+				return err
+			}
+
+		case "profiles":
+			if err := awsRestjson1_deserializeDocumentWorkflowProfileList(&sv.Profiles, value); err != nil {
 				return err
 			}
 
@@ -19593,7 +19617,7 @@ func (m *awsRestjson1_deserializeOpUpdateRunCache) HandleDeserialize(ctx context
 	output := &UpdateRunCacheOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -19708,7 +19732,7 @@ func (m *awsRestjson1_deserializeOpUpdateRunGroup) HandleDeserialize(ctx context
 	output := &UpdateRunGroupOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -20327,7 +20351,7 @@ func (m *awsRestjson1_deserializeOpUpdateWorkflow) HandleDeserialize(ctx context
 	output := &UpdateWorkflowOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -20442,7 +20466,7 @@ func (m *awsRestjson1_deserializeOpUpdateWorkflowVersion) HandleDeserialize(ctx 
 	output := &UpdateWorkflowVersionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -22369,6 +22393,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 				sv.CacheId = ptr.String(jtv)
 			}
 
+		case "configurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationName = ptr.String(jtv)
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22385,6 +22418,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 					return fmt.Errorf("expected RunName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkingMode to be of type string, got %T instead", value)
+				}
+				sv.NetworkingMode = types.NetworkingMode(jtv)
 			}
 
 		case "outputBucketOwnerId":
@@ -22591,6 +22633,14 @@ func awsRestjson1_deserializeDocumentDefinitionRepositoryDetails(v **types.Defin
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEngineSettings(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }
 
@@ -28365,6 +28415,76 @@ func awsRestjson1_deserializeDocumentWorkflowParameterTemplate(v *map[string]typ
 			return err
 		}
 		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkflowProfileList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected WorkflowProfileName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkflowProfileParameterTemplates(v *map[string]map[string]types.WorkflowParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]map[string]types.WorkflowParameter
+	if *v == nil {
+		mv = map[string]map[string]types.WorkflowParameter{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal map[string]types.WorkflowParameter
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentWorkflowParameterTemplate(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
 		mv[key] = parsedVal
 
 	}

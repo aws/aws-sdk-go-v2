@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,33 @@ type HttpPayloadTraitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type HttpPayloadTraitsOutput struct {
 	Blob []byte
 
@@ -48,16 +77,40 @@ type HttpPayloadTraitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadTraits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraits, schemas.HttpPayloadTraitsInputOutput, schemas.HttpPayloadTraitsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadTraits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraits, schemas.HttpPayloadTraitsInputOutput, schemas.HttpPayloadTraitsInputOutput), output: &HttpPayloadTraitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadTraits"); err != nil {

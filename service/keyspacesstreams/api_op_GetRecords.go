@@ -58,6 +58,10 @@ type GetRecordsOutput struct {
 	// information about what data was modified.
 	ChangeRecords []types.Record
 
+	//  Provides information about the current iterator at the time GetRecords request
+	// was processed by Keyspaces.
+	IteratorDescription *types.IteratorDescription
+
 	//  The next position in the shard from which to start sequentially reading data
 	// records. If null, the shard has been closed and the requested iterator will not
 	// return any more data.

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an agent space record
+// Deletes an agent space and all of its associated resources, including pentests,
+// findings, and artifacts.
 func (c *Client) DeleteAgentSpace(ctx context.Context, params *DeleteAgentSpaceInput, optFns ...func(*Options)) (*DeleteAgentSpaceOutput, error) {
 	if params == nil {
 		params = &DeleteAgentSpaceInput{}
@@ -26,10 +27,10 @@ func (c *Client) DeleteAgentSpace(ctx context.Context, params *DeleteAgentSpaceI
 	return out, nil
 }
 
-// Input for deleting an agent space
+// Input for deleting an agent space.
 type DeleteAgentSpaceInput struct {
 
-	// Unique identifier of the agent space to delete
+	// The unique identifier of the agent space to delete.
 	//
 	// This member is required.
 	AgentSpaceId *string
@@ -37,10 +38,10 @@ type DeleteAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Output for the DeleteAgentSpace operation
+// Output for the DeleteAgentSpace operation.
 type DeleteAgentSpaceOutput struct {
 
-	// Unique identifier of the deleted agent space
+	// The unique identifier of the deleted agent space.
 	AgentSpaceId *string
 
 	// Metadata pertaining to the operation's result.

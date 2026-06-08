@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,16 @@ type XmlEmptyMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyMapsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlMapsInputOutputMap(s, schemas.XmlEmptyMapsRequest_myMap, v.MyMap)
+}
+
 type XmlEmptyMapsOutput struct {
 	MyMap map[string]types.GreetingStruct
 
@@ -41,16 +53,23 @@ type XmlEmptyMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlEmptyMapsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlEmptyMapsResponse_myMap:
+			return deserializeXmlMapsInputOutputMap(d, schemas.XmlEmptyMapsResponse_myMap, &v.MyMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlEmptyMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEmptyMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyMaps, schemas.XmlEmptyMapsRequest, schemas.XmlEmptyMapsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlEmptyMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEmptyMaps, schemas.XmlEmptyMapsRequest, schemas.XmlEmptyMapsResponse), output: &XmlEmptyMapsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEmptyMaps"); err != nil {

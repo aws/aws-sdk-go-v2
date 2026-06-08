@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an evaluation form in the specified Amazon Connect instance. The form
+// Creates an evaluation form in the specified Connect Customer instance. The form
 // can be used to define questions related to agent performance, and create
 // sections to organize such questions. Question and section identifiers cannot be
 // duplicated within the same evaluation form.
@@ -32,8 +32,8 @@ func (c *Client) CreateEvaluationForm(ctx context.Context, params *CreateEvaluat
 
 type CreateEvaluationFormInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

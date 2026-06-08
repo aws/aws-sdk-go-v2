@@ -50,11 +50,6 @@ type CreateGatewayInput struct {
 	// This member is required.
 	Name *string
 
-	// The protocol type for the gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
-
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
 	// the gateway to access Amazon Web Services services.
 	//
@@ -103,6 +98,9 @@ type CreateGatewayInput struct {
 	// parameter.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
 
+	// The protocol type for the gateway.
+	ProtocolType types.GatewayProtocolType
+
 	// A map of key-value pairs to associate with the gateway as metadata tags.
 	Tags map[string]string
 
@@ -135,11 +133,6 @@ type CreateGatewayOutput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The protocol type of the gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
 
 	// The current status of the gateway.
 	//
@@ -181,6 +174,9 @@ type CreateGatewayOutput struct {
 
 	// The configuration settings for the protocol used by the gateway.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
+
+	// The protocol type of the gateway.
+	ProtocolType types.GatewayProtocolType
 
 	// The Amazon Resource Name (ARN) of the IAM role associated with the gateway.
 	RoleArn *string

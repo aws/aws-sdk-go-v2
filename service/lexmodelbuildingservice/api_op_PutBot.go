@@ -29,6 +29,8 @@ import (
 //
 // This operation requires permissions for the lex:PutBot action. For more
 // information, see security-iam.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func(*Options)) (*PutBotOutput, error) {
 	if params == nil {
 		params = &PutBotInput{}

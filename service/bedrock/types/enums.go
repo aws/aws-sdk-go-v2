@@ -2,6 +2,36 @@
 
 package types
 
+type AdvancedPromptOptimizationJobStatus string
+
+// Enum values for AdvancedPromptOptimizationJobStatus
+const (
+	AdvancedPromptOptimizationJobStatusInProgress         AdvancedPromptOptimizationJobStatus = "InProgress"
+	AdvancedPromptOptimizationJobStatusCompleted          AdvancedPromptOptimizationJobStatus = "Completed"
+	AdvancedPromptOptimizationJobStatusFailed             AdvancedPromptOptimizationJobStatus = "Failed"
+	AdvancedPromptOptimizationJobStatusPartiallyCompleted AdvancedPromptOptimizationJobStatus = "PartiallyCompleted"
+	AdvancedPromptOptimizationJobStatusStopping           AdvancedPromptOptimizationJobStatus = "Stopping"
+	AdvancedPromptOptimizationJobStatusStopped            AdvancedPromptOptimizationJobStatus = "Stopped"
+	AdvancedPromptOptimizationJobStatusDeleting           AdvancedPromptOptimizationJobStatus = "Deleting"
+)
+
+// Values returns all known values for AdvancedPromptOptimizationJobStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedPromptOptimizationJobStatus) Values() []AdvancedPromptOptimizationJobStatus {
+	return []AdvancedPromptOptimizationJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"PartiallyCompleted",
+		"Stopping",
+		"Stopped",
+		"Deleting",
+	}
+}
+
 type AgreementStatus string
 
 // Enum values for AgreementStatus
@@ -266,11 +296,13 @@ type AutomatedReasoningPolicyBuildWorkflowType string
 
 // Enum values for AutomatedReasoningPolicyBuildWorkflowType
 const (
-	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent           AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
-	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy            AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy            AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
-	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent            AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy             AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy             AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport   AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeResolvePolicyAmbiguities AutomatedReasoningPolicyBuildWorkflowType = "RESOLVE_POLICY_AMBIGUITIES"
+	AutomatedReasoningPolicyBuildWorkflowTypeIterativelyRefinePolicy  AutomatedReasoningPolicyBuildWorkflowType = "ITERATIVELY_REFINE_POLICY"
 )
 
 // Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
@@ -285,6 +317,8 @@ func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPo
 		"IMPORT_POLICY",
 		"GENERATE_FIDELITY_REPORT",
 		"GENERATE_POLICY_SCENARIOS",
+		"RESOLVE_POLICY_AMBIGUITIES",
+		"ITERATIVELY_REFINE_POLICY",
 	}
 }
 

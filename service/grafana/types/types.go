@@ -510,6 +510,10 @@ type WorkspaceDescription struct {
 	// organizational units the workspace can access.
 	AccountAccessType AccountAccessType
 
+	// If the workspace is in the DEGRADED status, this field describes the reason the
+	// workspace is degraded.
+	DegradedWorkspaceReason *string
+
 	// The user-defined description of the workspace.
 	Description *string
 
@@ -532,6 +536,10 @@ type WorkspaceDescription struct {
 	//
 	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
 	GrafanaToken *string
+
+	// The type of IP addresses supported for connection to the workspace. Valid
+	// values are IPv4 and DualStack .
+	IpAddressType IPAddressType
 
 	// The ID or ARN of the Key Management Service key used for encrypting workspace
 	// data.

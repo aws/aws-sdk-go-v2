@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// This API is in preview release for Connect Customer and is subject to change.
+// To request access to this API, contact Amazon Web Services Support.
 //
 // Updates the selected authentication profile.
 func (c *Client) UpdateAuthenticationProfile(ctx context.Context, params *UpdateAuthenticationProfileInput, optFns ...func(*Options)) (*UpdateAuthenticationProfileOutput, error) {
@@ -36,8 +36,8 @@ type UpdateAuthenticationProfileInput struct {
 	// This member is required.
 	AuthenticationProfileId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -45,7 +45,7 @@ type UpdateAuthenticationProfileInput struct {
 	InstanceId *string
 
 	// A list of IP address range strings that are allowed to access the instance. For
-	// more information on how to configure IP addresses, see[Configure session timeouts] in the Amazon Connect
+	// more information on how to configure IP addresses, see[Configure session timeouts] in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Configure session timeouts]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
@@ -53,7 +53,7 @@ type UpdateAuthenticationProfileInput struct {
 
 	// A list of IP address range strings that are blocked from accessing the
 	// instance. For more information on how to configure IP addresses, For more
-	// information on how to configure IP addresses, see [Configure IP-based access control]in the Amazon Connect
+	// information on how to configure IP addresses, see [Configure IP-based access control]in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Configure IP-based access control]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
@@ -65,10 +65,10 @@ type UpdateAuthenticationProfileInput struct {
 	// The name for the authentication profile.
 	Name *string
 
-	// The short lived session duration configuration for users logged in to Amazon
-	// Connect, in minutes. This value determines the maximum possible time before an
+	// The short lived session duration configuration for users logged in to Connect
+	// Customer, in minutes. This value determines the maximum possible time before an
 	// agent is authenticated. For more information, For more information on how to
-	// configure IP addresses, see [Configure session timeouts]in the Amazon Connect Administrator Guide.
+	// configure IP addresses, see [Configure session timeouts]in the Connect Customer Administrator Guide.
 	//
 	// [Configure session timeouts]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
 	//

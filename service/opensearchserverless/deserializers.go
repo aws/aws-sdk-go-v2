@@ -5952,6 +5952,80 @@ func awsAwsjson10_deserializeDocumentAccountSettingsDetail(v **types.AccountSett
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCapacityDetails(v **types.CapacityDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapacityDetails
+	if *v == nil {
+		sv = &types.CapacityDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoscalingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoscalingStatus to be of type string, got %T instead", value)
+				}
+				sv.AutoscalingStatus = types.AutoscalingStatus(jtv)
+			}
+
+		case "capacityInOcu":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CapacityInOcu = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CapacityInOcu = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCapacityLimits(v **types.CapacityLimits, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6078,6 +6152,15 @@ func awsAwsjson10_deserializeDocumentCollectionDetail(v **types.CollectionDetail
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DashboardEndpoint = ptr.String(jtv)
+			}
+
+		case "deletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtection to be of type string, got %T instead", value)
+				}
+				sv.DeletionProtection = types.DeletionProtection(jtv)
 			}
 
 		case "description":
@@ -6379,7 +6462,7 @@ func awsAwsjson10_deserializeDocumentCollectionGroupCapacityLimits(v **types.Col
 					sv.MaxIndexingCapacityInOCU = ptr.Float32(float32(f64))
 
 				default:
-					return fmt.Errorf("expected CollectionGroupIndexingCapacityValue to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CollectionGroupMaxIndexingCapacityValue to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -6413,7 +6496,7 @@ func awsAwsjson10_deserializeDocumentCollectionGroupCapacityLimits(v **types.Col
 					sv.MaxSearchCapacityInOCU = ptr.Float32(float32(f64))
 
 				default:
-					return fmt.Errorf("expected CollectionGroupSearchCapacityValue to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CollectionGroupMaxSearchCapacityValue to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -6447,7 +6530,7 @@ func awsAwsjson10_deserializeDocumentCollectionGroupCapacityLimits(v **types.Col
 					sv.MinIndexingCapacityInOCU = ptr.Float32(float32(f64))
 
 				default:
-					return fmt.Errorf("expected CollectionGroupIndexingCapacityValue to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CollectionGroupMinIndexingCapacityValue to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -6481,7 +6564,7 @@ func awsAwsjson10_deserializeDocumentCollectionGroupCapacityLimits(v **types.Col
 					sv.MinSearchCapacityInOCU = ptr.Float32(float32(f64))
 
 				default:
-					return fmt.Errorf("expected CollectionGroupSearchCapacityValue to be a JSON Number, got %T instead", value)
+					return fmt.Errorf("expected CollectionGroupMinSearchCapacityValue to be a JSON Number, got %T instead", value)
 
 				}
 			}
@@ -6544,6 +6627,11 @@ func awsAwsjson10_deserializeDocumentCollectionGroupDetail(v **types.CollectionG
 				sv.CreatedDate = ptr.Int64(i64)
 			}
 
+		case "currentCapacity":
+			if err := awsAwsjson10_deserializeDocumentCurrentCapacity(&sv.CurrentCapacity, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6551,6 +6639,15 @@ func awsAwsjson10_deserializeDocumentCollectionGroupDetail(v **types.CollectionG
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "generation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerlessGeneration to be of type string, got %T instead", value)
+				}
+				sv.Generation = types.ServerlessGeneration(jtv)
 			}
 
 		case "id":
@@ -6825,6 +6922,15 @@ func awsAwsjson10_deserializeDocumentCollectionGroupSummary(v **types.Collection
 				sv.CreatedDate = ptr.Int64(i64)
 			}
 
+		case "generation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerlessGeneration to be of type string, got %T instead", value)
+				}
+				sv.Generation = types.ServerlessGeneration(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7077,6 +7183,15 @@ func awsAwsjson10_deserializeDocumentCreateCollectionDetail(v **types.CreateColl
 				sv.CreatedDate = ptr.Int64(i64)
 			}
 
+		case "deletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtection to be of type string, got %T instead", value)
+				}
+				sv.DeletionProtection = types.DeletionProtection(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7225,6 +7340,15 @@ func awsAwsjson10_deserializeDocumentCreateCollectionGroupDetail(v **types.Creat
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "generation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerlessGeneration to be of type string, got %T instead", value)
+				}
+				sv.Generation = types.ServerlessGeneration(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7324,6 +7448,47 @@ func awsAwsjson10_deserializeDocumentCreateVpcEndpointDetail(v **types.CreateVpc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCurrentCapacity(v **types.CurrentCapacity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CurrentCapacity
+	if *v == nil {
+		sv = &types.CurrentCapacity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "indexing":
+			if err := awsAwsjson10_deserializeDocumentCapacityDetails(&sv.Indexing, value); err != nil {
+				return err
+			}
+
+		case "search":
+			if err := awsAwsjson10_deserializeDocumentCapacityDetails(&sv.Search, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDeleteCollectionDetail(v **types.DeleteCollectionDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7346,6 +7511,15 @@ func awsAwsjson10_deserializeDocumentDeleteCollectionDetail(v **types.DeleteColl
 
 	for key, value := range shape {
 		switch key {
+		case "deletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtection to be of type string, got %T instead", value)
+				}
+				sv.DeletionProtection = types.DeletionProtection(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9291,6 +9465,15 @@ func awsAwsjson10_deserializeDocumentUpdateCollectionDetail(v **types.UpdateColl
 				sv.CreatedDate = ptr.Int64(i64)
 			}
 
+		case "deletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtection to be of type string, got %T instead", value)
+				}
+				sv.DeletionProtection = types.DeletionProtection(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9419,6 +9602,15 @@ func awsAwsjson10_deserializeDocumentUpdateCollectionGroupDetail(v **types.Updat
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "generation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerlessGeneration to be of type string, got %T instead", value)
+				}
+				sv.Generation = types.ServerlessGeneration(jtv)
 			}
 
 		case "id":

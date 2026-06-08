@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpAcceptMatch) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorAcceptMatch(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1212,7 +1211,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateVpcPeeringConnection) HandleDeserial
 		return out, metadata, rpc2_deserializeOpErrorCreateVpcPeeringConnection(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1261,7 +1260,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAlias) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteAlias(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1310,7 +1309,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteBuild) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteBuild(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1359,7 +1358,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteContainerFleet) HandleDeserialize(ct
 		return out, metadata, rpc2_deserializeOpErrorDeleteContainerFleet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1408,7 +1407,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteContainerGroupDefinition) HandleDese
 		return out, metadata, rpc2_deserializeOpErrorDeleteContainerGroupDefinition(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1457,7 +1456,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteFleet) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteFleet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1636,7 +1635,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteGameSessionQueue) HandleDeserialize(
 		return out, metadata, rpc2_deserializeOpErrorDeleteGameSessionQueue(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1685,7 +1684,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteLocation) HandleDeserialize(ctx cont
 		return out, metadata, rpc2_deserializeOpErrorDeleteLocation(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1734,7 +1733,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteMatchmakingConfiguration) HandleDese
 		return out, metadata, rpc2_deserializeOpErrorDeleteMatchmakingConfiguration(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1783,7 +1782,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteMatchmakingRuleSet) HandleDeserializ
 		return out, metadata, rpc2_deserializeOpErrorDeleteMatchmakingRuleSet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1832,7 +1831,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteScalingPolicy) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorDeleteScalingPolicy(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1881,7 +1880,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteScript) HandleDeserialize(ctx contex
 		return out, metadata, rpc2_deserializeOpErrorDeleteScript(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1930,7 +1929,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteVpcPeeringAuthorization) HandleDeser
 		return out, metadata, rpc2_deserializeOpErrorDeleteVpcPeeringAuthorization(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1979,7 +1978,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteVpcPeeringConnection) HandleDeserial
 		return out, metadata, rpc2_deserializeOpErrorDeleteVpcPeeringConnection(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -2028,7 +2027,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterCompute) HandleDeserialize(ctx c
 		return out, metadata, rpc2_deserializeOpErrorDeregisterCompute(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -2077,7 +2076,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterGameServer) HandleDeserialize(ct
 		return out, metadata, rpc2_deserializeOpErrorDeregisterGameServer(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -2402,6 +2401,71 @@ func (m *smithyRpcv2cbor_deserializeOpDescribeContainerGroupDefinition) HandleDe
 	}
 
 	output, err := deserializeCBOR_DescribeContainerGroupDefinitionOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
+type smithyRpcv2cbor_deserializeOpDescribeContainerGroupPortMappings struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpDescribeContainerGroupPortMappings) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpDescribeContainerGroupPortMappings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorDescribeContainerGroupPortMappings(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &DescribeContainerGroupPortMappingsOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_DescribeContainerGroupPortMappingsOutput(cv)
 	if err != nil {
 		return out, metadata, err
 	}
@@ -6221,7 +6285,7 @@ func (m *smithyRpcv2cbor_deserializeOpStopMatchmaking) HandleDeserialize(ctx con
 		return out, metadata, rpc2_deserializeOpErrorStopMatchmaking(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -6335,7 +6399,7 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorTagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -6449,7 +6513,7 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorUntagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -8810,6 +8874,67 @@ func deserializeCBOR_ContainerGroupDefinitionStatus(v smithycbor.Value) (types.C
 	return types.ContainerGroupDefinitionStatus(av), nil
 }
 
+func deserializeCBOR_ContainerGroupPortMapping(v smithycbor.Value) (*types.ContainerGroupPortMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ContainerGroupPortMapping{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ContainerName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerName = ptr.String(dv)
+		}
+
+		if key == "ContainerRuntimeId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerRuntimeId = ptr.String(dv)
+		}
+
+		if key == "ContainerPortMappings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ContainerPortMappingList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerPortMappings = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ContainerGroupPortMappingList(v smithycbor.Value) ([]types.ContainerGroupPortMapping, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.ContainerGroupPortMapping
+	for _, si := range av {
+
+		di, err := deserializeCBOR_ContainerGroupPortMapping(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
 func deserializeCBOR_ContainerGroupType(v smithycbor.Value) (types.ContainerGroupType, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -9029,6 +9154,65 @@ func deserializeCBOR_ContainerPortConfiguration(v smithycbor.Value) (*types.Cont
 		}
 	}
 	return ds, nil
+}
+
+func deserializeCBOR_ContainerPortMapping(v smithycbor.Value) (*types.ContainerPortMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ContainerPortMapping{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ContainerPort" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerPort = ptr.Int32(dv)
+		}
+
+		if key == "ConnectionPort" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConnectionPort = ptr.Int32(dv)
+		}
+
+		if key == "Protocol" {
+
+			dv, err := deserializeCBOR_IpProtocol(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Protocol = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ContainerPortMappingList(v smithycbor.Value) ([]types.ContainerPortMapping, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.ContainerPortMapping
+	for _, si := range av {
+
+		di, err := deserializeCBOR_ContainerPortMapping(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
 }
 
 func deserializeCBOR_ContainerPortRange(v smithycbor.Value) (*types.ContainerPortRange, error) {
@@ -15702,6 +15886,92 @@ func deserializeCBOR_DescribeContainerGroupDefinitionOutput(v smithycbor.Value) 
 	return ds, nil
 }
 
+func deserializeCBOR_DescribeContainerGroupPortMappingsOutput(v smithycbor.Value) (*DescribeContainerGroupPortMappingsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DescribeContainerGroupPortMappingsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "FleetId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FleetId = ptr.String(dv)
+		}
+
+		if key == "Location" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Location = ptr.String(dv)
+		}
+
+		if key == "ContainerGroupDefinitionArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerGroupDefinitionArn = ptr.String(dv)
+		}
+
+		if key == "ContainerGroupType" {
+
+			dv, err := deserializeCBOR_ContainerGroupType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerGroupType = dv
+		}
+
+		if key == "ComputeName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ComputeName = ptr.String(dv)
+		}
+
+		if key == "InstanceId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.InstanceId = ptr.String(dv)
+		}
+
+		if key == "ContainerGroupPortMappings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ContainerGroupPortMappingList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContainerGroupPortMappings = dv
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_DescribeEC2InstanceLimitsOutput(v smithycbor.Value) (*DescribeEC2InstanceLimitsOutput, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -21342,6 +21612,95 @@ func rpc2_deserializeOpErrorDescribeContainerGroupDefinition(resp *smithyhttp.Re
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#InvalidRequestException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "NotFoundException":
+		verr, err := deserializeCBOR_NotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#NotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "UnauthorizedException":
+		verr, err := deserializeCBOR_UnauthorizedException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnauthorizedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "UnsupportedRegionException":
+		verr, err := deserializeCBOR_UnsupportedRegionException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnsupportedRegionException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	default:
+
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorDescribeContainerGroupPortMappings(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "InternalServiceException":
+		verr, err := deserializeCBOR_InternalServiceException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#InternalServiceException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "InvalidRequestException":
+		verr, err := deserializeCBOR_InvalidRequestException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#InvalidRequestException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "LimitExceededException":
+		verr, err := deserializeCBOR_LimitExceededException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#LimitExceededException: %w", err),
 				Snapshot: payload,
 			}
 		}

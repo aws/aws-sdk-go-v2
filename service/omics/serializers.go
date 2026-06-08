@@ -8449,6 +8449,13 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(*v.ConfigurationName)
 	}
 
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -10056,6 +10063,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		ok.String(*v.CacheId)
 	}
 
+	if v.ConfigurationName != nil {
+		ok := object.Key("configurationName")
+		ok.String(*v.ConfigurationName)
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -10064,6 +10076,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.NetworkingMode) > 0 {
+		ok := object.Key("networkingMode")
+		ok.String(string(v.NetworkingMode))
 	}
 
 	if v.OutputBucketOwnerId != nil {
@@ -10171,6 +10188,21 @@ func awsRestjson1_serializeDocumentDefinitionRepository(v *types.DefinitionRepos
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEngineSettings(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 

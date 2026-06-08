@@ -241,16 +241,15 @@ type ComputeEnvironmentDetail struct {
 	// progress normally. Managed compute environments in the DISABLED state don't
 	// scale out.
 	//
-	// Compute environments in a DISABLED state may continue to incur billing charges.
-	// To prevent additional charges, turn off and then delete the compute environment.
-	// For more information, see [State]in the Batch User Guide.
+	// Compute environments in a DISABLED state may continue to incur billing charges,
+	// for example, if they have running instances due to jobs that are still executing
+	// or a non-zero minvCpus setting. To prevent additional charges, disable and
+	// delete the compute environment.
 	//
 	// When an instance is idle, the instance scales down to the minvCpus value.
 	// However, the instance size doesn't change. For example, consider a c5.8xlarge
 	// instance with a minvCpus value of 4 and a desiredvCpus value of 36 . This
 	// instance doesn't scale down to a c5.large instance.
-	//
-	// [State]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
 	State CEState
 
 	// The current status of the compute environment (for example, CREATING or VALID ).
@@ -373,6 +372,10 @@ type ComputeResource struct {
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	// Don't specify it.
 	//
+	// This parameter is required for Amazon EKS compute environments. For Amazon ECS
+	// compute environments, if this parameter isn't specified, the BEST_FIT
+	// allocation strategy is used by default.
+	//
 	// BEST_FIT (default) Batch selects an instance type that best fits the needs of
 	// the jobs with a preference for the lowest-cost instance type. If additional
 	// instances of the selected instance type aren't available, Batch waits for the
@@ -486,9 +489,6 @@ type ComputeResource struct {
 	//
 	// Batch can select the instance type for you if you choose one of the following:
 	//
-	//   - optimal to select instance types (from the c4 , m4 , r4 , c5 , m5 , and r5
-	//   instance families) that match the demand of your job queues.
-	//
 	//   - default_x86_64 to choose x86 based instance types (from the m6i , c6i , r6i
 	//   , and c7i instance families) that matches the resource demands of the job
 	//   queue.
@@ -496,10 +496,7 @@ type ComputeResource struct {
 	//   - default_arm64 to choose ARM based instance types (from the m6g , c6g , r6g ,
 	//   and c7g instance families) that matches the resource demands of the job queue.
 	//
-	// Starting on 11/01/2025 the behavior of optimal is going to be changed to match
-	// default_x86_64 . During the change your instance families could be updated to a
-	// newer generation. You do not need to perform any actions for the upgrade to
-	// happen. For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
+	//   - optimal Semantically equivalent to default_x86_64 , see [Optimal instance type configuration to receive automatic instance family updates]for details.
 	//
 	// Instance family availability varies by Amazon Web Services Region. For example,
 	// some Amazon Web Services Regions may not have any fourth generation instance
@@ -985,6 +982,9 @@ type ComputeScalingPolicy struct {
 	//
 	// Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and
 	// disable the scale down delay.
+	//
+	// Idle instances retained during the scale-down delay period are billable at
+	// standard EC2 pricing.
 	//
 	// The scale down delay does not apply to:
 	//
@@ -5581,7 +5581,12 @@ type Ulimit struct {
 type UpdatePolicy struct {
 
 	// Specifies the job timeout (in minutes) when the compute environment
-	// infrastructure is updated. The default value is 30.
+	// infrastructure is updated. The default value is 30. The maximum value is 7200.
+	//
+	// Increasing jobExecutionTimeoutMinutes during infrastructure updates delays the
+	// replacement of instances with new instances that include updates such as
+	// security patches, but provides more time for jobs to execute. Consider the
+	// security implications of this tradeoff when setting timeout values.
 	JobExecutionTimeoutMinutes *int64
 
 	// Specifies whether jobs are automatically terminated when the compute

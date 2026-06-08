@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,27 @@ type XmlEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEnumsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FooEnum1 != "" {
+		s.WriteString(schemas.XmlEnumsRequest_fooEnum1, string(v.FooEnum1))
+	}
+	if v.FooEnum2 != "" {
+		s.WriteString(schemas.XmlEnumsRequest_fooEnum2, string(v.FooEnum2))
+	}
+	if v.FooEnum3 != "" {
+		s.WriteString(schemas.XmlEnumsRequest_fooEnum3, string(v.FooEnum3))
+	}
+	serializeFooEnumList(s, schemas.XmlEnumsRequest_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.XmlEnumsRequest_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.XmlEnumsRequest_fooEnumSet, v.FooEnumSet)
+}
+
 type XmlEnumsOutput struct {
 	FooEnum1 types.FooEnum
 
@@ -62,16 +85,48 @@ type XmlEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlEnumsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlEnumsResponse_fooEnum1:
+			var ev string
+			if err := d.ReadString(schemas.XmlEnumsResponse_fooEnum1, &ev); err != nil {
+				return err
+			}
+			v.FooEnum1 = types.FooEnum(ev)
+			return nil
+		case schemas.XmlEnumsResponse_fooEnum2:
+			var ev string
+			if err := d.ReadString(schemas.XmlEnumsResponse_fooEnum2, &ev); err != nil {
+				return err
+			}
+			v.FooEnum2 = types.FooEnum(ev)
+			return nil
+		case schemas.XmlEnumsResponse_fooEnum3:
+			var ev string
+			if err := d.ReadString(schemas.XmlEnumsResponse_fooEnum3, &ev); err != nil {
+				return err
+			}
+			v.FooEnum3 = types.FooEnum(ev)
+			return nil
+		case schemas.XmlEnumsResponse_fooEnumList:
+			return deserializeFooEnumList(d, schemas.XmlEnumsResponse_fooEnumList, &v.FooEnumList)
+		case schemas.XmlEnumsResponse_fooEnumMap:
+			return deserializeFooEnumMap(d, schemas.XmlEnumsResponse_fooEnumMap, &v.FooEnumMap)
+		case schemas.XmlEnumsResponse_fooEnumSet:
+			return deserializeFooEnumSet(d, schemas.XmlEnumsResponse_fooEnumSet, &v.FooEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.XmlEnumsRequest, schemas.XmlEnumsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.XmlEnumsRequest, schemas.XmlEnumsResponse), output: &XmlEnumsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEnums"); err != nil {

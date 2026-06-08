@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches the flow modules in an Amazon Connect instance, with optional
+// Searches the flow modules in an Connect Customer instance, with optional
 // filtering.
 func (c *Client) SearchContactFlowModules(ctx context.Context, params *SearchContactFlowModulesInput, optFns ...func(*Options)) (*SearchContactFlowModulesOutput, error) {
 	if params == nil {
@@ -30,8 +30,8 @@ func (c *Client) SearchContactFlowModules(ctx context.Context, params *SearchCon
 
 type SearchContactFlowModulesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
-	// the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can find the instance ID
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string

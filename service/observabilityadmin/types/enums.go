@@ -207,6 +207,29 @@ func (LogType) Values() []LogType {
 	}
 }
 
+type MskEnhancedMonitoringLevel string
+
+// Enum values for MskEnhancedMonitoringLevel
+const (
+	MskEnhancedMonitoringLevelDefault              MskEnhancedMonitoringLevel = "DEFAULT"
+	MskEnhancedMonitoringLevelPerBroker            MskEnhancedMonitoringLevel = "PER_BROKER"
+	MskEnhancedMonitoringLevelPerTopicPerBroker    MskEnhancedMonitoringLevel = "PER_TOPIC_PER_BROKER"
+	MskEnhancedMonitoringLevelPerTopicPerPartition MskEnhancedMonitoringLevel = "PER_TOPIC_PER_PARTITION"
+)
+
+// Values returns all known values for MskEnhancedMonitoringLevel. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MskEnhancedMonitoringLevel) Values() []MskEnhancedMonitoringLevel {
+	return []MskEnhancedMonitoringLevel{
+		"DEFAULT",
+		"PER_BROKER",
+		"PER_TOPIC_PER_BROKER",
+		"PER_TOPIC_PER_PARTITION",
+	}
+}
+
 type OutputFormat string
 
 // Enum values for OutputFormat
@@ -249,22 +272,25 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAwsEc2Instance                     ResourceType = "AWS::EC2::Instance"
-	ResourceTypeAwsEc2Vpc                          ResourceType = "AWS::EC2::VPC"
-	ResourceTypeAwsLamdbaFunction                  ResourceType = "AWS::Lambda::Function"
-	ResourceTypeAwsCloudtrail                      ResourceType = "AWS::CloudTrail"
-	ResourceTypeAwsEksCluster                      ResourceType = "AWS::EKS::Cluster"
-	ResourceTypeAwsWafV2WebAcl                     ResourceType = "AWS::WAFv2::WebACL"
-	ResourceTypeAwsElbLoadbalancer                 ResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer"
-	ResourceTypeAwsRoute53ResolverResolverEndpoint ResourceType = "AWS::Route53Resolver::ResolverEndpoint"
-	ResourceTypeAwsBedrockAgentcoreRuntime         ResourceType = "AWS::BedrockAgentCore::Runtime"
-	ResourceTypeAwsBedrockAgentcoreBrowser         ResourceType = "AWS::BedrockAgentCore::Browser"
-	ResourceTypeAwsBedrockAgentcoreCodeInterpreter ResourceType = "AWS::BedrockAgentCore::CodeInterpreter"
-	ResourceTypeAwsBedrockAgentcoreGateway         ResourceType = "AWS::BedrockAgentCore::Gateway"
-	ResourceTypeAwsBedrockAgentcoreMemory          ResourceType = "AWS::BedrockAgentCore::Memory"
-	ResourceTypeAwsSecurityHub                     ResourceType = "AWS::SecurityHub::Hub"
-	ResourceTypeAwsCloudfrontDistribution          ResourceType = "AWS::CloudFront::Distribution"
-	ResourceTypeAwsSecurityHubHubv2                ResourceType = "AWS::SecurityHub::HubV2"
+	ResourceTypeAwsEc2Instance                      ResourceType = "AWS::EC2::Instance"
+	ResourceTypeAwsEc2Vpc                           ResourceType = "AWS::EC2::VPC"
+	ResourceTypeAwsLamdbaFunction                   ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsCloudtrail                       ResourceType = "AWS::CloudTrail"
+	ResourceTypeAwsEksCluster                       ResourceType = "AWS::EKS::Cluster"
+	ResourceTypeAwsWafV2WebAcl                      ResourceType = "AWS::WAFv2::WebACL"
+	ResourceTypeAwsElbLoadbalancer                  ResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer"
+	ResourceTypeAwsRoute53ResolverResolverEndpoint  ResourceType = "AWS::Route53Resolver::ResolverEndpoint"
+	ResourceTypeAwsBedrockAgentcoreRuntime          ResourceType = "AWS::BedrockAgentCore::Runtime"
+	ResourceTypeAwsBedrockAgentcoreBrowser          ResourceType = "AWS::BedrockAgentCore::Browser"
+	ResourceTypeAwsBedrockAgentcoreCodeInterpreter  ResourceType = "AWS::BedrockAgentCore::CodeInterpreter"
+	ResourceTypeAwsBedrockAgentcoreGateway          ResourceType = "AWS::BedrockAgentCore::Gateway"
+	ResourceTypeAwsBedrockAgentcoreMemory           ResourceType = "AWS::BedrockAgentCore::Memory"
+	ResourceTypeAwsBedrockAgentcoreWorkloadIdentity ResourceType = "AWS::BedrockAgentCore::WorkloadIdentity"
+	ResourceTypeAwsSecurityHub                      ResourceType = "AWS::SecurityHub::Hub"
+	ResourceTypeAwsCloudfrontDistribution           ResourceType = "AWS::CloudFront::Distribution"
+	ResourceTypeAwsSecurityHubHubv2                 ResourceType = "AWS::SecurityHub::HubV2"
+	ResourceTypeAwsOtelEnrichment                   ResourceType = "AWS::CloudWatch::OTelEnrichment"
+	ResourceTypeAwsMskCluster                       ResourceType = "AWS::MSK::Cluster"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -286,9 +312,12 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::BedrockAgentCore::CodeInterpreter",
 		"AWS::BedrockAgentCore::Gateway",
 		"AWS::BedrockAgentCore::Memory",
+		"AWS::BedrockAgentCore::WorkloadIdentity",
 		"AWS::SecurityHub::Hub",
 		"AWS::CloudFront::Distribution",
 		"AWS::SecurityHub::HubV2",
+		"AWS::CloudWatch::OTelEnrichment",
+		"AWS::MSK::Cluster",
 	}
 }
 

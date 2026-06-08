@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,64 @@ type JsonTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonTimestampsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonTimestampsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonTimestampsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateTime != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_dateTime, *v.DateTime)
+	}
+	if v.DateTimeOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_dateTimeOnTarget, *v.DateTimeOnTarget)
+	}
+	if v.EpochSeconds != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_epochSeconds, *v.EpochSeconds)
+	}
+	if v.EpochSecondsOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_epochSecondsOnTarget, *v.EpochSecondsOnTarget)
+	}
+	if v.HttpDate != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_httpDate, *v.HttpDate)
+	}
+	if v.HttpDateOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_httpDateOnTarget, *v.HttpDateOnTarget)
+	}
+	if v.Normal != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_normal, *v.Normal)
+	}
+}
+func (v *JsonTimestampsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonTimestampsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonTimestampsInputOutput_dateTime:
+			v.DateTime = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_dateTime, v.DateTime)
+		case schemas.JsonTimestampsInputOutput_dateTimeOnTarget:
+			v.DateTimeOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_dateTimeOnTarget, v.DateTimeOnTarget)
+		case schemas.JsonTimestampsInputOutput_epochSeconds:
+			v.EpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_epochSeconds, v.EpochSeconds)
+		case schemas.JsonTimestampsInputOutput_epochSecondsOnTarget:
+			v.EpochSecondsOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_epochSecondsOnTarget, v.EpochSecondsOnTarget)
+		case schemas.JsonTimestampsInputOutput_httpDate:
+			v.HttpDate = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_httpDate, v.HttpDate)
+		case schemas.JsonTimestampsInputOutput_httpDateOnTarget:
+			v.HttpDateOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_httpDateOnTarget, v.HttpDateOnTarget)
+		case schemas.JsonTimestampsInputOutput_normal:
+			v.Normal = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_normal, v.Normal)
+		}
+		return nil
+	})
+}
+
 type JsonTimestampsOutput struct {
 	DateTime *time.Time
 
@@ -67,16 +127,71 @@ type JsonTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonTimestampsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonTimestampsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonTimestampsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateTime != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_dateTime, *v.DateTime)
+	}
+	if v.DateTimeOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_dateTimeOnTarget, *v.DateTimeOnTarget)
+	}
+	if v.EpochSeconds != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_epochSeconds, *v.EpochSeconds)
+	}
+	if v.EpochSecondsOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_epochSecondsOnTarget, *v.EpochSecondsOnTarget)
+	}
+	if v.HttpDate != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_httpDate, *v.HttpDate)
+	}
+	if v.HttpDateOnTarget != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_httpDateOnTarget, *v.HttpDateOnTarget)
+	}
+	if v.Normal != nil {
+		s.WriteTime(schemas.JsonTimestampsInputOutput_normal, *v.Normal)
+	}
+}
+func (v *JsonTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonTimestampsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonTimestampsInputOutput_dateTime:
+			v.DateTime = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_dateTime, v.DateTime)
+		case schemas.JsonTimestampsInputOutput_dateTimeOnTarget:
+			v.DateTimeOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_dateTimeOnTarget, v.DateTimeOnTarget)
+		case schemas.JsonTimestampsInputOutput_epochSeconds:
+			v.EpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_epochSeconds, v.EpochSeconds)
+		case schemas.JsonTimestampsInputOutput_epochSecondsOnTarget:
+			v.EpochSecondsOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_epochSecondsOnTarget, v.EpochSecondsOnTarget)
+		case schemas.JsonTimestampsInputOutput_httpDate:
+			v.HttpDate = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_httpDate, v.HttpDate)
+		case schemas.JsonTimestampsInputOutput_httpDateOnTarget:
+			v.HttpDateOnTarget = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_httpDateOnTarget, v.HttpDateOnTarget)
+		case schemas.JsonTimestampsInputOutput_normal:
+			v.Normal = new(time.Time)
+			return d.ReadTime(schemas.JsonTimestampsInputOutput_normal, v.Normal)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonTimestamps, schemas.JsonTimestampsInputOutput, schemas.JsonTimestampsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonTimestamps, schemas.JsonTimestampsInputOutput, schemas.JsonTimestampsInputOutput), output: &JsonTimestampsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonTimestamps"); err != nil {

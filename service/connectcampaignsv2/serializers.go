@@ -3746,6 +3746,11 @@ func awsRestjson1_serializeDocumentLocalTimeZoneConfig(v *types.LocalTimeZoneCon
 		}
 	}
 
+	if len(v.LocalTimeZoneDetectionScope) > 0 {
+		ok := object.Key("localTimeZoneDetectionScope")
+		ok.String(string(v.LocalTimeZoneDetectionScope))
+	}
+
 	return nil
 }
 

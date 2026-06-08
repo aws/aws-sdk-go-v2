@@ -1297,6 +1297,11 @@ func awsAwsjson10_serializeDocumentComputeNodeGroupSlurmConfigurationRequest(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		ok := object.Key("scaleDownIdleTimeInSeconds")
+		ok.Integer(*v.ScaleDownIdleTimeInSeconds)
+	}
+
 	if v.SlurmCustomSettings != nil {
 		ok := object.Key("slurmCustomSettings")
 		if err := awsAwsjson10_serializeDocumentSlurmCustomSettings(v.SlurmCustomSettings, ok); err != nil {
@@ -1629,6 +1634,11 @@ func awsAwsjson10_serializeDocumentUpdateClusterSlurmConfigurationRequest(v *typ
 func awsAwsjson10_serializeDocumentUpdateComputeNodeGroupSlurmConfigurationRequest(v *types.UpdateComputeNodeGroupSlurmConfigurationRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ScaleDownIdleTimeInSeconds != nil {
+		ok := object.Key("scaleDownIdleTimeInSeconds")
+		ok.Integer(*v.ScaleDownIdleTimeInSeconds)
+	}
 
 	if v.SlurmCustomSettings != nil {
 		ok := object.Key("slurmCustomSettings")

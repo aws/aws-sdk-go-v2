@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the current status of a user or agent in Amazon Connect. If the agent
+// Changes the current status of a user or agent in Connect Customer. If the agent
 // is currently handling a contact, this sets the agent's next status.
 //
-// For more information, see [Agent status] and [Set your next status] in the Amazon Connect Administrator Guide.
+// For more information, see [Agent status] and [Set your next status] in the Connect Customer Administrator Guide.
 //
 // [Agent status]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html
 // [Set your next status]: https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html
@@ -39,8 +39,8 @@ type PutUserStatusInput struct {
 	// This member is required.
 	AgentStatusId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

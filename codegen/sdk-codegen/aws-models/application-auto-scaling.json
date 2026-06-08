@@ -152,6 +152,218 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>With Application Auto Scaling, you can configure automatic scaling for the following\n      resources:</p>\n         <ul>\n            <li>\n               <p>Amazon AppStream 2.0 fleets</p>\n            </li>\n            <li>\n               <p>Amazon Aurora Replicas</p>\n            </li>\n            <li>\n               <p>Amazon Comprehend document classification and entity recognizer endpoints</p>\n            </li>\n            <li>\n               <p>Amazon DynamoDB tables and global secondary indexes throughput capacity</p>\n            </li>\n            <li>\n               <p>Amazon ECS services</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache replication groups (Redis OSS and Valkey) and Memcached clusters</p>\n            </li>\n            <li>\n               <p>Amazon EMR clusters</p>\n            </li>\n            <li>\n               <p>Amazon Keyspaces (for Apache Cassandra) tables</p>\n            </li>\n            <li>\n               <p>Lambda function provisioned concurrency</p>\n            </li>\n            <li>\n               <p>Amazon Managed Streaming for Apache Kafka broker storage</p>\n            </li>\n            <li>\n               <p>Amazon Neptune clusters</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker endpoint variants</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker inference components</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker serverless endpoint provisioned concurrency</p>\n            </li>\n            <li>\n               <p>Spot Fleets (Amazon EC2)</p>\n            </li>\n            <li>\n               <p>Pool of WorkSpaces</p>\n            </li>\n            <li>\n               <p>Custom resources provided by your own applications or services</p>\n            </li>\n         </ul>\n         <p>To learn more about Application Auto Scaling, see the <a href=\"https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html\">Application Auto Scaling User\n        Guide</a>.</p>\n         <p>\n            <b>API Summary</b>\n         </p>\n         <p>The Application Auto Scaling service API includes three key sets of actions: </p>\n         <ul>\n            <li>\n               <p>Register and manage scalable targets - Register Amazon Web Services or custom resources as scalable\n          targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and\n          retrieve information on existing scalable targets.</p>\n            </li>\n            <li>\n               <p>Configure and manage automatic scaling - Define scaling policies to dynamically scale\n          your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions,\n          and retrieve your recent scaling activity history.</p>\n            </li>\n            <li>\n               <p>Suspend and resume scaling - Temporarily suspend and later resume automatic scaling by\n          calling the <a href=\"https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html\">RegisterScalableTarget</a> API action for any Application Auto Scaling scalable target. You can\n          suspend and resume (individually or in combination) scale-out activities that are\n          triggered by a scaling policy, scale-in activities that are triggered by a scaling policy,\n          and scheduled scaling.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Application Auto Scaling",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://application-autoscaling.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://application-autoscaling-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://application-autoscaling.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

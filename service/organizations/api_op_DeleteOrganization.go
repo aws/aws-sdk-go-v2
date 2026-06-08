@@ -13,6 +13,11 @@ import (
 // Deletes the organization. You can delete an organization only by using
 // credentials from the management account. The organization must be empty of
 // member accounts.
+//
+// When an organization is deleted, Organizations logs a membership event in
+// CloudTrail. The event is an AccountDepartedOrganization event with
+// departedMethod:Left and departedTime . This event is available only in the
+// management account's event history.
 func (c *Client) DeleteOrganization(ctx context.Context, params *DeleteOrganizationInput, optFns ...func(*Options)) (*DeleteOrganizationOutput, error) {
 	if params == nil {
 		params = &DeleteOrganizationInput{}

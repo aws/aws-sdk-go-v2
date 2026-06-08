@@ -2416,6 +2416,294 @@ func awsRestjson1_deserializeDocumentRoute(v **types.Route, value interface{}) e
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRouteAccessibilityAvailabilityDetails(v **types.RouteAccessibilityAvailabilityDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteAccessibilityAvailabilityDetails
+	if *v == nil {
+		sv = &types.RouteAccessibilityAvailabilityDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Wheelchair":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteAccessibilityAvailability to be of type string, got %T instead", value)
+				}
+				sv.Wheelchair = types.RouteAccessibilityAvailability(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteAccessPointDetails(v **types.RouteAccessPointDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteAccessPointDetails
+	if *v == nil {
+		sv = &types.RouteAccessPointDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Accessibility":
+			if err := awsRestjson1_deserializeDocumentRouteAccessibilityAvailabilityDetails(&sv.Accessibility, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteAttribution(v **types.RouteAttribution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteAttribution
+	if *v == nil {
+		sv = &types.RouteAttribution{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteAttributionType to be of type string, got %T instead", value)
+				}
+				sv.AttributionType = types.RouteAttributionType(jtv)
+			}
+
+		case "WebLink":
+			if err := awsRestjson1_deserializeDocumentRouteWebLink(&sv.WebLink, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteAttributionList(v *[]types.RouteAttribution, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteAttribution
+	if *v == nil {
+		cv = []types.RouteAttribution{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteAttribution
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteAttribution(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteChargeStepDetails(v **types.RouteChargeStepDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteChargeStepDetails
+	if *v == nil {
+		sv = &types.RouteChargeStepDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ArrivalCharge":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ArrivalCharge = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ArrivalCharge = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected EnergyKilowattHours to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ConsumablePower":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ConsumablePower = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ConsumablePower = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected PowerKilowatts to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DesiredCharge":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DesiredCharge = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DesiredCharge = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected EnergyKilowattHours to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(v **types.RouteContinueHighwayStepDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3803,6 +4091,21 @@ func awsRestjson1_deserializeDocumentRouteLeg(v **types.RouteLeg, value interfac
 				return err
 			}
 
+		case "RentalLegDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRentalLegDetails(&sv.RentalLegDetails, value); err != nil {
+				return err
+			}
+
+		case "TaxiLegDetails":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiLegDetails(&sv.TaxiLegDetails, value); err != nil {
+				return err
+			}
+
+		case "TransitLegDetails":
+			if err := awsRestjson1_deserializeDocumentRouteTransitLegDetails(&sv.TransitLegDetails, value); err != nil {
+				return err
+			}
+
 		case "TravelMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4594,6 +4897,102 @@ func awsRestjson1_deserializeDocumentRoutePassThroughWaypointList(v *[]types.Rou
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRoutePedestrianAfterTravelStep(v **types.RoutePedestrianAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RoutePedestrianAfterTravelStep
+	if *v == nil {
+		sv = &types.RoutePedestrianAfterTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoutePedestrianAfterTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RoutePedestrianAfterTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRoutePedestrianAfterTravelStepList(v *[]types.RoutePedestrianAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RoutePedestrianAfterTravelStep
+	if *v == nil {
+		cv = []types.RoutePedestrianAfterTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RoutePedestrianAfterTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRoutePedestrianAfterTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRoutePedestrianArrival(v **types.RoutePedestrianArrival, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4706,6 +5105,11 @@ func awsRestjson1_deserializeDocumentRoutePedestrianLegDetails(v **types.RoutePe
 
 	for key, value := range shape {
 		switch key {
+		case "AfterTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRoutePedestrianAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
+				return err
+			}
+
 		case "Arrival":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianArrival(&sv.Arrival, value); err != nil {
 				return err
@@ -4912,6 +5316,11 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 
 	for key, value := range shape {
 		switch key {
+		case "AccessPointDetails":
+			if err := awsRestjson1_deserializeDocumentRouteAccessPointDetails(&sv.AccessPointDetails, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4938,6 +5347,20 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 					return fmt.Errorf("expected RouteSideOfStreet to be of type string, got %T instead", value)
 				}
 				sv.SideOfStreet = types.RouteSideOfStreet(jtv)
+			}
+
+		case "StationDetails":
+			if err := awsRestjson1_deserializeDocumentRouteStationDetails(&sv.StationDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoutePedestrianPlaceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RoutePedestrianPlaceType(jtv)
 			}
 
 		case "WaypointIndex":
@@ -5500,6 +5923,925 @@ func awsRestjson1_deserializeDocumentRouteRampStepDetails(v **types.RouteRampSte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalAfterTravelStep(v **types.RouteRentalAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalAfterTravelStep
+	if *v == nil {
+		sv = &types.RouteRentalAfterTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteRentalAfterTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteRentalAfterTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalAfterTravelStepList(v *[]types.RouteRentalAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteRentalAfterTravelStep
+	if *v == nil {
+		cv = []types.RouteRentalAfterTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteRentalAfterTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteRentalAfterTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalAgency(v **types.RouteRentalAgency, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalAgency
+	if *v == nil {
+		sv = &types.RouteRentalAgency{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalArrival(v **types.RouteRentalArrival, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalArrival
+	if *v == nil {
+		sv = &types.RouteRentalArrival{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteRentalPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalBeforeTravelStep(v **types.RouteRentalBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalBeforeTravelStep
+	if *v == nil {
+		sv = &types.RouteRentalBeforeTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteRentalBeforeTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteRentalBeforeTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalBeforeTravelStepList(v *[]types.RouteRentalBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteRentalBeforeTravelStep
+	if *v == nil {
+		cv = []types.RouteRentalBeforeTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteRentalBeforeTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteRentalBeforeTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalDeparture(v **types.RouteRentalDeparture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalDeparture
+	if *v == nil {
+		sv = &types.RouteRentalDeparture{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteRentalPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalLegDetails(v **types.RouteRentalLegDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalLegDetails
+	if *v == nil {
+		sv = &types.RouteRentalLegDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AfterTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteRentalAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "Agency":
+			if err := awsRestjson1_deserializeDocumentRouteRentalAgency(&sv.Agency, value); err != nil {
+				return err
+			}
+
+		case "Arrival":
+			if err := awsRestjson1_deserializeDocumentRouteRentalArrival(&sv.Arrival, value); err != nil {
+				return err
+			}
+
+		case "Attributions":
+			if err := awsRestjson1_deserializeDocumentRouteAttributionList(&sv.Attributions, value); err != nil {
+				return err
+			}
+
+		case "BeforeTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteRentalBeforeTravelStepList(&sv.BeforeTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "BookingWebLinks":
+			if err := awsRestjson1_deserializeDocumentRouteWebLinkList(&sv.BookingWebLinks, value); err != nil {
+				return err
+			}
+
+		case "Departure":
+			if err := awsRestjson1_deserializeDocumentRouteRentalDeparture(&sv.Departure, value); err != nil {
+				return err
+			}
+
+		case "Summary":
+			if err := awsRestjson1_deserializeDocumentRouteRentalSummary(&sv.Summary, value); err != nil {
+				return err
+			}
+
+		case "Transport":
+			if err := awsRestjson1_deserializeDocumentRouteRentalTransportModeDetails(&sv.Transport, value); err != nil {
+				return err
+			}
+
+		case "TravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteRentalTravelStepList(&sv.TravelSteps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalOverviewSummary(v **types.RouteRentalOverviewSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalOverviewSummary
+	if *v == nil {
+		sv = &types.RouteRentalOverviewSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalPlace(v **types.RouteRentalPlace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalPlace
+	if *v == nil {
+		sv = &types.RouteRentalPlace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessPointDetails":
+			if err := awsRestjson1_deserializeDocumentRouteAccessPointDetails(&sv.AccessPointDetails, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OriginalPosition":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
+				return err
+			}
+
+		case "Position":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "StationDetails":
+			if err := awsRestjson1_deserializeDocumentRouteStationDetails(&sv.StationDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteRentalPlaceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteRentalPlaceType(jtv)
+			}
+
+		case "WaypointIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaypointIndex = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalSummary(v **types.RouteRentalSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalSummary
+	if *v == nil {
+		sv = &types.RouteRentalSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Overview":
+			if err := awsRestjson1_deserializeDocumentRouteRentalOverviewSummary(&sv.Overview, value); err != nil {
+				return err
+			}
+
+		case "TravelOnly":
+			if err := awsRestjson1_deserializeDocumentRouteRentalTravelOnlySummary(&sv.TravelOnly, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalTransportModeDetails(v **types.RouteRentalTransportModeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalTransportModeDetails
+	if *v == nil {
+		sv = &types.RouteRentalTransportModeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableSeats":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableSeats = ptr.Int32(int32(i64))
+			}
+
+		case "Category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Category = ptr.String(jtv)
+			}
+
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteEngineType to be of type string, got %T instead", value)
+				}
+				sv.Engine = types.RouteEngineType(jtv)
+			}
+
+		case "LicensePlate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.LicensePlate = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteRentalMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.RouteRentalMode(jtv)
+			}
+
+		case "Model":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Model = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TextColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.TextColor = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalTravelOnlySummary(v **types.RouteRentalTravelOnlySummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalTravelOnlySummary
+	if *v == nil {
+		sv = &types.RouteRentalTravelOnlySummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalTravelStep(v **types.RouteRentalTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteRentalTravelStep
+	if *v == nil {
+		sv = &types.RouteRentalTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContinueStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteContinueStepDetails(&sv.ContinueStepDetails, value); err != nil {
+				return err
+			}
+
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "ExitStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteExitStepDetails(&sv.ExitStepDetails, value); err != nil {
+				return err
+			}
+
+		case "GeometryOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GeometryOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "KeepStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteKeepStepDetails(&sv.KeepStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RampStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRampStepDetails(&sv.RampStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutEnterStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(&sv.RoundaboutEnterStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutExitStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(&sv.RoundaboutExitStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutPassStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(&sv.RoundaboutPassStepDetails, value); err != nil {
+				return err
+			}
+
+		case "TurnStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteTurnStepDetails(&sv.TurnStepDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteRentalTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteRentalTravelStepType(jtv)
+			}
+
+		case "UTurnStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteUTurnStepDetails(&sv.UTurnStepDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteRentalTravelStepList(v *[]types.RouteRentalTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteRentalTravelStep
+	if *v == nil {
+		cv = []types.RouteRentalTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteRentalTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteRentalTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6386,6 +7728,60 @@ func awsRestjson1_deserializeDocumentRouteSpanTruckAccessAttributeList(v *[]type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRouteStationDetails(v **types.RouteStationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteStationDetails
+	if *v == nil {
+		sv = &types.RouteStationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Accessibility":
+			if err := awsRestjson1_deserializeDocumentRouteAccessibilityAvailabilityDetails(&sv.Accessibility, value); err != nil {
+				return err
+			}
+
+		case "PlatformName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.PlatformName = ptr.String(jtv)
+			}
+
+		case "ShortName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.ShortName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRouteSummary(v **types.RouteSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6445,6 +7841,1013 @@ func awsRestjson1_deserializeDocumentRouteSummary(v **types.RouteSummary, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiAfterTravelStep(v **types.RouteTaxiAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiAfterTravelStep
+	if *v == nil {
+		sv = &types.RouteTaxiAfterTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiAfterTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTaxiAfterTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiAfterTravelStepList(v *[]types.RouteTaxiAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTaxiAfterTravelStep
+	if *v == nil {
+		cv = []types.RouteTaxiAfterTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTaxiAfterTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTaxiAfterTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiAgency(v **types.RouteTaxiAgency, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiAgency
+	if *v == nil {
+		sv = &types.RouteTaxiAgency{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiArrival(v **types.RouteTaxiArrival, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiArrival
+	if *v == nil {
+		sv = &types.RouteTaxiArrival{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiBeforeTravelStep(v **types.RouteTaxiBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiBeforeTravelStep
+	if *v == nil {
+		sv = &types.RouteTaxiBeforeTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiBeforeTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTaxiBeforeTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiBeforeTravelStepList(v *[]types.RouteTaxiBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTaxiBeforeTravelStep
+	if *v == nil {
+		cv = []types.RouteTaxiBeforeTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTaxiBeforeTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTaxiBeforeTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiDeparture(v **types.RouteTaxiDeparture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiDeparture
+	if *v == nil {
+		sv = &types.RouteTaxiDeparture{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiLegDetails(v **types.RouteTaxiLegDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiLegDetails
+	if *v == nil {
+		sv = &types.RouteTaxiLegDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AfterTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "Agency":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiAgency(&sv.Agency, value); err != nil {
+				return err
+			}
+
+		case "Arrival":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiArrival(&sv.Arrival, value); err != nil {
+				return err
+			}
+
+		case "Attributions":
+			if err := awsRestjson1_deserializeDocumentRouteAttributionList(&sv.Attributions, value); err != nil {
+				return err
+			}
+
+		case "BeforeTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiBeforeTravelStepList(&sv.BeforeTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "BookingWebLinks":
+			if err := awsRestjson1_deserializeDocumentRouteWebLinkList(&sv.BookingWebLinks, value); err != nil {
+				return err
+			}
+
+		case "Departure":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiDeparture(&sv.Departure, value); err != nil {
+				return err
+			}
+
+		case "Notices":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiNoticeList(&sv.Notices, value); err != nil {
+				return err
+			}
+
+		case "Summary":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiSummary(&sv.Summary, value); err != nil {
+				return err
+			}
+
+		case "Transport":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiTransportModeDetails(&sv.Transport, value); err != nil {
+				return err
+			}
+
+		case "TravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiTravelStepList(&sv.TravelSteps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiNotice(v **types.RouteTaxiNotice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiNotice
+	if *v == nil {
+		sv = &types.RouteTaxiNotice{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiNoticeCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.RouteTaxiNoticeCode(jtv)
+			}
+
+		case "Impact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteNoticeImpact to be of type string, got %T instead", value)
+				}
+				sv.Impact = types.RouteNoticeImpact(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiNoticeList(v *[]types.RouteTaxiNotice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTaxiNotice
+	if *v == nil {
+		cv = []types.RouteTaxiNotice{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTaxiNotice
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTaxiNotice(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiOverviewSummary(v **types.RouteTaxiOverviewSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiOverviewSummary
+	if *v == nil {
+		sv = &types.RouteTaxiOverviewSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiPlace(v **types.RouteTaxiPlace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiPlace
+	if *v == nil {
+		sv = &types.RouteTaxiPlace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessPointDetails":
+			if err := awsRestjson1_deserializeDocumentRouteAccessPointDetails(&sv.AccessPointDetails, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OriginalPosition":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
+				return err
+			}
+
+		case "Position":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "StationDetails":
+			if err := awsRestjson1_deserializeDocumentRouteStationDetails(&sv.StationDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiPlaceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTaxiPlaceType(jtv)
+			}
+
+		case "WaypointIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaypointIndex = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiSummary(v **types.RouteTaxiSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiSummary
+	if *v == nil {
+		sv = &types.RouteTaxiSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Overview":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiOverviewSummary(&sv.Overview, value); err != nil {
+				return err
+			}
+
+		case "TravelOnly":
+			if err := awsRestjson1_deserializeDocumentRouteTaxiTravelOnlySummary(&sv.TravelOnly, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiTransportModeDetails(v **types.RouteTaxiTransportModeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiTransportModeDetails
+	if *v == nil {
+		sv = &types.RouteTaxiTransportModeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableSeats":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableSeats = ptr.Int32(int32(i64))
+			}
+
+		case "Category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Category = ptr.String(jtv)
+			}
+
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteEngineType to be of type string, got %T instead", value)
+				}
+				sv.Engine = types.RouteEngineType(jtv)
+			}
+
+		case "LicensePlate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.LicensePlate = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.RouteTaxiMode(jtv)
+			}
+
+		case "Model":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Model = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TextColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.TextColor = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiTravelOnlySummary(v **types.RouteTaxiTravelOnlySummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiTravelOnlySummary
+	if *v == nil {
+		sv = &types.RouteTaxiTravelOnlySummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiTravelStep(v **types.RouteTaxiTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTaxiTravelStep
+	if *v == nil {
+		sv = &types.RouteTaxiTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContinueStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteContinueStepDetails(&sv.ContinueStepDetails, value); err != nil {
+				return err
+			}
+
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "ExitStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteExitStepDetails(&sv.ExitStepDetails, value); err != nil {
+				return err
+			}
+
+		case "GeometryOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GeometryOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "KeepStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteKeepStepDetails(&sv.KeepStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RampStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRampStepDetails(&sv.RampStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutEnterStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(&sv.RoundaboutEnterStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutExitStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(&sv.RoundaboutExitStepDetails, value); err != nil {
+				return err
+			}
+
+		case "RoundaboutPassStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(&sv.RoundaboutPassStepDetails, value); err != nil {
+				return err
+			}
+
+		case "TurnStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteTurnStepDetails(&sv.TurnStepDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTaxiTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTaxiTravelStepType(jtv)
+			}
+
+		case "UTurnStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteUTurnStepDetails(&sv.UTurnStepDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTaxiTravelStepList(v *[]types.RouteTaxiTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTaxiTravelStep
+	if *v == nil {
+		cv = []types.RouteTaxiTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTaxiTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTaxiTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -7318,6 +9721,1513 @@ func awsRestjson1_deserializeDocumentRouteTollSystemList(v *[]types.RouteTollSys
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRouteTransitAfterTravelStep(v **types.RouteTransitAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitAfterTravelStep
+	if *v == nil {
+		sv = &types.RouteTransitAfterTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitAfterTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTransitAfterTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitAfterTravelStepList(v *[]types.RouteTransitAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitAfterTravelStep
+	if *v == nil {
+		cv = []types.RouteTransitAfterTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitAfterTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitAfterTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitAgency(v **types.RouteTransitAgency, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitAgency
+	if *v == nil {
+		sv = &types.RouteTransitAgency{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitArrival(v **types.RouteTransitArrival, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitArrival
+	if *v == nil {
+		sv = &types.RouteTransitArrival{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delay":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Delay = ptr.Int64(i64)
+			}
+
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteTransitPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitTripStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RouteTransitTripStatus(jtv)
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitBeforeTravelStep(v **types.RouteTransitBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitBeforeTravelStep
+	if *v == nil {
+		sv = &types.RouteTransitBeforeTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitBeforeTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTransitBeforeTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitBeforeTravelStepList(v *[]types.RouteTransitBeforeTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitBeforeTravelStep
+	if *v == nil {
+		cv = []types.RouteTransitBeforeTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitBeforeTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitBeforeTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitDeparture(v **types.RouteTransitDeparture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitDeparture
+	if *v == nil {
+		sv = &types.RouteTransitDeparture{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delay":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Delay = ptr.Int64(i64)
+			}
+
+		case "Place":
+			if err := awsRestjson1_deserializeDocumentRouteTransitPlace(&sv.Place, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitTripStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RouteTransitTripStatus(jtv)
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitIncident(v **types.RouteTransitIncident, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitIncident
+	if *v == nil {
+		sv = &types.RouteTransitIncident{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "Effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitIncidentEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.RouteTransitIncidentEffect(jtv)
+			}
+
+		case "EndTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.EndTime = ptr.String(jtv)
+			}
+
+		case "StartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitIncidentType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTransitIncidentType(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitIncidentList(v *[]types.RouteTransitIncident, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitIncident
+	if *v == nil {
+		cv = []types.RouteTransitIncident{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitIncident
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitIncident(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitIntermediateStop(v **types.RouteTransitIntermediateStop, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitIntermediateStop
+	if *v == nil {
+		sv = &types.RouteTransitIntermediateStop{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Attributes":
+			if err := awsRestjson1_deserializeDocumentRouteTransitIntermediateStopAttributeList(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "Departure":
+			if err := awsRestjson1_deserializeDocumentRouteTransitDeparture(&sv.Departure, value); err != nil {
+				return err
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "GeometryOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GeometryOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Transport":
+			if err := awsRestjson1_deserializeDocumentRouteTransitTransportModeDetails(&sv.Transport, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitIntermediateStopAttributeList(v *[]types.RouteTransitIntermediateStopAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitIntermediateStopAttribute
+	if *v == nil {
+		cv = []types.RouteTransitIntermediateStopAttribute{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitIntermediateStopAttribute
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RouteTransitIntermediateStopAttribute to be of type string, got %T instead", value)
+			}
+			col = types.RouteTransitIntermediateStopAttribute(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitIntermediateStopList(v *[]types.RouteTransitIntermediateStop, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitIntermediateStop
+	if *v == nil {
+		cv = []types.RouteTransitIntermediateStop{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitIntermediateStop
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitIntermediateStop(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitLegDetails(v **types.RouteTransitLegDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitLegDetails
+	if *v == nil {
+		sv = &types.RouteTransitLegDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AfterTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTransitAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "Agency":
+			if err := awsRestjson1_deserializeDocumentRouteTransitAgency(&sv.Agency, value); err != nil {
+				return err
+			}
+
+		case "Arrival":
+			if err := awsRestjson1_deserializeDocumentRouteTransitArrival(&sv.Arrival, value); err != nil {
+				return err
+			}
+
+		case "Attributions":
+			if err := awsRestjson1_deserializeDocumentRouteAttributionList(&sv.Attributions, value); err != nil {
+				return err
+			}
+
+		case "BeforeTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTransitBeforeTravelStepList(&sv.BeforeTravelSteps, value); err != nil {
+				return err
+			}
+
+		case "BookingWebLinks":
+			if err := awsRestjson1_deserializeDocumentRouteWebLinkList(&sv.BookingWebLinks, value); err != nil {
+				return err
+			}
+
+		case "Departure":
+			if err := awsRestjson1_deserializeDocumentRouteTransitDeparture(&sv.Departure, value); err != nil {
+				return err
+			}
+
+		case "Incidents":
+			if err := awsRestjson1_deserializeDocumentRouteTransitIncidentList(&sv.Incidents, value); err != nil {
+				return err
+			}
+
+		case "IntermediateStops":
+			if err := awsRestjson1_deserializeDocumentRouteTransitIntermediateStopList(&sv.IntermediateStops, value); err != nil {
+				return err
+			}
+
+		case "NextDepartures":
+			if err := awsRestjson1_deserializeDocumentRouteTransitNextDepartureList(&sv.NextDepartures, value); err != nil {
+				return err
+			}
+
+		case "Notices":
+			if err := awsRestjson1_deserializeDocumentRouteTransitNoticeList(&sv.Notices, value); err != nil {
+				return err
+			}
+
+		case "PassThroughWaypoints":
+			if err := awsRestjson1_deserializeDocumentRoutePassThroughWaypointList(&sv.PassThroughWaypoints, value); err != nil {
+				return err
+			}
+
+		case "Spans":
+			if err := awsRestjson1_deserializeDocumentRouteTransitSpanList(&sv.Spans, value); err != nil {
+				return err
+			}
+
+		case "Summary":
+			if err := awsRestjson1_deserializeDocumentRouteTransitSummary(&sv.Summary, value); err != nil {
+				return err
+			}
+
+		case "Transport":
+			if err := awsRestjson1_deserializeDocumentRouteTransitTransportModeDetails(&sv.Transport, value); err != nil {
+				return err
+			}
+
+		case "TravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteTransitTravelStepList(&sv.TravelSteps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitNextDeparture(v **types.RouteTransitNextDeparture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitNextDeparture
+	if *v == nil {
+		sv = &types.RouteTransitNextDeparture{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delay":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Delay = ptr.Int64(i64)
+			}
+
+		case "PlatformName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.PlatformName = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitTripStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RouteTransitTripStatus(jtv)
+			}
+
+		case "Time":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampWithTimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.Time = ptr.String(jtv)
+			}
+
+		case "Transport":
+			if err := awsRestjson1_deserializeDocumentRouteTransitTransportModeDetails(&sv.Transport, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitNextDepartureList(v *[]types.RouteTransitNextDeparture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitNextDeparture
+	if *v == nil {
+		cv = []types.RouteTransitNextDeparture{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitNextDeparture
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitNextDeparture(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitNotice(v **types.RouteTransitNotice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitNotice
+	if *v == nil {
+		sv = &types.RouteTransitNotice{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitNoticeCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.RouteTransitNoticeCode(jtv)
+			}
+
+		case "Impact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteNoticeImpact to be of type string, got %T instead", value)
+				}
+				sv.Impact = types.RouteNoticeImpact(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitNoticeList(v *[]types.RouteTransitNotice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitNotice
+	if *v == nil {
+		cv = []types.RouteTransitNotice{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitNotice
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitNotice(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitOverviewSummary(v **types.RouteTransitOverviewSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitOverviewSummary
+	if *v == nil {
+		sv = &types.RouteTransitOverviewSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitPlace(v **types.RouteTransitPlace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitPlace
+	if *v == nil {
+		sv = &types.RouteTransitPlace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OriginalPosition":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
+				return err
+			}
+
+		case "Position":
+			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "StationDetails":
+			if err := awsRestjson1_deserializeDocumentRouteStationDetails(&sv.StationDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitPlaceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTransitPlaceType(jtv)
+			}
+
+		case "WaypointIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SensitiveInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaypointIndex = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitSpan(v **types.RouteTransitSpan, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitSpan
+	if *v == nil {
+		sv = &types.RouteTransitSpan{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Country":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CountryCode3 to be of type string, got %T instead", value)
+				}
+				sv.Country = ptr.String(jtv)
+			}
+
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "GeometryOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GeometryOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Names":
+			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Names, value); err != nil {
+				return err
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitSpanList(v *[]types.RouteTransitSpan, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitSpan
+	if *v == nil {
+		cv = []types.RouteTransitSpan{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitSpan
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitSpan(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitSummary(v **types.RouteTransitSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitSummary
+	if *v == nil {
+		sv = &types.RouteTransitSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Overview":
+			if err := awsRestjson1_deserializeDocumentRouteTransitOverviewSummary(&sv.Overview, value); err != nil {
+				return err
+			}
+
+		case "TravelOnly":
+			if err := awsRestjson1_deserializeDocumentRouteTransitTravelOnlySummary(&sv.TravelOnly, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitTransportModeDetails(v **types.RouteTransitTransportModeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitTransportModeDetails
+	if *v == nil {
+		sv = &types.RouteTransitTransportModeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Accessibility":
+			if err := awsRestjson1_deserializeDocumentRouteAccessibilityAvailabilityDetails(&sv.Accessibility, value); err != nil {
+				return err
+			}
+
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "Headsign":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Headsign = ptr.String(jtv)
+			}
+
+		case "LongRouteName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.LongRouteName = ptr.String(jtv)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.RouteTransitMode(jtv)
+			}
+
+		case "RouteName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.RouteName = ptr.String(jtv)
+			}
+
+		case "ShortRouteName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.ShortRouteName = ptr.String(jtv)
+			}
+
+		case "TextColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.TextColor = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitTravelOnlySummary(v **types.RouteTransitTravelOnlySummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitTravelOnlySummary
+	if *v == nil {
+		sv = &types.RouteTransitTravelOnlySummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitTravelStep(v **types.RouteTransitTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteTransitTravelStep
+	if *v == nil {
+		sv = &types.RouteTransitTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Distance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DistanceMeters to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Distance = ptr.Int64(i64)
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "GeometryOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GeometryOffset = ptr.Int32(int32(i64))
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTransitTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteTransitTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteTransitTravelStepList(v *[]types.RouteTransitTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteTransitTravelStep
+	if *v == nil {
+		cv = []types.RouteTransitTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteTransitTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteTransitTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRouteTransponder(v **types.RouteTransponder, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7568,6 +11478,107 @@ func awsRestjson1_deserializeDocumentRouteUTurnStepDetails(v **types.RouteUTurnS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRouteVehicleAfterTravelStep(v **types.RouteVehicleAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteVehicleAfterTravelStep
+	if *v == nil {
+		sv = &types.RouteVehicleAfterTravelStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChargeStepDetails":
+			if err := awsRestjson1_deserializeDocumentRouteChargeStepDetails(&sv.ChargeStepDetails, value); err != nil {
+				return err
+			}
+
+		case "Duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = ptr.Int64(i64)
+			}
+
+		case "Instruction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Instruction = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteVehicleAfterTravelStepType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteVehicleAfterTravelStepType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteVehicleAfterTravelStepList(v *[]types.RouteVehicleAfterTravelStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteVehicleAfterTravelStep
+	if *v == nil {
+		cv = []types.RouteVehicleAfterTravelStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteVehicleAfterTravelStep
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteVehicleAfterTravelStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRouteVehicleArrival(v **types.RouteVehicleArrival, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7790,6 +11801,11 @@ func awsRestjson1_deserializeDocumentRouteVehicleLegDetails(v **types.RouteVehic
 
 	for key, value := range shape {
 		switch key {
+		case "AfterTravelSteps":
+			if err := awsRestjson1_deserializeDocumentRouteVehicleAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
+				return err
+			}
+
 		case "Arrival":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleArrival(&sv.Arrival, value); err != nil {
 				return err
@@ -8131,6 +12147,11 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 
 	for key, value := range shape {
 		switch key {
+		case "AccessPointDetails":
+			if err := awsRestjson1_deserializeDocumentRouteAccessPointDetails(&sv.AccessPointDetails, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8157,6 +12178,20 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 					return fmt.Errorf("expected RouteSideOfStreet to be of type string, got %T instead", value)
 				}
 				sv.SideOfStreet = types.RouteSideOfStreet(jtv)
+			}
+
+		case "StationDetails":
+			if err := awsRestjson1_deserializeDocumentRouteStationDetails(&sv.StationDetails, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteVehiclePlaceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RouteVehiclePlaceType(jtv)
 			}
 
 		case "WaypointIndex":
@@ -8932,6 +12967,107 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteWebLink(v **types.RouteWebLink, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteWebLink
+	if *v == nil {
+		sv = &types.RouteWebLink{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AnchorText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.AnchorText = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "DeviceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteWebLinkDeviceType to be of type string, got %T instead", value)
+				}
+				sv.DeviceType = types.RouteWebLinkDeviceType(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteWebLinkList(v *[]types.RouteWebLink, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteWebLink
+	if *v == nil {
+		cv = []types.RouteWebLink{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteWebLink
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteWebLink(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

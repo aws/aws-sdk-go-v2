@@ -461,6 +461,31 @@ type ClipRange struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a CUSTOM_OUTPUT function. MediaTailor evaluates the
+// output expressions against the current session state and commits the results as
+// output bindings. CUSTOM_OUTPUT functions do not make external calls. For more
+// information, see [CUSTOM_OUTPUT]in the MediaTailor User Guide.
+//
+// [CUSTOM_OUTPUT]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-custom-output.html
+type CustomOutputConfiguration struct {
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// A map of output bindings. Each key is a namespaced output path (such as
+	// player_params.device_type or temp.variant ), and each value is an expression
+	// that MediaTailor evaluates at runtime against the current session state. For
+	// more information about expression syntax, see [JSONata expression reference]in the MediaTailor User Guide.
+	//
+	// [JSONata expression reference]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+	Output map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for DASH content.
 type DashConfiguration struct {
 
@@ -547,6 +572,59 @@ type DefaultSegmentDeliveryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// -- Define Mixin --
+type Function struct {
+
+	// The identifier of the function.
+	//
+	// This member is required.
+	FunctionId *string
+
+	// The type of the function.
+	//
+	// This member is required.
+	FunctionType FunctionType
+
+	// The Amazon Resource Name (ARN) of the function.
+	Arn *string
+
+	// The configuration for a CUSTOM_OUTPUT function.
+	CustomOutputConfiguration *CustomOutputConfiguration
+
+	// A description of the function.
+	Description *string
+
+	// The configuration for an HTTP_REQUEST function.
+	HttpRequestConfiguration *HttpRequestConfiguration
+
+	// The configuration for a SEQUENTIAL_EXECUTOR function.
+	SequentialExecutorConfiguration *SequentialExecutorConfiguration
+
+	// The tags assigned to the function. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a child function within a SEQUENTIAL_EXECUTOR function.
+type FunctionRef struct {
+
+	// The identifier of the child function to execute in this step.
+	FunctionId *string
+
+	// An optional expression that evaluates to a boolean. MediaTailor evaluates this
+	// expression immediately before running the step, using the accumulated state at
+	// that point in the sequence. If the expression evaluates to false , MediaTailor
+	// skips the step and moves to the next one. If omitted, the step always runs.
+	RunCondition *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for HLS content.
 type HlsConfiguration struct {
 
@@ -628,6 +706,55 @@ type HttpRequest struct {
 	// The HTTP method to use when making requests to the ad decision server.
 	// Supported values are GET and POST .
 	Method Method
+
+	noSmithyDocumentSerde
+}
+
+// -- Function Configuration DataStructure
+type HttpRequestConfiguration struct {
+
+	// The HTTP method for the request. Valid values: GET and POST .
+	//
+	// This member is required.
+	MethodType MethodType
+
+	// The maximum time, in milliseconds, that MediaTailor waits for a response from
+	// the external service. If the call exceeds this timeout, MediaTailor sets the
+	// response status code to null and proceeds with output expression evaluation.
+	// Valid values: 100 to 2000 .
+	//
+	// This member is required.
+	RequestTimeoutMilliseconds *int32
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// An expression that evaluates to the request URL. Use {%...%} delimiters for
+	// dynamic expressions. The maximum length after evaluation is 2,048 characters.
+	//
+	// This member is required.
+	Url *string
+
+	// An expression that evaluates to the request body. Used with POST requests. The
+	// maximum size after evaluation is 64 KB.
+	Body *string
+
+	// A map of HTTP header names to expression values. MediaTailor evaluates each
+	// header value expression at runtime and includes the result in the outbound HTTP
+	// request. Maximum 50 headers.
+	Headers map[string]string
+
+	// A map of output bindings. Each key is a namespaced output path (such as
+	// player_params.device_type or temp.identity ), and each value is an expression
+	// that MediaTailor evaluates at runtime. Output expressions in an HTTP_REQUEST
+	// function can reference the response object returned by the HTTP call. For more
+	// information about expression syntax, see [JSONata expression reference]in the MediaTailor User Guide.
+	//
+	// [JSONata expression reference]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+	Output map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -787,6 +914,11 @@ type ManifestServiceInteractionLog struct {
 	// playback sessions that are initialized with this configuration.
 	ExcludeEventTypes []ManifestServiceExcludeEventType
 
+	// Indicates that MediaTailor will emit the selected events in the logs for
+	// playback sessions that are initialized with this configuration. These events are
+	// not emitted by default and must be explicitly opted in.
+	PublishOptInEventTypes []ManifestServicePublishOptInEventType
+
 	noSmithyDocumentSerde
 }
 
@@ -838,6 +970,14 @@ type PlaybackConfiguration struct {
 
 	// The configuration for a DASH source.
 	DashConfiguration *DashConfiguration
+
+	// A map of lifecycle hook event names to function identifiers. The function
+	// mapping specifies which function MediaTailor executes at each lifecycle hook
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
+	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	//
+	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+	FunctionMapping map[string]string
 
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration
@@ -1343,6 +1483,43 @@ type SegmentDeliveryConfiguration struct {
 	// A unique identifier used to distinguish between multiple segment delivery
 	// configurations in a source location.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a SEQUENTIAL_EXECUTOR function. A SEQUENTIAL_EXECUTOR
+// runs a sequence of child functions in order, passing data between steps through
+// temporary data. For more information, see [SEQUENTIAL_EXECUTOR]in the MediaTailor User Guide.
+//
+// [SEQUENTIAL_EXECUTOR]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-sequential-executor.html
+type SequentialExecutorConfiguration struct {
+
+	// An ordered list of 1 to 10 steps. Each step specifies a child function to
+	// execute and an optional run condition expression that controls whether the step
+	// runs. MediaTailor executes steps in order, passing data between steps through
+	// temporary data.
+	//
+	// This member is required.
+	FunctionList []FunctionRef
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// The maximum time, in milliseconds, for the entire sequence to complete. This
+	// timeout covers all steps, including any HTTP calls made by child functions. If
+	// the sequence exceeds this timeout, MediaTailor discards all output from the
+	// sequence and proceeds with default behavior.
+	//
+	// This member is required.
+	TimeoutMilliseconds *int32
+
+	// An optional map of output bindings that controls which bindings the sequence
+	// commits to the session state after all steps complete. If omitted, MediaTailor
+	// commits all accumulated output bindings from all child steps.
+	Output map[string]string
 
 	noSmithyDocumentSerde
 }

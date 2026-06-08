@@ -110,6 +110,7 @@ type ConversationRole string
 const (
 	ConversationRoleUser      ConversationRole = "user"
 	ConversationRoleAssistant ConversationRole = "assistant"
+	ConversationRoleSystem    ConversationRole = "system"
 )
 
 // Values returns all known values for ConversationRole. Note that this can be
@@ -120,6 +121,7 @@ func (ConversationRole) Values() []ConversationRole {
 	return []ConversationRole{
 		"user",
 		"assistant",
+		"system",
 	}
 }
 

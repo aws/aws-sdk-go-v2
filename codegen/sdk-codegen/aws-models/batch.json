@@ -186,6 +186,242 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://batch.amazonaws.com/doc/2016-08-10/"
                 },
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://batch-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://fips.batch.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://batch.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://batch-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://batch.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://batch.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 15,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEMAAAABQX14QoF9eELAAAABAAAAAwAAAAJAAAABgAAAAoF9eEJAAAABwX14QYAAAALAAAACAX14QcF9eEIAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1767,7 +2003,7 @@
                 "state": {
                     "target": "com.amazonaws.batch#CEState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or\n    <code>DISABLED</code>.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n   from an associated job queue on the compute resources within the environment. If the compute\n   environment is managed, then it can scale its instances out or in automatically based on the job\n   queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n   jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n   continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n   don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n    charges. To prevent additional charges, turn off and then delete the compute environment. For\n    more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state\">State</a> in the <i>Batch User Guide</i>.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n   However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n   instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n   value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n   instance.</p>"
+                        "smithy.api#documentation": "<p>The state of the compute environment. The valid values are <code>ENABLED</code> or\n    <code>DISABLED</code>.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n   from an associated job queue on the compute resources within the environment. If the compute\n   environment is managed, then it can scale its instances out or in automatically based on the job\n   queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n   jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n   continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n   don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n    charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n   However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n   instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n   value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n   instance.</p>"
                     }
                 },
                 "status": {
@@ -1879,7 +2115,7 @@
                 "allocationStrategy": {
                     "target": "com.amazonaws.batch#CRAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allocation strategy to use for the compute resource if not enough instances of the best\n   fitting instance type can be allocated. This might be because of availability of the instance\n   type in the Region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. For more\n   information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html\">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <dl>\n            <dt>BEST_FIT (default)</dt>\n            <dd>\n               <p>Batch selects an instance type that best fits the needs of the jobs with a preference\n      for the lowest-cost instance type. If additional instances of the selected instance type\n      aren't available, Batch waits for the additional instances to be available. If there aren't\n      enough instances available or the user is reaching <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>,\n      additional jobs aren't run until the currently running jobs are completed. This allocation\n      strategy keeps costs lower but can limit scaling. If you're using Spot Fleets with\n       <code>BEST_FIT</code>, the Spot Fleet IAM Role must be specified. Compute resources that use\n      a <code>BEST_FIT</code> allocation strategy don't support infrastructure updates and can't\n      update some parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute environments</a> in\n      the <i>Batch User Guide</i>.</p>\n            </dd>\n            <dt>BEST_FIT_PROGRESSIVE</dt>\n            <dd>\n               <p>Batch selects additional instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If\n      additional instances of the previously selected instance types aren't available, Batch\n      selects new instance types.</p>\n            </dd>\n            <dt>SPOT_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>Batch selects one or more instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types that are less likely to be\n      interrupted. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n            <dt>SPOT_PRICE_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>The price and capacity optimized allocation strategy looks at both price and capacity to\n      select the Spot Instance pools that are the least likely to be interrupted and have the lowest\n      possible price. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n         </dl>\n         <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and\n    <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot \n    Instances, and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to \n    exceed <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never \n    exceeds <code>maxvCpus</code> by more than a single instance.</p>"
+                        "smithy.api#documentation": "<p>The allocation strategy to use for the compute resource if not enough instances of the best\n fitting instance type can be allocated. This might be because of availability of the instance\n type in the Region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. For more\n information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html\">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <note>\n            <p>This parameter is required for Amazon EKS compute environments. For Amazon ECS compute environments,\n     if this parameter isn't specified, the <code>BEST_FIT</code> allocation strategy is used by\n     default.</p>\n         </note>\n         <dl>\n            <dt>BEST_FIT (default)</dt>\n            <dd>\n               <p>Batch selects an instance type that best fits the needs of the jobs with a preference\n      for the lowest-cost instance type. If additional instances of the selected instance type\n      aren't available, Batch waits for the additional instances to be available. If there aren't\n      enough instances available or the user is reaching <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>,\n      additional jobs aren't run until the currently running jobs are completed. This allocation\n      strategy keeps costs lower but can limit scaling. If you're using Spot Fleets with\n       <code>BEST_FIT</code>, the Spot Fleet IAM Role must be specified. Compute resources that use\n      a <code>BEST_FIT</code> allocation strategy don't support infrastructure updates and can't\n      update some parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute environments</a> in\n      the <i>Batch User Guide</i>.</p>\n            </dd>\n            <dt>BEST_FIT_PROGRESSIVE</dt>\n            <dd>\n               <p>Batch selects additional instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If\n      additional instances of the previously selected instance types aren't available, Batch\n      selects new instance types.</p>\n            </dd>\n            <dt>SPOT_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>Batch selects one or more instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types that are less likely to be\n      interrupted. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n            <dt>SPOT_PRICE_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>The price and capacity optimized allocation strategy looks at both price and capacity to\n      select the Spot Instance pools that are the least likely to be interrupted and have the lowest\n      possible price. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n         </dl>\n         <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and\n    <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot \n    Instances, and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to \n    exceed <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never \n    exceeds <code>maxvCpus</code> by more than a single instance.</p>"
                     }
                 },
                 "minvCpus": {
@@ -1905,7 +2141,7 @@
                 "instanceTypes": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instances types that can be launched. You can specify instance families to launch any\n   instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can\n   specify specific sizes within a family (such as <code>c5.8xlarge</code>). </p>\n         <p>Batch can select the instance type for you if you choose one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>optimal</code> to select instance types (from the <code>c4</code>, <code>m4</code>,\n    <code>r4</code>, <code>c5</code>, <code>m5</code>, and <code>r5</code>\n    instance families) that match the demand of your job queues. </p>\n            </li>\n            <li>\n               <p>\n                  <code>default_x86_64</code> to choose x86 based instance types (from the <code>m6i</code>,\n     <code>c6i</code>, <code>r6i</code>, and <code>c7i</code> instance families) that matches the resource demands of the job queue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>default_arm64</code> to choose ARM based instance types (from the <code>m6g</code>,\n     <code>c6g</code>, <code>r6g</code>, and <code>c7g</code> instance families) that matches the resource demands of the job queue.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Starting on 11/01/2025 the behavior of <code>optimal</code> is going to be changed to match\n     <code>default_x86_64</code>.  During the change your instance families could be updated to a\n    newer generation. You do not need to perform any actions for the upgrade to happen. For more\n    information about change, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html\">Optimal instance type configuration to receive automatic instance family\n    updates</a>.</p>\n         </note>\n         <note>\n            <p>Instance family availability varies by Amazon Web Services Region. For example, some Amazon Web Services Regions may not have any fourth generation instance families but have fifth and\n    sixth generation instance families.</p>\n            <p>When using <code>default_x86_64</code> or <code>default_arm64</code> instance bundles,\n    Batch selects instance families based on a balance of cost-effectiveness and performance.\n    While newer generation instances often provide better price-performance, Batch may choose an\n    earlier generation instance family if it provides the optimal combination of availability, cost,\n    and performance for your workload. For example, in an Amazon Web Services Region where both c6i\n    and c7i instances are available, Batch might select c6i instances if they offer better\n    cost-effectiveness for your specific job requirements. For more information on Batch instance\n    types and Amazon Web Services Region availability, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html\">Instance\n     type compute table</a> in the <i>Batch User Guide</i>.</p>\n            <p>Batch periodically updates your instances in default bundles to newer,\n    more cost-effective options. Updates happen automatically without requiring any\n    action from you. Your workloads continue running during updates with no interruption\n   </p>\n         </note>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <note>\n            <p>When you create a compute environment, the instance types that you select for the compute environment must\n    share the same architecture. For example, you can't mix x86 and ARM instances in the same compute\n    environment.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The instances types that can be launched. You can specify instance families to launch any\n   instance type within those families (for example, <code>c5</code> or <code>p3</code>), or you can\n   specify specific sizes within a family (such as <code>c5.8xlarge</code>).</p>\n         <p>Batch can select the instance type for you if you choose one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>default_x86_64</code> to choose x86 based instance types (from the <code>m6i</code>,\n     <code>c6i</code>, <code>r6i</code>, and <code>c7i</code> instance families) that matches the resource demands of the job queue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>default_arm64</code> to choose ARM based instance types (from the <code>m6g</code>,\n     <code>c6g</code>, <code>r6g</code>, and <code>c7g</code> instance families) that matches the resource demands of the job queue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>optimal</code> Semantically equivalent to <code>default_x86_64</code>, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html\">Optimal instance type configuration to receive automatic instance family\n    updates</a> for details.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Instance family availability varies by Amazon Web Services Region. For example, some Amazon Web Services Regions may not have any fourth generation instance families but have fifth and\n    sixth generation instance families.</p>\n            <p>When using <code>default_x86_64</code> or <code>default_arm64</code> instance bundles,\n    Batch selects instance families based on a balance of cost-effectiveness and performance.\n    While newer generation instances often provide better price-performance, Batch may choose an\n    earlier generation instance family if it provides the optimal combination of availability, cost,\n    and performance for your workload. For example, in an Amazon Web Services Region where both c6i\n    and c7i instances are available, Batch might select c6i instances if they offer better\n    cost-effectiveness for your specific job requirements. For more information on Batch instance\n    types and Amazon Web Services Region availability, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/instance-type-compute-table.html\">Instance\n     type compute table</a> in the <i>Batch User Guide</i>.</p>\n            <p>Batch periodically updates your instances in default bundles to newer,\n    more cost-effective options. Updates happen automatically without requiring any\n    action from you. Your workloads continue running during updates with no interruption\n   </p>\n         </note>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <note>\n            <p>When you create a compute environment, the instance types that you select for the compute environment must\n    share the same architecture. For example, you can't mix x86 and ARM instances in the same compute\n    environment.</p>\n         </note>"
                     }
                 },
                 "imageId": {
@@ -2026,7 +2262,7 @@
                 "allocationStrategy": {
                     "target": "com.amazonaws.batch#CRUpdateAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The allocation strategy to use for the compute resource if there's not enough instances of\n   the best fitting instance type that can be allocated. This might be because of availability of\n   the instance type in the Region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. For more\n   information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html\">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>\n         <p>When updating a compute environment, changing the allocation strategy requires an\n   infrastructure update of the compute environment. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n    environments</a> in the <i>Batch User Guide</i>. <code>BEST_FIT</code> isn't\n   supported when updating a compute environment.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <dl>\n            <dt>BEST_FIT_PROGRESSIVE</dt>\n            <dd>\n               <p>Batch selects additional instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If\n      additional instances of the previously selected instance types aren't available, Batch\n      selects new instance types.</p>\n            </dd>\n            <dt>SPOT_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>Batch selects one or more instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types that are less likely to be\n      interrupted. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n            <dt>SPOT_PRICE_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>The price and capacity optimized allocation strategy looks at both price and capacity to\n      select the Spot Instance pools that are the least likely to be interrupted and have the lowest\n      possible price. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n         </dl>\n         <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and\n    <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot Instances, \n    and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to exceed\n    <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never exceeds\n    <code>maxvCpus</code> by more than a single instance.</p>"
+                        "smithy.api#documentation": "<p>The allocation strategy to use for the compute resource if there's not enough instances of\n the best fitting instance type that can be allocated. This might be because of availability of\n the instance type in the Region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. For more\n information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html\">Allocation strategies</a> in the <i>Batch User Guide</i>.</p>\n         <p>When updating a compute environment, changing the allocation strategy requires an\n infrastructure update of the compute environment. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n environments</a> in the <i>Batch User Guide</i>. <code>BEST_FIT</code> isn't\n supported when updating a compute environment.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>\n         <dl>\n            <dt>BEST_FIT_PROGRESSIVE</dt>\n            <dd>\n               <p>Batch selects additional instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types with lower cost vCPUs. If\n      additional instances of the previously selected instance types aren't available, Batch\n      selects new instance types.</p>\n            </dd>\n            <dt>SPOT_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>Batch selects one or more instance types that are large enough to meet the requirements\n      of the jobs in the queue. Its preference is for instance types that are less likely to be\n      interrupted. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n            <dt>SPOT_PRICE_CAPACITY_OPTIMIZED</dt>\n            <dd>\n               <p>The price and capacity optimized allocation strategy looks at both price and capacity to\n      select the Spot Instance pools that are the least likely to be interrupted and have the lowest\n      possible price. This allocation strategy is only available for Spot Instance compute\n      resources.</p>\n            </dd>\n         </dl>\n         <p>With <code>BEST_FIT_PROGRESSIVE</code>,<code>SPOT_CAPACITY_OPTIMIZED</code> and\n    <code>SPOT_PRICE_CAPACITY_OPTIMIZED</code> (recommended) strategies using On-Demand or Spot Instances, \n    and the <code>BEST_FIT</code> strategy using Spot Instances, Batch might need to exceed\n    <code>maxvCpus</code> to meet your capacity requirements. In this event, Batch never exceeds\n    <code>maxvCpus</code> by more than a single instance.</p>"
                     }
                 },
                 "instanceTypes": {
@@ -2112,7 +2348,7 @@
                 "minScaleDownDelayMinutes": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum time (in minutes) that Batch keeps instances running in the compute environment \n   after their jobs complete. For each instance, the delay period begins when the last job finishes. \n   If no new jobs are placed on the instance during this delay, Batch terminates the instance once \n   the delay expires.</p>\n         <p>Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and disable the scale down delay.</p>\n         <note>\n            <p>The scale down delay does not apply to:</p>\n            <ul>\n               <li>\n                  <p>Instances being replaced during infrastructure updates</p>\n               </li>\n               <li>\n                  <p>Newly launched instances that have not yet run any jobs</p>\n               </li>\n               <li>\n                  <p>Spot instances reclaimed due to interruption</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>The minimum time (in minutes) that Batch keeps instances running in the compute environment \n   after their jobs complete. For each instance, the delay period begins when the last job finishes. \n   If no new jobs are placed on the instance during this delay, Batch terminates the instance once \n   the delay expires.</p>\n         <p>Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and disable the scale down delay.</p>\n         <note>\n            <p>Idle instances retained during the scale-down delay period are billable at standard EC2 pricing.</p>\n         </note>\n         <note>\n            <p>The scale down delay does not apply to:</p>\n            <ul>\n               <li>\n                  <p>Instances being replaced during infrastructure updates</p>\n               </li>\n               <li>\n                  <p>Newly launched instances that have not yet run any jobs</p>\n               </li>\n               <li>\n                  <p>Spot instances reclaimed due to interruption</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },
@@ -2751,7 +2987,7 @@
                 "state": {
                     "target": "com.amazonaws.batch#CEState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the compute environment. If the state is <code>ENABLED</code>, then the\n      compute environment accepts jobs from a queue and can scale out automatically based on\n      queues.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n      from an associated job queue on the compute resources within the environment. If the compute\n      environment is managed, then it can scale its instances out or in automatically, based on the\n      job queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n      jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n      continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n      don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n        charges. To prevent additional charges, turn off and then delete the compute environment.\n        For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state\">State</a> in the <i>Batch User Guide</i>.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n      However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n      instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n      value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n      instance.</p>"
+                        "smithy.api#documentation": "<p>The state of the compute environment. A compute environment must be created in the\n      <code>ENABLED</code> state.</p>\n         <p>If the state is <code>ENABLED</code>, then the\n      compute environment accepts jobs from a queue and can scale out automatically based on\n      queues.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n      from an associated job queue on the compute resources within the environment. If the compute\n      environment is managed, then it can scale its instances out or in automatically, based on the\n      job queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n      jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n      continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n      don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n        charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n      However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n      instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n      value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n      instance.</p>"
                     }
                 },
                 "unmanagedvCpus": {
@@ -2769,7 +3005,7 @@
                 "serviceRole": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make calls to other Amazon Web Services\n      services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html\">Batch service IAM role</a> in the\n        <i>Batch User Guide</i>.</p>\n         <important>\n            <p>If your account already created the Batch service-linked role, that role is used by\n        default for your compute environment unless you specify a different role here. If the\n        Batch service-linked role doesn't exist in your account, and no role is specified here,\n        the service attempts to create the Batch service-linked role in your account.</p>\n         </important>\n         <p>If your specified role has a path other than <code>/</code>, then you must specify either\n      the full role ARN (recommended) or prefix the role name with the path. For example, if a\n      role with the name <code>bar</code> has a path of <code>/foo/</code>, specify\n        <code>/foo/bar</code> as the role name. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly\n        names and paths</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Depending on how you created your Batch service role, its ARN might contain the\n          <code>service-role</code> path prefix. When you only specify the name of the service role,\n        Batch assumes that your ARN doesn't use the <code>service-role</code> path prefix. Because\n        of this, we recommend that you specify the full ARN of your service role when you create\n        compute environments.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make calls to other Amazon Web Services\n      services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html\">Batch service IAM role</a> in the\n        <i>Batch User Guide</i>.</p>\n         <important>\n            <p>If your account already created the Batch service-linked role, that role is used by\n        default for your compute environment unless you specify a different role here. If the\n        Batch service-linked role doesn't exist in your account, and no role is specified here,\n        the service attempts to create the Batch service-linked role in your account.</p>\n            <p>This automatic service-linked role creation only applies to <code>MANAGED</code> compute\n        environments. For <code>UNMANAGED</code> compute environments, you must explicitly specify a\n        <code>serviceRole</code>.</p>\n         </important>\n         <p>If your specified role has a path other than <code>/</code>, then you must specify either\n      the full role ARN (recommended) or prefix the role name with the path. For example, if a\n      role with the name <code>bar</code> has a path of <code>/foo/</code>, specify\n        <code>/foo/bar</code> as the role name. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly\n        names and paths</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Depending on how you created your Batch service role, its ARN might contain the\n          <code>service-role</code> path prefix. When you only specify the name of the service role,\n        Batch assumes that your ARN doesn't use the <code>service-role</code> path prefix. Because\n        of this, we recommend that you specify the full ARN of your service role when you create\n        compute environments.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -6951,7 +7187,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 360
+                    "max": 7200
                 }
             }
         },
@@ -11416,7 +11652,7 @@
                 "state": {
                     "target": "com.amazonaws.batch#CEState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the compute environment. Compute environments in the <code>ENABLED</code>\n      state can accept jobs from a queue and scale in or out automatically based on the workload\n      demand of its associated queues.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n      from an associated job queue on the compute resources within the environment. If the compute\n      environment is managed, then it can scale its instances out or in automatically, based on the\n      job queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n      jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n      continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n      don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n        charges. To prevent additional charges, turn off and then delete the compute environment.\n        For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state\">State</a> in the <i>Batch User Guide</i>.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n      However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n      instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n      value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n      instance.</p>"
+                        "smithy.api#documentation": "<p>The state of the compute environment. Compute environments in the <code>ENABLED</code>\n      state can accept jobs from a queue and scale in or out automatically based on the workload\n      demand of its associated queues.</p>\n         <p>If the state is <code>ENABLED</code>, then the Batch scheduler can attempt to place jobs\n      from an associated job queue on the compute resources within the environment. If the compute\n      environment is managed, then it can scale its instances out or in automatically, based on the\n      job queue demand.</p>\n         <p>If the state is <code>DISABLED</code>, then the Batch scheduler doesn't attempt to place\n      jobs within the environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state\n      continue to progress normally. Managed compute environments in the <code>DISABLED</code> state\n      don't scale out. </p>\n         <note>\n            <p>Compute environments in a <code>DISABLED</code> state may continue to incur billing\n        charges, for example, if they have running instances due to jobs that are still executing or a non-zero <code>minvCpus</code> setting. To prevent additional charges, disable and delete the compute environment.</p>\n         </note>\n         <p>When an instance is idle, the instance scales down to the <code>minvCpus</code> value.\n      However, the instance size doesn't change. For example, consider a <code>c5.8xlarge</code>\n      instance with a <code>minvCpus</code> value of <code>4</code> and a <code>desiredvCpus</code>\n      value of <code>36</code>. This instance doesn't scale down to a <code>c5.large</code>\n      instance.</p>"
                     }
                 },
                 "unmanagedvCpus": {
@@ -11705,7 +11941,7 @@
                 "jobExecutionTimeoutMinutes": {
                     "target": "com.amazonaws.batch#JobExecutionTimeoutMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the job timeout (in minutes) when the compute environment infrastructure is\n   updated. The default value is 30.</p>"
+                        "smithy.api#documentation": "<p>Specifies the job timeout (in minutes) when the compute environment infrastructure is\n   updated. The default value is 30. The maximum value is 7200.</p>\n         <note>\n            <p>Increasing <code>jobExecutionTimeoutMinutes</code> during infrastructure updates delays \n    the replacement of instances with new instances that include updates such as security patches, \n    but provides more time for jobs to execute. Consider the security implications of this tradeoff \n    when setting timeout values.</p>\n         </note>"
                     }
                 }
             },

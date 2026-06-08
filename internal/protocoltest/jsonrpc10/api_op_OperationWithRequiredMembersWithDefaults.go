@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -29,6 +31,22 @@ func (c *Client) OperationWithRequiredMembersWithDefaults(ctx context.Context, p
 
 type OperationWithRequiredMembersWithDefaultsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *OperationWithRequiredMembersWithDefaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithRequiredMembersWithDefaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OperationWithRequiredMembersWithDefaultsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type OperationWithRequiredMembersWithDefaultsOutput struct {
@@ -81,16 +99,68 @@ type OperationWithRequiredMembersWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithRequiredMembersWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationWithRequiredMembersWithDefaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBlob:
+			return d.ReadBlob(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBlob, &v.RequiredBlob)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBoolean:
+			v.RequiredBoolean = new(bool)
+			return d.ReadBool(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBoolean, v.RequiredBoolean)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredByte:
+			v.RequiredByte = new(int8)
+			return d.ReadInt8(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredByte, v.RequiredByte)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredDouble:
+			v.RequiredDouble = new(float64)
+			return d.ReadFloat64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredDouble, v.RequiredDouble)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredEnum:
+			var ev string
+			if err := d.ReadString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredEnum, &ev); err != nil {
+				return err
+			}
+			v.RequiredEnum = types.RequiredEnum(ev)
+			return nil
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredFloat:
+			v.RequiredFloat = new(float32)
+			return d.ReadFloat32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredFloat, v.RequiredFloat)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredIntEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredIntEnum, &ev); err != nil {
+				return err
+			}
+			v.RequiredIntEnum = types.RequiredIntEnum(ev)
+			return nil
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredInteger:
+			v.RequiredInteger = new(int32)
+			return d.ReadInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredInteger, v.RequiredInteger)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList:
+			return deserializeRequiredStringList(d, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList, &v.RequiredList)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredLong:
+			v.RequiredLong = new(int64)
+			return d.ReadInt64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredLong, v.RequiredLong)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap:
+			return deserializeRequiredStringMap(d, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap, &v.RequiredMap)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredShort:
+			v.RequiredShort = new(int16)
+			return d.ReadInt16(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredShort, v.RequiredShort)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredString:
+			v.RequiredString = new(string)
+			return d.ReadString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredString, v.RequiredString)
+		case schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredTimestamp:
+			v.RequiredTimestamp = new(time.Time)
+			return d.ReadTime(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredTimestamp, v.RequiredTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOperationWithRequiredMembersWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpOperationWithRequiredMembersWithDefaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithRequiredMembersWithDefaults, nil, schemas.OperationWithRequiredMembersWithDefaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpOperationWithRequiredMembersWithDefaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithRequiredMembersWithDefaults, nil, schemas.OperationWithRequiredMembersWithDefaultsOutput), output: &OperationWithRequiredMembersWithDefaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithRequiredMembersWithDefaults"); err != nil {

@@ -713,6 +713,9 @@ type LocalTimeZoneConfig struct {
 	// Local TimeZone Detection method list
 	LocalTimeZoneDetection []LocalTimeZoneDetectionType
 
+	// Local TimeZone Detection scope.
+	LocalTimeZoneDetectionScope LocalTimeZoneDetectionScope
+
 	noSmithyDocumentSerde
 }
 

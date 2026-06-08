@@ -115,6 +115,11 @@ type CreateDomainInput struct {
 	// A collection of Domain settings.
 	DomainSettings *types.DomainSettings
 
+	// Indicates whether to create a home EFS file system for the domain. Defaults to
+	// Enabled . Set to Disabled to skip EFS creation and reduce domain creation time.
+	// You can enable EFS later by calling UpdateDomain .
+	HomeEfsFileSystemCreation types.HomeEfsFileSystemCreation
+
 	// Use KmsKeyId .
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.

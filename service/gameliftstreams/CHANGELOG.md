@@ -1,3 +1,42 @@
+# v1.11.11 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+# v1.11.10 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.9 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.8 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.7 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.6 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.5 (2026-05-22)
+
+* **Documentation**: Added new Gen6 stream classes based on the EC2 G6e instance family. These classes are designed for streaming high-fidelity, graphically demanding games and applications that benefit from additional GPU memory and performance.
+
+# v1.11.4 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.3 (2026-04-27)
+
+* **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+
 # v1.11.2 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

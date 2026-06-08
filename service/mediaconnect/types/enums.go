@@ -613,6 +613,25 @@ func (MediaStreamType) Values() []MediaStreamType {
 	}
 }
 
+type NdiOutputTimecodeSource string
+
+// Enum values for NdiOutputTimecodeSource
+const (
+	NdiOutputTimecodeSourceEmbeddedTimecode NdiOutputTimecodeSource = "EMBEDDED_TIMECODE"
+	NdiOutputTimecodeSourceUtcSystemTime    NdiOutputTimecodeSource = "UTC_SYSTEM_TIME"
+)
+
+// Values returns all known values for NdiOutputTimecodeSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NdiOutputTimecodeSource) Values() []NdiOutputTimecodeSource {
+	return []NdiOutputTimecodeSource{
+		"EMBEDDED_TIMECODE",
+		"UTC_SYSTEM_TIME",
+	}
+}
+
 type NdiState string
 
 // Enum values for NdiState

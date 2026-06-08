@@ -20,6 +20,8 @@ import (
 //     $LATEST version of all intents.
 //
 // The operation requires permission for the lex:GetIntents action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetIntents(ctx context.Context, params *GetIntentsInput, optFns ...func(*Options)) (*GetIntentsOutput, error) {
 	if params == nil {
 		params = &GetIntentsInput{}

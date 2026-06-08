@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets metric data from the specified Amazon Connect instance.
+// Gets metric data from the specified Connect Customer instance.
 //
 // GetMetricDataV2 offers more features than [GetMetricData], the previous version of this API.
 // It has new metrics, offers filtering at a metric level, and offers the ability
@@ -21,7 +21,7 @@ import (
 // at varying intervals. It does not support agent queues.
 //
 // For a description of the historical metrics that are supported by
-// GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Amazon Connect Administrator
+// GetMetricDataV2 and GetMetricData , see [Metrics definitions] in the Connect Customer Administrator
 // Guide.
 //
 // When you make a successful API request, you can expect the following metric
@@ -81,24 +81,27 @@ type GetMetricDataV2Input struct {
 	//
 	// The following are valid filter keys for a GetMetricDataV2 request:
 	//
-	// AGENT | AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
-	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
-	// AGENT_HIERARCHY_LEVEL_FIVE | ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS |
-	// BOT_ID | BOT_INTENT_NAME | BOT_LOCALE | BOT_VERSION | CAMPAIGN |
-	// CAMPAIGN_DELIVERY_EVENT_TYPE | CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS |
-	// CASE_TEMPLATE_ARN | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// AGENT | AI_AGENT | AI_AGENT_ID | AI_AGENT_NAME | AI_AGENT_TYPE | AI_PROMPT |
+	// AI_PROMPT_ID | AI_PROMPT_NAME | AI_PROMPT_TYPE | AI_TOOL_ID | AI_TOOL_NAME |
+	// AI_TOOL_TYPE | AI_USE_CASE | AGENT_HIERARCHY_LEVEL_ONE |
+	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
+	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
+	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS | BOT_ID | BOT_INTENT_NAME |
+	// BOT_LOCALE | BOT_VERSION | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
+	// CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS | CASE_TEMPLATE_ARN | CHANNEL |
+	// contact/segmentAttributes/connect:Subtype |
 	// contact/segmentAttributes/connect:ValidationTestType | DISCONNECT_REASON |
 	// EVALUATION_FORM | EVALUATION_QUESTION | EVALUATION_SECTION | EVALUATION_SOURCE
 	// | EVALUATOR_ID | FEATURE | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID
 	// | FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE |
 	// FLOWS_RESOURCE_ID | FORM_VERSION | INITIATING_FLOW | INITIATION_METHOD |
 	// INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
-	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
+	// KNOWLEDGE_BASE_NAME | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	// TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_EXECUTION_RESULT |
-	// TEST_CASE_EXECUTION_STATE
+	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
+	// TEST_CASE_EXECUTION_RESULT | TEST_CASE_EXECUTION_STATE
 	//
-	// The following filter keys correspond to Amazon Connect resources and are used
+	// The following filter keys correspond to Connect Customer resources and are used
 	// for authorizing requests. A GetMetricDataV2 request requires at least one of
 	// these filters:
 	//
@@ -145,7 +148,7 @@ type GetMetricDataV2Input struct {
 	// [Campaign]
 	//   - ARNs are valid filter values for the CAMPAIGN filter key.
 	//
-	//   - To filter by phone number, see [Create a historical metrics report]in the Amazon Connect Administrator Guide.
+	//   - To filter by phone number, see [Create a historical metrics report]in the Connect Customer Administrator Guide.
 	//
 	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
 	// [Campaign]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-outbound-campaigns_Campaign.html
@@ -155,7 +158,7 @@ type GetMetricDataV2Input struct {
 
 	// The metrics to retrieve. Specify the name or metricId, groupings, and filters
 	// for each metric. The following historical metrics are available. For a
-	// description of each metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
+	// description of each metric, see [Metrics definition]in the Connect Customer Administrator Guide.
 	//
 	// MetricId should be used to reference custom metrics or out of the box metrics
 	// as Arn. If using MetricId, the limit is 20 MetricId per request.
@@ -401,7 +404,7 @@ type GetMetricDataV2Input struct {
 	// AVG_HANDLE_TIME Unit: Seconds
 	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+	// Hierarchy, AI Use Case, Feature, contact/segmentAttributes/connect:Subtype,
 	// RoutingStepExpression
 	//
 	// UI name: [Average handle time]
@@ -417,15 +420,17 @@ type GetMetricDataV2Input struct {
 	//
 	// AI_HANDOFF_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [AI Handoff Rate]
 	//
 	// AI_HANDOFFS Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
-	// UI name: [AI Handoffs]
+	// UI name: [AI Handoff Count]
 	//
 	// AI_AGENT_INVOCATION_SUCCESS Unit: Count
 	//
@@ -450,19 +455,39 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Agent
 	// Name Version, AI Use Case, Channel, Queue, Routing Profile
 	//
-	// UI name: [AI Agent Invocations]
+	// UI name: [AI Agent Invocation Count]
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_AGENT_RESPONSE_HELPFUL Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: [AI Agent Response Helpful]
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_AGENT_RESPONSE_NOT_HELPFUL Unit: Count
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile
+	//
+	// UI name: [AI Agent Response Not Helpful]
 	//
 	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
 	// AI_RESPONSE_COMPLETION_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [AI Response Completion Rate]
 	//
 	// AI_INVOLVED_CONTACTS Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [AI Involved Contacts]
 	//
@@ -537,7 +562,8 @@ type GetMetricDataV2Input struct {
 	//
 	// AVG_AI_CONVERSATION_TURNS Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Average AI Conversation Turns]
 	//
@@ -561,6 +587,57 @@ type GetMetricDataV2Input struct {
 	//
 	// AI Agent Name Version is not a valid filter but a valid grouping.
 	//
+	// AI_TOOL_PARAMETER_ACCURACY Unit: Double
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: [AI Tool Parameter Accuracy]
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_TOOL_SELECTION_ACCURACY Unit: Double
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile
+	//
+	// UI name: [AI Tool Selection Accuracy]
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// AI_TOOL_UTILIZATION_ACCURACY Unit: Double
+	//
+	// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+	// Name Version, AI Agent Type, AI Tool ID, AI Tool Name, AI Tool Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [AI Tool Utilization Accuracy]
+	//
+	// AI Agent Name Version is not a valid filter but a valid grouping.
+	//
+	// COMPLETENESS_SCORE Unit: Double
+	//
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [Completeness Score]
+	//
+	// FAITHFULNESS_SCORE Unit: Double
+	//
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [Faithfulness Score]
+	//
+	// GOAL_SUCCESS_RATE Unit: Double
+	//
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile, Session ID
+	//
+	// UI name: [Goal Success Rate]
+	//
 	// KNOWLEDGE_CONTENT_REFERENCES Unit: Count
 	//
 	// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
@@ -570,31 +647,36 @@ type GetMetricDataV2Input struct {
 	//
 	// PROACTIVE_INTENT_ENGAGEMENT_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Proactive Intent Engagement Rate]
 	//
 	// PROACTIVE_INTENT_RESPONSE_RATE Unit: Percent
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Proactive Intent Response Rate]
 	//
 	// PROACTIVE_INTENTS_ANSWERED Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Proactive Intents Answered]
 	//
 	// PROACTIVE_INTENTS_DETECTED Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Proactive Intents Detected]
 	//
 	// PROACTIVE_INTENTS_ENGAGED Unit: Count
 	//
-	// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+	// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Type, AI Use
+	// Case, Channel, Queue, Routing Profile
 	//
 	// UI name: [Proactive Intents Engaged]
 	//
@@ -1461,11 +1543,13 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Callback attempts]
 	//
+	// [AI Tool Parameter Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy
 	// [Contacts transferred out external]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-external
 	// [Average agent greeting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-greeting-time
 	// [Non-talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#non-talk-time-percent
 	// [Agent non-productive time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-productive-time
 	// [AI Handoff Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate
+	// [AI Agent Response Not Helpful]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful
 	// [Contacts created]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-created
 	// [Adherence]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherence
 	// [Customer talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-talk-time-percent
@@ -1486,27 +1570,29 @@ type GetMetricDataV2Input struct {
 	// [Active AI Agents]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents
 	// [Average agent talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-talk-time
 	// [Recipients attempted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-attempted
+	// [AI Agent Invocation Count]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
 	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-interruption-time
+	// [AI Agent Response Helpful]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful
 	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out
 	// [Campaign send attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-attempts
 	// [Average conversation close time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-conversation-close-time
 	// [Proactive Intents Answered]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered
 	// [Average bot conversation time]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#average-bot-conversation-time
+	// [Goal Success Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate
 	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-flow-time
+	// [AI Handoff Count]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
 	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-disconnect
 	// [AI Tool Invocation Success Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate
 	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-holds
 	// [Bot conversations completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed
 	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response-without-customer-abandons
 	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#service-level
-	// [AI Agent Invocations]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations
 	// [Recipients interacted]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted
 	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contact-handle-time
 	// [Average messages]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-messages
 	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-idle-time
 	// [Average customer message length]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-message-length
 	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#adherent-time
-	// [AI Handoffs]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs
 	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-talk-time
 	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
 	// [Average customer response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
@@ -1518,6 +1604,7 @@ type GetMetricDataV2Input struct {
 	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-customer-disconnect
 	// [Human answered]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#human-answered
 	// [Contacts removed from queue in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-removed-from-queue
+	// [AI Tool Selection Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy
 	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-hold-agent-disconnect
 	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-internal
 	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-non-response
@@ -1595,16 +1682,19 @@ type GetMetricDataV2Input struct {
 	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-abandoned-in-x-seconds
 	// [AI Involved Contacts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts
 	// [Average wait time after customer connection]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-wait-time-after-customer-connection
+	// [Completeness Score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score
 	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#current-cases
 	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-answer-time
 	// [AI Response Completion Rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate
 	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#customer-hold-time
+	// [AI Tool Utilization Accuracy]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy
 	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#agent-interaction-and-hold-time
 	// [Delivery attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts
 	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-put-on-hold
 	// [Automatic fails percent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#automatic-fails-percent
 	// [Campaign send exclusions]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-send-exclusions
 	// [Average AI Conversation Turns]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns
+	// [Faithfulness Score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score
 	// [AI Prompt Invocations]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations
 	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#callback-attempts
 	// [Forecasting, capacity planning, and scheduling]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
@@ -1614,7 +1704,7 @@ type GetMetricDataV2Input struct {
 	Metrics []types.MetricV2
 
 	// The Amazon Resource Name (ARN) of the resource. This includes the instanceId an
-	// Amazon Connect instance.
+	// Connect Customer instance.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -1635,7 +1725,10 @@ type GetMetricDataV2Input struct {
 	//
 	// If no grouping is specified, a summary of all metrics is returned.
 	//
-	// Valid grouping keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
+	// Valid grouping keys: AGENT | AI_AGENT | AI_AGENT_ID | AI_AGENT_NAME |
+	// AI_AGENT_NAME_VERSION | AI_AGENT_TYPE | AI_PROMPT | AI_PROMPT_ID |
+	// AI_PROMPT_NAME | AI_PROMPT_NAME_VERSION | AI_PROMPT_TYPE | AI_TOOL_ID |
+	// AI_TOOL_NAME | AI_TOOL_TYPE | AI_USE_CASE | AGENT_HIERARCHY_LEVEL_ONE |
 	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
 	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
 	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
@@ -1646,9 +1739,14 @@ type GetMetricDataV2Input struct {
 	// | EVALUATION_SOURCE | EVALUATOR_ID | FLOWS_RESOURCE_ID |
 	// FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
 	// FORM_VERSION | INITIATION_METHOD | INVOKING_RESOURCE_PUBLISHED_TIMESTAMP |
-	// INVOKING_RESOURCE_TYPE | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
+	// INVOKING_RESOURCE_TYPE | KNOWLEDGE_ARTICLE_NAME | KNOWLEDGE_BASE_NAME |
+	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
-	// TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON | TEST_CASE_INVOCATION_METHOD
+	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
+	// TEST_CASE_INVOCATION_METHOD
+	//
+	// AI_AGENT_NAME_VERSION , AI_PROMPT_NAME_VERSION , and KNOWLEDGE_ARTICLE_NAME are
+	// valid groupings but not valid filters.
 	//
 	// API, SCHEDULE, and EVENT are the only valid filterValues for
 	// TEST_CASE_INVOCATION_METHOD.
@@ -1670,8 +1768,8 @@ type GetMetricDataV2Input struct {
 	//   TOTAL .
 	//
 	// For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and EndTime
-	//   differs by 1 day, then Amazon Connect returns 48 results in the response. Each
-	//   result is aggregated by the THIRTY_MIN period. By default Amazon Connect
+	//   differs by 1 day, then Connect Customer returns 48 results in the response. Each
+	//   result is aggregated by the THIRTY_MIN period. By default Connect Customer
 	//   aggregates results based on the TOTAL interval period.
 	//
 	// The following list describes restrictions on StartTime and EndTime based on

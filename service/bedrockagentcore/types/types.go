@@ -20,6 +20,98 @@ type A2aDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// The evaluation configuration for an A/B test, specifying which online
+// evaluation configurations to use for measuring variant performance.
+//
+// The following types satisfy this interface:
+//
+//	ABTestEvaluationConfigMemberOnlineEvaluationConfigArn
+//	ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig
+type ABTestEvaluationConfig interface {
+	isABTestEvaluationConfig()
+}
+
+// The Amazon Resource Name (ARN) of a single online evaluation configuration to
+// use for both variants.
+type ABTestEvaluationConfigMemberOnlineEvaluationConfigArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ABTestEvaluationConfigMemberOnlineEvaluationConfigArn) isABTestEvaluationConfig() {}
+
+// Per-variant online evaluation configurations, allowing different evaluation
+// settings for each variant.
+type ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig struct {
+	Value []PerVariantOnlineEvaluationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig) isABTestEvaluationConfig() {}
+
+// The statistical results of an A/B test.
+type ABTestResults struct {
+
+	// The per-evaluator metrics comparing control and treatment variants.
+	//
+	// This member is required.
+	EvaluatorMetrics []EvaluatorMetric
+
+	// The timestamp when the analysis was performed.
+	AnalysisTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an A/B test.
+type ABTestSummary struct {
+
+	// The Amazon Resource Name (ARN) of the A/B test.
+	//
+	// This member is required.
+	AbTestArn *string
+
+	// The unique identifier of the A/B test.
+	//
+	// This member is required.
+	AbTestId *string
+
+	// The timestamp when the A/B test was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The execution status of the A/B test.
+	//
+	// This member is required.
+	ExecutionStatus ABTestExecutionStatus
+
+	// The name of the A/B test.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the A/B test.
+	//
+	// This member is required.
+	Status ABTestStatus
+
+	// The timestamp when the A/B test was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the A/B test.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the gateway used for traffic splitting.
+	GatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about an actor in an AgentCore Memory resource.
 type ActorSummary struct {
 
@@ -59,6 +151,51 @@ type AgentSkillsDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration specifying where to read agent traces from for recommendation
+// analysis.
+//
+// The following types satisfy this interface:
+//
+//	AgentTracesConfigMemberCloudwatchLogs
+//	AgentTracesConfigMemberSessionSpans
+type AgentTracesConfig interface {
+	isAgentTracesConfig()
+}
+
+// Agent traces read from CloudWatch Logs.
+type AgentTracesConfigMemberCloudwatchLogs struct {
+	Value CloudWatchLogsTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberCloudwatchLogs) isAgentTracesConfig() {}
+
+// Agent traces provided as inline session spans in OpenTelemetry format.
+type AgentTracesConfigMemberSessionSpans struct {
+	Value []document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberSessionSpans) isAgentTracesConfig() {}
+
+// Represents a monetary amount with a currency.
+type Amount struct {
+
+	// The currency code for the amount.
+	//
+	// This member is required.
+	Currency Currency
+
+	// The numeric value of the amount.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a stream that enables programmatic control of a browser
 // session in Amazon Bedrock AgentCore. This stream provides a bidirectional
 // communication channel for sending commands to the browser and receiving
@@ -91,6 +228,18 @@ type AutomationStreamUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// The available spending limits for a payment session.
+type AvailableLimits struct {
+
+	// The remaining available amount that can be spent.
+	AvailableSpendAmount *Amount
+
+	// The timestamp when the available limits were last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for HTTP Basic Authentication using credentials stored in Amazon
 // Web Services Secrets Manager. The secret must contain a JSON object with
 // username and password string fields. Username allows alphanumeric characters
@@ -108,6 +257,52 @@ type BasicAuth struct {
 	//
 	// This member is required.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary representation for list responses.
+type BatchEvaluationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationArn *string
+
+	// The unique identifier of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationId *string
+
+	// The name of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationName *string
+
+	// The timestamp when the batch evaluation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The current status of the batch evaluation.
+	//
+	// This member is required.
+	Status BatchEvaluationStatus
+
+	// The description of the batch evaluation.
+	Description *string
+
+	// The error details if the batch evaluation encountered failures.
+	ErrorDetails []string
+
+	// The aggregated evaluation results.
+	EvaluationResults *EvaluationJobResults
+
+	// The list of evaluators applied during the batch evaluation.
+	Evaluators []Evaluator
+
+	// The timestamp when the batch evaluation was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -453,6 +648,117 @@ type CertificateLocationMemberSecretsManager struct {
 
 func (*CertificateLocationMemberSecretsManager) isCertificateLocation() {}
 
+// Filter configuration for narrowing down CloudWatch Logs sessions for evaluation.
+type CloudWatchFilterConfig struct {
+
+	// A list of specific session IDs to evaluate. If specified, only these sessions
+	// are included in the evaluation.
+	SessionIds []string
+
+	// The time range filter for selecting sessions to evaluate.
+	TimeRange *SessionFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// A filter for narrowing down agent traces from CloudWatch Logs based on
+// key-value comparisons.
+type CloudWatchLogsFilter struct {
+
+	// The key or field name to filter on within the agent trace data.
+	//
+	// This member is required.
+	Key *string
+
+	// The comparison operator to use for filtering.
+	//
+	// This member is required.
+	Operator CloudWatchLogsFilterOperator
+
+	// The value to compare against using the specified operator.
+	//
+	// This member is required.
+	Value FilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A rule configuration for filtering agent traces from CloudWatch Logs.
+type CloudWatchLogsRule struct {
+
+	// The list of filters to apply when reading agent traces.
+	Filters []CloudWatchLogsFilter
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for reading agent traces from CloudWatch Logs.
+type CloudWatchLogsSource struct {
+
+	// The list of CloudWatch log group names to read agent traces from. Maximum of 5
+	// log groups.
+	//
+	// This member is required.
+	LogGroupNames []string
+
+	// The list of agent service names to filter traces within the specified log
+	// groups.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	// Optional filter configuration to narrow down which sessions to evaluate.
+	FilterConfig *CloudWatchFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for reading agent traces from CloudWatch Logs for recommendation
+// analysis.
+type CloudWatchLogsTraceConfig struct {
+
+	// The end time of the time range to read traces from.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The list of CloudWatch log group ARNs to read agent traces from.
+	//
+	// This member is required.
+	LogGroupArns []string
+
+	// The list of service names to filter traces within the specified log groups.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	// The start time of the time range to read traces from.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Optional rule configuration for filtering traces.
+	Rule *CloudWatchLogsRule
+
+	noSmithyDocumentSerde
+}
+
+// CloudWatch Logs destination for batch evaluation results.
+type CloudWatchOutputConfig struct {
+
+	// The name of the CloudWatch log group where evaluation results will be written.
+	//
+	// This member is required.
+	LogGroupName *string
+
+	// The name of the CloudWatch log stream where evaluation results will be written.
+	//
+	// This member is required.
+	LogStreamName *string
+
+	noSmithyDocumentSerde
+}
+
 // The output produced by executing code in a code interpreter session in Amazon
 // Bedrock AgentCore. This structure contains the results of code execution,
 // including textual output, structured data, and error information. Agents use
@@ -543,6 +849,90 @@ type CodeInterpreterStreamOutputMemberResult struct {
 }
 
 func (*CodeInterpreterStreamOutputMemberResult) isCodeInterpreterStreamOutput() {}
+
+// Coinbase CDP token request parameters.
+type CoinbaseCdpTokenRequestInput struct {
+
+	// The HTTP method for the payment API request.
+	//
+	// This member is required.
+	RequestMethod PaymentHttpMethodType
+
+	// The path of the payment API request.
+	//
+	// This member is required.
+	RequestPath *string
+
+	// Set to true for wallet write operations (requires walletSecret configured).
+	IncludeWalletAuthToken bool
+
+	// Request body JSON — used to generate wallet auth JWT.
+	RequestBody *string
+
+	// The host for the payment API request. Defaults to "api.cdp.coinbase.com".
+	RequestHost *string
+
+	noSmithyDocumentSerde
+}
+
+// Coinbase CDP token response.
+type CoinbaseCdpTokenResponseOutput struct {
+
+	// Bearer Token for Authorization header.
+	//
+	// This member is required.
+	BearerToken *string
+
+	// Wallet Auth Token for X-Wallet-Auth header.
+	WalletAuthToken *string
+
+	noSmithyDocumentSerde
+}
+
+// A confidence interval for a statistical measurement.
+type ConfidenceInterval struct {
+
+	// The lower bound of the confidence interval.
+	Lower *float64
+
+	// The upper bound of the confidence interval.
+	Upper *float64
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a specific version of a configuration bundle.
+type ConfigurationBundleRef struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version of the configuration bundle.
+	//
+	// This member is required.
+	BundleVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Maps a tool name to its JSON path within a configuration bundle.
+type ConfigurationBundleToolEntry struct {
+
+	// The JSON path within the configuration bundle's components that contains the
+	// tool description.
+	//
+	// This member is required.
+	ToolDescriptionJsonPath *string
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains the content of a memory item.
 //
@@ -664,6 +1054,27 @@ type ContextMemberSpanContext struct {
 
 func (*ContextMemberSpanContext) isContext() {}
 
+// Statistics for the control variant in an A/B test.
+type ControlStats struct {
+
+	// The mean evaluation score for the control variant.
+	//
+	// This member is required.
+	Mean *float64
+
+	// The number of sessions evaluated for the control variant.
+	//
+	// This member is required.
+	SampleSize *int32
+
+	// The name of the control variant.
+	//
+	// This member is required.
+	VariantName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains conversational content for an event payload.
 type Conversational struct {
 
@@ -681,6 +1092,38 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
+// The input for a crypto X402 payment.
+type CryptoX402PaymentInput struct {
+
+	// The X402 payment payload.
+	//
+	// This member is required.
+	Payload document.Interface
+
+	// The version of the X402 protocol.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// The output from a crypto X402 payment.
+type CryptoX402PaymentOutput struct {
+
+	// The X402 payment response payload.
+	//
+	// This member is required.
+	Payload document.Interface
+
+	// The version of the X402 protocol.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // A custom descriptor configuration for a registry record.
 type CustomDescriptor struct {
 
@@ -689,6 +1132,24 @@ type CustomDescriptor struct {
 
 	noSmithyDocumentSerde
 }
+
+// Configuration for the data source used in evaluation.
+//
+// The following types satisfy this interface:
+//
+//	DataSourceConfigMemberCloudWatchLogs
+type DataSourceConfig interface {
+	isDataSourceConfig()
+}
+
+// Configuration for pulling agent session traces from CloudWatch Logs.
+type DataSourceConfigMemberCloudWatchLogs struct {
+	Value CloudWatchLogsSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
 
 //	Contains the descriptor configuration for a registry record. Only the field
 //
@@ -710,6 +1171,31 @@ type Descriptors struct {
 	//  The MCP (Model Context Protocol) descriptor configuration. Populated when the
 	// record's descriptorType is MCP .
 	Mcp *McpDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// Embedded crypto wallet instrument details.
+type EmbeddedCryptoWallet struct {
+
+	// List of linked accounts linked to this wallet. Each represents a way the end
+	// user can authenticate to this wallet.
+	//
+	// This member is required.
+	LinkedAccounts []LinkedAccount
+
+	// The blockchain network for this embedded crypto wallet. Supported networks:
+	// ETHEREUM, SOLANA.
+	//
+	// This member is required.
+	Network CryptoWalletNetwork
+
+	// URL for the end user to complete a provider-specific action such as wallet
+	// linking or onboarding.
+	RedirectUrl *string
+
+	// The wallet address on the specified blockchain network.
+	WalletAddress *string
 
 	noSmithyDocumentSerde
 }
@@ -769,14 +1255,57 @@ type EvaluationInputMemberSessionSpans struct {
 
 func (*EvaluationInputMemberSessionSpans) isEvaluationInput() {}
 
+// Aggregated results from a batch evaluation, including session completion counts
+// and evaluator score summaries.
+type EvaluationJobResults struct {
+
+	// A list of per-evaluator summary statistics.
+	EvaluatorSummaries []EvaluatorSummary
+
+	// The number of sessions that have been successfully evaluated.
+	NumberOfSessionsCompleted *int32
+
+	// The number of sessions that failed evaluation.
+	NumberOfSessionsFailed *int32
+
+	// The number of sessions that were ignored during evaluation.
+	NumberOfSessionsIgnored *int32
+
+	// The number of sessions currently being evaluated.
+	NumberOfSessionsInProgress *int32
+
+	// The total number of sessions included in the batch evaluation.
+	TotalNumberOfSessions *int32
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for the evaluation, including session-specific ground truth data.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationMetadataMemberSessionMetadata
+type EvaluationMetadata interface {
+	isEvaluationMetadata()
+}
+
+// A list of session metadata entries containing ground truth data and test
+// scenario identifiers for specific sessions.
+type EvaluationMetadataMemberSessionMetadata struct {
+	Value []SessionMetadataShape
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationMetadataMemberSessionMetadata) isEvaluationMetadata() {}
+
 //	A reference input containing ground truth data for evaluation, scoped to a
 //
 // specific context level (session or trace) through its span context.
 type EvaluationReferenceInput struct {
 
-	//  The contextual information associated with an evaluation, including span
-	// context details that identify the specific traces and sessions being evaluated
-	// within the agent's execution flow.
+	//  The span context that identifies which session or trace this reference input
+	// applies to, used for correlating ground truth with agent output.
 	//
 	// This member is required.
 	Context Context
@@ -910,6 +1439,67 @@ type EvaluationTargetMemberTraceIds struct {
 }
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
+
+// An evaluator to run against sessions.
+type Evaluator struct {
+
+	// The unique identifier of the evaluator. Can reference built-in evaluators
+	// (e.g., Builtin.Helpfulness ) or custom evaluators.
+	//
+	// This member is required.
+	EvaluatorId *string
+
+	noSmithyDocumentSerde
+}
+
+// Statistical metrics for a single evaluator comparing control and treatment
+// variants.
+type EvaluatorMetric struct {
+
+	// The statistics for the control variant.
+	//
+	// This member is required.
+	ControlStats *ControlStats
+
+	// The Amazon Resource Name (ARN) of the evaluator.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	// The results for each treatment variant compared against the control.
+	//
+	// This member is required.
+	VariantResults []VariantResult
+
+	noSmithyDocumentSerde
+}
+
+// Aggregated statistics for an evaluator.
+type EvaluatorStatistics struct {
+
+	// The average score across all evaluated sessions for this evaluator.
+	AverageScore *float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary statistics for a single evaluator within a batch evaluation.
+type EvaluatorSummary struct {
+
+	// The unique identifier of the evaluator.
+	EvaluatorId *string
+
+	// The aggregated statistics for this evaluator.
+	Statistics *EvaluatorStatistics
+
+	// The total number of sessions evaluated by this evaluator.
+	TotalEvaluated *int32
+
+	// The total number of sessions that failed evaluation by this evaluator.
+	TotalFailed *int32
+
+	noSmithyDocumentSerde
+}
 
 // Contains information about an event in an AgentCore Memory resource.
 type Event struct {
@@ -1098,6 +1688,101 @@ type FilterInput struct {
 	noSmithyDocumentSerde
 }
 
+// A value used in filter comparisons, supporting different data types.
+//
+// The following types satisfy this interface:
+//
+//	FilterValueMemberBooleanValue
+//	FilterValueMemberDoubleValue
+//	FilterValueMemberStringValue
+type FilterValue interface {
+	isFilterValue()
+}
+
+// A boolean value for true/false filtering conditions.
+type FilterValueMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberBooleanValue) isFilterValue() {}
+
+// A numeric value for numerical filtering and comparisons.
+type FilterValueMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberDoubleValue) isFilterValue() {}
+
+// A string value for text-based filtering.
+type FilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberStringValue) isFilterValue() {}
+
+// A filter to restrict which gateway target paths are included in the A/B test.
+type GatewayFilter struct {
+
+	// A list of target path patterns to include in the A/B test.
+	TargetPaths []string
+
+	noSmithyDocumentSerde
+}
+
+// Where to pull ground truth from.
+//
+// The following types satisfy this interface:
+//
+//	GroundTruthSourceMemberInline
+type GroundTruthSource interface {
+	isGroundTruthSource()
+}
+
+// Inline ground truth data provided directly in the request.
+type GroundTruthSourceMemberInline struct {
+	Value InlineGroundTruth
+
+	noSmithyDocumentSerde
+}
+
+func (*GroundTruthSourceMemberInline) isGroundTruthSource() {}
+
+// Ground truth data for a single conversation turn.
+type GroundTruthTurn struct {
+
+	// The expected response for this conversation turn.
+	ExpectedResponse EvaluationContent
+
+	// The input for this conversation turn.
+	Input GroundTruthTurnInput
+
+	noSmithyDocumentSerde
+}
+
+// The input for a ground truth conversation turn.
+//
+// The following types satisfy this interface:
+//
+//	GroundTruthTurnInputMemberPrompt
+type GroundTruthTurnInput interface {
+	isGroundTruthTurnInput()
+}
+
+// The text prompt for this conversation turn.
+type GroundTruthTurnInputMemberPrompt struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GroundTruthTurnInputMemberPrompt) isGroundTruthTurnInput() {}
+
 // Configuration for AgentCore Browser.
 type HarnessAgentCoreBrowserConfig struct {
 
@@ -1124,7 +1809,8 @@ type HarnessAgentCoreGatewayConfig struct {
 	// This member is required.
 	GatewayArn *string
 
-	// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if omitted.
+	// How harness authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if
+	// omitted.
 	OutboundAuth HarnessGatewayOutboundAuth
 
 	noSmithyDocumentSerde
@@ -1137,6 +1823,12 @@ type HarnessBedrockModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the Bedrock provider.
+	ApiFormat HarnessBedrockApiFormat
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -1401,6 +2093,37 @@ type HarnessInlineFunctionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a LiteLLM model provider, enabling connection to third-party
+// model providers.
+type HarnessLiteLlmModelConfig struct {
+
+	// The LiteLLM model identifier (e.g., "anthropic/claude-3-sonnet").
+	//
+	// This member is required.
+	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The base URL for the model provider's API endpoint.
+	ApiBase *string
+
+	// The ARN of the API key in AgentCore Identity for authenticating with the model
+	// provider.
+	ApiKeyArn *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // A message in the conversation.
 type HarnessMessage struct {
 
@@ -1461,6 +2184,7 @@ type HarnessMetadataEvent struct {
 //
 //	HarnessModelConfigurationMemberBedrockModelConfig
 //	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberLiteLlmModelConfig
 //	HarnessModelConfigurationMemberOpenAiModelConfig
 type HarnessModelConfiguration interface {
 	isHarnessModelConfiguration()
@@ -1484,6 +2208,15 @@ type HarnessModelConfigurationMemberGeminiModelConfig struct {
 
 func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
 
+// The LiteLLM model configuration for connecting to third-party model providers.
+type HarnessModelConfigurationMemberLiteLlmModelConfig struct {
+	Value HarnessLiteLlmModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberLiteLlmModelConfig) isHarnessModelConfiguration() {}
+
 // Configuration for an OpenAI model.
 type HarnessModelConfigurationMemberOpenAiModelConfig struct {
 	Value HarnessOpenAiModelConfig
@@ -1506,6 +2239,12 @@ type HarnessOpenAiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the OpenAI provider.
+	ApiFormat HarnessOpenAiApiFormat
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -1608,7 +2347,7 @@ type HarnessRemoteMcpConfig struct {
 	// This member is required.
 	Url *string
 
-	// Map of key/value pairs for HTTP headers.
+	// Custom headers to include when connecting to the remote MCP server.
 	Headers map[string]string
 
 	noSmithyDocumentSerde
@@ -1618,10 +2357,21 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
+//	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// A git repository containing the skill.
+type HarnessSkillMemberGit struct {
+	Value HarnessSkillGitSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberGit) isHarnessSkill() {}
 
 // The filesystem path to the skill definition.
 type HarnessSkillMemberPath struct {
@@ -1631,6 +2381,58 @@ type HarnessSkillMemberPath struct {
 }
 
 func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// An S3 source containing the skill.
+type HarnessSkillMemberS3 struct {
+	Value HarnessSkillS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Authentication configuration for accessing a private git repository.
+type HarnessSkillGitAuth struct {
+
+	// The ARN of the credential in AgentCore Identity containing the password or
+	// personal access token.
+	//
+	// This member is required.
+	CredentialArn *string
+
+	// Username for authentication. Defaults to 'oauth2' if not specified.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// A git repository source for a skill.
+type HarnessSkillGitSource struct {
+
+	// The HTTPS URL of the git repository.
+	//
+	// This member is required.
+	Url *string
+
+	// Authentication configuration for private repositories.
+	Auth *HarnessSkillGitAuth
+
+	// Subdirectory within the repository containing the skill.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// An S3 source for a skill.
+type HarnessSkillS3Source struct {
+
+	// The S3 URI pointing to the skill directory (e.g., s3://bucket/skills/my-skill/).
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
 
 // Latency metrics for the invocation.
 type HarnessStreamMetrics struct {
@@ -1915,6 +2717,23 @@ type HarnessToolUseBlockStart struct {
 	noSmithyDocumentSerde
 }
 
+// Inline ground truth data containing assertions, expected trajectories, and
+// per-turn expected responses.
+type InlineGroundTruth struct {
+
+	// Assertions for evaluation, reuses common model EvaluationContentList.
+	Assertions []EvaluationContent
+
+	// The expected tool call sequence for trajectory evaluation.
+	ExpectedTrajectory *EvaluationExpectedTrajectory
+
+	// A list of per-turn ground truth data, each containing an input prompt and
+	// expected response.
+	Turns []GroundTruthTurn
+
+	noSmithyDocumentSerde
+}
+
 // A block of input content.
 type InputContentBlock struct {
 
@@ -2135,6 +2954,154 @@ type LeftExpressionMemberMetadataKey struct {
 
 func (*LeftExpressionMemberMetadataKey) isLeftExpression() {}
 
+// Represents different linked accounts that can be linked to an embedded wallet.
+// Supports email, SMS, JWT, and OAuth2 approaches.
+//
+// The following types satisfy this interface:
+//
+//	LinkedAccountMemberDeveloperJwt
+//	LinkedAccountMemberEmail
+//	LinkedAccountMemberOAuth2
+//	LinkedAccountMemberSms
+type LinkedAccount interface {
+	isLinkedAccount()
+}
+
+// Developer JWT linked account with key ID and subject.
+type LinkedAccountMemberDeveloperJwt struct {
+	Value LinkedAccountDeveloperJwt
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberDeveloperJwt) isLinkedAccount() {}
+
+// Email-based linked account.
+type LinkedAccountMemberEmail struct {
+	Value LinkedAccountEmail
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberEmail) isLinkedAccount() {}
+
+// OAuth2 provider linked account (Google, Apple, X, Telegram, GitHub).
+type LinkedAccountMemberOAuth2 struct {
+	Value LinkedAccountOAuth2
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberOAuth2) isLinkedAccount() {}
+
+// SMS-based linked account using phone number.
+type LinkedAccountMemberSms struct {
+	Value LinkedAccountSms
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountMemberSms) isLinkedAccount() {}
+
+// Authentication method using JWT with key ID and subject claims.
+type LinkedAccountDeveloperJwt struct {
+
+	// The key ID (kid) from the JWT header. Identifies which key was used to sign the
+	// JWT.
+	//
+	// This member is required.
+	Kid *string
+
+	// The subject (sub) claim from the JWT payload. Identifies the principal that is
+	// the subject of the JWT.
+	//
+	// This member is required.
+	Sub *string
+
+	noSmithyDocumentSerde
+}
+
+// Linked account using an email address.
+type LinkedAccountEmail struct {
+
+	// The email address used for the linked account. Must be a valid email format.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Authentication method using OAuth2 providers. Supports Google, Apple, X,
+// Telegram, and GitHub providers.
+//
+// The following types satisfy this interface:
+//
+//	LinkedAccountOAuth2MemberApple
+//	LinkedAccountOAuth2MemberGithub
+//	LinkedAccountOAuth2MemberGoogle
+//	LinkedAccountOAuth2MemberTelegram
+//	LinkedAccountOAuth2MemberX
+type LinkedAccountOAuth2 interface {
+	isLinkedAccountOAuth2()
+}
+
+// Apple OAuth2 authentication.
+type LinkedAccountOAuth2MemberApple struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberApple) isLinkedAccountOAuth2() {}
+
+// GitHub OAuth2 authentication.
+type LinkedAccountOAuth2MemberGithub struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberGithub) isLinkedAccountOAuth2() {}
+
+// Google OAuth2 authentication.
+type LinkedAccountOAuth2MemberGoogle struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberGoogle) isLinkedAccountOAuth2() {}
+
+// Telegram OAuth2 authentication.
+type LinkedAccountOAuth2MemberTelegram struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberTelegram) isLinkedAccountOAuth2() {}
+
+// X (formerly Twitter) OAuth2 authentication.
+type LinkedAccountOAuth2MemberX struct {
+	Value OAuth2Authentication
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkedAccountOAuth2MemberX) isLinkedAccountOAuth2() {}
+
+// Linked account using a phone number in E.164 format.
+type LinkedAccountSms struct {
+
+	// The phone number in E.164 format (e.g., +1234567890).
+	//
+	// This member is required.
+	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a stream that provides a visual representation of a
 // browser session in Amazon Bedrock AgentCore. This stream enables agents to
 // observe the current state of the browser, including rendered web pages, visual
@@ -2189,19 +3156,20 @@ func (*MemoryContentMemberText) isMemoryContent() {}
 // relationship to match.
 type MemoryMetadataFilterExpression struct {
 
-	// Left expression of the event metadata filter.
+	// The metadata key to evaluate.
 	//
 	// This member is required.
-	Left LeftExpression
+	Left MemoryRecordLeftExpression
 
 	// The relationship between the metadata key and value to match when applying the
 	// metadata filter.
 	//
 	// This member is required.
-	Operator OperatorType
+	Operator MemoryRecordOperatorType
 
-	// Right expression of the eventMetadata filter.
-	Right RightExpression
+	// The value to compare against. Required for all operators except EXISTS and
+	// NOT_EXISTS.
+	Right MemoryRecordRightExpression
 
 	noSmithyDocumentSerde
 }
@@ -2236,7 +3204,7 @@ type MemoryRecord struct {
 	Namespaces []string
 
 	// A map of metadata key-value pairs associated with a memory record.
-	Metadata map[string]MetadataValue
+	Metadata map[string]MemoryRecordMetadataValue
 
 	noSmithyDocumentSerde
 }
@@ -2267,6 +3235,9 @@ type MemoryRecordCreateInput struct {
 	// The ID of the memory strategy that defines how this memory record is grouped.
 	MemoryStrategyId *string
 
+	// Metadata key-value pairs to be stored with the memory record.
+	Metadata map[string]MemoryRecordMetadataValue
+
 	noSmithyDocumentSerde
 }
 
@@ -2280,6 +3251,72 @@ type MemoryRecordDeleteInput struct {
 
 	noSmithyDocumentSerde
 }
+
+// The left-hand side of a memory record metadata filter expression.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordLeftExpressionMemberMetadataKey
+type MemoryRecordLeftExpression interface {
+	isMemoryRecordLeftExpression()
+}
+
+// The metadata key to filter on.
+type MemoryRecordLeftExpressionMemberMetadataKey struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordLeftExpressionMemberMetadataKey) isMemoryRecordLeftExpression() {}
+
+// The value of a memory record metadata entry.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordMetadataValueMemberDateTimeValue
+//	MemoryRecordMetadataValueMemberNumberValue
+//	MemoryRecordMetadataValueMemberStringListValue
+//	MemoryRecordMetadataValueMemberStringValue
+type MemoryRecordMetadataValue interface {
+	isMemoryRecordMetadataValue()
+}
+
+// A timestamp value in ISO 8601 UTC format.
+type MemoryRecordMetadataValueMemberDateTimeValue struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberDateTimeValue) isMemoryRecordMetadataValue() {}
+
+// A numeric value.
+type MemoryRecordMetadataValueMemberNumberValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberNumberValue) isMemoryRecordMetadataValue() {}
+
+// A list of string values.
+type MemoryRecordMetadataValueMemberStringListValue struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberStringListValue) isMemoryRecordMetadataValue() {}
+
+// A string value.
+type MemoryRecordMetadataValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberStringValue) isMemoryRecordMetadataValue() {}
 
 // Output information returned after processing a memory record operation.
 type MemoryRecordOutput struct {
@@ -2306,6 +3343,24 @@ type MemoryRecordOutput struct {
 
 	noSmithyDocumentSerde
 }
+
+// The right-hand side of a memory record metadata filter expression.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordRightExpressionMemberMetadataValue
+type MemoryRecordRightExpression interface {
+	isMemoryRecordRightExpression()
+}
+
+// The metadata value to compare against.
+type MemoryRecordRightExpressionMemberMetadataValue struct {
+	Value MemoryRecordMetadataValue
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordRightExpressionMemberMetadataValue) isMemoryRecordRightExpression() {}
 
 // Contains summary information about a memory record.
 type MemoryRecordSummary struct {
@@ -2336,7 +3391,7 @@ type MemoryRecordSummary struct {
 	Namespaces []string
 
 	// A map of metadata key-value pairs associated with a memory record.
-	Metadata map[string]MetadataValue
+	Metadata map[string]MemoryRecordMetadataValue
 
 	// The relevance score of the memory record when returned as part of a search
 	// result. Higher values indicate greater relevance to the search query.
@@ -2364,6 +3419,9 @@ type MemoryRecordUpdateInput struct {
 	// The updated ID of the memory strategy that defines how this memory record is
 	// grouped.
 	MemoryStrategyId *string
+
+	// Metadata key-value pairs to be stored with the memory record.
+	Metadata map[string]MemoryRecordMetadataValue
 
 	// The updated list of namespace identifiers for categorizing the memory record.
 	Namespaces []string
@@ -2551,6 +3609,27 @@ type MouseScrollResult struct {
 	noSmithyDocumentSerde
 }
 
+// OAuth2 authentication information for third-party providers.
+type OAuth2Authentication struct {
+
+	// The subject (sub) claim from the OAuth2 provider. Uniquely identifies the user
+	// at the provider.
+	//
+	// This member is required.
+	Sub *string
+
+	// The email address from the OAuth2 provider.
+	EmailAddress *string
+
+	// The user's name from the OAuth2 provider.
+	Name *string
+
+	// The username from the OAuth2 provider.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for an OAuth 2.0 credential provider used to authenticate tool
 // calls.
 type OAuthCredentialProvider struct {
@@ -2576,6 +3655,24 @@ type OAuthCredentialProvider struct {
 
 	noSmithyDocumentSerde
 }
+
+// Output destination configuration.
+//
+// The following types satisfy this interface:
+//
+//	OutputConfigMemberCloudWatchConfig
+type OutputConfig interface {
+	isOutputConfig()
+}
+
+// The CloudWatch Logs configuration for writing evaluation results.
+type OutputConfigMemberCloudWatchConfig struct {
+	Value CloudWatchOutputConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberCloudWatchConfig) isOutputConfig() {}
 
 // Contains the payload content for an event.
 //
@@ -2604,6 +3701,308 @@ type PayloadTypeMemberConversational struct {
 }
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
+
+// The payment input details, which vary by payment type.
+//
+// The following types satisfy this interface:
+//
+//	PaymentInputMemberCryptoX402
+type PaymentInput interface {
+	isPaymentInput()
+}
+
+// Input for a crypto X402 payment.
+type PaymentInputMemberCryptoX402 struct {
+	Value CryptoX402PaymentInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInputMemberCryptoX402) isPaymentInput() {}
+
+// Represents a payment instrument.
+type PaymentInstrument struct {
+
+	// The timestamp when this payment instrument was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the payment connector associated with this instrument.
+	//
+	// This member is required.
+	PaymentConnectorId *string
+
+	// The details specific to the payment instrument type.
+	//
+	// This member is required.
+	PaymentInstrumentDetails PaymentInstrumentDetails
+
+	// The unique identifier for this payment instrument.
+	//
+	// This member is required.
+	PaymentInstrumentId *string
+
+	// The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).
+	//
+	// This member is required.
+	PaymentInstrumentType PaymentInstrumentType
+
+	// The ARN of the payment manager that owns this payment instrument.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The current status of this payment instrument.
+	//
+	// This member is required.
+	Status PaymentInstrumentStatus
+
+	// The timestamp when this payment instrument was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment instrument.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details specific to the instrument type.
+//
+// The following types satisfy this interface:
+//
+//	PaymentInstrumentDetailsMemberEmbeddedCryptoWallet
+type PaymentInstrumentDetails interface {
+	isPaymentInstrumentDetails()
+}
+
+// Embedded crypto wallet managed directly by end user.
+type PaymentInstrumentDetailsMemberEmbeddedCryptoWallet struct {
+	Value EmbeddedCryptoWallet
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInstrumentDetailsMemberEmbeddedCryptoWallet) isPaymentInstrumentDetails() {}
+
+// Summary of a payment instrument for list operations.
+type PaymentInstrumentSummary struct {
+
+	// The timestamp when this payment instrument was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the payment connector associated with this instrument.
+	//
+	// This member is required.
+	PaymentConnectorId *string
+
+	// The unique identifier for this payment instrument.
+	//
+	// This member is required.
+	PaymentInstrumentId *string
+
+	// The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).
+	//
+	// This member is required.
+	PaymentInstrumentType PaymentInstrumentType
+
+	// The ARN of the payment manager that owns this payment instrument.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The current status of this payment instrument.
+	//
+	// This member is required.
+	Status PaymentInstrumentStatus
+
+	// The timestamp when this payment instrument was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this payment instrument.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The payment output details, which vary by payment type.
+//
+// The following types satisfy this interface:
+//
+//	PaymentOutputMemberCryptoX402
+type PaymentOutput interface {
+	isPaymentOutput()
+}
+
+// Output from a crypto X402 payment.
+type PaymentOutputMemberCryptoX402 struct {
+	Value CryptoX402PaymentOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentOutputMemberCryptoX402) isPaymentOutput() {}
+
+// A payment session for managing payment transactions.
+type PaymentSession struct {
+
+	// The timestamp when the session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The session expiry time in minutes.
+	//
+	// This member is required.
+	ExpiryTimeInMinutes *int32
+
+	// The ARN of the payment manager that owns this session.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The unique identifier of the payment session.
+	//
+	// This member is required.
+	PaymentSessionId *string
+
+	// The timestamp when the session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this session.
+	//
+	// This member is required.
+	UserId *string
+
+	// The current available spending limits.
+	AvailableLimits *AvailableLimits
+
+	// The spending limits for the payment session.
+	Limits *SessionLimits
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a payment session.
+type PaymentSessionSummary struct {
+
+	// The timestamp when the session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The session expiry time in minutes.
+	//
+	// This member is required.
+	ExpiryTimeInMinutes *int32
+
+	// The ARN of the payment manager that owns this session.
+	//
+	// This member is required.
+	PaymentManagerArn *string
+
+	// The unique identifier of the payment session.
+	//
+	// This member is required.
+	PaymentSessionId *string
+
+	// The timestamp when the session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user ID associated with this session.
+	//
+	// This member is required.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Vendor-specific token request configuration.
+//
+// The following types satisfy this interface:
+//
+//	PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest
+//	PaymentTokenRequestInputMemberStripePrivyTokenRequest
+type PaymentTokenRequestInput interface {
+	isPaymentTokenRequestInput()
+}
+
+// The Coinbase CDP token request.
+type PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest struct {
+	Value CoinbaseCdpTokenRequestInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest) isPaymentTokenRequestInput() {}
+
+// The Stripe Privy token request.
+type PaymentTokenRequestInputMemberStripePrivyTokenRequest struct {
+	Value StripePrivyTokenRequestInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenRequestInputMemberStripePrivyTokenRequest) isPaymentTokenRequestInput() {}
+
+// Vendor-specific token response configuration.
+//
+// The following types satisfy this interface:
+//
+//	PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse
+//	PaymentTokenResponseOutputMemberStripePrivyTokenResponse
+type PaymentTokenResponseOutput interface {
+	isPaymentTokenResponseOutput()
+}
+
+// The Coinbase CDP token response.
+type PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse struct {
+	Value CoinbaseCdpTokenResponseOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse) isPaymentTokenResponseOutput() {}
+
+// The Stripe Privy token response.
+type PaymentTokenResponseOutputMemberStripePrivyTokenResponse struct {
+	Value StripePrivyTokenResponseOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentTokenResponseOutputMemberStripePrivyTokenResponse) isPaymentTokenResponseOutput() {}
+
+// An online evaluation configuration associated with a specific A/B test variant.
+type PerVariantOnlineEvaluationConfig struct {
+
+	// The name of the variant this evaluation configuration applies to.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the online evaluation configuration for this
+	// variant.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	noSmithyDocumentSerde
+}
 
 // Union type representing different proxy configurations. Currently supports
 // external customer-managed proxies.
@@ -2678,6 +4077,145 @@ type ProxyCredentialsMemberBasicAuth struct {
 }
 
 func (*ProxyCredentialsMemberBasicAuth) isProxyCredentials() {}
+
+// The configuration for a recommendation, varying by recommendation type.
+//
+// The following types satisfy this interface:
+//
+//	RecommendationConfigMemberSystemPromptRecommendationConfig
+//	RecommendationConfigMemberToolDescriptionRecommendationConfig
+type RecommendationConfig interface {
+	isRecommendationConfig()
+}
+
+// The configuration for a system prompt recommendation.
+type RecommendationConfigMemberSystemPromptRecommendationConfig struct {
+	Value SystemPromptRecommendationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationConfigMemberSystemPromptRecommendationConfig) isRecommendationConfig() {}
+
+// The configuration for a tool description recommendation.
+type RecommendationConfigMemberToolDescriptionRecommendationConfig struct {
+	Value ToolDescriptionRecommendationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationConfigMemberToolDescriptionRecommendationConfig) isRecommendationConfig() {}
+
+// The evaluation configuration for assessing recommendation quality.
+type RecommendationEvaluationConfig struct {
+
+	// The list of evaluators to use for assessing recommendation quality.
+	//
+	// This member is required.
+	Evaluators []RecommendationEvaluatorReference
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an evaluator used for recommendation assessment.
+type RecommendationEvaluatorReference struct {
+
+	// The Amazon Resource Name (ARN) of the evaluator.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a recommendation, containing the optimized output.
+//
+// The following types satisfy this interface:
+//
+//	RecommendationResultMemberSystemPromptRecommendationResult
+//	RecommendationResultMemberToolDescriptionRecommendationResult
+type RecommendationResult interface {
+	isRecommendationResult()
+}
+
+// The result of a system prompt recommendation.
+type RecommendationResultMemberSystemPromptRecommendationResult struct {
+	Value SystemPromptRecommendationResult
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationResultMemberSystemPromptRecommendationResult) isRecommendationResult() {}
+
+// The result of a tool description recommendation.
+type RecommendationResultMemberToolDescriptionRecommendationResult struct {
+	Value ToolDescriptionRecommendationResult
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationResultMemberToolDescriptionRecommendationResult) isRecommendationResult() {}
+
+// A configuration bundle reference in a recommendation result.
+type RecommendationResultConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version identifier of the configuration bundle containing the
+	// recommendation.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a recommendation.
+type RecommendationSummary struct {
+
+	// The timestamp when the recommendation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the recommendation.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the recommendation.
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The unique identifier of the recommendation.
+	//
+	// This member is required.
+	RecommendationId *string
+
+	// The current status of the recommendation.
+	//
+	// This member is required.
+	Status RecommendationStatus
+
+	// The type of recommendation.
+	//
+	// This member is required.
+	Type RecommendationType
+
+	// The timestamp when the recommendation was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the recommendation.
+	Description *string
+
+	noSmithyDocumentSerde
+}
 
 // Summary information about a registry record.
 type RegistryRecordSummary struct {
@@ -2920,6 +4458,55 @@ type SessionFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A time range filter for selecting sessions. Specifies the start and end times
+// to narrow down which sessions are included.
+type SessionFilterConfig struct {
+
+	// The end time of the time range. Only sessions with activity before this
+	// timestamp are included.
+	EndTime *time.Time
+
+	// The start time of the time range. Only sessions with activity at or after this
+	// timestamp are included.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The spending limits configuration for a payment session.
+type SessionLimits struct {
+
+	// The maximum amount that can be spent in the session.
+	//
+	// This member is required.
+	MaxSpendAmount *Amount
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a specific session in a batch evaluation, including ground truth
+// data and test scenario identifiers.
+type SessionMetadataShape struct {
+
+	// The unique identifier of the session this metadata applies to.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The ground truth data for this session, including expected responses and
+	// assertions.
+	GroundTruth GroundTruthSource
+
+	// Additional key-value metadata associated with this session.
+	Metadata map[string]string
+
+	// An optional test scenario identifier for categorizing and tracking evaluation
+	// results.
+	TestScenarioId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a session in an AgentCore Memory resource.
 type SessionSummary struct {
 
@@ -3007,6 +4594,185 @@ type StreamUpdateMemberAutomationStreamUpdate struct {
 
 func (*StreamUpdateMemberAutomationStreamUpdate) isStreamUpdate() {}
 
+// Stripe Privy token request parameters.
+type StripePrivyTokenRequestInput struct {
+
+	// Request body JSON for the Privy API call.
+	//
+	// This member is required.
+	RequestBody *string
+
+	// The path of the Stripe Privy API request.
+	//
+	// This member is required.
+	RequestPath *string
+
+	// Set to true to generate privy-authorization-signature.
+	IncludeAuthorizationSignature bool
+
+	// The host for the Privy API request. Defaults to "api.privy.io".
+	RequestHost *string
+
+	noSmithyDocumentSerde
+}
+
+// Stripe Privy token response containing appId, basicAuthToken, and optionally
+// authorizationSignature.
+type StripePrivyTokenResponseOutput struct {
+
+	// The Privy app ID for the privy-app-id header.
+	//
+	// This member is required.
+	AppId *string
+
+	// Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header.
+	//
+	// This member is required.
+	BasicAuthToken *string
+
+	// Base64-encoded ECDSA P-256 authorization signature (only present when
+	// includeAuthorizationSignature is true).
+	AuthorizationSignature *string
+
+	// Unix timestamp in milliseconds when the authorization signature expires.
+	RequestExpiry *int64
+
+	noSmithyDocumentSerde
+}
+
+// The system prompt input, either as inline text or from a configuration bundle.
+//
+// The following types satisfy this interface:
+//
+//	SystemPromptConfigMemberConfigurationBundle
+//	SystemPromptConfigMemberText
+type SystemPromptConfig interface {
+	isSystemPromptConfig()
+}
+
+// The system prompt sourced from a configuration bundle version.
+type SystemPromptConfigMemberConfigurationBundle struct {
+	Value SystemPromptConfigurationBundle
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemPromptConfigMemberConfigurationBundle) isSystemPromptConfig() {}
+
+// The system prompt text provided inline.
+type SystemPromptConfigMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemPromptConfigMemberText) isSystemPromptConfig() {}
+
+// A system prompt sourced from a configuration bundle version.
+type SystemPromptConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The JSON path within the configuration bundle that contains the system prompt.
+	//
+	// This member is required.
+	SystemPromptJsonPath *string
+
+	// The version identifier of the configuration bundle.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for generating system prompt optimization recommendations.
+type SystemPromptRecommendationConfig struct {
+
+	// The agent traces to analyze for generating recommendations.
+	//
+	// This member is required.
+	AgentTraces AgentTracesConfig
+
+	// The evaluation configuration specifying which evaluator to use for assessing
+	// recommendation quality.
+	//
+	// This member is required.
+	EvaluationConfig *RecommendationEvaluationConfig
+
+	// The current system prompt to optimize.
+	//
+	// This member is required.
+	SystemPrompt SystemPromptConfig
+
+	noSmithyDocumentSerde
+}
+
+// The result of a system prompt recommendation, containing the optimized prompt.
+type SystemPromptRecommendationResult struct {
+
+	// The configuration bundle containing the recommended system prompt, if the input
+	// was sourced from a configuration bundle.
+	ConfigurationBundle *RecommendationResultConfigurationBundle
+
+	// The error code if the recommendation failed.
+	ErrorCode *string
+
+	// The error message if the recommendation failed.
+	ErrorMessage *string
+
+	// The optimized system prompt text generated by the recommendation.
+	RecommendedSystemPrompt *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a gateway target.
+type TargetRef struct {
+
+	// The name of the gateway target.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A single token balance entry.
+type TokenBalance struct {
+
+	// Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC =
+	// 1000000).
+	//
+	// This member is required.
+	Amount *string
+
+	// The specific blockchain chain.
+	//
+	// This member is required.
+	Chain BlockchainChainId
+
+	// Number of decimal places for the token (e.g., 6 for USDC).
+	//
+	// This member is required.
+	Decimals *int32
+
+	// The blockchain network family (ETHEREUM or SOLANA).
+	//
+	// This member is required.
+	Network CryptoWalletNetwork
+
+	// The supported token for this balance.
+	//
+	// This member is required.
+	Token InstrumentBalanceToken
+
+	noSmithyDocumentSerde
+}
+
 //	The token consumption statistics for language model operations during
 //
 // evaluation. Provides detailed breakdown of input, output, and total tokens used
@@ -3070,6 +4836,152 @@ type ToolArguments struct {
 
 	// The identifier of the task for the tool operation.
 	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The tool description content.
+//
+// The following types satisfy this interface:
+//
+//	ToolDescriptionConfigMemberText
+type ToolDescriptionConfig interface {
+	isToolDescriptionConfig()
+}
+
+// The tool description as inline text.
+type ToolDescriptionConfigMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionConfigMemberText) isToolDescriptionConfig() {}
+
+// Tool descriptions sourced from a configuration bundle version.
+type ToolDescriptionConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The list of tool entries mapping tool names to their JSON paths within the
+	// bundle.
+	//
+	// This member is required.
+	Tools []ConfigurationBundleToolEntry
+
+	// The version identifier of the configuration bundle.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A tool description input containing the tool name and its current description.
+type ToolDescriptionInput struct {
+
+	// The current description of the tool to optimize.
+	//
+	// This member is required.
+	ToolDescription ToolDescriptionConfig
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	noSmithyDocumentSerde
+}
+
+// The output for a single tool description recommendation.
+type ToolDescriptionOutput struct {
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	// The optimized tool description text generated by the recommendation.
+	RecommendedToolDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for generating tool description optimization recommendations.
+type ToolDescriptionRecommendationConfig struct {
+
+	// The agent traces to analyze for generating tool description recommendations.
+	//
+	// This member is required.
+	AgentTraces AgentTracesConfig
+
+	// The current tool descriptions to optimize.
+	//
+	// This member is required.
+	ToolDescription ToolDescriptionSource
+
+	noSmithyDocumentSerde
+}
+
+// The result of a tool description recommendation, containing optimized
+// descriptions.
+type ToolDescriptionRecommendationResult struct {
+
+	// The configuration bundle containing the recommended tool descriptions, if the
+	// input was sourced from a configuration bundle.
+	ConfigurationBundle *RecommendationResultConfigurationBundle
+
+	// The error code if the recommendation failed.
+	ErrorCode *string
+
+	// The error message if the recommendation failed.
+	ErrorMessage *string
+
+	// The list of tools with their recommended descriptions.
+	Tools []ToolDescriptionOutput
+
+	noSmithyDocumentSerde
+}
+
+// The source of tool descriptions, either inline text or from a configuration
+// bundle.
+//
+// The following types satisfy this interface:
+//
+//	ToolDescriptionSourceMemberConfigurationBundle
+//	ToolDescriptionSourceMemberToolDescriptionText
+type ToolDescriptionSource interface {
+	isToolDescriptionSource()
+}
+
+// Tool descriptions sourced from a configuration bundle version.
+type ToolDescriptionSourceMemberConfigurationBundle struct {
+	Value ToolDescriptionConfigurationBundle
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionSourceMemberConfigurationBundle) isToolDescriptionSource() {}
+
+// Tool descriptions provided as inline text.
+type ToolDescriptionSourceMemberToolDescriptionText struct {
+	Value ToolDescriptionTextInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionSourceMemberToolDescriptionText) isToolDescriptionSource() {}
+
+// Inline tool description input containing a list of tools.
+type ToolDescriptionTextInput struct {
+
+	// The list of tool descriptions to optimize.
+	//
+	// This member is required.
+	Tools []ToolDescriptionInput
 
 	noSmithyDocumentSerde
 }
@@ -3164,6 +5076,80 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// A variant in an A/B test, representing either the control (C) or treatment (T1)
+// configuration.
+type Variant struct {
+
+	// The name of the variant. Must be C for control or T1 for treatment.
+	//
+	// This member is required.
+	Name *string
+
+	// The configuration for this variant, including the configuration bundle or
+	// target reference.
+	//
+	// This member is required.
+	VariantConfiguration *VariantConfiguration
+
+	// The percentage of traffic to route to this variant. Weights across all variants
+	// must sum to 100.
+	//
+	// This member is required.
+	Weight *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an A/B test variant.
+type VariantConfiguration struct {
+
+	// A reference to a configuration bundle version to use for this variant.
+	ConfigurationBundle *ConfigurationBundleRef
+
+	// A reference to a gateway target to route traffic to for this variant.
+	Target *TargetRef
+
+	noSmithyDocumentSerde
+}
+
+// Statistical results for a treatment variant compared against the control.
+type VariantResult struct {
+
+	// Whether the observed difference is statistically significant.
+	//
+	// This member is required.
+	IsSignificant *bool
+
+	// The mean evaluation score for this variant.
+	//
+	// This member is required.
+	Mean *float64
+
+	// The number of sessions evaluated for this variant.
+	//
+	// This member is required.
+	SampleSize *int32
+
+	// The name of the treatment variant.
+	//
+	// This member is required.
+	VariantName *string
+
+	// The absolute change in mean score compared to the control variant.
+	AbsoluteChange *float64
+
+	// The confidence interval for the observed difference.
+	ConfidenceInterval *ConfidenceInterval
+
+	// The p-value indicating the statistical significance of the observed difference.
+	PValue *float64
+
+	// The percentage change in mean score compared to the control variant.
+	PercentChange *float64
+
+	noSmithyDocumentSerde
+}
+
 // The configuration that defines the dimensions of a browser viewport in a
 // browser session. The viewport determines the visible area of web content and
 // affects how web pages are rendered and displayed. Proper viewport configuration
@@ -3200,16 +5186,23 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isABTestEvaluationConfig()                {}
+func (*UnknownUnionMember) isAgentTracesConfig()                     {}
 func (*UnknownUnionMember) isBrowserAction()                         {}
 func (*UnknownUnionMember) isBrowserActionResult()                   {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isContext()                               {}
+func (*UnknownUnionMember) isDataSourceConfig()                      {}
 func (*UnknownUnionMember) isEvaluationContent()                     {}
 func (*UnknownUnionMember) isEvaluationInput()                       {}
+func (*UnknownUnionMember) isEvaluationMetadata()                    {}
 func (*UnknownUnionMember) isEvaluationTarget()                      {}
 func (*UnknownUnionMember) isExtractionJobMessages()                 {}
+func (*UnknownUnionMember) isFilterValue()                           {}
+func (*UnknownUnionMember) isGroundTruthSource()                     {}
+func (*UnknownUnionMember) isGroundTruthTurnInput()                  {}
 func (*UnknownUnionMember) isHarnessContentBlock()                   {}
 func (*UnknownUnionMember) isHarnessContentBlockDelta()              {}
 func (*UnknownUnionMember) isHarnessContentBlockStart()              {}
@@ -3225,12 +5218,28 @@ func (*UnknownUnionMember) isHarnessToolResultContentBlock()         {}
 func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
 func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
+func (*UnknownUnionMember) isLinkedAccount()                         {}
+func (*UnknownUnionMember) isLinkedAccountOAuth2()                   {}
 func (*UnknownUnionMember) isMemoryContent()                         {}
+func (*UnknownUnionMember) isMemoryRecordLeftExpression()            {}
+func (*UnknownUnionMember) isMemoryRecordMetadataValue()             {}
+func (*UnknownUnionMember) isMemoryRecordRightExpression()           {}
 func (*UnknownUnionMember) isMetadataValue()                         {}
+func (*UnknownUnionMember) isOutputConfig()                          {}
 func (*UnknownUnionMember) isPayloadType()                           {}
+func (*UnknownUnionMember) isPaymentInput()                          {}
+func (*UnknownUnionMember) isPaymentInstrumentDetails()              {}
+func (*UnknownUnionMember) isPaymentOutput()                         {}
+func (*UnknownUnionMember) isPaymentTokenRequestInput()              {}
+func (*UnknownUnionMember) isPaymentTokenResponseOutput()            {}
 func (*UnknownUnionMember) isProxy()                                 {}
 func (*UnknownUnionMember) isProxyCredentials()                      {}
+func (*UnknownUnionMember) isRecommendationConfig()                  {}
+func (*UnknownUnionMember) isRecommendationResult()                  {}
 func (*UnknownUnionMember) isResourceLocation()                      {}
 func (*UnknownUnionMember) isRightExpression()                       {}
 func (*UnknownUnionMember) isStreamUpdate()                          {}
+func (*UnknownUnionMember) isSystemPromptConfig()                    {}
+func (*UnknownUnionMember) isToolDescriptionConfig()                 {}
+func (*UnknownUnionMember) isToolDescriptionSource()                 {}
 func (*UnknownUnionMember) isUserIdentifier()                        {}

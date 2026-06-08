@@ -228,6 +228,9 @@ type DICOMImportJobProperties struct {
 	// The timestamp for when the import job was ended.
 	EndedAt *time.Time
 
+	// The object containing DicomJsonMetadataImportConfiguration .
+	ImportConfiguration ImportConfiguration
+
 	// The error message thrown if an import job fails.
 	Message *string
 
@@ -272,6 +275,38 @@ type DICOMImportJobSummary struct {
 
 	// The timestamp when an import job was submitted.
 	SubmittedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration parameters that are specific to DICOM JSON metadata import
+// operations.
+type DicomJsonMetadataImportConfiguration struct {
+
+	// Maps DCM files to their metadata.
+	//
+	// This member is required.
+	DicomMetadataMappings []DicomMetadataMapping
+
+	noSmithyDocumentSerde
+}
+
+// Maps DCM files to their metadata.
+type DicomMetadataMapping struct {
+
+	// The path to the JSON metadata file relative to inputS3Uri.
+	//
+	// This member is required.
+	MetadataFilePath *string
+
+	// The Study Instance UID that identifies the study.
+	//
+	// This member is required.
+	StudyInstanceUID *string
+
+	// The Series Instance UID that identifies the series. This parameter is optional
+	// because the mapping might be at the study level.
+	SeriesInstanceUID *string
 
 	noSmithyDocumentSerde
 }
@@ -445,6 +480,25 @@ type ImageSetsMetadataSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration options for different types of import operations.
+//
+// The following types satisfy this interface:
+//
+//	ImportConfigurationMemberDicomJsonMetadataImportConfiguration
+type ImportConfiguration interface {
+	isImportConfiguration()
+}
+
+// The configuration parameters that are specific to DICOM JSON metadata import
+// operations.
+type ImportConfigurationMemberDicomJsonMetadataImportConfiguration struct {
+	Value DicomJsonMetadataImportConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ImportConfigurationMemberDicomJsonMetadataImportConfiguration) isImportConfiguration() {}
 
 // Contains copiable Attributes structure and wraps information related to
 // specific copy use cases. For example, when copying subsets.
@@ -657,5 +711,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isImportConfiguration()    {}
 func (*UnknownUnionMember) isMetadataUpdates()        {}
 func (*UnknownUnionMember) isSearchByAttributeValue() {}

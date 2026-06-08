@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,28 @@ type HttpStringPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpStringPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringPayloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpStringPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteString(schemas.StringPayloadInput_payload, *v.Payload)
+	}
+}
+func (v *HttpStringPayloadInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringPayloadInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringPayloadInput_payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.StringPayloadInput_payload, v.Payload)
+		}
+		return nil
+	})
+}
+
 type HttpStringPayloadOutput struct {
 	Payload *string
 
@@ -40,16 +64,35 @@ type HttpStringPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpStringPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringPayloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpStringPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteString(schemas.StringPayloadInput_payload, *v.Payload)
+	}
+}
+func (v *HttpStringPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringPayloadInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringPayloadInput_payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.StringPayloadInput_payload, v.Payload)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpStringPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpStringPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpStringPayload, schemas.StringPayloadInput, schemas.StringPayloadInput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpStringPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpStringPayload, schemas.StringPayloadInput, schemas.StringPayloadInput), output: &HttpStringPayloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpStringPayload"); err != nil {

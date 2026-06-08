@@ -1268,9 +1268,6 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.DurationInYears == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DurationInYears"))
-	}
 	if v.Nameservers != nil {
 		if err := validateNameserverList(v.Nameservers); err != nil {
 			invalidParams.AddNested("Nameservers", err.(smithy.InvalidParamsError))

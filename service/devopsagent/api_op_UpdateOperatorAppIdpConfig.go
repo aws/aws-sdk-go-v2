@@ -126,6 +126,9 @@ func (c *Client) addOperationUpdateOperatorAppIdpConfigMiddlewares(stack *middle
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opUpdateOperatorAppIdpConfigMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpUpdateOperatorAppIdpConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,6 +160,33 @@ func (c *Client) addOperationUpdateOperatorAppIdpConfigMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware struct {
+}
+
+func (*endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleFinalize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "cp." + req.URL.Host
+
+	return next.HandleFinalize(ctx, in)
+}
+func addEndpointPrefix_opUpdateOperatorAppIdpConfigMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opUpdateOperatorAppIdpConfigMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opUpdateOperatorAppIdpConfig(region string) *awsmiddleware.RegisterServiceMetadata {

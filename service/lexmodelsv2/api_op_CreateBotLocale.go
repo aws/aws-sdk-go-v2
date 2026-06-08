@@ -74,6 +74,12 @@ type CreateBotLocaleInput struct {
 	// This member is required.
 	NluIntentConfidenceThreshold *float64
 
+	// Audio filler settings to configure for the new bot locale. When enabled, Amazon
+	// Lex plays a brief background audio filler during speech-to-speech interactions
+	// to mask processing delays. Requires unifiedSpeechSettings (speech-to-speech) to
+	// be configured on the bot locale.
+	AudioFillerSettings *types.AudioFillerSettings
+
 	// A description of the bot locale. Use this to help identify the bot locale in
 	// lists.
 	Description *string
@@ -101,6 +107,9 @@ type CreateBotLocaleInput struct {
 }
 
 type CreateBotLocaleOutput struct {
+
+	// The audio filler settings configured for the created bot locale.
+	AudioFillerSettings *types.AudioFillerSettings
 
 	// The specified bot identifier.
 	BotId *string

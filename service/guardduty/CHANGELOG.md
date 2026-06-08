@@ -1,3 +1,48 @@
+# v1.79.2 (2026-06-04)
+
+* **Documentation**: Remove unsupported RDS field for filter
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.0 (2026-06-02)
+
+* **Feature**: Amazon GuardDuty Runtime Monitoring now supports 3 new SensitiveFileModified finding types (Persistence, PrivilegeEscalation, DefenseEvasion) that detect when security-sensitive system files are modified on EC2 instances or containers, indicating potential compromise through file tampering.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.0 (2026-05-26)
+
+* **Feature**: Add malware scan support for Continuous Backups, also known as Point-In-Time Recovery Points (PITR).
+
+# v1.77.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
+# v1.76.0 (2026-05-19)
+
+* **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+
+# v1.75.4 (2026-05-07)
+
+* **Documentation**: This is a documentation update
+
+# v1.75.3 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.2 (2026-04-20)
 
 * **Documentation**: Expanded support for new suppression rule fields.

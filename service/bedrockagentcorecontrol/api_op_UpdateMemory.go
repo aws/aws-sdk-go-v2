@@ -34,6 +34,9 @@ type UpdateMemoryInput struct {
 	// This member is required.
 	MemoryId *string
 
+	// Additional metadata keys to index. Previously indexed keys cannot be removed.
+	AddIndexedKeys []types.IndexedKey
+
 	// A client token is used for keeping track of idempotent requests. It can contain
 	// a session id which can be around 250 chars, combined with a unique AWS
 	// identifier.

@@ -261,6 +261,18 @@ type AddOutputRequest struct {
 	//  The name of the output. This value must be unique within the current flow.
 	Name *string
 
+	// Controls how MediaConnect generates timecodes for NDI output frames. If you
+	// don't specify this field, MediaConnect uses EMBEDDED_TIMECODE .
+	//
+	//   - EMBEDDED_TIMECODE (default) - Preserves timecodes from the input transport
+	//   stream. The timecodes must be embedded in the video stream as SEI timing
+	//   messages. If no embedded timecode is detected, MediaConnect uses the UTC system
+	//   time instead.
+	//
+	//   - UTC_SYSTEM_TIME - Generates timecodes based on the system clock time when
+	//   each frame is sent.
+	NdiOutputTimecodeSource NdiOutputTimecodeSource
+
 	//  A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.
 	NdiProgramName *string
@@ -4304,6 +4316,17 @@ type Transport struct {
 	// stream is set to the highest number between the sender’s minimum latency and the
 	// receiver’s minimum latency.
 	MinLatency *int32
+
+	// The timecode source for NDI output frames. For NDI outputs, this field is
+	// always present and defaults to EMBEDDED_TIMECODE .
+	//
+	//   - EMBEDDED_TIMECODE - Preserves timecodes from the input transport stream. The
+	//   timecodes must be embedded in the video stream as SEI timing messages. If no
+	//   embedded timecode is detected, MediaConnect uses the UTC system time instead.
+	//
+	//   - UTC_SYSTEM_TIME - Generates timecodes based on the system clock time when
+	//   each frame is sent.
+	NdiOutputTimecodeSource NdiOutputTimecodeSource
 
 	// A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.

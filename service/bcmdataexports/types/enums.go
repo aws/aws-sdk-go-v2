@@ -149,7 +149,9 @@ type S3OutputType string
 
 // Enum values for S3OutputType
 const (
-	S3OutputTypeCustom S3OutputType = "CUSTOM"
+	S3OutputTypeCustom   S3OutputType = "CUSTOM"
+	S3OutputTypeAthena   S3OutputType = "ATHENA"
+	S3OutputTypeRedshift S3OutputType = "REDSHIFT"
 )
 
 // Values returns all known values for S3OutputType. Note that this can be
@@ -159,6 +161,8 @@ const (
 func (S3OutputType) Values() []S3OutputType {
 	return []S3OutputType{
 		"CUSTOM",
+		"ATHENA",
+		"REDSHIFT",
 	}
 }
 

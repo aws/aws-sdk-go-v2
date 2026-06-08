@@ -20,6 +20,67 @@ import (
 	"path"
 )
 
+type awsAwsjson11_serializeOpContinueServiceDeployment struct {
+}
+
+func (*awsAwsjson11_serializeOpContinueServiceDeployment) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpContinueServiceDeployment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ContinueServiceDeploymentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerServiceV20141113.ContinueServiceDeployment")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentContinueServiceDeploymentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateCapacityProvider struct {
 }
 
@@ -6122,6 +6183,18 @@ func awsAwsjson11_serializeDocumentDeploymentLifecycleHook(v *types.DeploymentLi
 		ok.String(*v.RoleArn)
 	}
 
+	if len(v.TargetType) > 0 {
+		ok := object.Key("targetType")
+		ok.String(string(v.TargetType))
+	}
+
+	if v.TimeoutConfiguration != nil {
+		ok := object.Key("timeoutConfiguration")
+		if err := awsAwsjson11_serializeDocumentDeploymentLifecycleHookTimeoutConfiguration(v.TimeoutConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6146,6 +6219,23 @@ func awsAwsjson11_serializeDocumentDeploymentLifecycleHookStageList(v []types.De
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentLifecycleHookTimeoutConfiguration(v *types.DeploymentLifecycleHookTimeoutConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.TimeoutInMinutes != nil {
+		ok := object.Key("timeoutInMinutes")
+		ok.Integer(*v.TimeoutInMinutes)
+	}
+
 	return nil
 }
 
@@ -9129,6 +9219,28 @@ func awsAwsjson11_serializeDocumentVpcLatticeConfigurations(v []types.VpcLattice
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentContinueServiceDeploymentInput(v *ContinueServiceDeploymentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.HookId != nil {
+		ok := object.Key("hookId")
+		ok.String(*v.HookId)
+	}
+
+	if v.ServiceDeploymentArn != nil {
+		ok := object.Key("serviceDeploymentArn")
+		ok.String(*v.ServiceDeploymentArn)
+	}
+
 	return nil
 }
 

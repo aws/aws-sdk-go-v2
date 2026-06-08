@@ -55,6 +55,9 @@ type DescribeBotLocaleInput struct {
 
 type DescribeBotLocaleOutput struct {
 
+	// The audio filler settings configured for the bot locale.
+	AudioFillerSettings *types.AudioFillerSettings
+
 	// The identifier of the bot associated with the locale.
 	BotId *string
 

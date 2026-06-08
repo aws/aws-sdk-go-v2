@@ -1768,6 +1768,7 @@ const (
 	CmafImageBasedTrickPlayThumbnail             CmafImageBasedTrickPlay = "THUMBNAIL"
 	CmafImageBasedTrickPlayThumbnailAndFullframe CmafImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
 	CmafImageBasedTrickPlayAdvanced              CmafImageBasedTrickPlay = "ADVANCED"
+	CmafImageBasedTrickPlayVariants              CmafImageBasedTrickPlay = "VARIANTS"
 )
 
 // Values returns all known values for CmafImageBasedTrickPlay. Note that this can
@@ -1780,6 +1781,7 @@ func (CmafImageBasedTrickPlay) Values() []CmafImageBasedTrickPlay {
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
 		"ADVANCED",
+		"VARIANTS",
 	}
 }
 
@@ -2320,6 +2322,7 @@ const (
 	CodecAc3          Codec = "AC3"
 	CodecEac3         Codec = "EAC3"
 	CodecFlac         Codec = "FLAC"
+	CodecMp2          Codec = "MP2"
 	CodecMp3          Codec = "MP3"
 	CodecOpus         Codec = "OPUS"
 	CodecPcm          Codec = "PCM"
@@ -2355,6 +2358,7 @@ func (Codec) Values() []Codec {
 		"AC3",
 		"EAC3",
 		"FLAC",
+		"MP2",
 		"MP3",
 		"OPUS",
 		"PCM",
@@ -2653,6 +2657,7 @@ const (
 	DashIsoImageBasedTrickPlayThumbnail             DashIsoImageBasedTrickPlay = "THUMBNAIL"
 	DashIsoImageBasedTrickPlayThumbnailAndFullframe DashIsoImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
 	DashIsoImageBasedTrickPlayAdvanced              DashIsoImageBasedTrickPlay = "ADVANCED"
+	DashIsoImageBasedTrickPlayVariants              DashIsoImageBasedTrickPlay = "VARIANTS"
 )
 
 // Values returns all known values for DashIsoImageBasedTrickPlay. Note that this
@@ -2665,6 +2670,7 @@ func (DashIsoImageBasedTrickPlay) Values() []DashIsoImageBasedTrickPlay {
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
 		"ADVANCED",
+		"VARIANTS",
 	}
 }
 
@@ -4059,6 +4065,7 @@ const (
 	FormatWave      Format = "wave"
 	FormatAvi       Format = "avi"
 	FormatMpegts    Format = "mpegts"
+	FormatMpegps    Format = "mpegps"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4075,6 +4082,7 @@ func (Format) Values() []Format {
 		"wave",
 		"avi",
 		"mpegts",
+		"mpegps",
 	}
 }
 
@@ -5555,25 +5563,6 @@ func (HlsCaptionSegmentLengthControl) Values() []HlsCaptionSegmentLengthControl 
 	}
 }
 
-type HlsClearLead string
-
-// Enum values for HlsClearLead
-const (
-	HlsClearLeadEnabled  HlsClearLead = "ENABLED"
-	HlsClearLeadDisabled HlsClearLead = "DISABLED"
-)
-
-// Values returns all known values for HlsClearLead. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (HlsClearLead) Values() []HlsClearLead {
-	return []HlsClearLead{
-		"ENABLED",
-		"DISABLED",
-	}
-}
-
 type HlsClientCache string
 
 // Enum values for HlsClientCache
@@ -5699,6 +5688,7 @@ const (
 	HlsImageBasedTrickPlayThumbnail             HlsImageBasedTrickPlay = "THUMBNAIL"
 	HlsImageBasedTrickPlayThumbnailAndFullframe HlsImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
 	HlsImageBasedTrickPlayAdvanced              HlsImageBasedTrickPlay = "ADVANCED"
+	HlsImageBasedTrickPlayVariants              HlsImageBasedTrickPlay = "VARIANTS"
 )
 
 // Values returns all known values for HlsImageBasedTrickPlay. Note that this can
@@ -5711,6 +5701,7 @@ func (HlsImageBasedTrickPlay) Values() []HlsImageBasedTrickPlay {
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
 		"ADVANCED",
+		"VARIANTS",
 	}
 }
 

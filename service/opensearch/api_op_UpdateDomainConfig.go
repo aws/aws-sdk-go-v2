@@ -71,6 +71,15 @@ type UpdateDomainConfigInput struct {
 	// Options for Auto-Tune.
 	AutoTuneOptions *types.AutoTuneOptions
 
+	// Specifies the automated snapshot pause options for the domain.
+	//
+	// Suspending snapshots reduces data protection. You cannot restore your domain to
+	// points in time when snapshots are suspended. Use this feature only for
+	// short-term operational needs such as migrations or maintenance windows.
+	//
+	// Maximum suspension duration: 3 days.
+	AutomatedSnapshotPauseOptions *types.AutomatedSnapshotPauseRequestOptions
+
 	// Changes that you want to make to the cluster configuration, such as the
 	// instance type and number of EC2 instances.
 	ClusterConfig *types.ClusterConfig

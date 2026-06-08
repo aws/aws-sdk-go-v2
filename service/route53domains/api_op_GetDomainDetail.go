@@ -112,8 +112,7 @@ type GetDomainDetailOutput struct {
 	// Reserved for future use.
 	RegistryDomainId *string
 
-	// Reseller of the domain. Domains registered or transferred using Route 53
-	// domains will have "Amazon" as the reseller.
+	// Reserved for future use.
 	Reseller *string
 
 	// An array of domain name status codes, also known as Extensible Provisioning

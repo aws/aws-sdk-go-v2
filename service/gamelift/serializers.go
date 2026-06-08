@@ -2066,6 +2066,56 @@ func (m *smithyRpcv2cbor_serializeOpDescribeContainerGroupDefinition) HandleSeri
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpDescribeContainerGroupPortMappings struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpDescribeContainerGroupPortMappings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpDescribeContainerGroupPortMappings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	input, ok := in.Parameters.(*DescribeContainerGroupPortMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/GameLift/operation/DescribeContainerGroupPortMappings"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeContainerGroupPortMappingsInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	endTimer()
+	span.End()
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpDescribeEC2InstanceLimits struct {
 }
 
@@ -9047,6 +9097,46 @@ func serializeCBOR_DescribeContainerGroupDefinitionInput(v *DescribeContainerGro
 			return nil, err
 		}
 		vm["VersionNumber"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeContainerGroupPortMappingsInput(v *DescribeContainerGroupPortMappingsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.FleetId != nil {
+		ser, err := serializeCBOR_String(*v.FleetId)
+		if err != nil {
+			return nil, err
+		}
+		vm["FleetId"] = ser
+	}
+	if len(v.ContainerGroupType) > 0 {
+		ser, err := serializeCBOR_ContainerGroupType(v.ContainerGroupType)
+		if err != nil {
+			return nil, err
+		}
+		vm["ContainerGroupType"] = ser
+	}
+	if v.ComputeName != nil {
+		ser, err := serializeCBOR_String(*v.ComputeName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ComputeName"] = ser
+	}
+	if v.InstanceId != nil {
+		ser, err := serializeCBOR_String(*v.InstanceId)
+		if err != nil {
+			return nil, err
+		}
+		vm["InstanceId"] = ser
+	}
+	if v.ContainerName != nil {
+		ser, err := serializeCBOR_String(*v.ContainerName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ContainerName"] = ser
 	}
 	return vm, nil
 }

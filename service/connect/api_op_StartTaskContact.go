@@ -13,7 +13,7 @@ import (
 )
 
 // Initiates a flow to start a new task contact. For more information about task
-// contacts, see [Concepts: Tasks in Amazon Connect]in the Amazon Connect Administrator Guide.
+// contacts, see [Concepts: Tasks in Connect Customer]in the Connect Customer Administrator Guide.
 //
 // When using PreviousContactId and RelatedContactId input parameters, note the
 // following:
@@ -41,16 +41,16 @@ import (
 // parameter is required as long as the task template has a flow configured to run
 // it. If more than one parameter is specified, or only the TaskTemplateID is
 // specified but it does not have a flow configured, the request returns an error
-// because Amazon Connect cannot identify the unique flow to run when the task is
+// because Connect Customer cannot identify the unique flow to run when the task is
 // created.
 //
 // A ServiceQuotaExceededException occurs when the number of open tasks exceeds
 // the active tasks quota or there are already 12 tasks referencing the same
 // PreviousContactId . For more information about service quotas for task contacts,
-// see [Amazon Connect service quotas]in the Amazon Connect Administrator Guide.
+// see [Connect Customer service quotas]in the Connect Customer Administrator Guide.
 //
-// [Amazon Connect service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
-// [Concepts: Tasks in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html
+// [Concepts: Tasks in Connect Customer]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html
+// [Connect Customer service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}
@@ -68,8 +68,8 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 
 type StartTaskContactInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -86,7 +86,7 @@ type StartTaskContactInput struct {
 	Attachments []types.TaskAttachment
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -101,7 +101,7 @@ type StartTaskContactInput struct {
 	ClientToken *string
 
 	// The identifier of the flow for initiating the tasks. To see the ContactFlowId
-	// in the Amazon Connect admin website, on the navigation menu go to Routing,
+	// in the Connect Customer admin website, on the navigation menu go to Routing,
 	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
 	// Show additional flow information. The ContactFlowId is the last part of the ARN,
 	// shown here in bold:
@@ -148,8 +148,8 @@ type StartTaskContactInput struct {
 	ScheduledTime *time.Time
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// (unique contact ID) using an attribute map. The attributes are standard Amazon
-	// Connect attributes. They can be accessed in flows.
+	// (unique contact ID) using an attribute map. The attributes are standard Connect
+	// Customer attributes. They can be accessed in flows.
 	//
 	// Attribute keys can include only alphanumeric, -, and _.
 	//
@@ -168,7 +168,7 @@ type StartTaskContactInput struct {
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	// A unique identifier for the task template. For more information about task
-	// templates, see [Create task templates]in the Amazon Connect Administrator Guide.
+	// templates, see [Create task templates]in the Connect Customer Administrator Guide.
 	//
 	// [Create task templates]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
 	TaskTemplateId *string
@@ -178,7 +178,7 @@ type StartTaskContactInput struct {
 
 type StartTaskContactOutput struct {
 
-	// The identifier of this contact within the Amazon Connect instance.
+	// The identifier of this contact within the Connect Customer instance.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

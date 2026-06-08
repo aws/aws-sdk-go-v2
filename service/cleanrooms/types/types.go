@@ -3369,6 +3369,13 @@ type MemberChangeSpecification struct {
 	// becomes optional when modifying abilities of existing collaboration members.
 	DisplayName *string
 
+	// The ML member abilities for a collaboration member.
+	MlMemberAbilities *MLMemberAbilities
+
+	// An object representing the collaboration member's payment responsibilities set
+	// by the collaboration creator.
+	PaymentConfiguration *PaymentConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -4353,6 +4360,9 @@ type ProtectedJob struct {
 	//  The error from the protected job.
 	Error *ProtectedJobError
 
+	// The account ID of the member that pays for the job compute costs.
+	JobComputePayerAccountId *string
+
 	//  The job parameters for the protected job.
 	JobParameters *ProtectedJobParameters
 
@@ -4686,6 +4696,9 @@ type ProtectedJobSummary struct {
 	// This member is required.
 	Status ProtectedJobStatus
 
+	// The account ID of the member that pays for the job compute costs.
+	JobComputePayerAccountId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4747,6 +4760,9 @@ type ProtectedQuery struct {
 
 	// An error thrown by the protected query.
 	Error *ProtectedQueryError
+
+	// The account ID of the member that pays for the query compute costs.
+	QueryComputePayerAccountId *string
 
 	// The result of the protected query.
 	Result *ProtectedQueryResult
@@ -5075,6 +5091,9 @@ type ProtectedQuerySummary struct {
 	//
 	// This member is required.
 	Status ProtectedQueryStatus
+
+	// The account ID of the member that pays for the query compute costs.
+	QueryComputePayerAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -5566,6 +5585,25 @@ type TableReferenceMemberSnowflake struct {
 }
 
 func (*TableReferenceMemberSnowflake) isTableReference() {}
+
+// An object representing the payment responsibilities to update for the
+// membership.
+type UpdateMembershipPaymentConfiguration struct {
+
+	// An object representing the payment responsibilities accepted by the
+	// collaboration member for query and job compute costs.
+	JobCompute *MembershipJobComputePaymentConfig
+
+	// An object representing the collaboration member's machine learning payment
+	// responsibilities set by the collaboration creator.
+	MachineLearning *MembershipMLPaymentConfig
+
+	// An object representing the payment responsibilities accepted by the
+	// collaboration member for query compute costs.
+	QueryCompute *MembershipQueryComputePaymentConfig
+
+	noSmithyDocumentSerde
+}
 
 // Describes validation errors for specific input parameters.
 type ValidationExceptionField struct {

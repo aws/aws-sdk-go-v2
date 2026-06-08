@@ -14,6 +14,12 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberArcRoutingControlConfig:
 		_ = v.Value // Value is types.ArcRoutingControlConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig:
+		_ = v.Value // Value is types.AuroraProvisionedScalingConfiguration
+
+	case *types.ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig:
+		_ = v.Value // Value is types.AuroraServerlessScalingConfiguration
+
 	case *types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
 		_ = v.Value // Value is types.CustomActionLambdaConfiguration
 
@@ -34,6 +40,12 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 
 	case *types.ExecutionBlockConfigurationMemberGlobalAuroraConfig:
 		_ = v.Value // Value is types.GlobalAuroraConfiguration
+
+	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
+		_ = v.Value // Value is types.LambdaEventSourceMappingConfiguration
+
+	case *types.ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig:
+		_ = v.Value // Value is types.NeptuneGlobalDatabaseConfiguration
 
 	case *types.ExecutionBlockConfigurationMemberParallelConfig:
 		_ = v.Value // Value is types.ParallelExecutionBlockConfiguration
@@ -60,10 +72,14 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 }
 
 var _ *types.RdsCreateCrossRegionReplicaConfiguration
+var _ *types.NeptuneGlobalDatabaseConfiguration
 var _ *types.DocumentDbConfiguration
+var _ *types.AuroraServerlessScalingConfiguration
 var _ *types.ExecutionApprovalConfiguration
+var _ *types.LambdaEventSourceMappingConfiguration
 var _ *types.EksResourceScalingConfiguration
 var _ *types.RegionSwitchPlanConfiguration
+var _ *types.AuroraProvisionedScalingConfiguration
 var _ *types.CustomActionLambdaConfiguration
 var _ *types.GlobalAuroraConfiguration
 var _ *types.EcsCapacityIncreaseConfiguration

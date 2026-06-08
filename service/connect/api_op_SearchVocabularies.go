@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for vocabularies within a specific Amazon Connect instance using State
-// , NameStartsWith , and LanguageCode .
+// Searches for vocabularies within a specific Connect Customer instance using
+// State , NameStartsWith , and LanguageCode .
 func (c *Client) SearchVocabularies(ctx context.Context, params *SearchVocabulariesInput, optFns ...func(*Options)) (*SearchVocabulariesOutput, error) {
 	if params == nil {
 		params = &SearchVocabulariesInput{}
@@ -30,8 +30,8 @@ func (c *Client) SearchVocabularies(ctx context.Context, params *SearchVocabular
 
 type SearchVocabulariesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

@@ -18,14 +18,14 @@ import (
 // name or the reason the customer called. You can add notes about steps that the
 // agent took during the call that display to the next agent that takes the call.
 // You can also update attributes for a contact using data from your CRM
-// application and save the data with the contact in Amazon Connect. You could also
-// flag calls for additional analysis, such as legal review or to identify abusive
-// callers.
+// application and save the data with the contact in Connect Customer. You could
+// also flag calls for additional analysis, such as legal review or to identify
+// abusive callers.
 //
-// Contact attributes are available in Amazon Connect for 24 months, and are then
-// deleted. For information about contact record retention and the maximum size of
-// the contact record attributes section, see [Feature specifications]in the Amazon Connect Administrator
-// Guide.
+// Contact attributes are available in Connect Customer for 24 months, and are
+// then deleted. For information about contact record retention and the maximum
+// size of the contact record attributes section, see [Feature specifications]in the Connect Customer
+// Administrator Guide.
 //
 // [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
 func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateContactAttributesInput, optFns ...func(*Options)) (*UpdateContactAttributesOutput, error) {
@@ -45,7 +45,7 @@ func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateCont
 
 type UpdateContactAttributesInput struct {
 
-	// The Amazon Connect attributes. These attributes can be accessed in flows just
+	// The Connect Customer attributes. These attributes can be accessed in flows just
 	// like any other contact attributes.
 	//
 	// You can have up to 32,768 UTF-8 bytes across all attributes for a contact.
@@ -60,8 +60,8 @@ type UpdateContactAttributesInput struct {
 	//   - If the attributes are only used in one flow and don't need to be referred
 	//   to outside of that flow (for example, by a Lambda or another flow), then use
 	//   flow attributes. This way you aren't needlessly persisting the 32 KB of
-	//   information from one flow to another. For more information, see [Flow block: Set contact attributes]in the Amazon
-	//   Connect Administrator Guide.
+	//   information from one flow to another. For more information, see [Flow block: Set contact attributes]in the
+	//   Connect Customer Administrator Guide.
 	//
 	// [Flow block: Set contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html
 	// [Set contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html
@@ -75,8 +75,8 @@ type UpdateContactAttributesInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

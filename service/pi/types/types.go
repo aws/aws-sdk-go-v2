@@ -567,6 +567,10 @@ type Recommendation struct {
 	// during that time period: sql-id
 	RecommendationDescription *string
 
+	// Detailed information about the recommendation, including steps to resolve the
+	// performance issue.
+	RecommendationDetails *string
+
 	// The unique identifier for the recommendation.
 	RecommendationId *string
 

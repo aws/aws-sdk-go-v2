@@ -10,18 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
-// Deletes the Amazon Connect instance. For more information, see [Delete your Amazon Connect instance] in the Amazon
-// Connect Administrator Guide.
+// Deletes the Connect Customer instance. For more information, see [Delete your Connect Customer instance] in the
+// Connect Customer Administrator Guide.
 //
-// Amazon Connect enforces a limit on the total number of instances that you can
+// Connect Customer enforces a limit on the total number of instances that you can
 // create or delete in 30 days. If you exceed this limit, you will get an error
 // message indicating there has been an excessive number of attempts at creating or
 // deleting instances. You must wait 30 days before you can restart creating and
 // deleting instances in your account.
 //
-// [Delete your Amazon Connect instance]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html
+// [Delete your Connect Customer instance]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html
 func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput, optFns ...func(*Options)) (*DeleteInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceInput{}
@@ -39,8 +39,8 @@ func (c *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceInput
 
 type DeleteInstanceInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//

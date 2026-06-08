@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates your claimed phone number from its current Amazon Connect instance or
-// traffic distribution group to another Amazon Connect instance or traffic
+// Updates your claimed phone number from its current Connect Customer instance or
+// traffic distribution group to another Connect Customer instance or traffic
 // distribution group in the same Amazon Web Services Region.
 //
 // After using this API, you must verify that the phone number is attached to the
@@ -53,14 +53,14 @@ type UpdatePhoneNumberInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. You must enter
 	// InstanceId or TargetArn .
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through. You
 	// must enter InstanceId or TargetArn .
 	TargetArn *string

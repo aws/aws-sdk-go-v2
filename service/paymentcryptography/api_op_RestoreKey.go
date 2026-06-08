@@ -19,8 +19,8 @@ import (
 // deleted. After Key is restored, the KeyState is CREATE_COMPLETE , and the value
 // for deletePendingTimestamp is removed.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -33,6 +33,7 @@ import (
 // [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
 // [StartKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
 // [StopKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) RestoreKey(ctx context.Context, params *RestoreKeyInput, optFns ...func(*Options)) (*RestoreKeyOutput, error) {
 	if params == nil {
 		params = &RestoreKeyInput{}

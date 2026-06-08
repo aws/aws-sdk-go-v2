@@ -2,6 +2,32 @@
 
 package types
 
+type CertificateAssociationStatus string
+
+// Enum values for CertificateAssociationStatus
+const (
+	CertificateAssociationStatusPendingAssociation    CertificateAssociationStatus = "PENDING_ASSOCIATION"
+	CertificateAssociationStatusAssociated            CertificateAssociationStatus = "ASSOCIATED"
+	CertificateAssociationStatusPendingDisassociation CertificateAssociationStatus = "PENDING_DISASSOCIATION"
+	CertificateAssociationStatusDisassociated         CertificateAssociationStatus = "DISASSOCIATED"
+	CertificateAssociationStatusFailed                CertificateAssociationStatus = "FAILED"
+)
+
+// Values returns all known values for CertificateAssociationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAssociationStatus) Values() []CertificateAssociationStatus {
+	return []CertificateAssociationStatus{
+		"PENDING_ASSOCIATION",
+		"ASSOCIATED",
+		"PENDING_DISASSOCIATION",
+		"DISASSOCIATED",
+		"FAILED",
+	}
+}
+
 type ConnectivityType string
 
 // Enum values for ConnectivityType
@@ -246,5 +272,32 @@ func (ResponderGatewayStatus) Values() []ResponderGatewayStatus {
 		"ISOLATED",
 		"PENDING_ISOLATION",
 		"PENDING_RESTORATION",
+	}
+}
+
+type RuleStatus string
+
+// Enum values for RuleStatus
+const (
+	RuleStatusCreationInProgress RuleStatus = "CREATION_IN_PROGRESS"
+	RuleStatusActive             RuleStatus = "ACTIVE"
+	RuleStatusUpdateInProgress   RuleStatus = "UPDATE_IN_PROGRESS"
+	RuleStatusDeletionInProgress RuleStatus = "DELETION_IN_PROGRESS"
+	RuleStatusDeleted            RuleStatus = "DELETED"
+	RuleStatusFailed             RuleStatus = "FAILED"
+)
+
+// Values returns all known values for RuleStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleStatus) Values() []RuleStatus {
+	return []RuleStatus{
+		"CREATION_IN_PROGRESS",
+		"ACTIVE",
+		"UPDATE_IN_PROGRESS",
+		"DELETION_IN_PROGRESS",
+		"DELETED",
+		"FAILED",
 	}
 }

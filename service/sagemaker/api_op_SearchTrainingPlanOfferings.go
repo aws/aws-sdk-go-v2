@@ -68,7 +68,7 @@ type SearchTrainingPlanOfferingsInput struct {
 	StartTimeAfter *time.Time
 
 	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-	// SageMaker Endpoints) to search for in the offerings.
+	// SageMaker Endpoints, Studio apps) to search for in the offerings.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -80,6 +80,9 @@ type SearchTrainingPlanOfferingsInput struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	TargetResources []types.SageMakerResourceName
 
 	// The Amazon Resource Name (ARN); of an existing training plan to search for

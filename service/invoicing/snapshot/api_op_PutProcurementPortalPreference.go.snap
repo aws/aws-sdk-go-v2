@@ -1,6 +1,7 @@
 PutProcurementPortalPreference
 	Initialize stack step
 		RegisterServiceMetadata
+		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation

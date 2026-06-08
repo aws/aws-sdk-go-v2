@@ -3835,6 +3835,18 @@ func awsRestjson1_serializeDocumentLogTypes(v []types.LogType, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMskMonitoringParameters(v *types.MskMonitoringParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EnhancedMonitoring) > 0 {
+		ok := object.Key("EnhancedMonitoring")
+		ok.String(string(v.EnhancedMonitoring))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOrganizationUnitIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4020,6 +4032,13 @@ func awsRestjson1_serializeDocumentTelemetryDestinationConfiguration(v *types.Te
 	if v.LogDeliveryParameters != nil {
 		ok := object.Key("LogDeliveryParameters")
 		if err := awsRestjson1_serializeDocumentLogDeliveryParameters(v.LogDeliveryParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MskMonitoringParameters != nil {
+		ok := object.Key("MskMonitoringParameters")
+		if err := awsRestjson1_serializeDocumentMskMonitoringParameters(v.MskMonitoringParameters, ok); err != nil {
 			return err
 		}
 	}

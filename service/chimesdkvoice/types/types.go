@@ -799,7 +799,7 @@ type VoiceConnector struct {
 	// The Voice Connector's creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 
-	// The connectors for use with Amazon Connect.
+	// The connectors for use with Connect Customer.
 	IntegrationType VoiceConnectorIntegrationType
 
 	// The Voice Connector's name.

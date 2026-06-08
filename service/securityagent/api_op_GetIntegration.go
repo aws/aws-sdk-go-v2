@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets Integration metadata from the provided id
+// Retrieves information about an integration.
 func (c *Client) GetIntegration(ctx context.Context, params *GetIntegrationInput, optFns ...func(*Options)) (*GetIntegrationOutput, error) {
 	if params == nil {
 		params = &GetIntegrationInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetIntegration(ctx context.Context, params *GetIntegrationInput
 
 type GetIntegrationInput struct {
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration to retrieve.
 	//
 	// This member is required.
 	IntegrationId *string
@@ -39,30 +39,31 @@ type GetIntegrationInput struct {
 
 type GetIntegrationOutput struct {
 
-	// Installation identifier from the provider
+	// The installation identifier from the integration provider.
 	//
 	// This member is required.
 	InstallationId *string
 
-	// Unique identifier of the integration
+	// The unique identifier of the integration.
 	//
 	// This member is required.
 	IntegrationId *string
 
-	// Provider type
+	// The integration provider.
 	//
 	// This member is required.
 	Provider types.Provider
 
-	// Type of provider integration
+	// The type of the integration provider.
 	//
 	// This member is required.
 	ProviderType types.ProviderType
 
-	// Display name for the integration
+	// The display name of the integration.
 	DisplayName *string
 
-	// KMS key ID for encrypting integration details
+	// The identifier of the AWS KMS key used to encrypt data associated with the
+	// integration.
 	KmsKeyId *string
 
 	// Metadata pertaining to the operation's result.

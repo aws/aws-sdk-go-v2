@@ -63,6 +63,10 @@ type CreateMLInputChannelInput struct {
 	// channel.
 	KmsKeyArn *string
 
+	// The payer configuration for the ML input channel. Determines which member
+	// account pays for compute and synthetic data costs.
+	PayerConfiguration *types.PayerConfiguration
+
 	// The optional metadata that you apply to the resource to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define.

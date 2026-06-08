@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to a MediaConvert queue, preset, or job template. For information
+// Add tags to a MediaConvert queue, preset, job, or job template. For information
 // about tagging, see the User Guide at
-// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

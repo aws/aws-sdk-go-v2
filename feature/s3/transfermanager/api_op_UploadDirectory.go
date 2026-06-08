@@ -195,7 +195,9 @@ func (u *directoryUploader) uploadDirectory(ctx context.Context) (*UploadDirecto
 	u.wg.Wait()
 
 	if u.err != nil {
-		u.emitter.Failed(ctx, u.in, u.err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.emitter.Failed(freshCtx, u.in, u.err)
 		return nil, u.err
 	}
 
@@ -390,6 +392,13 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		u.filesUploaded.Add(1)
 		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
 	}
+}
+
+func (u *directoryUploader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if u.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), u.options.FailTimeout)
 }
 
 func (u *directoryUploader) setErr(err error) {

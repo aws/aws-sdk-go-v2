@@ -34,9 +34,16 @@ type GetWhatsAppMessageTemplateInput struct {
 	Id *string
 
 	// The numeric ID of the template assigned by Meta.
-	//
-	// This member is required.
 	MetaTemplateId *string
+
+	// The language code of the message template (for example, en or en_US ). Use
+	// together with templateName as an alternative to metaTemplateId to identify a
+	// template.
+	TemplateLanguageCode *string
+
+	// The name of the message template. Use together with templateLanguageCode as an
+	// alternative to metaTemplateId to identify a template.
+	TemplateName *string
 
 	noSmithyDocumentSerde
 }

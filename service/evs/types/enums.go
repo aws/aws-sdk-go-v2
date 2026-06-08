@@ -200,7 +200,8 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeI4iMetal InstanceType = "i4i.metal"
+	InstanceTypeI4iMetal     InstanceType = "i4i.metal"
+	InstanceTypeI7iMetal24xl InstanceType = "i7i.metal-24xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -210,6 +211,7 @@ const (
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"i4i.metal",
+		"i7i.metal-24xl",
 	}
 }
 

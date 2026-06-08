@@ -22,8 +22,8 @@ import (
 // agent, or it can also deflect an ongoing contact to an outbound SMS or WhatsApp
 // contact by using the [StartOutboundChatContact]Flow Action.
 //
-// For more information about using SMS or WhatsApp in Amazon Connect, see the
-// following topics in the Amazon Connect Administrator Guide:
+// For more information about using SMS or WhatsApp in Connect Customer, see the
+// following topics in the Connect Customer Administrator Guide:
 //
 // [Set up SMS messaging]
 //
@@ -52,11 +52,11 @@ func (c *Client) StartOutboundChatContact(ctx context.Context, params *StartOutb
 
 type StartOutboundChatContactInput struct {
 
-	// The identifier of the flow for the call. To see the ContactFlowId in the Amazon
-	// Connect console user interface, on the navigation menu go to Routing, Contact
-	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
-	// Show additional flow information. The ContactFlowId is the last part of the ARN,
-	// shown here in bold:
+	// The identifier of the flow for the call. To see the ContactFlowId in the
+	// Connect Customer console user interface, on the navigation menu go to Routing,
+	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
+	// choose Show additional flow information. The ContactFlowId is the last part of
+	// the ARN, shown here in bold:
 	//
 	//   -
 	//   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/123ec456-a007-89c0-1234-xxxxxxxxxxxx
@@ -69,14 +69,14 @@ type StartOutboundChatContactInput struct {
 	// This member is required.
 	DestinationEndpoint *types.Endpoint
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
-	// the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can find the instance ID
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// using an attribute map. The attributes are standard Amazon Connect attributes.
+	// using an attribute map. The attributes are standard Connect Customer attributes.
 	// They can be accessed in flows.
 	//
 	//   - Attribute keys can include only alphanumeric, - , and _ .
@@ -93,7 +93,7 @@ type StartOutboundChatContactInput struct {
 	SourceEndpoint *types.Endpoint
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	Attributes map[string]string
 
@@ -120,8 +120,8 @@ type StartOutboundChatContactInput struct {
 	// The customer's details.
 	ParticipantDetails *types.ParticipantDetails
 
-	// The unique identifier for an Amazon Connect contact. This identifier is related
-	// to the contact starting.
+	// The unique identifier for an Connect Customer contact. This identifier is
+	// related to the contact starting.
 	RelatedContactId *string
 
 	// The supported chat message content types. Supported types are:
@@ -151,7 +151,7 @@ type StartOutboundChatContactInput struct {
 
 type StartOutboundChatContactOutput struct {
 
-	// The identifier of this contact within the Amazon Connect instance.
+	// The identifier of this contact within the Connect Customer instance.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

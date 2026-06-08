@@ -37,6 +37,10 @@ type UpdateCollectionInput struct {
 	// Unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
+	// Indicates whether to enable or disable deletion protection for the collection.
+	// When set to ENABLED , the collection cannot be deleted.
+	DeletionProtection types.DeletionProtection
+
 	// A description of the collection.
 	Description *string
 

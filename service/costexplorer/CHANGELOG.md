@@ -1,3 +1,35 @@
+# v1.65.0 (2026-06-04)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2026-06-03.2)
+
+* **Feature**: Added support for target-coverage-based Savings Plans purchase analysis. The StartCommitmentPurchaseAnalysis API now accepts a new TARGET AVERAGE COVERAGE value for AnalysisType, as well as an optional SavingsPlansTargetCoverage field in SavingsPlansPurchaseAnalysisConfiguration
+
+# v1.63.12 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.11 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.10 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.9 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.8 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.7 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

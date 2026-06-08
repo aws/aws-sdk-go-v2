@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an hours of operation override in an Amazon Connect hours of operation
-// resource.
+// Deletes an hours of operation override in an Connect Customer hours of
+// operation resource.
 func (c *Client) DeleteHoursOfOperationOverride(ctx context.Context, params *DeleteHoursOfOperationOverrideInput, optFns ...func(*Options)) (*DeleteHoursOfOperationOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteHoursOfOperationOverrideInput{}
@@ -39,7 +39,7 @@ type DeleteHoursOfOperationOverrideInput struct {
 	// This member is required.
 	HoursOfOperationOverrideId *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string

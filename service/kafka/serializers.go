@@ -4529,6 +4529,13 @@ func awsRestjson1_serializeOpDocumentUpdateConnectivityInput(v *UpdateConnectivi
 		ok.String(*v.CurrentVersion)
 	}
 
+	if v.ZookeeperAccess != nil {
+		ok := object.Key("zookeeperAccess")
+		if err := awsRestjson1_serializeDocumentZookeeperAccess(v.ZookeeperAccess, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6496,6 +6503,18 @@ func awsRestjson1_serializeDocumentVpcConnectivityScram(v *types.VpcConnectivity
 }
 
 func awsRestjson1_serializeDocumentVpcConnectivityTls(v *types.VpcConnectivityTls, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentZookeeperAccess(v *types.ZookeeperAccess, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

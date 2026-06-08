@@ -200,6 +200,11 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceInput(v *CreateWorkspaceInpu
 		ok.String(*v.GrafanaVersion)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -2035,6 +2040,11 @@ func awsRestjson1_serializeOpDocumentUpdateWorkspaceInput(v *UpdateWorkspaceInpu
 	if len(v.AccountAccessType) > 0 {
 		ok := object.Key("accountAccessType")
 		ok.String(string(v.AccountAccessType))
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.NetworkAccessControl != nil {
