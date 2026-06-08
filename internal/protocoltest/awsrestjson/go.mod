@@ -4,8 +4,8 @@ go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.42.0
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.13
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.24
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.11
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.19
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.29
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.29
 	github.com/aws/smithy-go v1.27.1
