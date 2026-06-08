@@ -1,0 +1,13 @@
+{
+    "id": "cffa1fca-5828-44fb-947b-ae754cd08bae",
+    "type": "feature",
+    "description": "Add preview of standard retry changes behind AWS_NEW_RETRIES_2026 flag",
+    "modules": [
+        ".",
+        "service/dynamodb",
+        "service/dynamodbstreams",
+        "service/sfn",
+        "service/sqs",
+        "service/swf"
+    ]
+}

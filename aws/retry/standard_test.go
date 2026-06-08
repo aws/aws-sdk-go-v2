@@ -199,6 +199,7 @@ func TestStandard_RetryDelay(t *testing.T) {
 }
 
 func TestStandard_retryEventuallySucceeds(t *testing.T) {
+	t.Setenv("AWS_NEW_RETRIES_2026", "false")
 	ratelimiter := ratelimit.NewTokenRateLimit(500)
 	retryer := NewStandard(func(o *StandardOptions) {
 		o.MaxAttempts = 3

@@ -176,6 +176,9 @@ func (c *Client) addOperationPollForActivityTaskMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSetLongPollingContext(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}

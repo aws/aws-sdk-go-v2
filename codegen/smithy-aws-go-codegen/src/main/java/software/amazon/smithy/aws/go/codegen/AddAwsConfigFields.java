@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting;
 import software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme;
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -317,7 +318,7 @@ public class AddAwsConfigFields implements GoIntegration {
         ServiceShape serviceShape = settings.getService(model);
         goDelegator.useShapeWriter(serviceShape, w -> {
             writeAwsConfigConstructor(model, serviceShape, w);
-            writeAwsDefaultResolvers(w);
+            writeAwsDefaultResolvers(serviceShape, w);
         });
         goDelegator.useShapeTestWriter(serviceShape, w -> {
             writerAwsDefaultResolversTests(w);
@@ -331,9 +332,9 @@ public class AddAwsConfigFields implements GoIntegration {
                 .resolver(resolver);
     }
 
-    private void writeAwsDefaultResolvers(GoWriter writer) {
+    private void writeAwsDefaultResolvers(ServiceShape serviceShape, GoWriter writer) {
         writeHttpClientResolver(writer);
-        writeRetryerResolvers(writer);
+        writeRetryerResolvers(serviceShape, writer);
         writeRetryMaxAttemptsFinalizers(writer);
         writeAwsConfigEndpointResolver(writer);
         writeInterceptorResolver(writer);
@@ -351,7 +352,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writeRetryResolverTests(writer);
     }
 
-    private void writeRetryerResolvers(GoWriter writer) {
+    private void writeRetryerResolvers(ServiceShape serviceShape, GoWriter writer) {
         writer.pushState();
 
         writer.putContext("resolvedDefaultsMode",
@@ -380,6 +381,31 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("adaptiveModeOptions", SymbolUtils.createValueSymbolBuilder("AdaptiveModeOptions",
                 AwsGoDependency.AWS_RETRY).build());
 
+        // Determine service-specific retry configuration.
+        String sdkId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+        boolean isDynamoDB = sdkId.equals("DynamoDB") || sdkId.equals("DynamoDB Streams");
+
+        String serviceSpecificRetryOptions;
+        if (isDynamoDB) {
+            writer.addUseImports(SmithyGoDependency.TIME);
+            writer.addUseImports(SmithyGoDependency.OS);
+
+            serviceSpecificRetryOptions = """
+                    if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
+                        // DynamoDB uses a shorter base backoff (25ms) and one additional
+                        // retry attempt (4 total) by default.
+                        standardOptions = append(standardOptions, func(so *$standardOptions:T) {
+                            if o.$retryMaxAttemptsOption:L == 0 {
+                                so.MaxAttempts = 4
+                            }
+                            so.BaseDelay = 25 * time.Millisecond
+                        })
+                    }
+                    """;
+        } else {
+            serviceSpecificRetryOptions = "";
+        }
+
         writer.write("""
                 func $resolverName:L(o *Options) {
                     if o.$retryerOption:L != nil {
@@ -402,6 +428,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             so.MaxAttempts = v
                         })
                     }
+                    """ + serviceSpecificRetryOptions + """
 
                     switch o.$retryModeOption:L {
                     case $retryModeAdaptive:T:
