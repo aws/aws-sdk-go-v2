@@ -1157,6 +1157,20 @@
                 "smithy.api#documentation": "<p>The DB instance configuration used for recommendations.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#DocumentDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity": {
             "type": "structure",
             "members": {
@@ -1234,6 +1248,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The DynamoDB reserved capacity configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#DynamoDbTable": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#EbsVolume": {
@@ -1648,6 +1676,20 @@
                 "smithy.api#documentation": "<p>A list of cost efficiency metrics grouped by the specified dimension.</p>",
                 "smithy.api#tags": [
                     "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ElastiCacheCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
                 ]
             }
         },
@@ -2326,7 +2368,7 @@
                         "smithy.api#documentation": "<p>The maximum number of groups to return in the response. Valid values range from 0 to 1000. Use in conjunction with <code>nextToken</code> to paginate through results when the total number of groups exceeds this limit.</p>",
                         "smithy.api#range": {
                             "min": 0,
-                            "max": 100
+                            "max": 1000
                         }
                     }
                 },
@@ -2702,6 +2744,20 @@
                         "smithy.api#enumValue": "None"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#MemoryDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances": {
@@ -3815,6 +3871,60 @@
                             "nat_gateway"
                         ]
                     }
+                },
+                "dynamoDbTable": {
+                    "target": "com.amazonaws.costoptimizationhub#DynamoDbTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "elastiCacheCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#ElastiCacheCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "memoryDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#MemoryDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "documentDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#DocumentDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "workSpaces": {
+                    "target": "com.amazonaws.costoptimizationhub#WorkSpaces",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "sageMakerEndpoint": {
+                    "target": "com.amazonaws.costoptimizationhub#SageMakerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -4007,6 +4117,60 @@
                             "nat_gateway"
                         ]
                     }
+                },
+                "DYNAMO_DB_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBTable",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "ELASTI_CACHE_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "MEMORY_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "DOCUMENT_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "WORK_SPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkSpaces",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "SAGE_MAKER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerEndpoint",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
                 }
             }
         },
@@ -4020,6 +4184,20 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#SageMakerEndpoint": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#SageMakerSavingsPlans": {
@@ -4552,6 +4730,20 @@
                         "smithy.api#enumValue": "Other"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#WorkSpaces": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         }
     }

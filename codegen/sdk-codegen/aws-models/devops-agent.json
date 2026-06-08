@@ -315,6 +315,363 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.devopsagent#Asset": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for this asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetType": {
+                    "target": "com.amazonaws.devopsagent#AssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of this asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for this asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of this asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this asset was created</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this asset was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an asset in an agent space, including its identifier, type, metadata, version, and timestamps.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetContent": {
+            "type": "union",
+            "members": {
+                "file": {
+                    "target": "com.amazonaws.devopsagent#AssetFileContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single file with path and content</p>"
+                    }
+                },
+                "zip": {
+                    "target": "com.amazonaws.devopsagent#AssetZipContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A zip file containing multiple files</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Content for an asset, either a single file or a zip bundle</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFile": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of this file within the asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetFileBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of this file</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for this file</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset version this file belongs to</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this file was created</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this file was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single file within an asset, including its path, content, version, and timestamps.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileBody": {
+            "type": "union",
+            "members": {
+                "bytes": {
+                    "target": "com.amazonaws.devopsagent#AssetFileBytes"
+                },
+                "text": {
+                    "target": "com.amazonaws.devopsagent#AssetFileText"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Content of an individual asset file</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileBytes": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "<p>Binary file content</p>",
+                "smithy.api#length": {
+                    "max": 6291456
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileContent": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the file within the asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.devopsagent#AssetFileBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file content</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata for this file</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single file with path and content</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The path of a file within an asset</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_./-]+$"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileSummary": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of this file within the asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for this file</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset version this file belongs to</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this file was created</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this file was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of a file within an asset, including its path, version, and timestamps.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#AssetFileSummary"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetFileText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Text file content</p>",
+                "smithy.api#length": {
+                    "max": 1572864
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#AssetIdList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of asset identifiers to attach to a message</p>",
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#AssetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#Asset"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The type of asset (e.g. skill, artifact)</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#AssetTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#AssetTypeSummary"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetTypeSummary": {
+            "type": "structure",
+            "members": {
+                "assetType": {
+                    "target": "com.amazonaws.devopsagent#AssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset type identifier</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the asset type</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of an asset type, including its identifier and description.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetVersionMetadata": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of this asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this asset version was created</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this asset version was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for a single version of an asset, including the version number and timestamps.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetVersionMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#AssetVersionMetadata"
+            }
+        },
+        "com.amazonaws.devopsagent#AssetZipBytes": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "<p>Zip file content as bytes</p>",
+                "smithy.api#length": {
+                    "max": 6291456
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#AssetZipContent": {
+            "type": "structure",
+            "members": {
+                "zipFile": {
+                    "target": "com.amazonaws.devopsagent#AssetZipBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zip file bytes</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A zip file containing asset files</p>"
+            }
+        },
         "com.amazonaws.devopsagent#AssistantMessage": {
             "type": "list",
             "member": {
@@ -543,7 +900,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "agentspace/{agentSpaceId}/associations/{associationId}"
+                    "template": "agentspace/{agentSpaceId}/association/{associationId}"
                 },
                 "smithy.api#documentation": "<p>Association resource represents a connection between an AgentSpace and an external service (e.g., GitHub, Slack, AWS), defining how the agent interacts with that service.</p>"
             }
@@ -698,6 +1055,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A single chat execution summary</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#ChatExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Chat execution identifier — must be a valid UUID</p>",
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.devopsagent#ChatExecutionList": {
@@ -879,6 +1243,239 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output containing the newly created AgentSpace.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#CreateAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#CreateAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an asset",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a new asset in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAssetFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#CreateAssetFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#CreateAssetFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ContentSizeExceededException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an asset file",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a file in an asset</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/files/{path+}"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAssetFileRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to create the file in</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the file within the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetFileBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the file to create</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata describing this file</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent asset file creation</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for creating an asset file</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAssetFileResponse": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "target": "com.amazonaws.devopsagent#AssetFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset file object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for creating an asset file</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAssetRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space where the asset will be created</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetType": {
+                    "target": "com.amazonaws.devopsagent#AssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of asset to create</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata describing this asset</p>"
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content for the asset. Provide a single file or a zip bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent asset creation</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for creating a new asset</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#CreateAssetResponse": {
+            "type": "structure",
+            "members": {
+                "asset": {
+                    "target": "com.amazonaws.devopsagent#Asset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for creating a new asset</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1222,6 +1819,18 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
+                "dnsResolution": {
+                    "target": "com.amazonaws.devopsagent#ResourceConfigDnsResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS resolution mode for the Private Connection's resource gateway.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.devopsagent#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing the reason for a failed Private Connection creation, if applicable.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.devopsagent#Tags",
                     "traits": {
@@ -1291,18 +1900,16 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerName",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server name.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server endpoint URL.</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -1396,6 +2003,175 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Empty output for successful AgentSpace deletion.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#DeleteAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#DeleteAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an asset",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes an asset and all its files from the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAssetFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#DeleteAssetFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#DeleteAssetFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an asset file",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a file from an asset</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/files/{path+}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAssetFileRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset containing the file</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the file within the asset to delete</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for deleting an asset file</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAssetFileResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for deleting an asset file</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAssetRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to delete</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for deleting an asset</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteAssetResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for deleting an asset</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1660,6 +2436,18 @@
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
+                "dnsResolution": {
+                    "target": "com.amazonaws.devopsagent#ResourceConfigDnsResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS resolution mode for the Private Connection's resource gateway.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.devopsagent#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing the reason for a failed Private Connection, if applicable.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.devopsagent#Tags",
                     "traits": {
@@ -1690,19 +2478,52 @@
             "version": "2026-01-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.devopsagent#CreateAsset"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#CreateAssetFile"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#CreateBacklogTask"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#CreateChat"
                 },
                 {
+                    "target": "com.amazonaws.devopsagent#DeleteAsset"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#DeleteAssetFile"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#GetAccountUsage"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#GetAsset"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#GetAssetContent"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#GetAssetFile"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#GetBacklogTask"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#GetRecommendation"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ListAssetFiles"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ListAssets"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ListAssetTypes"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ListAssetVersions"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ListBacklogTasks"
@@ -1736,6 +2557,12 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#UpdateAsset"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#UpdateAssetFile"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#UpdateBacklogTask"
@@ -1834,7 +2661,7 @@
                         "http/1.1"
                     ]
                 },
-                "smithy.api#documentation": "<p>AWS DevOps Agent is your always-available operations teammate. It resolves and proactively prevents incidents, optimizes application reliability and performance, and handles on-demand SRE tasks across AWS, multicloud, and on-premises environments. AWS DevOps Agent investigates incidents as an experienced DevOps engineer would. It learns your applications and their relationships. It works with your observability tools, runbooks, code repositories, and CI/CD pipelines. The agent correlates telemetry, code, and deployment data across all of them. </p>",
+                "smithy.api#documentation": "<p>AWS DevOps Agent is your always-available operations teammate. It resolves and proactively prevents incidents, optimizes application reliability and performance, and handles on-demand SRE tasks across AWS, multicloud, and on-premises environments. AWS DevOps Agent investigates incidents as an experienced DevOps engineer would. It learns your applications and their relationships. It works with your observability tools, runbooks, code repositories, and CI/CD pipelines. The agent correlates telemetry, code, and deployment data across all of them.</p>",
                 "smithy.api#title": "AWS DevOps Agent Service",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -2563,6 +3390,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "operatorAppUrl": {
+                    "target": "com.amazonaws.devopsagent#OperatorAppUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for operators to access the Operator App</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
                 "iam": {
                     "target": "com.amazonaws.devopsagent#IamAuthConfiguration",
                     "traits": {
@@ -2760,6 +3594,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Possible states of an execution</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#FailureMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Failure message describing why a Private Connection has a FAILED status.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.devopsagent#GenericWebhook": {
@@ -2983,6 +3827,312 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output containing the requested AgentSpace details.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#GetAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#GetAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get an asset",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Gets an asset from the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetContent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#GetAssetContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#GetAssetContentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get asset content",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Gets an asset's content as a zip bundle</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/content"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetContentRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetVersion": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific asset version to export. If omitted, the latest version is returned.</p>",
+                        "smithy.api#httpQuery": "assetVersion",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for getting an asset's content as a zip bundle</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetContentResponse": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetZipContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset content as a zip file</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset version this content belongs to</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for getting an asset's content as a zip bundle</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#GetAssetFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#GetAssetFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get an asset file",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Gets a file from an asset</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/files/{path+}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetFileRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset containing the file</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the file within the asset to retrieve</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetVersion": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific asset version to retrieve the file from. If omitted, the latest version is returned.</p>",
+                        "smithy.api#httpQuery": "assetVersion",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for getting an asset file</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetFileResponse": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "target": "com.amazonaws.devopsagent#AssetFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset file object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for getting an asset file</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to retrieve</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetVersion": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific version of the asset to retrieve. If omitted, the latest version is returned.</p>",
+                        "smithy.api#httpQuery": "assetVersion",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for getting an asset</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetAssetResponse": {
+            "type": "structure",
+            "members": {
+                "asset": {
+                    "target": "com.amazonaws.devopsagent#Asset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for getting an asset</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3214,6 +4364,13 @@
         "com.amazonaws.devopsagent#GetOperatorAppOutput": {
             "type": "structure",
             "members": {
+                "operatorAppUrl": {
+                    "target": "com.amazonaws.devopsagent#OperatorAppUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for operators to access the Operator App</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
                 "iam": {
                     "target": "com.amazonaws.devopsagent#IamAuthConfiguration",
                     "traits": {
@@ -3780,18 +4937,16 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerName",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server name.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server endpoint URL.</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -4247,6 +5402,470 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output containing a list of AgentSpaces and pagination token.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetFiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#ListAssetFilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#ListAssetFilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list asset files",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists files in an asset</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/files"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetFilesRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset whose files to list</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetVersion": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific asset version to list files from. If omitted, files from the latest version are returned.</p>",
+                        "smithy.api#httpQuery": "assetVersion",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response to retrieve the next page of results</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single response</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for listing asset files</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetFilesResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.devopsagent#AssetFileSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of asset file summaries</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to retrieve the next page of results. Absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for listing asset files</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#ListAssetTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#ListAssetTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list asset types"
+                },
+                "smithy.api#documentation": "<p>Lists the supported asset types</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/types"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetTypesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response to retrieve the next page of results</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single response</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for listing asset types</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetTypesResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.devopsagent#AssetTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supported asset types</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to retrieve the next page of results. Absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for listing asset types</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#ListAssetVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#ListAssetVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list asset versions",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists versions of an asset in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset whose versions to list</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single response</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response to retrieve the next page of results</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for listing asset versions</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.devopsagent#AssetVersionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of version metadata for the asset</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to retrieve the next page of results. Absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for listing asset versions</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#ListAssetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#ListAssetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list assets",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists assets in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetsRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space to list assets from</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetType": {
+                    "target": "com.amazonaws.devopsagent#AssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to only assets of this type</p>",
+                        "smithy.api#httpQuery": "assetType"
+                    }
+                },
+                "updatedAfter": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to only assets updated after this timestamp</p>",
+                        "smithy.api#httpQuery": "updatedAfter"
+                    }
+                },
+                "updatedBefore": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to only assets updated before this timestamp</p>",
+                        "smithy.api#httpQuery": "updatedBefore"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response to retrieve the next page of results</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single response</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for listing assets</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListAssetsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.devopsagent#AssetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of assets for the agent space</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token to retrieve the next page of results. Absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for listing assets</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5694,18 +7313,16 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerName",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server name.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server endpoint URL.</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -5728,6 +7345,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Complete service details for MCP server integration.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#MCPServerEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>HTTPS endpoint URL for an MCP server.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
             }
         },
         "com.amazonaws.devopsagent#MCPServerGrafanaConfiguration": {
@@ -5757,6 +7385,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for Grafana MCP server integration, used with an AWS-hosted MCP server.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#MCPServerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Name identifier for an MCP server.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
         "com.amazonaws.devopsagent#MCPServerNewRelicConfiguration": {
@@ -5937,10 +7576,25 @@
                     }
                 },
                 "roleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#deprecated": {
+                            "message": "Use mcpRoleArn instead.",
+                            "since": "2026-05-27"
+                        },
+                        "smithy.api#documentation": "<p>Deprecated — use mcpRoleArn instead. IAM role ARN to assume for SigV4 signing.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 255
+                        }
+                    }
+                },
+                "mcpRoleArn": {
                     "target": "com.amazonaws.devopsagent#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>IAM role ARN to assume for SigV4 signing.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>IAM role ARN to assume for SigV4 signing. Optional — when omitted, credentials are resolved at runtime via a monitor account association.</p>"
                     }
                 },
                 "customHeaders": {
@@ -5973,18 +7627,16 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerName",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server name.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server endpoint URL.</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -6244,6 +7896,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for completing OAuth authorization step.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#OAuthScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>OAuth scope parameter</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[!#-\\[\\]-~]+$"
+            }
+        },
+        "com.amazonaws.devopsagent#OperatorAppUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The URL for operators to access the Operator App.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(/.*)?$"
             }
         },
         "com.amazonaws.devopsagent#OrderType": {
@@ -6736,6 +8410,18 @@
                         "smithy.api#documentation": "<p>The expiry time of the certificate associated with the Private Connection. Only present when a certificate is associated.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "dnsResolution": {
+                    "target": "com.amazonaws.devopsagent#ResourceConfigDnsResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS resolution mode for the Private Connection's resource gateway.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.devopsagent#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing the reason for a failed Private Connection, if applicable.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7150,6 +8836,18 @@
                         "smithy.api#documentation": "<p>The name of the private connection to use for VPC connectivity.</p>"
                     }
                 },
+                "targetUrlPrivateConnectionName": {
+                    "target": "com.amazonaws.devopsagent#PrivateConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the private connection to use for API calls (target URL) only. Cannot be specified when privateConnectionName is provided.</p>"
+                    }
+                },
+                "exchangeUrlPrivateConnectionName": {
+                    "target": "com.amazonaws.devopsagent#PrivateConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when privateConnectionName is provided.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.devopsagent#ServiceName",
                     "traits": {
@@ -7314,10 +9012,9 @@
             "type": "structure",
             "members": {
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>Grafana instance URL (e.g., https://your-instance.grafana.net)</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -7378,18 +9075,16 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerName",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server name.</p>",
-                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.devopsagent#MCPServerEndpoint",
                     "traits": {
                         "smithy.api#documentation": "<p>MCP server endpoint URL.</p>",
-                        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
                         "smithy.api#required": {}
                     }
                 },
@@ -7421,11 +9116,24 @@
                     }
                 },
                 "roleArn": {
-                    "target": "com.amazonaws.devopsagent#RoleArn",
+                    "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#deprecated": {
+                            "message": "Use mcpRoleArn instead.",
+                            "since": "2026-05-27"
+                        },
                         "smithy.api#documentation": "<p>IAM role ARN to assume for SigV4 signing.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 255
+                        },
                         "smithy.api#required": {}
                     }
+                },
+                "mcpRoleArn": {
+                    "target": "com.amazonaws.devopsagent#RoleArn"
                 },
                 "customHeaders": {
                     "target": "com.amazonaws.devopsagent#CustomHeaders",
@@ -7578,6 +9286,28 @@
                 "smithy.api#documentation": "<p>Details specific to a registered Slack workspace.</p>"
             }
         },
+        "com.amazonaws.devopsagent#ResourceConfigDnsResolution": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use public DNS resolution for resources behind this resource gateway.</p>",
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "IN_VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable private DNS resolution within VPC for resources behind this resource gateway.</p>",
+                        "smithy.api#enumValue": "IN_VPC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>DNS resolution mode for a Resource Gateway.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#ResourceConfigurationArn": {
             "type": "string",
             "traits": {
@@ -7664,10 +9394,13 @@
         "com.amazonaws.devopsagent#Scopes": {
             "type": "list",
             "member": {
-                "target": "smithy.api#String"
+                "target": "com.amazonaws.devopsagent#OAuthScope"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of OAuth scopes.</p>"
+                "smithy.api#documentation": "<p>List of OAuth scopes.</p>",
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.devopsagent#SecurityGroupId": {
@@ -7993,7 +9726,7 @@
                     }
                 },
                 "executionId": {
-                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "target": "com.amazonaws.devopsagent#ChatExecutionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The execution identifier for the chat session</p>",
                         "smithy.api#required": {}
@@ -8020,6 +9753,12 @@
                             "since": "2026-04-15"
                         },
                         "smithy.api#documentation": "<p>User identifier. This field is deprecated and will be ignored — the service resolves user identity from the authenticated session.</p>"
+                    }
+                },
+                "assetIds": {
+                    "target": "com.amazonaws.devopsagent#AssetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional list of asset identifiers to attach to the message</p>"
                     }
                 }
             },
@@ -8567,6 +10306,12 @@
                     "target": "com.amazonaws.devopsagent#CertificateString",
                     "traits": {
                         "smithy.api#documentation": "<p>Certificate for the Private Connection.</p>"
+                    }
+                },
+                "dnsResolution": {
+                    "target": "com.amazonaws.devopsagent#ResourceConfigDnsResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.</p>"
                     }
                 }
             },
@@ -9302,6 +11047,13 @@
                         "smithy.api#documentation": "<p>Task has been canceled</p>",
                         "smithy.api#enumValue": "CANCELED"
                     }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Task has been skipped by triage</p>",
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
                 }
             },
             "traits": {
@@ -9531,6 +11283,241 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output containing the updated AgentSpace.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAsset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#UpdateAssetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#UpdateAssetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an asset",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates an asset in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAssetFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#UpdateAssetFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#UpdateAssetFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ContentSizeExceededException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an asset file",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates a file in an asset</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/asset/agent-space/{agentSpaceId}/assets/{assetId}/files/{path+}"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAssetFileRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset containing the file</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.devopsagent#AssetFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the file within the asset to update</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetFileBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated file content. If omitted, the existing content is unchanged.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata fields to update. Only the fields present in this document are updated. Omitted fields retain their current values.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent asset file update</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for updating an asset file</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAssetFileResponse": {
+            "type": "structure",
+            "members": {
+                "file": {
+                    "target": "com.amazonaws.devopsagent#AssetFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset file object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for updating an asset file</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAssetRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent space containing the asset</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the asset to update</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata fields to update. Only the fields present in this document are updated. Omitted fields retain their current values.</p>"
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.devopsagent#AssetContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional content to set or replace. A single file adds or replaces one file; a zip replaces all files.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent asset update</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request structure for updating an asset</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateAssetResponse": {
+            "type": "structure",
+            "members": {
+                "asset": {
+                    "target": "com.amazonaws.devopsagent#Asset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response structure for updating an asset</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10034,6 +12021,18 @@
                         "smithy.api#documentation": "<p>The expiry time of the certificate associated with the Private Connection. Only present when a certificate is associated.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "dnsResolution": {
+                    "target": "com.amazonaws.devopsagent#ResourceConfigDnsResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS resolution mode for the Private Connection's resource gateway.</p>"
+                    }
+                },
+                "failureMessage": {
+                    "target": "com.amazonaws.devopsagent#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing the reason for a failed Private Connection update, if applicable.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10155,7 +12154,7 @@
                 "limit": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configured limit for this metric.</p>",
+                        "smithy.api#documentation": "<p>Configured limit for this metric. A value of -1 indicates no limit is enforced.</p>",
                         "smithy.api#required": {}
                     }
                 },

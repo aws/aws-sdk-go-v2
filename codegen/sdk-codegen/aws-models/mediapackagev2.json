@@ -1040,6 +1040,12 @@
                         "smithy.api#documentation": "<p>The layout of the DASH manifest that MediaPackage produces. <code>STANDARD</code> indicates a default manifest, which is compacted. <code>NONE</code> indicates a full manifest.</p> <p>For information about compactness, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html\">DASH manifest compactness</a> in the <i>Elemental MediaPackage v2 User Guide</i>.</p>"
                     }
                 },
+                "AudioTimelinePattern": {
+                    "target": "com.amazonaws.mediapackagev2#DashAudioTimelinePattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How MediaPackage represents the audio timeline in the DASH manifest. This setting applies DASH Segment Duration Patternization, as defined in the MPEG-DASH specification, to audio adaptation sets. When set to <code>PATTERNED</code>, MediaPackage uses a pattern-based segment template for audio, which reduces manifest size by expressing repeating segment durations as a pattern instead of listing each segment individually. When set to <code>NONE</code>, the manifest contains an explicit timeline that lists each audio segment.</p> <p>Valid values: <code>NONE</code> | <code>PATTERNED</code> </p> <p>For information about audio timeline patterns, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-audio-timeline-pattern.html\">DASH audio timeline pattern</a> in the <i>Elemental MediaPackage v2 User Guide</i>.</p>"
+                    }
+                },
                 "SubtitleConfiguration": {
                     "target": "com.amazonaws.mediapackagev2#DashSubtitleConfiguration",
                     "traits": {
@@ -2626,6 +2632,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashAudioTimelinePattern": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PATTERNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATTERNED"
+                    }
                 }
             }
         },
@@ -4259,6 +4282,12 @@
                     "target": "com.amazonaws.mediapackagev2#DashCompactness",
                     "traits": {
                         "smithy.api#documentation": "<p>The layout of the DASH manifest that MediaPackage produces. <code>STANDARD</code> indicates a default manifest, which is compacted. <code>NONE</code> indicates a full manifest.</p>"
+                    }
+                },
+                "AudioTimelinePattern": {
+                    "target": "com.amazonaws.mediapackagev2#DashAudioTimelinePattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How MediaPackage represents the audio timeline in the DASH manifest, using DASH Segment Duration Patternization for audio adaptation sets. <code>PATTERNED</code> indicates that MediaPackage uses a pattern-based segment template for audio, reducing manifest size. <code>NONE</code> indicates that the manifest contains an explicit timeline for each audio segment.</p>"
                     }
                 },
                 "SubtitleConfiguration": {
@@ -7782,6 +7811,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISTRIBUTOR_AD_BLOCK"
+                    }
+                },
+                "CONTENT_IDENTIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_IDENTIFICATION"
+                    }
+                },
+                "CALL_AD_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALL_AD_SERVER"
                     }
                 }
             }

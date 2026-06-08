@@ -4550,6 +4550,102 @@
                         "smithy.api#enumValue": "UtilizationMetricsPacketsInFromDestinationMaximum"
                     }
                 },
+                "UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsConsumedReadCapacityUnitsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsConsumedWriteCapacityUnitsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_NEW_CONNECTIONS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsNewConnectionsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsEngineCPUUtilizationMaximum"
+                    }
+                },
+                "UTILIZATION_METRICS_CACHE_HITS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsCacheHitsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_CACHE_MISSES_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsCacheMissesSum"
+                    }
+                },
+                "UTILIZATION_METRICS_KEYSPACE_HITS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsKeyspaceHitsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_KEYSPACE_MISSES_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsKeyspaceMissesSum"
+                    }
+                },
+                "UTILIZATION_METRICS_IS_IDLE_MINIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsIsIdleMinimum"
+                    }
+                },
+                "UTILIZATION_METRICS_USER_CONNECTED_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsUserConnectedSum"
+                    }
+                },
+                "UTILIZATION_METRICS_INVOCATIONS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsInvocationsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_GET_TYPE_CMDS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsGetTypeCmdsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_SET_TYPE_CMDS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsSetTypeCmdsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsElastiCacheProcessingUnitsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_CURR_CONNECTIONS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsCurrConnectionsSum"
+                    }
+                },
+                "UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtilizationMetricsDatabaseConnectionsSum"
+                    }
+                },
                 "FINDING": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8027,6 +8123,44 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#IdleDimension": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.computeoptimizer#IdleDimensionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension key.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#IdleDimensionValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the dimension.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the dimension of an idle resource utilization metric.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleDimensionKey": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#IdleDimensionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#IdleDimensionValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleDimensionValue"
+            }
+        },
+        "com.amazonaws.computeoptimizer#IdleDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#IdleDimension"
+            }
+        },
         "com.amazonaws.computeoptimizer#IdleEstimatedMonthlySavings": {
             "type": "structure",
             "members": {
@@ -8156,6 +8290,102 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PacketsInFromDestination"
+                    }
+                },
+                "CONSUMED_READ_CAPACITY_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConsumedReadCapacityUnits"
+                    }
+                },
+                "CONSUMED_WRITE_CAPACITY_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConsumedWriteCapacityUnits"
+                    }
+                },
+                "CONSUMED_CHANGE_DATA_CAPTURE_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConsumedChangeDataCaptureUnits"
+                    }
+                },
+                "NEW_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NewConnections"
+                    }
+                },
+                "ENGINE_CPU_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EngineCPUUtilization"
+                    }
+                },
+                "CACHE_HITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CacheHits"
+                    }
+                },
+                "CACHE_MISSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CacheMisses"
+                    }
+                },
+                "KEYSPACE_HITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KeyspaceHits"
+                    }
+                },
+                "KEYSPACE_MISSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KeyspaceMisses"
+                    }
+                },
+                "IS_IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IsIdle"
+                    }
+                },
+                "USER_CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UserConnected"
+                    }
+                },
+                "INVOCATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Invocations"
+                    }
+                },
+                "GET_TYPE_CMDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetTypeCmds"
+                    }
+                },
+                "SET_TYPE_CMDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SetTypeCmds"
+                    }
+                },
+                "ELASTI_CACHE_PROCESSING_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheProcessingUnits"
+                    }
+                },
+                "CURR_CONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CurrConnections"
                     }
                 }
             }
@@ -8360,6 +8590,42 @@
                     "traits": {
                         "smithy.api#enumValue": "NatGateway"
                     }
+                },
+                "DYNAMO_DB_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBTable"
+                    }
+                },
+                "ELASTI_CACHE_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheCluster"
+                    }
+                },
+                "MEMORY_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryDBCluster"
+                    }
+                },
+                "DOCUMENT_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentDBCluster"
+                    }
+                },
+                "WORKSPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkSpaces"
+                    }
+                },
+                "SAGE_MAKER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerEndpoint"
+                    }
                 }
             }
         },
@@ -8458,6 +8724,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of the utilization metric.</p>"
+                    }
+                },
+                "dimensions": {
+                    "target": "com.amazonaws.computeoptimizer#IdleDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions of the utilization metric.</p>"
                     }
                 }
             },
@@ -11959,6 +12231,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NatGateway"
+                    }
+                },
+                "DYNAMO_DB_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBTable"
+                    }
+                },
+                "ELASTI_CACHE_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheCluster"
+                    }
+                },
+                "MEMORY_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryDBCluster"
+                    }
+                },
+                "DOCUMENT_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentDBCluster"
+                    }
+                },
+                "WORKSPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkSpaces"
+                    }
+                },
+                "SAGE_MAKER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerEndpoint"
                     }
                 }
             }

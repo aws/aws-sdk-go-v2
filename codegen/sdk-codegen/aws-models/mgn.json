@@ -12803,6 +12803,10 @@
                     {
                         "name": "MODELIZE_IT",
                         "value": "MODELIZE_IT"
+                    },
+                    {
+                        "name": "AWS_DISCOVERY_COLLECTOR",
+                        "value": "AWS_DISCOVERY_COLLECTOR"
                     }
                 ]
             }
