@@ -240,6 +240,23 @@ func (ComputeAssetState) Values() []ComputeAssetState {
 	}
 }
 
+type CurrencyCode string
+
+// Enum values for CurrencyCode
+const (
+	CurrencyCodeUsd CurrencyCode = "USD"
+)
+
+// Values returns all known values for CurrencyCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CurrencyCode) Values() []CurrencyCode {
+	return []CurrencyCode{
+		"USD",
+	}
+}
+
 type DecommissionRequestStatus string
 
 // Enum values for DecommissionRequestStatus
@@ -277,6 +294,25 @@ func (FiberOpticCableType) Values() []FiberOpticCableType {
 	return []FiberOpticCableType{
 		"SINGLE_MODE",
 		"MULTI_MODE",
+	}
+}
+
+type FormFactor string
+
+// Enum values for FormFactor
+const (
+	FormFactorRack   FormFactor = "RACK"
+	FormFactorServer FormFactor = "SERVER"
+)
+
+// Values returns all known values for FormFactor. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FormFactor) Values() []FormFactor {
+	return []FormFactor{
+		"RACK",
+		"SERVER",
 	}
 }
 
@@ -379,6 +415,76 @@ func (OpticalStandard) Values() []OpticalStandard {
 	}
 }
 
+type OrderingRequirementStatus string
+
+// Enum values for OrderingRequirementStatus
+const (
+	OrderingRequirementStatusPass   OrderingRequirementStatus = "PASS"
+	OrderingRequirementStatusFail   OrderingRequirementStatus = "FAIL"
+	OrderingRequirementStatusExempt OrderingRequirementStatus = "EXEMPT"
+)
+
+// Values returns all known values for OrderingRequirementStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrderingRequirementStatus) Values() []OrderingRequirementStatus {
+	return []OrderingRequirementStatus{
+		"PASS",
+		"FAIL",
+		"EXEMPT",
+	}
+}
+
+type OrderingRequirementType string
+
+// Enum values for OrderingRequirementType
+const (
+	OrderingRequirementTypeOutpostActiveCheckError                  OrderingRequirementType = "OUTPOST_ACTIVE_CHECK_ERROR"
+	OrderingRequirementTypeMaximumAllowedOrdersCheckError           OrderingRequirementType = "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR"
+	OrderingRequirementTypeValidZipCodeCheckError                   OrderingRequirementType = "VALID_ZIP_CODE_CHECK_ERROR"
+	OrderingRequirementTypeRackPhysicalPropertiesCheckError         OrderingRequirementType = "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR"
+	OrderingRequirementTypeOperatingAddressExistenceCheckError      OrderingRequirementType = "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR"
+	OrderingRequirementTypeShippingAddressExistenceCheckError       OrderingRequirementType = "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR"
+	OrderingRequirementTypeCountryCodeMismatchCheckError            OrderingRequirementType = "COUNTRY_CODE_MISMATCH_CHECK_ERROR"
+	OrderingRequirementTypeOutpostGenerationMismatchError           OrderingRequirementType = "OUTPOST_GENERATION_MISMATCH_ERROR"
+	OrderingRequirementTypeUnsupported                              OrderingRequirementType = "UNSUPPORTED"
+	OrderingRequirementTypeOutpostIdMissingOnQuoteError             OrderingRequirementType = "OUTPOST_ID_MISSING_ON_QUOTE_ERROR"
+	OrderingRequirementTypeEnterpriseSupportError                   OrderingRequirementType = "ENTERPRISE_SUPPORT_ERROR"
+	OrderingRequirementTypeShippingAddressMissingContactNameError   OrderingRequirementType = "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR"
+	OrderingRequirementTypeShippingAddressMissingContactNumberError OrderingRequirementType = "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR"
+	OrderingRequirementTypeShippingAddressMissingContactInfoError   OrderingRequirementType = "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR"
+	OrderingRequirementTypeOutpostStateChangedError                 OrderingRequirementType = "OUTPOST_STATE_CHANGED_ERROR"
+	OrderingRequirementTypeOutpostNotFoundError                     OrderingRequirementType = "OUTPOST_NOT_FOUND_ERROR"
+	OrderingRequirementTypeOutpostRenewalRequiredError              OrderingRequirementType = "OUTPOST_RENEWAL_REQUIRED_ERROR"
+)
+
+// Values returns all known values for OrderingRequirementType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrderingRequirementType) Values() []OrderingRequirementType {
+	return []OrderingRequirementType{
+		"OUTPOST_ACTIVE_CHECK_ERROR",
+		"MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR",
+		"VALID_ZIP_CODE_CHECK_ERROR",
+		"RACK_PHYSICAL_PROPERTIES_CHECK_ERROR",
+		"OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR",
+		"SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR",
+		"COUNTRY_CODE_MISMATCH_CHECK_ERROR",
+		"OUTPOST_GENERATION_MISMATCH_ERROR",
+		"UNSUPPORTED",
+		"OUTPOST_ID_MISSING_ON_QUOTE_ERROR",
+		"ENTERPRISE_SUPPORT_ERROR",
+		"SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR",
+		"SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR",
+		"SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR",
+		"OUTPOST_STATE_CHANGED_ERROR",
+		"OUTPOST_NOT_FOUND_ERROR",
+		"OUTPOST_RENEWAL_REQUIRED_ERROR",
+	}
+}
+
 type OrderStatus string
 
 // Enum values for OrderStatus
@@ -432,6 +538,25 @@ func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"OUTPOST",
 		"REPLACEMENT",
+	}
+}
+
+type OutpostGeneration string
+
+// Enum values for OutpostGeneration
+const (
+	OutpostGenerationGeneration2 OutpostGeneration = "GENERATION_2"
+	OutpostGenerationGeneration1 OutpostGeneration = "GENERATION_1"
+)
+
+// Values returns all known values for OutpostGeneration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutpostGeneration) Values() []OutpostGeneration {
+	return []OutpostGeneration{
+		"GENERATION_2",
+		"GENERATION_1",
 	}
 }
 
@@ -582,6 +707,48 @@ func (PricingResult) Values() []PricingResult {
 	}
 }
 
+type QuoteCapacityType string
+
+// Enum values for QuoteCapacityType
+const (
+	QuoteCapacityTypeEc2 QuoteCapacityType = "EC2"
+	QuoteCapacityTypeEbs QuoteCapacityType = "EBS"
+	QuoteCapacityTypeS3  QuoteCapacityType = "S3"
+)
+
+// Values returns all known values for QuoteCapacityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuoteCapacityType) Values() []QuoteCapacityType {
+	return []QuoteCapacityType{
+		"EC2",
+		"EBS",
+		"S3",
+	}
+}
+
+type QuoteConstraintType string
+
+// Enum values for QuoteConstraintType
+const (
+	QuoteConstraintTypeRackMaximum      QuoteConstraintType = "RACK_MAXIMUM"
+	QuoteConstraintTypeRackMaxPowerKva  QuoteConstraintType = "RACK_MAX_POWER_KVA"
+	QuoteConstraintTypeRackMaxWeightLbs QuoteConstraintType = "RACK_MAX_WEIGHT_LBS"
+)
+
+// Values returns all known values for QuoteConstraintType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuoteConstraintType) Values() []QuoteConstraintType {
+	return []QuoteConstraintType{
+		"RACK_MAXIMUM",
+		"RACK_MAX_POWER_KVA",
+		"RACK_MAX_WEIGHT_LBS",
+	}
+}
+
 type QuotePricingType string
 
 // Enum values for QuotePricingType
@@ -596,6 +763,90 @@ const (
 func (QuotePricingType) Values() []QuotePricingType {
 	return []QuotePricingType{
 		"SUBSCRIPTION",
+	}
+}
+
+type QuoteRackUseType string
+
+// Enum values for QuoteRackUseType
+const (
+	QuoteRackUseTypeNetworking QuoteRackUseType = "NETWORKING"
+	QuoteRackUseTypeCompute    QuoteRackUseType = "COMPUTE"
+)
+
+// Values returns all known values for QuoteRackUseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuoteRackUseType) Values() []QuoteRackUseType {
+	return []QuoteRackUseType{
+		"NETWORKING",
+		"COMPUTE",
+	}
+}
+
+type QuoteSpecificationType string
+
+// Enum values for QuoteSpecificationType
+const (
+	QuoteSpecificationTypeUpdatedRack  QuoteSpecificationType = "UPDATED_RACK"
+	QuoteSpecificationTypeNewRack      QuoteSpecificationType = "NEW_RACK"
+	QuoteSpecificationTypeExistingRack QuoteSpecificationType = "EXISTING_RACK"
+	QuoteSpecificationTypeServer       QuoteSpecificationType = "SERVER"
+)
+
+// Values returns all known values for QuoteSpecificationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuoteSpecificationType) Values() []QuoteSpecificationType {
+	return []QuoteSpecificationType{
+		"UPDATED_RACK",
+		"NEW_RACK",
+		"EXISTING_RACK",
+		"SERVER",
+	}
+}
+
+type QuoteStatus string
+
+// Enum values for QuoteStatus
+const (
+	QuoteStatusCreated        QuoteStatus = "CREATED"
+	QuoteStatusOrderSubmitted QuoteStatus = "ORDER_SUBMITTED"
+	QuoteStatusExpired        QuoteStatus = "EXPIRED"
+)
+
+// Values returns all known values for QuoteStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuoteStatus) Values() []QuoteStatus {
+	return []QuoteStatus{
+		"CREATED",
+		"ORDER_SUBMITTED",
+		"EXPIRED",
+	}
+}
+
+type RackUnitHeight string
+
+// Enum values for RackUnitHeight
+const (
+	RackUnitHeightHeight42u RackUnitHeight = "HEIGHT_42U"
+	RackUnitHeightHeight2u  RackUnitHeight = "HEIGHT_2U"
+	RackUnitHeightHeight1u  RackUnitHeight = "HEIGHT_1U"
+)
+
+// Values returns all known values for RackUnitHeight. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RackUnitHeight) Values() []RackUnitHeight {
+	return []RackUnitHeight{
+		"HEIGHT_42U",
+		"HEIGHT_2U",
+		"HEIGHT_1U",
 	}
 }
 

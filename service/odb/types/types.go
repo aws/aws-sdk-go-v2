@@ -7,6 +7,963 @@ import (
 	"time"
 )
 
+// Information about an Autonomous Database.
+type AutonomousDatabase struct {
+
+	// The actual amount of data storage currently in use by the Autonomous Database,
+	// in TB.
+	ActualUsedDataStorageSizeInTBs *float64
+
+	// The amount of storage currently allocated to the Autonomous Database, in TB.
+	AllocatedStorageSizeInTBs *float64
+
+	// The list of IP addresses that are allowed to access the Autonomous Database.
+	AllowlistedIps []string
+
+	// The Oracle Application Express (APEX) details for the Autonomous Database.
+	ApexDetails *AutonomousDatabaseApex
+
+	// The frequency, in seconds, at which the refreshable clone Autonomous Database
+	// is automatically refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source
+	// Autonomous Database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The maintenance schedule type for the Autonomous Database.
+	AutonomousMaintenanceScheduleType AutonomousMaintenanceScheduleType
+
+	// The Availability Zone where the Autonomous Database is located.
+	AvailabilityZone *string
+
+	// The unique identifier of the Availability Zone where the Autonomous Database is
+	// located.
+	AvailabilityZoneId *string
+
+	// The list of Oracle Database software versions to which the Autonomous Database
+	// can be upgraded.
+	AvailableUpgradeVersions []string
+
+	// The retention period, in days, for automatic backups of the Autonomous Database.
+	BackupRetentionPeriodInDays *int32
+
+	// The maximum number of compute resources that you can allocate to the Autonomous
+	// Database under the bring-your-own-license (BYOL) model.
+	ByolComputeCountLimit *int32
+
+	// The character set of the Autonomous Database.
+	CharacterSet *string
+
+	// The list of tablespace identifiers to clone for the Autonomous Database.
+	CloneTableSpaceList []int32
+
+	// The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs),
+	// assigned to the Autonomous Database.
+	ComputeCount *float32
+
+	// The compute model of the Autonomous Database, either ECPU or OCPU.
+	ComputeModel ComputeModel
+
+	// The connection string details for the Autonomous Database.
+	ConnectionStringDetails *AutonomousDatabaseConnectionStrings
+
+	// The connection URLs for accessing tools and services for the Autonomous
+	// Database.
+	ConnectionUrls *AutonomousDatabaseConnectionUrls
+
+	// The number of CPU cores allocated to the Autonomous Database.
+	CpuCoreCount *int32
+
+	// The date and time when the Autonomous Database was created.
+	CreatedAt *time.Time
+
+	// The list of customer contacts that receive operational notifications from
+	// Oracle for the Autonomous Database.
+	CustomerContacts []CustomerContact
+
+	// The status of the Oracle Data Safe registration for the Autonomous Database.
+	DataSafeStatus DataSafeStatus
+
+	// The size, in gigabytes (GB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInGBs *int32
+
+	// The size, in terabytes (TB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInTBs *float64
+
+	// The Oracle Database edition of the Autonomous Database.
+	DatabaseEdition DatabaseEdition
+
+	// The status of Oracle Database Management for the Autonomous Database.
+	DatabaseManagementStatus DatabaseManagementStatus
+
+	// The type of the Autonomous Database, either a regular database or a clone.
+	DatabaseType DatabaseType
+
+	// The name of the Autonomous Database.
+	DbName *string
+
+	// The list of database management tools enabled for the Autonomous Database.
+	DbToolsDetails []DatabaseTool
+
+	// The Oracle Database software version of the Autonomous Database.
+	DbVersion *string
+
+	// The intended use of the Autonomous Database, such as transaction processing,
+	// data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// The user-friendly name of the Autonomous Database.
+	DisplayName *string
+
+	// The encryption configuration for the Autonomous Database.
+	EncryptionSummary *EncryptionSummary
+
+	// The amount of time, in seconds, that the data in the Autonomous Database is
+	// behind the data in the primary database.
+	FailedDataRecoveryInSeconds *int32
+
+	// The size of the in-memory area of the Autonomous Database, in GB.
+	InMemoryAreaInGBs *int32
+
+	// Indicates whether automatic scaling of the compute resources is enabled for the
+	// Autonomous Database.
+	IsAutoScalingEnabled *bool
+
+	// Indicates whether automatic scaling of the storage is enabled for the
+	// Autonomous Database.
+	IsAutoScalingForStorageEnabled *bool
+
+	// Indicates whether the backup retention period of the Autonomous Database is
+	// locked.
+	IsBackupRetentionLocked *bool
+
+	// Indicates whether local Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsLocalDataGuardEnabled *bool
+
+	// Indicates whether mutual TLS (mTLS) authentication is required to connect to
+	// the Autonomous Database.
+	IsMtlsConnectionRequired *bool
+
+	// Indicates whether reconnecting the refreshable clone to its source Autonomous
+	// Database is enabled.
+	IsReconnectCloneEnabled *bool
+
+	// Indicates whether the Autonomous Database is a refreshable clone.
+	IsRefreshableClone *bool
+
+	// Indicates whether remote Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsRemoteDataGuardEnabled *bool
+
+	// The Oracle license model that applies to the Autonomous Database.
+	LicenseModel LicenseModel
+
+	// The maximum data loss limit, in seconds, for automatic failover to the local
+	// Oracle Data Guard standby database.
+	LocalAdgAutoFailoverMaxDataLossLimit *int32
+
+	// The type of local disaster recovery configured for the Autonomous Database.
+	LocalDisasterRecoveryType DisasterRecoveryType
+
+	// The details of the local standby Autonomous Database in an Oracle Data Guard
+	// configuration.
+	LocalStandbyDb *DatabaseStandbySummary
+
+	// The long-term backup schedule for the Autonomous Database.
+	LongTermBackupSchedule *LongTermBackupSchedule
+
+	// The component on the Autonomous Database that the current maintenance is being
+	// applied to.
+	MaintenanceTargetComponent *string
+
+	// The amount of memory allocated per Oracle Compute Unit, in GB.
+	MemoryPerOracleComputeUnitInGBs *int32
+
+	// The national character set of the Autonomous Database.
+	NcharacterSet *string
+
+	// The Oracle Net Services architecture of the Autonomous Database, either
+	// dedicated or shared.
+	NetServicesArchitecture NetServicesArchitecture
+
+	// The date and time of the next scheduled long-term backup of the Autonomous
+	// Database.
+	NextLongTermBackupTimeStamp *time.Time
+
+	// The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated
+	// with the Autonomous Database.
+	OciResourceAnchorName *string
+
+	// The URL for accessing the OCI console page for the Autonomous Database.
+	OciUrl *string
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with the
+	// Autonomous Database.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network associated with the Autonomous
+	// Database.
+	OdbNetworkId *string
+
+	// The mode in which the Autonomous Database is open, either read-only or
+	// read/write.
+	OpenMode OpenMode
+
+	// The status of Oracle Operations Insights for the Autonomous Database.
+	OperationsInsightsStatus OperationsInsightsStatus
+
+	// The list of unique identifiers of the peer Autonomous Databases.
+	PeerDbIds []string
+
+	// The progress of the current operation on the Autonomous Database, as a
+	// percentage.
+	PercentProgress *float32
+
+	// The permission level of the Autonomous Database.
+	PermissionLevel PermissionLevel
+
+	// The private endpoint for the Autonomous Database.
+	PrivateEndpoint *string
+
+	// The private endpoint IP address for the Autonomous Database.
+	PrivateEndpointIp *string
+
+	// The private endpoint label for the Autonomous Database.
+	PrivateEndpointLabel *string
+
+	// The list of CPU core counts that you can provision for the Autonomous Database.
+	ProvisionableCpus []int32
+
+	// The refresh mode of the refreshable clone Autonomous Database.
+	RefreshableMode RefreshableMode
+
+	// The refresh status of the refreshable clone Autonomous Database.
+	RefreshableStatus RefreshableStatus
+
+	// The configuration of the remote disaster recovery for the Autonomous Database.
+	RemoteDisasterRecoveryConfiguration *DisasterRecoveryConfiguration
+
+	// The unique identifier of the resource pool leader Autonomous Database.
+	ResourcePoolLeaderId *string
+
+	// The configuration of the resource pool for the Autonomous Database.
+	ResourcePoolSummary *ResourcePoolSummary
+
+	// The Oracle Data Guard role of the Autonomous Database.
+	Role DataGuardRole
+
+	// The list of scheduled start and stop times for the Autonomous Database.
+	ScheduledOperations []ScheduledOperationDetails
+
+	// The URL for accessing the Oracle service console for the Autonomous Database.
+	ServiceConsoleUrl *string
+
+	// The unique identifier of the source from which the Autonomous Database was
+	// created.
+	SourceId *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlWebDeveloperUrl *string
+
+	// The list of IP addresses that are allowed to access the standby Autonomous
+	// Database.
+	StandbyAllowlistedIps []string
+
+	// The source of the allowlisted IP addresses for the standby Autonomous Database.
+	StandbyAllowlistedIpsSource StandbyAllowlistedIpsSource
+
+	// The details of the standby Autonomous Database in a cross-Region Oracle Data
+	// Guard configuration.
+	StandbyDb *DatabaseStandbySummary
+
+	// The current status of the Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the Autonomous Database, if
+	// applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the Autonomous Database
+	// last changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the inactive Always Free Autonomous Database is
+	// scheduled to be automatically deleted.
+	TimeDeletionOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the disaster recovery role of the Autonomous Database
+	// last changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when local Oracle Data Guard was enabled for the Autonomous
+	// Database.
+	TimeLocalDataGuardEnabled *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database ends.
+	TimeMaintenanceEnd *time.Time
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// Autonomous Database starts.
+	TimeOfAutoRefreshStart *time.Time
+
+	// The date and time of the last backup of the Autonomous Database.
+	TimeOfLastBackup *time.Time
+
+	// The date and time of the last failover operation for the Autonomous Database.
+	TimeOfLastFailover *time.Time
+
+	// The date and time of the last refresh of the refreshable clone Autonomous
+	// Database.
+	TimeOfLastRefresh *time.Time
+
+	// The date and time as of which the data in the refreshable clone Autonomous
+	// Database is current.
+	TimeOfLastRefreshPoint *time.Time
+
+	// The date and time of the last switchover operation for the Autonomous Database.
+	TimeOfLastSwitchover *time.Time
+
+	// The date and time of the next scheduled refresh of the refreshable clone
+	// Autonomous Database.
+	TimeOfNextRefresh *time.Time
+
+	// The date and time when the Always Free Autonomous Database is scheduled to be
+	// stopped because of inactivity.
+	TimeReclamationOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the Autonomous Database was restored after deletion.
+	TimeUndeleted *time.Time
+
+	// The date and time until which reconnecting the refreshable clone to its source
+	// Autonomous Database is allowed.
+	TimeUntilReconnectCloneEnabled *time.Time
+
+	// The total amount of backup storage used by the Autonomous Database, in GB.
+	TotalBackupStorageSizeInGBs *float64
+
+	// The amount of data storage currently in use by the Autonomous Database, in GB.
+	UsedDataStorageSizeInGBs *int32
+
+	// The amount of data storage currently in use by the Autonomous Database, in TB.
+	UsedDataStorageSizeInTBs *float64
+
+	noSmithyDocumentSerde
+}
+
+// The Oracle Application Express (APEX) details for an Autonomous Database.
+type AutonomousDatabaseApex struct {
+
+	// The Oracle Application Express (APEX) version of the Autonomous Database.
+	ApexVersion *string
+
+	// The Oracle REST Data Services (ORDS) version of the Autonomous Database.
+	OrdsVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Autonomous Database backup.
+type AutonomousDatabaseBackup struct {
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database backup.
+	AutonomousDatabaseBackupArn *string
+
+	// The unique identifier of the Autonomous Database backup.
+	AutonomousDatabaseBackupId *string
+
+	// The unique identifier of the Autonomous Database that the backup was created
+	// from.
+	AutonomousDatabaseId *string
+
+	// The Oracle Database software version of the Autonomous Database backup.
+	DbVersion *string
+
+	// The user-friendly name of the Autonomous Database backup.
+	DisplayName *string
+
+	// Indicates whether the backup was created automatically.
+	IsAutomatic *bool
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.
+	Ocid *string
+
+	// The retention period, in days, for the Autonomous Database backup.
+	RetentionPeriodInDays *int32
+
+	// The size of the Autonomous Database backup, in terabytes (TB).
+	SizeInTBs *float64
+
+	// The current status of the Autonomous Database backup.
+	Status AutonomousDatabaseBackupStatus
+
+	// Additional information about the current status of the Autonomous Database
+	// backup, if applicable.
+	StatusReason *string
+
+	// The date and time until which the Autonomous Database backup is available for
+	// restore.
+	TimeAvailableTill *time.Time
+
+	// The date and time when the Autonomous Database backup ended.
+	TimeEnded *time.Time
+
+	// The date and time when the Autonomous Database backup started.
+	TimeStarted *time.Time
+
+	// The type of the Autonomous Database backup.
+	Type AutonomousDatabaseBackupType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an Autonomous Database backup.
+type AutonomousDatabaseBackupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database backup.
+	AutonomousDatabaseBackupArn *string
+
+	// The unique identifier of the Autonomous Database backup.
+	AutonomousDatabaseBackupId *string
+
+	// The unique identifier of the Autonomous Database that the backup was created
+	// from.
+	AutonomousDatabaseId *string
+
+	// The Oracle Database software version of the Autonomous Database backup.
+	DbVersion *string
+
+	// The user-friendly name of the Autonomous Database backup.
+	DisplayName *string
+
+	// Indicates whether the backup was created automatically.
+	IsAutomatic *bool
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database backup.
+	Ocid *string
+
+	// The retention period, in days, for the Autonomous Database backup.
+	RetentionPeriodInDays *int32
+
+	// The size of the Autonomous Database backup, in terabytes (TB).
+	SizeInTBs *float64
+
+	// The current status of the Autonomous Database backup.
+	Status AutonomousDatabaseBackupStatus
+
+	// Additional information about the current status of the Autonomous Database
+	// backup, if applicable.
+	StatusReason *string
+
+	// The date and time until which the Autonomous Database backup is available for
+	// restore.
+	TimeAvailableTill *time.Time
+
+	// The date and time when the Autonomous Database backup ended.
+	TimeEnded *time.Time
+
+	// The date and time when the Autonomous Database backup started.
+	TimeStarted *time.Time
+
+	// The type of the Autonomous Database backup.
+	Type AutonomousDatabaseBackupType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an available character set for Autonomous Databases.
+type AutonomousDatabaseCharacterSetSummary struct {
+
+	// The name of the character set.
+	CharacterSet *string
+
+	noSmithyDocumentSerde
+}
+
+// The connection strings used to connect to an Autonomous Database.
+type AutonomousDatabaseConnectionStrings struct {
+
+	// The list of all connection strings that you can use to connect to the
+	// Autonomous Database.
+	AllConnectionStrings map[string]string
+
+	// The connection string for connecting to the Autonomous Database with a
+	// dedicated service.
+	Dedicated *string
+
+	// The connection string for the high-priority database service.
+	High *string
+
+	// The connection string for the low-priority database service.
+	Low *string
+
+	// The connection string for the medium-priority database service.
+	Medium *string
+
+	// The list of connection string profiles for the Autonomous Database.
+	Profiles []DatabaseConnectionStringProfile
+
+	noSmithyDocumentSerde
+}
+
+// The connection URLs for accessing tools and services for an Autonomous Database.
+type AutonomousDatabaseConnectionUrls struct {
+
+	// The URL for accessing Oracle Application Express (APEX) for the Autonomous
+	// Database.
+	ApexUrl *string
+
+	// The URL for accessing Oracle Database Transforms for the Autonomous Database.
+	DatabaseTransformsUrl *string
+
+	// The URL for accessing Oracle Graph Studio for the Autonomous Database.
+	GraphStudioUrl *string
+
+	// The URL for accessing the Oracle Machine Learning notebook for the Autonomous
+	// Database.
+	MachineLearningNotebookUrl *string
+
+	// The URL for accessing Oracle Machine Learning user management for the
+	// Autonomous Database.
+	MachineLearningUserManagementUrl *string
+
+	// The URL for accessing the MongoDB API for the Autonomous Database.
+	MongoDbUrl *string
+
+	// The URL for accessing Oracle REST Data Services (ORDS) for the Autonomous
+	// Database.
+	OrdsUrl *string
+
+	// The URL for accessing Oracle Spatial Studio for the Autonomous Database.
+	SpatialStudioUrl *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlDevWebUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a peer database of an Autonomous Database.
+type AutonomousDatabasePeerSummary struct {
+
+	// The Amazon Resource Name (ARN) of the peer Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the peer Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The Oracle Cloud Identifier (OCID) of the peer Autonomous Database.
+	Ocid *string
+
+	// The Amazon Web Services Region where the peer Autonomous Database is located.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an Autonomous Database.
+type AutonomousDatabaseSummary struct {
+
+	// The actual amount of data storage currently in use by the Autonomous Database,
+	// in TB.
+	ActualUsedDataStorageSizeInTBs *float64
+
+	// The amount of storage currently allocated to the Autonomous Database, in TB.
+	AllocatedStorageSizeInTBs *float64
+
+	// The list of IP addresses that are allowed to access the Autonomous Database.
+	AllowlistedIps []string
+
+	// The Oracle Application Express (APEX) details for the Autonomous Database.
+	ApexDetails *AutonomousDatabaseApex
+
+	// The frequency, in seconds, at which the refreshable clone Autonomous Database
+	// is automatically refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source
+	// Autonomous Database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The Amazon Resource Name (ARN) of the Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The maintenance schedule type for the Autonomous Database.
+	AutonomousMaintenanceScheduleType AutonomousMaintenanceScheduleType
+
+	// The Availability Zone where the Autonomous Database is located.
+	AvailabilityZone *string
+
+	// The unique identifier of the Availability Zone where the Autonomous Database is
+	// located.
+	AvailabilityZoneId *string
+
+	// The list of Oracle Database software versions to which the Autonomous Database
+	// can be upgraded.
+	AvailableUpgradeVersions []string
+
+	// The retention period, in days, for automatic backups of the Autonomous Database.
+	BackupRetentionPeriodInDays *int32
+
+	// The maximum number of compute resources that you can allocate to the Autonomous
+	// Database under the bring-your-own-license (BYOL) model.
+	ByolComputeCountLimit *int32
+
+	// The character set of the Autonomous Database.
+	CharacterSet *string
+
+	// The list of tablespace identifiers to clone for the Autonomous Database.
+	CloneTableSpaceList []int32
+
+	// The compute capacity, in number of Elastic CPUs (ECPUs) or Oracle CPUs (OCPUs),
+	// assigned to the Autonomous Database.
+	ComputeCount *float32
+
+	// The compute model of the Autonomous Database, either ECPU or OCPU.
+	ComputeModel ComputeModel
+
+	// The connection string details for the Autonomous Database.
+	ConnectionStringDetails *AutonomousDatabaseConnectionStrings
+
+	// The connection URLs for accessing tools and services for the Autonomous
+	// Database.
+	ConnectionUrls *AutonomousDatabaseConnectionUrls
+
+	// The number of CPU cores allocated to the Autonomous Database.
+	CpuCoreCount *int32
+
+	// The date and time when the Autonomous Database was created.
+	CreatedAt *time.Time
+
+	// The list of customer contacts that receive operational notifications from
+	// Oracle for the Autonomous Database.
+	CustomerContacts []CustomerContact
+
+	// The status of the Oracle Data Safe registration for the Autonomous Database.
+	DataSafeStatus DataSafeStatus
+
+	// The size, in gigabytes (GB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInGBs *int32
+
+	// The size, in terabytes (TB), of the data volume allocated for the Autonomous
+	// Database.
+	DataStorageSizeInTBs *float64
+
+	// The Oracle Database edition of the Autonomous Database.
+	DatabaseEdition DatabaseEdition
+
+	// The status of Oracle Database Management for the Autonomous Database.
+	DatabaseManagementStatus DatabaseManagementStatus
+
+	// The type of the Autonomous Database, either a regular database or a clone.
+	DatabaseType DatabaseType
+
+	// The name of the Autonomous Database.
+	DbName *string
+
+	// The list of database management tools enabled for the Autonomous Database.
+	DbToolsDetails []DatabaseTool
+
+	// The Oracle Database software version of the Autonomous Database.
+	DbVersion *string
+
+	// The intended use of the Autonomous Database, such as transaction processing,
+	// data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// The user-friendly name of the Autonomous Database.
+	DisplayName *string
+
+	// The encryption configuration for the Autonomous Database.
+	EncryptionSummary *EncryptionSummary
+
+	// The amount of time, in seconds, that the data in the Autonomous Database is
+	// behind the data in the primary database.
+	FailedDataRecoveryInSeconds *int32
+
+	// The size of the in-memory area of the Autonomous Database, in GB.
+	InMemoryAreaInGBs *int32
+
+	// Indicates whether automatic scaling of the compute resources is enabled for the
+	// Autonomous Database.
+	IsAutoScalingEnabled *bool
+
+	// Indicates whether automatic scaling of the storage is enabled for the
+	// Autonomous Database.
+	IsAutoScalingForStorageEnabled *bool
+
+	// Indicates whether the backup retention period of the Autonomous Database is
+	// locked.
+	IsBackupRetentionLocked *bool
+
+	// Indicates whether local Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsLocalDataGuardEnabled *bool
+
+	// Indicates whether mutual TLS (mTLS) authentication is required to connect to
+	// the Autonomous Database.
+	IsMtlsConnectionRequired *bool
+
+	// Indicates whether reconnecting the refreshable clone to its source Autonomous
+	// Database is enabled.
+	IsReconnectCloneEnabled *bool
+
+	// Indicates whether the Autonomous Database is a refreshable clone.
+	IsRefreshableClone *bool
+
+	// Indicates whether remote Oracle Data Guard is enabled for the Autonomous
+	// Database.
+	IsRemoteDataGuardEnabled *bool
+
+	// The Oracle license model that applies to the Autonomous Database.
+	LicenseModel LicenseModel
+
+	// The maximum data loss limit, in seconds, for automatic failover to the local
+	// Oracle Data Guard standby database.
+	LocalAdgAutoFailoverMaxDataLossLimit *int32
+
+	// The type of local disaster recovery configured for the Autonomous Database.
+	LocalDisasterRecoveryType DisasterRecoveryType
+
+	// The details of the local standby Autonomous Database in an Oracle Data Guard
+	// configuration.
+	LocalStandbyDb *DatabaseStandbySummary
+
+	// The long-term backup schedule for the Autonomous Database.
+	LongTermBackupSchedule *LongTermBackupSchedule
+
+	// The component on the Autonomous Database that the current maintenance is being
+	// applied to.
+	MaintenanceTargetComponent *string
+
+	// The amount of memory allocated per Oracle Compute Unit, in GB.
+	MemoryPerOracleComputeUnitInGBs *int32
+
+	// The national character set of the Autonomous Database.
+	NcharacterSet *string
+
+	// The Oracle Net Services architecture of the Autonomous Database, either
+	// dedicated or shared.
+	NetServicesArchitecture NetServicesArchitecture
+
+	// The date and time of the next scheduled long-term backup of the Autonomous
+	// Database.
+	NextLongTermBackupTimeStamp *time.Time
+
+	// The name of the Oracle Cloud Infrastructure (OCI) resource anchor associated
+	// with the Autonomous Database.
+	OciResourceAnchorName *string
+
+	// The URL for accessing the OCI console page for the Autonomous Database.
+	OciUrl *string
+
+	// The Oracle Cloud Identifier (OCID) of the Autonomous Database.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with the
+	// Autonomous Database.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network associated with the Autonomous
+	// Database.
+	OdbNetworkId *string
+
+	// The mode in which the Autonomous Database is open, either read-only or
+	// read/write.
+	OpenMode OpenMode
+
+	// The status of Oracle Operations Insights for the Autonomous Database.
+	OperationsInsightsStatus OperationsInsightsStatus
+
+	// The list of unique identifiers of the peer Autonomous Databases.
+	PeerDbIds []string
+
+	// The progress of the current operation on the Autonomous Database, as a
+	// percentage.
+	PercentProgress *float32
+
+	// The permission level of the Autonomous Database.
+	PermissionLevel PermissionLevel
+
+	// The private endpoint for the Autonomous Database.
+	PrivateEndpoint *string
+
+	// The private endpoint IP address for the Autonomous Database.
+	PrivateEndpointIp *string
+
+	// The private endpoint label for the Autonomous Database.
+	PrivateEndpointLabel *string
+
+	// The list of CPU core counts that you can provision for the Autonomous Database.
+	ProvisionableCpus []int32
+
+	// The refresh mode of the refreshable clone Autonomous Database.
+	RefreshableMode RefreshableMode
+
+	// The refresh status of the refreshable clone Autonomous Database.
+	RefreshableStatus RefreshableStatus
+
+	// The configuration of the remote disaster recovery for the Autonomous Database.
+	RemoteDisasterRecoveryConfiguration *DisasterRecoveryConfiguration
+
+	// The unique identifier of the resource pool leader Autonomous Database.
+	ResourcePoolLeaderId *string
+
+	// The configuration of the resource pool for the Autonomous Database.
+	ResourcePoolSummary *ResourcePoolSummary
+
+	// The Oracle Data Guard role of the Autonomous Database.
+	Role DataGuardRole
+
+	// The list of scheduled start and stop times for the Autonomous Database.
+	ScheduledOperations []ScheduledOperationDetails
+
+	// The URL for accessing the Oracle service console for the Autonomous Database.
+	ServiceConsoleUrl *string
+
+	// The unique identifier of the source from which the Autonomous Database was
+	// created.
+	SourceId *string
+
+	// The URL for accessing Oracle SQL Developer Web for the Autonomous Database.
+	SqlWebDeveloperUrl *string
+
+	// The list of IP addresses that are allowed to access the standby Autonomous
+	// Database.
+	StandbyAllowlistedIps []string
+
+	// The source of the allowlisted IP addresses for the standby Autonomous Database.
+	StandbyAllowlistedIpsSource StandbyAllowlistedIpsSource
+
+	// The details of the standby Autonomous Database in a cross-Region Oracle Data
+	// Guard configuration.
+	StandbyDb *DatabaseStandbySummary
+
+	// The current status of the Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the Autonomous Database, if
+	// applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the Autonomous Database
+	// last changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the inactive Always Free Autonomous Database is
+	// scheduled to be automatically deleted.
+	TimeDeletionOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the disaster recovery role of the Autonomous Database
+	// last changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when local Oracle Data Guard was enabled for the Autonomous
+	// Database.
+	TimeLocalDataGuardEnabled *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the Autonomous Database ends.
+	TimeMaintenanceEnd *time.Time
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// Autonomous Database starts.
+	TimeOfAutoRefreshStart *time.Time
+
+	// The date and time of the last backup of the Autonomous Database.
+	TimeOfLastBackup *time.Time
+
+	// The date and time of the last failover operation for the Autonomous Database.
+	TimeOfLastFailover *time.Time
+
+	// The date and time of the last refresh of the refreshable clone Autonomous
+	// Database.
+	TimeOfLastRefresh *time.Time
+
+	// The date and time as of which the data in the refreshable clone Autonomous
+	// Database is current.
+	TimeOfLastRefreshPoint *time.Time
+
+	// The date and time of the last switchover operation for the Autonomous Database.
+	TimeOfLastSwitchover *time.Time
+
+	// The date and time of the next scheduled refresh of the refreshable clone
+	// Autonomous Database.
+	TimeOfNextRefresh *time.Time
+
+	// The date and time when the Always Free Autonomous Database is scheduled to be
+	// stopped because of inactivity.
+	TimeReclamationOfFreeAutonomousDatabase *time.Time
+
+	// The date and time when the Autonomous Database was restored after deletion.
+	TimeUndeleted *time.Time
+
+	// The date and time until which reconnecting the refreshable clone to its source
+	// Autonomous Database is allowed.
+	TimeUntilReconnectCloneEnabled *time.Time
+
+	// The total amount of backup storage used by the Autonomous Database, in GB.
+	TotalBackupStorageSizeInGBs *float64
+
+	// The amount of data storage currently in use by the Autonomous Database, in GB.
+	UsedDataStorageSizeInGBs *int32
+
+	// The amount of data storage currently in use by the Autonomous Database, in TB.
+	UsedDataStorageSizeInTBs *float64
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an available Oracle Database software version for Autonomous
+// Databases.
+type AutonomousDatabaseVersionSummary struct {
+
+	// The intended use of the Autonomous Database that the version supports, such as
+	// transaction processing, data warehouse, JSON database, or APEX.
+	DbWorkload DbWorkload
+
+	// Additional details about the Autonomous Database software version.
+	Details *string
+
+	// The Oracle Database software version.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// The wallet details for an Autonomous Database.
+type AutonomousDatabaseWalletDetails struct {
+
+	// The current status of the Autonomous Database wallet.
+	Status AutonomousDatabaseWalletStatus
+
+	// The date and time when the Autonomous Database wallet was last rotated.
+	TimeRotated *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A summary of an Autonomous Virtual Machine (VM) within an Autonomous VM cluster.
 type AutonomousVirtualMachineSummary struct {
 
@@ -52,6 +1009,72 @@ type AutonomousVirtualMachineSummary struct {
 
 	// The name of the Autonomous VM.
 	VmName *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key used for an Autonomous Database.
+type AwsEncryptionKeyConfiguration struct {
+
+	// The type of external identifier associated with the encryption key.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that grants access to the KMS key.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services KMS key used for encryption.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key to use for an Autonomous Database.
+type AwsEncryptionKeyConfigurationInput struct {
+
+	// The type of external identifier associated with the encryption key.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that grants access to the KMS key.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services KMS key to use for encryption.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating an Autonomous Database as a refreshable clone.
+type CloneToRefreshableConfiguration struct {
+
+	// The unique identifier of the source Autonomous Database to create the
+	// refreshable clone from.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	// The frequency, in seconds, at which the refreshable clone is automatically
+	// refreshed.
+	AutoRefreshFrequencyInSeconds *int32
+
+	// The time lag, in seconds, between the refreshable clone and its source database.
+	AutoRefreshPointLagInSeconds *int32
+
+	// The type of clone to create.
+	CloneType CloneType
+
+	// The mode in which to open the refreshable clone, either read-only or read/write.
+	OpenMode OpenMode
+
+	// The refresh mode of the refreshable clone, either automatic or manual.
+	RefreshableMode RefreshableMode
+
+	// The date and time at which the automatic refresh of the refreshable clone
+	// starts.
+	TimeOfAutoRefreshStart *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1066,6 +2089,42 @@ type CloudVmClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for creating an Autonomous Database as a cross-Region Oracle
+// Data Guard peer.
+type CrossRegionDataGuardConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the source Autonomous Database for the
+	// cross-Region Oracle Data Guard configuration.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating an Autonomous Database as a cross-Region
+// disaster recovery peer.
+type CrossRegionDisasterRecoveryConfiguration struct {
+
+	// The type of remote disaster recovery to configure, either Autonomous Data Guard
+	// or backup-based.
+	//
+	// This member is required.
+	RemoteDisasterRecoveryType DisasterRecoveryType
+
+	// The Amazon Resource Name (ARN) of the source Autonomous Database for the
+	// cross-Region disaster recovery configuration.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseArn *string
+
+	// Indicates whether automatic backups are replicated to the disaster recovery
+	// database.
+	IsReplicateAutomaticBackups *bool
+
+	noSmithyDocumentSerde
+}
+
 // The configuration access for the cross-Region Amazon S3 database restore source
 // for the ODB network.
 type CrossRegionS3RestoreSourcesAccess struct {
@@ -1088,6 +2147,114 @@ type CustomerContact struct {
 
 	// The email address of the contact.
 	Email *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating an Autonomous Database as a clone of an existing
+// database.
+type DatabaseCloneConfiguration struct {
+
+	// The type of clone to create, either a full clone, a metadata clone, or a
+	// partial clone.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The unique identifier of the source Autonomous Database to clone.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// A connection string profile for an Autonomous Database.
+type DatabaseConnectionStringProfile struct {
+
+	// The consumer group associated with the connection string profile.
+	ConsumerGroup *string
+
+	// The user-friendly name of the connection string profile.
+	DisplayName *string
+
+	// The host name format used in the connection string.
+	HostFormat *string
+
+	// Indicates whether the connection string profile is regional.
+	IsRegional *bool
+
+	// The protocol used by the connection string profile.
+	Protocol *string
+
+	// The session mode of the connection string profile.
+	SessionMode *string
+
+	// The syntax format of the connection string profile.
+	SyntaxFormat *string
+
+	// The TLS authentication method used by the connection string profile.
+	TlsAuthentication *string
+
+	// The connection string value of the profile.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a standby Autonomous Database in an Oracle Data Guard
+// configuration.
+type DatabaseStandbySummary struct {
+
+	// The availability domain of the standby Autonomous Database.
+	AvailabilityDomain *string
+
+	// The time lag, in seconds, between the standby database and the primary database.
+	LagTimeInSeconds *int32
+
+	// The component on the standby Autonomous Database that the current maintenance
+	// is being applied to.
+	MaintenanceTargetComponent *string
+
+	// The current status of the standby Autonomous Database.
+	Status AutonomousDatabaseResourceStatus
+
+	// Additional information about the current status of the standby Autonomous
+	// Database, if applicable.
+	StatusReason *string
+
+	// The date and time when the Oracle Data Guard role of the standby database last
+	// changed.
+	TimeDataGuardRoleChanged *time.Time
+
+	// The date and time when the disaster recovery role of the standby database last
+	// changed.
+	TimeDisasterRecoveryRoleChanged *time.Time
+
+	// The date and time when the next maintenance of the standby database begins.
+	TimeMaintenanceBegin *time.Time
+
+	// The date and time when the next maintenance of the standby database ends.
+	TimeMaintenanceEnd *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about a database management tool for an Autonomous Database.
+type DatabaseTool struct {
+
+	// The compute capacity allocated to the database management tool.
+	ComputeCount *float64
+
+	// Indicates whether the database management tool is enabled.
+	IsEnabled *bool
+
+	// The maximum amount of time, in minutes, that the database management tool can
+	// be idle before it is shut down.
+	MaxIdleTimeInMinutes *int32
+
+	// The name of the database management tool.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -1576,6 +2743,97 @@ type DbSystemShapeSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The disaster recovery configuration for an Autonomous Database.
+type DisasterRecoveryConfiguration struct {
+
+	// The type of disaster recovery configured for the Autonomous Database.
+	DisasterRecoveryType DisasterRecoveryType
+
+	// Indicates whether automatic backups are replicated to the disaster recovery
+	// database.
+	IsReplicateAutomaticBackups *bool
+
+	// Indicates whether the standby database is a snapshot standby.
+	IsSnapshotStandby *bool
+
+	// The date and time until which the snapshot standby database remains enabled.
+	TimeSnapshotStandbyEnabledTill *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the encryption key used for an Autonomous Database. This
+// is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionKeyConfigurationMemberAwsEncryptionKey
+//	EncryptionKeyConfigurationMemberOciEncryptionKey
+//	EncryptionKeyConfigurationMemberOkvEncryptionKey
+type EncryptionKeyConfiguration interface {
+	isEncryptionKeyConfiguration()
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key.
+type EncryptionKeyConfigurationMemberAwsEncryptionKey struct {
+	Value AwsEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberAwsEncryptionKey) isEncryptionKeyConfiguration() {}
+
+// The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key.
+type EncryptionKeyConfigurationMemberOciEncryptionKey struct {
+	Value OciEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberOciEncryptionKey) isEncryptionKeyConfiguration() {}
+
+// The configuration of the Oracle Key Vault (OKV) encryption key.
+type EncryptionKeyConfigurationMemberOkvEncryptionKey struct {
+	Value OkvEncryptionKeyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationMemberOkvEncryptionKey) isEncryptionKeyConfiguration() {}
+
+// The configuration of the encryption key to use for an Autonomous Database. This
+// is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	EncryptionKeyConfigurationInputMemberAwsEncryptionKey
+type EncryptionKeyConfigurationInput interface {
+	isEncryptionKeyConfigurationInput()
+}
+
+// The configuration of the Amazon Web Services Key Management Service (KMS)
+// encryption key to use.
+type EncryptionKeyConfigurationInputMemberAwsEncryptionKey struct {
+	Value AwsEncryptionKeyConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionKeyConfigurationInputMemberAwsEncryptionKey) isEncryptionKeyConfigurationInput() {}
+
+// The encryption configuration for an Autonomous Database.
+type EncryptionSummary struct {
+
+	// The configuration of the encryption key used for the Autonomous Database.
+	EncryptionKeyConfiguration EncryptionKeyConfiguration
+
+	// The provider of the encryption key used for the Autonomous Database.
+	EncryptionKeyProvider EncryptionKeyProvider
+
+	noSmithyDocumentSerde
+}
+
 // The IORM settings of the Exadata DB system.
 type ExadataIormConfig struct {
 
@@ -1646,6 +2904,24 @@ type KmsAccess struct {
 	// The current status of the Amazon Web Services Key Management Service (KMS)
 	// access configuration.
 	Status ManagedResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// The long-term backup schedule for an Autonomous Database.
+type LongTermBackupSchedule struct {
+
+	// Indicates whether the long-term backup schedule is disabled.
+	IsDisabled *bool
+
+	// The cadence at which long-term backups are taken.
+	RepeatCadence RepeatCadence
+
+	// The retention period, in days, for long-term backups.
+	RetentionPeriodInDays *int32
+
+	// The date and time at which the long-term backup is taken.
+	TimeOfBackup *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1752,6 +3028,40 @@ type OciDnsForwardingConfig struct {
 
 	// OCI DNS listener IP for custom DNS setup.
 	OciDnsListenerIp *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Oracle Cloud Infrastructure (OCI) Vault encryption key
+// used for an Autonomous Database.
+type OciEncryptionKeyConfiguration struct {
+
+	// The Oracle Cloud Identifier (OCID) of the OCI Vault key to use for encryption.
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// The Oracle Cloud Identifier (OCID) of the OCI Vault that contains the
+	// encryption key.
+	//
+	// This member is required.
+	VaultId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Amazon Web Services Identity and Access Management (IAM)
+// service role used for Autonomous Database integration with Oracle Cloud
+// Infrastructure (OCI).
+type OciIamRole struct {
+
+	// The Amazon Web Services integration configuration settings for the Amazon Web
+	// Services Identity and Access Management (IAM) service role.
+	AwsIntegration OciAwsIntegration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) service role.
+	IamRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2039,6 +3349,107 @@ type OdbPeeringConnectionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the Oracle Key Vault (OKV) encryption key used for an
+// Autonomous Database.
+type OkvEncryptionKeyConfiguration struct {
+
+	// The name of the directory that contains the Oracle Key Vault (OKV) certificate.
+	//
+	// This member is required.
+	CertificateDirectoryName *string
+
+	// The name of the directory where the Oracle Key Vault (OKV) configuration is
+	// stored.
+	//
+	// This member is required.
+	DirectoryName *string
+
+	// The identifier of the Oracle Key Vault (OKV) key to use for encryption.
+	//
+	// This member is required.
+	OkvKmsKey *string
+
+	// The URI of the Oracle Key Vault (OKV) server.
+	//
+	// This member is required.
+	OkvUri *string
+
+	// The identifier of the Oracle Key Vault (OKV) certificate.
+	CertificateId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating an Autonomous Database by restoring to a point
+// in time.
+type PointInTimeRestoreConfiguration struct {
+
+	// The type of clone to create from the point-in-time restore.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The unique identifier of the source Autonomous Database to restore from.
+	//
+	// This member is required.
+	SourceAutonomousDatabaseId *string
+
+	// The list of tablespace identifiers to clone from the point-in-time restore.
+	CloneTableSpaceList []int32
+
+	// The date and time to which to restore the Autonomous Database.
+	Timestamp *time.Time
+
+	// Indicates whether to use the latest available backup timestamp for the restore.
+	UseLatestAvailableBackupTimestamp *bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of a resource pool for an Autonomous Database.
+type ResourcePoolSummary struct {
+
+	// The available compute capacity in the resource pool.
+	AvailableComputeCapacity *int32
+
+	// The available storage capacity in the resource pool, in TB.
+	AvailableStorageCapacityInTBs *float64
+
+	// Indicates whether the resource pool is disabled.
+	IsDisabled *bool
+
+	// The number of Autonomous Databases that the resource pool can contain.
+	PoolSize *int32
+
+	// The total storage size of the resource pool, in terabytes (TB).
+	PoolStorageSizeInTBs *int32
+
+	// The total compute capacity of the resource pool.
+	TotalComputeCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for creating an Autonomous Database by restoring from a
+// backup.
+type RestoreFromBackupConfiguration struct {
+
+	// The unique identifier of the Autonomous Database backup to restore from.
+	//
+	// This member is required.
+	AutonomousDatabaseBackupId *string
+
+	// The type of clone to create from the backup.
+	//
+	// This member is required.
+	CloneType CloneType
+
+	// The list of tablespace identifiers to clone from the backup.
+	CloneTableSpaceList []int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for Amazon S3 access from the ODB network.
 type S3Access struct {
 
@@ -2057,6 +3468,24 @@ type S3Access struct {
 	noSmithyDocumentSerde
 }
 
+// The scheduled start and stop times for an Autonomous Database on a specific day
+// of the week.
+type ScheduledOperationDetails struct {
+
+	// The day of the week on which the scheduled operation occurs.
+	//
+	// This member is required.
+	DayOfWeek *DayOfWeek
+
+	// The scheduled start time for the Autonomous Database, in UTC.
+	ScheduledStartTime *string
+
+	// The scheduled stop time for the Autonomous Database, in UTC.
+	ScheduledStopTime *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a service network endpoint.
 type ServiceNetworkEndpoint struct {
 
@@ -2068,6 +3497,80 @@ type ServiceNetworkEndpoint struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration details for the source used to create an Autonomous Database.
+// This is a union, so only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	SourceConfigurationMemberCloneToRefreshable
+//	SourceConfigurationMemberCrossRegionDataGuard
+//	SourceConfigurationMemberCrossRegionDisasterRecovery
+//	SourceConfigurationMemberDatabaseClone
+//	SourceConfigurationMemberPointInTimeRestore
+//	SourceConfigurationMemberRestoreFromBackup
+type SourceConfiguration interface {
+	isSourceConfiguration()
+}
+
+// The configuration for creating the Autonomous Database as a refreshable clone.
+type SourceConfigurationMemberCloneToRefreshable struct {
+	Value CloneToRefreshableConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCloneToRefreshable) isSourceConfiguration() {}
+
+// The configuration for creating the Autonomous Database as a cross-Region Oracle
+// Data Guard peer.
+type SourceConfigurationMemberCrossRegionDataGuard struct {
+	Value CrossRegionDataGuardConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCrossRegionDataGuard) isSourceConfiguration() {}
+
+// The configuration for creating the Autonomous Database as a cross-Region
+// disaster recovery peer.
+type SourceConfigurationMemberCrossRegionDisasterRecovery struct {
+	Value CrossRegionDisasterRecoveryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberCrossRegionDisasterRecovery) isSourceConfiguration() {}
+
+// The configuration for creating the Autonomous Database as a clone of an
+// existing database.
+type SourceConfigurationMemberDatabaseClone struct {
+	Value DatabaseCloneConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberDatabaseClone) isSourceConfiguration() {}
+
+// The configuration for creating the Autonomous Database by restoring to a point
+// in time.
+type SourceConfigurationMemberPointInTimeRestore struct {
+	Value PointInTimeRestoreConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberPointInTimeRestore) isSourceConfiguration() {}
+
+// The configuration for creating the Autonomous Database by restoring from a
+// backup.
+type SourceConfigurationMemberRestoreFromBackup struct {
+	Value RestoreFromBackupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberRestoreFromBackup) isSourceConfiguration() {}
 
 // Configuration for Amazon Web Services Security Token Service (STS) access from
 // the ODB network.
@@ -2092,6 +3595,15 @@ type StsAccess struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an error that occurred during the subscription process.
+type SubscriptionError struct {
+
+	// A human-readable message that describes the subscription error.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the compatible system versions that can be used with a
 // specific Exadata shape and Grid Infrastructure (GI) version.
 type SystemVersionSummary struct {
@@ -2105,6 +3617,17 @@ type SystemVersionSummary struct {
 	// The Exadata system versions that are compatible with the specified Exadata
 	// shape and GI version.
 	SystemVersions []string
+
+	noSmithyDocumentSerde
+}
+
+// The transportable tablespace configuration used when creating an Autonomous
+// Database.
+type TransportableTablespace struct {
+
+	// The URL of the transportable tablespace bundle to use when creating the
+	// Autonomous Database.
+	TtsBundleUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -2139,3 +3662,16 @@ type ZeroEtlAccess struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEncryptionKeyConfiguration()      {}
+func (*UnknownUnionMember) isEncryptionKeyConfigurationInput() {}
+func (*UnknownUnionMember) isSourceConfiguration()             {}

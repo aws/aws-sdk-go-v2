@@ -6978,6 +6978,10 @@ type FlowLog struct {
 	// The ID of the resource being monitored.
 	ResourceId *string
 
+	// The tag configuration associated with the Flow Logs Amazon EC2 Tags feature
+	// fields in your custom log format.
+	TagFieldSpecifications []TagFieldSpecificationResponse
+
 	// The tags for the flow log.
 	Tags []Tag
 
@@ -22483,6 +22487,36 @@ type TagDescription struct {
 	noSmithyDocumentSerde
 }
 
+// A single resource's tag configuration associated with the Flow Logs Amazon EC2
+// Tags feature fields in your custom log format.
+type TagFieldSpecificationRequest struct {
+
+	// The resource type for the tag keys associated with the Flow Logs Amazon EC2
+	// Tags feature fields in your custom log format.
+	ResourceType TaggableResourceType
+
+	// The tag keys on your tagged resources to be displayed by the Flow Logs Amazon
+	// EC2 Tags feature fields in your custom log format.
+	TagKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// A single resource's tag configuration associated with the Flow Logs Amazon EC2
+// Tags feature fields in your custom log format.
+type TagFieldSpecificationResponse struct {
+
+	// The resource type for the tag keys associated with the Flow Logs Amazon EC2
+	// Tags feature fields in your custom log format.
+	ResourceType TaggableResourceType
+
+	// The tag keys on your tagged resources to be displayed by the Flow Logs Amazon
+	// EC2 Tags feature fields in your custom log format.
+	TagKeys []string
+
+	noSmithyDocumentSerde
+}
+
 // The tags to apply to a resource when the resource is being created. When you
 // specify a tag, you must specify the resource type to tag, otherwise the request
 // will fail.
@@ -25102,10 +25136,6 @@ type VolumeModification struct {
 
 	// The current modification state.
 	ModificationState VolumeModificationState
-
-	// Describes whether the resource is managed by a service provider and, if so,
-	// describes the service provider that manages it.
-	Operator *OperatorResponse
 
 	// The original IOPS rate of the volume.
 	OriginalIops *int32

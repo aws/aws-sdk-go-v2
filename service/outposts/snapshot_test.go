@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRenewal(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRenewal(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_DeleteOutpost(t *testing.T) {
 	_, err := svc.DeleteOutpost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOutpost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +278,18 @@ func TestCheckSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRenewalPricing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRenewalPricing(context.Background(), nil, func(o *Options) {
@@ -350,6 +386,18 @@ func TestCheckSnapshot_ListCatalogItems(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOrderableInstanceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrderableInstanceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOrderableInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListOrders(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOrders(context.Background(), nil, func(o *Options) {
@@ -367,6 +415,18 @@ func TestCheckSnapshot_ListOutposts(t *testing.T) {
 	_, err := svc.ListOutposts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListOutposts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,6 +530,18 @@ func TestCheckSnapshot_UpdateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSite(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSite(context.Background(), nil, func(o *Options) {
@@ -553,6 +625,18 @@ func TestUpdateSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRenewal(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRenewal(context.Background(), nil, func(o *Options) {
@@ -582,6 +666,18 @@ func TestUpdateSnapshot_DeleteOutpost(t *testing.T) {
 	_, err := svc.DeleteOutpost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOutpost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -697,6 +793,18 @@ func TestUpdateSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRenewalPricing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRenewalPricing(context.Background(), nil, func(o *Options) {
@@ -793,6 +901,18 @@ func TestUpdateSnapshot_ListCatalogItems(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOrderableInstanceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrderableInstanceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOrderableInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListOrders(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOrders(context.Background(), nil, func(o *Options) {
@@ -810,6 +930,18 @@ func TestUpdateSnapshot_ListOutposts(t *testing.T) {
 	_, err := svc.ListOutposts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListOutposts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -906,6 +1038,18 @@ func TestUpdateSnapshot_UpdateOutpost(t *testing.T) {
 	_, err := svc.UpdateOutpost(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateOutpost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQuote")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

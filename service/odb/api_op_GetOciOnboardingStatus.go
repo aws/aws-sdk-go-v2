@@ -34,8 +34,21 @@ type GetOciOnboardingStatusInput struct {
 
 type GetOciOnboardingStatusOutput struct {
 
+	// The list of Amazon Web Services Identity and Access Management (IAM) service
+	// roles used for Autonomous Database integration with Oracle Cloud Infrastructure
+	// (OCI).
+	AutonomousDatabaseOciIntegrationIamRoles []types.OciIamRole
+
 	// The existing OCI tenancy activation link for your Amazon Web Services account.
 	ExistingTenancyActivationLink *string
+
+	// The unique identifier of the Oracle Cloud Infrastructure (OCI) compartment that
+	// is linked to your Amazon Web Services account.
+	LinkedOciCompartmentId *string
+
+	// The unique identifier of the Oracle Cloud Infrastructure (OCI) tenancy that is
+	// linked to your Amazon Web Services account.
+	LinkedOciTenancyId *string
 
 	// A new OCI tenancy activation link for your Amazon Web Services account.
 	NewTenancyActivationLink *string
@@ -46,6 +59,10 @@ type GetOciOnboardingStatusOutput struct {
 
 	//
 	Status types.OciOnboardingStatus
+
+	// The list of errors that occurred during the subscription process for your
+	// Amazon Web Services account, if any.
+	SubscriptionErrors []types.SubscriptionError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

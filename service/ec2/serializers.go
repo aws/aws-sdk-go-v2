@@ -64146,6 +64146,53 @@ func awsEc2query_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
+func awsEc2query_serializeDocumentTagFieldSpecificationListRequest(v []types.TagFieldSpecificationRequest, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentTagFieldSpecificationRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentTagFieldSpecificationRequest(v *types.TagFieldSpecificationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ResourceType) > 0 {
+		objectKey := object.Key("ResourceType")
+		objectKey.String(string(v.ResourceType))
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.FlatKey("TagKey")
+		if err := awsEc2query_serializeDocumentTagKeyList(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentTagKeyList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -68399,6 +68446,13 @@ func awsEc2query_serializeOpDocumentCreateFlowLogsInput(v *CreateFlowLogsInput, 
 	if len(v.ResourceType) > 0 {
 		objectKey := object.Key("ResourceType")
 		objectKey.String(string(v.ResourceType))
+	}
+
+	if v.TagFieldSpecifications != nil {
+		objectKey := object.FlatKey("TagFieldSpecification")
+		if err := awsEc2query_serializeDocumentTagFieldSpecificationListRequest(v.TagFieldSpecifications, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TagSpecifications != nil {

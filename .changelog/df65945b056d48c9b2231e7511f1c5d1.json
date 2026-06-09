@@ -1,0 +1,8 @@
+{
+    "id": "df65945b-056d-48c9-b223-1e7511f1c5d1",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/timestreamwrite"
+    ]
+}

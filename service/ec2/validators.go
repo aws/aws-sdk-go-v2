@@ -14913,9 +14913,6 @@ func validateOpCreateCapacityReservationFleetInput(v *CreateCapacityReservationF
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCapacityReservationFleetInput"}
-	if v.InstanceTypeSpecifications == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceTypeSpecifications"))
-	}
 	if v.TotalTargetCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TotalTargetCapacity"))
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "cf2c0fb0-b347-4399-a6a8-77d40b765690",
+    "type": "feature",
+    "description": "Added TagFieldSpecifications to CreateFlowLogs and DescribeFlowLogs APIs. Customers can now specify tag keys in their Flow Logs subscriptions to capture associated EC2 resource tag values in their logs, enabling tag-based visibility.",
+    "modules": [
+        "service/ec2"
+    ]
+}

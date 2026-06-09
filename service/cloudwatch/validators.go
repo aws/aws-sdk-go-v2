@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateDatasetKmsKey struct {
+}
+
+func (*validateOpAssociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlarmMuteRule struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpDisableInsightRules) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateDatasetKmsKey struct {
+}
+
+func (*validateOpDisassociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableAlarmActions struct {
 }
 
@@ -305,6 +345,26 @@ func (m *validateOpGetDashboard) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataset struct {
+}
+
+func (*validateOpGetDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +810,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDatasetKmsKey{}, middleware.After)
+}
+
 func addOpDeleteAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlarmMuteRule{}, middleware.After)
 }
@@ -794,6 +858,10 @@ func addOpDisableInsightRulesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisableInsightRules{}, middleware.After)
 }
 
+func addOpDisassociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateDatasetKmsKey{}, middleware.After)
+}
+
 func addOpEnableAlarmActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableAlarmActions{}, middleware.After)
 }
@@ -808,6 +876,10 @@ func addOpGetAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDashboard{}, middleware.After)
+}
+
+func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataset{}, middleware.After)
 }
 
 func addOpGetInsightRuleReportValidationMiddleware(stack *middleware.Stack) error {
@@ -1465,6 +1537,24 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateOpAssociateDatasetKmsKeyInput(v *AssociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAlarmMuteRuleInput(v *DeleteAlarmMuteRuleInput) error {
 	if v == nil {
 		return nil
@@ -1652,6 +1742,21 @@ func validateOpDisableInsightRulesInput(v *DisableInsightRulesInput) error {
 	}
 }
 
+func validateOpDisassociateDatasetKmsKeyInput(v *DisassociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableAlarmActionsInput(v *EnableAlarmActionsInput) error {
 	if v == nil {
 		return nil
@@ -1704,6 +1809,21 @@ func validateOpGetDashboardInput(v *GetDashboardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardInput"}
 	if v.DashboardName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDatasetInput(v *GetDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -17,6 +17,55 @@ import (
 	"time"
 )
 
+type smithyRpcv2cbor_deserializeOpAssociateDatasetKmsKey struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpAssociateDatasetKmsKey) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpAssociateDatasetKmsKey) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorAssociateDatasetKmsKey(resp)
+	}
+
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
+		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	}
+
+	out.Result = &AssociateDatasetKmsKeyOutput{}
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpDeleteAlarmMuteRule struct {
 }
 
@@ -831,6 +880,55 @@ func (m *smithyRpcv2cbor_deserializeOpDisableInsightRules) HandleDeserialize(ctx
 	return out, metadata, nil
 }
 
+type smithyRpcv2cbor_deserializeOpDisassociateDatasetKmsKey struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpDisassociateDatasetKmsKey) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpDisassociateDatasetKmsKey) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorDisassociateDatasetKmsKey(resp)
+	}
+
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
+		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	}
+
+	out.Result = &DisassociateDatasetKmsKeyOutput{}
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpEnableAlarmActions struct {
 }
 
@@ -1066,6 +1164,71 @@ func (m *smithyRpcv2cbor_deserializeOpGetDashboard) HandleDeserialize(ctx contex
 	}
 
 	output, err := deserializeCBOR_GetDashboardOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
+type smithyRpcv2cbor_deserializeOpGetDataset struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpGetDataset) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpGetDataset) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorGetDataset(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &GetDatasetOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_GetDatasetOutput(cv)
 	if err != nil {
 		return out, metadata, err
 	}
@@ -4397,6 +4560,72 @@ func deserializeCBOR_InvalidParameterValueException(v smithycbor.Value) (*types.
 	return ds, nil
 }
 
+func deserializeCBOR_KmsAccessDeniedException(v smithycbor.Value) (*types.KmsAccessDeniedException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KmsAccessDeniedException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KmsKeyDisabledException(v smithycbor.Value) (*types.KmsKeyDisabledException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KmsKeyDisabledException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KmsKeyNotFoundException(v smithycbor.Value) (*types.KmsKeyNotFoundException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KmsKeyNotFoundException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_LimitExceededException(v smithycbor.Value) (*types.LimitExceededException, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -6547,6 +6776,50 @@ func deserializeCBOR_GetDashboardOutput(v smithycbor.Value) (*GetDashboardOutput
 	return ds, nil
 }
 
+func deserializeCBOR_GetDatasetOutput(v smithycbor.Value) (*GetDatasetOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetDatasetOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "DatasetId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DatasetId = ptr.String(dv)
+		}
+
+		if key == "Arn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Arn = ptr.String(dv)
+		}
+
+		if key == "KmsKeyArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.KmsKeyArn = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_GetInsightRuleReportOutput(v smithycbor.Value) (*GetInsightRuleReportOutput, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -7145,6 +7418,97 @@ func deserializeCBOR_PutMetricStreamOutput(v smithycbor.Value) (*PutMetricStream
 	}
 	return ds, nil
 }
+func rpc2_deserializeOpErrorAssociateDatasetKmsKey(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ConflictException":
+		verr, err := deserializeCBOR_ConflictException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ConflictException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "KmsAccessDeniedException":
+		verr, err := deserializeCBOR_KmsAccessDeniedException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#KmsAccessDeniedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "KmsKeyDisabledException":
+		verr, err := deserializeCBOR_KmsKeyDisabledException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#KmsKeyDisabledException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "KmsKeyNotFoundException":
+		verr, err := deserializeCBOR_KmsKeyNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#KmsKeyNotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "ResourceNotFoundException":
+		verr, err := deserializeCBOR_ResourceNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ResourceNotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
 func rpc2_deserializeOpErrorDeleteAlarmMuteRule(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -7882,6 +8246,61 @@ func rpc2_deserializeOpErrorDisableInsightRules(resp *smithyhttp.Response) error
 	}
 }
 
+func rpc2_deserializeOpErrorDisassociateDatasetKmsKey(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ConflictException":
+		verr, err := deserializeCBOR_ConflictException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ConflictException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	case "ResourceNotFoundException":
+		verr, err := deserializeCBOR_ResourceNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ResourceNotFoundException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
 func rpc2_deserializeOpErrorEnableAlarmActions(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -8076,6 +8495,49 @@ func rpc2_deserializeOpErrorGetDashboard(resp *smithyhttp.Response) error {
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#InvalidParameterValueException: %w", err),
+				Snapshot: payload,
+			}
+		}
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			verr.ErrorCodeOverride = ptr.String(qtype)
+		}
+		return verr
+	default:
+		if qtype := getAwsQueryErrorCode(resp); len(qtype) > 0 {
+			typ = qtype
+		}
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
+func rpc2_deserializeOpErrorGetDataset(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "ResourceNotFoundException":
+		verr, err := deserializeCBOR_ResourceNotFoundException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.cloudwatch#ResourceNotFoundException: %w", err),
 				Snapshot: payload,
 			}
 		}

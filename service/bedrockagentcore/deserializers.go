@@ -3268,6 +3268,9 @@ func awsRestjson1_deserializeOpErrorGetAgentCard(response *smithyhttp.Response, 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("RetryableConflictException", errorCode):
+		return awsRestjson1_deserializeErrorRetryableConflictException(response, errorBody)
+
 	case strings.EqualFold("RuntimeClientError", errorCode):
 		return awsRestjson1_deserializeErrorRuntimeClientError(response, errorBody)
 
@@ -6506,6 +6509,9 @@ func awsRestjson1_deserializeOpErrorInvokeAgentRuntimeCommand(response *smithyht
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("RetryableConflictException", errorCode):
+		return awsRestjson1_deserializeErrorRetryableConflictException(response, errorBody)
 
 	case strings.EqualFold("RuntimeClientError", errorCode):
 		return awsRestjson1_deserializeErrorRuntimeClientError(response, errorBody)

@@ -173,6 +173,91 @@ func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
+// ListActionsPaginatorOptions is the paginator options for ListActions
+type ListActionsPaginatorOptions struct {
+	// The maximum number of results to return for each paginated request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListActionsPaginator is a paginator for ListActions
+type ListActionsPaginator struct {
+	options   ListActionsPaginatorOptions
+	client    ListActionsAPIClient
+	params    *ListActionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListActionsPaginator returns a new ListActionsPaginator
+func NewListActionsPaginator(client ListActionsAPIClient, params *ListActionsInput, optFns ...func(*ListActionsPaginatorOptions)) *ListActionsPaginator {
+	if params == nil {
+		params = &ListActionsInput{}
+	}
+
+	options := ListActionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListActionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListActionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListActions page.
+func (p *ListActionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListActionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListActions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 type endpointPrefix_opListActionsMiddleware struct {
 }
 
@@ -199,6 +284,13 @@ func (m *endpointPrefix_opListActionsMiddleware) HandleFinalize(ctx context.Cont
 func addEndpointPrefix_opListActionsMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opListActionsMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
+
+// ListActionsAPIClient is a client that implements the ListActions operation.
+type ListActionsAPIClient interface {
+	ListActions(context.Context, *ListActionsInput, ...func(*Options)) (*ListActionsOutput, error)
+}
+
+var _ ListActionsAPIClient = (*Client)(nil)
 
 func newServiceMetadataMiddleware_opListActions(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{

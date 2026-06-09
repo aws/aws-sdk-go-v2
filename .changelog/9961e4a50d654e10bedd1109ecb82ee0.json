@@ -1,0 +1,8 @@
+{
+    "id": "9961e4a5-0d65-4e10-bedd-1109ecb82ee0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}
