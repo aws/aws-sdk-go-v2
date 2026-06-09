@@ -569,6 +569,66 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#AssociateDatasetKmsKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#KmsAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#KmsKeyDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#KmsKeyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an Amazon Web Services Key Management Service (Amazon Web Services KMS)\n            customer managed key with the specified dataset. After this operation completes, all\n            data published to the dataset is encrypted at rest using the specified KMS key.\n            Callers must have <code>kms:Decrypt</code> permission on the key to read the\n            encrypted data.</p>\n         <p>Only the <code>default</code> dataset is supported. The <code>default</code> dataset\n            is implicit for every account in every Region — you do not need to create it before\n            calling this operation.</p>\n         <p>You can call <code>AssociateDatasetKmsKey</code> on a dataset that is already\n            associated with a KMS key to replace the existing key with a different one. To replace\n            a key, the caller must have <code>kms:Decrypt</code> permission on both the current\n            key and the new key.</p>\n         <p>The KMS key that you specify must meet all of the following requirements:</p>\n         <ul>\n            <li>\n               <p>It must be a symmetric encryption KMS key (key spec\n                    <code>SYMMETRIC_DEFAULT</code>, key usage <code>ENCRYPT_DECRYPT</code>).\n                    Asymmetric keys, HMAC keys, and key material types other than\n                    <code>SYMMETRIC_DEFAULT</code> are not supported.</p>\n            </li>\n            <li>\n               <p>It must be enabled and not pending deletion.</p>\n            </li>\n            <li>\n               <p>Its key policy must grant the CloudWatch service principal\n                    (<code>cloudwatch.amazonaws.com</code>) these permissions:\n                    <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,\n                    <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and\n                    <code>kms:ReEncrypt*</code>. Amazon CloudWatch requires these permissions\n                    to manage the data on your behalf.</p>\n            </li>\n            <li>\n               <p>The calling principal must have <code>kms:Decrypt</code> permission on the\n                    key.</p>\n            </li>\n            <li>\n               <p>It must be specified as a fully qualified key ARN. Key IDs, aliases, and\n                    alias ARNs are not accepted.</p>\n            </li>\n            <li>\n               <p>It must be in the same Amazon Web Services Region as the dataset.</p>\n            </li>\n         </ul>\n         <p>Before completing the association, Amazon CloudWatch validates the key by\n            performing a series of dry-run KMS operations. Service-principal checks run first to\n            verify that the key policy grants the required access to Amazon CloudWatch. These\n            checks include <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,\n            <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and <code>kms:ReEncrypt*</code>.\n            After those succeed, a <code>kms:Decrypt</code> dry-run is run with the caller's\n            credentials to verify that the calling principal can use the key. When you are\n            replacing an existing key, the caller's <code>kms:Decrypt</code> dry-run is run on\n            the current key first, and only then on the new key.</p>\n         <p>If any of these checks fails, the operation fails and the existing key association\n            (if any) remains unchanged. Common failure causes include the key being disabled, the\n            key policy not granting the required permissions to Amazon CloudWatch, or the\n            caller lacking <code>kms:Decrypt</code> permission on the key.</p>\n         <p>For more information about using customer managed keys with Amazon CloudWatch,\n            see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html\">Encryption at rest\n                with customer managed keys</a> in the <i>Amazon CloudWatch User\n                Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyInput": {
+            "type": "structure",
+            "members": {
+                "DatasetIdentifier": {
+                    "target": "com.amazonaws.cloudwatch#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the identifier of the dataset that you want to associate the KMS key\n            with. For the <code>default</code> dataset, you can specify either\n            <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format\n            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.cloudwatch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the customer managed KMS key to\n            associate with the dataset. The key must be a symmetric encryption KMS key\n            (<code>SYMMETRIC_DEFAULT</code>) in the same Amazon Web Services Region as the\n            dataset.</p>\n         <p>The ARN must be in the format\n            <code>arn:aws:kms:<i>Region</i>:<i>account-id</i>:key/<i>key-id</i>\n            </code>.\n            Key IDs, aliases, and alias ARNs are not accepted.</p>\n         <p>For more information about KMS key ARNs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">Key ARN</a> in\n            the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#AssociateDatasetKmsKeyOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#AttributeName": {
             "type": "string",
             "traits": {
@@ -1042,6 +1102,36 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9-]+:cloudwatch:[a-zA-Z0-9-]*:\\d{12}:dataset/default$"
+            }
+        },
+        "com.amazonaws.cloudwatch#DatasetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 7
+                },
+                "smithy.api#pattern": "^default$"
+            }
+        },
+        "com.amazonaws.cloudwatch#DatasetIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(default|arn:[a-zA-Z0-9-]+:cloudwatch:[a-zA-Z0-9-]*:\\d{12}:dataset/default)$"
             }
         },
         "com.amazonaws.cloudwatch#DeleteAlarmMuteRule": {
@@ -2054,6 +2144,50 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudwatch#DisassociateDatasetKmsKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the customer managed Amazon Web Services Key Management Service\n            (Amazon Web Services KMS) key association from the specified dataset. After this\n            operation completes, data that you publish to the dataset is encrypted at rest using\n            an Amazon Web Services owned key managed by Amazon CloudWatch.</p>\n         <p>Only the <code>default</code> dataset is supported. To call this operation, the\n            dataset must currently have a customer managed KMS key associated with it. If the\n            dataset has no associated KMS key, the operation fails with\n            <code>ResourceNotFoundException</code>.</p>\n         <p>Amazon CloudWatch performs a dry-run <code>kms:Decrypt</code> call on the key\n            as part of this operation. This verifies that the caller is authorized to use the\n            currently associated key. The caller must have <code>kms:Decrypt</code> permission on\n            the currently associated key, and the key must be enabled and accessible. If the key\n            has been disabled or scheduled for deletion, you must first re-enable or restore it\n            before you can disassociate it from the dataset.</p>\n         <important>\n            <p>Disassociating a KMS key from a dataset does not immediately remove the\n                <code>kms:Decrypt</code> requirement on data plane operations. For up to three\n                hours after disassociation, callers must continue to have\n                <code>kms:Decrypt</code> permission on the previously associated key. Some data\n                may still be encrypted with that key during this window. After this enforcement\n                window elapses, the <code>kms:Decrypt</code> requirement is lifted.</p>\n         </important>\n         <p>For more information about using customer managed keys with Amazon CloudWatch,\n            see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html\">Encryption at rest\n                with customer managed keys</a> in the <i>Amazon CloudWatch User\n                Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyInput": {
+            "type": "structure",
+            "members": {
+                "DatasetIdentifier": {
+                    "target": "com.amazonaws.cloudwatch#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the identifier of the dataset from which to remove the KMS key\n            association. For the <code>default</code> dataset, you can specify either\n            <code>default</code> or the full dataset Amazon Resource Name (ARN) in the format\n            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#DisassociateDatasetKmsKeyOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatch#Duration": {
             "type": "string",
             "traits": {
@@ -2545,6 +2679,70 @@
                     "target": "com.amazonaws.cloudwatch#DashboardName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#GetDatasetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#GetDatasetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified dataset. This includes its identifier,\n            Amazon Resource Name (ARN), and any customer managed Amazon Web Services Key\n            Management Service (Amazon Web Services KMS) key that is currently associated with\n            it.</p>\n         <p>Only the <code>default</code> dataset is supported. The <code>default</code> dataset\n            is implicit for every account in every Region — you can call <code>GetDataset</code>\n            for it without first creating it. If no customer managed KMS key has been associated\n            with the dataset, the response omits the <code>KmsKeyArn</code> field, indicating that\n            data is encrypted at rest using an Amazon Web Services owned key managed by\n            Amazon CloudWatch.</p>\n         <p>To associate a customer managed KMS key with a dataset, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html\">AssociateDatasetKmsKey</a>. To remove the association, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisassociateDatasetKmsKey.html\">DisassociateDatasetKmsKey</a>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetDatasetInput": {
+            "type": "structure",
+            "members": {
+                "DatasetIdentifier": {
+                    "target": "com.amazonaws.cloudwatch#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the identifier of the dataset to retrieve. For the <code>default</code>\n            dataset, you can specify either <code>default</code> or the full dataset Amazon\n            Resource Name (ARN) in the format\n            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/default</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatch#GetDatasetOutput": {
+            "type": "structure",
+            "members": {
+                "DatasetId": {
+                    "target": "com.amazonaws.cloudwatch#DatasetId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Returns the identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.cloudwatch#DatasetArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Returns the Amazon Resource Name (ARN) of the dataset, in the format\n            <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:dataset/<i>dataset-id</i>\n            </code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.cloudwatch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Amazon Resource Name (ARN) of the customer managed Amazon Web Services\n            KMS key that is currently associated with the dataset, if any. If the dataset is not\n            associated with a customer managed KMS key, this field is not included in the\n            response and the dataset is encrypted at rest using an Amazon Web Services owned\n            key.</p>"
                     }
                 }
             },
@@ -3118,6 +3316,9 @@
             "version": "2010-08-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.cloudwatch#AssociateDatasetKmsKey"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#DeleteAlarmMuteRule"
                 },
                 {
@@ -3160,6 +3361,9 @@
                     "target": "com.amazonaws.cloudwatch#DisableInsightRules"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#DisassociateDatasetKmsKey"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#EnableAlarmActions"
                 },
                 {
@@ -3170,6 +3374,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#GetDashboard"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#GetDataset"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#GetInsightRuleReport"
@@ -4699,6 +4906,64 @@
                 "smithy.api#documentation": "<p>The value of an input parameter is bad or out-of-range.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudwatch#KmsAccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudwatch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation was denied because either the calling principal lacks the required\n            Amazon Web Services Key Management Service (Amazon Web Services KMS) permission on the\n            key, or the key policy does not grant Amazon CloudWatch the permissions it needs\n            to use the key. Verify that the caller has <code>kms:Decrypt</code> permission on the\n            key, and that the key policy grants the CloudWatch service principal the\n            <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>,\n            <code>kms:Encrypt</code>, <code>kms:Decrypt</code>, and <code>kms:ReEncrypt*</code>\n            permissions described in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html\">AssociateDatasetKmsKey</a>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.cloudwatch#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\\d{12}:key/[a-f0-9-]+$"
+            }
+        },
+        "com.amazonaws.cloudwatch#KmsKeyDisabledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudwatch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key\n            is disabled or pending deletion. Re-enable the key (or restore it, if it is pending\n            deletion) and retry the operation.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.cloudwatch#KmsKeyNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudwatch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified Amazon Web Services Key Management Service (Amazon Web Services KMS) key\n            could not be found. Verify that the key Amazon Resource Name (ARN) is correct, that\n            the key exists, and that it is in the same Amazon Web Services Region as the\n            resource.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.cloudwatch#LabelOptions": {
@@ -7813,6 +8078,9 @@
         },
         "com.amazonaws.cloudwatch#StrictEntityValidation": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatch#String": {
+            "type": "string"
         },
         "com.amazonaws.cloudwatch#SuppressorPeriod": {
             "type": "integer"

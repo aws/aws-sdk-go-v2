@@ -750,6 +750,32 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#CapacitySummary": {
+            "type": "structure",
+            "members": {
+                "ExistingCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The existing capacities on the Outpost before the quote is fulfilled.</p>"
+                    }
+                },
+                "FinalCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final capacities on the Outpost after the quote is fulfilled.</p>"
+                    }
+                },
+                "CapacityChange": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change in capacity between the existing and final state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the capacity changes for a quote option.</p>"
+            }
+        },
         "com.amazonaws.outposts#CapacityTaskFailure": {
             "type": "structure",
             "members": {
@@ -1204,6 +1230,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9+/=]{1,1024}$"
             }
         },
+        "com.amazonaws.outposts#ConstraintValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S \\n]+$"
+            }
+        },
         "com.amazonaws.outposts#ContactName": {
             "type": "string",
             "traits": {
@@ -1415,6 +1451,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#CreateQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#CreateQuoteInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#CreateQuoteOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a quote for an Outpost. A quote provides pricing and configuration options based\n      on the requested capacity. You can optionally associate the quote with an existing Outpost or\n      create a standalone quote by specifying only the country code and requested capacities.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/quotes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#CreateQuoteInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost to associate with the quote. If not specified, the quote is\n      created without an Outpost association.</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.outposts#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code for the Outpost site location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity requirements for the quote. Each entry specifies a capacity type (such as\n      Amazon EC2), the unit, and the quantity. For Amazon EC2, the quantity is the number of additional\n      instances to add to the Outpost. For Amazon EBS and Amazon S3, the quantity is the total desired\n      end-state capacity of the Outpost.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedConstraints": {
+                    "target": "com.amazonaws.outposts#QuoteConstraintList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The physical constraints for the quote, such as maximum number of racks, maximum power\n      draw per rack, or maximum weight per rack.</p>"
+                    }
+                },
+                "RequestedPaymentOptions": {
+                    "target": "com.amazonaws.outposts#PaymentOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment options to include in the quote pricing. If not specified, all available\n      payment options are returned.</p>"
+                    }
+                },
+                "RequestedPaymentTerms": {
+                    "target": "com.amazonaws.outposts#PaymentTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment terms to include in the quote pricing. If not specified, all available\n      payment terms are returned.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.outposts#QuoteDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the quote.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#CreateQuoteOutput": {
+            "type": "structure",
+            "members": {
+                "Quote": {
+                    "target": "com.amazonaws.outposts#Quote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quote.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#CreateRenewal": {
             "type": "operation",
             "input": {
@@ -1514,6 +1647,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The monthly recurring price of the renewal.</p>"
                     }
+                },
+                "Currency": {
+                    "target": "com.amazonaws.outposts#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency of the renewal price.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1612,6 +1751,17 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#CurrencyCode": {
+            "type": "enum",
+            "members": {
+                "USD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USD"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#DecommissionRequestStatus": {
             "type": "enum",
             "members": {
@@ -1692,6 +1842,60 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#DeleteQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#DeleteQuoteInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#DeleteQuoteOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified quote.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/quotes/{QuoteIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#DeleteQuoteInput": {
+            "type": "structure",
+            "members": {
+                "QuoteIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#DeleteQuoteOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#DeleteSite": {
             "type": "operation",
             "input": {
@@ -1747,6 +1951,51 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#DetailedInstanceTypeItem": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.outposts#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type.</p>"
+                    }
+                },
+                "VCPUs": {
+                    "target": "com.amazonaws.outposts#VCPUCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of default VCPUs in the instance type.</p>"
+                    }
+                },
+                "MemoryInMib": {
+                    "target": "com.amazonaws.outposts#MemoryInMib",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The memory size of the instance type, in MiB.</p>"
+                    }
+                },
+                "NetworkPerformance": {
+                    "target": "com.amazonaws.outposts#NetworkPerformance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network performance of the instance type.</p>"
+                    }
+                },
+                "FormFactorConfigs": {
+                    "target": "com.amazonaws.outposts#FormFactorConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported form factor and Outpost generation configurations for the instance\n      type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an instance type that can be ordered for an Outpost, including\n      hardware specifications and supported form factors.</p>"
+            }
+        },
+        "com.amazonaws.outposts#DetailedInstanceTypeListDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#DetailedInstanceTypeItem"
             }
         },
         "com.amazonaws.outposts#DeviceSerialNumber": {
@@ -1830,7 +2079,7 @@
                     "min": 1,
                     "max": 10
                 },
-                "smithy.api#pattern": "^[a-z0-9]+$"
+                "smithy.api#pattern": "^[a-z0-9]+[a-z0-9-]*[a-z0-9]+$"
             }
         },
         "com.amazonaws.outposts#FiberOpticCableType": {
@@ -1848,6 +2097,49 @@
                         "smithy.api#enumValue": "MULTI_MODE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.outposts#FormFactor": {
+            "type": "enum",
+            "members": {
+                "RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACK"
+                    }
+                },
+                "SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#FormFactorConfig": {
+            "type": "structure",
+            "members": {
+                "FormFactor": {
+                    "target": "com.amazonaws.outposts#FormFactor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form factor. Valid values are <code>RACK</code> for rack-based Outposts and\n      <code>SERVER</code> for server-based Outposts.</p>"
+                    }
+                },
+                "OutpostGeneration": {
+                    "target": "com.amazonaws.outposts#OutpostGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Outpost generation. Valid values are <code>GENERATION_1</code> for first-generation\n      rack deployments and <code>GENERATION_2</code> for second-generation rack deployments. This\n      value is not set for server form factors.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A supported form factor and Outpost generation configuration for an instance type.</p>"
+            }
+        },
+        "com.amazonaws.outposts#FormFactorConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#FormFactorConfig"
             }
         },
         "com.amazonaws.outposts#GetCapacityTask": {
@@ -2505,6 +2797,67 @@
                 },
                 "NextToken": {
                     "target": "com.amazonaws.outposts#Token"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#GetQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#GetQuoteInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#GetQuoteOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified quote.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/quotes/{QuoteIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#GetQuoteInput": {
+            "type": "structure",
+            "members": {
+                "QuoteIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#GetQuoteOutput": {
+            "type": "structure",
+            "members": {
+                "Quote": {
+                    "target": "com.amazonaws.outposts#Quote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quote.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3590,6 +3943,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#ListOrderableInstanceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListOrderableInstanceTypesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListOrderableInstanceTypesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the instance types that can be ordered for an Outpost. You can filter the results\n      by Outpost generation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/instanceTypes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InstanceTypes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListOrderableInstanceTypesInput": {
+            "type": "structure",
+            "members": {
+                "OutpostGenerationFilter": {
+                    "target": "com.amazonaws.outposts#OutpostGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by Outpost generation. Specify <code>GENERATION_1</code> for\n      first-generation rack deployments or <code>GENERATION_2</code> for second-generation rack\n      deployments.</p>",
+                        "smithy.api#httpQuery": "OutpostGenerationFilter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.outposts#MaxResults1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum page size.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#ListOrderableInstanceTypesOutput": {
+            "type": "structure",
+            "members": {
+                "InstanceTypes": {
+                    "target": "com.amazonaws.outposts#DetailedInstanceTypeListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the instance types that can be ordered for the Outpost.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#ListOrders": {
             "type": "operation",
             "input": {
@@ -3754,6 +4193,79 @@
                 },
                 "NextToken": {
                     "target": "com.amazonaws.outposts#Token"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#ListQuotes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListQuotesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListQuotesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the quotes for your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/quotes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Quotes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListQuotesInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.outposts#MaxResults1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum page size.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#ListQuotesOutput": {
+            "type": "structure",
+            "members": {
+                "Quotes": {
+                    "target": "com.amazonaws.outposts#QuoteSummaryListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quotes.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3971,6 +4483,12 @@
                 }
             }
         },
+        "com.amazonaws.outposts#MemoryInMib": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.outposts#Municipality": {
             "type": "string",
             "traits": {
@@ -3990,6 +4508,9 @@
                     "max": 1
                 }
             }
+        },
+        "com.amazonaws.outposts#NetworkPerformance": {
+            "type": "string"
         },
         "com.amazonaws.outposts#NotFoundException": {
             "type": "structure",
@@ -4171,6 +4692,16 @@
                 "target": "com.amazonaws.outposts#String"
             }
         },
+        "com.amazonaws.outposts#OrderIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^oo-[a-f0-9]{17}$"
+            }
+        },
         "com.amazonaws.outposts#OrderStatus": {
             "type": "enum",
             "members": {
@@ -4315,6 +4846,174 @@
                 }
             }
         },
+        "com.amazonaws.outposts#OrderingRequirement": {
+            "type": "structure",
+            "members": {
+                "StatusMessage": {
+                    "target": "com.amazonaws.outposts#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the ordering requirement.</p>"
+                    }
+                },
+                "OrderingRequirementType": {
+                    "target": "com.amazonaws.outposts#OrderingRequirementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of ordering requirement. Indicates which check failed or passed.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OUTPOST_ACTIVE_CHECK_ERROR</code> - The Outpost must be in\n          an active state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR</code> - The maximum\n          number of allowed orders has been reached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VALID_ZIP_CODE_CHECK_ERROR</code> - The site address must\n          have a valid zip code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RACK_PHYSICAL_PROPERTIES_CHECK_ERROR</code> - The rack\n          physical properties do not meet requirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR</code> - The site\n          must have an operating address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR</code> - The site\n          must have a shipping address.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COUNTRY_CODE_MISMATCH_CHECK_ERROR</code> - The country\n          code on the quote does not match the Outpost site country.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTPOST_GENERATION_MISMATCH_ERROR</code> - The Outpost generation\n          does not match the requested configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTPOST_ID_MISSING_ON_QUOTE_ERROR</code> - The quote must\n          be associated with an Outpost before submitting an order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE_SUPPORT_ERROR</code> - Enterprise Support is\n          required.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR</code> - The\n          shipping address must have a contact name.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR</code> - The\n          shipping address must have a contact phone number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR</code> - The\n          shipping address must have contact information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTPOST_STATE_CHANGED_ERROR</code> - The Outpost state has\n          changed since the quote was created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTPOST_NOT_FOUND_ERROR</code> - The Outpost associated\n          with the quote was not found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OUTPOST_RENEWAL_REQUIRED_ERROR</code> - The Outpost\n          requires a renewal before a new order can be submitted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSUPPORTED</code> - The requirement type is not\n          recognized.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.outposts#OrderingRequirementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ordering requirement. Valid values are <code>PASS</code>,\n      <code>FAIL</code>, and <code>EXEMPT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A requirement that must be met before an order can be submitted for a quote.</p>"
+            }
+        },
+        "com.amazonaws.outposts#OrderingRequirementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#OrderingRequirement"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.outposts#OrderingRequirementStatus": {
+            "type": "enum",
+            "members": {
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL"
+                    }
+                },
+                "EXEMPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXEMPT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#OrderingRequirementType": {
+            "type": "enum",
+            "members": {
+                "OUTPOST_ACTIVE_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_ACTIVE_CHECK_ERROR"
+                    }
+                },
+                "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAXIMUM_ALLOWED_ORDERS_CHECK_ERROR"
+                    }
+                },
+                "VALID_ZIP_CODE_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID_ZIP_CODE_CHECK_ERROR"
+                    }
+                },
+                "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACK_PHYSICAL_PROPERTIES_CHECK_ERROR"
+                    }
+                },
+                "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATING_ADDRESS_EXISTENCE_CHECK_ERROR"
+                    }
+                },
+                "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHIPPING_ADDRESS_EXISTENCE_CHECK_ERROR"
+                    }
+                },
+                "COUNTRY_CODE_MISMATCH_CHECK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNTRY_CODE_MISMATCH_CHECK_ERROR"
+                    }
+                },
+                "OUTPOST_GENERATION_MISMATCH_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_GENERATION_MISMATCH_ERROR"
+                    }
+                },
+                "UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED"
+                    }
+                },
+                "OUTPOST_ID_MISSING_ON_QUOTE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_ID_MISSING_ON_QUOTE_ERROR"
+                    }
+                },
+                "ENTERPRISE_SUPPORT_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE_SUPPORT_ERROR"
+                    }
+                },
+                "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHIPPING_ADDRESS_MISSING_CONTACT_NAME_ERROR"
+                    }
+                },
+                "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHIPPING_ADDRESS_MISSING_CONTACT_NUMBER_ERROR"
+                    }
+                },
+                "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHIPPING_ADDRESS_MISSING_CONTACT_INFO_ERROR"
+                    }
+                },
+                "OUTPOST_STATE_CHANGED_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_STATE_CHANGED_ERROR"
+                    }
+                },
+                "OUTPOST_NOT_FOUND_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_NOT_FOUND_ERROR"
+                    }
+                },
+                "OUTPOST_RENEWAL_REQUIRED_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_RENEWAL_REQUIRED_ERROR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#Outpost": {
             "type": "structure",
             "members": {
@@ -4390,6 +5089,23 @@
                 "smithy.api#pattern": "^[\\S ]*$"
             }
         },
+        "com.amazonaws.outposts#OutpostGeneration": {
+            "type": "enum",
+            "members": {
+                "GENERATION_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATION_2"
+                    }
+                },
+                "GENERATION_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATION_1"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#OutpostId": {
             "type": "string",
             "traits": {
@@ -4418,6 +5134,16 @@
                     "max": 180
                 },
                 "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#OutpostIdentifierOrEmpty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 180
+                },
+                "smithy.api#pattern": "^((arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17})?$"
             }
         },
         "com.amazonaws.outposts#OutpostInstanceType": {
@@ -4464,6 +5190,9 @@
                     "target": "com.amazonaws.outposts#CreateOutpost"
                 },
                 {
+                    "target": "com.amazonaws.outposts#CreateQuote"
+                },
+                {
                     "target": "com.amazonaws.outposts#CreateRenewal"
                 },
                 {
@@ -4471,6 +5200,9 @@
                 },
                 {
                     "target": "com.amazonaws.outposts#DeleteOutpost"
+                },
+                {
+                    "target": "com.amazonaws.outposts#DeleteQuote"
                 },
                 {
                     "target": "com.amazonaws.outposts#DeleteSite"
@@ -4500,6 +5232,9 @@
                     "target": "com.amazonaws.outposts#GetOutpostSupportedInstanceTypes"
                 },
                 {
+                    "target": "com.amazonaws.outposts#GetQuote"
+                },
+                {
                     "target": "com.amazonaws.outposts#GetRenewalPricing"
                 },
                 {
@@ -4524,10 +5259,16 @@
                     "target": "com.amazonaws.outposts#ListCatalogItems"
                 },
                 {
+                    "target": "com.amazonaws.outposts#ListOrderableInstanceTypes"
+                },
+                {
                     "target": "com.amazonaws.outposts#ListOrders"
                 },
                 {
                     "target": "com.amazonaws.outposts#ListOutposts"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ListQuotes"
                 },
                 {
                     "target": "com.amazonaws.outposts#ListSites"
@@ -4552,6 +5293,9 @@
                 },
                 {
                     "target": "com.amazonaws.outposts#UpdateOutpost"
+                },
+                {
+                    "target": "com.amazonaws.outposts#UpdateQuote"
                 },
                 {
                     "target": "com.amazonaws.outposts#UpdateSite"
@@ -5772,6 +6516,18 @@
                 }
             }
         },
+        "com.amazonaws.outposts#PaymentOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#PaymentOption"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.outposts#PaymentTerm": {
             "type": "enum",
             "members": {
@@ -5792,6 +6548,18 @@
                     "traits": {
                         "smithy.api#enumValue": "FIVE_YEARS"
                     }
+                }
+            }
+        },
+        "com.amazonaws.outposts#PaymentTermList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#PaymentTerm"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -5927,6 +6695,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.outposts#PricingOption"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 9
+                }
             }
         },
         "com.amazonaws.outposts#PricingResult": {
@@ -5949,6 +6723,317 @@
         "com.amazonaws.outposts#Quantity": {
             "type": "string"
         },
+        "com.amazonaws.outposts#Quote": {
+            "type": "structure",
+            "members": {
+                "QuoteId": {
+                    "target": "com.amazonaws.outposts#QuoteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.outposts#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account that owns the quote.</p>"
+                    }
+                },
+                "QuoteStatus": {
+                    "target": "com.amazonaws.outposts#QuoteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the quote.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> - The quote has been created and is\n          available for review.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ORDER_SUBMITTED</code> - An order has been submitted for\n          the quote.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code> - The quote has expired and can no longer\n          be used to submit an order.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.outposts#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the status of the quote.</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.outposts#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Outpost associated with the quote.</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.outposts#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code for the Outpost site location.</p>"
+                    }
+                },
+                "RequestedCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity requirements specified in the quote request.</p>"
+                    }
+                },
+                "RequestedConstraints": {
+                    "target": "com.amazonaws.outposts#QuoteConstraintList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The physical constraints specified in the quote request.</p>"
+                    }
+                },
+                "RequestedPaymentOptions": {
+                    "target": "com.amazonaws.outposts#PaymentOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment options specified in the quote request.</p>"
+                    }
+                },
+                "RequestedPaymentTerms": {
+                    "target": "com.amazonaws.outposts#PaymentTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment terms specified in the quote request.</p>"
+                    }
+                },
+                "QuoteOptions": {
+                    "target": "com.amazonaws.outposts#QuoteOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration and pricing options for the quote. Each option includes capacity\n      details, physical specifications, and pricing information.</p>"
+                    }
+                },
+                "OrderingRequirements": {
+                    "target": "com.amazonaws.outposts#OrderingRequirementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requirements that must be met before an order can be submitted for the quote.</p>"
+                    }
+                },
+                "SubmittedOrderId": {
+                    "target": "com.amazonaws.outposts#OrderIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the order submitted for the quote.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the quote was created.</p>"
+                    }
+                },
+                "ExpirationDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the quote expires.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.outposts#QuoteDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the quote.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a quote for an Outpost. A quote provides pricing and configuration\n      options based on the requested capacity.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteCapacity": {
+            "type": "structure",
+            "members": {
+                "QuoteCapacityType": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of capacity. Valid values are <code>EC2</code>, <code>EBS</code>, and\n      <code>S3</code>.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.outposts#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the capacity. For Amazon EC2, this is the instance type (for\n      example, <code>c5.24xlarge</code>). For Amazon EBS and Amazon S3, this is the storage unit (for\n      example, <code>TiB</code> for tebibytes).</p>"
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of the specified capacity unit. For Amazon EC2, this is the number of\n      additional instances to add to the Outpost. For Amazon EBS and Amazon S3, this is the total\n      desired end-state capacity of the Outpost.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A capacity requirement for a quote. Specifies the type of capacity, the unit, and the\n      quantity.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteCapacityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#QuoteCapacity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteCapacityType": {
+            "type": "enum",
+            "members": {
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
+                    }
+                },
+                "EBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteConstraint": {
+            "type": "structure",
+            "members": {
+                "QuoteConstraintType": {
+                    "target": "com.amazonaws.outposts#QuoteConstraintType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of constraint. Valid values are <code>RACK_MAXIMUM</code>,\n      <code>RACK_MAX_POWER_KVA</code>, and <code>RACK_MAX_WEIGHT_LBS</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.outposts#ConstraintValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the constraint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A physical constraint for a quote.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteConstraintList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#QuoteConstraint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteConstraintType": {
+            "type": "enum",
+            "members": {
+                "RACK_MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACK_MAXIMUM"
+                    }
+                },
+                "RACK_MAX_POWER_KVA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACK_MAX_POWER_KVA"
+                    }
+                },
+                "RACK_MAX_WEIGHT_LBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACK_MAX_WEIGHT_LBS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S \\n]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.outposts#QuoteId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^oq-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#QuoteIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:quote/)?oq-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#QuoteOption": {
+            "type": "structure",
+            "members": {
+                "QuoteOptionIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteOptionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote option.</p>"
+                    }
+                },
+                "Capacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacities included in this quote option.</p>"
+                    }
+                },
+                "CapacitySummary": {
+                    "target": "com.amazonaws.outposts#CapacitySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the existing, final, and changed capacity for this quote option.</p>"
+                    }
+                },
+                "Specifications": {
+                    "target": "com.amazonaws.outposts#QuoteSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The physical specifications for the racks or servers in this quote option.</p>"
+                    }
+                },
+                "PricingOptions": {
+                    "target": "com.amazonaws.outposts#PricingOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing options for this quote option.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration and pricing option for a quote. Each option includes the capacity\n      breakdown, physical specifications for the racks or servers, and pricing details.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteOptionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^oqo-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#QuoteOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#QuoteOption"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.outposts#QuotePricingType": {
             "type": "enum",
             "members": {
@@ -5957,6 +7042,229 @@
                     "traits": {
                         "smithy.api#enumValue": "SUBSCRIPTION"
                     }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteRackUseType": {
+            "type": "enum",
+            "members": {
+                "NETWORKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORKING"
+                    }
+                },
+                "COMPUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteSpecification": {
+            "type": "structure",
+            "members": {
+                "QuoteSpecificationType": {
+                    "target": "com.amazonaws.outposts#QuoteSpecificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of specification. Valid values are <code>NEW_RACK</code>,\n      <code>UPDATED_RACK</code>, <code>EXISTING_RACK</code>, and <code>SERVER</code>.</p>"
+                    }
+                },
+                "ExistingRackSpecificationDetails": {
+                    "target": "com.amazonaws.outposts#RackSpecificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The existing rack specification details, if the specification type is\n      <code>UPDATED_RACK</code> or <code>EXISTING_RACK</code>.</p>"
+                    }
+                },
+                "FinalRackSpecificationDetails": {
+                    "target": "com.amazonaws.outposts#RackSpecificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final rack specification details after the quote is fulfilled.</p>"
+                    }
+                },
+                "ServerSpecificationDetails": {
+                    "target": "com.amazonaws.outposts#ServerSpecificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server specification details, if the specification type is\n      <code>SERVER</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A physical specification for a quote option. Describes the rack or server configuration\n      that would be deployed.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#QuoteSpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteSpecificationType": {
+            "type": "enum",
+            "members": {
+                "UPDATED_RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED_RACK"
+                    }
+                },
+                "NEW_RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_RACK"
+                    }
+                },
+                "EXISTING_RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXISTING_RACK"
+                    }
+                },
+                "SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "ORDER_SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORDER_SUBMITTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#QuoteSummary": {
+            "type": "structure",
+            "members": {
+                "QuoteId": {
+                    "target": "com.amazonaws.outposts#QuoteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.outposts#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account that owns the quote.</p>"
+                    }
+                },
+                "QuoteStatus": {
+                    "target": "com.amazonaws.outposts#QuoteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the quote.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.outposts#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about the status of the quote.</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.outposts#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Outpost associated with the quote.</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.outposts#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code for the Outpost site location.</p>"
+                    }
+                },
+                "RequestedCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity requirements specified in the quote request.</p>"
+                    }
+                },
+                "RequestedConstraints": {
+                    "target": "com.amazonaws.outposts#QuoteConstraintList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The physical constraints specified in the quote request.</p>"
+                    }
+                },
+                "RequestedPaymentOptions": {
+                    "target": "com.amazonaws.outposts#PaymentOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment options specified in the quote request.</p>"
+                    }
+                },
+                "RequestedPaymentTerms": {
+                    "target": "com.amazonaws.outposts#PaymentTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment terms specified in the quote request.</p>"
+                    }
+                },
+                "QuoteOptions": {
+                    "target": "com.amazonaws.outposts#QuoteOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration and pricing options for the quote.</p>"
+                    }
+                },
+                "SubmittedOrderId": {
+                    "target": "com.amazonaws.outposts#OrderIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the order submitted for the quote.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the quote was created.</p>"
+                    }
+                },
+                "ExpirationDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the quote expires.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.outposts#QuoteDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the quote.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a quote.</p>"
+            }
+        },
+        "com.amazonaws.outposts#QuoteSummaryListDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#QuoteSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
                 }
             }
         },
@@ -6041,6 +7349,91 @@
                 "smithy.api#documentation": "<p> Information about the physical and logistical details for racks at sites.\n      For more information\n      about hardware requirements for racks, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist\">Network \n        readiness checklist</a> in the Amazon Web Services Outposts User Guide.\n        </p>"
             }
         },
+        "com.amazonaws.outposts#RackSpecificationDetails": {
+            "type": "structure",
+            "members": {
+                "RackId": {
+                    "target": "com.amazonaws.outposts#RackId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rack.</p>"
+                    }
+                },
+                "RackUse": {
+                    "target": "com.amazonaws.outposts#QuoteRackUseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use of the rack. Valid values are <code>COMPUTE</code> and\n      <code>NETWORKING</code>.</p>"
+                    }
+                },
+                "RackPowerDrawKva": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum power draw of the rack in kVA.</p>"
+                    }
+                },
+                "RackWeightLbs": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the rack in pounds.</p>"
+                    }
+                },
+                "RackHeightInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of the rack in inches.</p>"
+                    }
+                },
+                "RackWidthInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the rack in inches.</p>"
+                    }
+                },
+                "RackDepthInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The depth of the rack in inches.</p>"
+                    }
+                },
+                "RackUnitHeight": {
+                    "target": "com.amazonaws.outposts#RackUnitHeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rack unit height.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEIGHT_42U</code> - 42 rack units.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEIGHT_2U</code> - 2 rack units.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEIGHT_1U</code> - 1 rack unit.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EC2Capacities": {
+                    "target": "com.amazonaws.outposts#EC2CapacityListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 capacities for the rack.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The physical specification details for a rack in a quote option.</p>"
+            }
+        },
+        "com.amazonaws.outposts#RackUnitHeight": {
+            "type": "enum",
+            "members": {
+                "HEIGHT_42U": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEIGHT_42U"
+                    }
+                },
+                "HEIGHT_2U": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEIGHT_2U"
+                    }
+                },
+                "HEIGHT_1U": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEIGHT_1U"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#RequestedInstancePools": {
             "type": "list",
             "member": {
@@ -6072,6 +7465,56 @@
                     "max": 21
                 },
                 "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{1,5}$"
+            }
+        },
+        "com.amazonaws.outposts#ServerSpecificationDetails": {
+            "type": "structure",
+            "members": {
+                "ServerPowerDrawKva": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum power draw of the server in kVA.</p>"
+                    }
+                },
+                "ServerWeightLbs": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the server in pounds.</p>"
+                    }
+                },
+                "ServerHeightInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of the server in inches.</p>"
+                    }
+                },
+                "ServerWidthInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the server in inches.</p>"
+                    }
+                },
+                "ServerDepthInches": {
+                    "target": "com.amazonaws.outposts#NullableFloat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The depth of the server in inches.</p>"
+                    }
+                },
+                "RackUnitHeight": {
+                    "target": "com.amazonaws.outposts#RackUnitHeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rack unit height of the server.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HEIGHT_2U</code> - 2 rack units.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HEIGHT_1U</code> - 1 rack unit.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EC2Capacities": {
+                    "target": "com.amazonaws.outposts#EC2CapacityListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 capacities for the server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The physical specification details for a server in a quote option.</p>"
             }
         },
         "com.amazonaws.outposts#ServiceQuotaExceededException": {
@@ -6632,6 +8075,16 @@
                 }
             }
         },
+        "com.amazonaws.outposts#StatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S \\n]+$"
+            }
+        },
         "com.amazonaws.outposts#String": {
             "type": "string",
             "traits": {
@@ -6679,6 +8132,12 @@
                     "target": "com.amazonaws.outposts#ISO8601Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date your subscription ends.</p>"
+                    }
+                },
+                "Currency": {
+                    "target": "com.amazonaws.outposts#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency of the subscription price. Currently only <code>USD</code> is\n      supported.</p>"
                     }
                 },
                 "MonthlyRecurringPrice": {
@@ -6729,6 +8188,12 @@
                     "target": "com.amazonaws.outposts#NullableFloat",
                     "traits": {
                         "smithy.api#documentation": "<p>The monthly recurring price.</p>"
+                    }
+                },
+                "Currency": {
+                    "target": "com.amazonaws.outposts#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currency of the price. Currently only <code>USD</code> is supported.</p>"
                     }
                 }
             },
@@ -7119,6 +8584,109 @@
             "members": {
                 "Outpost": {
                     "target": "com.amazonaws.outposts#Outpost"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#UpdateQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#UpdateQuoteInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#UpdateQuoteOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified quote. You can modify the requested capacities, constraints,\n      payment options, payment terms, or Outpost association.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/quotes/{QuoteIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#UpdateQuoteInput": {
+            "type": "structure",
+            "members": {
+                "QuoteIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifierOrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost to associate with the quote. Specify an empty string to\n      remove the Outpost association.</p>"
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.outposts#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code for the Outpost site location.</p>"
+                    }
+                },
+                "RequestedCapacities": {
+                    "target": "com.amazonaws.outposts#QuoteCapacityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated capacity requirements for the quote.</p>"
+                    }
+                },
+                "RequestedConstraints": {
+                    "target": "com.amazonaws.outposts#QuoteConstraintList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated physical constraints for the quote.</p>"
+                    }
+                },
+                "RequestedPaymentOptions": {
+                    "target": "com.amazonaws.outposts#PaymentOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated payment options to include in the quote pricing.</p>"
+                    }
+                },
+                "RequestedPaymentTerms": {
+                    "target": "com.amazonaws.outposts#PaymentTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated payment terms to include in the quote pricing.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.outposts#QuoteDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the quote.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#UpdateQuoteOutput": {
+            "type": "structure",
+            "members": {
+                "Quote": {
+                    "target": "com.amazonaws.outposts#Quote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the updated quote.</p>"
+                    }
                 }
             },
             "traits": {

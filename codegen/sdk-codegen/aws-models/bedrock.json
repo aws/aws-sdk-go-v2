@@ -481,6 +481,9 @@
                     "target": "com.amazonaws.bedrock#CustomModelResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#DataRetentionResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource"
                 },
                 {
@@ -8229,6 +8232,49 @@
                 "smithy.api#documentation": "<p>For a Distillation job, the status details for the data processing sub-task of the job.</p>"
             }
         },
+        "com.amazonaws.bedrock#DataRetentionMode": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "PROVIDER_DATA_SHARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provider_data_share"
+                    }
+                },
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inherit"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data retention mode for the account. Valid values are:</p> <ul> <li> <p> <code>default</code> – The standard data handling for the model applies.</p> </li> <li> <p> <code>none</code> – Zero data retention.</p> </li> <li> <p> <code>provider_data_share</code> – Data may be shared with the model provider.</p> </li> <li> <p> <code>inherit</code> – No data retention mode is set at this scope.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#GetAccountDataRetention"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutAccountDataRetention"
+                }
+            ]
+        },
         "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicy": {
             "type": "operation",
             "input": {
@@ -10695,6 +10741,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details for response generation based on retrieved text chunks.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode configured for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob": {
@@ -20925,6 +21031,74 @@
                     "target": "com.amazonaws.bedrock#UpdateProvisionedModelThroughput"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode to set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration": {
             "type": "operation",

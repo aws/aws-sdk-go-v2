@@ -5873,6 +5873,9 @@
                     "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#RetryableConflictException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#RuntimeClientError"
                 },
                 {
@@ -9216,6 +9219,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#RetryableConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#RuntimeClientError"
