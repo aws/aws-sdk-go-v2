@@ -1,3 +1,7 @@
+# v1.12.0 (2026-06-09)
+
+* **Feature**: Releases Autonomous Database Serverless APIs, autonomousDatabaseOciIntegrationIamRoles, linkedOciTenancyId, linkedOciCompartmentId, and subscriptionErrors fields in GetOciOnboardingStatus API response.
+
 # v1.11.7 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

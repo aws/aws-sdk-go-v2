@@ -1,8 +1,0 @@
-{
-    "id": "cac03414-4b94-463b-82cb-8e322498a873",
-    "type": "feature",
-    "description": "Releases Autonomous Database Serverless APIs, autonomousDatabaseOciIntegrationIamRoles, linkedOciTenancyId, linkedOciCompartmentId, and subscriptionErrors fields in GetOciOnboardingStatus API response.",
-    "modules": [
-        "service/odb"
-    ]
-}

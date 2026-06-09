@@ -1,3 +1,32 @@
+# Release (2026-06-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.64.0](service/bedrock/CHANGELOG.md#v1640-2026-06-09)
+  * **Feature**: Adds support for the Amazon Bedrock account-level data retention APIs PutAccountDataRetention and GetAccountDataRetention.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.29.0](service/bedrockagentcore/CHANGELOG.md#v1290-2026-06-09)
+  * **Feature**: Add RetryableConflictException (HTTP 409) to InvokeAgentRuntimeCommand and GetAgentCard to prevent orphaned VMs during concurrent session access. The SDK automatically retries this exception with backoff. Enforcement is not yet active and will be enabled in a future service update.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.59.0](service/cloudwatch/CHANGELOG.md#v1590-2026-06-09)
+  * **Feature**: This release adds the APIs (AssociateDatasetKmsKey, DisassociateDatasetKmsKey, GetDataset) to manage encryption at rest for OpenTelemetry metrics in CloudWatch using AWS KMS customer managed keys.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.34.0](service/dynamodbstreams/CHANGELOG.md#v1340-2026-06-09)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.306.0](service/ec2/CHANGELOG.md#v13060-2026-06-09)
+  * **Feature**: Added TagFieldSpecifications to CreateFlowLogs and DescribeFlowLogs APIs. Customers can now specify tag keys in their Flow Logs subscriptions to capture associated EC2 resource tag values in their logs, enabling tag-based visibility.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.53.0](service/iotsitewise/CHANGELOG.md#v1530-2026-06-09)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.31.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1310-2026-06-09)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.12.0](service/odb/CHANGELOG.md#v1120-2026-06-09)
+  * **Feature**: Releases Autonomous Database Serverless APIs, autonomousDatabaseOciIntegrationIamRoles, linkedOciTenancyId, linkedOciCompartmentId, and subscriptionErrors fields in GetOciOnboardingStatus API response.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.61.0](service/outposts/CHANGELOG.md#v1610-2026-06-09)
+  * **Feature**: Added AWS Outposts APIs for self-service Outposts quoting and ordering. New operations include CreateQuote, GetQuote, UpdateQuote, DeleteQuote, ListQuotes, and ListOrderableInstanceTypes.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.37.0](service/timestreamquery/CHANGELOG.md#v1370-2026-06-09)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.36.0](service/timestreamwrite/CHANGELOG.md#v1360-2026-06-09)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-06-08)
 
 ## General Highlights

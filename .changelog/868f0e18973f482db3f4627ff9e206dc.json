@@ -1,8 +1,0 @@
-{
-    "id": "868f0e18-973f-482d-b3f4-627ff9e206dc",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/timestreamquery"
-    ]
-}

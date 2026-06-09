@@ -1,3 +1,7 @@
+# v1.29.0 (2026-06-09)
+
+* **Feature**: Add RetryableConflictException (HTTP 409) to InvokeAgentRuntimeCommand and GetAgentCard to prevent orphaned VMs during concurrent session access. The SDK automatically retries this exception with backoff. Enforcement is not yet active and will be enabled in a future service update.
+
 # v1.28.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

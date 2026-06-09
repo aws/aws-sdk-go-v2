@@ -1,3 +1,7 @@
+# v1.64.0 (2026-06-09)
+
+* **Feature**: Adds support for the Amazon Bedrock account-level data retention APIs PutAccountDataRetention and GetAccountDataRetention.
+
 # v1.63.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

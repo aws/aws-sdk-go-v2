@@ -1,3 +1,7 @@
+# v1.306.0 (2026-06-09)
+
+* **Feature**: Added TagFieldSpecifications to CreateFlowLogs and DescribeFlowLogs APIs. Customers can now specify tag keys in their Flow Logs subscriptions to capture associated EC2 resource tag values in their logs, enabling tag-based visibility.
+
 # v1.305.3 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
