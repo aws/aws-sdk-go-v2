@@ -120,12 +120,9 @@ type CreateEndpointConfigInput struct {
 	//
 	// Certain Nitro-based instances include local storage, dependent on the instance
 	// type. Local storage volumes are encrypted using a hardware module on the
-	// instance. You can't request a KmsKeyId when using an instance type with local
-	// storage. If any of the models that you specify in the ProductionVariants
-	// parameter use nitro-based instances with local storage, do not specify a value
-	// for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any
-	// nitro-based instances with local storage, the call to CreateEndpointConfig
-	// fails.
+	// instance. If any of the models that you specify in the ProductionVariants
+	// parameter use nitro-based instances with local storage, the KmsKeyId parameter
+	// does not encrypt instance local storage.
 	//
 	// For a list of instance types that support local instance storage, see [Instance Store Volumes].
 	//

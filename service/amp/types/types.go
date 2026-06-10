@@ -919,8 +919,16 @@ type WorkspaceConfigurationDescription struct {
 	// for the workspace and the limits for that label set.
 	LimitsPerLabelSet []LimitsPerLabelSet
 
+	// This field displays the out of order time window in seconds for accepting out
+	// of order samples.
+	OutOfOrderTimeWindowInSeconds *int32
+
 	// This field displays how many days that metrics are retained in the workspace.
 	RetentionPeriodInDays *int32
+
+	// This field displays the duration in seconds that rule evaluation queries are
+	// offset into the past.
+	RuleQueryOffsetInSeconds *int32
 
 	noSmithyDocumentSerde
 }

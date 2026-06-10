@@ -238,6 +238,18 @@ type MedicalScribeAudioEvent struct {
 	noSmithyDocumentSerde
 }
 
+// An event containing raw binary audio data for the Medical Scribe stream. The
+// audio is sent as a raw binary payload rather than as a base64-encoded value.
+type MedicalScribeBinaryAudioEvent struct {
+
+	// The raw binary audio data chunk
+	//
+	// This member is required.
+	AudioChunk []byte
+
+	noSmithyDocumentSerde
+}
+
 // Defines a channel in the audio stream
 type MedicalScribeChannelDefinition struct {
 
@@ -276,6 +288,7 @@ type MedicalScribeConfigurationEvent struct {
 // The following types satisfy this interface:
 //
 //	MedicalScribeInputStreamMemberAudioEvent
+//	MedicalScribeInputStreamMemberBinaryAudioEvent
 //	MedicalScribeInputStreamMemberConfigurationEvent
 //	MedicalScribeInputStreamMemberSessionControlEvent
 type MedicalScribeInputStream interface {
@@ -289,6 +302,16 @@ type MedicalScribeInputStreamMemberAudioEvent struct {
 }
 
 func (*MedicalScribeInputStreamMemberAudioEvent) isMedicalScribeInputStream() {}
+
+// An event containing raw binary audio data for the Medical Scribe stream. The
+// audio is sent as a raw binary payload rather than as a base64-encoded value.
+type MedicalScribeInputStreamMemberBinaryAudioEvent struct {
+	Value MedicalScribeBinaryAudioEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeInputStreamMemberBinaryAudioEvent) isMedicalScribeInputStream() {}
 
 type MedicalScribeInputStreamMemberConfigurationEvent struct {
 	Value MedicalScribeConfigurationEvent

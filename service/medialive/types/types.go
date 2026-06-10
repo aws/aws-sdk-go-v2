@@ -395,13 +395,36 @@ type AudioLanguageSelection struct {
 // Audio Normalization Settings
 type AudioNormalizationSettings struct {
 
-	// Audio normalization algorithm to use. itu17701 conforms to the CALM Act
-	// specification, itu17702 conforms to the EBU R-128 specification.
+	// Choose one of the following audio normalization algorithms:
+	//
+	// ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness
+	// for an entire piece of content, suitable for measurement of short-form content
+	// under ATSC recommendation A/85. Supports up to 5.1 audio channels.
+	//
+	// ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness
+	// compliant with the requirements of EBU-R128. Supports up to 5.1 audio channels.
+	//
+	// ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as
+	// 1770-2, with an updated true peak measurement.
+	//
+	// ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the
+	// other algorithms, including configurations such as 7.1.
 	Algorithm AudioNormalizationAlgorithm
 
 	// When set to correctAudio the output audio is corrected using the chosen
 	// algorithm. If set to measureOnly, the audio will be measured but not adjusted.
 	AlgorithmControl AudioNormalizationAlgorithmControl
+
+	// If set to TRUE_PEAK, calculate the TruePeak for each output's audio track
+	// loudness.
+	PeakCalculation AudioNormalizationPeakCalculation
+
+	// Peak limiter threshold in decibels relative to true peak (dBTP) if TRUE_PEAK is
+	// enabled. If TRUE_PEAK is not enabled a full scale (dbFS) value is used. The peak
+	// inter-audio sample loudness in your output will be limited to the value that you
+	// specify, without affecting the overall target LKFS. Leave blank to use the
+	// default value 0.
+	PeakLimiterThreshold *float64
 
 	// Target LKFS(loudness) to adjust volume to. If no value is entered, a default
 	// value will be used according to the chosen algorithm. The CALM Act recommends a
@@ -450,6 +473,30 @@ type AudioOnlyHlsSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single PID value for audio selection with optional pre-mixer
+// settings
+type AudioPid struct {
+
+	// PID value from within a source.
+	//
+	// This member is required.
+	Pid *int32
+
+	// Configure decoding options for Dolby E streams - these should be Dolby E frames
+	// carried in PCM streams tagged with SMPTE-337. When using the 'pids' array, if
+	// this field is not specified and Dolby E content is present, the decoder will
+	// extract the specified program. To maintain legacy behavior (allPrograms),
+	// explicitly set programSelection to "allChannels".
+	DolbyEDecode *AudioDolbyEDecode
+
+	// Optional audio pre-mixer settings for this PID. When specified, allows per-PID
+	// audio processing including channel remixing, gain adjustment, and loudness
+	// normalization before interleaving.
+	PremixSettings *AudioPreMixerSettings
+
+	noSmithyDocumentSerde
+}
+
 // Audio Pid Selection
 type AudioPidSelection struct {
 
@@ -457,6 +504,33 @@ type AudioPidSelection struct {
 	//
 	// This member is required.
 	Pid *int32
+
+	// Selects one or more unique PIDs from within a source. When using 'pids', you
+	// can specify per-PID audio pre-mixer settings.
+	Pids []AudioPid
+
+	noSmithyDocumentSerde
+}
+
+// Audio pre-mixer settings for normalizing audio before interleaving. These
+// settings can be applied to individual PIDs or tracks before they are combined.
+type AudioPreMixerSettings struct {
+
+	// Audio normalization settings for loudness control. When specified, audio
+	// loudness will be normalized according to the chosen algorithm.
+	AudioNormalizationSettings *AudioNormalizationSettings
+
+	// Number of audio channels. If specified, the audio will be remixed to match this
+	// channel count. Ignored if remixSettings is specified.
+	Channels *int32
+
+	// Gain adjustment in dB to apply. Range: -60 to +60 dB
+	GainDb *float64
+
+	// Settings that control how input audio channels are remixed. When specified,
+	// allows fine-grained control over channel mapping and gain levels. Takes
+	// precedence over the 'channels' setting.
+	RemixSettings *RemixSettings
 
 	noSmithyDocumentSerde
 }
@@ -512,13 +586,18 @@ type AudioSilenceFailoverSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Audio Track
+// Represents a single audio track for selection with optional pre-mixer settings
 type AudioTrack struct {
 
 	// 1-based integer value that maps to a specific audio track
 	//
 	// This member is required.
 	Track *int32
+
+	// Optional audio pre-mixer settings for this track. When specified, allows
+	// per-track audio processing including channel remixing, gain adjustment, and
+	// loudness normalization before interleaving.
+	PremixSettings *AudioPreMixerSettings
 
 	noSmithyDocumentSerde
 }

@@ -2389,6 +2389,23 @@ func validate__listOfAudioDescription(v []types.AudioDescription) error {
 	}
 }
 
+func validate__listOfAudioPid(v []types.AudioPid) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioPid"}
+	for i := range v {
+		if err := validateAudioPid(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfAudioSelector(v []types.AudioSelector) error {
 	if v == nil {
 		return nil
@@ -2927,6 +2944,31 @@ func validateAudioOnlyHlsSettings(v *types.AudioOnlyHlsSettings) error {
 	}
 }
 
+func validateAudioPid(v *types.AudioPid) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioPid"}
+	if v.DolbyEDecode != nil {
+		if err := validateAudioDolbyEDecode(v.DolbyEDecode); err != nil {
+			invalidParams.AddNested("DolbyEDecode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Pid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pid"))
+	}
+	if v.PremixSettings != nil {
+		if err := validateAudioPreMixerSettings(v.PremixSettings); err != nil {
+			invalidParams.AddNested("PremixSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAudioPidSelection(v *types.AudioPidSelection) error {
 	if v == nil {
 		return nil
@@ -2934,6 +2976,28 @@ func validateAudioPidSelection(v *types.AudioPidSelection) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AudioPidSelection"}
 	if v.Pid == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Pid"))
+	}
+	if v.Pids != nil {
+		if err := validate__listOfAudioPid(v.Pids); err != nil {
+			invalidParams.AddNested("Pids", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioPreMixerSettings(v *types.AudioPreMixerSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioPreMixerSettings"}
+	if v.RemixSettings != nil {
+		if err := validateRemixSettings(v.RemixSettings); err != nil {
+			invalidParams.AddNested("RemixSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3016,6 +3080,11 @@ func validateAudioTrack(v *types.AudioTrack) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AudioTrack"}
 	if v.Track == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Track"))
+	}
+	if v.PremixSettings != nil {
+		if err := validateAudioPreMixerSettings(v.PremixSettings); err != nil {
+			invalidParams.AddNested("PremixSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

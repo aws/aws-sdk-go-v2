@@ -25515,6 +25515,40 @@ func awsRestjson1_deserializeDocument__listOfAudioFeedInput(v *[]types.AudioFeed
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAudioPid(v *[]types.AudioPid, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioPid
+	if *v == nil {
+		cv = []types.AudioPid{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioPid
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioPid(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioSelector(v *[]types.AudioSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29278,6 +29312,49 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				sv.AlgorithmControl = types.AudioNormalizationAlgorithmControl(jtv)
 			}
 
+		case "peakCalculation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioNormalizationPeakCalculation to be of type string, got %T instead", value)
+				}
+				sv.PeakCalculation = types.AudioNormalizationPeakCalculation(jtv)
+			}
+
+		case "peakLimiterThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PeakLimiterThreshold = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PeakLimiterThreshold = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative8Max0 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "targetLkfs":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -29384,6 +29461,60 @@ func awsRestjson1_deserializeDocumentAudioOnlyHlsSettings(v **types.AudioOnlyHls
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioPid(v **types.AudioPid, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioPid
+	if *v == nil {
+		sv = &types.AudioPid{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dolbyEDecode":
+			if err := awsRestjson1_deserializeDocumentAudioDolbyEDecode(&sv.DolbyEDecode, value); err != nil {
+				return err
+			}
+
+		case "pid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max8191 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Pid = ptr.Int32(int32(i64))
+			}
+
+		case "premixSettings":
+			if err := awsRestjson1_deserializeDocumentAudioPreMixerSettings(&sv.PremixSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioPidSelection(v **types.AudioPidSelection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29417,6 +29548,99 @@ func awsRestjson1_deserializeDocumentAudioPidSelection(v **types.AudioPidSelecti
 					return err
 				}
 				sv.Pid = ptr.Int32(int32(i64))
+			}
+
+		case "pids":
+			if err := awsRestjson1_deserializeDocument__listOfAudioPid(&sv.Pids, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioPreMixerSettings(v **types.AudioPreMixerSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioPreMixerSettings
+	if *v == nil {
+		sv = &types.AudioPreMixerSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioNormalizationSettings":
+			if err := awsRestjson1_deserializeDocumentAudioNormalizationSettings(&sv.AudioNormalizationSettings, value); err != nil {
+				return err
+			}
+
+		case "channels":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max16 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Channels = ptr.Int32(int32(i64))
+			}
+
+		case "gainDb":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.GainDb = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.GainDb = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative60Max60 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "remixSettings":
+			if err := awsRestjson1_deserializeDocumentRemixSettings(&sv.RemixSettings, value); err != nil {
+				return err
 			}
 
 		default:
@@ -29599,6 +29823,11 @@ func awsRestjson1_deserializeDocumentAudioTrack(v **types.AudioTrack, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "premixSettings":
+			if err := awsRestjson1_deserializeDocumentAudioPreMixerSettings(&sv.PremixSettings, value); err != nil {
+				return err
+			}
+
 		case "track":
 			if value != nil {
 				jtv, ok := value.(json.Number)

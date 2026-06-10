@@ -10363,6 +10363,19 @@ func awsRestjson1_deserializeDocumentWorkspaceConfigurationDescription(v **types
 				return err
 			}
 
+		case "outOfOrderTimeWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutOfOrderTimeWindowInSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "retentionPeriodInDays":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10374,6 +10387,19 @@ func awsRestjson1_deserializeDocumentWorkspaceConfigurationDescription(v **types
 					return err
 				}
 				sv.RetentionPeriodInDays = ptr.Int32(int32(i64))
+			}
+
+		case "ruleQueryOffsetInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RuleQueryOffsetInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "status":

@@ -49,8 +49,16 @@ type UpdateWorkspaceConfigurationInput struct {
 	// sets. Each label name in a label set must be unique.
 	LimitsPerLabelSet []types.LimitsPerLabelSet
 
+	// Specifies the time window in seconds for accepting out of order samples. Out of
+	// order samples older than this window are rejected.
+	OutOfOrderTimeWindowInSeconds *int32
+
 	// Specifies how many days that metrics will be retained in the workspace.
 	RetentionPeriodInDays *int32
+
+	// Specifies the duration in seconds to offset rule evaluation queries into the
+	// past. This allows ingested samples to be available before rule evaluation.
+	RuleQueryOffsetInSeconds *int32
 
 	noSmithyDocumentSerde
 }

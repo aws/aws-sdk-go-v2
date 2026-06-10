@@ -1,0 +1,8 @@
+{
+    "id": "40de402c-8955-421c-903a-32922920fb89",
+    "type": "feature",
+    "description": "This release adds support for AMI Watermark which a structured identifier that helps in tracking AMI provenance",
+    "modules": [
+        "service/ec2"
+    ]
+}
