@@ -1,8 +1,0 @@
-{
-    "id": "75548abd-efc4-4684-9b0a-604db098f416",
-    "type": "feature",
-    "description": "AWS Sign-In now allows customers to control access to the AWS Management Console using resource-based policies. With this release customers can restrict console access based on network perimeters such as VPC IDs, VPC endpoints, and IP addresses.",
-    "modules": [
-        "service/signin"
-    ]
-}

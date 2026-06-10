@@ -1,3 +1,7 @@
+# v1.254.0 (2026-06-10)
+
+* **Feature**: Add support for G6e instances (ml.g6e.xlarge through ml.g6e.48xlarge) on Amazon SageMaker Notebook Instances.
+
 # v1.253.1 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

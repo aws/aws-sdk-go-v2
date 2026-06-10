@@ -1,8 +1,0 @@
-{
-    "id": "ad81478e-d5b4-4d42-9262-0797338f7a25",
-    "type": "feature",
-    "description": "Amazon ECS Managed Daemon task definitions now support pidMode and ipcMode parameters. Set shared to allow daemons to share PID or IPC namespaces with co-located tasks on Managed Instances, enabling process tracing and shared memory communication.",
-    "modules": [
-        "service/ecs"
-    ]
-}

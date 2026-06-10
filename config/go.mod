@@ -4,9 +4,9 @@ go 1.24
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.42.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.23
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.24
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.29
-	github.com/aws/aws-sdk-go-v2/service/signin v1.1.5
+	github.com/aws/aws-sdk-go-v2/service/signin v1.2.0
 	github.com/aws/aws-sdk-go-v2/service/sso v1.31.3
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.36.6
 	github.com/aws/aws-sdk-go-v2/service/sts v1.43.3

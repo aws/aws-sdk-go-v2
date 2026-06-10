@@ -1,8 +1,0 @@
-{
-    "id": "479b3882-e9d2-4546-a7f7-498a2b8f25d3",
-    "type": "feature",
-    "description": "Adding premixer settings to pid and track audio inputs in MediaLIve to allow greater control over mixing audio from multiple source streams including support for AudioPidSelectors made up of multiple audio PIDs.",
-    "modules": [
-        "service/medialive"
-    ]
-}

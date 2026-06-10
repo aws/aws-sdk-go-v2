@@ -1,8 +1,0 @@
-{
-    "id": "f33680e9-2904-4ec2-a338-f2ab87da2b74",
-    "type": "feature",
-    "description": "Add support for G6e instances (ml.g6e.xlarge through ml.g6e.48xlarge) on Amazon SageMaker Notebook Instances.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

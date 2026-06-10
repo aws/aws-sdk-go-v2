@@ -1,3 +1,26 @@
+# Release (2026-06-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.44.0](service/amp/CHANGELOG.md#v1440-2026-06-10)
+  * **Feature**: Adds supports for out-of-order sample ingestion (default 1-minute window) and a configurable rule query offset to reduce data loss and improve alerting accuracy.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.3.0](service/connecthealth/CHANGELOG.md#v130-2026-06-10)
+  * **Feature**: Add support for MedicalScribeBinaryAudioEvent in the Medical Scribe streaming input. This new event type lets you send audio as a raw binary payload instead of a base64-encoded value
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.307.0](service/ec2/CHANGELOG.md#v13070-2026-06-10)
+  * **Feature**: This release adds support for AMI Watermark which a structured identifier that helps in tracking AMI provenance
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.83.0](service/ecs/CHANGELOG.md#v1830-2026-06-10)
+  * **Feature**: Amazon ECS Managed Daemon task definitions now support pidMode and ipcMode parameters. Set shared to allow daemons to share PID or IPC namespaces with co-located tasks on Managed Instances, enabling process tracing and shared memory communication.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.56.0](service/lightsail/CHANGELOG.md#v1560-2026-06-10)
+  * **Feature**: This release adds support for Asia Pacific (Hong Kong) (ap-east-1), Europe (Spain) (eu-south-2) and South America (Sao Paulo) (sa-east-1) Regions.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.99.0](service/medialive/CHANGELOG.md#v1990-2026-06-10)
+  * **Feature**: Adding premixer settings to pid and track audio inputs in MediaLIve to allow greater control over mixing audio from multiple source streams including support for AudioPidSelectors made up of multiple audio PIDs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.254.0](service/sagemaker/CHANGELOG.md#v12540-2026-06-10)
+  * **Feature**: Add support for G6e instances (ml.g6e.xlarge through ml.g6e.48xlarge) on Amazon SageMaker Notebook Instances.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.2.0](service/signin/CHANGELOG.md#v120-2026-06-10)
+  * **Feature**: AWS Sign-In now allows customers to control access to the AWS Management Console using resource-based policies. With this release customers can restrict console access based on network perimeters such as VPC IDs, VPC endpoints, and IP addresses.
+
 # Release (2026-06-09)
 
 ## General Highlights

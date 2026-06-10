@@ -1,8 +1,0 @@
-{
-    "id": "3e791b58-6cec-4327-a676-82e38596de98",
-    "type": "feature",
-    "description": "Add support for MedicalScribeBinaryAudioEvent in the Medical Scribe streaming input. This new event type lets you send audio as a raw binary payload instead of a base64-encoded value",
-    "modules": [
-        "service/connecthealth"
-    ]
-}
