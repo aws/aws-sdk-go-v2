@@ -1,0 +1,8 @@
+{
+    "id": "ef607a73-d3b7-4710-b3c5-49eebfe05fe3",
+    "type": "feature",
+    "description": "Supports deterministic metadata for AgentCore Memory",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

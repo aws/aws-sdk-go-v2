@@ -12,19 +12,10 @@ import (
 	"time"
 )
 
-// Adds examples to the dataset's DRAFT.
+//	Adds examples to the dataset's DRAFT. All examples are validated against the
 //
-// Validation: All examples are validated against the dataset's schemaType before
-// any writes occur. If any example fails validation, the entire batch is rejected
-// with ValidationException — no examples are written (all-or-nothing semantics).
-//
-// Asynchronous: Operates in-place on DRAFT. No version bump occurs. Use
-// CreateDatasetVersion to publish DRAFT as a new numbered version.
-//
-// State guard: Returns ConflictException (DATASET_NOT_READY) if the dataset
-// status is not in {DRAFT, ACTIVE}.
-//
-// Request size limit: Max 5 MB total request body. Max 1000 examples per call.
+// dataset's schema type before any writes occur. If any example fails validation,
+// the entire batch is rejected (all-or-nothing semantics).
 func (c *Client) AddDatasetExamples(ctx context.Context, params *AddDatasetExamplesInput, optFns ...func(*Options)) (*AddDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &AddDatasetExamplesInput{}
@@ -47,8 +38,8 @@ type AddDatasetExamplesInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Source of examples to add. Provide either inline examples or an S3 URI pointing
-	// to a JSONL file.
+	//  Source of examples to add. Provide either inline examples or an S3 URI
+	// pointing to a JSONL file.
 	//
 	// This member is required.
 	Source types.DataSourceType
@@ -81,7 +72,7 @@ type AddDatasetExamplesOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// IDs of all added examples (auto-generated UUIDs).
+	//  IDs of all added examples (auto-generated UUIDs).
 	//
 	// This member is required.
 	ExampleIds []string

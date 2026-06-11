@@ -217,6 +217,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateFHIRDatastore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFHIRDatastore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFHIRDatastore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFHIRDatastore(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFHIRDatastore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFHIRDatastore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFHIRDatastore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -2,6 +2,33 @@
 
 package types
 
+type AnalyticsStatus string
+
+// Enum values for AnalyticsStatus
+const (
+	AnalyticsStatusEnabled   AnalyticsStatus = "ENABLED"
+	AnalyticsStatusEnabling  AnalyticsStatus = "ENABLING"
+	AnalyticsStatusDisabled  AnalyticsStatus = "DISABLED"
+	AnalyticsStatusDisabling AnalyticsStatus = "DISABLING"
+	AnalyticsStatusPausing   AnalyticsStatus = "PAUSING"
+	AnalyticsStatusPaused    AnalyticsStatus = "PAUSED"
+)
+
+// Values returns all known values for AnalyticsStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsStatus) Values() []AnalyticsStatus {
+	return []AnalyticsStatus{
+		"ENABLED",
+		"ENABLING",
+		"DISABLED",
+		"DISABLING",
+		"PAUSING",
+		"PAUSED",
+	}
+}
+
 type AuthorizationStrategy string
 
 // Enum values for AuthorizationStrategy
@@ -51,6 +78,8 @@ const (
 	DatastoreStatusDeleting     DatastoreStatus = "DELETING"
 	DatastoreStatusDeleted      DatastoreStatus = "DELETED"
 	DatastoreStatusCreateFailed DatastoreStatus = "CREATE_FAILED"
+	DatastoreStatusUpdating     DatastoreStatus = "UPDATING"
+	DatastoreStatusUpdateFailed DatastoreStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for DatastoreStatus. Note that this can be
@@ -64,6 +93,8 @@ func (DatastoreStatus) Values() []DatastoreStatus {
 		"DELETING",
 		"DELETED",
 		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
 	}
 }
 
@@ -135,6 +166,29 @@ func (JobStatus) Values() []JobStatus {
 		"CANCEL_IN_PROGRESS",
 		"CANCEL_COMPLETED",
 		"CANCEL_FAILED",
+	}
+}
+
+type NlpStatus string
+
+// Enum values for NlpStatus
+const (
+	NlpStatusEnabled   NlpStatus = "ENABLED"
+	NlpStatusDisabled  NlpStatus = "DISABLED"
+	NlpStatusEnabling  NlpStatus = "ENABLING"
+	NlpStatusDisabling NlpStatus = "DISABLING"
+)
+
+// Values returns all known values for NlpStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NlpStatus) Values() []NlpStatus {
+	return []NlpStatus{
+		"ENABLED",
+		"DISABLED",
+		"ENABLING",
+		"DISABLING",
 	}
 }
 

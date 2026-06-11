@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all published versions of a dataset, sorted by version number descending
-// (newest first). Does not include the DRAFT working copy.
+//	Lists all published versions of a dataset, sorted by version number descending
 //
-// State guard: Allowed for all statuses including DELETING.
+// (newest first). Does not include the DRAFT working copy.
 func (c *Client) ListDatasetVersions(ctx context.Context, params *ListDatasetVersionsInput, optFns ...func(*Options)) (*ListDatasetVersionsOutput, error) {
 	if params == nil {
 		params = &ListDatasetVersionsInput{}

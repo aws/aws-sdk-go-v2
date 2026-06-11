@@ -1602,6 +1602,9 @@ type RunListItem struct {
 	// The run's workflow ID.
 	WorkflowId *string
 
+	// The name of the workflow.
+	WorkflowName *string
+
 	// The name of the workflow version.
 	WorkflowVersionName *string
 

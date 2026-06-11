@@ -25886,6 +25886,15 @@ func awsRestjson1_deserializeDocumentRunListItem(v **types.RunListItem, value in
 				sv.WorkflowId = ptr.String(jtv)
 			}
 
+		case "workflowName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowName to be of type string, got %T instead", value)
+				}
+				sv.WorkflowName = ptr.String(jtv)
+			}
+
 		case "workflowVersionName":
 			if value != nil {
 				jtv, ok := value.(string)

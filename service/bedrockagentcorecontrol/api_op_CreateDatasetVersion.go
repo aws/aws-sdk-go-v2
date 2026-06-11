@@ -12,18 +12,10 @@ import (
 	"time"
 )
 
-// Publishes the current DRAFT as a new numbered version.
+//	Publishes the current DRAFT as a new numbered version. The DRAFT is preserved
 //
-// Snapshots the DRAFT examples as the next version (1, 2, 3, ...). The DRAFT is
-// preserved and remains editable after publishing. Returns immediately with status
-// UPDATING. Poll GetDataset until status transitions to ACTIVE
-// (draftStatus=UNMODIFIED) or UPDATE_FAILED.
-//
-// State guard: Returns ConflictException (DATASET_NOT_READY) if status is in
-// {CREATING, UPDATING, DELETING}, or DATASET_IN_FAILED_STATE if status is in
-// {CREATE_FAILED, DELETE_FAILED}.
-//
-// Quota: MAX_VERSIONS_PER_DATASET applies to published versions only (not DRAFT).
+// and remains editable after publishing. Returns immediately with status UPDATING.
+// Poll GetDataset until status transitions to ACTIVE or UPDATE_FAILED.
 func (c *Client) CreateDatasetVersion(ctx context.Context, params *CreateDatasetVersionInput, optFns ...func(*Options)) (*CreateDatasetVersionOutput, error) {
 	if params == nil {
 		params = &CreateDatasetVersionInput{}
@@ -74,13 +66,13 @@ type CreateDatasetVersionOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// The version being created.
+	//  The version number being created.
 	//
 	// This member is required.
 	DatasetVersion *string
 
-	// Always UPDATING immediately after this call. Poll GetDataset until status ==
-	// ACTIVE (draftStatus=UNMODIFIED) or UPDATE_FAILED.
+	//  Always UPDATING immediately after this call. Poll GetDataset until status
+	// transitions to ACTIVE or UPDATE_FAILED.
 	//
 	// This member is required.
 	Status types.DatasetStatus

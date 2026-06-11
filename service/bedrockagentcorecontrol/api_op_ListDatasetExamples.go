@@ -11,15 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns paginated examples from the dataset.
+//	Returns paginated examples from the dataset. The server embeds the resolved
 //
-// Version-pinned pagination: The server embeds the resolved version in the
-// nextToken . Once pagination begins, all subsequent pages are pinned to that
-// version regardless of concurrent mutations or whether datasetVersion is passed
-// on subsequent requests. The datasetVersion query parameter is only used for the
-// first request (when nextToken is absent); if omitted, defaults to DRAFT.
-//
-// State guard: Allowed for all statuses including DELETING.
+// version in the pagination token. Once pagination begins, all subsequent pages
+// are pinned to that version regardless of concurrent mutations.
 func (c *Client) ListDatasetExamples(ctx context.Context, params *ListDatasetExamplesInput, optFns ...func(*Options)) (*ListDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &ListDatasetExamplesInput{}
@@ -42,14 +37,12 @@ type ListDatasetExamplesInput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent.
-	// Only used on the first request (when nextToken is absent). For subsequent pages,
-	// the version is extracted from the nextToken and this parameter is ignored.
+	//  Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent.
+	// Only used on the first request; for subsequent pages, the version is extracted
+	// from the pagination token.
 	DatasetVersion *string
 
-	// Maximum number of examples to return per page. Default: 1000. Min: 1, max:
-	// 1000. Response size is validated against 5 MB limit after reading. For bulk
-	// access to all examples, use the downloadUrl field from GetDataset.
+	//  Maximum number of examples to return per page.
 	MaxResults *int32
 
 	//  The token for the next page of results.
@@ -70,13 +63,13 @@ type ListDatasetExamplesOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// The version returned.
+	//  The version returned.
 	//
 	// This member is required.
 	DatasetVersion *string
 
-	// Paginated example content. Each element is a JSON object containing at least an
-	// exampleId field plus the schema-specific content fields.
+	//  Paginated example content. Each element is a JSON object containing at least
+	// an exampleId field plus the schema-specific content fields.
 	//
 	// This member is required.
 	Examples []document.Interface
@@ -190,9 +183,7 @@ func (c *Client) addOperationListDatasetExamplesMiddlewares(stack *middleware.St
 // ListDatasetExamplesPaginatorOptions is the paginator options for
 // ListDatasetExamples
 type ListDatasetExamplesPaginatorOptions struct {
-	// Maximum number of examples to return per page. Default: 1000. Min: 1, max:
-	// 1000. Response size is validated against 5 MB limit after reading. For bulk
-	// access to all examples, use the downloadUrl field from GetDataset.
+	//  Maximum number of examples to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

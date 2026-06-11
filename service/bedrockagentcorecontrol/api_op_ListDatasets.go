@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all datasets in the caller's account, paginated. No presigned URLs in
-// list results.
+// Lists all datasets in the caller's account, paginated.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}

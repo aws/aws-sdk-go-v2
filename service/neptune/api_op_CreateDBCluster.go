@@ -98,9 +98,7 @@ type CreateDBClusterInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string
 
-	// The name for your database of up to 64 alpha-numeric characters. If you do not
-	// provide a name, Amazon Neptune will not create a database in the DB cluster you
-	// are creating.
+	// Not supported by Neptune.
 	DatabaseName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
@@ -161,6 +159,17 @@ type CreateDBClusterInput struct {
 
 	// Not supported by Neptune.
 	MasterUsername *string
+
+	// The network type of the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - IPV4 – ( the default ) The DB cluster uses only IPv4 addresses for
+	//   communication.
+	//
+	//   - DUAL – The DB cluster uses both IPv4 and IPv6 addresses for communication.
+	//   The DB subnet group associated with the cluster must support IPv6.
+	NetworkType *string
 
 	//  (Not supported by Neptune)
 	OptionGroupName *string

@@ -1753,7 +1753,7 @@ type DatasetSummary struct {
 	//  The description of the dataset.
 	Description *string
 
-	// Publish synchronization state. Only authoritative when status == ACTIVE.
+	//  Publish synchronization state. Only authoritative when status is ACTIVE.
 	DraftStatus DraftStatus
 
 	noSmithyDocumentSerde
@@ -1767,20 +1767,7 @@ type DatasetVersionSummary struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Dataset version identifier. Accepts "DRAFT" or a non-negative integer string.
-	//
-	// "DRAFT" refers to the single mutable working copy of the dataset.
-	//
-	//   - Always present after CreateDataset ingestion completes.
-	//   - Content changes in-place when examples are added, updated, or deleted.
-	//   - NOT tracked as a DDB DatasetVersionItem — state lives in S3
-	//   (draft/manifest.json, draft/dataset.jsonl) and the DatasetItem.exampleCount
-	//   field.
-	//   - Default for read operations when ?datasetVersion is absent.
-	// An integer string (e.g. "1", "2", "3") refers to a published, immutable
-	// snapshot created by CreateDatasetVersion. Once created, a published version's
-	// content never changes. Stored as a DDB DatasetVersionItem
-	// (SK=VERSION#{zero-padded-N}).
+	//  The version number of this published snapshot.
 	//
 	// This member is required.
 	DatasetVersion *string
@@ -1813,7 +1800,7 @@ type DataSourceConfigMemberCloudWatchLogs struct {
 
 func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
 
-// Source of examples to add to the dataset.
+//	Source of examples to add to the dataset.
 //
 // The following types satisfy this interface:
 //
@@ -1832,8 +1819,7 @@ type DataSourceTypeMemberInlineExamples struct {
 
 func (*DataSourceTypeMemberInlineExamples) isDataSourceType() {}
 
-// S3 URI pointing to a JSONL file in the customer's bucket. The service reads
-// this file using the caller's FAS credentials.
+// Amazon S3 URI pointing to a JSONL file in the customer's bucket.
 type DataSourceTypeMemberS3Source struct {
 	Value S3Source
 
@@ -3744,7 +3730,7 @@ type InferenceConfiguration struct {
 // Inline examples provided directly in the request body.
 type InlineExamplesSource struct {
 
-	// Examples to add. Each example is assigned an auto-generated UUID.
+	//  Examples to add. Each example is assigned an auto-generated UUID.
 	//
 	// This member is required.
 	Examples []document.Interface
@@ -4506,7 +4492,12 @@ type MetadataSchemaEntry struct {
 	Key *string
 
 	// Configuration for extracting this metadata value from conversational content.
+	// Applicable only if extractionType is LLM inferred.
 	ExtractionConfig ExtractionConfig
+
+	// Specifies whether the metadata value is extracted by the LLM or passed through
+	// deterministically from the event.
+	ExtractionType ExtractionType
 
 	// The MetadataValueType.
 	Type MetadataValueType
@@ -6371,10 +6362,11 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
-// S3 location of a JSONL file containing dataset examples.
+// Amazon S3 location of a JSONL file containing dataset examples.
 type S3Source struct {
 
-	// S3 URI of the JSONL file (e.g. s3://my-bucket/path/to/examples.jsonl).
+	//  Amazon S3 URI of the JSONL file (for example,
+	// s3://my-bucket/path/to/examples.jsonl ).
 	//
 	// This member is required.
 	S3Uri *string

@@ -17515,6 +17515,11 @@ func awsRestjson1_serializeDocumentMetadataSchemaEntry(v *types.MetadataSchemaEn
 		}
 	}
 
+	if len(v.ExtractionType) > 0 {
+		ok := object.Key("extractionType")
+		ok.String(string(v.ExtractionType))
+	}
+
 	if v.Key != nil {
 		ok := object.Key("key")
 		ok.String(*v.Key)

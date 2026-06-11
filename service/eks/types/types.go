@@ -1001,6 +1001,11 @@ type ControlPlanePlacementRequest struct {
 	// This setting can't be changed after cluster creation.
 	GroupName *string
 
+	// Optional parameter to specify the placement group spread level for control
+	// plane instances. If not provided, Amazon EKS will deploy control plane instances
+	// without a placement group.
+	SpreadLevel SpreadLevel
+
 	noSmithyDocumentSerde
 }
 
@@ -1013,6 +1018,10 @@ type ControlPlanePlacementResponse struct {
 
 	// The name of the placement group for the Kubernetes control plane instances.
 	GroupName *string
+
+	// The spread level used with the placement group for control plane instances on
+	// your local Amazon EKS cluster on Amazon Web Services Outposts.
+	SpreadLevel SpreadLevel
 
 	noSmithyDocumentSerde
 }
@@ -1195,6 +1204,35 @@ type ErrorDetail struct {
 
 	// An optional field that contains the resource IDs associated with the error.
 	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The placement configuration for the etcd instances of your local Amazon EKS
+// cluster on an Amazon Web Services Outpost. For more information, see [Capacity considerations]in the
+// Amazon EKS User Guide.
+//
+// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
+type EtcdPlacementRequest struct {
+
+	// Optional parameter to specify the placement group spread level for etcd
+	// instances. If not provided, Amazon EKS will deploy etcd instances without a
+	// placement group.
+	SpreadLevel SpreadLevel
+
+	noSmithyDocumentSerde
+}
+
+// The placement configuration for the etcd instances of your local Amazon EKS
+// cluster on an Amazon Web Services Outpost. For more information, see [Capacity considerations]in the
+// Amazon EKS User Guide.
+//
+// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
+type EtcdPlacementResponse struct {
+
+	// The spread level used with the placement group for etcd instances on your local
+	// Amazon EKS cluster on Amazon Web Services Outposts.
+	SpreadLevel SpreadLevel
 
 	noSmithyDocumentSerde
 }
@@ -2119,13 +2157,12 @@ type OidcIdentityProviderConfigRequest struct {
 // [Creating a local cluster on an Outpost]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html
 type OutpostConfigRequest struct {
 
-	// The Amazon EC2 instance type that you want to use for your local Amazon EKS
-	// cluster on Outposts. Choose an instance type based on the number of nodes that
-	// your cluster will have. For more information, see [Capacity considerations]in the Amazon EKS User Guide.
+	// The Amazon EC2 instance type for the Kubernetes control plane instances of your
+	// local Amazon EKS cluster on Amazon Web Services Outposts. This instance type
+	// applies to all control plane instances and cannot be changed after cluster
+	// creation.
 	//
-	// The instance type that you specify is used for all Kubernetes control plane
-	// instances. The instance type can't be changed after cluster creation. The
-	// control plane is not automatically scaled by Amazon EKS.
+	// For more information, see [Capacity considerations] in the Amazon EKS User Guide.
 	//
 	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	//
@@ -2145,6 +2182,18 @@ type OutpostConfigRequest struct {
 	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	ControlPlanePlacement *ControlPlanePlacementRequest
 
+	// The Amazon EC2 instance type for etcd instances of your local Amazon EKS
+	// cluster on Amazon Web Services Outposts. This instance type applies to all etcd
+	// instances and cannot be changed after cluster creation.
+	EtcdInstanceType *string
+
+	// An object representing the placement configuration for the etcd instances of
+	// your local Amazon EKS cluster on an Amazon Web Services Outpost. For more
+	// information, see [Capacity considerations]in the Amazon EKS User Guide.
+	//
+	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
+	EtcdPlacement *EtcdPlacementRequest
+
 	noSmithyDocumentSerde
 }
 
@@ -2153,7 +2202,8 @@ type OutpostConfigRequest struct {
 // the Amazon Web Services cloud.
 type OutpostConfigResponse struct {
 
-	// The Amazon EC2 instance type used for the control plane. The instance type is
+	// The Amazon EC2 instance type for the Kubernetes control plane instances of your
+	// local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is
 	// the same for all control plane instances.
 	//
 	// This member is required.
@@ -2171,6 +2221,18 @@ type OutpostConfigResponse struct {
 	//
 	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	ControlPlanePlacement *ControlPlanePlacementResponse
+
+	// The Amazon EC2 instance type for etcd instances of your local Amazon EKS
+	// cluster on Amazon Web Services Outposts. The instance type is the same for all
+	// etcd instances.
+	EtcdInstanceType *string
+
+	// An object representing the placement configuration for the etcd instances of
+	// your local Amazon EKS cluster on an Amazon Web Services Outpost. For more
+	// information, see [Capacity considerations]in the Amazon EKS User Guide.
+	//
+	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
+	EtcdPlacement *EtcdPlacementResponse
 
 	noSmithyDocumentSerde
 }

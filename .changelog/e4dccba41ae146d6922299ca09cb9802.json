@@ -1,0 +1,8 @@
+{
+    "id": "e4dccba4-1ae1-46d6-9222-99ca09cb9802",
+    "type": "feature",
+    "description": "Introduce new CreateCluster parameters for Amazon EKS local clusters on AWS Outposts. Added etcdInstanceType for configuring the EC2 instance type for dedicated etcd instances, and spreadLevel for configuring the placement group spread level for Kubernetes control plane and etcd instances.",
+    "modules": [
+        "service/eks"
+    ]
+}

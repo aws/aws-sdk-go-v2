@@ -12,10 +12,9 @@ import (
 	"time"
 )
 
-// Creates a new Dataset resource asynchronously.
+//	Creates a new dataset resource asynchronously. Returns immediately with status
 //
-// Returns immediately with status CREATING. Poll GetDataset until status
-// transitions to ACTIVE or CREATE_FAILED (with failureReason).
+// CREATING. Poll GetDataset until status transitions to ACTIVE or CREATE_FAILED.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -33,31 +32,36 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// Human-readable name for the dataset. Unique within the account
-	// (case-insensitive). Immutable after creation.
+	//  Human-readable name for the dataset. Must be unique within the account.
+	// Immutable after creation.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// Versioned schema type governing the structure of examples. Immutable after
+	//  Versioned schema type governing the structure of examples. Immutable after
 	// creation.
 	//
 	// This member is required.
 	SchemaType types.DatasetSchemaType
 
-	// Source of initial examples. Provide either inline examples or an S3 URI
+	//  Source of initial examples. Provide either inline examples or an S3 URI
 	// pointing to a JSONL file.
 	//
 	// This member is required.
 	Source types.DataSourceType
 
-	// Optional idempotency token.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If you don't specify this field, a value is randomly
+	// generated for you. If this token matches a previous request, the service ignores
+	// the request, but doesn't return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	//  A description of the dataset.
 	Description *string
 
-	// Optional AWS KMS key ARN for SSE-KMS on service S3 writes.
+	//  Optional KMS key ARN for server-side encryption on service Amazon S3 writes.
 	KmsKeyArn *string
 
 	//  A map of tag keys and values to assign to the dataset.
@@ -83,8 +87,8 @@ type CreateDatasetOutput struct {
 	// This member is required.
 	DatasetId *string
 
-	// Always CREATING immediately after this call. Poll GetDataset until status ==
-	// ACTIVE (draftStatus=MODIFIED) or CREATE_FAILED.
+	//  Always CREATING immediately after this call. Poll GetDataset until status
+	// transitions to ACTIVE or CREATE_FAILED.
 	//
 	// This member is required.
 	Status types.DatasetStatus

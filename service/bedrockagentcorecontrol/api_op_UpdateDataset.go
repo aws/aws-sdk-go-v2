@@ -11,13 +11,10 @@ import (
 	"time"
 )
 
-// Updates a dataset's metadata. Synchronous operation. Only provided fields are
-// updated; omitted fields remain unchanged.
+//	Updates a dataset's metadata. Synchronous operation. Only provided fields are
 //
-// To modify dataset content, use AddDatasetExamples, UpdateDatasetExamples, or
-// DeleteDatasetExamples.
-//
-// Cannot update: name, schemaType, kmsKeyArn (immutable after creation).
+// updated; omitted fields remain unchanged. To modify dataset content, use
+// AddDatasetExamples , UpdateDatasetExamples , or DeleteDatasetExamples .
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}

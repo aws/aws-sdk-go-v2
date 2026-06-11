@@ -6470,6 +6470,11 @@ func awsRestjson1_serializeDocumentControlPlanePlacementRequest(v *types.Control
 		ok.String(*v.GroupName)
 	}
 
+	if len(v.SpreadLevel) > 0 {
+		ok := object.Key("spreadLevel")
+		ok.String(string(v.SpreadLevel))
+	}
+
 	return nil
 }
 
@@ -6562,6 +6567,18 @@ func awsRestjson1_serializeDocumentEncryptionConfigList(v []types.EncryptionConf
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEtcdPlacementRequest(v *types.EtcdPlacementRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SpreadLevel) > 0 {
+		ok := object.Key("spreadLevel")
+		ok.String(string(v.SpreadLevel))
+	}
+
 	return nil
 }
 
@@ -6973,6 +6990,18 @@ func awsRestjson1_serializeDocumentOutpostConfigRequest(v *types.OutpostConfigRe
 	if v.ControlPlanePlacement != nil {
 		ok := object.Key("controlPlanePlacement")
 		if err := awsRestjson1_serializeDocumentControlPlanePlacementRequest(v.ControlPlanePlacement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EtcdInstanceType != nil {
+		ok := object.Key("etcdInstanceType")
+		ok.String(*v.EtcdInstanceType)
+	}
+
+	if v.EtcdPlacement != nil {
+		ok := object.Key("etcdPlacement")
+		if err := awsRestjson1_serializeDocumentEtcdPlacementRequest(v.EtcdPlacement, ok); err != nil {
 			return err
 		}
 	}

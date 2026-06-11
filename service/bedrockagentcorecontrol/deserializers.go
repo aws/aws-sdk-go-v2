@@ -42485,6 +42485,15 @@ func awsRestjson1_deserializeDocumentMetadataSchemaEntry(v **types.MetadataSchem
 				return err
 			}
 
+		case "extractionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionType to be of type string, got %T instead", value)
+				}
+				sv.ExtractionType = types.ExtractionType(jtv)
+			}
+
 		case "key":
 			if value != nil {
 				jtv, ok := value.(string)

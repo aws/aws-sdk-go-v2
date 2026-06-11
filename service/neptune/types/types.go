@@ -75,6 +75,11 @@ type ClusterPendingModifiedValues struct {
 	// for Multi-AZ DB clusters.
 	Iops *int32
 
+	// The pending change in network type for the DB cluster.
+	//
+	// Valid Values: IPV4 , DUAL
+	NetworkType *string
+
 	// This PendingCloudwatchLogsExports structure specifies pending changes to which
 	// CloudWatch logs are enabled and which are disabled.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
@@ -220,6 +225,15 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
+
+	// The network type of the DB cluster.
+	//
+	// Valid Values:
+	//
+	//   - IPV4 – The DB cluster uses only IPv4 addresses for communication.
+	//
+	//   - DUAL – The DB cluster uses both IPv4 and IPv6 addresses for communication.
+	NetworkType *string
 
 	// This data type is used as a response element in the ModifyDBCluster operation
 	// and contains changes that will be applied during the next maintenance window.
@@ -744,6 +758,11 @@ type DBInstance struct {
 	// Specifies if the DB instance is a Multi-AZ deployment.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Inherited from the DB cluster.
+	//
+	// Valid Values: IPV4 , DUAL
+	NetworkType *string
+
 	//  (Not supported by Neptune)
 	OptionGroupMemberships []OptionGroupMembership
 
@@ -918,6 +937,12 @@ type DBSubnetGroup struct {
 
 	//  Contains a list of Subnet elements.
 	Subnets []Subnet
+
+	// The network types supported by the DB subnet group.
+	//
+	// Valid network types include IPV4 and DUAL . A DB subnet group supports DUAL if
+	// all subnets in the group have both IPv4 and IPv6 CIDRs.
+	SupportedNetworkTypes []string
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string
@@ -1261,6 +1286,9 @@ type OrderableDBInstanceOption struct {
 
 	// Not applicable. In Neptune the storage type is managed at the DB Cluster level.
 	StorageType *string
+
+	// The network types supported by the orderable DB instance option.
+	SupportedNetworkTypes []string
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from
 	// 1 to 60 seconds.
