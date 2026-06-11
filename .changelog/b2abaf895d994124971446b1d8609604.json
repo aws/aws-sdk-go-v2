@@ -1,8 +1,0 @@
-{
-    "id": "b2abaf89-5d99-4124-9714-46b1d8609604",
-    "type": "feature",
-    "description": "Adds support to perform cross account data plane actions on an AgentCore Memory resource",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

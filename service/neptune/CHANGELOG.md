@@ -1,3 +1,7 @@
+# v1.46.0 (2026-06-11)
+
+* **Feature**: Amazon Neptune now supports IPv6 dual-stack networking. You can create and manage Neptune DB clusters accessible over both IPv4 and IPv6 by specifying NetworkType as DUAL in CreateDBCluster, ModifyDBCluster, RestoreDBClusterFromSnapshot, and RestoreDBClusterToPointInTime API operations
+
 # v1.45.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

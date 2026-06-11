@@ -1,3 +1,7 @@
+# v1.45.0 (2026-06-11)
+
+* **Feature**: Adds support for workflowName in the ListRuns API response.
+
 # v1.44.0 (2026-06-08)
 
 * **Feature**: StartRunBatch API - Add EngineSettings

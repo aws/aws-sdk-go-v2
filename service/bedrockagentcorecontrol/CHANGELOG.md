@@ -1,3 +1,7 @@
+# v1.43.0 (2026-06-11)
+
+* **Feature**: Supports deterministic metadata for AgentCore Memory
+
 # v1.42.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

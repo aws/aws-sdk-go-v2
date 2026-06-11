@@ -1,8 +1,0 @@
-{
-    "id": "8c7b5703-1971-46bb-838c-d1f020b20ac4",
-    "type": "feature",
-    "description": "Adds the UpdateFHIRDatastore API and adds analytics, NLP, and profile configuration support to CreateFHIRDatastore and DescribeFHIRDatastore.",
-    "modules": [
-        "service/healthlake"
-    ]
-}

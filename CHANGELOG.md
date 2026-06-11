@@ -1,3 +1,19 @@
+# Release (2026-06-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.43.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1430-2026-06-11)
+  * **Feature**: Supports deterministic metadata for AgentCore Memory
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.85.0](service/eks/CHANGELOG.md#v1850-2026-06-11)
+  * **Feature**: Introduce new CreateCluster parameters for Amazon EKS local clusters on AWS Outposts. Added etcdInstanceType for configuring the EC2 instance type for dedicated etcd instances, and spreadLevel for configuring the placement group spread level for Kubernetes control plane and etcd instances.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.38.0](service/healthlake/CHANGELOG.md#v1380-2026-06-11)
+  * **Feature**: Adds the UpdateFHIRDatastore API and adds analytics, NLP, and profile configuration support to CreateFHIRDatastore and DescribeFHIRDatastore.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.46.0](service/neptune/CHANGELOG.md#v1460-2026-06-11)
+  * **Feature**: Amazon Neptune now supports IPv6 dual-stack networking. You can create and manage Neptune DB clusters accessible over both IPv4 and IPv6 by specifying NetworkType as DUAL in CreateDBCluster, ModifyDBCluster, RestoreDBClusterFromSnapshot, and RestoreDBClusterToPointInTime API operations
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.45.0](service/omics/CHANGELOG.md#v1450-2026-06-11)
+  * **Feature**: Adds support for workflowName in the ListRuns API response.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.32.0](service/support/CHANGELOG.md#v1320-2026-06-11)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-06-10)
 
 ## General Highlights

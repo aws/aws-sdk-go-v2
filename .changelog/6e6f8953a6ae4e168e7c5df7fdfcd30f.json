@@ -1,8 +1,0 @@
-{
-    "id": "6e6f8953-a6ae-4e16-8e7c-5df7fdfcd30f",
-    "type": "feature",
-    "description": "Adds support for workflowName in the ListRuns API response.",
-    "modules": [
-        "service/omics"
-    ]
-}
