@@ -11736,7 +11736,7 @@
                 "smithy.api#length": {
                     "min": 12
                 },
-                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+                "smithy.api#pattern": "^(arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/)?[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
             }
         },
         "com.amazonaws.bedrockagentcore#MemoryMetadataFilterExpression": {

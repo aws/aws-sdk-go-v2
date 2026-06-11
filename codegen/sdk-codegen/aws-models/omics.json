@@ -17115,6 +17115,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the workflow version.</p>"
                     }
+                },
+                "workflowName": {
+                    "target": "com.amazonaws.omics#WorkflowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>"
+                    }
                 }
             },
             "traits": {

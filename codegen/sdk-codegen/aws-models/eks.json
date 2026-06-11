@@ -3997,6 +3997,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances. This setting\n            can't be changed after cluster creation. </p>"
                     }
+                },
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter to specify the placement group spread level for control plane instances. If not provided, Amazon EKS will deploy control plane instances without a placement group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4010,6 +4016,12 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances.</p>"
+                    }
+                },
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spread level used with the placement group for control plane instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>"
                     }
                 }
             },
@@ -7745,6 +7757,34 @@
                 "target": "com.amazonaws.eks#ErrorDetail"
             }
         },
+        "com.amazonaws.eks#EtcdPlacementRequest": {
+            "type": "structure",
+            "members": {
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter to specify the placement group spread level for etcd instances. If not provided, Amazon EKS will deploy etcd instances without a placement group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for the etcd instances of your local Amazon EKS\n            cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.eks#EtcdPlacementResponse": {
+            "type": "structure",
+            "members": {
+                "spreadLevel": {
+                    "target": "com.amazonaws.eks#SpreadLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spread level used with the placement group for etcd instances on your local Amazon EKS cluster on Amazon Web Services Outposts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for the etcd instances of your local Amazon EKS\n            cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.eks#FargateProfile": {
             "type": "structure",
             "members": {
@@ -10866,7 +10906,7 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts.\n            Choose an instance type based on the number of nodes that your cluster will have. For\n            more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>The instance type that you specify is used for all Kubernetes control plane instances. The\n            instance type can't be changed after cluster creation. The control plane is not\n            automatically scaled by Amazon EKS.</p>\n         <p> </p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10874,6 +10914,18 @@
                     "target": "com.amazonaws.eks#ControlPlanePlacementRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instances\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
+                },
+                "etcdInstanceType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.</p>"
+                    }
+                },
+                "etcdPlacement": {
+                    "target": "com.amazonaws.eks#EtcdPlacementRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for the etcd instances of your local \n            Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             },
@@ -10894,7 +10946,7 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type used for the control plane. The instance type is the same for\n            all control plane instances.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for\n            all control plane instances.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10902,6 +10954,18 @@
                     "target": "com.amazonaws.eks#ControlPlanePlacementResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instances\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
+                },
+                "etcdInstanceType": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for etcd instances of your local Amazon EKS cluster on Amazon Web Services Outposts. The instance type is the same for\n            all etcd instances.</p>"
+                    }
+                },
+                "etcdPlacement": {
+                    "target": "com.amazonaws.eks#EtcdPlacementResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for the etcd instances of your local \n            Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             },
@@ -11549,6 +11613,23 @@
                 "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.eks#SpreadLevel": {
+            "type": "enum",
+            "members": {
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
+                    }
+                },
+                "RACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rack"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#SsoIdentity": {

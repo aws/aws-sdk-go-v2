@@ -52,6 +52,61 @@
                 "smithy.api#pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\\d{12}:datastore\\/fhir\\/.{32}$"
             }
         },
+        "com.amazonaws.healthlake#AnalyticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.healthlake#AnalyticsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The status of the analytics configuration.</para>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<para>The analytics configuration for a data store.</para>"
+            }
+        },
+        "com.amazonaws.healthlake#AnalyticsStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLING"
+                    }
+                },
+                "PAUSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSING"
+                    }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.healthlake#AuthorizationStrategy": {
             "type": "enum",
             "members": {
@@ -379,6 +434,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The error cause for the current data store operation.</p>"
                     }
+                },
+                "NlpConfiguration": {
+                    "target": "com.amazonaws.healthlake#NlpConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The natural language processing (NLP) configuration for the data store.</para>"
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The analytics configuration for the data store.</para>"
+                    }
+                },
+                "ProfileConfiguration": {
+                    "target": "com.amazonaws.healthlake#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The profile configuration for the data store.</para>"
+                    }
                 }
             },
             "traits": {
@@ -423,7 +496,25 @@
                     "traits": {
                         "smithy.api#enumValue": "CREATE_FAILED"
                     }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.healthlake#DefaultProfiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.healthlake#String"
             }
         },
         "com.amazonaws.healthlake#DeleteFHIRDatastore": {
@@ -1025,6 +1116,9 @@
                 },
                 {
                     "target": "com.amazonaws.healthlake#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#UpdateFHIRDatastore"
                 }
             ],
             "traits": {
@@ -2537,6 +2631,49 @@
                 "smithy.api#pattern": "^\\p{ASCII}{0,8192}$"
             }
         },
+        "com.amazonaws.healthlake#NlpConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.healthlake#NlpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The status of the NLP configuration.</para>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<para>The natural language processing (NLP) configuration for a data store.</para>"
+            }
+        },
+        "com.amazonaws.healthlake#NlpStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLING"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.healthlake#OutputDataConfig": {
             "type": "union",
             "members": {
@@ -2575,6 +2712,20 @@
                         "smithy.api#enumValue": "SYNTHEA"
                     }
                 }
+            }
+        },
+        "com.amazonaws.healthlake#ProfileConfiguration": {
+            "type": "structure",
+            "members": {
+                "DefaultProfiles": {
+                    "target": "com.amazonaws.healthlake#DefaultProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The list of default profiles for the data store.</para>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<para>The profile configuration for a data store.</para>"
             }
         },
         "com.amazonaws.healthlake#ResourceNotFoundException": {
@@ -3033,6 +3184,98 @@
         "com.amazonaws.healthlake#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.healthlake#UpdateFHIRDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#UpdateFHIRDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#UpdateFHIRDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<para>Update the properties of a FHIR-enabled data store.</para>"
+            }
+        },
+        "com.amazonaws.healthlake#UpdateFHIRDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The data store identifier.</para>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreName": {
+                    "target": "com.amazonaws.healthlake#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The data store name.</para>"
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.healthlake#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The analytics configuration for the data store.</para>"
+                    }
+                },
+                "NlpConfiguration": {
+                    "target": "com.amazonaws.healthlake#NlpConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The NLP configuration for the data store.</para>"
+                    }
+                },
+                "ProfileConfiguration": {
+                    "target": "com.amazonaws.healthlake#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The profile configuration for the data store.</para>"
+                    }
+                },
+                "IdentityProviderConfiguration": {
+                    "target": "com.amazonaws.healthlake#IdentityProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The identity provider configuration for the data store.</para>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.healthlake#UpdateFHIRDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "DatastoreProperties": {
+                    "target": "com.amazonaws.healthlake#DatastoreProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<para>The data store properties.</para>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
