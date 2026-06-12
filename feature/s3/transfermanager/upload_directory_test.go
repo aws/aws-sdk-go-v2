@@ -212,6 +212,40 @@ func TestUploadDirectory(t *testing.T) {
 				l.expectComplete(t, in, out, 4)
 			},
 		},
+		// Two distinct directory symlinks that point to the same underlying directory
+		// must each be traversed and uploaded as separate S3 key subtrees.
+		// Regression test for the edge case raised during review of #3439.
+		"two symlinks referring to the same directory are each uploaded": {
+			source:         filepath.Join(root, "multi-file-contain-symlink"),
+			followSymLinks: true,
+			recursive:      true,
+			preprocessFunc: func(root string) (func() error, error) {
+				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symlinkDirA")
+				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symlinkDirB")
+				postprocessFunc := func() error {
+					os.Remove(symlinkPath1)
+					os.Remove(symlinkPath2)
+					return nil
+				}
+				// Both symlinks point to the exact same directory (dstDir1 contains one file: foo)
+				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath1); err != nil {
+					return postprocessFunc, err
+				}
+				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath2); err != nil {
+					return postprocessFunc, err
+				}
+				return postprocessFunc, nil
+			},
+			// dstDir1 contains one file (foo), so each directory symlink contributes one key:
+			//   to/the/symlinkDirA/foo  and  to/the/symlinkDirB/foo
+			// plus the original 4 files in multi-file-contain-symlink = 6 total
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/yee", "to/the/symlinkDirA/foo", "to/the/symlinkDirB/foo"},
+			expectFilesUploaded: 6,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 6)
+			},
+		},
 		"folder containing files and symlink referring to folder": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
 			followSymLinks: true,
