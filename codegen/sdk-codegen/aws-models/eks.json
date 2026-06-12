@@ -13239,6 +13239,30 @@
                         "smithy.api#enumValue": "NodeRepairConfig"
                     }
                 },
+                "ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleArn"
+                    }
+                },
+                "ROLE_MAPPINGS_TO_ADD_OR_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleMappingsToAddOrUpdate"
+                    }
+                },
+                "ROLE_MAPPINGS_TO_REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleMappingsToRemove"
+                    }
+                },
+                "NETWORK_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NetworkAccess"
+                    }
+                },
                 "VENDED_LOGS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -13555,6 +13579,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DeletionProtectionUpdate"
+                    }
+                },
+                "CAPABILITY_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CapabilityUpdate"
                     }
                 },
                 "CONTROL_PLANE_SCALING_CONFIG_UPDATE": {

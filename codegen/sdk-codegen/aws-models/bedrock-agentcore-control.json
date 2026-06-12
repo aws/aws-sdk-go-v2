@@ -2845,6 +2845,57 @@
                 "smithy.api#documentation": "<p> The configuration for writing evaluation results to CloudWatch logs with embedded metric format (EMF) for monitoring. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ClusteringConfig": {
+            "type": "structure",
+            "members": {
+                "frequencies": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringFrequencyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of frequencies at which clustering batch evaluations are triggered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for periodic batch evaluation clustering, specifying how often clustering jobs run.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ClusteringFrequency": {
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ClusteringFrequencyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringFrequency"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Code": {
             "type": "union",
             "members": {
@@ -3340,7 +3391,7 @@
         "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleDescription": {
@@ -4581,6 +4632,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#VersionCreatedBySource",
                     "traits": {
                         "smithy.api#documentation": "<p>The source that created this version, including the source name and optional ARN.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional KMS key ARN for encrypting component configurations.</p>"
                     }
                 },
                 "tags": {
@@ -6157,8 +6214,19 @@
                 "evaluators": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of evaluators to apply during online evaluation. Can include both built-in evaluators and custom evaluators created with <code>CreateEvaluator</code>. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The list of evaluators to apply during online evaluation. Can include both built-in evaluators and custom evaluators created with <code>CreateEvaluator</code>. </p>"
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of insight types to run against agent sessions.</p>"
+                    }
+                },
+                "clusteringConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for periodic batch evaluation clustering of insight results.</p>"
                     }
                 },
                 "evaluationExecutionRoleArn": {
@@ -11416,7 +11484,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 10
                 }
             }
@@ -13604,6 +13672,12 @@
                         "smithy.api#documentation": "<p>The timestamp when the configuration bundle was last updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS key ARN used to encrypt component configurations, if CMK was provided.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13730,6 +13804,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when this specific version was created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS key ARN used to encrypt component configurations, if CMK was provided.</p>"
                     }
                 }
             },
@@ -14952,8 +15032,21 @@
                 "evaluators": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of evaluators applied during online evaluation. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p> The list of evaluators applied during online evaluation. </p>"
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of insight types configured for this evaluation.</p>"
+                    }
+                },
+                "clusteringConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clustering configuration for periodic batch evaluation.</p>"
                     }
                 },
                 "outputConfig": {
@@ -18705,6 +18798,39 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#Insight": {
+            "type": "structure",
+            "members": {
+                "insightId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InsightId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A reference to an insight analysis to run against sessions."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InsightId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Canonical insight identifiers using the Builtin.Insight.* naming convention.\nUsed by BatchEvaluate, InternalEvaluate, and ServiceEngineEvaluate flows.",
+                "smithy.api#pattern": "^(Builtin\\.[a-zA-Z0-9._-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#InsightList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#Insight"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#InterceptorConfiguration": {
             "type": "union",
             "members": {
@@ -22186,10 +22312,6 @@
         "com.amazonaws.bedrockagentcorecontrol#LogGroupName": {
             "type": "string",
             "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 512
-                },
                 "smithy.api#pattern": "^[.\\-_/#A-Za-z0-9]+$"
             }
         },
@@ -24279,6 +24401,18 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p> The reason for failure if the online evaluation configuration execution failed. </p>"
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of insight types configured for this evaluation.</p>"
+                    }
+                },
+                "clusteringConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clustering configuration for periodic batch evaluation.</p>"
                     }
                 }
             },
@@ -30411,6 +30545,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The source that created this version, including the source name and optional ARN.</p>"
                     }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional KMS key ARN for encrypting component configurations. If provided, components will be encrypted with this key. If the bundle already has a KMS key, this rotates to the new key.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31948,6 +32088,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#EvaluatorList",
                     "traits": {
                         "smithy.api#documentation": "<p> The updated list of evaluators to apply during online evaluation. </p>"
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InsightList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated list of insight types to run against agent sessions.</p>"
+                    }
+                },
+                "clusteringConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClusteringConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated clustering configuration for periodic batch evaluation.</p>"
                     }
                 },
                 "evaluationExecutionRoleArn": {

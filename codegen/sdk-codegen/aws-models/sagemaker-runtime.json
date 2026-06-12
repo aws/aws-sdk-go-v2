@@ -1268,6 +1268,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemakerruntime#AsyncBodyBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.sagemakerruntime#BodyBlob": {
             "type": "blob",
             "traits": {
@@ -1516,10 +1526,8 @@
                 "InputLocation": {
                     "target": "com.amazonaws.sagemakerruntime#InputLocationHeader",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon S3 URI where the inference request payload is stored.</p>",
-                        "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation",
-                        "smithy.api#required": {}
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation"
                     }
                 },
                 "S3OutputPathExtension": {
@@ -1548,6 +1556,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum amount of time in seconds a request can be processed before it is marked as\n            expired. The default is 15 minutes, or 900 seconds.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-InvocationTimeoutSeconds"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerruntime#AsyncBodyBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides inline input data for the inference request, in the format specified in the\n                <code>ContentType</code> request header. Use this parameter to send the request\n            payload directly in the API call instead of uploading it to Amazon S3 and\n            referencing it with <code>InputLocation</code>. The inline payload can be up to 128,000\n            bytes.</p>\n         <p>\n            <code>Body</code> and <code>InputLocation</code> are mutually exclusive. Provide\n            exactly one of them.</p>\n         <p>For information about the format of the request body, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html\">Common Data\n            Formats-Inference</a>.</p>",
+                        "smithy.api#httpPayload": {}
                     }
                 }
             },

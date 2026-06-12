@@ -1844,6 +1844,122 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devopsagent#CreateTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#CreateTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#CreateTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a Trigger",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a new Trigger in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/trigger/agent-space/{agentSpaceId}/triggers"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#CreateTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.devopsagent#TriggerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the new Trigger fires</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.devopsagent#TriggerCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition that fires the new Trigger</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.devopsagent#TriggerAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action the new Trigger performs when it fires</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.devopsagent#TriggerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial status of the Trigger</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent Trigger creation</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#CreateTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "trigger": {
+                    "target": "com.amazonaws.devopsagent#Trigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Trigger object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.devopsagent#CustomHeaderName": {
             "type": "string",
             "traits": {
@@ -2257,6 +2373,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devopsagent#DeleteTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#DeleteTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#DeleteTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a Trigger",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a Trigger from the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/trigger/agent-space/{agentSpaceId}/triggers/{triggerId}"
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "triggerId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#DeleteTriggerResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.devopsagent#DeregisterService": {
             "type": "operation",
             "input": {
@@ -2490,10 +2683,16 @@
                     "target": "com.amazonaws.devopsagent#CreateChat"
                 },
                 {
+                    "target": "com.amazonaws.devopsagent#CreateTrigger"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#DeleteAsset"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#DeleteAssetFile"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#DeleteTrigger"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#GetAccountUsage"
@@ -2512,6 +2711,9 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#GetRecommendation"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#GetTrigger"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#ListAssetFiles"
@@ -2550,6 +2752,9 @@
                     "target": "com.amazonaws.devopsagent#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.devopsagent#ListTriggers"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#SendMessage"
                 },
                 {
@@ -2572,6 +2777,9 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#UpdateRecommendation"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#UpdateTrigger"
                 }
             ],
             "resources": [
@@ -4566,6 +4774,89 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output containing the requested service details.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#GetTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#GetTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a Trigger",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Gets a Trigger from the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trigger/agent-space/{agentSpaceId}/triggers/{triggerId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "triggerId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "trigger": {
+                    "target": "com.amazonaws.devopsagent#Trigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Trigger object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -7042,6 +7333,116 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devopsagent#ListTriggers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#ListTriggersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#ListTriggersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list Triggers",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists Triggers in the specified agent space</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trigger/agent-space/{agentSpaceId}/triggers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListTriggersRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.devopsagent#TriggerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results to Triggers in this status</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response to retrieve the next page of results</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single response</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#ListTriggersResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.devopsagent#TriggerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Triggers</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.devopsagent#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.devopsagent#ListWebhooks": {
             "type": "operation",
             "input": {
@@ -9369,6 +9770,30 @@
                 "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"
             }
         },
+        "com.amazonaws.devopsagent#ScheduleCondition": {
+            "type": "structure",
+            "members": {
+                "expression": {
+                    "target": "com.amazonaws.devopsagent#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule expression</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Schedule-based condition that fires the Trigger</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#ScheduleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.devopsagent#SchedulerState": {
             "type": "enum",
             "members": {
@@ -11125,6 +11550,109 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.devopsagent#Trigger": {
+            "type": "structure",
+            "members": {
+                "triggerId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.devopsagent#TriggerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How this Trigger fires</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.devopsagent#TriggerCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition that fires this Trigger</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.devopsagent#TriggerAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action this Trigger performs when it fires</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.devopsagent#TriggerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of this Trigger</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this Trigger was created</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp when this Trigger was last updated</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Trigger fires on a schedule and invokes an agent</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerAction": {
+            "type": "document"
+        },
+        "com.amazonaws.devopsagent#TriggerCondition": {
+            "type": "union",
+            "members": {
+                "schedule": {
+                    "target": "com.amazonaws.devopsagent#ScheduleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time-based firing condition</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the firing condition for a Trigger</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#Trigger"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.devopsagent#UntagResource": {
             "type": "operation",
             "input": {
@@ -12145,6 +12673,106 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Response structure containing the updated recommendation</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateTrigger": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#UpdateTriggerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#UpdateTriggerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a Trigger",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates the status of an existing Trigger</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/trigger/agent-space/{agentSpaceId}/triggers/{triggerId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateTriggerRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "triggerId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.devopsagent#TriggerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new status for the Trigger</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier used for idempotent Trigger update</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateTriggerResponse": {
+            "type": "structure",
+            "members": {
+                "trigger": {
+                    "target": "com.amazonaws.devopsagent#Trigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Trigger object</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
