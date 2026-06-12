@@ -277,6 +277,27 @@ func (ClientAuthenticationMethodType) Values() []ClientAuthenticationMethodType 
 	}
 }
 
+type ClusteringFrequency string
+
+// Enum values for ClusteringFrequency
+const (
+	ClusteringFrequencyDaily   ClusteringFrequency = "DAILY"
+	ClusteringFrequencyWeekly  ClusteringFrequency = "WEEKLY"
+	ClusteringFrequencyMonthly ClusteringFrequency = "MONTHLY"
+)
+
+// Values returns all known values for ClusteringFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusteringFrequency) Values() []ClusteringFrequency {
+	return []ClusteringFrequency{
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+	}
+}
+
 type CodeInterpreterNetworkMode string
 
 // Enum values for CodeInterpreterNetworkMode

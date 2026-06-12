@@ -58,6 +58,13 @@ type StartRecommendationInput struct {
 	// The description of the recommendation.
 	Description *string
 
+	// The ARN of the KMS key used to encrypt recommendation data. If provided,
+	// customer data is encrypted at rest with the specified key.
+	KmsKeyArn *string
+
+	// A map of tag keys and values to associate with the recommendation.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

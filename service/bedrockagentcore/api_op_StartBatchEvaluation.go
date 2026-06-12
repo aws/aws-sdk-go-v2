@@ -60,6 +60,17 @@ type StartBatchEvaluationInput struct {
 	// built-in evaluators and custom evaluators. Maximum of 10 evaluators.
 	Evaluators []types.Evaluator
 
+	// The list of insight analyses to run against sessions during the batch
+	// evaluation. Maximum of 10 insights.
+	Insights []types.Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data. If provided, customer
+	// data is encrypted at rest with the specified key.
+	KmsKeyArn *string
+
+	// A map of tag keys and values to associate with the batch evaluation.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -96,8 +107,17 @@ type StartBatchEvaluationOutput struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []types.Evaluator
 
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []types.Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The output configuration specifying where evaluation results are written.
 	OutputConfig types.OutputConfig
+
+	// The tags associated with the batch evaluation.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

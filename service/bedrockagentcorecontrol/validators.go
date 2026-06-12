@@ -3508,6 +3508,21 @@ func validateCloudWatchLogsInputConfig(v *types.CloudWatchLogsInputConfig) error
 	}
 }
 
+func validateClusteringConfig(v *types.ClusteringConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusteringConfig"}
+	if v.Frequencies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Frequencies"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCode(v types.Code) error {
 	if v == nil {
 		return nil
@@ -5196,6 +5211,38 @@ func validateInlineExamplesSource(v *types.InlineExamplesSource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InlineExamplesSource"}
 	if v.Examples == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Examples"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsight(v *types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Insight"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightList(v []types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightList"}
+	for i := range v {
+		if err := validateInsight(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7857,8 +7904,15 @@ func validateOpCreateOnlineEvaluationConfigInput(v *CreateOnlineEvaluationConfig
 			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Evaluators == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Evaluators"))
+	if v.Insights != nil {
+		if err := validateInsightList(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClusteringConfig != nil {
+		if err := validateClusteringConfig(v.ClusteringConfig); err != nil {
+			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.EvaluationExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationExecutionRoleArn"))
@@ -9704,6 +9758,16 @@ func validateOpUpdateOnlineEvaluationConfigInput(v *UpdateOnlineEvaluationConfig
 	if v.DataSourceConfig != nil {
 		if err := validateDataSourceConfig(v.DataSourceConfig); err != nil {
 			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Insights != nil {
+		if err := validateInsightList(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClusteringConfig != nil {
+		if err := validateClusteringConfig(v.ClusteringConfig); err != nil {
+			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

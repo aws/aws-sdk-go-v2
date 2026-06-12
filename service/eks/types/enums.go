@@ -1043,6 +1043,10 @@ const (
 	UpdateParamTypeRemoteNetworkConfig              UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection               UpdateParamType = "DeletionProtection"
 	UpdateParamTypeNodeRepairConfig                 UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeRoleArn                          UpdateParamType = "RoleArn"
+	UpdateParamTypeRoleMappingsToAddOrUpdate        UpdateParamType = "RoleMappingsToAddOrUpdate"
+	UpdateParamTypeRoleMappingsToRemove             UpdateParamType = "RoleMappingsToRemove"
+	UpdateParamTypeNetworkAccess                    UpdateParamType = "NetworkAccess"
 	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
 	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
 	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
@@ -1097,6 +1101,10 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"RoleArn",
+		"RoleMappingsToAddOrUpdate",
+		"RoleMappingsToRemove",
+		"NetworkAccess",
 		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
@@ -1150,6 +1158,7 @@ const (
 	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
+	UpdateTypeCapabilityUpdate                   UpdateType = "CapabilityUpdate"
 	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
 	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
 )
@@ -1175,6 +1184,7 @@ func (UpdateType) Values() []UpdateType {
 		"AutoModeUpdate",
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
+		"CapabilityUpdate",
 		"ControlPlaneScalingConfigUpdate",
 		"VendedLogsUpdate",
 	}

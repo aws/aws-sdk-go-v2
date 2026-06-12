@@ -1,0 +1,8 @@
+{
+    "id": "e5f57ba6-34b2-4ff7-9e9b-92a146b91a1c",
+    "type": "feature",
+    "description": "Certificate transparency logging opt-out is no longer available. Per compliance requirements, all public ACM certificates are automatically recorded in certificate transparency logs. The CertificateTransparencyLoggingPreference option is deprecated.",
+    "modules": [
+        "service/acm"
+    ]
+}

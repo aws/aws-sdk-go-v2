@@ -64,6 +64,11 @@ type UpdateConfigurationBundleInput struct {
 	// The updated description for the configuration bundle.
 	Description *string
 
+	// Optional KMS key ARN for encrypting component configurations. If provided,
+	// components will be encrypted with this key. If the bundle already has a KMS key,
+	// this rotates to the new key.
+	KmsKeyArn *string
+
 	// A list of parent version identifiers for lineage tracking. Regular commits have
 	// a single parent. Merge commits have two parents: the target branch parent and
 	// the source branch parent. If the branch already exists, the first parent must be

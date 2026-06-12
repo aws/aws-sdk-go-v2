@@ -12051,6 +12051,15 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationBundleOutput(v **GetConfi
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "lineageMetadata":
 			if err := awsRestjson1_deserializeDocumentVersionLineageMetadata(&sv.LineageMetadata, value); err != nil {
 				return err
@@ -12295,6 +12304,15 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationBundleVersionOutput(v **G
 					return fmt.Errorf("expected ConfigurationBundleDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "kmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		case "lineageMetadata":
@@ -14538,6 +14556,11 @@ func awsRestjson1_deserializeOpDocumentGetOnlineEvaluationConfigOutput(v **GetOn
 
 	for key, value := range shape {
 		switch key {
+		case "clusteringConfig":
+			if err := awsRestjson1_deserializeDocumentClusteringConfig(&sv.ClusteringConfig, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14598,6 +14621,11 @@ func awsRestjson1_deserializeOpDocumentGetOnlineEvaluationConfigOutput(v **GetOn
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "insights":
+			if err := awsRestjson1_deserializeDocumentInsightList(&sv.Insights, value); err != nil {
+				return err
 			}
 
 		case "onlineEvaluationConfigArn":
@@ -33406,6 +33434,78 @@ func awsRestjson1_deserializeDocumentCloudWatchOutputConfig(v **types.CloudWatch
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentClusteringConfig(v **types.ClusteringConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusteringConfig
+	if *v == nil {
+		sv = &types.ClusteringConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "frequencies":
+			if err := awsRestjson1_deserializeDocumentClusteringFrequencyList(&sv.Frequencies, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentClusteringFrequencyList(v *[]types.ClusteringFrequency, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClusteringFrequency
+	if *v == nil {
+		cv = []types.ClusteringFrequency{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClusteringFrequency
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClusteringFrequency to be of type string, got %T instead", value)
+			}
+			col = types.ClusteringFrequency(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCode(v *types.Code, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -40557,6 +40657,80 @@ func awsRestjson1_deserializeDocumentInferenceConfiguration(v **types.InferenceC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInsight(v **types.Insight, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Insight
+	if *v == nil {
+		sv = &types.Insight{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "insightId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InsightId to be of type string, got %T instead", value)
+				}
+				sv.InsightId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInsightList(v *[]types.Insight, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Insight
+	if *v == nil {
+		cv = []types.Insight{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Insight
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInsight(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInterceptorConfiguration(v *types.InterceptorConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43553,6 +43727,11 @@ func awsRestjson1_deserializeDocumentOnlineEvaluationConfigSummary(v **types.Onl
 
 	for key, value := range shape {
 		switch key {
+		case "clusteringConfig":
+			if err := awsRestjson1_deserializeDocumentClusteringConfig(&sv.ClusteringConfig, value); err != nil {
+				return err
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -43594,6 +43773,11 @@ func awsRestjson1_deserializeDocumentOnlineEvaluationConfigSummary(v **types.Onl
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "insights":
+			if err := awsRestjson1_deserializeDocumentInsightList(&sv.Insights, value); err != nil {
+				return err
 			}
 
 		case "onlineEvaluationConfigArn":

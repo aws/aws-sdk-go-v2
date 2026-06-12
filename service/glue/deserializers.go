@@ -51556,6 +51556,14 @@ func awsAwsjson11_deserializeDocumentIcebergCompactionMetrics(v **types.IcebergC
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIcebergDocument(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIcebergOptimizationPropertiesOutput(v **types.IcebergOptimizationPropertiesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51818,6 +51826,198 @@ func awsAwsjson11_deserializeDocumentIcebergOrphanFileDeletionMetrics(v **types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIcebergPartitionField(v **types.IcebergPartitionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergPartitionField
+	if *v == nil {
+		sv = &types.IcebergPartitionField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FieldId = int32(i64)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnNameString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "SourceId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourceId = int32(i64)
+			}
+
+		case "Transform":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergTransformString to be of type string, got %T instead", value)
+				}
+				sv.Transform = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergPartitionSpec(v **types.IcebergPartitionSpec, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergPartitionSpec
+	if *v == nil {
+		sv = &types.IcebergPartitionSpec{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Fields":
+			if err := awsAwsjson11_deserializeDocumentIcebergPartitionSpecFieldList(&sv.Fields, value); err != nil {
+				return err
+			}
+
+		case "SpecId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SpecId = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergPartitionSpecFieldList(v *[]types.IcebergPartitionField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergPartitionField
+	if *v == nil {
+		cv = []types.IcebergPartitionField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergPartitionField
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergPartitionField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergPartitionSpecList(v *[]types.IcebergPartitionSpec, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergPartitionSpec
+	if *v == nil {
+		cv = []types.IcebergPartitionSpec{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergPartitionSpec
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergPartitionSpec(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIcebergRetentionConfiguration(v **types.IcebergRetentionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52037,6 +52237,554 @@ func awsAwsjson11_deserializeDocumentIcebergRetentionMetrics(v **types.IcebergRe
 					return err
 				}
 				sv.NumberOfManifestListsDeleted = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSchema(v **types.IcebergSchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergSchema
+	if *v == nil {
+		sv = &types.IcebergSchema{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Fields":
+			if err := awsAwsjson11_deserializeDocumentIcebergStructFieldList(&sv.Fields, value); err != nil {
+				return err
+			}
+
+		case "IdentifierFieldIds":
+			if err := awsAwsjson11_deserializeDocumentIntegerList(&sv.IdentifierFieldIds, value); err != nil {
+				return err
+			}
+
+		case "SchemaId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SchemaId = int32(i64)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergStructTypeEnum to be of type string, got %T instead", value)
+				}
+				sv.Type = types.IcebergStructTypeEnum(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSchemaList(v *[]types.IcebergSchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergSchema
+	if *v == nil {
+		cv = []types.IcebergSchema{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergSchema
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergSchema(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSortField(v **types.IcebergSortField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergSortField
+	if *v == nil {
+		sv = &types.IcebergSortField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Direction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergSortDirection to be of type string, got %T instead", value)
+				}
+				sv.Direction = types.IcebergSortDirection(jtv)
+			}
+
+		case "NullOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergNullOrder to be of type string, got %T instead", value)
+				}
+				sv.NullOrder = types.IcebergNullOrder(jtv)
+			}
+
+		case "SourceId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourceId = int32(i64)
+			}
+
+		case "Transform":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IcebergTransformString to be of type string, got %T instead", value)
+				}
+				sv.Transform = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSortOrder(v **types.IcebergSortOrder, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergSortOrder
+	if *v == nil {
+		sv = &types.IcebergSortOrder{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Fields":
+			if err := awsAwsjson11_deserializeDocumentIcebergSortOrderFieldList(&sv.Fields, value); err != nil {
+				return err
+			}
+
+		case "OrderId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OrderId = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSortOrderFieldList(v *[]types.IcebergSortField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergSortField
+	if *v == nil {
+		cv = []types.IcebergSortField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergSortField
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergSortField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergSortOrderList(v *[]types.IcebergSortOrder, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergSortOrder
+	if *v == nil {
+		cv = []types.IcebergSortOrder{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergSortOrder
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergSortOrder(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergStructField(v **types.IcebergStructField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergStructField
+	if *v == nil {
+		sv = &types.IcebergStructField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Doc":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommentString to be of type string, got %T instead", value)
+				}
+				sv.Doc = ptr.String(jtv)
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Id = int32(i64)
+			}
+
+		case "InitialDefault":
+			if err := awsAwsjson11_deserializeDocumentIcebergDocument(&sv.InitialDefault, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnNameString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Required":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Required = jtv
+			}
+
+		case "Type":
+			if err := awsAwsjson11_deserializeDocumentIcebergDocument(&sv.Type, value); err != nil {
+				return err
+			}
+
+		case "WriteDefault":
+			if err := awsAwsjson11_deserializeDocumentIcebergDocument(&sv.WriteDefault, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergStructFieldList(v *[]types.IcebergStructField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergStructField
+	if *v == nil {
+		cv = []types.IcebergStructField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergStructField
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergStructField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergTableMetadata(v **types.IcebergTableMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergTableMetadata
+	if *v == nil {
+		sv = &types.IcebergTableMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentSchemaId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentSchemaId = int32(i64)
+			}
+
+		case "DefaultSortOrderId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultSortOrderId = int32(i64)
+			}
+
+		case "DefaultSpecId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultSpecId = int32(i64)
+			}
+
+		case "FormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VersionString to be of type string, got %T instead", value)
+				}
+				sv.FormatVersion = ptr.String(jtv)
+			}
+
+		case "LastColumnId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LastColumnId = int32(i64)
+			}
+
+		case "LastPartitionId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LastPartitionId = int32(i64)
+			}
+
+		case "Location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocationString to be of type string, got %T instead", value)
+				}
+				sv.Location = ptr.String(jtv)
+			}
+
+		case "PartitionSpecs":
+			if err := awsAwsjson11_deserializeDocumentIcebergPartitionSpecList(&sv.PartitionSpecs, value); err != nil {
+				return err
+			}
+
+		case "Properties":
+			if err := awsAwsjson11_deserializeDocumentStringToStringMap(&sv.Properties, value); err != nil {
+				return err
+			}
+
+		case "Schemas":
+			if err := awsAwsjson11_deserializeDocumentIcebergSchemaList(&sv.Schemas, value); err != nil {
+				return err
+			}
+
+		case "SortOrders":
+			if err := awsAwsjson11_deserializeDocumentIcebergSortOrderList(&sv.SortOrders, value); err != nil {
+				return err
+			}
+
+		case "TableUuid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TableIdString to be of type string, got %T instead", value)
+				}
+				sv.TableUuid = ptr.String(jtv)
 			}
 
 		default:
@@ -52474,6 +53222,46 @@ func awsAwsjson11_deserializeDocumentInboundIntegrationsList(v *[]types.InboundI
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIntegerList(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
 		cv = append(cv, col)
 
 	}
@@ -68210,6 +68998,42 @@ func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStringToStringMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NullableString to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -68286,6 +69110,11 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 
 		case "FederatedTable":
 			if err := awsAwsjson11_deserializeDocumentFederatedTable(&sv.FederatedTable, value); err != nil {
+				return err
+			}
+
+		case "IcebergTableMetadata":
+			if err := awsAwsjson11_deserializeDocumentIcebergTableMetadata(&sv.IcebergTableMetadata, value); err != nil {
 				return err
 			}
 

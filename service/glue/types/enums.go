@@ -3033,8 +3033,10 @@ type TableAttributes string
 
 // Enum values for TableAttributes
 const (
-	TableAttributesName      TableAttributes = "NAME"
-	TableAttributesTableType TableAttributes = "TABLE_TYPE"
+	TableAttributesName                  TableAttributes = "NAME"
+	TableAttributesTableType             TableAttributes = "TABLE_TYPE"
+	TableAttributesDefault               TableAttributes = "DEFAULT"
+	TableAttributesLatestIcebergMetadata TableAttributes = "LATEST_ICEBERG_METADATA"
 )
 
 // Values returns all known values for TableAttributes. Note that this can be
@@ -3045,6 +3047,8 @@ func (TableAttributes) Values() []TableAttributes {
 	return []TableAttributes{
 		"NAME",
 		"TABLE_TYPE",
+		"DEFAULT",
+		"LATEST_ICEBERG_METADATA",
 	}
 }
 

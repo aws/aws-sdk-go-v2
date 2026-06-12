@@ -46,6 +46,9 @@ type UpdateOnlineEvaluationConfigInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// The updated clustering configuration for periodic batch evaluation.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The updated data source configuration specifying CloudWatch log groups and
 	// service names to monitor.
 	DataSourceConfig types.DataSourceConfig
@@ -62,6 +65,9 @@ type UpdateOnlineEvaluationConfigInput struct {
 
 	//  The updated execution status to enable or disable the online evaluation.
 	ExecutionStatus types.OnlineEvaluationExecutionStatus
+
+	// The updated list of insight types to run against agent sessions.
+	Insights []types.Insight
 
 	//  The updated evaluation rule containing sampling configuration, filters, and
 	// session settings.

@@ -964,6 +964,11 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationBundleInput(v *CreateCon
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -2201,6 +2206,13 @@ func awsRestjson1_serializeOpDocumentCreateOnlineEvaluationConfigInput(v *Create
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ClusteringConfig != nil {
+		ok := object.Key("clusteringConfig")
+		if err := awsRestjson1_serializeDocumentClusteringConfig(v.ClusteringConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataSourceConfig != nil {
 		ok := object.Key("dataSourceConfig")
 		if err := awsRestjson1_serializeDocumentDataSourceConfig(v.DataSourceConfig, ok); err != nil {
@@ -2226,6 +2238,13 @@ func awsRestjson1_serializeOpDocumentCreateOnlineEvaluationConfigInput(v *Create
 	if v.Evaluators != nil {
 		ok := object.Key("evaluators")
 		if err := awsRestjson1_serializeDocumentEvaluatorList(v.Evaluators, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Insights != nil {
+		ok := object.Key("insights")
+		if err := awsRestjson1_serializeDocumentInsightList(v.Insights, ok); err != nil {
 			return err
 		}
 	}
@@ -11342,6 +11361,11 @@ func awsRestjson1_serializeOpDocumentUpdateConfigurationBundleInput(v *UpdateCon
 		ok.String(*v.Description)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.ParentVersionIds != nil {
 		ok := object.Key("parentVersionIds")
 		if err := awsRestjson1_serializeDocumentConfigurationBundleVersionList(v.ParentVersionIds, ok); err != nil {
@@ -12583,6 +12607,13 @@ func awsRestjson1_serializeOpDocumentUpdateOnlineEvaluationConfigInput(v *Update
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ClusteringConfig != nil {
+		ok := object.Key("clusteringConfig")
+		if err := awsRestjson1_serializeDocumentClusteringConfig(v.ClusteringConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataSourceConfig != nil {
 		ok := object.Key("dataSourceConfig")
 		if err := awsRestjson1_serializeDocumentDataSourceConfig(v.DataSourceConfig, ok); err != nil {
@@ -12610,6 +12641,13 @@ func awsRestjson1_serializeOpDocumentUpdateOnlineEvaluationConfigInput(v *Update
 	if len(v.ExecutionStatus) > 0 {
 		ok := object.Key("executionStatus")
 		ok.String(string(v.ExecutionStatus))
+	}
+
+	if v.Insights != nil {
+		ok := object.Key("insights")
+		if err := awsRestjson1_serializeDocumentInsightList(v.Insights, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Rule != nil {
@@ -14273,6 +14311,31 @@ func awsRestjson1_serializeDocumentCloudWatchLogsInputConfig(v *types.CloudWatch
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClusteringConfig(v *types.ClusteringConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Frequencies != nil {
+		ok := object.Key("frequencies")
+		if err := awsRestjson1_serializeDocumentClusteringFrequencyList(v.Frequencies, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClusteringFrequencyList(v []types.ClusteringFrequency, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -16861,6 +16924,31 @@ func awsRestjson1_serializeDocumentInlineExamplesSource(v *types.InlineExamplesS
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsight(v *types.Insight, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InsightId != nil {
+		ok := object.Key("insightId")
+		ok.String(*v.InsightId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsightList(v []types.Insight, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInsight(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

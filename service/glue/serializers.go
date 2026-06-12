@@ -32091,6 +32091,13 @@ func awsAwsjson11_serializeOpDocumentGetTableInput(v *GetTableInput, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.AttributesToGet != nil {
+		ok := object.Key("AttributesToGet")
+		if err := awsAwsjson11_serializeDocumentTableAttributesList(v.AttributesToGet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AuditContext != nil {
 		ok := object.Key("AuditContext")
 		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {

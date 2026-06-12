@@ -58,12 +58,6 @@ type CreateOnlineEvaluationConfigInput struct {
 	// This member is required.
 	EvaluationExecutionRoleArn *string
 
-	//  The list of evaluators to apply during online evaluation. Can include both
-	// built-in evaluators and custom evaluators created with CreateEvaluator .
-	//
-	// This member is required.
-	Evaluators []types.EvaluatorReference
-
 	//  The name of the online evaluation configuration. Must be unique within your
 	// account.
 	//
@@ -84,9 +78,19 @@ type CreateOnlineEvaluationConfigInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// Configuration for periodic batch evaluation clustering of insight results.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The description of the online evaluation configuration that explains its
 	// monitoring purpose and scope.
 	Description *string
+
+	//  The list of evaluators to apply during online evaluation. Can include both
+	// built-in evaluators and custom evaluators created with CreateEvaluator .
+	Evaluators []types.EvaluatorReference
+
+	// The list of insight types to run against agent sessions.
+	Insights []types.Insight
 
 	// A map of tag keys and values to assign to an AgentCore Online Evaluation
 	// Config. Tags enable you to categorize your resources in different ways, for

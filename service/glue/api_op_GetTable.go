@@ -42,6 +42,20 @@ type GetTableInput struct {
 	// This member is required.
 	Name *string
 
+	// Specifies the table fields returned by the GetTable call. This parameter
+	// doesn't accept an empty list.
+	//
+	// The following are the valid combinations of values:
+	//
+	//   - DEFAULT - Returns the Hive-style table definition only.
+	//
+	//   - LATEST_ICEBERG_METADATA - Returns only the latest Apache Iceberg table
+	//   metadata.
+	//
+	//   - DEFAULT , LATEST_ICEBERG_METADATA - Returns both the Hive-style table
+	//   definition and the latest Apache Iceberg table metadata.
+	AttributesToGet []types.TableAttributes
+
 	// A structure containing the Lake Formation [audit context].
 	//
 	// [audit context]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html

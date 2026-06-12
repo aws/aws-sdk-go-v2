@@ -123,6 +123,37 @@ type ActorSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A session affected by a detected failure pattern, including root cause details.
+type AffectedSession struct {
+
+	// An explanation of how the failure manifested in this session.
+	//
+	// This member is required.
+	Explanation *string
+
+	// The list of spans where failures were detected in this session.
+	//
+	// This member is required.
+	FailureSpans []FailureSpanDetail
+
+	// The type of fix recommended for this failure.
+	//
+	// This member is required.
+	FixType *string
+
+	// The specific fix recommendation for this session.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// The unique identifier of the affected session.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
 //	The agent card definition for A2A descriptors, including the schema version
 //
 // and inline content that describes the agent's capabilities.
@@ -156,11 +187,21 @@ type AgentSkillsDescriptor struct {
 //
 // The following types satisfy this interface:
 //
+//	AgentTracesConfigMemberBatchEvaluation
 //	AgentTracesConfigMemberCloudwatchLogs
 //	AgentTracesConfigMemberSessionSpans
 type AgentTracesConfig interface {
 	isAgentTracesConfig()
 }
+
+// Use a completed batch evaluation as the source of agent traces.
+type AgentTracesConfigMemberBatchEvaluation struct {
+	Value BatchEvaluationTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberBatchEvaluation) isAgentTracesConfig() {}
 
 // Agent traces read from CloudWatch Logs.
 type AgentTracesConfigMemberCloudwatchLogs struct {
@@ -301,8 +342,26 @@ type BatchEvaluationSummary struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []Evaluator
 
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for using a batch evaluation as the source of agent traces for
+// recommendations.
+type BatchEvaluationTraceConfig struct {
+
+	// The ARN of the completed batch evaluation to use as the trace source.
+	//
+	// This member is required.
+	BatchEvaluationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1138,6 +1197,7 @@ type CustomDescriptor struct {
 // The following types satisfy this interface:
 //
 //	DataSourceConfigMemberCloudWatchLogs
+//	DataSourceConfigMemberOnlineEvaluationConfigSource
 type DataSourceConfig interface {
 	isDataSourceConfig()
 }
@@ -1150,6 +1210,15 @@ type DataSourceConfigMemberCloudWatchLogs struct {
 }
 
 func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
+
+// Reference an existing OnlineEvaluationConfig as session source
+type DataSourceConfigMemberOnlineEvaluationConfigSource struct {
+	Value OnlineEvaluationConfigSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceConfigMemberOnlineEvaluationConfigSource) isDataSourceConfig() {}
 
 //	Contains the descriptor configuration for a registry record. Only the field
 //
@@ -1440,7 +1509,7 @@ type EvaluationTargetMemberTraceIds struct {
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
 
-// An evaluator to run against sessions.
+// An evaluator to run against sessions
 type Evaluator struct {
 
 	// The unique identifier of the evaluator. Can reference built-in evaluators
@@ -1563,6 +1632,69 @@ type EventMetadataFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// A session associated with an execution summary cluster.
+type ExecutionSummaryAffectedSession struct {
+
+	// The approach taken by the agent during this session.
+	//
+	// This member is required.
+	ApproachTaken *string
+
+	// The final outcome of the session.
+	//
+	// This member is required.
+	FinalOutcome *string
+
+	// The unique identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A cluster of similar execution patterns identified across sessions.
+type ExecutionSummaryCluster struct {
+
+	// The number of sessions with this execution pattern.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions with this execution pattern.
+	//
+	// This member is required.
+	AffectedSessions []ExecutionSummaryAffectedSession
+
+	// The unique identifier of the execution summary cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the execution pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the execution pattern cluster.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Customer-facing execution summary clustering result written to S3.
+type ExecutionSummaryClusteringResultContent struct {
+
+	// The list of execution summary clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	ExecutionSummaries []ExecutionSummaryCluster
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for a customer-managed external proxy server. Includes server
 // location, optional domain-based routing patterns, and authentication
 // credentials.
@@ -1672,6 +1804,101 @@ type ExtractionJobMetadata struct {
 
 	// The identifier of the memory strategy for this extraction job.
 	StrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Unified customer-facing clustering result written to S3.
+type FailureAnalysisResultContent struct {
+
+	// The list of failure category clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	Failures []FailureCategoryCluster
+
+	noSmithyDocumentSerde
+}
+
+// A top-level failure category identified by clustering similar failure patterns
+// across sessions.
+type FailureCategoryCluster struct {
+
+	// The number of sessions affected by this failure category.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The unique identifier of the failure category cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the failure category pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the failure category.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of failure subcategories within this category.
+	//
+	// This member is required.
+	SubCategories []FailureSubCategoryCluster
+
+	noSmithyDocumentSerde
+}
+
+// Details about a specific span where a failure was detected.
+type FailureSpanDetail struct {
+
+	// The failure signals detected in this span.
+	//
+	// This member is required.
+	Signals []InsightsFailureSignal
+
+	// The unique identifier of the span where the failure occurred.
+	//
+	// This member is required.
+	SpanId *string
+
+	// The trace identifier associated with the failure span.
+	//
+	// This member is required.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A subcategory of failures within a top-level failure category.
+type FailureSubCategoryCluster struct {
+
+	// The number of sessions affected by this failure subcategory.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The unique identifier of the failure subcategory cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the failure subcategory pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the failure subcategory.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of root cause clusters identified within this subcategory.
+	//
+	// This member is required.
+	RootCauses []RootCauseCluster
 
 	noSmithyDocumentSerde
 }
@@ -2751,6 +2978,41 @@ type InputContentBlock struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to an insight analysis to run against sessions.
+type Insight struct {
+
+	// Canonical insight identifiers using the Builtin.Insight.* naming convention.
+	// Used by BatchEvaluate, InternalEvaluate, and ServiceEngineEvaluate flows.
+	//
+	// This member is required.
+	InsightId *string
+
+	noSmithyDocumentSerde
+}
+
+// A signal indicating a detected failure within a span.
+type InsightsFailureSignal struct {
+
+	// Failure category taxonomy for agent session insights. Values must stay in sync
+	// with the category registry in AgentCoreLens
+	// (amzn_agentcore_lens.config.failure_detection.FAILURE_CATEGORIES).
+	//
+	// This member is required.
+	Category InsightsFailureCategory
+
+	// The confidence score of the failure detection.
+	//
+	// This member is required.
+	Confidence *float64
+
+	// The evidence supporting the failure detection.
+	//
+	// This member is required.
+	Evidence *string
+
+	noSmithyDocumentSerde
+}
+
 // The request body structure for the InvokeAgentRuntimeCommand operation,
 // containing the command to execute and optional configuration parameters.
 type InvokeAgentRuntimeCommandRequestBody struct {
@@ -3656,6 +3918,23 @@ type OAuthCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to an existing online evaluation configuration to use as the data
+// source for batch evaluation.
+type OnlineEvaluationConfigSource struct {
+
+	// The Amazon Resource Name (ARN) of the online evaluation configuration to use as
+	// the session source.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	// Optional session filter configuration to narrow down which sessions from the
+	// online evaluation configuration to include.
+	SessionFilterConfig *SessionFilterConfig
+
+	noSmithyDocumentSerde
+}
+
 // Output destination configuration.
 //
 // The following types satisfy this interface:
@@ -4355,6 +4634,42 @@ type RightExpressionMemberMetadataValue struct {
 
 func (*RightExpressionMemberMetadataValue) isRightExpression() {}
 
+// A cluster of similar root causes identified within a failure subcategory.
+type RootCauseCluster struct {
+
+	// The number of sessions affected by this root cause.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions affected by this root cause.
+	//
+	// This member is required.
+	AffectedSessions []AffectedSession
+
+	// The unique identifier of the root cause cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// The name of the root cause cluster.
+	//
+	// This member is required.
+	Name *string
+
+	// The recommended fix for this root cause.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// The root cause explanation for this cluster of failures.
+	//
+	// This member is required.
+	RootCause *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 location configuration of a resource.
 type S3Location struct {
 
@@ -4697,16 +5012,14 @@ type SystemPromptRecommendationConfig struct {
 	// This member is required.
 	AgentTraces AgentTracesConfig
 
-	// The evaluation configuration specifying which evaluator to use for assessing
-	// recommendation quality.
-	//
-	// This member is required.
-	EvaluationConfig *RecommendationEvaluationConfig
-
 	// The current system prompt to optimize.
 	//
 	// This member is required.
 	SystemPrompt SystemPromptConfig
+
+	// The evaluation configuration specifying which evaluator to use for assessing
+	// recommendation quality.
+	EvaluationConfig *RecommendationEvaluationConfig
 
 	noSmithyDocumentSerde
 }
@@ -4723,6 +5036,10 @@ type SystemPromptRecommendationResult struct {
 
 	// The error message if the recommendation failed.
 	ErrorMessage *string
+
+	// An explanation of why the recommendation was generated and what patterns were
+	// identified in the agent traces.
+	Explanation *string
 
 	// The optimized system prompt text generated by the recommendation.
 	RecommendedSystemPrompt *string
@@ -4904,6 +5221,10 @@ type ToolDescriptionOutput struct {
 	// This member is required.
 	ToolName *string
 
+	// An explanation of why the recommendation was generated for this tool and what
+	// patterns were identified in the agent traces.
+	Explanation *string
+
 	// The optimized tool description text generated by the recommendation.
 	RecommendedToolDescription *string
 
@@ -5058,6 +5379,64 @@ type UserIdentifierMemberUserToken struct {
 }
 
 func (*UserIdentifierMemberUserToken) isUserIdentifier() {}
+
+// A session associated with a user intent cluster.
+type UserIntentAffectedSession struct {
+
+	// The unique identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The user messages from this session that contributed to the intent cluster.
+	//
+	// This member is required.
+	UserMessages []string
+
+	noSmithyDocumentSerde
+}
+
+// A cluster of similar user intents identified across sessions.
+type UserIntentCluster struct {
+
+	// The number of sessions with this user intent.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions with this user intent.
+	//
+	// This member is required.
+	AffectedSessions []UserIntentAffectedSession
+
+	// The unique identifier of the user intent cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the user intent pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the user intent cluster.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Customer-facing user intent clustering result written to S3.
+type UserIntentClusteringResultContent struct {
+
+	// The list of user intent clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	UserIntents []UserIntentCluster
+
+	noSmithyDocumentSerde
+}
 
 // Stores information about a field passed inside a request that resulted in an
 // exception.

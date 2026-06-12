@@ -1523,6 +1523,11 @@ func validateAgentTracesConfig(v types.AgentTracesConfig) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AgentTracesConfig"}
 	switch uv := v.(type) {
+	case *types.AgentTracesConfigMemberBatchEvaluation:
+		if err := validateBatchEvaluationTraceConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[batchEvaluation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AgentTracesConfigMemberCloudwatchLogs:
 		if err := validateCloudWatchLogsTraceConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[cloudwatchLogs]", err.(smithy.InvalidParamsError))
@@ -1561,6 +1566,21 @@ func validateBasicAuth(v *types.BasicAuth) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BasicAuth"}
 	if v.SecretArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchEvaluationTraceConfig(v *types.BatchEvaluationTraceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchEvaluationTraceConfig"}
+	if v.BatchEvaluationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchEvaluationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2027,6 +2047,11 @@ func validateDataSourceConfig(v types.DataSourceConfig) error {
 	case *types.DataSourceConfigMemberCloudWatchLogs:
 		if err := validateCloudWatchLogsSource(&uv.Value); err != nil {
 			invalidParams.AddNested("[cloudWatchLogs]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceConfigMemberOnlineEvaluationConfigSource:
+		if err := validateOnlineEvaluationConfigSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[onlineEvaluationConfigSource]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -2760,6 +2785,38 @@ func validateInputContentBlockList(v []types.InputContentBlock) error {
 	}
 }
 
+func validateInsight(v *types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Insight"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightList(v []types.Insight) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightList"}
+	for i := range v {
+		if err := validateInsight(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvokeAgentRuntimeCommandRequestBody(v *types.InvokeAgentRuntimeCommandRequestBody) error {
 	if v == nil {
 		return nil
@@ -3204,6 +3261,21 @@ func validateOAuthCredentialProvider(v *types.OAuthCredentialProvider) error {
 	}
 	if v.Scopes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Scopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOnlineEvaluationConfigSource(v *types.OnlineEvaluationConfigSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnlineEvaluationConfigSource"}
+	if v.OnlineEvaluationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OnlineEvaluationConfigArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3709,9 +3781,7 @@ func validateSystemPromptRecommendationConfig(v *types.SystemPromptRecommendatio
 			invalidParams.AddNested("AgentTraces", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EvaluationConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationConfig"))
-	} else if v.EvaluationConfig != nil {
+	if v.EvaluationConfig != nil {
 		if err := validateRecommendationEvaluationConfig(v.EvaluationConfig); err != nil {
 			invalidParams.AddNested("EvaluationConfig", err.(smithy.InvalidParamsError))
 		}
@@ -5022,6 +5092,11 @@ func validateOpStartBatchEvaluationInput(v *StartBatchEvaluationInput) error {
 	if v.Evaluators != nil {
 		if err := validateEvaluatorList(v.Evaluators); err != nil {
 			invalidParams.AddNested("Evaluators", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Insights != nil {
+		if err := validateInsightList(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DataSourceConfig == nil {

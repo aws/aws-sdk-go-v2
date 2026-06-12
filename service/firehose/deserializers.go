@@ -3262,7 +3262,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(v **t
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected AWSKMSKeyARN to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AWSKMSKeyARNForSSE to be of type string, got %T instead", value)
 				}
 				sv.KeyARN = ptr.String(jtv)
 			}

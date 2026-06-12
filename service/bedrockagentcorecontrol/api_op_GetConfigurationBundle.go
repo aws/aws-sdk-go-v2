@@ -84,6 +84,9 @@ type GetConfigurationBundleOutput struct {
 	// The description of the configuration bundle.
 	Description *string
 
+	// KMS key ARN used to encrypt component configurations, if CMK was provided.
+	KmsKeyArn *string
+
 	// The version lineage metadata, including parent versions, branch name, and
 	// creation source.
 	LineageMetadata *types.VersionLineageMetadata

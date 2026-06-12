@@ -53,11 +53,6 @@ type GetOnlineEvaluationConfigOutput struct {
 	// This member is required.
 	DataSourceConfig types.DataSourceConfig
 
-	//  The list of evaluators applied during online evaluation.
-	//
-	// This member is required.
-	Evaluators []types.EvaluatorReference
-
 	//  The execution status indicating whether the online evaluation is currently
 	// running.
 	//
@@ -95,15 +90,24 @@ type GetOnlineEvaluationConfigOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The clustering configuration for periodic batch evaluation.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The description of the online evaluation configuration.
 	Description *string
 
 	//  The Amazon Resource Name (ARN) of the IAM role used for evaluation execution.
 	EvaluationExecutionRoleArn *string
 
+	//  The list of evaluators applied during online evaluation.
+	Evaluators []types.EvaluatorReference
+
 	//  The reason for failure if the online evaluation configuration execution
 	// failed.
 	FailureReason *string
+
+	// The list of insight types configured for this evaluation.
+	Insights []types.Insight
 
 	//  The output configuration specifying where evaluation results are written.
 	OutputConfig *types.OutputConfig

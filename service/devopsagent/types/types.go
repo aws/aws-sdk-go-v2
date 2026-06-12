@@ -2075,6 +2075,17 @@ type RegisteredSlackServiceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Schedule-based condition that fires the Trigger
+type ScheduleCondition struct {
+
+	// The schedule expression
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for a self-managed Private Connection.
 type SelfManagedInput struct {
 
@@ -2991,6 +3002,72 @@ type TaskFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A Trigger fires on a schedule and invokes an agent
+type Trigger struct {
+
+	// The action this Trigger performs when it fires
+	//
+	// This member is required.
+	Action document.Interface
+
+	// Unique identifier for an agent space (allows alphanumeric characters and
+	// hyphens; 1-64 characters)
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The condition that fires this Trigger
+	//
+	// This member is required.
+	Condition TriggerCondition
+
+	// Timestamp when this Trigger was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The status of this Trigger
+	//
+	// This member is required.
+	Status *string
+
+	// Generic resource identifier (allows alphanumeric characters, hyphens, and
+	// underscores; 1-128 characters)
+	//
+	// This member is required.
+	TriggerId *string
+
+	// How this Trigger fires
+	//
+	// This member is required.
+	Type *string
+
+	// Timestamp when this Trigger was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Defines the firing condition for a Trigger
+//
+// The following types satisfy this interface:
+//
+//	TriggerConditionMemberSchedule
+type TriggerCondition interface {
+	isTriggerCondition()
+}
+
+// Time-based firing condition
+type TriggerConditionMemberSchedule struct {
+	Value ScheduleCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionMemberSchedule) isTriggerCondition() {}
+
 // Represents a usage metric with its configured limit and current usage value.
 type UsageMetric struct {
 
@@ -3115,4 +3192,5 @@ func (*UnknownUnionMember) isSendMessageEvents()                    {}
 func (*UnknownUnionMember) isServiceConfiguration()                 {}
 func (*UnknownUnionMember) isServiceDetails()                       {}
 func (*UnknownUnionMember) isServiceNowServiceAuthorizationConfig() {}
+func (*UnknownUnionMember) isTriggerCondition()                     {}
 func (*UnknownUnionMember) isUserMessageBlock()                     {}

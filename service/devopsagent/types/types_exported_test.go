@@ -539,6 +539,24 @@ func ExampleServiceNowServiceAuthorizationConfig_outputUsage() {
 
 var _ *types.ServiceNowOAuthClientCredentialsConfig
 
+func ExampleTriggerCondition_outputUsage() {
+	var union types.TriggerCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerConditionMemberSchedule:
+		_ = v.Value // Value is types.ScheduleCondition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ScheduleCondition
+
 func ExampleUserMessageBlock_outputUsage() {
 	var union types.UserMessageBlock
 	// type switches can be used to check the union value

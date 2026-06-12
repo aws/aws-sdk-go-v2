@@ -5840,6 +5840,63 @@ type IcebergStructField struct {
 	noSmithyDocumentSerde
 }
 
+// The Apache Iceberg table metadata, including format version, table identifier,
+// schemas, partition specifications, sort orders, and table properties. This
+// structure captures the current state of an Iceberg table's metadata as managed
+// by the Glue Data Catalog.
+type IcebergTableMetadata struct {
+
+	// The identifier of the schema that is currently active for the Iceberg table.
+	// Matches an entry in Schemas .
+	CurrentSchemaId int32
+
+	// The identifier of the sort order that is currently used by default when writing
+	// new data to the Iceberg table.
+	DefaultSortOrderId int32
+
+	// The identifier of the partition specification that is currently used by default
+	// when writing new data to the Iceberg table.
+	DefaultSpecId int32
+
+	// The Apache Iceberg table format version, such as 1 or 2 . Determines the set of
+	// features and on-disk layout supported by the table.
+	FormatVersion *string
+
+	// The highest column identifier that has been assigned in the Iceberg table's
+	// schema, used to ensure unique IDs as new columns are added.
+	LastColumnId int32
+
+	// The highest partition field identifier that has been assigned across the
+	// table's partition specifications.
+	LastPartitionId int32
+
+	// The base S3 location where the Iceberg table's data and metadata files are
+	// stored.
+	Location *string
+
+	// The list of partition specifications that have been associated with the Iceberg
+	// table over its history, supporting partition evolution.
+	PartitionSpecs []IcebergPartitionSpec
+
+	// A map of key-value pairs that define table-level properties and configuration
+	// settings for the Iceberg table.
+	Properties map[string]string
+
+	// The list of schemas that have been associated with the Iceberg table over its
+	// history, supporting schema evolution.
+	Schemas []IcebergSchema
+
+	// The list of sort order specifications that have been associated with the
+	// Iceberg table over its history.
+	SortOrders []IcebergSortOrder
+
+	// The unique identifier (UUID) for the Iceberg table, assigned when the table is
+	// created and used to track the table across metadata updates.
+	TableUuid *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a complete set of updates to be applied to an Iceberg table, including
 // schema changes, partitioning modifications, sort order adjustments, location
 // updates, and property changes.
@@ -11122,6 +11179,12 @@ type Table struct {
 	// A FederatedTable structure that references an entity outside the Glue Data
 	// Catalog.
 	FederatedTable *FederatedTable
+
+	// The latest Apache Iceberg table metadata for the table, including format
+	// version, schemas, partition specifications, and sort orders. This field is
+	// populated for Iceberg tables and reflects the current state of the table's
+	// Iceberg metadata.
+	IcebergTableMetadata *IcebergTableMetadata
 
 	// Indicates a table is a MaterializedView .
 	IsMaterializedView *bool

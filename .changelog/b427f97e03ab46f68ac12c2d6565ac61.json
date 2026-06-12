@@ -1,0 +1,8 @@
+{
+    "id": "b427f97e-03ab-46f6-8ac1-2c2d6565ac61",
+    "type": "feature",
+    "description": "Added support for inline request payloads to the InvokeEndpointAsync operation to allow users to provide the inference payload directly in the request Body (up to 128,000 bytes) as an alternative to uploading the payload to Amazon S3 and passing InputLocation.",
+    "modules": [
+        "service/sagemakerruntime"
+    ]
+}

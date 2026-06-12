@@ -82,11 +82,26 @@ type GetBatchEvaluationOutput struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []types.Evaluator
 
+	// Customer-facing execution summary clustering result written to S3.
+	ExecutionSummaryResult *types.ExecutionSummaryClusteringResultContent
+
+	// Unified customer-facing clustering result written to S3.
+	FailureAnalysisResult *types.FailureAnalysisResultContent
+
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []types.Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The output configuration specifying where evaluation results are written.
 	OutputConfig types.OutputConfig
 
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
+
+	// Customer-facing user intent clustering result written to S3.
+	UserIntentResult *types.UserIntentClusteringResultContent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

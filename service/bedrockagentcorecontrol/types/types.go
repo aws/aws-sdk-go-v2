@@ -757,6 +757,18 @@ type CloudWatchOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for periodic batch evaluation clustering, specifying how often
+// clustering jobs run.
+type ClusteringConfig struct {
+
+	// The list of frequencies at which clustering batch evaluations are triggered.
+	//
+	// This member is required.
+	Frequencies []ClusteringFrequency
+
+	noSmithyDocumentSerde
+}
+
 // The source code configuration that specifies the location and details of the
 // code to be executed.
 //
@@ -3738,6 +3750,18 @@ type InlineExamplesSource struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to an insight analysis to run against sessions.
+type Insight struct {
+
+	// Canonical insight identifiers using the Builtin.Insight.* naming convention.
+	// Used by BatchEvaluate, InternalEvaluate, and ServiceEngineEvaluate flows.
+	//
+	// This member is required.
+	InsightId *string
+
+	noSmithyDocumentSerde
+}
+
 // The interceptor configuration.
 //
 // The following types satisfy this interface:
@@ -5156,12 +5180,18 @@ type OnlineEvaluationConfigSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The clustering configuration for periodic batch evaluation.
+	ClusteringConfig *ClusteringConfig
+
 	//  The description of the online evaluation configuration.
 	Description *string
 
 	//  The reason for failure if the online evaluation configuration execution
 	// failed.
 	FailureReason *string
+
+	// The list of insight types configured for this evaluation.
+	Insights []Insight
 
 	noSmithyDocumentSerde
 }
