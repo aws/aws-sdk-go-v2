@@ -1,3 +1,7 @@
+# v1.44.0 (2026-06-12)
+
+* **Feature**: Added tagging and CMK support for optimizations and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior
+
 # v1.43.0 (2026-06-11)
 
 * **Feature**: Supports deterministic metadata for AgentCore Memory

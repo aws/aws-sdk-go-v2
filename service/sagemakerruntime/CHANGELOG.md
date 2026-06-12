@@ -1,3 +1,7 @@
+# v1.41.0 (2026-06-12)
+
+* **Feature**: Added support for inline request payloads to the InvokeEndpointAsync operation to allow users to provide the inference payload directly in the request Body (up to 128,000 bytes) as an alternative to uploading the payload to Amazon S3 and passing InputLocation.
+
 # v1.40.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

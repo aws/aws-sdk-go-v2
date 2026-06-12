@@ -1,8 +1,0 @@
-{
-    "id": "caa917f0-c42e-47f7-9e1a-d1f8bbee5f8a",
-    "type": "documentation",
-    "description": "Updating documentation for select service-specific credential APIs",
-    "modules": [
-        "service/iam"
-    ]
-}

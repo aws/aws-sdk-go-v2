@@ -1,8 +1,0 @@
-{
-    "id": "cd2ed78f-bf3b-41c7-90b4-aea92f0a633f",
-    "type": "feature",
-    "description": "Update KeyARN in DeliveryStreamEncryptionConfigurationInput to accept KMS key ARNs only (not alias ARNs), matching service behavior.",
-    "modules": [
-        "service/firehose"
-    ]
-}

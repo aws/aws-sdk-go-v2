@@ -1,3 +1,7 @@
+# v1.7.0 (2026-06-12)
+
+* **Feature**: Adds support for Trigger CRUD APIs (CreateTrigger, GetTrigger, UpdateTrigger, DeleteTrigger, ListTriggers) for managing schedule-based automation triggers in DevOps Agent agent spaces.
+
 # v1.6.0 (2026-06-08)
 
 * **Feature**: Add Asset APIs for managing versioned assets and asset files in AWS DevOps Agent agent spaces.

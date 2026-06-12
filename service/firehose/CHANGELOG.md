@@ -1,3 +1,7 @@
+# v1.44.0 (2026-06-12)
+
+* **Feature**: Update KeyARN in DeliveryStreamEncryptionConfigurationInput to accept KMS key ARNs only (not alias ARNs), matching service behavior.
+
 # v1.43.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

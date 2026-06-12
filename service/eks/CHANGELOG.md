@@ -1,3 +1,7 @@
+# v1.86.0 (2026-06-12)
+
+* **Feature**: Patches missing enum values for EKS updates
+
 # v1.85.0 (2026-06-11)
 
 * **Feature**: Introduce new CreateCluster parameters for Amazon EKS local clusters on AWS Outposts. Added etcdInstanceType for configuring the EC2 instance type for dedicated etcd instances, and spreadLevel for configuring the placement group spread level for Kubernetes control plane and etcd instances.

@@ -1,8 +1,0 @@
-{
-    "id": "f39a8392-a44d-4a6e-b51d-66aac676bc44",
-    "type": "feature",
-    "description": "Patches missing enum values for EKS updates",
-    "modules": [
-        "service/eks"
-    ]
-}

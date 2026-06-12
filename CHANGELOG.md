@@ -1,3 +1,25 @@
+# Release (2026-06-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.40.0](service/acm/CHANGELOG.md#v1400-2026-06-12)
+  * **Feature**: Certificate transparency logging opt-out is no longer available. Per compliance requirements, all public ACM certificates are automatically recorded in certificate transparency logs. The CertificateTransparencyLoggingPreference option is deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.30.0](service/bedrockagentcore/CHANGELOG.md#v1300-2026-06-12)
+  * **Feature**: Added tagging and CMK support across optimization, an explanation field in recommendation output, and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.44.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1440-2026-06-12)
+  * **Feature**: Added tagging and CMK support for optimizations and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.7.0](service/devopsagent/CHANGELOG.md#v170-2026-06-12)
+  * **Feature**: Adds support for Trigger CRUD APIs (CreateTrigger, GetTrigger, UpdateTrigger, DeleteTrigger, ListTriggers) for managing schedule-based automation triggers in DevOps Agent agent spaces.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.86.0](service/eks/CHANGELOG.md#v1860-2026-06-12)
+  * **Feature**: Patches missing enum values for EKS updates
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.44.0](service/firehose/CHANGELOG.md#v1440-2026-06-12)
+  * **Feature**: Update KeyARN in DeliveryStreamEncryptionConfigurationInput to accept KMS key ARNs only (not alias ARNs), matching service behavior.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.144.0](service/glue/CHANGELOG.md#v11440-2026-06-12)
+  * **Feature**: Adds support for retrieving Apache Iceberg table metadata via GetTable. Use the new AttributesToGet parameter with LATEST ICEBERG METADATA to receive schema, partition specs, sort orders, and table properties in the response.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.54.5](service/iam/CHANGELOG.md#v1545-2026-06-12)
+  * **Documentation**: Updating documentation for select service-specific credential APIs
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.41.0](service/sagemakerruntime/CHANGELOG.md#v1410-2026-06-12)
+  * **Feature**: Added support for inline request payloads to the InvokeEndpointAsync operation to allow users to provide the inference payload directly in the request Body (up to 128,000 bytes) as an alternative to uploading the payload to Amazon S3 and passing InputLocation.
+
 # Release (2026-06-11)
 
 ## Module Highlights

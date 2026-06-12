@@ -1,8 +1,0 @@
-{
-    "id": "a6f3eb56-3919-416c-ad04-9670d9341390",
-    "type": "feature",
-    "description": "Added tagging and CMK support across optimization, an explanation field in recommendation output, and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

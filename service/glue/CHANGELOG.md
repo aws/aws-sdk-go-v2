@@ -1,3 +1,7 @@
+# v1.144.0 (2026-06-12)
+
+* **Feature**: Adds support for retrieving Apache Iceberg table metadata via GetTable. Use the new AttributesToGet parameter with LATEST ICEBERG METADATA to receive schema, partition specs, sort orders, and table properties in the response.
+
 # v1.143.1 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
