@@ -90,6 +90,13 @@ aws_secret_access_key = assume_role_w_creds_secret
 role_arn = assume_role_wo_creds_role_arn
 source_profile = assume_role_wo_creds
 
+[profile login_session_creds]
+login_session = login_session_creds_session
+
+[profile assume_role_w_login_session]
+role_arn = assume_role_w_login_session_role_arn
+source_profile = login_session_creds
+
 [profile valid_arn_region]
 s3_use_arn_region=true
 

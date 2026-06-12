@@ -1463,6 +1463,7 @@ func (c *SharedConfig) hasCredentials() bool {
 	case len(c.CredentialSource) != 0:
 	case len(c.CredentialProcess) != 0:
 	case len(c.WebIdentityTokenFile) != 0:
+	case len(c.LoginSession) != 0:
 	case c.hasSSOConfiguration():
 	case c.Credentials.HasKeys():
 	default:
