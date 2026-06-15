@@ -1456,6 +1456,301 @@ type GuardrailAutomatedReasoningValidFinding struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for inline guardrail checks. Specify one or more check types
+// to run against the messages.
+type GuardrailChecksConfig struct {
+
+	// The content filter check configuration.
+	ContentFilter *GuardrailChecksContentFilterConfig
+
+	// The prompt attack check configuration.
+	PromptAttack *GuardrailChecksPromptAttackConfig
+
+	// The sensitive information check configuration.
+	SensitiveInformation *GuardrailChecksSensitiveInformationConfig
+
+	noSmithyDocumentSerde
+}
+
+// A content block within a message to evaluate.
+//
+// The following types satisfy this interface:
+//
+//	GuardrailChecksContentBlockMemberText
+type GuardrailChecksContentBlock interface {
+	isGuardrailChecksContentBlock()
+}
+
+// The text content to evaluate.
+type GuardrailChecksContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GuardrailChecksContentBlockMemberText) isGuardrailChecksContentBlock() {}
+
+// The configuration for a single content filter category to evaluate.
+type GuardrailChecksContentFilterCategoryConfig struct {
+
+	// The content filter category to evaluate.
+	//
+	// This member is required.
+	Category GuardrailChecksContentFilterCategory
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the content filter check, specifying which categories to
+// evaluate.
+type GuardrailChecksContentFilterConfig struct {
+
+	// The content filter categories to evaluate.
+	//
+	// This member is required.
+	Categories []GuardrailChecksContentFilterCategoryConfig
+
+	noSmithyDocumentSerde
+}
+
+// The content filter check results.
+type GuardrailChecksContentFilterResult struct {
+
+	// The per-category content filter results.
+	//
+	// This member is required.
+	Results []GuardrailChecksContentFilterResultEntry
+
+	noSmithyDocumentSerde
+}
+
+// The evaluation result for a single content filter category.
+type GuardrailChecksContentFilterResultEntry struct {
+
+	// The content filter category that was evaluated.
+	//
+	// This member is required.
+	Category GuardrailChecksContentFilterCategory
+
+	// The severity score for the category, ranging from 0.0 to 1.0. Higher values
+	// indicate greater severity.
+	//
+	// This member is required.
+	SeverityScore *float64
+
+	noSmithyDocumentSerde
+}
+
+// The text unit usage for the content filter check.
+type GuardrailChecksContentFilterUsage struct {
+
+	// The number of text units consumed by the content filter check.
+	//
+	// This member is required.
+	TextUnits *int32
+
+	noSmithyDocumentSerde
+}
+
+// A message to evaluate against guardrail checks, containing a role and content
+// blocks.
+type GuardrailChecksMessage struct {
+
+	// The content blocks for the message.
+	//
+	// This member is required.
+	Content []GuardrailChecksContentBlock
+
+	// The role of the message sender.
+	//
+	// This member is required.
+	Role GuardrailChecksRole
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a single prompt attack category to evaluate.
+type GuardrailChecksPromptAttackCategoryConfig struct {
+
+	// The prompt attack category to evaluate.
+	//
+	// This member is required.
+	Category GuardrailChecksPromptAttackCategory
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the prompt attack check, specifying which categories to
+// evaluate.
+type GuardrailChecksPromptAttackConfig struct {
+
+	// The prompt attack categories to evaluate.
+	//
+	// This member is required.
+	Categories []GuardrailChecksPromptAttackCategoryConfig
+
+	noSmithyDocumentSerde
+}
+
+// The prompt attack check results.
+type GuardrailChecksPromptAttackResult struct {
+
+	// The per-category prompt attack results.
+	//
+	// This member is required.
+	Results []GuardrailChecksPromptAttackResultEntry
+
+	noSmithyDocumentSerde
+}
+
+// The evaluation result for a single prompt attack category.
+type GuardrailChecksPromptAttackResultEntry struct {
+
+	// The prompt attack category that was evaluated.
+	//
+	// This member is required.
+	Category GuardrailChecksPromptAttackCategory
+
+	// The severity score for the category, ranging from 0.0 to 1.0. Higher values
+	// indicate greater severity.
+	//
+	// This member is required.
+	SeverityScore *float64
+
+	noSmithyDocumentSerde
+}
+
+// The text unit usage for the prompt attack check.
+type GuardrailChecksPromptAttackUsage struct {
+
+	// The number of text units consumed by the prompt attack check.
+	//
+	// This member is required.
+	TextUnits *int32
+
+	noSmithyDocumentSerde
+}
+
+// The results from the guardrail checks evaluation, organized by check type.
+type GuardrailChecksResults struct {
+
+	// The content filter check results.
+	ContentFilter *GuardrailChecksContentFilterResult
+
+	// The prompt attack check results.
+	PromptAttack *GuardrailChecksPromptAttackResult
+
+	// The sensitive information check results.
+	SensitiveInformation *GuardrailChecksSensitiveInformationResult
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the sensitive information check, specifying which entity
+// types to detect.
+type GuardrailChecksSensitiveInformationConfig struct {
+
+	// The sensitive information entity types to detect.
+	//
+	// This member is required.
+	Entities []GuardrailChecksSensitiveInformationEntityConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a single sensitive information entity type to detect.
+type GuardrailChecksSensitiveInformationEntityConfig struct {
+
+	// The PII entity type to detect.
+	//
+	// This member is required.
+	Type GuardrailChecksSensitiveInformationEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The sensitive information check results.
+type GuardrailChecksSensitiveInformationResult struct {
+
+	// The detected sensitive information entities.
+	//
+	// This member is required.
+	Results []GuardrailChecksSensitiveInformationResultEntry
+
+	// Specifies whether the results were truncated because the number of detected
+	// entities exceeded the maximum limit.
+	Truncated *bool
+
+	noSmithyDocumentSerde
+}
+
+// The detection result for a single sensitive information entity found in the
+// evaluated messages.
+type GuardrailChecksSensitiveInformationResultEntry struct {
+
+	// The start character offset of the detected entity within the content block.
+	//
+	// This member is required.
+	BeginOffset *int32
+
+	// The confidence score for the detection, ranging from 0.0 to 1.0. Higher values
+	// indicate greater confidence.
+	//
+	// This member is required.
+	ConfidenceScore *float64
+
+	// The zero-based index of the content block within the message where the entity
+	// was detected.
+	//
+	// This member is required.
+	ContentIndex *int32
+
+	// The end character offset of the detected entity within the content block.
+	//
+	// This member is required.
+	EndOffset *int32
+
+	// The zero-based index of the message in the input messages array where the
+	// entity was detected.
+	//
+	// This member is required.
+	MessageIndex *int32
+
+	// The PII entity type that was detected.
+	//
+	// This member is required.
+	Type GuardrailChecksSensitiveInformationEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The text unit usage for the sensitive information check.
+type GuardrailChecksSensitiveInformationUsage struct {
+
+	// The number of text units consumed by the sensitive information check.
+	//
+	// This member is required.
+	TextUnits *int32
+
+	noSmithyDocumentSerde
+}
+
+// The text unit usage for the guardrail checks evaluation, organized by check
+// type.
+type GuardrailChecksUsageResults struct {
+
+	// The text unit usage for the content filter check.
+	ContentFilter *GuardrailChecksContentFilterUsage
+
+	// The text unit usage for the prompt attack check.
+	PromptAttack *GuardrailChecksPromptAttackUsage
+
+	// The text unit usage for the sensitive information check.
+	SensitiveInformation *GuardrailChecksSensitiveInformationUsage
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information for a guardrail that you use with the [Converse] operation.
 //
 // [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
@@ -3139,6 +3434,7 @@ func (*UnknownUnionMember) isCountTokensInput()                         {}
 func (*UnknownUnionMember) isDocumentContentBlock()                     {}
 func (*UnknownUnionMember) isDocumentSource()                           {}
 func (*UnknownUnionMember) isGuardrailAutomatedReasoningFinding()       {}
+func (*UnknownUnionMember) isGuardrailChecksContentBlock()              {}
 func (*UnknownUnionMember) isGuardrailContentBlock()                    {}
 func (*UnknownUnionMember) isGuardrailConverseContentBlock()            {}
 func (*UnknownUnionMember) isGuardrailConverseImageSource()             {}

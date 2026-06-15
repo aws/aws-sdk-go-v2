@@ -132,6 +132,10 @@ type CreateWebACLInput struct {
 	// A description of the web ACL that helps with identification.
 	Description *string
 
+	// The monetization configuration for the web ACL. Provide this when any rule in
+	// the web ACL uses the Monetize action.
+	MonetizationConfig *types.MonetizationConfig
+
 	// Specifies the type of DDoS protection to apply to web request data for a web
 	// ACL. For most scenarios, it is recommended to use the default protection level,
 	// ACTIVE_UNDER_DDOS . If a web ACL is associated with multiple Application Load

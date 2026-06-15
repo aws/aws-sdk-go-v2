@@ -1,0 +1,8 @@
+{
+    "id": "53b1c471-5019-433d-b1a1-9ec68fa916fc",
+    "type": "feature",
+    "description": "AWS Transform for VMware now supports Amazon FSx for NetApp ONTAP as a target storage. Customers can migrate source server disks directly to FSx for NetApp ONTAP iSCSI LUNs. Target storage is configurable per source server, and compute, network, and storage migrate together in coordinated waves.",
+    "modules": [
+        "service/mgn"
+    ]
+}

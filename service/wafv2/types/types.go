@@ -995,6 +995,21 @@ type CountAction struct {
 	noSmithyDocumentSerde
 }
 
+// The cryptocurrency payment configuration for AI bot monetization. Contains the
+// list of blockchain payment networks where you receive payments.
+type CryptoConfig struct {
+
+	// The blockchain payment networks configured to receive payments. You can specify
+	// 1 to 2 networks. All networks must be in the same environment-either all
+	// production networks (Base, Solana) or all test networks (Base Sepolia, Solana
+	// Devnet).
+	//
+	// This member is required.
+	PaymentNetworks []PaymentNetwork
+
+	noSmithyDocumentSerde
+}
+
 // A custom header for custom request and response handling. This is used in CustomResponse and CustomRequestHandling.
 type CustomHTTPHeader struct {
 
@@ -1101,6 +1116,34 @@ type CustomResponseBody struct {
 	//
 	// This member is required.
 	ContentType ResponseContentType
+
+	noSmithyDocumentSerde
+}
+
+// A single data point in a revenue time series, representing aggregated
+// monetization metrics for a specific time interval.
+type DataPointEntry struct {
+
+	// The bot category for this data point, when grouped by category.
+	Category *string
+
+	// The timestamp for this data point.
+	Date *time.Time
+
+	// The group-by dimension value for this data point.
+	GroupByValue *string
+
+	// The intent classification for this data point, when grouped by intent.
+	Intent *string
+
+	// The number of HTTP 402 Payment Required responses served during this interval.
+	MonetizeServedCount int64
+
+	// The number of successfully settled payments during this interval.
+	SettledCount int64
+
+	// The total revenue amount during this interval in the specified currency.
+	TotalAmount *string
 
 	noSmithyDocumentSerde
 }
@@ -2961,6 +3004,118 @@ type MobileSdkRelease struct {
 	noSmithyDocumentSerde
 }
 
+// The monetization configuration for a web ACL or rule group. Specifies the
+// cryptocurrency payment networks and currency mode for AI bot monetization. You
+// must provide this configuration when any rule in the web ACL or rule group uses
+// the Monetize action.
+type MonetizationConfig struct {
+
+	// The cryptocurrency payment configuration, including the blockchain networks and
+	// wallet addresses where you receive payments.
+	CryptoConfig *CryptoConfig
+
+	// Specifies whether the configuration uses real or test currency. Set to REAL to
+	// settle payments in USDC on production blockchain networks (Base, Solana). Set to
+	// TEST to settle on testnet networks (Base Sepolia, Solana Devnet) with tokens
+	// that have no monetary value. If not specified, defaults to REAL .
+	CurrencyMode CurrencyMode
+
+	noSmithyDocumentSerde
+}
+
+// A filter for narrowing monetization statistics and settlement record results.
+// Specify a filter name and one or more values to match.
+//
+// Filter behavior:
+//
+//   - Multiple values within one filter: OR (match any)
+//
+//   - Multiple filters: AND (all must match)
+//
+//   - No duplicate filter names allowed (rejected with error)
+//
+//   - Duplicate values within a filter are silently deduplicated
+//
+//   - If no CurrencyMode filter is specified, defaults to REAL
+type MonetizationFilter struct {
+
+	// The filter name. Format: Key is a string, Value is a list of strings.
+	//
+	// Enum-restricted (invalid values rejected):
+	//
+	//   - CurrencyMode : REAL , TEST
+	//
+	//   - ChainName : BASE , SOLANA , BASE_SEPOLIA , SOLANA_DEVNET
+	//
+	//   - SettlementStatus : SETTLED , PENDING , FAILED , SERVICE_ERROR ,
+	//   SKIPPED_ORIGIN_ERROR , DUPLICATE
+	//
+	//   - HttpSourceName : CF , ALB , APIGW , APPRUNNER , COGNITO , VERIFIED_ACCESS
+	//
+	// ARN-validated:
+	//
+	//   - WebACLArn : valid WAFv2 web ACL ARN
+	//
+	// Free-text (any string up to 256 chars):
+	//
+	//   - SourceName : The name of the bot. Populated from Bot Control verified bot
+	//   labels.
+	//
+	//   - SourceCategory : The category classification of the bot. From Bot Control
+	//   categorization.
+	//
+	//   - Intent : The declared intent of the bot request.
+	//
+	//   - Organization : The organization operating the bot.
+	//
+	//   - UriPathPrefix : The URI path of the request that was monetized.
+	//
+	//   - RequestId : The WAF request ID associated with the transaction. Matches the
+	//   requestId in WAF logs. Pattern: ^[a-zA-Z0-9:._\-=+/]+$
+	//
+	//   - TransactionId : The blockchain transaction identifier. Pattern:
+	//   ^[a-zA-Z0-9:._\-=+/]+$
+	//
+	//   - TerminatingRuleName : The name of the WAF rule that triggered the Monetize
+	//   action.
+	//
+	//   - PayerAddress : The blockchain wallet address of the paying client. Pattern:
+	//   ^[a-zA-Z0-9:._\-=+/]+$
+	//
+	//   - HttpSourceId : The identifier of the Amazon Web Services resource associated
+	//   with the web ACL (for example, CloudFront distribution ID).
+	//
+	// This member is required.
+	Name *string
+
+	// The values to filter on. Specify as a list of strings. Results match any of the
+	// specified values (OR logic). Duplicate values are silently deduplicated.
+	// Maximum: 20 values per filter.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the monetize action settings for a rule. When WAF applies this
+// action, it returns an HTTP 402 Payment Required response containing pricing
+// information that the requesting client uses to complete payment and gain access
+// to the resource. This is a terminating action-if the client does not complete
+// the 402 payment flow, the request is blocked. This action is available only for
+// web ACLs associated with Amazon CloudFront distributions. You must configure a
+// MonetizationConfig on the web ACL or rule group before adding rules that use
+// this action. You cannot use the Monetize action for rate-based rules.
+type MonetizeAction struct {
+
+	// An integer multiplier applied to the base price defined in the web ACL's
+	// MonetizationConfig . The effective price for the request is the base price
+	// multiplied by this value. Specify as a string. Valid values: 1 to 100.
+	PriceMultiplier *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that WAF should do nothing. This is used for the OverrideAction
 // setting on a Rulewhen the rule uses a rule group reference statement.
 //
@@ -3110,6 +3265,39 @@ type PathStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// A blockchain payment network configuration for receiving AI bot monetization
+// payments. Specifies the blockchain chain, your wallet address on that chain, and
+// the price per request.
+type PaymentNetwork struct {
+
+	// The blockchain network for receiving payments. Production networks: BASE (Base
+	// mainnet), SOLANA (Solana mainnet). Test networks: BASE_SEPOLIA (Base Sepolia
+	// testnet), SOLANA_DEVNET (Solana Devnet).
+	//
+	// This member is required.
+	Chain BlockchainChain
+
+	// The price configuration for this payment network. Currently supports a single
+	// price entry in USDC.
+	//
+	// This member is required.
+	Prices []Price
+
+	// Your wallet address on the specified blockchain where payments are sent. For
+	// EVM chains (Base, Base Sepolia), provide a valid Ethereum address (42 characters
+	// including 0x prefix). For Solana chains, provide a valid Base58-encoded public
+	// key (32-44 characters).
+	//
+	// For EVM addresses, WAF performs EIP-55 checksum validation for typo detection
+	// when the address uses a mix of lower and upper case letters. You can bypass this
+	// validation by providing the address in all lowercase or all uppercase.
+	//
+	// This member is required.
+	WalletAddress *string
+
+	noSmithyDocumentSerde
+}
+
 // The name of a field in the request payload that contains part or all of your
 // customer's primary phone number.
 //
@@ -3141,6 +3329,24 @@ type PhoneNumberField struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The price per request for a payment network, specifying the amount and
+// cryptocurrency.
+type Price struct {
+
+	// The price per request as a decimal string in the specified currency. Minimum:
+	// 0.001. Maximum: 999999999.999. Supports up to 3 decimal places.
+	//
+	// This member is required.
+	Amount *string
+
+	// The cryptocurrency for payment. Currently only USDC is supported.
+	//
+	// This member is required.
+	Currency CryptoCurrency
 
 	noSmithyDocumentSerde
 }
@@ -4259,6 +4465,58 @@ type ResponseInspectionStatusCode struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of AI bot monetization revenue, including total revenue, revenue by
+// verification tier, and request counts.
+type RevenueBreakdown struct {
+
+	// The currency of the revenue amounts.
+	Currency Currency
+
+	// The total revenue amount in the specified currency.
+	TotalAmount *string
+
+	// The total number of HTTP 402 Payment Required responses served to AI agents.
+	TotalMonetizeServed int64
+
+	// The total number of successfully settled payment transactions.
+	TotalSettled int64
+
+	// The revenue amount from unverified AI bots.
+	UnverifiedAmount *string
+
+	// The revenue amount from verified AI bots.
+	VerifiedAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// Revenue statistics for a single content path, including the path, revenue
+// amount, and request count.
+type RevenuePathStatistics struct {
+
+	// The total revenue amount from this path in the specified currency.
+	//
+	// This member is required.
+	Amount *string
+
+	// The URI path.
+	//
+	// This member is required.
+	Path *string
+
+	// The percentage of total revenue from this path.
+	//
+	// This member is required.
+	Percentage float64
+
+	// The number of monetized requests to this path.
+	//
+	// This member is required.
+	RequestCount int64
+
+	noSmithyDocumentSerde
+}
+
 // A single rule, which you can use in a WebACL or RuleGroup to identify web requests that you
 // want to manage in some way. Each rule includes one top-level Statementthat WAF uses to
 // identify matching web requests, and parameters that govern how WAF handles them.
@@ -4383,6 +4641,13 @@ type RuleAction struct {
 	// Instructs WAF to count the web request and then continue evaluating the request
 	// using the remaining rules in the web ACL.
 	Count *CountAction
+
+	// Instructs WAF to return an HTTP 402 Payment Required response with a price
+	// manifest. The requesting client can complete payment and resubmit the request to
+	// gain access. This is a terminating action-requests that do not complete payment
+	// are blocked. This action is available only for web ACLs associated with Amazon
+	// CloudFront distributions and requires a MonetizationConfig on the web ACL.
+	Monetize *MonetizeAction
 
 	noSmithyDocumentSerde
 }
@@ -4515,6 +4780,12 @@ type RuleGroup struct {
 	//
 	// :
 	LabelNamespace *string
+
+	// The monetization configuration for the rule group. Required when any rule in
+	// the rule group uses the Monetize action. When a rule group with a
+	// MonetizationConfig is used in a web ACL, the rule group's configuration applies
+	// to rules within that group unless overridden at the web ACL level.
+	MonetizationConfig *MonetizationConfig
 
 	// The Rule statements used to identify the web requests that you want to manage. Each
 	// rule includes one top-level statement that WAF uses to identify matching web
@@ -4673,6 +4944,98 @@ type SampledHTTPRequest struct {
 	noSmithyDocumentSerde
 }
 
+// A single settlement transaction record for AI bot monetization. Contains
+// details about the payment including timestamp, amount, status, and the parties
+// involved.
+type SettlementRecord struct {
+
+	// The payment amount in the specified currency.
+	//
+	// This member is required.
+	Amount *string
+
+	// The status of the settlement. Possible values:
+	//
+	//   - SETTLED - The payment was successfully settled on the blockchain and the
+	//   transfer from the payer's wallet to the publisher's wallet is confirmed. The
+	//   TransactionId field contains the on-chain transaction hash. Content is served
+	//   to the client.
+	//
+	//   - PENDING - The blockchain transaction has been submitted but not yet
+	//   confirmed on-chain. This is a transient state that automatically resolves to
+	//   either SETTLED or FAILED . No action is required. While pending, content is
+	//   not served and the API returns a 402 response. Clients can retry the request.
+	//
+	//   - FAILED - The payment settlement was attempted but failed. Possible causes
+	//   include insufficient funds, an expired payment authorization, or a reverted
+	//   blockchain transaction. The failureReason field contains a machine-readable
+	//   error code. Content is not served.
+	//
+	//   - SERVICE_ERROR - Settlement could not be completed due to an internal service
+	//   issue or an issue with the payment network. Content is not served. The client's
+	//   payment authorization remains valid and the request can be retried.
+	//
+	//   - SKIPPED_ORIGIN_ERROR - The origin returned a non-2xx response, so settlement
+	//   was intentionally skipped. The client is not charged.
+	//
+	//   - DUPLICATE - A prior request with the same payment payload has already been
+	//   settled. This status typically appears when a previous attempt timed out but the
+	//   payment was ultimately processed. The client is not charged again.
+	//
+	// This member is required.
+	Status SettlementStatus
+
+	// The timestamp when the settlement was recorded.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The content path that was accessed.
+	ContentPath *string
+
+	// The currency of the payment amount.
+	Currency Currency
+
+	// The declared intent of the AI bot request.
+	Intent *string
+
+	// The blockchain network on which the settlement occurred.
+	Network *string
+
+	// The organization associated with the AI bot.
+	Organization *string
+
+	// The blockchain wallet address of the paying AI agent.
+	PayerAddress *string
+
+	// The WAF request ID associated with this settlement.
+	RequestId *string
+
+	// The timestamp of the original web request.
+	RequestTimestamp *time.Time
+
+	// The category of the AI bot source.
+	SourceCategory *string
+
+	// The name of the AI bot that made the payment.
+	SourceName *string
+
+	// The blockchain transaction identifier. You can use this to verify the
+	// transaction on a blockchain explorer.
+	TransactionId *string
+
+	// Whether the AI bot's identity was verified.
+	Verified bool
+
+	// Your receiving wallet address.
+	WalletAddress *string
+
+	// The ARN of the web ACL that processed the request.
+	WebAclArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Inspect one of the headers in the web request, identified by name, for example,
 // User-Agent or Referer . The name isn't case sensitive.
 //
@@ -4753,6 +5116,48 @@ type SizeConstraintStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
+}
+
+// Revenue statistics for a single AI bot source, including the bot name, revenue
+// amount, request count, and verification status.
+type SourceStatistics struct {
+
+	// The total revenue amount from this source in the specified currency.
+	//
+	// This member is required.
+	Amount *string
+
+	// The percentage of total revenue from this source.
+	//
+	// This member is required.
+	Percentage float64
+
+	// The number of monetized requests from this source.
+	//
+	// This member is required.
+	RequestCount int64
+
+	// The name of the AI bot.
+	//
+	// This member is required.
+	SourceName *string
+
+	// The value for the group-by dimension, when grouping is applied.
+	GroupByValue *string
+
+	// The declared intent of the AI bot (for example, summarize, index, or train).
+	Intent *string
+
+	// The organization associated with the AI bot.
+	Organization *string
+
+	// The category of this AI bot source.
+	SourceCategory *string
+
+	// Whether the AI bot's identity was verified.
+	Verified bool
 
 	noSmithyDocumentSerde
 }
@@ -5449,6 +5854,11 @@ type WebACL struct {
 	// properties RetrofittedByFirewallManager , PreProcessFirewallManagerRuleGroups ,
 	// and PostProcessFirewallManagerRuleGroups .
 	ManagedByFirewallManager bool
+
+	// The monetization configuration for the web ACL. Required when any rule in the
+	// web ACL uses the Monetize action. Specifies the cryptocurrency payment networks
+	// and currency mode for AI bot monetization.
+	MonetizationConfig *MonetizationConfig
 
 	// Configures the level of DDoS protection that applies to web ACLs associated
 	// with Application Load Balancers.

@@ -101,6 +101,9 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// Request to configure the internet protocol to IPv4 or IPv6.
 	InternetProtocol types.InternetProtocol
 
+	// Request to configure storage during Replication Settings template creation.
+	StorageConfiguration *types.StorageConfiguration
+
 	// Request to store snapshot on local zone during Replication Settings template
 	// creation.
 	StoreSnapshotOnLocalZone *bool
@@ -160,6 +163,9 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template Staging Area Tags.
 	StagingAreaTags map[string]string
+
+	// Replication Configuration template storage configuration.
+	StorageConfiguration *types.StorageConfiguration
 
 	// Replication Configuration template store snapshot on local zone.
 	StoreSnapshotOnLocalZone *bool

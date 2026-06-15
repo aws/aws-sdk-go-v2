@@ -1093,6 +1093,13 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 		}
 	}
 
+	if v.StorageConfiguration != nil {
+		ok := object.Key("storageConfiguration")
+		if err := awsRestjson1_serializeDocumentStorageConfiguration(v.StorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StoreSnapshotOnLocalZone != nil {
 		ok := object.Key("storeSnapshotOnLocalZone")
 		ok.Boolean(*v.StoreSnapshotOnLocalZone)
@@ -8851,6 +8858,13 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 		}
 	}
 
+	if v.StorageConfiguration != nil {
+		ok := object.Key("storageConfiguration")
+		if err := awsRestjson1_serializeDocumentStorageConfiguration(v.StorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StoreSnapshotOnLocalZone != nil {
 		ok := object.Key("storeSnapshotOnLocalZone")
 		ok.Boolean(*v.StoreSnapshotOnLocalZone)
@@ -9016,6 +9030,13 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 		}
 	}
 
+	if v.StorageConfiguration != nil {
+		ok := object.Key("storageConfiguration")
+		if err := awsRestjson1_serializeDocumentStorageConfiguration(v.StorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StoreSnapshotOnLocalZone != nil {
 		ok := object.Key("storeSnapshotOnLocalZone")
 		ok.Boolean(*v.StoreSnapshotOnLocalZone)
@@ -9119,9 +9140,24 @@ func awsRestjson1_serializeOpDocumentUpdateSourceServerInput(v *UpdateSourceServ
 		}
 	}
 
+	if v.FqdnForActionFramework != nil {
+		ok := object.Key("fqdnForActionFramework")
+		ok.String(*v.FqdnForActionFramework)
+	}
+
+	if v.Platform != nil {
+		ok := object.Key("platform")
+		ok.String(*v.Platform)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
+	}
+
+	if v.UserProvidedID != nil {
+		ok := object.Key("userProvidedID")
+		ok.String(*v.UserProvidedID)
 	}
 
 	return nil
@@ -9584,6 +9620,23 @@ func awsRestjson1_serializeDocumentEnrichmentTargetS3Configuration(v *types.Enri
 	if v.S3Key != nil {
 		ok := object.Key("s3Key")
 		ok.String(*v.S3Key)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFsxOntapConfiguration(v *types.FsxOntapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialsSecretArn != nil {
+		ok := object.Key("credentialsSecretArn")
+		ok.String(*v.CredentialsSecretArn)
+	}
+
+	if v.StorageVirtualMachineId != nil {
+		ok := object.Key("storageVirtualMachineId")
+		ok.String(*v.StorageVirtualMachineId)
 	}
 
 	return nil
@@ -10658,6 +10711,25 @@ func awsRestjson1_serializeDocumentStartTestRequestSourceServerIDs(v []string, v
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FsxOntapConfiguration != nil {
+		ok := object.Key("fsxOntapConfiguration")
+		if err := awsRestjson1_serializeDocumentFsxOntapConfiguration(v.FsxOntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.StorageType) > 0 {
+		ok := object.Key("storageType")
+		ok.String(string(v.StorageType))
+	}
+
 	return nil
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "3160b4c9-906f-4f17-9d1d-e8aecd8f9da6",
+    "type": "feature",
+    "description": "Added a validation for null check for ImageIds in DescribeWorkspaceImages API request parameters.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

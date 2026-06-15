@@ -746,6 +746,18 @@ func TestCheckSnapshot_DeleteGlossaryTerm(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLineageEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteListing(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteListing(context.Background(), nil, func(o *Options) {
@@ -2994,6 +3006,18 @@ func TestUpdateSnapshot_DeleteGlossaryTerm(t *testing.T) {
 	_, err := svc.DeleteGlossaryTerm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteGlossaryTerm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLineageEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLineageEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLineageEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

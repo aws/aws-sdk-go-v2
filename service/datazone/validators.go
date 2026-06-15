@@ -1150,6 +1150,26 @@ func (m *validateOpDeleteGlossaryTerm) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLineageEvent struct {
+}
+
+func (*validateOpDeleteLineageEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLineageEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLineageEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLineageEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteListing struct {
 }
 
@@ -3976,6 +3996,10 @@ func addOpDeleteGlossaryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGlossaryTermValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGlossaryTerm{}, middleware.After)
+}
+
+func addOpDeleteLineageEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLineageEvent{}, middleware.After)
 }
 
 func addOpDeleteListingValidationMiddleware(stack *middleware.Stack) error {
@@ -8128,6 +8152,24 @@ func validateOpDeleteGlossaryTermInput(v *DeleteGlossaryTermInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlossaryTermInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLineageEventInput(v *DeleteLineageEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLineageEventInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}

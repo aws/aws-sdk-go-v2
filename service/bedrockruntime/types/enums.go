@@ -197,6 +197,153 @@ func (GuardrailAutomatedReasoningLogicWarningType) Values() []GuardrailAutomated
 	}
 }
 
+type GuardrailChecksContentFilterCategory string
+
+// Enum values for GuardrailChecksContentFilterCategory
+const (
+	GuardrailChecksContentFilterCategoryViolence   GuardrailChecksContentFilterCategory = "VIOLENCE"
+	GuardrailChecksContentFilterCategoryHate       GuardrailChecksContentFilterCategory = "HATE"
+	GuardrailChecksContentFilterCategorySexual     GuardrailChecksContentFilterCategory = "SEXUAL"
+	GuardrailChecksContentFilterCategoryMisconduct GuardrailChecksContentFilterCategory = "MISCONDUCT"
+	GuardrailChecksContentFilterCategoryInsults    GuardrailChecksContentFilterCategory = "INSULTS"
+)
+
+// Values returns all known values for GuardrailChecksContentFilterCategory. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailChecksContentFilterCategory) Values() []GuardrailChecksContentFilterCategory {
+	return []GuardrailChecksContentFilterCategory{
+		"VIOLENCE",
+		"HATE",
+		"SEXUAL",
+		"MISCONDUCT",
+		"INSULTS",
+	}
+}
+
+type GuardrailChecksPromptAttackCategory string
+
+// Enum values for GuardrailChecksPromptAttackCategory
+const (
+	GuardrailChecksPromptAttackCategoryJailbreak       GuardrailChecksPromptAttackCategory = "JAILBREAK"
+	GuardrailChecksPromptAttackCategoryPromptInjection GuardrailChecksPromptAttackCategory = "PROMPT_INJECTION"
+	GuardrailChecksPromptAttackCategoryPromptLeakage   GuardrailChecksPromptAttackCategory = "PROMPT_LEAKAGE"
+)
+
+// Values returns all known values for GuardrailChecksPromptAttackCategory. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailChecksPromptAttackCategory) Values() []GuardrailChecksPromptAttackCategory {
+	return []GuardrailChecksPromptAttackCategory{
+		"JAILBREAK",
+		"PROMPT_INJECTION",
+		"PROMPT_LEAKAGE",
+	}
+}
+
+type GuardrailChecksRole string
+
+// Enum values for GuardrailChecksRole
+const (
+	GuardrailChecksRoleUser      GuardrailChecksRole = "user"
+	GuardrailChecksRoleAssistant GuardrailChecksRole = "assistant"
+	GuardrailChecksRoleSystem    GuardrailChecksRole = "system"
+)
+
+// Values returns all known values for GuardrailChecksRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailChecksRole) Values() []GuardrailChecksRole {
+	return []GuardrailChecksRole{
+		"user",
+		"assistant",
+		"system",
+	}
+}
+
+type GuardrailChecksSensitiveInformationEntityType string
+
+// Enum values for GuardrailChecksSensitiveInformationEntityType
+const (
+	GuardrailChecksSensitiveInformationEntityTypeAddress                             GuardrailChecksSensitiveInformationEntityType = "ADDRESS"
+	GuardrailChecksSensitiveInformationEntityTypeAge                                 GuardrailChecksSensitiveInformationEntityType = "AGE"
+	GuardrailChecksSensitiveInformationEntityTypeAwsAccessKey                        GuardrailChecksSensitiveInformationEntityType = "AWS_ACCESS_KEY"
+	GuardrailChecksSensitiveInformationEntityTypeAwsSecretKey                        GuardrailChecksSensitiveInformationEntityType = "AWS_SECRET_KEY"
+	GuardrailChecksSensitiveInformationEntityTypeCaHealthNumber                      GuardrailChecksSensitiveInformationEntityType = "CA_HEALTH_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeCaSocialInsuranceNumber             GuardrailChecksSensitiveInformationEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeCreditDebitCardCvv                  GuardrailChecksSensitiveInformationEntityType = "CREDIT_DEBIT_CARD_CVV"
+	GuardrailChecksSensitiveInformationEntityTypeCreditDebitCardExpiry               GuardrailChecksSensitiveInformationEntityType = "CREDIT_DEBIT_CARD_EXPIRY"
+	GuardrailChecksSensitiveInformationEntityTypeCreditDebitCardNumber               GuardrailChecksSensitiveInformationEntityType = "CREDIT_DEBIT_CARD_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeDriverId                            GuardrailChecksSensitiveInformationEntityType = "DRIVER_ID"
+	GuardrailChecksSensitiveInformationEntityTypeEmail                               GuardrailChecksSensitiveInformationEntityType = "EMAIL"
+	GuardrailChecksSensitiveInformationEntityTypeInternationalBankAccountNumber      GuardrailChecksSensitiveInformationEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeIpAddress                           GuardrailChecksSensitiveInformationEntityType = "IP_ADDRESS"
+	GuardrailChecksSensitiveInformationEntityTypeLicensePlate                        GuardrailChecksSensitiveInformationEntityType = "LICENSE_PLATE"
+	GuardrailChecksSensitiveInformationEntityTypeMacAddress                          GuardrailChecksSensitiveInformationEntityType = "MAC_ADDRESS"
+	GuardrailChecksSensitiveInformationEntityTypeName                                GuardrailChecksSensitiveInformationEntityType = "NAME"
+	GuardrailChecksSensitiveInformationEntityTypePassword                            GuardrailChecksSensitiveInformationEntityType = "PASSWORD"
+	GuardrailChecksSensitiveInformationEntityTypePhone                               GuardrailChecksSensitiveInformationEntityType = "PHONE"
+	GuardrailChecksSensitiveInformationEntityTypePin                                 GuardrailChecksSensitiveInformationEntityType = "PIN"
+	GuardrailChecksSensitiveInformationEntityTypeSwiftCode                           GuardrailChecksSensitiveInformationEntityType = "SWIFT_CODE"
+	GuardrailChecksSensitiveInformationEntityTypeUkNationalHealthServiceNumber       GuardrailChecksSensitiveInformationEntityType = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUkNationalInsuranceNumber           GuardrailChecksSensitiveInformationEntityType = "UK_NATIONAL_INSURANCE_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUkUniqueTaxpayerReferenceNumber     GuardrailChecksSensitiveInformationEntityType = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUrl                                 GuardrailChecksSensitiveInformationEntityType = "URL"
+	GuardrailChecksSensitiveInformationEntityTypeUsername                            GuardrailChecksSensitiveInformationEntityType = "USERNAME"
+	GuardrailChecksSensitiveInformationEntityTypeUsBankAccountNumber                 GuardrailChecksSensitiveInformationEntityType = "US_BANK_ACCOUNT_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUsBankRoutingNumber                 GuardrailChecksSensitiveInformationEntityType = "US_BANK_ROUTING_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUsIndividualTaxIdentificationNumber GuardrailChecksSensitiveInformationEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUsPassportNumber                    GuardrailChecksSensitiveInformationEntityType = "US_PASSPORT_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeUsSocialSecurityNumber              GuardrailChecksSensitiveInformationEntityType = "US_SOCIAL_SECURITY_NUMBER"
+	GuardrailChecksSensitiveInformationEntityTypeVehicleIdentificationNumber         GuardrailChecksSensitiveInformationEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+)
+
+// Values returns all known values for
+// GuardrailChecksSensitiveInformationEntityType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailChecksSensitiveInformationEntityType) Values() []GuardrailChecksSensitiveInformationEntityType {
+	return []GuardrailChecksSensitiveInformationEntityType{
+		"ADDRESS",
+		"AGE",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"CREDIT_DEBIT_CARD_CVV",
+		"CREDIT_DEBIT_CARD_EXPIRY",
+		"CREDIT_DEBIT_CARD_NUMBER",
+		"DRIVER_ID",
+		"EMAIL",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"IP_ADDRESS",
+		"LICENSE_PLATE",
+		"MAC_ADDRESS",
+		"NAME",
+		"PASSWORD",
+		"PHONE",
+		"PIN",
+		"SWIFT_CODE",
+		"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		"UK_NATIONAL_INSURANCE_NUMBER",
+		"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+		"URL",
+		"USERNAME",
+		"US_BANK_ACCOUNT_NUMBER",
+		"US_BANK_ROUTING_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"US_PASSPORT_NUMBER",
+		"US_SOCIAL_SECURITY_NUMBER",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+	}
+}
+
 type GuardrailContentFilterConfidence string
 
 // Enum values for GuardrailContentFilterConfidence

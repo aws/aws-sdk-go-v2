@@ -570,6 +570,66 @@ func (m *validateOpGetRegexPatternSet) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRevenueStatistics struct {
+}
+
+func (*validateOpGetRevenueStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRevenueStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRevenueStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRevenueStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRevenueStatisticsSummary struct {
+}
+
+func (*validateOpGetRevenueStatisticsSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRevenueStatisticsSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRevenueStatisticsSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRevenueStatisticsSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRevenueStatisticsTimeSeries struct {
+}
+
+func (*validateOpGetRevenueStatisticsTimeSeries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRevenueStatisticsTimeSeries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRevenueStatisticsTimeSeriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRevenueStatisticsTimeSeriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSampledRequests struct {
 }
 
@@ -825,6 +885,26 @@ func (m *validateOpListRuleGroups) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRuleGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSettlementRecords struct {
+}
+
+func (*validateOpListSettlementRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSettlementRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSettlementRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSettlementRecordsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1182,6 +1262,18 @@ func addOpGetRegexPatternSetValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetRegexPatternSet{}, middleware.After)
 }
 
+func addOpGetRevenueStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRevenueStatistics{}, middleware.After)
+}
+
+func addOpGetRevenueStatisticsSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRevenueStatisticsSummary{}, middleware.After)
+}
+
+func addOpGetRevenueStatisticsTimeSeriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRevenueStatisticsTimeSeries{}, middleware.After)
+}
+
 func addOpGetSampledRequestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSampledRequests{}, middleware.After)
 }
@@ -1232,6 +1324,10 @@ func addOpListResourcesForWebACLValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListRuleGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRuleGroups{}, middleware.After)
+}
+
+func addOpListSettlementRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSettlementRecords{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1710,6 +1806,25 @@ func validateCountAction(v *types.CountAction) error {
 	if v.CustomRequestHandling != nil {
 		if err := validateCustomRequestHandling(v.CustomRequestHandling); err != nil {
 			invalidParams.AddNested("CustomRequestHandling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCryptoConfig(v *types.CryptoConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CryptoConfig"}
+	if v.PaymentNetworks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentNetworks"))
+	} else if v.PaymentNetworks != nil {
+		if err := validatePaymentNetworks(v.PaymentNetworks); err != nil {
+			invalidParams.AddNested("PaymentNetworks", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2452,6 +2567,58 @@ func validateManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement) error
 	}
 }
 
+func validateMonetizationConfig(v *types.MonetizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonetizationConfig"}
+	if v.CryptoConfig != nil {
+		if err := validateCryptoConfig(v.CryptoConfig); err != nil {
+			invalidParams.AddNested("CryptoConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonetizationFilter(v *types.MonetizationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonetizationFilter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonetizationFilterList(v []types.MonetizationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonetizationFilterList"}
+	for i := range v {
+		if err := validateMonetizationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNotStatement(v *types.NotStatement) error {
 	if v == nil {
 		return nil
@@ -2537,6 +2704,48 @@ func validatePasswordField(v *types.PasswordField) error {
 	}
 }
 
+func validatePaymentNetwork(v *types.PaymentNetwork) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentNetwork"}
+	if len(v.Chain) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Chain"))
+	}
+	if v.WalletAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WalletAddress"))
+	}
+	if v.Prices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prices"))
+	} else if v.Prices != nil {
+		if err := validatePrices(v.Prices); err != nil {
+			invalidParams.AddNested("Prices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePaymentNetworks(v []types.PaymentNetwork) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PaymentNetworks"}
+	for i := range v {
+		if err := validatePaymentNetwork(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePhoneNumberField(v *types.PhoneNumberField) error {
 	if v == nil {
 		return nil
@@ -2559,6 +2768,41 @@ func validatePhoneNumberFields(v []types.PhoneNumberField) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberFields"}
 	for i := range v {
 		if err := validatePhoneNumberField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrice(v *types.Price) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Price"}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrices(v []types.Price) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Prices"}
+	for i := range v {
+		if err := validatePrice(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3763,6 +4007,11 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MonetizationConfig != nil {
+		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
+			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3833,6 +4082,11 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	if v.OnSourceDDoSProtectionConfig != nil {
 		if err := validateOnSourceDDoSProtectionConfig(v.OnSourceDDoSProtectionConfig); err != nil {
 			invalidParams.AddNested("OnSourceDDoSProtectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonetizationConfig != nil {
+		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
+			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4244,6 +4498,105 @@ func validateOpGetRegexPatternSetInput(v *GetRegexPatternSetInput) error {
 	}
 }
 
+func validateOpGetRevenueStatisticsInput(v *GetRevenueStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRevenueStatisticsInput"}
+	if len(v.StatisticType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StatisticType"))
+	}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if v.Filters != nil {
+		if err := validateMonetizationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRevenueStatisticsSummaryInput(v *GetRevenueStatisticsSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRevenueStatisticsSummaryInput"}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if v.Filters != nil {
+		if err := validateMonetizationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRevenueStatisticsTimeSeriesInput(v *GetRevenueStatisticsTimeSeriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRevenueStatisticsTimeSeriesInput"}
+	if len(v.StatisticType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StatisticType"))
+	}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if len(v.Interval) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if v.Filters != nil {
+		if err := validateMonetizationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 	if v == nil {
 		return nil
@@ -4469,6 +4822,36 @@ func validateOpListRuleGroupsInput(v *ListRuleGroupsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListRuleGroupsInput"}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSettlementRecordsInput(v *ListSettlementRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSettlementRecordsInput"}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if len(v.Currency) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if v.Filters != nil {
+		if err := validateMonetizationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4726,6 +5109,11 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MonetizationConfig != nil {
+		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
+			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4797,6 +5185,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.OnSourceDDoSProtectionConfig != nil {
 		if err := validateOnSourceDDoSProtectionConfig(v.OnSourceDDoSProtectionConfig); err != nil {
 			invalidParams.AddNested("OnSourceDDoSProtectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonetizationConfig != nil {
+		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
+			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
