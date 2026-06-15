@@ -1,3 +1,7 @@
+# v1.73.0 (2026-06-15)
+
+* **Feature**: AWS WAF now supports AI traffic monetization for CloudFront. Configure payment networks and pricing on your web ACL, use the new Monetize rule action to charge AI agents via x402, and monitor revenue with new GetRevenueStatisticsSummary, GetRevenueStatistics, and ListSettlementRecords APIs.
+
 # v1.72.4 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

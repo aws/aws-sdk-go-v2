@@ -1,8 +1,0 @@
-{
-    "id": "ca3c1a47-5d86-4763-b3c0-48996756f65d",
-    "type": "feature",
-    "description": "Added endTimeOffset parameter to Scheduled Queries APIs (Create, Update, Get) enabling bounded time window configuration. Introduced scheduleType filter (CUSTOMER MANAGED, AWS MANAGED) for ListScheduledQueries and exposed it in Get and Update responses.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

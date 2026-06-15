@@ -1,3 +1,24 @@
+# Release (2026-06-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.54.0](service/bedrockruntime/CHANGELOG.md#v1540-2026-06-15)
+  * **Feature**: InvokeGuardrailChecks API evaluates prompts and responses against safety checks (content filters, prompt attacks, sensitive info) without creating guardrail resources. It's a detect-only API, returning numeric scores so you can build adaptive logic as per your application.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.76.0](service/cloudwatchlogs/CHANGELOG.md#v1760-2026-06-15)
+  * **Feature**: Added endTimeOffset parameter to Scheduled Queries APIs (Create, Update, Get) enabling bounded time window configuration. Introduced scheduleType filter (CUSTOMER MANAGED, AWS MANAGED) for ListScheduledQueries and exposed it in Get and Update responses.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.63.0](service/datazone/CHANGELOG.md#v1630-2026-06-15)
+  * **Feature**: Adds support for deleting lineage events in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.46.0](service/mgn/CHANGELOG.md#v1460-2026-06-15)
+  * **Feature**: AWS Transform for VMware now supports Amazon FSx for NetApp ONTAP as a target storage. Customers can migrate source server disks directly to FSx for NetApp ONTAP iSCSI LUNs. Target storage is configurable per source server, and compute, network, and storage migrate together in coordinated waves.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.119.3](service/rds/CHANGELOG.md#v11193-2026-06-15)
+  * **Documentation**: Adding support for RDS SQL Server BYOM and DB2 Community Edition
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.73.0](service/wafv2/CHANGELOG.md#v1730-2026-06-15)
+  * **Feature**: AWS WAF now supports AI traffic monetization for CloudFront. Configure payment networks and pricing on your web ACL, use the new Monetize rule action to charge AI agents via x402, and monitor revenue with new GetRevenueStatisticsSummary, GetRevenueStatistics, and ListSettlementRecords APIs.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.70.0](service/workspaces/CHANGELOG.md#v1700-2026-06-15)
+  * **Feature**: Added a validation for null check for ImageIds in DescribeWorkspaceImages API request parameters.
+
 # Release (2026-06-12)
 
 ## Module Highlights

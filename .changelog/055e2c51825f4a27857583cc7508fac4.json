@@ -1,8 +1,0 @@
-{
-    "id": "055e2c51-825f-4a27-8575-83cc7508fac4",
-    "type": "feature",
-    "description": "Adds support for deleting lineage events in Amazon DataZone.",
-    "modules": [
-        "service/datazone"
-    ]
-}

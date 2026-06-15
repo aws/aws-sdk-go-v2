@@ -1,3 +1,7 @@
+# v1.54.0 (2026-06-15)
+
+* **Feature**: InvokeGuardrailChecks API evaluates prompts and responses against safety checks (content filters, prompt attacks, sensitive info) without creating guardrail resources. It's a detect-only API, returning numeric scores so you can build adaptive logic as per your application.
+
 # v1.53.5 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "639464a1-ea88-45e9-80b7-98199641daec",
-    "type": "documentation",
-    "description": "Adding support for RDS SQL Server BYOM and DB2 Community Edition",
-    "modules": [
-        "service/rds"
-    ]
-}

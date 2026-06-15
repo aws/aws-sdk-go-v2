@@ -1,3 +1,7 @@
+# v1.119.3 (2026-06-15)
+
+* **Documentation**: Adding support for RDS SQL Server BYOM and DB2 Community Edition
+
 # v1.119.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
