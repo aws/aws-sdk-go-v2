@@ -1323,6 +1323,18 @@
                         "smithy.api#required": {}
                     }
                 },
+                "QuoteIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote to use for the order.</p>"
+                    }
+                },
+                "QuoteOptionIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteOptionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote option to use for the order.</p>"
+                    }
+                },
                 "LineItems": {
                     "target": "com.amazonaws.outposts#LineItemRequestListDefinition",
                     "traits": {
@@ -1879,7 +1891,7 @@
                 "QuoteIdentifier": {
                     "target": "com.amazonaws.outposts#QuoteIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#documentation": "<p>The ID of the quote.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2840,7 +2852,7 @@
                 "QuoteIdentifier": {
                     "target": "com.amazonaws.outposts#QuoteIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#documentation": "<p>The ID of the quote.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4621,6 +4633,18 @@
                     "target": "com.amazonaws.outposts#OutpostIdOnly",
                     "traits": {
                         "smithy.api#documentation": "<p> The ID of the Outpost in the order. </p>"
+                    }
+                },
+                "QuoteIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote associated with the order.</p>"
+                    }
+                },
+                "QuoteOptionIdentifier": {
+                    "target": "com.amazonaws.outposts#QuoteOptionIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote option associated with the order.</p>"
                     }
                 },
                 "OrderId": {
@@ -8627,7 +8651,7 @@
                 "QuoteIdentifier": {
                     "target": "com.amazonaws.outposts#QuoteIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID or ARN of the quote.</p>",
+                        "smithy.api#documentation": "<p>The ID of the quote.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
