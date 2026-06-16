@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified firewall rule.
+// Deletes the specified firewall rule. Identify the rule using either
+// FirewallDomainListId (for domain-list and DNS Firewall Advanced rules) or
+// FirewallThreatProtectionId (for partner-managed and DNS Firewall Advanced rules)
+// — together with FirewallRuleGroupId .
+//
+// DeleteFirewallRule is the only operation that succeeds against a rule whose
+// Status is CREATION_FAILED .
 func (c *Client) DeleteFirewallRule(ctx context.Context, params *DeleteFirewallRuleInput, optFns ...func(*Options)) (*DeleteFirewallRuleOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallRuleInput{}

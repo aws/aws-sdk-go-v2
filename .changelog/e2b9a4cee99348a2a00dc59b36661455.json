@@ -1,0 +1,8 @@
+{
+    "id": "e2b9a4ce-e993-48a2-a00d-c59b36661455",
+    "type": "feature",
+    "description": "Added VIF rate limiting support for AWS Direct Connect, allowing customers to set bandwidth allocations on virtual interfaces to manage traffic on dedicated connections.",
+    "modules": [
+        "service/directconnect"
+    ]
+}

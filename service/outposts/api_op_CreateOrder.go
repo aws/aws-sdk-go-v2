@@ -45,6 +45,12 @@ type CreateOrderInput struct {
 	// The payment terms.
 	PaymentTerm types.PaymentTerm
 
+	// The ID of the quote to use for the order.
+	QuoteIdentifier *string
+
+	// The ID of the quote option to use for the order.
+	QuoteOptionIdentifier *string
+
 	noSmithyDocumentSerde
 }
 

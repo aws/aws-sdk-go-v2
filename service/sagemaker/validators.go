@@ -10096,6 +10096,11 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 			invalidParams.AddNested("AdditionalModelDataSources", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContainerMetricsConfig != nil {
+		if err := validateContainerMetricsConfig(v.ContainerMetricsConfig); err != nil {
+			invalidParams.AddNested("ContainerMetricsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -10111,6 +10116,23 @@ func validateContainerDefinitionList(v []types.ContainerDefinition) error {
 	for i := range v {
 		if err := validateContainerDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMetricsConfig(v *types.ContainerMetricsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMetricsConfig"}
+	if v.MetricsEndpoints != nil {
+		if err := validateMetricsEndpointList(v.MetricsEndpoints); err != nil {
+			invalidParams.AddNested("MetricsEndpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11936,6 +11958,23 @@ func validateInferenceComponentComputeResourceRequirements(v *types.InferenceCom
 	}
 }
 
+func validateInferenceComponentContainerSpecification(v *types.InferenceComponentContainerSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentContainerSpecification"}
+	if v.ContainerMetricsConfig != nil {
+		if err := validateContainerMetricsConfig(v.ContainerMetricsConfig); err != nil {
+			invalidParams.AddNested("ContainerMetricsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceComponentDataCacheConfig(v *types.InferenceComponentDataCacheConfig) error {
 	if v == nil {
 		return nil
@@ -12037,6 +12076,11 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentSpecification"}
+	if v.Container != nil {
+		if err := validateInferenceComponentContainerSpecification(v.Container); err != nil {
+			invalidParams.AddNested("Container", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ComputeResourceRequirements != nil {
 		if err := validateInferenceComponentComputeResourceRequirements(v.ComputeResourceRequirements); err != nil {
 			invalidParams.AddNested("ComputeResourceRequirements", err.(smithy.InvalidParamsError))
@@ -12643,6 +12687,38 @@ func validateMetricDefinitionList(v []types.MetricDefinition) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionList"}
 	for i := range v {
 		if err := validateMetricDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsEndpoint(v *types.MetricsEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsEndpoint"}
+	if v.MetricsEndpointPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricsEndpointPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsEndpointList(v []types.MetricsEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsEndpointList"}
+	for i := range v {
+		if err := validateMetricsEndpoint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

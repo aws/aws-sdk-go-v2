@@ -10917,6 +10917,24 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				sv.Qtype = ptr.String(jtv)
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FirewallRuleStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FirewallRuleStatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11436,6 +11454,11 @@ func awsAwsjson11_deserializeDocumentFirewallRuleType(v **types.FirewallRuleType
 				return err
 			}
 
+		case "PartnerThreatProtection":
+			if err := awsAwsjson11_deserializeDocumentPartnerThreatProtectionConfig(&sv.PartnerThreatProtection, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11492,6 +11515,11 @@ func awsAwsjson11_deserializeDocumentFirewallRuleTypeDefinition(v **types.Firewa
 					return fmt.Errorf("expected RuleTypeName to be of type string, got %T instead", value)
 				}
 				sv.RuleType = ptr.String(jtv)
+			}
+
+		case "SubscriptionInfo":
+			if err := awsAwsjson11_deserializeDocumentSubscriptionInfo(&sv.SubscriptionInfo, value); err != nil {
+				return err
 			}
 
 		case "Value":
@@ -12146,6 +12174,46 @@ func awsAwsjson11_deserializeDocumentOutpostResolverList(v *[]types.OutpostResol
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPartnerThreatProtectionConfig(v **types.PartnerThreatProtectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PartnerThreatProtectionConfig
+	if *v == nil {
+		sv = &types.PartnerThreatProtectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Partner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartnerValue to be of type string, got %T instead", value)
+				}
+				sv.Partner = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -13491,6 +13559,55 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSubscriptionInfo(v **types.SubscriptionInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubscriptionInfo
+	if *v == nil {
+		sv = &types.SubscriptionInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProductId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductId to be of type string, got %T instead", value)
+				}
+				sv.ProductId = ptr.String(jtv)
+			}
+
+		case "VendorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VendorName to be of type string, got %T instead", value)
+				}
+				sv.VendorName = ptr.String(jtv)
 			}
 
 		default:

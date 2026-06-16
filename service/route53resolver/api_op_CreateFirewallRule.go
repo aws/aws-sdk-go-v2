@@ -11,8 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a single DNS Firewall rule in the specified rule group, using the
-// specified domain list.
+// Creates a single DNS Firewall rule in the specified rule group. The rule can
+// use any one of the following match sources, and the chosen source must be
+// supplied through the matching request field — they are mutually exclusive:
+//
+//   - FirewallDomainListId — match a customer-managed or AWS-managed domain list.
+//
+//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
+//     ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
+//
+//   - FirewallRuleType — match one of the rule-type variants returned by ListFirewallRuleTypes:
+//     FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
+//     DnsThreatProtection , or PartnerThreatProtection . The PartnerThreatProtection
+//     variant requires an active AWS Marketplace subscription to the named partner
+//     product.
+//
+// For rules that require asynchronous provisioning (today, the
+// PartnerThreatProtection rule type), the rule's Status begins at CREATING and
+// transitions to COMPLETE once the rule is provisioned and the marketplace
+// entitlement is verified. If provisioning fails, Status becomes CREATION_FAILED
+// and StatusMessage contains a human-readable reason; the rule is then immutable
+// and must be removed with DeleteFirewallRule.
 func (c *Client) CreateFirewallRule(ctx context.Context, params *CreateFirewallRuleInput, optFns ...func(*Options)) (*CreateFirewallRuleOutput, error) {
 	if params == nil {
 		params = &CreateFirewallRuleInput{}
@@ -123,7 +142,19 @@ type CreateFirewallRuleInput struct {
 	//   false positives.
 	ConfidenceThreshold types.ConfidenceThreshold
 
-	//  Use to create a DNS Firewall Advanced rule.
+	//  The type of the DNS Firewall Advanced rule. This setting is mutually exclusive
+	// with FirewallDomainListId and FirewallRuleType . Valid values are:
+	//
+	//   - DGA : Domain generation algorithms detection. DGAs are used by attackers to
+	//   generate a large number of domains to launch malware attacks.
+	//
+	//   - DNS_TUNNELING : DNS tunneling detection. DNS tunneling is used by attackers
+	//   to exfiltrate data from the client by using the DNS tunnel without making a
+	//   network connection to the client.
+	//
+	//   - DICTIONARY_DGA : Dictionary-based domain generation algorithms detection.
+	//   Dictionary DGAs use wordlists to generate domains that appear more legitimate,
+	//   making them harder to detect than traditional DGAs.
 	DnsThreatProtection types.DnsThreatProtection
 
 	// The ID of the domain list that you want to use in the rule. Can't be used
@@ -142,9 +173,24 @@ type CreateFirewallRuleInput struct {
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
 
-	// The rule type configuration for the firewall rule. This setting is mutually
-	// exclusive with the top-level FirewallDomainListId and DnsThreatProtection
-	// fields.
+	// The rule type configuration for the firewall rule. This is a tagged union — set
+	// exactly one of its members. This setting is mutually exclusive with the
+	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
+	//
+	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
+	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//
+	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
+	//   category (for example, PHISHING ).
+	//
+	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
+	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
+	//
+	//   - PartnerThreatProtection — match a third-party threat feed delivered through
+	//   AWS Marketplace. The selected partner must be an active subscription on the
+	//   calling account.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
 	FirewallRuleType *types.FirewallRuleType
 
 	//  The DNS query type you want the rule to evaluate. Allowed values are;

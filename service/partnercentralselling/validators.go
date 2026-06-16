@@ -310,6 +310,26 @@ func (m *validateOpGetOpportunity) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetProspectingFromEngagementTask struct {
+}
+
+func (*validateOpGetProspectingFromEngagementTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProspectingFromEngagementTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProspectingFromEngagementTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProspectingFromEngagementTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceSnapshot struct {
 }
 
@@ -530,6 +550,26 @@ func (m *validateOpListOpportunityFromEngagementTasks) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProspectingFromEngagementTasks struct {
+}
+
+func (*validateOpListProspectingFromEngagementTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProspectingFromEngagementTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProspectingFromEngagementTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProspectingFromEngagementTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResourceSnapshotJobs struct {
 }
 
@@ -705,6 +745,26 @@ func (m *validateOpStartOpportunityFromEngagementTask) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartOpportunityFromEngagementTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartProspectingFromEngagementTask struct {
+}
+
+func (*validateOpStartProspectingFromEngagementTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartProspectingFromEngagementTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartProspectingFromEngagementTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartProspectingFromEngagementTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -910,6 +970,10 @@ func addOpGetOpportunityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOpportunity{}, middleware.After)
 }
 
+func addOpGetProspectingFromEngagementTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProspectingFromEngagementTask{}, middleware.After)
+}
+
 func addOpGetResourceSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceSnapshot{}, middleware.After)
 }
@@ -954,6 +1018,10 @@ func addOpListOpportunityFromEngagementTasksValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpListOpportunityFromEngagementTasks{}, middleware.After)
 }
 
+func addOpListProspectingFromEngagementTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProspectingFromEngagementTasks{}, middleware.After)
+}
+
 func addOpListResourceSnapshotJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResourceSnapshotJobs{}, middleware.After)
 }
@@ -988,6 +1056,10 @@ func addOpStartEngagementFromOpportunityTaskValidationMiddleware(stack *middlewa
 
 func addOpStartOpportunityFromEngagementTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOpportunityFromEngagementTask{}, middleware.After)
+}
+
+func addOpStartProspectingFromEngagementTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartProspectingFromEngagementTask{}, middleware.After)
 }
 
 func addOpStartResourceSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1751,6 +1823,24 @@ func validateProjectDetails(v *types.ProjectDetails) error {
 	}
 }
 
+func validateProspectingFromEngagementTaskSort(v *types.ProspectingFromEngagementTaskSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProspectingFromEngagementTaskSort"}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReceiver(v types.Receiver) error {
 	if v == nil {
 		return nil
@@ -2297,6 +2387,24 @@ func validateOpGetOpportunityInput(v *GetOpportunityInput) error {
 	}
 }
 
+func validateOpGetProspectingFromEngagementTaskInput(v *GetProspectingFromEngagementTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProspectingFromEngagementTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.TaskIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceSnapshotInput(v *GetResourceSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -2513,6 +2621,26 @@ func validateOpListOpportunityFromEngagementTasksInput(v *ListOpportunityFromEng
 	}
 }
 
+func validateOpListProspectingFromEngagementTasksInput(v *ListProspectingFromEngagementTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProspectingFromEngagementTasksInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Sort != nil {
+		if err := validateProspectingFromEngagementTaskSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListResourceSnapshotJobsInput(v *ListResourceSnapshotJobsInput) error {
 	if v == nil {
 		return nil
@@ -2694,6 +2822,30 @@ func validateOpStartOpportunityFromEngagementTaskInput(v *StartOpportunityFromEn
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartProspectingFromEngagementTaskInput(v *StartProspectingFromEngagementTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartProspectingFromEngagementTaskInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	}
+	if v.TaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskName"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

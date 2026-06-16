@@ -1560,6 +1560,11 @@ func validateFirewallRuleType(v *types.FirewallRuleType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FirewallRuleType"}
+	if v.PartnerThreatProtection != nil {
+		if err := validatePartnerThreatProtectionConfig(v.PartnerThreatProtection); err != nil {
+			invalidParams.AddNested("PartnerThreatProtection", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.FirewallAdvancedContentCategory != nil {
 		if err := validateFirewallAdvancedContentCategoryConfig(v.FirewallAdvancedContentCategory); err != nil {
 			invalidParams.AddNested("FirewallAdvancedContentCategory", err.(smithy.InvalidParamsError))
@@ -1606,6 +1611,21 @@ func validateIpAddressRequest(v *types.IpAddressRequest) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IpAddressRequest"}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartnerThreatProtectionConfig(v *types.PartnerThreatProtectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartnerThreatProtectionConfig"}
+	if v.Partner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Partner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

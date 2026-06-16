@@ -56,6 +56,10 @@ type GetAwsOpportunitySummaryOutput struct {
 	// This member is required.
 	Catalog *string
 
+	// Engagement classification for this opportunity. Read-only. Null before scoring.
+	// Known values: AWS Field-engaged , Agent-engaged , Partner-led .
+	CosellMotion *string
+
 	// Provides details about the customer associated with the AWS Opportunity,
 	// including account information, industry, and other customer data. These details
 	// help partners understand the business context of the opportunity.

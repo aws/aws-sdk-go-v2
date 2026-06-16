@@ -28,7 +28,7 @@ func (c *Client) DeleteQuote(ctx context.Context, params *DeleteQuoteInput, optF
 
 type DeleteQuoteInput struct {
 
-	// The ID or ARN of the quote.
+	// The ID of the quote.
 	//
 	// This member is required.
 	QuoteIdentifier *string

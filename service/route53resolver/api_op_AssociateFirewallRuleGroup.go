@@ -12,6 +12,11 @@ import (
 )
 
 // Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC.
+//
+// If the rule group contains any rule configured with the PartnerThreatProtection
+// rule type, the calling account must hold an active AWS Marketplace subscription
+// to the named partner. If the subscription is missing, the association request is
+// rejected.
 func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *AssociateFirewallRuleGroupInput, optFns ...func(*Options)) (*AssociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &AssociateFirewallRuleGroupInput{}

@@ -30,7 +30,7 @@ func (c *Client) UpdateQuote(ctx context.Context, params *UpdateQuoteInput, optF
 
 type UpdateQuoteInput struct {
 
-	// The ID or ARN of the quote.
+	// The ID of the quote.
 	//
 	// This member is required.
 	QuoteIdentifier *string

@@ -1283,8 +1283,9 @@ type EngagementContextType string
 
 // Enum values for EngagementContextType
 const (
-	EngagementContextTypeCustomerProject EngagementContextType = "CustomerProject"
-	EngagementContextTypeLead            EngagementContextType = "Lead"
+	EngagementContextTypeCustomerProject   EngagementContextType = "CustomerProject"
+	EngagementContextTypeLead              EngagementContextType = "Lead"
+	EngagementContextTypeProspectingResult EngagementContextType = "ProspectingResult"
 )
 
 // Values returns all known values for EngagementContextType. Note that this can
@@ -1295,6 +1296,7 @@ func (EngagementContextType) Values() []EngagementContextType {
 	return []EngagementContextType{
 		"CustomerProject",
 		"Lead",
+		"ProspectingResult",
 	}
 }
 
@@ -1720,6 +1722,51 @@ func (PrimaryNeedFromAws) Values() []PrimaryNeedFromAws {
 		"Co-Sell - Total Cost of Ownership Evaluation",
 		"Co-Sell - Deal Support",
 		"Co-Sell - Support for Public Tender / RFx",
+	}
+}
+
+type ProspectingFromEngagementTaskSortName string
+
+// Enum values for ProspectingFromEngagementTaskSortName
+const (
+	ProspectingFromEngagementTaskSortNameStartTime             ProspectingFromEngagementTaskSortName = "StartTime"
+	ProspectingFromEngagementTaskSortNameTaskName              ProspectingFromEngagementTaskSortName = "TaskName"
+	ProspectingFromEngagementTaskSortNameFailedEngagementCount ProspectingFromEngagementTaskSortName = "FailedEngagementCount"
+)
+
+// Values returns all known values for ProspectingFromEngagementTaskSortName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProspectingFromEngagementTaskSortName) Values() []ProspectingFromEngagementTaskSortName {
+	return []ProspectingFromEngagementTaskSortName{
+		"StartTime",
+		"TaskName",
+		"FailedEngagementCount",
+	}
+}
+
+type ProspectingTaskStatus string
+
+// Enum values for ProspectingTaskStatus
+const (
+	ProspectingTaskStatusPending    ProspectingTaskStatus = "PENDING"
+	ProspectingTaskStatusInProgress ProspectingTaskStatus = "IN_PROGRESS"
+	ProspectingTaskStatusCompleted  ProspectingTaskStatus = "COMPLETED"
+	ProspectingTaskStatusFailed     ProspectingTaskStatus = "FAILED"
+)
+
+// Values returns all known values for ProspectingTaskStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProspectingTaskStatus) Values() []ProspectingTaskStatus {
+	return []ProspectingTaskStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

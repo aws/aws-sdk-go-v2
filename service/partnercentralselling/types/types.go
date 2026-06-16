@@ -229,6 +229,12 @@ type AwsOpportunityInsights struct {
 	// move the opportunity forward and increase the likelihood of success.
 	NextBestActions *string
 
+	// Opportunity quality assessment. Null if not yet scored.
+	OpportunityQuality *OpportunityQuality
+
+	// List of recommendations from various agent-driven sources.
+	Recommendations []Recommendation
+
 	noSmithyDocumentSerde
 }
 
@@ -303,6 +309,10 @@ type AwsOpportunityRelatedEntities struct {
 
 // Provides a comprehensive view of AwsOpportunitySummaryFullView template.
 type AwsOpportunitySummaryFullView struct {
+
+	// Engagement classification for this opportunity. Read-only. Null before scoring.
+	// Known values: AWS Field-engaged , Agent-engaged , Partner-led .
+	CosellMotion *string
 
 	// Represents the customer associated with the AWS opportunity. This field
 	// captures key details about the customer that are necessary for managing the
@@ -598,6 +608,7 @@ type EngagementContextDetails struct {
 //
 //	EngagementContextPayloadMemberCustomerProject
 //	EngagementContextPayloadMemberLead
+//	EngagementContextPayloadMemberProspectingResult
 type EngagementContextPayload interface {
 	isEngagementContextPayload()
 }
@@ -623,6 +634,17 @@ type EngagementContextPayloadMemberLead struct {
 }
 
 func (*EngagementContextPayloadMemberLead) isEngagementContextPayload() {}
+
+// Contains prospecting result data with enriched insights. The system generates
+// these insights when a partner runs an autonomous prospecting job on leads. This
+// field appears only when the context type is "ProspectingResult".
+type EngagementContextPayloadMemberProspectingResult struct {
+	Value ProspectingResult
+
+	noSmithyDocumentSerde
+}
+
+func (*EngagementContextPayloadMemberProspectingResult) isEngagementContextPayload() {}
 
 // Contains details about the customer associated with the Engagement Invitation,
 // including company information and industry.
@@ -797,6 +819,39 @@ type EngagementMemberSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the result of processing a single engagement within a prospecting
+// task. Each engagement is processed independently, so individual engagements can
+// succeed or fail regardless of other engagements in the same task.
+type EngagementProspectingResult struct {
+
+	// The unique identifier of the engagement that was processed.
+	//
+	// This member is required.
+	EngagementIdentifier *string
+
+	// The processing status of this specific engagement. Possible values are PENDING ,
+	// IN_PROGRESS , COMPLETED , and FAILED .
+	//
+	// This member is required.
+	Status ProspectingTaskStatus
+
+	// The identifier of the prospecting context created for this engagement. This
+	// field is only populated when the engagement was processed successfully (status
+	// is COMPLETED ). Use this identifier to reference the prospecting context in
+	// subsequent operations.
+	EngagementContextId *string
+
+	// A human-readable description of the failure for this engagement, including
+	// suggested recovery steps. This field is only populated when Status is FAILED .
+	Message *string
+
+	// An enumerated code indicating the reason this engagement failed to process.
+	// This field is only populated when Status is FAILED .
+	ReasonCode *string
+
+	noSmithyDocumentSerde
+}
+
 //	This provide a streamlined view of the relationships between engagements and
 //
 // resources. These summaries offer a crucial link between collaborative
@@ -916,16 +971,19 @@ type ExpectedCustomerSpend struct {
 	CurrencyCode CurrencyCode
 
 	// Indicates how frequently the customer is expected to spend the projected
-	// amount. Only the value Monthly is allowed for the Frequency field, representing
-	// recurring monthly spend.
+	// amount. Use Monthly for recurring monthly spend (required for TargetCompany:
+	// "AWS" entries). Use None for one-time deal value entries (required for
+	// TargetCompany: "Self" entries when providing Total Contract Value).
 	//
 	// This member is required.
 	Frequency PaymentFrequency
 
-	// Specifies the name of the partner company that is expected to generate revenue
-	// from the opportunity. This field helps track the partner’s involvement in the
-	// opportunity. This field only accepts the value AWS . If any other value is
-	// provided, the system will automatically set it to AWS .
+	// Specifies the entity associated with this spend entry. Use AWS for the system’s
+	// AWS Monthly Recurring Revenue (MRR) estimate. Use Self for the partner’s own
+	// deal value entry when providing Total Contract Value (TCV) for automatic MRR
+	// conversion. When ExpectedContractDuration is present on the Project, only AWS
+	// and Self are accepted. When ExpectedContractDuration is not present, only AWS
+	// is accepted and any other value will be automatically set to AWS .
 	//
 	// This member is required.
 	TargetCompany *string
@@ -1036,6 +1094,11 @@ type LeadContext struct {
 	// This member is required.
 	Interactions []LeadInteraction
 
+	// Insights that AI generates and associates with the lead. These insights provide
+	// automated analysis such as lead readiness scoring to help partners assess the
+	// lead quality.
+	Insights *LeadInsights
+
 	// Indicates the current qualification status of the lead, such as whether it has
 	// been qualified, disqualified, or is still under evaluation. This helps track the
 	// lead's progression through the qualification process.
@@ -1080,6 +1143,19 @@ type LeadCustomer struct {
 	// context about the customer organization and helps verify company legitimacy and
 	// size.
 	WebsiteUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains insights that AI generates for a lead. These insights provide
+// automated analysis to help partners evaluate the lead quality and prioritize
+// engagement efforts.
+type LeadInsights struct {
+
+	// A score that indicates the lead's readiness for engagement. Valid values are Low
+	// , Medium , and High . Use this score to prioritize leads based on their
+	// likelihood of conversion.
+	LeadReadinessScore *string
 
 	noSmithyDocumentSerde
 }
@@ -1828,6 +1904,20 @@ type OpportunityInvitationPayload struct {
 	noSmithyDocumentSerde
 }
 
+// Opportunity quality score and trend.
+type OpportunityQuality struct {
+
+	// Deal quality score based on opportunity content completeness and sales
+	// methodology criteria. Values range from 0 to 100.
+	Score *int32
+
+	// Direction of score change since last scoring iteration. Known values: Improving
+	// , Declining , No Change .
+	Trend *string
+
+	noSmithyDocumentSerde
+}
+
 // Object that configures response sorting.
 type OpportunitySort struct {
 
@@ -2238,6 +2328,197 @@ type ProjectView struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the sort configuration for ListProspectingFromEngagementTasks .
+// Contains the field to sort by and the sort direction.
+type ProspectingFromEngagementTaskSort struct {
+
+	// The field by which to sort the returned tasks. Valid values: StartTime (task
+	// creation timestamp), TaskName (alphabetically by task name), and
+	// FailedEngagementCount (number of failed engagements).
+	//
+	// This member is required.
+	SortBy ProspectingFromEngagementTaskSortName
+
+	// The direction in which to sort the results. Use ASCENDING to return the
+	// smallest or earliest values first, or DESCENDING to return the largest or most
+	// recent values first.
+	//
+	// This member is required.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Contains insights that AI generates from the prospecting analysis. These
+// insights include marketplace engagement scoring, solution fit assessments, and
+// solution categorization for the prospected customer.
+type ProspectingInsights struct {
+
+	// A score that indicates the prospected customer's level of engagement with AWS
+	// Marketplace. Valid values are High , Medium , and Low .
+	MarketplaceEngagementScore *string
+
+	// The primary solution category classification for the prospected customer. This
+	// indicates the type of solution that best addresses their needs.
+	SolutionCategory *string
+
+	// A score that indicates how well the partner's solution fits the prospected
+	// customer's needs.
+	SolutionScore *string
+
+	// The solution sub-category classification for the prospected customer. This
+	// provides more granular categorization of the recommended solution type.
+	SolutionSubCategory *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results of an autonomous prospecting job. This includes data and
+// insights that AWS provides about a prospected customer account.
+type ProspectingResult struct {
+
+	// Prospecting data and insights that AWS provides during the prospecting job.
+	// This includes customer details, task information, and scoring that AI generates.
+	Aws *ProspectingResultAws
+
+	noSmithyDocumentSerde
+}
+
+// Contains the prospecting data that AWS sources. This includes task execution
+// details, customer account information, and insights that AI generates from the
+// prospecting analysis.
+type ProspectingResultAws struct {
+
+	// Contains details about the prospected customer account, including geographic,
+	// industry, and segment classifications.
+	Customer *ProspectingResultCustomer
+
+	// The timestamp when the prospecting task completed processing. The format is ISO
+	// 8601 (UTC).
+	EndTime *time.Time
+
+	// Insights that AI generates from the prospecting analysis. These insights
+	// include engagement scores and solution fit assessments for the prospected
+	// customer.
+	Insights *ProspectingInsights
+
+	// The timestamp when the prospecting result context was created. The format is
+	// ISO 8601 (UTC).
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the prospecting task. Use this ARN to track
+	// and manage the task within AWS.
+	TaskArn *string
+
+	// The unique identifier of the prospecting task that generates this result.
+	TaskId *string
+
+	// The name that the user provides for the prospecting task that generates this
+	// result.
+	TaskName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about the prospected customer account, including
+// company identifiers, geographic classification, industry segmentation, and
+// program eligibility.
+type ProspectingResultCustomer struct {
+
+	// The name of the prospected customer account.
+	AccountName *string
+
+	// The company size classification of the prospected customer account.
+	CompanySize *string
+
+	// The country code of the prospected customer account.
+	Country CountryCode
+
+	// A list of AWS Greenfield programs that the prospected customer is eligible for.
+	// Use this list to identify relevant go-to-market opportunities.
+	EligiblePrograms []string
+
+	// The geographic region classification of the prospected customer account.
+	Geo *string
+
+	// The industry classification of the prospected customer account.
+	Industry Industry
+
+	// A summary of publicly available information about the prospected customer. The
+	// system uses this summary to generate customer insights and inform engagement
+	// strategies.
+	PublicProfileSummary *string
+
+	// The specific region of the prospected customer account.
+	Region *string
+
+	// The market segment classification of the prospected customer account.
+	Segment *string
+
+	// The sub-industry classification of the prospected customer account. This
+	// provides more granular categorization within the primary industry.
+	SubIndustry *string
+
+	// The subregion classification of the prospected customer account.
+	SubRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a single prospecting task, returned by
+// ListProspectingFromEngagementTasks . Contains key metrics and status information
+// without the full per-engagement detail available from
+// GetProspectingFromEngagementTask .
+type ProspectingTaskSummary struct {
+
+	// The number of engagements that have been successfully converted into
+	// prospecting leads.
+	//
+	// This member is required.
+	CompletedEngagementCount *int32
+
+	// The number of engagements that failed to be converted. Retrieve the full task
+	// details using GetProspectingFromEngagementTask for per-engagement error
+	// information.
+	//
+	// This member is required.
+	FailedEngagementCount *int32
+
+	// The timestamp indicating when the task was initiated. The format follows ISO
+	// 8601 date-time notation.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the task.
+	//
+	// This member is required.
+	TaskArn *string
+
+	// The unique identifier of the task. Use this value with
+	// GetProspectingFromEngagementTask to retrieve full task details.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The descriptive name of the task provided when it was created.
+	//
+	// This member is required.
+	TaskName *string
+
+	// The total number of engagements included in the task.
+	//
+	// This member is required.
+	TotalEngagementCount int32
+
+	// The timestamp indicating when the task finished processing. This field is
+	// absent if the task is still in progress. The format follows ISO 8601 date-time
+	// notation.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Represents the entity that received the Engagement Invitation, including
 // account and company details. This field is essential for tracking the partner
 // who is being invited to collaborate.
@@ -2259,6 +2540,26 @@ type ReceiverMemberAccount struct {
 }
 
 func (*ReceiverMemberAccount) isReceiver() {}
+
+// A recommendation from an agent-driven source.
+type Recommendation struct {
+
+	// Human-readable recommendation text from this source.
+	//
+	// This member is required.
+	Details *string
+
+	// The recommendation source type. Known values: OpportunityQuality ,
+	// SolutionRecommendation , SpecialistRecommendation .
+	//
+	// This member is required.
+	Type *string
+
+	// Source-specific metadata as key-value pairs.
+	Attributes map[string]string
+
+	noSmithyDocumentSerde
+}
 
 // This field provides the associations' information for other entities with the
 // opportunity. These entities include identifiers for AWSProducts , Partner
@@ -2571,6 +2872,7 @@ type TargetCloseDateFilter struct {
 //
 //	UpdateEngagementContextPayloadMemberCustomerProject
 //	UpdateEngagementContextPayloadMemberLead
+//	UpdateEngagementContextPayloadMemberProspectingResult
 type UpdateEngagementContextPayload interface {
 	isUpdateEngagementContextPayload()
 }
@@ -2603,6 +2905,17 @@ type UpdateEngagementContextPayloadMemberLead struct {
 
 func (*UpdateEngagementContextPayloadMemberLead) isUpdateEngagementContextPayload() {}
 
+// Contains updated prospecting result data when the context type is
+// "ProspectingResult". This field includes enriched data and insights that the
+// system generates when a partner runs an autonomous prospecting job on leads.
+type UpdateEngagementContextPayloadMemberProspectingResult struct {
+	Value ProspectingResult
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateEngagementContextPayloadMemberProspectingResult) isUpdateEngagementContextPayload() {}
+
 // Updates the context information for a lead with qualification status, customer
 // details, and interaction data.
 type UpdateLeadContext struct {
@@ -2611,6 +2924,10 @@ type UpdateLeadContext struct {
 	//
 	// This member is required.
 	Customer *LeadCustomer
+
+	// Insights that AI generates and associates with the lead. These insights provide
+	// automated analysis to help partners assess the lead quality and readiness.
+	Insights *LeadInsights
 
 	// Updated interaction details for the lead context.
 	Interaction *LeadInteraction

@@ -1,0 +1,8 @@
+{
+    "id": "5fa30572-a821-4510-b7eb-d66f12522a94",
+    "type": "feature",
+    "description": "Amazon S3 Vectors now supports paginated QueryVectors requests, returning up to 10,000 results per query.",
+    "modules": [
+        "service/s3vectors"
+    ]
+}

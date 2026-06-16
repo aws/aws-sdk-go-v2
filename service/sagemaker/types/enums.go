@@ -588,6 +588,12 @@ const (
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
 	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
+	AppInstanceTypeMlG7e2xlarge            AppInstanceType = "ml.g7e.2xlarge"
+	AppInstanceTypeMlG7e4xlarge            AppInstanceType = "ml.g7e.4xlarge"
+	AppInstanceTypeMlG7e8xlarge            AppInstanceType = "ml.g7e.8xlarge"
+	AppInstanceTypeMlG7e12xlarge           AppInstanceType = "ml.g7e.12xlarge"
+	AppInstanceTypeMlG7e24xlarge           AppInstanceType = "ml.g7e.24xlarge"
+	AppInstanceTypeMlG7e48xlarge           AppInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -760,6 +766,12 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
 		"ml.p5.4xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 

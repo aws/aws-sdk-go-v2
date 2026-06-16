@@ -932,6 +932,67 @@ func (m *awsAwsjson10_serializeOpGetOpportunity) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetProspectingFromEngagementTask struct {
+}
+
+func (*awsAwsjson10_serializeOpGetProspectingFromEngagementTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetProspectingFromEngagementTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetProspectingFromEngagementTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPartnerCentralSelling.GetProspectingFromEngagementTask")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetProspectingFromEngagementTaskInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetResourceSnapshot struct {
 }
 
@@ -1603,6 +1664,67 @@ func (m *awsAwsjson10_serializeOpListOpportunityFromEngagementTasks) HandleSeria
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListProspectingFromEngagementTasks struct {
+}
+
+func (*awsAwsjson10_serializeOpListProspectingFromEngagementTasks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListProspectingFromEngagementTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProspectingFromEngagementTasksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPartnerCentralSelling.ListProspectingFromEngagementTasks")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListProspectingFromEngagementTasksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListResourceSnapshotJobs struct {
 }
 
@@ -2135,6 +2257,67 @@ func (m *awsAwsjson10_serializeOpStartOpportunityFromEngagementTask) HandleSeria
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentStartOpportunityFromEngagementTaskInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpStartProspectingFromEngagementTask struct {
+}
+
+func (*awsAwsjson10_serializeOpStartProspectingFromEngagementTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartProspectingFromEngagementTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartProspectingFromEngagementTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPartnerCentralSelling.StartProspectingFromEngagementTask")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartProspectingFromEngagementTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2917,6 +3100,17 @@ func awsAwsjson10_serializeDocumentDeliveryModels(v []types.DeliveryModel, value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentEligibleProgramsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentEngagementContextDetails(v *types.EngagementContextDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2955,6 +3149,12 @@ func awsAwsjson10_serializeDocumentEngagementContextPayload(v types.EngagementCo
 	case *types.EngagementContextPayloadMemberLead:
 		av := object.Key("Lead")
 		if err := awsAwsjson10_serializeDocumentLeadContext(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EngagementContextPayloadMemberProspectingResult:
+		av := object.Key("ProspectingResult")
+		if err := awsAwsjson10_serializeDocumentProspectingResult(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3035,6 +3235,17 @@ func awsAwsjson10_serializeDocumentEngagementCustomerProjectDetails(v *types.Eng
 		ok.String(*v.Title)
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentEngagementIdentifierList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3291,6 +3502,13 @@ func awsAwsjson10_serializeDocumentLeadContext(v *types.LeadContext, value smith
 		}
 	}
 
+	if v.Insights != nil {
+		ok := object.Key("Insights")
+		if err := awsAwsjson10_serializeDocumentLeadInsights(v.Insights, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Interactions != nil {
 		ok := object.Key("Interactions")
 		if err := awsAwsjson10_serializeDocumentLeadInteractionList(v.Interactions, ok); err != nil {
@@ -3340,6 +3558,18 @@ func awsAwsjson10_serializeDocumentLeadCustomer(v *types.LeadCustomer, value smi
 	if v.WebsiteUrl != nil {
 		ok := object.Key("WebsiteUrl")
 		ok.String(*v.WebsiteUrl)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentLeadInsights(v *types.LeadInsights, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LeadReadinessScore != nil {
+		ok := object.Key("LeadReadinessScore")
+		ok.String(*v.LeadReadinessScore)
 	}
 
 	return nil
@@ -3890,6 +4120,174 @@ func awsAwsjson10_serializeDocumentProjectDetails(v *types.ProjectDetails, value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentProspectingFromEngagementTaskSort(v *types.ProspectingFromEngagementTaskSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProspectingInsights(v *types.ProspectingInsights, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MarketplaceEngagementScore != nil {
+		ok := object.Key("MarketplaceEngagementScore")
+		ok.String(*v.MarketplaceEngagementScore)
+	}
+
+	if v.SolutionCategory != nil {
+		ok := object.Key("SolutionCategory")
+		ok.String(*v.SolutionCategory)
+	}
+
+	if v.SolutionScore != nil {
+		ok := object.Key("SolutionScore")
+		ok.String(*v.SolutionScore)
+	}
+
+	if v.SolutionSubCategory != nil {
+		ok := object.Key("SolutionSubCategory")
+		ok.String(*v.SolutionSubCategory)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProspectingResult(v *types.ProspectingResult, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Aws != nil {
+		ok := object.Key("Aws")
+		if err := awsAwsjson10_serializeDocumentProspectingResultAws(v.Aws, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProspectingResultAws(v *types.ProspectingResultAws, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Customer != nil {
+		ok := object.Key("Customer")
+		if err := awsAwsjson10_serializeDocumentProspectingResultCustomer(v.Customer, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.Insights != nil {
+		ok := object.Key("Insights")
+		if err := awsAwsjson10_serializeDocumentProspectingInsights(v.Insights, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	if v.TaskArn != nil {
+		ok := object.Key("TaskArn")
+		ok.String(*v.TaskArn)
+	}
+
+	if v.TaskId != nil {
+		ok := object.Key("TaskId")
+		ok.String(*v.TaskId)
+	}
+
+	if v.TaskName != nil {
+		ok := object.Key("TaskName")
+		ok.String(*v.TaskName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentProspectingResultCustomer(v *types.ProspectingResultCustomer, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountName != nil {
+		ok := object.Key("AccountName")
+		ok.String(*v.AccountName)
+	}
+
+	if v.CompanySize != nil {
+		ok := object.Key("CompanySize")
+		ok.String(*v.CompanySize)
+	}
+
+	if len(v.Country) > 0 {
+		ok := object.Key("Country")
+		ok.String(string(v.Country))
+	}
+
+	if v.EligiblePrograms != nil {
+		ok := object.Key("EligiblePrograms")
+		if err := awsAwsjson10_serializeDocumentEligibleProgramsList(v.EligiblePrograms, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Geo != nil {
+		ok := object.Key("Geo")
+		ok.String(*v.Geo)
+	}
+
+	if len(v.Industry) > 0 {
+		ok := object.Key("Industry")
+		ok.String(string(v.Industry))
+	}
+
+	if v.PublicProfileSummary != nil {
+		ok := object.Key("PublicProfileSummary")
+		ok.String(*v.PublicProfileSummary)
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
+	if v.Segment != nil {
+		ok := object.Key("Segment")
+		ok.String(*v.Segment)
+	}
+
+	if v.SubIndustry != nil {
+		ok := object.Key("SubIndustry")
+		ok.String(*v.SubIndustry)
+	}
+
+	if v.SubRegion != nil {
+		ok := object.Key("SubRegion")
+		ok.String(*v.SubRegion)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentReceiver(v types.Receiver, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4118,7 +4516,29 @@ func awsAwsjson10_serializeDocumentTargetCloseDateFilter(v *types.TargetCloseDat
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTaskIdentifierList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTaskIdentifiers(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentTaskNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4157,6 +4577,12 @@ func awsAwsjson10_serializeDocumentUpdateEngagementContextPayload(v types.Update
 			return err
 		}
 
+	case *types.UpdateEngagementContextPayloadMemberProspectingResult:
+		av := object.Key("ProspectingResult")
+		if err := awsAwsjson10_serializeDocumentProspectingResult(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4171,6 +4597,13 @@ func awsAwsjson10_serializeDocumentUpdateLeadContext(v *types.UpdateLeadContext,
 	if v.Customer != nil {
 		ok := object.Key("Customer")
 		if err := awsAwsjson10_serializeDocumentLeadCustomer(v.Customer, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Insights != nil {
+		ok := object.Key("Insights")
+		if err := awsAwsjson10_serializeDocumentLeadInsights(v.Insights, ok); err != nil {
 			return err
 		}
 	}
@@ -4647,6 +5080,23 @@ func awsAwsjson10_serializeOpDocumentGetOpportunityInput(v *GetOpportunityInput,
 	if v.Identifier != nil {
 		ok := object.Key("Identifier")
 		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetProspectingFromEngagementTaskInput(v *GetProspectingFromEngagementTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
+	if v.TaskIdentifier != nil {
+		ok := object.Key("TaskIdentifier")
+		ok.String(*v.TaskIdentifier)
 	}
 
 	return nil
@@ -5169,6 +5619,59 @@ func awsAwsjson10_serializeOpDocumentListOpportunityFromEngagementTasksInput(v *
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListProspectingFromEngagementTasksInput(v *ListProspectingFromEngagementTasksInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Sort != nil {
+		ok := object.Key("Sort")
+		if err := awsAwsjson10_serializeDocumentProspectingFromEngagementTaskSort(v.Sort, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartAfter != nil {
+		ok := object.Key("StartAfter")
+		ok.String(smithytime.FormatDateTime(*v.StartAfter))
+	}
+
+	if v.StartBefore != nil {
+		ok := object.Key("StartBefore")
+		ok.String(smithytime.FormatDateTime(*v.StartBefore))
+	}
+
+	if v.TaskIdentifier != nil {
+		ok := object.Key("TaskIdentifier")
+		if err := awsAwsjson10_serializeDocumentTaskIdentifierList(v.TaskIdentifier, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskName != nil {
+		ok := object.Key("TaskName")
+		if err := awsAwsjson10_serializeDocumentTaskNameList(v.TaskName, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListResourceSnapshotJobsInput(v *ListResourceSnapshotJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5450,6 +5953,35 @@ func awsAwsjson10_serializeOpDocumentStartOpportunityFromEngagementTaskInput(v *
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentStartProspectingFromEngagementTaskInput(v *StartProspectingFromEngagementTaskInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Identifiers != nil {
+		ok := object.Key("Identifiers")
+		if err := awsAwsjson10_serializeDocumentEngagementIdentifierList(v.Identifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskName != nil {
+		ok := object.Key("TaskName")
+		ok.String(*v.TaskName)
 	}
 
 	return nil

@@ -477,6 +477,12 @@ type Order struct {
 	// The payment term.
 	PaymentTerm PaymentTerm
 
+	// The ID of the quote associated with the order.
+	QuoteIdentifier *string
+
+	// The ID of the quote option associated with the order.
+	QuoteOptionIdentifier *string
+
 	// The status of the order.
 	//
 	//   - PREPARING - Order is received and being prepared.

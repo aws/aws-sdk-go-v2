@@ -9698,6 +9698,24 @@ func awsRestjson1_deserializeDocumentOrder(v **types.Order, value interface{}) e
 				sv.PaymentTerm = types.PaymentTerm(jtv)
 			}
 
+		case "QuoteIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuoteIdentifier to be of type string, got %T instead", value)
+				}
+				sv.QuoteIdentifier = ptr.String(jtv)
+			}
+
+		case "QuoteOptionIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QuoteOptionIdentifier to be of type string, got %T instead", value)
+				}
+				sv.QuoteOptionIdentifier = ptr.String(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

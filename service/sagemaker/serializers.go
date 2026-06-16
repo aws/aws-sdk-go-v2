@@ -28058,6 +28058,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(*v.ContainerHostname)
 	}
 
+	if v.ContainerMetricsConfig != nil {
+		ok := object.Key("ContainerMetricsConfig")
+		if err := awsAwsjson11_serializeDocumentContainerMetricsConfig(v.ContainerMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Environment != nil {
 		ok := object.Key("Environment")
 		if err := awsAwsjson11_serializeDocumentEnvironmentMap(v.Environment, ok); err != nil {
@@ -28135,6 +28142,20 @@ func awsAwsjson11_serializeDocumentContainerEntrypoint(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentContainerMetricsConfig(v *types.ContainerMetricsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricsEndpoints != nil {
+		ok := object.Key("MetricsEndpoints")
+		if err := awsAwsjson11_serializeDocumentMetricsEndpointList(v.MetricsEndpoints, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31260,6 +31281,13 @@ func awsAwsjson11_serializeDocumentInferenceComponentContainerSpecification(v *t
 		ok.String(*v.ArtifactUrl)
 	}
 
+	if v.ContainerMetricsConfig != nil {
+		ok := object.Key("ContainerMetricsConfig")
+		if err := awsAwsjson11_serializeDocumentContainerMetricsConfig(v.ContainerMetricsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Environment != nil {
 		ok := object.Key("Environment")
 		if err := awsAwsjson11_serializeDocumentEnvironmentMap(v.Environment, ok); err != nil {
@@ -32351,6 +32379,11 @@ func awsAwsjson11_serializeDocumentMetricsConfig(v *types.MetricsConfig, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableDetailedObservability != nil {
+		ok := object.Key("EnableDetailedObservability")
+		ok.Boolean(*v.EnableDetailedObservability)
+	}
+
 	if v.EnableEnhancedMetrics != nil {
 		ok := object.Key("EnableEnhancedMetrics")
 		ok.Boolean(*v.EnableEnhancedMetrics)
@@ -32361,6 +32394,36 @@ func awsAwsjson11_serializeDocumentMetricsConfig(v *types.MetricsConfig, value s
 		ok.Integer(v.MetricPublishFrequencyInSeconds)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricsEndpoint(v *types.MetricsEndpoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricPublishFrequencyInSeconds != 0 {
+		ok := object.Key("MetricPublishFrequencyInSeconds")
+		ok.Integer(v.MetricPublishFrequencyInSeconds)
+	}
+
+	if v.MetricsEndpointPath != nil {
+		ok := object.Key("MetricsEndpointPath")
+		ok.String(*v.MetricsEndpointPath)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricsEndpointList(v []types.MetricsEndpoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMetricsEndpoint(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

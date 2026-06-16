@@ -20,8 +20,8 @@ import (
 // A virtual interface (VLAN) transmits the traffic between the Direct Connect
 // location and the customer network.
 //
-//   - If you're using an asn , the response includes ASN value in both the asn and
-//     asnLong fields.
+//   - If you're using an asn , the response includes the ASN value in both the asn
+//     and asnLong fields.
 //
 //   - If you're using asnLong , the response returns a value of 0 (zero) for the
 //     asn attribute because it exceeds the highest ASN value of 2,147,483,647 that

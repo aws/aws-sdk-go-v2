@@ -58117,6 +58117,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.ContainerHostname = ptr.String(jtv)
 			}
 
+		case "ContainerMetricsConfig":
+			if err := awsAwsjson11_deserializeDocumentContainerMetricsConfig(&sv.ContainerMetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "Environment":
 			if err := awsAwsjson11_deserializeDocumentEnvironmentMap(&sv.Environment, value); err != nil {
 				return err
@@ -58258,6 +58263,42 @@ func awsAwsjson11_deserializeDocumentContainerEntrypoint(v *[]string, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContainerMetricsConfig(v **types.ContainerMetricsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerMetricsConfig
+	if *v == nil {
+		sv = &types.ContainerMetricsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricsEndpoints":
+			if err := awsAwsjson11_deserializeDocumentMetricsEndpointList(&sv.MetricsEndpoints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -70968,6 +71009,11 @@ func awsAwsjson11_deserializeDocumentInferenceComponentContainerSpecificationSum
 				sv.ArtifactUrl = ptr.String(jtv)
 			}
 
+		case "ContainerMetricsConfig":
+			if err := awsAwsjson11_deserializeDocumentContainerMetricsConfig(&sv.ContainerMetricsConfig, value); err != nil {
+				return err
+			}
+
 		case "DeployedImage":
 			if err := awsAwsjson11_deserializeDocumentDeployedImage(&sv.DeployedImage, value); err != nil {
 				return err
@@ -76409,6 +76455,15 @@ func awsAwsjson11_deserializeDocumentMetricsConfig(v **types.MetricsConfig, valu
 
 	for key, value := range shape {
 		switch key {
+		case "EnableDetailedObservability":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected EnableDetailedObservability to be of type *bool, got %T instead", value)
+				}
+				sv.EnableDetailedObservability = ptr.Bool(jtv)
+			}
+
 		case "EnableEnhancedMetrics":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -76437,6 +76492,93 @@ func awsAwsjson11_deserializeDocumentMetricsConfig(v **types.MetricsConfig, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMetricsEndpoint(v **types.MetricsEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricsEndpoint
+	if *v == nil {
+		sv = &types.MetricsEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MetricPublishFrequencyInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MetricPublishFrequencyInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MetricPublishFrequencyInSeconds = int32(i64)
+			}
+
+		case "MetricsEndpointPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricsEndpointPath to be of type string, got %T instead", value)
+				}
+				sv.MetricsEndpointPath = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMetricsEndpointList(v *[]types.MetricsEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MetricsEndpoint
+	if *v == nil {
+		cv = []types.MetricsEndpoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MetricsEndpoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentMetricsEndpoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

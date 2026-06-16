@@ -262,6 +262,16 @@ func awsRestjson1_serializeOpDocumentCreateOrderInput(v *CreateOrderInput, value
 		ok.String(string(v.PaymentTerm))
 	}
 
+	if v.QuoteIdentifier != nil {
+		ok := object.Key("QuoteIdentifier")
+		ok.String(*v.QuoteIdentifier)
+	}
+
+	if v.QuoteOptionIdentifier != nil {
+		ok := object.Key("QuoteOptionIdentifier")
+		ok.String(*v.QuoteOptionIdentifier)
+	}
+
 	return nil
 }
 

@@ -29,7 +29,7 @@ func (c *Client) GetQuote(ctx context.Context, params *GetQuoteInput, optFns ...
 
 type GetQuoteInput struct {
 
-	// The ID or ARN of the quote.
+	// The ID of the quote.
 	//
 	// This member is required.
 	QuoteIdentifier *string

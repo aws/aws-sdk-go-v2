@@ -4664,6 +4664,13 @@ func awsAwsjson11_serializeDocumentFirewallRuleType(v *types.FirewallRuleType, v
 		}
 	}
 
+	if v.PartnerThreatProtection != nil {
+		ok := object.Key("PartnerThreatProtection")
+		if err := awsAwsjson11_serializeDocumentPartnerThreatProtectionConfig(v.PartnerThreatProtection, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4724,6 +4731,18 @@ func awsAwsjson11_serializeDocumentIpAddressUpdate(v *types.IpAddressUpdate, val
 	if v.SubnetId != nil {
 		ok := object.Key("SubnetId")
 		ok.String(*v.SubnetId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPartnerThreatProtectionConfig(v *types.PartnerThreatProtectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Partner != nil {
+		ok := object.Key("Partner")
+		ok.String(*v.Partner)
 	}
 
 	return nil
