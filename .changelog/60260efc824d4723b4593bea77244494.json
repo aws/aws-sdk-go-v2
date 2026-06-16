@@ -1,8 +1,0 @@
-{
-    "id": "60260efc-824d-4723-b459-3bea77244494",
-    "type": "feature",
-    "description": "Adds support for creating an order from quotes.",
-    "modules": [
-        "service/outposts"
-    ]
-}

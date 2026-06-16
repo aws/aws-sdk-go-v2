@@ -1,8 +1,0 @@
-{
-    "id": "922ac994-73b4-4b02-8a81-191c25879fd0",
-    "type": "feature",
-    "description": "Adds supports for PartnerManagedRules",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

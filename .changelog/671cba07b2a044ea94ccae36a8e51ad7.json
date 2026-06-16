@@ -1,8 +1,0 @@
-{
-    "id": "671cba07-b2a0-44ea-94cc-ae36a8e51ad7",
-    "type": "feature",
-    "description": "Add EnableDetailedObservability to Endpoint MetricsConfig. Publishes GPU, host, and framework-native inference metrics to CloudWatch with per-inference-component, availability-zone, and instance dimensions. Adds Inference Component provisioning lifecycle and multi-AZ placement metrics.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

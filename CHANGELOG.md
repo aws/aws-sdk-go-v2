@@ -1,3 +1,24 @@
+# Release (2026-06-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.40.0](service/directconnect/CHANGELOG.md#v1400-2026-06-16)
+  * **Feature**: Added VIF rate limiting support for AWS Direct Connect, allowing customers to set bandwidth allocations on virtual interfaces to manage traffic on dedicated connections.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.62.0](service/outposts/CHANGELOG.md#v1620-2026-06-16)
+  * **Feature**: Adds support for creating an order from quotes.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.19.0](service/partnercentralselling/CHANGELOG.md#v1190-2026-06-16)
+  * **Feature**: Added Prospecting APIs to convert engagements into AI-enriched leads with scoring insights. Extended Engagement APIs with ProspectingResult and Lead contexts. Added CoSell Scoring to GetAwsOpportunitySummary- quality score, trend, agent-driven recommendations, and engagement classification.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.46.0](service/route53resolver/CHANGELOG.md#v1460-2026-06-16)
+  * **Feature**: Adds supports for PartnerManagedRules
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.104.0](service/s3/CHANGELOG.md#v11040-2026-06-16)
+  * **Feature**: Added support for annotations. You can now attach up to 1000 annotations (up to 1 MB each) directly to objects and create, retrieve, list, and delete them using new annotation APIs. Also added support for configuring an annotation table in S3 Metadata.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.8.0](service/s3vectors/CHANGELOG.md#v180-2026-06-16)
+  * **Feature**: Amazon S3 Vectors now supports paginated QueryVectors requests, returning up to 10,000 results per query.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.255.0](service/sagemaker/CHANGELOG.md#v12550-2026-06-16)
+  * **Feature**: Add EnableDetailedObservability to Endpoint MetricsConfig. Publishes GPU, host, and framework-native inference metrics to CloudWatch with per-inference-component, availability-zone, and instance dimensions. Adds Inference Component provisioning lifecycle and multi-AZ placement metrics.
+
 # Release (2026-06-15)
 
 ## General Highlights

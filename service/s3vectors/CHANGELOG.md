@@ -1,3 +1,7 @@
+# v1.8.0 (2026-06-16)
+
+* **Feature**: Amazon S3 Vectors now supports paginated QueryVectors requests, returning up to 10,000 results per query.
+
 # v1.7.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

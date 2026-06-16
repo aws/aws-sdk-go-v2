@@ -1,3 +1,7 @@
+# v1.62.0 (2026-06-16)
+
+* **Feature**: Adds support for creating an order from quotes.
+
 # v1.61.0 (2026-06-09)
 
 * **Feature**: Added AWS Outposts APIs for self-service Outposts quoting and ordering. New operations include CreateQuote, GetQuote, UpdateQuote, DeleteQuote, ListQuotes, and ListOrderableInstanceTypes.
