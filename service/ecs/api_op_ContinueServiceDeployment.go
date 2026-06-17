@@ -22,6 +22,10 @@ import (
 // To find the hookId of the paused hook, call [DescribeServiceDeployments] and inspect the
 // lifecycleHookDetails field.
 //
+// For more information, see [Continuing Amazon ECS service deployments] in the Amazon Elastic Container Service Developer
+// Guide.
+//
+// [Continuing Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/continue-service-deployment.html
 // [DescribeServiceDeployments]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
 func (c *Client) ContinueServiceDeployment(ctx context.Context, params *ContinueServiceDeploymentInput, optFns ...func(*Options)) (*ContinueServiceDeploymentOutput, error) {
 	if params == nil {

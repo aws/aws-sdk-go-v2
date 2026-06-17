@@ -13,7 +13,8 @@ type BadRequestException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -41,7 +42,8 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -69,7 +71,8 @@ type ForbiddenException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -97,7 +100,8 @@ type InternalServerErrorException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -125,7 +129,8 @@ type NotFoundException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -153,7 +158,8 @@ type UnauthorizedException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }

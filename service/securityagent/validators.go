@@ -30,6 +30,26 @@ func (m *validateOpAddArtifact) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchCreateSecurityRequirements struct {
+}
+
+func (*validateOpBatchCreateSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateSecurityRequirementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteCodeReviews struct {
 }
 
@@ -65,6 +85,46 @@ func (m *validateOpBatchDeletePentests) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchDeletePentestsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteSecurityRequirements struct {
+}
+
+func (*validateOpBatchDeleteSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteSecurityRequirementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteThreatModels struct {
+}
+
+func (*validateOpBatchDeleteThreatModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteThreatModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteThreatModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteThreatModelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,26 @@ func (m *validateOpBatchGetPentests) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetSecurityRequirements struct {
+}
+
+func (*validateOpBatchGetSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSecurityRequirementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetTargetDomains struct {
 }
 
@@ -265,6 +345,106 @@ func (m *validateOpBatchGetTargetDomains) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetTargetDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetThreatModelJobs struct {
+}
+
+func (*validateOpBatchGetThreatModelJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetThreatModelJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetThreatModelJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetThreatModelJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetThreatModelJobTasks struct {
+}
+
+func (*validateOpBatchGetThreatModelJobTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetThreatModelJobTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetThreatModelJobTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetThreatModelJobTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetThreatModels struct {
+}
+
+func (*validateOpBatchGetThreatModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetThreatModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetThreatModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetThreatModelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetThreats struct {
+}
+
+func (*validateOpBatchGetThreats) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetThreats) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetThreatsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetThreatsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateSecurityRequirements struct {
+}
+
+func (*validateOpBatchUpdateSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateSecurityRequirementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +550,46 @@ func (m *validateOpCreatePentest) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePrivateConnection struct {
+}
+
+func (*validateOpCreatePrivateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrivateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePrivateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePrivateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSecurityRequirementPack struct {
+}
+
+func (*validateOpCreateSecurityRequirementPack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSecurityRequirementPack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSecurityRequirementPackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSecurityRequirementPackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTargetDomain struct {
 }
 
@@ -385,6 +605,46 @@ func (m *validateOpCreateTargetDomain) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTargetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateThreat struct {
+}
+
+func (*validateOpCreateThreat) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateThreat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateThreatInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateThreatInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateThreatModel struct {
+}
+
+func (*validateOpCreateThreatModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateThreatModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateThreatModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateThreatModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +750,46 @@ func (m *validateOpDeleteMembership) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePrivateConnection struct {
+}
+
+func (*validateOpDeletePrivateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrivateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePrivateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePrivateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSecurityRequirementPack struct {
+}
+
+func (*validateOpDeleteSecurityRequirementPack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSecurityRequirementPack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSecurityRequirementPackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSecurityRequirementPackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTargetDomain struct {
 }
 
@@ -505,6 +805,26 @@ func (m *validateOpDeleteTargetDomain) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTargetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePrivateConnection struct {
+}
+
+func (*validateOpDescribePrivateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePrivateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePrivateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePrivateConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -565,6 +885,46 @@ func (m *validateOpGetIntegration) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSecurityRequirementPack struct {
+}
+
+func (*validateOpGetSecurityRequirementPack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSecurityRequirementPack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSecurityRequirementPackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSecurityRequirementPackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportSecurityRequirements struct {
+}
+
+func (*validateOpImportSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportSecurityRequirementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +1170,26 @@ func (m *validateOpListPentests) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSecurityRequirements struct {
+}
+
+func (*validateOpListSecurityRequirements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSecurityRequirements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSecurityRequirementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSecurityRequirementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -825,6 +1205,86 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThreatModelJobs struct {
+}
+
+func (*validateOpListThreatModelJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThreatModelJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThreatModelJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThreatModelJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThreatModelJobTasks struct {
+}
+
+func (*validateOpListThreatModelJobTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThreatModelJobTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThreatModelJobTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThreatModelJobTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThreatModels struct {
+}
+
+func (*validateOpListThreatModels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThreatModels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThreatModelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThreatModelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThreats struct {
+}
+
+func (*validateOpListThreats) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThreats) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThreatsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThreatsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +1350,26 @@ func (m *validateOpStartPentestJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartThreatModelJob struct {
+}
+
+func (*validateOpStartThreatModelJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartThreatModelJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartThreatModelJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartThreatModelJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopCodeReviewJob struct {
 }
 
@@ -925,6 +1405,26 @@ func (m *validateOpStopPentestJob) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopPentestJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopThreatModelJob struct {
+}
+
+func (*validateOpStopThreatModelJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopThreatModelJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopThreatModelJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopThreatModelJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1090,6 +1590,46 @@ func (m *validateOpUpdatePentest) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePrivateConnectionCertificate struct {
+}
+
+func (*validateOpUpdatePrivateConnectionCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrivateConnectionCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePrivateConnectionCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePrivateConnectionCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSecurityRequirementPack struct {
+}
+
+func (*validateOpUpdateSecurityRequirementPack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSecurityRequirementPack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSecurityRequirementPackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSecurityRequirementPackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTargetDomain struct {
 }
 
@@ -1105,6 +1645,46 @@ func (m *validateOpUpdateTargetDomain) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateTargetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateThreat struct {
+}
+
+func (*validateOpUpdateThreat) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThreat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThreatInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThreatInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateThreatModel struct {
+}
+
+func (*validateOpUpdateThreatModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThreatModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThreatModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThreatModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1134,12 +1714,24 @@ func addOpAddArtifactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddArtifact{}, middleware.After)
 }
 
+func addOpBatchCreateSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateSecurityRequirements{}, middleware.After)
+}
+
 func addOpBatchDeleteCodeReviewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteCodeReviews{}, middleware.After)
 }
 
 func addOpBatchDeletePentestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeletePentests{}, middleware.After)
+}
+
+func addOpBatchDeleteSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteSecurityRequirements{}, middleware.After)
+}
+
+func addOpBatchDeleteThreatModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteThreatModels{}, middleware.After)
 }
 
 func addOpBatchGetAgentSpacesValidationMiddleware(stack *middleware.Stack) error {
@@ -1178,8 +1770,32 @@ func addOpBatchGetPentestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetPentests{}, middleware.After)
 }
 
+func addOpBatchGetSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSecurityRequirements{}, middleware.After)
+}
+
 func addOpBatchGetTargetDomainsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetTargetDomains{}, middleware.After)
+}
+
+func addOpBatchGetThreatModelJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetThreatModelJobs{}, middleware.After)
+}
+
+func addOpBatchGetThreatModelJobTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetThreatModelJobTasks{}, middleware.After)
+}
+
+func addOpBatchGetThreatModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetThreatModels{}, middleware.After)
+}
+
+func addOpBatchGetThreatsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetThreats{}, middleware.After)
+}
+
+func addOpBatchUpdateSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateSecurityRequirements{}, middleware.After)
 }
 
 func addOpCreateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1202,8 +1818,24 @@ func addOpCreatePentestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePentest{}, middleware.After)
 }
 
+func addOpCreatePrivateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrivateConnection{}, middleware.After)
+}
+
+func addOpCreateSecurityRequirementPackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSecurityRequirementPack{}, middleware.After)
+}
+
 func addOpCreateTargetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTargetDomain{}, middleware.After)
+}
+
+func addOpCreateThreatValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateThreat{}, middleware.After)
+}
+
+func addOpCreateThreatModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateThreatModel{}, middleware.After)
 }
 
 func addOpDeleteAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1226,8 +1858,20 @@ func addOpDeleteMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMembership{}, middleware.After)
 }
 
+func addOpDeletePrivateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrivateConnection{}, middleware.After)
+}
+
+func addOpDeleteSecurityRequirementPackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSecurityRequirementPack{}, middleware.After)
+}
+
 func addOpDeleteTargetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTargetDomain{}, middleware.After)
+}
+
+func addOpDescribePrivateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePrivateConnection{}, middleware.After)
 }
 
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1240,6 +1884,14 @@ func addOpGetArtifactValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIntegration{}, middleware.After)
+}
+
+func addOpGetSecurityRequirementPackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSecurityRequirementPack{}, middleware.After)
+}
+
+func addOpImportSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportSecurityRequirements{}, middleware.After)
 }
 
 func addOpInitiateProviderRegistrationValidationMiddleware(stack *middleware.Stack) error {
@@ -1290,8 +1942,28 @@ func addOpListPentestsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPentests{}, middleware.After)
 }
 
+func addOpListSecurityRequirementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSecurityRequirements{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListThreatModelJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThreatModelJobs{}, middleware.After)
+}
+
+func addOpListThreatModelJobTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThreatModelJobTasks{}, middleware.After)
+}
+
+func addOpListThreatModelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThreatModels{}, middleware.After)
+}
+
+func addOpListThreatsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThreats{}, middleware.After)
 }
 
 func addOpStartCodeRemediationValidationMiddleware(stack *middleware.Stack) error {
@@ -1306,12 +1978,20 @@ func addOpStartPentestJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPentestJob{}, middleware.After)
 }
 
+func addOpStartThreatModelJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartThreatModelJob{}, middleware.After)
+}
+
 func addOpStopCodeReviewJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCodeReviewJob{}, middleware.After)
 }
 
 func addOpStopPentestJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopPentestJob{}, middleware.After)
+}
+
+func addOpStopThreatModelJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopThreatModelJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1346,8 +2026,24 @@ func addOpUpdatePentestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePentest{}, middleware.After)
 }
 
+func addOpUpdatePrivateConnectionCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrivateConnectionCertificate{}, middleware.After)
+}
+
+func addOpUpdateSecurityRequirementPackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSecurityRequirementPack{}, middleware.After)
+}
+
 func addOpUpdateTargetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTargetDomain{}, middleware.After)
+}
+
+func addOpUpdateThreatValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThreat{}, middleware.After)
+}
+
+func addOpUpdateThreatModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThreatModel{}, middleware.After)
 }
 
 func addOpVerifyTargetDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1359,10 +2055,57 @@ func validateAssets(v *types.Assets) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Assets"}
+	if v.Documents != nil {
+		if err := validateDocumentList(v.Documents); err != nil {
+			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.IntegratedRepositories != nil {
 		if err := validateIntegratedRepositoryList(v.IntegratedRepositories); err != nil {
 			invalidParams.AddNested("IntegratedRepositories", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketIntegrationInput(v *types.BitbucketIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketIntegrationInput"}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if v.Workspace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBitbucketRepositoryResource(v *types.BitbucketRepositoryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BitbucketRepositoryResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Workspace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Workspace"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,6 +2124,126 @@ func validateCodeReviewSettings(v *types.CodeReviewSettings) error {
 	}
 	if v.GeneralPurposeScanning == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GeneralPurposeScanning"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceDocumentResource(v *types.ConfluenceDocumentResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceDocumentResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SpaceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceKey"))
+	}
+	if v.PageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfluenceIntegrationInput(v *types.ConfluenceIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceIntegrationInput"}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.SiteUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSecurityRequirementEntry(v *types.CreateSecurityRequirementEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityRequirementEntry"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Evaluation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Evaluation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSecurityRequirementEntryList(v []types.CreateSecurityRequirementEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityRequirementEntryList"}
+	for i := range v {
+		if err := validateCreateSecurityRequirementEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentInfo(v *types.DocumentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentInfo"}
+	if v.IntegratedDocument != nil {
+		if err := validateIntegratedDocument(v.IntegratedDocument); err != nil {
+			invalidParams.AddNested("IntegratedDocument", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentList(v []types.DocumentInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentList"}
+	for i := range v {
+		if err := validateDocumentInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1417,6 +2280,79 @@ func validateGitHubRepositoryResource(v *types.GitHubRepositoryResource) error {
 	}
 	if v.Owner == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitLabIntegrationInput(v *types.GitLabIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitLabIntegrationInput"}
+	if v.AccessToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if len(v.TokenType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGitLabRepositoryResource(v *types.GitLabRepositoryResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitLabRepositoryResource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportSource(v types.ImportSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSource"}
+	switch uv := v.(type) {
+	case *types.ImportSourceMemberDocuments:
+		if err := validateSecurityRequirementArtifactList(uv.Value); err != nil {
+			invalidParams.AddNested("[documents]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntegratedDocument(v *types.IntegratedDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntegratedDocument"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1466,9 +2402,24 @@ func validateIntegratedResource(v types.IntegratedResource) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegratedResource"}
 	switch uv := v.(type) {
+	case *types.IntegratedResourceMemberBitbucketRepository:
+		if err := validateBitbucketRepositoryResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucketRepository]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IntegratedResourceMemberConfluenceDocument:
+		if err := validateConfluenceDocumentResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[confluenceDocument]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.IntegratedResourceMemberGithubRepository:
 		if err := validateGitHubRepositoryResource(&uv.Value); err != nil {
 			invalidParams.AddNested("[githubRepository]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IntegratedResourceMemberGitlabRepository:
+		if err := validateGitLabRepositoryResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlabRepository]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1515,17 +2466,180 @@ func validateIntegratedResourceInputItemList(v []types.IntegratedResourceInputIt
 	}
 }
 
+func validatePrivateConnectionMode(v types.PrivateConnectionMode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateConnectionMode"}
+	switch uv := v.(type) {
+	case *types.PrivateConnectionModeMemberSelfManaged:
+		if err := validateSelfManagedInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[selfManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PrivateConnectionModeMemberServiceManaged:
+		if err := validateServiceManagedInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[serviceManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProviderInput(v types.ProviderInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProviderInput"}
 	switch uv := v.(type) {
+	case *types.ProviderInputMemberBitbucket:
+		if err := validateBitbucketIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[bitbucket]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderInputMemberConfluence:
+		if err := validateConfluenceIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[confluence]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProviderInputMemberGithub:
 		if err := validateGitHubIntegrationInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ProviderInputMemberGitlab:
+		if err := validateGitLabIntegrationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportDestination(v *types.ReportDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportDestination"}
+	if v.IntegrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if v.ContainerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityRequirementArtifact(v *types.SecurityRequirementArtifact) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityRequirementArtifact"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityRequirementArtifactList(v []types.SecurityRequirementArtifact) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityRequirementArtifactList"}
+	for i := range v {
+		if err := validateSecurityRequirementArtifact(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelfManagedInput(v *types.SelfManagedInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelfManagedInput"}
+	if v.ResourceConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceManagedInput(v *types.ServiceManagedInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceManagedInput"}
+	if v.HostAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostAddress"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateSecurityRequirementEntry(v *types.UpdateSecurityRequirementEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityRequirementEntry"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateSecurityRequirementEntryList(v []types.UpdateSecurityRequirementEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityRequirementEntryList"}
+	for i := range v {
+		if err := validateUpdateSecurityRequirementEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1550,6 +2664,28 @@ func validateOpAddArtifactInput(v *AddArtifactInput) error {
 	}
 	if v.FileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchCreateSecurityRequirementsInput(v *BatchCreateSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if v.SecurityRequirements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityRequirements"))
+	} else if v.SecurityRequirements != nil {
+		if err := validateCreateSecurityRequirementEntryList(v.SecurityRequirements); err != nil {
+			invalidParams.AddNested("SecurityRequirements", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1583,6 +2719,42 @@ func validateOpBatchDeletePentestsInput(v *BatchDeletePentestsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDeletePentestsInput"}
 	if v.PentestIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteSecurityRequirementsInput(v *BatchDeleteSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if v.SecurityRequirementNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityRequirementNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteThreatModelsInput(v *BatchDeleteThreatModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteThreatModelsInput"}
+	if v.ThreatModelIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelIds"))
 	}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
@@ -1753,6 +2925,24 @@ func validateOpBatchGetPentestsInput(v *BatchGetPentestsInput) error {
 	}
 }
 
+func validateOpBatchGetSecurityRequirementsInput(v *BatchGetSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if v.SecurityRequirementNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityRequirementNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetTargetDomainsInput(v *BatchGetTargetDomainsInput) error {
 	if v == nil {
 		return nil
@@ -1760,6 +2950,100 @@ func validateOpBatchGetTargetDomainsInput(v *BatchGetTargetDomainsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetTargetDomainsInput"}
 	if v.TargetDomainIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDomainIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetThreatModelJobsInput(v *BatchGetThreatModelJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetThreatModelJobsInput"}
+	if v.ThreatModelJobIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelJobIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetThreatModelJobTasksInput(v *BatchGetThreatModelJobTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetThreatModelJobTasksInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ThreatModelJobTaskIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelJobTaskIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetThreatModelsInput(v *BatchGetThreatModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetThreatModelsInput"}
+	if v.ThreatModelIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetThreatsInput(v *BatchGetThreatsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetThreatsInput"}
+	if v.ThreatIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatIds"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateSecurityRequirementsInput(v *BatchUpdateSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if v.SecurityRequirements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityRequirements"))
+	} else if v.SecurityRequirements != nil {
+		if err := validateUpdateSecurityRequirementEntryList(v.SecurityRequirements); err != nil {
+			invalidParams.AddNested("SecurityRequirements", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1885,6 +3169,43 @@ func validateOpCreatePentestInput(v *CreatePentestInput) error {
 	}
 }
 
+func validateOpCreatePrivateConnectionInput(v *CreatePrivateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePrivateConnectionInput"}
+	if v.PrivateConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateConnectionName"))
+	}
+	if v.Mode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	} else if v.Mode != nil {
+		if err := validatePrivateConnectionMode(v.Mode); err != nil {
+			invalidParams.AddNested("Mode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSecurityRequirementPackInput(v *CreateSecurityRequirementPackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityRequirementPackInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTargetDomainInput(v *CreateTargetDomainInput) error {
 	if v == nil {
 		return nil
@@ -1895,6 +3216,60 @@ func validateOpCreateTargetDomainInput(v *CreateTargetDomainInput) error {
 	}
 	if len(v.VerificationMethod) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("VerificationMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateThreatInput(v *CreateThreatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateThreatInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ThreatJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateThreatModelInput(v *CreateThreatModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateThreatModelInput"}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.Assets != nil {
+		if err := validateAssets(v.Assets); err != nil {
+			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScopeDocs != nil {
+		if err := validateDocumentList(v.ScopeDocs); err != nil {
+			invalidParams.AddNested("ScopeDocs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	}
+	if v.ReportDestination != nil {
+		if err := validateReportDestination(v.ReportDestination); err != nil {
+			invalidParams.AddNested("ReportDestination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1987,6 +3362,36 @@ func validateOpDeleteMembershipInput(v *DeleteMembershipInput) error {
 	}
 }
 
+func validateOpDeletePrivateConnectionInput(v *DeletePrivateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePrivateConnectionInput"}
+	if v.PrivateConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateConnectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSecurityRequirementPackInput(v *DeleteSecurityRequirementPackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSecurityRequirementPackInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTargetDomainInput(v *DeleteTargetDomainInput) error {
 	if v == nil {
 		return nil
@@ -1994,6 +3399,21 @@ func validateOpDeleteTargetDomainInput(v *DeleteTargetDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTargetDomainInput"}
 	if v.TargetDomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePrivateConnectionInput(v *DescribePrivateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePrivateConnectionInput"}
+	if v.PrivateConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateConnectionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2042,6 +3462,43 @@ func validateOpGetIntegrationInput(v *GetIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetIntegrationInput"}
 	if v.IntegrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSecurityRequirementPackInput(v *GetSecurityRequirementPackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSecurityRequirementPackInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportSecurityRequirementsInput(v *ImportSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if v.Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	} else if v.Input != nil {
+		if err := validateImportSource(v.Input); err != nil {
+			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2242,6 +3699,21 @@ func validateOpListPentestsInput(v *ListPentestsInput) error {
 	}
 }
 
+func validateOpListSecurityRequirementsInput(v *ListSecurityRequirementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityRequirementsInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -2249,6 +3721,75 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThreatModelJobsInput(v *ListThreatModelJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThreatModelJobsInput"}
+	if v.ThreatModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThreatModelJobTasksInput(v *ListThreatModelJobTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThreatModelJobTasksInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ThreatModelJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThreatModelsInput(v *ListThreatModelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThreatModelsInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThreatsInput(v *ListThreatsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThreatsInput"}
+	if v.ThreatJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatJobId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2311,6 +3852,24 @@ func validateOpStartPentestJobInput(v *StartPentestJobInput) error {
 	}
 }
 
+func validateOpStartThreatModelJobInput(v *StartThreatModelJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartThreatModelJobInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ThreatModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopCodeReviewJobInput(v *StopCodeReviewJobInput) error {
 	if v == nil {
 		return nil
@@ -2339,6 +3898,24 @@ func validateOpStopPentestJobInput(v *StopPentestJobInput) error {
 	}
 	if v.PentestJobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PentestJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopThreatModelJobInput(v *StopThreatModelJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopThreatModelJobInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ThreatModelJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2507,6 +4084,39 @@ func validateOpUpdatePentestInput(v *UpdatePentestInput) error {
 	}
 }
 
+func validateOpUpdatePrivateConnectionCertificateInput(v *UpdatePrivateConnectionCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePrivateConnectionCertificateInput"}
+	if v.PrivateConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateConnectionName"))
+	}
+	if v.Certificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSecurityRequirementPackInput(v *UpdateSecurityRequirementPackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityRequirementPackInput"}
+	if v.PackId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateTargetDomainInput(v *UpdateTargetDomainInput) error {
 	if v == nil {
 		return nil
@@ -2517,6 +4127,52 @@ func validateOpUpdateTargetDomainInput(v *UpdateTargetDomainInput) error {
 	}
 	if len(v.VerificationMethod) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("VerificationMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThreatInput(v *UpdateThreatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThreatInput"}
+	if v.ThreatId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThreatModelInput(v *UpdateThreatModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThreatModelInput"}
+	if v.ThreatModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatModelId"))
+	}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.Assets != nil {
+		if err := validateAssets(v.Assets); err != nil {
+			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScopeDocs != nil {
+		if err := validateDocumentList(v.ScopeDocs); err != nil {
+			invalidParams.AddNested("ScopeDocs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

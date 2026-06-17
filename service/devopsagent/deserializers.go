@@ -12627,6 +12627,26 @@ loop:
 			uv = &types.AdditionalServiceDetailsMemberPagerduty{Value: mv}
 			break loop
 
+		case "remoteagent":
+			var mv types.RegisteredRemoteAgentDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRegisteredRemoteAgentDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AdditionalServiceDetailsMemberRemoteagent{Value: mv}
+			break loop
+
+		case "remoteagentsigv4":
+			var mv types.RegisteredRemoteAgentSigV4Details
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRegisteredRemoteAgentSigV4Details(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AdditionalServiceDetailsMemberRemoteagentsigv4{Value: mv}
+			break loop
+
 		case "servicenow":
 			var mv types.RegisteredServiceNowDetails
 			destAddr := &mv
@@ -13602,6 +13622,11 @@ func awsRestjson1_deserializeDocumentAssociation(v **types.Association, value in
 				sv.AssociationId = ptr.String(jtv)
 			}
 
+		case "capabilities":
+			if err := awsRestjson1_deserializeDocumentAssociationCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
 		case "configuration":
 			if err := awsRestjson1_deserializeDocumentServiceConfiguration(&sv.Configuration, value); err != nil {
 				return err
@@ -13657,6 +13682,41 @@ func awsRestjson1_deserializeDocumentAssociation(v **types.Association, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociationCapabilities(v *map[string]types.CapabilityConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.CapabilityConfiguration
+	if *v == nil {
+		mv = map[string]types.CapabilityConfiguration{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.CapabilityConfiguration
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentCapabilityConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -13839,6 +13899,46 @@ func awsRestjson1_deserializeDocumentAzureDevOpsConfiguration(v **types.AzureDev
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ProjectName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCapabilityConfiguration(v **types.CapabilityConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapabilityConfiguration
+	if *v == nil {
+		sv = &types.CapabilityConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -14528,6 +14628,15 @@ func awsRestjson1_deserializeDocumentGitHubConfiguration(v **types.GitHubConfigu
 				sv.RepoName = ptr.String(jtv)
 			}
 
+		case "runtimeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeRoleArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14584,6 +14693,15 @@ func awsRestjson1_deserializeDocumentGitLabConfiguration(v **types.GitLabConfigu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ProjectPath = ptr.String(jtv)
+			}
+
+		case "runtimeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeRoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -16978,6 +17096,167 @@ func awsRestjson1_deserializeDocumentRegisteredPagerDutyDetails(v **types.Regist
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRegisteredRemoteAgentDetails(v **types.RegisteredRemoteAgentDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegisteredRemoteAgentDetails
+	if *v == nil {
+		sv = &types.RegisteredRemoteAgentDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "apiKeyHeader":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ApiKeyHeader = ptr.String(jtv)
+			}
+
+		case "authorizationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteAgentAuthorizationMethod to be of type string, got %T instead", value)
+				}
+				sv.AuthorizationMethod = types.RemoteAgentAuthorizationMethod(jtv)
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteAgentEndpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteAgentName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRegisteredRemoteAgentSigV4Details(v **types.RegisteredRemoteAgentSigV4Details, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegisteredRemoteAgentSigV4Details
+	if *v == nil {
+		sv = &types.RegisteredRemoteAgentSigV4Details{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteAgentEndpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RemoteAgentName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SigV4Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRegisteredService(v **types.RegisteredService, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17178,6 +17457,68 @@ func awsRestjson1_deserializeDocumentRegisteredSlackServiceDetails(v **types.Reg
 				sv.TeamName = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemoteAgentConfiguration(v **types.RemoteAgentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteAgentConfiguration
+	if *v == nil {
+		sv = &types.RemoteAgentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRemoteAgentSigV4Configuration(v **types.RemoteAgentSigV4Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RemoteAgentSigV4Configuration
+	if *v == nil {
+		sv = &types.RemoteAgentSigV4Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -17425,6 +17766,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ServiceConfigurationMemberPagerduty{Value: mv}
+			break loop
+
+		case "remoteagent":
+			var mv types.RemoteAgentConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRemoteAgentConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberRemoteagent{Value: mv}
+			break loop
+
+		case "remoteagentsigv4":
+			var mv types.RemoteAgentSigV4Configuration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRemoteAgentSigV4Configuration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberRemoteagentsigv4{Value: mv}
 			break loop
 
 		case "servicenow":

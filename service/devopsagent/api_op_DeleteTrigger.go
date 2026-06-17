@@ -26,16 +26,15 @@ func (c *Client) DeleteTrigger(ctx context.Context, params *DeleteTriggerInput, 
 	return out, nil
 }
 
+// Request structure for deleting a Trigger
 type DeleteTriggerInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space containing the Trigger
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Generic resource identifier (allows alphanumeric characters, hyphens, and
-	// underscores; 1-128 characters)
+	// The unique identifier of the Trigger to delete
 	//
 	// This member is required.
 	TriggerId *string
@@ -43,6 +42,7 @@ type DeleteTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for deleting a Trigger
 type DeleteTriggerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

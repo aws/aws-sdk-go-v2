@@ -1,0 +1,8 @@
+{
+    "id": "34fbb7a4-11be-4cff-8be5-5263c5db10e4",
+    "type": "feature",
+    "description": "AgentCore Gateway now supports inference targets to LLM providers (direct config or built-in connectors), HTTP passthrough targets with session stickiness, runtime target API schemas, AWS WAF web ACL association with configurable fail-open or fail-close modes, and interceptor payload filtering.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

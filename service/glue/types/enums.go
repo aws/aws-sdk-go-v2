@@ -2788,6 +2788,52 @@ func (SchemaVersionStatus) Values() []SchemaVersionStatus {
 	}
 }
 
+type SearchFilterOperator string
+
+// Enum values for SearchFilterOperator
+const (
+	SearchFilterOperatorEquals              SearchFilterOperator = "equals"
+	SearchFilterOperatorGreaterThan         SearchFilterOperator = "greaterThan"
+	SearchFilterOperatorGreaterThanOrEquals SearchFilterOperator = "greaterThanOrEquals"
+	SearchFilterOperatorLessThan            SearchFilterOperator = "lessThan"
+	SearchFilterOperatorLessThanOrEquals    SearchFilterOperator = "lessThanOrEquals"
+	SearchFilterOperatorNotExists           SearchFilterOperator = "notExists"
+)
+
+// Values returns all known values for SearchFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchFilterOperator) Values() []SearchFilterOperator {
+	return []SearchFilterOperator{
+		"equals",
+		"greaterThan",
+		"greaterThanOrEquals",
+		"lessThan",
+		"lessThanOrEquals",
+		"notExists",
+	}
+}
+
+type SearchSortOrder string
+
+// Enum values for SearchSortOrder
+const (
+	SearchSortOrderAscending  SearchSortOrder = "ASCENDING"
+	SearchSortOrderDescending SearchSortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SearchSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchSortOrder) Values() []SearchSortOrder {
+	return []SearchSortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
+
 type Separator string
 
 // Enum values for Separator

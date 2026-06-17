@@ -628,6 +628,25 @@ func (EndpointIpAddressType) Values() []EndpointIpAddressType {
 	}
 }
 
+type EnforcementMode string
+
+// Enum values for EnforcementMode
+const (
+	EnforcementModeActive  EnforcementMode = "ACTIVE"
+	EnforcementModeLogOnly EnforcementMode = "LOG_ONLY"
+)
+
+// Values returns all known values for EnforcementMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnforcementMode) Values() []EnforcementMode {
+	return []EnforcementMode{
+		"ACTIVE",
+		"LOG_ONLY",
+	}
+}
+
 type EvaluatorLevel string
 
 // Enum values for EvaluatorLevel
@@ -922,6 +941,59 @@ func (HarnessBedrockApiFormat) Values() []HarnessBedrockApiFormat {
 	}
 }
 
+type HarnessEndpointStatus string
+
+// Enum values for HarnessEndpointStatus
+const (
+	HarnessEndpointStatusCreating     HarnessEndpointStatus = "CREATING"
+	HarnessEndpointStatusCreateFailed HarnessEndpointStatus = "CREATE_FAILED"
+	HarnessEndpointStatusUpdating     HarnessEndpointStatus = "UPDATING"
+	HarnessEndpointStatusUpdateFailed HarnessEndpointStatus = "UPDATE_FAILED"
+	HarnessEndpointStatusReady        HarnessEndpointStatus = "READY"
+	HarnessEndpointStatusDeleting     HarnessEndpointStatus = "DELETING"
+	HarnessEndpointStatusDeleteFailed HarnessEndpointStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for HarnessEndpointStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessEndpointStatus) Values() []HarnessEndpointStatus {
+	return []HarnessEndpointStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
+type HarnessManagedMemoryStrategyType string
+
+// Enum values for HarnessManagedMemoryStrategyType
+const (
+	HarnessManagedMemoryStrategyTypeSemantic       HarnessManagedMemoryStrategyType = "SEMANTIC"
+	HarnessManagedMemoryStrategyTypeSummarization  HarnessManagedMemoryStrategyType = "SUMMARIZATION"
+	HarnessManagedMemoryStrategyTypeUserPreference HarnessManagedMemoryStrategyType = "USER_PREFERENCE"
+	HarnessManagedMemoryStrategyTypeEpisodic       HarnessManagedMemoryStrategyType = "EPISODIC"
+)
+
+// Values returns all known values for HarnessManagedMemoryStrategyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessManagedMemoryStrategyType) Values() []HarnessManagedMemoryStrategyType {
+	return []HarnessManagedMemoryStrategyType{
+		"SEMANTIC",
+		"SUMMARIZATION",
+		"USER_PREFERENCE",
+		"EPISODIC",
+	}
+}
+
 type HarnessOpenAiApiFormat string
 
 // Enum values for HarnessOpenAiApiFormat
@@ -1053,6 +1125,23 @@ func (IncludedData) Values() []IncludedData {
 	return []IncludedData{
 		"ALL_DATA",
 		"METADATA_ONLY",
+	}
+}
+
+type InterceptorPayloadExclusion string
+
+// Enum values for InterceptorPayloadExclusion
+const (
+	InterceptorPayloadExclusionResponseBody InterceptorPayloadExclusion = "RESPONSE_BODY"
+)
+
+// Values returns all known values for InterceptorPayloadExclusion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InterceptorPayloadExclusion) Values() []InterceptorPayloadExclusion {
+	return []InterceptorPayloadExclusion{
+		"RESPONSE_BODY",
 	}
 }
 
@@ -1342,6 +1431,29 @@ func (OverrideType) Values() []OverrideType {
 		"USER_PREFERENCE_OVERRIDE",
 		"SELF_MANAGED",
 		"EPISODIC_OVERRIDE",
+	}
+}
+
+type PassthroughProtocolType string
+
+// Enum values for PassthroughProtocolType
+const (
+	PassthroughProtocolTypeMcp       PassthroughProtocolType = "MCP"
+	PassthroughProtocolTypeA2a       PassthroughProtocolType = "A2A"
+	PassthroughProtocolTypeInference PassthroughProtocolType = "INFERENCE"
+	PassthroughProtocolTypeCustom    PassthroughProtocolType = "CUSTOM"
+)
+
+// Values returns all known values for PassthroughProtocolType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PassthroughProtocolType) Values() []PassthroughProtocolType {
+	return []PassthroughProtocolType{
+		"MCP",
+		"A2A",
+		"INFERENCE",
+		"CUSTOM",
 	}
 }
 
@@ -1937,6 +2049,39 @@ func (TargetStatus) Values() []TargetStatus {
 	}
 }
 
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeOpenApiSchema    TargetType = "OPEN_API_SCHEMA"
+	TargetTypeSmithyModel      TargetType = "SMITHY_MODEL"
+	TargetTypeMcpServer        TargetType = "MCP_SERVER"
+	TargetTypeLambda           TargetType = "LAMBDA"
+	TargetTypeApiGateway       TargetType = "API_GATEWAY"
+	TargetTypeConnector        TargetType = "CONNECTOR"
+	TargetTypeAgentcoreRuntime TargetType = "AGENTCORE_RUNTIME"
+	TargetTypePassthrough      TargetType = "PASSTHROUGH"
+	TargetTypeProvider         TargetType = "PROVIDER"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"OPEN_API_SCHEMA",
+		"SMITHY_MODEL",
+		"MCP_SERVER",
+		"LAMBDA",
+		"API_GATEWAY",
+		"CONNECTOR",
+		"AGENTCORE_RUNTIME",
+		"PASSTHROUGH",
+		"PROVIDER",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
@@ -1959,5 +2104,24 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+	}
+}
+
+type WafFailureMode string
+
+// Enum values for WafFailureMode
+const (
+	WafFailureModeFailClose WafFailureMode = "FAIL_CLOSE"
+	WafFailureModeFailOpen  WafFailureMode = "FAIL_OPEN"
+)
+
+// Values returns all known values for WafFailureMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WafFailureMode) Values() []WafFailureMode {
+	return []WafFailureMode{
+		"FAIL_CLOSE",
+		"FAIL_OPEN",
 	}
 }

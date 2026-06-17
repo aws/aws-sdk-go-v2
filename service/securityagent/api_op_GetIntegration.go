@@ -66,6 +66,15 @@ type GetIntegrationOutput struct {
 	// integration.
 	KmsKeyId *string
 
+	// The name of the private connection used to reach the integration's self-hosted
+	// instance over private networking, if one is configured.
+	PrivateConnectionName *string
+
+	// The HTTPS URL of the customer self-hosted instance, such as a GitHub Enterprise
+	// Server or self-managed GitLab instance. This value is absent for SaaS
+	// integrations.
+	TargetUrl *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

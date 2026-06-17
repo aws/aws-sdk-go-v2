@@ -66,6 +66,19 @@ type UpdateExpressGatewayServiceInput struct {
 	// The auto-scaling configuration for the Express service.
 	ScalingTarget *types.ExpressGatewayScalingTarget
 
+	// The Amazon Resource Name (ARN) of a task definition to use to update the
+	// Express Gateway service. This allows you to manage your own task definition,
+	// giving you more control over the service configuration such as adding sidecar
+	// containers.
+	//
+	// The task definition must have a container named Main with a single TCP port
+	// mapping that includes a container port and port name. The task definition must
+	// also have FARGATE compatibility.
+	//
+	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
+	// taskRoleArn , cpu , or memory .
+	TaskDefinitionArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role for containers in this task.
 	TaskRoleArn *string
 

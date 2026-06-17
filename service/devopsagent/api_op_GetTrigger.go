@@ -27,16 +27,15 @@ func (c *Client) GetTrigger(ctx context.Context, params *GetTriggerInput, optFns
 	return out, nil
 }
 
+// Request structure for getting a Trigger
 type GetTriggerInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space containing the Trigger
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Generic resource identifier (allows alphanumeric characters, hyphens, and
-	// underscores; 1-128 characters)
+	// The unique identifier of the Trigger to retrieve
 	//
 	// This member is required.
 	TriggerId *string
@@ -44,6 +43,7 @@ type GetTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for getting a Trigger
 type GetTriggerOutput struct {
 
 	// The Trigger object

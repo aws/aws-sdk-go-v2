@@ -1389,6 +1389,11 @@ func validateAssetContent(v types.AssetContent) error {
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AssetContentMemberSourceUrl:
+		if err := validateAssetSourceUrlContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[sourceUrl]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AssetContentMemberZip:
 		if err := validateAssetZipContent(&uv.Value); err != nil {
 			invalidParams.AddNested("[zip]", err.(smithy.InvalidParamsError))
@@ -1412,6 +1417,21 @@ func validateAssetFileContent(v *types.AssetFileContent) error {
 	}
 	if v.Body == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetSourceUrlContent(v *types.AssetSourceUrlContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetSourceUrlContent"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2188,6 +2208,163 @@ func validateRegisteredAzureIdentityDetails(v *types.RegisteredAzureIdentityDeta
 	}
 }
 
+func validateRemoteAgentAPIKeyConfig(v *types.RemoteAgentAPIKeyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentAPIKeyConfig"}
+	if v.ApiKeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyName"))
+	}
+	if v.ApiKeyValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyValue"))
+	}
+	if v.ApiKeyHeader == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyHeader"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentAuthorizationConfig(v types.RemoteAgentAuthorizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentAuthorizationConfig"}
+	switch uv := v.(type) {
+	case *types.RemoteAgentAuthorizationConfigMemberApiKey:
+		if err := validateRemoteAgentAPIKeyConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[apiKey]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RemoteAgentAuthorizationConfigMemberBearerToken:
+		if err := validateRemoteAgentBearerTokenConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[bearerToken]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RemoteAgentAuthorizationConfigMemberOAuthClientCredentials:
+		if err := validateRemoteAgentOAuthClientCredentialsConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[oAuthClientCredentials]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentBearerTokenConfig(v *types.RemoteAgentBearerTokenConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentBearerTokenConfig"}
+	if v.TokenName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenName"))
+	}
+	if v.TokenValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentOAuthClientCredentialsConfig(v *types.RemoteAgentOAuthClientCredentialsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentOAuthClientCredentialsConfig"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.ExchangeUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExchangeUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentServiceDetails(v *types.RemoteAgentServiceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentServiceDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.AuthorizationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationConfig"))
+	} else if v.AuthorizationConfig != nil {
+		if err := validateRemoteAgentAuthorizationConfig(v.AuthorizationConfig); err != nil {
+			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentSigV4AuthorizationConfig(v *types.RemoteAgentSigV4AuthorizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentSigV4AuthorizationConfig"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRemoteAgentSigV4ServiceDetails(v *types.RemoteAgentSigV4ServiceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoteAgentSigV4ServiceDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.AuthorizationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationConfig"))
+	} else if v.AuthorizationConfig != nil {
+		if err := validateRemoteAgentSigV4AuthorizationConfig(v.AuthorizationConfig); err != nil {
+			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateScheduleCondition(v *types.ScheduleCondition) error {
 	if v == nil {
 		return nil
@@ -2351,6 +2528,16 @@ func validateServiceDetails(v types.ServiceDetails) error {
 	case *types.ServiceDetailsMemberPagerduty:
 		if err := validatePagerDutyDetails(&uv.Value); err != nil {
 			invalidParams.AddNested("[pagerduty]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceDetailsMemberRemoteagent:
+		if err := validateRemoteAgentServiceDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[remoteagent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceDetailsMemberRemoteagentsigv4:
+		if err := validateRemoteAgentSigV4ServiceDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[remoteagentsigv4]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceDetailsMemberServicenow:

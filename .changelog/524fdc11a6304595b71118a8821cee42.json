@@ -1,0 +1,8 @@
+{
+    "id": "524fdc11-a630-4595-b711-18a8821cee42",
+    "type": "feature",
+    "description": "Adds support for configuring IAM Identity Center options on existing OpenSearch applications via the UpdateApplication API.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

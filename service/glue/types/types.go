@@ -295,6 +295,42 @@ type ApplyMapping struct {
 	noSmithyDocumentSerde
 }
 
+// A form on an asset, consisting of the form type identifier and its JSON content.
+type AssetFormEntry struct {
+
+	// The JSON content of the form, conforming to the schema of the specified form
+	// type.
+	Content *string
+
+	// The identifier of the form type that defines this form's schema.
+	FormTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a form type that is included in an asset type.
+type AssetTypeFormReference struct {
+
+	// The identifier of the referenced form type.
+	//
+	// This member is required.
+	FormTypeIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an asset type.
+type AssetTypeItem struct {
+
+	// The identifier of the asset type.
+	Id *string
+
+	// The name of the asset type.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a connector to an Amazon Athena data source.
 type AthenaConnectorSource struct {
 
@@ -5170,6 +5206,18 @@ type FindMatchesTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of a form type.
+type FormTypeItem struct {
+
+	// The identifier of the form type.
+	Id *string
+
+	// The name of the form type.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Filters the connection definitions that are returned by the GetConnections API
 // operation.
 type GetConnectionsFilter struct {
@@ -5183,6 +5231,36 @@ type GetConnectionsFilter struct {
 	// A criteria string that must match the criteria recorded in the connection
 	// definition for that connection definition to be returned.
 	MatchCriteria []string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a business glossary.
+type GlossaryItem struct {
+
+	// The description of the glossary.
+	Description *string
+
+	// The unique identifier of the glossary.
+	Id *string
+
+	// The name of the glossary.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a glossary term.
+type GlossaryTermItem struct {
+
+	// The unique identifier of the glossary term.
+	Id *string
+
+	// The name of the glossary term.
+	Name *string
+
+	// The short description of the glossary term.
+	ShortDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -6234,6 +6312,70 @@ type IntegrationResourcePropertyFilter struct {
 
 	// A list of filter values.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// An error that occurred when retrieving an iterable form item.
+type ItemError struct {
+
+	// The error code.
+	Code *string
+
+	// The identifier of the item that caused the error.
+	ItemIdentifier *string
+
+	// The error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// An iterable form available on an asset, identified by its form type.
+type IterableFormEntry struct {
+
+	// The form type identifier of the iterable form (for example, columns ), used to
+	// retrieve its items via ListIterableForms or BatchGetIterableForms .
+	FormTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+// A full iterable form item with its forms.
+type IterableFormItem struct {
+
+	// Additional attachments on the item for more context, keyed by attachment name.
+	Attachments map[string]AssetFormEntry
+
+	// The forms on the item, keyed by form name.
+	Forms map[string]AssetFormEntry
+
+	// The identifiers of the glossary terms associated with the item.
+	GlossaryTerms []string
+
+	// The unique identifier of the item.
+	ItemId *string
+
+	// The name of the item.
+	ItemName *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an item in an iterable form.
+type IterableFormListItem struct {
+
+	// The description of the item.
+	Description *string
+
+	// The identifiers of the glossary terms associated with the item.
+	GlossaryTerms []string
+
+	// The unique identifier of the item.
+	ItemId *string
+
+	// The name of the item.
+	ItemName *string
 
 	noSmithyDocumentSerde
 }
@@ -10255,6 +10397,177 @@ type SchemaVersionNumber struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that compares an attribute value using an operator.
+type SearchAttributeFilter struct {
+
+	// The attribute name to filter on.
+	//
+	// This member is required.
+	Attribute *string
+
+	// The comparison operator. Valid values are equals , greaterThan ,
+	// greaterThanOrEquals , lessThan , lessThanOrEquals , and notExists .
+	//
+	// This member is required.
+	Operator SearchFilterOperator
+
+	// The value to compare against.
+	Value SearchFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A filter clause that supports nested boolean logic. Exactly one of andAllFilters
+// , orAnyFilters , attributeFilter , or mapFilter must be specified.
+//
+// The following types satisfy this interface:
+//
+//	SearchFilterClauseMemberAndAllFilters
+//	SearchFilterClauseMemberAttributeFilter
+//	SearchFilterClauseMemberMapFilter
+//	SearchFilterClauseMemberOrAnyFilters
+type SearchFilterClause interface {
+	isSearchFilterClause()
+}
+
+// A list of filter clauses that must all match (logical AND).
+type SearchFilterClauseMemberAndAllFilters struct {
+	Value []SearchFilterClause
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterClauseMemberAndAllFilters) isSearchFilterClause() {}
+
+// A filter on a single attribute value.
+type SearchFilterClauseMemberAttributeFilter struct {
+	Value SearchAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterClauseMemberAttributeFilter) isSearchFilterClause() {}
+
+// A filter on a map attribute's key-value pair.
+type SearchFilterClauseMemberMapFilter struct {
+	Value SearchMapFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterClauseMemberMapFilter) isSearchFilterClause() {}
+
+// A list of filter clauses where at least one must match (logical OR).
+type SearchFilterClauseMemberOrAnyFilters struct {
+	Value []SearchFilterClause
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterClauseMemberOrAnyFilters) isSearchFilterClause() {}
+
+// A filter value. Exactly one of stringValue or longValue must be specified.
+//
+// The following types satisfy this interface:
+//
+//	SearchFilterValueMemberLongValue
+//	SearchFilterValueMemberStringValue
+type SearchFilterValue interface {
+	isSearchFilterValue()
+}
+
+// A long integer filter value.
+type SearchFilterValueMemberLongValue struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterValueMemberLongValue) isSearchFilterValue() {}
+
+// A string filter value.
+type SearchFilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchFilterValueMemberStringValue) isSearchFilterValue() {}
+
+// A filter on a map attribute's key-value pair.
+type SearchMapFilter struct {
+
+	// The map attribute name to filter on.
+	//
+	// This member is required.
+	Attribute *string
+
+	// The key within the map attribute to filter on.
+	//
+	// This member is required.
+	Key *string
+
+	// The value to compare against.
+	//
+	// This member is required.
+	Value SearchMapFilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A map filter value. Currently supports string comparison only.
+//
+// The following types satisfy this interface:
+//
+//	SearchMapFilterValueMemberStringValue
+type SearchMapFilterValue interface {
+	isSearchMapFilterValue()
+}
+
+// A string filter value.
+type SearchMapFilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchMapFilterValueMemberStringValue) isSearchMapFilterValue() {}
+
+// A single search result item representing a matched asset.
+type SearchResultItem struct {
+
+	// The description of the matched asset.
+	AssetDescription *string
+
+	// The name of the matched asset.
+	AssetName *string
+
+	// The identifier of the asset type for the matched asset.
+	AssetTypeId *string
+
+	// The unique identifier of the matched asset.
+	Id *string
+
+	// The timestamp at which the matched asset was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The sort criteria for search results.
+type SearchSort struct {
+
+	// The attribute to sort by.
+	//
+	// This member is required.
+	Attribute *string
+
+	// The sort order. Valid values are ASCENDING and DESCENDING .
+	Order SearchSortOrder
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a security configuration.
 type SecurityConfiguration struct {
 
@@ -12614,4 +12927,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isSearchFilterClause()             {}
+func (*UnknownUnionMember) isSearchFilterValue()              {}
+func (*UnknownUnionMember) isSearchMapFilterValue()           {}
 func (*UnknownUnionMember) isTableOptimizerVpcConfiguration() {}

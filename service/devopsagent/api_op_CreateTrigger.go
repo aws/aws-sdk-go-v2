@@ -28,6 +28,7 @@ func (c *Client) CreateTrigger(ctx context.Context, params *CreateTriggerInput, 
 	return out, nil
 }
 
+// Request structure for creating a new Trigger
 type CreateTriggerInput struct {
 
 	// The action the new Trigger performs when it fires
@@ -35,8 +36,7 @@ type CreateTriggerInput struct {
 	// This member is required.
 	Action document.Interface
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space where the Trigger will be created
 	//
 	// This member is required.
 	AgentSpaceId *string
@@ -60,6 +60,7 @@ type CreateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for creating a new Trigger
 type CreateTriggerOutput struct {
 
 	// The Trigger object

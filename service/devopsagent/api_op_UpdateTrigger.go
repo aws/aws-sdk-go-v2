@@ -27,16 +27,15 @@ func (c *Client) UpdateTrigger(ctx context.Context, params *UpdateTriggerInput, 
 	return out, nil
 }
 
+// Request structure for updating a Trigger
 type UpdateTriggerInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space containing the Trigger
 	//
 	// This member is required.
 	AgentSpaceId *string
 
-	// Generic resource identifier (allows alphanumeric characters, hyphens, and
-	// underscores; 1-128 characters)
+	// The unique identifier of the Trigger to update
 	//
 	// This member is required.
 	TriggerId *string
@@ -50,6 +49,7 @@ type UpdateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for updating a Trigger
 type UpdateTriggerOutput struct {
 
 	// The Trigger object

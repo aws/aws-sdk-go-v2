@@ -66,6 +66,9 @@ type InvokeHarnessInput struct {
 	// harness default.
 	Model types.HarnessModelConfiguration
 
+	// The endpoint name to invoke. If omitted, the DEFAULT endpoint is used.
+	Qualifier *string
+
 	// An identifier for the end user making the request. This value is passed through
 	// to the runtime container.
 	RuntimeUserId *string

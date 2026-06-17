@@ -39,11 +39,6 @@ type UpdateGatewayTargetInput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// The updated name for the gateway target.
-	//
-	// This member is required.
-	Name *string
-
 	// The configuration for a gateway target. This structure defines how the gateway
 	// connects to and interacts with the target endpoint.
 	//
@@ -64,6 +59,9 @@ type UpdateGatewayTargetInput struct {
 	// Configuration for HTTP header and query parameter propagation to the gateway
 	// target.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// The updated name for the gateway target.
+	Name *string
 
 	// The private endpoint configuration for the gateway target. Use this to connect
 	// the gateway to private resources in your VPC.

@@ -40,7 +40,8 @@ type GetApiKeyCredentialProviderInput struct {
 
 type GetApiKeyCredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ApiKeySecretArn *types.Secret
@@ -65,12 +66,13 @@ type GetApiKeyCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// The JSON key used to extract the API key value from the AWS Secrets Manager
-	// secret.
+	// The JSON key used to extract the API key value from the Amazon Web Services
+	// Secrets Manager secret.
 	ApiKeySecretJsonKey *string
 
 	// The source type of the API key secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ApiKeySecretSource types.SecretSourceType
 
 	// Metadata pertaining to the operation's result.

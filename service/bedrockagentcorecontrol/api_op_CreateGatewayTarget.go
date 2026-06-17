@@ -36,11 +36,6 @@ type CreateGatewayTargetInput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// The name of the gateway target. The name must be unique within the gateway.
-	//
-	// This member is required.
-	Name *string
-
 	// The configuration settings for the target, including endpoint information and
 	// schema definitions.
 	//
@@ -65,6 +60,9 @@ type CreateGatewayTargetInput struct {
 	// Optional configuration for HTTP header and query parameter propagation to and
 	// from the gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// The name of the gateway target. The name must be unique within the gateway.
+	Name *string
 
 	// The private endpoint configuration for the gateway target. Use this to connect
 	// the gateway to private resources in your VPC.

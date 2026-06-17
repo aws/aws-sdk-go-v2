@@ -34,8 +34,8 @@ type ListDaemonsInput struct {
 	// by. Only daemons associated with the specified capacity providers are returned.
 	CapacityProviderArns []string
 
-	// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If not
-	// specified, daemons from all clusters are returned.
+	// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If you do
+	// not specify a cluster, the default cluster is assumed.
 	ClusterArn *string
 
 	// The maximum number of daemon results that ListDaemons returned in paginated

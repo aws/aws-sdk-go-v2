@@ -18494,6 +18494,15 @@ func awsAwsjson11_deserializeDocumentExpressGatewayServiceConfiguration(v **type
 				sv.ServiceRevisionArn = ptr.String(jtv)
 			}
 
+		case "taskDefinitionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TaskDefinitionArn = ptr.String(jtv)
+			}
+
 		case "taskRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

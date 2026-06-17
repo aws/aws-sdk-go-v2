@@ -9466,6 +9466,11 @@ func awsAwsjson11_serializeOpDocumentCreateExpressGatewayServiceInput(v *CreateE
 		}
 	}
 
+	if v.TaskDefinitionArn != nil {
+		ok := object.Key("taskDefinitionArn")
+		ok.String(*v.TaskDefinitionArn)
+	}
+
 	if v.TaskRoleArn != nil {
 		ok := object.Key("taskRoleArn")
 		ok.String(*v.TaskRoleArn)
@@ -11675,6 +11680,11 @@ func awsAwsjson11_serializeOpDocumentUpdateExpressGatewayServiceInput(v *UpdateE
 	if v.ServiceArn != nil {
 		ok := object.Key("serviceArn")
 		ok.String(*v.ServiceArn)
+	}
+
+	if v.TaskDefinitionArn != nil {
+		ok := object.Key("taskDefinitionArn")
+		ok.String(*v.TaskDefinitionArn)
 	}
 
 	if v.TaskRoleArn != nil {

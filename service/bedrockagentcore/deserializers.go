@@ -7008,6 +7008,9 @@ func awsRestjson1_deserializeOpErrorInvokeHarness(response *smithyhttp.Response,
 	case strings.EqualFold("RuntimeClientError", errorCode):
 		return awsRestjson1_deserializeErrorRuntimeClientError(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -21890,8 +21893,8 @@ func awsRestjson1_deserializeDocumentOnlineEvaluationConfigSource(v **types.Onli
 				sv.OnlineEvaluationConfigArn = ptr.String(jtv)
 			}
 
-		case "sessionFilterConfig":
-			if err := awsRestjson1_deserializeDocumentSessionFilterConfig(&sv.SessionFilterConfig, value); err != nil {
+		case "timeRange":
+			if err := awsRestjson1_deserializeDocumentSessionFilterConfig(&sv.TimeRange, value); err != nil {
 				return err
 			}
 

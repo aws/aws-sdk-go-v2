@@ -55,6 +55,12 @@ type UpdatePolicyInput struct {
 	// updating the policy's documentation while keeping the same policy logic.
 	Description *types.UpdatedDescription
 
+	// The enforcement mode for the policy. Run this policy in LOG_ONLY mode to
+	// collect data on how it affects your application. Once you are satisfied with the
+	// data gathered, switch the policy to ACTIVE . If you omit this field, the
+	// policy's existing enforcement mode is unchanged.
+	EnforcementMode types.EnforcementMode
+
 	// The validation mode for the policy update. Determines how Cedar analyzer
 	// validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs
 	// the Cedar analyzer and fails the update if validation issues are detected,
@@ -116,6 +122,9 @@ type UpdatePolicyOutput struct {
 
 	// The updated description of the policy.
 	Description *string
+
+	// The current enforcement mode of the updated policy.
+	EnforcementMode types.EnforcementMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

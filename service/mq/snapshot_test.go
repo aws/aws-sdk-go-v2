@@ -218,6 +218,18 @@ func TestCheckSnapshot_DescribeConfigurationRevision(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSharedResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSharedResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSharedResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUser(context.Background(), nil, func(o *Options) {
@@ -498,6 +510,18 @@ func TestUpdateSnapshot_DescribeConfigurationRevision(t *testing.T) {
 	_, err := svc.DescribeConfigurationRevision(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeConfigurationRevision")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSharedResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSharedResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSharedResources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

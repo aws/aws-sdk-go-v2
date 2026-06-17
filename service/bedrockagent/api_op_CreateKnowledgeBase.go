@@ -16,19 +16,25 @@ import (
 // must first set up your data sources and configure a supported vector store. For
 // more information, see [Set up a knowledge base].
 //
-// If you prefer to let Amazon Bedrock create and manage a vector store for you in
-// Amazon OpenSearch Service, use the console. For more information, see [Create a knowledge base].
+// To create a managed knowledge base, provide a managedKnowledgeBaseConfiguration
+// during creation. For more information, see [Build a managed knowledge base].
 //
 //   - Provide the name and an optional description .
 //
 //   - Provide the Amazon Resource Name (ARN) with permissions to create a
 //     knowledge base in the roleArn field.
 //
-//   - Provide the embedding model to use in the embeddingModelArn field in the
-//     knowledgeBaseConfiguration object.
+//   - For managed knowledge bases, set embeddingModelType to MANAGED to use the
+//     service-managed embedding model, or CUSTOM with an embeddingModelArn to use
+//     your own. To use your own KMS key for encryption, provide the ARN in
+//     serverSideEncryptionConfiguration . No vector store configuration is required
+//     for managed knowledge bases.
 //
-//   - Provide the configuration for your vector store in the storageConfiguration
-//     object.
+//   - For self-managed knowledge bases, provide the embedding model to use in the
+//     embeddingModelArn field in the knowledgeBaseConfiguration object.
+//
+//   - For self-managed knowledge bases, provide the configuration for your vector
+//     store in the storageConfiguration object.
 //
 //   - For an Amazon OpenSearch Service database, use the
 //     opensearchServerlessConfiguration object. For more information, see [Create a vector store in Amazon OpenSearch Service].
@@ -42,9 +48,9 @@ import (
 //   - For a Redis Enterprise Cloud database, use the
 //     redisEnterpriseCloudConfiguration object. For more information, see [Create a vector store in Redis Enterprise Cloud].
 //
-// [Create a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
 // [Create a vector store in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 // [Create a vector store in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
+// [Build a managed knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
 // [Set up a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html
 // [Create a vector store in Amazon Aurora]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 // [Create a vector store in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html

@@ -37,6 +37,11 @@ type DeleteHarnessInput struct {
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
+	// Whether to delete the managed memory on harness deletion. Default: true. If
+	// false, the memory is disassociated and becomes a regular customer-owned
+	// resource.
+	DeleteManagedMemory *bool
+
 	noSmithyDocumentSerde
 }
 

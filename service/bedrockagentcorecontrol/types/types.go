@@ -201,6 +201,22 @@ type AgentSkillsDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that restricts which workloads in the request's identity
+// chain are allowed to invoke the target, identified by their hosting environments
+// and workload identities. At launch, this is supported only for AgentCore Runtime
+// targets, and the allowed workloads are AgentCore Gateways.
+type AllowedWorkloadConfiguration struct {
+
+	// The list of hosting environments whose workloads are allowed to invoke the
+	// target. At launch, the only supported hosting environment is AgentCore Gateway.
+	HostingEnvironments []HostingEnvironment
+
+	// The list of workload identities that are allowed to invoke the target.
+	WorkloadIdentities []string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an Amazon API Gateway target.
 type ApiGatewayTargetConfiguration struct {
 
@@ -368,14 +384,15 @@ type AtlassianOauth2ProviderConfigInput struct {
 	// Atlassian and used along with the client ID to authenticate your application.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret for the Atlassian OAuth2 provider. Use
 	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
-	// secret yourself in AWS Secrets Manager.
+	// secret yourself in Amazon Web Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -899,27 +916,29 @@ type CoinbaseCdpConfigurationInput struct {
 	// The API key secret provided by Coinbase Developer Platform.
 	ApiKeySecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the API key secret.
-	// This includes the secret ID and the JSON key used to extract the API key secret
-	// value from the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// API key secret. This includes the secret ID and the JSON key used to extract the
+	// API key secret value from the secret. Required when apiKeySecretSource is set
+	// to EXTERNAL .
 	ApiKeySecretConfig *SecretReference
 
 	// The source type of the API key secret for the Coinbase Developer Platform. Use
 	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
-	// secret yourself in AWS Secrets Manager.
+	// secret yourself in Amazon Web Services Secrets Manager.
 	ApiKeySecretSource SecretSourceType
 
 	// The wallet secret provided by Coinbase Developer Platform.
 	WalletSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the wallet secret.
-	// This includes the secret ID and the JSON key used to extract the wallet secret
-	// value from the secret. Required when walletSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// wallet secret. This includes the secret ID and the JSON key used to extract the
+	// wallet secret value from the secret. Required when walletSecretSource is set to
+	// EXTERNAL .
 	WalletSecretConfig *SecretReference
 
 	// The source type of the wallet secret for the Coinbase Developer Platform. Use
 	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
-	// secret yourself in AWS Secrets Manager.
+	// secret yourself in Amazon Web Services Secrets Manager.
 	WalletSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -933,30 +952,32 @@ type CoinbaseCdpConfigurationOutput struct {
 	// This member is required.
 	ApiKeyId *string
 
-	// Contains information about a secret in AWS Secrets Manager.
+	// Contains information about a secret in Amazon Web Services Secrets Manager.
 	//
 	// This member is required.
 	ApiKeySecretArn *Secret
 
-	// Contains information about a secret in AWS Secrets Manager.
+	// Contains information about a secret in Amazon Web Services Secrets Manager.
 	//
 	// This member is required.
 	WalletSecretArn *Secret
 
-	// The JSON key used to extract the API key secret value from the AWS Secrets
-	// Manager secret.
+	// The JSON key used to extract the API key secret value from the Amazon Web
+	// Services Secrets Manager secret.
 	ApiKeySecretJsonKey *string
 
 	// The source type of the API key secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ApiKeySecretSource SecretSourceType
 
-	// The JSON key used to extract the wallet secret value from the AWS Secrets
-	// Manager secret.
+	// The JSON key used to extract the wallet secret value from the Amazon Web
+	// Services Secrets Manager secret.
 	WalletSecretJsonKey *string
 
 	// The source type of the wallet secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	WalletSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -1103,6 +1124,78 @@ type ConfigurationBundleVersionSummary struct {
 	// The version lineage metadata, including parent versions, branch name, and
 	// creation source.
 	LineageMetadata *VersionLineageMetadata
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a single tool within a connector.
+type ConnectorConfiguration struct {
+
+	// The tool or operation name (for example, retrieve or webSearch ).
+	//
+	// This member is required.
+	Name *string
+
+	// An agent-facing description override for this tool.
+	Description *string
+
+	// Parameters to expose to the agent at runtime, with optional description
+	// overrides.
+	ParameterOverrides []ConnectorParameterOverride
+
+	// Parameters to set as fixed or default values when provisioning this tool.
+	ParameterValues document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a parameter override for a connector tool, allowing you to control
+// parameter visibility and descriptions.
+type ConnectorParameterOverride struct {
+
+	// A JSON Pointer path identifying the parameter (for example, /numberOfResults or
+	// /filter ).
+	//
+	// This member is required.
+	Path *string
+
+	// An agent-facing description override for this parameter.
+	Description *string
+
+	// Whether this parameter is visible to the agent. If not specified, uses the
+	// service default.
+	Visible *bool
+
+	noSmithyDocumentSerde
+}
+
+// The source identifying the connector integration.
+type ConnectorSource struct {
+
+	// The identifier for the connector integration (for example,
+	// bedrock-knowledge-bases ).
+	//
+	// This member is required.
+	ConnectorId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a connector integration target. Connectors provide pre-built
+// integrations with Amazon Web Services services and third-party tools.
+type ConnectorTargetConfiguration struct {
+
+	// The source configuration identifying which connector to use.
+	//
+	// This member is required.
+	Source *ConnectorSource
+
+	// A list of per-tool configurations for the connector.
+	Configurations []ConnectorConfiguration
+
+	// A list of tool names to enable from this connector. If absent, all tools
+	// provided by the connector are enabled.
+	Enabled []string
 
 	noSmithyDocumentSerde
 }
@@ -1568,6 +1661,12 @@ type CustomJWTAuthorizerConfiguration struct {
 	// An array of scopes that are allowed to access the token.
 	AllowedScopes []string
 
+	// The configuration that restricts which workloads in the request's identity
+	// chain are allowed to invoke the target, identified by their hosting environments
+	// and workload identities. At launch, this is supported only for AgentCore Runtime
+	// targets, and the allowed workloads are AgentCore Gateways.
+	AllowedWorkloadConfiguration *AllowedWorkloadConfiguration
+
 	// An array of objects that define a custom claim validation name, value, and
 	// operation
 	CustomClaims []CustomClaimValidationType
@@ -1629,14 +1728,15 @@ type CustomOauth2ProviderConfigInput struct {
 	// The client secret for the custom OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	// The configuration for on-behalf-of token exchange. This enables authentication
@@ -1717,6 +1817,17 @@ type CustomReflectionConfigurationInputMemberEpisodicReflectionOverride struct {
 }
 
 func (*CustomReflectionConfigurationInputMemberEpisodicReflectionOverride) isCustomReflectionConfigurationInput() {
+}
+
+// The configuration for custom transformations applied to requests and responses
+// through the gateway. This structure defines how the gateway transforms data.
+type CustomTransformConfiguration struct {
+
+	// The Lambda configuration for custom transformations. This configuration defines
+	// how the gateway uses a Lambda function to transform data.
+	Lambda *LambdaTransformConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a dataset.
@@ -2708,14 +2819,15 @@ type GithubOauth2ProviderConfigInput struct {
 	// The client secret for the GitHub OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -2746,14 +2858,15 @@ type GoogleOauth2ProviderConfigInput struct {
 	// The client secret for the Google OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -2773,20 +2886,20 @@ type GoogleOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Representation of a Harness.
+// Representation of a harness.
 type Harness struct {
 
-	// The allowed tools of the Harness. All tools are allowed by default.
+	// The allowed tools of the harness. All tools are allowed by default.
 	//
 	// This member is required.
 	AllowedTools []string
 
-	// The ARN of the Harness.
+	// The ARN of the harness.
 	//
 	// This member is required.
 	Arn *string
 
-	// The createdAt time of the Harness.
+	// The createdAt time of the harness.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -2796,17 +2909,17 @@ type Harness struct {
 	// This member is required.
 	Environment HarnessEnvironmentProvider
 
-	// IAM role the Harness assumes when running.
+	// IAM role the harness assumes when running.
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The ID of the Harness.
+	// The ID of the harness.
 	//
 	// This member is required.
 	HarnessId *string
 
-	// The name of the Harness.
+	// The name of the harness.
 	//
 	// This member is required.
 	HarnessName *string
@@ -2816,22 +2929,22 @@ type Harness struct {
 	// This member is required.
 	Model HarnessModelConfiguration
 
-	// The skills of the Harness.
+	// The skills of the harness.
 	//
 	// This member is required.
 	Skills []HarnessSkill
 
-	// The status of the Harness.
+	// The status of the harness.
 	//
 	// This member is required.
 	Status HarnessStatus
 
-	// The system prompt of the Harness.
+	// The system prompt of the harness.
 	//
 	// This member is required.
 	SystemPrompt []HarnessSystemContentBlock
 
-	// The tools of the Harness.
+	// The tools of the harness.
 	//
 	// This member is required.
 	Tools []HarnessTool
@@ -2841,7 +2954,7 @@ type Harness struct {
 	// This member is required.
 	Truncation *HarnessTruncationConfiguration
 
-	// The updatedAt time of the Harness.
+	// The updatedAt time of the harness.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -2853,11 +2966,14 @@ type Harness struct {
 	// The environment artifact (e.g., container) in which the Harness operates.
 	EnvironmentArtifact HarnessEnvironmentArtifact
 
-	// Environment variables exposed in the environment in which the Harness operates.
+	// Environment variables exposed in the environment in which the harness operates.
 	EnvironmentVariables map[string]string
 
 	// Reason why create or update operations fail.
 	FailureReason *string
+
+	// The version of the harness. Incremented on every successful UpdateHarness.
+	HarnessVersion *string
 
 	// The maximum number of iterations in the agent loop allowed before exiting per
 	// invocation.
@@ -3022,6 +3138,68 @@ type HarnessBedrockModelConfig struct {
 
 	// The topP set when calling the model.
 	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Explicitly opt out of memory.
+type HarnessDisabledMemoryConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// Representation of a harness endpoint. An endpoint is a named, stable reference
+// to a specific version of a harness that callers invoke, allowing the underlying
+// version to be updated without changing how the agent is invoked.
+type HarnessEndpoint struct {
+
+	// The ARN of the endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the endpoint.
+	//
+	// This member is required.
+	EndpointName *string
+
+	// The ID of the harness that the endpoint belongs to.
+	//
+	// This member is required.
+	HarnessId *string
+
+	// The name of the harness that the endpoint belongs to.
+	//
+	// This member is required.
+	HarnessName *string
+
+	// The status of the endpoint.
+	//
+	// This member is required.
+	Status HarnessEndpointStatus
+
+	// The timestamp when the endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the endpoint.
+	Description *string
+
+	// The reason the endpoint's last create or update operation failed.
+	FailureReason *string
+
+	// The harness version that the endpoint is currently serving.
+	LiveVersion *string
+
+	// The harness version that the endpoint points to. While an update is in
+	// progress, this can differ from the live version until the endpoint finishes
+	// transitioning.
+	TargetVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -3197,11 +3375,33 @@ type HarnessLiteLlmModelConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for managed memory creation.
+type HarnessManagedMemoryConfiguration struct {
+
+	// The ARN of the managed AgentCore Memory resource. Read-only on Get, ignored on
+	// Create/Update input.
+	Arn *string
+
+	// Customer-managed KMS key. Defaults to AWS-owned key. Not updatable after
+	// creation.
+	EncryptionKeyArn *string
+
+	// Event retention in days. Defaults to 30.
+	EventExpiryDuration *int32
+
+	// Strategy types to enable. Defaults to [SEMANTIC, SUMMARIZATION].
+	Strategies []HarnessManagedMemoryStrategyType
+
+	noSmithyDocumentSerde
+}
+
 // The memory configuration for a harness.
 //
 // The following types satisfy this interface:
 //
 //	HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration
+//	HarnessMemoryConfigurationMemberDisabled
+//	HarnessMemoryConfigurationMemberManagedMemoryConfiguration
 type HarnessMemoryConfiguration interface {
 	isHarnessMemoryConfiguration()
 }
@@ -3214,6 +3414,24 @@ type HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration struct {
 }
 
 func (*HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration) isHarnessMemoryConfiguration() {}
+
+// Explicitly opt out of memory.
+type HarnessMemoryConfigurationMemberDisabled struct {
+	Value HarnessDisabledMemoryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessMemoryConfigurationMemberDisabled) isHarnessMemoryConfiguration() {}
+
+// Harness creates and manages a memory resource in the customer's account.
+type HarnessMemoryConfigurationMemberManagedMemoryConfiguration struct {
+	Value HarnessManagedMemoryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessMemoryConfigurationMemberManagedMemoryConfiguration) isHarnessMemoryConfiguration() {}
 
 // Specification of which model to use.
 //
@@ -3313,12 +3531,22 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberAwsSkills
 //	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
 //	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// AWS Skills baked into the harness's underlying Runtime.
+type HarnessSkillMemberAwsSkills struct {
+	Value HarnessSkillAwsSkillsSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberAwsSkills) isHarnessSkill() {}
 
 // A git repository containing the skill.
 type HarnessSkillMemberGit struct {
@@ -3346,6 +3574,15 @@ type HarnessSkillMemberS3 struct {
 }
 
 func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Passed to show that AWS Skills should be included.
+type HarnessSkillAwsSkillsSource struct {
+
+	// Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].
+	Paths []string
+
+	noSmithyDocumentSerde
+}
 
 // Authentication configuration for accessing a private git repository.
 type HarnessSkillGitAuth struct {
@@ -3446,6 +3683,9 @@ type HarnessSummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The latest version of the harness.
+	HarnessVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -3587,12 +3827,81 @@ type HarnessTruncationStrategyConfigurationMemberSummarization struct {
 func (*HarnessTruncationStrategyConfigurationMemberSummarization) isHarnessTruncationStrategyConfiguration() {
 }
 
+// Summary information about a single version of a harness.
+type HarnessVersionSummary struct {
+
+	// The ARN of the harness.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when this harness version was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the harness.
+	//
+	// This member is required.
+	HarnessId *string
+
+	// The name of the harness.
+	//
+	// This member is required.
+	HarnessName *string
+
+	// The version of the harness that this summary describes.
+	//
+	// This member is required.
+	HarnessVersion *string
+
+	// The status of this harness version.
+	//
+	// This member is required.
+	Status HarnessStatus
+
+	// The timestamp when this harness version was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Reason why the create or update operation for this harness version failed.
+	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// A hosting environment whose workloads are allowed to invoke the target. At
+// launch, the only supported hosting environment is AgentCore Gateway.
+type HostingEnvironment struct {
+
+	// The Amazon Resource Name (ARN) of the hosting environment.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The API schema configuration for an HTTP target. This schema defines the API
+// structure that the target exposes.
+type HttpApiSchemaConfiguration struct {
+
+	// Configuration for API schema.
+	//
+	// This member is required.
+	Source ApiSchemaConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The HTTP target configuration for a gateway target. Contains the configuration
 // for HTTP-based target endpoints.
 //
 // The following types satisfy this interface:
 //
 //	HttpTargetConfigurationMemberAgentcoreRuntime
+//	HttpTargetConfigurationMemberPassthrough
 type HttpTargetConfiguration interface {
 	isHttpTargetConfiguration()
 }
@@ -3606,6 +3915,16 @@ type HttpTargetConfigurationMemberAgentcoreRuntime struct {
 }
 
 func (*HttpTargetConfigurationMemberAgentcoreRuntime) isHttpTargetConfiguration() {}
+
+// The passthrough configuration for the HTTP target. A passthrough target
+// forwards requests directly to an external HTTP endpoint.
+type HttpTargetConfigurationMemberPassthrough struct {
+	Value PassthroughTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HttpTargetConfigurationMemberPassthrough) isHttpTargetConfiguration() {}
 
 // An IAM credential provider for gateway authentication. This structure contains
 // the configuration for authenticating with the target endpoint using IAM
@@ -3663,14 +3982,15 @@ type IncludedOauth2ProviderConfigInput struct {
 	// application.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	// Token issuer of your isolated OAuth2 application tenant. This URL identifies
@@ -3739,6 +4059,107 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The source identifying the inference connector.
+type InferenceConnectorSource struct {
+
+	// The identifier for the inference connector (for example, bedrock-mantle , openai
+	// , or anthropic ).
+	//
+	// This member is required.
+	ConnectorId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a connector-based inference target. This configuration
+// uses a built-in connector that provides predefined rules for a large language
+// model (LLM) provider.
+type InferenceConnectorTargetConfiguration struct {
+
+	// The source configuration identifying which inference connector to use.
+	//
+	// This member is required.
+	Source *InferenceConnectorSource
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a specific inference operation, including its request
+// path and the models that the operation supports.
+type InferenceOperationConfiguration struct {
+
+	// The request path for this operation (for example, /v1/messages or /v1/responses
+	// ).
+	//
+	// This member is required.
+	Path *string
+
+	// The list of models supported for this operation.
+	Models []ModelEntry
+
+	// The provider path to forward requests to, if it differs from the request path.
+	// For example, /anthropic/v1/messages when the provider expects a different path
+	// than the client-facing /v1/messages .
+	ProviderPath *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a provider-based inference target. This configuration
+// explicitly defines the endpoint, model mapping, and operations used to route
+// requests to a large language model (LLM) provider.
+type InferenceProviderTargetConfiguration struct {
+
+	// The HTTPS endpoint of the inference provider that the gateway forwards requests
+	// to.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The configuration that translates client-facing model IDs to the model IDs
+	// expected by the provider.
+	ModelMapping *ModelMapping
+
+	// A list of per-operation configurations that map request paths to the models
+	// supported for each operation.
+	Operations []InferenceOperationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an inference target. An inference target routes requests
+// to a large language model (LLM) provider, either through a built-in connector or
+// an explicitly configured provider.
+//
+// The following types satisfy this interface:
+//
+//	InferenceTargetConfigurationMemberConnector
+//	InferenceTargetConfigurationMemberProvider
+type InferenceTargetConfiguration interface {
+	isInferenceTargetConfiguration()
+}
+
+// The connector-based inference configuration. Use this option to route requests
+// to an LLM provider through a built-in connector that includes predefined
+// provider rules.
+type InferenceTargetConfigurationMemberConnector struct {
+	Value InferenceConnectorTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*InferenceTargetConfigurationMemberConnector) isInferenceTargetConfiguration() {}
+
+// The provider-based inference configuration. Use this option to explicitly
+// configure the endpoint, model mapping, and operations for an LLM provider.
+type InferenceTargetConfigurationMemberProvider struct {
+	Value InferenceProviderTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*InferenceTargetConfigurationMemberProvider) isInferenceTargetConfiguration() {}
+
 // Inline examples provided directly in the request body.
 type InlineExamplesSource struct {
 
@@ -3750,11 +4171,12 @@ type InlineExamplesSource struct {
 	noSmithyDocumentSerde
 }
 
-// A reference to an insight analysis to run against sessions.
+// A reference to an insight analysis to run against sessions during evaluation.
+// Insights provide deeper analysis beyond individual evaluator scores, including
+// failure detection, user intent clustering, and execution summarization.
 type Insight struct {
 
-	// Canonical insight identifiers using the Builtin.Insight.* naming convention.
-	// Used by BatchEvaluate, InternalEvaluate, and ServiceEngineEvaluate flows.
+	// The unique identifier of the insight to run.
 	//
 	// This member is required.
 	InsightId *string
@@ -3788,6 +4210,42 @@ type InterceptorInputConfiguration struct {
 	//
 	// This member is required.
 	PassRequestHeaders *bool
+
+	// The filter that determines which parts of the request or response payload are
+	// passed as input to the interceptor.
+	PayloadFilter *InterceptorPayloadFilter
+
+	noSmithyDocumentSerde
+}
+
+// A selector that identifies a payload field to exclude from the interceptor
+// input.
+//
+// The following types satisfy this interface:
+//
+//	InterceptorPayloadExclusionSelectorMemberField
+type InterceptorPayloadExclusionSelector interface {
+	isInterceptorPayloadExclusionSelector()
+}
+
+// The field to exclude from the interceptor input.
+type InterceptorPayloadExclusionSelectorMemberField struct {
+	Value InterceptorPayloadExclusion
+
+	noSmithyDocumentSerde
+}
+
+func (*InterceptorPayloadExclusionSelectorMemberField) isInterceptorPayloadExclusionSelector() {}
+
+// The filter that controls which fields of the request or response payload are
+// included in the input to the interceptor.
+type InterceptorPayloadFilter struct {
+
+	// The list of selectors that identify payload fields to exclude from the
+	// interceptor input.
+	//
+	// This member is required.
+	Exclude []InterceptorPayloadExclusionSelector
 
 	noSmithyDocumentSerde
 }
@@ -3881,6 +4339,17 @@ type LambdaInterceptorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The Lambda configuration for custom transformations. This structure defines the
+// Lambda function that the gateway invokes to transform data.
+type LambdaTransformConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda function. This function is invoked
+	// by the gateway to transform data.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
 // resources in AgentCore Runtime. This configuration helps optimize resource
 // utilization by automatically cleaning up idle sessions and preventing
@@ -3914,14 +4383,15 @@ type LinkedinOauth2ProviderConfigInput struct {
 	// LinkedIn and used along with the client ID to authenticate your application.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -4176,6 +4646,7 @@ type McpServerTargetConfiguration struct {
 // The following types satisfy this interface:
 //
 //	McpTargetConfigurationMemberApiGateway
+//	McpTargetConfigurationMemberConnector
 //	McpTargetConfigurationMemberLambda
 //	McpTargetConfigurationMemberMcpServer
 //	McpTargetConfigurationMemberOpenApiSchema
@@ -4192,6 +4663,17 @@ type McpTargetConfigurationMemberApiGateway struct {
 }
 
 func (*McpTargetConfigurationMemberApiGateway) isMcpTargetConfiguration() {}
+
+// The connector integration configuration for the Model Context Protocol target.
+// This configuration defines how the gateway uses a pre-built connector to
+// communicate with the target.
+type McpTargetConfigurationMemberConnector struct {
+	Value ConnectorTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*McpTargetConfigurationMemberConnector) isMcpTargetConfiguration() {}
 
 // The Lambda configuration for the Model Context Protocol target. This
 // configuration defines how the gateway uses a Lambda function to communicate with
@@ -4313,6 +4795,10 @@ type Memory struct {
 	// The indexed metadata keys for this memory. Only indexed keys can be used in
 	// metadata filters.
 	IndexedKeys []IndexedKey
+
+	// ARN of the resource managing this memory (e.g. a harness). When set, strategy
+	// modifications and deletion are only allowed through the managing resource.
+	ManagedByResourceArn *string
 
 	// The ARN of the IAM role that provides permissions for the memory.
 	MemoryExecutionRoleArn *string
@@ -4463,6 +4949,9 @@ type MemorySummary struct {
 	// The unique identifier of the memory.
 	Id *string
 
+	// ARN of the resource managing this memory (e.g. a harness). Null if not managed.
+	ManagedByResourceArn *string
+
 	// The current status of the memory.
 	Status MemoryStatus
 
@@ -4540,14 +5029,15 @@ type MicrosoftOauth2ProviderConfigInput struct {
 	// The client secret for the Microsoft OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	// The Microsoft Entra ID (formerly Azure AD) tenant ID for your organization.
@@ -4568,6 +5058,28 @@ type MicrosoftOauth2ProviderConfigOutput struct {
 
 	// The client ID for the Microsoft OAuth2 provider.
 	ClientId *string
+
+	noSmithyDocumentSerde
+}
+
+// A model entry that specifies a model supported for an inference operation.
+type ModelEntry struct {
+
+	// The model ID or glob pattern that identifies the model (for example,
+	// anthropic.claude-opus-* or openai.gpt-oss-* ).
+	//
+	// This member is required.
+	Model *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that translates model IDs between client-facing names and
+// provider model IDs.
+type ModelMapping struct {
+
+	// The provider prefix configuration used for model ID translation.
+	ProviderPrefix *ProviderPrefix
 
 	noSmithyDocumentSerde
 }
@@ -5210,6 +5722,33 @@ type OutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for an HTTP passthrough target. A passthrough target forwards
+// requests directly to an external HTTP endpoint.
+type PassthroughTargetConfiguration struct {
+
+	// The HTTPS endpoint that the gateway forwards requests to for this passthrough
+	// target.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The application protocol the passthrough target implements. Required for
+	// passthrough targets.
+	//
+	// This member is required.
+	ProtocolType PassthroughProtocolType
+
+	// The API schema configuration that defines the structure of the passthrough
+	// target's API.
+	Schema *HttpApiSchemaConfiguration
+
+	// The session stickiness configuration for the passthrough target. This
+	// configuration routes requests within the same session to the same target.
+	StickinessConfiguration *StickinessConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a payment connector.
 type PaymentConnectorSummary struct {
 
@@ -5473,6 +6012,9 @@ type Policy struct {
 	// to 4,096 characters, this helps administrators understand and manage the policy.
 	Description *string
 
+	// The current enforcement mode of the policy.
+	EnforcementMode EnforcementMode
+
 	noSmithyDocumentSerde
 }
 
@@ -5483,6 +6025,7 @@ type Policy struct {
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionMemberCedar
+//	PolicyDefinitionMemberPolicy
 //	PolicyDefinitionMemberPolicyGeneration
 type PolicyDefinition interface {
 	isPolicyDefinition()
@@ -5504,6 +6047,16 @@ type PolicyDefinitionMemberCedar struct {
 }
 
 func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
+
+// An AgentCore policy statement that defines the access control rules. The
+// statement can be a Cedar policy or a guardrails definition.
+type PolicyDefinitionMemberPolicy struct {
+	Value PolicyStatement
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyDefinitionMemberPolicy) isPolicyDefinition() {}
 
 // The generated policy asset information within the policy definition structure.
 // This contains information identifying a generated policy asset from the
@@ -5809,6 +6362,19 @@ type PolicyGenerationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An AgentCore policy statement, which supports plain Cedar policies as well as
+// guardrails definitions.
+type PolicyStatement struct {
+
+	// The body of the AgentCore policy statement. Contains the policy logic, which
+	// can be a Cedar policy or a guardrails definition.
+	//
+	// This member is required.
+	Statement *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a metadata-only summary of a policy resource. This structure
 // contains resource identifiers, status, and timestamps without customer-encrypted
 // fields such as definition, description, or status reasons. Policy summaries are
@@ -5849,6 +6415,9 @@ type PolicySummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The current enforcement mode of the policy.
+	EnforcementMode EnforcementMode
 
 	noSmithyDocumentSerde
 }
@@ -5911,6 +6480,22 @@ type ProtocolConfiguration struct {
 	//
 	// This member is required.
 	ServerProtocol ServerProtocol
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that controls how a provider prefix is applied to model IDs
+// during translation.
+type ProviderPrefix struct {
+
+	// The single character that separates the provider prefix from the model name
+	// (for example, . ). The default is . .
+	Separator *string
+
+	// Whether clients can omit the provider prefix from model IDs. If true , the
+	// gateway accepts model IDs without the prefix and restores the full prefixed form
+	// before forwarding to the provider. The default is false .
+	Strip bool
 
 	noSmithyDocumentSerde
 }
@@ -6332,6 +6917,10 @@ type RuntimeTargetConfiguration struct {
 	// version. If not specified, the default endpoint is used.
 	Qualifier *string
 
+	// The API schema configuration that defines the structure of the runtime target's
+	// API.
+	Schema *HttpApiSchemaConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -6415,14 +7004,15 @@ type SalesforceOauth2ProviderConfigInput struct {
 	// The client secret for the Salesforce OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -6485,10 +7075,11 @@ type SchemaDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a secret in AWS Secrets Manager.
+// Contains information about a secret in Amazon Web Services Secrets Manager.
 type Secret struct {
 
-	// The Amazon Resource Name (ARN) of the secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the secret in Amazon Web Services Secrets
+	// Manager.
 	//
 	// This member is required.
 	SecretArn *string
@@ -6496,16 +7087,17 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a reference to a secret stored in AWS Secrets Manager.
+// Contains a reference to a secret stored in Amazon Web Services Secrets Manager.
 type SecretReference struct {
 
-	// The JSON key used to extract the secret value from the AWS Secrets Manager
-	// secret.
+	// The JSON key used to extract the secret value from the Amazon Web Services
+	// Secrets Manager secret.
 	//
 	// This member is required.
 	JsonKey *string
 
-	// The ID of the AWS Secrets Manager secret that stores the secret value.
+	// The ID of the Amazon Web Services Secrets Manager secret that stores the secret
+	// value.
 	//
 	// This member is required.
 	SecretId *string
@@ -6775,14 +7367,15 @@ type SlackOauth2ProviderConfigInput struct {
 	// The client secret for the Slack OAuth2 provider.
 	ClientSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the client secret.
-	// This includes the secret ID and the JSON key used to extract the client secret
-	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// client secret. This includes the secret ID and the JSON key used to extract the
+	// client secret value from the secret. Required when clientSecretSource is set to
+	// EXTERNAL .
 	ClientSecretConfig *SecretReference
 
 	// The source type of the client secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -6825,6 +7418,23 @@ type StaticRoute struct {
 	//
 	// This member is required.
 	TargetName *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for session-sticky routing to a target. Session stickiness
+// routes requests that share a session identifier to the same target.
+type StickinessConfiguration struct {
+
+	// The expression that identifies where to extract the session identifier from the
+	// request (for example, $context.header.x-session-id ).
+	//
+	// This member is required.
+	Identifier *string
+
+	// The session stickiness timeout, in seconds. After this duration of inactivity,
+	// the session affinity expires. Valid values range from 1 to 86400.
+	Timeout *int32
 
 	noSmithyDocumentSerde
 }
@@ -6929,27 +7539,28 @@ type StripePrivyConfigurationInput struct {
 	// The app secret provided by Privy.
 	AppSecret *string
 
-	// A reference to the AWS Secrets Manager secret that stores the app secret. This
-	// includes the secret ID and the JSON key used to extract the app secret value
-	// from the secret. Required when appSecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// app secret. This includes the secret ID and the JSON key used to extract the app
+	// secret value from the secret. Required when appSecretSource is set to EXTERNAL .
 	AppSecretConfig *SecretReference
 
 	// The source type of the app secret. Use MANAGED if the secret is managed by the
-	// service, or EXTERNAL if you manage the secret yourself in AWS Secrets Manager.
+	// service, or EXTERNAL if you manage the secret yourself in Amazon Web Services
+	// Secrets Manager.
 	AppSecretSource SecretSourceType
 
 	// The authorization private key for the Stripe Privy integration.
 	AuthorizationPrivateKey *string
 
-	// A reference to the AWS Secrets Manager secret that stores the authorization
-	// private key. This includes the secret ID and the JSON key used to extract the
-	// authorization private key value from the secret. Required when
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// authorization private key. This includes the secret ID and the JSON key used to
+	// extract the authorization private key value from the secret. Required when
 	// authorizationPrivateKeySource is set to EXTERNAL .
 	AuthorizationPrivateKeyConfig *SecretReference
 
 	// The source type of the authorization private key. Use MANAGED if the secret is
-	// managed by the service, or EXTERNAL if you manage the secret yourself in AWS
-	// Secrets Manager.
+	// managed by the service, or EXTERNAL if you manage the secret yourself in Amazon
+	// Web Services Secrets Manager.
 	AuthorizationPrivateKeySource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -6963,7 +7574,7 @@ type StripePrivyConfigurationOutput struct {
 	// This member is required.
 	AppId *string
 
-	// Contains information about a secret in AWS Secrets Manager.
+	// Contains information about a secret in Amazon Web Services Secrets Manager.
 	//
 	// This member is required.
 	AppSecretArn *Secret
@@ -6973,26 +7584,27 @@ type StripePrivyConfigurationOutput struct {
 	// This member is required.
 	AuthorizationId *string
 
-	// Contains information about a secret in AWS Secrets Manager.
+	// Contains information about a secret in Amazon Web Services Secrets Manager.
 	//
 	// This member is required.
 	AuthorizationPrivateKeyArn *Secret
 
-	// The JSON key used to extract the app secret value from the AWS Secrets Manager
-	// secret.
+	// The JSON key used to extract the app secret value from the Amazon Web Services
+	// Secrets Manager secret.
 	AppSecretJsonKey *string
 
 	// The source type of the app secret. Either MANAGED if the secret is managed by
-	// the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// the service, or EXTERNAL if managed by the user in Amazon Web Services Secrets
+	// Manager.
 	AppSecretSource SecretSourceType
 
-	// The JSON key used to extract the authorization private key value from the AWS
-	// Secrets Manager secret.
+	// The JSON key used to extract the authorization private key value from the
+	// Amazon Web Services Secrets Manager secret.
 	AuthorizationPrivateKeyJsonKey *string
 
 	// The source type of the authorization private key. Either MANAGED if the secret
-	// is managed by the service, or EXTERNAL if managed by the user in AWS Secrets
-	// Manager.
+	// is managed by the service, or EXTERNAL if managed by the user in Amazon Web
+	// Services Secrets Manager.
 	AuthorizationPrivateKeySource SecretSourceType
 
 	noSmithyDocumentSerde
@@ -7093,6 +7705,7 @@ type SystemManagedBlock struct {
 // The following types satisfy this interface:
 //
 //	TargetConfigurationMemberHttp
+//	TargetConfigurationMemberInference
 //	TargetConfigurationMemberMcp
 type TargetConfiguration interface {
 	isTargetConfiguration()
@@ -7107,6 +7720,16 @@ type TargetConfigurationMemberHttp struct {
 }
 
 func (*TargetConfigurationMemberHttp) isTargetConfiguration() {}
+
+// The inference configuration for the target. This configuration routes requests
+// to a large language model (LLM) provider.
+type TargetConfigurationMemberInference struct {
+	Value InferenceTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TargetConfigurationMemberInference) isTargetConfiguration() {}
 
 // The Model Context Protocol (MCP) configuration for the target. This
 // configuration defines how the gateway uses MCP to communicate with the target.
@@ -7147,12 +7770,28 @@ type TargetSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// Contains the authorization data that is returned when a gateway target is
+	// configured with a credential provider with authorization code grant type and
+	// requires user federation.
+	AuthorizationData AuthorizationData
+
 	// The description of the target.
 	Description *string
+
+	// The timestamp when the target was last synchronized.
+	LastSynchronizedAt *time.Time
+
+	// The listing mode for the target. MCP resources for DEFAULT targets are cached
+	// at the control plane for faster access. MCP resources for DYNAMIC targets are
+	// retrieved dynamically when listing tools.
+	ListingMode ListingMode
 
 	// Priority for resolving resource URI conflicts across targets. Lower values take
 	// precedence. Defaults to 1000 when not set.
 	ResourcePriority *int32
+
+	// The type of the target.
+	TargetType TargetType
 
 	noSmithyDocumentSerde
 }
@@ -7899,6 +8538,24 @@ type VpcConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Web Services WAF configuration for the gateway. This configuration
+// controls how the gateway behaves when the associated web ACL cannot be
+// evaluated.
+type WafConfiguration struct {
+
+	// The failure mode that determines how the gateway handles requests when Amazon
+	// Web Services WAF is unreachable or times out. Valid values include:
+	//
+	//   - FAIL_CLOSE - The gateway blocks requests when Amazon Web Services WAF cannot
+	//   be evaluated.
+	//
+	//   - FAIL_OPEN - The gateway allows requests when Amazon Web Services WAF cannot
+	//   be evaluated.
+	FailureMode WafFailureMode
+
+	noSmithyDocumentSerde
+}
+
 // A weighted configuration bundle override that splits traffic between multiple
 // bundle versions.
 type WeightedOverride struct {
@@ -8008,7 +8665,9 @@ func (*UnknownUnionMember) isHarnessSystemContentBlock()              {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()               {}
 func (*UnknownUnionMember) isHarnessTruncationStrategyConfiguration() {}
 func (*UnknownUnionMember) isHttpTargetConfiguration()                {}
+func (*UnknownUnionMember) isInferenceTargetConfiguration()           {}
 func (*UnknownUnionMember) isInterceptorConfiguration()               {}
+func (*UnknownUnionMember) isInterceptorPayloadExclusionSelector()    {}
 func (*UnknownUnionMember) isMatchPrincipalEntry()                    {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                 {}
 func (*UnknownUnionMember) isMcpToolSchemaConfiguration()             {}

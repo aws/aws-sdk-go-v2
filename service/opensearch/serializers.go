@@ -6716,6 +6716,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.IamIdentityCenterOptions != nil {
+		ok := object.Key("iamIdentityCenterOptions")
+		if err := awsRestjson1_serializeDocumentIamIdentityCenterOptionsInput(v.IamIdentityCenterOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

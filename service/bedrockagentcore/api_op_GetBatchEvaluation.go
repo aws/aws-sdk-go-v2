@@ -82,10 +82,12 @@ type GetBatchEvaluationOutput struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []types.Evaluator
 
-	// Customer-facing execution summary clustering result written to S3.
+	// The execution summary clustering results from insights, containing grouped
+	// execution patterns across evaluated sessions.
 	ExecutionSummaryResult *types.ExecutionSummaryClusteringResultContent
 
-	// Unified customer-facing clustering result written to S3.
+	// The failure analysis results from insights, containing categorized failure
+	// clusters with root causes and recommendations.
 	FailureAnalysisResult *types.FailureAnalysisResultContent
 
 	// The list of insight analyses applied during the batch evaluation.
@@ -100,7 +102,8 @@ type GetBatchEvaluationOutput struct {
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
 
-	// Customer-facing user intent clustering result written to S3.
+	// The user intent clustering results from insights, containing grouped user
+	// intents across evaluated sessions.
 	UserIntentResult *types.UserIntentClusteringResultContent
 
 	// Metadata pertaining to the operation's result.

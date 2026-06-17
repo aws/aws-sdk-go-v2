@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Operation to list Harnesses.
+// Operation to list harnesses.
 func (c *Client) ListHarnesses(ctx context.Context, params *ListHarnessesInput, optFns ...func(*Options)) (*ListHarnessesOutput, error) {
 	if params == nil {
 		params = &ListHarnessesInput{}

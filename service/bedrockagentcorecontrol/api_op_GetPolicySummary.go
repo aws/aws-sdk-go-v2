@@ -87,6 +87,9 @@ type GetPolicySummaryOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The current enforcement mode of the policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

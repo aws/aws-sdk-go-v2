@@ -49,6 +49,9 @@ type UpdateAssociationInput struct {
 	// This member is required.
 	Configuration types.ServiceConfiguration
 
+	// Enabled capabilities for this association.
+	Capabilities map[string]types.CapabilityConfiguration
+
 	noSmithyDocumentSerde
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Operation to create a Harness.
+// Operation to create a harness.
 func (c *Client) CreateHarness(ctx context.Context, params *CreateHarnessInput, optFns ...func(*Options)) (*CreateHarnessOutput, error) {
 	if params == nil {
 		params = &CreateHarnessInput{}

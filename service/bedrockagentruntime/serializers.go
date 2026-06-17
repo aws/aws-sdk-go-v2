@@ -19,6 +19,127 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpAgenticRetrieveStream struct {
+}
+
+func (*awsRestjson1_serializeOpAgenticRetrieveStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAgenticRetrieveStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AgenticRetrieveStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/agenticRetrieveStream")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAgenticRetrieveStreamInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAgenticRetrieveStreamInput(v *AgenticRetrieveStreamInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAgenticRetrieveStreamInput(v *AgenticRetrieveStreamInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgenticRetrieveConfiguration != nil {
+		ok := object.Key("agenticRetrieveConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveConfiguration(v.AgenticRetrieveConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GenerateResponse != nil {
+		ok := object.Key("generateResponse")
+		ok.Boolean(*v.GenerateResponse)
+	}
+
+	if v.Messages != nil {
+		ok := object.Key("messages")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveMessages(v.Messages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PolicyConfiguration != nil {
+		ok := object.Key("policyConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrievePolicyConfiguration(v.PolicyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Retrievers != nil {
+		ok := object.Key("retrievers")
+		if err := awsRestjson1_serializeDocumentAgenticRetrievers(v.Retrievers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserContext != nil {
+		ok := object.Key("userContext")
+		if err := awsRestjson1_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateInvocation struct {
 }
 
@@ -624,6 +745,125 @@ func awsRestjson1_serializeOpHttpBindingsGetAgentMemoryInput(v *GetAgentMemoryIn
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetDocumentContent struct {
+}
+
+func (*awsRestjson1_serializeOpGetDocumentContent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDocumentContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDocumentContentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/documents/{documentId}/content")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetDocumentContentInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetDocumentContentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDocumentContentInput(v *GetDocumentContentInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DataSourceId == nil || len(*v.DataSourceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataSourceId must not be empty")}
+	}
+	if v.DataSourceId != nil {
+		if err := encoder.SetURI("dataSourceId").String(*v.DataSourceId); err != nil {
+			return err
+		}
+	}
+
+	if v.DocumentId == nil || len(*v.DocumentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member documentId must not be empty")}
+	}
+	if v.DocumentId != nil {
+		if err := encoder.SetURI("documentId").String(*v.DocumentId); err != nil {
+			return err
+		}
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetDocumentContentInput(v *GetDocumentContentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.OutputFormat) > 0 {
+		ok := object.Key("outputFormat")
+		ok.String(string(v.OutputFormat))
+	}
+
+	if v.UserContext != nil {
+		ok := object.Key("userContext")
+		if err := awsRestjson1_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2398,6 +2638,13 @@ func awsRestjson1_serializeOpDocumentRetrieveInput(v *RetrieveInput, value smith
 		}
 	}
 
+	if v.UserContext != nil {
+		ok := object.Key("userContext")
+		if err := awsRestjson1_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2500,6 +2747,13 @@ func awsRestjson1_serializeOpDocumentRetrieveAndGenerateInput(v *RetrieveAndGene
 		ok.String(*v.SessionId)
 	}
 
+	if v.UserContext != nil {
+		ok := object.Key("userContext")
+		if err := awsRestjson1_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2600,6 +2854,13 @@ func awsRestjson1_serializeOpDocumentRetrieveAndGenerateStreamInput(v *RetrieveA
 	if v.SessionId != nil {
 		ok := object.Key("sessionId")
 		ok.String(*v.SessionId)
+	}
+
+	if v.UserContext != nil {
+		ok := object.Key("userContext")
+		if err := awsRestjson1_serializeDocumentUserContext(v.UserContext, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3205,6 +3466,194 @@ func awsRestjson1_serializeDocumentAgentActionGroups(v []types.AgentActionGroup,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgenticRetrieveBedrockGuardrailConfiguration(v *types.AgenticRetrieveBedrockGuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailId != nil {
+		ok := object.Key("guardrailId")
+		ok.String(*v.GuardrailId)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveBedrockRerankingConfiguration(v *types.AgenticRetrieveBedrockRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelConfiguration != nil {
+		ok := object.Key("modelConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveBedrockRerankingModelConfiguration(v.ModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveBedrockRerankingModelConfiguration(v *types.AgenticRetrieveBedrockRerankingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveConfiguration(v *types.AgenticRetrieveConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FoundationModelConfiguration != nil {
+		ok := object.Key("foundationModelConfiguration")
+		if err := awsRestjson1_serializeDocumentFoundationModelConfiguration(v.FoundationModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FoundationModelType) > 0 {
+		ok := object.Key("foundationModelType")
+		ok.String(string(v.FoundationModelType))
+	}
+
+	if v.MaxAgentIteration != nil {
+		ok := object.Key("maxAgentIteration")
+		ok.Integer(*v.MaxAgentIteration)
+	}
+
+	if v.RerankingConfiguration != nil {
+		ok := object.Key("rerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveRerankingConfiguration(v.RerankingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RerankingModelType) > 0 {
+		ok := object.Key("rerankingModelType")
+		ok.String(string(v.RerankingModelType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveMessage(v *types.AgenticRetrieveMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveMessageContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Role) > 0 {
+		ok := object.Key("role")
+		ok.String(string(v.Role))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveMessageContent(v *types.AgenticRetrieveMessageContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveMessages(v []types.AgenticRetrieveMessage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveMessage(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrievePolicyConfiguration(v *types.AgenticRetrievePolicyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockGuardrailConfiguration != nil {
+		ok := object.Key("bedrockGuardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveBedrockGuardrailConfiguration(v.BedrockGuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetriever(v *types.AgenticRetriever, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentRetrieverConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrieveRerankingConfiguration(v *types.AgenticRetrieveRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockRerankingConfiguration != nil {
+		ok := object.Key("bedrockRerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentAgenticRetrieveBedrockRerankingConfiguration(v.BedrockRerankingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAgenticRetrievers(v []types.AgenticRetriever, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAgenticRetriever(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApiResult(v *types.ApiResult, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3273,6 +3722,32 @@ func awsRestjson1_serializeDocumentAPISchema(v types.APISchema, value smithyjson
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBedrockFoundationModelConfiguration(v *types.BedrockFoundationModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelConfiguration != nil {
+		ok := object.Key("modelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockFoundationModelModelConfiguration(v.ModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBedrockFoundationModelModelConfiguration(v *types.BedrockFoundationModelModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
 	return nil
 }
 
@@ -3858,6 +4333,25 @@ func awsRestjson1_serializeDocumentFlowInputs(v []types.FlowInput, value smithyj
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFoundationModelConfiguration(v *types.FoundationModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockFoundationModelConfiguration != nil {
+		ok := object.Key("bedrockFoundationModelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockFoundationModelConfiguration(v.BedrockFoundationModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -4477,6 +4971,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseRetrievalConfiguration(v *types.
 	object := value.Object()
 	defer object.Close()
 
+	if v.ManagedSearchConfiguration != nil {
+		ok := object.Key("managedSearchConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedSearchConfiguration(v.ManagedSearchConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VectorSearchConfiguration != nil {
 		ok := object.Key("vectorSearchConfiguration")
 		if err := awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v.VectorSearchConfiguration, ok); err != nil {
@@ -4518,6 +5019,25 @@ func awsRestjson1_serializeDocumentKnowledgeBaseRetrieveAndGenerateConfiguration
 	if v.RetrievalConfiguration != nil {
 		ok := object.Key("retrievalConfiguration")
 		if err := awsRestjson1_serializeDocumentKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKnowledgeBaseRetrieverConfiguration(v *types.KnowledgeBaseRetrieverConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KnowledgeBaseId != nil {
+		ok := object.Key("knowledgeBaseId")
+		ok.String(*v.KnowledgeBaseId)
+	}
+
+	if v.RetrievalOverrides != nil {
+		ok := object.Key("retrievalOverrides")
+		if err := awsRestjson1_serializeDocumentRetrievalOverrides(v.RetrievalOverrides, ok); err != nil {
 			return err
 		}
 	}
@@ -4571,6 +5091,101 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 		if err := awsRestjson1_serializeDocumentVectorSearchRerankingConfiguration(v.RerankingConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedSearchBedrockRerankingConfiguration(v *types.ManagedSearchBedrockRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataConfiguration != nil {
+		ok := object.Key("metadataConfiguration")
+		if err := awsRestjson1_serializeDocumentMetadataConfigurationForReranking(v.MetadataConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelConfiguration != nil {
+		ok := object.Key("modelConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedSearchBedrockRerankingModelConfiguration(v.ModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberOfRerankedResults != nil {
+		ok := object.Key("numberOfRerankedResults")
+		ok.Integer(*v.NumberOfRerankedResults)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedSearchBedrockRerankingModelConfiguration(v *types.ManagedSearchBedrockRerankingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFields(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedSearchConfiguration(v *types.ManagedSearchConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentRetrievalFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberOfResults != nil {
+		ok := object.Key("numberOfResults")
+		ok.Integer(*v.NumberOfResults)
+	}
+
+	if v.RerankingConfiguration != nil {
+		ok := object.Key("rerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedSearchRerankingConfiguration(v.RerankingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RerankingModelType) > 0 {
+		ok := object.Key("rerankingModelType")
+		ok.String(string(v.RerankingModelType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedSearchRerankingConfiguration(v *types.ManagedSearchRerankingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockRerankingConfiguration != nil {
+		ok := object.Key("bedrockRerankingConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedSearchBedrockRerankingConfiguration(v.BedrockRerankingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -5210,6 +5825,25 @@ func awsRestjson1_serializeDocumentRetrievalFilterList(v []types.RetrievalFilter
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRetrievalOverrides(v *types.RetrievalOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentRetrievalFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxNumberOfResults != nil {
+		ok := object.Key("maxNumberOfResults")
+		ok.Integer(*v.MaxNumberOfResults)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRetrieveAndGenerateConfiguration(v *types.RetrieveAndGenerateConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5257,6 +5891,24 @@ func awsRestjson1_serializeDocumentRetrieveAndGenerateSessionConfiguration(v *ty
 		ok.String(*v.KmsKeyArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetrieverConfiguration(v types.RetrieverConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RetrieverConfigurationMemberKnowledgeBase:
+		av := object.Key("knowledgeBase")
+		if err := awsRestjson1_serializeDocumentKnowledgeBaseRetrieverConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -5556,6 +6208,18 @@ func awsRestjson1_serializeDocumentTransformationConfiguration(v *types.Transfor
 		if err := awsRestjson1_serializeDocumentTextToSqlConfiguration(v.TextToSqlConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUserContext(v *types.UserContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UserId != nil {
+		ok := object.Key("userId")
+		ok.String(*v.UserId)
 	}
 
 	return nil

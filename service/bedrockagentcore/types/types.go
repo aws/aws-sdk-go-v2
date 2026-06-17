@@ -1509,7 +1509,7 @@ type EvaluationTargetMemberTraceIds struct {
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
 
-// An evaluator to run against sessions
+// An evaluator to run against sessions during batch evaluation.
 type Evaluator struct {
 
 	// The unique identifier of the evaluator. Can reference built-in evaluators
@@ -1684,7 +1684,8 @@ type ExecutionSummaryCluster struct {
 	noSmithyDocumentSerde
 }
 
-// Customer-facing execution summary clustering result written to S3.
+// The execution summary clustering result containing grouped execution patterns
+// identified across evaluated sessions.
 type ExecutionSummaryClusteringResultContent struct {
 
 	// The list of execution summary clusters identified across analyzed sessions.
@@ -1808,7 +1809,8 @@ type ExtractionJobMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Unified customer-facing clustering result written to S3.
+// The failure analysis clustering result containing categorized failure clusters
+// with root causes and remediation recommendations.
 type FailureAnalysisResultContent struct {
 
 	// The list of failure category clusters identified across analyzed sessions.
@@ -2584,12 +2586,22 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberAwsSkills
 //	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
 //	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// AWS Skills baked into the Harness's underlying Runtime.
+type HarnessSkillMemberAwsSkills struct {
+	Value HarnessSkillAwsSkillsSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberAwsSkills) isHarnessSkill() {}
 
 // A git repository containing the skill.
 type HarnessSkillMemberGit struct {
@@ -2617,6 +2629,15 @@ type HarnessSkillMemberS3 struct {
 }
 
 func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Passed to show that AWS Skills should be included.
+type HarnessSkillAwsSkillsSource struct {
+
+	// Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].
+	Paths []string
+
+	noSmithyDocumentSerde
+}
 
 // Authentication configuration for accessing a private git repository.
 type HarnessSkillGitAuth struct {
@@ -2978,11 +2999,13 @@ type InputContentBlock struct {
 	noSmithyDocumentSerde
 }
 
-// A reference to an insight analysis to run against sessions.
+// A reference to an insight analysis to run against sessions during batch
+// evaluation. Insights provide deeper analysis beyond individual evaluator scores,
+// including failure detection, user intent clustering, and execution
+// summarization.
 type Insight struct {
 
-	// Canonical insight identifiers using the Builtin.Insight.* naming convention.
-	// Used by BatchEvaluate, InternalEvaluate, and ServiceEngineEvaluate flows.
+	// The unique identifier of the insight to run.
 	//
 	// This member is required.
 	InsightId *string
@@ -2993,9 +3016,7 @@ type Insight struct {
 // A signal indicating a detected failure within a span.
 type InsightsFailureSignal struct {
 
-	// Failure category taxonomy for agent session insights. Values must stay in sync
-	// with the category registry in AgentCoreLens
-	// (amzn_agentcore_lens.config.failure_detection.FAILURE_CATEGORIES).
+	// The failure category classification for this signal.
 	//
 	// This member is required.
 	Category InsightsFailureCategory
@@ -3930,7 +3951,7 @@ type OnlineEvaluationConfigSource struct {
 
 	// Optional session filter configuration to narrow down which sessions from the
 	// online evaluation configuration to include.
-	SessionFilterConfig *SessionFilterConfig
+	TimeRange *SessionFilterConfig
 
 	noSmithyDocumentSerde
 }
@@ -5427,7 +5448,8 @@ type UserIntentCluster struct {
 	noSmithyDocumentSerde
 }
 
-// Customer-facing user intent clustering result written to S3.
+// The user intent clustering result containing grouped user intents identified
+// across evaluated sessions.
 type UserIntentClusteringResultContent struct {
 
 	// The list of user intent clusters identified across analyzed sessions.

@@ -2389,19 +2389,25 @@ type DaemonTaskDefinition struct {
 	// The name of a family that this daemon task definition is registered to.
 	Family *string
 
-	// The IPC namespace mode for the daemon. A value of shared means the daemon
-	// shares the IPC namespace with co-located tasks, allowing communication through
-	// POSIX shared memory, semaphores, and message queues. A value of none means the
-	// daemon has its own isolated IPC namespace.
+	// The IPC namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own IPC
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host IPC namespace, making it accessible to non-daemon tasks that use
+	// ipcMode: "host" or other daemons that use ipcMode: "shared" .
 	IpcMode DaemonIpcMode
 
 	// The amount of memory (in MiB) used by the daemon task.
 	Memory *string
 
-	// The process namespace mode for the daemon. A value of shared means the daemon
-	// shares the PID namespace with co-located tasks, giving it visibility into
-	// application processes. A value of none means the daemon has its own isolated
-	// PID namespace.
+	// The PID namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own PID
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host PID namespace, making it accessible to non-daemon tasks that use
+	// pidMode: "host" or other daemons that use pidMode: "shared" .
 	PidMode DaemonPidMode
 
 	// The Unix timestamp for the time when the daemon task definition was registered.
@@ -2699,8 +2705,8 @@ type DeploymentConfiguration struct {
 	// [Rolling update]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html
 	DeploymentCircuitBreaker *DeploymentCircuitBreaker
 
-	// An array of deployment lifecycle hook objects to run custom logic at specific
-	// stages of the deployment lifecycle.
+	// An array of deployment lifecycle hook objects to run custom logic or pause the
+	// deployment at specific stages of the deployment lifecycle.
 	LifecycleHooks []DeploymentLifecycleHook
 
 	// Configuration for linear deployment strategy. Only valid when the deployment
@@ -2943,8 +2949,9 @@ type DeploymentEphemeralStorage struct {
 	noSmithyDocumentSerde
 }
 
-// A deployment lifecycle hook runs custom logic at specific stages of the
-// deployment process. Currently, you can use Lambda functions as hook targets.
+// A deployment lifecycle hook runs custom logic or pauses the deployment at
+// specific stages of the deployment process. You can use Lambda functions or pause
+// hooks as hook targets.
 //
 // For more information, see [Lifecycle hooks for Amazon ECS service deployments] in the Amazon Elastic Container Service Developer
 // Guide.
@@ -2952,14 +2959,14 @@ type DeploymentEphemeralStorage struct {
 // [Lifecycle hooks for Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
 type DeploymentLifecycleHook struct {
 
-	// Use this field to specify custom parameters that Amazon ECS will pass to your
-	// hook target invocations (such as a Lambda function).
+	// Use this field to specify custom parameters that Amazon ECS passes to your
+	// Lambda function on each invocation. This field is not used for PAUSE hooks.
 	HookDetails document.Interface
 
-	// The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda
-	// function ARNs are supported.
+	// The Amazon Resource Name (ARN) of the hook target. For AWS_LAMBDA hooks, this
+	// is the Lambda function ARN. This field is not applicable for PAUSE hooks.
 	//
-	// You must provide this parameter when configuring a deployment lifecycle hook.
+	// You must provide this parameter when configuring an AWS_LAMBDA lifecycle hook.
 	HookTargetArn *string
 
 	// The lifecycle stages at which to run the hook. Choose from these valid values:
@@ -3000,10 +3007,18 @@ type DeploymentLifecycleHook struct {
 	//
 	// You can use a lifecycle hook for this stage.
 	//
+	//   - PRE_PRODUCTION_TRAFFIC_SHIFT
+	//
+	// Occurs before production traffic shift. For linear and canary deployments, this
+	//   stage is invoked before every traffic shift step.
+	//
+	// You can use a lifecycle hook for this stage.
+	//
 	//   - PRODUCTION_TRAFFIC_SHIFT
 	//
 	// Production traffic is shifting to the green service revision. The green service
-	//   revision is migrating from 0% to 100% of production traffic.
+	//   revision is migrating from 0% to 100% of production traffic. For linear and
+	//   canary deployments, this stage is invoked at every traffic shift step.
 	//
 	// You can use a lifecycle hook for this stage.
 	//
@@ -3012,6 +3027,10 @@ type DeploymentLifecycleHook struct {
 	// The production traffic shift is complete.
 	//
 	// You can use a lifecycle hook for this stage.
+	//
+	// PAUSE hooks cannot be configured at TEST_TRAFFIC_SHIFT or
+	// PRODUCTION_TRAFFIC_SHIFT stages. These stages are only valid for AWS_LAMBDA
+	// hooks.
 	//
 	// You must provide this parameter when configuring a deployment lifecycle hook.
 	LifecycleStages []DeploymentLifecycleHookStage
@@ -3059,11 +3078,8 @@ type DeploymentLifecycleHookDetail struct {
 	// ContinueServiceDeployment to continue or roll back a paused deployment.
 	HookId *string
 
-	// The status of the lifecycle hook. Valid values depend on the hook type:
-	//
-	//   - For AWS_LAMBDA hooks: IN_PROGRESS , SUCCEEDED , FAILED , and TIMED_OUT .
-	//
-	//   - For PAUSE hooks: AWAITING_ACTION , SUCCEEDED , FAILED , and TIMED_OUT .
+	// The status of the lifecycle hook. Valid values include AWAITING_ACTION ,
+	// IN_PROGRESS , SUCCEEDED , FAILED , and TIMED_OUT .
 	Status DeploymentLifecycleHookStatus
 
 	// The Amazon Resource Name (ARN) of the hook target. For AWS_LAMBDA hooks, this
@@ -3090,10 +3106,14 @@ type DeploymentLifecycleHookTimeoutConfiguration struct {
 	//   - CONTINUE - Proceeds the deployment to the next lifecycle stage.
 	//
 	//   - ROLLBACK - Rolls back the deployment to the previous service revision.
+	//
+	// Default: ROLLBACK
 	Action DeploymentLifecycleHookAction
 
 	// The number of minutes Amazon ECS waits for the lifecycle hook to complete
 	// before taking the timeout action.
+	//
+	// Default: 1440 (24 hours)
 	TimeoutInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -3578,6 +3598,11 @@ type ExpressGatewayServiceConfiguration struct {
 
 	// The ARN of the service revision.
 	ServiceRevisionArn *string
+
+	// The ARN of the task definition used by this service revision. This is present
+	// for all Express services and reflects the task definition in use, whether
+	// managed by Amazon ECS or provided by the customer.
+	TaskDefinitionArn *string
 
 	// The ARN of the task role for the service revision.
 	TaskRoleArn *string
@@ -6790,10 +6815,16 @@ type ServiceDeployment struct {
 	// The test traffic shift is complete. The green service revision handles 100% of
 	//   the test traffic.
 	//
+	//   - PRE_PRODUCTION_TRAFFIC_SHIFT
+	//
+	// Occurs before production traffic shift. For linear and canary deployments, this
+	//   stage is invoked before every traffic shift step.
+	//
 	//   - PRODUCTION_TRAFFIC_SHIFT
 	//
 	// Production traffic is shifting to the green service revision. The green service
-	//   revision is migrating from 0% to 100% of production traffic.
+	//   revision is migrating from 0% to 100% of production traffic. For linear and
+	//   canary deployments, this stage is invoked at every traffic shift step.
 	//
 	//   - POST_PRODUCTION_TRAFFIC_SHIFT
 	//

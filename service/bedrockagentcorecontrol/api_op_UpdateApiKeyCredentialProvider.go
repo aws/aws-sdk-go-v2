@@ -39,14 +39,14 @@ type UpdateApiKeyCredentialProviderInput struct {
 	// key and is encrypted and stored securely.
 	ApiKey *string
 
-	// A reference to the AWS Secrets Manager secret that stores the API key. This
-	// includes the secret ID and the JSON key used to extract the API key value from
-	// the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// API key. This includes the secret ID and the JSON key used to extract the API
+	// key value from the secret. Required when apiKeySecretSource is set to EXTERNAL .
 	ApiKeySecretConfig *types.SecretReference
 
 	// The source type of the API key secret. Use MANAGED if the secret is managed by
-	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
-	// Manager.
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
 	ApiKeySecretSource types.SecretSourceType
 
 	noSmithyDocumentSerde
@@ -54,7 +54,8 @@ type UpdateApiKeyCredentialProviderInput struct {
 
 type UpdateApiKeyCredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ApiKeySecretArn *types.Secret
@@ -79,12 +80,13 @@ type UpdateApiKeyCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
-	// The JSON key used to extract the API key value from the AWS Secrets Manager
-	// secret.
+	// The JSON key used to extract the API key value from the Amazon Web Services
+	// Secrets Manager secret.
 	ApiKeySecretJsonKey *string
 
 	// The source type of the API key secret. Either MANAGED if the secret is managed
-	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
 	ApiKeySecretSource types.SecretSourceType
 
 	// Metadata pertaining to the operation's result.

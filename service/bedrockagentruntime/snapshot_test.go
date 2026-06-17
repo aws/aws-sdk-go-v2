@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AgenticRetrieveStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AgenticRetrieveStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AgenticRetrieveStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_GetAgentMemory(t *testing.T) {
 	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDocumentContent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +457,18 @@ func TestCheckSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AgenticRetrieveStream(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AgenticRetrieveStream(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AgenticRetrieveStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -510,6 +546,18 @@ func TestUpdateSnapshot_GetAgentMemory(t *testing.T) {
 	_, err := svc.GetAgentMemory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAgentMemory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDocumentContent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentContent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDocumentContent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

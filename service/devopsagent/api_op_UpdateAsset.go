@@ -44,8 +44,8 @@ type UpdateAssetInput struct {
 	// A unique, case-sensitive identifier used for idempotent asset update
 	ClientToken *string
 
-	// Optional content to set or replace. A single file adds or replaces one file; a
-	// zip replaces all files.
+	// Optional content update. A single file adds or replaces one file; a zip
+	// replaces all files; a sourceUrl re-syncs from the original source.
 	Content types.AssetContent
 
 	// Metadata fields to update. Only the fields present in this document are

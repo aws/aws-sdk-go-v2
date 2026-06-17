@@ -589,6 +589,7 @@ const (
 	InsightsFailureCategoryConfigurationMismatchToolDefinition      InsightsFailureCategory = "configuration-mismatch-category-tool-definition"
 	InsightsFailureCategoryCodingEdgeCaseOversights                 InsightsFailureCategory = "coding-use-case-specific-failure-types-category-edge-case-oversights"
 	InsightsFailureCategoryCodingDependencyIssues                   InsightsFailureCategory = "coding-use-case-specific-failure-types-category-dependency-issues"
+	InsightsFailureCategoryOther                                    InsightsFailureCategory = "other"
 )
 
 // Values returns all known values for InsightsFailureCategory. Note that this can
@@ -630,6 +631,7 @@ func (InsightsFailureCategory) Values() []InsightsFailureCategory {
 		"configuration-mismatch-category-tool-definition",
 		"coding-use-case-specific-failure-types-category-edge-case-oversights",
 		"coding-use-case-specific-failure-types-category-dependency-issues",
+		"other",
 	}
 }
 

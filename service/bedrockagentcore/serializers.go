@@ -3671,6 +3671,10 @@ func awsRestjson1_serializeOpHttpBindingsInvokeHarnessInput(v *InvokeHarnessInpu
 		encoder.SetQuery("harnessArn").String(*v.HarnessArn)
 	}
 
+	if v.Qualifier != nil {
+		encoder.SetQuery("qualifier").String(*v.Qualifier)
+	}
+
 	if v.RuntimeSessionId != nil {
 		locationName := "X-Amzn-Bedrock-Agentcore-Runtime-Session-Id"
 		encoder.SetHeader(locationName).String(*v.RuntimeSessionId)
@@ -7860,6 +7864,17 @@ func awsRestjson1_serializeDocumentHarnessAllowedTools(v []string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHarnessAwsSkillPaths(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHarnessBedrockModelConfig(v *types.HarnessBedrockModelConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8358,6 +8373,12 @@ func awsRestjson1_serializeDocumentHarnessSkill(v types.HarnessSkill, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.HarnessSkillMemberAwsSkills:
+		av := object.Key("awsSkills")
+		if err := awsRestjson1_serializeDocumentHarnessSkillAwsSkillsSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.HarnessSkillMemberGit:
 		av := object.Key("git")
 		if err := awsRestjson1_serializeDocumentHarnessSkillGitSource(&uv.Value, av); err != nil {
@@ -8378,6 +8399,20 @@ func awsRestjson1_serializeDocumentHarnessSkill(v types.HarnessSkill, value smit
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessSkillAwsSkillsSource(v *types.HarnessSkillAwsSkillsSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Paths != nil {
+		ok := object.Key("paths")
+		if err := awsRestjson1_serializeDocumentHarnessAwsSkillPaths(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9549,9 +9584,9 @@ func awsRestjson1_serializeDocumentOnlineEvaluationConfigSource(v *types.OnlineE
 		ok.String(*v.OnlineEvaluationConfigArn)
 	}
 
-	if v.SessionFilterConfig != nil {
-		ok := object.Key("sessionFilterConfig")
-		if err := awsRestjson1_serializeDocumentSessionFilterConfig(v.SessionFilterConfig, ok); err != nil {
+	if v.TimeRange != nil {
+		ok := object.Key("timeRange")
+		if err := awsRestjson1_serializeDocumentSessionFilterConfig(v.TimeRange, ok); err != nil {
 			return err
 		}
 	}

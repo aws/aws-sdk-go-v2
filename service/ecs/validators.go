@@ -3318,15 +3318,10 @@ func validateOpCreateExpressGatewayServiceInput(v *CreateExpressGatewayServiceIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateExpressGatewayServiceInput"}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
-	}
 	if v.InfrastructureRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
 	}
-	if v.PrimaryContainer == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrimaryContainer"))
-	} else if v.PrimaryContainer != nil {
+	if v.PrimaryContainer != nil {
 		if err := validateExpressGatewayContainer(v.PrimaryContainer); err != nil {
 			invalidParams.AddNested("PrimaryContainer", err.(smithy.InvalidParamsError))
 		}

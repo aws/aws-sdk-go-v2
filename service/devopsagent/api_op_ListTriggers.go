@@ -27,10 +27,10 @@ func (c *Client) ListTriggers(ctx context.Context, params *ListTriggersInput, op
 	return out, nil
 }
 
+// Request structure for listing Triggers in an agent space
 type ListTriggersInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space whose Triggers should be listed
 	//
 	// This member is required.
 	AgentSpaceId *string
@@ -47,6 +47,7 @@ type ListTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response structure for listing Triggers
 type ListTriggersOutput struct {
 
 	// The list of Triggers
@@ -54,7 +55,7 @@ type ListTriggersOutput struct {
 	// This member is required.
 	Items []types.Trigger
 
-	// Pagination token for list operations (1-2048 characters)
+	// Pagination token to retrieve the next page of results
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

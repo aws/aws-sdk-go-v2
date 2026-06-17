@@ -147,6 +147,10 @@ type CreateGatewayOutput struct {
 	// The authorizer configuration for the created gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The custom transformation configuration for the gateway. This configuration
+	// defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The description of the gateway.
 	Description *string
 
@@ -183,6 +187,13 @@ type CreateGatewayOutput struct {
 
 	// The reasons for the current status of the gateway.
 	StatusReasons []string
+
+	// The Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+	// associated with the gateway.
+	WebAclArn *string
 
 	// The workload identity details for the created gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails

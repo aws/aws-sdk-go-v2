@@ -2338,6 +2338,176 @@ func awsRestjson1_deserializeOpDocumentDescribeConfigurationRevisionOutput(v **D
 	return nil
 }
 
+type awsRestjson1_deserializeOpDescribeSharedResources struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeSharedResources) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeSharedResources) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeSharedResources(response, &metadata)
+	}
+	output := &DescribeSharedResourcesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeSharedResourcesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeSharedResources(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeSharedResourcesOutput(v **DescribeSharedResourcesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeSharedResourcesOutput
+	if *v == nil {
+		sv = &DescribeSharedResourcesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "sharedResources":
+			if err := awsRestjson1_deserializeDocument__listOfSharedResource(&sv.SharedResources, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeUser struct {
 }
 
@@ -3937,6 +4107,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 				sv.PendingDataReplicationMode = types.DataReplicationMode(jtv)
 			}
 
+		case "resourceShareArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ResourceShareArns, value); err != nil {
+				return err
+			}
+
 		case "securityGroups":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.SecurityGroups, value); err != nil {
 				return err
@@ -4888,6 +5063,40 @@ func awsRestjson1_deserializeDocument__listOfEngineVersion(v *[]types.EngineVers
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfResourceShareError(v *[]types.ResourceShareError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceShareError
+	if *v == nil {
+		cv = []types.ResourceShareError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceShareError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceShareError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfSanitizationWarning(v *[]types.SanitizationWarning, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4912,6 +5121,40 @@ func awsRestjson1_deserializeDocument__listOfSanitizationWarning(v *[]types.Sani
 		var col types.SanitizationWarning
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentSanitizationWarning(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfSharedResource(v *[]types.SharedResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SharedResource
+	if *v == nil {
+		cv = []types.SharedResource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SharedResource
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSharedResource(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -5119,6 +5362,11 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5731,6 +5979,11 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5963,6 +6216,11 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6010,6 +6268,11 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6299,6 +6562,11 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6346,6 +6614,64 @@ func awsRestjson1_deserializeDocumentPendingLogs(v **types.PendingLogs, value in
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
 				sv.General = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceShareError(v **types.ResourceShareError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceShareError
+	if *v == nil {
+		sv = &types.ResourceShareError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "resourceShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ResourceShareArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
 			}
 
 		default:
@@ -6415,6 +6741,128 @@ func awsRestjson1_deserializeDocumentSanitizationWarning(v **types.SanitizationW
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSharedResource(v **types.SharedResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SharedResource
+	if *v == nil {
+		sv = &types.SharedResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dnsNames":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.DnsNames, value); err != nil {
+				return err
+			}
+
+		case "error":
+			if err := awsRestjson1_deserializeDocumentSharedResourceError(&sv.Error, value); err != nil {
+				return err
+			}
+
+		case "resourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "resourceShareArns":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ResourceShareArns, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharedResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.SharedResourceStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharedResourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SharedResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSharedResourceError(v **types.SharedResourceError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SharedResourceError
+	if *v == nil {
+		sv = &types.SharedResourceError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharedResourceErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.SharedResourceErrorCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.UnauthorizedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6453,6 +6901,11 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "resourceShareErrors":
+			if err := awsRestjson1_deserializeDocument__listOfResourceShareError(&sv.ResourceShareErrors, value); err != nil {
+				return err
 			}
 
 		default:

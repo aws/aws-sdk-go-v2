@@ -2,6 +2,42 @@
 
 package types
 
+type AccessControlAccess string
+
+// Enum values for AccessControlAccess
+const (
+	AccessControlAccessAllow AccessControlAccess = "ALLOW"
+	AccessControlAccessDeny  AccessControlAccess = "DENY"
+)
+
+// Values returns all known values for AccessControlAccess. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessControlAccess) Values() []AccessControlAccess {
+	return []AccessControlAccess{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type AccessControlPrincipalType string
+
+// Enum values for AccessControlPrincipalType
+const (
+	AccessControlPrincipalTypeUser AccessControlPrincipalType = "USER"
+)
+
+// Values returns all known values for AccessControlPrincipalType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessControlPrincipalType) Values() []AccessControlPrincipalType {
+	return []AccessControlPrincipalType{
+		"USER",
+	}
+}
+
 type ActionGroupSignature string
 
 // Enum values for ActionGroupSignature
@@ -395,6 +431,9 @@ const (
 	DataSourceStatusAvailable          DataSourceStatus = "AVAILABLE"
 	DataSourceStatusDeleting           DataSourceStatus = "DELETING"
 	DataSourceStatusDeleteUnsuccessful DataSourceStatus = "DELETE_UNSUCCESSFUL"
+	DataSourceStatusCreating           DataSourceStatus = "CREATING"
+	DataSourceStatusUpdating           DataSourceStatus = "UPDATING"
+	DataSourceStatusFailed             DataSourceStatus = "FAILED"
 )
 
 // Values returns all known values for DataSourceStatus. Note that this can be
@@ -406,6 +445,9 @@ func (DataSourceStatus) Values() []DataSourceStatus {
 		"AVAILABLE",
 		"DELETING",
 		"DELETE_UNSUCCESSFUL",
+		"CREATING",
+		"UPDATING",
+		"FAILED",
 	}
 }
 
@@ -413,13 +455,14 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeS3               DataSourceType = "S3"
-	DataSourceTypeWeb              DataSourceType = "WEB"
-	DataSourceTypeConfluence       DataSourceType = "CONFLUENCE"
-	DataSourceTypeSalesforce       DataSourceType = "SALESFORCE"
-	DataSourceTypeSharepoint       DataSourceType = "SHAREPOINT"
-	DataSourceTypeCustom           DataSourceType = "CUSTOM"
-	DataSourceTypeRedshiftMetadata DataSourceType = "REDSHIFT_METADATA"
+	DataSourceTypeS3                            DataSourceType = "S3"
+	DataSourceTypeWeb                           DataSourceType = "WEB"
+	DataSourceTypeConfluence                    DataSourceType = "CONFLUENCE"
+	DataSourceTypeSalesforce                    DataSourceType = "SALESFORCE"
+	DataSourceTypeSharepoint                    DataSourceType = "SHAREPOINT"
+	DataSourceTypeCustom                        DataSourceType = "CUSTOM"
+	DataSourceTypeRedshiftMetadata              DataSourceType = "REDSHIFT_METADATA"
+	DataSourceTypeManagedKnowledgeBaseConnector DataSourceType = "MANAGED_KNOWLEDGE_BASE_CONNECTOR"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -435,6 +478,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"SHAREPOINT",
 		"CUSTOM",
 		"REDSHIFT_METADATA",
+		"MANAGED_KNOWLEDGE_BASE_CONNECTOR",
 	}
 }
 
@@ -493,6 +537,44 @@ func (EmbeddingDataType) Values() []EmbeddingDataType {
 	return []EmbeddingDataType{
 		"FLOAT32",
 		"BINARY",
+	}
+}
+
+type EmbeddingModelType string
+
+// Enum values for EmbeddingModelType
+const (
+	EmbeddingModelTypeCustom  EmbeddingModelType = "CUSTOM"
+	EmbeddingModelTypeManaged EmbeddingModelType = "MANAGED"
+)
+
+// Values returns all known values for EmbeddingModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddingModelType) Values() []EmbeddingModelType {
+	return []EmbeddingModelType{
+		"CUSTOM",
+		"MANAGED",
+	}
+}
+
+type EnabledOrDisabledState string
+
+// Enum values for EnabledOrDisabledState
+const (
+	EnabledOrDisabledStateEnabled  EnabledOrDisabledState = "ENABLED"
+	EnabledOrDisabledStateDisabled EnabledOrDisabledState = "DISABLED"
+)
+
+// Values returns all known values for EnabledOrDisabledState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnabledOrDisabledState) Values() []EnabledOrDisabledState {
+	return []EnabledOrDisabledState{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -918,6 +1000,7 @@ const (
 	KnowledgeBaseStatusUpdating           KnowledgeBaseStatus = "UPDATING"
 	KnowledgeBaseStatusFailed             KnowledgeBaseStatus = "FAILED"
 	KnowledgeBaseStatusDeleteUnsuccessful KnowledgeBaseStatus = "DELETE_UNSUCCESSFUL"
+	KnowledgeBaseStatusUpdateUnsuccessful KnowledgeBaseStatus = "UPDATE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for KnowledgeBaseStatus. Note that this can be
@@ -932,6 +1015,7 @@ func (KnowledgeBaseStatus) Values() []KnowledgeBaseStatus {
 		"UPDATING",
 		"FAILED",
 		"DELETE_UNSUCCESSFUL",
+		"UPDATE_UNSUCCESSFUL",
 	}
 }
 
@@ -970,9 +1054,10 @@ type KnowledgeBaseType string
 
 // Enum values for KnowledgeBaseType
 const (
-	KnowledgeBaseTypeVector KnowledgeBaseType = "VECTOR"
-	KnowledgeBaseTypeKendra KnowledgeBaseType = "KENDRA"
-	KnowledgeBaseTypeSql    KnowledgeBaseType = "SQL"
+	KnowledgeBaseTypeVector  KnowledgeBaseType = "VECTOR"
+	KnowledgeBaseTypeKendra  KnowledgeBaseType = "KENDRA"
+	KnowledgeBaseTypeSql     KnowledgeBaseType = "SQL"
+	KnowledgeBaseTypeManaged KnowledgeBaseType = "MANAGED"
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
@@ -984,6 +1069,7 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 		"VECTOR",
 		"KENDRA",
 		"SQL",
+		"MANAGED",
 	}
 }
 
@@ -1088,6 +1174,7 @@ type ParsingStrategy string
 const (
 	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
 	ParsingStrategyBedrockDataAutomation  ParsingStrategy = "BEDROCK_DATA_AUTOMATION"
+	ParsingStrategySmartParsing           ParsingStrategy = "SMART_PARSING"
 )
 
 // Values returns all known values for ParsingStrategy. Note that this can be
@@ -1098,6 +1185,7 @@ func (ParsingStrategy) Values() []ParsingStrategy {
 	return []ParsingStrategy{
 		"BEDROCK_FOUNDATION_MODEL",
 		"BEDROCK_DATA_AUTOMATION",
+		"SMART_PARSING",
 	}
 }
 

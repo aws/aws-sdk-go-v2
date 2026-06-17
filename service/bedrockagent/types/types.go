@@ -864,6 +864,17 @@ type AudioConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for audio extraction.
+type AudioExtractionConfiguration struct {
+
+	// Whether audio extraction is enabled or disabled.
+	//
+	// This member is required.
+	AudioExtractionStatus EnabledOrDisabledState
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for segmenting audio content during multimodal knowledge base
 // ingestion. Determines how audio files are divided into chunks for processing.
 type AudioSegmentationConfiguration struct {
@@ -1139,7 +1150,8 @@ type ConfluenceCrawlerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration information to connect to Confluence as your data source.
+// The configuration information to connect to Confluence as your data source for
+// self-managed knowledge bases.
 type ConfluenceDataSourceConfiguration struct {
 
 	// The endpoint information to connect to your Confluence data source.
@@ -1438,29 +1450,52 @@ type DataSourceConfiguration struct {
 	// This member is required.
 	Type DataSourceType
 
-	// The configuration information to connect to Confluence as your data source.
+	// The configuration information to connect to Confluence as your data source for
+	// self-managed knowledge bases.
 	//
-	// Confluence data source connector is in preview release and is subject to change.
+	// To configure this data source for managed knowledge bases, use [managedKnowledgeBaseConnectorConfiguration]. Confluence
+	// data source connector for self-managed knowledge bases is in preview release and
+	// is subject to change.
+	//
+	// [managedKnowledgeBaseConnectorConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html
 	ConfluenceConfiguration *ConfluenceDataSourceConfiguration
 
-	// The configuration information to connect to Amazon S3 as your data source.
+	// Contains the configuration for a data source that connects a managed knowledge
+	// base to a supported data source connector. Specify this object when the data
+	// source type is MANAGED_KNOWLEDGE_BASE_CONNECTOR .
+	ManagedKnowledgeBaseConnectorConfiguration *ManagedKnowledgeBaseConnectorConfiguration
+
+	// The configuration information to connect to Amazon S3 as your data source for
+	// self-managed knowledge bases. To configure this data source for managed
+	// knowledge bases, use [managedKnowledgeBaseConnectorConfiguration].
+	//
+	// [managedKnowledgeBaseConnectorConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html
 	S3Configuration *S3DataSourceConfiguration
 
 	// The configuration information to connect to Salesforce as your data source.
 	//
-	// Salesforce data source connector is in preview release and is subject to change.
+	// Salesforce data source connector for self-managed knowledge bases is in preview
+	// release and is subject to change.
 	SalesforceConfiguration *SalesforceDataSourceConfiguration
 
-	// The configuration information to connect to SharePoint as your data source.
+	// The configuration information to connect to SharePoint as your data source for
+	// self-managed knowledge bases.
 	//
-	// SharePoint data source connector is in preview release and is subject to change.
+	// To configure this data source for managed knowledge bases, use [managedKnowledgeBaseConnectorConfiguration]. SharePoint
+	// data source connector for self-managed knowledge bases is in preview release and
+	// is subject to change.
+	//
+	// [managedKnowledgeBaseConnectorConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html
 	SharePointConfiguration *SharePointDataSourceConfiguration
 
 	// The configuration of web URLs to crawl for your data source. You should be
 	// authorized to crawl the URLs.
 	//
-	// Crawling web URLs as your data source is in preview release and is subject to
-	// change.
+	// To configure this data source for managed knowledge bases, use [managedKnowledgeBaseConnectorConfiguration]. Web crawler
+	// data source connector for self-managed knowledge bases is in preview release and
+	// is subject to change.
+	//
+	// [managedKnowledgeBaseConnectorConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html
 	WebConfiguration *WebDataSourceConfiguration
 
 	noSmithyDocumentSerde
@@ -1496,6 +1531,44 @@ type DataSourceSummary struct {
 
 	// The description of the data source.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for deletion protection.
+type DeletionProtectionConfiguration struct {
+
+	// Enable or disable deletion protection for the connector.
+	//
+	// This member is required.
+	DeletionProtectionStatus EnabledOrDisabledState
+
+	// The threshold is the maximum percentage of documents that a sync job can delete
+	// from your index. If a sync would delete more than this percentage, the sync
+	// skips its delete phase, leaving your indexed documents in place. Not supported
+	// for the Custom connector.
+	DeletionProtectionThreshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// An access control entry specifying a principal and their access level.
+type DocumentAccessControlEntry struct {
+
+	// Whether to allow or deny access.
+	//
+	// This member is required.
+	Access AccessControlAccess
+
+	// The user identifier.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of principal.
+	//
+	// This member is required.
+	Type AccessControlPrincipalType
 
 	noSmithyDocumentSerde
 }
@@ -1548,6 +1621,10 @@ type DocumentMetadata struct {
 	//
 	// This member is required.
 	Type MetadataSourceType
+
+	// Access control list for the document. Used when metadata type is
+	// IN_LINE_ATTRIBUTE.
+	AccessControlList []DocumentAccessControlEntry
 
 	// An array of objects, each of which defines a metadata attribute to associate
 	// with the content to ingest. You define the attributes inline.
@@ -2713,6 +2790,17 @@ type HierarchicalChunkingLevelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for image extraction.
+type ImageExtractionConfiguration struct {
+
+	// Whether image extraction is enabled or disabled.
+	//
+	// This member is required.
+	ImageExtractionStatus EnabledOrDisabledState
+
+	noSmithyDocumentSerde
+}
+
 // Details about incompatible data types in a connection between nodes.
 type IncompatibleConnectionDataTypeFlowValidationDetails struct {
 
@@ -2875,6 +2963,9 @@ type IngestionJobStatistics struct {
 	// The total number of source documents that were scanned. Includes new, updated,
 	// and unchanged documents.
 	NumberOfDocumentsScanned int64
+
+	// The number of source documents that were skipped during ingestion.
+	NumberOfDocumentsSkipped int64
 
 	// The number of metadata files that were updated or deleted.
 	NumberOfMetadataDocumentsModified int64
@@ -3113,12 +3204,16 @@ type KnowledgeBase struct {
 type KnowledgeBaseConfiguration struct {
 
 	// The type of data that the data source is converted into for the knowledge base.
+	// Choose MANAGED to create a managed knowledge base.
 	//
 	// This member is required.
 	Type KnowledgeBaseType
 
 	// Settings for an Amazon Kendra knowledge base.
 	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfiguration
+
+	// Configurations for a managed knowledge base.
+	ManagedKnowledgeBaseConfiguration *ManagedKnowledgeBaseConfiguration
 
 	// Specifies configurations for a knowledge base connected to an SQL database.
 	SqlKnowledgeBaseConfiguration *SqlKnowledgeBaseConfiguration
@@ -3463,6 +3558,61 @@ type MalformedNodeInputExpressionFlowValidationDetails struct {
 	//
 	// This member is required.
 	Node *string
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for a managed knowledge base.
+type ManagedKnowledgeBaseConfiguration struct {
+
+	// The ARN for the embeddings model.
+	EmbeddingModelArn *string
+
+	// The configuration details for the embeddings model.
+	EmbeddingModelConfiguration *EmbeddingModelConfiguration
+
+	// Choose CUSTOM to provide your own Bedrock embedding model ARN. Choose MANAGED
+	// to use a service-managed embedding model. For more information, see [Embedding model options].
+	//
+	// [Embedding model options]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-create.html#kb-managed-embedding-models
+	EmbeddingModelType EmbeddingModelType
+
+	// Contains the configuration for server-side encryption for your managed
+	// knowledge base.
+	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for managed knowledge base connector data sources.
+type ManagedKnowledgeBaseConnectorConfiguration struct {
+
+	// Connector-specific parameters. For more information, see [Connect a data source].
+	//
+	// [Connect a data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-connect-ds.html
+	ConnectorParameters document.Interface
+
+	// A safeguard against accidental bulk deletion of indexed content.
+	DeletionProtectionConfiguration *DeletionProtectionConfiguration
+
+	// Configuration for extracting media (images, audio, video) from data source
+	// files.
+	MediaExtractionConfiguration *MediaExtractionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for media extraction settings.
+type MediaExtractionConfiguration struct {
+
+	// Configuration for audio extraction.
+	AudioExtractionConfiguration *AudioExtractionConfiguration
+
+	// Configuration for image extraction.
+	ImageExtractionConfiguration *ImageExtractionConfiguration
+
+	// Configuration for video extraction.
+	VideoExtractionConfiguration *VideoExtractionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -4031,7 +4181,10 @@ type ParameterDetail struct {
 // [Parsing options for your data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html
 type ParsingConfiguration struct {
 
-	// The parsing strategy for the data source.
+	// The parsing strategy for the data source. Only SMART_PARSING can be selected
+	// for managed knowledge bases. For more information, see [Customize ingestion for managed knowledge bases].
+	//
+	// [Customize ingestion for managed knowledge bases]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html
 	//
 	// This member is required.
 	ParsingStrategy ParsingStrategy
@@ -5004,7 +5157,11 @@ type S3Content struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration information to connect to Amazon S3 as your data source.
+// The configuration information to connect to Amazon S3 as your data source for
+// self-managed knowledge bases. To configure this data source for managed
+// knowledge bases, use [managedKnowledgeBaseConnectorConfiguration].
+//
+// [managedKnowledgeBaseConnectorConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html
 type S3DataSourceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the S3 bucket that contains your data.
@@ -5164,7 +5321,8 @@ type SemanticChunkingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configuration for server-side encryption.
+// Contains the configuration for server-side encryption for your managed
+// knowledge base.
 type ServerSideEncryptionConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
@@ -5194,7 +5352,8 @@ type SharePointCrawlerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration information to connect to SharePoint as your data source.
+// The configuration information to connect to SharePoint as your data source for
+// self-managed knowledge bases.
 type SharePointDataSourceConfiguration struct {
 
 	// The endpoint information to connect to your SharePoint data source.
@@ -5375,13 +5534,14 @@ type StorageFlowNodeServiceConfigurationMemberS3 struct {
 
 func (*StorageFlowNodeServiceConfigurationMemberS3) isStorageFlowNodeServiceConfiguration() {}
 
-// Specifies configurations for the storage location of the images extracted from
-// multimodal documents in your data source. These images can be retrieved and
-// returned to the end user.
+// Specifies configurations for the storage location of multimedia content
+// (images, audio, and video) extracted from multimodal documents in your data
+// source. This content can be retrieved and returned to the end user with
+// timestamp references for audio and video segments.
 type SupplementalDataStorageConfiguration struct {
 
-	// A list of objects specifying storage locations for images extracted from
-	// multimodal documents in your data source.
+	// A list of objects specifying storage locations for multimedia content (images,
+	// audio, and video) extracted from multimodal documents in your data source.
 	//
 	// This member is required.
 	StorageLocations []SupplementalDataStorageLocation
@@ -5389,8 +5549,8 @@ type SupplementalDataStorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a storage location for images extracted from
-// multimodal documents in your data source.
+// Contains information about a storage location for multimedia content (images,
+// audio, and video) extracted from multimodal documents in your data source.
 type SupplementalDataStorageLocation struct {
 
 	// Specifies the storage service used for this location.
@@ -5398,7 +5558,8 @@ type SupplementalDataStorageLocation struct {
 	// This member is required.
 	Type SupplementalDataStorageLocationType
 
-	// Contains information about the Amazon S3 location for the extracted images.
+	// Contains information about the Amazon S3 location for the extracted multimedia
+	// content.
 	S3Location *S3Location
 
 	noSmithyDocumentSerde
@@ -5907,6 +6068,17 @@ type VideoConfiguration struct {
 	//
 	// This member is required.
 	SegmentationConfiguration *VideoSegmentationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for video extraction.
+type VideoExtractionConfiguration struct {
+
+	// Whether video extraction is enabled or disabled.
+	//
+	// This member is required.
+	VideoExtractionStatus EnabledOrDisabledState
 
 	noSmithyDocumentSerde
 }

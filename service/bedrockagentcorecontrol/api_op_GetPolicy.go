@@ -108,6 +108,9 @@ type GetPolicyOutput struct {
 	// helps administrators understand and manage the policy.
 	Description *string
 
+	// The current enforcement mode of the policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

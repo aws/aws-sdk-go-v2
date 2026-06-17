@@ -1,0 +1,8 @@
+{
+    "id": "1787f5e5-b41f-4e67-b05c-062d7e9ef488",
+    "type": "feature",
+    "description": "Cosell Resonate AND Prospecing API Launch with ARN correction",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

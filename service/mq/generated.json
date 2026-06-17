@@ -21,6 +21,7 @@
         "api_op_DescribeBrokerInstanceOptions.go",
         "api_op_DescribeConfiguration.go",
         "api_op_DescribeConfigurationRevision.go",
+        "api_op_DescribeSharedResources.go",
         "api_op_DescribeUser.go",
         "api_op_ListBrokers.go",
         "api_op_ListConfigurationRevisions.go",

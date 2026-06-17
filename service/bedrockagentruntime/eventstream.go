@@ -17,6 +17,16 @@ import (
 	"sync"
 )
 
+// AgenticRetrieveStreamResponseOutputReader provides the interface for reading
+// events from a stream.
+//
+// The writer's Close method must allow multiple concurrent calls.
+type AgenticRetrieveStreamResponseOutputReader interface {
+	Events() <-chan types.AgenticRetrieveStreamResponseOutput
+	Close() error
+	Err() error
+}
+
 // FlowResponseStreamReader provides the interface for reading events from a
 // stream.
 //
@@ -191,6 +201,134 @@ func (r *responseStreamReader) Err() error {
 }
 
 func (r *responseStreamReader) Closed() <-chan struct{} {
+	return r.done
+}
+
+type agenticRetrieveStreamResponseOutputReader struct {
+	stream      chan types.AgenticRetrieveStreamResponseOutput
+	decoder     *eventstream.Decoder
+	eventStream io.ReadCloser
+	err         *smithysync.OnceErr
+	payloadBuf  []byte
+	done        chan struct{}
+	closeOnce   sync.Once
+}
+
+func newAgenticRetrieveStreamResponseOutputReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *agenticRetrieveStreamResponseOutputReader {
+	w := &agenticRetrieveStreamResponseOutputReader{
+		stream:      make(chan types.AgenticRetrieveStreamResponseOutput),
+		decoder:     decoder,
+		eventStream: readCloser,
+		err:         smithysync.NewOnceErr(),
+		done:        make(chan struct{}),
+		payloadBuf:  make([]byte, 10*1024),
+	}
+
+	go w.readEventStream()
+
+	return w
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) Events() <-chan types.AgenticRetrieveStreamResponseOutput {
+	return r.stream
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) readEventStream() {
+	defer r.Close()
+	defer close(r.stream)
+
+	for {
+		r.payloadBuf = r.payloadBuf[0:0]
+		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
+		if err != nil {
+			if err == io.EOF {
+				return
+			}
+			select {
+			case <-r.done:
+				return
+			default:
+				r.err.SetError(err)
+				return
+			}
+		}
+
+		event, err := r.deserializeEventMessage(&decodedMessage)
+		if err != nil {
+			r.err.SetError(err)
+			return
+		}
+
+		select {
+		case r.stream <- event:
+		case <-r.done:
+			return
+		}
+
+	}
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) deserializeEventMessage(msg *eventstream.Message) (types.AgenticRetrieveStreamResponseOutput, error) {
+	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
+	if messageType == nil {
+		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
+	}
+
+	switch messageType.String() {
+	case eventstreamapi.EventMessageType:
+		var v types.AgenticRetrieveStreamResponseOutput
+		if err := awsRestjson1_deserializeEventStreamAgenticRetrieveStreamResponseOutput(&v, msg); err != nil {
+			return nil, err
+		}
+		return v, nil
+
+	case eventstreamapi.ExceptionMessageType:
+		return nil, awsRestjson1_deserializeEventStreamExceptionAgenticRetrieveStreamResponseOutput(msg)
+
+	case eventstreamapi.ErrorMessageType:
+		errorCode := "UnknownError"
+		errorMessage := errorCode
+		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
+			errorCode = header.String()
+		}
+		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
+			errorMessage = header.String()
+		}
+		return nil, &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+
+	default:
+		mc := msg.Clone()
+		return nil, &UnknownEventMessageError{
+			Type:    messageType.String(),
+			Message: &mc,
+		}
+
+	}
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) ErrorSet() <-chan struct{} {
+	return r.err.ErrorSet()
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) Close() error {
+	r.closeOnce.Do(r.safeClose)
+	return r.Err()
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) safeClose() {
+	close(r.done)
+	r.eventStream.Close()
+
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) Err() error {
+	return r.err.Err()
+}
+
+func (r *agenticRetrieveStreamResponseOutputReader) Closed() <-chan struct{} {
 	return r.done
 }
 
@@ -706,6 +844,119 @@ func (r *flowResponseStreamReader) Closed() <-chan struct{} {
 	return r.done
 }
 
+type awsRestjson1_deserializeOpEventStreamAgenticRetrieveStream struct {
+	LogEventStreamWrites bool
+	LogEventStreamReads  bool
+
+	existingResult *AgenticRetrieveStreamOutput
+	asyncResult    chan deserializeResult
+}
+
+func (*awsRestjson1_deserializeOpEventStreamAgenticRetrieveStream) ID() string {
+	return "OperationEventStreamDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpEventStreamAgenticRetrieveStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	defer func() {
+		if err == nil {
+			return
+		}
+		m.closeResponseBody(out)
+	}()
+
+	logger := middleware.GetLogger(ctx)
+
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
+	}
+	_ = request
+
+	//  storing existing output instead of creating a new one
+	var output *AgenticRetrieveStreamOutput
+	var asyncResult chan deserializeResult
+
+	existingResult := m.existingResult
+	asyncResult = m.asyncResult
+	if existingResult == nil {
+		// Create async result channel
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newAgenticRetrieveStreamResponseOutputReader(
+			asyncReader.pipeReader,
+			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
+				options.Logger = logger
+				options.Logger = logger
+				options.LogMessages = m.LogEventStreamReads
+			}),
+		)
+		output = &AgenticRetrieveStreamOutput{}
+		output.eventStream = NewAgenticRetrieveStreamEventStream(func(stream *AgenticRetrieveStreamEventStream) {
+
+			stream.Reader = eventReader
+		})
+		output.initialReply = make(chan AgenticRetrieveStreamInitialReply, 1)
+
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	ctxCh := ctx.Value(partialResultChan{})
+	if ctxCh == nil {
+		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	}
+
+	prc, ok := ctxCh.(chan PartialResult)
+	if !ok {
+		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
+	}
+	// Drain existing results from the channel in case this is a retry
+	select {
+	case <-prc:
+	default:
+	}
+	partial := PartialResult{
+		Output:   output,
+		Metadata: middleware.Metadata{},
+		Error:    nil,
+	}
+	prc <- partial
+
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+
+	if err == nil {
+		// Extract actual response and create real reader
+		resp := out.RawResponse.(*smithyhttp.Response)
+		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
+	} else {
+		asyncResult <- deserializeResult{reader: nil, err: err}
+	}
+	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
+	return out, metadata, err
+}
+
+func (*awsRestjson1_deserializeOpEventStreamAgenticRetrieveStream) closeResponseBody(out middleware.DeserializeOutput) {
+	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
+		_, _ = io.Copy(io.Discard, resp.Body)
+		_ = resp.Body.Close()
+	}
+}
+
+func addEventStreamAgenticRetrieveStreamMiddleware(stack *middleware.Stack, options Options) error {
+	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamAgenticRetrieveStream{
+		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
+		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
+	}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
+	}
+	return nil
+
+}
+
 type awsRestjson1_deserializeOpEventStreamInvokeAgent struct {
 	LogEventStreamWrites bool
 	LogEventStreamReads  bool
@@ -1160,6 +1411,10 @@ func (e *UnknownEventMessageError) Error() string {
 
 func setSafeEventStreamClientLogMode(o *Options, operation string) {
 	switch operation {
+	case "AgenticRetrieveStream":
+		toggleEventStreamClientLogMode(o, false, true)
+		return
+
 	case "InvokeAgent":
 		toggleEventStreamClientLogMode(o, false, true)
 		return
