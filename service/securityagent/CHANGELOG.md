@@ -1,3 +1,7 @@
+# v1.5.0 (2026-06-17)
+
+* **Feature**: Updated AWS Security Agent SDK model with new APIs for threat modeling, code review, security requirements, and additional integration providers.
+
 # v1.4.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

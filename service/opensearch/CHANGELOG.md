@@ -1,3 +1,7 @@
+# v1.71.0 (2026-06-17)
+
+* **Feature**: Adds support for configuring IAM Identity Center options on existing OpenSearch applications via the UpdateApplication API.
+
 # v1.70.8 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.36.0 (2026-06-17)
+
+* **Feature**: This release adds private networking support for Amazon MQ for RabbitMQ. You can now associate AWS RAM resource shares with your broker and retrieve shared resource details using the new DescribeSharedResources API.
+
 # v1.35.2 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

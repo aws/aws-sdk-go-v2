@@ -1,8 +1,0 @@
-{
-    "id": "09ed5fca-6c1c-4dbd-aca3-187be6654a80",
-    "type": "feature",
-    "description": "Adds support for Remote A2A (Agent-to-Agent) agent registration and management. Adds new Release Readiness Review and Release Testing capabilities. Adds support for Git managed skills in AWS DevOps Agent.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

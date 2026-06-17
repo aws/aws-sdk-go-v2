@@ -1,3 +1,7 @@
+# v1.84.0 (2026-06-17)
+
+* **Feature**: Releasing the ability to bring-your-own task-definition for CreateExpressGatewayService and UpdateGatewayExpressService
+
 # v1.83.0 (2026-06-10)
 
 * **Feature**: Amazon ECS Managed Daemon task definitions now support pidMode and ipcMode parameters. Set shared to allow daemons to share PID or IPC namespaces with co-located tasks on Managed Instances, enabling process tracing and shared memory communication.

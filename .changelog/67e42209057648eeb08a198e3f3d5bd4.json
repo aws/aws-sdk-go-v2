@@ -1,8 +1,0 @@
-{
-    "id": "67e42209-0576-48ee-b08a-198e3f3d5bd4",
-    "type": "feature",
-    "description": "Launching Bedrock Managed Knowledge Bases. Added support for resource-based policies on Knowledge Base resources, enabling cross-account access for Managed Knowledge Bases.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

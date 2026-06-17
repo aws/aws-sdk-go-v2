@@ -1,8 +1,0 @@
-{
-    "id": "c6ad3c6f-f672-469b-b1a0-3b63f4e24348",
-    "type": "feature",
-    "description": "Releasing the ability to bring-your-own task-definition for CreateExpressGatewayService and UpdateGatewayExpressService",
-    "modules": [
-        "service/ecs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.53.0 (2026-06-17)
+
+* **Feature**: Adds new AgenticRetrieveStream API for managed knowledge bases to use conversation history and autonomously plan for multi-hop multi-KB reasoning with built-in evaluation and access-control. Updates Retrieve API for access-control-based filtering for managed knowledge bases.
+
 # v1.52.6 (2026-06-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

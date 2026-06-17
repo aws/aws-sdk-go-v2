@@ -1,8 +1,0 @@
-{
-    "id": "006fed08-f40d-4e13-a5b5-7b93036d44e7",
-    "type": "feature",
-    "description": "Updated AWS Security Agent SDK model with new APIs for threat modeling, code review, security requirements, and additional integration providers.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

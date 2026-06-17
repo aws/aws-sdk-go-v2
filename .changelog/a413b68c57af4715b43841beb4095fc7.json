@@ -1,8 +1,0 @@
-{
-    "id": "a413b68c-57af-4715-b438-41beb4095fc7",
-    "type": "feature",
-    "description": "This release adds support for Search and Discovery in AWS Glue, letting you and your applications search Data Catalog assets such as table and enrich them with business context and glossary terms.",
-    "modules": [
-        "service/glue"
-    ]
-}

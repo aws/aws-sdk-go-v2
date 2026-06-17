@@ -1,3 +1,7 @@
+# v1.31.0 (2026-06-17)
+
+* **Feature**: AgentCore Harness service will be Generally Available at NYS 2026 with this Treb release. Harness will support invoking specific endpoints via the qualifier parameter, AWS Skills for pre-built agent capabilities, and improved validation for skill git source URLs.
+
 # v1.30.0 (2026-06-12)
 
 * **Feature**: Added tagging and CMK support across optimization, an explanation field in recommendation output, and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior

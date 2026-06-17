@@ -1,3 +1,29 @@
+# Release (2026-06-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.55.0](service/bedrockagent/CHANGELOG.md#v1550-2026-06-17)
+  * **Feature**: Launching Bedrock Managed Knowledge Bases. Added support for resource-based policies on Knowledge Base resources, enabling cross-account access for Managed Knowledge Bases.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.31.0](service/bedrockagentcore/CHANGELOG.md#v1310-2026-06-17)
+  * **Feature**: AgentCore Harness service will be Generally Available at NYS 2026 with this Treb release. Harness will support invoking specific endpoints via the qualifier parameter, AWS Skills for pre-built agent capabilities, and improved validation for skill git source URLs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.45.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1450-2026-06-17)
+  * **Feature**: AgentCore Gateway now supports inference targets to LLM providers (direct config or built-in connectors), HTTP passthrough targets with session stickiness, runtime target API schemas, AWS WAF web ACL association with configurable fail-open or fail-close modes, and interceptor payload filtering.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.53.0](service/bedrockagentruntime/CHANGELOG.md#v1530-2026-06-17)
+  * **Feature**: Adds new AgenticRetrieveStream API for managed knowledge bases to use conversation history and autonomously plan for multi-hop multi-KB reasoning with built-in evaluation and access-control. Updates Retrieve API for access-control-based filtering for managed knowledge bases.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.3.0](service/computeoptimizerautomation/CHANGELOG.md#v130-2026-06-17)
+  * **Feature**: This launch adds IfExists comparison operators to Compute Optimizer Automation rule criteria, so a rule can include recommended actions whose specified attribute isn't present.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.8.0](service/devopsagent/CHANGELOG.md#v180-2026-06-17)
+  * **Feature**: Adds support for Remote A2A (Agent-to-Agent) agent registration and management. Adds new Release Readiness Review and Release Testing capabilities. Adds support for Git managed skills in AWS DevOps Agent.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.84.0](service/ecs/CHANGELOG.md#v1840-2026-06-17)
+  * **Feature**: Releasing the ability to bring-your-own task-definition for CreateExpressGatewayService and UpdateGatewayExpressService
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.145.0](service/glue/CHANGELOG.md#v11450-2026-06-17)
+  * **Feature**: This release adds support for Search and Discovery in AWS Glue, letting you and your applications search Data Catalog assets such as table and enrich them with business context and glossary terms.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.36.0](service/mq/CHANGELOG.md#v1360-2026-06-17)
+  * **Feature**: This release adds private networking support for Amazon MQ for RabbitMQ. You can now associate AWS RAM resource shares with your broker and retrieve shared resource details using the new DescribeSharedResources API.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.71.0](service/opensearch/CHANGELOG.md#v1710-2026-06-17)
+  * **Feature**: Adds support for configuring IAM Identity Center options on existing OpenSearch applications via the UpdateApplication API.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.5.0](service/securityagent/CHANGELOG.md#v150-2026-06-17)
+  * **Feature**: Updated AWS Security Agent SDK model with new APIs for threat modeling, code review, security requirements, and additional integration providers.
+
 # Release (2026-06-16)
 
 ## General Highlights
